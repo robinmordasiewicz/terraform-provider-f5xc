@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -58,6 +59,15 @@ type AuthenticationCookieParamsModel struct {
 	KmsKeyHMAC            *AuthenticationEmptyModel                `tfsdk:"kms_key_hmac"`
 }
 
+// AuthenticationCookieParamsModelAttrTypes defines the attribute types for AuthenticationCookieParamsModel
+var AuthenticationCookieParamsModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry":           types.Int64Type,
+	"cookie_refresh_interval": types.Int64Type,
+	"session_expiry":          types.Int64Type,
+	"auth_hmac":               types.ObjectType{AttrTypes: AuthenticationCookieParamsAuthHMACModelAttrTypes},
+	"kms_key_hmac":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AuthenticationCookieParamsAuthHMACModel represents auth_hmac block
 type AuthenticationCookieParamsAuthHMACModel struct {
 	PrimKeyExpiry types.String                                    `tfsdk:"prim_key_expiry"`
@@ -66,10 +76,24 @@ type AuthenticationCookieParamsAuthHMACModel struct {
 	SecKey        *AuthenticationCookieParamsAuthHMACSecKeyModel  `tfsdk:"sec_key"`
 }
 
+// AuthenticationCookieParamsAuthHMACModelAttrTypes defines the attribute types for AuthenticationCookieParamsAuthHMACModel
+var AuthenticationCookieParamsAuthHMACModelAttrTypes = map[string]attr.Type{
+	"prim_key_expiry": types.StringType,
+	"sec_key_expiry":  types.StringType,
+	"prim_key":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sec_key":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AuthenticationCookieParamsAuthHMACPrimKeyModel represents prim_key block
 type AuthenticationCookieParamsAuthHMACPrimKeyModel struct {
 	BlindfoldSecretInfo *AuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AuthenticationCookieParamsAuthHMACPrimKeyModelAttrTypes defines the attribute types for AuthenticationCookieParamsAuthHMACPrimKeyModel
+var AuthenticationCookieParamsAuthHMACPrimKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModelAttrTypes},
 }
 
 // AuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -79,16 +103,35 @@ type AuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for AuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel
+var AuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel represents clear_secret_info block
 type AuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// AuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModelAttrTypes defines the attribute types for AuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel
+var AuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // AuthenticationCookieParamsAuthHMACSecKeyModel represents sec_key block
 type AuthenticationCookieParamsAuthHMACSecKeyModel struct {
 	BlindfoldSecretInfo *AuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AuthenticationCookieParamsAuthHMACSecKeyModelAttrTypes defines the attribute types for AuthenticationCookieParamsAuthHMACSecKeyModel
+var AuthenticationCookieParamsAuthHMACSecKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModelAttrTypes},
 }
 
 // AuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -98,10 +141,23 @@ type AuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for AuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel
+var AuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel represents clear_secret_info block
 type AuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// AuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModelAttrTypes defines the attribute types for AuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel
+var AuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // AuthenticationOIDCAuthModel represents oidc_auth block
@@ -112,10 +168,24 @@ type AuthenticationOIDCAuthModel struct {
 	OIDCAuthParams         *AuthenticationOIDCAuthOIDCAuthParamsModel `tfsdk:"oidc_auth_params"`
 }
 
+// AuthenticationOIDCAuthModelAttrTypes defines the attribute types for AuthenticationOIDCAuthModel
+var AuthenticationOIDCAuthModelAttrTypes = map[string]attr.Type{
+	"oidc_client_id":             types.StringType,
+	"oidc_well_known_config_url": types.StringType,
+	"client_secret":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"oidc_auth_params":           types.ObjectType{AttrTypes: AuthenticationOIDCAuthOIDCAuthParamsModelAttrTypes},
+}
+
 // AuthenticationOIDCAuthClientSecretModel represents client_secret block
 type AuthenticationOIDCAuthClientSecretModel struct {
 	BlindfoldSecretInfo *AuthenticationOIDCAuthClientSecretBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AuthenticationOIDCAuthClientSecretClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AuthenticationOIDCAuthClientSecretModelAttrTypes defines the attribute types for AuthenticationOIDCAuthClientSecretModel
+var AuthenticationOIDCAuthClientSecretModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AuthenticationOIDCAuthClientSecretBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AuthenticationOIDCAuthClientSecretClearSecretInfoModelAttrTypes},
 }
 
 // AuthenticationOIDCAuthClientSecretBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -125,10 +195,23 @@ type AuthenticationOIDCAuthClientSecretBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AuthenticationOIDCAuthClientSecretBlindfoldSecretInfoModelAttrTypes defines the attribute types for AuthenticationOIDCAuthClientSecretBlindfoldSecretInfoModel
+var AuthenticationOIDCAuthClientSecretBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AuthenticationOIDCAuthClientSecretClearSecretInfoModel represents clear_secret_info block
 type AuthenticationOIDCAuthClientSecretClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// AuthenticationOIDCAuthClientSecretClearSecretInfoModelAttrTypes defines the attribute types for AuthenticationOIDCAuthClientSecretClearSecretInfoModel
+var AuthenticationOIDCAuthClientSecretClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // AuthenticationOIDCAuthOIDCAuthParamsModel represents oidc_auth_params block
@@ -136,6 +219,13 @@ type AuthenticationOIDCAuthOIDCAuthParamsModel struct {
 	AuthEndpointURL       types.String `tfsdk:"auth_endpoint_url"`
 	EndSessionEndpointURL types.String `tfsdk:"end_session_endpoint_url"`
 	TokenEndpointURL      types.String `tfsdk:"token_endpoint_url"`
+}
+
+// AuthenticationOIDCAuthOIDCAuthParamsModelAttrTypes defines the attribute types for AuthenticationOIDCAuthOIDCAuthParamsModel
+var AuthenticationOIDCAuthOIDCAuthParamsModelAttrTypes = map[string]attr.Type{
+	"auth_endpoint_url":        types.StringType,
+	"end_session_endpoint_url": types.StringType,
+	"token_endpoint_url":       types.StringType,
 }
 
 type AuthenticationResourceModel struct {
@@ -783,11 +873,17 @@ func (r *AuthenticationResource) Read(ctx context.Context, req resource.ReadRequ
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

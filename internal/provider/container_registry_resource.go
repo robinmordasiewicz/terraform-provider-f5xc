@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,6 +56,12 @@ type ContainerRegistryPasswordModel struct {
 	ClearSecretInfo     *ContainerRegistryPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
 }
 
+// ContainerRegistryPasswordModelAttrTypes defines the attribute types for ContainerRegistryPasswordModel
+var ContainerRegistryPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ContainerRegistryPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ContainerRegistryPasswordClearSecretInfoModelAttrTypes},
+}
+
 // ContainerRegistryPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
 type ContainerRegistryPasswordBlindfoldSecretInfoModel struct {
 	DecryptionProvider types.String `tfsdk:"decryption_provider"`
@@ -62,10 +69,23 @@ type ContainerRegistryPasswordBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ContainerRegistryPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for ContainerRegistryPasswordBlindfoldSecretInfoModel
+var ContainerRegistryPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ContainerRegistryPasswordClearSecretInfoModel represents clear_secret_info block
 type ContainerRegistryPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ContainerRegistryPasswordClearSecretInfoModelAttrTypes defines the attribute types for ContainerRegistryPasswordClearSecretInfoModel
+var ContainerRegistryPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 type ContainerRegistryResourceModel struct {
@@ -486,11 +506,17 @@ func (r *ContainerRegistryResource) Read(ctx context.Context, req resource.ReadR
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

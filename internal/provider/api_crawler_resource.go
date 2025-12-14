@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,16 +56,34 @@ type APICrawlerDomainsModel struct {
 	SimpleLogin *APICrawlerDomainsSimpleLoginModel `tfsdk:"simple_login"`
 }
 
+// APICrawlerDomainsModelAttrTypes defines the attribute types for APICrawlerDomainsModel
+var APICrawlerDomainsModelAttrTypes = map[string]attr.Type{
+	"domain":       types.StringType,
+	"simple_login": types.ObjectType{AttrTypes: APICrawlerDomainsSimpleLoginModelAttrTypes},
+}
+
 // APICrawlerDomainsSimpleLoginModel represents simple_login block
 type APICrawlerDomainsSimpleLoginModel struct {
 	User     types.String                               `tfsdk:"user"`
 	Password *APICrawlerDomainsSimpleLoginPasswordModel `tfsdk:"password"`
 }
 
+// APICrawlerDomainsSimpleLoginModelAttrTypes defines the attribute types for APICrawlerDomainsSimpleLoginModel
+var APICrawlerDomainsSimpleLoginModelAttrTypes = map[string]attr.Type{
+	"user":     types.StringType,
+	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APICrawlerDomainsSimpleLoginPasswordModel represents password block
 type APICrawlerDomainsSimpleLoginPasswordModel struct {
 	BlindfoldSecretInfo *APICrawlerDomainsSimpleLoginPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APICrawlerDomainsSimpleLoginPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APICrawlerDomainsSimpleLoginPasswordModelAttrTypes defines the attribute types for APICrawlerDomainsSimpleLoginPasswordModel
+var APICrawlerDomainsSimpleLoginPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APICrawlerDomainsSimpleLoginPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APICrawlerDomainsSimpleLoginPasswordClearSecretInfoModelAttrTypes},
 }
 
 // APICrawlerDomainsSimpleLoginPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -74,22 +93,35 @@ type APICrawlerDomainsSimpleLoginPasswordBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APICrawlerDomainsSimpleLoginPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for APICrawlerDomainsSimpleLoginPasswordBlindfoldSecretInfoModel
+var APICrawlerDomainsSimpleLoginPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APICrawlerDomainsSimpleLoginPasswordClearSecretInfoModel represents clear_secret_info block
 type APICrawlerDomainsSimpleLoginPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// APICrawlerDomainsSimpleLoginPasswordClearSecretInfoModelAttrTypes defines the attribute types for APICrawlerDomainsSimpleLoginPasswordClearSecretInfoModel
+var APICrawlerDomainsSimpleLoginPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 type APICrawlerResourceModel struct {
-	Name        types.String             `tfsdk:"name"`
-	Namespace   types.String             `tfsdk:"namespace"`
-	Annotations types.Map                `tfsdk:"annotations"`
-	Description types.String             `tfsdk:"description"`
-	Disable     types.Bool               `tfsdk:"disable"`
-	Labels      types.Map                `tfsdk:"labels"`
-	ID          types.String             `tfsdk:"id"`
-	Timeouts    timeouts.Value           `tfsdk:"timeouts"`
-	Domains     []APICrawlerDomainsModel `tfsdk:"domains"`
+	Name        types.String   `tfsdk:"name"`
+	Namespace   types.String   `tfsdk:"namespace"`
+	Annotations types.Map      `tfsdk:"annotations"`
+	Description types.String   `tfsdk:"description"`
+	Disable     types.Bool     `tfsdk:"disable"`
+	Labels      types.Map      `tfsdk:"labels"`
+	ID          types.String   `tfsdk:"id"`
+	Timeouts    timeouts.Value `tfsdk:"timeouts"`
+	Domains     types.List     `tfsdk:"domains"`
 }
 
 func (r *APICrawlerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -362,27 +394,32 @@ func (r *APICrawlerResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Domains) > 0 {
-		var domainsList []map[string]interface{}
-		for _, item := range data.Domains {
-			itemMap := make(map[string]interface{})
-			if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
-				itemMap["domain"] = item.Domain.ValueString()
-			}
-			if item.SimpleLogin != nil {
-				simple_loginNestedMap := make(map[string]interface{})
-				if item.SimpleLogin.Password != nil {
-					passwordDeepMap := make(map[string]interface{})
-					simple_loginNestedMap["password"] = passwordDeepMap
+	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+		var domainsItems []APICrawlerDomainsModel
+		diags := data.Domains.ElementsAs(ctx, &domainsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(domainsItems) > 0 {
+			var domainsList []map[string]interface{}
+			for _, item := range domainsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
+					itemMap["domain"] = item.Domain.ValueString()
 				}
-				if !item.SimpleLogin.User.IsNull() && !item.SimpleLogin.User.IsUnknown() {
-					simple_loginNestedMap["user"] = item.SimpleLogin.User.ValueString()
+				if item.SimpleLogin != nil {
+					simple_loginNestedMap := make(map[string]interface{})
+					if item.SimpleLogin.Password != nil {
+						passwordDeepMap := make(map[string]interface{})
+						simple_loginNestedMap["password"] = passwordDeepMap
+					}
+					if !item.SimpleLogin.User.IsNull() && !item.SimpleLogin.User.IsUnknown() {
+						simple_loginNestedMap["user"] = item.SimpleLogin.User.ValueString()
+					}
+					itemMap["simple_login"] = simple_loginNestedMap
 				}
-				itemMap["simple_login"] = simple_loginNestedMap
+				domainsList = append(domainsList, itemMap)
 			}
-			domainsList = append(domainsList, itemMap)
+			createReq.Spec["domains"] = domainsList
 		}
-		createReq.Spec["domains"] = domainsList
 	}
 
 	apiResource, err := r.client.CreateAPICrawler(ctx, createReq)
@@ -399,6 +436,10 @@ func (r *APICrawlerResource) Create(ctx context.Context, req resource.CreateRequ
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
 		var domainsList []APICrawlerDomainsModel
+		var existingDomainsItems []APICrawlerDomainsModel
+		if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+			data.Domains.ElementsAs(ctx, &existingDomainsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -425,7 +466,14 @@ func (r *APICrawlerResource) Create(ctx context.Context, req resource.CreateRequ
 				})
 			}
 		}
-		data.Domains = domainsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APICrawlerDomainsModelAttrTypes}, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Domains = types.ListNull(types.ObjectType{AttrTypes: APICrawlerDomainsModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -491,11 +539,17 @@ func (r *APICrawlerResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -522,6 +576,10 @@ func (r *APICrawlerResource) Read(ctx context.Context, req resource.ReadRequest,
 	})
 	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
 		var domainsList []APICrawlerDomainsModel
+		var existingDomainsItems []APICrawlerDomainsModel
+		if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+			data.Domains.ElementsAs(ctx, &existingDomainsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -548,7 +606,14 @@ func (r *APICrawlerResource) Read(ctx context.Context, req resource.ReadRequest,
 				})
 			}
 		}
-		data.Domains = domainsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APICrawlerDomainsModelAttrTypes}, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Domains = types.ListNull(types.ObjectType{AttrTypes: APICrawlerDomainsModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -610,27 +675,32 @@ func (r *APICrawlerResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Domains) > 0 {
-		var domainsList []map[string]interface{}
-		for _, item := range data.Domains {
-			itemMap := make(map[string]interface{})
-			if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
-				itemMap["domain"] = item.Domain.ValueString()
-			}
-			if item.SimpleLogin != nil {
-				simple_loginNestedMap := make(map[string]interface{})
-				if item.SimpleLogin.Password != nil {
-					passwordDeepMap := make(map[string]interface{})
-					simple_loginNestedMap["password"] = passwordDeepMap
+	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+		var domainsItems []APICrawlerDomainsModel
+		diags := data.Domains.ElementsAs(ctx, &domainsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(domainsItems) > 0 {
+			var domainsList []map[string]interface{}
+			for _, item := range domainsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
+					itemMap["domain"] = item.Domain.ValueString()
 				}
-				if !item.SimpleLogin.User.IsNull() && !item.SimpleLogin.User.IsUnknown() {
-					simple_loginNestedMap["user"] = item.SimpleLogin.User.ValueString()
+				if item.SimpleLogin != nil {
+					simple_loginNestedMap := make(map[string]interface{})
+					if item.SimpleLogin.Password != nil {
+						passwordDeepMap := make(map[string]interface{})
+						simple_loginNestedMap["password"] = passwordDeepMap
+					}
+					if !item.SimpleLogin.User.IsNull() && !item.SimpleLogin.User.IsUnknown() {
+						simple_loginNestedMap["user"] = item.SimpleLogin.User.ValueString()
+					}
+					itemMap["simple_login"] = simple_loginNestedMap
 				}
-				itemMap["simple_login"] = simple_loginNestedMap
+				domainsList = append(domainsList, itemMap)
 			}
-			domainsList = append(domainsList, itemMap)
+			apiResource.Spec["domains"] = domainsList
 		}
-		apiResource.Spec["domains"] = domainsList
 	}
 
 	_, err := r.client.UpdateAPICrawler(ctx, apiResource)
@@ -658,6 +728,10 @@ func (r *APICrawlerResource) Update(ctx context.Context, req resource.UpdateRequ
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
 		var domainsList []APICrawlerDomainsModel
+		var existingDomainsItems []APICrawlerDomainsModel
+		if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+			data.Domains.ElementsAs(ctx, &existingDomainsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -684,7 +758,14 @@ func (r *APICrawlerResource) Update(ctx context.Context, req resource.UpdateRequ
 				})
 			}
 		}
-		data.Domains = domainsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APICrawlerDomainsModelAttrTypes}, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Domains = types.ListNull(types.ObjectType{AttrTypes: APICrawlerDomainsModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

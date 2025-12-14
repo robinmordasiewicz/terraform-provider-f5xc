@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,16 +56,33 @@ type SecretPolicyRuleListModel struct {
 	Rules []SecretPolicyRuleListRulesModel `tfsdk:"rules"`
 }
 
+// SecretPolicyRuleListModelAttrTypes defines the attribute types for SecretPolicyRuleListModel
+var SecretPolicyRuleListModelAttrTypes = map[string]attr.Type{
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+}
+
 // SecretPolicyRuleListRulesModel represents rules block
 type SecretPolicyRuleListRulesModel struct {
 	Metadata *SecretPolicyRuleListRulesMetadataModel `tfsdk:"metadata"`
 	Spec     *SecretPolicyRuleListRulesSpecModel     `tfsdk:"spec"`
 }
 
+// SecretPolicyRuleListRulesModelAttrTypes defines the attribute types for SecretPolicyRuleListRulesModel
+var SecretPolicyRuleListRulesModelAttrTypes = map[string]attr.Type{
+	"metadata": types.ObjectType{AttrTypes: SecretPolicyRuleListRulesMetadataModelAttrTypes},
+	"spec":     types.ObjectType{AttrTypes: SecretPolicyRuleListRulesSpecModelAttrTypes},
+}
+
 // SecretPolicyRuleListRulesMetadataModel represents metadata block
 type SecretPolicyRuleListRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// SecretPolicyRuleListRulesMetadataModelAttrTypes defines the attribute types for SecretPolicyRuleListRulesMetadataModel
+var SecretPolicyRuleListRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // SecretPolicyRuleListRulesSpecModel represents spec block
@@ -75,6 +93,14 @@ type SecretPolicyRuleListRulesSpecModel struct {
 	ClientSelector    *SecretPolicyRuleListRulesSpecClientSelectorModel    `tfsdk:"client_selector"`
 }
 
+// SecretPolicyRuleListRulesSpecModelAttrTypes defines the attribute types for SecretPolicyRuleListRulesSpecModel
+var SecretPolicyRuleListRulesSpecModelAttrTypes = map[string]attr.Type{
+	"action":              types.StringType,
+	"client_name":         types.StringType,
+	"client_name_matcher": types.ObjectType{AttrTypes: SecretPolicyRuleListRulesSpecClientNameMatcherModelAttrTypes},
+	"client_selector":     types.ObjectType{AttrTypes: SecretPolicyRuleListRulesSpecClientSelectorModelAttrTypes},
+}
+
 // SecretPolicyRuleListRulesSpecClientNameMatcherModel represents client_name_matcher block
 type SecretPolicyRuleListRulesSpecClientNameMatcherModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -82,9 +108,21 @@ type SecretPolicyRuleListRulesSpecClientNameMatcherModel struct {
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// SecretPolicyRuleListRulesSpecClientNameMatcherModelAttrTypes defines the attribute types for SecretPolicyRuleListRulesSpecClientNameMatcherModel
+var SecretPolicyRuleListRulesSpecClientNameMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // SecretPolicyRuleListRulesSpecClientSelectorModel represents client_selector block
 type SecretPolicyRuleListRulesSpecClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// SecretPolicyRuleListRulesSpecClientSelectorModelAttrTypes defines the attribute types for SecretPolicyRuleListRulesSpecClientSelectorModel
+var SecretPolicyRuleListRulesSpecClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 type SecretPolicyResourceModel struct {
@@ -585,11 +623,17 @@ func (r *SecretPolicyResource) Read(ctx context.Context, req resource.ReadReques
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

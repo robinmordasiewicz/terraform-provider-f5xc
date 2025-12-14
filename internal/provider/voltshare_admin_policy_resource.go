@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -57,9 +58,22 @@ type VoltshareAdminPolicyAuthorRestrictionsModel struct {
 	DenyList  *VoltshareAdminPolicyAuthorRestrictionsDenyListModel  `tfsdk:"deny_list"`
 }
 
+// VoltshareAdminPolicyAuthorRestrictionsModelAttrTypes defines the attribute types for VoltshareAdminPolicyAuthorRestrictionsModel
+var VoltshareAdminPolicyAuthorRestrictionsModelAttrTypes = map[string]attr.Type{
+	"allow_all":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"allow_list": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deny_all":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deny_list":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VoltshareAdminPolicyAuthorRestrictionsAllowListModel represents allow_list block
 type VoltshareAdminPolicyAuthorRestrictionsAllowListModel struct {
 	CustomList []VoltshareAdminPolicyAuthorRestrictionsAllowListCustomListModel `tfsdk:"custom_list"`
+}
+
+// VoltshareAdminPolicyAuthorRestrictionsAllowListModelAttrTypes defines the attribute types for VoltshareAdminPolicyAuthorRestrictionsAllowListModel
+var VoltshareAdminPolicyAuthorRestrictionsAllowListModelAttrTypes = map[string]attr.Type{
+	"custom_list": types.ListType{ElemType: types.ObjectType{AttrTypes: VoltshareAdminPolicyAuthorRestrictionsAllowListCustomListModelAttrTypes}},
 }
 
 // VoltshareAdminPolicyAuthorRestrictionsAllowListCustomListModel represents custom_list block
@@ -68,15 +82,32 @@ type VoltshareAdminPolicyAuthorRestrictionsAllowListCustomListModel struct {
 	RegexPattern types.String `tfsdk:"regex_pattern"`
 }
 
+// VoltshareAdminPolicyAuthorRestrictionsAllowListCustomListModelAttrTypes defines the attribute types for VoltshareAdminPolicyAuthorRestrictionsAllowListCustomListModel
+var VoltshareAdminPolicyAuthorRestrictionsAllowListCustomListModelAttrTypes = map[string]attr.Type{
+	"exact_value":   types.StringType,
+	"regex_pattern": types.StringType,
+}
+
 // VoltshareAdminPolicyAuthorRestrictionsDenyListModel represents deny_list block
 type VoltshareAdminPolicyAuthorRestrictionsDenyListModel struct {
 	CustomList []VoltshareAdminPolicyAuthorRestrictionsDenyListCustomListModel `tfsdk:"custom_list"`
+}
+
+// VoltshareAdminPolicyAuthorRestrictionsDenyListModelAttrTypes defines the attribute types for VoltshareAdminPolicyAuthorRestrictionsDenyListModel
+var VoltshareAdminPolicyAuthorRestrictionsDenyListModelAttrTypes = map[string]attr.Type{
+	"custom_list": types.ListType{ElemType: types.ObjectType{AttrTypes: VoltshareAdminPolicyAuthorRestrictionsDenyListCustomListModelAttrTypes}},
 }
 
 // VoltshareAdminPolicyAuthorRestrictionsDenyListCustomListModel represents custom_list block
 type VoltshareAdminPolicyAuthorRestrictionsDenyListCustomListModel struct {
 	ExactValue   types.String `tfsdk:"exact_value"`
 	RegexPattern types.String `tfsdk:"regex_pattern"`
+}
+
+// VoltshareAdminPolicyAuthorRestrictionsDenyListCustomListModelAttrTypes defines the attribute types for VoltshareAdminPolicyAuthorRestrictionsDenyListCustomListModel
+var VoltshareAdminPolicyAuthorRestrictionsDenyListCustomListModelAttrTypes = map[string]attr.Type{
+	"exact_value":   types.StringType,
+	"regex_pattern": types.StringType,
 }
 
 // VoltshareAdminPolicyUserRestrictionsModel represents user_restrictions block
@@ -87,6 +118,14 @@ type VoltshareAdminPolicyUserRestrictionsModel struct {
 	UserRestrictions *VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel `tfsdk:"user_restrictions"`
 }
 
+// VoltshareAdminPolicyUserRestrictionsModelAttrTypes defines the attribute types for VoltshareAdminPolicyUserRestrictionsModel
+var VoltshareAdminPolicyUserRestrictionsModelAttrTypes = map[string]attr.Type{
+	"tenant":            types.StringType,
+	"all_tenants":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"individual_users":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"user_restrictions": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel represents user_restrictions block
 type VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel struct {
 	AllowAll  *VoltshareAdminPolicyEmptyModel                                     `tfsdk:"allow_all"`
@@ -95,9 +134,22 @@ type VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel struct {
 	DenyList  *VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListModel  `tfsdk:"deny_list"`
 }
 
+// VoltshareAdminPolicyUserRestrictionsUserRestrictionsModelAttrTypes defines the attribute types for VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel
+var VoltshareAdminPolicyUserRestrictionsUserRestrictionsModelAttrTypes = map[string]attr.Type{
+	"allow_all":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"allow_list": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deny_all":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deny_list":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListModel represents allow_list block
 type VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListModel struct {
 	CustomList []VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListCustomListModel `tfsdk:"custom_list"`
+}
+
+// VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListModelAttrTypes defines the attribute types for VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListModel
+var VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListModelAttrTypes = map[string]attr.Type{
+	"custom_list": types.ListType{ElemType: types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListCustomListModelAttrTypes}},
 }
 
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListCustomListModel represents custom_list block
@@ -106,15 +158,32 @@ type VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListCustomListMode
 	RegexPattern types.String `tfsdk:"regex_pattern"`
 }
 
+// VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListCustomListModelAttrTypes defines the attribute types for VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListCustomListModel
+var VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListCustomListModelAttrTypes = map[string]attr.Type{
+	"exact_value":   types.StringType,
+	"regex_pattern": types.StringType,
+}
+
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListModel represents deny_list block
 type VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListModel struct {
 	CustomList []VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListCustomListModel `tfsdk:"custom_list"`
+}
+
+// VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListModelAttrTypes defines the attribute types for VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListModel
+var VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListModelAttrTypes = map[string]attr.Type{
+	"custom_list": types.ListType{ElemType: types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListCustomListModelAttrTypes}},
 }
 
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListCustomListModel represents custom_list block
 type VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListCustomListModel struct {
 	ExactValue   types.String `tfsdk:"exact_value"`
 	RegexPattern types.String `tfsdk:"regex_pattern"`
+}
+
+// VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListCustomListModelAttrTypes defines the attribute types for VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListCustomListModel
+var VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListCustomListModelAttrTypes = map[string]attr.Type{
+	"exact_value":   types.StringType,
+	"regex_pattern": types.StringType,
 }
 
 type VoltshareAdminPolicyResourceModel struct {
@@ -128,7 +197,7 @@ type VoltshareAdminPolicyResourceModel struct {
 	MaxValidityDuration types.String                                 `tfsdk:"max_validity_duration"`
 	Timeouts            timeouts.Value                               `tfsdk:"timeouts"`
 	AuthorRestrictions  *VoltshareAdminPolicyAuthorRestrictionsModel `tfsdk:"author_restrictions"`
-	UserRestrictions    []VoltshareAdminPolicyUserRestrictionsModel  `tfsdk:"user_restrictions"`
+	UserRestrictions    types.List                                   `tfsdk:"user_restrictions"`
 }
 
 func (r *VoltshareAdminPolicyResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -263,6 +332,9 @@ func (r *VoltshareAdminPolicyResource) Schema(ctx context.Context, req resource.
 							MarkdownDescription: "Team/Tenant. Team/Tenant for which this rule is valid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 					Blocks: map[string]schema.Block{
@@ -495,40 +567,45 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 		}
 		createReq.Spec["author_restrictions"] = author_restrictionsMap
 	}
-	if len(data.UserRestrictions) > 0 {
-		var user_restrictionsList []map[string]interface{}
-		for _, item := range data.UserRestrictions {
-			itemMap := make(map[string]interface{})
-			if item.AllTenants != nil {
-				itemMap["all_tenants"] = map[string]interface{}{}
-			}
-			if item.IndividualUsers != nil {
-				itemMap["individual_users"] = map[string]interface{}{}
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if item.UserRestrictions != nil {
-				user_restrictionsNestedMap := make(map[string]interface{})
-				if item.UserRestrictions.AllowAll != nil {
-					user_restrictionsNestedMap["allow_all"] = map[string]interface{}{}
+	if !data.UserRestrictions.IsNull() && !data.UserRestrictions.IsUnknown() {
+		var user_restrictionsItems []VoltshareAdminPolicyUserRestrictionsModel
+		diags := data.UserRestrictions.ElementsAs(ctx, &user_restrictionsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(user_restrictionsItems) > 0 {
+			var user_restrictionsList []map[string]interface{}
+			for _, item := range user_restrictionsItems {
+				itemMap := make(map[string]interface{})
+				if item.AllTenants != nil {
+					itemMap["all_tenants"] = map[string]interface{}{}
 				}
-				if item.UserRestrictions.AllowList != nil {
-					allow_listDeepMap := make(map[string]interface{})
-					user_restrictionsNestedMap["allow_list"] = allow_listDeepMap
+				if item.IndividualUsers != nil {
+					itemMap["individual_users"] = map[string]interface{}{}
 				}
-				if item.UserRestrictions.DenyAll != nil {
-					user_restrictionsNestedMap["deny_all"] = map[string]interface{}{}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
 				}
-				if item.UserRestrictions.DenyList != nil {
-					deny_listDeepMap := make(map[string]interface{})
-					user_restrictionsNestedMap["deny_list"] = deny_listDeepMap
+				if item.UserRestrictions != nil {
+					user_restrictionsNestedMap := make(map[string]interface{})
+					if item.UserRestrictions.AllowAll != nil {
+						user_restrictionsNestedMap["allow_all"] = map[string]interface{}{}
+					}
+					if item.UserRestrictions.AllowList != nil {
+						allow_listDeepMap := make(map[string]interface{})
+						user_restrictionsNestedMap["allow_list"] = allow_listDeepMap
+					}
+					if item.UserRestrictions.DenyAll != nil {
+						user_restrictionsNestedMap["deny_all"] = map[string]interface{}{}
+					}
+					if item.UserRestrictions.DenyList != nil {
+						deny_listDeepMap := make(map[string]interface{})
+						user_restrictionsNestedMap["deny_list"] = deny_listDeepMap
+					}
+					itemMap["user_restrictions"] = user_restrictionsNestedMap
 				}
-				itemMap["user_restrictions"] = user_restrictionsNestedMap
+				user_restrictionsList = append(user_restrictionsList, itemMap)
 			}
-			user_restrictionsList = append(user_restrictionsList, itemMap)
+			createReq.Spec["user_restrictions"] = user_restrictionsList
 		}
-		createReq.Spec["user_restrictions"] = user_restrictionsList
 	}
 	if !data.MaxValidityDuration.IsNull() && !data.MaxValidityDuration.IsUnknown() {
 		createReq.Spec["max_validity_duration"] = data.MaxValidityDuration.ValueString()
@@ -553,18 +630,22 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["user_restrictions"].([]interface{}); ok && len(listData) > 0 {
 		var user_restrictionsList []VoltshareAdminPolicyUserRestrictionsModel
+		var existingUserRestrictionsItems []VoltshareAdminPolicyUserRestrictionsModel
+		if !data.UserRestrictions.IsNull() && !data.UserRestrictions.IsUnknown() {
+			data.UserRestrictions.ElementsAs(ctx, &existingUserRestrictionsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				user_restrictionsList = append(user_restrictionsList, VoltshareAdminPolicyUserRestrictionsModel{
 					AllTenants: func() *VoltshareAdminPolicyEmptyModel {
-						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].AllTenants != nil {
+						if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].AllTenants != nil {
 							return &VoltshareAdminPolicyEmptyModel{}
 						}
 						return nil
 					}(),
 					IndividualUsers: func() *VoltshareAdminPolicyEmptyModel {
-						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].IndividualUsers != nil {
+						if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].IndividualUsers != nil {
 							return &VoltshareAdminPolicyEmptyModel{}
 						}
 						return nil
@@ -579,13 +660,13 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 						if _, ok := itemMap["user_restrictions"].(map[string]interface{}); ok {
 							return &VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel{
 								AllowAll: func() *VoltshareAdminPolicyEmptyModel {
-									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.AllowAll != nil {
+									if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].UserRestrictions != nil && existingUserRestrictionsItems[listIdx].UserRestrictions.AllowAll != nil {
 										return &VoltshareAdminPolicyEmptyModel{}
 									}
 									return nil
 								}(),
 								DenyAll: func() *VoltshareAdminPolicyEmptyModel {
-									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.DenyAll != nil {
+									if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].UserRestrictions != nil && existingUserRestrictionsItems[listIdx].UserRestrictions.DenyAll != nil {
 										return &VoltshareAdminPolicyEmptyModel{}
 									}
 									return nil
@@ -597,7 +678,14 @@ func (r *VoltshareAdminPolicyResource) Create(ctx context.Context, req resource.
 				})
 			}
 		}
-		data.UserRestrictions = user_restrictionsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsModelAttrTypes}, user_restrictionsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.UserRestrictions = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.UserRestrictions = types.ListNull(types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["max_validity_duration"].(string); ok && v != "" {
 		data.MaxValidityDuration = types.StringValue(v)
@@ -668,11 +756,17 @@ func (r *VoltshareAdminPolicyResource) Read(ctx context.Context, req resource.Re
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -704,18 +798,22 @@ func (r *VoltshareAdminPolicyResource) Read(ctx context.Context, req resource.Re
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["user_restrictions"].([]interface{}); ok && len(listData) > 0 {
 		var user_restrictionsList []VoltshareAdminPolicyUserRestrictionsModel
+		var existingUserRestrictionsItems []VoltshareAdminPolicyUserRestrictionsModel
+		if !data.UserRestrictions.IsNull() && !data.UserRestrictions.IsUnknown() {
+			data.UserRestrictions.ElementsAs(ctx, &existingUserRestrictionsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				user_restrictionsList = append(user_restrictionsList, VoltshareAdminPolicyUserRestrictionsModel{
 					AllTenants: func() *VoltshareAdminPolicyEmptyModel {
-						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].AllTenants != nil {
+						if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].AllTenants != nil {
 							return &VoltshareAdminPolicyEmptyModel{}
 						}
 						return nil
 					}(),
 					IndividualUsers: func() *VoltshareAdminPolicyEmptyModel {
-						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].IndividualUsers != nil {
+						if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].IndividualUsers != nil {
 							return &VoltshareAdminPolicyEmptyModel{}
 						}
 						return nil
@@ -730,13 +828,13 @@ func (r *VoltshareAdminPolicyResource) Read(ctx context.Context, req resource.Re
 						if _, ok := itemMap["user_restrictions"].(map[string]interface{}); ok {
 							return &VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel{
 								AllowAll: func() *VoltshareAdminPolicyEmptyModel {
-									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.AllowAll != nil {
+									if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].UserRestrictions != nil && existingUserRestrictionsItems[listIdx].UserRestrictions.AllowAll != nil {
 										return &VoltshareAdminPolicyEmptyModel{}
 									}
 									return nil
 								}(),
 								DenyAll: func() *VoltshareAdminPolicyEmptyModel {
-									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.DenyAll != nil {
+									if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].UserRestrictions != nil && existingUserRestrictionsItems[listIdx].UserRestrictions.DenyAll != nil {
 										return &VoltshareAdminPolicyEmptyModel{}
 									}
 									return nil
@@ -748,7 +846,14 @@ func (r *VoltshareAdminPolicyResource) Read(ctx context.Context, req resource.Re
 				})
 			}
 		}
-		data.UserRestrictions = user_restrictionsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsModelAttrTypes}, user_restrictionsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.UserRestrictions = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.UserRestrictions = types.ListNull(types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["max_validity_duration"].(string); ok && v != "" {
 		data.MaxValidityDuration = types.StringValue(v)
@@ -833,40 +938,45 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 		}
 		apiResource.Spec["author_restrictions"] = author_restrictionsMap
 	}
-	if len(data.UserRestrictions) > 0 {
-		var user_restrictionsList []map[string]interface{}
-		for _, item := range data.UserRestrictions {
-			itemMap := make(map[string]interface{})
-			if item.AllTenants != nil {
-				itemMap["all_tenants"] = map[string]interface{}{}
-			}
-			if item.IndividualUsers != nil {
-				itemMap["individual_users"] = map[string]interface{}{}
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if item.UserRestrictions != nil {
-				user_restrictionsNestedMap := make(map[string]interface{})
-				if item.UserRestrictions.AllowAll != nil {
-					user_restrictionsNestedMap["allow_all"] = map[string]interface{}{}
+	if !data.UserRestrictions.IsNull() && !data.UserRestrictions.IsUnknown() {
+		var user_restrictionsItems []VoltshareAdminPolicyUserRestrictionsModel
+		diags := data.UserRestrictions.ElementsAs(ctx, &user_restrictionsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(user_restrictionsItems) > 0 {
+			var user_restrictionsList []map[string]interface{}
+			for _, item := range user_restrictionsItems {
+				itemMap := make(map[string]interface{})
+				if item.AllTenants != nil {
+					itemMap["all_tenants"] = map[string]interface{}{}
 				}
-				if item.UserRestrictions.AllowList != nil {
-					allow_listDeepMap := make(map[string]interface{})
-					user_restrictionsNestedMap["allow_list"] = allow_listDeepMap
+				if item.IndividualUsers != nil {
+					itemMap["individual_users"] = map[string]interface{}{}
 				}
-				if item.UserRestrictions.DenyAll != nil {
-					user_restrictionsNestedMap["deny_all"] = map[string]interface{}{}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
 				}
-				if item.UserRestrictions.DenyList != nil {
-					deny_listDeepMap := make(map[string]interface{})
-					user_restrictionsNestedMap["deny_list"] = deny_listDeepMap
+				if item.UserRestrictions != nil {
+					user_restrictionsNestedMap := make(map[string]interface{})
+					if item.UserRestrictions.AllowAll != nil {
+						user_restrictionsNestedMap["allow_all"] = map[string]interface{}{}
+					}
+					if item.UserRestrictions.AllowList != nil {
+						allow_listDeepMap := make(map[string]interface{})
+						user_restrictionsNestedMap["allow_list"] = allow_listDeepMap
+					}
+					if item.UserRestrictions.DenyAll != nil {
+						user_restrictionsNestedMap["deny_all"] = map[string]interface{}{}
+					}
+					if item.UserRestrictions.DenyList != nil {
+						deny_listDeepMap := make(map[string]interface{})
+						user_restrictionsNestedMap["deny_list"] = deny_listDeepMap
+					}
+					itemMap["user_restrictions"] = user_restrictionsNestedMap
 				}
-				itemMap["user_restrictions"] = user_restrictionsNestedMap
+				user_restrictionsList = append(user_restrictionsList, itemMap)
 			}
-			user_restrictionsList = append(user_restrictionsList, itemMap)
+			apiResource.Spec["user_restrictions"] = user_restrictionsList
 		}
-		apiResource.Spec["user_restrictions"] = user_restrictionsList
 	}
 	if !data.MaxValidityDuration.IsNull() && !data.MaxValidityDuration.IsUnknown() {
 		apiResource.Spec["max_validity_duration"] = data.MaxValidityDuration.ValueString()
@@ -909,18 +1019,22 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["user_restrictions"].([]interface{}); ok && len(listData) > 0 {
 		var user_restrictionsList []VoltshareAdminPolicyUserRestrictionsModel
+		var existingUserRestrictionsItems []VoltshareAdminPolicyUserRestrictionsModel
+		if !data.UserRestrictions.IsNull() && !data.UserRestrictions.IsUnknown() {
+			data.UserRestrictions.ElementsAs(ctx, &existingUserRestrictionsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				user_restrictionsList = append(user_restrictionsList, VoltshareAdminPolicyUserRestrictionsModel{
 					AllTenants: func() *VoltshareAdminPolicyEmptyModel {
-						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].AllTenants != nil {
+						if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].AllTenants != nil {
 							return &VoltshareAdminPolicyEmptyModel{}
 						}
 						return nil
 					}(),
 					IndividualUsers: func() *VoltshareAdminPolicyEmptyModel {
-						if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].IndividualUsers != nil {
+						if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].IndividualUsers != nil {
 							return &VoltshareAdminPolicyEmptyModel{}
 						}
 						return nil
@@ -935,13 +1049,13 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 						if _, ok := itemMap["user_restrictions"].(map[string]interface{}); ok {
 							return &VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel{
 								AllowAll: func() *VoltshareAdminPolicyEmptyModel {
-									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.AllowAll != nil {
+									if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].UserRestrictions != nil && existingUserRestrictionsItems[listIdx].UserRestrictions.AllowAll != nil {
 										return &VoltshareAdminPolicyEmptyModel{}
 									}
 									return nil
 								}(),
 								DenyAll: func() *VoltshareAdminPolicyEmptyModel {
-									if !isImport && len(data.UserRestrictions) > listIdx && data.UserRestrictions[listIdx].UserRestrictions != nil && data.UserRestrictions[listIdx].UserRestrictions.DenyAll != nil {
+									if !isImport && len(existingUserRestrictionsItems) > listIdx && existingUserRestrictionsItems[listIdx].UserRestrictions != nil && existingUserRestrictionsItems[listIdx].UserRestrictions.DenyAll != nil {
 										return &VoltshareAdminPolicyEmptyModel{}
 									}
 									return nil
@@ -953,7 +1067,14 @@ func (r *VoltshareAdminPolicyResource) Update(ctx context.Context, req resource.
 				})
 			}
 		}
-		data.UserRestrictions = user_restrictionsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsModelAttrTypes}, user_restrictionsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.UserRestrictions = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.UserRestrictions = types.ListNull(types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["max_validity_duration"].(string); ok && v != "" {
 		data.MaxValidityDuration = types.StringValue(v)

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,17 +57,24 @@ type AllowedTenantAllowedGroupsModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AllowedTenantAllowedGroupsModelAttrTypes defines the attribute types for AllowedTenantAllowedGroupsModel
+var AllowedTenantAllowedGroupsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 type AllowedTenantResourceModel struct {
-	Name          types.String                      `tfsdk:"name"`
-	Namespace     types.String                      `tfsdk:"namespace"`
-	Annotations   types.Map                         `tfsdk:"annotations"`
-	Description   types.String                      `tfsdk:"description"`
-	Disable       types.Bool                        `tfsdk:"disable"`
-	Labels        types.Map                         `tfsdk:"labels"`
-	ID            types.String                      `tfsdk:"id"`
-	TenantID      types.String                      `tfsdk:"tenant_id"`
-	Timeouts      timeouts.Value                    `tfsdk:"timeouts"`
-	AllowedGroups []AllowedTenantAllowedGroupsModel `tfsdk:"allowed_groups"`
+	Name          types.String   `tfsdk:"name"`
+	Namespace     types.String   `tfsdk:"namespace"`
+	Annotations   types.Map      `tfsdk:"annotations"`
+	Description   types.String   `tfsdk:"description"`
+	Disable       types.Bool     `tfsdk:"disable"`
+	Labels        types.Map      `tfsdk:"labels"`
+	ID            types.String   `tfsdk:"id"`
+	TenantID      types.String   `tfsdk:"tenant_id"`
+	Timeouts      timeouts.Value `tfsdk:"timeouts"`
+	AllowedGroups types.List     `tfsdk:"allowed_groups"`
 }
 
 func (r *AllowedTenantResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -155,6 +163,9 @@ func (r *AllowedTenantResource) Schema(ctx context.Context, req resource.SchemaR
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -307,22 +318,27 @@ func (r *AllowedTenantResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.AllowedGroups) > 0 {
-		var allowed_groupsList []map[string]interface{}
-		for _, item := range data.AllowedGroups {
-			itemMap := make(map[string]interface{})
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
+	if !data.AllowedGroups.IsNull() && !data.AllowedGroups.IsUnknown() {
+		var allowed_groupsItems []AllowedTenantAllowedGroupsModel
+		diags := data.AllowedGroups.ElementsAs(ctx, &allowed_groupsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(allowed_groupsItems) > 0 {
+			var allowed_groupsList []map[string]interface{}
+			for _, item := range allowed_groupsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				allowed_groupsList = append(allowed_groupsList, itemMap)
 			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			allowed_groupsList = append(allowed_groupsList, itemMap)
+			createReq.Spec["allowed_groups"] = allowed_groupsList
 		}
-		createReq.Spec["allowed_groups"] = allowed_groupsList
 	}
 	if !data.TenantID.IsNull() && !data.TenantID.IsUnknown() {
 		createReq.Spec["tenant_id"] = data.TenantID.ValueString()
@@ -342,6 +358,10 @@ func (r *AllowedTenantResource) Create(ctx context.Context, req resource.CreateR
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["allowed_groups"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_groupsList []AllowedTenantAllowedGroupsModel
+		var existingAllowedGroupsItems []AllowedTenantAllowedGroupsModel
+		if !data.AllowedGroups.IsNull() && !data.AllowedGroups.IsUnknown() {
+			data.AllowedGroups.ElementsAs(ctx, &existingAllowedGroupsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -367,7 +387,14 @@ func (r *AllowedTenantResource) Create(ctx context.Context, req resource.CreateR
 				})
 			}
 		}
-		data.AllowedGroups = allowed_groupsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AllowedTenantAllowedGroupsModelAttrTypes}, allowed_groupsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AllowedGroups = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.AllowedGroups = types.ListNull(types.ObjectType{AttrTypes: AllowedTenantAllowedGroupsModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["tenant_id"].(string); ok && v != "" {
 		data.TenantID = types.StringValue(v)
@@ -438,11 +465,17 @@ func (r *AllowedTenantResource) Read(ctx context.Context, req resource.ReadReque
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -469,6 +502,10 @@ func (r *AllowedTenantResource) Read(ctx context.Context, req resource.ReadReque
 	})
 	if listData, ok := apiResource.Spec["allowed_groups"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_groupsList []AllowedTenantAllowedGroupsModel
+		var existingAllowedGroupsItems []AllowedTenantAllowedGroupsModel
+		if !data.AllowedGroups.IsNull() && !data.AllowedGroups.IsUnknown() {
+			data.AllowedGroups.ElementsAs(ctx, &existingAllowedGroupsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -494,7 +531,14 @@ func (r *AllowedTenantResource) Read(ctx context.Context, req resource.ReadReque
 				})
 			}
 		}
-		data.AllowedGroups = allowed_groupsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AllowedTenantAllowedGroupsModelAttrTypes}, allowed_groupsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AllowedGroups = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.AllowedGroups = types.ListNull(types.ObjectType{AttrTypes: AllowedTenantAllowedGroupsModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["tenant_id"].(string); ok && v != "" {
 		data.TenantID = types.StringValue(v)
@@ -561,22 +605,27 @@ func (r *AllowedTenantResource) Update(ctx context.Context, req resource.UpdateR
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.AllowedGroups) > 0 {
-		var allowed_groupsList []map[string]interface{}
-		for _, item := range data.AllowedGroups {
-			itemMap := make(map[string]interface{})
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
+	if !data.AllowedGroups.IsNull() && !data.AllowedGroups.IsUnknown() {
+		var allowed_groupsItems []AllowedTenantAllowedGroupsModel
+		diags := data.AllowedGroups.ElementsAs(ctx, &allowed_groupsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(allowed_groupsItems) > 0 {
+			var allowed_groupsList []map[string]interface{}
+			for _, item := range allowed_groupsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				allowed_groupsList = append(allowed_groupsList, itemMap)
 			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			allowed_groupsList = append(allowed_groupsList, itemMap)
+			apiResource.Spec["allowed_groups"] = allowed_groupsList
 		}
-		apiResource.Spec["allowed_groups"] = allowed_groupsList
 	}
 	if !data.TenantID.IsNull() && !data.TenantID.IsUnknown() {
 		apiResource.Spec["tenant_id"] = data.TenantID.ValueString()
@@ -614,6 +663,10 @@ func (r *AllowedTenantResource) Update(ctx context.Context, req resource.UpdateR
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["allowed_groups"].([]interface{}); ok && len(listData) > 0 {
 		var allowed_groupsList []AllowedTenantAllowedGroupsModel
+		var existingAllowedGroupsItems []AllowedTenantAllowedGroupsModel
+		if !data.AllowedGroups.IsNull() && !data.AllowedGroups.IsUnknown() {
+			data.AllowedGroups.ElementsAs(ctx, &existingAllowedGroupsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -639,7 +692,14 @@ func (r *AllowedTenantResource) Update(ctx context.Context, req resource.UpdateR
 				})
 			}
 		}
-		data.AllowedGroups = allowed_groupsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AllowedTenantAllowedGroupsModelAttrTypes}, allowed_groupsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AllowedGroups = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.AllowedGroups = types.ListNull(types.ObjectType{AttrTypes: AllowedTenantAllowedGroupsModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["tenant_id"].(string); ok && v != "" {
 		data.TenantID = types.StringValue(v)

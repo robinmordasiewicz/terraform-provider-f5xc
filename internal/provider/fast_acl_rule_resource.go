@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,9 +57,21 @@ type FastACLRuleActionModel struct {
 	ProtocolPolicerAction *FastACLRuleActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
 }
 
+// FastACLRuleActionModelAttrTypes defines the attribute types for FastACLRuleActionModel
+var FastACLRuleActionModelAttrTypes = map[string]attr.Type{
+	"simple_action":           types.StringType,
+	"policer_action":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"protocol_policer_action": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FastACLRuleActionPolicerActionModel represents policer_action block
 type FastACLRuleActionPolicerActionModel struct {
 	Ref []FastACLRuleActionPolicerActionRefModel `tfsdk:"ref"`
+}
+
+// FastACLRuleActionPolicerActionModelAttrTypes defines the attribute types for FastACLRuleActionPolicerActionModel
+var FastACLRuleActionPolicerActionModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLRuleActionPolicerActionRefModelAttrTypes}},
 }
 
 // FastACLRuleActionPolicerActionRefModel represents ref block
@@ -70,9 +83,23 @@ type FastACLRuleActionPolicerActionRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FastACLRuleActionPolicerActionRefModelAttrTypes defines the attribute types for FastACLRuleActionPolicerActionRefModel
+var FastACLRuleActionPolicerActionRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FastACLRuleActionProtocolPolicerActionModel represents protocol_policer_action block
 type FastACLRuleActionProtocolPolicerActionModel struct {
 	Ref []FastACLRuleActionProtocolPolicerActionRefModel `tfsdk:"ref"`
+}
+
+// FastACLRuleActionProtocolPolicerActionModelAttrTypes defines the attribute types for FastACLRuleActionProtocolPolicerActionModel
+var FastACLRuleActionProtocolPolicerActionModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLRuleActionProtocolPolicerActionRefModelAttrTypes}},
 }
 
 // FastACLRuleActionProtocolPolicerActionRefModel represents ref block
@@ -84,9 +111,23 @@ type FastACLRuleActionProtocolPolicerActionRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FastACLRuleActionProtocolPolicerActionRefModelAttrTypes defines the attribute types for FastACLRuleActionProtocolPolicerActionRefModel
+var FastACLRuleActionProtocolPolicerActionRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FastACLRuleIPPrefixSetModel represents ip_prefix_set block
 type FastACLRuleIPPrefixSetModel struct {
 	Ref []FastACLRuleIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// FastACLRuleIPPrefixSetModelAttrTypes defines the attribute types for FastACLRuleIPPrefixSetModel
+var FastACLRuleIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLRuleIPPrefixSetRefModelAttrTypes}},
 }
 
 // FastACLRuleIPPrefixSetRefModel represents ref block
@@ -98,6 +139,15 @@ type FastACLRuleIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FastACLRuleIPPrefixSetRefModelAttrTypes defines the attribute types for FastACLRuleIPPrefixSetRefModel
+var FastACLRuleIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FastACLRulePortModel represents port block
 type FastACLRulePortModel struct {
 	UserDefined types.Int64            `tfsdk:"user_defined"`
@@ -105,9 +155,21 @@ type FastACLRulePortModel struct {
 	DNS         *FastACLRuleEmptyModel `tfsdk:"dns"`
 }
 
+// FastACLRulePortModelAttrTypes defines the attribute types for FastACLRulePortModel
+var FastACLRulePortModelAttrTypes = map[string]attr.Type{
+	"user_defined": types.Int64Type,
+	"all":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FastACLRulePrefixModel represents prefix block
 type FastACLRulePrefixModel struct {
 	Prefix types.List `tfsdk:"prefix"`
+}
+
+// FastACLRulePrefixModelAttrTypes defines the attribute types for FastACLRulePrefixModel
+var FastACLRulePrefixModelAttrTypes = map[string]attr.Type{
+	"prefix": types.ListType{ElemType: types.StringType},
 }
 
 type FastACLRuleResourceModel struct {
@@ -121,7 +183,7 @@ type FastACLRuleResourceModel struct {
 	Timeouts    timeouts.Value               `tfsdk:"timeouts"`
 	Action      *FastACLRuleActionModel      `tfsdk:"action"`
 	IPPrefixSet *FastACLRuleIPPrefixSetModel `tfsdk:"ip_prefix_set"`
-	Port        []FastACLRulePortModel       `tfsdk:"port"`
+	Port        types.List                   `tfsdk:"port"`
 	Prefix      *FastACLRulePrefixModel      `tfsdk:"prefix"`
 }
 
@@ -208,6 +270,9 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -221,11 +286,17 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -244,6 +315,9 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -257,11 +331,17 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -282,6 +362,9 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -295,11 +378,17 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"uid": schema.StringAttribute{
 									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -525,22 +614,27 @@ func (r *FastACLRuleResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		createReq.Spec["ip_prefix_set"] = ip_prefix_setMap
 	}
-	if len(data.Port) > 0 {
-		var portList []map[string]interface{}
-		for _, item := range data.Port {
-			itemMap := make(map[string]interface{})
-			if item.All != nil {
-				itemMap["all"] = map[string]interface{}{}
+	if !data.Port.IsNull() && !data.Port.IsUnknown() {
+		var portItems []FastACLRulePortModel
+		diags := data.Port.ElementsAs(ctx, &portItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(portItems) > 0 {
+			var portList []map[string]interface{}
+			for _, item := range portItems {
+				itemMap := make(map[string]interface{})
+				if item.All != nil {
+					itemMap["all"] = map[string]interface{}{}
+				}
+				if item.DNS != nil {
+					itemMap["dns"] = map[string]interface{}{}
+				}
+				if !item.UserDefined.IsNull() && !item.UserDefined.IsUnknown() {
+					itemMap["user_defined"] = item.UserDefined.ValueInt64()
+				}
+				portList = append(portList, itemMap)
 			}
-			if item.DNS != nil {
-				itemMap["dns"] = map[string]interface{}{}
-			}
-			if !item.UserDefined.IsNull() && !item.UserDefined.IsUnknown() {
-				itemMap["user_defined"] = item.UserDefined.ValueInt64()
-			}
-			portList = append(portList, itemMap)
+			createReq.Spec["port"] = portList
 		}
-		createReq.Spec["port"] = portList
 	}
 	if data.Prefix != nil {
 		prefixMap := make(map[string]interface{})
@@ -647,18 +741,22 @@ func (r *FastACLRuleResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if listData, ok := apiResource.Spec["port"].([]interface{}); ok && len(listData) > 0 {
 		var portList []FastACLRulePortModel
+		var existingPortItems []FastACLRulePortModel
+		if !data.Port.IsNull() && !data.Port.IsUnknown() {
+			data.Port.ElementsAs(ctx, &existingPortItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				portList = append(portList, FastACLRulePortModel{
 					All: func() *FastACLRuleEmptyModel {
-						if !isImport && len(data.Port) > listIdx && data.Port[listIdx].All != nil {
+						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].All != nil {
 							return &FastACLRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					DNS: func() *FastACLRuleEmptyModel {
-						if !isImport && len(data.Port) > listIdx && data.Port[listIdx].DNS != nil {
+						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].DNS != nil {
 							return &FastACLRuleEmptyModel{}
 						}
 						return nil
@@ -672,7 +770,14 @@ func (r *FastACLRuleResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.Port = portList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FastACLRulePortModelAttrTypes}, portList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Port = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Port = types.ListNull(types.ObjectType{AttrTypes: FastACLRulePortModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && (isImport || data.Prefix != nil) {
 		data.Prefix = &FastACLRulePrefixModel{
@@ -755,11 +860,17 @@ func (r *FastACLRuleResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -865,18 +976,22 @@ func (r *FastACLRuleResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if listData, ok := apiResource.Spec["port"].([]interface{}); ok && len(listData) > 0 {
 		var portList []FastACLRulePortModel
+		var existingPortItems []FastACLRulePortModel
+		if !data.Port.IsNull() && !data.Port.IsUnknown() {
+			data.Port.ElementsAs(ctx, &existingPortItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				portList = append(portList, FastACLRulePortModel{
 					All: func() *FastACLRuleEmptyModel {
-						if !isImport && len(data.Port) > listIdx && data.Port[listIdx].All != nil {
+						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].All != nil {
 							return &FastACLRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					DNS: func() *FastACLRuleEmptyModel {
-						if !isImport && len(data.Port) > listIdx && data.Port[listIdx].DNS != nil {
+						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].DNS != nil {
 							return &FastACLRuleEmptyModel{}
 						}
 						return nil
@@ -890,7 +1005,14 @@ func (r *FastACLRuleResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.Port = portList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FastACLRulePortModelAttrTypes}, portList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Port = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Port = types.ListNull(types.ObjectType{AttrTypes: FastACLRulePortModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && (isImport || data.Prefix != nil) {
 		data.Prefix = &FastACLRulePrefixModel{
@@ -1011,22 +1133,27 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["ip_prefix_set"] = ip_prefix_setMap
 	}
-	if len(data.Port) > 0 {
-		var portList []map[string]interface{}
-		for _, item := range data.Port {
-			itemMap := make(map[string]interface{})
-			if item.All != nil {
-				itemMap["all"] = map[string]interface{}{}
+	if !data.Port.IsNull() && !data.Port.IsUnknown() {
+		var portItems []FastACLRulePortModel
+		diags := data.Port.ElementsAs(ctx, &portItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(portItems) > 0 {
+			var portList []map[string]interface{}
+			for _, item := range portItems {
+				itemMap := make(map[string]interface{})
+				if item.All != nil {
+					itemMap["all"] = map[string]interface{}{}
+				}
+				if item.DNS != nil {
+					itemMap["dns"] = map[string]interface{}{}
+				}
+				if !item.UserDefined.IsNull() && !item.UserDefined.IsUnknown() {
+					itemMap["user_defined"] = item.UserDefined.ValueInt64()
+				}
+				portList = append(portList, itemMap)
 			}
-			if item.DNS != nil {
-				itemMap["dns"] = map[string]interface{}{}
-			}
-			if !item.UserDefined.IsNull() && !item.UserDefined.IsUnknown() {
-				itemMap["user_defined"] = item.UserDefined.ValueInt64()
-			}
-			portList = append(portList, itemMap)
+			apiResource.Spec["port"] = portList
 		}
-		apiResource.Spec["port"] = portList
 	}
 	if data.Prefix != nil {
 		prefixMap := make(map[string]interface{})
@@ -1144,18 +1271,22 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if listData, ok := apiResource.Spec["port"].([]interface{}); ok && len(listData) > 0 {
 		var portList []FastACLRulePortModel
+		var existingPortItems []FastACLRulePortModel
+		if !data.Port.IsNull() && !data.Port.IsUnknown() {
+			data.Port.ElementsAs(ctx, &existingPortItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				portList = append(portList, FastACLRulePortModel{
 					All: func() *FastACLRuleEmptyModel {
-						if !isImport && len(data.Port) > listIdx && data.Port[listIdx].All != nil {
+						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].All != nil {
 							return &FastACLRuleEmptyModel{}
 						}
 						return nil
 					}(),
 					DNS: func() *FastACLRuleEmptyModel {
-						if !isImport && len(data.Port) > listIdx && data.Port[listIdx].DNS != nil {
+						if !isImport && len(existingPortItems) > listIdx && existingPortItems[listIdx].DNS != nil {
 							return &FastACLRuleEmptyModel{}
 						}
 						return nil
@@ -1169,7 +1300,14 @@ func (r *FastACLRuleResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.Port = portList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FastACLRulePortModelAttrTypes}, portList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Port = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Port = types.ListNull(types.ObjectType{AttrTypes: FastACLRulePortModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["prefix"].(map[string]interface{}); ok && (isImport || data.Prefix != nil) {
 		data.Prefix = &FastACLRulePrefixModel{

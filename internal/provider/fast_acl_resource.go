@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,12 +57,27 @@ type FastACLProtocolPolicerModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// FastACLProtocolPolicerModelAttrTypes defines the attribute types for FastACLProtocolPolicerModel
+var FastACLProtocolPolicerModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // FastACLREACLModel represents re_acl block
 type FastACLREACLModel struct {
 	AllPublicVips     *FastACLEmptyModel                  `tfsdk:"all_public_vips"`
 	DefaultTenantVIP  *FastACLEmptyModel                  `tfsdk:"default_tenant_vip"`
 	FastACLRules      []FastACLREACLFastACLRulesModel     `tfsdk:"fast_acl_rules"`
 	SelectedTenantVIP *FastACLREACLSelectedTenantVIPModel `tfsdk:"selected_tenant_vip"`
+}
+
+// FastACLREACLModelAttrTypes defines the attribute types for FastACLREACLModel
+var FastACLREACLModelAttrTypes = map[string]attr.Type{
+	"all_public_vips":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_tenant_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fast_acl_rules":      types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"selected_tenant_vip": types.ObjectType{AttrTypes: FastACLREACLSelectedTenantVIPModelAttrTypes},
 }
 
 // FastACLREACLFastACLRulesModel represents fast_acl_rules block
@@ -73,6 +89,15 @@ type FastACLREACLFastACLRulesModel struct {
 	Prefix      *FastACLREACLFastACLRulesPrefixModel      `tfsdk:"prefix"`
 }
 
+// FastACLREACLFastACLRulesModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesModel
+var FastACLREACLFastACLRulesModelAttrTypes = map[string]attr.Type{
+	"action":        types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionModelAttrTypes},
+	"ip_prefix_set": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metadata":      types.ObjectType{AttrTypes: FastACLREACLFastACLRulesMetadataModelAttrTypes},
+	"port":          types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesPortModelAttrTypes}},
+	"prefix":        types.ObjectType{AttrTypes: FastACLREACLFastACLRulesPrefixModelAttrTypes},
+}
+
 // FastACLREACLFastACLRulesActionModel represents action block
 type FastACLREACLFastACLRulesActionModel struct {
 	SimpleAction          types.String                                              `tfsdk:"simple_action"`
@@ -80,9 +105,21 @@ type FastACLREACLFastACLRulesActionModel struct {
 	ProtocolPolicerAction *FastACLREACLFastACLRulesActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
 }
 
+// FastACLREACLFastACLRulesActionModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionModel
+var FastACLREACLFastACLRulesActionModelAttrTypes = map[string]attr.Type{
+	"simple_action":           types.StringType,
+	"policer_action":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"protocol_policer_action": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FastACLREACLFastACLRulesActionPolicerActionModel represents policer_action block
 type FastACLREACLFastACLRulesActionPolicerActionModel struct {
 	Ref []FastACLREACLFastACLRulesActionPolicerActionRefModel `tfsdk:"ref"`
+}
+
+// FastACLREACLFastACLRulesActionPolicerActionModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionPolicerActionModel
+var FastACLREACLFastACLRulesActionPolicerActionModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionPolicerActionRefModelAttrTypes}},
 }
 
 // FastACLREACLFastACLRulesActionPolicerActionRefModel represents ref block
@@ -94,9 +131,23 @@ type FastACLREACLFastACLRulesActionPolicerActionRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FastACLREACLFastACLRulesActionPolicerActionRefModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionPolicerActionRefModel
+var FastACLREACLFastACLRulesActionPolicerActionRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FastACLREACLFastACLRulesActionProtocolPolicerActionModel represents protocol_policer_action block
 type FastACLREACLFastACLRulesActionProtocolPolicerActionModel struct {
 	Ref []FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel `tfsdk:"ref"`
+}
+
+// FastACLREACLFastACLRulesActionProtocolPolicerActionModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionProtocolPolicerActionModel
+var FastACLREACLFastACLRulesActionProtocolPolicerActionModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes}},
 }
 
 // FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel represents ref block
@@ -108,9 +159,23 @@ type FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FastACLREACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionProtocolPolicerActionRefModel
+var FastACLREACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FastACLREACLFastACLRulesIPPrefixSetModel represents ip_prefix_set block
 type FastACLREACLFastACLRulesIPPrefixSetModel struct {
 	Ref []FastACLREACLFastACLRulesIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// FastACLREACLFastACLRulesIPPrefixSetModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesIPPrefixSetModel
+var FastACLREACLFastACLRulesIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesIPPrefixSetRefModelAttrTypes}},
 }
 
 // FastACLREACLFastACLRulesIPPrefixSetRefModel represents ref block
@@ -122,10 +187,25 @@ type FastACLREACLFastACLRulesIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FastACLREACLFastACLRulesIPPrefixSetRefModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesIPPrefixSetRefModel
+var FastACLREACLFastACLRulesIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FastACLREACLFastACLRulesMetadataModel represents metadata block
 type FastACLREACLFastACLRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// FastACLREACLFastACLRulesMetadataModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesMetadataModel
+var FastACLREACLFastACLRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // FastACLREACLFastACLRulesPortModel represents port block
@@ -135,9 +215,21 @@ type FastACLREACLFastACLRulesPortModel struct {
 	DNS         *FastACLEmptyModel `tfsdk:"dns"`
 }
 
+// FastACLREACLFastACLRulesPortModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesPortModel
+var FastACLREACLFastACLRulesPortModelAttrTypes = map[string]attr.Type{
+	"user_defined": types.Int64Type,
+	"all":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FastACLREACLFastACLRulesPrefixModel represents prefix block
 type FastACLREACLFastACLRulesPrefixModel struct {
 	Prefix types.List `tfsdk:"prefix"`
+}
+
+// FastACLREACLFastACLRulesPrefixModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesPrefixModel
+var FastACLREACLFastACLRulesPrefixModelAttrTypes = map[string]attr.Type{
+	"prefix": types.ListType{ElemType: types.StringType},
 }
 
 // FastACLREACLSelectedTenantVIPModel represents selected_tenant_vip block
@@ -146,11 +238,24 @@ type FastACLREACLSelectedTenantVIPModel struct {
 	PublicIPRefs     []FastACLREACLSelectedTenantVIPPublicIPRefsModel `tfsdk:"public_ip_refs"`
 }
 
+// FastACLREACLSelectedTenantVIPModelAttrTypes defines the attribute types for FastACLREACLSelectedTenantVIPModel
+var FastACLREACLSelectedTenantVIPModelAttrTypes = map[string]attr.Type{
+	"default_tenant_vip": types.BoolType,
+	"public_ip_refs":     types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLSelectedTenantVIPPublicIPRefsModelAttrTypes}},
+}
+
 // FastACLREACLSelectedTenantVIPPublicIPRefsModel represents public_ip_refs block
 type FastACLREACLSelectedTenantVIPPublicIPRefsModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// FastACLREACLSelectedTenantVIPPublicIPRefsModelAttrTypes defines the attribute types for FastACLREACLSelectedTenantVIPPublicIPRefsModel
+var FastACLREACLSelectedTenantVIPPublicIPRefsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // FastACLSiteACLModel represents site_acl block
@@ -163,6 +268,16 @@ type FastACLSiteACLModel struct {
 	VIPServices       *FastACLEmptyModel                `tfsdk:"vip_services"`
 }
 
+// FastACLSiteACLModelAttrTypes defines the attribute types for FastACLSiteACLModel
+var FastACLSiteACLModelAttrTypes = map[string]attr.Type{
+	"all_services":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fast_acl_rules":     types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"inside_network":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_services": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_network":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vip_services":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FastACLSiteACLFastACLRulesModel represents fast_acl_rules block
 type FastACLSiteACLFastACLRulesModel struct {
 	Action      *FastACLSiteACLFastACLRulesActionModel      `tfsdk:"action"`
@@ -172,6 +287,15 @@ type FastACLSiteACLFastACLRulesModel struct {
 	Prefix      *FastACLSiteACLFastACLRulesPrefixModel      `tfsdk:"prefix"`
 }
 
+// FastACLSiteACLFastACLRulesModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesModel
+var FastACLSiteACLFastACLRulesModelAttrTypes = map[string]attr.Type{
+	"action":        types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionModelAttrTypes},
+	"ip_prefix_set": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metadata":      types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesMetadataModelAttrTypes},
+	"port":          types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesPortModelAttrTypes}},
+	"prefix":        types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesPrefixModelAttrTypes},
+}
+
 // FastACLSiteACLFastACLRulesActionModel represents action block
 type FastACLSiteACLFastACLRulesActionModel struct {
 	SimpleAction          types.String                                                `tfsdk:"simple_action"`
@@ -179,9 +303,21 @@ type FastACLSiteACLFastACLRulesActionModel struct {
 	ProtocolPolicerAction *FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel `tfsdk:"protocol_policer_action"`
 }
 
+// FastACLSiteACLFastACLRulesActionModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionModel
+var FastACLSiteACLFastACLRulesActionModelAttrTypes = map[string]attr.Type{
+	"simple_action":           types.StringType,
+	"policer_action":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"protocol_policer_action": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FastACLSiteACLFastACLRulesActionPolicerActionModel represents policer_action block
 type FastACLSiteACLFastACLRulesActionPolicerActionModel struct {
 	Ref []FastACLSiteACLFastACLRulesActionPolicerActionRefModel `tfsdk:"ref"`
+}
+
+// FastACLSiteACLFastACLRulesActionPolicerActionModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionPolicerActionModel
+var FastACLSiteACLFastACLRulesActionPolicerActionModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionPolicerActionRefModelAttrTypes}},
 }
 
 // FastACLSiteACLFastACLRulesActionPolicerActionRefModel represents ref block
@@ -193,9 +329,23 @@ type FastACLSiteACLFastACLRulesActionPolicerActionRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FastACLSiteACLFastACLRulesActionPolicerActionRefModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionPolicerActionRefModel
+var FastACLSiteACLFastACLRulesActionPolicerActionRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel represents protocol_policer_action block
 type FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel struct {
 	Ref []FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModel `tfsdk:"ref"`
+}
+
+// FastACLSiteACLFastACLRulesActionProtocolPolicerActionModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionProtocolPolicerActionModel
+var FastACLSiteACLFastACLRulesActionProtocolPolicerActionModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes}},
 }
 
 // FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModel represents ref block
@@ -207,9 +357,23 @@ type FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModel
+var FastACLSiteACLFastACLRulesActionProtocolPolicerActionRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FastACLSiteACLFastACLRulesIPPrefixSetModel represents ip_prefix_set block
 type FastACLSiteACLFastACLRulesIPPrefixSetModel struct {
 	Ref []FastACLSiteACLFastACLRulesIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// FastACLSiteACLFastACLRulesIPPrefixSetModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesIPPrefixSetModel
+var FastACLSiteACLFastACLRulesIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesIPPrefixSetRefModelAttrTypes}},
 }
 
 // FastACLSiteACLFastACLRulesIPPrefixSetRefModel represents ref block
@@ -221,10 +385,25 @@ type FastACLSiteACLFastACLRulesIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// FastACLSiteACLFastACLRulesIPPrefixSetRefModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesIPPrefixSetRefModel
+var FastACLSiteACLFastACLRulesIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // FastACLSiteACLFastACLRulesMetadataModel represents metadata block
 type FastACLSiteACLFastACLRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// FastACLSiteACLFastACLRulesMetadataModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesMetadataModel
+var FastACLSiteACLFastACLRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // FastACLSiteACLFastACLRulesPortModel represents port block
@@ -234,9 +413,21 @@ type FastACLSiteACLFastACLRulesPortModel struct {
 	DNS         *FastACLEmptyModel `tfsdk:"dns"`
 }
 
+// FastACLSiteACLFastACLRulesPortModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesPortModel
+var FastACLSiteACLFastACLRulesPortModelAttrTypes = map[string]attr.Type{
+	"user_defined": types.Int64Type,
+	"all":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // FastACLSiteACLFastACLRulesPrefixModel represents prefix block
 type FastACLSiteACLFastACLRulesPrefixModel struct {
 	Prefix types.List `tfsdk:"prefix"`
+}
+
+// FastACLSiteACLFastACLRulesPrefixModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesPrefixModel
+var FastACLSiteACLFastACLRulesPrefixModelAttrTypes = map[string]attr.Type{
+	"prefix": types.ListType{ElemType: types.StringType},
 }
 
 type FastACLResourceModel struct {
@@ -330,6 +521,9 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -369,6 +563,9 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -382,11 +579,17 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -405,6 +608,9 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -418,11 +624,17 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -443,6 +655,9 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -456,11 +671,17 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -537,6 +758,9 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -578,6 +802,9 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -591,11 +818,17 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -614,6 +847,9 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -627,11 +863,17 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -652,6 +894,9 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -665,11 +910,17 @@ func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -1321,11 +1572,17 @@ func (r *FastACLResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

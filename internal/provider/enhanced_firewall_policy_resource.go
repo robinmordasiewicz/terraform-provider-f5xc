@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,9 +55,19 @@ type EnhancedFirewallPolicyAllowedDestinationsModel struct {
 	Prefix types.List `tfsdk:"prefix"`
 }
 
+// EnhancedFirewallPolicyAllowedDestinationsModelAttrTypes defines the attribute types for EnhancedFirewallPolicyAllowedDestinationsModel
+var EnhancedFirewallPolicyAllowedDestinationsModelAttrTypes = map[string]attr.Type{
+	"prefix": types.ListType{ElemType: types.StringType},
+}
+
 // EnhancedFirewallPolicyAllowedSourcesModel represents allowed_sources block
 type EnhancedFirewallPolicyAllowedSourcesModel struct {
 	Prefix types.List `tfsdk:"prefix"`
+}
+
+// EnhancedFirewallPolicyAllowedSourcesModelAttrTypes defines the attribute types for EnhancedFirewallPolicyAllowedSourcesModel
+var EnhancedFirewallPolicyAllowedSourcesModelAttrTypes = map[string]attr.Type{
+	"prefix": types.ListType{ElemType: types.StringType},
 }
 
 // EnhancedFirewallPolicyDeniedDestinationsModel represents denied_destinations block
@@ -64,14 +75,29 @@ type EnhancedFirewallPolicyDeniedDestinationsModel struct {
 	Prefix types.List `tfsdk:"prefix"`
 }
 
+// EnhancedFirewallPolicyDeniedDestinationsModelAttrTypes defines the attribute types for EnhancedFirewallPolicyDeniedDestinationsModel
+var EnhancedFirewallPolicyDeniedDestinationsModelAttrTypes = map[string]attr.Type{
+	"prefix": types.ListType{ElemType: types.StringType},
+}
+
 // EnhancedFirewallPolicyDeniedSourcesModel represents denied_sources block
 type EnhancedFirewallPolicyDeniedSourcesModel struct {
 	Prefix types.List `tfsdk:"prefix"`
 }
 
+// EnhancedFirewallPolicyDeniedSourcesModelAttrTypes defines the attribute types for EnhancedFirewallPolicyDeniedSourcesModel
+var EnhancedFirewallPolicyDeniedSourcesModelAttrTypes = map[string]attr.Type{
+	"prefix": types.ListType{ElemType: types.StringType},
+}
+
 // EnhancedFirewallPolicyRuleListModel represents rule_list block
 type EnhancedFirewallPolicyRuleListModel struct {
 	Rules []EnhancedFirewallPolicyRuleListRulesModel `tfsdk:"rules"`
+}
+
+// EnhancedFirewallPolicyRuleListModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListModel
+var EnhancedFirewallPolicyRuleListModelAttrTypes = map[string]attr.Type{
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // EnhancedFirewallPolicyRuleListRulesModel represents rules block
@@ -105,9 +131,45 @@ type EnhancedFirewallPolicyRuleListRulesModel struct {
 	SourcePrefixList         *EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel         `tfsdk:"source_prefix_list"`
 }
 
+// EnhancedFirewallPolicyRuleListRulesModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesModel
+var EnhancedFirewallPolicyRuleListRulesModelAttrTypes = map[string]attr.Type{
+	"advanced_action":            types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesAdvancedActionModelAttrTypes},
+	"all_destinations":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_sli_vips":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_slo_vips":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_sources":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_tcp_traffic":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_traffic":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_udp_traffic":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"allow":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"applications":               types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesApplicationsModelAttrTypes},
+	"deny":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"destination_aws_vpc_ids":    types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModelAttrTypes},
+	"destination_ip_prefix_set":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"destination_label_selector": types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModelAttrTypes},
+	"destination_prefix_list":    types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModelAttrTypes},
+	"insert_service":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inside_destinations":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inside_sources":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"label_matcher":              types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesLabelMatcherModelAttrTypes},
+	"metadata":                   types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesMetadataModelAttrTypes},
+	"outside_destinations":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_sources":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"protocol_port_range":        types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModelAttrTypes},
+	"source_aws_vpc_ids":         types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModelAttrTypes},
+	"source_ip_prefix_set":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"source_label_selector":      types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModelAttrTypes},
+	"source_prefix_list":         types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesSourcePrefixListModelAttrTypes},
+}
+
 // EnhancedFirewallPolicyRuleListRulesAdvancedActionModel represents advanced_action block
 type EnhancedFirewallPolicyRuleListRulesAdvancedActionModel struct {
 	Action types.String `tfsdk:"action"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesAdvancedActionModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesAdvancedActionModel
+var EnhancedFirewallPolicyRuleListRulesAdvancedActionModelAttrTypes = map[string]attr.Type{
+	"action": types.StringType,
 }
 
 // EnhancedFirewallPolicyRuleListRulesApplicationsModel represents applications block
@@ -115,14 +177,29 @@ type EnhancedFirewallPolicyRuleListRulesApplicationsModel struct {
 	Applications types.List `tfsdk:"applications"`
 }
 
+// EnhancedFirewallPolicyRuleListRulesApplicationsModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesApplicationsModel
+var EnhancedFirewallPolicyRuleListRulesApplicationsModelAttrTypes = map[string]attr.Type{
+	"applications": types.ListType{ElemType: types.StringType},
+}
+
 // EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel represents destination_aws_vpc_ids block
 type EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel struct {
 	VPCID types.List `tfsdk:"vpc_id"`
 }
 
+// EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModel
+var EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModelAttrTypes = map[string]attr.Type{
+	"vpc_id": types.ListType{ElemType: types.StringType},
+}
+
 // EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel represents destination_ip_prefix_set block
 type EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel struct {
 	Ref []EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModel
+var EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModelAttrTypes}},
 }
 
 // EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModel represents ref block
@@ -134,9 +211,23 @@ type EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModel
+var EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel represents destination_label_selector block
 type EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModel
+var EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel represents destination_prefix_list block
@@ -144,9 +235,19 @@ type EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
 }
 
+// EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModel
+var EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
+}
+
 // EnhancedFirewallPolicyRuleListRulesInsertServiceModel represents insert_service block
 type EnhancedFirewallPolicyRuleListRulesInsertServiceModel struct {
 	NfvService *EnhancedFirewallPolicyRuleListRulesInsertServiceNfvServiceModel `tfsdk:"nfv_service"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesInsertServiceModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesInsertServiceModel
+var EnhancedFirewallPolicyRuleListRulesInsertServiceModelAttrTypes = map[string]attr.Type{
+	"nfv_service": types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesInsertServiceNfvServiceModelAttrTypes},
 }
 
 // EnhancedFirewallPolicyRuleListRulesInsertServiceNfvServiceModel represents nfv_service block
@@ -156,9 +257,21 @@ type EnhancedFirewallPolicyRuleListRulesInsertServiceNfvServiceModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// EnhancedFirewallPolicyRuleListRulesInsertServiceNfvServiceModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesInsertServiceNfvServiceModel
+var EnhancedFirewallPolicyRuleListRulesInsertServiceNfvServiceModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // EnhancedFirewallPolicyRuleListRulesLabelMatcherModel represents label_matcher block
 type EnhancedFirewallPolicyRuleListRulesLabelMatcherModel struct {
 	Keys types.List `tfsdk:"keys"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesLabelMatcherModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesLabelMatcherModel
+var EnhancedFirewallPolicyRuleListRulesLabelMatcherModelAttrTypes = map[string]attr.Type{
+	"keys": types.ListType{ElemType: types.StringType},
 }
 
 // EnhancedFirewallPolicyRuleListRulesMetadataModel represents metadata block
@@ -167,10 +280,22 @@ type EnhancedFirewallPolicyRuleListRulesMetadataModel struct {
 	Name            types.String `tfsdk:"name"`
 }
 
+// EnhancedFirewallPolicyRuleListRulesMetadataModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesMetadataModel
+var EnhancedFirewallPolicyRuleListRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel represents protocol_port_range block
 type EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel struct {
 	PortRanges types.List   `tfsdk:"port_ranges"`
 	Protocol   types.String `tfsdk:"protocol"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModel
+var EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModelAttrTypes = map[string]attr.Type{
+	"port_ranges": types.ListType{ElemType: types.StringType},
+	"protocol":    types.StringType,
 }
 
 // EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel represents source_aws_vpc_ids block
@@ -178,9 +303,19 @@ type EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel struct {
 	VPCID types.List `tfsdk:"vpc_id"`
 }
 
+// EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModel
+var EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModelAttrTypes = map[string]attr.Type{
+	"vpc_id": types.ListType{ElemType: types.StringType},
+}
+
 // EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel represents source_ip_prefix_set block
 type EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel struct {
 	Ref []EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModel
+var EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModelAttrTypes}},
 }
 
 // EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModel represents ref block
@@ -192,14 +327,33 @@ type EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModel
+var EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel represents source_label_selector block
 type EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
 }
 
+// EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModel
+var EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
+}
+
 // EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel represents source_prefix_list block
 type EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// EnhancedFirewallPolicyRuleListRulesSourcePrefixListModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListRulesSourcePrefixListModel
+var EnhancedFirewallPolicyRuleListRulesSourcePrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 type EnhancedFirewallPolicyResourceModel struct {
@@ -405,6 +559,9 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -418,11 +575,17 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -468,6 +631,9 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -544,6 +710,9 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -557,11 +726,17 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -1273,11 +1448,17 @@ func (r *EnhancedFirewallPolicyResource) Read(ctx context.Context, req resource.
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

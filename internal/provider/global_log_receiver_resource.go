@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -59,11 +60,28 @@ type GlobalLogReceiverAWSCloudWatchReceiverModel struct {
 	Compression *GlobalLogReceiverAWSCloudWatchReceiverCompressionModel `tfsdk:"compression"`
 }
 
+// GlobalLogReceiverAWSCloudWatchReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverAWSCloudWatchReceiverModel
+var GlobalLogReceiverAWSCloudWatchReceiverModelAttrTypes = map[string]attr.Type{
+	"aws_region":  types.StringType,
+	"group_name":  types.StringType,
+	"stream_name": types.StringType,
+	"aws_cred":    types.ObjectType{AttrTypes: GlobalLogReceiverAWSCloudWatchReceiverAWSCredModelAttrTypes},
+	"batch":       types.ObjectType{AttrTypes: GlobalLogReceiverAWSCloudWatchReceiverBatchModelAttrTypes},
+	"compression": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel represents aws_cred block
 type GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// GlobalLogReceiverAWSCloudWatchReceiverAWSCredModelAttrTypes defines the attribute types for GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel
+var GlobalLogReceiverAWSCloudWatchReceiverAWSCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // GlobalLogReceiverAWSCloudWatchReceiverBatchModel represents batch block
@@ -76,11 +94,28 @@ type GlobalLogReceiverAWSCloudWatchReceiverBatchModel struct {
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
+// GlobalLogReceiverAWSCloudWatchReceiverBatchModelAttrTypes defines the attribute types for GlobalLogReceiverAWSCloudWatchReceiverBatchModel
+var GlobalLogReceiverAWSCloudWatchReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverAWSCloudWatchReceiverCompressionModel represents compression block
 type GlobalLogReceiverAWSCloudWatchReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
 	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
 	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverAWSCloudWatchReceiverCompressionModelAttrTypes defines the attribute types for GlobalLogReceiverAWSCloudWatchReceiverCompressionModel
+var GlobalLogReceiverAWSCloudWatchReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // GlobalLogReceiverAzureEventHubsReceiverModel represents azure_event_hubs_receiver block
@@ -90,10 +125,23 @@ type GlobalLogReceiverAzureEventHubsReceiverModel struct {
 	ConnectionString *GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel `tfsdk:"connection_string"`
 }
 
+// GlobalLogReceiverAzureEventHubsReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverAzureEventHubsReceiverModel
+var GlobalLogReceiverAzureEventHubsReceiverModelAttrTypes = map[string]attr.Type{
+	"instance":          types.StringType,
+	"namespace":         types.StringType,
+	"connection_string": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel represents connection_string block
 type GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverAzureEventHubsReceiverConnectionStringModelAttrTypes defines the attribute types for GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel
+var GlobalLogReceiverAzureEventHubsReceiverConnectionStringModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -103,10 +151,23 @@ type GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoM
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModel
+var GlobalLogReceiverAzureEventHubsReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModel
+var GlobalLogReceiverAzureEventHubsReceiverConnectionStringClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverAzureReceiverModel represents azure_receiver block
@@ -116,6 +177,15 @@ type GlobalLogReceiverAzureReceiverModel struct {
 	Compression      *GlobalLogReceiverAzureReceiverCompressionModel      `tfsdk:"compression"`
 	ConnectionString *GlobalLogReceiverAzureReceiverConnectionStringModel `tfsdk:"connection_string"`
 	FilenameOptions  *GlobalLogReceiverAzureReceiverFilenameOptionsModel  `tfsdk:"filename_options"`
+}
+
+// GlobalLogReceiverAzureReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverAzureReceiverModel
+var GlobalLogReceiverAzureReceiverModelAttrTypes = map[string]attr.Type{
+	"container_name":    types.StringType,
+	"batch":             types.ObjectType{AttrTypes: GlobalLogReceiverAzureReceiverBatchModelAttrTypes},
+	"compression":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"connection_string": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"filename_options":  types.ObjectType{AttrTypes: GlobalLogReceiverAzureReceiverFilenameOptionsModelAttrTypes},
 }
 
 // GlobalLogReceiverAzureReceiverBatchModel represents batch block
@@ -128,6 +198,16 @@ type GlobalLogReceiverAzureReceiverBatchModel struct {
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
+// GlobalLogReceiverAzureReceiverBatchModelAttrTypes defines the attribute types for GlobalLogReceiverAzureReceiverBatchModel
+var GlobalLogReceiverAzureReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverAzureReceiverCompressionModel represents compression block
 type GlobalLogReceiverAzureReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
@@ -135,10 +215,23 @@ type GlobalLogReceiverAzureReceiverCompressionModel struct {
 	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
+// GlobalLogReceiverAzureReceiverCompressionModelAttrTypes defines the attribute types for GlobalLogReceiverAzureReceiverCompressionModel
+var GlobalLogReceiverAzureReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverAzureReceiverConnectionStringModel represents connection_string block
 type GlobalLogReceiverAzureReceiverConnectionStringModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverAzureReceiverConnectionStringModelAttrTypes defines the attribute types for GlobalLogReceiverAzureReceiverConnectionStringModel
+var GlobalLogReceiverAzureReceiverConnectionStringModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -148,10 +241,23 @@ type GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel stru
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModel
+var GlobalLogReceiverAzureReceiverConnectionStringBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModel
+var GlobalLogReceiverAzureReceiverConnectionStringClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverAzureReceiverFilenameOptionsModel represents filename_options block
@@ -159,6 +265,13 @@ type GlobalLogReceiverAzureReceiverFilenameOptionsModel struct {
 	CustomFolder  types.String                 `tfsdk:"custom_folder"`
 	LogTypeFolder *GlobalLogReceiverEmptyModel `tfsdk:"log_type_folder"`
 	NoFolder      *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
+}
+
+// GlobalLogReceiverAzureReceiverFilenameOptionsModelAttrTypes defines the attribute types for GlobalLogReceiverAzureReceiverFilenameOptionsModel
+var GlobalLogReceiverAzureReceiverFilenameOptionsModelAttrTypes = map[string]attr.Type{
+	"custom_folder":   types.StringType,
+	"log_type_folder": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_folder":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // GlobalLogReceiverDatadogReceiverModel represents datadog_receiver block
@@ -172,6 +285,17 @@ type GlobalLogReceiverDatadogReceiverModel struct {
 	UseTLS        *GlobalLogReceiverDatadogReceiverUseTLSModel        `tfsdk:"use_tls"`
 }
 
+// GlobalLogReceiverDatadogReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverModel
+var GlobalLogReceiverDatadogReceiverModelAttrTypes = map[string]attr.Type{
+	"endpoint":        types.StringType,
+	"site":            types.StringType,
+	"batch":           types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverBatchModelAttrTypes},
+	"compression":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"datadog_api_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_tls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":         types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverUseTLSModelAttrTypes},
+}
+
 // GlobalLogReceiverDatadogReceiverBatchModel represents batch block
 type GlobalLogReceiverDatadogReceiverBatchModel struct {
 	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
@@ -182,6 +306,16 @@ type GlobalLogReceiverDatadogReceiverBatchModel struct {
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
+// GlobalLogReceiverDatadogReceiverBatchModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverBatchModel
+var GlobalLogReceiverDatadogReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverDatadogReceiverCompressionModel represents compression block
 type GlobalLogReceiverDatadogReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
@@ -189,10 +323,23 @@ type GlobalLogReceiverDatadogReceiverCompressionModel struct {
 	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
+// GlobalLogReceiverDatadogReceiverCompressionModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverCompressionModel
+var GlobalLogReceiverDatadogReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel represents datadog_api_key block
 type GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverDatadogReceiverDatadogAPIKeyModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverDatadogAPIKeyModel
+var GlobalLogReceiverDatadogReceiverDatadogAPIKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -202,10 +349,23 @@ type GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel struc
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModel
+var GlobalLogReceiverDatadogReceiverDatadogAPIKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModel
+var GlobalLogReceiverDatadogReceiverDatadogAPIKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverDatadogReceiverUseTLSModel represents use_tls block
@@ -220,16 +380,40 @@ type GlobalLogReceiverDatadogReceiverUseTLSModel struct {
 	NoCA                     *GlobalLogReceiverEmptyModel                           `tfsdk:"no_ca"`
 }
 
+// GlobalLogReceiverDatadogReceiverUseTLSModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverUseTLSModel
+var GlobalLogReceiverDatadogReceiverUseTLSModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":             types.StringType,
+	"disable_verify_certificate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_verify_hostname":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_certificate":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_hostname":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":                types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModelAttrTypes},
+	"no_ca":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel represents mtls_enable block
 type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel struct {
 	Certificate types.String                                                 `tfsdk:"certificate"`
 	KeyURL      *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
+// GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel
+var GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
 type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel
+var GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -239,10 +423,23 @@ type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoMo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
+var GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel
+var GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverGCPBucketReceiverModel represents gcp_bucket_receiver block
@@ -252,6 +449,15 @@ type GlobalLogReceiverGCPBucketReceiverModel struct {
 	Compression     *GlobalLogReceiverGCPBucketReceiverCompressionModel     `tfsdk:"compression"`
 	FilenameOptions *GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel `tfsdk:"filename_options"`
 	GCPCred         *GlobalLogReceiverGCPBucketReceiverGCPCredModel         `tfsdk:"gcp_cred"`
+}
+
+// GlobalLogReceiverGCPBucketReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverGCPBucketReceiverModel
+var GlobalLogReceiverGCPBucketReceiverModelAttrTypes = map[string]attr.Type{
+	"bucket":           types.StringType,
+	"batch":            types.ObjectType{AttrTypes: GlobalLogReceiverGCPBucketReceiverBatchModelAttrTypes},
+	"compression":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"filename_options": types.ObjectType{AttrTypes: GlobalLogReceiverGCPBucketReceiverFilenameOptionsModelAttrTypes},
+	"gcp_cred":         types.ObjectType{AttrTypes: GlobalLogReceiverGCPBucketReceiverGCPCredModelAttrTypes},
 }
 
 // GlobalLogReceiverGCPBucketReceiverBatchModel represents batch block
@@ -264,11 +470,28 @@ type GlobalLogReceiverGCPBucketReceiverBatchModel struct {
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
+// GlobalLogReceiverGCPBucketReceiverBatchModelAttrTypes defines the attribute types for GlobalLogReceiverGCPBucketReceiverBatchModel
+var GlobalLogReceiverGCPBucketReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverGCPBucketReceiverCompressionModel represents compression block
 type GlobalLogReceiverGCPBucketReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
 	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
 	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverGCPBucketReceiverCompressionModelAttrTypes defines the attribute types for GlobalLogReceiverGCPBucketReceiverCompressionModel
+var GlobalLogReceiverGCPBucketReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel represents filename_options block
@@ -278,11 +501,25 @@ type GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel struct {
 	NoFolder      *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
 }
 
+// GlobalLogReceiverGCPBucketReceiverFilenameOptionsModelAttrTypes defines the attribute types for GlobalLogReceiverGCPBucketReceiverFilenameOptionsModel
+var GlobalLogReceiverGCPBucketReceiverFilenameOptionsModelAttrTypes = map[string]attr.Type{
+	"custom_folder":   types.StringType,
+	"log_type_folder": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_folder":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverGCPBucketReceiverGCPCredModel represents gcp_cred block
 type GlobalLogReceiverGCPBucketReceiverGCPCredModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// GlobalLogReceiverGCPBucketReceiverGCPCredModelAttrTypes defines the attribute types for GlobalLogReceiverGCPBucketReceiverGCPCredModel
+var GlobalLogReceiverGCPBucketReceiverGCPCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // GlobalLogReceiverHTTPReceiverModel represents http_receiver block
@@ -297,16 +534,40 @@ type GlobalLogReceiverHTTPReceiverModel struct {
 	UseTLS      *GlobalLogReceiverHTTPReceiverUseTLSModel      `tfsdk:"use_tls"`
 }
 
+// GlobalLogReceiverHTTPReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverModel
+var GlobalLogReceiverHTTPReceiverModelAttrTypes = map[string]attr.Type{
+	"uri":         types.StringType,
+	"auth_basic":  types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverAuthBasicModelAttrTypes},
+	"auth_none":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"auth_token":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"batch":       types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverBatchModelAttrTypes},
+	"compression": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_tls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":     types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverUseTLSModelAttrTypes},
+}
+
 // GlobalLogReceiverHTTPReceiverAuthBasicModel represents auth_basic block
 type GlobalLogReceiverHTTPReceiverAuthBasicModel struct {
 	UserName types.String                                         `tfsdk:"user_name"`
 	Password *GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel `tfsdk:"password"`
 }
 
+// GlobalLogReceiverHTTPReceiverAuthBasicModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverAuthBasicModel
+var GlobalLogReceiverHTTPReceiverAuthBasicModelAttrTypes = map[string]attr.Type{
+	"user_name": types.StringType,
+	"password":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel represents password block
 type GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthBasicPasswordModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel
+var GlobalLogReceiverHTTPReceiverAuthBasicPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -316,10 +577,23 @@ type GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel stru
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModel
+var GlobalLogReceiverHTTPReceiverAuthBasicPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModel
+var GlobalLogReceiverHTTPReceiverAuthBasicPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverHTTPReceiverAuthTokenModel represents auth_token block
@@ -327,10 +601,21 @@ type GlobalLogReceiverHTTPReceiverAuthTokenModel struct {
 	Token *GlobalLogReceiverHTTPReceiverAuthTokenTokenModel `tfsdk:"token"`
 }
 
+// GlobalLogReceiverHTTPReceiverAuthTokenModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverAuthTokenModel
+var GlobalLogReceiverHTTPReceiverAuthTokenModelAttrTypes = map[string]attr.Type{
+	"token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverHTTPReceiverAuthTokenTokenModel represents token block
 type GlobalLogReceiverHTTPReceiverAuthTokenTokenModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthTokenTokenModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverAuthTokenTokenModel
+var GlobalLogReceiverHTTPReceiverAuthTokenTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -340,10 +625,23 @@ type GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel struct 
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModel
+var GlobalLogReceiverHTTPReceiverAuthTokenTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModel
+var GlobalLogReceiverHTTPReceiverAuthTokenTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverHTTPReceiverBatchModel represents batch block
@@ -356,11 +654,28 @@ type GlobalLogReceiverHTTPReceiverBatchModel struct {
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
+// GlobalLogReceiverHTTPReceiverBatchModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverBatchModel
+var GlobalLogReceiverHTTPReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverHTTPReceiverCompressionModel represents compression block
 type GlobalLogReceiverHTTPReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
 	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
 	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverHTTPReceiverCompressionModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverCompressionModel
+var GlobalLogReceiverHTTPReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // GlobalLogReceiverHTTPReceiverUseTLSModel represents use_tls block
@@ -375,16 +690,40 @@ type GlobalLogReceiverHTTPReceiverUseTLSModel struct {
 	NoCA                     *GlobalLogReceiverEmptyModel                        `tfsdk:"no_ca"`
 }
 
+// GlobalLogReceiverHTTPReceiverUseTLSModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverUseTLSModel
+var GlobalLogReceiverHTTPReceiverUseTLSModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":             types.StringType,
+	"disable_verify_certificate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_verify_hostname":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_certificate":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_hostname":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":                types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModelAttrTypes},
+	"no_ca":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel represents mtls_enable block
 type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel struct {
 	Certificate types.String                                              `tfsdk:"certificate"`
 	KeyURL      *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
+// GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel
+var GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
 type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel
+var GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -394,10 +733,23 @@ type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
+var GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel
+var GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverKafkaReceiverModel represents kafka_receiver block
@@ -410,6 +762,16 @@ type GlobalLogReceiverKafkaReceiverModel struct {
 	UseTLS           *GlobalLogReceiverKafkaReceiverUseTLSModel      `tfsdk:"use_tls"`
 }
 
+// GlobalLogReceiverKafkaReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverKafkaReceiverModel
+var GlobalLogReceiverKafkaReceiverModelAttrTypes = map[string]attr.Type{
+	"bootstrap_servers": types.ListType{ElemType: types.StringType},
+	"kafka_topic":       types.StringType,
+	"batch":             types.ObjectType{AttrTypes: GlobalLogReceiverKafkaReceiverBatchModelAttrTypes},
+	"compression":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_tls":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":           types.ObjectType{AttrTypes: GlobalLogReceiverKafkaReceiverUseTLSModelAttrTypes},
+}
+
 // GlobalLogReceiverKafkaReceiverBatchModel represents batch block
 type GlobalLogReceiverKafkaReceiverBatchModel struct {
 	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
@@ -420,11 +782,28 @@ type GlobalLogReceiverKafkaReceiverBatchModel struct {
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
+// GlobalLogReceiverKafkaReceiverBatchModelAttrTypes defines the attribute types for GlobalLogReceiverKafkaReceiverBatchModel
+var GlobalLogReceiverKafkaReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverKafkaReceiverCompressionModel represents compression block
 type GlobalLogReceiverKafkaReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
 	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
 	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverKafkaReceiverCompressionModelAttrTypes defines the attribute types for GlobalLogReceiverKafkaReceiverCompressionModel
+var GlobalLogReceiverKafkaReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // GlobalLogReceiverKafkaReceiverUseTLSModel represents use_tls block
@@ -439,16 +818,40 @@ type GlobalLogReceiverKafkaReceiverUseTLSModel struct {
 	NoCA                     *GlobalLogReceiverEmptyModel                         `tfsdk:"no_ca"`
 }
 
+// GlobalLogReceiverKafkaReceiverUseTLSModelAttrTypes defines the attribute types for GlobalLogReceiverKafkaReceiverUseTLSModel
+var GlobalLogReceiverKafkaReceiverUseTLSModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":             types.StringType,
+	"disable_verify_certificate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_verify_hostname":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_certificate":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_hostname":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":                types.ObjectType{AttrTypes: GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModelAttrTypes},
+	"no_ca":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel represents mtls_enable block
 type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel struct {
 	Certificate types.String                                               `tfsdk:"certificate"`
 	KeyURL      *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
+// GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel
+var GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
 type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModelAttrTypes defines the attribute types for GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel
+var GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -458,10 +861,23 @@ type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoMode
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
+var GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel
+var GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverNewRelicReceiverModel represents new_relic_receiver block
@@ -471,10 +887,23 @@ type GlobalLogReceiverNewRelicReceiverModel struct {
 	Us     *GlobalLogReceiverEmptyModel                  `tfsdk:"us"`
 }
 
+// GlobalLogReceiverNewRelicReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverNewRelicReceiverModel
+var GlobalLogReceiverNewRelicReceiverModelAttrTypes = map[string]attr.Type{
+	"api_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"eu":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"us":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverNewRelicReceiverAPIKeyModel represents api_key block
 type GlobalLogReceiverNewRelicReceiverAPIKeyModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverNewRelicReceiverAPIKeyModelAttrTypes defines the attribute types for GlobalLogReceiverNewRelicReceiverAPIKeyModel
+var GlobalLogReceiverNewRelicReceiverAPIKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -484,15 +913,33 @@ type GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModel
+var GlobalLogReceiverNewRelicReceiverAPIKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModel
+var GlobalLogReceiverNewRelicReceiverAPIKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // GlobalLogReceiverNsListModel represents ns_list block
 type GlobalLogReceiverNsListModel struct {
 	Namespaces types.List `tfsdk:"namespaces"`
+}
+
+// GlobalLogReceiverNsListModelAttrTypes defines the attribute types for GlobalLogReceiverNsListModel
+var GlobalLogReceiverNsListModelAttrTypes = map[string]attr.Type{
+	"namespaces": types.ListType{ElemType: types.StringType},
 }
 
 // GlobalLogReceiverQradarReceiverModel represents qradar_receiver block
@@ -502,6 +949,15 @@ type GlobalLogReceiverQradarReceiverModel struct {
 	Compression *GlobalLogReceiverQradarReceiverCompressionModel `tfsdk:"compression"`
 	NoTLS       *GlobalLogReceiverEmptyModel                     `tfsdk:"no_tls"`
 	UseTLS      *GlobalLogReceiverQradarReceiverUseTLSModel      `tfsdk:"use_tls"`
+}
+
+// GlobalLogReceiverQradarReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverQradarReceiverModel
+var GlobalLogReceiverQradarReceiverModelAttrTypes = map[string]attr.Type{
+	"uri":         types.StringType,
+	"batch":       types.ObjectType{AttrTypes: GlobalLogReceiverQradarReceiverBatchModelAttrTypes},
+	"compression": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_tls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":     types.ObjectType{AttrTypes: GlobalLogReceiverQradarReceiverUseTLSModelAttrTypes},
 }
 
 // GlobalLogReceiverQradarReceiverBatchModel represents batch block
@@ -514,11 +970,28 @@ type GlobalLogReceiverQradarReceiverBatchModel struct {
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
+// GlobalLogReceiverQradarReceiverBatchModelAttrTypes defines the attribute types for GlobalLogReceiverQradarReceiverBatchModel
+var GlobalLogReceiverQradarReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverQradarReceiverCompressionModel represents compression block
 type GlobalLogReceiverQradarReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
 	CompressionGzip    *GlobalLogReceiverEmptyModel `tfsdk:"compression_gzip"`
 	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
+}
+
+// GlobalLogReceiverQradarReceiverCompressionModelAttrTypes defines the attribute types for GlobalLogReceiverQradarReceiverCompressionModel
+var GlobalLogReceiverQradarReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // GlobalLogReceiverQradarReceiverUseTLSModel represents use_tls block
@@ -533,16 +1006,40 @@ type GlobalLogReceiverQradarReceiverUseTLSModel struct {
 	NoCA                     *GlobalLogReceiverEmptyModel                          `tfsdk:"no_ca"`
 }
 
+// GlobalLogReceiverQradarReceiverUseTLSModelAttrTypes defines the attribute types for GlobalLogReceiverQradarReceiverUseTLSModel
+var GlobalLogReceiverQradarReceiverUseTLSModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":             types.StringType,
+	"disable_verify_certificate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_verify_hostname":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_certificate":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_hostname":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":                types.ObjectType{AttrTypes: GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModelAttrTypes},
+	"no_ca":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel represents mtls_enable block
 type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel struct {
 	Certificate types.String                                                `tfsdk:"certificate"`
 	KeyURL      *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
+// GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel
+var GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
 type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModelAttrTypes defines the attribute types for GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel
+var GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -552,10 +1049,23 @@ type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoMod
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
+var GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel
+var GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverS3ReceiverModel represents s3_receiver block
@@ -568,11 +1078,28 @@ type GlobalLogReceiverS3ReceiverModel struct {
 	FilenameOptions *GlobalLogReceiverS3ReceiverFilenameOptionsModel `tfsdk:"filename_options"`
 }
 
+// GlobalLogReceiverS3ReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverS3ReceiverModel
+var GlobalLogReceiverS3ReceiverModelAttrTypes = map[string]attr.Type{
+	"aws_region":       types.StringType,
+	"bucket":           types.StringType,
+	"aws_cred":         types.ObjectType{AttrTypes: GlobalLogReceiverS3ReceiverAWSCredModelAttrTypes},
+	"batch":            types.ObjectType{AttrTypes: GlobalLogReceiverS3ReceiverBatchModelAttrTypes},
+	"compression":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"filename_options": types.ObjectType{AttrTypes: GlobalLogReceiverS3ReceiverFilenameOptionsModelAttrTypes},
+}
+
 // GlobalLogReceiverS3ReceiverAWSCredModel represents aws_cred block
 type GlobalLogReceiverS3ReceiverAWSCredModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// GlobalLogReceiverS3ReceiverAWSCredModelAttrTypes defines the attribute types for GlobalLogReceiverS3ReceiverAWSCredModel
+var GlobalLogReceiverS3ReceiverAWSCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // GlobalLogReceiverS3ReceiverBatchModel represents batch block
@@ -585,6 +1112,16 @@ type GlobalLogReceiverS3ReceiverBatchModel struct {
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
+// GlobalLogReceiverS3ReceiverBatchModelAttrTypes defines the attribute types for GlobalLogReceiverS3ReceiverBatchModel
+var GlobalLogReceiverS3ReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverS3ReceiverCompressionModel represents compression block
 type GlobalLogReceiverS3ReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
@@ -592,11 +1129,25 @@ type GlobalLogReceiverS3ReceiverCompressionModel struct {
 	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
+// GlobalLogReceiverS3ReceiverCompressionModelAttrTypes defines the attribute types for GlobalLogReceiverS3ReceiverCompressionModel
+var GlobalLogReceiverS3ReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverS3ReceiverFilenameOptionsModel represents filename_options block
 type GlobalLogReceiverS3ReceiverFilenameOptionsModel struct {
 	CustomFolder  types.String                 `tfsdk:"custom_folder"`
 	LogTypeFolder *GlobalLogReceiverEmptyModel `tfsdk:"log_type_folder"`
 	NoFolder      *GlobalLogReceiverEmptyModel `tfsdk:"no_folder"`
+}
+
+// GlobalLogReceiverS3ReceiverFilenameOptionsModelAttrTypes defines the attribute types for GlobalLogReceiverS3ReceiverFilenameOptionsModel
+var GlobalLogReceiverS3ReceiverFilenameOptionsModelAttrTypes = map[string]attr.Type{
+	"custom_folder":   types.StringType,
+	"log_type_folder": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_folder":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // GlobalLogReceiverSplunkReceiverModel represents splunk_receiver block
@@ -609,6 +1160,16 @@ type GlobalLogReceiverSplunkReceiverModel struct {
 	UseTLS         *GlobalLogReceiverSplunkReceiverUseTLSModel         `tfsdk:"use_tls"`
 }
 
+// GlobalLogReceiverSplunkReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverModel
+var GlobalLogReceiverSplunkReceiverModelAttrTypes = map[string]attr.Type{
+	"endpoint":         types.StringType,
+	"batch":            types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverBatchModelAttrTypes},
+	"compression":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_tls":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"splunk_hec_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":          types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverUseTLSModelAttrTypes},
+}
+
 // GlobalLogReceiverSplunkReceiverBatchModel represents batch block
 type GlobalLogReceiverSplunkReceiverBatchModel struct {
 	MaxBytes              types.Int64                  `tfsdk:"max_bytes"`
@@ -619,6 +1180,16 @@ type GlobalLogReceiverSplunkReceiverBatchModel struct {
 	TimeoutSecondsDefault *GlobalLogReceiverEmptyModel `tfsdk:"timeout_seconds_default"`
 }
 
+// GlobalLogReceiverSplunkReceiverBatchModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverBatchModel
+var GlobalLogReceiverSplunkReceiverBatchModelAttrTypes = map[string]attr.Type{
+	"max_bytes":               types.Int64Type,
+	"max_events":              types.Int64Type,
+	"timeout_seconds":         types.StringType,
+	"max_bytes_disabled":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_events_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"timeout_seconds_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverSplunkReceiverCompressionModel represents compression block
 type GlobalLogReceiverSplunkReceiverCompressionModel struct {
 	CompressionDefault *GlobalLogReceiverEmptyModel `tfsdk:"compression_default"`
@@ -626,10 +1197,23 @@ type GlobalLogReceiverSplunkReceiverCompressionModel struct {
 	CompressionNone    *GlobalLogReceiverEmptyModel `tfsdk:"compression_none"`
 }
 
+// GlobalLogReceiverSplunkReceiverCompressionModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverCompressionModel
+var GlobalLogReceiverSplunkReceiverCompressionModelAttrTypes = map[string]attr.Type{
+	"compression_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_gzip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverSplunkReceiverSplunkHecTokenModel represents splunk_hec_token block
 type GlobalLogReceiverSplunkReceiverSplunkHecTokenModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverSplunkReceiverSplunkHecTokenModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverSplunkHecTokenModel
+var GlobalLogReceiverSplunkReceiverSplunkHecTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -639,10 +1223,23 @@ type GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel struc
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModel
+var GlobalLogReceiverSplunkReceiverSplunkHecTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModel
+var GlobalLogReceiverSplunkReceiverSplunkHecTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverSplunkReceiverUseTLSModel represents use_tls block
@@ -657,16 +1254,40 @@ type GlobalLogReceiverSplunkReceiverUseTLSModel struct {
 	NoCA                     *GlobalLogReceiverEmptyModel                          `tfsdk:"no_ca"`
 }
 
+// GlobalLogReceiverSplunkReceiverUseTLSModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverUseTLSModel
+var GlobalLogReceiverSplunkReceiverUseTLSModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url":             types.StringType,
+	"disable_verify_certificate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_verify_hostname":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_certificate":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_verify_hostname":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":                types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModelAttrTypes},
+	"no_ca":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel represents mtls_enable block
 type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel struct {
 	Certificate types.String                                                `tfsdk:"certificate"`
 	KeyURL      *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
+// GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel
+var GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
 type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel
+var GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -676,10 +1297,23 @@ type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoMod
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModel
+var GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModel
+var GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // GlobalLogReceiverSumoLogicReceiverModel represents sumo_logic_receiver block
@@ -687,10 +1321,21 @@ type GlobalLogReceiverSumoLogicReceiverModel struct {
 	URL *GlobalLogReceiverSumoLogicReceiverURLModel `tfsdk:"url"`
 }
 
+// GlobalLogReceiverSumoLogicReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverSumoLogicReceiverModel
+var GlobalLogReceiverSumoLogicReceiverModelAttrTypes = map[string]attr.Type{
+	"url": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // GlobalLogReceiverSumoLogicReceiverURLModel represents url block
 type GlobalLogReceiverSumoLogicReceiverURLModel struct {
 	BlindfoldSecretInfo *GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// GlobalLogReceiverSumoLogicReceiverURLModelAttrTypes defines the attribute types for GlobalLogReceiverSumoLogicReceiverURLModel
+var GlobalLogReceiverSumoLogicReceiverURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModelAttrTypes},
 }
 
 // GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -700,10 +1345,23 @@ type GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModel
+var GlobalLogReceiverSumoLogicReceiverURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel represents clear_secret_info block
 type GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModelAttrTypes defines the attribute types for GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModel
+var GlobalLogReceiverSumoLogicReceiverURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 type GlobalLogReceiverResourceModel struct {
@@ -833,6 +1491,9 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -1299,6 +1960,9 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -1895,6 +2559,9 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -3789,11 +4456,17 @@ func (r *GlobalLogReceiverResource) Read(ctx context.Context, req resource.ReadR
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

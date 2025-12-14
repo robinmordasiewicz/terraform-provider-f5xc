@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,6 +55,11 @@ type AppAPIGroupBigIPVirtualServerModel struct {
 	BigIPVirtualServer *AppAPIGroupBigIPVirtualServerBigIPVirtualServerModel `tfsdk:"bigip_virtual_server"`
 }
 
+// AppAPIGroupBigIPVirtualServerModelAttrTypes defines the attribute types for AppAPIGroupBigIPVirtualServerModel
+var AppAPIGroupBigIPVirtualServerModelAttrTypes = map[string]attr.Type{
+	"bigip_virtual_server": types.ObjectType{AttrTypes: AppAPIGroupBigIPVirtualServerBigIPVirtualServerModelAttrTypes},
+}
+
 // AppAPIGroupBigIPVirtualServerBigIPVirtualServerModel represents bigip_virtual_server block
 type AppAPIGroupBigIPVirtualServerBigIPVirtualServerModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -61,9 +67,21 @@ type AppAPIGroupBigIPVirtualServerBigIPVirtualServerModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AppAPIGroupBigIPVirtualServerBigIPVirtualServerModelAttrTypes defines the attribute types for AppAPIGroupBigIPVirtualServerBigIPVirtualServerModel
+var AppAPIGroupBigIPVirtualServerBigIPVirtualServerModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AppAPIGroupCDNLoadBalancerModel represents cdn_loadbalancer block
 type AppAPIGroupCDNLoadBalancerModel struct {
 	CDNLoadBalancer *AppAPIGroupCDNLoadBalancerCDNLoadBalancerModel `tfsdk:"cdn_loadbalancer"`
+}
+
+// AppAPIGroupCDNLoadBalancerModelAttrTypes defines the attribute types for AppAPIGroupCDNLoadBalancerModel
+var AppAPIGroupCDNLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"cdn_loadbalancer": types.ObjectType{AttrTypes: AppAPIGroupCDNLoadBalancerCDNLoadBalancerModelAttrTypes},
 }
 
 // AppAPIGroupCDNLoadBalancerCDNLoadBalancerModel represents cdn_loadbalancer block
@@ -73,10 +91,23 @@ type AppAPIGroupCDNLoadBalancerCDNLoadBalancerModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AppAPIGroupCDNLoadBalancerCDNLoadBalancerModelAttrTypes defines the attribute types for AppAPIGroupCDNLoadBalancerCDNLoadBalancerModel
+var AppAPIGroupCDNLoadBalancerCDNLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AppAPIGroupElementsModel represents elements block
 type AppAPIGroupElementsModel struct {
 	Methods   types.List   `tfsdk:"methods"`
 	PathRegex types.String `tfsdk:"path_regex"`
+}
+
+// AppAPIGroupElementsModelAttrTypes defines the attribute types for AppAPIGroupElementsModel
+var AppAPIGroupElementsModelAttrTypes = map[string]attr.Type{
+	"methods":    types.ListType{ElemType: types.StringType},
+	"path_regex": types.StringType,
 }
 
 // AppAPIGroupHTTPLoadBalancerModel represents http_loadbalancer block
@@ -84,11 +115,23 @@ type AppAPIGroupHTTPLoadBalancerModel struct {
 	HTTPLoadBalancer *AppAPIGroupHTTPLoadBalancerHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
 }
 
+// AppAPIGroupHTTPLoadBalancerModelAttrTypes defines the attribute types for AppAPIGroupHTTPLoadBalancerModel
+var AppAPIGroupHTTPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"http_loadbalancer": types.ObjectType{AttrTypes: AppAPIGroupHTTPLoadBalancerHTTPLoadBalancerModelAttrTypes},
+}
+
 // AppAPIGroupHTTPLoadBalancerHTTPLoadBalancerModel represents http_loadbalancer block
 type AppAPIGroupHTTPLoadBalancerHTTPLoadBalancerModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// AppAPIGroupHTTPLoadBalancerHTTPLoadBalancerModelAttrTypes defines the attribute types for AppAPIGroupHTTPLoadBalancerHTTPLoadBalancerModel
+var AppAPIGroupHTTPLoadBalancerHTTPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type AppAPIGroupResourceModel struct {
@@ -102,7 +145,7 @@ type AppAPIGroupResourceModel struct {
 	Timeouts           timeouts.Value                      `tfsdk:"timeouts"`
 	BigIPVirtualServer *AppAPIGroupBigIPVirtualServerModel `tfsdk:"bigip_virtual_server"`
 	CDNLoadBalancer    *AppAPIGroupCDNLoadBalancerModel    `tfsdk:"cdn_loadbalancer"`
-	Elements           []AppAPIGroupElementsModel          `tfsdk:"elements"`
+	Elements           types.List                          `tfsdk:"elements"`
 	HTTPLoadBalancer   *AppAPIGroupHTTPLoadBalancerModel   `tfsdk:"http_loadbalancer"`
 }
 
@@ -187,6 +230,9 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -211,6 +257,9 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -251,6 +300,9 @@ func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaReq
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -438,16 +490,21 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		createReq.Spec["cdn_loadbalancer"] = cdn_loadbalancerMap
 	}
-	if len(data.Elements) > 0 {
-		var elementsList []map[string]interface{}
-		for _, item := range data.Elements {
-			itemMap := make(map[string]interface{})
-			if !item.PathRegex.IsNull() && !item.PathRegex.IsUnknown() {
-				itemMap["path_regex"] = item.PathRegex.ValueString()
+	if !data.Elements.IsNull() && !data.Elements.IsUnknown() {
+		var elementsItems []AppAPIGroupElementsModel
+		diags := data.Elements.ElementsAs(ctx, &elementsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(elementsItems) > 0 {
+			var elementsList []map[string]interface{}
+			for _, item := range elementsItems {
+				itemMap := make(map[string]interface{})
+				if !item.PathRegex.IsNull() && !item.PathRegex.IsUnknown() {
+					itemMap["path_regex"] = item.PathRegex.ValueString()
+				}
+				elementsList = append(elementsList, itemMap)
 			}
-			elementsList = append(elementsList, itemMap)
+			createReq.Spec["elements"] = elementsList
 		}
-		createReq.Spec["elements"] = elementsList
 	}
 	if data.HTTPLoadBalancer != nil {
 		http_loadbalancerMap := make(map[string]interface{})
@@ -491,6 +548,10 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["elements"].([]interface{}); ok && len(listData) > 0 {
 		var elementsList []AppAPIGroupElementsModel
+		var existingElementsItems []AppAPIGroupElementsModel
+		if !data.Elements.IsNull() && !data.Elements.IsUnknown() {
+			data.Elements.ElementsAs(ctx, &existingElementsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -517,7 +578,14 @@ func (r *AppAPIGroupResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.Elements = elementsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AppAPIGroupElementsModelAttrTypes}, elementsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Elements = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Elements = types.ListNull(types.ObjectType{AttrTypes: AppAPIGroupElementsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["http_loadbalancer"].(map[string]interface{}); ok && isImport && data.HTTPLoadBalancer == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -588,11 +656,17 @@ func (r *AppAPIGroupResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -629,6 +703,10 @@ func (r *AppAPIGroupResource) Read(ctx context.Context, req resource.ReadRequest
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["elements"].([]interface{}); ok && len(listData) > 0 {
 		var elementsList []AppAPIGroupElementsModel
+		var existingElementsItems []AppAPIGroupElementsModel
+		if !data.Elements.IsNull() && !data.Elements.IsUnknown() {
+			data.Elements.ElementsAs(ctx, &existingElementsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -655,7 +733,14 @@ func (r *AppAPIGroupResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.Elements = elementsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AppAPIGroupElementsModelAttrTypes}, elementsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Elements = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Elements = types.ListNull(types.ObjectType{AttrTypes: AppAPIGroupElementsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["http_loadbalancer"].(map[string]interface{}); ok && isImport && data.HTTPLoadBalancer == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -756,16 +841,21 @@ func (r *AppAPIGroupResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["cdn_loadbalancer"] = cdn_loadbalancerMap
 	}
-	if len(data.Elements) > 0 {
-		var elementsList []map[string]interface{}
-		for _, item := range data.Elements {
-			itemMap := make(map[string]interface{})
-			if !item.PathRegex.IsNull() && !item.PathRegex.IsUnknown() {
-				itemMap["path_regex"] = item.PathRegex.ValueString()
+	if !data.Elements.IsNull() && !data.Elements.IsUnknown() {
+		var elementsItems []AppAPIGroupElementsModel
+		diags := data.Elements.ElementsAs(ctx, &elementsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(elementsItems) > 0 {
+			var elementsList []map[string]interface{}
+			for _, item := range elementsItems {
+				itemMap := make(map[string]interface{})
+				if !item.PathRegex.IsNull() && !item.PathRegex.IsUnknown() {
+					itemMap["path_regex"] = item.PathRegex.ValueString()
+				}
+				elementsList = append(elementsList, itemMap)
 			}
-			elementsList = append(elementsList, itemMap)
+			apiResource.Spec["elements"] = elementsList
 		}
-		apiResource.Spec["elements"] = elementsList
 	}
 	if data.HTTPLoadBalancer != nil {
 		http_loadbalancerMap := make(map[string]interface{})
@@ -820,6 +910,10 @@ func (r *AppAPIGroupResource) Update(ctx context.Context, req resource.UpdateReq
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["elements"].([]interface{}); ok && len(listData) > 0 {
 		var elementsList []AppAPIGroupElementsModel
+		var existingElementsItems []AppAPIGroupElementsModel
+		if !data.Elements.IsNull() && !data.Elements.IsUnknown() {
+			data.Elements.ElementsAs(ctx, &existingElementsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -846,7 +940,14 @@ func (r *AppAPIGroupResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.Elements = elementsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AppAPIGroupElementsModelAttrTypes}, elementsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Elements = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Elements = types.ListNull(types.ObjectType{AttrTypes: AppAPIGroupElementsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["http_loadbalancer"].(map[string]interface{}); ok && isImport && data.HTTPLoadBalancer == nil {
 		// Import case: populate from API since state is nil and psd is empty

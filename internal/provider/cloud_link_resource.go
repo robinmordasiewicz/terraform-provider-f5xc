@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,6 +57,13 @@ type CloudLinkAWSModel struct {
 	Byoc      *CloudLinkAWSByocModel    `tfsdk:"byoc"`
 }
 
+// CloudLinkAWSModelAttrTypes defines the attribute types for CloudLinkAWSModel
+var CloudLinkAWSModelAttrTypes = map[string]attr.Type{
+	"custom_asn": types.Int64Type,
+	"aws_cred":   types.ObjectType{AttrTypes: CloudLinkAWSAWSCredModelAttrTypes},
+	"byoc":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudLinkAWSAWSCredModel represents aws_cred block
 type CloudLinkAWSAWSCredModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -63,9 +71,21 @@ type CloudLinkAWSAWSCredModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// CloudLinkAWSAWSCredModelAttrTypes defines the attribute types for CloudLinkAWSAWSCredModel
+var CloudLinkAWSAWSCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // CloudLinkAWSByocModel represents byoc block
 type CloudLinkAWSByocModel struct {
 	Connections []CloudLinkAWSByocConnectionsModel `tfsdk:"connections"`
+}
+
+// CloudLinkAWSByocModelAttrTypes defines the attribute types for CloudLinkAWSByocModel
+var CloudLinkAWSByocModelAttrTypes = map[string]attr.Type{
+	"connections": types.ListType{ElemType: types.ObjectType{AttrTypes: CloudLinkAWSByocConnectionsModelAttrTypes}},
 }
 
 // CloudLinkAWSByocConnectionsModel represents connections block
@@ -83,10 +103,31 @@ type CloudLinkAWSByocConnectionsModel struct {
 	Tags                 *CloudLinkEmptyModel                      `tfsdk:"tags"`
 }
 
+// CloudLinkAWSByocConnectionsModelAttrTypes defines the attribute types for CloudLinkAWSByocConnectionsModel
+var CloudLinkAWSByocConnectionsModelAttrTypes = map[string]attr.Type{
+	"bgp_asn":                types.Int64Type,
+	"connection_id":          types.StringType,
+	"region":                 types.StringType,
+	"user_assigned_name":     types.StringType,
+	"virtual_interface_type": types.StringType,
+	"vlan":                   types.Int64Type,
+	"auth_key":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv4":                   types.ObjectType{AttrTypes: CloudLinkAWSByocConnectionsIpv4ModelAttrTypes},
+	"metadata":               types.ObjectType{AttrTypes: CloudLinkAWSByocConnectionsMetadataModelAttrTypes},
+	"system_generated_name":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tags":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudLinkAWSByocConnectionsAuthKeyModel represents auth_key block
 type CloudLinkAWSByocConnectionsAuthKeyModel struct {
 	BlindfoldSecretInfo *CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CloudLinkAWSByocConnectionsAuthKeyModelAttrTypes defines the attribute types for CloudLinkAWSByocConnectionsAuthKeyModel
+var CloudLinkAWSByocConnectionsAuthKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModelAttrTypes},
 }
 
 // CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -96,10 +137,23 @@ type CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModel
+var CloudLinkAWSByocConnectionsAuthKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel represents clear_secret_info block
 type CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModelAttrTypes defines the attribute types for CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModel
+var CloudLinkAWSByocConnectionsAuthKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // CloudLinkAWSByocConnectionsIpv4Model represents ipv4 block
@@ -108,15 +162,32 @@ type CloudLinkAWSByocConnectionsIpv4Model struct {
 	RouterPeerAddress    types.String `tfsdk:"router_peer_address"`
 }
 
+// CloudLinkAWSByocConnectionsIpv4ModelAttrTypes defines the attribute types for CloudLinkAWSByocConnectionsIpv4Model
+var CloudLinkAWSByocConnectionsIpv4ModelAttrTypes = map[string]attr.Type{
+	"aws_router_peer_address": types.StringType,
+	"router_peer_address":     types.StringType,
+}
+
 // CloudLinkAWSByocConnectionsMetadataModel represents metadata block
 type CloudLinkAWSByocConnectionsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
 }
 
+// CloudLinkAWSByocConnectionsMetadataModelAttrTypes defines the attribute types for CloudLinkAWSByocConnectionsMetadataModel
+var CloudLinkAWSByocConnectionsMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // CloudLinkEnabledModel represents enabled block
 type CloudLinkEnabledModel struct {
 	CloudlinkNetworkName types.String `tfsdk:"cloudlink_network_name"`
+}
+
+// CloudLinkEnabledModelAttrTypes defines the attribute types for CloudLinkEnabledModel
+var CloudLinkEnabledModelAttrTypes = map[string]attr.Type{
+	"cloudlink_network_name": types.StringType,
 }
 
 // CloudLinkGCPModel represents gcp block
@@ -125,9 +196,20 @@ type CloudLinkGCPModel struct {
 	GCPCred *CloudLinkGCPGCPCredModel `tfsdk:"gcp_cred"`
 }
 
+// CloudLinkGCPModelAttrTypes defines the attribute types for CloudLinkGCPModel
+var CloudLinkGCPModelAttrTypes = map[string]attr.Type{
+	"byoc":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"gcp_cred": types.ObjectType{AttrTypes: CloudLinkGCPGCPCredModelAttrTypes},
+}
+
 // CloudLinkGCPByocModel represents byoc block
 type CloudLinkGCPByocModel struct {
 	Connections []CloudLinkGCPByocConnectionsModel `tfsdk:"connections"`
+}
+
+// CloudLinkGCPByocModelAttrTypes defines the attribute types for CloudLinkGCPByocModel
+var CloudLinkGCPByocModelAttrTypes = map[string]attr.Type{
+	"connections": types.ListType{ElemType: types.ObjectType{AttrTypes: CloudLinkGCPByocConnectionsModelAttrTypes}},
 }
 
 // CloudLinkGCPByocConnectionsModel represents connections block
@@ -139,10 +221,25 @@ type CloudLinkGCPByocConnectionsModel struct {
 	SameAsCredential           *CloudLinkEmptyModel                      `tfsdk:"same_as_credential"`
 }
 
+// CloudLinkGCPByocConnectionsModelAttrTypes defines the attribute types for CloudLinkGCPByocConnectionsModel
+var CloudLinkGCPByocConnectionsModelAttrTypes = map[string]attr.Type{
+	"interconnect_attachment_name": types.StringType,
+	"project":                      types.StringType,
+	"region":                       types.StringType,
+	"metadata":                     types.ObjectType{AttrTypes: CloudLinkGCPByocConnectionsMetadataModelAttrTypes},
+	"same_as_credential":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CloudLinkGCPByocConnectionsMetadataModel represents metadata block
 type CloudLinkGCPByocConnectionsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// CloudLinkGCPByocConnectionsMetadataModelAttrTypes defines the attribute types for CloudLinkGCPByocConnectionsMetadataModel
+var CloudLinkGCPByocConnectionsMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // CloudLinkGCPGCPCredModel represents gcp_cred block
@@ -150,6 +247,13 @@ type CloudLinkGCPGCPCredModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// CloudLinkGCPGCPCredModelAttrTypes defines the attribute types for CloudLinkGCPGCPCredModel
+var CloudLinkGCPGCPCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type CloudLinkResourceModel struct {
@@ -253,6 +357,9 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -439,6 +546,9 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -796,11 +906,17 @@ func (r *CloudLinkResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

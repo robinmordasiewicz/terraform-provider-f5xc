@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -59,17 +60,26 @@ type CloudElasticIPSiteRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// CloudElasticIPSiteRefModelAttrTypes defines the attribute types for CloudElasticIPSiteRefModel
+var CloudElasticIPSiteRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 type CloudElasticIPResourceModel struct {
-	Name        types.String                 `tfsdk:"name"`
-	Namespace   types.String                 `tfsdk:"namespace"`
-	Annotations types.Map                    `tfsdk:"annotations"`
-	Description types.String                 `tfsdk:"description"`
-	Disable     types.Bool                   `tfsdk:"disable"`
-	Labels      types.Map                    `tfsdk:"labels"`
-	ID          types.String                 `tfsdk:"id"`
-	Count       types.Int64                  `tfsdk:"item_count"`
-	Timeouts    timeouts.Value               `tfsdk:"timeouts"`
-	SiteRef     []CloudElasticIPSiteRefModel `tfsdk:"site_ref"`
+	Name        types.String   `tfsdk:"name"`
+	Namespace   types.String   `tfsdk:"namespace"`
+	Annotations types.Map      `tfsdk:"annotations"`
+	Description types.String   `tfsdk:"description"`
+	Disable     types.Bool     `tfsdk:"disable"`
+	Labels      types.Map      `tfsdk:"labels"`
+	ID          types.String   `tfsdk:"id"`
+	Count       types.Int64    `tfsdk:"item_count"`
+	Timeouts    timeouts.Value `tfsdk:"timeouts"`
+	SiteRef     types.List     `tfsdk:"site_ref"`
 }
 
 func (r *CloudElasticIPResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -150,6 +160,9 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -163,11 +176,17 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -320,28 +339,33 @@ func (r *CloudElasticIPResource) Create(ctx context.Context, req resource.Create
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.SiteRef) > 0 {
-		var site_refList []map[string]interface{}
-		for _, item := range data.SiteRef {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.SiteRef.IsNull() && !data.SiteRef.IsUnknown() {
+		var site_refItems []CloudElasticIPSiteRefModel
+		diags := data.SiteRef.ElementsAs(ctx, &site_refItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(site_refItems) > 0 {
+			var site_refList []map[string]interface{}
+			for _, item := range site_refItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				site_refList = append(site_refList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			site_refList = append(site_refList, itemMap)
+			createReq.Spec["site_ref"] = site_refList
 		}
-		createReq.Spec["site_ref"] = site_refList
 	}
 	if !data.Count.IsNull() && !data.Count.IsUnknown() {
 		createReq.Spec["count"] = data.Count.ValueInt64()
@@ -361,6 +385,10 @@ func (r *CloudElasticIPResource) Create(ctx context.Context, req resource.Create
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["site_ref"].([]interface{}); ok && len(listData) > 0 {
 		var site_refList []CloudElasticIPSiteRefModel
+		var existingSiteRefItems []CloudElasticIPSiteRefModel
+		if !data.SiteRef.IsNull() && !data.SiteRef.IsUnknown() {
+			data.SiteRef.ElementsAs(ctx, &existingSiteRefItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -398,7 +426,14 @@ func (r *CloudElasticIPResource) Create(ctx context.Context, req resource.Create
 				})
 			}
 		}
-		data.SiteRef = site_refList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: CloudElasticIPSiteRefModelAttrTypes}, site_refList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SiteRef = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.SiteRef = types.ListNull(types.ObjectType{AttrTypes: CloudElasticIPSiteRefModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["count"].(float64); ok {
 		data.Count = types.Int64Value(int64(v))
@@ -469,11 +504,17 @@ func (r *CloudElasticIPResource) Read(ctx context.Context, req resource.ReadRequ
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -500,6 +541,10 @@ func (r *CloudElasticIPResource) Read(ctx context.Context, req resource.ReadRequ
 	})
 	if listData, ok := apiResource.Spec["site_ref"].([]interface{}); ok && len(listData) > 0 {
 		var site_refList []CloudElasticIPSiteRefModel
+		var existingSiteRefItems []CloudElasticIPSiteRefModel
+		if !data.SiteRef.IsNull() && !data.SiteRef.IsUnknown() {
+			data.SiteRef.ElementsAs(ctx, &existingSiteRefItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -537,7 +582,14 @@ func (r *CloudElasticIPResource) Read(ctx context.Context, req resource.ReadRequ
 				})
 			}
 		}
-		data.SiteRef = site_refList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: CloudElasticIPSiteRefModelAttrTypes}, site_refList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SiteRef = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.SiteRef = types.ListNull(types.ObjectType{AttrTypes: CloudElasticIPSiteRefModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["count"].(float64); ok {
 		data.Count = types.Int64Value(int64(v))
@@ -604,28 +656,33 @@ func (r *CloudElasticIPResource) Update(ctx context.Context, req resource.Update
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.SiteRef) > 0 {
-		var site_refList []map[string]interface{}
-		for _, item := range data.SiteRef {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.SiteRef.IsNull() && !data.SiteRef.IsUnknown() {
+		var site_refItems []CloudElasticIPSiteRefModel
+		diags := data.SiteRef.ElementsAs(ctx, &site_refItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(site_refItems) > 0 {
+			var site_refList []map[string]interface{}
+			for _, item := range site_refItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				site_refList = append(site_refList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			site_refList = append(site_refList, itemMap)
+			apiResource.Spec["site_ref"] = site_refList
 		}
-		apiResource.Spec["site_ref"] = site_refList
 	}
 	if !data.Count.IsNull() && !data.Count.IsUnknown() {
 		apiResource.Spec["count"] = data.Count.ValueInt64()
@@ -663,6 +720,10 @@ func (r *CloudElasticIPResource) Update(ctx context.Context, req resource.Update
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["site_ref"].([]interface{}); ok && len(listData) > 0 {
 		var site_refList []CloudElasticIPSiteRefModel
+		var existingSiteRefItems []CloudElasticIPSiteRefModel
+		if !data.SiteRef.IsNull() && !data.SiteRef.IsUnknown() {
+			data.SiteRef.ElementsAs(ctx, &existingSiteRefItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -700,7 +761,14 @@ func (r *CloudElasticIPResource) Update(ctx context.Context, req resource.Update
 				})
 			}
 		}
-		data.SiteRef = site_refList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: CloudElasticIPSiteRefModelAttrTypes}, site_refList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SiteRef = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.SiteRef = types.ListNull(types.ObjectType{AttrTypes: CloudElasticIPSiteRefModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["count"].(float64); ok {
 		data.Count = types.Int64Value(int64(v))

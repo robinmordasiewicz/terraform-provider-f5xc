@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,6 +57,13 @@ type VirtualK8SDefaultFlavorRefModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// VirtualK8SDefaultFlavorRefModelAttrTypes defines the attribute types for VirtualK8SDefaultFlavorRefModel
+var VirtualK8SDefaultFlavorRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // VirtualK8SVsiteRefsModel represents vsite_refs block
 type VirtualK8SVsiteRefsModel struct {
 	Kind      types.String `tfsdk:"kind"`
@@ -63,6 +71,15 @@ type VirtualK8SVsiteRefsModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 	Uid       types.String `tfsdk:"uid"`
+}
+
+// VirtualK8SVsiteRefsModelAttrTypes defines the attribute types for VirtualK8SVsiteRefsModel
+var VirtualK8SVsiteRefsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
 }
 
 type VirtualK8SResourceModel struct {
@@ -77,7 +94,7 @@ type VirtualK8SResourceModel struct {
 	DefaultFlavorRef *VirtualK8SDefaultFlavorRefModel `tfsdk:"default_flavor_ref"`
 	Disabled         *VirtualK8SEmptyModel            `tfsdk:"disabled"`
 	Isolated         *VirtualK8SEmptyModel            `tfsdk:"isolated"`
-	VsiteRefs        []VirtualK8SVsiteRefsModel       `tfsdk:"vsite_refs"`
+	VsiteRefs        types.List                       `tfsdk:"vsite_refs"`
 }
 
 func (r *VirtualK8SResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -157,6 +174,9 @@ func (r *VirtualK8SResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -174,6 +194,9 @@ func (r *VirtualK8SResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -187,11 +210,17 @@ func (r *VirtualK8SResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -365,28 +394,33 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 		isolatedMap := make(map[string]interface{})
 		createReq.Spec["isolated"] = isolatedMap
 	}
-	if len(data.VsiteRefs) > 0 {
-		var vsite_refsList []map[string]interface{}
-		for _, item := range data.VsiteRefs {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.VsiteRefs.IsNull() && !data.VsiteRefs.IsUnknown() {
+		var vsite_refsItems []VirtualK8SVsiteRefsModel
+		diags := data.VsiteRefs.ElementsAs(ctx, &vsite_refsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(vsite_refsItems) > 0 {
+			var vsite_refsList []map[string]interface{}
+			for _, item := range vsite_refsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				vsite_refsList = append(vsite_refsList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			vsite_refsList = append(vsite_refsList, itemMap)
+			createReq.Spec["vsite_refs"] = vsite_refsList
 		}
-		createReq.Spec["vsite_refs"] = vsite_refsList
 	}
 
 	apiResource, err := r.client.CreateVirtualK8S(ctx, createReq)
@@ -435,6 +469,10 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["vsite_refs"].([]interface{}); ok && len(listData) > 0 {
 		var vsite_refsList []VirtualK8SVsiteRefsModel
+		var existingVsiteRefsItems []VirtualK8SVsiteRefsModel
+		if !data.VsiteRefs.IsNull() && !data.VsiteRefs.IsUnknown() {
+			data.VsiteRefs.ElementsAs(ctx, &existingVsiteRefsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -472,7 +510,14 @@ func (r *VirtualK8SResource) Create(ctx context.Context, req resource.CreateRequ
 				})
 			}
 		}
-		data.VsiteRefs = vsite_refsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualK8SVsiteRefsModelAttrTypes}, vsite_refsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.VsiteRefs = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.VsiteRefs = types.ListNull(types.ObjectType{AttrTypes: VirtualK8SVsiteRefsModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -538,11 +583,17 @@ func (r *VirtualK8SResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -601,6 +652,10 @@ func (r *VirtualK8SResource) Read(ctx context.Context, req resource.ReadRequest,
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["vsite_refs"].([]interface{}); ok && len(listData) > 0 {
 		var vsite_refsList []VirtualK8SVsiteRefsModel
+		var existingVsiteRefsItems []VirtualK8SVsiteRefsModel
+		if !data.VsiteRefs.IsNull() && !data.VsiteRefs.IsUnknown() {
+			data.VsiteRefs.ElementsAs(ctx, &existingVsiteRefsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -638,7 +693,14 @@ func (r *VirtualK8SResource) Read(ctx context.Context, req resource.ReadRequest,
 				})
 			}
 		}
-		data.VsiteRefs = vsite_refsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualK8SVsiteRefsModelAttrTypes}, vsite_refsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.VsiteRefs = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.VsiteRefs = types.ListNull(types.ObjectType{AttrTypes: VirtualK8SVsiteRefsModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -721,28 +783,33 @@ func (r *VirtualK8SResource) Update(ctx context.Context, req resource.UpdateRequ
 		isolatedMap := make(map[string]interface{})
 		apiResource.Spec["isolated"] = isolatedMap
 	}
-	if len(data.VsiteRefs) > 0 {
-		var vsite_refsList []map[string]interface{}
-		for _, item := range data.VsiteRefs {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.VsiteRefs.IsNull() && !data.VsiteRefs.IsUnknown() {
+		var vsite_refsItems []VirtualK8SVsiteRefsModel
+		diags := data.VsiteRefs.ElementsAs(ctx, &vsite_refsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(vsite_refsItems) > 0 {
+			var vsite_refsList []map[string]interface{}
+			for _, item := range vsite_refsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				vsite_refsList = append(vsite_refsList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			vsite_refsList = append(vsite_refsList, itemMap)
+			apiResource.Spec["vsite_refs"] = vsite_refsList
 		}
-		apiResource.Spec["vsite_refs"] = vsite_refsList
 	}
 
 	_, err := r.client.UpdateVirtualK8S(ctx, apiResource)
@@ -802,6 +869,10 @@ func (r *VirtualK8SResource) Update(ctx context.Context, req resource.UpdateRequ
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["vsite_refs"].([]interface{}); ok && len(listData) > 0 {
 		var vsite_refsList []VirtualK8SVsiteRefsModel
+		var existingVsiteRefsItems []VirtualK8SVsiteRefsModel
+		if !data.VsiteRefs.IsNull() && !data.VsiteRefs.IsUnknown() {
+			data.VsiteRefs.ElementsAs(ctx, &existingVsiteRefsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -839,7 +910,14 @@ func (r *VirtualK8SResource) Update(ctx context.Context, req resource.UpdateRequ
 				})
 			}
 		}
-		data.VsiteRefs = vsite_refsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualK8SVsiteRefsModelAttrTypes}, vsite_refsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.VsiteRefs = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.VsiteRefs = types.ListNull(types.ObjectType{AttrTypes: VirtualK8SVsiteRefsModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

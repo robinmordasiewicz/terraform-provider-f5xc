@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,14 +57,31 @@ type AppTypeBusinessLogicMarkupSettingModel struct {
 	Enable                *AppTypeEmptyModel                                           `tfsdk:"enable"`
 }
 
+// AppTypeBusinessLogicMarkupSettingModelAttrTypes defines the attribute types for AppTypeBusinessLogicMarkupSettingModel
+var AppTypeBusinessLogicMarkupSettingModelAttrTypes = map[string]attr.Type{
+	"disable":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"discovered_api_settings": types.ObjectType{AttrTypes: AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModelAttrTypes},
+	"enable":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModel represents discovered_api_settings block
 type AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModel struct {
 	PurgeDurationForInactiveDiscoveredApis types.Int64 `tfsdk:"purge_duration_for_inactive_discovered_apis"`
 }
 
+// AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModelAttrTypes defines the attribute types for AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModel
+var AppTypeBusinessLogicMarkupSettingDiscoveredAPISettingsModelAttrTypes = map[string]attr.Type{
+	"purge_duration_for_inactive_discovered_apis": types.Int64Type,
+}
+
 // AppTypeFeaturesModel represents features block
 type AppTypeFeaturesModel struct {
 	Type types.String `tfsdk:"type"`
+}
+
+// AppTypeFeaturesModelAttrTypes defines the attribute types for AppTypeFeaturesModel
+var AppTypeFeaturesModelAttrTypes = map[string]attr.Type{
+	"type": types.StringType,
 }
 
 type AppTypeResourceModel struct {
@@ -76,7 +94,7 @@ type AppTypeResourceModel struct {
 	ID                         types.String                            `tfsdk:"id"`
 	Timeouts                   timeouts.Value                          `tfsdk:"timeouts"`
 	BusinessLogicMarkupSetting *AppTypeBusinessLogicMarkupSettingModel `tfsdk:"business_logic_markup_setting"`
-	Features                   []AppTypeFeaturesModel                  `tfsdk:"features"`
+	Features                   types.List                              `tfsdk:"features"`
 }
 
 func (r *AppTypeResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -338,16 +356,21 @@ func (r *AppTypeResource) Create(ctx context.Context, req resource.CreateRequest
 		}
 		createReq.Spec["business_logic_markup_setting"] = business_logic_markup_settingMap
 	}
-	if len(data.Features) > 0 {
-		var featuresList []map[string]interface{}
-		for _, item := range data.Features {
-			itemMap := make(map[string]interface{})
-			if !item.Type.IsNull() && !item.Type.IsUnknown() {
-				itemMap["type"] = item.Type.ValueString()
+	if !data.Features.IsNull() && !data.Features.IsUnknown() {
+		var featuresItems []AppTypeFeaturesModel
+		diags := data.Features.ElementsAs(ctx, &featuresItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(featuresItems) > 0 {
+			var featuresList []map[string]interface{}
+			for _, item := range featuresItems {
+				itemMap := make(map[string]interface{})
+				if !item.Type.IsNull() && !item.Type.IsUnknown() {
+					itemMap["type"] = item.Type.ValueString()
+				}
+				featuresList = append(featuresList, itemMap)
 			}
-			featuresList = append(featuresList, itemMap)
+			createReq.Spec["features"] = featuresList
 		}
-		createReq.Spec["features"] = featuresList
 	}
 
 	apiResource, err := r.client.CreateAppType(ctx, createReq)
@@ -369,6 +392,10 @@ func (r *AppTypeResource) Create(ctx context.Context, req resource.CreateRequest
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["features"].([]interface{}); ok && len(listData) > 0 {
 		var featuresList []AppTypeFeaturesModel
+		var existingFeaturesItems []AppTypeFeaturesModel
+		if !data.Features.IsNull() && !data.Features.IsUnknown() {
+			data.Features.ElementsAs(ctx, &existingFeaturesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -382,7 +409,14 @@ func (r *AppTypeResource) Create(ctx context.Context, req resource.CreateRequest
 				})
 			}
 		}
-		data.Features = featuresList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AppTypeFeaturesModelAttrTypes}, featuresList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Features = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Features = types.ListNull(types.ObjectType{AttrTypes: AppTypeFeaturesModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -448,11 +482,17 @@ func (r *AppTypeResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -484,6 +524,10 @@ func (r *AppTypeResource) Read(ctx context.Context, req resource.ReadRequest, re
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["features"].([]interface{}); ok && len(listData) > 0 {
 		var featuresList []AppTypeFeaturesModel
+		var existingFeaturesItems []AppTypeFeaturesModel
+		if !data.Features.IsNull() && !data.Features.IsUnknown() {
+			data.Features.ElementsAs(ctx, &existingFeaturesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -497,7 +541,14 @@ func (r *AppTypeResource) Read(ctx context.Context, req resource.ReadRequest, re
 				})
 			}
 		}
-		data.Features = featuresList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AppTypeFeaturesModelAttrTypes}, featuresList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Features = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Features = types.ListNull(types.ObjectType{AttrTypes: AppTypeFeaturesModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -576,16 +627,21 @@ func (r *AppTypeResource) Update(ctx context.Context, req resource.UpdateRequest
 		}
 		apiResource.Spec["business_logic_markup_setting"] = business_logic_markup_settingMap
 	}
-	if len(data.Features) > 0 {
-		var featuresList []map[string]interface{}
-		for _, item := range data.Features {
-			itemMap := make(map[string]interface{})
-			if !item.Type.IsNull() && !item.Type.IsUnknown() {
-				itemMap["type"] = item.Type.ValueString()
+	if !data.Features.IsNull() && !data.Features.IsUnknown() {
+		var featuresItems []AppTypeFeaturesModel
+		diags := data.Features.ElementsAs(ctx, &featuresItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(featuresItems) > 0 {
+			var featuresList []map[string]interface{}
+			for _, item := range featuresItems {
+				itemMap := make(map[string]interface{})
+				if !item.Type.IsNull() && !item.Type.IsUnknown() {
+					itemMap["type"] = item.Type.ValueString()
+				}
+				featuresList = append(featuresList, itemMap)
 			}
-			featuresList = append(featuresList, itemMap)
+			apiResource.Spec["features"] = featuresList
 		}
-		apiResource.Spec["features"] = featuresList
 	}
 
 	_, err := r.client.UpdateAppType(ctx, apiResource)
@@ -618,6 +674,10 @@ func (r *AppTypeResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["features"].([]interface{}); ok && len(listData) > 0 {
 		var featuresList []AppTypeFeaturesModel
+		var existingFeaturesItems []AppTypeFeaturesModel
+		if !data.Features.IsNull() && !data.Features.IsUnknown() {
+			data.Features.ElementsAs(ctx, &existingFeaturesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -631,7 +691,14 @@ func (r *AppTypeResource) Update(ctx context.Context, req resource.UpdateRequest
 				})
 			}
 		}
-		data.Features = featuresList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: AppTypeFeaturesModelAttrTypes}, featuresList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Features = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Features = types.ListNull(types.ObjectType{AttrTypes: AppTypeFeaturesModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,11 +57,25 @@ type DNSLoadBalancerFallbackPoolModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// DNSLoadBalancerFallbackPoolModelAttrTypes defines the attribute types for DNSLoadBalancerFallbackPoolModel
+var DNSLoadBalancerFallbackPoolModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // DNSLoadBalancerResponseCacheModel represents response_cache block
 type DNSLoadBalancerResponseCacheModel struct {
 	DefaultResponseCacheParameters *DNSLoadBalancerEmptyModel                                `tfsdk:"default_response_cache_parameters"`
 	Disable                        *DNSLoadBalancerEmptyModel                                `tfsdk:"disable"`
 	ResponseCacheParameters        *DNSLoadBalancerResponseCacheResponseCacheParametersModel `tfsdk:"response_cache_parameters"`
+}
+
+// DNSLoadBalancerResponseCacheModelAttrTypes defines the attribute types for DNSLoadBalancerResponseCacheModel
+var DNSLoadBalancerResponseCacheModelAttrTypes = map[string]attr.Type{
+	"default_response_cache_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"response_cache_parameters":         types.ObjectType{AttrTypes: DNSLoadBalancerResponseCacheResponseCacheParametersModelAttrTypes},
 }
 
 // DNSLoadBalancerResponseCacheResponseCacheParametersModel represents response_cache_parameters block
@@ -70,9 +85,21 @@ type DNSLoadBalancerResponseCacheResponseCacheParametersModel struct {
 	CacheTTL      types.Int64 `tfsdk:"cache_ttl"`
 }
 
+// DNSLoadBalancerResponseCacheResponseCacheParametersModelAttrTypes defines the attribute types for DNSLoadBalancerResponseCacheResponseCacheParametersModel
+var DNSLoadBalancerResponseCacheResponseCacheParametersModelAttrTypes = map[string]attr.Type{
+	"cache_cidr_ipv4": types.Int64Type,
+	"cache_cidr_ipv6": types.Int64Type,
+	"cache_ttl":       types.Int64Type,
+}
+
 // DNSLoadBalancerRuleListModel represents rule_list block
 type DNSLoadBalancerRuleListModel struct {
 	Rules []DNSLoadBalancerRuleListRulesModel `tfsdk:"rules"`
+}
+
+// DNSLoadBalancerRuleListModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListModel
+var DNSLoadBalancerRuleListModelAttrTypes = map[string]attr.Type{
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesModelAttrTypes}},
 }
 
 // DNSLoadBalancerRuleListRulesModel represents rules block
@@ -87,14 +114,36 @@ type DNSLoadBalancerRuleListRulesModel struct {
 	Pool                     *DNSLoadBalancerRuleListRulesPoolModel                     `tfsdk:"pool"`
 }
 
+// DNSLoadBalancerRuleListRulesModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListRulesModel
+var DNSLoadBalancerRuleListRulesModelAttrTypes = map[string]attr.Type{
+	"score":                       types.Int64Type,
+	"asn_list":                    types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesAsnListModelAttrTypes},
+	"asn_matcher":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"geo_location_label_selector": types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModelAttrTypes},
+	"geo_location_set":            types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesGeoLocationSetModelAttrTypes},
+	"ip_prefix_list":              types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesIPPrefixListModelAttrTypes},
+	"ip_prefix_set":               types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesIPPrefixSetModelAttrTypes},
+	"pool":                        types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesPoolModelAttrTypes},
+}
+
 // DNSLoadBalancerRuleListRulesAsnListModel represents asn_list block
 type DNSLoadBalancerRuleListRulesAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// DNSLoadBalancerRuleListRulesAsnListModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListRulesAsnListModel
+var DNSLoadBalancerRuleListRulesAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // DNSLoadBalancerRuleListRulesAsnMatcherModel represents asn_matcher block
 type DNSLoadBalancerRuleListRulesAsnMatcherModel struct {
 	AsnSets []DNSLoadBalancerRuleListRulesAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// DNSLoadBalancerRuleListRulesAsnMatcherModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListRulesAsnMatcherModel
+var DNSLoadBalancerRuleListRulesAsnMatcherModelAttrTypes = map[string]attr.Type{
+	"asn_sets": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesAsnMatcherAsnSetsModelAttrTypes}},
 }
 
 // DNSLoadBalancerRuleListRulesAsnMatcherAsnSetsModel represents asn_sets block
@@ -106,9 +155,23 @@ type DNSLoadBalancerRuleListRulesAsnMatcherAsnSetsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// DNSLoadBalancerRuleListRulesAsnMatcherAsnSetsModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListRulesAsnMatcherAsnSetsModel
+var DNSLoadBalancerRuleListRulesAsnMatcherAsnSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel represents geo_location_label_selector block
 type DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModel
+var DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // DNSLoadBalancerRuleListRulesGeoLocationSetModel represents geo_location_set block
@@ -118,16 +181,35 @@ type DNSLoadBalancerRuleListRulesGeoLocationSetModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// DNSLoadBalancerRuleListRulesGeoLocationSetModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListRulesGeoLocationSetModel
+var DNSLoadBalancerRuleListRulesGeoLocationSetModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // DNSLoadBalancerRuleListRulesIPPrefixListModel represents ip_prefix_list block
 type DNSLoadBalancerRuleListRulesIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
+// DNSLoadBalancerRuleListRulesIPPrefixListModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListRulesIPPrefixListModel
+var DNSLoadBalancerRuleListRulesIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
+}
+
 // DNSLoadBalancerRuleListRulesIPPrefixSetModel represents ip_prefix_set block
 type DNSLoadBalancerRuleListRulesIPPrefixSetModel struct {
 	InvertMatcher types.Bool                                               `tfsdk:"invert_matcher"`
 	PrefixSets    []DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// DNSLoadBalancerRuleListRulesIPPrefixSetModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListRulesIPPrefixSetModel
+var DNSLoadBalancerRuleListRulesIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"prefix_sets":    types.ListType{ElemType: types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModelAttrTypes}},
 }
 
 // DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModel represents prefix_sets block
@@ -139,11 +221,27 @@ type DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModel
+var DNSLoadBalancerRuleListRulesIPPrefixSetPrefixSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // DNSLoadBalancerRuleListRulesPoolModel represents pool block
 type DNSLoadBalancerRuleListRulesPoolModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// DNSLoadBalancerRuleListRulesPoolModelAttrTypes defines the attribute types for DNSLoadBalancerRuleListRulesPoolModel
+var DNSLoadBalancerRuleListRulesPoolModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type DNSLoadBalancerResourceModel struct {
@@ -246,6 +344,9 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -314,6 +415,9 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -327,11 +431,17 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -363,6 +473,9 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -397,6 +510,9 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -410,11 +526,17 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -436,6 +558,9 @@ func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -924,11 +1049,17 @@ func (r *DNSLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

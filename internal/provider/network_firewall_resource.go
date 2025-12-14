@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,6 +55,11 @@ type NetworkFirewallActiveEnhancedFirewallPoliciesModel struct {
 	EnhancedFirewallPolicies []NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
 }
 
+// NetworkFirewallActiveEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for NetworkFirewallActiveEnhancedFirewallPoliciesModel
+var NetworkFirewallActiveEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
+	"enhanced_firewall_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes}},
+}
+
 // NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -61,9 +67,21 @@ type NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel 
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
+var NetworkFirewallActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // NetworkFirewallActiveFastAclsModel represents active_fast_acls block
 type NetworkFirewallActiveFastAclsModel struct {
 	FastAcls []NetworkFirewallActiveFastAclsFastAclsModel `tfsdk:"fast_acls"`
+}
+
+// NetworkFirewallActiveFastAclsModelAttrTypes defines the attribute types for NetworkFirewallActiveFastAclsModel
+var NetworkFirewallActiveFastAclsModelAttrTypes = map[string]attr.Type{
+	"fast_acls": types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkFirewallActiveFastAclsFastAclsModelAttrTypes}},
 }
 
 // NetworkFirewallActiveFastAclsFastAclsModel represents fast_acls block
@@ -73,9 +91,21 @@ type NetworkFirewallActiveFastAclsFastAclsModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// NetworkFirewallActiveFastAclsFastAclsModelAttrTypes defines the attribute types for NetworkFirewallActiveFastAclsFastAclsModel
+var NetworkFirewallActiveFastAclsFastAclsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // NetworkFirewallActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
 type NetworkFirewallActiveForwardProxyPoliciesModel struct {
 	ForwardProxyPolicies []NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// NetworkFirewallActiveForwardProxyPoliciesModelAttrTypes defines the attribute types for NetworkFirewallActiveForwardProxyPoliciesModel
+var NetworkFirewallActiveForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
+	"forward_proxy_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes}},
 }
 
 // NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
@@ -85,9 +115,21 @@ type NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes defines the attribute types for NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModel
+var NetworkFirewallActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // NetworkFirewallActiveNetworkPoliciesModel represents active_network_policies block
 type NetworkFirewallActiveNetworkPoliciesModel struct {
 	NetworkPolicies []NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
+}
+
+// NetworkFirewallActiveNetworkPoliciesModelAttrTypes defines the attribute types for NetworkFirewallActiveNetworkPoliciesModel
+var NetworkFirewallActiveNetworkPoliciesModelAttrTypes = map[string]attr.Type{
+	"network_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModelAttrTypes}},
 }
 
 // NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
@@ -95,6 +137,13 @@ type NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModelAttrTypes defines the attribute types for NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModel
+var NetworkFirewallActiveNetworkPoliciesNetworkPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type NetworkFirewallResourceModel struct {
@@ -197,6 +246,9 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -223,6 +275,9 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -249,6 +304,9 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -275,6 +333,9 @@ func (r *NetworkFirewallResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -766,11 +827,17 @@ func (r *NetworkFirewallResource) Read(ctx context.Context, req resource.ReadReq
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

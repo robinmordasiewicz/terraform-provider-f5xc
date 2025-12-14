@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -58,11 +59,26 @@ type DNSLBPoolAPoolModel struct {
 	Members            []DNSLBPoolAPoolMembersModel    `tfsdk:"members"`
 }
 
+// DNSLBPoolAPoolModelAttrTypes defines the attribute types for DNSLBPoolAPoolModel
+var DNSLBPoolAPoolModelAttrTypes = map[string]attr.Type{
+	"max_answers":          types.Int64Type,
+	"disable_health_check": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"health_check":         types.ObjectType{AttrTypes: DNSLBPoolAPoolHealthCheckModelAttrTypes},
+	"members":              types.ListType{ElemType: types.ObjectType{AttrTypes: DNSLBPoolAPoolMembersModelAttrTypes}},
+}
+
 // DNSLBPoolAPoolHealthCheckModel represents health_check block
 type DNSLBPoolAPoolHealthCheckModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// DNSLBPoolAPoolHealthCheckModelAttrTypes defines the attribute types for DNSLBPoolAPoolHealthCheckModel
+var DNSLBPoolAPoolHealthCheckModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // DNSLBPoolAPoolMembersModel represents members block
@@ -74,10 +90,25 @@ type DNSLBPoolAPoolMembersModel struct {
 	Ratio      types.Int64  `tfsdk:"ratio"`
 }
 
+// DNSLBPoolAPoolMembersModelAttrTypes defines the attribute types for DNSLBPoolAPoolMembersModel
+var DNSLBPoolAPoolMembersModelAttrTypes = map[string]attr.Type{
+	"disable":     types.BoolType,
+	"ip_endpoint": types.StringType,
+	"name":        types.StringType,
+	"priority":    types.Int64Type,
+	"ratio":       types.Int64Type,
+}
+
 // DNSLBPoolAaaaPoolModel represents aaaa_pool block
 type DNSLBPoolAaaaPoolModel struct {
 	MaxAnswers types.Int64                     `tfsdk:"max_answers"`
 	Members    []DNSLBPoolAaaaPoolMembersModel `tfsdk:"members"`
+}
+
+// DNSLBPoolAaaaPoolModelAttrTypes defines the attribute types for DNSLBPoolAaaaPoolModel
+var DNSLBPoolAaaaPoolModelAttrTypes = map[string]attr.Type{
+	"max_answers": types.Int64Type,
+	"members":     types.ListType{ElemType: types.ObjectType{AttrTypes: DNSLBPoolAaaaPoolMembersModelAttrTypes}},
 }
 
 // DNSLBPoolAaaaPoolMembersModel represents members block
@@ -89,9 +120,23 @@ type DNSLBPoolAaaaPoolMembersModel struct {
 	Ratio      types.Int64  `tfsdk:"ratio"`
 }
 
+// DNSLBPoolAaaaPoolMembersModelAttrTypes defines the attribute types for DNSLBPoolAaaaPoolMembersModel
+var DNSLBPoolAaaaPoolMembersModelAttrTypes = map[string]attr.Type{
+	"disable":     types.BoolType,
+	"ip_endpoint": types.StringType,
+	"name":        types.StringType,
+	"priority":    types.Int64Type,
+	"ratio":       types.Int64Type,
+}
+
 // DNSLBPoolCnamePoolModel represents cname_pool block
 type DNSLBPoolCnamePoolModel struct {
 	Members []DNSLBPoolCnamePoolMembersModel `tfsdk:"members"`
+}
+
+// DNSLBPoolCnamePoolModelAttrTypes defines the attribute types for DNSLBPoolCnamePoolModel
+var DNSLBPoolCnamePoolModelAttrTypes = map[string]attr.Type{
+	"members": types.ListType{ElemType: types.ObjectType{AttrTypes: DNSLBPoolCnamePoolMembersModelAttrTypes}},
 }
 
 // DNSLBPoolCnamePoolMembersModel represents members block
@@ -102,10 +147,24 @@ type DNSLBPoolCnamePoolMembersModel struct {
 	Ratio            types.Int64  `tfsdk:"ratio"`
 }
 
+// DNSLBPoolCnamePoolMembersModelAttrTypes defines the attribute types for DNSLBPoolCnamePoolMembersModel
+var DNSLBPoolCnamePoolMembersModelAttrTypes = map[string]attr.Type{
+	"domain":            types.StringType,
+	"final_translation": types.BoolType,
+	"name":              types.StringType,
+	"ratio":             types.Int64Type,
+}
+
 // DNSLBPoolMxPoolModel represents mx_pool block
 type DNSLBPoolMxPoolModel struct {
 	MaxAnswers types.Int64                   `tfsdk:"max_answers"`
 	Members    []DNSLBPoolMxPoolMembersModel `tfsdk:"members"`
+}
+
+// DNSLBPoolMxPoolModelAttrTypes defines the attribute types for DNSLBPoolMxPoolModel
+var DNSLBPoolMxPoolModelAttrTypes = map[string]attr.Type{
+	"max_answers": types.Int64Type,
+	"members":     types.ListType{ElemType: types.ObjectType{AttrTypes: DNSLBPoolMxPoolMembersModelAttrTypes}},
 }
 
 // DNSLBPoolMxPoolMembersModel represents members block
@@ -116,10 +175,24 @@ type DNSLBPoolMxPoolMembersModel struct {
 	Ratio    types.Int64  `tfsdk:"ratio"`
 }
 
+// DNSLBPoolMxPoolMembersModelAttrTypes defines the attribute types for DNSLBPoolMxPoolMembersModel
+var DNSLBPoolMxPoolMembersModelAttrTypes = map[string]attr.Type{
+	"domain":   types.StringType,
+	"name":     types.StringType,
+	"priority": types.Int64Type,
+	"ratio":    types.Int64Type,
+}
+
 // DNSLBPoolSrvPoolModel represents srv_pool block
 type DNSLBPoolSrvPoolModel struct {
 	MaxAnswers types.Int64                    `tfsdk:"max_answers"`
 	Members    []DNSLBPoolSrvPoolMembersModel `tfsdk:"members"`
+}
+
+// DNSLBPoolSrvPoolModelAttrTypes defines the attribute types for DNSLBPoolSrvPoolModel
+var DNSLBPoolSrvPoolModelAttrTypes = map[string]attr.Type{
+	"max_answers": types.Int64Type,
+	"members":     types.ListType{ElemType: types.ObjectType{AttrTypes: DNSLBPoolSrvPoolMembersModelAttrTypes}},
 }
 
 // DNSLBPoolSrvPoolMembersModel represents members block
@@ -131,6 +204,17 @@ type DNSLBPoolSrvPoolMembersModel struct {
 	Ratio            types.Int64  `tfsdk:"ratio"`
 	Target           types.String `tfsdk:"target"`
 	Weight           types.Int64  `tfsdk:"weight"`
+}
+
+// DNSLBPoolSrvPoolMembersModelAttrTypes defines the attribute types for DNSLBPoolSrvPoolMembersModel
+var DNSLBPoolSrvPoolMembersModelAttrTypes = map[string]attr.Type{
+	"final_translation": types.BoolType,
+	"name":              types.StringType,
+	"port":              types.Int64Type,
+	"priority":          types.Int64Type,
+	"ratio":             types.Int64Type,
+	"target":            types.StringType,
+	"weight":            types.Int64Type,
 }
 
 type DNSLBPoolResourceModel struct {
@@ -257,6 +341,9 @@ func (r *DNSLBPoolResource) Schema(ctx context.Context, req resource.SchemaReque
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -1153,11 +1240,17 @@ func (r *DNSLBPoolResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

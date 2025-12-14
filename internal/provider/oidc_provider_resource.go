@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -64,11 +65,33 @@ type OIDCProviderAzureOIDCSpecTypeModel struct {
 	UserInfoURL       types.String `tfsdk:"user_info_url"`
 }
 
+// OIDCProviderAzureOIDCSpecTypeModelAttrTypes defines the attribute types for OIDCProviderAzureOIDCSpecTypeModel
+var OIDCProviderAzureOIDCSpecTypeModelAttrTypes = map[string]attr.Type{
+	"authorization_url":  types.StringType,
+	"backchannel_logout": types.BoolType,
+	"client_id":          types.StringType,
+	"client_secret":      types.StringType,
+	"default_scopes":     types.StringType,
+	"issuer":             types.StringType,
+	"jwks_url":           types.StringType,
+	"logout_url":         types.StringType,
+	"prompt":             types.StringType,
+	"token_url":          types.StringType,
+	"user_info_url":      types.StringType,
+}
+
 // OIDCProviderGoogleOIDCSpecTypeModel represents google_oidc_spec_type block
 type OIDCProviderGoogleOIDCSpecTypeModel struct {
 	ClientID     types.String `tfsdk:"client_id"`
 	ClientSecret types.String `tfsdk:"client_secret"`
 	HostedDomain types.String `tfsdk:"hosted_domain"`
+}
+
+// OIDCProviderGoogleOIDCSpecTypeModelAttrTypes defines the attribute types for OIDCProviderGoogleOIDCSpecTypeModel
+var OIDCProviderGoogleOIDCSpecTypeModelAttrTypes = map[string]attr.Type{
+	"client_id":     types.StringType,
+	"client_secret": types.StringType,
+	"hosted_domain": types.StringType,
 }
 
 // OIDCProviderOIDCV10SpecTypeModel represents oidc_v10_spec_type block
@@ -93,6 +116,28 @@ type OIDCProviderOIDCV10SpecTypeModel struct {
 	ValidateSignatures       types.Bool   `tfsdk:"validate_signatures"`
 }
 
+// OIDCProviderOIDCV10SpecTypeModelAttrTypes defines the attribute types for OIDCProviderOIDCV10SpecTypeModel
+var OIDCProviderOIDCV10SpecTypeModelAttrTypes = map[string]attr.Type{
+	"allowed_clock_skew":         types.StringType,
+	"authorization_url":          types.StringType,
+	"backchannel_logout":         types.BoolType,
+	"client_id":                  types.StringType,
+	"client_secret":              types.StringType,
+	"default_scopes":             types.StringType,
+	"disable_user_info":          types.BoolType,
+	"display_name":               types.StringType,
+	"forwarded_query_parameters": types.StringType,
+	"issuer":                     types.StringType,
+	"jwks_url":                   types.StringType,
+	"logout_url":                 types.StringType,
+	"pass_current_locale":        types.BoolType,
+	"pass_login_hint":            types.BoolType,
+	"prompt":                     types.StringType,
+	"token_url":                  types.StringType,
+	"user_info_url":              types.StringType,
+	"validate_signatures":        types.BoolType,
+}
+
 // OIDCProviderOktaOIDCSpecTypeModel represents okta_oidc_spec_type block
 type OIDCProviderOktaOIDCSpecTypeModel struct {
 	AuthorizationURL  types.String `tfsdk:"authorization_url"`
@@ -106,6 +151,21 @@ type OIDCProviderOktaOIDCSpecTypeModel struct {
 	Prompt            types.String `tfsdk:"prompt"`
 	TokenURL          types.String `tfsdk:"token_url"`
 	UserInfoURL       types.String `tfsdk:"user_info_url"`
+}
+
+// OIDCProviderOktaOIDCSpecTypeModelAttrTypes defines the attribute types for OIDCProviderOktaOIDCSpecTypeModel
+var OIDCProviderOktaOIDCSpecTypeModelAttrTypes = map[string]attr.Type{
+	"authorization_url":  types.StringType,
+	"backchannel_logout": types.BoolType,
+	"client_id":          types.StringType,
+	"client_secret":      types.StringType,
+	"default_scopes":     types.StringType,
+	"issuer":             types.StringType,
+	"jwks_url":           types.StringType,
+	"logout_url":         types.StringType,
+	"prompt":             types.StringType,
+	"token_url":          types.StringType,
+	"user_info_url":      types.StringType,
 }
 
 type OIDCProviderResourceModel struct {
@@ -1073,11 +1133,17 @@ func (r *OIDCProviderResource) Read(ctx context.Context, req resource.ReadReques
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

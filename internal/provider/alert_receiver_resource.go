@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,16 +55,33 @@ type AlertReceiverEmailModel struct {
 	Email types.String `tfsdk:"email"`
 }
 
+// AlertReceiverEmailModelAttrTypes defines the attribute types for AlertReceiverEmailModel
+var AlertReceiverEmailModelAttrTypes = map[string]attr.Type{
+	"email": types.StringType,
+}
+
 // AlertReceiverOpsgenieModel represents opsgenie block
 type AlertReceiverOpsgenieModel struct {
 	URL    types.String                      `tfsdk:"url"`
 	APIKey *AlertReceiverOpsgenieAPIKeyModel `tfsdk:"api_key"`
 }
 
+// AlertReceiverOpsgenieModelAttrTypes defines the attribute types for AlertReceiverOpsgenieModel
+var AlertReceiverOpsgenieModelAttrTypes = map[string]attr.Type{
+	"url":     types.StringType,
+	"api_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AlertReceiverOpsgenieAPIKeyModel represents api_key block
 type AlertReceiverOpsgenieAPIKeyModel struct {
 	BlindfoldSecretInfo *AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AlertReceiverOpsgenieAPIKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverOpsgenieAPIKeyModelAttrTypes defines the attribute types for AlertReceiverOpsgenieAPIKeyModel
+var AlertReceiverOpsgenieAPIKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AlertReceiverOpsgenieAPIKeyClearSecretInfoModelAttrTypes},
 }
 
 // AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -73,10 +91,23 @@ type AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModel
+var AlertReceiverOpsgenieAPIKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AlertReceiverOpsgenieAPIKeyClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverOpsgenieAPIKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// AlertReceiverOpsgenieAPIKeyClearSecretInfoModelAttrTypes defines the attribute types for AlertReceiverOpsgenieAPIKeyClearSecretInfoModel
+var AlertReceiverOpsgenieAPIKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // AlertReceiverPagerdutyModel represents pagerduty block
@@ -85,10 +116,22 @@ type AlertReceiverPagerdutyModel struct {
 	RoutingKey *AlertReceiverPagerdutyRoutingKeyModel `tfsdk:"routing_key"`
 }
 
+// AlertReceiverPagerdutyModelAttrTypes defines the attribute types for AlertReceiverPagerdutyModel
+var AlertReceiverPagerdutyModelAttrTypes = map[string]attr.Type{
+	"url":         types.StringType,
+	"routing_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AlertReceiverPagerdutyRoutingKeyModel represents routing_key block
 type AlertReceiverPagerdutyRoutingKeyModel struct {
 	BlindfoldSecretInfo *AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverPagerdutyRoutingKeyModelAttrTypes defines the attribute types for AlertReceiverPagerdutyRoutingKeyModel
+var AlertReceiverPagerdutyRoutingKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AlertReceiverPagerdutyRoutingKeyClearSecretInfoModelAttrTypes},
 }
 
 // AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -98,10 +141,23 @@ type AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModel
+var AlertReceiverPagerdutyRoutingKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// AlertReceiverPagerdutyRoutingKeyClearSecretInfoModelAttrTypes defines the attribute types for AlertReceiverPagerdutyRoutingKeyClearSecretInfoModel
+var AlertReceiverPagerdutyRoutingKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // AlertReceiverSlackModel represents slack block
@@ -110,10 +166,22 @@ type AlertReceiverSlackModel struct {
 	URL     *AlertReceiverSlackURLModel `tfsdk:"url"`
 }
 
+// AlertReceiverSlackModelAttrTypes defines the attribute types for AlertReceiverSlackModel
+var AlertReceiverSlackModelAttrTypes = map[string]attr.Type{
+	"channel": types.StringType,
+	"url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AlertReceiverSlackURLModel represents url block
 type AlertReceiverSlackURLModel struct {
 	BlindfoldSecretInfo *AlertReceiverSlackURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AlertReceiverSlackURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverSlackURLModelAttrTypes defines the attribute types for AlertReceiverSlackURLModel
+var AlertReceiverSlackURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AlertReceiverSlackURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AlertReceiverSlackURLClearSecretInfoModelAttrTypes},
 }
 
 // AlertReceiverSlackURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -123,10 +191,23 @@ type AlertReceiverSlackURLBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AlertReceiverSlackURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for AlertReceiverSlackURLBlindfoldSecretInfoModel
+var AlertReceiverSlackURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AlertReceiverSlackURLClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverSlackURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// AlertReceiverSlackURLClearSecretInfoModelAttrTypes defines the attribute types for AlertReceiverSlackURLClearSecretInfoModel
+var AlertReceiverSlackURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // AlertReceiverSmsModel represents sms block
@@ -134,10 +215,21 @@ type AlertReceiverSmsModel struct {
 	ContactNumber types.String `tfsdk:"contact_number"`
 }
 
+// AlertReceiverSmsModelAttrTypes defines the attribute types for AlertReceiverSmsModel
+var AlertReceiverSmsModelAttrTypes = map[string]attr.Type{
+	"contact_number": types.StringType,
+}
+
 // AlertReceiverWebhookModel represents webhook block
 type AlertReceiverWebhookModel struct {
 	HTTPConfig *AlertReceiverWebhookHTTPConfigModel `tfsdk:"http_config"`
 	URL        *AlertReceiverWebhookURLModel        `tfsdk:"url"`
+}
+
+// AlertReceiverWebhookModelAttrTypes defines the attribute types for AlertReceiverWebhookModel
+var AlertReceiverWebhookModelAttrTypes = map[string]attr.Type{
+	"http_config": types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigModelAttrTypes},
+	"url":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // AlertReceiverWebhookHTTPConfigModel represents http_config block
@@ -152,15 +244,38 @@ type AlertReceiverWebhookHTTPConfigModel struct {
 	UseTLS          *AlertReceiverWebhookHTTPConfigUseTLSModel        `tfsdk:"use_tls"`
 }
 
+// AlertReceiverWebhookHTTPConfigModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigModel
+var AlertReceiverWebhookHTTPConfigModelAttrTypes = map[string]attr.Type{
+	"enable_http2":     types.BoolType,
+	"follow_redirects": types.BoolType,
+	"auth_token":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"basic_auth":       types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigBasicAuthModelAttrTypes},
+	"client_cert_obj":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_authorization": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_tls":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":          types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigUseTLSModelAttrTypes},
+}
+
 // AlertReceiverWebhookHTTPConfigAuthTokenModel represents auth_token block
 type AlertReceiverWebhookHTTPConfigAuthTokenModel struct {
 	Token *AlertReceiverWebhookHTTPConfigAuthTokenTokenModel `tfsdk:"token"`
+}
+
+// AlertReceiverWebhookHTTPConfigAuthTokenModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigAuthTokenModel
+var AlertReceiverWebhookHTTPConfigAuthTokenModelAttrTypes = map[string]attr.Type{
+	"token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // AlertReceiverWebhookHTTPConfigAuthTokenTokenModel represents token block
 type AlertReceiverWebhookHTTPConfigAuthTokenTokenModel struct {
 	BlindfoldSecretInfo *AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverWebhookHTTPConfigAuthTokenTokenModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigAuthTokenTokenModel
+var AlertReceiverWebhookHTTPConfigAuthTokenTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModelAttrTypes},
 }
 
 // AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -170,10 +285,23 @@ type AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModel struct
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModel
+var AlertReceiverWebhookHTTPConfigAuthTokenTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModel
+var AlertReceiverWebhookHTTPConfigAuthTokenTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // AlertReceiverWebhookHTTPConfigBasicAuthModel represents basic_auth block
@@ -182,10 +310,22 @@ type AlertReceiverWebhookHTTPConfigBasicAuthModel struct {
 	Password *AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel `tfsdk:"password"`
 }
 
+// AlertReceiverWebhookHTTPConfigBasicAuthModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigBasicAuthModel
+var AlertReceiverWebhookHTTPConfigBasicAuthModelAttrTypes = map[string]attr.Type{
+	"user_name": types.StringType,
+	"password":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel represents password block
 type AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel struct {
 	BlindfoldSecretInfo *AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverWebhookHTTPConfigBasicAuthPasswordModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel
+var AlertReceiverWebhookHTTPConfigBasicAuthPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModelAttrTypes},
 }
 
 // AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -195,15 +335,33 @@ type AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModel str
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModel
+var AlertReceiverWebhookHTTPConfigBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModel
+var AlertReceiverWebhookHTTPConfigBasicAuthPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // AlertReceiverWebhookHTTPConfigClientCertObjModel represents client_cert_obj block
 type AlertReceiverWebhookHTTPConfigClientCertObjModel struct {
 	UseTLSObj []AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModel `tfsdk:"use_tls_obj"`
+}
+
+// AlertReceiverWebhookHTTPConfigClientCertObjModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigClientCertObjModel
+var AlertReceiverWebhookHTTPConfigClientCertObjModelAttrTypes = map[string]attr.Type{
+	"use_tls_obj": types.ListType{ElemType: types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModelAttrTypes}},
 }
 
 // AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModel represents use_tls_obj block
@@ -213,6 +371,15 @@ type AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 	Uid       types.String `tfsdk:"uid"`
+}
+
+// AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModel
+var AlertReceiverWebhookHTTPConfigClientCertObjUseTLSObjModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
 }
 
 // AlertReceiverWebhookHTTPConfigUseTLSModel represents use_tls block
@@ -225,14 +392,34 @@ type AlertReceiverWebhookHTTPConfigUseTLSModel struct {
 	VolterraTrustedCA     *AlertReceiverEmptyModel                                        `tfsdk:"volterra_trusted_ca"`
 }
 
+// AlertReceiverWebhookHTTPConfigUseTLSModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigUseTLSModel
+var AlertReceiverWebhookHTTPConfigUseTLSModelAttrTypes = map[string]attr.Type{
+	"max_version":             types.StringType,
+	"min_version":             types.StringType,
+	"sni":                     types.StringType,
+	"disable_sni":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_server_verification": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"volterra_trusted_ca":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel represents use_server_verification block
 type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel struct {
 	CACertObj *AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModel `tfsdk:"ca_cert_obj"`
 }
 
+// AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel
+var AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModelAttrTypes = map[string]attr.Type{
+	"ca_cert_obj": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModel represents ca_cert_obj block
 type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModel struct {
 	TrustedCA []AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjTrustedCAModel `tfsdk:"trusted_ca"`
+}
+
+// AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModel
+var AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModelAttrTypes = map[string]attr.Type{
+	"trusted_ca": types.ListType{ElemType: types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjTrustedCAModelAttrTypes}},
 }
 
 // AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjTrustedCAModel represents trusted_ca block
@@ -244,10 +431,25 @@ type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjTrustedCA
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjTrustedCAModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjTrustedCAModel
+var AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjTrustedCAModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // AlertReceiverWebhookURLModel represents url block
 type AlertReceiverWebhookURLModel struct {
 	BlindfoldSecretInfo *AlertReceiverWebhookURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AlertReceiverWebhookURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AlertReceiverWebhookURLModelAttrTypes defines the attribute types for AlertReceiverWebhookURLModel
+var AlertReceiverWebhookURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AlertReceiverWebhookURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AlertReceiverWebhookURLClearSecretInfoModelAttrTypes},
 }
 
 // AlertReceiverWebhookURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -257,10 +459,23 @@ type AlertReceiverWebhookURLBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AlertReceiverWebhookURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for AlertReceiverWebhookURLBlindfoldSecretInfoModel
+var AlertReceiverWebhookURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AlertReceiverWebhookURLClearSecretInfoModel represents clear_secret_info block
 type AlertReceiverWebhookURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// AlertReceiverWebhookURLClearSecretInfoModelAttrTypes defines the attribute types for AlertReceiverWebhookURLClearSecretInfoModel
+var AlertReceiverWebhookURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 type AlertReceiverResourceModel struct {
@@ -619,6 +834,9 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 													MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -632,11 +850,17 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 												"uid": schema.StringAttribute{
 													MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -685,6 +909,9 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 																	MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 																"name": schema.StringAttribute{
 																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -698,11 +925,17 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 																"uid": schema.StringAttribute{
 																	MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -1134,11 +1367,17 @@ func (r *AlertReceiverResource) Read(ctx context.Context, req resource.ReadReque
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

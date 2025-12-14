@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -60,15 +61,37 @@ type CodeBaseIntegrationCodeBaseIntegrationModel struct {
 	GitlabEnterprise *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel `tfsdk:"gitlab_enterprise"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationModel
+var CodeBaseIntegrationCodeBaseIntegrationModelAttrTypes = map[string]attr.Type{
+	"azure_repos":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"bitbucket":         types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationBitbucketModelAttrTypes},
+	"bitbucket_server":  types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModelAttrTypes},
+	"github":            types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGithubModelAttrTypes},
+	"github_enterprise": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModelAttrTypes},
+	"gitlab":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"gitlab_enterprise": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModelAttrTypes},
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationAzureReposModel represents azure_repos block
 type CodeBaseIntegrationCodeBaseIntegrationAzureReposModel struct {
 	AccessToken *CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModel `tfsdk:"access_token"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationAzureReposModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationAzureReposModel
+var CodeBaseIntegrationCodeBaseIntegrationAzureReposModelAttrTypes = map[string]attr.Type{
+	"access_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModel represents access_token block
 type CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModel
+var CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -78,10 +101,23 @@ type CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretI
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketModel represents bitbucket block
@@ -90,10 +126,22 @@ type CodeBaseIntegrationCodeBaseIntegrationBitbucketModel struct {
 	Passwd   *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel `tfsdk:"passwd"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationBitbucketModel
+var CodeBaseIntegrationCodeBaseIntegrationBitbucketModelAttrTypes = map[string]attr.Type{
+	"username": types.StringType,
+	"passwd":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel represents passwd block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel
+var CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -103,10 +151,23 @@ type CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoMod
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModel represents bitbucket_server block
@@ -117,10 +178,24 @@ type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModel struct {
 	Passwd    *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel `tfsdk:"passwd"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModel
+var CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModelAttrTypes = map[string]attr.Type{
+	"url":        types.StringType,
+	"username":   types.StringType,
+	"verify_ssl": types.BoolType,
+	"passwd":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel represents passwd block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel
+var CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -130,10 +205,23 @@ type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretI
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubModel represents github block
@@ -143,10 +231,23 @@ type CodeBaseIntegrationCodeBaseIntegrationGithubModel struct {
 	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel `tfsdk:"access_token"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationGithubModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGithubModel
+var CodeBaseIntegrationCodeBaseIntegrationGithubModelAttrTypes = map[string]attr.Type{
+	"username":     types.StringType,
+	"verify_ssl":   types.BoolType,
+	"access_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel represents access_token block
 type CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel
+var CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -156,10 +257,23 @@ type CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoM
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModel represents github_enterprise block
@@ -169,10 +283,23 @@ type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModel struct {
 	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel `tfsdk:"access_token"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModel
+var CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModelAttrTypes = map[string]attr.Type{
+	"hostname":     types.StringType,
+	"username":     types.StringType,
+	"access_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel represents access_token block
 type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel
+var CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -182,10 +309,23 @@ type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldS
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabModel represents gitlab block
@@ -193,10 +333,21 @@ type CodeBaseIntegrationCodeBaseIntegrationGitlabModel struct {
 	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModel `tfsdk:"access_token"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationGitlabModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGitlabModel
+var CodeBaseIntegrationCodeBaseIntegrationGitlabModelAttrTypes = map[string]attr.Type{
+	"access_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModel represents access_token block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModel
+var CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -206,10 +357,23 @@ type CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoM
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel represents gitlab_enterprise block
@@ -218,10 +382,22 @@ type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel struct {
 	AccessToken *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel `tfsdk:"access_token"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel
+var CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModelAttrTypes = map[string]attr.Type{
+	"url":          types.StringType,
+	"access_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel represents access_token block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel struct {
 	BlindfoldSecretInfo *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel
+var CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -231,10 +407,23 @@ type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldS
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel represents clear_secret_info block
 type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModel
+var CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 type CodeBaseIntegrationResourceModel struct {
@@ -941,11 +1130,17 @@ func (r *CodeBaseIntegrationResource) Read(ctx context.Context, req resource.Rea
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

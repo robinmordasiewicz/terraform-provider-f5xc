@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,6 +57,11 @@ type UDPLoadBalancerAdvertiseCustomModel struct {
 	AdvertiseWhere []UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel `tfsdk:"advertise_where"`
 }
 
+// UDPLoadBalancerAdvertiseCustomModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomModel
+var UDPLoadBalancerAdvertiseCustomModelAttrTypes = map[string]attr.Type{
+	"advertise_where": types.ListType{ElemType: types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes}},
+}
+
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel represents advertise_where block
 type UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
 	Port               types.Int64                                                          `tfsdk:"port"`
@@ -69,9 +75,27 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
 	Vk8sService        *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel        `tfsdk:"vk8s_service"`
 }
 
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes = map[string]attr.Type{
+	"port":                  types.Int64Type,
+	"port_ranges":           types.StringType,
+	"advertise_on_public":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site":                  types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes},
+	"use_default_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network":       types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes},
+	"virtual_site":          types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes},
+	"virtual_site_with_vip": types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes},
+	"vk8s_service":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel represents advertise_on_public block
 type UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel struct {
 	PublicIP *UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel `tfsdk:"public_ip"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModelAttrTypes = map[string]attr.Type{
+	"public_ip": types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModelAttrTypes},
 }
 
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel represents public_ip block
@@ -81,6 +105,13 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel 
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel represents site block
 type UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel struct {
 	IP      types.String                                               `tfsdk:"ip"`
@@ -88,11 +119,25 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel struct {
 	Site    *UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
 }
 
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes = map[string]attr.Type{
+	"ip":      types.StringType,
+	"network": types.StringType,
+	"site":    types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes},
+}
+
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel represents site block
 type UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel represents virtual_network block
@@ -104,6 +149,15 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel struct {
 	VirtualNetwork *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel `tfsdk:"virtual_network"`
 }
 
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"specific_v6_vip": types.StringType,
+	"specific_vip":    types.StringType,
+	"default_v6_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_vip":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network": types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModelAttrTypes},
+}
+
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel represents virtual_network block
 type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -111,10 +165,23 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkMod
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel represents virtual_site block
 type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel struct {
 	Network     types.String                                                             `tfsdk:"network"`
 	VirtualSite *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"network":      types.StringType,
+	"virtual_site": types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes},
 }
 
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
@@ -124,11 +191,25 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel str
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel represents virtual_site_with_vip block
 type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel struct {
 	IP          types.String                                                                    `tfsdk:"ip"`
 	Network     types.String                                                                    `tfsdk:"network"`
 	VirtualSite *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes = map[string]attr.Type{
+	"ip":           types.StringType,
+	"network":      types.StringType,
+	"virtual_site": types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModelAttrTypes},
 }
 
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel represents virtual_site block
@@ -138,10 +219,23 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteMo
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel represents vk8s_service block
 type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel struct {
 	Site        *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel        `tfsdk:"site"`
 	VirtualSite *UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes},
 }
 
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel represents site block
@@ -151,6 +245,13 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel represents virtual_site block
 type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -158,9 +259,21 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel str
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel
+var UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // UDPLoadBalancerAdvertiseOnPublicModel represents advertise_on_public block
 type UDPLoadBalancerAdvertiseOnPublicModel struct {
 	PublicIP *UDPLoadBalancerAdvertiseOnPublicPublicIPModel `tfsdk:"public_ip"`
+}
+
+// UDPLoadBalancerAdvertiseOnPublicModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseOnPublicModel
+var UDPLoadBalancerAdvertiseOnPublicModelAttrTypes = map[string]attr.Type{
+	"public_ip": types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseOnPublicPublicIPModelAttrTypes},
 }
 
 // UDPLoadBalancerAdvertiseOnPublicPublicIPModel represents public_ip block
@@ -168,6 +281,13 @@ type UDPLoadBalancerAdvertiseOnPublicPublicIPModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerAdvertiseOnPublicPublicIPModelAttrTypes defines the attribute types for UDPLoadBalancerAdvertiseOnPublicPublicIPModel
+var UDPLoadBalancerAdvertiseOnPublicPublicIPModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // UDPLoadBalancerOriginPoolsWeightsModel represents origin_pools_weights block
@@ -179,11 +299,27 @@ type UDPLoadBalancerOriginPoolsWeightsModel struct {
 	Pool            *UDPLoadBalancerOriginPoolsWeightsPoolModel    `tfsdk:"pool"`
 }
 
+// UDPLoadBalancerOriginPoolsWeightsModelAttrTypes defines the attribute types for UDPLoadBalancerOriginPoolsWeightsModel
+var UDPLoadBalancerOriginPoolsWeightsModelAttrTypes = map[string]attr.Type{
+	"priority":         types.Int64Type,
+	"weight":           types.Int64Type,
+	"cluster":          types.ObjectType{AttrTypes: UDPLoadBalancerOriginPoolsWeightsClusterModelAttrTypes},
+	"endpoint_subsets": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pool":             types.ObjectType{AttrTypes: UDPLoadBalancerOriginPoolsWeightsPoolModelAttrTypes},
+}
+
 // UDPLoadBalancerOriginPoolsWeightsClusterModel represents cluster block
 type UDPLoadBalancerOriginPoolsWeightsClusterModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// UDPLoadBalancerOriginPoolsWeightsClusterModelAttrTypes defines the attribute types for UDPLoadBalancerOriginPoolsWeightsClusterModel
+var UDPLoadBalancerOriginPoolsWeightsClusterModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // UDPLoadBalancerOriginPoolsWeightsPoolModel represents pool block
@@ -193,30 +329,37 @@ type UDPLoadBalancerOriginPoolsWeightsPoolModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// UDPLoadBalancerOriginPoolsWeightsPoolModelAttrTypes defines the attribute types for UDPLoadBalancerOriginPoolsWeightsPoolModel
+var UDPLoadBalancerOriginPoolsWeightsPoolModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 type UDPLoadBalancerResourceModel struct {
-	Name                               types.String                             `tfsdk:"name"`
-	Namespace                          types.String                             `tfsdk:"namespace"`
-	Annotations                        types.Map                                `tfsdk:"annotations"`
-	Description                        types.String                             `tfsdk:"description"`
-	Disable                            types.Bool                               `tfsdk:"disable"`
-	Domains                            types.List                               `tfsdk:"domains"`
-	Labels                             types.Map                                `tfsdk:"labels"`
-	ID                                 types.String                             `tfsdk:"id"`
-	DNSVolterraManaged                 types.Bool                               `tfsdk:"dns_volterra_managed"`
-	EnablePerPacketLoadBalancing       types.Bool                               `tfsdk:"enable_per_packet_load_balancing"`
-	IdleTimeout                        types.Int64                              `tfsdk:"idle_timeout"`
-	ListenPort                         types.Int64                              `tfsdk:"listen_port"`
-	PortRanges                         types.String                             `tfsdk:"port_ranges"`
-	Timeouts                           timeouts.Value                           `tfsdk:"timeouts"`
-	AdvertiseCustom                    *UDPLoadBalancerAdvertiseCustomModel     `tfsdk:"advertise_custom"`
-	AdvertiseOnPublic                  *UDPLoadBalancerAdvertiseOnPublicModel   `tfsdk:"advertise_on_public"`
-	AdvertiseOnPublicDefaultVIP        *UDPLoadBalancerEmptyModel               `tfsdk:"advertise_on_public_default_vip"`
-	DoNotAdvertise                     *UDPLoadBalancerEmptyModel               `tfsdk:"do_not_advertise"`
-	HashPolicyChoiceRandom             *UDPLoadBalancerEmptyModel               `tfsdk:"hash_policy_choice_random"`
-	HashPolicyChoiceRoundRobin         *UDPLoadBalancerEmptyModel               `tfsdk:"hash_policy_choice_round_robin"`
-	HashPolicyChoiceSourceIPStickiness *UDPLoadBalancerEmptyModel               `tfsdk:"hash_policy_choice_source_ip_stickiness"`
-	OriginPoolsWeights                 []UDPLoadBalancerOriginPoolsWeightsModel `tfsdk:"origin_pools_weights"`
-	UDP                                *UDPLoadBalancerEmptyModel               `tfsdk:"udp"`
+	Name                               types.String                           `tfsdk:"name"`
+	Namespace                          types.String                           `tfsdk:"namespace"`
+	Annotations                        types.Map                              `tfsdk:"annotations"`
+	Description                        types.String                           `tfsdk:"description"`
+	Disable                            types.Bool                             `tfsdk:"disable"`
+	Domains                            types.List                             `tfsdk:"domains"`
+	Labels                             types.Map                              `tfsdk:"labels"`
+	ID                                 types.String                           `tfsdk:"id"`
+	DNSVolterraManaged                 types.Bool                             `tfsdk:"dns_volterra_managed"`
+	EnablePerPacketLoadBalancing       types.Bool                             `tfsdk:"enable_per_packet_load_balancing"`
+	IdleTimeout                        types.Int64                            `tfsdk:"idle_timeout"`
+	ListenPort                         types.Int64                            `tfsdk:"listen_port"`
+	PortRanges                         types.String                           `tfsdk:"port_ranges"`
+	Timeouts                           timeouts.Value                         `tfsdk:"timeouts"`
+	AdvertiseCustom                    *UDPLoadBalancerAdvertiseCustomModel   `tfsdk:"advertise_custom"`
+	AdvertiseOnPublic                  *UDPLoadBalancerAdvertiseOnPublicModel `tfsdk:"advertise_on_public"`
+	AdvertiseOnPublicDefaultVIP        *UDPLoadBalancerEmptyModel             `tfsdk:"advertise_on_public_default_vip"`
+	DoNotAdvertise                     *UDPLoadBalancerEmptyModel             `tfsdk:"do_not_advertise"`
+	HashPolicyChoiceRandom             *UDPLoadBalancerEmptyModel             `tfsdk:"hash_policy_choice_random"`
+	HashPolicyChoiceRoundRobin         *UDPLoadBalancerEmptyModel             `tfsdk:"hash_policy_choice_round_robin"`
+	HashPolicyChoiceSourceIPStickiness *UDPLoadBalancerEmptyModel             `tfsdk:"hash_policy_choice_source_ip_stickiness"`
+	OriginPoolsWeights                 types.List                             `tfsdk:"origin_pools_weights"`
+	UDP                                *UDPLoadBalancerEmptyModel             `tfsdk:"udp"`
 }
 
 func (r *UDPLoadBalancerResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -363,6 +506,9 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -396,6 +542,9 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -438,6 +587,9 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -467,6 +619,9 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -500,6 +655,9 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -524,6 +682,9 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -542,6 +703,9 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -571,6 +735,9 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -620,6 +787,9 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -641,6 +811,9 @@ func (r *UDPLoadBalancerResource) Schema(ctx context.Context, req resource.Schem
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -914,48 +1087,53 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 		hash_policy_choice_source_ip_stickinessMap := make(map[string]interface{})
 		createReq.Spec["hash_policy_choice_source_ip_stickiness"] = hash_policy_choice_source_ip_stickinessMap
 	}
-	if len(data.OriginPoolsWeights) > 0 {
-		var origin_pools_weightsList []map[string]interface{}
-		for _, item := range data.OriginPoolsWeights {
-			itemMap := make(map[string]interface{})
-			if item.Cluster != nil {
-				clusterNestedMap := make(map[string]interface{})
-				if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
-					clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+	if !data.OriginPoolsWeights.IsNull() && !data.OriginPoolsWeights.IsUnknown() {
+		var origin_pools_weightsItems []UDPLoadBalancerOriginPoolsWeightsModel
+		diags := data.OriginPoolsWeights.ElementsAs(ctx, &origin_pools_weightsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(origin_pools_weightsItems) > 0 {
+			var origin_pools_weightsList []map[string]interface{}
+			for _, item := range origin_pools_weightsItems {
+				itemMap := make(map[string]interface{})
+				if item.Cluster != nil {
+					clusterNestedMap := make(map[string]interface{})
+					if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
+						clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+					}
+					if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
+						clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+					}
+					if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
+						clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+					}
+					itemMap["cluster"] = clusterNestedMap
 				}
-				if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
-					clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+				if item.EndpointSubsets != nil {
+					itemMap["endpoint_subsets"] = map[string]interface{}{}
 				}
-				if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
-					clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+				if item.Pool != nil {
+					poolNestedMap := make(map[string]interface{})
+					if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
+						poolNestedMap["name"] = item.Pool.Name.ValueString()
+					}
+					if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
+						poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
+					}
+					if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
+						poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
+					}
+					itemMap["pool"] = poolNestedMap
 				}
-				itemMap["cluster"] = clusterNestedMap
+				if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
+					itemMap["priority"] = item.Priority.ValueInt64()
+				}
+				if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
+					itemMap["weight"] = item.Weight.ValueInt64()
+				}
+				origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
 			}
-			if item.EndpointSubsets != nil {
-				itemMap["endpoint_subsets"] = map[string]interface{}{}
-			}
-			if item.Pool != nil {
-				poolNestedMap := make(map[string]interface{})
-				if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
-					poolNestedMap["name"] = item.Pool.Name.ValueString()
-				}
-				if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
-					poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
-				}
-				if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
-					poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
-				}
-				itemMap["pool"] = poolNestedMap
-			}
-			if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
-				itemMap["priority"] = item.Priority.ValueInt64()
-			}
-			if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
-				itemMap["weight"] = item.Weight.ValueInt64()
-			}
-			origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
+			createReq.Spec["origin_pools_weights"] = origin_pools_weightsList
 		}
-		createReq.Spec["origin_pools_weights"] = origin_pools_weightsList
 	}
 	if data.UDP != nil {
 		udpMap := make(map[string]interface{})
@@ -1165,6 +1343,10 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["origin_pools_weights"].([]interface{}); ok && len(listData) > 0 {
 		var origin_pools_weightsList []UDPLoadBalancerOriginPoolsWeightsModel
+		var existingOriginPoolsWeightsItems []UDPLoadBalancerOriginPoolsWeightsModel
+		if !data.OriginPoolsWeights.IsNull() && !data.OriginPoolsWeights.IsUnknown() {
+			data.OriginPoolsWeights.ElementsAs(ctx, &existingOriginPoolsWeightsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1195,7 +1377,7 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 						return nil
 					}(),
 					EndpointSubsets: func() *UDPLoadBalancerEmptyModel {
-						if !isImport && len(data.OriginPoolsWeights) > listIdx && data.OriginPoolsWeights[listIdx].EndpointSubsets != nil {
+						if !isImport && len(existingOriginPoolsWeightsItems) > listIdx && existingOriginPoolsWeightsItems[listIdx].EndpointSubsets != nil {
 							return &UDPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -1240,7 +1422,14 @@ func (r *UDPLoadBalancerResource) Create(ctx context.Context, req resource.Creat
 				})
 			}
 		}
-		data.OriginPoolsWeights = origin_pools_weightsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: UDPLoadBalancerOriginPoolsWeightsModelAttrTypes}, origin_pools_weightsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.OriginPoolsWeights = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.OriginPoolsWeights = types.ListNull(types.ObjectType{AttrTypes: UDPLoadBalancerOriginPoolsWeightsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["udp"].(map[string]interface{}); ok && isImport && data.UDP == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -1348,11 +1537,17 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -1553,6 +1748,10 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["origin_pools_weights"].([]interface{}); ok && len(listData) > 0 {
 		var origin_pools_weightsList []UDPLoadBalancerOriginPoolsWeightsModel
+		var existingOriginPoolsWeightsItems []UDPLoadBalancerOriginPoolsWeightsModel
+		if !data.OriginPoolsWeights.IsNull() && !data.OriginPoolsWeights.IsUnknown() {
+			data.OriginPoolsWeights.ElementsAs(ctx, &existingOriginPoolsWeightsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1583,7 +1782,7 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 						return nil
 					}(),
 					EndpointSubsets: func() *UDPLoadBalancerEmptyModel {
-						if !isImport && len(data.OriginPoolsWeights) > listIdx && data.OriginPoolsWeights[listIdx].EndpointSubsets != nil {
+						if !isImport && len(existingOriginPoolsWeightsItems) > listIdx && existingOriginPoolsWeightsItems[listIdx].EndpointSubsets != nil {
 							return &UDPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -1628,7 +1827,14 @@ func (r *UDPLoadBalancerResource) Read(ctx context.Context, req resource.ReadReq
 				})
 			}
 		}
-		data.OriginPoolsWeights = origin_pools_weightsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: UDPLoadBalancerOriginPoolsWeightsModelAttrTypes}, origin_pools_weightsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.OriginPoolsWeights = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.OriginPoolsWeights = types.ListNull(types.ObjectType{AttrTypes: UDPLoadBalancerOriginPoolsWeightsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["udp"].(map[string]interface{}); ok && isImport && data.UDP == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -1848,48 +2054,53 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 		hash_policy_choice_source_ip_stickinessMap := make(map[string]interface{})
 		apiResource.Spec["hash_policy_choice_source_ip_stickiness"] = hash_policy_choice_source_ip_stickinessMap
 	}
-	if len(data.OriginPoolsWeights) > 0 {
-		var origin_pools_weightsList []map[string]interface{}
-		for _, item := range data.OriginPoolsWeights {
-			itemMap := make(map[string]interface{})
-			if item.Cluster != nil {
-				clusterNestedMap := make(map[string]interface{})
-				if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
-					clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+	if !data.OriginPoolsWeights.IsNull() && !data.OriginPoolsWeights.IsUnknown() {
+		var origin_pools_weightsItems []UDPLoadBalancerOriginPoolsWeightsModel
+		diags := data.OriginPoolsWeights.ElementsAs(ctx, &origin_pools_weightsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(origin_pools_weightsItems) > 0 {
+			var origin_pools_weightsList []map[string]interface{}
+			for _, item := range origin_pools_weightsItems {
+				itemMap := make(map[string]interface{})
+				if item.Cluster != nil {
+					clusterNestedMap := make(map[string]interface{})
+					if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
+						clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+					}
+					if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
+						clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+					}
+					if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
+						clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+					}
+					itemMap["cluster"] = clusterNestedMap
 				}
-				if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
-					clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+				if item.EndpointSubsets != nil {
+					itemMap["endpoint_subsets"] = map[string]interface{}{}
 				}
-				if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
-					clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+				if item.Pool != nil {
+					poolNestedMap := make(map[string]interface{})
+					if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
+						poolNestedMap["name"] = item.Pool.Name.ValueString()
+					}
+					if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
+						poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
+					}
+					if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
+						poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
+					}
+					itemMap["pool"] = poolNestedMap
 				}
-				itemMap["cluster"] = clusterNestedMap
+				if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
+					itemMap["priority"] = item.Priority.ValueInt64()
+				}
+				if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
+					itemMap["weight"] = item.Weight.ValueInt64()
+				}
+				origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
 			}
-			if item.EndpointSubsets != nil {
-				itemMap["endpoint_subsets"] = map[string]interface{}{}
-			}
-			if item.Pool != nil {
-				poolNestedMap := make(map[string]interface{})
-				if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
-					poolNestedMap["name"] = item.Pool.Name.ValueString()
-				}
-				if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
-					poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
-				}
-				if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
-					poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
-				}
-				itemMap["pool"] = poolNestedMap
-			}
-			if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
-				itemMap["priority"] = item.Priority.ValueInt64()
-			}
-			if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
-				itemMap["weight"] = item.Weight.ValueInt64()
-			}
-			origin_pools_weightsList = append(origin_pools_weightsList, itemMap)
+			apiResource.Spec["origin_pools_weights"] = origin_pools_weightsList
 		}
-		apiResource.Spec["origin_pools_weights"] = origin_pools_weightsList
 	}
 	if data.UDP != nil {
 		udpMap := make(map[string]interface{})
@@ -2145,6 +2356,10 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["origin_pools_weights"].([]interface{}); ok && len(listData) > 0 {
 		var origin_pools_weightsList []UDPLoadBalancerOriginPoolsWeightsModel
+		var existingOriginPoolsWeightsItems []UDPLoadBalancerOriginPoolsWeightsModel
+		if !data.OriginPoolsWeights.IsNull() && !data.OriginPoolsWeights.IsUnknown() {
+			data.OriginPoolsWeights.ElementsAs(ctx, &existingOriginPoolsWeightsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -2175,7 +2390,7 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 						return nil
 					}(),
 					EndpointSubsets: func() *UDPLoadBalancerEmptyModel {
-						if !isImport && len(data.OriginPoolsWeights) > listIdx && data.OriginPoolsWeights[listIdx].EndpointSubsets != nil {
+						if !isImport && len(existingOriginPoolsWeightsItems) > listIdx && existingOriginPoolsWeightsItems[listIdx].EndpointSubsets != nil {
 							return &UDPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -2220,7 +2435,14 @@ func (r *UDPLoadBalancerResource) Update(ctx context.Context, req resource.Updat
 				})
 			}
 		}
-		data.OriginPoolsWeights = origin_pools_weightsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: UDPLoadBalancerOriginPoolsWeightsModelAttrTypes}, origin_pools_weightsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.OriginPoolsWeights = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.OriginPoolsWeights = types.ListNull(types.ObjectType{AttrTypes: UDPLoadBalancerOriginPoolsWeightsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["udp"].(map[string]interface{}); ok && isImport && data.UDP == nil {
 		// Import case: populate from API since state is nil and psd is empty

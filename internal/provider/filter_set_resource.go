@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -57,10 +58,24 @@ type FilterSetFilterFieldsModel struct {
 	StringField           *FilterSetFilterFieldsStringFieldModel           `tfsdk:"string_field"`
 }
 
+// FilterSetFilterFieldsModelAttrTypes defines the attribute types for FilterSetFilterFieldsModel
+var FilterSetFilterFieldsModelAttrTypes = map[string]attr.Type{
+	"field_id":                types.StringType,
+	"date_field":              types.ObjectType{AttrTypes: FilterSetFilterFieldsDateFieldModelAttrTypes},
+	"filter_expression_field": types.ObjectType{AttrTypes: FilterSetFilterFieldsFilterExpressionFieldModelAttrTypes},
+	"string_field":            types.ObjectType{AttrTypes: FilterSetFilterFieldsStringFieldModelAttrTypes},
+}
+
 // FilterSetFilterFieldsDateFieldModel represents date_field block
 type FilterSetFilterFieldsDateFieldModel struct {
 	Relative types.String                                 `tfsdk:"relative"`
 	Absolute *FilterSetFilterFieldsDateFieldAbsoluteModel `tfsdk:"absolute"`
+}
+
+// FilterSetFilterFieldsDateFieldModelAttrTypes defines the attribute types for FilterSetFilterFieldsDateFieldModel
+var FilterSetFilterFieldsDateFieldModelAttrTypes = map[string]attr.Type{
+	"relative": types.StringType,
+	"absolute": types.ObjectType{AttrTypes: FilterSetFilterFieldsDateFieldAbsoluteModelAttrTypes},
 }
 
 // FilterSetFilterFieldsDateFieldAbsoluteModel represents absolute block
@@ -69,9 +84,20 @@ type FilterSetFilterFieldsDateFieldAbsoluteModel struct {
 	StartDate types.String `tfsdk:"start_date"`
 }
 
+// FilterSetFilterFieldsDateFieldAbsoluteModelAttrTypes defines the attribute types for FilterSetFilterFieldsDateFieldAbsoluteModel
+var FilterSetFilterFieldsDateFieldAbsoluteModelAttrTypes = map[string]attr.Type{
+	"end_date":   types.StringType,
+	"start_date": types.StringType,
+}
+
 // FilterSetFilterFieldsFilterExpressionFieldModel represents filter_expression_field block
 type FilterSetFilterFieldsFilterExpressionFieldModel struct {
 	Expression types.String `tfsdk:"expression"`
+}
+
+// FilterSetFilterFieldsFilterExpressionFieldModelAttrTypes defines the attribute types for FilterSetFilterFieldsFilterExpressionFieldModel
+var FilterSetFilterFieldsFilterExpressionFieldModelAttrTypes = map[string]attr.Type{
+	"expression": types.StringType,
 }
 
 // FilterSetFilterFieldsStringFieldModel represents string_field block
@@ -79,17 +105,22 @@ type FilterSetFilterFieldsStringFieldModel struct {
 	FieldValues types.List `tfsdk:"field_values"`
 }
 
+// FilterSetFilterFieldsStringFieldModelAttrTypes defines the attribute types for FilterSetFilterFieldsStringFieldModel
+var FilterSetFilterFieldsStringFieldModelAttrTypes = map[string]attr.Type{
+	"field_values": types.ListType{ElemType: types.StringType},
+}
+
 type FilterSetResourceModel struct {
-	Name         types.String                 `tfsdk:"name"`
-	Namespace    types.String                 `tfsdk:"namespace"`
-	Annotations  types.Map                    `tfsdk:"annotations"`
-	Description  types.String                 `tfsdk:"description"`
-	Disable      types.Bool                   `tfsdk:"disable"`
-	Labels       types.Map                    `tfsdk:"labels"`
-	ID           types.String                 `tfsdk:"id"`
-	ContextKey   types.String                 `tfsdk:"context_key"`
-	Timeouts     timeouts.Value               `tfsdk:"timeouts"`
-	FilterFields []FilterSetFilterFieldsModel `tfsdk:"filter_fields"`
+	Name         types.String   `tfsdk:"name"`
+	Namespace    types.String   `tfsdk:"namespace"`
+	Annotations  types.Map      `tfsdk:"annotations"`
+	Description  types.String   `tfsdk:"description"`
+	Disable      types.Bool     `tfsdk:"disable"`
+	Labels       types.Map      `tfsdk:"labels"`
+	ID           types.String   `tfsdk:"id"`
+	ContextKey   types.String   `tfsdk:"context_key"`
+	Timeouts     timeouts.Value `tfsdk:"timeouts"`
+	FilterFields types.List     `tfsdk:"filter_fields"`
 }
 
 func (r *FilterSetResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -366,51 +397,56 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.FilterFields) > 0 {
-		var filter_fieldsList []map[string]interface{}
-		for _, item := range data.FilterFields {
-			itemMap := make(map[string]interface{})
-			if item.DateField != nil {
-				date_fieldNestedMap := make(map[string]interface{})
-				if item.DateField.Absolute != nil {
-					absoluteDeepMap := make(map[string]interface{})
-					if !item.DateField.Absolute.EndDate.IsNull() && !item.DateField.Absolute.EndDate.IsUnknown() {
-						absoluteDeepMap["end_date"] = item.DateField.Absolute.EndDate.ValueString()
+	if !data.FilterFields.IsNull() && !data.FilterFields.IsUnknown() {
+		var filter_fieldsItems []FilterSetFilterFieldsModel
+		diags := data.FilterFields.ElementsAs(ctx, &filter_fieldsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(filter_fieldsItems) > 0 {
+			var filter_fieldsList []map[string]interface{}
+			for _, item := range filter_fieldsItems {
+				itemMap := make(map[string]interface{})
+				if item.DateField != nil {
+					date_fieldNestedMap := make(map[string]interface{})
+					if item.DateField.Absolute != nil {
+						absoluteDeepMap := make(map[string]interface{})
+						if !item.DateField.Absolute.EndDate.IsNull() && !item.DateField.Absolute.EndDate.IsUnknown() {
+							absoluteDeepMap["end_date"] = item.DateField.Absolute.EndDate.ValueString()
+						}
+						if !item.DateField.Absolute.StartDate.IsNull() && !item.DateField.Absolute.StartDate.IsUnknown() {
+							absoluteDeepMap["start_date"] = item.DateField.Absolute.StartDate.ValueString()
+						}
+						date_fieldNestedMap["absolute"] = absoluteDeepMap
 					}
-					if !item.DateField.Absolute.StartDate.IsNull() && !item.DateField.Absolute.StartDate.IsUnknown() {
-						absoluteDeepMap["start_date"] = item.DateField.Absolute.StartDate.ValueString()
+					if !item.DateField.Relative.IsNull() && !item.DateField.Relative.IsUnknown() {
+						date_fieldNestedMap["relative"] = item.DateField.Relative.ValueString()
 					}
-					date_fieldNestedMap["absolute"] = absoluteDeepMap
+					itemMap["date_field"] = date_fieldNestedMap
 				}
-				if !item.DateField.Relative.IsNull() && !item.DateField.Relative.IsUnknown() {
-					date_fieldNestedMap["relative"] = item.DateField.Relative.ValueString()
+				if !item.FieldID.IsNull() && !item.FieldID.IsUnknown() {
+					itemMap["field_id"] = item.FieldID.ValueString()
 				}
-				itemMap["date_field"] = date_fieldNestedMap
-			}
-			if !item.FieldID.IsNull() && !item.FieldID.IsUnknown() {
-				itemMap["field_id"] = item.FieldID.ValueString()
-			}
-			if item.FilterExpressionField != nil {
-				filter_expression_fieldNestedMap := make(map[string]interface{})
-				if !item.FilterExpressionField.Expression.IsNull() && !item.FilterExpressionField.Expression.IsUnknown() {
-					filter_expression_fieldNestedMap["expression"] = item.FilterExpressionField.Expression.ValueString()
-				}
-				itemMap["filter_expression_field"] = filter_expression_fieldNestedMap
-			}
-			if item.StringField != nil {
-				string_fieldNestedMap := make(map[string]interface{})
-				if !item.StringField.FieldValues.IsNull() && !item.StringField.FieldValues.IsUnknown() {
-					var FieldValuesItems []string
-					diags := item.StringField.FieldValues.ElementsAs(ctx, &FieldValuesItems, false)
-					if !diags.HasError() {
-						string_fieldNestedMap["field_values"] = FieldValuesItems
+				if item.FilterExpressionField != nil {
+					filter_expression_fieldNestedMap := make(map[string]interface{})
+					if !item.FilterExpressionField.Expression.IsNull() && !item.FilterExpressionField.Expression.IsUnknown() {
+						filter_expression_fieldNestedMap["expression"] = item.FilterExpressionField.Expression.ValueString()
 					}
+					itemMap["filter_expression_field"] = filter_expression_fieldNestedMap
 				}
-				itemMap["string_field"] = string_fieldNestedMap
+				if item.StringField != nil {
+					string_fieldNestedMap := make(map[string]interface{})
+					if !item.StringField.FieldValues.IsNull() && !item.StringField.FieldValues.IsUnknown() {
+						var FieldValuesItems []string
+						diags := item.StringField.FieldValues.ElementsAs(ctx, &FieldValuesItems, false)
+						if !diags.HasError() {
+							string_fieldNestedMap["field_values"] = FieldValuesItems
+						}
+					}
+					itemMap["string_field"] = string_fieldNestedMap
+				}
+				filter_fieldsList = append(filter_fieldsList, itemMap)
 			}
-			filter_fieldsList = append(filter_fieldsList, itemMap)
+			createReq.Spec["filter_fields"] = filter_fieldsList
 		}
-		createReq.Spec["filter_fields"] = filter_fieldsList
 	}
 	if !data.ContextKey.IsNull() && !data.ContextKey.IsUnknown() {
 		createReq.Spec["context_key"] = data.ContextKey.ValueString()
@@ -430,6 +466,10 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["filter_fields"].([]interface{}); ok && len(listData) > 0 {
 		var filter_fieldsList []FilterSetFilterFieldsModel
+		var existingFilterFieldsItems []FilterSetFilterFieldsModel
+		if !data.FilterFields.IsNull() && !data.FilterFields.IsUnknown() {
+			data.FilterFields.ElementsAs(ctx, &existingFilterFieldsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -489,7 +529,14 @@ func (r *FilterSetResource) Create(ctx context.Context, req resource.CreateReque
 				})
 			}
 		}
-		data.FilterFields = filter_fieldsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FilterSetFilterFieldsModelAttrTypes}, filter_fieldsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.FilterFields = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.FilterFields = types.ListNull(types.ObjectType{AttrTypes: FilterSetFilterFieldsModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["context_key"].(string); ok && v != "" {
 		data.ContextKey = types.StringValue(v)
@@ -560,11 +607,17 @@ func (r *FilterSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -591,6 +644,10 @@ func (r *FilterSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 	})
 	if listData, ok := apiResource.Spec["filter_fields"].([]interface{}); ok && len(listData) > 0 {
 		var filter_fieldsList []FilterSetFilterFieldsModel
+		var existingFilterFieldsItems []FilterSetFilterFieldsModel
+		if !data.FilterFields.IsNull() && !data.FilterFields.IsUnknown() {
+			data.FilterFields.ElementsAs(ctx, &existingFilterFieldsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -650,7 +707,14 @@ func (r *FilterSetResource) Read(ctx context.Context, req resource.ReadRequest, 
 				})
 			}
 		}
-		data.FilterFields = filter_fieldsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FilterSetFilterFieldsModelAttrTypes}, filter_fieldsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.FilterFields = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.FilterFields = types.ListNull(types.ObjectType{AttrTypes: FilterSetFilterFieldsModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["context_key"].(string); ok && v != "" {
 		data.ContextKey = types.StringValue(v)
@@ -717,51 +781,56 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.FilterFields) > 0 {
-		var filter_fieldsList []map[string]interface{}
-		for _, item := range data.FilterFields {
-			itemMap := make(map[string]interface{})
-			if item.DateField != nil {
-				date_fieldNestedMap := make(map[string]interface{})
-				if item.DateField.Absolute != nil {
-					absoluteDeepMap := make(map[string]interface{})
-					if !item.DateField.Absolute.EndDate.IsNull() && !item.DateField.Absolute.EndDate.IsUnknown() {
-						absoluteDeepMap["end_date"] = item.DateField.Absolute.EndDate.ValueString()
+	if !data.FilterFields.IsNull() && !data.FilterFields.IsUnknown() {
+		var filter_fieldsItems []FilterSetFilterFieldsModel
+		diags := data.FilterFields.ElementsAs(ctx, &filter_fieldsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(filter_fieldsItems) > 0 {
+			var filter_fieldsList []map[string]interface{}
+			for _, item := range filter_fieldsItems {
+				itemMap := make(map[string]interface{})
+				if item.DateField != nil {
+					date_fieldNestedMap := make(map[string]interface{})
+					if item.DateField.Absolute != nil {
+						absoluteDeepMap := make(map[string]interface{})
+						if !item.DateField.Absolute.EndDate.IsNull() && !item.DateField.Absolute.EndDate.IsUnknown() {
+							absoluteDeepMap["end_date"] = item.DateField.Absolute.EndDate.ValueString()
+						}
+						if !item.DateField.Absolute.StartDate.IsNull() && !item.DateField.Absolute.StartDate.IsUnknown() {
+							absoluteDeepMap["start_date"] = item.DateField.Absolute.StartDate.ValueString()
+						}
+						date_fieldNestedMap["absolute"] = absoluteDeepMap
 					}
-					if !item.DateField.Absolute.StartDate.IsNull() && !item.DateField.Absolute.StartDate.IsUnknown() {
-						absoluteDeepMap["start_date"] = item.DateField.Absolute.StartDate.ValueString()
+					if !item.DateField.Relative.IsNull() && !item.DateField.Relative.IsUnknown() {
+						date_fieldNestedMap["relative"] = item.DateField.Relative.ValueString()
 					}
-					date_fieldNestedMap["absolute"] = absoluteDeepMap
+					itemMap["date_field"] = date_fieldNestedMap
 				}
-				if !item.DateField.Relative.IsNull() && !item.DateField.Relative.IsUnknown() {
-					date_fieldNestedMap["relative"] = item.DateField.Relative.ValueString()
+				if !item.FieldID.IsNull() && !item.FieldID.IsUnknown() {
+					itemMap["field_id"] = item.FieldID.ValueString()
 				}
-				itemMap["date_field"] = date_fieldNestedMap
-			}
-			if !item.FieldID.IsNull() && !item.FieldID.IsUnknown() {
-				itemMap["field_id"] = item.FieldID.ValueString()
-			}
-			if item.FilterExpressionField != nil {
-				filter_expression_fieldNestedMap := make(map[string]interface{})
-				if !item.FilterExpressionField.Expression.IsNull() && !item.FilterExpressionField.Expression.IsUnknown() {
-					filter_expression_fieldNestedMap["expression"] = item.FilterExpressionField.Expression.ValueString()
-				}
-				itemMap["filter_expression_field"] = filter_expression_fieldNestedMap
-			}
-			if item.StringField != nil {
-				string_fieldNestedMap := make(map[string]interface{})
-				if !item.StringField.FieldValues.IsNull() && !item.StringField.FieldValues.IsUnknown() {
-					var FieldValuesItems []string
-					diags := item.StringField.FieldValues.ElementsAs(ctx, &FieldValuesItems, false)
-					if !diags.HasError() {
-						string_fieldNestedMap["field_values"] = FieldValuesItems
+				if item.FilterExpressionField != nil {
+					filter_expression_fieldNestedMap := make(map[string]interface{})
+					if !item.FilterExpressionField.Expression.IsNull() && !item.FilterExpressionField.Expression.IsUnknown() {
+						filter_expression_fieldNestedMap["expression"] = item.FilterExpressionField.Expression.ValueString()
 					}
+					itemMap["filter_expression_field"] = filter_expression_fieldNestedMap
 				}
-				itemMap["string_field"] = string_fieldNestedMap
+				if item.StringField != nil {
+					string_fieldNestedMap := make(map[string]interface{})
+					if !item.StringField.FieldValues.IsNull() && !item.StringField.FieldValues.IsUnknown() {
+						var FieldValuesItems []string
+						diags := item.StringField.FieldValues.ElementsAs(ctx, &FieldValuesItems, false)
+						if !diags.HasError() {
+							string_fieldNestedMap["field_values"] = FieldValuesItems
+						}
+					}
+					itemMap["string_field"] = string_fieldNestedMap
+				}
+				filter_fieldsList = append(filter_fieldsList, itemMap)
 			}
-			filter_fieldsList = append(filter_fieldsList, itemMap)
+			apiResource.Spec["filter_fields"] = filter_fieldsList
 		}
-		apiResource.Spec["filter_fields"] = filter_fieldsList
 	}
 	if !data.ContextKey.IsNull() && !data.ContextKey.IsUnknown() {
 		apiResource.Spec["context_key"] = data.ContextKey.ValueString()
@@ -799,6 +868,10 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["filter_fields"].([]interface{}); ok && len(listData) > 0 {
 		var filter_fieldsList []FilterSetFilterFieldsModel
+		var existingFilterFieldsItems []FilterSetFilterFieldsModel
+		if !data.FilterFields.IsNull() && !data.FilterFields.IsUnknown() {
+			data.FilterFields.ElementsAs(ctx, &existingFilterFieldsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -858,7 +931,14 @@ func (r *FilterSetResource) Update(ctx context.Context, req resource.UpdateReque
 				})
 			}
 		}
-		data.FilterFields = filter_fieldsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: FilterSetFilterFieldsModelAttrTypes}, filter_fieldsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.FilterFields = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.FilterFields = types.ListNull(types.ObjectType{AttrTypes: FilterSetFilterFieldsModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["context_key"].(string); ok && v != "" {
 		data.ContextKey = types.StringValue(v)

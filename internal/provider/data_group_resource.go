@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,14 +55,29 @@ type DataGroupAddressRecordsModel struct {
 	Records *DataGroupEmptyModel `tfsdk:"records"`
 }
 
+// DataGroupAddressRecordsModelAttrTypes defines the attribute types for DataGroupAddressRecordsModel
+var DataGroupAddressRecordsModelAttrTypes = map[string]attr.Type{
+	"records": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // DataGroupIntegerRecordsModel represents integer_records block
 type DataGroupIntegerRecordsModel struct {
 	Records *DataGroupEmptyModel `tfsdk:"records"`
 }
 
+// DataGroupIntegerRecordsModelAttrTypes defines the attribute types for DataGroupIntegerRecordsModel
+var DataGroupIntegerRecordsModelAttrTypes = map[string]attr.Type{
+	"records": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // DataGroupStringRecordsModel represents string_records block
 type DataGroupStringRecordsModel struct {
 	Records *DataGroupEmptyModel `tfsdk:"records"`
+}
+
+// DataGroupStringRecordsModelAttrTypes defines the attribute types for DataGroupStringRecordsModel
+var DataGroupStringRecordsModelAttrTypes = map[string]attr.Type{
+	"records": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 type DataGroupResourceModel struct {
@@ -428,11 +444,17 @@ func (r *DataGroupResource) Read(ctx context.Context, req resource.ReadRequest, 
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

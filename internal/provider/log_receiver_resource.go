@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -57,10 +58,24 @@ type LogReceiverSyslogModel struct {
 	UDPServer     *LogReceiverSyslogUDPServerModel `tfsdk:"udp_server"`
 }
 
+// LogReceiverSyslogModelAttrTypes defines the attribute types for LogReceiverSyslogModel
+var LogReceiverSyslogModelAttrTypes = map[string]attr.Type{
+	"syslog_rfc5424": types.Int64Type,
+	"tcp_server":     types.ObjectType{AttrTypes: LogReceiverSyslogTCPServerModelAttrTypes},
+	"tls_server":     types.ObjectType{AttrTypes: LogReceiverSyslogTLSServerModelAttrTypes},
+	"udp_server":     types.ObjectType{AttrTypes: LogReceiverSyslogUDPServerModelAttrTypes},
+}
+
 // LogReceiverSyslogTCPServerModel represents tcp_server block
 type LogReceiverSyslogTCPServerModel struct {
 	Port       types.Int64  `tfsdk:"port"`
 	ServerName types.String `tfsdk:"server_name"`
+}
+
+// LogReceiverSyslogTCPServerModelAttrTypes defines the attribute types for LogReceiverSyslogTCPServerModel
+var LogReceiverSyslogTCPServerModelAttrTypes = map[string]attr.Type{
+	"port":        types.Int64Type,
+	"server_name": types.StringType,
 }
 
 // LogReceiverSyslogTLSServerModel represents tls_server block
@@ -75,16 +90,40 @@ type LogReceiverSyslogTLSServerModel struct {
 	VolterraCA           *LogReceiverEmptyModel                     `tfsdk:"volterra_ca"`
 }
 
+// LogReceiverSyslogTLSServerModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerModel
+var LogReceiverSyslogTLSServerModelAttrTypes = map[string]attr.Type{
+	"port":                    types.Int64Type,
+	"server_name":             types.StringType,
+	"trusted_ca_url":          types.StringType,
+	"default_https_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_syslog_tls_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_disabled":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mtls_enable":             types.ObjectType{AttrTypes: LogReceiverSyslogTLSServerMtlsEnableModelAttrTypes},
+	"volterra_ca":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // LogReceiverSyslogTLSServerMtlsEnableModel represents mtls_enable block
 type LogReceiverSyslogTLSServerMtlsEnableModel struct {
 	Certificate types.String                                     `tfsdk:"certificate"`
 	KeyURL      *LogReceiverSyslogTLSServerMtlsEnableKeyURLModel `tfsdk:"key_url"`
 }
 
+// LogReceiverSyslogTLSServerMtlsEnableModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerMtlsEnableModel
+var LogReceiverSyslogTLSServerMtlsEnableModelAttrTypes = map[string]attr.Type{
+	"certificate": types.StringType,
+	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // LogReceiverSyslogTLSServerMtlsEnableKeyURLModel represents key_url block
 type LogReceiverSyslogTLSServerMtlsEnableKeyURLModel struct {
 	BlindfoldSecretInfo *LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// LogReceiverSyslogTLSServerMtlsEnableKeyURLModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerMtlsEnableKeyURLModel
+var LogReceiverSyslogTLSServerMtlsEnableKeyURLModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModelAttrTypes},
 }
 
 // LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -94,16 +133,35 @@ type LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModel
+var LogReceiverSyslogTLSServerMtlsEnableKeyURLBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel represents clear_secret_info block
 type LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModel
+var LogReceiverSyslogTLSServerMtlsEnableKeyURLClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // LogReceiverSyslogUDPServerModel represents udp_server block
 type LogReceiverSyslogUDPServerModel struct {
 	Port       types.Int64  `tfsdk:"port"`
 	ServerName types.String `tfsdk:"server_name"`
+}
+
+// LogReceiverSyslogUDPServerModelAttrTypes defines the attribute types for LogReceiverSyslogUDPServerModel
+var LogReceiverSyslogUDPServerModelAttrTypes = map[string]attr.Type{
+	"port":        types.Int64Type,
+	"server_name": types.StringType,
 }
 
 type LogReceiverResourceModel struct {
@@ -661,11 +719,17 @@ func (r *LogReceiverResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

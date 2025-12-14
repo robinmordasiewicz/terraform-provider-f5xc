@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -63,9 +64,28 @@ type ServicePolicyAllowListModel struct {
 	PrefixList              *ServicePolicyAllowListPrefixListModel   `tfsdk:"prefix_list"`
 }
 
+// ServicePolicyAllowListModelAttrTypes defines the attribute types for ServicePolicyAllowListModel
+var ServicePolicyAllowListModelAttrTypes = map[string]attr.Type{
+	"country_list":               types.ListType{ElemType: types.StringType},
+	"tls_fingerprint_classes":    types.ListType{ElemType: types.StringType},
+	"tls_fingerprint_values":     types.ListType{ElemType: types.StringType},
+	"asn_list":                   types.ObjectType{AttrTypes: ServicePolicyAllowListAsnListModelAttrTypes},
+	"asn_set":                    types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyAllowListAsnSetModelAttrTypes}},
+	"default_action_allow":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_action_deny":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_action_next_policy": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_prefix_set":              types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyAllowListIPPrefixSetModelAttrTypes}},
+	"prefix_list":                types.ObjectType{AttrTypes: ServicePolicyAllowListPrefixListModelAttrTypes},
+}
+
 // ServicePolicyAllowListAsnListModel represents asn_list block
 type ServicePolicyAllowListAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// ServicePolicyAllowListAsnListModelAttrTypes defines the attribute types for ServicePolicyAllowListAsnListModel
+var ServicePolicyAllowListAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
 }
 
 // ServicePolicyAllowListAsnSetModel represents asn_set block
@@ -75,6 +95,13 @@ type ServicePolicyAllowListAsnSetModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ServicePolicyAllowListAsnSetModelAttrTypes defines the attribute types for ServicePolicyAllowListAsnSetModel
+var ServicePolicyAllowListAsnSetModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ServicePolicyAllowListIPPrefixSetModel represents ip_prefix_set block
 type ServicePolicyAllowListIPPrefixSetModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -82,9 +109,21 @@ type ServicePolicyAllowListIPPrefixSetModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ServicePolicyAllowListIPPrefixSetModelAttrTypes defines the attribute types for ServicePolicyAllowListIPPrefixSetModel
+var ServicePolicyAllowListIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ServicePolicyAllowListPrefixListModel represents prefix_list block
 type ServicePolicyAllowListPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// ServicePolicyAllowListPrefixListModelAttrTypes defines the attribute types for ServicePolicyAllowListPrefixListModel
+var ServicePolicyAllowListPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyDenyListModel represents deny_list block
@@ -101,9 +140,28 @@ type ServicePolicyDenyListModel struct {
 	PrefixList              *ServicePolicyDenyListPrefixListModel   `tfsdk:"prefix_list"`
 }
 
+// ServicePolicyDenyListModelAttrTypes defines the attribute types for ServicePolicyDenyListModel
+var ServicePolicyDenyListModelAttrTypes = map[string]attr.Type{
+	"country_list":               types.ListType{ElemType: types.StringType},
+	"tls_fingerprint_classes":    types.ListType{ElemType: types.StringType},
+	"tls_fingerprint_values":     types.ListType{ElemType: types.StringType},
+	"asn_list":                   types.ObjectType{AttrTypes: ServicePolicyDenyListAsnListModelAttrTypes},
+	"asn_set":                    types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyDenyListAsnSetModelAttrTypes}},
+	"default_action_allow":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_action_deny":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_action_next_policy": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_prefix_set":              types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyDenyListIPPrefixSetModelAttrTypes}},
+	"prefix_list":                types.ObjectType{AttrTypes: ServicePolicyDenyListPrefixListModelAttrTypes},
+}
+
 // ServicePolicyDenyListAsnListModel represents asn_list block
 type ServicePolicyDenyListAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
+}
+
+// ServicePolicyDenyListAsnListModelAttrTypes defines the attribute types for ServicePolicyDenyListAsnListModel
+var ServicePolicyDenyListAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
 }
 
 // ServicePolicyDenyListAsnSetModel represents asn_set block
@@ -113,6 +171,13 @@ type ServicePolicyDenyListAsnSetModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ServicePolicyDenyListAsnSetModelAttrTypes defines the attribute types for ServicePolicyDenyListAsnSetModel
+var ServicePolicyDenyListAsnSetModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ServicePolicyDenyListIPPrefixSetModel represents ip_prefix_set block
 type ServicePolicyDenyListIPPrefixSetModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -120,14 +185,31 @@ type ServicePolicyDenyListIPPrefixSetModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ServicePolicyDenyListIPPrefixSetModelAttrTypes defines the attribute types for ServicePolicyDenyListIPPrefixSetModel
+var ServicePolicyDenyListIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ServicePolicyDenyListPrefixListModel represents prefix_list block
 type ServicePolicyDenyListPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
 }
 
+// ServicePolicyDenyListPrefixListModelAttrTypes defines the attribute types for ServicePolicyDenyListPrefixListModel
+var ServicePolicyDenyListPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleListModel represents rule_list block
 type ServicePolicyRuleListModel struct {
 	Rules []ServicePolicyRuleListRulesModel `tfsdk:"rules"`
+}
+
+// ServicePolicyRuleListModelAttrTypes defines the attribute types for ServicePolicyRuleListModel
+var ServicePolicyRuleListModelAttrTypes = map[string]attr.Type{
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // ServicePolicyRuleListRulesModel represents rules block
@@ -136,10 +218,22 @@ type ServicePolicyRuleListRulesModel struct {
 	Spec     *ServicePolicyRuleListRulesSpecModel     `tfsdk:"spec"`
 }
 
+// ServicePolicyRuleListRulesModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesModel
+var ServicePolicyRuleListRulesModelAttrTypes = map[string]attr.Type{
+	"metadata": types.ObjectType{AttrTypes: ServicePolicyRuleListRulesMetadataModelAttrTypes},
+	"spec":     types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecModelAttrTypes},
+}
+
 // ServicePolicyRuleListRulesMetadataModel represents metadata block
 type ServicePolicyRuleListRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// ServicePolicyRuleListRulesMetadataModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesMetadataModel
+var ServicePolicyRuleListRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // ServicePolicyRuleListRulesSpecModel represents spec block
@@ -179,10 +273,53 @@ type ServicePolicyRuleListRulesSpecModel struct {
 	WAFAction             *ServicePolicyRuleListRulesSpecWAFActionModel             `tfsdk:"waf_action"`
 }
 
+// ServicePolicyRuleListRulesSpecModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecModel
+var ServicePolicyRuleListRulesSpecModelAttrTypes = map[string]attr.Type{
+	"action":                  types.StringType,
+	"client_name":             types.StringType,
+	"expiration_timestamp":    types.StringType,
+	"any_asn":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_group_matcher":       types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecAPIGroupMatcherModelAttrTypes},
+	"arg_matchers":            types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecArgMatchersModelAttrTypes}},
+	"asn_list":                types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecAsnListModelAttrTypes},
+	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"body_matcher":            types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecBodyMatcherModelAttrTypes},
+	"bot_action":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_name_matcher":     types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecClientNameMatcherModelAttrTypes},
+	"client_selector":         types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecClientSelectorModelAttrTypes},
+	"cookie_matchers":         types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecCookieMatchersModelAttrTypes}},
+	"domain_matcher":          types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecDomainMatcherModelAttrTypes},
+	"headers":                 types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecHeadersModelAttrTypes}},
+	"http_method":             types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecHTTPMethodModelAttrTypes},
+	"ip_matcher":              types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecIPMatcherModelAttrTypes},
+	"ip_prefix_list":          types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecIPPrefixListModelAttrTypes},
+	"ip_threat_category_list": types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecIPThreatCategoryListModelAttrTypes},
+	"ja4_tls_fingerprint":     types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecJa4TLSFingerprintModelAttrTypes},
+	"jwt_claims":              types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecJWTClaimsModelAttrTypes}},
+	"label_matcher":           types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecLabelMatcherModelAttrTypes},
+	"mum_action":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"path":                    types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecPathModelAttrTypes},
+	"port_matcher":            types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecPortMatcherModelAttrTypes},
+	"query_params":            types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecQueryParamsModelAttrTypes}},
+	"request_constraints":     types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecRequestConstraintsModelAttrTypes},
+	"segment_policy":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_fingerprint_matcher": types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModelAttrTypes},
+	"user_identity_matcher":   types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecUserIdentityMatcherModelAttrTypes},
+	"waf_action":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ServicePolicyRuleListRulesSpecAPIGroupMatcherModel represents api_group_matcher block
 type ServicePolicyRuleListRulesSpecAPIGroupMatcherModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
 	Match         types.List `tfsdk:"match"`
+}
+
+// ServicePolicyRuleListRulesSpecAPIGroupMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecAPIGroupMatcherModel
+var ServicePolicyRuleListRulesSpecAPIGroupMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"match":          types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleListRulesSpecArgMatchersModel represents arg_matchers block
@@ -194,6 +331,15 @@ type ServicePolicyRuleListRulesSpecArgMatchersModel struct {
 	Item            *ServicePolicyRuleListRulesSpecArgMatchersItemModel `tfsdk:"item"`
 }
 
+// ServicePolicyRuleListRulesSpecArgMatchersModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecArgMatchersModel
+var ServicePolicyRuleListRulesSpecArgMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecArgMatchersItemModelAttrTypes},
+}
+
 // ServicePolicyRuleListRulesSpecArgMatchersItemModel represents item block
 type ServicePolicyRuleListRulesSpecArgMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -201,14 +347,31 @@ type ServicePolicyRuleListRulesSpecArgMatchersItemModel struct {
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// ServicePolicyRuleListRulesSpecArgMatchersItemModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecArgMatchersItemModel
+var ServicePolicyRuleListRulesSpecArgMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleListRulesSpecAsnListModel represents asn_list block
 type ServicePolicyRuleListRulesSpecAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// ServicePolicyRuleListRulesSpecAsnListModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecAsnListModel
+var ServicePolicyRuleListRulesSpecAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // ServicePolicyRuleListRulesSpecAsnMatcherModel represents asn_matcher block
 type ServicePolicyRuleListRulesSpecAsnMatcherModel struct {
 	AsnSets []ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// ServicePolicyRuleListRulesSpecAsnMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecAsnMatcherModel
+var ServicePolicyRuleListRulesSpecAsnMatcherModelAttrTypes = map[string]attr.Type{
+	"asn_sets": types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModelAttrTypes}},
 }
 
 // ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModel represents asn_sets block
@@ -220,6 +383,15 @@ type ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModel
+var ServicePolicyRuleListRulesSpecAsnMatcherAsnSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // ServicePolicyRuleListRulesSpecBodyMatcherModel represents body_matcher block
 type ServicePolicyRuleListRulesSpecBodyMatcherModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -227,10 +399,23 @@ type ServicePolicyRuleListRulesSpecBodyMatcherModel struct {
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// ServicePolicyRuleListRulesSpecBodyMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecBodyMatcherModel
+var ServicePolicyRuleListRulesSpecBodyMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleListRulesSpecBotActionModel represents bot_action block
 type ServicePolicyRuleListRulesSpecBotActionModel struct {
 	BotSkipProcessing *ServicePolicyEmptyModel `tfsdk:"bot_skip_processing"`
 	None              *ServicePolicyEmptyModel `tfsdk:"none"`
+}
+
+// ServicePolicyRuleListRulesSpecBotActionModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecBotActionModel
+var ServicePolicyRuleListRulesSpecBotActionModelAttrTypes = map[string]attr.Type{
+	"bot_skip_processing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"none":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // ServicePolicyRuleListRulesSpecClientNameMatcherModel represents client_name_matcher block
@@ -240,9 +425,21 @@ type ServicePolicyRuleListRulesSpecClientNameMatcherModel struct {
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// ServicePolicyRuleListRulesSpecClientNameMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecClientNameMatcherModel
+var ServicePolicyRuleListRulesSpecClientNameMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleListRulesSpecClientSelectorModel represents client_selector block
 type ServicePolicyRuleListRulesSpecClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// ServicePolicyRuleListRulesSpecClientSelectorModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecClientSelectorModel
+var ServicePolicyRuleListRulesSpecClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleListRulesSpecCookieMatchersModel represents cookie_matchers block
@@ -254,6 +451,15 @@ type ServicePolicyRuleListRulesSpecCookieMatchersModel struct {
 	Item            *ServicePolicyRuleListRulesSpecCookieMatchersItemModel `tfsdk:"item"`
 }
 
+// ServicePolicyRuleListRulesSpecCookieMatchersModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecCookieMatchersModel
+var ServicePolicyRuleListRulesSpecCookieMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecCookieMatchersItemModelAttrTypes},
+}
+
 // ServicePolicyRuleListRulesSpecCookieMatchersItemModel represents item block
 type ServicePolicyRuleListRulesSpecCookieMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -261,11 +467,25 @@ type ServicePolicyRuleListRulesSpecCookieMatchersItemModel struct {
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// ServicePolicyRuleListRulesSpecCookieMatchersItemModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecCookieMatchersItemModel
+var ServicePolicyRuleListRulesSpecCookieMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleListRulesSpecDomainMatcherModel represents domain_matcher block
 type ServicePolicyRuleListRulesSpecDomainMatcherModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecDomainMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecDomainMatcherModel
+var ServicePolicyRuleListRulesSpecDomainMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleListRulesSpecHeadersModel represents headers block
@@ -277,11 +497,27 @@ type ServicePolicyRuleListRulesSpecHeadersModel struct {
 	Item            *ServicePolicyRuleListRulesSpecHeadersItemModel `tfsdk:"item"`
 }
 
+// ServicePolicyRuleListRulesSpecHeadersModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecHeadersModel
+var ServicePolicyRuleListRulesSpecHeadersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecHeadersItemModelAttrTypes},
+}
+
 // ServicePolicyRuleListRulesSpecHeadersItemModel represents item block
 type ServicePolicyRuleListRulesSpecHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecHeadersItemModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecHeadersItemModel
+var ServicePolicyRuleListRulesSpecHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleListRulesSpecHTTPMethodModel represents http_method block
@@ -290,10 +526,22 @@ type ServicePolicyRuleListRulesSpecHTTPMethodModel struct {
 	Methods       types.List `tfsdk:"methods"`
 }
 
+// ServicePolicyRuleListRulesSpecHTTPMethodModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecHTTPMethodModel
+var ServicePolicyRuleListRulesSpecHTTPMethodModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"methods":        types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleListRulesSpecIPMatcherModel represents ip_matcher block
 type ServicePolicyRuleListRulesSpecIPMatcherModel struct {
 	InvertMatcher types.Bool                                               `tfsdk:"invert_matcher"`
 	PrefixSets    []ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// ServicePolicyRuleListRulesSpecIPMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecIPMatcherModel
+var ServicePolicyRuleListRulesSpecIPMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"prefix_sets":    types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModelAttrTypes}},
 }
 
 // ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel represents prefix_sets block
@@ -305,10 +553,25 @@ type ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModel
+var ServicePolicyRuleListRulesSpecIPMatcherPrefixSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // ServicePolicyRuleListRulesSpecIPPrefixListModel represents ip_prefix_list block
 type ServicePolicyRuleListRulesSpecIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
+}
+
+// ServicePolicyRuleListRulesSpecIPPrefixListModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecIPPrefixListModel
+var ServicePolicyRuleListRulesSpecIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleListRulesSpecIPThreatCategoryListModel represents ip_threat_category_list block
@@ -316,9 +579,19 @@ type ServicePolicyRuleListRulesSpecIPThreatCategoryListModel struct {
 	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
 }
 
+// ServicePolicyRuleListRulesSpecIPThreatCategoryListModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecIPThreatCategoryListModel
+var ServicePolicyRuleListRulesSpecIPThreatCategoryListModelAttrTypes = map[string]attr.Type{
+	"ip_threat_categories": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel represents ja4_tls_fingerprint block
 type ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
+}
+
+// ServicePolicyRuleListRulesSpecJa4TLSFingerprintModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecJa4TLSFingerprintModel
+var ServicePolicyRuleListRulesSpecJa4TLSFingerprintModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleListRulesSpecJWTClaimsModel represents jwt_claims block
@@ -330,6 +603,15 @@ type ServicePolicyRuleListRulesSpecJWTClaimsModel struct {
 	Item            *ServicePolicyRuleListRulesSpecJWTClaimsItemModel `tfsdk:"item"`
 }
 
+// ServicePolicyRuleListRulesSpecJWTClaimsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecJWTClaimsModel
+var ServicePolicyRuleListRulesSpecJWTClaimsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecJWTClaimsItemModelAttrTypes},
+}
+
 // ServicePolicyRuleListRulesSpecJWTClaimsItemModel represents item block
 type ServicePolicyRuleListRulesSpecJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -337,15 +619,33 @@ type ServicePolicyRuleListRulesSpecJWTClaimsItemModel struct {
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// ServicePolicyRuleListRulesSpecJWTClaimsItemModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecJWTClaimsItemModel
+var ServicePolicyRuleListRulesSpecJWTClaimsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleListRulesSpecLabelMatcherModel represents label_matcher block
 type ServicePolicyRuleListRulesSpecLabelMatcherModel struct {
 	Keys types.List `tfsdk:"keys"`
+}
+
+// ServicePolicyRuleListRulesSpecLabelMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecLabelMatcherModel
+var ServicePolicyRuleListRulesSpecLabelMatcherModelAttrTypes = map[string]attr.Type{
+	"keys": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleListRulesSpecMumActionModel represents mum_action block
 type ServicePolicyRuleListRulesSpecMumActionModel struct {
 	Default        *ServicePolicyEmptyModel `tfsdk:"default"`
 	SkipProcessing *ServicePolicyEmptyModel `tfsdk:"skip_processing"`
+}
+
+// ServicePolicyRuleListRulesSpecMumActionModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecMumActionModel
+var ServicePolicyRuleListRulesSpecMumActionModelAttrTypes = map[string]attr.Type{
+	"default":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"skip_processing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // ServicePolicyRuleListRulesSpecPathModel represents path block
@@ -358,10 +658,26 @@ type ServicePolicyRuleListRulesSpecPathModel struct {
 	Transformers  types.List `tfsdk:"transformers"`
 }
 
+// ServicePolicyRuleListRulesSpecPathModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecPathModel
+var ServicePolicyRuleListRulesSpecPathModelAttrTypes = map[string]attr.Type{
+	"exact_values":   types.ListType{ElemType: types.StringType},
+	"invert_matcher": types.BoolType,
+	"prefix_values":  types.ListType{ElemType: types.StringType},
+	"regex_values":   types.ListType{ElemType: types.StringType},
+	"suffix_values":  types.ListType{ElemType: types.StringType},
+	"transformers":   types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleListRulesSpecPortMatcherModel represents port_matcher block
 type ServicePolicyRuleListRulesSpecPortMatcherModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
 	Ports         types.List `tfsdk:"ports"`
+}
+
+// ServicePolicyRuleListRulesSpecPortMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecPortMatcherModel
+var ServicePolicyRuleListRulesSpecPortMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"ports":          types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleListRulesSpecQueryParamsModel represents query_params block
@@ -373,11 +689,27 @@ type ServicePolicyRuleListRulesSpecQueryParamsModel struct {
 	Item            *ServicePolicyRuleListRulesSpecQueryParamsItemModel `tfsdk:"item"`
 }
 
+// ServicePolicyRuleListRulesSpecQueryParamsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecQueryParamsModel
+var ServicePolicyRuleListRulesSpecQueryParamsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"key":               types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecQueryParamsItemModelAttrTypes},
+}
+
 // ServicePolicyRuleListRulesSpecQueryParamsItemModel represents item block
 type ServicePolicyRuleListRulesSpecQueryParamsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// ServicePolicyRuleListRulesSpecQueryParamsItemModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecQueryParamsItemModel
+var ServicePolicyRuleListRulesSpecQueryParamsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleListRulesSpecRequestConstraintsModel represents request_constraints block
@@ -410,6 +742,36 @@ type ServicePolicyRuleListRulesSpecRequestConstraintsModel struct {
 	MaxURLSizeNone               *ServicePolicyEmptyModel `tfsdk:"max_url_size_none"`
 }
 
+// ServicePolicyRuleListRulesSpecRequestConstraintsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecRequestConstraintsModel
+var ServicePolicyRuleListRulesSpecRequestConstraintsModelAttrTypes = map[string]attr.Type{
+	"max_cookie_count_exceeds":         types.Int64Type,
+	"max_cookie_key_size_exceeds":      types.Int64Type,
+	"max_cookie_value_size_exceeds":    types.Int64Type,
+	"max_header_count_exceeds":         types.Int64Type,
+	"max_header_key_size_exceeds":      types.Int64Type,
+	"max_header_value_size_exceeds":    types.Int64Type,
+	"max_parameter_count_exceeds":      types.Int64Type,
+	"max_parameter_name_size_exceeds":  types.Int64Type,
+	"max_parameter_value_size_exceeds": types.Int64Type,
+	"max_query_size_exceeds":           types.Int64Type,
+	"max_request_line_size_exceeds":    types.Int64Type,
+	"max_request_size_exceeds":         types.Int64Type,
+	"max_url_size_exceeds":             types.Int64Type,
+	"max_cookie_count_none":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_cookie_key_size_none":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_cookie_value_size_none":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_header_count_none":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_header_key_size_none":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_header_value_size_none":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_parameter_count_none":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_parameter_name_size_none":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_parameter_value_size_none":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_query_size_none":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_request_line_size_none":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_request_size_none":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"max_url_size_none":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ServicePolicyRuleListRulesSpecSegmentPolicyModel represents segment_policy block
 type ServicePolicyRuleListRulesSpecSegmentPolicyModel struct {
 	DstAny       *ServicePolicyEmptyModel                                     `tfsdk:"dst_any"`
@@ -419,9 +781,23 @@ type ServicePolicyRuleListRulesSpecSegmentPolicyModel struct {
 	SrcSegments  *ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel `tfsdk:"src_segments"`
 }
 
+// ServicePolicyRuleListRulesSpecSegmentPolicyModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecSegmentPolicyModel
+var ServicePolicyRuleListRulesSpecSegmentPolicyModelAttrTypes = map[string]attr.Type{
+	"dst_any":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dst_segments":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"intra_segment": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"src_any":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"src_segments":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel represents dst_segments block
 type ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel struct {
 	Segments []ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModel `tfsdk:"segments"`
+}
+
+// ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel
+var ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModelAttrTypes = map[string]attr.Type{
+	"segments": types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModelAttrTypes}},
 }
 
 // ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModel represents segments block
@@ -431,9 +807,21 @@ type ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModel struct 
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModel
+var ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsSegmentsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel represents src_segments block
 type ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel struct {
 	Segments []ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModel `tfsdk:"segments"`
+}
+
+// ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModel
+var ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModelAttrTypes = map[string]attr.Type{
+	"segments": types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModelAttrTypes}},
 }
 
 // ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModel represents segments block
@@ -443,11 +831,25 @@ type ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModel struct 
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModel
+var ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsSegmentsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
 type ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModel struct {
 	Classes        types.List `tfsdk:"classes"`
 	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
+}
+
+// ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModel
+var ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModelAttrTypes = map[string]attr.Type{
+	"classes":         types.ListType{ElemType: types.StringType},
+	"exact_values":    types.ListType{ElemType: types.StringType},
+	"excluded_values": types.ListType{ElemType: types.StringType},
 }
 
 // ServicePolicyRuleListRulesSpecUserIdentityMatcherModel represents user_identity_matcher block
@@ -456,11 +858,24 @@ type ServicePolicyRuleListRulesSpecUserIdentityMatcherModel struct {
 	RegexValues types.List `tfsdk:"regex_values"`
 }
 
+// ServicePolicyRuleListRulesSpecUserIdentityMatcherModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecUserIdentityMatcherModel
+var ServicePolicyRuleListRulesSpecUserIdentityMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyRuleListRulesSpecWAFActionModel represents waf_action block
 type ServicePolicyRuleListRulesSpecWAFActionModel struct {
 	AppFirewallDetectionControl *ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModel `tfsdk:"app_firewall_detection_control"`
 	None                        *ServicePolicyEmptyModel                                                 `tfsdk:"none"`
 	WAFSkipProcessing           *ServicePolicyEmptyModel                                                 `tfsdk:"waf_skip_processing"`
+}
+
+// ServicePolicyRuleListRulesSpecWAFActionModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecWAFActionModel
+var ServicePolicyRuleListRulesSpecWAFActionModelAttrTypes = map[string]attr.Type{
+	"app_firewall_detection_control": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"none":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"waf_skip_processing":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModel represents app_firewall_detection_control block
@@ -471,6 +886,14 @@ type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModel str
 	ExcludeViolationContexts  []ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel  `tfsdk:"exclude_violation_contexts"`
 }
 
+// ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModel
+var ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModelAttrTypes = map[string]attr.Type{
+	"exclude_attack_type_contexts": types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModelAttrTypes}},
+	"exclude_bot_name_contexts":    types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModelAttrTypes}},
+	"exclude_signature_contexts":   types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModelAttrTypes}},
+	"exclude_violation_contexts":   types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModelAttrTypes}},
+}
+
 // ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel represents exclude_attack_type_contexts block
 type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel struct {
 	Context           types.String `tfsdk:"context"`
@@ -478,9 +901,21 @@ type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAt
 	ExcludeAttackType types.String `tfsdk:"exclude_attack_type"`
 }
 
+// ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModel
+var ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeAttackTypeContextsModelAttrTypes = map[string]attr.Type{
+	"context":             types.StringType,
+	"context_name":        types.StringType,
+	"exclude_attack_type": types.StringType,
+}
+
 // ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel represents exclude_bot_name_contexts block
 type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel struct {
 	BotName types.String `tfsdk:"bot_name"`
+}
+
+// ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModel
+var ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeBotNameContextsModelAttrTypes = map[string]attr.Type{
+	"bot_name": types.StringType,
 }
 
 // ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel represents exclude_signature_contexts block
@@ -490,11 +925,25 @@ type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSi
 	SignatureID types.Int64  `tfsdk:"signature_id"`
 }
 
+// ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModel
+var ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeSignatureContextsModelAttrTypes = map[string]attr.Type{
+	"context":      types.StringType,
+	"context_name": types.StringType,
+	"signature_id": types.Int64Type,
+}
+
 // ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel represents exclude_violation_contexts block
 type ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel struct {
 	Context          types.String `tfsdk:"context"`
 	ContextName      types.String `tfsdk:"context_name"`
 	ExcludeViolation types.String `tfsdk:"exclude_violation"`
+}
+
+// ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModel
+var ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlExcludeViolationContextsModelAttrTypes = map[string]attr.Type{
+	"context":           types.StringType,
+	"context_name":      types.StringType,
+	"exclude_violation": types.StringType,
 }
 
 // ServicePolicyServerNameMatcherModel represents server_name_matcher block
@@ -503,9 +952,20 @@ type ServicePolicyServerNameMatcherModel struct {
 	RegexValues types.List `tfsdk:"regex_values"`
 }
 
+// ServicePolicyServerNameMatcherModelAttrTypes defines the attribute types for ServicePolicyServerNameMatcherModel
+var ServicePolicyServerNameMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+}
+
 // ServicePolicyServerSelectorModel represents server_selector block
 type ServicePolicyServerSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// ServicePolicyServerSelectorModelAttrTypes defines the attribute types for ServicePolicyServerSelectorModel
+var ServicePolicyServerSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 type ServicePolicyResourceModel struct {
@@ -647,6 +1107,9 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -676,6 +1139,9 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -744,6 +1210,9 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -773,6 +1242,9 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -916,6 +1388,9 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -929,11 +1404,17 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -1139,6 +1620,9 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1152,11 +1636,17 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -1478,6 +1968,9 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																},
 															},
@@ -1510,6 +2003,9 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																},
 															},
@@ -2664,11 +3160,17 @@ func (r *ServicePolicyResource) Read(ctx context.Context, req resource.ReadReque
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

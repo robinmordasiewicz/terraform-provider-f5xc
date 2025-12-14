@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -73,10 +74,40 @@ type AWSTGWSiteAWSParametersModel struct {
 	TGWCIDR             *AWSTGWSiteAWSParametersTGWCIDRModel             `tfsdk:"tgw_cidr"`
 }
 
+// AWSTGWSiteAWSParametersModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersModel
+var AWSTGWSiteAWSParametersModelAttrTypes = map[string]attr.Type{
+	"aws_region":            types.StringType,
+	"disk_size":             types.Int64Type,
+	"instance_type":         types.StringType,
+	"nodes_per_az":          types.Int64Type,
+	"ssh_key":               types.StringType,
+	"total_nodes":           types.Int64Type,
+	"vpc_id":                types.StringType,
+	"admin_password":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"aws_cred":              types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAWSCredModelAttrTypes},
+	"az_nodes":              types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAzNodesModelAttrTypes}},
+	"custom_security_group": types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersCustomSecurityGroupModelAttrTypes},
+	"disable_internet_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_internet_vip":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"existing_tgw":          types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersExistingTGWModelAttrTypes},
+	"f5xc_security_group":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"new_tgw":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"new_vpc":               types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersNewVPCModelAttrTypes},
+	"no_worker_nodes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"reserved_tgw_cidr":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tgw_cidr":              types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersTGWCIDRModelAttrTypes},
+}
+
 // AWSTGWSiteAWSParametersAdminPasswordModel represents admin_password block
 type AWSTGWSiteAWSParametersAdminPasswordModel struct {
 	BlindfoldSecretInfo *AWSTGWSiteAWSParametersAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *AWSTGWSiteAWSParametersAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// AWSTGWSiteAWSParametersAdminPasswordModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAdminPasswordModel
+var AWSTGWSiteAWSParametersAdminPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAdminPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAdminPasswordClearSecretInfoModelAttrTypes},
 }
 
 // AWSTGWSiteAWSParametersAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -86,10 +117,23 @@ type AWSTGWSiteAWSParametersAdminPasswordBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// AWSTGWSiteAWSParametersAdminPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAdminPasswordBlindfoldSecretInfoModel
+var AWSTGWSiteAWSParametersAdminPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // AWSTGWSiteAWSParametersAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type AWSTGWSiteAWSParametersAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// AWSTGWSiteAWSParametersAdminPasswordClearSecretInfoModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAdminPasswordClearSecretInfoModel
+var AWSTGWSiteAWSParametersAdminPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // AWSTGWSiteAWSParametersAWSCredModel represents aws_cred block
@@ -97,6 +141,13 @@ type AWSTGWSiteAWSParametersAWSCredModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// AWSTGWSiteAWSParametersAWSCredModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAWSCredModel
+var AWSTGWSiteAWSParametersAWSCredModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // AWSTGWSiteAWSParametersAzNodesModel represents az_nodes block
@@ -108,15 +159,35 @@ type AWSTGWSiteAWSParametersAzNodesModel struct {
 	WorkloadSubnet       *AWSTGWSiteAWSParametersAzNodesWorkloadSubnetModel `tfsdk:"workload_subnet"`
 }
 
+// AWSTGWSiteAWSParametersAzNodesModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAzNodesModel
+var AWSTGWSiteAWSParametersAzNodesModelAttrTypes = map[string]attr.Type{
+	"aws_az_name":            types.StringType,
+	"inside_subnet":          types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAzNodesInsideSubnetModelAttrTypes},
+	"outside_subnet":         types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAzNodesOutsideSubnetModelAttrTypes},
+	"reserved_inside_subnet": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"workload_subnet":        types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAzNodesWorkloadSubnetModelAttrTypes},
+}
+
 // AWSTGWSiteAWSParametersAzNodesInsideSubnetModel represents inside_subnet block
 type AWSTGWSiteAWSParametersAzNodesInsideSubnetModel struct {
 	ExistingSubnetID types.String                                                `tfsdk:"existing_subnet_id"`
 	SubnetParam      *AWSTGWSiteAWSParametersAzNodesInsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
+// AWSTGWSiteAWSParametersAzNodesInsideSubnetModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAzNodesInsideSubnetModel
+var AWSTGWSiteAWSParametersAzNodesInsideSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet_id": types.StringType,
+	"subnet_param":       types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAzNodesInsideSubnetSubnetParamModelAttrTypes},
+}
+
 // AWSTGWSiteAWSParametersAzNodesInsideSubnetSubnetParamModel represents subnet_param block
 type AWSTGWSiteAWSParametersAzNodesInsideSubnetSubnetParamModel struct {
 	Ipv4 types.String `tfsdk:"ipv4"`
+}
+
+// AWSTGWSiteAWSParametersAzNodesInsideSubnetSubnetParamModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAzNodesInsideSubnetSubnetParamModel
+var AWSTGWSiteAWSParametersAzNodesInsideSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
 }
 
 // AWSTGWSiteAWSParametersAzNodesOutsideSubnetModel represents outside_subnet block
@@ -125,9 +196,20 @@ type AWSTGWSiteAWSParametersAzNodesOutsideSubnetModel struct {
 	SubnetParam      *AWSTGWSiteAWSParametersAzNodesOutsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
+// AWSTGWSiteAWSParametersAzNodesOutsideSubnetModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAzNodesOutsideSubnetModel
+var AWSTGWSiteAWSParametersAzNodesOutsideSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet_id": types.StringType,
+	"subnet_param":       types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAzNodesOutsideSubnetSubnetParamModelAttrTypes},
+}
+
 // AWSTGWSiteAWSParametersAzNodesOutsideSubnetSubnetParamModel represents subnet_param block
 type AWSTGWSiteAWSParametersAzNodesOutsideSubnetSubnetParamModel struct {
 	Ipv4 types.String `tfsdk:"ipv4"`
+}
+
+// AWSTGWSiteAWSParametersAzNodesOutsideSubnetSubnetParamModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAzNodesOutsideSubnetSubnetParamModel
+var AWSTGWSiteAWSParametersAzNodesOutsideSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
 }
 
 // AWSTGWSiteAWSParametersAzNodesWorkloadSubnetModel represents workload_subnet block
@@ -136,15 +218,32 @@ type AWSTGWSiteAWSParametersAzNodesWorkloadSubnetModel struct {
 	SubnetParam      *AWSTGWSiteAWSParametersAzNodesWorkloadSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
+// AWSTGWSiteAWSParametersAzNodesWorkloadSubnetModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAzNodesWorkloadSubnetModel
+var AWSTGWSiteAWSParametersAzNodesWorkloadSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet_id": types.StringType,
+	"subnet_param":       types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAzNodesWorkloadSubnetSubnetParamModelAttrTypes},
+}
+
 // AWSTGWSiteAWSParametersAzNodesWorkloadSubnetSubnetParamModel represents subnet_param block
 type AWSTGWSiteAWSParametersAzNodesWorkloadSubnetSubnetParamModel struct {
 	Ipv4 types.String `tfsdk:"ipv4"`
+}
+
+// AWSTGWSiteAWSParametersAzNodesWorkloadSubnetSubnetParamModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersAzNodesWorkloadSubnetSubnetParamModel
+var AWSTGWSiteAWSParametersAzNodesWorkloadSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
 }
 
 // AWSTGWSiteAWSParametersCustomSecurityGroupModel represents custom_security_group block
 type AWSTGWSiteAWSParametersCustomSecurityGroupModel struct {
 	InsideSecurityGroupID  types.String `tfsdk:"inside_security_group_id"`
 	OutsideSecurityGroupID types.String `tfsdk:"outside_security_group_id"`
+}
+
+// AWSTGWSiteAWSParametersCustomSecurityGroupModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersCustomSecurityGroupModel
+var AWSTGWSiteAWSParametersCustomSecurityGroupModelAttrTypes = map[string]attr.Type{
+	"inside_security_group_id":  types.StringType,
+	"outside_security_group_id": types.StringType,
 }
 
 // AWSTGWSiteAWSParametersExistingTGWModel represents existing_tgw block
@@ -154,16 +253,35 @@ type AWSTGWSiteAWSParametersExistingTGWModel struct {
 	VolterraSiteAsn types.Int64  `tfsdk:"volterra_site_asn"`
 }
 
+// AWSTGWSiteAWSParametersExistingTGWModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersExistingTGWModel
+var AWSTGWSiteAWSParametersExistingTGWModelAttrTypes = map[string]attr.Type{
+	"tgw_asn":           types.Int64Type,
+	"tgw_id":            types.StringType,
+	"volterra_site_asn": types.Int64Type,
+}
+
 // AWSTGWSiteAWSParametersNewTGWModel represents new_tgw block
 type AWSTGWSiteAWSParametersNewTGWModel struct {
 	SystemGenerated *AWSTGWSiteEmptyModel                           `tfsdk:"system_generated"`
 	UserAssigned    *AWSTGWSiteAWSParametersNewTGWUserAssignedModel `tfsdk:"user_assigned"`
 }
 
+// AWSTGWSiteAWSParametersNewTGWModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersNewTGWModel
+var AWSTGWSiteAWSParametersNewTGWModelAttrTypes = map[string]attr.Type{
+	"system_generated": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"user_assigned":    types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersNewTGWUserAssignedModelAttrTypes},
+}
+
 // AWSTGWSiteAWSParametersNewTGWUserAssignedModel represents user_assigned block
 type AWSTGWSiteAWSParametersNewTGWUserAssignedModel struct {
 	TGWAsn          types.Int64 `tfsdk:"tgw_asn"`
 	VolterraSiteAsn types.Int64 `tfsdk:"volterra_site_asn"`
+}
+
+// AWSTGWSiteAWSParametersNewTGWUserAssignedModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersNewTGWUserAssignedModel
+var AWSTGWSiteAWSParametersNewTGWUserAssignedModelAttrTypes = map[string]attr.Type{
+	"tgw_asn":           types.Int64Type,
+	"volterra_site_asn": types.Int64Type,
 }
 
 // AWSTGWSiteAWSParametersNewVPCModel represents new_vpc block
@@ -173,14 +291,31 @@ type AWSTGWSiteAWSParametersNewVPCModel struct {
 	Autogenerate *AWSTGWSiteEmptyModel `tfsdk:"autogenerate"`
 }
 
+// AWSTGWSiteAWSParametersNewVPCModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersNewVPCModel
+var AWSTGWSiteAWSParametersNewVPCModelAttrTypes = map[string]attr.Type{
+	"name_tag":     types.StringType,
+	"primary_ipv4": types.StringType,
+	"autogenerate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteAWSParametersTGWCIDRModel represents tgw_cidr block
 type AWSTGWSiteAWSParametersTGWCIDRModel struct {
 	Ipv4 types.String `tfsdk:"ipv4"`
 }
 
+// AWSTGWSiteAWSParametersTGWCIDRModelAttrTypes defines the attribute types for AWSTGWSiteAWSParametersTGWCIDRModel
+var AWSTGWSiteAWSParametersTGWCIDRModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
+}
+
 // AWSTGWSiteBlockedServicesModel represents blocked_services block
 type AWSTGWSiteBlockedServicesModel struct {
 	BlockedSevice []AWSTGWSiteBlockedServicesBlockedSeviceModel `tfsdk:"blocked_sevice"`
+}
+
+// AWSTGWSiteBlockedServicesModelAttrTypes defines the attribute types for AWSTGWSiteBlockedServicesModel
+var AWSTGWSiteBlockedServicesModelAttrTypes = map[string]attr.Type{
+	"blocked_sevice": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteBlockedServicesBlockedSeviceModelAttrTypes}},
 }
 
 // AWSTGWSiteBlockedServicesBlockedSeviceModel represents blocked_sevice block
@@ -191,16 +326,36 @@ type AWSTGWSiteBlockedServicesBlockedSeviceModel struct {
 	WebUserInterface *AWSTGWSiteEmptyModel `tfsdk:"web_user_interface"`
 }
 
+// AWSTGWSiteBlockedServicesBlockedSeviceModelAttrTypes defines the attribute types for AWSTGWSiteBlockedServicesBlockedSeviceModel
+var AWSTGWSiteBlockedServicesBlockedSeviceModelAttrTypes = map[string]attr.Type{
+	"network_type":       types.StringType,
+	"dns":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ssh":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"web_user_interface": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteCoordinatesModel represents coordinates block
 type AWSTGWSiteCoordinatesModel struct {
 	Latitude  types.Int64 `tfsdk:"latitude"`
 	Longitude types.Int64 `tfsdk:"longitude"`
 }
 
+// AWSTGWSiteCoordinatesModelAttrTypes defines the attribute types for AWSTGWSiteCoordinatesModel
+var AWSTGWSiteCoordinatesModelAttrTypes = map[string]attr.Type{
+	"latitude":  types.Int64Type,
+	"longitude": types.Int64Type,
+}
+
 // AWSTGWSiteCustomDNSModel represents custom_dns block
 type AWSTGWSiteCustomDNSModel struct {
 	InsideNameserver  types.String `tfsdk:"inside_nameserver"`
 	OutsideNameserver types.String `tfsdk:"outside_nameserver"`
+}
+
+// AWSTGWSiteCustomDNSModelAttrTypes defines the attribute types for AWSTGWSiteCustomDNSModel
+var AWSTGWSiteCustomDNSModelAttrTypes = map[string]attr.Type{
+	"inside_nameserver":  types.StringType,
+	"outside_nameserver": types.StringType,
 }
 
 // AWSTGWSiteDirectConnectEnabledModel represents direct_connect_enabled block
@@ -211,6 +366,14 @@ type AWSTGWSiteDirectConnectEnabledModel struct {
 	StandardVifs *AWSTGWSiteEmptyModel                          `tfsdk:"standard_vifs"`
 }
 
+// AWSTGWSiteDirectConnectEnabledModelAttrTypes defines the attribute types for AWSTGWSiteDirectConnectEnabledModel
+var AWSTGWSiteDirectConnectEnabledModelAttrTypes = map[string]attr.Type{
+	"custom_asn":    types.Int64Type,
+	"auto_asn":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"hosted_vifs":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"standard_vifs": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteDirectConnectEnabledHostedVifsModel represents hosted_vifs block
 type AWSTGWSiteDirectConnectEnabledHostedVifsModel struct {
 	SiteRegistrationOverDirectConnect *AWSTGWSiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModel `tfsdk:"site_registration_over_direct_connect"`
@@ -218,9 +381,21 @@ type AWSTGWSiteDirectConnectEnabledHostedVifsModel struct {
 	VifList                           []AWSTGWSiteDirectConnectEnabledHostedVifsVifListModel                          `tfsdk:"vif_list"`
 }
 
+// AWSTGWSiteDirectConnectEnabledHostedVifsModelAttrTypes defines the attribute types for AWSTGWSiteDirectConnectEnabledHostedVifsModel
+var AWSTGWSiteDirectConnectEnabledHostedVifsModelAttrTypes = map[string]attr.Type{
+	"site_registration_over_direct_connect": types.ObjectType{AttrTypes: AWSTGWSiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModelAttrTypes},
+	"site_registration_over_internet":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vif_list":                              types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteDirectConnectEnabledHostedVifsVifListModelAttrTypes}},
+}
+
 // AWSTGWSiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModel represents site_registration_over_direct_connect block
 type AWSTGWSiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModel struct {
 	CloudlinkNetworkName types.String `tfsdk:"cloudlink_network_name"`
+}
+
+// AWSTGWSiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModelAttrTypes defines the attribute types for AWSTGWSiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModel
+var AWSTGWSiteDirectConnectEnabledHostedVifsSiteRegistrationOverDirectConnectModelAttrTypes = map[string]attr.Type{
+	"cloudlink_network_name": types.StringType,
 }
 
 // AWSTGWSiteDirectConnectEnabledHostedVifsVifListModel represents vif_list block
@@ -230,10 +405,23 @@ type AWSTGWSiteDirectConnectEnabledHostedVifsVifListModel struct {
 	SameAsSiteRegion *AWSTGWSiteEmptyModel `tfsdk:"same_as_site_region"`
 }
 
+// AWSTGWSiteDirectConnectEnabledHostedVifsVifListModelAttrTypes defines the attribute types for AWSTGWSiteDirectConnectEnabledHostedVifsVifListModel
+var AWSTGWSiteDirectConnectEnabledHostedVifsVifListModelAttrTypes = map[string]attr.Type{
+	"other_region":        types.StringType,
+	"vif_id":              types.StringType,
+	"same_as_site_region": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
 type AWSTGWSiteKubernetesUpgradeDrainModel struct {
 	DisableUpgradeDrain *AWSTGWSiteEmptyModel                                    `tfsdk:"disable_upgrade_drain"`
 	EnableUpgradeDrain  *AWSTGWSiteKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+}
+
+// AWSTGWSiteKubernetesUpgradeDrainModelAttrTypes defines the attribute types for AWSTGWSiteKubernetesUpgradeDrainModel
+var AWSTGWSiteKubernetesUpgradeDrainModelAttrTypes = map[string]attr.Type{
+	"disable_upgrade_drain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_upgrade_drain":  types.ObjectType{AttrTypes: AWSTGWSiteKubernetesUpgradeDrainEnableUpgradeDrainModelAttrTypes},
 }
 
 // AWSTGWSiteKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
@@ -244,11 +432,26 @@ type AWSTGWSiteKubernetesUpgradeDrainEnableUpgradeDrainModel struct {
 	EnableVegaUpgradeMode        *AWSTGWSiteEmptyModel `tfsdk:"enable_vega_upgrade_mode"`
 }
 
+// AWSTGWSiteKubernetesUpgradeDrainEnableUpgradeDrainModelAttrTypes defines the attribute types for AWSTGWSiteKubernetesUpgradeDrainEnableUpgradeDrainModel
+var AWSTGWSiteKubernetesUpgradeDrainEnableUpgradeDrainModelAttrTypes = map[string]attr.Type{
+	"drain_max_unavailable_node_count": types.Int64Type,
+	"drain_node_timeout":               types.Int64Type,
+	"disable_vega_upgrade_mode":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_vega_upgrade_mode":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteLogReceiverModel represents log_receiver block
 type AWSTGWSiteLogReceiverModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// AWSTGWSiteLogReceiverModelAttrTypes defines the attribute types for AWSTGWSiteLogReceiverModel
+var AWSTGWSiteLogReceiverModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // AWSTGWSiteOfflineSurvivabilityModeModel represents offline_survivability_mode block
@@ -257,10 +460,22 @@ type AWSTGWSiteOfflineSurvivabilityModeModel struct {
 	NoOfflineSurvivabilityMode     *AWSTGWSiteEmptyModel `tfsdk:"no_offline_survivability_mode"`
 }
 
+// AWSTGWSiteOfflineSurvivabilityModeModelAttrTypes defines the attribute types for AWSTGWSiteOfflineSurvivabilityModeModel
+var AWSTGWSiteOfflineSurvivabilityModeModelAttrTypes = map[string]attr.Type{
+	"enable_offline_survivability_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_offline_survivability_mode":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteOSModel represents os block
 type AWSTGWSiteOSModel struct {
 	OperatingSystemVersion types.String          `tfsdk:"operating_system_version"`
 	DefaultOSVersion       *AWSTGWSiteEmptyModel `tfsdk:"default_os_version"`
+}
+
+// AWSTGWSiteOSModelAttrTypes defines the attribute types for AWSTGWSiteOSModel
+var AWSTGWSiteOSModelAttrTypes = map[string]attr.Type{
+	"operating_system_version": types.StringType,
+	"default_os_version":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // AWSTGWSitePerformanceEnhancementModeModel represents performance_enhancement_mode block
@@ -269,10 +484,22 @@ type AWSTGWSitePerformanceEnhancementModeModel struct {
 	PerfModeL7Enhanced *AWSTGWSiteEmptyModel                                        `tfsdk:"perf_mode_l7_enhanced"`
 }
 
+// AWSTGWSitePerformanceEnhancementModeModelAttrTypes defines the attribute types for AWSTGWSitePerformanceEnhancementModeModel
+var AWSTGWSitePerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSitePerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
 type AWSTGWSitePerformanceEnhancementModePerfModeL3EnhancedModel struct {
 	Jumbo   *AWSTGWSiteEmptyModel `tfsdk:"jumbo"`
 	NoJumbo *AWSTGWSiteEmptyModel `tfsdk:"no_jumbo"`
+}
+
+// AWSTGWSitePerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes defines the attribute types for AWSTGWSitePerformanceEnhancementModePerfModeL3EnhancedModel
+var AWSTGWSitePerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes = map[string]attr.Type{
+	"jumbo":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_jumbo": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // AWSTGWSitePrivateConnectivityModel represents private_connectivity block
@@ -282,6 +509,13 @@ type AWSTGWSitePrivateConnectivityModel struct {
 	Outside   *AWSTGWSiteEmptyModel                        `tfsdk:"outside"`
 }
 
+// AWSTGWSitePrivateConnectivityModelAttrTypes defines the attribute types for AWSTGWSitePrivateConnectivityModel
+var AWSTGWSitePrivateConnectivityModelAttrTypes = map[string]attr.Type{
+	"cloud_link": types.ObjectType{AttrTypes: AWSTGWSitePrivateConnectivityCloudLinkModelAttrTypes},
+	"inside":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSitePrivateConnectivityCloudLinkModel represents cloud_link block
 type AWSTGWSitePrivateConnectivityCloudLinkModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -289,10 +523,23 @@ type AWSTGWSitePrivateConnectivityCloudLinkModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AWSTGWSitePrivateConnectivityCloudLinkModelAttrTypes defines the attribute types for AWSTGWSitePrivateConnectivityCloudLinkModel
+var AWSTGWSitePrivateConnectivityCloudLinkModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AWSTGWSiteSwModel represents sw block
 type AWSTGWSiteSwModel struct {
 	VolterraSoftwareVersion types.String          `tfsdk:"volterra_software_version"`
 	DefaultSwVersion        *AWSTGWSiteEmptyModel `tfsdk:"default_sw_version"`
+}
+
+// AWSTGWSiteSwModelAttrTypes defines the attribute types for AWSTGWSiteSwModel
+var AWSTGWSiteSwModelAttrTypes = map[string]attr.Type{
+	"volterra_software_version": types.StringType,
+	"default_sw_version":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // AWSTGWSiteTGWSecurityModel represents tgw_security block
@@ -308,9 +555,27 @@ type AWSTGWSiteTGWSecurityModel struct {
 	NoNetworkPolicy                *AWSTGWSiteEmptyModel                                     `tfsdk:"no_network_policy"`
 }
 
+// AWSTGWSiteTGWSecurityModelAttrTypes defines the attribute types for AWSTGWSiteTGWSecurityModel
+var AWSTGWSiteTGWSecurityModelAttrTypes = map[string]attr.Type{
+	"active_east_west_service_policies":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"active_enhanced_firewall_policies":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"active_forward_proxy_policies":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"active_network_policies":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"east_west_service_policy_allow_all": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"forward_proxy_allow_all":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_east_west_policy":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_forward_proxy":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_network_policy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesModel represents active_east_west_service_policies block
 type AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesModel struct {
 	ServicePolicies []AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModel `tfsdk:"service_policies"`
+}
+
+// AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesModelAttrTypes defines the attribute types for AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesModel
+var AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesModelAttrTypes = map[string]attr.Type{
+	"service_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModelAttrTypes}},
 }
 
 // AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModel represents service_policies block
@@ -320,9 +585,21 @@ type AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModel stru
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModelAttrTypes defines the attribute types for AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModel
+var AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesServicePoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
 type AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesModel struct {
 	EnhancedFirewallPolicies []AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
+}
+
+// AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesModel
+var AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
+	"enhanced_firewall_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes}},
 }
 
 // AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
@@ -332,9 +609,21 @@ type AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPolicies
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
+var AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
 type AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesModel struct {
 	ForwardProxyPolicies []AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesModelAttrTypes defines the attribute types for AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesModel
+var AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
+	"forward_proxy_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes}},
 }
 
 // AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
@@ -344,9 +633,21 @@ type AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModel st
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes defines the attribute types for AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModel
+var AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AWSTGWSiteTGWSecurityActiveNetworkPoliciesModel represents active_network_policies block
 type AWSTGWSiteTGWSecurityActiveNetworkPoliciesModel struct {
 	NetworkPolicies []AWSTGWSiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
+}
+
+// AWSTGWSiteTGWSecurityActiveNetworkPoliciesModelAttrTypes defines the attribute types for AWSTGWSiteTGWSecurityActiveNetworkPoliciesModel
+var AWSTGWSiteTGWSecurityActiveNetworkPoliciesModelAttrTypes = map[string]attr.Type{
+	"network_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModelAttrTypes}},
 }
 
 // AWSTGWSiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
@@ -354,6 +655,13 @@ type AWSTGWSiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// AWSTGWSiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModelAttrTypes defines the attribute types for AWSTGWSiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModel
+var AWSTGWSiteTGWSecurityActiveNetworkPoliciesNetworkPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // AWSTGWSiteVnConfigModel represents vn_config block
@@ -373,6 +681,23 @@ type AWSTGWSiteVnConfigModel struct {
 	SmConnectionPvtIP       *AWSTGWSiteEmptyModel                           `tfsdk:"sm_connection_pvt_ip"`
 }
 
+// AWSTGWSiteVnConfigModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigModel
+var AWSTGWSiteVnConfigModelAttrTypes = map[string]attr.Type{
+	"allowed_vip_port":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"allowed_vip_port_sli":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dc_cluster_group_inside_vn":  types.ObjectType{AttrTypes: AWSTGWSiteVnConfigDcClusterGroupInsideVnModelAttrTypes},
+	"dc_cluster_group_outside_vn": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigDcClusterGroupOutsideVnModelAttrTypes},
+	"global_network_list":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inside_static_routes":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_dc_cluster_group":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_global_network":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_inside_static_routes":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_outside_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sm_connection_public_ip":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sm_connection_pvt_ip":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteVnConfigAllowedVIPPortModel represents allowed_vip_port block
 type AWSTGWSiteVnConfigAllowedVIPPortModel struct {
 	CustomPorts           *AWSTGWSiteVnConfigAllowedVIPPortCustomPortsModel `tfsdk:"custom_ports"`
@@ -382,9 +707,23 @@ type AWSTGWSiteVnConfigAllowedVIPPortModel struct {
 	UseHTTPSPort          *AWSTGWSiteEmptyModel                             `tfsdk:"use_https_port"`
 }
 
+// AWSTGWSiteVnConfigAllowedVIPPortModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigAllowedVIPPortModel
+var AWSTGWSiteVnConfigAllowedVIPPortModelAttrTypes = map[string]attr.Type{
+	"custom_ports":             types.ObjectType{AttrTypes: AWSTGWSiteVnConfigAllowedVIPPortCustomPortsModelAttrTypes},
+	"disable_allowed_vip_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_http_https_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_http_port":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_https_port":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteVnConfigAllowedVIPPortCustomPortsModel represents custom_ports block
 type AWSTGWSiteVnConfigAllowedVIPPortCustomPortsModel struct {
 	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// AWSTGWSiteVnConfigAllowedVIPPortCustomPortsModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigAllowedVIPPortCustomPortsModel
+var AWSTGWSiteVnConfigAllowedVIPPortCustomPortsModelAttrTypes = map[string]attr.Type{
+	"port_ranges": types.StringType,
 }
 
 // AWSTGWSiteVnConfigAllowedVIPPortSLIModel represents allowed_vip_port_sli block
@@ -396,9 +735,23 @@ type AWSTGWSiteVnConfigAllowedVIPPortSLIModel struct {
 	UseHTTPSPort          *AWSTGWSiteEmptyModel                                `tfsdk:"use_https_port"`
 }
 
+// AWSTGWSiteVnConfigAllowedVIPPortSLIModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigAllowedVIPPortSLIModel
+var AWSTGWSiteVnConfigAllowedVIPPortSLIModelAttrTypes = map[string]attr.Type{
+	"custom_ports":             types.ObjectType{AttrTypes: AWSTGWSiteVnConfigAllowedVIPPortSLICustomPortsModelAttrTypes},
+	"disable_allowed_vip_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_http_https_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_http_port":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_https_port":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteVnConfigAllowedVIPPortSLICustomPortsModel represents custom_ports block
 type AWSTGWSiteVnConfigAllowedVIPPortSLICustomPortsModel struct {
 	PortRanges types.String `tfsdk:"port_ranges"`
+}
+
+// AWSTGWSiteVnConfigAllowedVIPPortSLICustomPortsModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigAllowedVIPPortSLICustomPortsModel
+var AWSTGWSiteVnConfigAllowedVIPPortSLICustomPortsModelAttrTypes = map[string]attr.Type{
+	"port_ranges": types.StringType,
 }
 
 // AWSTGWSiteVnConfigDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
@@ -408,6 +761,13 @@ type AWSTGWSiteVnConfigDcClusterGroupInsideVnModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AWSTGWSiteVnConfigDcClusterGroupInsideVnModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigDcClusterGroupInsideVnModel
+var AWSTGWSiteVnConfigDcClusterGroupInsideVnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AWSTGWSiteVnConfigDcClusterGroupOutsideVnModel represents dc_cluster_group_outside_vn block
 type AWSTGWSiteVnConfigDcClusterGroupOutsideVnModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -415,9 +775,21 @@ type AWSTGWSiteVnConfigDcClusterGroupOutsideVnModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AWSTGWSiteVnConfigDcClusterGroupOutsideVnModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigDcClusterGroupOutsideVnModel
+var AWSTGWSiteVnConfigDcClusterGroupOutsideVnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AWSTGWSiteVnConfigGlobalNetworkListModel represents global_network_list block
 type AWSTGWSiteVnConfigGlobalNetworkListModel struct {
 	GlobalNetworkConnections []AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
+}
+
+// AWSTGWSiteVnConfigGlobalNetworkListModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigGlobalNetworkListModel
+var AWSTGWSiteVnConfigGlobalNetworkListModelAttrTypes = map[string]attr.Type{
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
@@ -426,9 +798,20 @@ type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel struct {
 	SloToGlobalDR *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel `tfsdk:"slo_to_global_dr"`
 }
 
+// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel
+var AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
+	"sli_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
 type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel struct {
 	GlobalVn *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel
+var AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes = map[string]attr.Type{
+	"global_vn": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes},
 }
 
 // AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel represents global_vn block
@@ -438,9 +821,21 @@ type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlo
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel
+var AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel represents slo_to_global_dr block
 type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel struct {
 	GlobalVn *AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
+}
+
+// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel
+var AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes = map[string]attr.Type{
+	"global_vn": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes},
 }
 
 // AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel represents global_vn block
@@ -450,15 +845,33 @@ type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlo
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel
+var AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AWSTGWSiteVnConfigInsideStaticRoutesModel represents inside_static_routes block
 type AWSTGWSiteVnConfigInsideStaticRoutesModel struct {
 	StaticRouteList []AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// AWSTGWSiteVnConfigInsideStaticRoutesModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesModel
+var AWSTGWSiteVnConfigInsideStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"static_route_list": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListModelAttrTypes}},
 }
 
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListModel represents static_route_list block
 type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListModel struct {
 	SimpleStaticRoute types.String                                                               `tfsdk:"simple_static_route"`
 	CustomStaticRoute *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListModel
+var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListModelAttrTypes = map[string]attr.Type{
+	"simple_static_route": types.StringType,
+	"custom_static_route": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes},
 }
 
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
@@ -469,11 +882,26 @@ type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModel s
 	Subnets []AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModel
+var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes = map[string]attr.Type{
+	"attrs":   types.ListType{ElemType: types.StringType},
+	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+}
+
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
 	Type           types.String                                                                                    `tfsdk:"type"`
 	Interface      []AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel
+var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
+	"type":            types.StringType,
+	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
+	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
@@ -485,10 +913,25 @@ type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthop
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel
+var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
 type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
 	Ipv4 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
 	Ipv6 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
+}
+
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel
+var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes},
 }
 
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
@@ -496,9 +939,19 @@ type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthop
 	Addr types.String `tfsdk:"addr"`
 }
 
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model
+var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
 type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
+}
+
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model
+var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
 }
 
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
@@ -507,10 +960,22 @@ type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnets
 	Ipv6 *AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
 }
 
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel
+var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes},
+}
+
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
 type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model
+var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes = map[string]attr.Type{
+	"plen":   types.Int64Type,
+	"prefix": types.StringType,
 }
 
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
@@ -519,15 +984,32 @@ type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnets
 	Prefix types.String `tfsdk:"prefix"`
 }
 
+// AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model
+var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes = map[string]attr.Type{
+	"plen":   types.Int64Type,
+	"prefix": types.StringType,
+}
+
 // AWSTGWSiteVnConfigOutsideStaticRoutesModel represents outside_static_routes block
 type AWSTGWSiteVnConfigOutsideStaticRoutesModel struct {
 	StaticRouteList []AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
+}
+
+// AWSTGWSiteVnConfigOutsideStaticRoutesModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesModel
+var AWSTGWSiteVnConfigOutsideStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"static_route_list": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListModelAttrTypes}},
 }
 
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListModel represents static_route_list block
 type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListModel struct {
 	SimpleStaticRoute types.String                                                                `tfsdk:"simple_static_route"`
 	CustomStaticRoute *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
+}
+
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListModel
+var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListModelAttrTypes = map[string]attr.Type{
+	"simple_static_route": types.StringType,
+	"custom_static_route": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes},
 }
 
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
@@ -538,11 +1020,26 @@ type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModel 
 	Subnets []AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
 }
 
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModel
+var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes = map[string]attr.Type{
+	"attrs":   types.ListType{ElemType: types.StringType},
+	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+}
+
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
 type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
 	Type           types.String                                                                                     `tfsdk:"type"`
 	Interface      []AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
 	NexthopAddress *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
+}
+
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel
+var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
+	"type":            types.StringType,
+	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
+	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
@@ -554,10 +1051,25 @@ type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNextho
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel
+var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
 type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
 	Ipv4 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
 	Ipv6 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
+}
+
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel
+var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes},
 }
 
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
@@ -565,9 +1077,19 @@ type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNextho
 	Addr types.String `tfsdk:"addr"`
 }
 
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model
+var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
+}
+
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
 type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
 	Addr types.String `tfsdk:"addr"`
+}
+
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model
+var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes = map[string]attr.Type{
+	"addr": types.StringType,
 }
 
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
@@ -576,10 +1098,22 @@ type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnet
 	Ipv6 *AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
 }
 
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel
+var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes},
+	"ipv6": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes},
+}
+
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
 type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
 	Plen   types.Int64  `tfsdk:"plen"`
 	Prefix types.String `tfsdk:"prefix"`
+}
+
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model
+var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes = map[string]attr.Type{
+	"plen":   types.Int64Type,
+	"prefix": types.StringType,
 }
 
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
@@ -588,15 +1122,32 @@ type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnet
 	Prefix types.String `tfsdk:"prefix"`
 }
 
+// AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model
+var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes = map[string]attr.Type{
+	"plen":   types.Int64Type,
+	"prefix": types.StringType,
+}
+
 // AWSTGWSiteVPCAttachmentsModel represents vpc_attachments block
 type AWSTGWSiteVPCAttachmentsModel struct {
 	VPCList []AWSTGWSiteVPCAttachmentsVPCListModel `tfsdk:"vpc_list"`
+}
+
+// AWSTGWSiteVPCAttachmentsModelAttrTypes defines the attribute types for AWSTGWSiteVPCAttachmentsModel
+var AWSTGWSiteVPCAttachmentsModelAttrTypes = map[string]attr.Type{
+	"vpc_list": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteVPCAttachmentsVPCListModelAttrTypes}},
 }
 
 // AWSTGWSiteVPCAttachmentsVPCListModel represents vpc_list block
 type AWSTGWSiteVPCAttachmentsVPCListModel struct {
 	VPCID  types.String          `tfsdk:"vpc_id"`
 	Labels *AWSTGWSiteEmptyModel `tfsdk:"labels"`
+}
+
+// AWSTGWSiteVPCAttachmentsVPCListModelAttrTypes defines the attribute types for AWSTGWSiteVPCAttachmentsVPCListModel
+var AWSTGWSiteVPCAttachmentsVPCListModelAttrTypes = map[string]attr.Type{
+	"vpc_id": types.StringType,
+	"labels": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 type AWSTGWSiteResourceModel struct {
@@ -776,6 +1327,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -1114,6 +1668,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -1186,6 +1743,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -1238,6 +1798,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1264,6 +1827,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1290,6 +1856,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1316,6 +1885,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1412,6 +1984,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -1430,6 +2005,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -1461,6 +2039,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -1485,6 +2066,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -1539,6 +2123,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1552,11 +2139,17 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																},
 															},
@@ -1684,6 +2277,9 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1697,11 +2293,17 @@ func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequ
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																},
 															},
@@ -3046,11 +3648,17 @@ func (r *AWSTGWSiteResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -61,6 +62,18 @@ type RateLimiterLimitsModel struct {
 	TokenBucket      *RateLimiterEmptyModel             `tfsdk:"token_bucket"`
 }
 
+// RateLimiterLimitsModelAttrTypes defines the attribute types for RateLimiterLimitsModel
+var RateLimiterLimitsModelAttrTypes = map[string]attr.Type{
+	"burst_multiplier":  types.Int64Type,
+	"period_multiplier": types.Int64Type,
+	"total_number":      types.Int64Type,
+	"unit":              types.StringType,
+	"action_block":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"leaky_bucket":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"token_bucket":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // RateLimiterLimitsActionBlockModel represents action_block block
 type RateLimiterLimitsActionBlockModel struct {
 	Hours   *RateLimiterLimitsActionBlockHoursModel   `tfsdk:"hours"`
@@ -68,9 +81,21 @@ type RateLimiterLimitsActionBlockModel struct {
 	Seconds *RateLimiterLimitsActionBlockSecondsModel `tfsdk:"seconds"`
 }
 
+// RateLimiterLimitsActionBlockModelAttrTypes defines the attribute types for RateLimiterLimitsActionBlockModel
+var RateLimiterLimitsActionBlockModelAttrTypes = map[string]attr.Type{
+	"hours":   types.ObjectType{AttrTypes: RateLimiterLimitsActionBlockHoursModelAttrTypes},
+	"minutes": types.ObjectType{AttrTypes: RateLimiterLimitsActionBlockMinutesModelAttrTypes},
+	"seconds": types.ObjectType{AttrTypes: RateLimiterLimitsActionBlockSecondsModelAttrTypes},
+}
+
 // RateLimiterLimitsActionBlockHoursModel represents hours block
 type RateLimiterLimitsActionBlockHoursModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// RateLimiterLimitsActionBlockHoursModelAttrTypes defines the attribute types for RateLimiterLimitsActionBlockHoursModel
+var RateLimiterLimitsActionBlockHoursModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
 }
 
 // RateLimiterLimitsActionBlockMinutesModel represents minutes block
@@ -78,9 +103,19 @@ type RateLimiterLimitsActionBlockMinutesModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
 }
 
+// RateLimiterLimitsActionBlockMinutesModelAttrTypes defines the attribute types for RateLimiterLimitsActionBlockMinutesModel
+var RateLimiterLimitsActionBlockMinutesModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
+}
+
 // RateLimiterLimitsActionBlockSecondsModel represents seconds block
 type RateLimiterLimitsActionBlockSecondsModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// RateLimiterLimitsActionBlockSecondsModelAttrTypes defines the attribute types for RateLimiterLimitsActionBlockSecondsModel
+var RateLimiterLimitsActionBlockSecondsModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
 }
 
 // RateLimiterUserIdentificationModel represents user_identification block
@@ -92,17 +127,26 @@ type RateLimiterUserIdentificationModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// RateLimiterUserIdentificationModelAttrTypes defines the attribute types for RateLimiterUserIdentificationModel
+var RateLimiterUserIdentificationModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 type RateLimiterResourceModel struct {
-	Name               types.String                         `tfsdk:"name"`
-	Namespace          types.String                         `tfsdk:"namespace"`
-	Annotations        types.Map                            `tfsdk:"annotations"`
-	Description        types.String                         `tfsdk:"description"`
-	Disable            types.Bool                           `tfsdk:"disable"`
-	Labels             types.Map                            `tfsdk:"labels"`
-	ID                 types.String                         `tfsdk:"id"`
-	Timeouts           timeouts.Value                       `tfsdk:"timeouts"`
-	Limits             []RateLimiterLimitsModel             `tfsdk:"limits"`
-	UserIdentification []RateLimiterUserIdentificationModel `tfsdk:"user_identification"`
+	Name               types.String   `tfsdk:"name"`
+	Namespace          types.String   `tfsdk:"namespace"`
+	Annotations        types.Map      `tfsdk:"annotations"`
+	Description        types.String   `tfsdk:"description"`
+	Disable            types.Bool     `tfsdk:"disable"`
+	Labels             types.Map      `tfsdk:"labels"`
+	ID                 types.String   `tfsdk:"id"`
+	Timeouts           timeouts.Value `tfsdk:"timeouts"`
+	Limits             types.List     `tfsdk:"limits"`
+	UserIdentification types.List     `tfsdk:"user_identification"`
 }
 
 func (r *RateLimiterResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -242,6 +286,9 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -255,11 +302,17 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -412,82 +465,92 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Limits) > 0 {
-		var limitsList []map[string]interface{}
-		for _, item := range data.Limits {
-			itemMap := make(map[string]interface{})
-			if item.ActionBlock != nil {
-				action_blockNestedMap := make(map[string]interface{})
-				if item.ActionBlock.Hours != nil {
-					hoursDeepMap := make(map[string]interface{})
-					if !item.ActionBlock.Hours.Duration.IsNull() && !item.ActionBlock.Hours.Duration.IsUnknown() {
-						hoursDeepMap["duration"] = item.ActionBlock.Hours.Duration.ValueInt64()
+	if !data.Limits.IsNull() && !data.Limits.IsUnknown() {
+		var limitsItems []RateLimiterLimitsModel
+		diags := data.Limits.ElementsAs(ctx, &limitsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(limitsItems) > 0 {
+			var limitsList []map[string]interface{}
+			for _, item := range limitsItems {
+				itemMap := make(map[string]interface{})
+				if item.ActionBlock != nil {
+					action_blockNestedMap := make(map[string]interface{})
+					if item.ActionBlock.Hours != nil {
+						hoursDeepMap := make(map[string]interface{})
+						if !item.ActionBlock.Hours.Duration.IsNull() && !item.ActionBlock.Hours.Duration.IsUnknown() {
+							hoursDeepMap["duration"] = item.ActionBlock.Hours.Duration.ValueInt64()
+						}
+						action_blockNestedMap["hours"] = hoursDeepMap
 					}
-					action_blockNestedMap["hours"] = hoursDeepMap
-				}
-				if item.ActionBlock.Minutes != nil {
-					minutesDeepMap := make(map[string]interface{})
-					if !item.ActionBlock.Minutes.Duration.IsNull() && !item.ActionBlock.Minutes.Duration.IsUnknown() {
-						minutesDeepMap["duration"] = item.ActionBlock.Minutes.Duration.ValueInt64()
+					if item.ActionBlock.Minutes != nil {
+						minutesDeepMap := make(map[string]interface{})
+						if !item.ActionBlock.Minutes.Duration.IsNull() && !item.ActionBlock.Minutes.Duration.IsUnknown() {
+							minutesDeepMap["duration"] = item.ActionBlock.Minutes.Duration.ValueInt64()
+						}
+						action_blockNestedMap["minutes"] = minutesDeepMap
 					}
-					action_blockNestedMap["minutes"] = minutesDeepMap
-				}
-				if item.ActionBlock.Seconds != nil {
-					secondsDeepMap := make(map[string]interface{})
-					if !item.ActionBlock.Seconds.Duration.IsNull() && !item.ActionBlock.Seconds.Duration.IsUnknown() {
-						secondsDeepMap["duration"] = item.ActionBlock.Seconds.Duration.ValueInt64()
+					if item.ActionBlock.Seconds != nil {
+						secondsDeepMap := make(map[string]interface{})
+						if !item.ActionBlock.Seconds.Duration.IsNull() && !item.ActionBlock.Seconds.Duration.IsUnknown() {
+							secondsDeepMap["duration"] = item.ActionBlock.Seconds.Duration.ValueInt64()
+						}
+						action_blockNestedMap["seconds"] = secondsDeepMap
 					}
-					action_blockNestedMap["seconds"] = secondsDeepMap
+					itemMap["action_block"] = action_blockNestedMap
 				}
-				itemMap["action_block"] = action_blockNestedMap
+				if !item.BurstMultiplier.IsNull() && !item.BurstMultiplier.IsUnknown() {
+					itemMap["burst_multiplier"] = item.BurstMultiplier.ValueInt64()
+				}
+				if item.Disabled != nil {
+					itemMap["disabled"] = map[string]interface{}{}
+				}
+				if item.LeakyBucket != nil {
+					itemMap["leaky_bucket"] = map[string]interface{}{}
+				}
+				if !item.PeriodMultiplier.IsNull() && !item.PeriodMultiplier.IsUnknown() {
+					itemMap["period_multiplier"] = item.PeriodMultiplier.ValueInt64()
+				}
+				if item.TokenBucket != nil {
+					itemMap["token_bucket"] = map[string]interface{}{}
+				}
+				if !item.TotalNumber.IsNull() && !item.TotalNumber.IsUnknown() {
+					itemMap["total_number"] = item.TotalNumber.ValueInt64()
+				}
+				if !item.Unit.IsNull() && !item.Unit.IsUnknown() {
+					itemMap["unit"] = item.Unit.ValueString()
+				}
+				limitsList = append(limitsList, itemMap)
 			}
-			if !item.BurstMultiplier.IsNull() && !item.BurstMultiplier.IsUnknown() {
-				itemMap["burst_multiplier"] = item.BurstMultiplier.ValueInt64()
-			}
-			if item.Disabled != nil {
-				itemMap["disabled"] = map[string]interface{}{}
-			}
-			if item.LeakyBucket != nil {
-				itemMap["leaky_bucket"] = map[string]interface{}{}
-			}
-			if !item.PeriodMultiplier.IsNull() && !item.PeriodMultiplier.IsUnknown() {
-				itemMap["period_multiplier"] = item.PeriodMultiplier.ValueInt64()
-			}
-			if item.TokenBucket != nil {
-				itemMap["token_bucket"] = map[string]interface{}{}
-			}
-			if !item.TotalNumber.IsNull() && !item.TotalNumber.IsUnknown() {
-				itemMap["total_number"] = item.TotalNumber.ValueInt64()
-			}
-			if !item.Unit.IsNull() && !item.Unit.IsUnknown() {
-				itemMap["unit"] = item.Unit.ValueString()
-			}
-			limitsList = append(limitsList, itemMap)
+			createReq.Spec["limits"] = limitsList
 		}
-		createReq.Spec["limits"] = limitsList
 	}
-	if len(data.UserIdentification) > 0 {
-		var user_identificationList []map[string]interface{}
-		for _, item := range data.UserIdentification {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.UserIdentification.IsNull() && !data.UserIdentification.IsUnknown() {
+		var user_identificationItems []RateLimiterUserIdentificationModel
+		diags := data.UserIdentification.ElementsAs(ctx, &user_identificationItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(user_identificationItems) > 0 {
+			var user_identificationList []map[string]interface{}
+			for _, item := range user_identificationItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				user_identificationList = append(user_identificationList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			user_identificationList = append(user_identificationList, itemMap)
+			createReq.Spec["user_identification"] = user_identificationList
 		}
-		createReq.Spec["user_identification"] = user_identificationList
 	}
 
 	apiResource, err := r.client.CreateRateLimiter(ctx, createReq)
@@ -504,6 +567,10 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["limits"].([]interface{}); ok && len(listData) > 0 {
 		var limitsList []RateLimiterLimitsModel
+		var existingLimitsItems []RateLimiterLimitsModel
+		if !data.Limits.IsNull() && !data.Limits.IsUnknown() {
+			data.Limits.ElementsAs(ctx, &existingLimitsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -521,13 +588,13 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 						return types.Int64Null()
 					}(),
 					Disabled: func() *RateLimiterEmptyModel {
-						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].Disabled != nil {
+						if !isImport && len(existingLimitsItems) > listIdx && existingLimitsItems[listIdx].Disabled != nil {
 							return &RateLimiterEmptyModel{}
 						}
 						return nil
 					}(),
 					LeakyBucket: func() *RateLimiterEmptyModel {
-						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].LeakyBucket != nil {
+						if !isImport && len(existingLimitsItems) > listIdx && existingLimitsItems[listIdx].LeakyBucket != nil {
 							return &RateLimiterEmptyModel{}
 						}
 						return nil
@@ -539,7 +606,7 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 						return types.Int64Null()
 					}(),
 					TokenBucket: func() *RateLimiterEmptyModel {
-						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].TokenBucket != nil {
+						if !isImport && len(existingLimitsItems) > listIdx && existingLimitsItems[listIdx].TokenBucket != nil {
 							return &RateLimiterEmptyModel{}
 						}
 						return nil
@@ -559,10 +626,21 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.Limits = limitsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: RateLimiterLimitsModelAttrTypes}, limitsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Limits = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Limits = types.ListNull(types.ObjectType{AttrTypes: RateLimiterLimitsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
 		var user_identificationList []RateLimiterUserIdentificationModel
+		var existingUserIdentificationItems []RateLimiterUserIdentificationModel
+		if !data.UserIdentification.IsNull() && !data.UserIdentification.IsUnknown() {
+			data.UserIdentification.ElementsAs(ctx, &existingUserIdentificationItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -600,7 +678,14 @@ func (r *RateLimiterResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.UserIdentification = user_identificationList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: RateLimiterUserIdentificationModelAttrTypes}, user_identificationList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.UserIdentification = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.UserIdentification = types.ListNull(types.ObjectType{AttrTypes: RateLimiterUserIdentificationModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -666,11 +751,17 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -697,6 +788,10 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 	})
 	if listData, ok := apiResource.Spec["limits"].([]interface{}); ok && len(listData) > 0 {
 		var limitsList []RateLimiterLimitsModel
+		var existingLimitsItems []RateLimiterLimitsModel
+		if !data.Limits.IsNull() && !data.Limits.IsUnknown() {
+			data.Limits.ElementsAs(ctx, &existingLimitsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -714,13 +809,13 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 						return types.Int64Null()
 					}(),
 					Disabled: func() *RateLimiterEmptyModel {
-						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].Disabled != nil {
+						if !isImport && len(existingLimitsItems) > listIdx && existingLimitsItems[listIdx].Disabled != nil {
 							return &RateLimiterEmptyModel{}
 						}
 						return nil
 					}(),
 					LeakyBucket: func() *RateLimiterEmptyModel {
-						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].LeakyBucket != nil {
+						if !isImport && len(existingLimitsItems) > listIdx && existingLimitsItems[listIdx].LeakyBucket != nil {
 							return &RateLimiterEmptyModel{}
 						}
 						return nil
@@ -732,7 +827,7 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 						return types.Int64Null()
 					}(),
 					TokenBucket: func() *RateLimiterEmptyModel {
-						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].TokenBucket != nil {
+						if !isImport && len(existingLimitsItems) > listIdx && existingLimitsItems[listIdx].TokenBucket != nil {
 							return &RateLimiterEmptyModel{}
 						}
 						return nil
@@ -752,10 +847,21 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.Limits = limitsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: RateLimiterLimitsModelAttrTypes}, limitsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Limits = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Limits = types.ListNull(types.ObjectType{AttrTypes: RateLimiterLimitsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
 		var user_identificationList []RateLimiterUserIdentificationModel
+		var existingUserIdentificationItems []RateLimiterUserIdentificationModel
+		if !data.UserIdentification.IsNull() && !data.UserIdentification.IsUnknown() {
+			data.UserIdentification.ElementsAs(ctx, &existingUserIdentificationItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -793,7 +899,14 @@ func (r *RateLimiterResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.UserIdentification = user_identificationList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: RateLimiterUserIdentificationModelAttrTypes}, user_identificationList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.UserIdentification = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.UserIdentification = types.ListNull(types.ObjectType{AttrTypes: RateLimiterUserIdentificationModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -855,82 +968,92 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Limits) > 0 {
-		var limitsList []map[string]interface{}
-		for _, item := range data.Limits {
-			itemMap := make(map[string]interface{})
-			if item.ActionBlock != nil {
-				action_blockNestedMap := make(map[string]interface{})
-				if item.ActionBlock.Hours != nil {
-					hoursDeepMap := make(map[string]interface{})
-					if !item.ActionBlock.Hours.Duration.IsNull() && !item.ActionBlock.Hours.Duration.IsUnknown() {
-						hoursDeepMap["duration"] = item.ActionBlock.Hours.Duration.ValueInt64()
+	if !data.Limits.IsNull() && !data.Limits.IsUnknown() {
+		var limitsItems []RateLimiterLimitsModel
+		diags := data.Limits.ElementsAs(ctx, &limitsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(limitsItems) > 0 {
+			var limitsList []map[string]interface{}
+			for _, item := range limitsItems {
+				itemMap := make(map[string]interface{})
+				if item.ActionBlock != nil {
+					action_blockNestedMap := make(map[string]interface{})
+					if item.ActionBlock.Hours != nil {
+						hoursDeepMap := make(map[string]interface{})
+						if !item.ActionBlock.Hours.Duration.IsNull() && !item.ActionBlock.Hours.Duration.IsUnknown() {
+							hoursDeepMap["duration"] = item.ActionBlock.Hours.Duration.ValueInt64()
+						}
+						action_blockNestedMap["hours"] = hoursDeepMap
 					}
-					action_blockNestedMap["hours"] = hoursDeepMap
-				}
-				if item.ActionBlock.Minutes != nil {
-					minutesDeepMap := make(map[string]interface{})
-					if !item.ActionBlock.Minutes.Duration.IsNull() && !item.ActionBlock.Minutes.Duration.IsUnknown() {
-						minutesDeepMap["duration"] = item.ActionBlock.Minutes.Duration.ValueInt64()
+					if item.ActionBlock.Minutes != nil {
+						minutesDeepMap := make(map[string]interface{})
+						if !item.ActionBlock.Minutes.Duration.IsNull() && !item.ActionBlock.Minutes.Duration.IsUnknown() {
+							minutesDeepMap["duration"] = item.ActionBlock.Minutes.Duration.ValueInt64()
+						}
+						action_blockNestedMap["minutes"] = minutesDeepMap
 					}
-					action_blockNestedMap["minutes"] = minutesDeepMap
-				}
-				if item.ActionBlock.Seconds != nil {
-					secondsDeepMap := make(map[string]interface{})
-					if !item.ActionBlock.Seconds.Duration.IsNull() && !item.ActionBlock.Seconds.Duration.IsUnknown() {
-						secondsDeepMap["duration"] = item.ActionBlock.Seconds.Duration.ValueInt64()
+					if item.ActionBlock.Seconds != nil {
+						secondsDeepMap := make(map[string]interface{})
+						if !item.ActionBlock.Seconds.Duration.IsNull() && !item.ActionBlock.Seconds.Duration.IsUnknown() {
+							secondsDeepMap["duration"] = item.ActionBlock.Seconds.Duration.ValueInt64()
+						}
+						action_blockNestedMap["seconds"] = secondsDeepMap
 					}
-					action_blockNestedMap["seconds"] = secondsDeepMap
+					itemMap["action_block"] = action_blockNestedMap
 				}
-				itemMap["action_block"] = action_blockNestedMap
+				if !item.BurstMultiplier.IsNull() && !item.BurstMultiplier.IsUnknown() {
+					itemMap["burst_multiplier"] = item.BurstMultiplier.ValueInt64()
+				}
+				if item.Disabled != nil {
+					itemMap["disabled"] = map[string]interface{}{}
+				}
+				if item.LeakyBucket != nil {
+					itemMap["leaky_bucket"] = map[string]interface{}{}
+				}
+				if !item.PeriodMultiplier.IsNull() && !item.PeriodMultiplier.IsUnknown() {
+					itemMap["period_multiplier"] = item.PeriodMultiplier.ValueInt64()
+				}
+				if item.TokenBucket != nil {
+					itemMap["token_bucket"] = map[string]interface{}{}
+				}
+				if !item.TotalNumber.IsNull() && !item.TotalNumber.IsUnknown() {
+					itemMap["total_number"] = item.TotalNumber.ValueInt64()
+				}
+				if !item.Unit.IsNull() && !item.Unit.IsUnknown() {
+					itemMap["unit"] = item.Unit.ValueString()
+				}
+				limitsList = append(limitsList, itemMap)
 			}
-			if !item.BurstMultiplier.IsNull() && !item.BurstMultiplier.IsUnknown() {
-				itemMap["burst_multiplier"] = item.BurstMultiplier.ValueInt64()
-			}
-			if item.Disabled != nil {
-				itemMap["disabled"] = map[string]interface{}{}
-			}
-			if item.LeakyBucket != nil {
-				itemMap["leaky_bucket"] = map[string]interface{}{}
-			}
-			if !item.PeriodMultiplier.IsNull() && !item.PeriodMultiplier.IsUnknown() {
-				itemMap["period_multiplier"] = item.PeriodMultiplier.ValueInt64()
-			}
-			if item.TokenBucket != nil {
-				itemMap["token_bucket"] = map[string]interface{}{}
-			}
-			if !item.TotalNumber.IsNull() && !item.TotalNumber.IsUnknown() {
-				itemMap["total_number"] = item.TotalNumber.ValueInt64()
-			}
-			if !item.Unit.IsNull() && !item.Unit.IsUnknown() {
-				itemMap["unit"] = item.Unit.ValueString()
-			}
-			limitsList = append(limitsList, itemMap)
+			apiResource.Spec["limits"] = limitsList
 		}
-		apiResource.Spec["limits"] = limitsList
 	}
-	if len(data.UserIdentification) > 0 {
-		var user_identificationList []map[string]interface{}
-		for _, item := range data.UserIdentification {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.UserIdentification.IsNull() && !data.UserIdentification.IsUnknown() {
+		var user_identificationItems []RateLimiterUserIdentificationModel
+		diags := data.UserIdentification.ElementsAs(ctx, &user_identificationItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(user_identificationItems) > 0 {
+			var user_identificationList []map[string]interface{}
+			for _, item := range user_identificationItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				user_identificationList = append(user_identificationList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			user_identificationList = append(user_identificationList, itemMap)
+			apiResource.Spec["user_identification"] = user_identificationList
 		}
-		apiResource.Spec["user_identification"] = user_identificationList
 	}
 
 	_, err := r.client.UpdateRateLimiter(ctx, apiResource)
@@ -958,6 +1081,10 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["limits"].([]interface{}); ok && len(listData) > 0 {
 		var limitsList []RateLimiterLimitsModel
+		var existingLimitsItems []RateLimiterLimitsModel
+		if !data.Limits.IsNull() && !data.Limits.IsUnknown() {
+			data.Limits.ElementsAs(ctx, &existingLimitsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -975,13 +1102,13 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 						return types.Int64Null()
 					}(),
 					Disabled: func() *RateLimiterEmptyModel {
-						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].Disabled != nil {
+						if !isImport && len(existingLimitsItems) > listIdx && existingLimitsItems[listIdx].Disabled != nil {
 							return &RateLimiterEmptyModel{}
 						}
 						return nil
 					}(),
 					LeakyBucket: func() *RateLimiterEmptyModel {
-						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].LeakyBucket != nil {
+						if !isImport && len(existingLimitsItems) > listIdx && existingLimitsItems[listIdx].LeakyBucket != nil {
 							return &RateLimiterEmptyModel{}
 						}
 						return nil
@@ -993,7 +1120,7 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 						return types.Int64Null()
 					}(),
 					TokenBucket: func() *RateLimiterEmptyModel {
-						if !isImport && len(data.Limits) > listIdx && data.Limits[listIdx].TokenBucket != nil {
+						if !isImport && len(existingLimitsItems) > listIdx && existingLimitsItems[listIdx].TokenBucket != nil {
 							return &RateLimiterEmptyModel{}
 						}
 						return nil
@@ -1013,10 +1140,21 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.Limits = limitsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: RateLimiterLimitsModelAttrTypes}, limitsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Limits = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Limits = types.ListNull(types.ObjectType{AttrTypes: RateLimiterLimitsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
 		var user_identificationList []RateLimiterUserIdentificationModel
+		var existingUserIdentificationItems []RateLimiterUserIdentificationModel
+		if !data.UserIdentification.IsNull() && !data.UserIdentification.IsUnknown() {
+			data.UserIdentification.ElementsAs(ctx, &existingUserIdentificationItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1054,7 +1192,14 @@ func (r *RateLimiterResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.UserIdentification = user_identificationList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: RateLimiterUserIdentificationModelAttrTypes}, user_identificationList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.UserIdentification = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.UserIdentification = types.ListNull(types.ObjectType{AttrTypes: RateLimiterUserIdentificationModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

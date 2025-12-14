@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -60,6 +61,15 @@ type VirtualHostAdvertisePoliciesModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// VirtualHostAdvertisePoliciesModelAttrTypes defines the attribute types for VirtualHostAdvertisePoliciesModel
+var VirtualHostAdvertisePoliciesModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // VirtualHostAuthenticationModel represents authentication block
 type VirtualHostAuthenticationModel struct {
 	RedirectURL         types.String                                `tfsdk:"redirect_url"`
@@ -67,6 +77,15 @@ type VirtualHostAuthenticationModel struct {
 	CookieParams        *VirtualHostAuthenticationCookieParamsModel `tfsdk:"cookie_params"`
 	RedirectDynamic     *VirtualHostEmptyModel                      `tfsdk:"redirect_dynamic"`
 	UseAuthObjectConfig *VirtualHostEmptyModel                      `tfsdk:"use_auth_object_config"`
+}
+
+// VirtualHostAuthenticationModelAttrTypes defines the attribute types for VirtualHostAuthenticationModel
+var VirtualHostAuthenticationModelAttrTypes = map[string]attr.Type{
+	"redirect_url":           types.StringType,
+	"auth_config":            types.ListType{ElemType: types.ObjectType{AttrTypes: VirtualHostAuthenticationAuthConfigModelAttrTypes}},
+	"cookie_params":          types.ObjectType{AttrTypes: VirtualHostAuthenticationCookieParamsModelAttrTypes},
+	"redirect_dynamic":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_auth_object_config": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // VirtualHostAuthenticationAuthConfigModel represents auth_config block
@@ -78,6 +97,15 @@ type VirtualHostAuthenticationAuthConfigModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// VirtualHostAuthenticationAuthConfigModelAttrTypes defines the attribute types for VirtualHostAuthenticationAuthConfigModel
+var VirtualHostAuthenticationAuthConfigModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // VirtualHostAuthenticationCookieParamsModel represents cookie_params block
 type VirtualHostAuthenticationCookieParamsModel struct {
 	CookieExpiry          types.Int64                                         `tfsdk:"cookie_expiry"`
@@ -85,6 +113,15 @@ type VirtualHostAuthenticationCookieParamsModel struct {
 	SessionExpiry         types.Int64                                         `tfsdk:"session_expiry"`
 	AuthHMAC              *VirtualHostAuthenticationCookieParamsAuthHMACModel `tfsdk:"auth_hmac"`
 	KmsKeyHMAC            *VirtualHostEmptyModel                              `tfsdk:"kms_key_hmac"`
+}
+
+// VirtualHostAuthenticationCookieParamsModelAttrTypes defines the attribute types for VirtualHostAuthenticationCookieParamsModel
+var VirtualHostAuthenticationCookieParamsModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry":           types.Int64Type,
+	"cookie_refresh_interval": types.Int64Type,
+	"session_expiry":          types.Int64Type,
+	"auth_hmac":               types.ObjectType{AttrTypes: VirtualHostAuthenticationCookieParamsAuthHMACModelAttrTypes},
+	"kms_key_hmac":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // VirtualHostAuthenticationCookieParamsAuthHMACModel represents auth_hmac block
@@ -95,10 +132,24 @@ type VirtualHostAuthenticationCookieParamsAuthHMACModel struct {
 	SecKey        *VirtualHostAuthenticationCookieParamsAuthHMACSecKeyModel  `tfsdk:"sec_key"`
 }
 
+// VirtualHostAuthenticationCookieParamsAuthHMACModelAttrTypes defines the attribute types for VirtualHostAuthenticationCookieParamsAuthHMACModel
+var VirtualHostAuthenticationCookieParamsAuthHMACModelAttrTypes = map[string]attr.Type{
+	"prim_key_expiry": types.StringType,
+	"sec_key_expiry":  types.StringType,
+	"prim_key":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sec_key":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyModel represents prim_key block
 type VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyModel struct {
 	BlindfoldSecretInfo *VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyModelAttrTypes defines the attribute types for VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyModel
+var VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModelAttrTypes},
 }
 
 // VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -108,16 +159,35 @@ type VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoMode
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModel
+var VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel represents clear_secret_info block
 type VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModelAttrTypes defines the attribute types for VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModel
+var VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // VirtualHostAuthenticationCookieParamsAuthHMACSecKeyModel represents sec_key block
 type VirtualHostAuthenticationCookieParamsAuthHMACSecKeyModel struct {
 	BlindfoldSecretInfo *VirtualHostAuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *VirtualHostAuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostAuthenticationCookieParamsAuthHMACSecKeyModelAttrTypes defines the attribute types for VirtualHostAuthenticationCookieParamsAuthHMACSecKeyModel
+var VirtualHostAuthenticationCookieParamsAuthHMACSecKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: VirtualHostAuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: VirtualHostAuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModelAttrTypes},
 }
 
 // VirtualHostAuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -127,10 +197,23 @@ type VirtualHostAuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// VirtualHostAuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for VirtualHostAuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModel
+var VirtualHostAuthenticationCookieParamsAuthHMACSecKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // VirtualHostAuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel represents clear_secret_info block
 type VirtualHostAuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// VirtualHostAuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModelAttrTypes defines the attribute types for VirtualHostAuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModel
+var VirtualHostAuthenticationCookieParamsAuthHMACSecKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // VirtualHostBufferPolicyModel represents buffer_policy block
@@ -139,10 +222,22 @@ type VirtualHostBufferPolicyModel struct {
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
 }
 
+// VirtualHostBufferPolicyModelAttrTypes defines the attribute types for VirtualHostBufferPolicyModel
+var VirtualHostBufferPolicyModelAttrTypes = map[string]attr.Type{
+	"disabled":          types.BoolType,
+	"max_request_bytes": types.Int64Type,
+}
+
 // VirtualHostCaptchaChallengeModel represents captcha_challenge block
 type VirtualHostCaptchaChallengeModel struct {
 	CookieExpiry types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage   types.String `tfsdk:"custom_page"`
+}
+
+// VirtualHostCaptchaChallengeModelAttrTypes defines the attribute types for VirtualHostCaptchaChallengeModel
+var VirtualHostCaptchaChallengeModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry": types.Int64Type,
+	"custom_page":   types.StringType,
 }
 
 // VirtualHostCoalescingOptionsModel represents coalescing_options block
@@ -151,12 +246,26 @@ type VirtualHostCoalescingOptionsModel struct {
 	StrictCoalescing  *VirtualHostEmptyModel `tfsdk:"strict_coalescing"`
 }
 
+// VirtualHostCoalescingOptionsModelAttrTypes defines the attribute types for VirtualHostCoalescingOptionsModel
+var VirtualHostCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostCompressionParamsModel represents compression_params block
 type VirtualHostCompressionParamsModel struct {
 	ContentLength              types.Int64 `tfsdk:"content_length"`
 	ContentType                types.List  `tfsdk:"content_type"`
 	DisableOnEtagHeader        types.Bool  `tfsdk:"disable_on_etag_header"`
 	RemoveAcceptEncodingHeader types.Bool  `tfsdk:"remove_accept_encoding_header"`
+}
+
+// VirtualHostCompressionParamsModelAttrTypes defines the attribute types for VirtualHostCompressionParamsModel
+var VirtualHostCompressionParamsModelAttrTypes = map[string]attr.Type{
+	"content_length":                types.Int64Type,
+	"content_type":                  types.ListType{ElemType: types.StringType},
+	"disable_on_etag_header":        types.BoolType,
+	"remove_accept_encoding_header": types.BoolType,
 }
 
 // VirtualHostCORSPolicyModel represents cors_policy block
@@ -171,6 +280,18 @@ type VirtualHostCORSPolicyModel struct {
 	MaximumAge       types.Int64  `tfsdk:"maximum_age"`
 }
 
+// VirtualHostCORSPolicyModelAttrTypes defines the attribute types for VirtualHostCORSPolicyModel
+var VirtualHostCORSPolicyModelAttrTypes = map[string]attr.Type{
+	"allow_credentials":  types.BoolType,
+	"allow_headers":      types.StringType,
+	"allow_methods":      types.StringType,
+	"allow_origin":       types.ListType{ElemType: types.StringType},
+	"allow_origin_regex": types.ListType{ElemType: types.StringType},
+	"disabled":           types.BoolType,
+	"expose_headers":     types.StringType,
+	"maximum_age":        types.Int64Type,
+}
+
 // VirtualHostCSRFPolicyModel represents csrf_policy block
 type VirtualHostCSRFPolicyModel struct {
 	AllLoadBalancerDomains *VirtualHostEmptyModel                      `tfsdk:"all_load_balancer_domains"`
@@ -178,9 +299,21 @@ type VirtualHostCSRFPolicyModel struct {
 	Disabled               *VirtualHostEmptyModel                      `tfsdk:"disabled"`
 }
 
+// VirtualHostCSRFPolicyModelAttrTypes defines the attribute types for VirtualHostCSRFPolicyModel
+var VirtualHostCSRFPolicyModelAttrTypes = map[string]attr.Type{
+	"all_load_balancer_domains": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_domain_list":        types.ObjectType{AttrTypes: VirtualHostCSRFPolicyCustomDomainListModelAttrTypes},
+	"disabled":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostCSRFPolicyCustomDomainListModel represents custom_domain_list block
 type VirtualHostCSRFPolicyCustomDomainListModel struct {
 	Domains types.List `tfsdk:"domains"`
+}
+
+// VirtualHostCSRFPolicyCustomDomainListModelAttrTypes defines the attribute types for VirtualHostCSRFPolicyCustomDomainListModel
+var VirtualHostCSRFPolicyCustomDomainListModelAttrTypes = map[string]attr.Type{
+	"domains": types.ListType{ElemType: types.StringType},
 }
 
 // VirtualHostDynamicReverseProxyModel represents dynamic_reverse_proxy block
@@ -189,6 +322,14 @@ type VirtualHostDynamicReverseProxyModel struct {
 	ResolutionNetworkType      types.String                                           `tfsdk:"resolution_network_type"`
 	ResolveEndpointDynamically types.Bool                                             `tfsdk:"resolve_endpoint_dynamically"`
 	ResolutionNetwork          []VirtualHostDynamicReverseProxyResolutionNetworkModel `tfsdk:"resolution_network"`
+}
+
+// VirtualHostDynamicReverseProxyModelAttrTypes defines the attribute types for VirtualHostDynamicReverseProxyModel
+var VirtualHostDynamicReverseProxyModelAttrTypes = map[string]attr.Type{
+	"connection_timeout":           types.Int64Type,
+	"resolution_network_type":      types.StringType,
+	"resolve_endpoint_dynamically": types.BoolType,
+	"resolution_network":           types.ListType{ElemType: types.ObjectType{AttrTypes: VirtualHostDynamicReverseProxyResolutionNetworkModelAttrTypes}},
 }
 
 // VirtualHostDynamicReverseProxyResolutionNetworkModel represents resolution_network block
@@ -200,6 +341,15 @@ type VirtualHostDynamicReverseProxyResolutionNetworkModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// VirtualHostDynamicReverseProxyResolutionNetworkModelAttrTypes defines the attribute types for VirtualHostDynamicReverseProxyResolutionNetworkModel
+var VirtualHostDynamicReverseProxyResolutionNetworkModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // VirtualHostHTTPProtocolOptionsModel represents http_protocol_options block
 type VirtualHostHTTPProtocolOptionsModel struct {
 	HTTPProtocolEnableV1Only *VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel `tfsdk:"http_protocol_enable_v1_only"`
@@ -207,9 +357,21 @@ type VirtualHostHTTPProtocolOptionsModel struct {
 	HTTPProtocolEnableV2Only *VirtualHostEmptyModel                                       `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// VirtualHostHTTPProtocolOptionsModelAttrTypes defines the attribute types for VirtualHostHTTPProtocolOptionsModel
+var VirtualHostHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -220,11 +382,26 @@ type VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationM
 	ProperCaseHeaderTransformation   *VirtualHostEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostJsChallengeModel represents js_challenge block
 type VirtualHostJsChallengeModel struct {
 	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage    types.String `tfsdk:"custom_page"`
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
+}
+
+// VirtualHostJsChallengeModelAttrTypes defines the attribute types for VirtualHostJsChallengeModel
+var VirtualHostJsChallengeModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry":   types.Int64Type,
+	"custom_page":     types.StringType,
+	"js_script_delay": types.Int64Type,
 }
 
 // VirtualHostRateLimiterAllowedPrefixesModel represents rate_limiter_allowed_prefixes block
@@ -236,6 +413,15 @@ type VirtualHostRateLimiterAllowedPrefixesModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// VirtualHostRateLimiterAllowedPrefixesModelAttrTypes defines the attribute types for VirtualHostRateLimiterAllowedPrefixesModel
+var VirtualHostRateLimiterAllowedPrefixesModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // VirtualHostRequestCookiesToAddModel represents request_cookies_to_add block
 type VirtualHostRequestCookiesToAddModel struct {
 	Name        types.String                                    `tfsdk:"name"`
@@ -244,10 +430,24 @@ type VirtualHostRequestCookiesToAddModel struct {
 	SecretValue *VirtualHostRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// VirtualHostRequestCookiesToAddModelAttrTypes defines the attribute types for VirtualHostRequestCookiesToAddModel
+var VirtualHostRequestCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"name":         types.StringType,
+	"overwrite":    types.BoolType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostRequestCookiesToAddSecretValueModel represents secret_value block
 type VirtualHostRequestCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *VirtualHostRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *VirtualHostRequestCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostRequestCookiesToAddSecretValueModelAttrTypes defines the attribute types for VirtualHostRequestCookiesToAddSecretValueModel
+var VirtualHostRequestCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: VirtualHostRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: VirtualHostRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // VirtualHostRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -257,10 +457,23 @@ type VirtualHostRequestCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// VirtualHostRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for VirtualHostRequestCookiesToAddSecretValueBlindfoldSecretInfoModel
+var VirtualHostRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // VirtualHostRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type VirtualHostRequestCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// VirtualHostRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for VirtualHostRequestCookiesToAddSecretValueClearSecretInfoModel
+var VirtualHostRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // VirtualHostRequestHeadersToAddModel represents request_headers_to_add block
@@ -271,10 +484,24 @@ type VirtualHostRequestHeadersToAddModel struct {
 	SecretValue *VirtualHostRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// VirtualHostRequestHeadersToAddModelAttrTypes defines the attribute types for VirtualHostRequestHeadersToAddModel
+var VirtualHostRequestHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostRequestHeadersToAddSecretValueModel represents secret_value block
 type VirtualHostRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *VirtualHostRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *VirtualHostRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostRequestHeadersToAddSecretValueModelAttrTypes defines the attribute types for VirtualHostRequestHeadersToAddSecretValueModel
+var VirtualHostRequestHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: VirtualHostRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: VirtualHostRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // VirtualHostRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -284,10 +511,23 @@ type VirtualHostRequestHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// VirtualHostRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for VirtualHostRequestHeadersToAddSecretValueBlindfoldSecretInfoModel
+var VirtualHostRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // VirtualHostRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type VirtualHostRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// VirtualHostRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for VirtualHostRequestHeadersToAddSecretValueClearSecretInfoModel
+var VirtualHostRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // VirtualHostResponseCookiesToAddModel represents response_cookies_to_add block
@@ -317,10 +557,43 @@ type VirtualHostResponseCookiesToAddModel struct {
 	SecretValue       *VirtualHostResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// VirtualHostResponseCookiesToAddModelAttrTypes defines the attribute types for VirtualHostResponseCookiesToAddModel
+var VirtualHostResponseCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"add_domain":         types.StringType,
+	"add_expiry":         types.StringType,
+	"add_path":           types.StringType,
+	"max_age_value":      types.Int64Type,
+	"name":               types.StringType,
+	"overwrite":          types.BoolType,
+	"value":              types.StringType,
+	"add_httponly":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_partitioned":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_secure":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_expiry":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_httponly":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_max_age":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_partitioned": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_path":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_samesite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_secure":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostResponseCookiesToAddSecretValueModel represents secret_value block
 type VirtualHostResponseCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *VirtualHostResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *VirtualHostResponseCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostResponseCookiesToAddSecretValueModelAttrTypes defines the attribute types for VirtualHostResponseCookiesToAddSecretValueModel
+var VirtualHostResponseCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: VirtualHostResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: VirtualHostResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // VirtualHostResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -330,10 +603,23 @@ type VirtualHostResponseCookiesToAddSecretValueBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// VirtualHostResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for VirtualHostResponseCookiesToAddSecretValueBlindfoldSecretInfoModel
+var VirtualHostResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // VirtualHostResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type VirtualHostResponseCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// VirtualHostResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for VirtualHostResponseCookiesToAddSecretValueClearSecretInfoModel
+var VirtualHostResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // VirtualHostResponseHeadersToAddModel represents response_headers_to_add block
@@ -344,10 +630,24 @@ type VirtualHostResponseHeadersToAddModel struct {
 	SecretValue *VirtualHostResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// VirtualHostResponseHeadersToAddModelAttrTypes defines the attribute types for VirtualHostResponseHeadersToAddModel
+var VirtualHostResponseHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostResponseHeadersToAddSecretValueModel represents secret_value block
 type VirtualHostResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *VirtualHostResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *VirtualHostResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostResponseHeadersToAddSecretValueModelAttrTypes defines the attribute types for VirtualHostResponseHeadersToAddSecretValueModel
+var VirtualHostResponseHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: VirtualHostResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: VirtualHostResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // VirtualHostResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -357,10 +657,23 @@ type VirtualHostResponseHeadersToAddSecretValueBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// VirtualHostResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for VirtualHostResponseHeadersToAddSecretValueBlindfoldSecretInfoModel
+var VirtualHostResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // VirtualHostResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type VirtualHostResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// VirtualHostResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for VirtualHostResponseHeadersToAddSecretValueClearSecretInfoModel
+var VirtualHostResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // VirtualHostRetryPolicyModel represents retry_policy block
@@ -372,10 +685,25 @@ type VirtualHostRetryPolicyModel struct {
 	BackOff              *VirtualHostRetryPolicyBackOffModel `tfsdk:"back_off"`
 }
 
+// VirtualHostRetryPolicyModelAttrTypes defines the attribute types for VirtualHostRetryPolicyModel
+var VirtualHostRetryPolicyModelAttrTypes = map[string]attr.Type{
+	"num_retries":            types.Int64Type,
+	"per_try_timeout":        types.Int64Type,
+	"retriable_status_codes": types.ListType{ElemType: types.Int64Type},
+	"retry_condition":        types.ListType{ElemType: types.StringType},
+	"back_off":               types.ObjectType{AttrTypes: VirtualHostRetryPolicyBackOffModelAttrTypes},
+}
+
 // VirtualHostRetryPolicyBackOffModel represents back_off block
 type VirtualHostRetryPolicyBackOffModel struct {
 	BaseInterval types.Int64 `tfsdk:"base_interval"`
 	MaxInterval  types.Int64 `tfsdk:"max_interval"`
+}
+
+// VirtualHostRetryPolicyBackOffModelAttrTypes defines the attribute types for VirtualHostRetryPolicyBackOffModel
+var VirtualHostRetryPolicyBackOffModelAttrTypes = map[string]attr.Type{
+	"base_interval": types.Int64Type,
+	"max_interval":  types.Int64Type,
 }
 
 // VirtualHostRoutesModel represents routes block
@@ -387,6 +715,15 @@ type VirtualHostRoutesModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// VirtualHostRoutesModelAttrTypes defines the attribute types for VirtualHostRoutesModel
+var VirtualHostRoutesModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // VirtualHostSensitiveDataPolicyModel represents sensitive_data_policy block
 type VirtualHostSensitiveDataPolicyModel struct {
 	Kind      types.String `tfsdk:"kind"`
@@ -396,11 +733,27 @@ type VirtualHostSensitiveDataPolicyModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// VirtualHostSensitiveDataPolicyModelAttrTypes defines the attribute types for VirtualHostSensitiveDataPolicyModel
+var VirtualHostSensitiveDataPolicyModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // VirtualHostSlowDDOSMitigationModel represents slow_ddos_mitigation block
 type VirtualHostSlowDDOSMitigationModel struct {
 	RequestHeadersTimeout types.Int64            `tfsdk:"request_headers_timeout"`
 	RequestTimeout        types.Int64            `tfsdk:"request_timeout"`
 	DisableRequestTimeout *VirtualHostEmptyModel `tfsdk:"disable_request_timeout"`
+}
+
+// VirtualHostSlowDDOSMitigationModelAttrTypes defines the attribute types for VirtualHostSlowDDOSMitigationModel
+var VirtualHostSlowDDOSMitigationModelAttrTypes = map[string]attr.Type{
+	"request_headers_timeout": types.Int64Type,
+	"request_timeout":         types.Int64Type,
+	"disable_request_timeout": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // VirtualHostTLSCertParamsModel represents tls_cert_params block
@@ -416,6 +769,19 @@ type VirtualHostTLSCertParamsModel struct {
 	ValidationParams          *VirtualHostTLSCertParamsValidationParamsModel `tfsdk:"validation_params"`
 }
 
+// VirtualHostTLSCertParamsModelAttrTypes defines the attribute types for VirtualHostTLSCertParamsModel
+var VirtualHostTLSCertParamsModelAttrTypes = map[string]attr.Type{
+	"cipher_suites":               types.ListType{ElemType: types.StringType},
+	"maximum_protocol_version":    types.StringType,
+	"minimum_protocol_version":    types.StringType,
+	"xfcc_header_elements":        types.ListType{ElemType: types.StringType},
+	"certificates":                types.ListType{ElemType: types.ObjectType{AttrTypes: VirtualHostTLSCertParamsCertificatesModelAttrTypes}},
+	"client_certificate_optional": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_certificate_required": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_client_certificate":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validation_params":           types.ObjectType{AttrTypes: VirtualHostTLSCertParamsValidationParamsModelAttrTypes},
+}
+
 // VirtualHostTLSCertParamsCertificatesModel represents certificates block
 type VirtualHostTLSCertParamsCertificatesModel struct {
 	Kind      types.String `tfsdk:"kind"`
@@ -423,6 +789,15 @@ type VirtualHostTLSCertParamsCertificatesModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 	Uid       types.String `tfsdk:"uid"`
+}
+
+// VirtualHostTLSCertParamsCertificatesModelAttrTypes defines the attribute types for VirtualHostTLSCertParamsCertificatesModel
+var VirtualHostTLSCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
 }
 
 // VirtualHostTLSCertParamsValidationParamsModel represents validation_params block
@@ -433,9 +808,22 @@ type VirtualHostTLSCertParamsValidationParamsModel struct {
 	TrustedCA                *VirtualHostTLSCertParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
+// VirtualHostTLSCertParamsValidationParamsModelAttrTypes defines the attribute types for VirtualHostTLSCertParamsValidationParamsModel
+var VirtualHostTLSCertParamsValidationParamsModelAttrTypes = map[string]attr.Type{
+	"skip_hostname_verification": types.BoolType,
+	"trusted_ca_url":             types.StringType,
+	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
+	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostTLSCertParamsValidationParamsTrustedCAModel represents trusted_ca block
 type VirtualHostTLSCertParamsValidationParamsTrustedCAModel struct {
 	TrustedCAList []VirtualHostTLSCertParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
+}
+
+// VirtualHostTLSCertParamsValidationParamsTrustedCAModelAttrTypes defines the attribute types for VirtualHostTLSCertParamsValidationParamsTrustedCAModel
+var VirtualHostTLSCertParamsValidationParamsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_list": types.ListType{ElemType: types.ObjectType{AttrTypes: VirtualHostTLSCertParamsValidationParamsTrustedCATrustedCAListModelAttrTypes}},
 }
 
 // VirtualHostTLSCertParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
@@ -447,6 +835,15 @@ type VirtualHostTLSCertParamsValidationParamsTrustedCATrustedCAListModel struct 
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// VirtualHostTLSCertParamsValidationParamsTrustedCATrustedCAListModelAttrTypes defines the attribute types for VirtualHostTLSCertParamsValidationParamsTrustedCATrustedCAListModel
+var VirtualHostTLSCertParamsValidationParamsTrustedCATrustedCAListModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // VirtualHostTLSParametersModel represents tls_parameters block
 type VirtualHostTLSParametersModel struct {
 	XfccHeaderElements        types.List                                 `tfsdk:"xfcc_header_elements"`
@@ -456,6 +853,15 @@ type VirtualHostTLSParametersModel struct {
 	NoClientCertificate       *VirtualHostEmptyModel                     `tfsdk:"no_client_certificate"`
 }
 
+// VirtualHostTLSParametersModelAttrTypes defines the attribute types for VirtualHostTLSParametersModel
+var VirtualHostTLSParametersModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements":        types.ListType{ElemType: types.StringType},
+	"client_certificate_optional": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_certificate_required": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"common_params":               types.ObjectType{AttrTypes: VirtualHostTLSParametersCommonParamsModelAttrTypes},
+	"no_client_certificate":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostTLSParametersCommonParamsModel represents common_params block
 type VirtualHostTLSParametersCommonParamsModel struct {
 	CipherSuites           types.List                                                 `tfsdk:"cipher_suites"`
@@ -463,6 +869,15 @@ type VirtualHostTLSParametersCommonParamsModel struct {
 	MinimumProtocolVersion types.String                                               `tfsdk:"minimum_protocol_version"`
 	TLSCertificates        []VirtualHostTLSParametersCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
 	ValidationParams       *VirtualHostTLSParametersCommonParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// VirtualHostTLSParametersCommonParamsModelAttrTypes defines the attribute types for VirtualHostTLSParametersCommonParamsModel
+var VirtualHostTLSParametersCommonParamsModelAttrTypes = map[string]attr.Type{
+	"cipher_suites":            types.ListType{ElemType: types.StringType},
+	"maximum_protocol_version": types.StringType,
+	"minimum_protocol_version": types.StringType,
+	"tls_certificates":         types.ListType{ElemType: types.ObjectType{AttrTypes: VirtualHostTLSParametersCommonParamsTLSCertificatesModelAttrTypes}},
+	"validation_params":        types.ObjectType{AttrTypes: VirtualHostTLSParametersCommonParamsValidationParamsModelAttrTypes},
 }
 
 // VirtualHostTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
@@ -475,15 +890,36 @@ type VirtualHostTLSParametersCommonParamsTLSCertificatesModel struct {
 	UseSystemDefaults    *VirtualHostEmptyModel                                                        `tfsdk:"use_system_defaults"`
 }
 
+// VirtualHostTLSParametersCommonParamsTLSCertificatesModelAttrTypes defines the attribute types for VirtualHostTLSParametersCommonParamsTLSCertificatesModel
+var VirtualHostTLSParametersCommonParamsTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel
+var VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModel represents private_key block
 type VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModel
+var VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -493,10 +929,23 @@ type VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecre
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel
+var VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // VirtualHostTLSParametersCommonParamsValidationParamsModel represents validation_params block
@@ -507,9 +956,22 @@ type VirtualHostTLSParametersCommonParamsValidationParamsModel struct {
 	TrustedCA                *VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
+// VirtualHostTLSParametersCommonParamsValidationParamsModelAttrTypes defines the attribute types for VirtualHostTLSParametersCommonParamsValidationParamsModel
+var VirtualHostTLSParametersCommonParamsValidationParamsModelAttrTypes = map[string]attr.Type{
+	"skip_hostname_verification": types.BoolType,
+	"trusted_ca_url":             types.StringType,
+	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
+	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
 type VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModel struct {
 	TrustedCAList []VirtualHostTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
+}
+
+// VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModelAttrTypes defines the attribute types for VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModel
+var VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_list": types.ListType{ElemType: types.ObjectType{AttrTypes: VirtualHostTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes}},
 }
 
 // VirtualHostTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
@@ -521,6 +983,15 @@ type VirtualHostTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListM
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// VirtualHostTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes defines the attribute types for VirtualHostTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel
+var VirtualHostTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // VirtualHostUserIdentificationModel represents user_identification block
 type VirtualHostUserIdentificationModel struct {
 	Kind      types.String `tfsdk:"kind"`
@@ -530,6 +1001,15 @@ type VirtualHostUserIdentificationModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// VirtualHostUserIdentificationModelAttrTypes defines the attribute types for VirtualHostUserIdentificationModel
+var VirtualHostUserIdentificationModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // VirtualHostWAFTypeModel represents waf_type block
 type VirtualHostWAFTypeModel struct {
 	AppFirewall *VirtualHostWAFTypeAppFirewallModel `tfsdk:"app_firewall"`
@@ -537,9 +1017,21 @@ type VirtualHostWAFTypeModel struct {
 	InheritWAF  *VirtualHostEmptyModel              `tfsdk:"inherit_waf"`
 }
 
+// VirtualHostWAFTypeModelAttrTypes defines the attribute types for VirtualHostWAFTypeModel
+var VirtualHostWAFTypeModelAttrTypes = map[string]attr.Type{
+	"app_firewall": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_waf":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inherit_waf":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // VirtualHostWAFTypeAppFirewallModel represents app_firewall block
 type VirtualHostWAFTypeAppFirewallModel struct {
 	AppFirewall []VirtualHostWAFTypeAppFirewallAppFirewallModel `tfsdk:"app_firewall"`
+}
+
+// VirtualHostWAFTypeAppFirewallModelAttrTypes defines the attribute types for VirtualHostWAFTypeAppFirewallModel
+var VirtualHostWAFTypeAppFirewallModelAttrTypes = map[string]attr.Type{
+	"app_firewall": types.ListType{ElemType: types.ObjectType{AttrTypes: VirtualHostWAFTypeAppFirewallAppFirewallModelAttrTypes}},
 }
 
 // VirtualHostWAFTypeAppFirewallAppFirewallModel represents app_firewall block
@@ -551,62 +1043,71 @@ type VirtualHostWAFTypeAppFirewallAppFirewallModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// VirtualHostWAFTypeAppFirewallAppFirewallModelAttrTypes defines the attribute types for VirtualHostWAFTypeAppFirewallAppFirewallModel
+var VirtualHostWAFTypeAppFirewallAppFirewallModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 type VirtualHostResourceModel struct {
-	Name                       types.String                                 `tfsdk:"name"`
-	Namespace                  types.String                                 `tfsdk:"namespace"`
-	Annotations                types.Map                                    `tfsdk:"annotations"`
-	Description                types.String                                 `tfsdk:"description"`
-	Disable                    types.Bool                                   `tfsdk:"disable"`
-	Domains                    types.List                                   `tfsdk:"domains"`
-	Labels                     types.Map                                    `tfsdk:"labels"`
-	RequestCookiesToRemove     types.List                                   `tfsdk:"request_cookies_to_remove"`
-	RequestHeadersToRemove     types.List                                   `tfsdk:"request_headers_to_remove"`
-	ResponseCookiesToRemove    types.List                                   `tfsdk:"response_cookies_to_remove"`
-	ResponseHeadersToRemove    types.List                                   `tfsdk:"response_headers_to_remove"`
-	ID                         types.String                                 `tfsdk:"id"`
-	AddLocation                types.Bool                                   `tfsdk:"add_location"`
-	AppendServerName           types.String                                 `tfsdk:"append_server_name"`
-	ConnectionIdleTimeout      types.Int64                                  `tfsdk:"connection_idle_timeout"`
-	DisableDefaultErrorPages   types.Bool                                   `tfsdk:"disable_default_error_pages"`
-	DisableDNSResolve          types.Bool                                   `tfsdk:"disable_dns_resolve"`
-	IdleTimeout                types.Int64                                  `tfsdk:"idle_timeout"`
-	MaxRequestHeaderSize       types.Int64                                  `tfsdk:"max_request_header_size"`
-	Proxy                      types.String                                 `tfsdk:"proxy"`
-	ServerName                 types.String                                 `tfsdk:"server_name"`
-	Timeouts                   timeouts.Value                               `tfsdk:"timeouts"`
-	AdvertisePolicies          []VirtualHostAdvertisePoliciesModel          `tfsdk:"advertise_policies"`
-	Authentication             *VirtualHostAuthenticationModel              `tfsdk:"authentication"`
-	BufferPolicy               *VirtualHostBufferPolicyModel                `tfsdk:"buffer_policy"`
-	CaptchaChallenge           *VirtualHostCaptchaChallengeModel            `tfsdk:"captcha_challenge"`
-	CoalescingOptions          *VirtualHostCoalescingOptionsModel           `tfsdk:"coalescing_options"`
-	CompressionParams          *VirtualHostCompressionParamsModel           `tfsdk:"compression_params"`
-	CORSPolicy                 *VirtualHostCORSPolicyModel                  `tfsdk:"cors_policy"`
-	CSRFPolicy                 *VirtualHostCSRFPolicyModel                  `tfsdk:"csrf_policy"`
-	CustomErrors               *VirtualHostEmptyModel                       `tfsdk:"custom_errors"`
-	DefaultHeader              *VirtualHostEmptyModel                       `tfsdk:"default_header"`
-	DefaultLoadBalancer        *VirtualHostEmptyModel                       `tfsdk:"default_loadbalancer"`
-	DisablePathNormalize       *VirtualHostEmptyModel                       `tfsdk:"disable_path_normalize"`
-	DynamicReverseProxy        *VirtualHostDynamicReverseProxyModel         `tfsdk:"dynamic_reverse_proxy"`
-	EnablePathNormalize        *VirtualHostEmptyModel                       `tfsdk:"enable_path_normalize"`
-	HTTPProtocolOptions        *VirtualHostHTTPProtocolOptionsModel         `tfsdk:"http_protocol_options"`
-	JsChallenge                *VirtualHostJsChallengeModel                 `tfsdk:"js_challenge"`
-	NoAuthentication           *VirtualHostEmptyModel                       `tfsdk:"no_authentication"`
-	NoChallenge                *VirtualHostEmptyModel                       `tfsdk:"no_challenge"`
-	NonDefaultLoadBalancer     *VirtualHostEmptyModel                       `tfsdk:"non_default_loadbalancer"`
-	PassThrough                *VirtualHostEmptyModel                       `tfsdk:"pass_through"`
-	RateLimiterAllowedPrefixes []VirtualHostRateLimiterAllowedPrefixesModel `tfsdk:"rate_limiter_allowed_prefixes"`
-	RequestCookiesToAdd        []VirtualHostRequestCookiesToAddModel        `tfsdk:"request_cookies_to_add"`
-	RequestHeadersToAdd        []VirtualHostRequestHeadersToAddModel        `tfsdk:"request_headers_to_add"`
-	ResponseCookiesToAdd       []VirtualHostResponseCookiesToAddModel       `tfsdk:"response_cookies_to_add"`
-	ResponseHeadersToAdd       []VirtualHostResponseHeadersToAddModel       `tfsdk:"response_headers_to_add"`
-	RetryPolicy                *VirtualHostRetryPolicyModel                 `tfsdk:"retry_policy"`
-	Routes                     []VirtualHostRoutesModel                     `tfsdk:"routes"`
-	SensitiveDataPolicy        []VirtualHostSensitiveDataPolicyModel        `tfsdk:"sensitive_data_policy"`
-	SlowDDOSMitigation         *VirtualHostSlowDDOSMitigationModel          `tfsdk:"slow_ddos_mitigation"`
-	TLSCertParams              *VirtualHostTLSCertParamsModel               `tfsdk:"tls_cert_params"`
-	TLSParameters              *VirtualHostTLSParametersModel               `tfsdk:"tls_parameters"`
-	UserIdentification         []VirtualHostUserIdentificationModel         `tfsdk:"user_identification"`
-	WAFType                    *VirtualHostWAFTypeModel                     `tfsdk:"waf_type"`
+	Name                       types.String                         `tfsdk:"name"`
+	Namespace                  types.String                         `tfsdk:"namespace"`
+	Annotations                types.Map                            `tfsdk:"annotations"`
+	Description                types.String                         `tfsdk:"description"`
+	Disable                    types.Bool                           `tfsdk:"disable"`
+	Domains                    types.List                           `tfsdk:"domains"`
+	Labels                     types.Map                            `tfsdk:"labels"`
+	RequestCookiesToRemove     types.List                           `tfsdk:"request_cookies_to_remove"`
+	RequestHeadersToRemove     types.List                           `tfsdk:"request_headers_to_remove"`
+	ResponseCookiesToRemove    types.List                           `tfsdk:"response_cookies_to_remove"`
+	ResponseHeadersToRemove    types.List                           `tfsdk:"response_headers_to_remove"`
+	ID                         types.String                         `tfsdk:"id"`
+	AddLocation                types.Bool                           `tfsdk:"add_location"`
+	AppendServerName           types.String                         `tfsdk:"append_server_name"`
+	ConnectionIdleTimeout      types.Int64                          `tfsdk:"connection_idle_timeout"`
+	DisableDefaultErrorPages   types.Bool                           `tfsdk:"disable_default_error_pages"`
+	DisableDNSResolve          types.Bool                           `tfsdk:"disable_dns_resolve"`
+	IdleTimeout                types.Int64                          `tfsdk:"idle_timeout"`
+	MaxRequestHeaderSize       types.Int64                          `tfsdk:"max_request_header_size"`
+	Proxy                      types.String                         `tfsdk:"proxy"`
+	ServerName                 types.String                         `tfsdk:"server_name"`
+	Timeouts                   timeouts.Value                       `tfsdk:"timeouts"`
+	AdvertisePolicies          types.List                           `tfsdk:"advertise_policies"`
+	Authentication             *VirtualHostAuthenticationModel      `tfsdk:"authentication"`
+	BufferPolicy               *VirtualHostBufferPolicyModel        `tfsdk:"buffer_policy"`
+	CaptchaChallenge           *VirtualHostCaptchaChallengeModel    `tfsdk:"captcha_challenge"`
+	CoalescingOptions          *VirtualHostCoalescingOptionsModel   `tfsdk:"coalescing_options"`
+	CompressionParams          *VirtualHostCompressionParamsModel   `tfsdk:"compression_params"`
+	CORSPolicy                 *VirtualHostCORSPolicyModel          `tfsdk:"cors_policy"`
+	CSRFPolicy                 *VirtualHostCSRFPolicyModel          `tfsdk:"csrf_policy"`
+	CustomErrors               *VirtualHostEmptyModel               `tfsdk:"custom_errors"`
+	DefaultHeader              *VirtualHostEmptyModel               `tfsdk:"default_header"`
+	DefaultLoadBalancer        *VirtualHostEmptyModel               `tfsdk:"default_loadbalancer"`
+	DisablePathNormalize       *VirtualHostEmptyModel               `tfsdk:"disable_path_normalize"`
+	DynamicReverseProxy        *VirtualHostDynamicReverseProxyModel `tfsdk:"dynamic_reverse_proxy"`
+	EnablePathNormalize        *VirtualHostEmptyModel               `tfsdk:"enable_path_normalize"`
+	HTTPProtocolOptions        *VirtualHostHTTPProtocolOptionsModel `tfsdk:"http_protocol_options"`
+	JsChallenge                *VirtualHostJsChallengeModel         `tfsdk:"js_challenge"`
+	NoAuthentication           *VirtualHostEmptyModel               `tfsdk:"no_authentication"`
+	NoChallenge                *VirtualHostEmptyModel               `tfsdk:"no_challenge"`
+	NonDefaultLoadBalancer     *VirtualHostEmptyModel               `tfsdk:"non_default_loadbalancer"`
+	PassThrough                *VirtualHostEmptyModel               `tfsdk:"pass_through"`
+	RateLimiterAllowedPrefixes types.List                           `tfsdk:"rate_limiter_allowed_prefixes"`
+	RequestCookiesToAdd        types.List                           `tfsdk:"request_cookies_to_add"`
+	RequestHeadersToAdd        types.List                           `tfsdk:"request_headers_to_add"`
+	ResponseCookiesToAdd       types.List                           `tfsdk:"response_cookies_to_add"`
+	ResponseHeadersToAdd       types.List                           `tfsdk:"response_headers_to_add"`
+	RetryPolicy                *VirtualHostRetryPolicyModel         `tfsdk:"retry_policy"`
+	Routes                     types.List                           `tfsdk:"routes"`
+	SensitiveDataPolicy        types.List                           `tfsdk:"sensitive_data_policy"`
+	SlowDDOSMitigation         *VirtualHostSlowDDOSMitigationModel  `tfsdk:"slow_ddos_mitigation"`
+	TLSCertParams              *VirtualHostTLSCertParamsModel       `tfsdk:"tls_cert_params"`
+	TLSParameters              *VirtualHostTLSParametersModel       `tfsdk:"tls_parameters"`
+	UserIdentification         types.List                           `tfsdk:"user_identification"`
+	WAFType                    *VirtualHostWAFTypeModel             `tfsdk:"waf_type"`
 }
 
 func (r *VirtualHostResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -776,6 +1277,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -789,11 +1293,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -815,6 +1325,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -828,11 +1341,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"uid": schema.StringAttribute{
 									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -1112,6 +1631,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1125,11 +1647,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"uid": schema.StringAttribute{
 									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -1212,6 +1740,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1225,11 +1756,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -1569,6 +2106,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1582,11 +2122,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -1599,6 +2145,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1612,11 +2161,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -1670,6 +2225,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"name": schema.StringAttribute{
 									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1683,11 +2241,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 								"uid": schema.StringAttribute{
 									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -1731,6 +2295,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 													MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1744,11 +2311,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 												"uid": schema.StringAttribute{
 													MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -1892,6 +2465,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1905,11 +2481,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -1933,6 +2515,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1946,11 +2531,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -1971,6 +2562,9 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -1984,11 +2578,17 @@ func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaReq
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -2151,28 +2751,33 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.AdvertisePolicies) > 0 {
-		var advertise_policiesList []map[string]interface{}
-		for _, item := range data.AdvertisePolicies {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.AdvertisePolicies.IsNull() && !data.AdvertisePolicies.IsUnknown() {
+		var advertise_policiesItems []VirtualHostAdvertisePoliciesModel
+		diags := data.AdvertisePolicies.ElementsAs(ctx, &advertise_policiesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(advertise_policiesItems) > 0 {
+			var advertise_policiesList []map[string]interface{}
+			for _, item := range advertise_policiesItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				advertise_policiesList = append(advertise_policiesList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			advertise_policiesList = append(advertise_policiesList, itemMap)
+			createReq.Spec["advertise_policies"] = advertise_policiesList
 		}
-		createReq.Spec["advertise_policies"] = advertise_policiesList
 	}
 	if data.Authentication != nil {
 		authenticationMap := make(map[string]interface{})
@@ -2429,72 +3034,82 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		pass_throughMap := make(map[string]interface{})
 		createReq.Spec["pass_through"] = pass_throughMap
 	}
-	if len(data.RateLimiterAllowedPrefixes) > 0 {
-		var rate_limiter_allowed_prefixesList []map[string]interface{}
-		for _, item := range data.RateLimiterAllowedPrefixes {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.RateLimiterAllowedPrefixes.IsNull() && !data.RateLimiterAllowedPrefixes.IsUnknown() {
+		var rate_limiter_allowed_prefixesItems []VirtualHostRateLimiterAllowedPrefixesModel
+		diags := data.RateLimiterAllowedPrefixes.ElementsAs(ctx, &rate_limiter_allowed_prefixesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(rate_limiter_allowed_prefixesItems) > 0 {
+			var rate_limiter_allowed_prefixesList []map[string]interface{}
+			for _, item := range rate_limiter_allowed_prefixesItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				rate_limiter_allowed_prefixesList = append(rate_limiter_allowed_prefixesList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			rate_limiter_allowed_prefixesList = append(rate_limiter_allowed_prefixesList, itemMap)
+			createReq.Spec["rate_limiter_allowed_prefixes"] = rate_limiter_allowed_prefixesList
 		}
-		createReq.Spec["rate_limiter_allowed_prefixes"] = rate_limiter_allowed_prefixesList
 	}
-	if len(data.RequestCookiesToAdd) > 0 {
-		var request_cookies_to_addList []map[string]interface{}
-		for _, item := range data.RequestCookiesToAdd {
-			itemMap := make(map[string]interface{})
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
-				itemMap["overwrite"] = item.Overwrite.ValueBool()
-			}
-			if item.SecretValue != nil {
-				secret_valueNestedMap := make(map[string]interface{})
-				if item.SecretValue.BlindfoldSecretInfo != nil {
-					blindfold_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
-						blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
-					}
-					secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+	if !data.RequestCookiesToAdd.IsNull() && !data.RequestCookiesToAdd.IsUnknown() {
+		var request_cookies_to_addItems []VirtualHostRequestCookiesToAddModel
+		diags := data.RequestCookiesToAdd.ElementsAs(ctx, &request_cookies_to_addItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(request_cookies_to_addItems) > 0 {
+			var request_cookies_to_addList []map[string]interface{}
+			for _, item := range request_cookies_to_addItems {
+				itemMap := make(map[string]interface{})
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
 				}
-				if item.SecretValue.ClearSecretInfo != nil {
-					clear_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
-						clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
-					}
-					if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
-						clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
-					}
-					secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+				if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
+					itemMap["overwrite"] = item.Overwrite.ValueBool()
 				}
-				itemMap["secret_value"] = secret_valueNestedMap
+				if item.SecretValue != nil {
+					secret_valueNestedMap := make(map[string]interface{})
+					if item.SecretValue.BlindfoldSecretInfo != nil {
+						blindfold_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
+							blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
+						}
+						secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+					}
+					if item.SecretValue.ClearSecretInfo != nil {
+						clear_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
+							clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
+						}
+						if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
+							clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
+						}
+						secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+					}
+					itemMap["secret_value"] = secret_valueNestedMap
+				}
+				if !item.Value.IsNull() && !item.Value.IsUnknown() {
+					itemMap["value"] = item.Value.ValueString()
+				}
+				request_cookies_to_addList = append(request_cookies_to_addList, itemMap)
 			}
-			if !item.Value.IsNull() && !item.Value.IsUnknown() {
-				itemMap["value"] = item.Value.ValueString()
-			}
-			request_cookies_to_addList = append(request_cookies_to_addList, itemMap)
+			createReq.Spec["request_cookies_to_add"] = request_cookies_to_addList
 		}
-		createReq.Spec["request_cookies_to_add"] = request_cookies_to_addList
 	}
 	if !data.RequestCookiesToRemove.IsNull() && !data.RequestCookiesToRemove.IsUnknown() {
 		var request_cookies_to_removeList []string
@@ -2503,49 +3118,54 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			createReq.Spec["request_cookies_to_remove"] = request_cookies_to_removeList
 		}
 	}
-	if len(data.RequestHeadersToAdd) > 0 {
-		var request_headers_to_addList []map[string]interface{}
-		for _, item := range data.RequestHeadersToAdd {
-			itemMap := make(map[string]interface{})
-			if !item.Append.IsNull() && !item.Append.IsUnknown() {
-				itemMap["append"] = item.Append.ValueBool()
-			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if item.SecretValue != nil {
-				secret_valueNestedMap := make(map[string]interface{})
-				if item.SecretValue.BlindfoldSecretInfo != nil {
-					blindfold_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
-						blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
-					}
-					secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+	if !data.RequestHeadersToAdd.IsNull() && !data.RequestHeadersToAdd.IsUnknown() {
+		var request_headers_to_addItems []VirtualHostRequestHeadersToAddModel
+		diags := data.RequestHeadersToAdd.ElementsAs(ctx, &request_headers_to_addItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(request_headers_to_addItems) > 0 {
+			var request_headers_to_addList []map[string]interface{}
+			for _, item := range request_headers_to_addItems {
+				itemMap := make(map[string]interface{})
+				if !item.Append.IsNull() && !item.Append.IsUnknown() {
+					itemMap["append"] = item.Append.ValueBool()
 				}
-				if item.SecretValue.ClearSecretInfo != nil {
-					clear_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
-						clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
-					}
-					if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
-						clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
-					}
-					secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
 				}
-				itemMap["secret_value"] = secret_valueNestedMap
+				if item.SecretValue != nil {
+					secret_valueNestedMap := make(map[string]interface{})
+					if item.SecretValue.BlindfoldSecretInfo != nil {
+						blindfold_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
+							blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
+						}
+						secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+					}
+					if item.SecretValue.ClearSecretInfo != nil {
+						clear_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
+							clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
+						}
+						if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
+							clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
+						}
+						secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+					}
+					itemMap["secret_value"] = secret_valueNestedMap
+				}
+				if !item.Value.IsNull() && !item.Value.IsUnknown() {
+					itemMap["value"] = item.Value.ValueString()
+				}
+				request_headers_to_addList = append(request_headers_to_addList, itemMap)
 			}
-			if !item.Value.IsNull() && !item.Value.IsUnknown() {
-				itemMap["value"] = item.Value.ValueString()
-			}
-			request_headers_to_addList = append(request_headers_to_addList, itemMap)
+			createReq.Spec["request_headers_to_add"] = request_headers_to_addList
 		}
-		createReq.Spec["request_headers_to_add"] = request_headers_to_addList
 	}
 	if !data.RequestHeadersToRemove.IsNull() && !data.RequestHeadersToRemove.IsUnknown() {
 		var request_headers_to_removeList []string
@@ -2554,106 +3174,111 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			createReq.Spec["request_headers_to_remove"] = request_headers_to_removeList
 		}
 	}
-	if len(data.ResponseCookiesToAdd) > 0 {
-		var response_cookies_to_addList []map[string]interface{}
-		for _, item := range data.ResponseCookiesToAdd {
-			itemMap := make(map[string]interface{})
-			if !item.AddDomain.IsNull() && !item.AddDomain.IsUnknown() {
-				itemMap["add_domain"] = item.AddDomain.ValueString()
-			}
-			if !item.AddExpiry.IsNull() && !item.AddExpiry.IsUnknown() {
-				itemMap["add_expiry"] = item.AddExpiry.ValueString()
-			}
-			if item.AddHttponly != nil {
-				itemMap["add_httponly"] = map[string]interface{}{}
-			}
-			if item.AddPartitioned != nil {
-				itemMap["add_partitioned"] = map[string]interface{}{}
-			}
-			if !item.AddPath.IsNull() && !item.AddPath.IsUnknown() {
-				itemMap["add_path"] = item.AddPath.ValueString()
-			}
-			if item.AddSecure != nil {
-				itemMap["add_secure"] = map[string]interface{}{}
-			}
-			if item.IgnoreDomain != nil {
-				itemMap["ignore_domain"] = map[string]interface{}{}
-			}
-			if item.IgnoreExpiry != nil {
-				itemMap["ignore_expiry"] = map[string]interface{}{}
-			}
-			if item.IgnoreHttponly != nil {
-				itemMap["ignore_httponly"] = map[string]interface{}{}
-			}
-			if item.IgnoreMaxAge != nil {
-				itemMap["ignore_max_age"] = map[string]interface{}{}
-			}
-			if item.IgnorePartitioned != nil {
-				itemMap["ignore_partitioned"] = map[string]interface{}{}
-			}
-			if item.IgnorePath != nil {
-				itemMap["ignore_path"] = map[string]interface{}{}
-			}
-			if item.IgnoreSamesite != nil {
-				itemMap["ignore_samesite"] = map[string]interface{}{}
-			}
-			if item.IgnoreSecure != nil {
-				itemMap["ignore_secure"] = map[string]interface{}{}
-			}
-			if item.IgnoreValue != nil {
-				itemMap["ignore_value"] = map[string]interface{}{}
-			}
-			if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
-				itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
-			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
-				itemMap["overwrite"] = item.Overwrite.ValueBool()
-			}
-			if item.SamesiteLax != nil {
-				itemMap["samesite_lax"] = map[string]interface{}{}
-			}
-			if item.SamesiteNone != nil {
-				itemMap["samesite_none"] = map[string]interface{}{}
-			}
-			if item.SamesiteStrict != nil {
-				itemMap["samesite_strict"] = map[string]interface{}{}
-			}
-			if item.SecretValue != nil {
-				secret_valueNestedMap := make(map[string]interface{})
-				if item.SecretValue.BlindfoldSecretInfo != nil {
-					blindfold_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
-						blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
-					}
-					secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+	if !data.ResponseCookiesToAdd.IsNull() && !data.ResponseCookiesToAdd.IsUnknown() {
+		var response_cookies_to_addItems []VirtualHostResponseCookiesToAddModel
+		diags := data.ResponseCookiesToAdd.ElementsAs(ctx, &response_cookies_to_addItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(response_cookies_to_addItems) > 0 {
+			var response_cookies_to_addList []map[string]interface{}
+			for _, item := range response_cookies_to_addItems {
+				itemMap := make(map[string]interface{})
+				if !item.AddDomain.IsNull() && !item.AddDomain.IsUnknown() {
+					itemMap["add_domain"] = item.AddDomain.ValueString()
 				}
-				if item.SecretValue.ClearSecretInfo != nil {
-					clear_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
-						clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
-					}
-					if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
-						clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
-					}
-					secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+				if !item.AddExpiry.IsNull() && !item.AddExpiry.IsUnknown() {
+					itemMap["add_expiry"] = item.AddExpiry.ValueString()
 				}
-				itemMap["secret_value"] = secret_valueNestedMap
+				if item.AddHttponly != nil {
+					itemMap["add_httponly"] = map[string]interface{}{}
+				}
+				if item.AddPartitioned != nil {
+					itemMap["add_partitioned"] = map[string]interface{}{}
+				}
+				if !item.AddPath.IsNull() && !item.AddPath.IsUnknown() {
+					itemMap["add_path"] = item.AddPath.ValueString()
+				}
+				if item.AddSecure != nil {
+					itemMap["add_secure"] = map[string]interface{}{}
+				}
+				if item.IgnoreDomain != nil {
+					itemMap["ignore_domain"] = map[string]interface{}{}
+				}
+				if item.IgnoreExpiry != nil {
+					itemMap["ignore_expiry"] = map[string]interface{}{}
+				}
+				if item.IgnoreHttponly != nil {
+					itemMap["ignore_httponly"] = map[string]interface{}{}
+				}
+				if item.IgnoreMaxAge != nil {
+					itemMap["ignore_max_age"] = map[string]interface{}{}
+				}
+				if item.IgnorePartitioned != nil {
+					itemMap["ignore_partitioned"] = map[string]interface{}{}
+				}
+				if item.IgnorePath != nil {
+					itemMap["ignore_path"] = map[string]interface{}{}
+				}
+				if item.IgnoreSamesite != nil {
+					itemMap["ignore_samesite"] = map[string]interface{}{}
+				}
+				if item.IgnoreSecure != nil {
+					itemMap["ignore_secure"] = map[string]interface{}{}
+				}
+				if item.IgnoreValue != nil {
+					itemMap["ignore_value"] = map[string]interface{}{}
+				}
+				if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
+					itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
+					itemMap["overwrite"] = item.Overwrite.ValueBool()
+				}
+				if item.SamesiteLax != nil {
+					itemMap["samesite_lax"] = map[string]interface{}{}
+				}
+				if item.SamesiteNone != nil {
+					itemMap["samesite_none"] = map[string]interface{}{}
+				}
+				if item.SamesiteStrict != nil {
+					itemMap["samesite_strict"] = map[string]interface{}{}
+				}
+				if item.SecretValue != nil {
+					secret_valueNestedMap := make(map[string]interface{})
+					if item.SecretValue.BlindfoldSecretInfo != nil {
+						blindfold_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
+							blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
+						}
+						secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+					}
+					if item.SecretValue.ClearSecretInfo != nil {
+						clear_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
+							clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
+						}
+						if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
+							clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
+						}
+						secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+					}
+					itemMap["secret_value"] = secret_valueNestedMap
+				}
+				if !item.Value.IsNull() && !item.Value.IsUnknown() {
+					itemMap["value"] = item.Value.ValueString()
+				}
+				response_cookies_to_addList = append(response_cookies_to_addList, itemMap)
 			}
-			if !item.Value.IsNull() && !item.Value.IsUnknown() {
-				itemMap["value"] = item.Value.ValueString()
-			}
-			response_cookies_to_addList = append(response_cookies_to_addList, itemMap)
+			createReq.Spec["response_cookies_to_add"] = response_cookies_to_addList
 		}
-		createReq.Spec["response_cookies_to_add"] = response_cookies_to_addList
 	}
 	if !data.ResponseCookiesToRemove.IsNull() && !data.ResponseCookiesToRemove.IsUnknown() {
 		var response_cookies_to_removeList []string
@@ -2662,49 +3287,54 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 			createReq.Spec["response_cookies_to_remove"] = response_cookies_to_removeList
 		}
 	}
-	if len(data.ResponseHeadersToAdd) > 0 {
-		var response_headers_to_addList []map[string]interface{}
-		for _, item := range data.ResponseHeadersToAdd {
-			itemMap := make(map[string]interface{})
-			if !item.Append.IsNull() && !item.Append.IsUnknown() {
-				itemMap["append"] = item.Append.ValueBool()
-			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if item.SecretValue != nil {
-				secret_valueNestedMap := make(map[string]interface{})
-				if item.SecretValue.BlindfoldSecretInfo != nil {
-					blindfold_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
-						blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
-					}
-					secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+	if !data.ResponseHeadersToAdd.IsNull() && !data.ResponseHeadersToAdd.IsUnknown() {
+		var response_headers_to_addItems []VirtualHostResponseHeadersToAddModel
+		diags := data.ResponseHeadersToAdd.ElementsAs(ctx, &response_headers_to_addItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(response_headers_to_addItems) > 0 {
+			var response_headers_to_addList []map[string]interface{}
+			for _, item := range response_headers_to_addItems {
+				itemMap := make(map[string]interface{})
+				if !item.Append.IsNull() && !item.Append.IsUnknown() {
+					itemMap["append"] = item.Append.ValueBool()
 				}
-				if item.SecretValue.ClearSecretInfo != nil {
-					clear_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
-						clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
-					}
-					if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
-						clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
-					}
-					secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
 				}
-				itemMap["secret_value"] = secret_valueNestedMap
+				if item.SecretValue != nil {
+					secret_valueNestedMap := make(map[string]interface{})
+					if item.SecretValue.BlindfoldSecretInfo != nil {
+						blindfold_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
+							blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
+						}
+						secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+					}
+					if item.SecretValue.ClearSecretInfo != nil {
+						clear_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
+							clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
+						}
+						if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
+							clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
+						}
+						secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+					}
+					itemMap["secret_value"] = secret_valueNestedMap
+				}
+				if !item.Value.IsNull() && !item.Value.IsUnknown() {
+					itemMap["value"] = item.Value.ValueString()
+				}
+				response_headers_to_addList = append(response_headers_to_addList, itemMap)
 			}
-			if !item.Value.IsNull() && !item.Value.IsUnknown() {
-				itemMap["value"] = item.Value.ValueString()
-			}
-			response_headers_to_addList = append(response_headers_to_addList, itemMap)
+			createReq.Spec["response_headers_to_add"] = response_headers_to_addList
 		}
-		createReq.Spec["response_headers_to_add"] = response_headers_to_addList
 	}
 	if !data.ResponseHeadersToRemove.IsNull() && !data.ResponseHeadersToRemove.IsUnknown() {
 		var response_headers_to_removeList []string
@@ -2747,51 +3377,61 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		createReq.Spec["retry_policy"] = retry_policyMap
 	}
-	if len(data.Routes) > 0 {
-		var routesList []map[string]interface{}
-		for _, item := range data.Routes {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.Routes.IsNull() && !data.Routes.IsUnknown() {
+		var routesItems []VirtualHostRoutesModel
+		diags := data.Routes.ElementsAs(ctx, &routesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(routesItems) > 0 {
+			var routesList []map[string]interface{}
+			for _, item := range routesItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				routesList = append(routesList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			routesList = append(routesList, itemMap)
+			createReq.Spec["routes"] = routesList
 		}
-		createReq.Spec["routes"] = routesList
 	}
-	if len(data.SensitiveDataPolicy) > 0 {
-		var sensitive_data_policyList []map[string]interface{}
-		for _, item := range data.SensitiveDataPolicy {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.SensitiveDataPolicy.IsNull() && !data.SensitiveDataPolicy.IsUnknown() {
+		var sensitive_data_policyItems []VirtualHostSensitiveDataPolicyModel
+		diags := data.SensitiveDataPolicy.ElementsAs(ctx, &sensitive_data_policyItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(sensitive_data_policyItems) > 0 {
+			var sensitive_data_policyList []map[string]interface{}
+			for _, item := range sensitive_data_policyItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				sensitive_data_policyList = append(sensitive_data_policyList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			sensitive_data_policyList = append(sensitive_data_policyList, itemMap)
+			createReq.Spec["sensitive_data_policy"] = sensitive_data_policyList
 		}
-		createReq.Spec["sensitive_data_policy"] = sensitive_data_policyList
 	}
 	if data.SlowDDOSMitigation != nil {
 		slow_ddos_mitigationMap := make(map[string]interface{})
@@ -2902,28 +3542,33 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 		}
 		createReq.Spec["tls_parameters"] = tls_parametersMap
 	}
-	if len(data.UserIdentification) > 0 {
-		var user_identificationList []map[string]interface{}
-		for _, item := range data.UserIdentification {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.UserIdentification.IsNull() && !data.UserIdentification.IsUnknown() {
+		var user_identificationItems []VirtualHostUserIdentificationModel
+		diags := data.UserIdentification.ElementsAs(ctx, &user_identificationItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(user_identificationItems) > 0 {
+			var user_identificationList []map[string]interface{}
+			for _, item := range user_identificationItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				user_identificationList = append(user_identificationList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			user_identificationList = append(user_identificationList, itemMap)
+			createReq.Spec["user_identification"] = user_identificationList
 		}
-		createReq.Spec["user_identification"] = user_identificationList
 	}
 	if data.WAFType != nil {
 		waf_typeMap := make(map[string]interface{})
@@ -2981,6 +3626,10 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["advertise_policies"].([]interface{}); ok && len(listData) > 0 {
 		var advertise_policiesList []VirtualHostAdvertisePoliciesModel
+		var existingAdvertisePoliciesItems []VirtualHostAdvertisePoliciesModel
+		if !data.AdvertisePolicies.IsNull() && !data.AdvertisePolicies.IsUnknown() {
+			data.AdvertisePolicies.ElementsAs(ctx, &existingAdvertisePoliciesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3018,7 +3667,14 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.AdvertisePolicies = advertise_policiesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostAdvertisePoliciesModelAttrTypes}, advertise_policiesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AdvertisePolicies = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.AdvertisePolicies = types.ListNull(types.ObjectType{AttrTypes: VirtualHostAdvertisePoliciesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["authentication"].(map[string]interface{}); ok && (isImport || data.Authentication != nil) {
 		data.Authentication = &VirtualHostAuthenticationModel{
@@ -3454,6 +4110,10 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["rate_limiter_allowed_prefixes"].([]interface{}); ok && len(listData) > 0 {
 		var rate_limiter_allowed_prefixesList []VirtualHostRateLimiterAllowedPrefixesModel
+		var existingRateLimiterAllowedPrefixesItems []VirtualHostRateLimiterAllowedPrefixesModel
+		if !data.RateLimiterAllowedPrefixes.IsNull() && !data.RateLimiterAllowedPrefixes.IsUnknown() {
+			data.RateLimiterAllowedPrefixes.ElementsAs(ctx, &existingRateLimiterAllowedPrefixesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3491,10 +4151,21 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.RateLimiterAllowedPrefixes = rate_limiter_allowed_prefixesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRateLimiterAllowedPrefixesModelAttrTypes}, rate_limiter_allowed_prefixesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RateLimiterAllowedPrefixes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RateLimiterAllowedPrefixes = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRateLimiterAllowedPrefixesModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["request_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var request_cookies_to_addList []VirtualHostRequestCookiesToAddModel
+		var existingRequestCookiesToAddItems []VirtualHostRequestCookiesToAddModel
+		if !data.RequestCookiesToAdd.IsNull() && !data.RequestCookiesToAdd.IsUnknown() {
+			data.RequestCookiesToAdd.ElementsAs(ctx, &existingRequestCookiesToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3526,7 +4197,14 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.RequestCookiesToAdd = request_cookies_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRequestCookiesToAddModelAttrTypes}, request_cookies_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RequestCookiesToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RequestCookiesToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRequestCookiesToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["request_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var request_cookies_to_removeList []string
@@ -3545,6 +4223,10 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if listData, ok := apiResource.Spec["request_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var request_headers_to_addList []VirtualHostRequestHeadersToAddModel
+		var existingRequestHeadersToAddItems []VirtualHostRequestHeadersToAddModel
+		if !data.RequestHeadersToAdd.IsNull() && !data.RequestHeadersToAdd.IsUnknown() {
+			data.RequestHeadersToAdd.ElementsAs(ctx, &existingRequestHeadersToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3576,7 +4258,14 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.RequestHeadersToAdd = request_headers_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRequestHeadersToAddModelAttrTypes}, request_headers_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RequestHeadersToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RequestHeadersToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRequestHeadersToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var request_headers_to_removeList []string
@@ -3595,6 +4284,10 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if listData, ok := apiResource.Spec["response_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var response_cookies_to_addList []VirtualHostResponseCookiesToAddModel
+		var existingResponseCookiesToAddItems []VirtualHostResponseCookiesToAddModel
+		if !data.ResponseCookiesToAdd.IsNull() && !data.ResponseCookiesToAdd.IsUnknown() {
+			data.ResponseCookiesToAdd.ElementsAs(ctx, &existingResponseCookiesToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3612,13 +4305,13 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 						return types.StringNull()
 					}(),
 					AddHttponly: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddHttponly != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].AddHttponly != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					AddPartitioned: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddPartitioned != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].AddPartitioned != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
@@ -3630,61 +4323,61 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 						return types.StringNull()
 					}(),
 					AddSecure: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddSecure != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].AddSecure != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreDomain: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreDomain != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreDomain != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreExpiry: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreExpiry != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreExpiry != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreHttponly: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreHttponly != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreHttponly != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreMaxAge: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreMaxAge != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreMaxAge != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnorePartitioned: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnorePartitioned != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnorePartitioned != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnorePath: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnorePath != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnorePath != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSamesite: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreSamesite != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreSamesite != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSecure: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreSecure != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreSecure != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreValue: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreValue != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreValue != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
@@ -3708,19 +4401,19 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 						return types.BoolNull()
 					}(),
 					SamesiteLax: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteLax != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].SamesiteLax != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteNone: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteNone != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].SamesiteNone != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteStrict: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteStrict != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].SamesiteStrict != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
@@ -3740,7 +4433,14 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.ResponseCookiesToAdd = response_cookies_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostResponseCookiesToAddModelAttrTypes}, response_cookies_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ResponseCookiesToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ResponseCookiesToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostResponseCookiesToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["response_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var response_cookies_to_removeList []string
@@ -3759,6 +4459,10 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if listData, ok := apiResource.Spec["response_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var response_headers_to_addList []VirtualHostResponseHeadersToAddModel
+		var existingResponseHeadersToAddItems []VirtualHostResponseHeadersToAddModel
+		if !data.ResponseHeadersToAdd.IsNull() && !data.ResponseHeadersToAdd.IsUnknown() {
+			data.ResponseHeadersToAdd.ElementsAs(ctx, &existingResponseHeadersToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3790,7 +4494,14 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.ResponseHeadersToAdd = response_headers_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostResponseHeadersToAddModelAttrTypes}, response_headers_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ResponseHeadersToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ResponseHeadersToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostResponseHeadersToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var response_headers_to_removeList []string
@@ -3875,6 +4586,10 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
 		var routesList []VirtualHostRoutesModel
+		var existingRoutesItems []VirtualHostRoutesModel
+		if !data.Routes.IsNull() && !data.Routes.IsUnknown() {
+			data.Routes.ElementsAs(ctx, &existingRoutesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3912,10 +4627,21 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.Routes = routesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRoutesModelAttrTypes}, routesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Routes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Routes = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRoutesModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["sensitive_data_policy"].([]interface{}); ok && len(listData) > 0 {
 		var sensitive_data_policyList []VirtualHostSensitiveDataPolicyModel
+		var existingSensitiveDataPolicyItems []VirtualHostSensitiveDataPolicyModel
+		if !data.SensitiveDataPolicy.IsNull() && !data.SensitiveDataPolicy.IsUnknown() {
+			data.SensitiveDataPolicy.ElementsAs(ctx, &existingSensitiveDataPolicyItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -3953,7 +4679,14 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.SensitiveDataPolicy = sensitive_data_policyList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostSensitiveDataPolicyModelAttrTypes}, sensitive_data_policyList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SensitiveDataPolicy = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.SensitiveDataPolicy = types.ListNull(types.ObjectType{AttrTypes: VirtualHostSensitiveDataPolicyModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
 		data.SlowDDOSMitigation = &VirtualHostSlowDDOSMitigationModel{
@@ -4233,6 +4966,10 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
 		var user_identificationList []VirtualHostUserIdentificationModel
+		var existingUserIdentificationItems []VirtualHostUserIdentificationModel
+		if !data.UserIdentification.IsNull() && !data.UserIdentification.IsUnknown() {
+			data.UserIdentification.ElementsAs(ctx, &existingUserIdentificationItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -4270,7 +5007,14 @@ func (r *VirtualHostResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.UserIdentification = user_identificationList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostUserIdentificationModelAttrTypes}, user_identificationList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.UserIdentification = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.UserIdentification = types.ListNull(types.ObjectType{AttrTypes: VirtualHostUserIdentificationModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["waf_type"].(map[string]interface{}); ok && isImport && data.WAFType == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -4404,11 +5148,17 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -4435,6 +5185,10 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	})
 	if listData, ok := apiResource.Spec["advertise_policies"].([]interface{}); ok && len(listData) > 0 {
 		var advertise_policiesList []VirtualHostAdvertisePoliciesModel
+		var existingAdvertisePoliciesItems []VirtualHostAdvertisePoliciesModel
+		if !data.AdvertisePolicies.IsNull() && !data.AdvertisePolicies.IsUnknown() {
+			data.AdvertisePolicies.ElementsAs(ctx, &existingAdvertisePoliciesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -4472,7 +5226,14 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.AdvertisePolicies = advertise_policiesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostAdvertisePoliciesModelAttrTypes}, advertise_policiesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AdvertisePolicies = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.AdvertisePolicies = types.ListNull(types.ObjectType{AttrTypes: VirtualHostAdvertisePoliciesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["authentication"].(map[string]interface{}); ok && (isImport || data.Authentication != nil) {
 		data.Authentication = &VirtualHostAuthenticationModel{
@@ -4908,6 +5669,10 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["rate_limiter_allowed_prefixes"].([]interface{}); ok && len(listData) > 0 {
 		var rate_limiter_allowed_prefixesList []VirtualHostRateLimiterAllowedPrefixesModel
+		var existingRateLimiterAllowedPrefixesItems []VirtualHostRateLimiterAllowedPrefixesModel
+		if !data.RateLimiterAllowedPrefixes.IsNull() && !data.RateLimiterAllowedPrefixes.IsUnknown() {
+			data.RateLimiterAllowedPrefixes.ElementsAs(ctx, &existingRateLimiterAllowedPrefixesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -4945,10 +5710,21 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.RateLimiterAllowedPrefixes = rate_limiter_allowed_prefixesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRateLimiterAllowedPrefixesModelAttrTypes}, rate_limiter_allowed_prefixesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RateLimiterAllowedPrefixes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RateLimiterAllowedPrefixes = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRateLimiterAllowedPrefixesModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["request_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var request_cookies_to_addList []VirtualHostRequestCookiesToAddModel
+		var existingRequestCookiesToAddItems []VirtualHostRequestCookiesToAddModel
+		if !data.RequestCookiesToAdd.IsNull() && !data.RequestCookiesToAdd.IsUnknown() {
+			data.RequestCookiesToAdd.ElementsAs(ctx, &existingRequestCookiesToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -4980,7 +5756,14 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.RequestCookiesToAdd = request_cookies_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRequestCookiesToAddModelAttrTypes}, request_cookies_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RequestCookiesToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RequestCookiesToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRequestCookiesToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["request_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var request_cookies_to_removeList []string
@@ -4999,6 +5782,10 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if listData, ok := apiResource.Spec["request_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var request_headers_to_addList []VirtualHostRequestHeadersToAddModel
+		var existingRequestHeadersToAddItems []VirtualHostRequestHeadersToAddModel
+		if !data.RequestHeadersToAdd.IsNull() && !data.RequestHeadersToAdd.IsUnknown() {
+			data.RequestHeadersToAdd.ElementsAs(ctx, &existingRequestHeadersToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -5030,7 +5817,14 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.RequestHeadersToAdd = request_headers_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRequestHeadersToAddModelAttrTypes}, request_headers_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RequestHeadersToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RequestHeadersToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRequestHeadersToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var request_headers_to_removeList []string
@@ -5049,6 +5843,10 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if listData, ok := apiResource.Spec["response_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var response_cookies_to_addList []VirtualHostResponseCookiesToAddModel
+		var existingResponseCookiesToAddItems []VirtualHostResponseCookiesToAddModel
+		if !data.ResponseCookiesToAdd.IsNull() && !data.ResponseCookiesToAdd.IsUnknown() {
+			data.ResponseCookiesToAdd.ElementsAs(ctx, &existingResponseCookiesToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -5066,13 +5864,13 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 						return types.StringNull()
 					}(),
 					AddHttponly: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddHttponly != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].AddHttponly != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					AddPartitioned: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddPartitioned != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].AddPartitioned != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
@@ -5084,61 +5882,61 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 						return types.StringNull()
 					}(),
 					AddSecure: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddSecure != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].AddSecure != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreDomain: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreDomain != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreDomain != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreExpiry: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreExpiry != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreExpiry != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreHttponly: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreHttponly != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreHttponly != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreMaxAge: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreMaxAge != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreMaxAge != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnorePartitioned: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnorePartitioned != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnorePartitioned != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnorePath: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnorePath != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnorePath != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSamesite: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreSamesite != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreSamesite != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSecure: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreSecure != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreSecure != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreValue: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreValue != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreValue != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
@@ -5162,19 +5960,19 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 						return types.BoolNull()
 					}(),
 					SamesiteLax: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteLax != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].SamesiteLax != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteNone: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteNone != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].SamesiteNone != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteStrict: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteStrict != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].SamesiteStrict != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
@@ -5194,7 +5992,14 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.ResponseCookiesToAdd = response_cookies_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostResponseCookiesToAddModelAttrTypes}, response_cookies_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ResponseCookiesToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ResponseCookiesToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostResponseCookiesToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["response_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var response_cookies_to_removeList []string
@@ -5213,6 +6018,10 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if listData, ok := apiResource.Spec["response_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var response_headers_to_addList []VirtualHostResponseHeadersToAddModel
+		var existingResponseHeadersToAddItems []VirtualHostResponseHeadersToAddModel
+		if !data.ResponseHeadersToAdd.IsNull() && !data.ResponseHeadersToAdd.IsUnknown() {
+			data.ResponseHeadersToAdd.ElementsAs(ctx, &existingResponseHeadersToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -5244,7 +6053,14 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.ResponseHeadersToAdd = response_headers_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostResponseHeadersToAddModelAttrTypes}, response_headers_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ResponseHeadersToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ResponseHeadersToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostResponseHeadersToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var response_headers_to_removeList []string
@@ -5329,6 +6145,10 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
 		var routesList []VirtualHostRoutesModel
+		var existingRoutesItems []VirtualHostRoutesModel
+		if !data.Routes.IsNull() && !data.Routes.IsUnknown() {
+			data.Routes.ElementsAs(ctx, &existingRoutesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -5366,10 +6186,21 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.Routes = routesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRoutesModelAttrTypes}, routesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Routes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Routes = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRoutesModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["sensitive_data_policy"].([]interface{}); ok && len(listData) > 0 {
 		var sensitive_data_policyList []VirtualHostSensitiveDataPolicyModel
+		var existingSensitiveDataPolicyItems []VirtualHostSensitiveDataPolicyModel
+		if !data.SensitiveDataPolicy.IsNull() && !data.SensitiveDataPolicy.IsUnknown() {
+			data.SensitiveDataPolicy.ElementsAs(ctx, &existingSensitiveDataPolicyItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -5407,7 +6238,14 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.SensitiveDataPolicy = sensitive_data_policyList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostSensitiveDataPolicyModelAttrTypes}, sensitive_data_policyList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SensitiveDataPolicy = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.SensitiveDataPolicy = types.ListNull(types.ObjectType{AttrTypes: VirtualHostSensitiveDataPolicyModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
 		data.SlowDDOSMitigation = &VirtualHostSlowDDOSMitigationModel{
@@ -5687,6 +6525,10 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
 		var user_identificationList []VirtualHostUserIdentificationModel
+		var existingUserIdentificationItems []VirtualHostUserIdentificationModel
+		if !data.UserIdentification.IsNull() && !data.UserIdentification.IsUnknown() {
+			data.UserIdentification.ElementsAs(ctx, &existingUserIdentificationItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -5724,7 +6566,14 @@ func (r *VirtualHostResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.UserIdentification = user_identificationList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostUserIdentificationModelAttrTypes}, user_identificationList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.UserIdentification = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.UserIdentification = types.ListNull(types.ObjectType{AttrTypes: VirtualHostUserIdentificationModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["waf_type"].(map[string]interface{}); ok && isImport && data.WAFType == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -5854,28 +6703,33 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.AdvertisePolicies) > 0 {
-		var advertise_policiesList []map[string]interface{}
-		for _, item := range data.AdvertisePolicies {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.AdvertisePolicies.IsNull() && !data.AdvertisePolicies.IsUnknown() {
+		var advertise_policiesItems []VirtualHostAdvertisePoliciesModel
+		diags := data.AdvertisePolicies.ElementsAs(ctx, &advertise_policiesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(advertise_policiesItems) > 0 {
+			var advertise_policiesList []map[string]interface{}
+			for _, item := range advertise_policiesItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				advertise_policiesList = append(advertise_policiesList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			advertise_policiesList = append(advertise_policiesList, itemMap)
+			apiResource.Spec["advertise_policies"] = advertise_policiesList
 		}
-		apiResource.Spec["advertise_policies"] = advertise_policiesList
 	}
 	if data.Authentication != nil {
 		authenticationMap := make(map[string]interface{})
@@ -6132,72 +6986,82 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		pass_throughMap := make(map[string]interface{})
 		apiResource.Spec["pass_through"] = pass_throughMap
 	}
-	if len(data.RateLimiterAllowedPrefixes) > 0 {
-		var rate_limiter_allowed_prefixesList []map[string]interface{}
-		for _, item := range data.RateLimiterAllowedPrefixes {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.RateLimiterAllowedPrefixes.IsNull() && !data.RateLimiterAllowedPrefixes.IsUnknown() {
+		var rate_limiter_allowed_prefixesItems []VirtualHostRateLimiterAllowedPrefixesModel
+		diags := data.RateLimiterAllowedPrefixes.ElementsAs(ctx, &rate_limiter_allowed_prefixesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(rate_limiter_allowed_prefixesItems) > 0 {
+			var rate_limiter_allowed_prefixesList []map[string]interface{}
+			for _, item := range rate_limiter_allowed_prefixesItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				rate_limiter_allowed_prefixesList = append(rate_limiter_allowed_prefixesList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			rate_limiter_allowed_prefixesList = append(rate_limiter_allowed_prefixesList, itemMap)
+			apiResource.Spec["rate_limiter_allowed_prefixes"] = rate_limiter_allowed_prefixesList
 		}
-		apiResource.Spec["rate_limiter_allowed_prefixes"] = rate_limiter_allowed_prefixesList
 	}
-	if len(data.RequestCookiesToAdd) > 0 {
-		var request_cookies_to_addList []map[string]interface{}
-		for _, item := range data.RequestCookiesToAdd {
-			itemMap := make(map[string]interface{})
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
-				itemMap["overwrite"] = item.Overwrite.ValueBool()
-			}
-			if item.SecretValue != nil {
-				secret_valueNestedMap := make(map[string]interface{})
-				if item.SecretValue.BlindfoldSecretInfo != nil {
-					blindfold_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
-						blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
-					}
-					secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+	if !data.RequestCookiesToAdd.IsNull() && !data.RequestCookiesToAdd.IsUnknown() {
+		var request_cookies_to_addItems []VirtualHostRequestCookiesToAddModel
+		diags := data.RequestCookiesToAdd.ElementsAs(ctx, &request_cookies_to_addItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(request_cookies_to_addItems) > 0 {
+			var request_cookies_to_addList []map[string]interface{}
+			for _, item := range request_cookies_to_addItems {
+				itemMap := make(map[string]interface{})
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
 				}
-				if item.SecretValue.ClearSecretInfo != nil {
-					clear_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
-						clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
-					}
-					if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
-						clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
-					}
-					secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+				if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
+					itemMap["overwrite"] = item.Overwrite.ValueBool()
 				}
-				itemMap["secret_value"] = secret_valueNestedMap
+				if item.SecretValue != nil {
+					secret_valueNestedMap := make(map[string]interface{})
+					if item.SecretValue.BlindfoldSecretInfo != nil {
+						blindfold_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
+							blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
+						}
+						secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+					}
+					if item.SecretValue.ClearSecretInfo != nil {
+						clear_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
+							clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
+						}
+						if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
+							clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
+						}
+						secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+					}
+					itemMap["secret_value"] = secret_valueNestedMap
+				}
+				if !item.Value.IsNull() && !item.Value.IsUnknown() {
+					itemMap["value"] = item.Value.ValueString()
+				}
+				request_cookies_to_addList = append(request_cookies_to_addList, itemMap)
 			}
-			if !item.Value.IsNull() && !item.Value.IsUnknown() {
-				itemMap["value"] = item.Value.ValueString()
-			}
-			request_cookies_to_addList = append(request_cookies_to_addList, itemMap)
+			apiResource.Spec["request_cookies_to_add"] = request_cookies_to_addList
 		}
-		apiResource.Spec["request_cookies_to_add"] = request_cookies_to_addList
 	}
 	if !data.RequestCookiesToRemove.IsNull() && !data.RequestCookiesToRemove.IsUnknown() {
 		var request_cookies_to_removeList []string
@@ -6206,49 +7070,54 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			apiResource.Spec["request_cookies_to_remove"] = request_cookies_to_removeList
 		}
 	}
-	if len(data.RequestHeadersToAdd) > 0 {
-		var request_headers_to_addList []map[string]interface{}
-		for _, item := range data.RequestHeadersToAdd {
-			itemMap := make(map[string]interface{})
-			if !item.Append.IsNull() && !item.Append.IsUnknown() {
-				itemMap["append"] = item.Append.ValueBool()
-			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if item.SecretValue != nil {
-				secret_valueNestedMap := make(map[string]interface{})
-				if item.SecretValue.BlindfoldSecretInfo != nil {
-					blindfold_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
-						blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
-					}
-					secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+	if !data.RequestHeadersToAdd.IsNull() && !data.RequestHeadersToAdd.IsUnknown() {
+		var request_headers_to_addItems []VirtualHostRequestHeadersToAddModel
+		diags := data.RequestHeadersToAdd.ElementsAs(ctx, &request_headers_to_addItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(request_headers_to_addItems) > 0 {
+			var request_headers_to_addList []map[string]interface{}
+			for _, item := range request_headers_to_addItems {
+				itemMap := make(map[string]interface{})
+				if !item.Append.IsNull() && !item.Append.IsUnknown() {
+					itemMap["append"] = item.Append.ValueBool()
 				}
-				if item.SecretValue.ClearSecretInfo != nil {
-					clear_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
-						clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
-					}
-					if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
-						clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
-					}
-					secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
 				}
-				itemMap["secret_value"] = secret_valueNestedMap
+				if item.SecretValue != nil {
+					secret_valueNestedMap := make(map[string]interface{})
+					if item.SecretValue.BlindfoldSecretInfo != nil {
+						blindfold_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
+							blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
+						}
+						secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+					}
+					if item.SecretValue.ClearSecretInfo != nil {
+						clear_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
+							clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
+						}
+						if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
+							clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
+						}
+						secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+					}
+					itemMap["secret_value"] = secret_valueNestedMap
+				}
+				if !item.Value.IsNull() && !item.Value.IsUnknown() {
+					itemMap["value"] = item.Value.ValueString()
+				}
+				request_headers_to_addList = append(request_headers_to_addList, itemMap)
 			}
-			if !item.Value.IsNull() && !item.Value.IsUnknown() {
-				itemMap["value"] = item.Value.ValueString()
-			}
-			request_headers_to_addList = append(request_headers_to_addList, itemMap)
+			apiResource.Spec["request_headers_to_add"] = request_headers_to_addList
 		}
-		apiResource.Spec["request_headers_to_add"] = request_headers_to_addList
 	}
 	if !data.RequestHeadersToRemove.IsNull() && !data.RequestHeadersToRemove.IsUnknown() {
 		var request_headers_to_removeList []string
@@ -6257,106 +7126,111 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			apiResource.Spec["request_headers_to_remove"] = request_headers_to_removeList
 		}
 	}
-	if len(data.ResponseCookiesToAdd) > 0 {
-		var response_cookies_to_addList []map[string]interface{}
-		for _, item := range data.ResponseCookiesToAdd {
-			itemMap := make(map[string]interface{})
-			if !item.AddDomain.IsNull() && !item.AddDomain.IsUnknown() {
-				itemMap["add_domain"] = item.AddDomain.ValueString()
-			}
-			if !item.AddExpiry.IsNull() && !item.AddExpiry.IsUnknown() {
-				itemMap["add_expiry"] = item.AddExpiry.ValueString()
-			}
-			if item.AddHttponly != nil {
-				itemMap["add_httponly"] = map[string]interface{}{}
-			}
-			if item.AddPartitioned != nil {
-				itemMap["add_partitioned"] = map[string]interface{}{}
-			}
-			if !item.AddPath.IsNull() && !item.AddPath.IsUnknown() {
-				itemMap["add_path"] = item.AddPath.ValueString()
-			}
-			if item.AddSecure != nil {
-				itemMap["add_secure"] = map[string]interface{}{}
-			}
-			if item.IgnoreDomain != nil {
-				itemMap["ignore_domain"] = map[string]interface{}{}
-			}
-			if item.IgnoreExpiry != nil {
-				itemMap["ignore_expiry"] = map[string]interface{}{}
-			}
-			if item.IgnoreHttponly != nil {
-				itemMap["ignore_httponly"] = map[string]interface{}{}
-			}
-			if item.IgnoreMaxAge != nil {
-				itemMap["ignore_max_age"] = map[string]interface{}{}
-			}
-			if item.IgnorePartitioned != nil {
-				itemMap["ignore_partitioned"] = map[string]interface{}{}
-			}
-			if item.IgnorePath != nil {
-				itemMap["ignore_path"] = map[string]interface{}{}
-			}
-			if item.IgnoreSamesite != nil {
-				itemMap["ignore_samesite"] = map[string]interface{}{}
-			}
-			if item.IgnoreSecure != nil {
-				itemMap["ignore_secure"] = map[string]interface{}{}
-			}
-			if item.IgnoreValue != nil {
-				itemMap["ignore_value"] = map[string]interface{}{}
-			}
-			if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
-				itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
-			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
-				itemMap["overwrite"] = item.Overwrite.ValueBool()
-			}
-			if item.SamesiteLax != nil {
-				itemMap["samesite_lax"] = map[string]interface{}{}
-			}
-			if item.SamesiteNone != nil {
-				itemMap["samesite_none"] = map[string]interface{}{}
-			}
-			if item.SamesiteStrict != nil {
-				itemMap["samesite_strict"] = map[string]interface{}{}
-			}
-			if item.SecretValue != nil {
-				secret_valueNestedMap := make(map[string]interface{})
-				if item.SecretValue.BlindfoldSecretInfo != nil {
-					blindfold_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
-						blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
-					}
-					secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+	if !data.ResponseCookiesToAdd.IsNull() && !data.ResponseCookiesToAdd.IsUnknown() {
+		var response_cookies_to_addItems []VirtualHostResponseCookiesToAddModel
+		diags := data.ResponseCookiesToAdd.ElementsAs(ctx, &response_cookies_to_addItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(response_cookies_to_addItems) > 0 {
+			var response_cookies_to_addList []map[string]interface{}
+			for _, item := range response_cookies_to_addItems {
+				itemMap := make(map[string]interface{})
+				if !item.AddDomain.IsNull() && !item.AddDomain.IsUnknown() {
+					itemMap["add_domain"] = item.AddDomain.ValueString()
 				}
-				if item.SecretValue.ClearSecretInfo != nil {
-					clear_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
-						clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
-					}
-					if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
-						clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
-					}
-					secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+				if !item.AddExpiry.IsNull() && !item.AddExpiry.IsUnknown() {
+					itemMap["add_expiry"] = item.AddExpiry.ValueString()
 				}
-				itemMap["secret_value"] = secret_valueNestedMap
+				if item.AddHttponly != nil {
+					itemMap["add_httponly"] = map[string]interface{}{}
+				}
+				if item.AddPartitioned != nil {
+					itemMap["add_partitioned"] = map[string]interface{}{}
+				}
+				if !item.AddPath.IsNull() && !item.AddPath.IsUnknown() {
+					itemMap["add_path"] = item.AddPath.ValueString()
+				}
+				if item.AddSecure != nil {
+					itemMap["add_secure"] = map[string]interface{}{}
+				}
+				if item.IgnoreDomain != nil {
+					itemMap["ignore_domain"] = map[string]interface{}{}
+				}
+				if item.IgnoreExpiry != nil {
+					itemMap["ignore_expiry"] = map[string]interface{}{}
+				}
+				if item.IgnoreHttponly != nil {
+					itemMap["ignore_httponly"] = map[string]interface{}{}
+				}
+				if item.IgnoreMaxAge != nil {
+					itemMap["ignore_max_age"] = map[string]interface{}{}
+				}
+				if item.IgnorePartitioned != nil {
+					itemMap["ignore_partitioned"] = map[string]interface{}{}
+				}
+				if item.IgnorePath != nil {
+					itemMap["ignore_path"] = map[string]interface{}{}
+				}
+				if item.IgnoreSamesite != nil {
+					itemMap["ignore_samesite"] = map[string]interface{}{}
+				}
+				if item.IgnoreSecure != nil {
+					itemMap["ignore_secure"] = map[string]interface{}{}
+				}
+				if item.IgnoreValue != nil {
+					itemMap["ignore_value"] = map[string]interface{}{}
+				}
+				if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
+					itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Overwrite.IsNull() && !item.Overwrite.IsUnknown() {
+					itemMap["overwrite"] = item.Overwrite.ValueBool()
+				}
+				if item.SamesiteLax != nil {
+					itemMap["samesite_lax"] = map[string]interface{}{}
+				}
+				if item.SamesiteNone != nil {
+					itemMap["samesite_none"] = map[string]interface{}{}
+				}
+				if item.SamesiteStrict != nil {
+					itemMap["samesite_strict"] = map[string]interface{}{}
+				}
+				if item.SecretValue != nil {
+					secret_valueNestedMap := make(map[string]interface{})
+					if item.SecretValue.BlindfoldSecretInfo != nil {
+						blindfold_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
+							blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
+						}
+						secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+					}
+					if item.SecretValue.ClearSecretInfo != nil {
+						clear_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
+							clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
+						}
+						if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
+							clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
+						}
+						secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+					}
+					itemMap["secret_value"] = secret_valueNestedMap
+				}
+				if !item.Value.IsNull() && !item.Value.IsUnknown() {
+					itemMap["value"] = item.Value.ValueString()
+				}
+				response_cookies_to_addList = append(response_cookies_to_addList, itemMap)
 			}
-			if !item.Value.IsNull() && !item.Value.IsUnknown() {
-				itemMap["value"] = item.Value.ValueString()
-			}
-			response_cookies_to_addList = append(response_cookies_to_addList, itemMap)
+			apiResource.Spec["response_cookies_to_add"] = response_cookies_to_addList
 		}
-		apiResource.Spec["response_cookies_to_add"] = response_cookies_to_addList
 	}
 	if !data.ResponseCookiesToRemove.IsNull() && !data.ResponseCookiesToRemove.IsUnknown() {
 		var response_cookies_to_removeList []string
@@ -6365,49 +7239,54 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 			apiResource.Spec["response_cookies_to_remove"] = response_cookies_to_removeList
 		}
 	}
-	if len(data.ResponseHeadersToAdd) > 0 {
-		var response_headers_to_addList []map[string]interface{}
-		for _, item := range data.ResponseHeadersToAdd {
-			itemMap := make(map[string]interface{})
-			if !item.Append.IsNull() && !item.Append.IsUnknown() {
-				itemMap["append"] = item.Append.ValueBool()
-			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if item.SecretValue != nil {
-				secret_valueNestedMap := make(map[string]interface{})
-				if item.SecretValue.BlindfoldSecretInfo != nil {
-					blindfold_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
-						blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
-					}
-					if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
-						blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
-					}
-					secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+	if !data.ResponseHeadersToAdd.IsNull() && !data.ResponseHeadersToAdd.IsUnknown() {
+		var response_headers_to_addItems []VirtualHostResponseHeadersToAddModel
+		diags := data.ResponseHeadersToAdd.ElementsAs(ctx, &response_headers_to_addItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(response_headers_to_addItems) > 0 {
+			var response_headers_to_addList []map[string]interface{}
+			for _, item := range response_headers_to_addItems {
+				itemMap := make(map[string]interface{})
+				if !item.Append.IsNull() && !item.Append.IsUnknown() {
+					itemMap["append"] = item.Append.ValueBool()
 				}
-				if item.SecretValue.ClearSecretInfo != nil {
-					clear_secret_infoDeepMap := make(map[string]interface{})
-					if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
-						clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
-					}
-					if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
-						clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
-					}
-					secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
 				}
-				itemMap["secret_value"] = secret_valueNestedMap
+				if item.SecretValue != nil {
+					secret_valueNestedMap := make(map[string]interface{})
+					if item.SecretValue.BlindfoldSecretInfo != nil {
+						blindfold_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["decryption_provider"] = item.SecretValue.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.Location.IsNull() && !item.SecretValue.BlindfoldSecretInfo.Location.IsUnknown() {
+							blindfold_secret_infoDeepMap["location"] = item.SecretValue.BlindfoldSecretInfo.Location.ValueString()
+						}
+						if !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsNull() && !item.SecretValue.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+							blindfold_secret_infoDeepMap["store_provider"] = item.SecretValue.BlindfoldSecretInfo.StoreProvider.ValueString()
+						}
+						secret_valueNestedMap["blindfold_secret_info"] = blindfold_secret_infoDeepMap
+					}
+					if item.SecretValue.ClearSecretInfo != nil {
+						clear_secret_infoDeepMap := make(map[string]interface{})
+						if !item.SecretValue.ClearSecretInfo.Provider.IsNull() && !item.SecretValue.ClearSecretInfo.Provider.IsUnknown() {
+							clear_secret_infoDeepMap["provider"] = item.SecretValue.ClearSecretInfo.Provider.ValueString()
+						}
+						if !item.SecretValue.ClearSecretInfo.URL.IsNull() && !item.SecretValue.ClearSecretInfo.URL.IsUnknown() {
+							clear_secret_infoDeepMap["url"] = item.SecretValue.ClearSecretInfo.URL.ValueString()
+						}
+						secret_valueNestedMap["clear_secret_info"] = clear_secret_infoDeepMap
+					}
+					itemMap["secret_value"] = secret_valueNestedMap
+				}
+				if !item.Value.IsNull() && !item.Value.IsUnknown() {
+					itemMap["value"] = item.Value.ValueString()
+				}
+				response_headers_to_addList = append(response_headers_to_addList, itemMap)
 			}
-			if !item.Value.IsNull() && !item.Value.IsUnknown() {
-				itemMap["value"] = item.Value.ValueString()
-			}
-			response_headers_to_addList = append(response_headers_to_addList, itemMap)
+			apiResource.Spec["response_headers_to_add"] = response_headers_to_addList
 		}
-		apiResource.Spec["response_headers_to_add"] = response_headers_to_addList
 	}
 	if !data.ResponseHeadersToRemove.IsNull() && !data.ResponseHeadersToRemove.IsUnknown() {
 		var response_headers_to_removeList []string
@@ -6450,51 +7329,61 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["retry_policy"] = retry_policyMap
 	}
-	if len(data.Routes) > 0 {
-		var routesList []map[string]interface{}
-		for _, item := range data.Routes {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.Routes.IsNull() && !data.Routes.IsUnknown() {
+		var routesItems []VirtualHostRoutesModel
+		diags := data.Routes.ElementsAs(ctx, &routesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(routesItems) > 0 {
+			var routesList []map[string]interface{}
+			for _, item := range routesItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				routesList = append(routesList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			routesList = append(routesList, itemMap)
+			apiResource.Spec["routes"] = routesList
 		}
-		apiResource.Spec["routes"] = routesList
 	}
-	if len(data.SensitiveDataPolicy) > 0 {
-		var sensitive_data_policyList []map[string]interface{}
-		for _, item := range data.SensitiveDataPolicy {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.SensitiveDataPolicy.IsNull() && !data.SensitiveDataPolicy.IsUnknown() {
+		var sensitive_data_policyItems []VirtualHostSensitiveDataPolicyModel
+		diags := data.SensitiveDataPolicy.ElementsAs(ctx, &sensitive_data_policyItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(sensitive_data_policyItems) > 0 {
+			var sensitive_data_policyList []map[string]interface{}
+			for _, item := range sensitive_data_policyItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				sensitive_data_policyList = append(sensitive_data_policyList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			sensitive_data_policyList = append(sensitive_data_policyList, itemMap)
+			apiResource.Spec["sensitive_data_policy"] = sensitive_data_policyList
 		}
-		apiResource.Spec["sensitive_data_policy"] = sensitive_data_policyList
 	}
 	if data.SlowDDOSMitigation != nil {
 		slow_ddos_mitigationMap := make(map[string]interface{})
@@ -6605,28 +7494,33 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 		}
 		apiResource.Spec["tls_parameters"] = tls_parametersMap
 	}
-	if len(data.UserIdentification) > 0 {
-		var user_identificationList []map[string]interface{}
-		for _, item := range data.UserIdentification {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.UserIdentification.IsNull() && !data.UserIdentification.IsUnknown() {
+		var user_identificationItems []VirtualHostUserIdentificationModel
+		diags := data.UserIdentification.ElementsAs(ctx, &user_identificationItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(user_identificationItems) > 0 {
+			var user_identificationList []map[string]interface{}
+			for _, item := range user_identificationItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				user_identificationList = append(user_identificationList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			user_identificationList = append(user_identificationList, itemMap)
+			apiResource.Spec["user_identification"] = user_identificationList
 		}
-		apiResource.Spec["user_identification"] = user_identificationList
 	}
 	if data.WAFType != nil {
 		waf_typeMap := make(map[string]interface{})
@@ -6758,6 +7652,10 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["advertise_policies"].([]interface{}); ok && len(listData) > 0 {
 		var advertise_policiesList []VirtualHostAdvertisePoliciesModel
+		var existingAdvertisePoliciesItems []VirtualHostAdvertisePoliciesModel
+		if !data.AdvertisePolicies.IsNull() && !data.AdvertisePolicies.IsUnknown() {
+			data.AdvertisePolicies.ElementsAs(ctx, &existingAdvertisePoliciesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -6795,7 +7693,14 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.AdvertisePolicies = advertise_policiesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostAdvertisePoliciesModelAttrTypes}, advertise_policiesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.AdvertisePolicies = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.AdvertisePolicies = types.ListNull(types.ObjectType{AttrTypes: VirtualHostAdvertisePoliciesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["authentication"].(map[string]interface{}); ok && (isImport || data.Authentication != nil) {
 		data.Authentication = &VirtualHostAuthenticationModel{
@@ -7231,6 +8136,10 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["rate_limiter_allowed_prefixes"].([]interface{}); ok && len(listData) > 0 {
 		var rate_limiter_allowed_prefixesList []VirtualHostRateLimiterAllowedPrefixesModel
+		var existingRateLimiterAllowedPrefixesItems []VirtualHostRateLimiterAllowedPrefixesModel
+		if !data.RateLimiterAllowedPrefixes.IsNull() && !data.RateLimiterAllowedPrefixes.IsUnknown() {
+			data.RateLimiterAllowedPrefixes.ElementsAs(ctx, &existingRateLimiterAllowedPrefixesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -7268,10 +8177,21 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.RateLimiterAllowedPrefixes = rate_limiter_allowed_prefixesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRateLimiterAllowedPrefixesModelAttrTypes}, rate_limiter_allowed_prefixesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RateLimiterAllowedPrefixes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RateLimiterAllowedPrefixes = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRateLimiterAllowedPrefixesModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["request_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var request_cookies_to_addList []VirtualHostRequestCookiesToAddModel
+		var existingRequestCookiesToAddItems []VirtualHostRequestCookiesToAddModel
+		if !data.RequestCookiesToAdd.IsNull() && !data.RequestCookiesToAdd.IsUnknown() {
+			data.RequestCookiesToAdd.ElementsAs(ctx, &existingRequestCookiesToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -7303,7 +8223,14 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.RequestCookiesToAdd = request_cookies_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRequestCookiesToAddModelAttrTypes}, request_cookies_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RequestCookiesToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RequestCookiesToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRequestCookiesToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["request_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var request_cookies_to_removeList []string
@@ -7322,6 +8249,10 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if listData, ok := apiResource.Spec["request_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var request_headers_to_addList []VirtualHostRequestHeadersToAddModel
+		var existingRequestHeadersToAddItems []VirtualHostRequestHeadersToAddModel
+		if !data.RequestHeadersToAdd.IsNull() && !data.RequestHeadersToAdd.IsUnknown() {
+			data.RequestHeadersToAdd.ElementsAs(ctx, &existingRequestHeadersToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -7353,7 +8284,14 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.RequestHeadersToAdd = request_headers_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRequestHeadersToAddModelAttrTypes}, request_headers_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.RequestHeadersToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.RequestHeadersToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRequestHeadersToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["request_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var request_headers_to_removeList []string
@@ -7372,6 +8310,10 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if listData, ok := apiResource.Spec["response_cookies_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var response_cookies_to_addList []VirtualHostResponseCookiesToAddModel
+		var existingResponseCookiesToAddItems []VirtualHostResponseCookiesToAddModel
+		if !data.ResponseCookiesToAdd.IsNull() && !data.ResponseCookiesToAdd.IsUnknown() {
+			data.ResponseCookiesToAdd.ElementsAs(ctx, &existingResponseCookiesToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -7389,13 +8331,13 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 						return types.StringNull()
 					}(),
 					AddHttponly: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddHttponly != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].AddHttponly != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					AddPartitioned: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddPartitioned != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].AddPartitioned != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
@@ -7407,61 +8349,61 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 						return types.StringNull()
 					}(),
 					AddSecure: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].AddSecure != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].AddSecure != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreDomain: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreDomain != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreDomain != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreExpiry: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreExpiry != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreExpiry != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreHttponly: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreHttponly != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreHttponly != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreMaxAge: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreMaxAge != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreMaxAge != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnorePartitioned: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnorePartitioned != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnorePartitioned != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnorePath: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnorePath != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnorePath != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSamesite: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreSamesite != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreSamesite != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSecure: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreSecure != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreSecure != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreValue: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].IgnoreValue != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].IgnoreValue != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
@@ -7485,19 +8427,19 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 						return types.BoolNull()
 					}(),
 					SamesiteLax: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteLax != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].SamesiteLax != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteNone: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteNone != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].SamesiteNone != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteStrict: func() *VirtualHostEmptyModel {
-						if !isImport && len(data.ResponseCookiesToAdd) > listIdx && data.ResponseCookiesToAdd[listIdx].SamesiteStrict != nil {
+						if !isImport && len(existingResponseCookiesToAddItems) > listIdx && existingResponseCookiesToAddItems[listIdx].SamesiteStrict != nil {
 							return &VirtualHostEmptyModel{}
 						}
 						return nil
@@ -7517,7 +8459,14 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.ResponseCookiesToAdd = response_cookies_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostResponseCookiesToAddModelAttrTypes}, response_cookies_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ResponseCookiesToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ResponseCookiesToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostResponseCookiesToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["response_cookies_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var response_cookies_to_removeList []string
@@ -7536,6 +8485,10 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if listData, ok := apiResource.Spec["response_headers_to_add"].([]interface{}); ok && len(listData) > 0 {
 		var response_headers_to_addList []VirtualHostResponseHeadersToAddModel
+		var existingResponseHeadersToAddItems []VirtualHostResponseHeadersToAddModel
+		if !data.ResponseHeadersToAdd.IsNull() && !data.ResponseHeadersToAdd.IsUnknown() {
+			data.ResponseHeadersToAdd.ElementsAs(ctx, &existingResponseHeadersToAddItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -7567,7 +8520,14 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.ResponseHeadersToAdd = response_headers_to_addList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostResponseHeadersToAddModelAttrTypes}, response_headers_to_addList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ResponseHeadersToAdd = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ResponseHeadersToAdd = types.ListNull(types.ObjectType{AttrTypes: VirtualHostResponseHeadersToAddModelAttrTypes})
 	}
 	if v, ok := apiResource.Spec["response_headers_to_remove"].([]interface{}); ok && len(v) > 0 {
 		var response_headers_to_removeList []string
@@ -7652,6 +8612,10 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
 		var routesList []VirtualHostRoutesModel
+		var existingRoutesItems []VirtualHostRoutesModel
+		if !data.Routes.IsNull() && !data.Routes.IsUnknown() {
+			data.Routes.ElementsAs(ctx, &existingRoutesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -7689,10 +8653,21 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.Routes = routesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostRoutesModelAttrTypes}, routesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Routes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Routes = types.ListNull(types.ObjectType{AttrTypes: VirtualHostRoutesModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["sensitive_data_policy"].([]interface{}); ok && len(listData) > 0 {
 		var sensitive_data_policyList []VirtualHostSensitiveDataPolicyModel
+		var existingSensitiveDataPolicyItems []VirtualHostSensitiveDataPolicyModel
+		if !data.SensitiveDataPolicy.IsNull() && !data.SensitiveDataPolicy.IsUnknown() {
+			data.SensitiveDataPolicy.ElementsAs(ctx, &existingSensitiveDataPolicyItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -7730,7 +8705,14 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.SensitiveDataPolicy = sensitive_data_policyList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostSensitiveDataPolicyModelAttrTypes}, sensitive_data_policyList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.SensitiveDataPolicy = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.SensitiveDataPolicy = types.ListNull(types.ObjectType{AttrTypes: VirtualHostSensitiveDataPolicyModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["slow_ddos_mitigation"].(map[string]interface{}); ok && (isImport || data.SlowDDOSMitigation != nil) {
 		data.SlowDDOSMitigation = &VirtualHostSlowDDOSMitigationModel{
@@ -8010,6 +8992,10 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if listData, ok := apiResource.Spec["user_identification"].([]interface{}); ok && len(listData) > 0 {
 		var user_identificationList []VirtualHostUserIdentificationModel
+		var existingUserIdentificationItems []VirtualHostUserIdentificationModel
+		if !data.UserIdentification.IsNull() && !data.UserIdentification.IsUnknown() {
+			data.UserIdentification.ElementsAs(ctx, &existingUserIdentificationItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -8047,7 +9033,14 @@ func (r *VirtualHostResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.UserIdentification = user_identificationList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: VirtualHostUserIdentificationModelAttrTypes}, user_identificationList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.UserIdentification = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.UserIdentification = types.ListNull(types.ObjectType{AttrTypes: VirtualHostUserIdentificationModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["waf_type"].(map[string]interface{}); ok && isImport && data.WAFType == nil {
 		// Import case: populate from API since state is nil and psd is empty

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,16 +56,22 @@ type APIDiscoveryCustomAuthTypesModel struct {
 	ParameterType types.String `tfsdk:"parameter_type"`
 }
 
+// APIDiscoveryCustomAuthTypesModelAttrTypes defines the attribute types for APIDiscoveryCustomAuthTypesModel
+var APIDiscoveryCustomAuthTypesModelAttrTypes = map[string]attr.Type{
+	"parameter_name": types.StringType,
+	"parameter_type": types.StringType,
+}
+
 type APIDiscoveryResourceModel struct {
-	Name            types.String                       `tfsdk:"name"`
-	Namespace       types.String                       `tfsdk:"namespace"`
-	Annotations     types.Map                          `tfsdk:"annotations"`
-	Description     types.String                       `tfsdk:"description"`
-	Disable         types.Bool                         `tfsdk:"disable"`
-	Labels          types.Map                          `tfsdk:"labels"`
-	ID              types.String                       `tfsdk:"id"`
-	Timeouts        timeouts.Value                     `tfsdk:"timeouts"`
-	CustomAuthTypes []APIDiscoveryCustomAuthTypesModel `tfsdk:"custom_auth_types"`
+	Name            types.String   `tfsdk:"name"`
+	Namespace       types.String   `tfsdk:"namespace"`
+	Annotations     types.Map      `tfsdk:"annotations"`
+	Description     types.String   `tfsdk:"description"`
+	Disable         types.Bool     `tfsdk:"disable"`
+	Labels          types.Map      `tfsdk:"labels"`
+	ID              types.String   `tfsdk:"id"`
+	Timeouts        timeouts.Value `tfsdk:"timeouts"`
+	CustomAuthTypes types.List     `tfsdk:"custom_auth_types"`
 }
 
 func (r *APIDiscoveryResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -292,19 +299,24 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.CustomAuthTypes) > 0 {
-		var custom_auth_typesList []map[string]interface{}
-		for _, item := range data.CustomAuthTypes {
-			itemMap := make(map[string]interface{})
-			if !item.ParameterName.IsNull() && !item.ParameterName.IsUnknown() {
-				itemMap["parameter_name"] = item.ParameterName.ValueString()
+	if !data.CustomAuthTypes.IsNull() && !data.CustomAuthTypes.IsUnknown() {
+		var custom_auth_typesItems []APIDiscoveryCustomAuthTypesModel
+		diags := data.CustomAuthTypes.ElementsAs(ctx, &custom_auth_typesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(custom_auth_typesItems) > 0 {
+			var custom_auth_typesList []map[string]interface{}
+			for _, item := range custom_auth_typesItems {
+				itemMap := make(map[string]interface{})
+				if !item.ParameterName.IsNull() && !item.ParameterName.IsUnknown() {
+					itemMap["parameter_name"] = item.ParameterName.ValueString()
+				}
+				if !item.ParameterType.IsNull() && !item.ParameterType.IsUnknown() {
+					itemMap["parameter_type"] = item.ParameterType.ValueString()
+				}
+				custom_auth_typesList = append(custom_auth_typesList, itemMap)
 			}
-			if !item.ParameterType.IsNull() && !item.ParameterType.IsUnknown() {
-				itemMap["parameter_type"] = item.ParameterType.ValueString()
-			}
-			custom_auth_typesList = append(custom_auth_typesList, itemMap)
+			createReq.Spec["custom_auth_types"] = custom_auth_typesList
 		}
-		createReq.Spec["custom_auth_types"] = custom_auth_typesList
 	}
 
 	apiResource, err := r.client.CreateAPIDiscovery(ctx, createReq)
@@ -321,6 +333,10 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["custom_auth_types"].([]interface{}); ok && len(listData) > 0 {
 		var custom_auth_typesList []APIDiscoveryCustomAuthTypesModel
+		var existingCustomAuthTypesItems []APIDiscoveryCustomAuthTypesModel
+		if !data.CustomAuthTypes.IsNull() && !data.CustomAuthTypes.IsUnknown() {
+			data.CustomAuthTypes.ElementsAs(ctx, &existingCustomAuthTypesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -340,7 +356,14 @@ func (r *APIDiscoveryResource) Create(ctx context.Context, req resource.CreateRe
 				})
 			}
 		}
-		data.CustomAuthTypes = custom_auth_typesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDiscoveryCustomAuthTypesModelAttrTypes}, custom_auth_typesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CustomAuthTypes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CustomAuthTypes = types.ListNull(types.ObjectType{AttrTypes: APIDiscoveryCustomAuthTypesModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -406,11 +429,17 @@ func (r *APIDiscoveryResource) Read(ctx context.Context, req resource.ReadReques
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -437,6 +466,10 @@ func (r *APIDiscoveryResource) Read(ctx context.Context, req resource.ReadReques
 	})
 	if listData, ok := apiResource.Spec["custom_auth_types"].([]interface{}); ok && len(listData) > 0 {
 		var custom_auth_typesList []APIDiscoveryCustomAuthTypesModel
+		var existingCustomAuthTypesItems []APIDiscoveryCustomAuthTypesModel
+		if !data.CustomAuthTypes.IsNull() && !data.CustomAuthTypes.IsUnknown() {
+			data.CustomAuthTypes.ElementsAs(ctx, &existingCustomAuthTypesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -456,7 +489,14 @@ func (r *APIDiscoveryResource) Read(ctx context.Context, req resource.ReadReques
 				})
 			}
 		}
-		data.CustomAuthTypes = custom_auth_typesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDiscoveryCustomAuthTypesModelAttrTypes}, custom_auth_typesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CustomAuthTypes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CustomAuthTypes = types.ListNull(types.ObjectType{AttrTypes: APIDiscoveryCustomAuthTypesModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -518,19 +558,24 @@ func (r *APIDiscoveryResource) Update(ctx context.Context, req resource.UpdateRe
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.CustomAuthTypes) > 0 {
-		var custom_auth_typesList []map[string]interface{}
-		for _, item := range data.CustomAuthTypes {
-			itemMap := make(map[string]interface{})
-			if !item.ParameterName.IsNull() && !item.ParameterName.IsUnknown() {
-				itemMap["parameter_name"] = item.ParameterName.ValueString()
+	if !data.CustomAuthTypes.IsNull() && !data.CustomAuthTypes.IsUnknown() {
+		var custom_auth_typesItems []APIDiscoveryCustomAuthTypesModel
+		diags := data.CustomAuthTypes.ElementsAs(ctx, &custom_auth_typesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(custom_auth_typesItems) > 0 {
+			var custom_auth_typesList []map[string]interface{}
+			for _, item := range custom_auth_typesItems {
+				itemMap := make(map[string]interface{})
+				if !item.ParameterName.IsNull() && !item.ParameterName.IsUnknown() {
+					itemMap["parameter_name"] = item.ParameterName.ValueString()
+				}
+				if !item.ParameterType.IsNull() && !item.ParameterType.IsUnknown() {
+					itemMap["parameter_type"] = item.ParameterType.ValueString()
+				}
+				custom_auth_typesList = append(custom_auth_typesList, itemMap)
 			}
-			if !item.ParameterType.IsNull() && !item.ParameterType.IsUnknown() {
-				itemMap["parameter_type"] = item.ParameterType.ValueString()
-			}
-			custom_auth_typesList = append(custom_auth_typesList, itemMap)
+			apiResource.Spec["custom_auth_types"] = custom_auth_typesList
 		}
-		apiResource.Spec["custom_auth_types"] = custom_auth_typesList
 	}
 
 	_, err := r.client.UpdateAPIDiscovery(ctx, apiResource)
@@ -558,6 +603,10 @@ func (r *APIDiscoveryResource) Update(ctx context.Context, req resource.UpdateRe
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["custom_auth_types"].([]interface{}); ok && len(listData) > 0 {
 		var custom_auth_typesList []APIDiscoveryCustomAuthTypesModel
+		var existingCustomAuthTypesItems []APIDiscoveryCustomAuthTypesModel
+		if !data.CustomAuthTypes.IsNull() && !data.CustomAuthTypes.IsUnknown() {
+			data.CustomAuthTypes.ElementsAs(ctx, &existingCustomAuthTypesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -577,7 +626,14 @@ func (r *APIDiscoveryResource) Update(ctx context.Context, req resource.UpdateRe
 				})
 			}
 		}
-		data.CustomAuthTypes = custom_auth_typesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APIDiscoveryCustomAuthTypesModelAttrTypes}, custom_auth_typesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.CustomAuthTypes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.CustomAuthTypes = types.ListNull(types.ObjectType{AttrTypes: APIDiscoveryCustomAuthTypesModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

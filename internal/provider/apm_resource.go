@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,6 +56,12 @@ type APMAWSSiteTypeChoiceModel struct {
 	MarketPlaceImage *APMAWSSiteTypeChoiceMarketPlaceImageModel `tfsdk:"market_place_image"`
 }
 
+// APMAWSSiteTypeChoiceModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceModel
+var APMAWSSiteTypeChoiceModelAttrTypes = map[string]attr.Type{
+	"apm_aws_site":       types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteModelAttrTypes},
+	"market_place_image": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMAWSSiteTypeChoiceAPMAWSSiteModel represents apm_aws_site block
 type APMAWSSiteTypeChoiceAPMAWSSiteModel struct {
 	AdminUsername   types.String                                        `tfsdk:"admin_username"`
@@ -66,10 +73,27 @@ type APMAWSSiteTypeChoiceAPMAWSSiteModel struct {
 	Tags            *APMEmptyModel                                      `tfsdk:"tags"`
 }
 
+// APMAWSSiteTypeChoiceAPMAWSSiteModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteModel
+var APMAWSSiteTypeChoiceAPMAWSSiteModelAttrTypes = map[string]attr.Type{
+	"admin_username":   types.StringType,
+	"ssh_key":          types.StringType,
+	"admin_password":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"aws_tgw_site":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"endpoint_service": types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModelAttrTypes},
+	"nodes":            types.ListType{ElemType: types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteNodesModelAttrTypes}},
+	"tags":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModel represents admin_password block
 type APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModel struct {
 	BlindfoldSecretInfo *APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModel
+var APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModelAttrTypes},
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -79,10 +103,23 @@ type APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModel struct 
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModel
+var APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModel
+var APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModel represents aws_tgw_site block
@@ -90,11 +127,23 @@ type APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModel struct {
 	AWSTGWSite *APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModel `tfsdk:"aws_tgw_site"`
 }
 
+// APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModel
+var APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModelAttrTypes = map[string]attr.Type{
+	"aws_tgw_site": types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModelAttrTypes},
+}
+
 // APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModel represents aws_tgw_site block
 type APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModel
+var APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteAWSTGWSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModel represents endpoint_service block
@@ -113,14 +162,40 @@ type APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModel struct {
 	NoUDPPorts               *APMEmptyModel                                                    `tfsdk:"no_udp_ports"`
 }
 
+// APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModel
+var APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModelAttrTypes = map[string]attr.Type{
+	"configured_vip":               types.StringType,
+	"advertise_on_slo_ip":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_slo_ip_external": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_vip":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_tcp_ports":             types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModelAttrTypes},
+	"custom_udp_ports":             types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModelAttrTypes},
+	"default_tcp_ports":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_advertise_on_slo_ip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_port":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"https_port":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_tcp_ports":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_udp_ports":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModel represents custom_tcp_ports block
 type APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModel struct {
 	Ports types.List `tfsdk:"ports"`
 }
 
+// APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModel
+var APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomTCPPortsModelAttrTypes = map[string]attr.Type{
+	"ports": types.ListType{ElemType: types.StringType},
+}
+
 // APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModel represents custom_udp_ports block
 type APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModel struct {
 	Ports types.List `tfsdk:"ports"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModel
+var APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceCustomUDPPortsModelAttrTypes = map[string]attr.Type{
+	"ports": types.ListType{ElemType: types.StringType},
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteNodesModel represents nodes block
@@ -133,15 +208,36 @@ type APMAWSSiteTypeChoiceAPMAWSSiteNodesModel struct {
 	ReservedMgmtSubnet *APMEmptyModel                                      `tfsdk:"reserved_mgmt_subnet"`
 }
 
+// APMAWSSiteTypeChoiceAPMAWSSiteNodesModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteNodesModel
+var APMAWSSiteTypeChoiceAPMAWSSiteNodesModelAttrTypes = map[string]attr.Type{
+	"aws_az_name":          types.StringType,
+	"node_name":            types.StringType,
+	"tunnel_prefix":        types.StringType,
+	"automatic_prefix":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mgmt_subnet":          types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModelAttrTypes},
+	"reserved_mgmt_subnet": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModel represents mgmt_subnet block
 type APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModel struct {
 	ExistingSubnetID types.String                                                   `tfsdk:"existing_subnet_id"`
 	SubnetParam      *APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel `tfsdk:"subnet_param"`
 }
 
+// APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModel
+var APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet_id": types.StringType,
+	"subnet_param":       types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModelAttrTypes},
+}
+
 // APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel represents subnet_param block
 type APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel struct {
 	Ipv4 types.String `tfsdk:"ipv4"`
+}
+
+// APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModel
+var APMAWSSiteTypeChoiceAPMAWSSiteNodesMgmtSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
+	"ipv4": types.StringType,
 }
 
 // APMAWSSiteTypeChoiceMarketPlaceImageModel represents market_place_image block
@@ -150,9 +246,20 @@ type APMAWSSiteTypeChoiceMarketPlaceImageModel struct {
 	BestPlusPayg1gbps   *APMEmptyModel `tfsdk:"best_plus_payg_1gbps"`
 }
 
+// APMAWSSiteTypeChoiceMarketPlaceImageModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceMarketPlaceImageModel
+var APMAWSSiteTypeChoiceMarketPlaceImageModelAttrTypes = map[string]attr.Type{
+	"best_plus_pay_g200_mbps": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"best_plus_payg_1gbps":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMBaremetalSiteTypeChoiceModel represents baremetal_site_type_choice block
 type APMBaremetalSiteTypeChoiceModel struct {
 	F5BareMetalSite *APMBaremetalSiteTypeChoiceF5BareMetalSiteModel `tfsdk:"f5_bare_metal_site"`
+}
+
+// APMBaremetalSiteTypeChoiceModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceModel
+var APMBaremetalSiteTypeChoiceModelAttrTypes = map[string]attr.Type{
+	"f5_bare_metal_site": types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteModelAttrTypes},
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteModel represents f5_bare_metal_site block
@@ -166,10 +273,27 @@ type APMBaremetalSiteTypeChoiceF5BareMetalSiteModel struct {
 	Nodes             []APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel        `tfsdk:"nodes"`
 }
 
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteModelAttrTypes = map[string]attr.Type{
+	"admin_username":      types.StringType,
+	"public_download_url": types.StringType,
+	"ssh_key":             types.StringType,
+	"admin_password":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"bare_metal_site":     types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModelAttrTypes},
+	"bigiq_instance":      types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModelAttrTypes},
+	"nodes":               types.ListType{ElemType: types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModelAttrTypes}},
+}
+
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModel represents admin_password block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModel struct {
 	BlindfoldSecretInfo *APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModelAttrTypes},
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -179,10 +303,23 @@ type APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoMo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModel represents bare_metal_site block
@@ -190,6 +327,13 @@ type APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModel represents bigiq_instance block
@@ -201,10 +345,25 @@ type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModel struct {
 	Password        *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel `tfsdk:"password"`
 }
 
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModelAttrTypes = map[string]attr.Type{
+	"license_pool_name": types.StringType,
+	"license_server_ip": types.StringType,
+	"sku_name":          types.StringType,
+	"username":          types.StringType,
+	"password":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel represents password block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel struct {
 	BlindfoldSecretInfo *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModelAttrTypes},
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -214,10 +373,23 @@ type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecr
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel represents clear_secret_info block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel represents nodes block
@@ -229,11 +401,27 @@ type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel struct {
 	InternalInterface *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel `tfsdk:"internal_interface"`
 }
 
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModelAttrTypes = map[string]attr.Type{
+	"bm_node_memory_size":  types.StringType,
+	"bm_virtual_cpu_count": types.StringType,
+	"node_name":            types.StringType,
+	"external_interface":   types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModelAttrTypes},
+	"internal_interface":   types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModelAttrTypes},
+}
+
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModel represents external_interface block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModel struct {
 	NetworkGateway types.String                                                                   `tfsdk:"network_gateway"`
 	NetworkSelfIP  types.String                                                                   `tfsdk:"network_self_ip"`
 	Interface      *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModel `tfsdk:"interface"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceModelAttrTypes = map[string]attr.Type{
+	"network_gateway": types.StringType,
+	"network_self_ip": types.StringType,
+	"interface":       types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModelAttrTypes},
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModel represents interface block
@@ -243,6 +431,13 @@ type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceMod
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesExternalInterfaceInterfaceModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel represents internal_interface block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel struct {
 	NetworkGateway types.String                                                                   `tfsdk:"network_gateway"`
@@ -250,11 +445,25 @@ type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel struct
 	Interface      *APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel `tfsdk:"interface"`
 }
 
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceModelAttrTypes = map[string]attr.Type{
+	"network_gateway": types.StringType,
+	"network_self_ip": types.StringType,
+	"interface":       types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModelAttrTypes},
+}
+
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel represents interface block
 type APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModelAttrTypes defines the attribute types for APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModel
+var APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesInternalInterfaceInterfaceModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // APMHTTPSManagementModel represents https_management block
@@ -270,9 +479,27 @@ type APMHTTPSManagementModel struct {
 	DefaultHTTPSPort              *APMEmptyModel                                    `tfsdk:"default_https_port"`
 }
 
+// APMHTTPSManagementModelAttrTypes defines the attribute types for APMHTTPSManagementModel
+var APMHTTPSManagementModelAttrTypes = map[string]attr.Type{
+	"domain_suffix":                     types.StringType,
+	"https_port":                        types.Int64Type,
+	"advertise_on_internet":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_internet_default_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_sli_vip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_slo_internet_vip":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_slo_sli":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_slo_vip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_https_port":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMHTTPSManagementAdvertiseOnInternetModel represents advertise_on_internet block
 type APMHTTPSManagementAdvertiseOnInternetModel struct {
 	PublicIP *APMHTTPSManagementAdvertiseOnInternetPublicIPModel `tfsdk:"public_ip"`
+}
+
+// APMHTTPSManagementAdvertiseOnInternetModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnInternetModel
+var APMHTTPSManagementAdvertiseOnInternetModelAttrTypes = map[string]attr.Type{
+	"public_ip": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnInternetPublicIPModelAttrTypes},
 }
 
 // APMHTTPSManagementAdvertiseOnInternetPublicIPModel represents public_ip block
@@ -282,12 +509,27 @@ type APMHTTPSManagementAdvertiseOnInternetPublicIPModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// APMHTTPSManagementAdvertiseOnInternetPublicIPModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnInternetPublicIPModel
+var APMHTTPSManagementAdvertiseOnInternetPublicIPModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // APMHTTPSManagementAdvertiseOnSLIVIPModel represents advertise_on_sli_vip block
 type APMHTTPSManagementAdvertiseOnSLIVIPModel struct {
 	NoMtls          *APMEmptyModel                                            `tfsdk:"no_mtls"`
 	TLSCertificates []APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVIPModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPModel
+var APMHTTPSManagementAdvertiseOnSLIVIPModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsModelAttrTypes},
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel represents tls_certificates block
@@ -300,15 +542,36 @@ type APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel struct {
 	UseSystemDefaults    *APMEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
+// APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModel
+var APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModel
+var APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModel represents private_key block
 type APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModel
+var APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -318,10 +581,23 @@ type APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecret
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModel
+var APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel represents tls_config block
@@ -332,11 +608,26 @@ type APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel struct {
 	MediumSecurity  *APMEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
+// APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigModel
+var APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModel represents custom_security block
 type APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModel
+var APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel represents use_mtls block
@@ -350,11 +641,29 @@ type APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel struct {
 	XfccOptions               *APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsModel
+var APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModel represents crl block
 type APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModel
+var APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModel represents trusted_ca block
@@ -364,9 +673,21 @@ type APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModel
+var APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel represents xfcc_options block
 type APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModel
+var APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // APMHTTPSManagementAdvertiseOnSloInternetVIPModel represents advertise_on_slo_internet_vip block
@@ -375,6 +696,14 @@ type APMHTTPSManagementAdvertiseOnSloInternetVIPModel struct {
 	TLSCertificates []APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloInternetVIPModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModelAttrTypes},
 }
 
 // APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel represents tls_certificates block
@@ -387,15 +716,36 @@ type APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel struct {
 	UseSystemDefaults    *APMEmptyModel                                                                       `tfsdk:"use_system_defaults"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModel represents private_key block
 type APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -405,10 +755,23 @@ type APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel represents tls_config block
@@ -419,11 +782,26 @@ type APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel struct {
 	MediumSecurity  *APMEmptyModel                                                           `tfsdk:"medium_security"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModel represents custom_security block
 type APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel represents use_mtls block
@@ -437,11 +815,29 @@ type APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel struct {
 	XfccOptions               *APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModel represents crl block
 type APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModel represents trusted_ca block
@@ -451,9 +847,21 @@ type APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel represents xfcc_options block
 type APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModel
+var APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // APMHTTPSManagementAdvertiseOnSloSLIModel represents advertise_on_slo_sli block
@@ -462,6 +870,14 @@ type APMHTTPSManagementAdvertiseOnSloSLIModel struct {
 	TLSCertificates []APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *APMHTTPSManagementAdvertiseOnSloSLITLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *APMHTTPSManagementAdvertiseOnSloSLIUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloSLIModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLIModel
+var APMHTTPSManagementAdvertiseOnSloSLIModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLIUseMtlsModelAttrTypes},
 }
 
 // APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel represents tls_certificates block
@@ -474,15 +890,36 @@ type APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel struct {
 	UseSystemDefaults    *APMEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesModel
+var APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModel
+var APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModel represents private_key block
 type APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModel
+var APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -492,10 +929,23 @@ type APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecret
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModel
+var APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSloSLITLSConfigModel represents tls_config block
@@ -506,11 +956,26 @@ type APMHTTPSManagementAdvertiseOnSloSLITLSConfigModel struct {
 	MediumSecurity  *APMEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloSLITLSConfigModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLITLSConfigModel
+var APMHTTPSManagementAdvertiseOnSloSLITLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModel represents custom_security block
 type APMHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModel
+var APMHTTPSManagementAdvertiseOnSloSLITLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSloSLIUseMtlsModel represents use_mtls block
@@ -524,11 +989,29 @@ type APMHTTPSManagementAdvertiseOnSloSLIUseMtlsModel struct {
 	XfccOptions               *APMHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloSLIUseMtlsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLIUseMtlsModel
+var APMHTTPSManagementAdvertiseOnSloSLIUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // APMHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModel represents crl block
 type APMHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModel
+var APMHTTPSManagementAdvertiseOnSloSLIUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModel represents trusted_ca block
@@ -538,9 +1021,21 @@ type APMHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModel
+var APMHTTPSManagementAdvertiseOnSloSLIUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // APMHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel represents xfcc_options block
 type APMHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModel
+var APMHTTPSManagementAdvertiseOnSloSLIUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // APMHTTPSManagementAdvertiseOnSloVIPModel represents advertise_on_slo_vip block
@@ -549,6 +1044,14 @@ type APMHTTPSManagementAdvertiseOnSloVIPModel struct {
 	TLSCertificates []APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *APMHTTPSManagementAdvertiseOnSloVIPTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *APMHTTPSManagementAdvertiseOnSloVIPUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloVIPModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPModel
+var APMHTTPSManagementAdvertiseOnSloVIPModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPUseMtlsModelAttrTypes},
 }
 
 // APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel represents tls_certificates block
@@ -561,15 +1064,36 @@ type APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel struct {
 	UseSystemDefaults    *APMEmptyModel                                                               `tfsdk:"use_system_defaults"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModel
+var APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModel
+var APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModel represents private_key block
 type APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModel
+var APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -579,10 +1103,23 @@ type APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecret
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModel
+var APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSloVIPTLSConfigModel represents tls_config block
@@ -593,11 +1130,26 @@ type APMHTTPSManagementAdvertiseOnSloVIPTLSConfigModel struct {
 	MediumSecurity  *APMEmptyModel                                                   `tfsdk:"medium_security"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloVIPTLSConfigModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPTLSConfigModel
+var APMHTTPSManagementAdvertiseOnSloVIPTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APMHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModel represents custom_security block
 type APMHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModel
+var APMHTTPSManagementAdvertiseOnSloVIPTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSloVIPUseMtlsModel represents use_mtls block
@@ -611,11 +1163,29 @@ type APMHTTPSManagementAdvertiseOnSloVIPUseMtlsModel struct {
 	XfccOptions               *APMHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloVIPUseMtlsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPUseMtlsModel
+var APMHTTPSManagementAdvertiseOnSloVIPUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // APMHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModel represents crl block
 type APMHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModel
+var APMHTTPSManagementAdvertiseOnSloVIPUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // APMHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModel represents trusted_ca block
@@ -625,9 +1195,21 @@ type APMHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// APMHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModel
+var APMHTTPSManagementAdvertiseOnSloVIPUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // APMHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel represents xfcc_options block
 type APMHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// APMHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModelAttrTypes defines the attribute types for APMHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModel
+var APMHTTPSManagementAdvertiseOnSloVIPUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 type APMResourceModel struct {
@@ -778,6 +1360,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -979,6 +1564,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -1087,6 +1675,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -1120,6 +1711,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -1164,6 +1758,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -1309,6 +1906,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1330,6 +1930,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1487,6 +2090,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1508,6 +2114,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1665,6 +2274,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1686,6 +2298,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1843,6 +2458,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -1864,6 +2482,9 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -2290,11 +2911,17 @@ func (r *APMResource) Read(ctx context.Context, req resource.ReadRequest, resp *
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

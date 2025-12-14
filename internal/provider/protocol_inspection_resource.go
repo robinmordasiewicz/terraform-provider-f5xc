@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,6 +56,12 @@ type ProtocolInspectionEnableDisableComplianceChecksModel struct {
 	EnableComplianceChecks  *ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel `tfsdk:"enable_compliance_checks"`
 }
 
+// ProtocolInspectionEnableDisableComplianceChecksModelAttrTypes defines the attribute types for ProtocolInspectionEnableDisableComplianceChecksModel
+var ProtocolInspectionEnableDisableComplianceChecksModelAttrTypes = map[string]attr.Type{
+	"disable_compliance_checks": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_compliance_checks":  types.ObjectType{AttrTypes: ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModelAttrTypes},
+}
+
 // ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel represents enable_compliance_checks block
 type ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -62,10 +69,23 @@ type ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel 
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModelAttrTypes defines the attribute types for ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModel
+var ProtocolInspectionEnableDisableComplianceChecksEnableComplianceChecksModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // ProtocolInspectionEnableDisableSignaturesModel represents enable_disable_signatures block
 type ProtocolInspectionEnableDisableSignaturesModel struct {
 	DisableSignature *ProtocolInspectionEmptyModel `tfsdk:"disable_signature"`
 	EnableSignature  *ProtocolInspectionEmptyModel `tfsdk:"enable_signature"`
+}
+
+// ProtocolInspectionEnableDisableSignaturesModelAttrTypes defines the attribute types for ProtocolInspectionEnableDisableSignaturesModel
+var ProtocolInspectionEnableDisableSignaturesModelAttrTypes = map[string]attr.Type{
+	"disable_signature": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_signature":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 type ProtocolInspectionResourceModel struct {
@@ -174,6 +194,9 @@ func (r *ProtocolInspectionResource) Schema(ctx context.Context, req resource.Sc
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -464,11 +487,17 @@ func (r *ProtocolInspectionResource) Read(ctx context.Context, req resource.Read
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

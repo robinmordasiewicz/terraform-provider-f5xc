@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,10 +55,21 @@ type MaliciousUserMitigationMitigationTypeModel struct {
 	Rules []MaliciousUserMitigationMitigationTypeRulesModel `tfsdk:"rules"`
 }
 
+// MaliciousUserMitigationMitigationTypeModelAttrTypes defines the attribute types for MaliciousUserMitigationMitigationTypeModel
+var MaliciousUserMitigationMitigationTypeModelAttrTypes = map[string]attr.Type{
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+}
+
 // MaliciousUserMitigationMitigationTypeRulesModel represents rules block
 type MaliciousUserMitigationMitigationTypeRulesModel struct {
 	MitigationAction *MaliciousUserMitigationMitigationTypeRulesMitigationActionModel `tfsdk:"mitigation_action"`
 	ThreatLevel      *MaliciousUserMitigationMitigationTypeRulesThreatLevelModel      `tfsdk:"threat_level"`
+}
+
+// MaliciousUserMitigationMitigationTypeRulesModelAttrTypes defines the attribute types for MaliciousUserMitigationMitigationTypeRulesModel
+var MaliciousUserMitigationMitigationTypeRulesModelAttrTypes = map[string]attr.Type{
+	"mitigation_action": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"threat_level":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // MaliciousUserMitigationMitigationTypeRulesMitigationActionModel represents mitigation_action block
@@ -67,11 +79,25 @@ type MaliciousUserMitigationMitigationTypeRulesMitigationActionModel struct {
 	JavascriptChallenge *MaliciousUserMitigationEmptyModel `tfsdk:"javascript_challenge"`
 }
 
+// MaliciousUserMitigationMitigationTypeRulesMitigationActionModelAttrTypes defines the attribute types for MaliciousUserMitigationMitigationTypeRulesMitigationActionModel
+var MaliciousUserMitigationMitigationTypeRulesMitigationActionModelAttrTypes = map[string]attr.Type{
+	"block_temporarily":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"captcha_challenge":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"javascript_challenge": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // MaliciousUserMitigationMitigationTypeRulesThreatLevelModel represents threat_level block
 type MaliciousUserMitigationMitigationTypeRulesThreatLevelModel struct {
 	High   *MaliciousUserMitigationEmptyModel `tfsdk:"high"`
 	Low    *MaliciousUserMitigationEmptyModel `tfsdk:"low"`
 	Medium *MaliciousUserMitigationEmptyModel `tfsdk:"medium"`
+}
+
+// MaliciousUserMitigationMitigationTypeRulesThreatLevelModelAttrTypes defines the attribute types for MaliciousUserMitigationMitigationTypeRulesThreatLevelModel
+var MaliciousUserMitigationMitigationTypeRulesThreatLevelModelAttrTypes = map[string]attr.Type{
+	"high":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 type MaliciousUserMitigationResourceModel struct {
@@ -522,11 +548,17 @@ func (r *MaliciousUserMitigationResource) Read(ctx context.Context, req resource
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

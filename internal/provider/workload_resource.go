@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -58,9 +59,23 @@ type WorkloadJobModel struct {
 	Volumes       []WorkloadJobVolumesModel      `tfsdk:"volumes"`
 }
 
+// WorkloadJobModelAttrTypes defines the attribute types for WorkloadJobModel
+var WorkloadJobModelAttrTypes = map[string]attr.Type{
+	"num_replicas":   types.Int64Type,
+	"configuration":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"containers":     types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadJobContainersModelAttrTypes}},
+	"deploy_options": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"volumes":        types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadJobVolumesModelAttrTypes}},
+}
+
 // WorkloadJobConfigurationModel represents configuration block
 type WorkloadJobConfigurationModel struct {
 	Parameters []WorkloadJobConfigurationParametersModel `tfsdk:"parameters"`
+}
+
+// WorkloadJobConfigurationModelAttrTypes defines the attribute types for WorkloadJobConfigurationModel
+var WorkloadJobConfigurationModelAttrTypes = map[string]attr.Type{
+	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadJobConfigurationParametersModel represents parameters block
@@ -69,10 +84,22 @@ type WorkloadJobConfigurationParametersModel struct {
 	File   *WorkloadJobConfigurationParametersFileModel   `tfsdk:"file"`
 }
 
+// WorkloadJobConfigurationParametersModelAttrTypes defines the attribute types for WorkloadJobConfigurationParametersModel
+var WorkloadJobConfigurationParametersModelAttrTypes = map[string]attr.Type{
+	"env_var": types.ObjectType{AttrTypes: WorkloadJobConfigurationParametersEnvVarModelAttrTypes},
+	"file":    types.ObjectType{AttrTypes: WorkloadJobConfigurationParametersFileModelAttrTypes},
+}
+
 // WorkloadJobConfigurationParametersEnvVarModel represents env_var block
 type WorkloadJobConfigurationParametersEnvVarModel struct {
 	Name  types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
+}
+
+// WorkloadJobConfigurationParametersEnvVarModelAttrTypes defines the attribute types for WorkloadJobConfigurationParametersEnvVarModel
+var WorkloadJobConfigurationParametersEnvVarModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.StringType,
 }
 
 // WorkloadJobConfigurationParametersFileModel represents file block
@@ -83,11 +110,26 @@ type WorkloadJobConfigurationParametersFileModel struct {
 	Mount      *WorkloadJobConfigurationParametersFileMountModel `tfsdk:"mount"`
 }
 
+// WorkloadJobConfigurationParametersFileModelAttrTypes defines the attribute types for WorkloadJobConfigurationParametersFileModel
+var WorkloadJobConfigurationParametersFileModelAttrTypes = map[string]attr.Type{
+	"data":        types.StringType,
+	"name":        types.StringType,
+	"volume_name": types.StringType,
+	"mount":       types.ObjectType{AttrTypes: WorkloadJobConfigurationParametersFileMountModelAttrTypes},
+}
+
 // WorkloadJobConfigurationParametersFileMountModel represents mount block
 type WorkloadJobConfigurationParametersFileMountModel struct {
 	Mode      types.String `tfsdk:"mode"`
 	MountPath types.String `tfsdk:"mount_path"`
 	SubPath   types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadJobConfigurationParametersFileMountModelAttrTypes defines the attribute types for WorkloadJobConfigurationParametersFileMountModel
+var WorkloadJobConfigurationParametersFileMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
 }
 
 // WorkloadJobContainersModel represents containers block
@@ -104,11 +146,32 @@ type WorkloadJobContainersModel struct {
 	ReadinessCheck *WorkloadJobContainersReadinessCheckModel `tfsdk:"readiness_check"`
 }
 
+// WorkloadJobContainersModelAttrTypes defines the attribute types for WorkloadJobContainersModel
+var WorkloadJobContainersModelAttrTypes = map[string]attr.Type{
+	"args":            types.ListType{ElemType: types.StringType},
+	"command":         types.ListType{ElemType: types.StringType},
+	"flavor":          types.StringType,
+	"init_container":  types.BoolType,
+	"name":            types.StringType,
+	"custom_flavor":   types.ObjectType{AttrTypes: WorkloadJobContainersCustomFlavorModelAttrTypes},
+	"default_flavor":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"image":           types.ObjectType{AttrTypes: WorkloadJobContainersImageModelAttrTypes},
+	"liveness_check":  types.ObjectType{AttrTypes: WorkloadJobContainersLivenessCheckModelAttrTypes},
+	"readiness_check": types.ObjectType{AttrTypes: WorkloadJobContainersReadinessCheckModelAttrTypes},
+}
+
 // WorkloadJobContainersCustomFlavorModel represents custom_flavor block
 type WorkloadJobContainersCustomFlavorModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadJobContainersCustomFlavorModelAttrTypes defines the attribute types for WorkloadJobContainersCustomFlavorModel
+var WorkloadJobContainersCustomFlavorModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadJobContainersImageModel represents image block
@@ -119,11 +182,26 @@ type WorkloadJobContainersImageModel struct {
 	Public            *WorkloadEmptyModel                               `tfsdk:"public"`
 }
 
+// WorkloadJobContainersImageModelAttrTypes defines the attribute types for WorkloadJobContainersImageModel
+var WorkloadJobContainersImageModelAttrTypes = map[string]attr.Type{
+	"name":               types.StringType,
+	"pull_policy":        types.StringType,
+	"container_registry": types.ObjectType{AttrTypes: WorkloadJobContainersImageContainerRegistryModelAttrTypes},
+	"public":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadJobContainersImageContainerRegistryModel represents container_registry block
 type WorkloadJobContainersImageContainerRegistryModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadJobContainersImageContainerRegistryModelAttrTypes defines the attribute types for WorkloadJobContainersImageContainerRegistryModel
+var WorkloadJobContainersImageContainerRegistryModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadJobContainersLivenessCheckModel represents liveness_check block
@@ -138,9 +216,26 @@ type WorkloadJobContainersLivenessCheckModel struct {
 	TCPHealthCheck     *WorkloadJobContainersLivenessCheckTCPHealthCheckModel  `tfsdk:"tcp_health_check"`
 }
 
+// WorkloadJobContainersLivenessCheckModelAttrTypes defines the attribute types for WorkloadJobContainersLivenessCheckModel
+var WorkloadJobContainersLivenessCheckModelAttrTypes = map[string]attr.Type{
+	"healthy_threshold":   types.Int64Type,
+	"initial_delay":       types.Int64Type,
+	"interval":            types.Int64Type,
+	"timeout":             types.Int64Type,
+	"unhealthy_threshold": types.Int64Type,
+	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadJobContainersLivenessCheckExecHealthCheckModelAttrTypes},
+	"http_health_check":   types.ObjectType{AttrTypes: WorkloadJobContainersLivenessCheckHTTPHealthCheckModelAttrTypes},
+	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadJobContainersLivenessCheckExecHealthCheckModel represents exec_health_check block
 type WorkloadJobContainersLivenessCheckExecHealthCheckModel struct {
 	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadJobContainersLivenessCheckExecHealthCheckModelAttrTypes defines the attribute types for WorkloadJobContainersLivenessCheckExecHealthCheckModel
+var WorkloadJobContainersLivenessCheckExecHealthCheckModelAttrTypes = map[string]attr.Type{
+	"command": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadJobContainersLivenessCheckHTTPHealthCheckModel represents http_health_check block
@@ -151,10 +246,24 @@ type WorkloadJobContainersLivenessCheckHTTPHealthCheckModel struct {
 	Port       *WorkloadJobContainersLivenessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadJobContainersLivenessCheckHTTPHealthCheckModelAttrTypes defines the attribute types for WorkloadJobContainersLivenessCheckHTTPHealthCheckModel
+var WorkloadJobContainersLivenessCheckHTTPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"host_header": types.StringType,
+	"path":        types.StringType,
+	"headers":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: WorkloadJobContainersLivenessCheckHTTPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadJobContainersLivenessCheckHTTPHealthCheckPortModel represents port block
 type WorkloadJobContainersLivenessCheckHTTPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadJobContainersLivenessCheckHTTPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadJobContainersLivenessCheckHTTPHealthCheckPortModel
+var WorkloadJobContainersLivenessCheckHTTPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadJobContainersLivenessCheckTCPHealthCheckModel represents tcp_health_check block
@@ -162,10 +271,21 @@ type WorkloadJobContainersLivenessCheckTCPHealthCheckModel struct {
 	Port *WorkloadJobContainersLivenessCheckTCPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadJobContainersLivenessCheckTCPHealthCheckModelAttrTypes defines the attribute types for WorkloadJobContainersLivenessCheckTCPHealthCheckModel
+var WorkloadJobContainersLivenessCheckTCPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"port": types.ObjectType{AttrTypes: WorkloadJobContainersLivenessCheckTCPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadJobContainersLivenessCheckTCPHealthCheckPortModel represents port block
 type WorkloadJobContainersLivenessCheckTCPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadJobContainersLivenessCheckTCPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadJobContainersLivenessCheckTCPHealthCheckPortModel
+var WorkloadJobContainersLivenessCheckTCPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadJobContainersReadinessCheckModel represents readiness_check block
@@ -180,9 +300,26 @@ type WorkloadJobContainersReadinessCheckModel struct {
 	TCPHealthCheck     *WorkloadJobContainersReadinessCheckTCPHealthCheckModel  `tfsdk:"tcp_health_check"`
 }
 
+// WorkloadJobContainersReadinessCheckModelAttrTypes defines the attribute types for WorkloadJobContainersReadinessCheckModel
+var WorkloadJobContainersReadinessCheckModelAttrTypes = map[string]attr.Type{
+	"healthy_threshold":   types.Int64Type,
+	"initial_delay":       types.Int64Type,
+	"interval":            types.Int64Type,
+	"timeout":             types.Int64Type,
+	"unhealthy_threshold": types.Int64Type,
+	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadJobContainersReadinessCheckExecHealthCheckModelAttrTypes},
+	"http_health_check":   types.ObjectType{AttrTypes: WorkloadJobContainersReadinessCheckHTTPHealthCheckModelAttrTypes},
+	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadJobContainersReadinessCheckExecHealthCheckModel represents exec_health_check block
 type WorkloadJobContainersReadinessCheckExecHealthCheckModel struct {
 	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadJobContainersReadinessCheckExecHealthCheckModelAttrTypes defines the attribute types for WorkloadJobContainersReadinessCheckExecHealthCheckModel
+var WorkloadJobContainersReadinessCheckExecHealthCheckModelAttrTypes = map[string]attr.Type{
+	"command": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadJobContainersReadinessCheckHTTPHealthCheckModel represents http_health_check block
@@ -193,10 +330,24 @@ type WorkloadJobContainersReadinessCheckHTTPHealthCheckModel struct {
 	Port       *WorkloadJobContainersReadinessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadJobContainersReadinessCheckHTTPHealthCheckModelAttrTypes defines the attribute types for WorkloadJobContainersReadinessCheckHTTPHealthCheckModel
+var WorkloadJobContainersReadinessCheckHTTPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"host_header": types.StringType,
+	"path":        types.StringType,
+	"headers":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: WorkloadJobContainersReadinessCheckHTTPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadJobContainersReadinessCheckHTTPHealthCheckPortModel represents port block
 type WorkloadJobContainersReadinessCheckHTTPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadJobContainersReadinessCheckHTTPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadJobContainersReadinessCheckHTTPHealthCheckPortModel
+var WorkloadJobContainersReadinessCheckHTTPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadJobContainersReadinessCheckTCPHealthCheckModel represents tcp_health_check block
@@ -204,10 +355,21 @@ type WorkloadJobContainersReadinessCheckTCPHealthCheckModel struct {
 	Port *WorkloadJobContainersReadinessCheckTCPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadJobContainersReadinessCheckTCPHealthCheckModelAttrTypes defines the attribute types for WorkloadJobContainersReadinessCheckTCPHealthCheckModel
+var WorkloadJobContainersReadinessCheckTCPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"port": types.ObjectType{AttrTypes: WorkloadJobContainersReadinessCheckTCPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadJobContainersReadinessCheckTCPHealthCheckPortModel represents port block
 type WorkloadJobContainersReadinessCheckTCPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadJobContainersReadinessCheckTCPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadJobContainersReadinessCheckTCPHealthCheckPortModel
+var WorkloadJobContainersReadinessCheckTCPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadJobDeployOptionsModel represents deploy_options block
@@ -220,9 +382,24 @@ type WorkloadJobDeployOptionsModel struct {
 	DeployREVirtualSites *WorkloadJobDeployOptionsDeployREVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
 }
 
+// WorkloadJobDeployOptionsModelAttrTypes defines the attribute types for WorkloadJobDeployOptionsModel
+var WorkloadJobDeployOptionsModelAttrTypes = map[string]attr.Type{
+	"all_res":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_virtual_sites":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_ce_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_ce_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_re_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_re_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadJobDeployOptionsDeployCESitesModel represents deploy_ce_sites block
 type WorkloadJobDeployOptionsDeployCESitesModel struct {
 	Site []WorkloadJobDeployOptionsDeployCESitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadJobDeployOptionsDeployCESitesModelAttrTypes defines the attribute types for WorkloadJobDeployOptionsDeployCESitesModel
+var WorkloadJobDeployOptionsDeployCESitesModelAttrTypes = map[string]attr.Type{
+	"site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadJobDeployOptionsDeployCESitesSiteModelAttrTypes}},
 }
 
 // WorkloadJobDeployOptionsDeployCESitesSiteModel represents site block
@@ -232,9 +409,21 @@ type WorkloadJobDeployOptionsDeployCESitesSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadJobDeployOptionsDeployCESitesSiteModelAttrTypes defines the attribute types for WorkloadJobDeployOptionsDeployCESitesSiteModel
+var WorkloadJobDeployOptionsDeployCESitesSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadJobDeployOptionsDeployCEVirtualSitesModel represents deploy_ce_virtual_sites block
 type WorkloadJobDeployOptionsDeployCEVirtualSitesModel struct {
 	VirtualSite []WorkloadJobDeployOptionsDeployCEVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadJobDeployOptionsDeployCEVirtualSitesModelAttrTypes defines the attribute types for WorkloadJobDeployOptionsDeployCEVirtualSitesModel
+var WorkloadJobDeployOptionsDeployCEVirtualSitesModelAttrTypes = map[string]attr.Type{
+	"virtual_site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadJobDeployOptionsDeployCEVirtualSitesVirtualSiteModelAttrTypes}},
 }
 
 // WorkloadJobDeployOptionsDeployCEVirtualSitesVirtualSiteModel represents virtual_site block
@@ -244,9 +433,21 @@ type WorkloadJobDeployOptionsDeployCEVirtualSitesVirtualSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadJobDeployOptionsDeployCEVirtualSitesVirtualSiteModelAttrTypes defines the attribute types for WorkloadJobDeployOptionsDeployCEVirtualSitesVirtualSiteModel
+var WorkloadJobDeployOptionsDeployCEVirtualSitesVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadJobDeployOptionsDeployRESitesModel represents deploy_re_sites block
 type WorkloadJobDeployOptionsDeployRESitesModel struct {
 	Site []WorkloadJobDeployOptionsDeployRESitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadJobDeployOptionsDeployRESitesModelAttrTypes defines the attribute types for WorkloadJobDeployOptionsDeployRESitesModel
+var WorkloadJobDeployOptionsDeployRESitesModelAttrTypes = map[string]attr.Type{
+	"site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadJobDeployOptionsDeployRESitesSiteModelAttrTypes}},
 }
 
 // WorkloadJobDeployOptionsDeployRESitesSiteModel represents site block
@@ -256,9 +457,21 @@ type WorkloadJobDeployOptionsDeployRESitesSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadJobDeployOptionsDeployRESitesSiteModelAttrTypes defines the attribute types for WorkloadJobDeployOptionsDeployRESitesSiteModel
+var WorkloadJobDeployOptionsDeployRESitesSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadJobDeployOptionsDeployREVirtualSitesModel represents deploy_re_virtual_sites block
 type WorkloadJobDeployOptionsDeployREVirtualSitesModel struct {
 	VirtualSite []WorkloadJobDeployOptionsDeployREVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadJobDeployOptionsDeployREVirtualSitesModelAttrTypes defines the attribute types for WorkloadJobDeployOptionsDeployREVirtualSitesModel
+var WorkloadJobDeployOptionsDeployREVirtualSitesModelAttrTypes = map[string]attr.Type{
+	"virtual_site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadJobDeployOptionsDeployREVirtualSitesVirtualSiteModelAttrTypes}},
 }
 
 // WorkloadJobDeployOptionsDeployREVirtualSitesVirtualSiteModel represents virtual_site block
@@ -266,6 +479,13 @@ type WorkloadJobDeployOptionsDeployREVirtualSitesVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadJobDeployOptionsDeployREVirtualSitesVirtualSiteModelAttrTypes defines the attribute types for WorkloadJobDeployOptionsDeployREVirtualSitesVirtualSiteModel
+var WorkloadJobDeployOptionsDeployREVirtualSitesVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadJobVolumesModel represents volumes block
@@ -276,10 +496,24 @@ type WorkloadJobVolumesModel struct {
 	PersistentVolume *WorkloadJobVolumesPersistentVolumeModel `tfsdk:"persistent_volume"`
 }
 
+// WorkloadJobVolumesModelAttrTypes defines the attribute types for WorkloadJobVolumesModel
+var WorkloadJobVolumesModelAttrTypes = map[string]attr.Type{
+	"name":              types.StringType,
+	"empty_dir":         types.ObjectType{AttrTypes: WorkloadJobVolumesEmptyDirModelAttrTypes},
+	"host_path":         types.ObjectType{AttrTypes: WorkloadJobVolumesHostPathModelAttrTypes},
+	"persistent_volume": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadJobVolumesEmptyDirModel represents empty_dir block
 type WorkloadJobVolumesEmptyDirModel struct {
 	SizeLimit types.Int64                           `tfsdk:"size_limit"`
 	Mount     *WorkloadJobVolumesEmptyDirMountModel `tfsdk:"mount"`
+}
+
+// WorkloadJobVolumesEmptyDirModelAttrTypes defines the attribute types for WorkloadJobVolumesEmptyDirModel
+var WorkloadJobVolumesEmptyDirModelAttrTypes = map[string]attr.Type{
+	"size_limit": types.Int64Type,
+	"mount":      types.ObjectType{AttrTypes: WorkloadJobVolumesEmptyDirMountModelAttrTypes},
 }
 
 // WorkloadJobVolumesEmptyDirMountModel represents mount block
@@ -289,10 +523,23 @@ type WorkloadJobVolumesEmptyDirMountModel struct {
 	SubPath   types.String `tfsdk:"sub_path"`
 }
 
+// WorkloadJobVolumesEmptyDirMountModelAttrTypes defines the attribute types for WorkloadJobVolumesEmptyDirMountModel
+var WorkloadJobVolumesEmptyDirMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
+}
+
 // WorkloadJobVolumesHostPathModel represents host_path block
 type WorkloadJobVolumesHostPathModel struct {
 	Path  types.String                          `tfsdk:"path"`
 	Mount *WorkloadJobVolumesHostPathMountModel `tfsdk:"mount"`
+}
+
+// WorkloadJobVolumesHostPathModelAttrTypes defines the attribute types for WorkloadJobVolumesHostPathModel
+var WorkloadJobVolumesHostPathModelAttrTypes = map[string]attr.Type{
+	"path":  types.StringType,
+	"mount": types.ObjectType{AttrTypes: WorkloadJobVolumesHostPathMountModelAttrTypes},
 }
 
 // WorkloadJobVolumesHostPathMountModel represents mount block
@@ -302,10 +549,23 @@ type WorkloadJobVolumesHostPathMountModel struct {
 	SubPath   types.String `tfsdk:"sub_path"`
 }
 
+// WorkloadJobVolumesHostPathMountModelAttrTypes defines the attribute types for WorkloadJobVolumesHostPathMountModel
+var WorkloadJobVolumesHostPathMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
+}
+
 // WorkloadJobVolumesPersistentVolumeModel represents persistent_volume block
 type WorkloadJobVolumesPersistentVolumeModel struct {
 	Mount   *WorkloadJobVolumesPersistentVolumeMountModel   `tfsdk:"mount"`
 	Storage *WorkloadJobVolumesPersistentVolumeStorageModel `tfsdk:"storage"`
+}
+
+// WorkloadJobVolumesPersistentVolumeModelAttrTypes defines the attribute types for WorkloadJobVolumesPersistentVolumeModel
+var WorkloadJobVolumesPersistentVolumeModelAttrTypes = map[string]attr.Type{
+	"mount":   types.ObjectType{AttrTypes: WorkloadJobVolumesPersistentVolumeMountModelAttrTypes},
+	"storage": types.ObjectType{AttrTypes: WorkloadJobVolumesPersistentVolumeStorageModelAttrTypes},
 }
 
 // WorkloadJobVolumesPersistentVolumeMountModel represents mount block
@@ -315,12 +575,27 @@ type WorkloadJobVolumesPersistentVolumeMountModel struct {
 	SubPath   types.String `tfsdk:"sub_path"`
 }
 
+// WorkloadJobVolumesPersistentVolumeMountModelAttrTypes defines the attribute types for WorkloadJobVolumesPersistentVolumeMountModel
+var WorkloadJobVolumesPersistentVolumeMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
+}
+
 // WorkloadJobVolumesPersistentVolumeStorageModel represents storage block
 type WorkloadJobVolumesPersistentVolumeStorageModel struct {
 	AccessMode  types.String        `tfsdk:"access_mode"`
 	ClassName   types.String        `tfsdk:"class_name"`
 	StorageSize types.Int64         `tfsdk:"storage_size"`
 	Default     *WorkloadEmptyModel `tfsdk:"default"`
+}
+
+// WorkloadJobVolumesPersistentVolumeStorageModelAttrTypes defines the attribute types for WorkloadJobVolumesPersistentVolumeStorageModel
+var WorkloadJobVolumesPersistentVolumeStorageModelAttrTypes = map[string]attr.Type{
+	"access_mode":  types.StringType,
+	"class_name":   types.StringType,
+	"storage_size": types.Int64Type,
+	"default":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceModel represents service block
@@ -334,6 +609,17 @@ type WorkloadServiceModel struct {
 	Volumes          []WorkloadServiceVolumesModel         `tfsdk:"volumes"`
 }
 
+// WorkloadServiceModelAttrTypes defines the attribute types for WorkloadServiceModel
+var WorkloadServiceModelAttrTypes = map[string]attr.Type{
+	"num_replicas":      types.Int64Type,
+	"advertise_options": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"configuration":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"containers":        types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceContainersModelAttrTypes}},
+	"deploy_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"scale_to_zero":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"volumes":           types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceVolumesModelAttrTypes}},
+}
+
 // WorkloadServiceAdvertiseOptionsModel represents advertise_options block
 type WorkloadServiceAdvertiseOptionsModel struct {
 	AdvertiseCustom    *WorkloadServiceAdvertiseOptionsAdvertiseCustomModel    `tfsdk:"advertise_custom"`
@@ -342,10 +628,24 @@ type WorkloadServiceAdvertiseOptionsModel struct {
 	DoNotAdvertise     *WorkloadEmptyModel                                     `tfsdk:"do_not_advertise"`
 }
 
+// WorkloadServiceAdvertiseOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsModel
+var WorkloadServiceAdvertiseOptionsModelAttrTypes = map[string]attr.Type{
+	"advertise_custom":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_in_cluster": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_public":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"do_not_advertise":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomModel represents advertise_custom block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomModel struct {
 	AdvertiseWhere []WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel `tfsdk:"advertise_where"`
 	Ports          []WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsModel          `tfsdk:"ports"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomModelAttrTypes = map[string]attr.Type{
+	"advertise_where": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"ports":           types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel represents advertise_where block
@@ -355,11 +655,25 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel struct {
 	Vk8sService *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel `tfsdk:"vk8s_service"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes},
+	"vk8s_service": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel represents site block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel struct {
 	IP      types.String                                                               `tfsdk:"ip"`
 	Network types.String                                                               `tfsdk:"network"`
 	Site    *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModelAttrTypes = map[string]attr.Type{
+	"ip":      types.StringType,
+	"network": types.StringType,
+	"site":    types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel represents site block
@@ -369,10 +683,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel s
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel represents virtual_site block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel struct {
 	Network     types.String                                                                             `tfsdk:"network"`
 	VirtualSite *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"network":      types.StringType,
+	"virtual_site": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
@@ -382,10 +709,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirt
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel represents vk8s_service block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel struct {
 	Site        *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel        `tfsdk:"site"`
 	VirtualSite *WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel represents site block
@@ -395,6 +735,13 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSite
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel represents virtual_site block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -402,11 +749,25 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirt
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsModel represents ports block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsModel struct {
 	HTTPLoadBalancer *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
 	Port             *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortModel             `tfsdk:"port"`
 	TCPLoadBalancer  *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel  `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsModelAttrTypes = map[string]attr.Type{
+	"http_loadbalancer": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModelAttrTypes},
+	"port":              types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortModelAttrTypes},
+	"tcp_loadbalancer":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel represents http_loadbalancer block
@@ -419,6 +780,16 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel st
 	SpecificRoutes *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":         types.ListType{ElemType: types.StringType},
+	"default_route":   types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModelAttrTypes},
+	"http":            types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModelAttrTypes},
+	"https":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModelAttrTypes},
+	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
+	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel struct {
 	HostRewrite        types.String        `tfsdk:"host_rewrite"`
@@ -426,11 +797,25 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultR
 	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel represents http block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel struct {
 	DNSVolterraManaged types.Bool   `tfsdk:"dns_volterra_managed"`
 	Port               types.Int64  `tfsdk:"port"`
 	PortRanges         types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModelAttrTypes = map[string]attr.Type{
+	"dns_volterra_managed": types.BoolType,
+	"port":                 types.Int64Type,
+	"port_ranges":          types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModel represents https block
@@ -454,10 +839,37 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSMod
 	TLSParameters          *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel       `tfsdk:"tls_parameters"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
@@ -467,9 +879,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTT
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                       `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -480,6 +904,14 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTT
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
 	Certificates []WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
@@ -488,11 +920,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	UseMtls      *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel       `tfsdk:"use_mtls"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
+	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
+	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":     types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
@@ -503,11 +950,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	MediumSecurity  *WorkloadEmptyModel                                                                                                `tfsdk:"medium_security"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
@@ -521,11 +983,29 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
@@ -535,9 +1015,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
@@ -546,6 +1038,14 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	TLSCertificates []WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
@@ -558,15 +1058,36 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                            `tfsdk:"use_system_defaults"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -576,10 +1097,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
@@ -590,11 +1124,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	MediumSecurity  *WorkloadEmptyModel                                                                                                `tfsdk:"medium_security"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
@@ -608,11 +1157,29 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
@@ -622,9 +1189,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
@@ -649,10 +1228,38 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAut
 	UseMtls                *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel             `tfsdk:"use_mtls"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
@@ -662,9 +1269,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAut
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                               `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -675,6 +1294,14 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAut
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
 	CustomSecurity  *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
@@ -683,11 +1310,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAut
 	MediumSecurity  *WorkloadEmptyModel                                                                                           `tfsdk:"medium_security"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
@@ -701,11 +1343,29 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAut
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
@@ -715,14 +1375,31 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAut
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel struct {
 	Routes []WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -733,9 +1410,22 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	SimpleRoute         *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel         `tfsdk:"simple_route"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
+	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"direct_response_route": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
+	"redirect_route":        types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
+	"simple_route":          types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
 	RouteRef *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes = map[string]attr.Type{
+	"route_ref": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
@@ -743,6 +1433,13 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
@@ -754,6 +1451,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	RouteDirectResponse *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":           types.StringType,
+	"headers":               types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes}},
+	"incoming_port":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes},
+	"path":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes},
+	"route_direct_response": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -763,11 +1469,27 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
 	PortRanges  types.String        `tfsdk:"port_ranges"`
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
@@ -777,10 +1499,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
 	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
 	ResponseCode        types.Int64  `tfsdk:"response_code"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes = map[string]attr.Type{
+	"response_body_encoded": types.StringType,
+	"response_code":         types.Int64Type,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
@@ -792,6 +1527,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	RouteRedirect *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":    types.StringType,
+	"headers":        types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes}},
+	"incoming_port":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes},
+	"path":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes},
+	"route_redirect": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -801,6 +1545,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
@@ -808,11 +1561,25 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
@@ -827,6 +1594,18 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes = map[string]attr.Type{
+	"host_redirect":     types.StringType,
+	"path_redirect":     types.StringType,
+	"prefix_rewrite":    types.StringType,
+	"proto_redirect":    types.StringType,
+	"replace_params":    types.StringType,
+	"response_code":     types.Int64Type,
+	"remove_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"retain_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
 	HostRewrite        types.String                                                                                                 `tfsdk:"host_rewrite"`
@@ -836,6 +1615,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	Path               *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"http_method":          types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"path":                 types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
@@ -843,10 +1631,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortModel represents port block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortModel struct {
 	Name types.String                                                      `tfsdk:"name"`
 	Info *WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"info": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel represents info block
@@ -857,10 +1658,24 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel struct {
 	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModelAttrTypes = map[string]attr.Type{
+	"port":         types.Int64Type,
+	"protocol":     types.StringType,
+	"target_port":  types.Int64Type,
+	"same_as_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel represents tcp_loadbalancer block
 type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel struct {
 	Domains types.List `tfsdk:"domains"`
 	WithSni types.Bool `tfsdk:"with_sni"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel
+var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":  types.ListType{ElemType: types.StringType},
+	"with_sni": types.BoolType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseInClusterModel represents advertise_in_cluster block
@@ -869,15 +1684,32 @@ type WorkloadServiceAdvertiseOptionsAdvertiseInClusterModel struct {
 	Port       *WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortModel       `tfsdk:"port"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseInClusterModel
+var WorkloadServiceAdvertiseOptionsAdvertiseInClusterModelAttrTypes = map[string]attr.Type{
+	"multi_ports": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel represents multi_ports block
 type WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel struct {
 	Ports []WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel `tfsdk:"ports"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModelAttrTypes = map[string]attr.Type{
+	"ports": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModelAttrTypes}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel represents ports block
 type WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel struct {
 	Name types.String                                                               `tfsdk:"name"`
 	Info *WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel `tfsdk:"info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"info": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel represents info block
@@ -888,9 +1720,22 @@ type WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel s
 	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModelAttrTypes = map[string]attr.Type{
+	"port":         types.Int64Type,
+	"protocol":     types.StringType,
+	"target_port":  types.Int64Type,
+	"same_as_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortModel represents port block
 type WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortModel struct {
 	Info *WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortModelAttrTypes = map[string]attr.Type{
+	"info": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortInfoModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel represents info block
@@ -901,10 +1746,24 @@ type WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel struct {
 	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortInfoModelAttrTypes = map[string]attr.Type{
+	"port":         types.Int64Type,
+	"protocol":     types.StringType,
+	"target_port":  types.Int64Type,
+	"same_as_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModel represents advertise_on_public block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModel struct {
 	MultiPorts *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel `tfsdk:"multi_ports"`
 	Port       *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModel       `tfsdk:"port"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModelAttrTypes = map[string]attr.Type{
+	"multi_ports": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel represents multi_ports block
@@ -912,11 +1771,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel struct {
 	Ports []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel `tfsdk:"ports"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModelAttrTypes = map[string]attr.Type{
+	"ports": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel represents ports block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel struct {
 	HTTPLoadBalancer *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
 	Port             *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel             `tfsdk:"port"`
 	TCPLoadBalancer  *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel  `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModelAttrTypes = map[string]attr.Type{
+	"http_loadbalancer": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModelAttrTypes},
+	"port":              types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModelAttrTypes},
+	"tcp_loadbalancer":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel represents http_loadbalancer block
@@ -929,6 +1800,16 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	SpecificRoutes *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":         types.ListType{ElemType: types.StringType},
+	"default_route":   types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModelAttrTypes},
+	"http":            types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModelAttrTypes},
+	"https":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModelAttrTypes},
+	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
+	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel struct {
 	HostRewrite        types.String        `tfsdk:"host_rewrite"`
@@ -936,11 +1817,25 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel represents http block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel struct {
 	DNSVolterraManaged types.Bool   `tfsdk:"dns_volterra_managed"`
 	Port               types.Int64  `tfsdk:"port"`
 	PortRanges         types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModelAttrTypes = map[string]attr.Type{
+	"dns_volterra_managed": types.BoolType,
+	"port":                 types.Int64Type,
+	"port_ranges":          types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModel represents https block
@@ -964,10 +1859,37 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	TLSParameters          *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel       `tfsdk:"tls_parameters"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
@@ -977,9 +1899,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                                   `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -990,6 +1924,14 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
 	Certificates []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
@@ -998,11 +1940,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	UseMtls      *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel       `tfsdk:"use_mtls"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
+	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
+	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":     types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
@@ -1013,11 +1970,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	MediumSecurity  *WorkloadEmptyModel                                                                                                            `tfsdk:"medium_security"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
@@ -1031,11 +2003,29 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
@@ -1045,9 +2035,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
@@ -1056,6 +2058,14 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	TLSCertificates []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
@@ -1068,15 +2078,36 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                                        `tfsdk:"use_system_defaults"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -1086,10 +2117,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
@@ -1100,11 +2144,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	MediumSecurity  *WorkloadEmptyModel                                                                                                            `tfsdk:"medium_security"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
@@ -1118,11 +2177,29 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
@@ -1132,9 +2209,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
@@ -1159,10 +2248,38 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	UseMtls                *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel             `tfsdk:"use_mtls"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
@@ -1172,9 +2289,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                                           `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -1185,6 +2314,14 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
 	CustomSecurity  *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
@@ -1193,11 +2330,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	MediumSecurity  *WorkloadEmptyModel                                                                                                       `tfsdk:"medium_security"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
@@ -1211,11 +2363,29 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
@@ -1225,14 +2395,31 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel struct {
 	Routes []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -1243,9 +2430,22 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	SimpleRoute         *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel         `tfsdk:"simple_route"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
+	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"direct_response_route": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
+	"redirect_route":        types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
+	"simple_route":          types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
 	RouteRef *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes = map[string]attr.Type{
+	"route_ref": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
@@ -1253,6 +2453,13 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
@@ -1264,6 +2471,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	RouteDirectResponse *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":           types.StringType,
+	"headers":               types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes}},
+	"incoming_port":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes},
+	"path":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes},
+	"route_direct_response": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -1273,11 +2489,27 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
 	PortRanges  types.String        `tfsdk:"port_ranges"`
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
@@ -1287,10 +2519,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
 	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
 	ResponseCode        types.Int64  `tfsdk:"response_code"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes = map[string]attr.Type{
+	"response_body_encoded": types.StringType,
+	"response_code":         types.Int64Type,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
@@ -1302,6 +2547,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	RouteRedirect *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":    types.StringType,
+	"headers":        types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes}},
+	"incoming_port":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes},
+	"path":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes},
+	"route_redirect": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -1311,6 +2565,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
@@ -1318,11 +2581,25 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
@@ -1337,6 +2614,18 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes = map[string]attr.Type{
+	"host_redirect":     types.StringType,
+	"path_redirect":     types.StringType,
+	"prefix_rewrite":    types.StringType,
+	"proto_redirect":    types.StringType,
+	"replace_params":    types.StringType,
+	"response_code":     types.Int64Type,
+	"remove_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"retain_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
 	HostRewrite        types.String                                                                                                             `tfsdk:"host_rewrite"`
@@ -1346,6 +2635,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Path               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"http_method":          types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"path":                 types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
@@ -1353,10 +2651,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel represents port block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel struct {
 	Name types.String                                                                  `tfsdk:"name"`
 	Info *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"info": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel represents info block
@@ -1367,10 +2678,24 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoMode
 	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModelAttrTypes = map[string]attr.Type{
+	"port":         types.Int64Type,
+	"protocol":     types.StringType,
+	"target_port":  types.Int64Type,
+	"same_as_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel represents tcp_loadbalancer block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel struct {
 	Domains types.List `tfsdk:"domains"`
 	WithSni types.Bool `tfsdk:"with_sni"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":  types.ListType{ElemType: types.StringType},
+	"with_sni": types.BoolType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModel represents port block
@@ -1378,6 +2703,13 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModel struct {
 	HTTPLoadBalancer *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
 	Port             *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel             `tfsdk:"port"`
 	TCPLoadBalancer  *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel  `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModelAttrTypes = map[string]attr.Type{
+	"http_loadbalancer": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModelAttrTypes},
+	"port":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp_loadbalancer":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel represents http_loadbalancer block
@@ -1390,6 +2722,16 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel s
 	SpecificRoutes *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":         types.ListType{ElemType: types.StringType},
+	"default_route":   types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModelAttrTypes},
+	"http":            types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModelAttrTypes},
+	"https":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModelAttrTypes},
+	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
+	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel represents default_route block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel struct {
 	HostRewrite        types.String        `tfsdk:"host_rewrite"`
@@ -1397,11 +2739,25 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefault
 	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel represents http block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel struct {
 	DNSVolterraManaged types.Bool   `tfsdk:"dns_volterra_managed"`
 	Port               types.Int64  `tfsdk:"port"`
 	PortRanges         types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModelAttrTypes = map[string]attr.Type{
+	"dns_volterra_managed": types.BoolType,
+	"port":                 types.Int64Type,
+	"port_ranges":          types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModel represents https block
@@ -1425,10 +2781,37 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSMo
 	TLSParameters          *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel       `tfsdk:"tls_parameters"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
@@ -1438,9 +2821,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHT
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                        `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -1451,6 +2846,14 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHT
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
 	Certificates []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
@@ -1459,11 +2862,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	UseMtls      *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel       `tfsdk:"use_mtls"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
+	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
+	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":     types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
@@ -1474,11 +2892,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	MediumSecurity  *WorkloadEmptyModel                                                                                                 `tfsdk:"medium_security"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
@@ -1492,11 +2925,29 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
@@ -1506,9 +2957,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
@@ -1517,6 +2980,14 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	TLSCertificates []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
@@ -1529,15 +3000,36 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                             `tfsdk:"use_system_defaults"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -1547,10 +3039,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
@@ -1561,11 +3066,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	MediumSecurity  *WorkloadEmptyModel                                                                                                 `tfsdk:"medium_security"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
@@ -1579,11 +3099,29 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
@@ -1593,9 +3131,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
@@ -1620,10 +3170,38 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAu
 	UseMtls                *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel             `tfsdk:"use_mtls"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
@@ -1633,9 +3211,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAu
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                                `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -1646,6 +3236,14 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAu
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
 	CustomSecurity  *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
@@ -1654,11 +3252,26 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAu
 	MediumSecurity  *WorkloadEmptyModel                                                                                            `tfsdk:"medium_security"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
@@ -1672,11 +3285,29 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAu
 	XfccOptions               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
@@ -1686,14 +3317,31 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAu
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel struct {
 	Routes []WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -1704,9 +3352,22 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	SimpleRoute         *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel         `tfsdk:"simple_route"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
+	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"direct_response_route": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
+	"redirect_route":        types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
+	"simple_route":          types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
 	RouteRef *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes = map[string]attr.Type{
+	"route_ref": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
@@ -1714,6 +3375,13 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
@@ -1725,6 +3393,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	RouteDirectResponse *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":           types.StringType,
+	"headers":               types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes}},
+	"incoming_port":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes},
+	"path":                  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes},
+	"route_direct_response": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -1734,11 +3411,27 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
 	PortRanges  types.String        `tfsdk:"port_ranges"`
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
@@ -1748,10 +3441,23 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
 	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
 	ResponseCode        types.Int64  `tfsdk:"response_code"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes = map[string]attr.Type{
+	"response_body_encoded": types.StringType,
+	"response_code":         types.Int64Type,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
@@ -1763,6 +3469,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	RouteRedirect *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":    types.StringType,
+	"headers":        types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes}},
+	"incoming_port":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes},
+	"path":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes},
+	"route_redirect": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -1772,6 +3487,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
@@ -1779,11 +3503,25 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
@@ -1798,6 +3536,18 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes = map[string]attr.Type{
+	"host_redirect":     types.StringType,
+	"path_redirect":     types.StringType,
+	"prefix_rewrite":    types.StringType,
+	"proto_redirect":    types.StringType,
+	"replace_params":    types.StringType,
+	"response_code":     types.Int64Type,
+	"remove_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"retain_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
 	HostRewrite        types.String                                                                                                  `tfsdk:"host_rewrite"`
@@ -1807,6 +3557,15 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	Path               *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"http_method":          types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"path":                 types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
@@ -1814,9 +3573,21 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel represents port block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel struct {
 	Info *WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortModelAttrTypes = map[string]attr.Type{
+	"info": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel represents info block
@@ -1827,15 +3598,34 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel struct {
 	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModelAttrTypes = map[string]attr.Type{
+	"port":         types.Int64Type,
+	"protocol":     types.StringType,
+	"target_port":  types.Int64Type,
+	"same_as_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel represents tcp_loadbalancer block
 type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel struct {
 	Domains types.List `tfsdk:"domains"`
 	WithSni types.Bool `tfsdk:"with_sni"`
 }
 
+// WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel
+var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":  types.ListType{ElemType: types.StringType},
+	"with_sni": types.BoolType,
+}
+
 // WorkloadServiceConfigurationModel represents configuration block
 type WorkloadServiceConfigurationModel struct {
 	Parameters []WorkloadServiceConfigurationParametersModel `tfsdk:"parameters"`
+}
+
+// WorkloadServiceConfigurationModelAttrTypes defines the attribute types for WorkloadServiceConfigurationModel
+var WorkloadServiceConfigurationModelAttrTypes = map[string]attr.Type{
+	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadServiceConfigurationParametersModel represents parameters block
@@ -1844,10 +3634,22 @@ type WorkloadServiceConfigurationParametersModel struct {
 	File   *WorkloadServiceConfigurationParametersFileModel   `tfsdk:"file"`
 }
 
+// WorkloadServiceConfigurationParametersModelAttrTypes defines the attribute types for WorkloadServiceConfigurationParametersModel
+var WorkloadServiceConfigurationParametersModelAttrTypes = map[string]attr.Type{
+	"env_var": types.ObjectType{AttrTypes: WorkloadServiceConfigurationParametersEnvVarModelAttrTypes},
+	"file":    types.ObjectType{AttrTypes: WorkloadServiceConfigurationParametersFileModelAttrTypes},
+}
+
 // WorkloadServiceConfigurationParametersEnvVarModel represents env_var block
 type WorkloadServiceConfigurationParametersEnvVarModel struct {
 	Name  types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
+}
+
+// WorkloadServiceConfigurationParametersEnvVarModelAttrTypes defines the attribute types for WorkloadServiceConfigurationParametersEnvVarModel
+var WorkloadServiceConfigurationParametersEnvVarModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.StringType,
 }
 
 // WorkloadServiceConfigurationParametersFileModel represents file block
@@ -1858,11 +3660,26 @@ type WorkloadServiceConfigurationParametersFileModel struct {
 	Mount      *WorkloadServiceConfigurationParametersFileMountModel `tfsdk:"mount"`
 }
 
+// WorkloadServiceConfigurationParametersFileModelAttrTypes defines the attribute types for WorkloadServiceConfigurationParametersFileModel
+var WorkloadServiceConfigurationParametersFileModelAttrTypes = map[string]attr.Type{
+	"data":        types.StringType,
+	"name":        types.StringType,
+	"volume_name": types.StringType,
+	"mount":       types.ObjectType{AttrTypes: WorkloadServiceConfigurationParametersFileMountModelAttrTypes},
+}
+
 // WorkloadServiceConfigurationParametersFileMountModel represents mount block
 type WorkloadServiceConfigurationParametersFileMountModel struct {
 	Mode      types.String `tfsdk:"mode"`
 	MountPath types.String `tfsdk:"mount_path"`
 	SubPath   types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadServiceConfigurationParametersFileMountModelAttrTypes defines the attribute types for WorkloadServiceConfigurationParametersFileMountModel
+var WorkloadServiceConfigurationParametersFileMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
 }
 
 // WorkloadServiceContainersModel represents containers block
@@ -1879,11 +3696,32 @@ type WorkloadServiceContainersModel struct {
 	ReadinessCheck *WorkloadServiceContainersReadinessCheckModel `tfsdk:"readiness_check"`
 }
 
+// WorkloadServiceContainersModelAttrTypes defines the attribute types for WorkloadServiceContainersModel
+var WorkloadServiceContainersModelAttrTypes = map[string]attr.Type{
+	"args":            types.ListType{ElemType: types.StringType},
+	"command":         types.ListType{ElemType: types.StringType},
+	"flavor":          types.StringType,
+	"init_container":  types.BoolType,
+	"name":            types.StringType,
+	"custom_flavor":   types.ObjectType{AttrTypes: WorkloadServiceContainersCustomFlavorModelAttrTypes},
+	"default_flavor":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"image":           types.ObjectType{AttrTypes: WorkloadServiceContainersImageModelAttrTypes},
+	"liveness_check":  types.ObjectType{AttrTypes: WorkloadServiceContainersLivenessCheckModelAttrTypes},
+	"readiness_check": types.ObjectType{AttrTypes: WorkloadServiceContainersReadinessCheckModelAttrTypes},
+}
+
 // WorkloadServiceContainersCustomFlavorModel represents custom_flavor block
 type WorkloadServiceContainersCustomFlavorModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceContainersCustomFlavorModelAttrTypes defines the attribute types for WorkloadServiceContainersCustomFlavorModel
+var WorkloadServiceContainersCustomFlavorModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceContainersImageModel represents image block
@@ -1894,11 +3732,26 @@ type WorkloadServiceContainersImageModel struct {
 	Public            *WorkloadEmptyModel                                   `tfsdk:"public"`
 }
 
+// WorkloadServiceContainersImageModelAttrTypes defines the attribute types for WorkloadServiceContainersImageModel
+var WorkloadServiceContainersImageModelAttrTypes = map[string]attr.Type{
+	"name":               types.StringType,
+	"pull_policy":        types.StringType,
+	"container_registry": types.ObjectType{AttrTypes: WorkloadServiceContainersImageContainerRegistryModelAttrTypes},
+	"public":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceContainersImageContainerRegistryModel represents container_registry block
 type WorkloadServiceContainersImageContainerRegistryModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceContainersImageContainerRegistryModelAttrTypes defines the attribute types for WorkloadServiceContainersImageContainerRegistryModel
+var WorkloadServiceContainersImageContainerRegistryModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceContainersLivenessCheckModel represents liveness_check block
@@ -1913,9 +3766,26 @@ type WorkloadServiceContainersLivenessCheckModel struct {
 	TCPHealthCheck     *WorkloadServiceContainersLivenessCheckTCPHealthCheckModel  `tfsdk:"tcp_health_check"`
 }
 
+// WorkloadServiceContainersLivenessCheckModelAttrTypes defines the attribute types for WorkloadServiceContainersLivenessCheckModel
+var WorkloadServiceContainersLivenessCheckModelAttrTypes = map[string]attr.Type{
+	"healthy_threshold":   types.Int64Type,
+	"initial_delay":       types.Int64Type,
+	"interval":            types.Int64Type,
+	"timeout":             types.Int64Type,
+	"unhealthy_threshold": types.Int64Type,
+	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadServiceContainersLivenessCheckExecHealthCheckModelAttrTypes},
+	"http_health_check":   types.ObjectType{AttrTypes: WorkloadServiceContainersLivenessCheckHTTPHealthCheckModelAttrTypes},
+	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceContainersLivenessCheckExecHealthCheckModel represents exec_health_check block
 type WorkloadServiceContainersLivenessCheckExecHealthCheckModel struct {
 	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadServiceContainersLivenessCheckExecHealthCheckModelAttrTypes defines the attribute types for WorkloadServiceContainersLivenessCheckExecHealthCheckModel
+var WorkloadServiceContainersLivenessCheckExecHealthCheckModelAttrTypes = map[string]attr.Type{
+	"command": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceContainersLivenessCheckHTTPHealthCheckModel represents http_health_check block
@@ -1926,10 +3796,24 @@ type WorkloadServiceContainersLivenessCheckHTTPHealthCheckModel struct {
 	Port       *WorkloadServiceContainersLivenessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadServiceContainersLivenessCheckHTTPHealthCheckModelAttrTypes defines the attribute types for WorkloadServiceContainersLivenessCheckHTTPHealthCheckModel
+var WorkloadServiceContainersLivenessCheckHTTPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"host_header": types.StringType,
+	"path":        types.StringType,
+	"headers":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: WorkloadServiceContainersLivenessCheckHTTPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadServiceContainersLivenessCheckHTTPHealthCheckPortModel represents port block
 type WorkloadServiceContainersLivenessCheckHTTPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadServiceContainersLivenessCheckHTTPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadServiceContainersLivenessCheckHTTPHealthCheckPortModel
+var WorkloadServiceContainersLivenessCheckHTTPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadServiceContainersLivenessCheckTCPHealthCheckModel represents tcp_health_check block
@@ -1937,10 +3821,21 @@ type WorkloadServiceContainersLivenessCheckTCPHealthCheckModel struct {
 	Port *WorkloadServiceContainersLivenessCheckTCPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadServiceContainersLivenessCheckTCPHealthCheckModelAttrTypes defines the attribute types for WorkloadServiceContainersLivenessCheckTCPHealthCheckModel
+var WorkloadServiceContainersLivenessCheckTCPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"port": types.ObjectType{AttrTypes: WorkloadServiceContainersLivenessCheckTCPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadServiceContainersLivenessCheckTCPHealthCheckPortModel represents port block
 type WorkloadServiceContainersLivenessCheckTCPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadServiceContainersLivenessCheckTCPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadServiceContainersLivenessCheckTCPHealthCheckPortModel
+var WorkloadServiceContainersLivenessCheckTCPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadServiceContainersReadinessCheckModel represents readiness_check block
@@ -1955,9 +3850,26 @@ type WorkloadServiceContainersReadinessCheckModel struct {
 	TCPHealthCheck     *WorkloadServiceContainersReadinessCheckTCPHealthCheckModel  `tfsdk:"tcp_health_check"`
 }
 
+// WorkloadServiceContainersReadinessCheckModelAttrTypes defines the attribute types for WorkloadServiceContainersReadinessCheckModel
+var WorkloadServiceContainersReadinessCheckModelAttrTypes = map[string]attr.Type{
+	"healthy_threshold":   types.Int64Type,
+	"initial_delay":       types.Int64Type,
+	"interval":            types.Int64Type,
+	"timeout":             types.Int64Type,
+	"unhealthy_threshold": types.Int64Type,
+	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadServiceContainersReadinessCheckExecHealthCheckModelAttrTypes},
+	"http_health_check":   types.ObjectType{AttrTypes: WorkloadServiceContainersReadinessCheckHTTPHealthCheckModelAttrTypes},
+	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceContainersReadinessCheckExecHealthCheckModel represents exec_health_check block
 type WorkloadServiceContainersReadinessCheckExecHealthCheckModel struct {
 	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadServiceContainersReadinessCheckExecHealthCheckModelAttrTypes defines the attribute types for WorkloadServiceContainersReadinessCheckExecHealthCheckModel
+var WorkloadServiceContainersReadinessCheckExecHealthCheckModelAttrTypes = map[string]attr.Type{
+	"command": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadServiceContainersReadinessCheckHTTPHealthCheckModel represents http_health_check block
@@ -1968,10 +3880,24 @@ type WorkloadServiceContainersReadinessCheckHTTPHealthCheckModel struct {
 	Port       *WorkloadServiceContainersReadinessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadServiceContainersReadinessCheckHTTPHealthCheckModelAttrTypes defines the attribute types for WorkloadServiceContainersReadinessCheckHTTPHealthCheckModel
+var WorkloadServiceContainersReadinessCheckHTTPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"host_header": types.StringType,
+	"path":        types.StringType,
+	"headers":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: WorkloadServiceContainersReadinessCheckHTTPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadServiceContainersReadinessCheckHTTPHealthCheckPortModel represents port block
 type WorkloadServiceContainersReadinessCheckHTTPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadServiceContainersReadinessCheckHTTPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadServiceContainersReadinessCheckHTTPHealthCheckPortModel
+var WorkloadServiceContainersReadinessCheckHTTPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadServiceContainersReadinessCheckTCPHealthCheckModel represents tcp_health_check block
@@ -1979,10 +3905,21 @@ type WorkloadServiceContainersReadinessCheckTCPHealthCheckModel struct {
 	Port *WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadServiceContainersReadinessCheckTCPHealthCheckModelAttrTypes defines the attribute types for WorkloadServiceContainersReadinessCheckTCPHealthCheckModel
+var WorkloadServiceContainersReadinessCheckTCPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"port": types.ObjectType{AttrTypes: WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModel represents port block
 type WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModel
+var WorkloadServiceContainersReadinessCheckTCPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadServiceDeployOptionsModel represents deploy_options block
@@ -1995,9 +3932,24 @@ type WorkloadServiceDeployOptionsModel struct {
 	DeployREVirtualSites *WorkloadServiceDeployOptionsDeployREVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
 }
 
+// WorkloadServiceDeployOptionsModelAttrTypes defines the attribute types for WorkloadServiceDeployOptionsModel
+var WorkloadServiceDeployOptionsModelAttrTypes = map[string]attr.Type{
+	"all_res":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_virtual_sites":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_ce_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_ce_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_re_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_re_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceDeployOptionsDeployCESitesModel represents deploy_ce_sites block
 type WorkloadServiceDeployOptionsDeployCESitesModel struct {
 	Site []WorkloadServiceDeployOptionsDeployCESitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadServiceDeployOptionsDeployCESitesModelAttrTypes defines the attribute types for WorkloadServiceDeployOptionsDeployCESitesModel
+var WorkloadServiceDeployOptionsDeployCESitesModelAttrTypes = map[string]attr.Type{
+	"site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceDeployOptionsDeployCESitesSiteModelAttrTypes}},
 }
 
 // WorkloadServiceDeployOptionsDeployCESitesSiteModel represents site block
@@ -2007,9 +3959,21 @@ type WorkloadServiceDeployOptionsDeployCESitesSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceDeployOptionsDeployCESitesSiteModelAttrTypes defines the attribute types for WorkloadServiceDeployOptionsDeployCESitesSiteModel
+var WorkloadServiceDeployOptionsDeployCESitesSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceDeployOptionsDeployCEVirtualSitesModel represents deploy_ce_virtual_sites block
 type WorkloadServiceDeployOptionsDeployCEVirtualSitesModel struct {
 	VirtualSite []WorkloadServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadServiceDeployOptionsDeployCEVirtualSitesModelAttrTypes defines the attribute types for WorkloadServiceDeployOptionsDeployCEVirtualSitesModel
+var WorkloadServiceDeployOptionsDeployCEVirtualSitesModelAttrTypes = map[string]attr.Type{
+	"virtual_site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModelAttrTypes}},
 }
 
 // WorkloadServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel represents virtual_site block
@@ -2019,9 +3983,21 @@ type WorkloadServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModelAttrTypes defines the attribute types for WorkloadServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel
+var WorkloadServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceDeployOptionsDeployRESitesModel represents deploy_re_sites block
 type WorkloadServiceDeployOptionsDeployRESitesModel struct {
 	Site []WorkloadServiceDeployOptionsDeployRESitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadServiceDeployOptionsDeployRESitesModelAttrTypes defines the attribute types for WorkloadServiceDeployOptionsDeployRESitesModel
+var WorkloadServiceDeployOptionsDeployRESitesModelAttrTypes = map[string]attr.Type{
+	"site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceDeployOptionsDeployRESitesSiteModelAttrTypes}},
 }
 
 // WorkloadServiceDeployOptionsDeployRESitesSiteModel represents site block
@@ -2031,9 +4007,21 @@ type WorkloadServiceDeployOptionsDeployRESitesSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadServiceDeployOptionsDeployRESitesSiteModelAttrTypes defines the attribute types for WorkloadServiceDeployOptionsDeployRESitesSiteModel
+var WorkloadServiceDeployOptionsDeployRESitesSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadServiceDeployOptionsDeployREVirtualSitesModel represents deploy_re_virtual_sites block
 type WorkloadServiceDeployOptionsDeployREVirtualSitesModel struct {
 	VirtualSite []WorkloadServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadServiceDeployOptionsDeployREVirtualSitesModelAttrTypes defines the attribute types for WorkloadServiceDeployOptionsDeployREVirtualSitesModel
+var WorkloadServiceDeployOptionsDeployREVirtualSitesModelAttrTypes = map[string]attr.Type{
+	"virtual_site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceDeployOptionsDeployREVirtualSitesVirtualSiteModelAttrTypes}},
 }
 
 // WorkloadServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel represents virtual_site block
@@ -2041,6 +4029,13 @@ type WorkloadServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadServiceDeployOptionsDeployREVirtualSitesVirtualSiteModelAttrTypes defines the attribute types for WorkloadServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel
+var WorkloadServiceDeployOptionsDeployREVirtualSitesVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadServiceVolumesModel represents volumes block
@@ -2051,10 +4046,24 @@ type WorkloadServiceVolumesModel struct {
 	PersistentVolume *WorkloadServiceVolumesPersistentVolumeModel `tfsdk:"persistent_volume"`
 }
 
+// WorkloadServiceVolumesModelAttrTypes defines the attribute types for WorkloadServiceVolumesModel
+var WorkloadServiceVolumesModelAttrTypes = map[string]attr.Type{
+	"name":              types.StringType,
+	"empty_dir":         types.ObjectType{AttrTypes: WorkloadServiceVolumesEmptyDirModelAttrTypes},
+	"host_path":         types.ObjectType{AttrTypes: WorkloadServiceVolumesHostPathModelAttrTypes},
+	"persistent_volume": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadServiceVolumesEmptyDirModel represents empty_dir block
 type WorkloadServiceVolumesEmptyDirModel struct {
 	SizeLimit types.Int64                               `tfsdk:"size_limit"`
 	Mount     *WorkloadServiceVolumesEmptyDirMountModel `tfsdk:"mount"`
+}
+
+// WorkloadServiceVolumesEmptyDirModelAttrTypes defines the attribute types for WorkloadServiceVolumesEmptyDirModel
+var WorkloadServiceVolumesEmptyDirModelAttrTypes = map[string]attr.Type{
+	"size_limit": types.Int64Type,
+	"mount":      types.ObjectType{AttrTypes: WorkloadServiceVolumesEmptyDirMountModelAttrTypes},
 }
 
 // WorkloadServiceVolumesEmptyDirMountModel represents mount block
@@ -2064,10 +4073,23 @@ type WorkloadServiceVolumesEmptyDirMountModel struct {
 	SubPath   types.String `tfsdk:"sub_path"`
 }
 
+// WorkloadServiceVolumesEmptyDirMountModelAttrTypes defines the attribute types for WorkloadServiceVolumesEmptyDirMountModel
+var WorkloadServiceVolumesEmptyDirMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
+}
+
 // WorkloadServiceVolumesHostPathModel represents host_path block
 type WorkloadServiceVolumesHostPathModel struct {
 	Path  types.String                              `tfsdk:"path"`
 	Mount *WorkloadServiceVolumesHostPathMountModel `tfsdk:"mount"`
+}
+
+// WorkloadServiceVolumesHostPathModelAttrTypes defines the attribute types for WorkloadServiceVolumesHostPathModel
+var WorkloadServiceVolumesHostPathModelAttrTypes = map[string]attr.Type{
+	"path":  types.StringType,
+	"mount": types.ObjectType{AttrTypes: WorkloadServiceVolumesHostPathMountModelAttrTypes},
 }
 
 // WorkloadServiceVolumesHostPathMountModel represents mount block
@@ -2077,10 +4099,23 @@ type WorkloadServiceVolumesHostPathMountModel struct {
 	SubPath   types.String `tfsdk:"sub_path"`
 }
 
+// WorkloadServiceVolumesHostPathMountModelAttrTypes defines the attribute types for WorkloadServiceVolumesHostPathMountModel
+var WorkloadServiceVolumesHostPathMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
+}
+
 // WorkloadServiceVolumesPersistentVolumeModel represents persistent_volume block
 type WorkloadServiceVolumesPersistentVolumeModel struct {
 	Mount   *WorkloadServiceVolumesPersistentVolumeMountModel   `tfsdk:"mount"`
 	Storage *WorkloadServiceVolumesPersistentVolumeStorageModel `tfsdk:"storage"`
+}
+
+// WorkloadServiceVolumesPersistentVolumeModelAttrTypes defines the attribute types for WorkloadServiceVolumesPersistentVolumeModel
+var WorkloadServiceVolumesPersistentVolumeModelAttrTypes = map[string]attr.Type{
+	"mount":   types.ObjectType{AttrTypes: WorkloadServiceVolumesPersistentVolumeMountModelAttrTypes},
+	"storage": types.ObjectType{AttrTypes: WorkloadServiceVolumesPersistentVolumeStorageModelAttrTypes},
 }
 
 // WorkloadServiceVolumesPersistentVolumeMountModel represents mount block
@@ -2090,12 +4125,27 @@ type WorkloadServiceVolumesPersistentVolumeMountModel struct {
 	SubPath   types.String `tfsdk:"sub_path"`
 }
 
+// WorkloadServiceVolumesPersistentVolumeMountModelAttrTypes defines the attribute types for WorkloadServiceVolumesPersistentVolumeMountModel
+var WorkloadServiceVolumesPersistentVolumeMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
+}
+
 // WorkloadServiceVolumesPersistentVolumeStorageModel represents storage block
 type WorkloadServiceVolumesPersistentVolumeStorageModel struct {
 	AccessMode  types.String        `tfsdk:"access_mode"`
 	ClassName   types.String        `tfsdk:"class_name"`
 	StorageSize types.Int64         `tfsdk:"storage_size"`
 	Default     *WorkloadEmptyModel `tfsdk:"default"`
+}
+
+// WorkloadServiceVolumesPersistentVolumeStorageModelAttrTypes defines the attribute types for WorkloadServiceVolumesPersistentVolumeStorageModel
+var WorkloadServiceVolumesPersistentVolumeStorageModelAttrTypes = map[string]attr.Type{
+	"access_mode":  types.StringType,
+	"class_name":   types.StringType,
+	"storage_size": types.Int64Type,
+	"default":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadSimpleServiceModel represents simple_service block
@@ -2109,9 +4159,25 @@ type WorkloadSimpleServiceModel struct {
 	SimpleAdvertise *WorkloadSimpleServiceSimpleAdvertiseModel `tfsdk:"simple_advertise"`
 }
 
+// WorkloadSimpleServiceModelAttrTypes defines the attribute types for WorkloadSimpleServiceModel
+var WorkloadSimpleServiceModelAttrTypes = map[string]attr.Type{
+	"scale_to_zero":    types.BoolType,
+	"configuration":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"container":        types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerModelAttrTypes},
+	"disabled":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"do_not_advertise": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enabled":          types.ObjectType{AttrTypes: WorkloadSimpleServiceEnabledModelAttrTypes},
+	"simple_advertise": types.ObjectType{AttrTypes: WorkloadSimpleServiceSimpleAdvertiseModelAttrTypes},
+}
+
 // WorkloadSimpleServiceConfigurationModel represents configuration block
 type WorkloadSimpleServiceConfigurationModel struct {
 	Parameters []WorkloadSimpleServiceConfigurationParametersModel `tfsdk:"parameters"`
+}
+
+// WorkloadSimpleServiceConfigurationModelAttrTypes defines the attribute types for WorkloadSimpleServiceConfigurationModel
+var WorkloadSimpleServiceConfigurationModelAttrTypes = map[string]attr.Type{
+	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadSimpleServiceConfigurationParametersModel represents parameters block
@@ -2120,10 +4186,22 @@ type WorkloadSimpleServiceConfigurationParametersModel struct {
 	File   *WorkloadSimpleServiceConfigurationParametersFileModel   `tfsdk:"file"`
 }
 
+// WorkloadSimpleServiceConfigurationParametersModelAttrTypes defines the attribute types for WorkloadSimpleServiceConfigurationParametersModel
+var WorkloadSimpleServiceConfigurationParametersModelAttrTypes = map[string]attr.Type{
+	"env_var": types.ObjectType{AttrTypes: WorkloadSimpleServiceConfigurationParametersEnvVarModelAttrTypes},
+	"file":    types.ObjectType{AttrTypes: WorkloadSimpleServiceConfigurationParametersFileModelAttrTypes},
+}
+
 // WorkloadSimpleServiceConfigurationParametersEnvVarModel represents env_var block
 type WorkloadSimpleServiceConfigurationParametersEnvVarModel struct {
 	Name  types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
+}
+
+// WorkloadSimpleServiceConfigurationParametersEnvVarModelAttrTypes defines the attribute types for WorkloadSimpleServiceConfigurationParametersEnvVarModel
+var WorkloadSimpleServiceConfigurationParametersEnvVarModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.StringType,
 }
 
 // WorkloadSimpleServiceConfigurationParametersFileModel represents file block
@@ -2134,11 +4212,26 @@ type WorkloadSimpleServiceConfigurationParametersFileModel struct {
 	Mount      *WorkloadSimpleServiceConfigurationParametersFileMountModel `tfsdk:"mount"`
 }
 
+// WorkloadSimpleServiceConfigurationParametersFileModelAttrTypes defines the attribute types for WorkloadSimpleServiceConfigurationParametersFileModel
+var WorkloadSimpleServiceConfigurationParametersFileModelAttrTypes = map[string]attr.Type{
+	"data":        types.StringType,
+	"name":        types.StringType,
+	"volume_name": types.StringType,
+	"mount":       types.ObjectType{AttrTypes: WorkloadSimpleServiceConfigurationParametersFileMountModelAttrTypes},
+}
+
 // WorkloadSimpleServiceConfigurationParametersFileMountModel represents mount block
 type WorkloadSimpleServiceConfigurationParametersFileMountModel struct {
 	Mode      types.String `tfsdk:"mode"`
 	MountPath types.String `tfsdk:"mount_path"`
 	SubPath   types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadSimpleServiceConfigurationParametersFileMountModelAttrTypes defines the attribute types for WorkloadSimpleServiceConfigurationParametersFileMountModel
+var WorkloadSimpleServiceConfigurationParametersFileMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
 }
 
 // WorkloadSimpleServiceContainerModel represents container block
@@ -2155,11 +4248,32 @@ type WorkloadSimpleServiceContainerModel struct {
 	ReadinessCheck *WorkloadSimpleServiceContainerReadinessCheckModel `tfsdk:"readiness_check"`
 }
 
+// WorkloadSimpleServiceContainerModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerModel
+var WorkloadSimpleServiceContainerModelAttrTypes = map[string]attr.Type{
+	"args":            types.ListType{ElemType: types.StringType},
+	"command":         types.ListType{ElemType: types.StringType},
+	"flavor":          types.StringType,
+	"init_container":  types.BoolType,
+	"name":            types.StringType,
+	"custom_flavor":   types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerCustomFlavorModelAttrTypes},
+	"default_flavor":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"image":           types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerImageModelAttrTypes},
+	"liveness_check":  types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerLivenessCheckModelAttrTypes},
+	"readiness_check": types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerReadinessCheckModelAttrTypes},
+}
+
 // WorkloadSimpleServiceContainerCustomFlavorModel represents custom_flavor block
 type WorkloadSimpleServiceContainerCustomFlavorModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadSimpleServiceContainerCustomFlavorModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerCustomFlavorModel
+var WorkloadSimpleServiceContainerCustomFlavorModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadSimpleServiceContainerImageModel represents image block
@@ -2170,11 +4284,26 @@ type WorkloadSimpleServiceContainerImageModel struct {
 	Public            *WorkloadEmptyModel                                        `tfsdk:"public"`
 }
 
+// WorkloadSimpleServiceContainerImageModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerImageModel
+var WorkloadSimpleServiceContainerImageModelAttrTypes = map[string]attr.Type{
+	"name":               types.StringType,
+	"pull_policy":        types.StringType,
+	"container_registry": types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerImageContainerRegistryModelAttrTypes},
+	"public":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadSimpleServiceContainerImageContainerRegistryModel represents container_registry block
 type WorkloadSimpleServiceContainerImageContainerRegistryModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadSimpleServiceContainerImageContainerRegistryModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerImageContainerRegistryModel
+var WorkloadSimpleServiceContainerImageContainerRegistryModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadSimpleServiceContainerLivenessCheckModel represents liveness_check block
@@ -2189,9 +4318,26 @@ type WorkloadSimpleServiceContainerLivenessCheckModel struct {
 	TCPHealthCheck     *WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckModel  `tfsdk:"tcp_health_check"`
 }
 
+// WorkloadSimpleServiceContainerLivenessCheckModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerLivenessCheckModel
+var WorkloadSimpleServiceContainerLivenessCheckModelAttrTypes = map[string]attr.Type{
+	"healthy_threshold":   types.Int64Type,
+	"initial_delay":       types.Int64Type,
+	"interval":            types.Int64Type,
+	"timeout":             types.Int64Type,
+	"unhealthy_threshold": types.Int64Type,
+	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModelAttrTypes},
+	"http_health_check":   types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckModelAttrTypes},
+	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModel represents exec_health_check block
 type WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModel struct {
 	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModel
+var WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModelAttrTypes = map[string]attr.Type{
+	"command": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckModel represents http_health_check block
@@ -2202,10 +4348,24 @@ type WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckModel struct {
 	Port       *WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckModel
+var WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"host_header": types.StringType,
+	"path":        types.StringType,
+	"headers":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckPortModel represents port block
 type WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckPortModel
+var WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckModel represents tcp_health_check block
@@ -2213,10 +4373,21 @@ type WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckModel struct {
 	Port *WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckModel
+var WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"port": types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckPortModel represents port block
 type WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckPortModel
+var WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadSimpleServiceContainerReadinessCheckModel represents readiness_check block
@@ -2231,9 +4402,26 @@ type WorkloadSimpleServiceContainerReadinessCheckModel struct {
 	TCPHealthCheck     *WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckModel  `tfsdk:"tcp_health_check"`
 }
 
+// WorkloadSimpleServiceContainerReadinessCheckModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerReadinessCheckModel
+var WorkloadSimpleServiceContainerReadinessCheckModelAttrTypes = map[string]attr.Type{
+	"healthy_threshold":   types.Int64Type,
+	"initial_delay":       types.Int64Type,
+	"interval":            types.Int64Type,
+	"timeout":             types.Int64Type,
+	"unhealthy_threshold": types.Int64Type,
+	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModelAttrTypes},
+	"http_health_check":   types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckModelAttrTypes},
+	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModel represents exec_health_check block
 type WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModel struct {
 	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModel
+var WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModelAttrTypes = map[string]attr.Type{
+	"command": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckModel represents http_health_check block
@@ -2244,15 +4432,34 @@ type WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckModel struct {
 	Port       *WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckModel
+var WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"host_header": types.StringType,
+	"path":        types.StringType,
+	"headers":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckPortModel represents port block
 type WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
 }
 
+// WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckPortModel
+var WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
+}
+
 // WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckModel represents tcp_health_check block
 type WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckModel struct {
 	Port *WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckPortModel `tfsdk:"port"`
+}
+
+// WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckModel
+var WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"port": types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckPortModelAttrTypes},
 }
 
 // WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckPortModel represents port block
@@ -2261,10 +4468,22 @@ type WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckPortModel struct 
 	Num  types.Int64  `tfsdk:"num"`
 }
 
+// WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckPortModel
+var WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
+}
+
 // WorkloadSimpleServiceEnabledModel represents enabled block
 type WorkloadSimpleServiceEnabledModel struct {
 	Name             types.String                                       `tfsdk:"name"`
 	PersistentVolume *WorkloadSimpleServiceEnabledPersistentVolumeModel `tfsdk:"persistent_volume"`
+}
+
+// WorkloadSimpleServiceEnabledModelAttrTypes defines the attribute types for WorkloadSimpleServiceEnabledModel
+var WorkloadSimpleServiceEnabledModelAttrTypes = map[string]attr.Type{
+	"name":              types.StringType,
+	"persistent_volume": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadSimpleServiceEnabledPersistentVolumeModel represents persistent_volume block
@@ -2273,11 +4492,24 @@ type WorkloadSimpleServiceEnabledPersistentVolumeModel struct {
 	Storage *WorkloadSimpleServiceEnabledPersistentVolumeStorageModel `tfsdk:"storage"`
 }
 
+// WorkloadSimpleServiceEnabledPersistentVolumeModelAttrTypes defines the attribute types for WorkloadSimpleServiceEnabledPersistentVolumeModel
+var WorkloadSimpleServiceEnabledPersistentVolumeModelAttrTypes = map[string]attr.Type{
+	"mount":   types.ObjectType{AttrTypes: WorkloadSimpleServiceEnabledPersistentVolumeMountModelAttrTypes},
+	"storage": types.ObjectType{AttrTypes: WorkloadSimpleServiceEnabledPersistentVolumeStorageModelAttrTypes},
+}
+
 // WorkloadSimpleServiceEnabledPersistentVolumeMountModel represents mount block
 type WorkloadSimpleServiceEnabledPersistentVolumeMountModel struct {
 	Mode      types.String `tfsdk:"mode"`
 	MountPath types.String `tfsdk:"mount_path"`
 	SubPath   types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadSimpleServiceEnabledPersistentVolumeMountModelAttrTypes defines the attribute types for WorkloadSimpleServiceEnabledPersistentVolumeMountModel
+var WorkloadSimpleServiceEnabledPersistentVolumeMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
 }
 
 // WorkloadSimpleServiceEnabledPersistentVolumeStorageModel represents storage block
@@ -2288,10 +4520,24 @@ type WorkloadSimpleServiceEnabledPersistentVolumeStorageModel struct {
 	Default     *WorkloadEmptyModel `tfsdk:"default"`
 }
 
+// WorkloadSimpleServiceEnabledPersistentVolumeStorageModelAttrTypes defines the attribute types for WorkloadSimpleServiceEnabledPersistentVolumeStorageModel
+var WorkloadSimpleServiceEnabledPersistentVolumeStorageModelAttrTypes = map[string]attr.Type{
+	"access_mode":  types.StringType,
+	"class_name":   types.StringType,
+	"storage_size": types.Int64Type,
+	"default":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadSimpleServiceSimpleAdvertiseModel represents simple_advertise block
 type WorkloadSimpleServiceSimpleAdvertiseModel struct {
 	Domains     types.List  `tfsdk:"domains"`
 	ServicePort types.Int64 `tfsdk:"service_port"`
+}
+
+// WorkloadSimpleServiceSimpleAdvertiseModelAttrTypes defines the attribute types for WorkloadSimpleServiceSimpleAdvertiseModel
+var WorkloadSimpleServiceSimpleAdvertiseModelAttrTypes = map[string]attr.Type{
+	"domains":      types.ListType{ElemType: types.StringType},
+	"service_port": types.Int64Type,
 }
 
 // WorkloadStatefulServiceModel represents stateful_service block
@@ -2306,6 +4552,18 @@ type WorkloadStatefulServiceModel struct {
 	Volumes           []WorkloadStatefulServiceVolumesModel           `tfsdk:"volumes"`
 }
 
+// WorkloadStatefulServiceModelAttrTypes defines the attribute types for WorkloadStatefulServiceModel
+var WorkloadStatefulServiceModelAttrTypes = map[string]attr.Type{
+	"num_replicas":       types.Int64Type,
+	"advertise_options":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"configuration":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"containers":         types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersModelAttrTypes}},
+	"deploy_options":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"persistent_volumes": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServicePersistentVolumesModelAttrTypes}},
+	"scale_to_zero":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"volumes":            types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceVolumesModelAttrTypes}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsModel represents advertise_options block
 type WorkloadStatefulServiceAdvertiseOptionsModel struct {
 	AdvertiseCustom    *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModel    `tfsdk:"advertise_custom"`
@@ -2314,10 +4572,24 @@ type WorkloadStatefulServiceAdvertiseOptionsModel struct {
 	DoNotAdvertise     *WorkloadEmptyModel                                             `tfsdk:"do_not_advertise"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsModelAttrTypes = map[string]attr.Type{
+	"advertise_custom":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_in_cluster": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_public":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"do_not_advertise":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModel represents advertise_custom block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModel struct {
 	AdvertiseWhere []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel `tfsdk:"advertise_where"`
 	Ports          []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsModel          `tfsdk:"ports"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModelAttrTypes = map[string]attr.Type{
+	"advertise_where": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"ports":           types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel represents advertise_where block
@@ -2327,11 +4599,25 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel s
 	Vk8sService *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel `tfsdk:"vk8s_service"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes},
+	"vk8s_service": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel represents site block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel struct {
 	IP      types.String                                                                       `tfsdk:"ip"`
 	Network types.String                                                                       `tfsdk:"network"`
 	Site    *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModelAttrTypes = map[string]attr.Type{
+	"ip":      types.StringType,
+	"network": types.StringType,
+	"site":    types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel represents site block
@@ -2341,10 +4627,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSit
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel represents virtual_site block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel struct {
 	Network     types.String                                                                                     `tfsdk:"network"`
 	VirtualSite *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"network":      types.StringType,
+	"virtual_site": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
@@ -2354,10 +4653,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtual
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel represents vk8s_service block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel struct {
 	Site        *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel        `tfsdk:"site"`
 	VirtualSite *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel represents site block
@@ -2367,6 +4679,13 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sSer
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel represents virtual_site block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -2374,11 +4693,25 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sSer
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsModel represents ports block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsModel struct {
 	HTTPLoadBalancer *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
 	Port             *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortModel             `tfsdk:"port"`
 	TCPLoadBalancer  *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel  `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsModelAttrTypes = map[string]attr.Type{
+	"http_loadbalancer": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModelAttrTypes},
+	"port":              types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortModelAttrTypes},
+	"tcp_loadbalancer":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel represents http_loadbalancer block
@@ -2391,6 +4724,16 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	SpecificRoutes *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":         types.ListType{ElemType: types.StringType},
+	"default_route":   types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModelAttrTypes},
+	"http":            types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModelAttrTypes},
+	"https":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModelAttrTypes},
+	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
+	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel struct {
 	HostRewrite        types.String        `tfsdk:"host_rewrite"`
@@ -2398,11 +4741,25 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel represents http block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel struct {
 	DNSVolterraManaged types.Bool   `tfsdk:"dns_volterra_managed"`
 	Port               types.Int64  `tfsdk:"port"`
 	PortRanges         types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModelAttrTypes = map[string]attr.Type{
+	"dns_volterra_managed": types.BoolType,
+	"port":                 types.Int64Type,
+	"port_ranges":          types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModel represents https block
@@ -2426,10 +4783,37 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	TLSParameters          *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel       `tfsdk:"tls_parameters"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
@@ -2439,9 +4823,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                               `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -2452,6 +4848,14 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
 	Certificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
@@ -2460,11 +4864,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	UseMtls      *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel       `tfsdk:"use_mtls"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
+	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
+	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":     types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
@@ -2475,11 +4894,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	MediumSecurity  *WorkloadEmptyModel                                                                                                        `tfsdk:"medium_security"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
@@ -2493,11 +4927,29 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
@@ -2507,9 +4959,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
@@ -2518,6 +4982,14 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	TLSCertificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
@@ -2530,15 +5002,36 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                                    `tfsdk:"use_system_defaults"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -2548,10 +5041,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
@@ -2562,11 +5068,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	MediumSecurity  *WorkloadEmptyModel                                                                                                        `tfsdk:"medium_security"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
@@ -2580,11 +5101,29 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
@@ -2594,9 +5133,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
@@ -2621,10 +5172,38 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	UseMtls                *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel             `tfsdk:"use_mtls"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
@@ -2634,9 +5213,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                                       `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -2647,6 +5238,14 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
 	CustomSecurity  *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
@@ -2655,11 +5254,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	MediumSecurity  *WorkloadEmptyModel                                                                                                   `tfsdk:"medium_security"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
@@ -2673,11 +5287,29 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
@@ -2687,14 +5319,31 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel struct {
 	Routes []WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -2705,9 +5354,22 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	SimpleRoute         *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel         `tfsdk:"simple_route"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
+	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"direct_response_route": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
+	"redirect_route":        types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
+	"simple_route":          types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
 	RouteRef *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes = map[string]attr.Type{
+	"route_ref": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
@@ -2715,6 +5377,13 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
@@ -2726,6 +5395,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	RouteDirectResponse *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":           types.StringType,
+	"headers":               types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes}},
+	"incoming_port":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes},
+	"path":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes},
+	"route_direct_response": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -2735,11 +5413,27 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
 	PortRanges  types.String        `tfsdk:"port_ranges"`
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
@@ -2749,10 +5443,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
 	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
 	ResponseCode        types.Int64  `tfsdk:"response_code"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes = map[string]attr.Type{
+	"response_body_encoded": types.StringType,
+	"response_code":         types.Int64Type,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
@@ -2764,6 +5471,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	RouteRedirect *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":    types.StringType,
+	"headers":        types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes}},
+	"incoming_port":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes},
+	"path":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes},
+	"route_redirect": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -2773,6 +5489,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
@@ -2780,11 +5505,25 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
@@ -2799,6 +5538,18 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes = map[string]attr.Type{
+	"host_redirect":     types.StringType,
+	"path_redirect":     types.StringType,
+	"prefix_rewrite":    types.StringType,
+	"proto_redirect":    types.StringType,
+	"replace_params":    types.StringType,
+	"response_code":     types.Int64Type,
+	"remove_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"retain_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
 	HostRewrite        types.String                                                                                                         `tfsdk:"host_rewrite"`
@@ -2808,6 +5559,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Path               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"http_method":          types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"path":                 types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
@@ -2815,10 +5575,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortModel represents port block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortModel struct {
 	Name types.String                                                              `tfsdk:"name"`
 	Info *WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"info": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel represents info block
@@ -2829,10 +5602,24 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel st
 	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsPortInfoModelAttrTypes = map[string]attr.Type{
+	"port":         types.Int64Type,
+	"protocol":     types.StringType,
+	"target_port":  types.Int64Type,
+	"same_as_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel represents tcp_loadbalancer block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel struct {
 	Domains types.List `tfsdk:"domains"`
 	WithSni types.Bool `tfsdk:"with_sni"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsTCPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":  types.ListType{ElemType: types.StringType},
+	"with_sni": types.BoolType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModel represents advertise_in_cluster block
@@ -2841,15 +5628,32 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModel struct {
 	Port       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortModel       `tfsdk:"port"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModelAttrTypes = map[string]attr.Type{
+	"multi_ports": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel represents multi_ports block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel struct {
 	Ports []WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel `tfsdk:"ports"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModelAttrTypes = map[string]attr.Type{
+	"ports": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel represents ports block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel struct {
 	Name types.String                                                                       `tfsdk:"name"`
 	Info *WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel `tfsdk:"info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"info": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel represents info block
@@ -2860,9 +5664,22 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInf
 	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsPortsInfoModelAttrTypes = map[string]attr.Type{
+	"port":         types.Int64Type,
+	"protocol":     types.StringType,
+	"target_port":  types.Int64Type,
+	"same_as_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortModel represents port block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortModel struct {
 	Info *WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortModelAttrTypes = map[string]attr.Type{
+	"info": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortInfoModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel represents info block
@@ -2873,10 +5690,24 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel stru
 	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortInfoModelAttrTypes = map[string]attr.Type{
+	"port":         types.Int64Type,
+	"protocol":     types.StringType,
+	"target_port":  types.Int64Type,
+	"same_as_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModel represents advertise_on_public block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModel struct {
 	MultiPorts *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel `tfsdk:"multi_ports"`
 	Port       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModel       `tfsdk:"port"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModelAttrTypes = map[string]attr.Type{
+	"multi_ports": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel represents multi_ports block
@@ -2884,11 +5715,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel str
 	Ports []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel `tfsdk:"ports"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModelAttrTypes = map[string]attr.Type{
+	"ports": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel represents ports block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel struct {
 	HTTPLoadBalancer *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
 	Port             *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel             `tfsdk:"port"`
 	TCPLoadBalancer  *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel  `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModelAttrTypes = map[string]attr.Type{
+	"http_loadbalancer": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModelAttrTypes},
+	"port":              types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModelAttrTypes},
+	"tcp_loadbalancer":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel represents http_loadbalancer block
@@ -2901,6 +5744,16 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	SpecificRoutes *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":         types.ListType{ElemType: types.StringType},
+	"default_route":   types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModelAttrTypes},
+	"http":            types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModelAttrTypes},
+	"https":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModelAttrTypes},
+	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
+	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel struct {
 	HostRewrite        types.String        `tfsdk:"host_rewrite"`
@@ -2908,11 +5761,25 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel represents http block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel struct {
 	DNSVolterraManaged types.Bool   `tfsdk:"dns_volterra_managed"`
 	Port               types.Int64  `tfsdk:"port"`
 	PortRanges         types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModelAttrTypes = map[string]attr.Type{
+	"dns_volterra_managed": types.BoolType,
+	"port":                 types.Int64Type,
+	"port_ranges":          types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModel represents https block
@@ -2936,10 +5803,37 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	TLSParameters          *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel       `tfsdk:"tls_parameters"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
@@ -2949,9 +5843,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                                           `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -2962,6 +5868,14 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
 	Certificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
@@ -2970,11 +5884,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	UseMtls      *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel       `tfsdk:"use_mtls"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
+	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
+	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":     types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
@@ -2985,11 +5914,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	MediumSecurity  *WorkloadEmptyModel                                                                                                                    `tfsdk:"medium_security"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
@@ -3003,11 +5947,29 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
@@ -3017,9 +5979,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
@@ -3028,6 +6002,14 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	TLSCertificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
@@ -3040,15 +6022,36 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                                                `tfsdk:"use_system_defaults"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -3058,10 +6061,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
@@ -3072,11 +6088,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	MediumSecurity  *WorkloadEmptyModel                                                                                                                    `tfsdk:"medium_security"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
@@ -3090,11 +6121,29 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
@@ -3104,9 +6153,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
@@ -3131,10 +6192,38 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	UseMtls                *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel             `tfsdk:"use_mtls"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
@@ -3144,9 +6233,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                                                   `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -3157,6 +6258,14 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
 	CustomSecurity  *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
@@ -3165,11 +6274,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	MediumSecurity  *WorkloadEmptyModel                                                                                                               `tfsdk:"medium_security"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
@@ -3183,11 +6307,29 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
@@ -3197,14 +6339,31 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel struct {
 	Routes []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -3215,9 +6374,22 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	SimpleRoute         *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel         `tfsdk:"simple_route"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
+	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"direct_response_route": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
+	"redirect_route":        types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
+	"simple_route":          types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
 	RouteRef *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes = map[string]attr.Type{
+	"route_ref": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
@@ -3225,6 +6397,13 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
@@ -3236,6 +6415,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	RouteDirectResponse *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":           types.StringType,
+	"headers":               types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes}},
+	"incoming_port":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes},
+	"path":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes},
+	"route_direct_response": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -3245,11 +6433,27 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
 	PortRanges  types.String        `tfsdk:"port_ranges"`
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
@@ -3259,10 +6463,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
 	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
 	ResponseCode        types.Int64  `tfsdk:"response_code"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes = map[string]attr.Type{
+	"response_body_encoded": types.StringType,
+	"response_code":         types.Int64Type,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
@@ -3274,6 +6491,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	RouteRedirect *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":    types.StringType,
+	"headers":        types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes}},
+	"incoming_port":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes},
+	"path":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes},
+	"route_redirect": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -3283,6 +6509,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
@@ -3290,11 +6525,25 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
@@ -3309,6 +6558,18 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes = map[string]attr.Type{
+	"host_redirect":     types.StringType,
+	"path_redirect":     types.StringType,
+	"prefix_rewrite":    types.StringType,
+	"proto_redirect":    types.StringType,
+	"replace_params":    types.StringType,
+	"response_code":     types.Int64Type,
+	"remove_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"retain_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
 	HostRewrite        types.String                                                                                                                     `tfsdk:"host_rewrite"`
@@ -3318,6 +6579,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Path               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"http_method":          types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"path":                 types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
@@ -3325,10 +6595,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel represents port block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel struct {
 	Name types.String                                                                          `tfsdk:"name"`
 	Info *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"info": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel represents info block
@@ -3339,10 +6622,24 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPort
 	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsPortInfoModelAttrTypes = map[string]attr.Type{
+	"port":         types.Int64Type,
+	"protocol":     types.StringType,
+	"target_port":  types.Int64Type,
+	"same_as_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel represents tcp_loadbalancer block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel struct {
 	Domains types.List `tfsdk:"domains"`
 	WithSni types.Bool `tfsdk:"with_sni"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsTCPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":  types.ListType{ElemType: types.StringType},
+	"with_sni": types.BoolType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModel represents port block
@@ -3350,6 +6647,13 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModel struct {
 	HTTPLoadBalancer *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel `tfsdk:"http_loadbalancer"`
 	Port             *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel             `tfsdk:"port"`
 	TCPLoadBalancer  *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel  `tfsdk:"tcp_loadbalancer"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModelAttrTypes = map[string]attr.Type{
+	"http_loadbalancer": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModelAttrTypes},
+	"port":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp_loadbalancer":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel represents http_loadbalancer block
@@ -3362,6 +6666,16 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	SpecificRoutes *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel `tfsdk:"specific_routes"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":         types.ListType{ElemType: types.StringType},
+	"default_route":   types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModelAttrTypes},
+	"http":            types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModelAttrTypes},
+	"https":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModelAttrTypes},
+	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
+	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel represents default_route block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel struct {
 	HostRewrite        types.String        `tfsdk:"host_rewrite"`
@@ -3369,11 +6683,25 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	DisableHostRewrite *WorkloadEmptyModel `tfsdk:"disable_host_rewrite"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel represents http block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel struct {
 	DNSVolterraManaged types.Bool   `tfsdk:"dns_volterra_managed"`
 	Port               types.Int64  `tfsdk:"port"`
 	PortRanges         types.String `tfsdk:"port_ranges"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModelAttrTypes = map[string]attr.Type{
+	"dns_volterra_managed": types.BoolType,
+	"port":                 types.Int64Type,
+	"port_ranges":          types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModel represents https block
@@ -3397,10 +6725,37 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	TLSParameters          *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel       `tfsdk:"tls_parameters"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
@@ -3410,9 +6765,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                                `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -3423,6 +6790,14 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel struct {
 	Certificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
@@ -3431,11 +6806,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	UseMtls      *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel       `tfsdk:"use_mtls"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
+	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
+	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":     types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
@@ -3446,11 +6836,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	MediumSecurity  *WorkloadEmptyModel                                                                                                         `tfsdk:"medium_security"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
@@ -3464,11 +6869,29 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
@@ -3478,9 +6901,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
@@ -3489,6 +6924,14 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	TLSCertificates []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
@@ -3501,15 +6944,36 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	UseSystemDefaults    *WorkloadEmptyModel                                                                                                                     `tfsdk:"use_system_defaults"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -3519,10 +6983,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
@@ -3533,11 +7010,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	MediumSecurity  *WorkloadEmptyModel                                                                                                         `tfsdk:"medium_security"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
@@ -3551,11 +7043,29 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
@@ -3565,9 +7075,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
@@ -3592,10 +7114,38 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	UseMtls                *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel             `tfsdk:"use_mtls"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
 	DefaultCoalescing *WorkloadEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *WorkloadEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
@@ -3605,9 +7155,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	HTTPProtocolEnableV2Only *WorkloadEmptyModel                                                                                                                        `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -3618,6 +7180,14 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	ProperCaseHeaderTransformation   *WorkloadEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
 	CustomSecurity  *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
@@ -3626,11 +7196,26 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	MediumSecurity  *WorkloadEmptyModel                                                                                                    `tfsdk:"medium_security"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
@@ -3644,11 +7229,29 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	XfccOptions               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
@@ -3658,14 +7261,31 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel represents specific_routes block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel struct {
 	Routes []WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel `tfsdk:"routes"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -3676,9 +7296,22 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	SimpleRoute         *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel         `tfsdk:"simple_route"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
+	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"direct_response_route": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
+	"redirect_route":        types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
+	"simple_route":          types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel represents custom_route_object block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel struct {
 	RouteRef *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes = map[string]attr.Type{
+	"route_ref": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel represents route_ref block
@@ -3686,6 +7319,13 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectRouteRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel represents direct_response_route block
@@ -3697,6 +7337,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	RouteDirectResponse *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":           types.StringType,
+	"headers":               types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes}},
+	"incoming_port":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes},
+	"path":                  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes},
+	"route_direct_response": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel represents headers block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -3706,11 +7355,27 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
 	PortRanges  types.String        `tfsdk:"port_ranges"`
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel represents path block
@@ -3720,10 +7385,23 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel struct {
 	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
 	ResponseCode        types.Int64  `tfsdk:"response_code"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes = map[string]attr.Type{
+	"response_body_encoded": types.StringType,
+	"response_code":         types.Int64Type,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel represents redirect_route block
@@ -3735,6 +7413,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	RouteRedirect *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":    types.StringType,
+	"headers":        types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes}},
+	"incoming_port":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes},
+	"path":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes},
+	"route_redirect": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel represents headers block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -3744,6 +7431,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel represents incoming_port block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel struct {
 	Port        types.Int64         `tfsdk:"port"`
@@ -3751,11 +7447,25 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	NoPortMatch *WorkloadEmptyModel `tfsdk:"no_port_match"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel represents path block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel represents route_redirect block
@@ -3770,6 +7480,18 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	RetainAllParams *WorkloadEmptyModel `tfsdk:"retain_all_params"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteRouteRedirectModelAttrTypes = map[string]attr.Type{
+	"host_redirect":     types.StringType,
+	"path_redirect":     types.StringType,
+	"prefix_rewrite":    types.StringType,
+	"proto_redirect":    types.StringType,
+	"replace_params":    types.StringType,
+	"response_code":     types.Int64Type,
+	"remove_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"retain_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel represents simple_route block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel struct {
 	HostRewrite        types.String                                                                                                          `tfsdk:"host_rewrite"`
@@ -3779,6 +7501,15 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Path               *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel `tfsdk:"path"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"http_method":          types.StringType,
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"path":                 types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel represents path block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
@@ -3786,9 +7517,21 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel represents port block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel struct {
 	Info *WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel `tfsdk:"info"`
+}
+
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortModelAttrTypes = map[string]attr.Type{
+	"info": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel represents info block
@@ -3799,15 +7542,34 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel s
 	SameAsPort *WorkloadEmptyModel `tfsdk:"same_as_port"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortInfoModelAttrTypes = map[string]attr.Type{
+	"port":         types.Int64Type,
+	"protocol":     types.StringType,
+	"target_port":  types.Int64Type,
+	"same_as_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel represents tcp_loadbalancer block
 type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel struct {
 	Domains types.List `tfsdk:"domains"`
 	WithSni types.Bool `tfsdk:"with_sni"`
 }
 
+// WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModel
+var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModelAttrTypes = map[string]attr.Type{
+	"domains":  types.ListType{ElemType: types.StringType},
+	"with_sni": types.BoolType,
+}
+
 // WorkloadStatefulServiceConfigurationModel represents configuration block
 type WorkloadStatefulServiceConfigurationModel struct {
 	Parameters []WorkloadStatefulServiceConfigurationParametersModel `tfsdk:"parameters"`
+}
+
+// WorkloadStatefulServiceConfigurationModelAttrTypes defines the attribute types for WorkloadStatefulServiceConfigurationModel
+var WorkloadStatefulServiceConfigurationModelAttrTypes = map[string]attr.Type{
+	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // WorkloadStatefulServiceConfigurationParametersModel represents parameters block
@@ -3816,10 +7578,22 @@ type WorkloadStatefulServiceConfigurationParametersModel struct {
 	File   *WorkloadStatefulServiceConfigurationParametersFileModel   `tfsdk:"file"`
 }
 
+// WorkloadStatefulServiceConfigurationParametersModelAttrTypes defines the attribute types for WorkloadStatefulServiceConfigurationParametersModel
+var WorkloadStatefulServiceConfigurationParametersModelAttrTypes = map[string]attr.Type{
+	"env_var": types.ObjectType{AttrTypes: WorkloadStatefulServiceConfigurationParametersEnvVarModelAttrTypes},
+	"file":    types.ObjectType{AttrTypes: WorkloadStatefulServiceConfigurationParametersFileModelAttrTypes},
+}
+
 // WorkloadStatefulServiceConfigurationParametersEnvVarModel represents env_var block
 type WorkloadStatefulServiceConfigurationParametersEnvVarModel struct {
 	Name  types.String `tfsdk:"name"`
 	Value types.String `tfsdk:"value"`
+}
+
+// WorkloadStatefulServiceConfigurationParametersEnvVarModelAttrTypes defines the attribute types for WorkloadStatefulServiceConfigurationParametersEnvVarModel
+var WorkloadStatefulServiceConfigurationParametersEnvVarModelAttrTypes = map[string]attr.Type{
+	"name":  types.StringType,
+	"value": types.StringType,
 }
 
 // WorkloadStatefulServiceConfigurationParametersFileModel represents file block
@@ -3830,11 +7604,26 @@ type WorkloadStatefulServiceConfigurationParametersFileModel struct {
 	Mount      *WorkloadStatefulServiceConfigurationParametersFileMountModel `tfsdk:"mount"`
 }
 
+// WorkloadStatefulServiceConfigurationParametersFileModelAttrTypes defines the attribute types for WorkloadStatefulServiceConfigurationParametersFileModel
+var WorkloadStatefulServiceConfigurationParametersFileModelAttrTypes = map[string]attr.Type{
+	"data":        types.StringType,
+	"name":        types.StringType,
+	"volume_name": types.StringType,
+	"mount":       types.ObjectType{AttrTypes: WorkloadStatefulServiceConfigurationParametersFileMountModelAttrTypes},
+}
+
 // WorkloadStatefulServiceConfigurationParametersFileMountModel represents mount block
 type WorkloadStatefulServiceConfigurationParametersFileMountModel struct {
 	Mode      types.String `tfsdk:"mode"`
 	MountPath types.String `tfsdk:"mount_path"`
 	SubPath   types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadStatefulServiceConfigurationParametersFileMountModelAttrTypes defines the attribute types for WorkloadStatefulServiceConfigurationParametersFileMountModel
+var WorkloadStatefulServiceConfigurationParametersFileMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
 }
 
 // WorkloadStatefulServiceContainersModel represents containers block
@@ -3851,11 +7640,32 @@ type WorkloadStatefulServiceContainersModel struct {
 	ReadinessCheck *WorkloadStatefulServiceContainersReadinessCheckModel `tfsdk:"readiness_check"`
 }
 
+// WorkloadStatefulServiceContainersModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersModel
+var WorkloadStatefulServiceContainersModelAttrTypes = map[string]attr.Type{
+	"args":            types.ListType{ElemType: types.StringType},
+	"command":         types.ListType{ElemType: types.StringType},
+	"flavor":          types.StringType,
+	"init_container":  types.BoolType,
+	"name":            types.StringType,
+	"custom_flavor":   types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersCustomFlavorModelAttrTypes},
+	"default_flavor":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"image":           types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersImageModelAttrTypes},
+	"liveness_check":  types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersLivenessCheckModelAttrTypes},
+	"readiness_check": types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersReadinessCheckModelAttrTypes},
+}
+
 // WorkloadStatefulServiceContainersCustomFlavorModel represents custom_flavor block
 type WorkloadStatefulServiceContainersCustomFlavorModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceContainersCustomFlavorModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersCustomFlavorModel
+var WorkloadStatefulServiceContainersCustomFlavorModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceContainersImageModel represents image block
@@ -3866,11 +7676,26 @@ type WorkloadStatefulServiceContainersImageModel struct {
 	Public            *WorkloadEmptyModel                                           `tfsdk:"public"`
 }
 
+// WorkloadStatefulServiceContainersImageModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersImageModel
+var WorkloadStatefulServiceContainersImageModelAttrTypes = map[string]attr.Type{
+	"name":               types.StringType,
+	"pull_policy":        types.StringType,
+	"container_registry": types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersImageContainerRegistryModelAttrTypes},
+	"public":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceContainersImageContainerRegistryModel represents container_registry block
 type WorkloadStatefulServiceContainersImageContainerRegistryModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// WorkloadStatefulServiceContainersImageContainerRegistryModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersImageContainerRegistryModel
+var WorkloadStatefulServiceContainersImageContainerRegistryModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // WorkloadStatefulServiceContainersLivenessCheckModel represents liveness_check block
@@ -3885,9 +7710,26 @@ type WorkloadStatefulServiceContainersLivenessCheckModel struct {
 	TCPHealthCheck     *WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckModel  `tfsdk:"tcp_health_check"`
 }
 
+// WorkloadStatefulServiceContainersLivenessCheckModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersLivenessCheckModel
+var WorkloadStatefulServiceContainersLivenessCheckModelAttrTypes = map[string]attr.Type{
+	"healthy_threshold":   types.Int64Type,
+	"initial_delay":       types.Int64Type,
+	"interval":            types.Int64Type,
+	"timeout":             types.Int64Type,
+	"unhealthy_threshold": types.Int64Type,
+	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModelAttrTypes},
+	"http_health_check":   types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckModelAttrTypes},
+	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModel represents exec_health_check block
 type WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModel struct {
 	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModel
+var WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModelAttrTypes = map[string]attr.Type{
+	"command": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckModel represents http_health_check block
@@ -3898,10 +7740,24 @@ type WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckModel struct {
 	Port       *WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckModel
+var WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"host_header": types.StringType,
+	"path":        types.StringType,
+	"headers":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckPortModel represents port block
 type WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckPortModel
+var WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckModel represents tcp_health_check block
@@ -3909,10 +7765,21 @@ type WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckModel struct {
 	Port *WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckModel
+var WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"port": types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckPortModel represents port block
 type WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckPortModel
+var WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadStatefulServiceContainersReadinessCheckModel represents readiness_check block
@@ -3927,9 +7794,26 @@ type WorkloadStatefulServiceContainersReadinessCheckModel struct {
 	TCPHealthCheck     *WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckModel  `tfsdk:"tcp_health_check"`
 }
 
+// WorkloadStatefulServiceContainersReadinessCheckModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersReadinessCheckModel
+var WorkloadStatefulServiceContainersReadinessCheckModelAttrTypes = map[string]attr.Type{
+	"healthy_threshold":   types.Int64Type,
+	"initial_delay":       types.Int64Type,
+	"interval":            types.Int64Type,
+	"timeout":             types.Int64Type,
+	"unhealthy_threshold": types.Int64Type,
+	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModelAttrTypes},
+	"http_health_check":   types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckModelAttrTypes},
+	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModel represents exec_health_check block
 type WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModel struct {
 	Command types.List `tfsdk:"command"`
+}
+
+// WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModel
+var WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModelAttrTypes = map[string]attr.Type{
+	"command": types.ListType{ElemType: types.StringType},
 }
 
 // WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckModel represents http_health_check block
@@ -3940,10 +7824,24 @@ type WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckModel struct 
 	Port       *WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckModel
+var WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"host_header": types.StringType,
+	"path":        types.StringType,
+	"headers":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":        types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckPortModel represents port block
 type WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckPortModel
+var WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckModel represents tcp_health_check block
@@ -3951,10 +7849,21 @@ type WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckModel struct {
 	Port *WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModel `tfsdk:"port"`
 }
 
+// WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckModel
+var WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckModelAttrTypes = map[string]attr.Type{
+	"port": types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModelAttrTypes},
+}
+
 // WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModel represents port block
 type WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModel struct {
 	Name types.String `tfsdk:"name"`
 	Num  types.Int64  `tfsdk:"num"`
+}
+
+// WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModel
+var WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckPortModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+	"num":  types.Int64Type,
 }
 
 // WorkloadStatefulServiceDeployOptionsModel represents deploy_options block
@@ -3967,9 +7876,24 @@ type WorkloadStatefulServiceDeployOptionsModel struct {
 	DeployREVirtualSites *WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesModel `tfsdk:"deploy_re_virtual_sites"`
 }
 
+// WorkloadStatefulServiceDeployOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceDeployOptionsModel
+var WorkloadStatefulServiceDeployOptionsModelAttrTypes = map[string]attr.Type{
+	"all_res":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_virtual_sites":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_ce_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_ce_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_re_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_re_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceDeployOptionsDeployCESitesModel represents deploy_ce_sites block
 type WorkloadStatefulServiceDeployOptionsDeployCESitesModel struct {
 	Site []WorkloadStatefulServiceDeployOptionsDeployCESitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployCESitesModelAttrTypes defines the attribute types for WorkloadStatefulServiceDeployOptionsDeployCESitesModel
+var WorkloadStatefulServiceDeployOptionsDeployCESitesModelAttrTypes = map[string]attr.Type{
+	"site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceDeployOptionsDeployCESitesSiteModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceDeployOptionsDeployCESitesSiteModel represents site block
@@ -3979,9 +7903,21 @@ type WorkloadStatefulServiceDeployOptionsDeployCESitesSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceDeployOptionsDeployCESitesSiteModelAttrTypes defines the attribute types for WorkloadStatefulServiceDeployOptionsDeployCESitesSiteModel
+var WorkloadStatefulServiceDeployOptionsDeployCESitesSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesModel represents deploy_ce_virtual_sites block
 type WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesModel struct {
 	VirtualSite []WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesModelAttrTypes defines the attribute types for WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesModel
+var WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesModelAttrTypes = map[string]attr.Type{
+	"virtual_site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel represents virtual_site block
@@ -3991,9 +7927,21 @@ type WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel st
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModelAttrTypes defines the attribute types for WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModel
+var WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceDeployOptionsDeployRESitesModel represents deploy_re_sites block
 type WorkloadStatefulServiceDeployOptionsDeployRESitesModel struct {
 	Site []WorkloadStatefulServiceDeployOptionsDeployRESitesSiteModel `tfsdk:"site"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployRESitesModelAttrTypes defines the attribute types for WorkloadStatefulServiceDeployOptionsDeployRESitesModel
+var WorkloadStatefulServiceDeployOptionsDeployRESitesModelAttrTypes = map[string]attr.Type{
+	"site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceDeployOptionsDeployRESitesSiteModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceDeployOptionsDeployRESitesSiteModel represents site block
@@ -4003,9 +7951,21 @@ type WorkloadStatefulServiceDeployOptionsDeployRESitesSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceDeployOptionsDeployRESitesSiteModelAttrTypes defines the attribute types for WorkloadStatefulServiceDeployOptionsDeployRESitesSiteModel
+var WorkloadStatefulServiceDeployOptionsDeployRESitesSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesModel represents deploy_re_virtual_sites block
 type WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesModel struct {
 	VirtualSite []WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesModelAttrTypes defines the attribute types for WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesModel
+var WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesModelAttrTypes = map[string]attr.Type{
+	"virtual_site": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesVirtualSiteModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel represents virtual_site block
@@ -4015,10 +7975,23 @@ type WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel st
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesVirtualSiteModelAttrTypes defines the attribute types for WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesVirtualSiteModel
+var WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // WorkloadStatefulServicePersistentVolumesModel represents persistent_volumes block
 type WorkloadStatefulServicePersistentVolumesModel struct {
 	Name             types.String                                                   `tfsdk:"name"`
 	PersistentVolume *WorkloadStatefulServicePersistentVolumesPersistentVolumeModel `tfsdk:"persistent_volume"`
+}
+
+// WorkloadStatefulServicePersistentVolumesModelAttrTypes defines the attribute types for WorkloadStatefulServicePersistentVolumesModel
+var WorkloadStatefulServicePersistentVolumesModelAttrTypes = map[string]attr.Type{
+	"name":              types.StringType,
+	"persistent_volume": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // WorkloadStatefulServicePersistentVolumesPersistentVolumeModel represents persistent_volume block
@@ -4027,11 +8000,24 @@ type WorkloadStatefulServicePersistentVolumesPersistentVolumeModel struct {
 	Storage *WorkloadStatefulServicePersistentVolumesPersistentVolumeStorageModel `tfsdk:"storage"`
 }
 
+// WorkloadStatefulServicePersistentVolumesPersistentVolumeModelAttrTypes defines the attribute types for WorkloadStatefulServicePersistentVolumesPersistentVolumeModel
+var WorkloadStatefulServicePersistentVolumesPersistentVolumeModelAttrTypes = map[string]attr.Type{
+	"mount":   types.ObjectType{AttrTypes: WorkloadStatefulServicePersistentVolumesPersistentVolumeMountModelAttrTypes},
+	"storage": types.ObjectType{AttrTypes: WorkloadStatefulServicePersistentVolumesPersistentVolumeStorageModelAttrTypes},
+}
+
 // WorkloadStatefulServicePersistentVolumesPersistentVolumeMountModel represents mount block
 type WorkloadStatefulServicePersistentVolumesPersistentVolumeMountModel struct {
 	Mode      types.String `tfsdk:"mode"`
 	MountPath types.String `tfsdk:"mount_path"`
 	SubPath   types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadStatefulServicePersistentVolumesPersistentVolumeMountModelAttrTypes defines the attribute types for WorkloadStatefulServicePersistentVolumesPersistentVolumeMountModel
+var WorkloadStatefulServicePersistentVolumesPersistentVolumeMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
 }
 
 // WorkloadStatefulServicePersistentVolumesPersistentVolumeStorageModel represents storage block
@@ -4042,6 +8028,14 @@ type WorkloadStatefulServicePersistentVolumesPersistentVolumeStorageModel struct
 	Default     *WorkloadEmptyModel `tfsdk:"default"`
 }
 
+// WorkloadStatefulServicePersistentVolumesPersistentVolumeStorageModelAttrTypes defines the attribute types for WorkloadStatefulServicePersistentVolumesPersistentVolumeStorageModel
+var WorkloadStatefulServicePersistentVolumesPersistentVolumeStorageModelAttrTypes = map[string]attr.Type{
+	"access_mode":  types.StringType,
+	"class_name":   types.StringType,
+	"storage_size": types.Int64Type,
+	"default":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // WorkloadStatefulServiceVolumesModel represents volumes block
 type WorkloadStatefulServiceVolumesModel struct {
 	Name     types.String                                 `tfsdk:"name"`
@@ -4049,10 +8043,23 @@ type WorkloadStatefulServiceVolumesModel struct {
 	HostPath *WorkloadStatefulServiceVolumesHostPathModel `tfsdk:"host_path"`
 }
 
+// WorkloadStatefulServiceVolumesModelAttrTypes defines the attribute types for WorkloadStatefulServiceVolumesModel
+var WorkloadStatefulServiceVolumesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"empty_dir": types.ObjectType{AttrTypes: WorkloadStatefulServiceVolumesEmptyDirModelAttrTypes},
+	"host_path": types.ObjectType{AttrTypes: WorkloadStatefulServiceVolumesHostPathModelAttrTypes},
+}
+
 // WorkloadStatefulServiceVolumesEmptyDirModel represents empty_dir block
 type WorkloadStatefulServiceVolumesEmptyDirModel struct {
 	SizeLimit types.Int64                                       `tfsdk:"size_limit"`
 	Mount     *WorkloadStatefulServiceVolumesEmptyDirMountModel `tfsdk:"mount"`
+}
+
+// WorkloadStatefulServiceVolumesEmptyDirModelAttrTypes defines the attribute types for WorkloadStatefulServiceVolumesEmptyDirModel
+var WorkloadStatefulServiceVolumesEmptyDirModelAttrTypes = map[string]attr.Type{
+	"size_limit": types.Int64Type,
+	"mount":      types.ObjectType{AttrTypes: WorkloadStatefulServiceVolumesEmptyDirMountModelAttrTypes},
 }
 
 // WorkloadStatefulServiceVolumesEmptyDirMountModel represents mount block
@@ -4062,10 +8069,23 @@ type WorkloadStatefulServiceVolumesEmptyDirMountModel struct {
 	SubPath   types.String `tfsdk:"sub_path"`
 }
 
+// WorkloadStatefulServiceVolumesEmptyDirMountModelAttrTypes defines the attribute types for WorkloadStatefulServiceVolumesEmptyDirMountModel
+var WorkloadStatefulServiceVolumesEmptyDirMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
+}
+
 // WorkloadStatefulServiceVolumesHostPathModel represents host_path block
 type WorkloadStatefulServiceVolumesHostPathModel struct {
 	Path  types.String                                      `tfsdk:"path"`
 	Mount *WorkloadStatefulServiceVolumesHostPathMountModel `tfsdk:"mount"`
+}
+
+// WorkloadStatefulServiceVolumesHostPathModelAttrTypes defines the attribute types for WorkloadStatefulServiceVolumesHostPathModel
+var WorkloadStatefulServiceVolumesHostPathModelAttrTypes = map[string]attr.Type{
+	"path":  types.StringType,
+	"mount": types.ObjectType{AttrTypes: WorkloadStatefulServiceVolumesHostPathMountModelAttrTypes},
 }
 
 // WorkloadStatefulServiceVolumesHostPathMountModel represents mount block
@@ -4073,6 +8093,13 @@ type WorkloadStatefulServiceVolumesHostPathMountModel struct {
 	Mode      types.String `tfsdk:"mode"`
 	MountPath types.String `tfsdk:"mount_path"`
 	SubPath   types.String `tfsdk:"sub_path"`
+}
+
+// WorkloadStatefulServiceVolumesHostPathMountModelAttrTypes defines the attribute types for WorkloadStatefulServiceVolumesHostPathMountModel
+var WorkloadStatefulServiceVolumesHostPathMountModelAttrTypes = map[string]attr.Type{
+	"mode":       types.StringType,
+	"mount_path": types.StringType,
+	"sub_path":   types.StringType,
 }
 
 type WorkloadResourceModel struct {
@@ -4267,6 +8294,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -4301,6 +8331,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -4516,6 +8549,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -4542,6 +8578,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -4568,6 +8607,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -4594,6 +8636,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -4768,6 +8813,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -4797,6 +8845,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -4821,6 +8872,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -4839,6 +8893,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -5015,6 +9072,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
+																						PlanModifiers: []planmodifier.String{
+																							stringplanmodifier.UseStateForUnknown(),
+																						},
 																					},
 																				},
 																			},
@@ -5083,6 +9143,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -5104,6 +9167,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -5261,6 +9327,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -5282,6 +9351,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -5467,6 +9539,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		},
@@ -5488,6 +9563,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		},
@@ -5536,6 +9614,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																								Optional:            true,
 																								Computed:            true,
+																								PlanModifiers: []planmodifier.String{
+																									stringplanmodifier.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					},
@@ -6085,6 +10166,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																								Optional:            true,
 																								Computed:            true,
+																								PlanModifiers: []planmodifier.String{
+																									stringplanmodifier.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					},
@@ -6153,6 +10237,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
+																									PlanModifiers: []planmodifier.String{
+																										stringplanmodifier.UseStateForUnknown(),
+																									},
 																								},
 																							},
 																						},
@@ -6174,6 +10261,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
+																									PlanModifiers: []planmodifier.String{
+																										stringplanmodifier.UseStateForUnknown(),
+																									},
 																								},
 																							},
 																						},
@@ -6331,6 +10421,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
+																									PlanModifiers: []planmodifier.String{
+																										stringplanmodifier.UseStateForUnknown(),
+																									},
 																								},
 																							},
 																						},
@@ -6352,6 +10445,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
+																									PlanModifiers: []planmodifier.String{
+																										stringplanmodifier.UseStateForUnknown(),
+																									},
 																								},
 																							},
 																						},
@@ -6537,6 +10633,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -6558,6 +10657,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -6606,6 +10708,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																										Optional:            true,
 																										Computed:            true,
+																										PlanModifiers: []planmodifier.String{
+																											stringplanmodifier.UseStateForUnknown(),
+																										},
 																									},
 																								},
 																							},
@@ -7071,6 +11176,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		},
@@ -7139,6 +11247,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
+																						PlanModifiers: []planmodifier.String{
+																							stringplanmodifier.UseStateForUnknown(),
+																						},
 																					},
 																				},
 																			},
@@ -7160,6 +11271,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
+																						PlanModifiers: []planmodifier.String{
+																							stringplanmodifier.UseStateForUnknown(),
+																						},
 																					},
 																				},
 																			},
@@ -7317,6 +11431,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
+																						PlanModifiers: []planmodifier.String{
+																							stringplanmodifier.UseStateForUnknown(),
+																						},
 																					},
 																				},
 																			},
@@ -7338,6 +11455,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
+																						PlanModifiers: []planmodifier.String{
+																							stringplanmodifier.UseStateForUnknown(),
+																						},
 																					},
 																				},
 																			},
@@ -7523,6 +11643,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																				Optional:            true,
 																				Computed:            true,
+																				PlanModifiers: []planmodifier.String{
+																					stringplanmodifier.UseStateForUnknown(),
+																				},
 																			},
 																		},
 																	},
@@ -7544,6 +11667,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																				Optional:            true,
 																				Computed:            true,
+																				PlanModifiers: []planmodifier.String{
+																					stringplanmodifier.UseStateForUnknown(),
+																				},
 																			},
 																		},
 																	},
@@ -7592,6 +11718,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -7995,6 +12124,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -8029,6 +12161,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -8244,6 +12379,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -8270,6 +12408,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -8296,6 +12437,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -8322,6 +12466,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -8563,6 +12710,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -8597,6 +12747,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -8909,6 +13062,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -8938,6 +13094,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -8962,6 +13121,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -8980,6 +13142,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -9156,6 +13321,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
+																						PlanModifiers: []planmodifier.String{
+																							stringplanmodifier.UseStateForUnknown(),
+																						},
 																					},
 																				},
 																			},
@@ -9224,6 +13392,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -9245,6 +13416,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -9402,6 +13576,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -9423,6 +13600,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -9608,6 +13788,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		},
@@ -9629,6 +13812,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		},
@@ -9677,6 +13863,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																								Optional:            true,
 																								Computed:            true,
+																								PlanModifiers: []planmodifier.String{
+																									stringplanmodifier.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					},
@@ -10226,6 +14415,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																								Optional:            true,
 																								Computed:            true,
+																								PlanModifiers: []planmodifier.String{
+																									stringplanmodifier.UseStateForUnknown(),
+																								},
 																							},
 																						},
 																					},
@@ -10294,6 +14486,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
+																									PlanModifiers: []planmodifier.String{
+																										stringplanmodifier.UseStateForUnknown(),
+																									},
 																								},
 																							},
 																						},
@@ -10315,6 +14510,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
+																									PlanModifiers: []planmodifier.String{
+																										stringplanmodifier.UseStateForUnknown(),
+																									},
 																								},
 																							},
 																						},
@@ -10472,6 +14670,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
+																									PlanModifiers: []planmodifier.String{
+																										stringplanmodifier.UseStateForUnknown(),
+																									},
 																								},
 																							},
 																						},
@@ -10493,6 +14694,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
+																									PlanModifiers: []planmodifier.String{
+																										stringplanmodifier.UseStateForUnknown(),
+																									},
 																								},
 																							},
 																						},
@@ -10678,6 +14882,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -10699,6 +14906,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -10747,6 +14957,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																										Optional:            true,
 																										Computed:            true,
+																										PlanModifiers: []planmodifier.String{
+																											stringplanmodifier.UseStateForUnknown(),
+																										},
 																									},
 																								},
 																							},
@@ -11212,6 +15425,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		},
@@ -11280,6 +15496,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
+																						PlanModifiers: []planmodifier.String{
+																							stringplanmodifier.UseStateForUnknown(),
+																						},
 																					},
 																				},
 																			},
@@ -11301,6 +15520,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
+																						PlanModifiers: []planmodifier.String{
+																							stringplanmodifier.UseStateForUnknown(),
+																						},
 																					},
 																				},
 																			},
@@ -11458,6 +15680,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
+																						PlanModifiers: []planmodifier.String{
+																							stringplanmodifier.UseStateForUnknown(),
+																						},
 																					},
 																				},
 																			},
@@ -11479,6 +15704,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
+																						PlanModifiers: []planmodifier.String{
+																							stringplanmodifier.UseStateForUnknown(),
+																						},
 																					},
 																				},
 																			},
@@ -11664,6 +15892,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																				Optional:            true,
 																				Computed:            true,
+																				PlanModifiers: []planmodifier.String{
+																					stringplanmodifier.UseStateForUnknown(),
+																				},
 																			},
 																		},
 																	},
@@ -11685,6 +15916,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																				Optional:            true,
 																				Computed:            true,
+																				PlanModifiers: []planmodifier.String{
+																					stringplanmodifier.UseStateForUnknown(),
+																				},
 																			},
 																		},
 																	},
@@ -11733,6 +15967,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
+																							PlanModifiers: []planmodifier.String{
+																								stringplanmodifier.UseStateForUnknown(),
+																							},
 																						},
 																					},
 																				},
@@ -12136,6 +16373,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -12170,6 +16410,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -12385,6 +16628,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -12411,6 +16657,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -12437,6 +16686,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -12463,6 +16715,9 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -14233,11 +18488,17 @@ func (r *WorkloadResource) Read(ctx context.Context, req resource.ReadRequest, r
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

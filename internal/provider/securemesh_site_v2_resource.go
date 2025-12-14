@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,6 +56,11 @@ type SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel struct {
 	EnhancedFirewallPolicies []SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
 }
 
+// SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModel
+var SecuremeshSiteV2ActiveEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
+	"enhanced_firewall_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes}},
+}
+
 // SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
 type SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -62,9 +68,21 @@ type SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
+var SecuremeshSiteV2ActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // SecuremeshSiteV2ActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
 type SecuremeshSiteV2ActiveForwardProxyPoliciesModel struct {
 	ForwardProxyPolicies []SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
+}
+
+// SecuremeshSiteV2ActiveForwardProxyPoliciesModelAttrTypes defines the attribute types for SecuremeshSiteV2ActiveForwardProxyPoliciesModel
+var SecuremeshSiteV2ActiveForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
+	"forward_proxy_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes}},
 }
 
 // SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
@@ -74,16 +92,35 @@ type SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel struct 
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes defines the attribute types for SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModel
+var SecuremeshSiteV2ActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // SecuremeshSiteV2AdminUserCredentialsModel represents admin_user_credentials block
 type SecuremeshSiteV2AdminUserCredentialsModel struct {
 	SSHKey        types.String                                            `tfsdk:"ssh_key"`
 	AdminPassword *SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel `tfsdk:"admin_password"`
 }
 
+// SecuremeshSiteV2AdminUserCredentialsModelAttrTypes defines the attribute types for SecuremeshSiteV2AdminUserCredentialsModel
+var SecuremeshSiteV2AdminUserCredentialsModelAttrTypes = map[string]attr.Type{
+	"ssh_key":        types.StringType,
+	"admin_password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel represents admin_password block
 type SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel struct {
 	BlindfoldSecretInfo *SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// SecuremeshSiteV2AdminUserCredentialsAdminPasswordModelAttrTypes defines the attribute types for SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel
+var SecuremeshSiteV2AdminUserCredentialsAdminPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModelAttrTypes},
 }
 
 // SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -93,10 +130,23 @@ type SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModel s
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModel
+var SecuremeshSiteV2AdminUserCredentialsAdminPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel represents clear_secret_info block
 type SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModelAttrTypes defines the attribute types for SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModel
+var SecuremeshSiteV2AdminUserCredentialsAdminPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // SecuremeshSiteV2AWSModel represents aws block
@@ -104,9 +154,19 @@ type SecuremeshSiteV2AWSModel struct {
 	NotManaged *SecuremeshSiteV2AWSNotManagedModel `tfsdk:"not_managed"`
 }
 
+// SecuremeshSiteV2AWSModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSModel
+var SecuremeshSiteV2AWSModelAttrTypes = map[string]attr.Type{
+	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2AWSNotManagedModel represents not_managed block
 type SecuremeshSiteV2AWSNotManagedModel struct {
 	NodeList []SecuremeshSiteV2AWSNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2AWSNotManagedModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedModel
+var SecuremeshSiteV2AWSNotManagedModelAttrTypes = map[string]attr.Type{
+	"node_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListModel represents node_list block
@@ -115,6 +175,14 @@ type SecuremeshSiteV2AWSNotManagedNodeListModel struct {
 	PublicIP      types.String                                              `tfsdk:"public_ip"`
 	Type          types.String                                              `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListModel
+var SecuremeshSiteV2AWSNotManagedNodeListModelAttrTypes = map[string]attr.Type{
+	"hostname":       types.StringType,
+	"public_ip":      types.StringType,
+	"type":           types.StringType,
+	"interface_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel represents interface_list block
@@ -140,6 +208,29 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel struct {
 	VLANInterface                           *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVLANInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModelAttrTypes = map[string]attr.Type{
+	"description_spec":   types.StringType,
+	"mtu":                types.Int64Type,
+	"name":               types.StringType,
+	"priority":           types.Int64Type,
+	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
+	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
+	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
+}
+
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel struct {
 	Devices             types.List                                                                `tfsdk:"devices"`
@@ -150,9 +241,24 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel struct
 	Lacp                *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes},
+}
+
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
@@ -161,10 +267,22 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModel st
 	Mac    types.String `tfsdk:"mac"`
 }
 
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device": types.StringType,
+	"mac":    types.StringType,
+}
+
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigModel struct {
 	Host   *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"host"`
 	Router *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel represents router block
@@ -174,10 +292,23 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 	Stateful      *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -185,11 +316,23 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSCo
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
 	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -201,11 +344,27 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterState
 	InterfaceIPMap     *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                           `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                           `tfsdk:"pool_settings"`
 	Pools         []SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -214,9 +373,20 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterState
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
@@ -225,10 +395,22 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModel struct
 	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes = map[string]attr.Type{
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressModel represents static_ipv6_address block
@@ -237,9 +419,20 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressModel st
 	NodeStaticIP    *SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
+}
+
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
@@ -248,10 +441,22 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressNodeStat
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVLANInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVLANInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
 	VLANID types.Int64  `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVLANInterfaceModel
+var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
 }
 
 // SecuremeshSiteV2AzureModel represents azure block
@@ -259,9 +464,19 @@ type SecuremeshSiteV2AzureModel struct {
 	NotManaged *SecuremeshSiteV2AzureNotManagedModel `tfsdk:"not_managed"`
 }
 
+// SecuremeshSiteV2AzureModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureModel
+var SecuremeshSiteV2AzureModelAttrTypes = map[string]attr.Type{
+	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2AzureNotManagedModel represents not_managed block
 type SecuremeshSiteV2AzureNotManagedModel struct {
 	NodeList []SecuremeshSiteV2AzureNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2AzureNotManagedModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedModel
+var SecuremeshSiteV2AzureNotManagedModelAttrTypes = map[string]attr.Type{
+	"node_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListModel represents node_list block
@@ -270,6 +485,14 @@ type SecuremeshSiteV2AzureNotManagedNodeListModel struct {
 	PublicIP      types.String                                                `tfsdk:"public_ip"`
 	Type          types.String                                                `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListModel
+var SecuremeshSiteV2AzureNotManagedNodeListModelAttrTypes = map[string]attr.Type{
+	"hostname":       types.StringType,
+	"public_ip":      types.StringType,
+	"type":           types.StringType,
+	"interface_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel represents interface_list block
@@ -295,6 +518,29 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel struct {
 	VLANInterface                           *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVLANInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModelAttrTypes = map[string]attr.Type{
+	"description_spec":   types.StringType,
+	"mtu":                types.Int64Type,
+	"name":               types.StringType,
+	"priority":           types.Int64Type,
+	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
+	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
+	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
+}
+
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel struct {
 	Devices             types.List                                                                  `tfsdk:"devices"`
@@ -305,9 +551,24 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel stru
 	Lacp                *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes},
+}
+
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
@@ -316,10 +577,22 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModel 
 	Mac    types.String `tfsdk:"mac"`
 }
 
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device": types.StringType,
+	"mac":    types.StringType,
+}
+
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigModel struct {
 	Host   *SecuremeshSiteV2EmptyModel                                                    `tfsdk:"host"`
 	Router *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel represents router block
@@ -329,10 +602,23 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterMod
 	Stateful      *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -340,11 +626,23 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNS
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
 	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -356,11 +654,27 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterSta
 	InterfaceIPMap     *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                             `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                             `tfsdk:"pool_settings"`
 	Pools         []SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -369,9 +683,20 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterSta
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
@@ -380,10 +705,22 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModel stru
 	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes = map[string]attr.Type{
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressModel represents static_ipv6_address block
@@ -392,9 +729,20 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressModel 
 	NodeStaticIP    *SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
+}
+
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
@@ -403,10 +751,22 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressNodeSt
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVLANInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVLANInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
 	VLANID types.Int64  `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVLANInterfaceModel
+var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
 }
 
 // SecuremeshSiteV2BaremetalModel represents baremetal block
@@ -414,9 +774,19 @@ type SecuremeshSiteV2BaremetalModel struct {
 	NotManaged *SecuremeshSiteV2BaremetalNotManagedModel `tfsdk:"not_managed"`
 }
 
+// SecuremeshSiteV2BaremetalModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalModel
+var SecuremeshSiteV2BaremetalModelAttrTypes = map[string]attr.Type{
+	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2BaremetalNotManagedModel represents not_managed block
 type SecuremeshSiteV2BaremetalNotManagedModel struct {
 	NodeList []SecuremeshSiteV2BaremetalNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedModel
+var SecuremeshSiteV2BaremetalNotManagedModelAttrTypes = map[string]attr.Type{
+	"node_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListModel represents node_list block
@@ -425,6 +795,14 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListModel struct {
 	PublicIP      types.String                                                    `tfsdk:"public_ip"`
 	Type          types.String                                                    `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListModelAttrTypes = map[string]attr.Type{
+	"hostname":       types.StringType,
+	"public_ip":      types.StringType,
+	"type":           types.StringType,
+	"interface_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel represents interface_list block
@@ -450,6 +828,29 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel struct {
 	VLANInterface                           *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVLANInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModelAttrTypes = map[string]attr.Type{
+	"description_spec":   types.StringType,
+	"mtu":                types.Int64Type,
+	"name":               types.StringType,
+	"priority":           types.Int64Type,
+	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
+	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
+	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
+}
+
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel struct {
 	Devices             types.List                                                                      `tfsdk:"devices"`
@@ -460,9 +861,24 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel 
 	Lacp                *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes},
+}
+
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
@@ -471,10 +887,22 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceMo
 	Mac    types.String `tfsdk:"mac"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device": types.StringType,
+	"mac":    types.StringType,
+}
+
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigModel struct {
 	Host   *SecuremeshSiteV2EmptyModel                                                        `tfsdk:"host"`
 	Router *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel represents router block
@@ -484,10 +912,23 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRoute
 	Stateful      *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -495,11 +936,23 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRoute
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
 	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -511,11 +964,27 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRoute
 	InterfaceIPMap     *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                                 `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                                 `tfsdk:"pool_settings"`
 	Pools         []SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -524,9 +993,20 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRoute
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
@@ -535,10 +1015,22 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModel 
 	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes = map[string]attr.Type{
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressModel represents static_ipv6_address block
@@ -547,9 +1039,20 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressMo
 	NodeStaticIP    *SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
+}
+
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
@@ -558,15 +1061,32 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressNo
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVLANInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVLANInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
 	VLANID types.Int64  `tfsdk:"vlan_id"`
 }
 
+// SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVLANInterfaceModel
+var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
+}
+
 // SecuremeshSiteV2BlockedServicesModel represents blocked_services block
 type SecuremeshSiteV2BlockedServicesModel struct {
 	BlockedSevice []SecuremeshSiteV2BlockedServicesBlockedSeviceModel `tfsdk:"blocked_sevice"`
+}
+
+// SecuremeshSiteV2BlockedServicesModelAttrTypes defines the attribute types for SecuremeshSiteV2BlockedServicesModel
+var SecuremeshSiteV2BlockedServicesModelAttrTypes = map[string]attr.Type{
+	"blocked_sevice": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2BlockedServicesBlockedSeviceModelAttrTypes}},
 }
 
 // SecuremeshSiteV2BlockedServicesBlockedSeviceModel represents blocked_sevice block
@@ -575,6 +1095,14 @@ type SecuremeshSiteV2BlockedServicesBlockedSeviceModel struct {
 	DNS              *SecuremeshSiteV2EmptyModel `tfsdk:"dns"`
 	SSH              *SecuremeshSiteV2EmptyModel `tfsdk:"ssh"`
 	WebUserInterface *SecuremeshSiteV2EmptyModel `tfsdk:"web_user_interface"`
+}
+
+// SecuremeshSiteV2BlockedServicesBlockedSeviceModelAttrTypes defines the attribute types for SecuremeshSiteV2BlockedServicesBlockedSeviceModel
+var SecuremeshSiteV2BlockedServicesBlockedSeviceModelAttrTypes = map[string]attr.Type{
+	"network_type":       types.StringType,
+	"dns":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ssh":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"web_user_interface": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2CustomProxyModel represents custom_proxy block
@@ -587,10 +1115,26 @@ type SecuremeshSiteV2CustomProxyModel struct {
 	Password        *SecuremeshSiteV2CustomProxyPasswordModel `tfsdk:"password"`
 }
 
+// SecuremeshSiteV2CustomProxyModelAttrTypes defines the attribute types for SecuremeshSiteV2CustomProxyModel
+var SecuremeshSiteV2CustomProxyModelAttrTypes = map[string]attr.Type{
+	"proxy_ip_address":  types.StringType,
+	"proxy_port":        types.Int64Type,
+	"username":          types.StringType,
+	"disable_re_tunnel": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_re_tunnel":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2CustomProxyPasswordModel represents password block
 type SecuremeshSiteV2CustomProxyPasswordModel struct {
 	BlindfoldSecretInfo *SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// SecuremeshSiteV2CustomProxyPasswordModelAttrTypes defines the attribute types for SecuremeshSiteV2CustomProxyPasswordModel
+var SecuremeshSiteV2CustomProxyPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModelAttrTypes},
 }
 
 // SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -600,15 +1144,33 @@ type SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModel
+var SecuremeshSiteV2CustomProxyPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel represents clear_secret_info block
 type SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModelAttrTypes defines the attribute types for SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModel
+var SecuremeshSiteV2CustomProxyPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // SecuremeshSiteV2CustomProxyBypassModel represents custom_proxy_bypass block
 type SecuremeshSiteV2CustomProxyBypassModel struct {
 	ProxyBypass types.List `tfsdk:"proxy_bypass"`
+}
+
+// SecuremeshSiteV2CustomProxyBypassModelAttrTypes defines the attribute types for SecuremeshSiteV2CustomProxyBypassModel
+var SecuremeshSiteV2CustomProxyBypassModelAttrTypes = map[string]attr.Type{
+	"proxy_bypass": types.ListType{ElemType: types.StringType},
 }
 
 // SecuremeshSiteV2DcClusterGroupSLIModel represents dc_cluster_group_sli block
@@ -618,11 +1180,25 @@ type SecuremeshSiteV2DcClusterGroupSLIModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// SecuremeshSiteV2DcClusterGroupSLIModelAttrTypes defines the attribute types for SecuremeshSiteV2DcClusterGroupSLIModel
+var SecuremeshSiteV2DcClusterGroupSLIModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // SecuremeshSiteV2DcClusterGroupSloModel represents dc_cluster_group_slo block
 type SecuremeshSiteV2DcClusterGroupSloModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SecuremeshSiteV2DcClusterGroupSloModelAttrTypes defines the attribute types for SecuremeshSiteV2DcClusterGroupSloModel
+var SecuremeshSiteV2DcClusterGroupSloModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // SecuremeshSiteV2DNSNTPConfigModel represents dns_ntp_config block
@@ -633,9 +1209,22 @@ type SecuremeshSiteV2DNSNTPConfigModel struct {
 	F5NTPDefault *SecuremeshSiteV2EmptyModel                 `tfsdk:"f5_ntp_default"`
 }
 
+// SecuremeshSiteV2DNSNTPConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2DNSNTPConfigModel
+var SecuremeshSiteV2DNSNTPConfigModelAttrTypes = map[string]attr.Type{
+	"custom_dns":     types.ObjectType{AttrTypes: SecuremeshSiteV2DNSNTPConfigCustomDNSModelAttrTypes},
+	"custom_ntp":     types.ObjectType{AttrTypes: SecuremeshSiteV2DNSNTPConfigCustomNTPModelAttrTypes},
+	"f5_dns_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"f5_ntp_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2DNSNTPConfigCustomDNSModel represents custom_dns block
 type SecuremeshSiteV2DNSNTPConfigCustomDNSModel struct {
 	DNSServers types.List `tfsdk:"dns_servers"`
+}
+
+// SecuremeshSiteV2DNSNTPConfigCustomDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2DNSNTPConfigCustomDNSModel
+var SecuremeshSiteV2DNSNTPConfigCustomDNSModelAttrTypes = map[string]attr.Type{
+	"dns_servers": types.ListType{ElemType: types.StringType},
 }
 
 // SecuremeshSiteV2DNSNTPConfigCustomNTPModel represents custom_ntp block
@@ -643,14 +1232,29 @@ type SecuremeshSiteV2DNSNTPConfigCustomNTPModel struct {
 	NTPServers types.List `tfsdk:"ntp_servers"`
 }
 
+// SecuremeshSiteV2DNSNTPConfigCustomNTPModelAttrTypes defines the attribute types for SecuremeshSiteV2DNSNTPConfigCustomNTPModel
+var SecuremeshSiteV2DNSNTPConfigCustomNTPModelAttrTypes = map[string]attr.Type{
+	"ntp_servers": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2EquinixModel represents equinix block
 type SecuremeshSiteV2EquinixModel struct {
 	NotManaged *SecuremeshSiteV2EquinixNotManagedModel `tfsdk:"not_managed"`
 }
 
+// SecuremeshSiteV2EquinixModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixModel
+var SecuremeshSiteV2EquinixModelAttrTypes = map[string]attr.Type{
+	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2EquinixNotManagedModel represents not_managed block
 type SecuremeshSiteV2EquinixNotManagedModel struct {
 	NodeList []SecuremeshSiteV2EquinixNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedModel
+var SecuremeshSiteV2EquinixNotManagedModelAttrTypes = map[string]attr.Type{
+	"node_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListModel represents node_list block
@@ -659,6 +1263,14 @@ type SecuremeshSiteV2EquinixNotManagedNodeListModel struct {
 	PublicIP      types.String                                                  `tfsdk:"public_ip"`
 	Type          types.String                                                  `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListModel
+var SecuremeshSiteV2EquinixNotManagedNodeListModelAttrTypes = map[string]attr.Type{
+	"hostname":       types.StringType,
+	"public_ip":      types.StringType,
+	"type":           types.StringType,
+	"interface_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel represents interface_list block
@@ -684,6 +1296,29 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel struct {
 	VLANInterface                           *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVLANInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModelAttrTypes = map[string]attr.Type{
+	"description_spec":   types.StringType,
+	"mtu":                types.Int64Type,
+	"name":               types.StringType,
+	"priority":           types.Int64Type,
+	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
+	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
+	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
+}
+
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel struct {
 	Devices             types.List                                                                    `tfsdk:"devices"`
@@ -694,9 +1329,24 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel st
 	Lacp                *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes},
+}
+
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
@@ -705,10 +1355,22 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceMode
 	Mac    types.String `tfsdk:"mac"`
 }
 
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device": types.StringType,
+	"mac":    types.StringType,
+}
+
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigModel struct {
 	Host   *SecuremeshSiteV2EmptyModel                                                      `tfsdk:"host"`
 	Router *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel represents router block
@@ -718,10 +1380,23 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterM
 	Stateful      *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -729,11 +1404,23 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterD
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
 	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -745,11 +1432,27 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterS
 	InterfaceIPMap     *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                               `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                               `tfsdk:"pool_settings"`
 	Pools         []SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -758,9 +1461,20 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterS
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
@@ -769,10 +1483,22 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModel st
 	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes = map[string]attr.Type{
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressModel represents static_ipv6_address block
@@ -781,9 +1507,20 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressMode
 	NodeStaticIP    *SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
+}
+
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
@@ -792,10 +1529,22 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressNode
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVLANInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVLANInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
 	VLANID types.Int64  `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVLANInterfaceModel
+var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
 }
 
 // SecuremeshSiteV2GCPModel represents gcp block
@@ -803,9 +1552,19 @@ type SecuremeshSiteV2GCPModel struct {
 	NotManaged *SecuremeshSiteV2GCPNotManagedModel `tfsdk:"not_managed"`
 }
 
+// SecuremeshSiteV2GCPModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPModel
+var SecuremeshSiteV2GCPModelAttrTypes = map[string]attr.Type{
+	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2GCPNotManagedModel represents not_managed block
 type SecuremeshSiteV2GCPNotManagedModel struct {
 	NodeList []SecuremeshSiteV2GCPNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2GCPNotManagedModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedModel
+var SecuremeshSiteV2GCPNotManagedModelAttrTypes = map[string]attr.Type{
+	"node_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListModel represents node_list block
@@ -814,6 +1573,14 @@ type SecuremeshSiteV2GCPNotManagedNodeListModel struct {
 	PublicIP      types.String                                              `tfsdk:"public_ip"`
 	Type          types.String                                              `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListModel
+var SecuremeshSiteV2GCPNotManagedNodeListModelAttrTypes = map[string]attr.Type{
+	"hostname":       types.StringType,
+	"public_ip":      types.StringType,
+	"type":           types.StringType,
+	"interface_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel represents interface_list block
@@ -839,6 +1606,29 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel struct {
 	VLANInterface                           *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVLANInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModelAttrTypes = map[string]attr.Type{
+	"description_spec":   types.StringType,
+	"mtu":                types.Int64Type,
+	"name":               types.StringType,
+	"priority":           types.Int64Type,
+	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
+	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
+	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
+}
+
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel struct {
 	Devices             types.List                                                                `tfsdk:"devices"`
@@ -849,9 +1639,24 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel struct
 	Lacp                *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes},
+}
+
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
@@ -860,10 +1665,22 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModel st
 	Mac    types.String `tfsdk:"mac"`
 }
 
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device": types.StringType,
+	"mac":    types.StringType,
+}
+
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigModel struct {
 	Host   *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"host"`
 	Router *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel represents router block
@@ -873,10 +1690,23 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 	Stateful      *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -884,11 +1714,23 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSCo
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
 	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -900,11 +1742,27 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterState
 	InterfaceIPMap     *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                           `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                           `tfsdk:"pool_settings"`
 	Pools         []SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -913,9 +1771,20 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterState
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
@@ -924,10 +1793,22 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModel struct
 	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes = map[string]attr.Type{
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressModel represents static_ipv6_address block
@@ -936,9 +1817,20 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressModel st
 	NodeStaticIP    *SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
+}
+
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
@@ -947,10 +1839,22 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressNodeStat
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVLANInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVLANInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
 	VLANID types.Int64  `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVLANInterfaceModel
+var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
 }
 
 // SecuremeshSiteV2KvmModel represents kvm block
@@ -958,9 +1862,19 @@ type SecuremeshSiteV2KvmModel struct {
 	NotManaged *SecuremeshSiteV2KvmNotManagedModel `tfsdk:"not_managed"`
 }
 
+// SecuremeshSiteV2KvmModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmModel
+var SecuremeshSiteV2KvmModelAttrTypes = map[string]attr.Type{
+	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2KvmNotManagedModel represents not_managed block
 type SecuremeshSiteV2KvmNotManagedModel struct {
 	NodeList []SecuremeshSiteV2KvmNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2KvmNotManagedModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedModel
+var SecuremeshSiteV2KvmNotManagedModelAttrTypes = map[string]attr.Type{
+	"node_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListModel represents node_list block
@@ -969,6 +1883,14 @@ type SecuremeshSiteV2KvmNotManagedNodeListModel struct {
 	PublicIP      types.String                                              `tfsdk:"public_ip"`
 	Type          types.String                                              `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2KvmNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2KvmNotManagedNodeListModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListModel
+var SecuremeshSiteV2KvmNotManagedNodeListModelAttrTypes = map[string]attr.Type{
+	"hostname":       types.StringType,
+	"public_ip":      types.StringType,
+	"type":           types.StringType,
+	"interface_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListModel represents interface_list block
@@ -994,6 +1916,29 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListModel struct {
 	VLANInterface                           *SecuremeshSiteV2KvmNotManagedNodeListInterfaceListVLANInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListModelAttrTypes = map[string]attr.Type{
+	"description_spec":   types.StringType,
+	"mtu":                types.Int64Type,
+	"name":               types.StringType,
+	"priority":           types.Int64Type,
+	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
+	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
+	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
+}
+
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceModel struct {
 	Devices             types.List                                                                `tfsdk:"devices"`
@@ -1004,9 +1949,24 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceModel struct
 	Lacp                *SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes},
+}
+
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
 type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceLacpModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
@@ -1015,10 +1975,22 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListEthernetInterfaceModel st
 	Mac    types.String `tfsdk:"mac"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListEthernetInterfaceModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device": types.StringType,
+	"mac":    types.StringType,
+}
+
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigModel struct {
 	Host   *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"host"`
 	Router *SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel represents router block
@@ -1028,10 +2000,23 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 	Stateful      *SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1039,11 +2024,23 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSCo
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
 	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -1055,11 +2052,27 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterState
 	InterfaceIPMap     *SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                           `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                           `tfsdk:"pool_settings"`
 	Pools         []SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -1068,9 +2081,20 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterState
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
@@ -1079,10 +2103,22 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListNetworkOptionModel struct
 	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListNetworkOptionModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes = map[string]attr.Type{
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
 type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIPModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressModel represents static_ipv6_address block
@@ -1091,9 +2127,20 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressModel st
 	NodeStaticIP    *SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
+}
+
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
 type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
@@ -1102,15 +2149,32 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressNodeStat
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListVLANInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListVLANInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
 	VLANID types.Int64  `tfsdk:"vlan_id"`
 }
 
+// SecuremeshSiteV2KvmNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListVLANInterfaceModel
+var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
+}
+
 // SecuremeshSiteV2LoadBalancingModel represents load_balancing block
 type SecuremeshSiteV2LoadBalancingModel struct {
 	VIPVrrpMode types.String `tfsdk:"vip_vrrp_mode"`
+}
+
+// SecuremeshSiteV2LoadBalancingModelAttrTypes defines the attribute types for SecuremeshSiteV2LoadBalancingModel
+var SecuremeshSiteV2LoadBalancingModelAttrTypes = map[string]attr.Type{
+	"vip_vrrp_mode": types.StringType,
 }
 
 // SecuremeshSiteV2LocalVrfModel represents local_vrf block
@@ -1119,6 +2183,14 @@ type SecuremeshSiteV2LocalVrfModel struct {
 	DefaultSLIConfig *SecuremeshSiteV2EmptyModel             `tfsdk:"default_sli_config"`
 	SLIConfig        *SecuremeshSiteV2LocalVrfSLIConfigModel `tfsdk:"sli_config"`
 	SloConfig        *SecuremeshSiteV2LocalVrfSloConfigModel `tfsdk:"slo_config"`
+}
+
+// SecuremeshSiteV2LocalVrfModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfModel
+var SecuremeshSiteV2LocalVrfModelAttrTypes = map[string]attr.Type{
+	"default_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_sli_config": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_config":         types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigModelAttrTypes},
+	"slo_config":         types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigModelAttrTypes},
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigModel represents sli_config block
@@ -1132,9 +2204,25 @@ type SecuremeshSiteV2LocalVrfSLIConfigModel struct {
 	StaticV6Routes   *SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
 }
 
+// SecuremeshSiteV2LocalVrfSLIConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigModel
+var SecuremeshSiteV2LocalVrfSLIConfigModelAttrTypes = map[string]attr.Type{
+	"nameserver":          types.StringType,
+	"vip":                 types.StringType,
+	"labels":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_v6_static_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_v6_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel represents static_routes block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel struct {
 	StaticRoutes []SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModel `tfsdk:"static_routes"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel
+var SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"static_routes": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModel represents static_routes block
@@ -1146,15 +2234,35 @@ type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModel struct {
 	NodeInterface  *SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
+// SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModel
+var SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"attrs":           types.ListType{ElemType: types.StringType},
+	"ip_address":      types.StringType,
+	"ip_prefixes":     types.ListType{ElemType: types.StringType},
+	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel struct {
 	List []SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel
+var SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes = map[string]attr.Type{
+	"list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
 	Node      types.String                                                                               `tfsdk:"node"`
 	Interface []SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModel
+var SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes = map[string]attr.Type{
+	"node":      types.StringType,
+	"interface": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
@@ -1166,9 +2274,23 @@ type SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListI
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel
+var SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel represents static_v6_routes block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel struct {
 	StaticRoutes []SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModel `tfsdk:"static_routes"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModel
+var SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModelAttrTypes = map[string]attr.Type{
+	"static_routes": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModel represents static_routes block
@@ -1180,15 +2302,35 @@ type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModel struct {
 	NodeInterface  *SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
+// SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModel
+var SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"attrs":           types.ListType{ElemType: types.StringType},
+	"ip_address":      types.StringType,
+	"ip_prefixes":     types.ListType{ElemType: types.StringType},
+	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel struct {
 	List []SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel
+var SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes = map[string]attr.Type{
+	"list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
 type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
 	Node      types.String                                                                                 `tfsdk:"node"`
 	Interface []SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel
+var SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes = map[string]attr.Type{
+	"node":      types.StringType,
+	"interface": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
@@ -1198,6 +2340,15 @@ type SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceLis
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 	Uid       types.String `tfsdk:"uid"`
+}
+
+// SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel
+var SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
 }
 
 // SecuremeshSiteV2LocalVrfSloConfigModel represents slo_config block
@@ -1211,9 +2362,25 @@ type SecuremeshSiteV2LocalVrfSloConfigModel struct {
 	StaticV6Routes   *SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesModel `tfsdk:"static_v6_routes"`
 }
 
+// SecuremeshSiteV2LocalVrfSloConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigModel
+var SecuremeshSiteV2LocalVrfSloConfigModelAttrTypes = map[string]attr.Type{
+	"nameserver":          types.StringType,
+	"vip":                 types.StringType,
+	"labels":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_v6_static_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_v6_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2LocalVrfSloConfigStaticRoutesModel represents static_routes block
 type SecuremeshSiteV2LocalVrfSloConfigStaticRoutesModel struct {
 	StaticRoutes []SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesModel `tfsdk:"static_routes"`
+}
+
+// SecuremeshSiteV2LocalVrfSloConfigStaticRoutesModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigStaticRoutesModel
+var SecuremeshSiteV2LocalVrfSloConfigStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"static_routes": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesModel represents static_routes block
@@ -1225,15 +2392,35 @@ type SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesModel struct {
 	NodeInterface  *SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
+// SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesModel
+var SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"attrs":           types.ListType{ElemType: types.StringType},
+	"ip_address":      types.StringType,
+	"ip_prefixes":     types.ListType{ElemType: types.StringType},
+	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
 type SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceModel struct {
 	List []SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
+}
+
+// SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceModel
+var SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes = map[string]attr.Type{
+	"list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel represents list block
 type SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel struct {
 	Node      types.String                                                                               `tfsdk:"node"`
 	Interface []SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListModel
+var SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListModelAttrTypes = map[string]attr.Type{
+	"node":      types.StringType,
+	"interface": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
@@ -1245,9 +2432,23 @@ type SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListI
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModel
+var SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesModel represents static_v6_routes block
 type SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesModel struct {
 	StaticRoutes []SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesModel `tfsdk:"static_routes"`
+}
+
+// SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesModel
+var SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesModelAttrTypes = map[string]attr.Type{
+	"static_routes": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesModel represents static_routes block
@@ -1259,15 +2460,35 @@ type SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesModel struct {
 	NodeInterface  *SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel `tfsdk:"node_interface"`
 }
 
+// SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesModel
+var SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesModelAttrTypes = map[string]attr.Type{
+	"attrs":           types.ListType{ElemType: types.StringType},
+	"ip_address":      types.StringType,
+	"ip_prefixes":     types.ListType{ElemType: types.StringType},
+	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
 type SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel struct {
 	List []SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel `tfsdk:"list"`
+}
+
+// SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel
+var SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes = map[string]attr.Type{
+	"list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel represents list block
 type SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel struct {
 	Node      types.String                                                                                 `tfsdk:"node"`
 	Interface []SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel `tfsdk:"interface"`
+}
+
+// SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModel
+var SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListModelAttrTypes = map[string]attr.Type{
+	"node":      types.StringType,
+	"interface": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes}},
 }
 
 // SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel represents interface block
@@ -1279,6 +2500,15 @@ type SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceLis
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModel
+var SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceListInterfaceModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // SecuremeshSiteV2LogReceiverModel represents log_receiver block
 type SecuremeshSiteV2LogReceiverModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -1286,14 +2516,31 @@ type SecuremeshSiteV2LogReceiverModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// SecuremeshSiteV2LogReceiverModelAttrTypes defines the attribute types for SecuremeshSiteV2LogReceiverModel
+var SecuremeshSiteV2LogReceiverModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // SecuremeshSiteV2NutanixModel represents nutanix block
 type SecuremeshSiteV2NutanixModel struct {
 	NotManaged *SecuremeshSiteV2NutanixNotManagedModel `tfsdk:"not_managed"`
 }
 
+// SecuremeshSiteV2NutanixModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixModel
+var SecuremeshSiteV2NutanixModelAttrTypes = map[string]attr.Type{
+	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2NutanixNotManagedModel represents not_managed block
 type SecuremeshSiteV2NutanixNotManagedModel struct {
 	NodeList []SecuremeshSiteV2NutanixNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedModel
+var SecuremeshSiteV2NutanixNotManagedModelAttrTypes = map[string]attr.Type{
+	"node_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListModel represents node_list block
@@ -1302,6 +2549,14 @@ type SecuremeshSiteV2NutanixNotManagedNodeListModel struct {
 	PublicIP      types.String                                                  `tfsdk:"public_ip"`
 	Type          types.String                                                  `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListModel
+var SecuremeshSiteV2NutanixNotManagedNodeListModelAttrTypes = map[string]attr.Type{
+	"hostname":       types.StringType,
+	"public_ip":      types.StringType,
+	"type":           types.StringType,
+	"interface_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel represents interface_list block
@@ -1327,6 +2582,29 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel struct {
 	VLANInterface                           *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVLANInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModelAttrTypes = map[string]attr.Type{
+	"description_spec":   types.StringType,
+	"mtu":                types.Int64Type,
+	"name":               types.StringType,
+	"priority":           types.Int64Type,
+	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
+	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
+	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
+}
+
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel struct {
 	Devices             types.List                                                                    `tfsdk:"devices"`
@@ -1337,9 +2615,24 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel st
 	Lacp                *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes},
+}
+
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
@@ -1348,10 +2641,22 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceMode
 	Mac    types.String `tfsdk:"mac"`
 }
 
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device": types.StringType,
+	"mac":    types.StringType,
+}
+
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigModel struct {
 	Host   *SecuremeshSiteV2EmptyModel                                                      `tfsdk:"host"`
 	Router *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel represents router block
@@ -1361,10 +2666,23 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterM
 	Stateful      *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1372,11 +2690,23 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterD
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
 	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -1388,11 +2718,27 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterS
 	InterfaceIPMap     *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                               `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                               `tfsdk:"pool_settings"`
 	Pools         []SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -1401,9 +2747,20 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterS
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
@@ -1412,10 +2769,22 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModel st
 	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes = map[string]attr.Type{
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressModel represents static_ipv6_address block
@@ -1424,9 +2793,20 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressMode
 	NodeStaticIP    *SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
+}
+
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
@@ -1435,10 +2815,22 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressNode
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVLANInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVLANInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
 	VLANID types.Int64  `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVLANInterfaceModel
+var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
 }
 
 // SecuremeshSiteV2OciModel represents oci block
@@ -1446,9 +2838,19 @@ type SecuremeshSiteV2OciModel struct {
 	NotManaged *SecuremeshSiteV2OciNotManagedModel `tfsdk:"not_managed"`
 }
 
+// SecuremeshSiteV2OciModelAttrTypes defines the attribute types for SecuremeshSiteV2OciModel
+var SecuremeshSiteV2OciModelAttrTypes = map[string]attr.Type{
+	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2OciNotManagedModel represents not_managed block
 type SecuremeshSiteV2OciNotManagedModel struct {
 	NodeList []SecuremeshSiteV2OciNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2OciNotManagedModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedModel
+var SecuremeshSiteV2OciNotManagedModelAttrTypes = map[string]attr.Type{
+	"node_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListModel represents node_list block
@@ -1457,6 +2859,14 @@ type SecuremeshSiteV2OciNotManagedNodeListModel struct {
 	PublicIP      types.String                                              `tfsdk:"public_ip"`
 	Type          types.String                                              `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2OciNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2OciNotManagedNodeListModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListModel
+var SecuremeshSiteV2OciNotManagedNodeListModelAttrTypes = map[string]attr.Type{
+	"hostname":       types.StringType,
+	"public_ip":      types.StringType,
+	"type":           types.StringType,
+	"interface_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListModel represents interface_list block
@@ -1482,6 +2892,29 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListModel struct {
 	VLANInterface                           *SecuremeshSiteV2OciNotManagedNodeListInterfaceListVLANInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListModelAttrTypes = map[string]attr.Type{
+	"description_spec":   types.StringType,
+	"mtu":                types.Int64Type,
+	"name":               types.StringType,
+	"priority":           types.Int64Type,
+	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
+	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
+	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
+}
+
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceModel struct {
 	Devices             types.List                                                                `tfsdk:"devices"`
@@ -1492,9 +2925,24 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceModel struct
 	Lacp                *SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes},
+}
+
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
 type SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceLacpModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
@@ -1503,10 +2951,22 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListEthernetInterfaceModel st
 	Mac    types.String `tfsdk:"mac"`
 }
 
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListEthernetInterfaceModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device": types.StringType,
+	"mac":    types.StringType,
+}
+
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigModel struct {
 	Host   *SecuremeshSiteV2EmptyModel                                                  `tfsdk:"host"`
 	Router *SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel represents router block
@@ -1516,10 +2976,23 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 	Stateful      *SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1527,11 +3000,23 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSCo
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
 	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -1543,11 +3028,27 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterState
 	InterfaceIPMap     *SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                           `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                           `tfsdk:"pool_settings"`
 	Pools         []SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -1556,9 +3057,20 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterState
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
@@ -1567,10 +3079,22 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListNetworkOptionModel struct
 	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListNetworkOptionModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes = map[string]attr.Type{
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
 type SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIPModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressModel represents static_ipv6_address block
@@ -1579,9 +3103,20 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressModel st
 	NodeStaticIP    *SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
+}
+
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
 type SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
@@ -1590,10 +3125,22 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressNodeStat
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListVLANInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2OciNotManagedNodeListInterfaceListVLANInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
 	VLANID types.Int64  `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2OciNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListVLANInterfaceModel
+var SecuremeshSiteV2OciNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
 }
 
 // SecuremeshSiteV2OfflineSurvivabilityModeModel represents offline_survivability_mode block
@@ -1602,14 +3149,30 @@ type SecuremeshSiteV2OfflineSurvivabilityModeModel struct {
 	NoOfflineSurvivabilityMode     *SecuremeshSiteV2EmptyModel `tfsdk:"no_offline_survivability_mode"`
 }
 
+// SecuremeshSiteV2OfflineSurvivabilityModeModelAttrTypes defines the attribute types for SecuremeshSiteV2OfflineSurvivabilityModeModel
+var SecuremeshSiteV2OfflineSurvivabilityModeModelAttrTypes = map[string]attr.Type{
+	"enable_offline_survivability_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_offline_survivability_mode":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2OpenstackModel represents openstack block
 type SecuremeshSiteV2OpenstackModel struct {
 	NotManaged *SecuremeshSiteV2OpenstackNotManagedModel `tfsdk:"not_managed"`
 }
 
+// SecuremeshSiteV2OpenstackModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackModel
+var SecuremeshSiteV2OpenstackModelAttrTypes = map[string]attr.Type{
+	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2OpenstackNotManagedModel represents not_managed block
 type SecuremeshSiteV2OpenstackNotManagedModel struct {
 	NodeList []SecuremeshSiteV2OpenstackNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedModel
+var SecuremeshSiteV2OpenstackNotManagedModelAttrTypes = map[string]attr.Type{
+	"node_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListModel represents node_list block
@@ -1618,6 +3181,14 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListModel struct {
 	PublicIP      types.String                                                    `tfsdk:"public_ip"`
 	Type          types.String                                                    `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListModelAttrTypes = map[string]attr.Type{
+	"hostname":       types.StringType,
+	"public_ip":      types.StringType,
+	"type":           types.StringType,
+	"interface_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel represents interface_list block
@@ -1643,6 +3214,29 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel struct {
 	VLANInterface                           *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVLANInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModelAttrTypes = map[string]attr.Type{
+	"description_spec":   types.StringType,
+	"mtu":                types.Int64Type,
+	"name":               types.StringType,
+	"priority":           types.Int64Type,
+	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
+	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
+	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
+}
+
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel struct {
 	Devices             types.List                                                                      `tfsdk:"devices"`
@@ -1653,9 +3247,24 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel 
 	Lacp                *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes},
+}
+
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
@@ -1664,10 +3273,22 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceMo
 	Mac    types.String `tfsdk:"mac"`
 }
 
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device": types.StringType,
+	"mac":    types.StringType,
+}
+
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigModel struct {
 	Host   *SecuremeshSiteV2EmptyModel                                                        `tfsdk:"host"`
 	Router *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel represents router block
@@ -1677,10 +3298,23 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRoute
 	Stateful      *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1688,11 +3322,23 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRoute
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
 	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -1704,11 +3350,27 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRoute
 	InterfaceIPMap     *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                                 `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                                 `tfsdk:"pool_settings"`
 	Pools         []SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -1717,9 +3379,20 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRoute
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
@@ -1728,10 +3401,22 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModel 
 	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes = map[string]attr.Type{
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressModel represents static_ipv6_address block
@@ -1740,9 +3425,20 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressMo
 	NodeStaticIP    *SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
+}
+
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
@@ -1751,10 +3447,22 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressNo
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVLANInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVLANInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
 	VLANID types.Int64  `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVLANInterfaceModel
+var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
 }
 
 // SecuremeshSiteV2PerformanceEnhancementModeModel represents performance_enhancement_mode block
@@ -1763,10 +3471,22 @@ type SecuremeshSiteV2PerformanceEnhancementModeModel struct {
 	PerfModeL7Enhanced *SecuremeshSiteV2EmptyModel                                        `tfsdk:"perf_mode_l7_enhanced"`
 }
 
+// SecuremeshSiteV2PerformanceEnhancementModeModelAttrTypes defines the attribute types for SecuremeshSiteV2PerformanceEnhancementModeModel
+var SecuremeshSiteV2PerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
 type SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModel struct {
 	Jumbo   *SecuremeshSiteV2EmptyModel `tfsdk:"jumbo"`
 	NoJumbo *SecuremeshSiteV2EmptyModel `tfsdk:"no_jumbo"`
+}
+
+// SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes defines the attribute types for SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModel
+var SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes = map[string]attr.Type{
+	"jumbo":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_jumbo": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2RESelectModel represents re_select block
@@ -1775,9 +3495,20 @@ type SecuremeshSiteV2RESelectModel struct {
 	SpecificRE   *SecuremeshSiteV2RESelectSpecificREModel `tfsdk:"specific_re"`
 }
 
+// SecuremeshSiteV2RESelectModelAttrTypes defines the attribute types for SecuremeshSiteV2RESelectModel
+var SecuremeshSiteV2RESelectModelAttrTypes = map[string]attr.Type{
+	"geo_proximity": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"specific_re":   types.ObjectType{AttrTypes: SecuremeshSiteV2RESelectSpecificREModelAttrTypes},
+}
+
 // SecuremeshSiteV2RESelectSpecificREModel represents specific_re block
 type SecuremeshSiteV2RESelectSpecificREModel struct {
 	PrimaryRE types.String `tfsdk:"primary_re"`
+}
+
+// SecuremeshSiteV2RESelectSpecificREModelAttrTypes defines the attribute types for SecuremeshSiteV2RESelectSpecificREModel
+var SecuremeshSiteV2RESelectSpecificREModelAttrTypes = map[string]attr.Type{
+	"primary_re": types.StringType,
 }
 
 // SecuremeshSiteV2SiteMeshGroupOnSloModel represents site_mesh_group_on_slo block
@@ -1788,11 +3519,26 @@ type SecuremeshSiteV2SiteMeshGroupOnSloModel struct {
 	SmConnectionPvtIP    *SecuremeshSiteV2EmptyModel                           `tfsdk:"sm_connection_pvt_ip"`
 }
 
+// SecuremeshSiteV2SiteMeshGroupOnSloModelAttrTypes defines the attribute types for SecuremeshSiteV2SiteMeshGroupOnSloModel
+var SecuremeshSiteV2SiteMeshGroupOnSloModelAttrTypes = map[string]attr.Type{
+	"no_site_mesh_group":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_mesh_group":         types.ObjectType{AttrTypes: SecuremeshSiteV2SiteMeshGroupOnSloSiteMeshGroupModelAttrTypes},
+	"sm_connection_public_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sm_connection_pvt_ip":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2SiteMeshGroupOnSloSiteMeshGroupModel represents site_mesh_group block
 type SecuremeshSiteV2SiteMeshGroupOnSloSiteMeshGroupModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SecuremeshSiteV2SiteMeshGroupOnSloSiteMeshGroupModelAttrTypes defines the attribute types for SecuremeshSiteV2SiteMeshGroupOnSloSiteMeshGroupModel
+var SecuremeshSiteV2SiteMeshGroupOnSloSiteMeshGroupModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // SecuremeshSiteV2SoftwareSettingsModel represents software_settings block
@@ -1801,10 +3547,22 @@ type SecuremeshSiteV2SoftwareSettingsModel struct {
 	Sw *SecuremeshSiteV2SoftwareSettingsSwModel `tfsdk:"sw"`
 }
 
+// SecuremeshSiteV2SoftwareSettingsModelAttrTypes defines the attribute types for SecuremeshSiteV2SoftwareSettingsModel
+var SecuremeshSiteV2SoftwareSettingsModelAttrTypes = map[string]attr.Type{
+	"os": types.ObjectType{AttrTypes: SecuremeshSiteV2SoftwareSettingsOSModelAttrTypes},
+	"sw": types.ObjectType{AttrTypes: SecuremeshSiteV2SoftwareSettingsSwModelAttrTypes},
+}
+
 // SecuremeshSiteV2SoftwareSettingsOSModel represents os block
 type SecuremeshSiteV2SoftwareSettingsOSModel struct {
 	OperatingSystemVersion types.String                `tfsdk:"operating_system_version"`
 	DefaultOSVersion       *SecuremeshSiteV2EmptyModel `tfsdk:"default_os_version"`
+}
+
+// SecuremeshSiteV2SoftwareSettingsOSModelAttrTypes defines the attribute types for SecuremeshSiteV2SoftwareSettingsOSModel
+var SecuremeshSiteV2SoftwareSettingsOSModelAttrTypes = map[string]attr.Type{
+	"operating_system_version": types.StringType,
+	"default_os_version":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2SoftwareSettingsSwModel represents sw block
@@ -1813,15 +3571,32 @@ type SecuremeshSiteV2SoftwareSettingsSwModel struct {
 	DefaultSwVersion        *SecuremeshSiteV2EmptyModel `tfsdk:"default_sw_version"`
 }
 
+// SecuremeshSiteV2SoftwareSettingsSwModelAttrTypes defines the attribute types for SecuremeshSiteV2SoftwareSettingsSwModel
+var SecuremeshSiteV2SoftwareSettingsSwModelAttrTypes = map[string]attr.Type{
+	"volterra_software_version": types.StringType,
+	"default_sw_version":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2UpgradeSettingsModel represents upgrade_settings block
 type SecuremeshSiteV2UpgradeSettingsModel struct {
 	KubernetesUpgradeDrain *SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModel `tfsdk:"kubernetes_upgrade_drain"`
+}
+
+// SecuremeshSiteV2UpgradeSettingsModelAttrTypes defines the attribute types for SecuremeshSiteV2UpgradeSettingsModel
+var SecuremeshSiteV2UpgradeSettingsModelAttrTypes = map[string]attr.Type{
+	"kubernetes_upgrade_drain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
 type SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModel struct {
 	DisableUpgradeDrain *SecuremeshSiteV2EmptyModel                                                   `tfsdk:"disable_upgrade_drain"`
 	EnableUpgradeDrain  *SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModel `tfsdk:"enable_upgrade_drain"`
+}
+
+// SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModelAttrTypes defines the attribute types for SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModel
+var SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModelAttrTypes = map[string]attr.Type{
+	"disable_upgrade_drain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_upgrade_drain":  types.ObjectType{AttrTypes: SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModelAttrTypes},
 }
 
 // SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModel represents enable_upgrade_drain block
@@ -1832,14 +3607,32 @@ type SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainMode
 	EnableVegaUpgradeMode        *SecuremeshSiteV2EmptyModel `tfsdk:"enable_vega_upgrade_mode"`
 }
 
+// SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModelAttrTypes defines the attribute types for SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModel
+var SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainEnableUpgradeDrainModelAttrTypes = map[string]attr.Type{
+	"drain_max_unavailable_node_count": types.Int64Type,
+	"drain_node_timeout":               types.Int64Type,
+	"disable_vega_upgrade_mode":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_vega_upgrade_mode":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2VmwareModel represents vmware block
 type SecuremeshSiteV2VmwareModel struct {
 	NotManaged *SecuremeshSiteV2VmwareNotManagedModel `tfsdk:"not_managed"`
 }
 
+// SecuremeshSiteV2VmwareModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareModel
+var SecuremeshSiteV2VmwareModelAttrTypes = map[string]attr.Type{
+	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2VmwareNotManagedModel represents not_managed block
 type SecuremeshSiteV2VmwareNotManagedModel struct {
 	NodeList []SecuremeshSiteV2VmwareNotManagedNodeListModel `tfsdk:"node_list"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedModel
+var SecuremeshSiteV2VmwareNotManagedModelAttrTypes = map[string]attr.Type{
+	"node_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListModel represents node_list block
@@ -1848,6 +3641,14 @@ type SecuremeshSiteV2VmwareNotManagedNodeListModel struct {
 	PublicIP      types.String                                                 `tfsdk:"public_ip"`
 	Type          types.String                                                 `tfsdk:"type"`
 	InterfaceList []SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel `tfsdk:"interface_list"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListModel
+var SecuremeshSiteV2VmwareNotManagedNodeListModelAttrTypes = map[string]attr.Type{
+	"hostname":       types.StringType,
+	"public_ip":      types.StringType,
+	"type":           types.StringType,
+	"interface_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModelAttrTypes}},
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel represents interface_list block
@@ -1873,6 +3674,29 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel struct {
 	VLANInterface                           *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVLANInterfaceModel     `tfsdk:"vlan_interface"`
 }
 
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModelAttrTypes = map[string]attr.Type{
+	"description_spec":   types.StringType,
+	"mtu":                types.Int64Type,
+	"name":               types.StringType,
+	"priority":           types.Int64Type,
+	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
+	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
+	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
+}
+
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel represents bond_interface block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel struct {
 	Devices             types.List                                                                   `tfsdk:"devices"`
@@ -1883,9 +3707,24 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel str
 	Lacp                *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel `tfsdk:"lacp"`
 }
 
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes = map[string]attr.Type{
+	"devices":               types.ListType{ElemType: types.StringType},
+	"link_polling_interval": types.Int64Type,
+	"link_up_delay":         types.Int64Type,
+	"name":                  types.StringType,
+	"active_backup":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"lacp":                  types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes},
+}
+
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel represents lacp block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel struct {
 	Rate types.Int64 `tfsdk:"rate"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceLacpModelAttrTypes = map[string]attr.Type{
+	"rate": types.Int64Type,
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModel represents ethernet_interface block
@@ -1894,10 +3733,22 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModel
 	Mac    types.String `tfsdk:"mac"`
 }
 
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes = map[string]attr.Type{
+	"device": types.StringType,
+	"mac":    types.StringType,
+}
+
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigModel represents ipv6_auto_config block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigModel struct {
 	Host   *SecuremeshSiteV2EmptyModel                                                     `tfsdk:"host"`
 	Router *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel `tfsdk:"router"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes = map[string]attr.Type{
+	"host":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"router": types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes},
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel represents router block
@@ -1907,10 +3758,23 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterMo
 	Stateful      *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel  `tfsdk:"stateful"`
 }
 
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel struct {
 	ConfiguredList *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel `tfsdk:"configured_list"`
 	LocalDNS       *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel       `tfsdk:"local_dns"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes = map[string]attr.Type{
+	"configured_list": types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes},
+	"local_dns":       types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes},
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel represents configured_list block
@@ -1918,11 +3782,23 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDN
 	DNSList types.List `tfsdk:"dns_list"`
 }
 
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigConfiguredListModelAttrTypes = map[string]attr.Type{
+	"dns_list": types.ListType{ElemType: types.StringType},
+}
+
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel represents local_dns block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel struct {
 	ConfiguredAddress types.String                `tfsdk:"configured_address"`
 	FirstAddress      *SecuremeshSiteV2EmptyModel `tfsdk:"first_address"`
 	LastAddress       *SecuremeshSiteV2EmptyModel `tfsdk:"last_address"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigLocalDNSModelAttrTypes = map[string]attr.Type{
+	"configured_address": types.StringType,
+	"first_address":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"last_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel represents stateful block
@@ -1934,11 +3810,27 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterSt
 	InterfaceIPMap     *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel `tfsdk:"interface_ip_map"`
 }
 
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes = map[string]attr.Type{
+	"automatic_from_end":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
+	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel struct {
 	NetworkPrefix types.String                                                                                              `tfsdk:"network_prefix"`
 	PoolSettings  types.String                                                                                              `tfsdk:"pool_settings"`
 	Pools         []SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel `tfsdk:"pools"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes = map[string]attr.Type{
+	"network_prefix": types.StringType,
+	"pool_settings":  types.StringType,
+	"pools":          types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes}},
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel represents pools block
@@ -1947,9 +3839,20 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterSt
 	StartIP types.String `tfsdk:"start_ip"`
 }
 
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksPoolsModelAttrTypes = map[string]attr.Type{
+	"end_ip":   types.StringType,
+	"start_ip": types.StringType,
+}
+
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel represents interface_ip_map block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModel represents network_option block
@@ -1958,10 +3861,22 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModel str
 	SiteLocalNetwork       *SecuremeshSiteV2EmptyModel `tfsdk:"site_local_network"`
 }
 
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes = map[string]attr.Type{
+	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModel represents static_ip block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModel struct {
 	DefaultGw types.String `tfsdk:"default_gw"`
 	IPAddress types.String `tfsdk:"ip_address"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressModel represents static_ipv6_address block
@@ -1970,9 +3885,20 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressModel
 	NodeStaticIP    *SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel    `tfsdk:"node_static_ip"`
 }
 
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
+	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
+}
+
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel represents cluster_static_ip block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel struct {
 	InterfaceIPMap *SecuremeshSiteV2EmptyModel `tfsdk:"interface_ip_map"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes = map[string]attr.Type{
+	"interface_ip_map": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel represents node_static_ip block
@@ -1981,10 +3907,22 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressNodeS
 	IPAddress types.String `tfsdk:"ip_address"`
 }
 
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes = map[string]attr.Type{
+	"default_gw": types.StringType,
+	"ip_address": types.StringType,
+}
+
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVLANInterfaceModel represents vlan_interface block
 type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVLANInterfaceModel struct {
 	Device types.String `tfsdk:"device"`
 	VLANID types.Int64  `tfsdk:"vlan_id"`
+}
+
+// SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVLANInterfaceModel
+var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes = map[string]attr.Type{
+	"device":  types.StringType,
+	"vlan_id": types.Int64Type,
 }
 
 type SecuremeshSiteV2ResourceModel struct {
@@ -2138,6 +4076,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -2164,6 +4105,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -3252,6 +5196,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -3270,6 +5217,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -4328,6 +6278,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4341,11 +6294,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		},
@@ -4409,6 +6368,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4422,11 +6384,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		},
@@ -4514,6 +6482,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4527,11 +6498,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		},
@@ -4595,6 +6572,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																				"name": schema.StringAttribute{
 																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -4608,11 +6588,17 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																				"uid": schema.StringAttribute{
 																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																					Optional:            true,
 																					Computed:            true,
+																					PlanModifiers: []planmodifier.String{
+																						stringplanmodifier.UseStateForUnknown(),
+																					},
 																				},
 																			},
 																		},
@@ -4646,6 +6632,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -5658,6 +7647,9 @@ func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -7138,11 +9130,17 @@ func (r *SecuremeshSiteV2Resource) Read(ctx context.Context, req resource.ReadRe
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

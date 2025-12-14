@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -58,11 +59,27 @@ type SecretManagementAccessAccessInfoModel struct {
 	VaultAuthInfo  *SecretManagementAccessAccessInfoVaultAuthInfoModel `tfsdk:"vault_auth_info"`
 }
 
+// SecretManagementAccessAccessInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoModel
+var SecretManagementAccessAccessInfoModelAttrTypes = map[string]attr.Type{
+	"scheme":          types.StringType,
+	"server_endpoint": types.StringType,
+	"rest_auth_info":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":      types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigModelAttrTypes},
+	"vault_auth_info": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecretManagementAccessAccessInfoRESTAuthInfoModel represents rest_auth_info block
 type SecretManagementAccessAccessInfoRESTAuthInfoModel struct {
 	BasicAuth       *SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModel       `tfsdk:"basic_auth"`
 	HeadersAuth     *SecretManagementAccessAccessInfoRESTAuthInfoHeadersAuthModel     `tfsdk:"headers_auth"`
 	QueryParamsAuth *SecretManagementAccessAccessInfoRESTAuthInfoQueryParamsAuthModel `tfsdk:"query_params_auth"`
+}
+
+// SecretManagementAccessAccessInfoRESTAuthInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoRESTAuthInfoModel
+var SecretManagementAccessAccessInfoRESTAuthInfoModelAttrTypes = map[string]attr.Type{
+	"basic_auth":        types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModelAttrTypes},
+	"headers_auth":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"query_params_auth": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModel represents basic_auth block
@@ -71,10 +88,22 @@ type SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModel struct {
 	Password *SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModel `tfsdk:"password"`
 }
 
+// SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModel
+var SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModelAttrTypes = map[string]attr.Type{
+	"username": types.StringType,
+	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModel represents password block
 type SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModel struct {
 	BlindfoldSecretInfo *SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModel
+var SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordClearSecretInfoModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -84,10 +113,23 @@ type SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordBlindfoldSecre
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordBlindfoldSecretInfoModel
+var SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordClearSecretInfoModel represents clear_secret_info block
 type SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordClearSecretInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordClearSecretInfoModel
+var SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // SecretManagementAccessAccessInfoRESTAuthInfoHeadersAuthModel represents headers_auth block
@@ -95,9 +137,19 @@ type SecretManagementAccessAccessInfoRESTAuthInfoHeadersAuthModel struct {
 	Headers *SecretManagementAccessEmptyModel `tfsdk:"headers"`
 }
 
+// SecretManagementAccessAccessInfoRESTAuthInfoHeadersAuthModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoRESTAuthInfoHeadersAuthModel
+var SecretManagementAccessAccessInfoRESTAuthInfoHeadersAuthModelAttrTypes = map[string]attr.Type{
+	"headers": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecretManagementAccessAccessInfoRESTAuthInfoQueryParamsAuthModel represents query_params_auth block
 type SecretManagementAccessAccessInfoRESTAuthInfoQueryParamsAuthModel struct {
 	QueryParams *SecretManagementAccessEmptyModel `tfsdk:"query_params"`
+}
+
+// SecretManagementAccessAccessInfoRESTAuthInfoQueryParamsAuthModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoRESTAuthInfoQueryParamsAuthModel
+var SecretManagementAccessAccessInfoRESTAuthInfoQueryParamsAuthModelAttrTypes = map[string]attr.Type{
+	"query_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecretManagementAccessAccessInfoTLSConfigModel represents tls_config block
@@ -112,6 +164,18 @@ type SecretManagementAccessAccessInfoTLSConfigModel struct {
 	UseHostHeaderAsSni       *SecretManagementAccessEmptyModel                           `tfsdk:"use_host_header_as_sni"`
 }
 
+// SecretManagementAccessAccessInfoTLSConfigModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigModel
+var SecretManagementAccessAccessInfoTLSConfigModelAttrTypes = map[string]attr.Type{
+	"max_session_keys":            types.Int64Type,
+	"sni":                         types.StringType,
+	"cert_params":                 types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCertParamsModelAttrTypes},
+	"common_params":               types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCommonParamsModelAttrTypes},
+	"default_session_key_caching": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_session_key_caching": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_sni":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_host_header_as_sni":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecretManagementAccessAccessInfoTLSConfigCertParamsModel represents cert_params block
 type SecretManagementAccessAccessInfoTLSConfigCertParamsModel struct {
 	CipherSuites           types.List                                                                `tfsdk:"cipher_suites"`
@@ -119,6 +183,15 @@ type SecretManagementAccessAccessInfoTLSConfigCertParamsModel struct {
 	MinimumProtocolVersion types.String                                                              `tfsdk:"minimum_protocol_version"`
 	Certificates           []SecretManagementAccessAccessInfoTLSConfigCertParamsCertificatesModel    `tfsdk:"certificates"`
 	ValidationParams       *SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// SecretManagementAccessAccessInfoTLSConfigCertParamsModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCertParamsModel
+var SecretManagementAccessAccessInfoTLSConfigCertParamsModelAttrTypes = map[string]attr.Type{
+	"cipher_suites":            types.ListType{ElemType: types.StringType},
+	"maximum_protocol_version": types.StringType,
+	"minimum_protocol_version": types.StringType,
+	"certificates":             types.ListType{ElemType: types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCertParamsCertificatesModelAttrTypes}},
+	"validation_params":        types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoTLSConfigCertParamsCertificatesModel represents certificates block
@@ -130,6 +203,15 @@ type SecretManagementAccessAccessInfoTLSConfigCertParamsCertificatesModel struct
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// SecretManagementAccessAccessInfoTLSConfigCertParamsCertificatesModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCertParamsCertificatesModel
+var SecretManagementAccessAccessInfoTLSConfigCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModel represents validation_params block
 type SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModel struct {
 	SkipHostnameVerification types.Bool                                                                         `tfsdk:"skip_hostname_verification"`
@@ -138,9 +220,22 @@ type SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModel st
 	TrustedCA                *SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
+// SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModel
+var SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModelAttrTypes = map[string]attr.Type{
+	"skip_hostname_verification": types.BoolType,
+	"trusted_ca_url":             types.StringType,
+	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
+	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModel represents trusted_ca block
 type SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModel struct {
 	TrustedCAList []SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
+}
+
+// SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModel
+var SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCATrustedCAListModelAttrTypes}},
 }
 
 // SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
@@ -152,6 +247,15 @@ type SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedC
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCATrustedCAListModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCATrustedCAListModel
+var SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCATrustedCAListModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsModel represents common_params block
 type SecretManagementAccessAccessInfoTLSConfigCommonParamsModel struct {
 	CipherSuites           types.List                                                                  `tfsdk:"cipher_suites"`
@@ -159,6 +263,15 @@ type SecretManagementAccessAccessInfoTLSConfigCommonParamsModel struct {
 	MinimumProtocolVersion types.String                                                                `tfsdk:"minimum_protocol_version"`
 	TLSCertificates        []SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
 	ValidationParams       *SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCommonParamsModel
+var SecretManagementAccessAccessInfoTLSConfigCommonParamsModelAttrTypes = map[string]attr.Type{
+	"cipher_suites":            types.ListType{ElemType: types.StringType},
+	"maximum_protocol_version": types.StringType,
+	"minimum_protocol_version": types.StringType,
+	"tls_certificates":         types.ListType{ElemType: types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModelAttrTypes}},
+	"validation_params":        types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModel represents tls_certificates block
@@ -171,15 +284,36 @@ type SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModel s
 	UseSystemDefaults    *SecretManagementAccessEmptyModel                                                              `tfsdk:"use_system_defaults"`
 }
 
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModel
+var SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesCustomHashAlgorithmsModel
+var SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyModel represents private_key block
 type SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyModel
+var SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -189,10 +323,23 @@ type SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivate
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel
+var SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsModel represents validation_params block
@@ -203,9 +350,22 @@ type SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsModel 
 	TrustedCA                *SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsModel
+var SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsModelAttrTypes = map[string]attr.Type{
+	"skip_hostname_verification": types.BoolType,
+	"trusted_ca_url":             types.StringType,
+	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
+	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
 type SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModel struct {
 	TrustedCAList []SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
+}
+
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModel
+var SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes}},
 }
 
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
@@ -217,10 +377,25 @@ type SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTruste
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCATrustedCAListModel
+var SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // SecretManagementAccessAccessInfoVaultAuthInfoModel represents vault_auth_info block
 type SecretManagementAccessAccessInfoVaultAuthInfoModel struct {
 	AppRoleAuth *SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModel `tfsdk:"app_role_auth"`
 	Token       *SecretManagementAccessAccessInfoVaultAuthInfoTokenModel       `tfsdk:"token"`
+}
+
+// SecretManagementAccessAccessInfoVaultAuthInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoVaultAuthInfoModel
+var SecretManagementAccessAccessInfoVaultAuthInfoModelAttrTypes = map[string]attr.Type{
+	"app_role_auth": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModelAttrTypes},
+	"token":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModel represents app_role_auth block
@@ -229,10 +404,22 @@ type SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModel struct {
 	SecretID *SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDModel `tfsdk:"secret_id"`
 }
 
+// SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModel
+var SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModelAttrTypes = map[string]attr.Type{
+	"role_id":   types.StringType,
+	"secret_id": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDModel represents secret_id block
 type SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDModel struct {
 	BlindfoldSecretInfo *SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDModel
+var SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDClearSecretInfoModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -242,16 +429,35 @@ type SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDBlindfoldSe
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDBlindfoldSecretInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDBlindfoldSecretInfoModel
+var SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDClearSecretInfoModel represents clear_secret_info block
 type SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDClearSecretInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDClearSecretInfoModel
+var SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // SecretManagementAccessAccessInfoVaultAuthInfoTokenModel represents token block
 type SecretManagementAccessAccessInfoVaultAuthInfoTokenModel struct {
 	BlindfoldSecretInfo *SecretManagementAccessAccessInfoVaultAuthInfoTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *SecretManagementAccessAccessInfoVaultAuthInfoTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// SecretManagementAccessAccessInfoVaultAuthInfoTokenModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoVaultAuthInfoTokenModel
+var SecretManagementAccessAccessInfoVaultAuthInfoTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoVaultAuthInfoTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoVaultAuthInfoTokenClearSecretInfoModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoVaultAuthInfoTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -261,10 +467,23 @@ type SecretManagementAccessAccessInfoVaultAuthInfoTokenBlindfoldSecretInfoModel 
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// SecretManagementAccessAccessInfoVaultAuthInfoTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoVaultAuthInfoTokenBlindfoldSecretInfoModel
+var SecretManagementAccessAccessInfoVaultAuthInfoTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // SecretManagementAccessAccessInfoVaultAuthInfoTokenClearSecretInfoModel represents clear_secret_info block
 type SecretManagementAccessAccessInfoVaultAuthInfoTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// SecretManagementAccessAccessInfoVaultAuthInfoTokenClearSecretInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoVaultAuthInfoTokenClearSecretInfoModel
+var SecretManagementAccessAccessInfoVaultAuthInfoTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // SecretManagementAccessWhereModel represents where block
@@ -274,12 +493,27 @@ type SecretManagementAccessWhereModel struct {
 	VirtualSite    *SecretManagementAccessWhereVirtualSiteModel    `tfsdk:"virtual_site"`
 }
 
+// SecretManagementAccessWhereModelAttrTypes defines the attribute types for SecretManagementAccessWhereModel
+var SecretManagementAccessWhereModelAttrTypes = map[string]attr.Type{
+	"site":            types.ObjectType{AttrTypes: SecretManagementAccessWhereSiteModelAttrTypes},
+	"virtual_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_site":    types.ObjectType{AttrTypes: SecretManagementAccessWhereVirtualSiteModelAttrTypes},
+}
+
 // SecretManagementAccessWhereSiteModel represents site block
 type SecretManagementAccessWhereSiteModel struct {
 	NetworkType        types.String                              `tfsdk:"network_type"`
 	DisableInternetVIP *SecretManagementAccessEmptyModel         `tfsdk:"disable_internet_vip"`
 	EnableInternetVIP  *SecretManagementAccessEmptyModel         `tfsdk:"enable_internet_vip"`
 	Ref                []SecretManagementAccessWhereSiteRefModel `tfsdk:"ref"`
+}
+
+// SecretManagementAccessWhereSiteModelAttrTypes defines the attribute types for SecretManagementAccessWhereSiteModel
+var SecretManagementAccessWhereSiteModelAttrTypes = map[string]attr.Type{
+	"network_type":         types.StringType,
+	"disable_internet_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_internet_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ref":                  types.ListType{ElemType: types.ObjectType{AttrTypes: SecretManagementAccessWhereSiteRefModelAttrTypes}},
 }
 
 // SecretManagementAccessWhereSiteRefModel represents ref block
@@ -291,9 +525,23 @@ type SecretManagementAccessWhereSiteRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// SecretManagementAccessWhereSiteRefModelAttrTypes defines the attribute types for SecretManagementAccessWhereSiteRefModel
+var SecretManagementAccessWhereSiteRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // SecretManagementAccessWhereVirtualNetworkModel represents virtual_network block
 type SecretManagementAccessWhereVirtualNetworkModel struct {
 	Ref []SecretManagementAccessWhereVirtualNetworkRefModel `tfsdk:"ref"`
+}
+
+// SecretManagementAccessWhereVirtualNetworkModelAttrTypes defines the attribute types for SecretManagementAccessWhereVirtualNetworkModel
+var SecretManagementAccessWhereVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: SecretManagementAccessWhereVirtualNetworkRefModelAttrTypes}},
 }
 
 // SecretManagementAccessWhereVirtualNetworkRefModel represents ref block
@@ -305,12 +553,29 @@ type SecretManagementAccessWhereVirtualNetworkRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// SecretManagementAccessWhereVirtualNetworkRefModelAttrTypes defines the attribute types for SecretManagementAccessWhereVirtualNetworkRefModel
+var SecretManagementAccessWhereVirtualNetworkRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // SecretManagementAccessWhereVirtualSiteModel represents virtual_site block
 type SecretManagementAccessWhereVirtualSiteModel struct {
 	NetworkType        types.String                                     `tfsdk:"network_type"`
 	DisableInternetVIP *SecretManagementAccessEmptyModel                `tfsdk:"disable_internet_vip"`
 	EnableInternetVIP  *SecretManagementAccessEmptyModel                `tfsdk:"enable_internet_vip"`
 	Ref                []SecretManagementAccessWhereVirtualSiteRefModel `tfsdk:"ref"`
+}
+
+// SecretManagementAccessWhereVirtualSiteModelAttrTypes defines the attribute types for SecretManagementAccessWhereVirtualSiteModel
+var SecretManagementAccessWhereVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"network_type":         types.StringType,
+	"disable_internet_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_internet_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ref":                  types.ListType{ElemType: types.ObjectType{AttrTypes: SecretManagementAccessWhereVirtualSiteRefModelAttrTypes}},
 }
 
 // SecretManagementAccessWhereVirtualSiteRefModel represents ref block
@@ -320,6 +585,15 @@ type SecretManagementAccessWhereVirtualSiteRefModel struct {
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
 	Uid       types.String `tfsdk:"uid"`
+}
+
+// SecretManagementAccessWhereVirtualSiteRefModelAttrTypes defines the attribute types for SecretManagementAccessWhereVirtualSiteRefModel
+var SecretManagementAccessWhereVirtualSiteRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
 }
 
 type SecretManagementAccessResourceModel struct {
@@ -529,6 +803,9 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 													MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -542,11 +819,17 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 												"uid": schema.StringAttribute{
 													MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -581,6 +864,9 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 																	MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 																"name": schema.StringAttribute{
 																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -594,11 +880,17 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 																"uid": schema.StringAttribute{
 																	MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -726,6 +1018,9 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 																	MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 																"name": schema.StringAttribute{
 																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -739,11 +1034,17 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 																"uid": schema.StringAttribute{
 																	MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																	Optional:            true,
 																	Computed:            true,
+																	PlanModifiers: []planmodifier.String{
+																		stringplanmodifier.UseStateForUnknown(),
+																	},
 																},
 															},
 														},
@@ -886,6 +1187,9 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -899,11 +1203,17 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -922,6 +1232,9 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -935,11 +1248,17 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -969,6 +1288,9 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -982,11 +1304,17 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -1345,11 +1673,17 @@ func (r *SecretManagementAccessResource) Read(ctx context.Context, req resource.
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

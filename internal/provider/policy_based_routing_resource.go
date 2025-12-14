@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,6 +55,11 @@ type PolicyBasedRoutingForwardProxyPbrModel struct {
 	ForwardProxyPbrRules []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel `tfsdk:"forward_proxy_pbr_rules"`
 }
 
+// PolicyBasedRoutingForwardProxyPbrModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrModel
+var PolicyBasedRoutingForwardProxyPbrModelAttrTypes = map[string]attr.Type{
+	"forward_proxy_pbr_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+}
+
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel represents forward_proxy_pbr_rules block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel struct {
 	AllDestinations     *PolicyBasedRoutingEmptyModel                                                   `tfsdk:"all_destinations"`
@@ -67,6 +73,19 @@ type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel struct {
 	TLSList             *PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel              `tfsdk:"tls_list"`
 }
 
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel
+var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModelAttrTypes = map[string]attr.Type{
+	"all_destinations":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_sources":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"forwarding_class_list": types.ListType{ElemType: types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModelAttrTypes}},
+	"http_list":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_prefix_set":         types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModelAttrTypes},
+	"label_selector":        types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModelAttrTypes},
+	"metadata":              types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModelAttrTypes},
+	"prefix_list":           types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModelAttrTypes},
+	"tls_list":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModel represents forwarding_class_list block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -74,9 +93,21 @@ type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListMod
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModel
+var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel represents http_list block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel struct {
 	HTTPList []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModel `tfsdk:"http_list"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModel
+var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModelAttrTypes = map[string]attr.Type{
+	"http_list": types.ListType{ElemType: types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModelAttrTypes}},
 }
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModel represents http_list block
@@ -90,6 +121,17 @@ type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModel 
 	AnyPath         *PolicyBasedRoutingEmptyModel `tfsdk:"any_path"`
 }
 
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModel
+var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListHTTPListModelAttrTypes = map[string]attr.Type{
+	"exact_value":       types.StringType,
+	"path_exact_value":  types.StringType,
+	"path_prefix_value": types.StringType,
+	"path_regex_value":  types.StringType,
+	"regex_value":       types.StringType,
+	"suffix_value":      types.StringType,
+	"any_path":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel represents ip_prefix_set block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -97,9 +139,21 @@ type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel struc
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModel
+var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel represents label_selector block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModel
+var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel represents metadata block
@@ -108,14 +162,30 @@ type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel struct {
 	Name            types.String `tfsdk:"name"`
 }
 
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModel
+var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel represents prefix_list block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
 }
 
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModel
+var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
+}
+
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel represents tls_list block
 type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel struct {
 	TLSList []PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModel `tfsdk:"tls_list"`
+}
+
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModel
+var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModelAttrTypes = map[string]attr.Type{
+	"tls_list": types.ListType{ElemType: types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModelAttrTypes}},
 }
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModel represents tls_list block
@@ -125,11 +195,25 @@ type PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModel st
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
+// PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModel
+var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListTLSListModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
+}
+
 // PolicyBasedRoutingForwardingClassListModel represents forwarding_class_list block
 type PolicyBasedRoutingForwardingClassListModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// PolicyBasedRoutingForwardingClassListModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardingClassListModel
+var PolicyBasedRoutingForwardingClassListModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // PolicyBasedRoutingNetworkPbrModel represents network_pbr block
@@ -140,9 +224,22 @@ type PolicyBasedRoutingNetworkPbrModel struct {
 	PrefixList      *PolicyBasedRoutingNetworkPbrPrefixListModel       `tfsdk:"prefix_list"`
 }
 
+// PolicyBasedRoutingNetworkPbrModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrModel
+var PolicyBasedRoutingNetworkPbrModelAttrTypes = map[string]attr.Type{
+	"any":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"label_selector":    types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrLabelSelectorModelAttrTypes},
+	"network_pbr_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesModelAttrTypes}},
+	"prefix_list":       types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrPrefixListModelAttrTypes},
+}
+
 // PolicyBasedRoutingNetworkPbrLabelSelectorModel represents label_selector block
 type PolicyBasedRoutingNetworkPbrLabelSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// PolicyBasedRoutingNetworkPbrLabelSelectorModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrLabelSelectorModel
+var PolicyBasedRoutingNetworkPbrLabelSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel represents network_pbr_rules block
@@ -160,9 +257,29 @@ type PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel struct {
 	ProtocolPortRange   *PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel    `tfsdk:"protocol_port_range"`
 }
 
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrNetworkPbrRulesModel
+var PolicyBasedRoutingNetworkPbrNetworkPbrRulesModelAttrTypes = map[string]attr.Type{
+	"dns_name":              types.StringType,
+	"all_tcp_traffic":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_traffic":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"all_udp_traffic":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"applications":          types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModelAttrTypes},
+	"forwarding_class_list": types.ListType{ElemType: types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModelAttrTypes}},
+	"ip_prefix_set":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metadata":              types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModelAttrTypes},
+	"prefix_list":           types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModelAttrTypes},
+	"protocol_port_range":   types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModelAttrTypes},
+}
+
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel represents applications block
 type PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel struct {
 	Applications types.List `tfsdk:"applications"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModel
+var PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModelAttrTypes = map[string]attr.Type{
+	"applications": types.ListType{ElemType: types.StringType},
 }
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModel represents forwarding_class_list block
@@ -172,9 +289,21 @@ type PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModel struct 
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModel
+var PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel represents ip_prefix_set block
 type PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel struct {
 	Ref []PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModel `tfsdk:"ref"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModel
+var PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModelAttrTypes = map[string]attr.Type{
+	"ref": types.ListType{ElemType: types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModelAttrTypes}},
 }
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModel represents ref block
@@ -186,15 +315,35 @@ type PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModel
+var PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel represents metadata block
 type PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
 }
 
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModel
+var PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel represents prefix_list block
 type PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModel
+var PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel represents protocol_port_range block
@@ -203,23 +352,34 @@ type PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel struct {
 	Protocol   types.String `tfsdk:"protocol"`
 }
 
+// PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModel
+var PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModelAttrTypes = map[string]attr.Type{
+	"port_ranges": types.ListType{ElemType: types.StringType},
+	"protocol":    types.StringType,
+}
+
 // PolicyBasedRoutingNetworkPbrPrefixListModel represents prefix_list block
 type PolicyBasedRoutingNetworkPbrPrefixListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
 }
 
+// PolicyBasedRoutingNetworkPbrPrefixListModelAttrTypes defines the attribute types for PolicyBasedRoutingNetworkPbrPrefixListModel
+var PolicyBasedRoutingNetworkPbrPrefixListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
+}
+
 type PolicyBasedRoutingResourceModel struct {
-	Name                types.String                                 `tfsdk:"name"`
-	Namespace           types.String                                 `tfsdk:"namespace"`
-	Annotations         types.Map                                    `tfsdk:"annotations"`
-	Description         types.String                                 `tfsdk:"description"`
-	Disable             types.Bool                                   `tfsdk:"disable"`
-	Labels              types.Map                                    `tfsdk:"labels"`
-	ID                  types.String                                 `tfsdk:"id"`
-	Timeouts            timeouts.Value                               `tfsdk:"timeouts"`
-	ForwardProxyPbr     *PolicyBasedRoutingForwardProxyPbrModel      `tfsdk:"forward_proxy_pbr"`
-	ForwardingClassList []PolicyBasedRoutingForwardingClassListModel `tfsdk:"forwarding_class_list"`
-	NetworkPbr          *PolicyBasedRoutingNetworkPbrModel           `tfsdk:"network_pbr"`
+	Name                types.String                            `tfsdk:"name"`
+	Namespace           types.String                            `tfsdk:"namespace"`
+	Annotations         types.Map                               `tfsdk:"annotations"`
+	Description         types.String                            `tfsdk:"description"`
+	Disable             types.Bool                              `tfsdk:"disable"`
+	Labels              types.Map                               `tfsdk:"labels"`
+	ID                  types.String                            `tfsdk:"id"`
+	Timeouts            timeouts.Value                          `tfsdk:"timeouts"`
+	ForwardProxyPbr     *PolicyBasedRoutingForwardProxyPbrModel `tfsdk:"forward_proxy_pbr"`
+	ForwardingClassList types.List                              `tfsdk:"forwarding_class_list"`
+	NetworkPbr          *PolicyBasedRoutingNetworkPbrModel      `tfsdk:"network_pbr"`
 }
 
 func (r *PolicyBasedRoutingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -315,6 +475,9 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -376,6 +539,9 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -458,6 +624,9 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -527,6 +696,9 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -543,6 +715,9 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -556,11 +731,17 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -824,22 +1005,27 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 		}
 		createReq.Spec["forward_proxy_pbr"] = forward_proxy_pbrMap
 	}
-	if len(data.ForwardingClassList) > 0 {
-		var forwarding_class_listList []map[string]interface{}
-		for _, item := range data.ForwardingClassList {
-			itemMap := make(map[string]interface{})
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
+	if !data.ForwardingClassList.IsNull() && !data.ForwardingClassList.IsUnknown() {
+		var forwarding_class_listItems []PolicyBasedRoutingForwardingClassListModel
+		diags := data.ForwardingClassList.ElementsAs(ctx, &forwarding_class_listItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(forwarding_class_listItems) > 0 {
+			var forwarding_class_listList []map[string]interface{}
+			for _, item := range forwarding_class_listItems {
+				itemMap := make(map[string]interface{})
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				forwarding_class_listList = append(forwarding_class_listList, itemMap)
 			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			forwarding_class_listList = append(forwarding_class_listList, itemMap)
+			createReq.Spec["forwarding_class_list"] = forwarding_class_listList
 		}
-		createReq.Spec["forwarding_class_list"] = forwarding_class_listList
 	}
 	if data.NetworkPbr != nil {
 		network_pbrMap := make(map[string]interface{})
@@ -1020,6 +1206,10 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 	}
 	if listData, ok := apiResource.Spec["forwarding_class_list"].([]interface{}); ok && len(listData) > 0 {
 		var forwarding_class_listList []PolicyBasedRoutingForwardingClassListModel
+		var existingForwardingClassListItems []PolicyBasedRoutingForwardingClassListModel
+		if !data.ForwardingClassList.IsNull() && !data.ForwardingClassList.IsUnknown() {
+			data.ForwardingClassList.ElementsAs(ctx, &existingForwardingClassListItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1045,7 +1235,14 @@ func (r *PolicyBasedRoutingResource) Create(ctx context.Context, req resource.Cr
 				})
 			}
 		}
-		data.ForwardingClassList = forwarding_class_listList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: PolicyBasedRoutingForwardingClassListModelAttrTypes}, forwarding_class_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ForwardingClassList = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ForwardingClassList = types.ListNull(types.ObjectType{AttrTypes: PolicyBasedRoutingForwardingClassListModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["network_pbr"].(map[string]interface{}); ok && (isImport || data.NetworkPbr != nil) {
 		data.NetworkPbr = &PolicyBasedRoutingNetworkPbrModel{
@@ -1270,11 +1467,17 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -1398,6 +1601,10 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 	}
 	if listData, ok := apiResource.Spec["forwarding_class_list"].([]interface{}); ok && len(listData) > 0 {
 		var forwarding_class_listList []PolicyBasedRoutingForwardingClassListModel
+		var existingForwardingClassListItems []PolicyBasedRoutingForwardingClassListModel
+		if !data.ForwardingClassList.IsNull() && !data.ForwardingClassList.IsUnknown() {
+			data.ForwardingClassList.ElementsAs(ctx, &existingForwardingClassListItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1423,7 +1630,14 @@ func (r *PolicyBasedRoutingResource) Read(ctx context.Context, req resource.Read
 				})
 			}
 		}
-		data.ForwardingClassList = forwarding_class_listList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: PolicyBasedRoutingForwardingClassListModelAttrTypes}, forwarding_class_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ForwardingClassList = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ForwardingClassList = types.ListNull(types.ObjectType{AttrTypes: PolicyBasedRoutingForwardingClassListModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["network_pbr"].(map[string]interface{}); ok && (isImport || data.NetworkPbr != nil) {
 		data.NetworkPbr = &PolicyBasedRoutingNetworkPbrModel{
@@ -1701,22 +1915,27 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 		}
 		apiResource.Spec["forward_proxy_pbr"] = forward_proxy_pbrMap
 	}
-	if len(data.ForwardingClassList) > 0 {
-		var forwarding_class_listList []map[string]interface{}
-		for _, item := range data.ForwardingClassList {
-			itemMap := make(map[string]interface{})
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
+	if !data.ForwardingClassList.IsNull() && !data.ForwardingClassList.IsUnknown() {
+		var forwarding_class_listItems []PolicyBasedRoutingForwardingClassListModel
+		diags := data.ForwardingClassList.ElementsAs(ctx, &forwarding_class_listItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(forwarding_class_listItems) > 0 {
+			var forwarding_class_listList []map[string]interface{}
+			for _, item := range forwarding_class_listItems {
+				itemMap := make(map[string]interface{})
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				forwarding_class_listList = append(forwarding_class_listList, itemMap)
 			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			forwarding_class_listList = append(forwarding_class_listList, itemMap)
+			apiResource.Spec["forwarding_class_list"] = forwarding_class_listList
 		}
-		apiResource.Spec["forwarding_class_list"] = forwarding_class_listList
 	}
 	if data.NetworkPbr != nil {
 		network_pbrMap := make(map[string]interface{})
@@ -1908,6 +2127,10 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 	}
 	if listData, ok := apiResource.Spec["forwarding_class_list"].([]interface{}); ok && len(listData) > 0 {
 		var forwarding_class_listList []PolicyBasedRoutingForwardingClassListModel
+		var existingForwardingClassListItems []PolicyBasedRoutingForwardingClassListModel
+		if !data.ForwardingClassList.IsNull() && !data.ForwardingClassList.IsUnknown() {
+			data.ForwardingClassList.ElementsAs(ctx, &existingForwardingClassListItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1933,7 +2156,14 @@ func (r *PolicyBasedRoutingResource) Update(ctx context.Context, req resource.Up
 				})
 			}
 		}
-		data.ForwardingClassList = forwarding_class_listList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: PolicyBasedRoutingForwardingClassListModelAttrTypes}, forwarding_class_listList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ForwardingClassList = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ForwardingClassList = types.ListNull(types.ObjectType{AttrTypes: PolicyBasedRoutingForwardingClassListModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["network_pbr"].(map[string]interface{}); ok && (isImport || data.NetworkPbr != nil) {
 		data.NetworkPbr = &PolicyBasedRoutingNetworkPbrModel{

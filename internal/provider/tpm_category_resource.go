@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -58,17 +59,26 @@ type TpmCategoryTpmManagerRefModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// TpmCategoryTpmManagerRefModelAttrTypes defines the attribute types for TpmCategoryTpmManagerRefModel
+var TpmCategoryTpmManagerRefModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 type TpmCategoryResourceModel struct {
-	Name          types.String                    `tfsdk:"name"`
-	Namespace     types.String                    `tfsdk:"namespace"`
-	Annotations   types.Map                       `tfsdk:"annotations"`
-	Description   types.String                    `tfsdk:"description"`
-	Disable       types.Bool                      `tfsdk:"disable"`
-	Labels        types.Map                       `tfsdk:"labels"`
-	TpmAllowList  types.List                      `tfsdk:"tpm_allow_list"`
-	ID            types.String                    `tfsdk:"id"`
-	Timeouts      timeouts.Value                  `tfsdk:"timeouts"`
-	TpmManagerRef []TpmCategoryTpmManagerRefModel `tfsdk:"tpm_manager_ref"`
+	Name          types.String   `tfsdk:"name"`
+	Namespace     types.String   `tfsdk:"namespace"`
+	Annotations   types.Map      `tfsdk:"annotations"`
+	Description   types.String   `tfsdk:"description"`
+	Disable       types.Bool     `tfsdk:"disable"`
+	Labels        types.Map      `tfsdk:"labels"`
+	TpmAllowList  types.List     `tfsdk:"tpm_allow_list"`
+	ID            types.String   `tfsdk:"id"`
+	Timeouts      timeouts.Value `tfsdk:"timeouts"`
+	TpmManagerRef types.List     `tfsdk:"tpm_manager_ref"`
 }
 
 func (r *TpmCategoryResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -146,6 +156,9 @@ func (r *TpmCategoryResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -159,11 +172,17 @@ func (r *TpmCategoryResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -323,28 +342,33 @@ func (r *TpmCategoryResource) Create(ctx context.Context, req resource.CreateReq
 			createReq.Spec["tpm_allow_list"] = tpm_allow_listList
 		}
 	}
-	if len(data.TpmManagerRef) > 0 {
-		var tpm_manager_refList []map[string]interface{}
-		for _, item := range data.TpmManagerRef {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.TpmManagerRef.IsNull() && !data.TpmManagerRef.IsUnknown() {
+		var tpm_manager_refItems []TpmCategoryTpmManagerRefModel
+		diags := data.TpmManagerRef.ElementsAs(ctx, &tpm_manager_refItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(tpm_manager_refItems) > 0 {
+			var tpm_manager_refList []map[string]interface{}
+			for _, item := range tpm_manager_refItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				tpm_manager_refList = append(tpm_manager_refList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			tpm_manager_refList = append(tpm_manager_refList, itemMap)
+			createReq.Spec["tpm_manager_ref"] = tpm_manager_refList
 		}
-		createReq.Spec["tpm_manager_ref"] = tpm_manager_refList
 	}
 
 	apiResource, err := r.client.CreateTpmCategory(ctx, createReq)
@@ -376,6 +400,10 @@ func (r *TpmCategoryResource) Create(ctx context.Context, req resource.CreateReq
 	}
 	if listData, ok := apiResource.Spec["tpm_manager_ref"].([]interface{}); ok && len(listData) > 0 {
 		var tpm_manager_refList []TpmCategoryTpmManagerRefModel
+		var existingTpmManagerRefItems []TpmCategoryTpmManagerRefModel
+		if !data.TpmManagerRef.IsNull() && !data.TpmManagerRef.IsUnknown() {
+			data.TpmManagerRef.ElementsAs(ctx, &existingTpmManagerRefItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -413,7 +441,14 @@ func (r *TpmCategoryResource) Create(ctx context.Context, req resource.CreateReq
 				})
 			}
 		}
-		data.TpmManagerRef = tpm_manager_refList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TpmCategoryTpmManagerRefModelAttrTypes}, tpm_manager_refList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.TpmManagerRef = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.TpmManagerRef = types.ListNull(types.ObjectType{AttrTypes: TpmCategoryTpmManagerRefModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -479,11 +514,17 @@ func (r *TpmCategoryResource) Read(ctx context.Context, req resource.ReadRequest
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -525,6 +566,10 @@ func (r *TpmCategoryResource) Read(ctx context.Context, req resource.ReadRequest
 	}
 	if listData, ok := apiResource.Spec["tpm_manager_ref"].([]interface{}); ok && len(listData) > 0 {
 		var tpm_manager_refList []TpmCategoryTpmManagerRefModel
+		var existingTpmManagerRefItems []TpmCategoryTpmManagerRefModel
+		if !data.TpmManagerRef.IsNull() && !data.TpmManagerRef.IsUnknown() {
+			data.TpmManagerRef.ElementsAs(ctx, &existingTpmManagerRefItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -562,7 +607,14 @@ func (r *TpmCategoryResource) Read(ctx context.Context, req resource.ReadRequest
 				})
 			}
 		}
-		data.TpmManagerRef = tpm_manager_refList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TpmCategoryTpmManagerRefModelAttrTypes}, tpm_manager_refList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.TpmManagerRef = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.TpmManagerRef = types.ListNull(types.ObjectType{AttrTypes: TpmCategoryTpmManagerRefModelAttrTypes})
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -631,28 +683,33 @@ func (r *TpmCategoryResource) Update(ctx context.Context, req resource.UpdateReq
 			apiResource.Spec["tpm_allow_list"] = tpm_allow_listList
 		}
 	}
-	if len(data.TpmManagerRef) > 0 {
-		var tpm_manager_refList []map[string]interface{}
-		for _, item := range data.TpmManagerRef {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.TpmManagerRef.IsNull() && !data.TpmManagerRef.IsUnknown() {
+		var tpm_manager_refItems []TpmCategoryTpmManagerRefModel
+		diags := data.TpmManagerRef.ElementsAs(ctx, &tpm_manager_refItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(tpm_manager_refItems) > 0 {
+			var tpm_manager_refList []map[string]interface{}
+			for _, item := range tpm_manager_refItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				tpm_manager_refList = append(tpm_manager_refList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			tpm_manager_refList = append(tpm_manager_refList, itemMap)
+			apiResource.Spec["tpm_manager_ref"] = tpm_manager_refList
 		}
-		apiResource.Spec["tpm_manager_ref"] = tpm_manager_refList
 	}
 
 	_, err := r.client.UpdateTpmCategory(ctx, apiResource)
@@ -695,6 +752,10 @@ func (r *TpmCategoryResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 	if listData, ok := apiResource.Spec["tpm_manager_ref"].([]interface{}); ok && len(listData) > 0 {
 		var tpm_manager_refList []TpmCategoryTpmManagerRefModel
+		var existingTpmManagerRefItems []TpmCategoryTpmManagerRefModel
+		if !data.TpmManagerRef.IsNull() && !data.TpmManagerRef.IsUnknown() {
+			data.TpmManagerRef.ElementsAs(ctx, &existingTpmManagerRefItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -732,7 +793,14 @@ func (r *TpmCategoryResource) Update(ctx context.Context, req resource.UpdateReq
 				})
 			}
 		}
-		data.TpmManagerRef = tpm_manager_refList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: TpmCategoryTpmManagerRefModelAttrTypes}, tpm_manager_refList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.TpmManagerRef = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.TpmManagerRef = types.ListNull(types.ObjectType{AttrTypes: TpmCategoryTpmManagerRefModelAttrTypes})
 	}
 
 	psd := privatestate.NewPrivateStateData()

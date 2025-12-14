@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -54,9 +55,19 @@ type IKEPhase1ProfileIKEKeylifetimeHoursModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
 }
 
+// IKEPhase1ProfileIKEKeylifetimeHoursModelAttrTypes defines the attribute types for IKEPhase1ProfileIKEKeylifetimeHoursModel
+var IKEPhase1ProfileIKEKeylifetimeHoursModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
+}
+
 // IKEPhase1ProfileIKEKeylifetimeMinutesModel represents ike_keylifetime_minutes block
 type IKEPhase1ProfileIKEKeylifetimeMinutesModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// IKEPhase1ProfileIKEKeylifetimeMinutesModelAttrTypes defines the attribute types for IKEPhase1ProfileIKEKeylifetimeMinutesModel
+var IKEPhase1ProfileIKEKeylifetimeMinutesModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
 }
 
 // IKEPhase1ProfileReauthTimeoutDaysModel represents reauth_timeout_days block
@@ -64,9 +75,19 @@ type IKEPhase1ProfileReauthTimeoutDaysModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
 }
 
+// IKEPhase1ProfileReauthTimeoutDaysModelAttrTypes defines the attribute types for IKEPhase1ProfileReauthTimeoutDaysModel
+var IKEPhase1ProfileReauthTimeoutDaysModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
+}
+
 // IKEPhase1ProfileReauthTimeoutHoursModel represents reauth_timeout_hours block
 type IKEPhase1ProfileReauthTimeoutHoursModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// IKEPhase1ProfileReauthTimeoutHoursModelAttrTypes defines the attribute types for IKEPhase1ProfileReauthTimeoutHoursModel
+var IKEPhase1ProfileReauthTimeoutHoursModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
 }
 
 type IKEPhase1ProfileResourceModel struct {
@@ -613,11 +634,17 @@ func (r *IKEPhase1ProfileResource) Read(ctx context.Context, req resource.ReadRe
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

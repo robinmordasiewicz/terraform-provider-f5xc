@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -66,6 +67,23 @@ type RegistrationInfraModel struct {
 	SwInfo           *RegistrationInfraSwInfoModel        `tfsdk:"sw_info"`
 }
 
+// RegistrationInfraModelAttrTypes defines the attribute types for RegistrationInfraModel
+var RegistrationInfraModelAttrTypes = map[string]attr.Type{
+	"availability_zone": types.StringType,
+	"certified_hw":      types.StringType,
+	"domain":            types.StringType,
+	"hostname":          types.StringType,
+	"instance_id":       types.StringType,
+	"machine_id":        types.StringType,
+	"provider_ref":      types.StringType,
+	"timestamp":         types.StringType,
+	"zone":              types.StringType,
+	"hw_info":           types.ObjectType{AttrTypes: RegistrationInfraHwInfoModelAttrTypes},
+	"interfaces":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"internet_proxy":    types.ObjectType{AttrTypes: RegistrationInfraInternetProxyModelAttrTypes},
+	"sw_info":           types.ObjectType{AttrTypes: RegistrationInfraSwInfoModelAttrTypes},
+}
+
 // RegistrationInfraHwInfoModel represents hw_info block
 type RegistrationInfraHwInfoModel struct {
 	NumaNodes types.Int64                           `tfsdk:"numa_nodes"`
@@ -83,11 +101,35 @@ type RegistrationInfraHwInfoModel struct {
 	Usb       []RegistrationInfraHwInfoUsbModel     `tfsdk:"usb"`
 }
 
+// RegistrationInfraHwInfoModelAttrTypes defines the attribute types for RegistrationInfraHwInfoModel
+var RegistrationInfraHwInfoModelAttrTypes = map[string]attr.Type{
+	"numa_nodes": types.Int64Type,
+	"bios":       types.ObjectType{AttrTypes: RegistrationInfraHwInfoBiosModelAttrTypes},
+	"board":      types.ObjectType{AttrTypes: RegistrationInfraHwInfoBoardModelAttrTypes},
+	"chassis":    types.ObjectType{AttrTypes: RegistrationInfraHwInfoChassisModelAttrTypes},
+	"cpu":        types.ObjectType{AttrTypes: RegistrationInfraHwInfoCPUModelAttrTypes},
+	"gpu":        types.ObjectType{AttrTypes: RegistrationInfraHwInfoGPUModelAttrTypes},
+	"kernel":     types.ObjectType{AttrTypes: RegistrationInfraHwInfoKernelModelAttrTypes},
+	"memory":     types.ObjectType{AttrTypes: RegistrationInfraHwInfoMemoryModelAttrTypes},
+	"network":    types.ListType{ElemType: types.ObjectType{AttrTypes: RegistrationInfraHwInfoNetworkModelAttrTypes}},
+	"os":         types.ObjectType{AttrTypes: RegistrationInfraHwInfoOSModelAttrTypes},
+	"product":    types.ObjectType{AttrTypes: RegistrationInfraHwInfoProductModelAttrTypes},
+	"storage":    types.ListType{ElemType: types.ObjectType{AttrTypes: RegistrationInfraHwInfoStorageModelAttrTypes}},
+	"usb":        types.ListType{ElemType: types.ObjectType{AttrTypes: RegistrationInfraHwInfoUsbModelAttrTypes}},
+}
+
 // RegistrationInfraHwInfoBiosModel represents bios block
 type RegistrationInfraHwInfoBiosModel struct {
 	Date    types.String `tfsdk:"date"`
 	Vendor  types.String `tfsdk:"vendor"`
 	Version types.String `tfsdk:"version"`
+}
+
+// RegistrationInfraHwInfoBiosModelAttrTypes defines the attribute types for RegistrationInfraHwInfoBiosModel
+var RegistrationInfraHwInfoBiosModelAttrTypes = map[string]attr.Type{
+	"date":    types.StringType,
+	"vendor":  types.StringType,
+	"version": types.StringType,
 }
 
 // RegistrationInfraHwInfoBoardModel represents board block
@@ -99,6 +141,15 @@ type RegistrationInfraHwInfoBoardModel struct {
 	Version  types.String `tfsdk:"version"`
 }
 
+// RegistrationInfraHwInfoBoardModelAttrTypes defines the attribute types for RegistrationInfraHwInfoBoardModel
+var RegistrationInfraHwInfoBoardModelAttrTypes = map[string]attr.Type{
+	"asset_tag": types.StringType,
+	"name":      types.StringType,
+	"serial":    types.StringType,
+	"vendor":    types.StringType,
+	"version":   types.StringType,
+}
+
 // RegistrationInfraHwInfoChassisModel represents chassis block
 type RegistrationInfraHwInfoChassisModel struct {
 	AssetTag types.String `tfsdk:"asset_tag"`
@@ -106,6 +157,15 @@ type RegistrationInfraHwInfoChassisModel struct {
 	Type     types.Int64  `tfsdk:"type"`
 	Vendor   types.String `tfsdk:"vendor"`
 	Version  types.String `tfsdk:"version"`
+}
+
+// RegistrationInfraHwInfoChassisModelAttrTypes defines the attribute types for RegistrationInfraHwInfoChassisModel
+var RegistrationInfraHwInfoChassisModelAttrTypes = map[string]attr.Type{
+	"asset_tag": types.StringType,
+	"serial":    types.StringType,
+	"type":      types.Int64Type,
+	"vendor":    types.StringType,
+	"version":   types.StringType,
 }
 
 // RegistrationInfraHwInfoCPUModel represents cpu block
@@ -119,11 +179,29 @@ type RegistrationInfraHwInfoCPUModel struct {
 	Vendor  types.String `tfsdk:"vendor"`
 }
 
+// RegistrationInfraHwInfoCPUModelAttrTypes defines the attribute types for RegistrationInfraHwInfoCPUModel
+var RegistrationInfraHwInfoCPUModelAttrTypes = map[string]attr.Type{
+	"cache":   types.Int64Type,
+	"cores":   types.Int64Type,
+	"cpus":    types.Int64Type,
+	"model":   types.StringType,
+	"speed":   types.Int64Type,
+	"threads": types.Int64Type,
+	"vendor":  types.StringType,
+}
+
 // RegistrationInfraHwInfoGPUModel represents gpu block
 type RegistrationInfraHwInfoGPUModel struct {
 	CudaVersion   types.String                               `tfsdk:"cuda_version"`
 	DriverVersion types.String                               `tfsdk:"driver_version"`
 	GPUDevice     []RegistrationInfraHwInfoGPUGPUDeviceModel `tfsdk:"gpu_device"`
+}
+
+// RegistrationInfraHwInfoGPUModelAttrTypes defines the attribute types for RegistrationInfraHwInfoGPUModel
+var RegistrationInfraHwInfoGPUModelAttrTypes = map[string]attr.Type{
+	"cuda_version":   types.StringType,
+	"driver_version": types.StringType,
+	"gpu_device":     types.ListType{ElemType: types.ObjectType{AttrTypes: RegistrationInfraHwInfoGPUGPUDeviceModelAttrTypes}},
 }
 
 // RegistrationInfraHwInfoGPUGPUDeviceModel represents gpu_device block
@@ -133,6 +211,13 @@ type RegistrationInfraHwInfoGPUGPUDeviceModel struct {
 	ProductName types.String `tfsdk:"product_name"`
 }
 
+// RegistrationInfraHwInfoGPUGPUDeviceModelAttrTypes defines the attribute types for RegistrationInfraHwInfoGPUGPUDeviceModel
+var RegistrationInfraHwInfoGPUGPUDeviceModelAttrTypes = map[string]attr.Type{
+	"id":           types.StringType,
+	"processes":    types.StringType,
+	"product_name": types.StringType,
+}
+
 // RegistrationInfraHwInfoKernelModel represents kernel block
 type RegistrationInfraHwInfoKernelModel struct {
 	Architecture types.String `tfsdk:"architecture"`
@@ -140,11 +225,25 @@ type RegistrationInfraHwInfoKernelModel struct {
 	Version      types.String `tfsdk:"version"`
 }
 
+// RegistrationInfraHwInfoKernelModelAttrTypes defines the attribute types for RegistrationInfraHwInfoKernelModel
+var RegistrationInfraHwInfoKernelModelAttrTypes = map[string]attr.Type{
+	"architecture": types.StringType,
+	"release":      types.StringType,
+	"version":      types.StringType,
+}
+
 // RegistrationInfraHwInfoMemoryModel represents memory block
 type RegistrationInfraHwInfoMemoryModel struct {
 	SizeMb types.Int64  `tfsdk:"size_mb"`
 	Speed  types.Int64  `tfsdk:"speed"`
 	Type   types.String `tfsdk:"type"`
+}
+
+// RegistrationInfraHwInfoMemoryModelAttrTypes defines the attribute types for RegistrationInfraHwInfoMemoryModel
+var RegistrationInfraHwInfoMemoryModelAttrTypes = map[string]attr.Type{
+	"size_mb": types.Int64Type,
+	"speed":   types.Int64Type,
+	"type":    types.StringType,
 }
 
 // RegistrationInfraHwInfoNetworkModel represents network block
@@ -159,6 +258,18 @@ type RegistrationInfraHwInfoNetworkModel struct {
 	Speed       types.Int64  `tfsdk:"speed"`
 }
 
+// RegistrationInfraHwInfoNetworkModelAttrTypes defines the attribute types for RegistrationInfraHwInfoNetworkModel
+var RegistrationInfraHwInfoNetworkModelAttrTypes = map[string]attr.Type{
+	"driver":       types.StringType,
+	"ip_address":   types.ListType{ElemType: types.StringType},
+	"link_quality": types.StringType,
+	"link_type":    types.StringType,
+	"mac_address":  types.StringType,
+	"name":         types.StringType,
+	"port":         types.StringType,
+	"speed":        types.Int64Type,
+}
+
 // RegistrationInfraHwInfoOSModel represents os block
 type RegistrationInfraHwInfoOSModel struct {
 	Architecture types.String `tfsdk:"architecture"`
@@ -166,6 +277,15 @@ type RegistrationInfraHwInfoOSModel struct {
 	Release      types.String `tfsdk:"release"`
 	Vendor       types.String `tfsdk:"vendor"`
 	Version      types.String `tfsdk:"version"`
+}
+
+// RegistrationInfraHwInfoOSModelAttrTypes defines the attribute types for RegistrationInfraHwInfoOSModel
+var RegistrationInfraHwInfoOSModelAttrTypes = map[string]attr.Type{
+	"architecture": types.StringType,
+	"name":         types.StringType,
+	"release":      types.StringType,
+	"vendor":       types.StringType,
+	"version":      types.StringType,
 }
 
 // RegistrationInfraHwInfoProductModel represents product block
@@ -176,6 +296,14 @@ type RegistrationInfraHwInfoProductModel struct {
 	Version types.String `tfsdk:"version"`
 }
 
+// RegistrationInfraHwInfoProductModelAttrTypes defines the attribute types for RegistrationInfraHwInfoProductModel
+var RegistrationInfraHwInfoProductModelAttrTypes = map[string]attr.Type{
+	"name":    types.StringType,
+	"serial":  types.StringType,
+	"vendor":  types.StringType,
+	"version": types.StringType,
+}
+
 // RegistrationInfraHwInfoStorageModel represents storage block
 type RegistrationInfraHwInfoStorageModel struct {
 	Driver types.String `tfsdk:"driver"`
@@ -184,6 +312,16 @@ type RegistrationInfraHwInfoStorageModel struct {
 	Serial types.String `tfsdk:"serial"`
 	SizeGb types.Int64  `tfsdk:"size_gb"`
 	Vendor types.String `tfsdk:"vendor"`
+}
+
+// RegistrationInfraHwInfoStorageModelAttrTypes defines the attribute types for RegistrationInfraHwInfoStorageModel
+var RegistrationInfraHwInfoStorageModelAttrTypes = map[string]attr.Type{
+	"driver":  types.StringType,
+	"model":   types.StringType,
+	"name":    types.StringType,
+	"serial":  types.StringType,
+	"size_gb": types.Int64Type,
+	"vendor":  types.StringType,
 }
 
 // RegistrationInfraHwInfoUsbModel represents usb block
@@ -209,6 +347,29 @@ type RegistrationInfraHwInfoUsbModel struct {
 	VendorName      types.String `tfsdk:"vendor_name"`
 }
 
+// RegistrationInfraHwInfoUsbModelAttrTypes defines the attribute types for RegistrationInfraHwInfoUsbModel
+var RegistrationInfraHwInfoUsbModelAttrTypes = map[string]attr.Type{
+	"address":            types.Int64Type,
+	"b_device_class":     types.StringType,
+	"b_device_protocol":  types.StringType,
+	"b_device_sub_class": types.StringType,
+	"b_max_packet_size":  types.Int64Type,
+	"bcd_device":         types.StringType,
+	"bcd_usb":            types.StringType,
+	"bus":                types.Int64Type,
+	"description_spec":   types.StringType,
+	"i_manufacturer":     types.StringType,
+	"i_product":          types.StringType,
+	"i_serial":           types.StringType,
+	"id_product":         types.StringType,
+	"id_vendor":          types.StringType,
+	"port":               types.Int64Type,
+	"product_name":       types.StringType,
+	"speed":              types.StringType,
+	"usb_type":           types.StringType,
+	"vendor_name":        types.StringType,
+}
+
 // RegistrationInfraInternetProxyModel represents internet_proxy block
 type RegistrationInfraInternetProxyModel struct {
 	HTTPProxy      types.String `tfsdk:"http_proxy"`
@@ -217,9 +378,22 @@ type RegistrationInfraInternetProxyModel struct {
 	ProxyCacertURL types.String `tfsdk:"proxy_cacert_url"`
 }
 
+// RegistrationInfraInternetProxyModelAttrTypes defines the attribute types for RegistrationInfraInternetProxyModel
+var RegistrationInfraInternetProxyModelAttrTypes = map[string]attr.Type{
+	"http_proxy":       types.StringType,
+	"https_proxy":      types.StringType,
+	"no_proxy":         types.StringType,
+	"proxy_cacert_url": types.StringType,
+}
+
 // RegistrationInfraSwInfoModel represents sw_info block
 type RegistrationInfraSwInfoModel struct {
 	SwVersion types.String `tfsdk:"sw_version"`
+}
+
+// RegistrationInfraSwInfoModelAttrTypes defines the attribute types for RegistrationInfraSwInfoModel
+var RegistrationInfraSwInfoModelAttrTypes = map[string]attr.Type{
+	"sw_version": types.StringType,
 }
 
 // RegistrationPassportModel represents passport block
@@ -234,6 +408,20 @@ type RegistrationPassportModel struct {
 	VolterraSoftwareVersion types.String            `tfsdk:"volterra_software_version"`
 	DefaultOSVersion        *RegistrationEmptyModel `tfsdk:"default_os_version"`
 	DefaultSwVersion        *RegistrationEmptyModel `tfsdk:"default_sw_version"`
+}
+
+// RegistrationPassportModelAttrTypes defines the attribute types for RegistrationPassportModel
+var RegistrationPassportModelAttrTypes = map[string]attr.Type{
+	"cluster_name":              types.StringType,
+	"cluster_size":              types.Int64Type,
+	"cluster_type":              types.StringType,
+	"latitude":                  types.Int64Type,
+	"longitude":                 types.Int64Type,
+	"operating_system_version":  types.StringType,
+	"private_network_name":      types.StringType,
+	"volterra_software_version": types.StringType,
+	"default_os_version":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_sw_version":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 type RegistrationResourceModel struct {
@@ -1369,11 +1557,17 @@ func (r *RegistrationResource) Read(ctx context.Context, req resource.ReadReques
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

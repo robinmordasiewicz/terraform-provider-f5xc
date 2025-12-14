@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,10 +57,23 @@ type AddonSubscriptionAddonServiceModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// AddonSubscriptionAddonServiceModelAttrTypes defines the attribute types for AddonSubscriptionAddonServiceModel
+var AddonSubscriptionAddonServiceModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // AddonSubscriptionNotificationPreferenceModel represents notification_preference block
 type AddonSubscriptionNotificationPreferenceModel struct {
 	Emails          *AddonSubscriptionNotificationPreferenceEmailsModel          `tfsdk:"emails"`
 	SupportTicketID *AddonSubscriptionNotificationPreferenceSupportTicketIDModel `tfsdk:"support_ticket_id"`
+}
+
+// AddonSubscriptionNotificationPreferenceModelAttrTypes defines the attribute types for AddonSubscriptionNotificationPreferenceModel
+var AddonSubscriptionNotificationPreferenceModelAttrTypes = map[string]attr.Type{
+	"emails":            types.ObjectType{AttrTypes: AddonSubscriptionNotificationPreferenceEmailsModelAttrTypes},
+	"support_ticket_id": types.ObjectType{AttrTypes: AddonSubscriptionNotificationPreferenceSupportTicketIDModelAttrTypes},
 }
 
 // AddonSubscriptionNotificationPreferenceEmailsModel represents emails block
@@ -67,10 +81,21 @@ type AddonSubscriptionNotificationPreferenceEmailsModel struct {
 	EmailIds types.List `tfsdk:"email_ids"`
 }
 
+// AddonSubscriptionNotificationPreferenceEmailsModelAttrTypes defines the attribute types for AddonSubscriptionNotificationPreferenceEmailsModel
+var AddonSubscriptionNotificationPreferenceEmailsModelAttrTypes = map[string]attr.Type{
+	"email_ids": types.ListType{ElemType: types.StringType},
+}
+
 // AddonSubscriptionNotificationPreferenceSupportTicketIDModel represents support_ticket_id block
 type AddonSubscriptionNotificationPreferenceSupportTicketIDModel struct {
 	SubscriptionTicketID   types.String `tfsdk:"subscription_ticket_id"`
 	UnsubscriptionTicketID types.String `tfsdk:"unsubscription_ticket_id"`
+}
+
+// AddonSubscriptionNotificationPreferenceSupportTicketIDModelAttrTypes defines the attribute types for AddonSubscriptionNotificationPreferenceSupportTicketIDModel
+var AddonSubscriptionNotificationPreferenceSupportTicketIDModelAttrTypes = map[string]attr.Type{
+	"subscription_ticket_id":   types.StringType,
+	"unsubscription_ticket_id": types.StringType,
 }
 
 type AddonSubscriptionResourceModel struct {
@@ -172,6 +197,9 @@ func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -495,11 +523,17 @@ func (r *AddonSubscriptionResource) Read(ctx context.Context, req resource.ReadR
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -84,9 +85,49 @@ type K8SPodSecurityPolicyPspSpecModel struct {
 	SupplementalGroups              *K8SPodSecurityPolicyPspSpecSupplementalGroupsModel     `tfsdk:"supplemental_groups"`
 }
 
+// K8SPodSecurityPolicyPspSpecModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecModel
+var K8SPodSecurityPolicyPspSpecModelAttrTypes = map[string]attr.Type{
+	"allow_privilege_escalation":         types.BoolType,
+	"allowed_csi_drivers":                types.ListType{ElemType: types.StringType},
+	"allowed_flex_volumes":               types.ListType{ElemType: types.StringType},
+	"allowed_proc_mounts":                types.ListType{ElemType: types.StringType},
+	"allowed_unsafe_sysctls":             types.ListType{ElemType: types.StringType},
+	"default_allow_privilege_escalation": types.BoolType,
+	"forbidden_sysctls":                  types.ListType{ElemType: types.StringType},
+	"host_ipc":                           types.BoolType,
+	"host_network":                       types.BoolType,
+	"host_pid":                           types.BoolType,
+	"host_port_ranges":                   types.StringType,
+	"privileged":                         types.BoolType,
+	"read_only_root_filesystem":          types.BoolType,
+	"volumes":                            types.ListType{ElemType: types.StringType},
+	"allowed_capabilities":               types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModelAttrTypes},
+	"allowed_host_paths":                 types.ListType{ElemType: types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecAllowedHostPathsModelAttrTypes}},
+	"default_capabilities":               types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModelAttrTypes},
+	"drop_capabilities":                  types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecDropCapabilitiesModelAttrTypes},
+	"fs_group_strategy_options":          types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModelAttrTypes},
+	"no_allowed_capabilities":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_default_capabilities":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_drop_capabilities":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_fs_groups":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_run_as_group":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_run_as_user":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_runtime_class":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_se_linux_options":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_supplemental_groups":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"run_as_group":                       types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecRunAsGroupModelAttrTypes},
+	"run_as_user":                        types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecRunAsUserModelAttrTypes},
+	"supplemental_groups":                types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecSupplementalGroupsModelAttrTypes},
+}
+
 // K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel represents allowed_capabilities block
 type K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel struct {
 	Capabilities types.List `tfsdk:"capabilities"`
+}
+
+// K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModel
+var K8SPodSecurityPolicyPspSpecAllowedCapabilitiesModelAttrTypes = map[string]attr.Type{
+	"capabilities": types.ListType{ElemType: types.StringType},
 }
 
 // K8SPodSecurityPolicyPspSpecAllowedHostPathsModel represents allowed_host_paths block
@@ -95,14 +136,30 @@ type K8SPodSecurityPolicyPspSpecAllowedHostPathsModel struct {
 	ReadOnly   types.Bool   `tfsdk:"read_only"`
 }
 
+// K8SPodSecurityPolicyPspSpecAllowedHostPathsModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecAllowedHostPathsModel
+var K8SPodSecurityPolicyPspSpecAllowedHostPathsModelAttrTypes = map[string]attr.Type{
+	"path_prefix": types.StringType,
+	"read_only":   types.BoolType,
+}
+
 // K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel represents default_capabilities block
 type K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel struct {
 	Capabilities types.List `tfsdk:"capabilities"`
 }
 
+// K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModel
+var K8SPodSecurityPolicyPspSpecDefaultCapabilitiesModelAttrTypes = map[string]attr.Type{
+	"capabilities": types.ListType{ElemType: types.StringType},
+}
+
 // K8SPodSecurityPolicyPspSpecDropCapabilitiesModel represents drop_capabilities block
 type K8SPodSecurityPolicyPspSpecDropCapabilitiesModel struct {
 	Capabilities types.List `tfsdk:"capabilities"`
+}
+
+// K8SPodSecurityPolicyPspSpecDropCapabilitiesModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecDropCapabilitiesModel
+var K8SPodSecurityPolicyPspSpecDropCapabilitiesModelAttrTypes = map[string]attr.Type{
+	"capabilities": types.ListType{ElemType: types.StringType},
 }
 
 // K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel represents fs_group_strategy_options block
@@ -111,10 +168,22 @@ type K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel struct {
 	IDRanges []K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModel `tfsdk:"id_ranges"`
 }
 
+// K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModel
+var K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsModelAttrTypes = map[string]attr.Type{
+	"rule":      types.StringType,
+	"id_ranges": types.ListType{ElemType: types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModelAttrTypes}},
+}
+
 // K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModel represents id_ranges block
 type K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModel struct {
 	MaxID types.Int64 `tfsdk:"max_id"`
 	MinID types.Int64 `tfsdk:"min_id"`
+}
+
+// K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModel
+var K8SPodSecurityPolicyPspSpecFsGroupStrategyOptionsIDRangesModelAttrTypes = map[string]attr.Type{
+	"max_id": types.Int64Type,
+	"min_id": types.Int64Type,
 }
 
 // K8SPodSecurityPolicyPspSpecRunAsGroupModel represents run_as_group block
@@ -123,10 +192,22 @@ type K8SPodSecurityPolicyPspSpecRunAsGroupModel struct {
 	IDRanges []K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModel `tfsdk:"id_ranges"`
 }
 
+// K8SPodSecurityPolicyPspSpecRunAsGroupModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecRunAsGroupModel
+var K8SPodSecurityPolicyPspSpecRunAsGroupModelAttrTypes = map[string]attr.Type{
+	"rule":      types.StringType,
+	"id_ranges": types.ListType{ElemType: types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModelAttrTypes}},
+}
+
 // K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModel represents id_ranges block
 type K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModel struct {
 	MaxID types.Int64 `tfsdk:"max_id"`
 	MinID types.Int64 `tfsdk:"min_id"`
+}
+
+// K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModel
+var K8SPodSecurityPolicyPspSpecRunAsGroupIDRangesModelAttrTypes = map[string]attr.Type{
+	"max_id": types.Int64Type,
+	"min_id": types.Int64Type,
 }
 
 // K8SPodSecurityPolicyPspSpecRunAsUserModel represents run_as_user block
@@ -135,10 +216,22 @@ type K8SPodSecurityPolicyPspSpecRunAsUserModel struct {
 	IDRanges []K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModel `tfsdk:"id_ranges"`
 }
 
+// K8SPodSecurityPolicyPspSpecRunAsUserModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecRunAsUserModel
+var K8SPodSecurityPolicyPspSpecRunAsUserModelAttrTypes = map[string]attr.Type{
+	"rule":      types.StringType,
+	"id_ranges": types.ListType{ElemType: types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModelAttrTypes}},
+}
+
 // K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModel represents id_ranges block
 type K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModel struct {
 	MaxID types.Int64 `tfsdk:"max_id"`
 	MinID types.Int64 `tfsdk:"min_id"`
+}
+
+// K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModel
+var K8SPodSecurityPolicyPspSpecRunAsUserIDRangesModelAttrTypes = map[string]attr.Type{
+	"max_id": types.Int64Type,
+	"min_id": types.Int64Type,
 }
 
 // K8SPodSecurityPolicyPspSpecSupplementalGroupsModel represents supplemental_groups block
@@ -147,10 +240,22 @@ type K8SPodSecurityPolicyPspSpecSupplementalGroupsModel struct {
 	IDRanges []K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModel `tfsdk:"id_ranges"`
 }
 
+// K8SPodSecurityPolicyPspSpecSupplementalGroupsModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecSupplementalGroupsModel
+var K8SPodSecurityPolicyPspSpecSupplementalGroupsModelAttrTypes = map[string]attr.Type{
+	"rule":      types.StringType,
+	"id_ranges": types.ListType{ElemType: types.ObjectType{AttrTypes: K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModelAttrTypes}},
+}
+
 // K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModel represents id_ranges block
 type K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModel struct {
 	MaxID types.Int64 `tfsdk:"max_id"`
 	MinID types.Int64 `tfsdk:"min_id"`
+}
+
+// K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModelAttrTypes defines the attribute types for K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModel
+var K8SPodSecurityPolicyPspSpecSupplementalGroupsIDRangesModelAttrTypes = map[string]attr.Type{
+	"max_id": types.Int64Type,
+	"min_id": types.Int64Type,
 }
 
 type K8SPodSecurityPolicyResourceModel struct {
@@ -1310,11 +1415,17 @@ func (r *K8SPodSecurityPolicyResource) Read(ctx context.Context, req resource.Re
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)

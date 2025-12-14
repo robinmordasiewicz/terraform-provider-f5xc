@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -59,9 +60,23 @@ type ClusterCircuitBreakerModel struct {
 	Retries         types.Int64  `tfsdk:"retries"`
 }
 
+// ClusterCircuitBreakerModelAttrTypes defines the attribute types for ClusterCircuitBreakerModel
+var ClusterCircuitBreakerModelAttrTypes = map[string]attr.Type{
+	"connection_limit": types.Int64Type,
+	"max_requests":     types.Int64Type,
+	"pending_requests": types.Int64Type,
+	"priority":         types.StringType,
+	"retries":          types.Int64Type,
+}
+
 // ClusterEndpointSubsetsModel represents endpoint_subsets block
 type ClusterEndpointSubsetsModel struct {
 	Keys types.List `tfsdk:"keys"`
+}
+
+// ClusterEndpointSubsetsModelAttrTypes defines the attribute types for ClusterEndpointSubsetsModel
+var ClusterEndpointSubsetsModelAttrTypes = map[string]attr.Type{
+	"keys": types.ListType{ElemType: types.StringType},
 }
 
 // ClusterEndpointsModel represents endpoints block
@@ -73,6 +88,15 @@ type ClusterEndpointsModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// ClusterEndpointsModelAttrTypes defines the attribute types for ClusterEndpointsModel
+var ClusterEndpointsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // ClusterHealthChecksModel represents health_checks block
 type ClusterHealthChecksModel struct {
 	Kind      types.String `tfsdk:"kind"`
@@ -82,9 +106,23 @@ type ClusterHealthChecksModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// ClusterHealthChecksModelAttrTypes defines the attribute types for ClusterHealthChecksModel
+var ClusterHealthChecksModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // ClusterHttp1ConfigModel represents http1_config block
 type ClusterHttp1ConfigModel struct {
 	HeaderTransformation *ClusterHttp1ConfigHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// ClusterHttp1ConfigModelAttrTypes defines the attribute types for ClusterHttp1ConfigModel
+var ClusterHttp1ConfigModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // ClusterHttp1ConfigHeaderTransformationModel represents header_transformation block
@@ -95,9 +133,22 @@ type ClusterHttp1ConfigHeaderTransformationModel struct {
 	ProperCaseHeaderTransformation   *ClusterEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// ClusterHttp1ConfigHeaderTransformationModelAttrTypes defines the attribute types for ClusterHttp1ConfigHeaderTransformationModel
+var ClusterHttp1ConfigHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ClusterHttp2OptionsModel represents http2_options block
 type ClusterHttp2OptionsModel struct {
 	Enabled types.Bool `tfsdk:"enabled"`
+}
+
+// ClusterHttp2OptionsModelAttrTypes defines the attribute types for ClusterHttp2OptionsModel
+var ClusterHttp2OptionsModelAttrTypes = map[string]attr.Type{
+	"enabled": types.BoolType,
 }
 
 // ClusterOutlierDetectionModel represents outlier_detection block
@@ -107,6 +158,15 @@ type ClusterOutlierDetectionModel struct {
 	ConsecutiveGatewayFailure types.Int64 `tfsdk:"consecutive_gateway_failure"`
 	Interval                  types.Int64 `tfsdk:"interval"`
 	MaxEjectionPercent        types.Int64 `tfsdk:"max_ejection_percent"`
+}
+
+// ClusterOutlierDetectionModelAttrTypes defines the attribute types for ClusterOutlierDetectionModel
+var ClusterOutlierDetectionModelAttrTypes = map[string]attr.Type{
+	"base_ejection_time":          types.Int64Type,
+	"consecutive_5xx":             types.Int64Type,
+	"consecutive_gateway_failure": types.Int64Type,
+	"interval":                    types.Int64Type,
+	"max_ejection_percent":        types.Int64Type,
 }
 
 // ClusterTLSParametersModel represents tls_parameters block
@@ -121,6 +181,18 @@ type ClusterTLSParametersModel struct {
 	UseHostHeaderAsSni       *ClusterEmptyModel                     `tfsdk:"use_host_header_as_sni"`
 }
 
+// ClusterTLSParametersModelAttrTypes defines the attribute types for ClusterTLSParametersModel
+var ClusterTLSParametersModelAttrTypes = map[string]attr.Type{
+	"max_session_keys":            types.Int64Type,
+	"sni":                         types.StringType,
+	"cert_params":                 types.ObjectType{AttrTypes: ClusterTLSParametersCertParamsModelAttrTypes},
+	"common_params":               types.ObjectType{AttrTypes: ClusterTLSParametersCommonParamsModelAttrTypes},
+	"default_session_key_caching": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_session_key_caching": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_sni":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_host_header_as_sni":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ClusterTLSParametersCertParamsModel represents cert_params block
 type ClusterTLSParametersCertParamsModel struct {
 	CipherSuites           types.List                                           `tfsdk:"cipher_suites"`
@@ -128,6 +200,15 @@ type ClusterTLSParametersCertParamsModel struct {
 	MinimumProtocolVersion types.String                                         `tfsdk:"minimum_protocol_version"`
 	Certificates           []ClusterTLSParametersCertParamsCertificatesModel    `tfsdk:"certificates"`
 	ValidationParams       *ClusterTLSParametersCertParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// ClusterTLSParametersCertParamsModelAttrTypes defines the attribute types for ClusterTLSParametersCertParamsModel
+var ClusterTLSParametersCertParamsModelAttrTypes = map[string]attr.Type{
+	"cipher_suites":            types.ListType{ElemType: types.StringType},
+	"maximum_protocol_version": types.StringType,
+	"minimum_protocol_version": types.StringType,
+	"certificates":             types.ListType{ElemType: types.ObjectType{AttrTypes: ClusterTLSParametersCertParamsCertificatesModelAttrTypes}},
+	"validation_params":        types.ObjectType{AttrTypes: ClusterTLSParametersCertParamsValidationParamsModelAttrTypes},
 }
 
 // ClusterTLSParametersCertParamsCertificatesModel represents certificates block
@@ -139,6 +220,15 @@ type ClusterTLSParametersCertParamsCertificatesModel struct {
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// ClusterTLSParametersCertParamsCertificatesModelAttrTypes defines the attribute types for ClusterTLSParametersCertParamsCertificatesModel
+var ClusterTLSParametersCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // ClusterTLSParametersCertParamsValidationParamsModel represents validation_params block
 type ClusterTLSParametersCertParamsValidationParamsModel struct {
 	SkipHostnameVerification types.Bool                                                    `tfsdk:"skip_hostname_verification"`
@@ -147,9 +237,22 @@ type ClusterTLSParametersCertParamsValidationParamsModel struct {
 	TrustedCA                *ClusterTLSParametersCertParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
+// ClusterTLSParametersCertParamsValidationParamsModelAttrTypes defines the attribute types for ClusterTLSParametersCertParamsValidationParamsModel
+var ClusterTLSParametersCertParamsValidationParamsModelAttrTypes = map[string]attr.Type{
+	"skip_hostname_verification": types.BoolType,
+	"trusted_ca_url":             types.StringType,
+	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
+	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ClusterTLSParametersCertParamsValidationParamsTrustedCAModel represents trusted_ca block
 type ClusterTLSParametersCertParamsValidationParamsTrustedCAModel struct {
 	TrustedCAList []ClusterTLSParametersCertParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
+}
+
+// ClusterTLSParametersCertParamsValidationParamsTrustedCAModelAttrTypes defines the attribute types for ClusterTLSParametersCertParamsValidationParamsTrustedCAModel
+var ClusterTLSParametersCertParamsValidationParamsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_list": types.ListType{ElemType: types.ObjectType{AttrTypes: ClusterTLSParametersCertParamsValidationParamsTrustedCATrustedCAListModelAttrTypes}},
 }
 
 // ClusterTLSParametersCertParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
@@ -161,6 +264,15 @@ type ClusterTLSParametersCertParamsValidationParamsTrustedCATrustedCAListModel s
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// ClusterTLSParametersCertParamsValidationParamsTrustedCATrustedCAListModelAttrTypes defines the attribute types for ClusterTLSParametersCertParamsValidationParamsTrustedCATrustedCAListModel
+var ClusterTLSParametersCertParamsValidationParamsTrustedCATrustedCAListModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // ClusterTLSParametersCommonParamsModel represents common_params block
 type ClusterTLSParametersCommonParamsModel struct {
 	CipherSuites           types.List                                             `tfsdk:"cipher_suites"`
@@ -168,6 +280,15 @@ type ClusterTLSParametersCommonParamsModel struct {
 	MinimumProtocolVersion types.String                                           `tfsdk:"minimum_protocol_version"`
 	TLSCertificates        []ClusterTLSParametersCommonParamsTLSCertificatesModel `tfsdk:"tls_certificates"`
 	ValidationParams       *ClusterTLSParametersCommonParamsValidationParamsModel `tfsdk:"validation_params"`
+}
+
+// ClusterTLSParametersCommonParamsModelAttrTypes defines the attribute types for ClusterTLSParametersCommonParamsModel
+var ClusterTLSParametersCommonParamsModelAttrTypes = map[string]attr.Type{
+	"cipher_suites":            types.ListType{ElemType: types.StringType},
+	"maximum_protocol_version": types.StringType,
+	"minimum_protocol_version": types.StringType,
+	"tls_certificates":         types.ListType{ElemType: types.ObjectType{AttrTypes: ClusterTLSParametersCommonParamsTLSCertificatesModelAttrTypes}},
+	"validation_params":        types.ObjectType{AttrTypes: ClusterTLSParametersCommonParamsValidationParamsModelAttrTypes},
 }
 
 // ClusterTLSParametersCommonParamsTLSCertificatesModel represents tls_certificates block
@@ -180,15 +301,36 @@ type ClusterTLSParametersCommonParamsTLSCertificatesModel struct {
 	UseSystemDefaults    *ClusterEmptyModel                                                        `tfsdk:"use_system_defaults"`
 }
 
+// ClusterTLSParametersCommonParamsTLSCertificatesModelAttrTypes defines the attribute types for ClusterTLSParametersCommonParamsTLSCertificatesModel
+var ClusterTLSParametersCommonParamsTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModel
+var ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel represents private_key block
 type ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModel
+var ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -198,10 +340,23 @@ type ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInf
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModel
+var ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // ClusterTLSParametersCommonParamsValidationParamsModel represents validation_params block
@@ -212,9 +367,22 @@ type ClusterTLSParametersCommonParamsValidationParamsModel struct {
 	TrustedCA                *ClusterTLSParametersCommonParamsValidationParamsTrustedCAModel `tfsdk:"trusted_ca"`
 }
 
+// ClusterTLSParametersCommonParamsValidationParamsModelAttrTypes defines the attribute types for ClusterTLSParametersCommonParamsValidationParamsModel
+var ClusterTLSParametersCommonParamsValidationParamsModelAttrTypes = map[string]attr.Type{
+	"skip_hostname_verification": types.BoolType,
+	"trusted_ca_url":             types.StringType,
+	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
+	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // ClusterTLSParametersCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
 type ClusterTLSParametersCommonParamsValidationParamsTrustedCAModel struct {
 	TrustedCAList []ClusterTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel `tfsdk:"trusted_ca_list"`
+}
+
+// ClusterTLSParametersCommonParamsValidationParamsTrustedCAModelAttrTypes defines the attribute types for ClusterTLSParametersCommonParamsValidationParamsTrustedCAModel
+var ClusterTLSParametersCommonParamsValidationParamsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_list": types.ListType{ElemType: types.ObjectType{AttrTypes: ClusterTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes}},
 }
 
 // ClusterTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel represents trusted_ca_list block
@@ -226,10 +394,25 @@ type ClusterTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// ClusterTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes defines the attribute types for ClusterTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModel
+var ClusterTLSParametersCommonParamsValidationParamsTrustedCATrustedCAListModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // ClusterUpstreamConnPoolReuseTypeModel represents upstream_conn_pool_reuse_type block
 type ClusterUpstreamConnPoolReuseTypeModel struct {
 	DisableConnPoolReuse *ClusterEmptyModel `tfsdk:"disable_conn_pool_reuse"`
 	EnableConnPoolReuse  *ClusterEmptyModel `tfsdk:"enable_conn_pool_reuse"`
+}
+
+// ClusterUpstreamConnPoolReuseTypeModelAttrTypes defines the attribute types for ClusterUpstreamConnPoolReuseTypeModel
+var ClusterUpstreamConnPoolReuseTypeModelAttrTypes = map[string]attr.Type{
+	"disable_conn_pool_reuse": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_conn_pool_reuse":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 type ClusterResourceModel struct {
@@ -251,9 +434,9 @@ type ClusterResourceModel struct {
 	CircuitBreaker            *ClusterCircuitBreakerModel            `tfsdk:"circuit_breaker"`
 	DefaultSubset             *ClusterEmptyModel                     `tfsdk:"default_subset"`
 	DisableProxyProtocol      *ClusterEmptyModel                     `tfsdk:"disable_proxy_protocol"`
-	EndpointSubsets           []ClusterEndpointSubsetsModel          `tfsdk:"endpoint_subsets"`
-	Endpoints                 []ClusterEndpointsModel                `tfsdk:"endpoints"`
-	HealthChecks              []ClusterHealthChecksModel             `tfsdk:"health_checks"`
+	EndpointSubsets           types.List                             `tfsdk:"endpoint_subsets"`
+	Endpoints                 types.List                             `tfsdk:"endpoints"`
+	HealthChecks              types.List                             `tfsdk:"health_checks"`
 	Http1Config               *ClusterHttp1ConfigModel               `tfsdk:"http1_config"`
 	Http2Options              *ClusterHttp2OptionsModel              `tfsdk:"http2_options"`
 	NoPanicThreshold          *ClusterEmptyModel                     `tfsdk:"no_panic_threshold"`
@@ -428,6 +611,9 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -441,11 +627,17 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -458,6 +650,9 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"name": schema.StringAttribute{
 							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -471,11 +666,17 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 						"uid": schema.StringAttribute{
 							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 							Optional:            true,
 							Computed:            true,
+							PlanModifiers: []planmodifier.String{
+								stringplanmodifier.UseStateForUnknown(),
+							},
 						},
 					},
 				},
@@ -586,6 +787,9 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"name": schema.StringAttribute{
 											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -599,11 +803,17 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 										"uid": schema.StringAttribute{
 											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -638,6 +848,9 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -651,11 +864,17 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -783,6 +1002,9 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 														"name": schema.StringAttribute{
 															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -796,11 +1018,17 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 														"uid": schema.StringAttribute{
 															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -1016,59 +1244,74 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 		disable_proxy_protocolMap := make(map[string]interface{})
 		createReq.Spec["disable_proxy_protocol"] = disable_proxy_protocolMap
 	}
-	if len(data.EndpointSubsets) > 0 {
-		var endpoint_subsetsList []map[string]interface{}
-		for range data.EndpointSubsets {
-			itemMap := make(map[string]interface{})
-			endpoint_subsetsList = append(endpoint_subsetsList, itemMap)
+	if !data.EndpointSubsets.IsNull() && !data.EndpointSubsets.IsUnknown() {
+		var endpoint_subsetsItems []ClusterEndpointSubsetsModel
+		diags := data.EndpointSubsets.ElementsAs(ctx, &endpoint_subsetsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(endpoint_subsetsItems) > 0 {
+			var endpoint_subsetsList []map[string]interface{}
+			for range endpoint_subsetsItems {
+				itemMap := make(map[string]interface{})
+				endpoint_subsetsList = append(endpoint_subsetsList, itemMap)
+			}
+			createReq.Spec["endpoint_subsets"] = endpoint_subsetsList
 		}
-		createReq.Spec["endpoint_subsets"] = endpoint_subsetsList
 	}
-	if len(data.Endpoints) > 0 {
-		var endpointsList []map[string]interface{}
-		for _, item := range data.Endpoints {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.Endpoints.IsNull() && !data.Endpoints.IsUnknown() {
+		var endpointsItems []ClusterEndpointsModel
+		diags := data.Endpoints.ElementsAs(ctx, &endpointsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(endpointsItems) > 0 {
+			var endpointsList []map[string]interface{}
+			for _, item := range endpointsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				endpointsList = append(endpointsList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			endpointsList = append(endpointsList, itemMap)
+			createReq.Spec["endpoints"] = endpointsList
 		}
-		createReq.Spec["endpoints"] = endpointsList
 	}
-	if len(data.HealthChecks) > 0 {
-		var health_checksList []map[string]interface{}
-		for _, item := range data.HealthChecks {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.HealthChecks.IsNull() && !data.HealthChecks.IsUnknown() {
+		var health_checksItems []ClusterHealthChecksModel
+		diags := data.HealthChecks.ElementsAs(ctx, &health_checksItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(health_checksItems) > 0 {
+			var health_checksList []map[string]interface{}
+			for _, item := range health_checksItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				health_checksList = append(health_checksList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			health_checksList = append(health_checksList, itemMap)
+			createReq.Spec["health_checks"] = health_checksList
 		}
-		createReq.Spec["health_checks"] = health_checksList
 	}
 	if data.Http1Config != nil {
 		http1_configMap := make(map[string]interface{})
@@ -1250,6 +1493,10 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["endpoint_subsets"].([]interface{}); ok && len(listData) > 0 {
 		var endpoint_subsetsList []ClusterEndpointSubsetsModel
+		var existingEndpointSubsetsItems []ClusterEndpointSubsetsModel
+		if !data.EndpointSubsets.IsNull() && !data.EndpointSubsets.IsUnknown() {
+			data.EndpointSubsets.ElementsAs(ctx, &existingEndpointSubsetsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1270,10 +1517,21 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 				})
 			}
 		}
-		data.EndpointSubsets = endpoint_subsetsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ClusterEndpointSubsetsModelAttrTypes}, endpoint_subsetsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.EndpointSubsets = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.EndpointSubsets = types.ListNull(types.ObjectType{AttrTypes: ClusterEndpointSubsetsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["endpoints"].([]interface{}); ok && len(listData) > 0 {
 		var endpointsList []ClusterEndpointsModel
+		var existingEndpointsItems []ClusterEndpointsModel
+		if !data.Endpoints.IsNull() && !data.Endpoints.IsUnknown() {
+			data.Endpoints.ElementsAs(ctx, &existingEndpointsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1311,10 +1569,21 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 				})
 			}
 		}
-		data.Endpoints = endpointsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ClusterEndpointsModelAttrTypes}, endpointsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Endpoints = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Endpoints = types.ListNull(types.ObjectType{AttrTypes: ClusterEndpointsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["health_checks"].([]interface{}); ok && len(listData) > 0 {
 		var health_checksList []ClusterHealthChecksModel
+		var existingHealthChecksItems []ClusterHealthChecksModel
+		if !data.HealthChecks.IsNull() && !data.HealthChecks.IsUnknown() {
+			data.HealthChecks.ElementsAs(ctx, &existingHealthChecksItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1352,7 +1621,14 @@ func (r *ClusterResource) Create(ctx context.Context, req resource.CreateRequest
 				})
 			}
 		}
-		data.HealthChecks = health_checksList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ClusterHealthChecksModelAttrTypes}, health_checksList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.HealthChecks = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.HealthChecks = types.ListNull(types.ObjectType{AttrTypes: ClusterHealthChecksModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["http1_config"].(map[string]interface{}); ok && isImport && data.Http1Config == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -1660,11 +1936,17 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -1740,6 +2022,10 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["endpoint_subsets"].([]interface{}); ok && len(listData) > 0 {
 		var endpoint_subsetsList []ClusterEndpointSubsetsModel
+		var existingEndpointSubsetsItems []ClusterEndpointSubsetsModel
+		if !data.EndpointSubsets.IsNull() && !data.EndpointSubsets.IsUnknown() {
+			data.EndpointSubsets.ElementsAs(ctx, &existingEndpointSubsetsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1760,10 +2046,21 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 				})
 			}
 		}
-		data.EndpointSubsets = endpoint_subsetsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ClusterEndpointSubsetsModelAttrTypes}, endpoint_subsetsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.EndpointSubsets = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.EndpointSubsets = types.ListNull(types.ObjectType{AttrTypes: ClusterEndpointSubsetsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["endpoints"].([]interface{}); ok && len(listData) > 0 {
 		var endpointsList []ClusterEndpointsModel
+		var existingEndpointsItems []ClusterEndpointsModel
+		if !data.Endpoints.IsNull() && !data.Endpoints.IsUnknown() {
+			data.Endpoints.ElementsAs(ctx, &existingEndpointsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1801,10 +2098,21 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 				})
 			}
 		}
-		data.Endpoints = endpointsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ClusterEndpointsModelAttrTypes}, endpointsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Endpoints = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Endpoints = types.ListNull(types.ObjectType{AttrTypes: ClusterEndpointsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["health_checks"].([]interface{}); ok && len(listData) > 0 {
 		var health_checksList []ClusterHealthChecksModel
+		var existingHealthChecksItems []ClusterHealthChecksModel
+		if !data.HealthChecks.IsNull() && !data.HealthChecks.IsUnknown() {
+			data.HealthChecks.ElementsAs(ctx, &existingHealthChecksItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1842,7 +2150,14 @@ func (r *ClusterResource) Read(ctx context.Context, req resource.ReadRequest, re
 				})
 			}
 		}
-		data.HealthChecks = health_checksList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ClusterHealthChecksModelAttrTypes}, health_checksList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.HealthChecks = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.HealthChecks = types.ListNull(types.ObjectType{AttrTypes: ClusterHealthChecksModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["http1_config"].(map[string]interface{}); ok && isImport && data.Http1Config == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -2177,59 +2492,74 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 		disable_proxy_protocolMap := make(map[string]interface{})
 		apiResource.Spec["disable_proxy_protocol"] = disable_proxy_protocolMap
 	}
-	if len(data.EndpointSubsets) > 0 {
-		var endpoint_subsetsList []map[string]interface{}
-		for range data.EndpointSubsets {
-			itemMap := make(map[string]interface{})
-			endpoint_subsetsList = append(endpoint_subsetsList, itemMap)
+	if !data.EndpointSubsets.IsNull() && !data.EndpointSubsets.IsUnknown() {
+		var endpoint_subsetsItems []ClusterEndpointSubsetsModel
+		diags := data.EndpointSubsets.ElementsAs(ctx, &endpoint_subsetsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(endpoint_subsetsItems) > 0 {
+			var endpoint_subsetsList []map[string]interface{}
+			for range endpoint_subsetsItems {
+				itemMap := make(map[string]interface{})
+				endpoint_subsetsList = append(endpoint_subsetsList, itemMap)
+			}
+			apiResource.Spec["endpoint_subsets"] = endpoint_subsetsList
 		}
-		apiResource.Spec["endpoint_subsets"] = endpoint_subsetsList
 	}
-	if len(data.Endpoints) > 0 {
-		var endpointsList []map[string]interface{}
-		for _, item := range data.Endpoints {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.Endpoints.IsNull() && !data.Endpoints.IsUnknown() {
+		var endpointsItems []ClusterEndpointsModel
+		diags := data.Endpoints.ElementsAs(ctx, &endpointsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(endpointsItems) > 0 {
+			var endpointsList []map[string]interface{}
+			for _, item := range endpointsItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				endpointsList = append(endpointsList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			endpointsList = append(endpointsList, itemMap)
+			apiResource.Spec["endpoints"] = endpointsList
 		}
-		apiResource.Spec["endpoints"] = endpointsList
 	}
-	if len(data.HealthChecks) > 0 {
-		var health_checksList []map[string]interface{}
-		for _, item := range data.HealthChecks {
-			itemMap := make(map[string]interface{})
-			if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
-				itemMap["kind"] = item.Kind.ValueString()
+	if !data.HealthChecks.IsNull() && !data.HealthChecks.IsUnknown() {
+		var health_checksItems []ClusterHealthChecksModel
+		diags := data.HealthChecks.ElementsAs(ctx, &health_checksItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(health_checksItems) > 0 {
+			var health_checksList []map[string]interface{}
+			for _, item := range health_checksItems {
+				itemMap := make(map[string]interface{})
+				if !item.Kind.IsNull() && !item.Kind.IsUnknown() {
+					itemMap["kind"] = item.Kind.ValueString()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
+					itemMap["namespace"] = item.Namespace.ValueString()
+				}
+				if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
+					itemMap["tenant"] = item.Tenant.ValueString()
+				}
+				if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
+					itemMap["uid"] = item.Uid.ValueString()
+				}
+				health_checksList = append(health_checksList, itemMap)
 			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if !item.Namespace.IsNull() && !item.Namespace.IsUnknown() {
-				itemMap["namespace"] = item.Namespace.ValueString()
-			}
-			if !item.Tenant.IsNull() && !item.Tenant.IsUnknown() {
-				itemMap["tenant"] = item.Tenant.ValueString()
-			}
-			if !item.Uid.IsNull() && !item.Uid.IsUnknown() {
-				itemMap["uid"] = item.Uid.ValueString()
-			}
-			health_checksList = append(health_checksList, itemMap)
+			apiResource.Spec["health_checks"] = health_checksList
 		}
-		apiResource.Spec["health_checks"] = health_checksList
 	}
 	if data.Http1Config != nil {
 		http1_configMap := make(map[string]interface{})
@@ -2464,6 +2794,10 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["endpoint_subsets"].([]interface{}); ok && len(listData) > 0 {
 		var endpoint_subsetsList []ClusterEndpointSubsetsModel
+		var existingEndpointSubsetsItems []ClusterEndpointSubsetsModel
+		if !data.EndpointSubsets.IsNull() && !data.EndpointSubsets.IsUnknown() {
+			data.EndpointSubsets.ElementsAs(ctx, &existingEndpointSubsetsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -2484,10 +2818,21 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 				})
 			}
 		}
-		data.EndpointSubsets = endpoint_subsetsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ClusterEndpointSubsetsModelAttrTypes}, endpoint_subsetsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.EndpointSubsets = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.EndpointSubsets = types.ListNull(types.ObjectType{AttrTypes: ClusterEndpointSubsetsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["endpoints"].([]interface{}); ok && len(listData) > 0 {
 		var endpointsList []ClusterEndpointsModel
+		var existingEndpointsItems []ClusterEndpointsModel
+		if !data.Endpoints.IsNull() && !data.Endpoints.IsUnknown() {
+			data.Endpoints.ElementsAs(ctx, &existingEndpointsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -2525,10 +2870,21 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 				})
 			}
 		}
-		data.Endpoints = endpointsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ClusterEndpointsModelAttrTypes}, endpointsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Endpoints = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Endpoints = types.ListNull(types.ObjectType{AttrTypes: ClusterEndpointsModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["health_checks"].([]interface{}); ok && len(listData) > 0 {
 		var health_checksList []ClusterHealthChecksModel
+		var existingHealthChecksItems []ClusterHealthChecksModel
+		if !data.HealthChecks.IsNull() && !data.HealthChecks.IsUnknown() {
+			data.HealthChecks.ElementsAs(ctx, &existingHealthChecksItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -2566,7 +2922,14 @@ func (r *ClusterResource) Update(ctx context.Context, req resource.UpdateRequest
 				})
 			}
 		}
-		data.HealthChecks = health_checksList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: ClusterHealthChecksModelAttrTypes}, health_checksList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.HealthChecks = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.HealthChecks = types.ListNull(types.ObjectType{AttrTypes: ClusterHealthChecksModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["http1_config"].(map[string]interface{}); ok && isImport && data.Http1Config == nil {
 		// Import case: populate from API since state is nil and psd is empty

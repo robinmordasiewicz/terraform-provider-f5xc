@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -56,6 +57,13 @@ type APITestingDomainsModel struct {
 	Credentials             []APITestingDomainsCredentialsModel `tfsdk:"credentials"`
 }
 
+// APITestingDomainsModelAttrTypes defines the attribute types for APITestingDomainsModel
+var APITestingDomainsModelAttrTypes = map[string]attr.Type{
+	"allow_destructive_methods": types.BoolType,
+	"domain":                    types.StringType,
+	"credentials":               types.ListType{ElemType: types.ObjectType{AttrTypes: APITestingDomainsCredentialsModelAttrTypes}},
+}
+
 // APITestingDomainsCredentialsModel represents credentials block
 type APITestingDomainsCredentialsModel struct {
 	CredentialName types.String                                    `tfsdk:"credential_name"`
@@ -67,16 +75,39 @@ type APITestingDomainsCredentialsModel struct {
 	Standard       *APITestingEmptyModel                           `tfsdk:"standard"`
 }
 
+// APITestingDomainsCredentialsModelAttrTypes defines the attribute types for APITestingDomainsCredentialsModel
+var APITestingDomainsCredentialsModelAttrTypes = map[string]attr.Type{
+	"credential_name": types.StringType,
+	"admin":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_key":         types.ObjectType{AttrTypes: APITestingDomainsCredentialsAPIKeyModelAttrTypes},
+	"basic_auth":      types.ObjectType{AttrTypes: APITestingDomainsCredentialsBasicAuthModelAttrTypes},
+	"bearer_token":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"login_endpoint":  types.ObjectType{AttrTypes: APITestingDomainsCredentialsLoginEndpointModelAttrTypes},
+	"standard":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APITestingDomainsCredentialsAPIKeyModel represents api_key block
 type APITestingDomainsCredentialsAPIKeyModel struct {
 	Key   types.String                                  `tfsdk:"key"`
 	Value *APITestingDomainsCredentialsAPIKeyValueModel `tfsdk:"value"`
 }
 
+// APITestingDomainsCredentialsAPIKeyModelAttrTypes defines the attribute types for APITestingDomainsCredentialsAPIKeyModel
+var APITestingDomainsCredentialsAPIKeyModelAttrTypes = map[string]attr.Type{
+	"key":   types.StringType,
+	"value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APITestingDomainsCredentialsAPIKeyValueModel represents value block
 type APITestingDomainsCredentialsAPIKeyValueModel struct {
 	BlindfoldSecretInfo *APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APITestingDomainsCredentialsAPIKeyValueModelAttrTypes defines the attribute types for APITestingDomainsCredentialsAPIKeyValueModel
+var APITestingDomainsCredentialsAPIKeyValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModelAttrTypes},
 }
 
 // APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -86,10 +117,23 @@ type APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel struct {
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel
+var APITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel represents clear_secret_info block
 type APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModelAttrTypes defines the attribute types for APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel
+var APITestingDomainsCredentialsAPIKeyValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // APITestingDomainsCredentialsBasicAuthModel represents basic_auth block
@@ -98,10 +142,22 @@ type APITestingDomainsCredentialsBasicAuthModel struct {
 	Password *APITestingDomainsCredentialsBasicAuthPasswordModel `tfsdk:"password"`
 }
 
+// APITestingDomainsCredentialsBasicAuthModelAttrTypes defines the attribute types for APITestingDomainsCredentialsBasicAuthModel
+var APITestingDomainsCredentialsBasicAuthModelAttrTypes = map[string]attr.Type{
+	"user":     types.StringType,
+	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APITestingDomainsCredentialsBasicAuthPasswordModel represents password block
 type APITestingDomainsCredentialsBasicAuthPasswordModel struct {
 	BlindfoldSecretInfo *APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APITestingDomainsCredentialsBasicAuthPasswordModelAttrTypes defines the attribute types for APITestingDomainsCredentialsBasicAuthPasswordModel
+var APITestingDomainsCredentialsBasicAuthPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModelAttrTypes},
 }
 
 // APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -111,10 +167,23 @@ type APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel struc
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel
+var APITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel represents clear_secret_info block
 type APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModelAttrTypes defines the attribute types for APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel
+var APITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // APITestingDomainsCredentialsBearerTokenModel represents bearer_token block
@@ -122,10 +191,21 @@ type APITestingDomainsCredentialsBearerTokenModel struct {
 	Token *APITestingDomainsCredentialsBearerTokenTokenModel `tfsdk:"token"`
 }
 
+// APITestingDomainsCredentialsBearerTokenModelAttrTypes defines the attribute types for APITestingDomainsCredentialsBearerTokenModel
+var APITestingDomainsCredentialsBearerTokenModelAttrTypes = map[string]attr.Type{
+	"token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APITestingDomainsCredentialsBearerTokenTokenModel represents token block
 type APITestingDomainsCredentialsBearerTokenTokenModel struct {
 	BlindfoldSecretInfo *APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APITestingDomainsCredentialsBearerTokenTokenModelAttrTypes defines the attribute types for APITestingDomainsCredentialsBearerTokenTokenModel
+var APITestingDomainsCredentialsBearerTokenTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModelAttrTypes},
 }
 
 // APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -135,10 +215,23 @@ type APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel struct
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel
+var APITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel represents clear_secret_info block
 type APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModelAttrTypes defines the attribute types for APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel
+var APITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // APITestingDomainsCredentialsLoginEndpointModel represents login_endpoint block
@@ -149,10 +242,24 @@ type APITestingDomainsCredentialsLoginEndpointModel struct {
 	JSONPayload      *APITestingDomainsCredentialsLoginEndpointJSONPayloadModel `tfsdk:"json_payload"`
 }
 
+// APITestingDomainsCredentialsLoginEndpointModelAttrTypes defines the attribute types for APITestingDomainsCredentialsLoginEndpointModel
+var APITestingDomainsCredentialsLoginEndpointModelAttrTypes = map[string]attr.Type{
+	"method":             types.StringType,
+	"path":               types.StringType,
+	"token_response_key": types.StringType,
+	"json_payload":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // APITestingDomainsCredentialsLoginEndpointJSONPayloadModel represents json_payload block
 type APITestingDomainsCredentialsLoginEndpointJSONPayloadModel struct {
 	BlindfoldSecretInfo *APITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *APITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// APITestingDomainsCredentialsLoginEndpointJSONPayloadModelAttrTypes defines the attribute types for APITestingDomainsCredentialsLoginEndpointJSONPayloadModel
+var APITestingDomainsCredentialsLoginEndpointJSONPayloadModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: APITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: APITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModelAttrTypes},
 }
 
 // APITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -162,26 +269,39 @@ type APITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoMode
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// APITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModelAttrTypes defines the attribute types for APITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel
+var APITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // APITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel represents clear_secret_info block
 type APITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// APITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModelAttrTypes defines the attribute types for APITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel
+var APITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 type APITestingResourceModel struct {
-	Name              types.String             `tfsdk:"name"`
-	Namespace         types.String             `tfsdk:"namespace"`
-	Annotations       types.Map                `tfsdk:"annotations"`
-	Description       types.String             `tfsdk:"description"`
-	Disable           types.Bool               `tfsdk:"disable"`
-	Labels            types.Map                `tfsdk:"labels"`
-	ID                types.String             `tfsdk:"id"`
-	CustomHeaderValue types.String             `tfsdk:"custom_header_value"`
-	Timeouts          timeouts.Value           `tfsdk:"timeouts"`
-	Domains           []APITestingDomainsModel `tfsdk:"domains"`
-	EveryDay          *APITestingEmptyModel    `tfsdk:"every_day"`
-	EveryMonth        *APITestingEmptyModel    `tfsdk:"every_month"`
-	EveryWeek         *APITestingEmptyModel    `tfsdk:"every_week"`
+	Name              types.String          `tfsdk:"name"`
+	Namespace         types.String          `tfsdk:"namespace"`
+	Annotations       types.Map             `tfsdk:"annotations"`
+	Description       types.String          `tfsdk:"description"`
+	Disable           types.Bool            `tfsdk:"disable"`
+	Labels            types.Map             `tfsdk:"labels"`
+	ID                types.String          `tfsdk:"id"`
+	CustomHeaderValue types.String          `tfsdk:"custom_header_value"`
+	Timeouts          timeouts.Value        `tfsdk:"timeouts"`
+	Domains           types.List            `tfsdk:"domains"`
+	EveryDay          *APITestingEmptyModel `tfsdk:"every_day"`
+	EveryMonth        *APITestingEmptyModel `tfsdk:"every_month"`
+	EveryWeek         *APITestingEmptyModel `tfsdk:"every_week"`
 }
 
 func (r *APITestingResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -638,30 +758,35 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Domains) > 0 {
-		var domainsList []map[string]interface{}
-		for _, item := range data.Domains {
-			itemMap := make(map[string]interface{})
-			if !item.AllowDestructiveMethods.IsNull() && !item.AllowDestructiveMethods.IsUnknown() {
-				itemMap["allow_destructive_methods"] = item.AllowDestructiveMethods.ValueBool()
-			}
-			if len(item.Credentials) > 0 {
-				var credentialsNestedList []map[string]interface{}
-				for _, nestedItem := range item.Credentials {
-					nestedItemMap := make(map[string]interface{})
-					if !nestedItem.CredentialName.IsNull() && !nestedItem.CredentialName.IsUnknown() {
-						nestedItemMap["credential_name"] = nestedItem.CredentialName.ValueString()
-					}
-					credentialsNestedList = append(credentialsNestedList, nestedItemMap)
+	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+		var domainsItems []APITestingDomainsModel
+		diags := data.Domains.ElementsAs(ctx, &domainsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(domainsItems) > 0 {
+			var domainsList []map[string]interface{}
+			for _, item := range domainsItems {
+				itemMap := make(map[string]interface{})
+				if !item.AllowDestructiveMethods.IsNull() && !item.AllowDestructiveMethods.IsUnknown() {
+					itemMap["allow_destructive_methods"] = item.AllowDestructiveMethods.ValueBool()
 				}
-				itemMap["credentials"] = credentialsNestedList
+				if len(item.Credentials) > 0 {
+					var credentialsNestedList []map[string]interface{}
+					for _, nestedItem := range item.Credentials {
+						nestedItemMap := make(map[string]interface{})
+						if !nestedItem.CredentialName.IsNull() && !nestedItem.CredentialName.IsUnknown() {
+							nestedItemMap["credential_name"] = nestedItem.CredentialName.ValueString()
+						}
+						credentialsNestedList = append(credentialsNestedList, nestedItemMap)
+					}
+					itemMap["credentials"] = credentialsNestedList
+				}
+				if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
+					itemMap["domain"] = item.Domain.ValueString()
+				}
+				domainsList = append(domainsList, itemMap)
 			}
-			if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
-				itemMap["domain"] = item.Domain.ValueString()
-			}
-			domainsList = append(domainsList, itemMap)
+			createReq.Spec["domains"] = domainsList
 		}
-		createReq.Spec["domains"] = domainsList
 	}
 	if data.EveryDay != nil {
 		every_dayMap := make(map[string]interface{})
@@ -693,6 +818,10 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 	_ = isImport      // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
 		var domainsList []APITestingDomainsModel
+		var existingDomainsItems []APITestingDomainsModel
+		if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+			data.Domains.ElementsAs(ctx, &existingDomainsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -731,7 +860,14 @@ func (r *APITestingResource) Create(ctx context.Context, req resource.CreateRequ
 				})
 			}
 		}
-		data.Domains = domainsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APITestingDomainsModelAttrTypes}, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Domains = types.ListNull(types.ObjectType{AttrTypes: APITestingDomainsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["every_day"].(map[string]interface{}); ok && isImport && data.EveryDay == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -817,11 +953,17 @@ func (r *APITestingResource) Read(ctx context.Context, req resource.ReadRequest,
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -848,6 +990,10 @@ func (r *APITestingResource) Read(ctx context.Context, req resource.ReadRequest,
 	})
 	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
 		var domainsList []APITestingDomainsModel
+		var existingDomainsItems []APITestingDomainsModel
+		if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+			data.Domains.ElementsAs(ctx, &existingDomainsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -886,7 +1032,14 @@ func (r *APITestingResource) Read(ctx context.Context, req resource.ReadRequest,
 				})
 			}
 		}
-		data.Domains = domainsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APITestingDomainsModelAttrTypes}, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Domains = types.ListNull(types.ObjectType{AttrTypes: APITestingDomainsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["every_day"].(map[string]interface{}); ok && isImport && data.EveryDay == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -968,30 +1121,35 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if len(data.Domains) > 0 {
-		var domainsList []map[string]interface{}
-		for _, item := range data.Domains {
-			itemMap := make(map[string]interface{})
-			if !item.AllowDestructiveMethods.IsNull() && !item.AllowDestructiveMethods.IsUnknown() {
-				itemMap["allow_destructive_methods"] = item.AllowDestructiveMethods.ValueBool()
-			}
-			if len(item.Credentials) > 0 {
-				var credentialsNestedList []map[string]interface{}
-				for _, nestedItem := range item.Credentials {
-					nestedItemMap := make(map[string]interface{})
-					if !nestedItem.CredentialName.IsNull() && !nestedItem.CredentialName.IsUnknown() {
-						nestedItemMap["credential_name"] = nestedItem.CredentialName.ValueString()
-					}
-					credentialsNestedList = append(credentialsNestedList, nestedItemMap)
+	if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+		var domainsItems []APITestingDomainsModel
+		diags := data.Domains.ElementsAs(ctx, &domainsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(domainsItems) > 0 {
+			var domainsList []map[string]interface{}
+			for _, item := range domainsItems {
+				itemMap := make(map[string]interface{})
+				if !item.AllowDestructiveMethods.IsNull() && !item.AllowDestructiveMethods.IsUnknown() {
+					itemMap["allow_destructive_methods"] = item.AllowDestructiveMethods.ValueBool()
 				}
-				itemMap["credentials"] = credentialsNestedList
+				if len(item.Credentials) > 0 {
+					var credentialsNestedList []map[string]interface{}
+					for _, nestedItem := range item.Credentials {
+						nestedItemMap := make(map[string]interface{})
+						if !nestedItem.CredentialName.IsNull() && !nestedItem.CredentialName.IsUnknown() {
+							nestedItemMap["credential_name"] = nestedItem.CredentialName.ValueString()
+						}
+						credentialsNestedList = append(credentialsNestedList, nestedItemMap)
+					}
+					itemMap["credentials"] = credentialsNestedList
+				}
+				if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
+					itemMap["domain"] = item.Domain.ValueString()
+				}
+				domainsList = append(domainsList, itemMap)
 			}
-			if !item.Domain.IsNull() && !item.Domain.IsUnknown() {
-				itemMap["domain"] = item.Domain.ValueString()
-			}
-			domainsList = append(domainsList, itemMap)
+			apiResource.Spec["domains"] = domainsList
 		}
-		apiResource.Spec["domains"] = domainsList
 	}
 	if data.EveryDay != nil {
 		every_dayMap := make(map[string]interface{})
@@ -1041,6 +1199,10 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 	_ = isImport          // May be unused if resource has no blocks needing import detection
 	if listData, ok := apiResource.Spec["domains"].([]interface{}); ok && len(listData) > 0 {
 		var domainsList []APITestingDomainsModel
+		var existingDomainsItems []APITestingDomainsModel
+		if !data.Domains.IsNull() && !data.Domains.IsUnknown() {
+			data.Domains.ElementsAs(ctx, &existingDomainsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -1079,7 +1241,14 @@ func (r *APITestingResource) Update(ctx context.Context, req resource.UpdateRequ
 				})
 			}
 		}
-		data.Domains = domainsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: APITestingDomainsModelAttrTypes}, domainsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Domains = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Domains = types.ListNull(types.ObjectType{AttrTypes: APITestingDomainsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["every_day"].(map[string]interface{}); ok && isImport && data.EveryDay == nil {
 		// Import case: populate from API since state is nil and psd is empty

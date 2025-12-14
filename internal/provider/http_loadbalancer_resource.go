@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -55,6 +56,11 @@ type HTTPLoadBalancerActiveServicePoliciesModel struct {
 	Policies []HTTPLoadBalancerActiveServicePoliciesPoliciesModel `tfsdk:"policies"`
 }
 
+// HTTPLoadBalancerActiveServicePoliciesModelAttrTypes defines the attribute types for HTTPLoadBalancerActiveServicePoliciesModel
+var HTTPLoadBalancerActiveServicePoliciesModelAttrTypes = map[string]attr.Type{
+	"policies": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerActiveServicePoliciesPoliciesModelAttrTypes}},
+}
+
 // HTTPLoadBalancerActiveServicePoliciesPoliciesModel represents policies block
 type HTTPLoadBalancerActiveServicePoliciesPoliciesModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -62,9 +68,21 @@ type HTTPLoadBalancerActiveServicePoliciesPoliciesModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerActiveServicePoliciesPoliciesModelAttrTypes defines the attribute types for HTTPLoadBalancerActiveServicePoliciesPoliciesModel
+var HTTPLoadBalancerActiveServicePoliciesPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAdvertiseCustomModel represents advertise_custom block
 type HTTPLoadBalancerAdvertiseCustomModel struct {
 	AdvertiseWhere []HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel `tfsdk:"advertise_where"`
+}
+
+// HTTPLoadBalancerAdvertiseCustomModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomModel
+var HTTPLoadBalancerAdvertiseCustomModelAttrTypes = map[string]attr.Type{
+	"advertise_where": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel represents advertise_where block
@@ -80,9 +98,27 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
 	Vk8sService        *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel        `tfsdk:"vk8s_service"`
 }
 
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes = map[string]attr.Type{
+	"port":                  types.Int64Type,
+	"port_ranges":           types.StringType,
+	"advertise_on_public":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site":                  types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes},
+	"use_default_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network":       types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes},
+	"virtual_site":          types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes},
+	"virtual_site_with_vip": types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes},
+	"vk8s_service":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel represents advertise_on_public block
 type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel struct {
 	PublicIP *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel `tfsdk:"public_ip"`
+}
+
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModelAttrTypes = map[string]attr.Type{
+	"public_ip": types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModelAttrTypes},
 }
 
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel represents public_ip block
@@ -92,6 +128,13 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicPublicIPModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel represents site block
 type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel struct {
 	IP      types.String                                                `tfsdk:"ip"`
@@ -99,11 +142,25 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel struct {
 	Site    *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel `tfsdk:"site"`
 }
 
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes = map[string]attr.Type{
+	"ip":      types.StringType,
+	"network": types.StringType,
+	"site":    types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes},
+}
+
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel represents site block
 type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel represents virtual_network block
@@ -115,6 +172,15 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel struct {
 	VirtualNetwork *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel `tfsdk:"virtual_network"`
 }
 
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"specific_v6_vip": types.StringType,
+	"specific_vip":    types.StringType,
+	"default_v6_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_vip":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network": types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModelAttrTypes},
+}
+
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel represents virtual_network block
 type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -122,10 +188,23 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkMo
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel represents virtual_site block
 type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel struct {
 	Network     types.String                                                              `tfsdk:"network"`
 	VirtualSite *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"network":      types.StringType,
+	"virtual_site": types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes},
 }
 
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel represents virtual_site block
@@ -135,11 +214,25 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel st
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel represents virtual_site_with_vip block
 type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel struct {
 	IP          types.String                                                                     `tfsdk:"ip"`
 	Network     types.String                                                                     `tfsdk:"network"`
 	VirtualSite *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes = map[string]attr.Type{
+	"ip":           types.StringType,
+	"network":      types.StringType,
+	"virtual_site": types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModelAttrTypes},
 }
 
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel represents virtual_site block
@@ -149,10 +242,23 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteM
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel represents vk8s_service block
 type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel struct {
 	Site        *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel        `tfsdk:"site"`
 	VirtualSite *HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes},
 }
 
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel represents site block
@@ -162,6 +268,13 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel represents virtual_site block
 type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -169,9 +282,21 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel st
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModel
+var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAdvertiseOnPublicModel represents advertise_on_public block
 type HTTPLoadBalancerAdvertiseOnPublicModel struct {
 	PublicIP *HTTPLoadBalancerAdvertiseOnPublicPublicIPModel `tfsdk:"public_ip"`
+}
+
+// HTTPLoadBalancerAdvertiseOnPublicModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseOnPublicModel
+var HTTPLoadBalancerAdvertiseOnPublicModelAttrTypes = map[string]attr.Type{
+	"public_ip": types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseOnPublicPublicIPModelAttrTypes},
 }
 
 // HTTPLoadBalancerAdvertiseOnPublicPublicIPModel represents public_ip block
@@ -181,10 +306,23 @@ type HTTPLoadBalancerAdvertiseOnPublicPublicIPModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerAdvertiseOnPublicPublicIPModelAttrTypes defines the attribute types for HTTPLoadBalancerAdvertiseOnPublicPublicIPModel
+var HTTPLoadBalancerAdvertiseOnPublicPublicIPModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAPIProtectionRulesModel represents api_protection_rules block
 type HTTPLoadBalancerAPIProtectionRulesModel struct {
 	APIEndpointRules []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel `tfsdk:"api_endpoint_rules"`
 	APIGroupsRules   []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModel   `tfsdk:"api_groups_rules"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesModel
+var HTTPLoadBalancerAPIProtectionRulesModelAttrTypes = map[string]attr.Type{
+	"api_endpoint_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModelAttrTypes}},
+	"api_groups_rules":   types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel represents api_endpoint_rules block
@@ -199,16 +337,40 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel struct {
 	RequestMatcher    *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModel    `tfsdk:"request_matcher"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModelAttrTypes = map[string]attr.Type{
+	"api_endpoint_path":   types.StringType,
+	"specific_domain":     types.StringType,
+	"action":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_domain":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_endpoint_method": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModelAttrTypes},
+	"client_matcher":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metadata":            types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModelAttrTypes},
+	"request_matcher":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModel represents action block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModel struct {
 	Allow *HTTPLoadBalancerEmptyModel `tfsdk:"allow"`
 	Deny  *HTTPLoadBalancerEmptyModel `tfsdk:"deny"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModelAttrTypes = map[string]attr.Type{
+	"allow": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deny":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModel represents api_endpoint_method block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
 	Methods       types.List `tfsdk:"methods"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"methods":        types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModel represents client_matcher block
@@ -224,14 +386,37 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModel struct
 	TLSFingerprintMatcher *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModelAttrTypes = map[string]attr.Type{
+	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_list":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnListModelAttrTypes},
+	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_selector":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherClientSelectorModelAttrTypes},
+	"ip_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherModelAttrTypes},
+	"ip_prefix_list":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPPrefixListModelAttrTypes},
+	"ip_threat_category_list": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPThreatCategoryListModelAttrTypes},
+	"tls_fingerprint_matcher": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherTLSFingerprintMatcherModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnListModel represents asn_list block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnListModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherModel represents asn_matcher block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherModel struct {
 	AsnSets []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherModelAttrTypes = map[string]attr.Type{
+	"asn_sets": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
@@ -243,15 +428,35 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherAs
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherClientSelectorModel represents client_selector block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherClientSelectorModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherClientSelectorModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherModel represents ip_matcher block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherModel struct {
 	InvertMatcher types.Bool                                                                                `tfsdk:"invert_matcher"`
 	PrefixSets    []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"prefix_sets":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
@@ -263,15 +468,35 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherPre
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPPrefixListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPPrefixListModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPThreatCategoryListModel struct {
 	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPThreatCategoryListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPThreatCategoryListModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPThreatCategoryListModelAttrTypes = map[string]attr.Type{
+	"ip_threat_categories": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
@@ -281,10 +506,23 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherTLSFingerpri
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherTLSFingerprintMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherTLSFingerprintMatcherModelAttrTypes = map[string]attr.Type{
+	"classes":         types.ListType{ElemType: types.StringType},
+	"exact_values":    types.ListType{ElemType: types.StringType},
+	"excluded_values": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModel represents metadata block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModel represents request_matcher block
@@ -293,6 +531,14 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModel struc
 	Headers        []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
 	JWTClaims      []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModelAttrTypes = map[string]attr.Type{
+	"cookie_matchers": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersModelAttrTypes}},
+	"headers":         types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersModelAttrTypes}},
+	"jwt_claims":      types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsModelAttrTypes}},
+	"query_params":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
@@ -304,11 +550,27 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatch
 	Item            *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersItemModel represents item block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersItemModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherCookieMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersModel represents headers block
@@ -320,11 +582,27 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersMode
 	Item            *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersItemModel represents item block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersItemModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsModel represents jwt_claims block
@@ -336,11 +614,27 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsMo
 	Item            *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsItemModel represents item block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsItemModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherJWTClaimsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsModel represents query_params block
@@ -352,11 +646,27 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParams
 	Item            *HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"key":               types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsItemModel represents item block
 type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsItemModel
+var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherQueryParamsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModel represents api_groups_rules block
@@ -371,10 +681,28 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModel struct {
 	RequestMatcher *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModel `tfsdk:"request_matcher"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModelAttrTypes = map[string]attr.Type{
+	"api_group":       types.StringType,
+	"base_path":       types.StringType,
+	"specific_domain": types.StringType,
+	"action":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_matcher":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metadata":        types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModelAttrTypes},
+	"request_matcher": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModel represents action block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModel struct {
 	Allow *HTTPLoadBalancerEmptyModel `tfsdk:"allow"`
 	Deny  *HTTPLoadBalancerEmptyModel `tfsdk:"deny"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModelAttrTypes = map[string]attr.Type{
+	"allow": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deny":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModel represents client_matcher block
@@ -390,14 +718,37 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModel struct {
 	TLSFingerprintMatcher *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModelAttrTypes = map[string]attr.Type{
+	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_list":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnListModelAttrTypes},
+	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_selector":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherClientSelectorModelAttrTypes},
+	"ip_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherModelAttrTypes},
+	"ip_prefix_list":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPPrefixListModelAttrTypes},
+	"ip_threat_category_list": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPThreatCategoryListModelAttrTypes},
+	"tls_fingerprint_matcher": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherTLSFingerprintMatcherModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnListModel represents asn_list block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnListModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherModel represents asn_matcher block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherModel struct {
 	AsnSets []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherModelAttrTypes = map[string]attr.Type{
+	"asn_sets": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
@@ -409,15 +760,35 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherAsnS
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherAsnSetsModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherClientSelectorModel represents client_selector block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherClientSelectorModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherClientSelectorModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherModel represents ip_matcher block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherModel struct {
 	InvertMatcher types.Bool                                                                              `tfsdk:"invert_matcher"`
 	PrefixSets    []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"prefix_sets":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
@@ -429,15 +800,35 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherPrefi
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherPrefixSetsModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPPrefixListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPPrefixListModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPThreatCategoryListModel struct {
 	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPThreatCategoryListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPThreatCategoryListModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPThreatCategoryListModelAttrTypes = map[string]attr.Type{
+	"ip_threat_categories": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
@@ -447,10 +838,23 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherTLSFingerprint
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherTLSFingerprintMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherTLSFingerprintMatcherModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherTLSFingerprintMatcherModelAttrTypes = map[string]attr.Type{
+	"classes":         types.ListType{ElemType: types.StringType},
+	"exact_values":    types.ListType{ElemType: types.StringType},
+	"excluded_values": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModel represents metadata block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModel represents request_matcher block
@@ -459,6 +863,14 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModel struct 
 	Headers        []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
 	JWTClaims      []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModelAttrTypes = map[string]attr.Type{
+	"cookie_matchers": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersModelAttrTypes}},
+	"headers":         types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersModelAttrTypes}},
+	"jwt_claims":      types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsModelAttrTypes}},
+	"query_params":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
@@ -470,11 +882,27 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatcher
 	Item            *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersItemModel represents item block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersItemModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherCookieMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersModel represents headers block
@@ -486,11 +914,27 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersModel 
 	Item            *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersItemModel represents item block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersItemModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsModel represents jwt_claims block
@@ -502,11 +946,27 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsMode
 	Item            *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsItemModel represents item block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsItemModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherJWTClaimsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsModel represents query_params block
@@ -518,11 +978,27 @@ type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsMo
 	Item            *HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"key":               types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsItemModel represents item block
 type HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsItemModel
+var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherQueryParamsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitModel represents api_rate_limit block
@@ -533,6 +1009,16 @@ type HTTPLoadBalancerAPIRateLimitModel struct {
 	IPAllowedList           *HTTPLoadBalancerAPIRateLimitIPAllowedListModel           `tfsdk:"ip_allowed_list"`
 	NoIPAllowedList         *HTTPLoadBalancerEmptyModel                               `tfsdk:"no_ip_allowed_list"`
 	ServerURLRules          []HTTPLoadBalancerAPIRateLimitServerURLRulesModel         `tfsdk:"server_url_rules"`
+}
+
+// HTTPLoadBalancerAPIRateLimitModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitModel
+var HTTPLoadBalancerAPIRateLimitModelAttrTypes = map[string]attr.Type{
+	"api_endpoint_rules":         types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModelAttrTypes}},
+	"bypass_rate_limiting_rules": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_ip_allowed_list":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_allowed_list":            types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitIPAllowedListModelAttrTypes},
+	"no_ip_allowed_list":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"server_url_rules":           types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModel represents api_endpoint_rules block
@@ -547,10 +1033,28 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModel struct {
 	RequestMatcher    *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel    `tfsdk:"request_matcher"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModelAttrTypes = map[string]attr.Type{
+	"api_endpoint_path":   types.StringType,
+	"specific_domain":     types.StringType,
+	"any_domain":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_endpoint_method": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModelAttrTypes},
+	"client_matcher":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inline_rate_limiter": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModelAttrTypes},
+	"ref_rate_limiter":    types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModelAttrTypes},
+	"request_matcher":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel represents api_endpoint_method block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel struct {
 	InvertMatcher types.Bool `tfsdk:"invert_matcher"`
 	Methods       types.List `tfsdk:"methods"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"methods":        types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel represents client_matcher block
@@ -566,14 +1070,37 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel struct {
 	TLSFingerprintMatcher *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModelAttrTypes = map[string]attr.Type{
+	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_list":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModelAttrTypes},
+	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_selector":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModelAttrTypes},
+	"ip_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModelAttrTypes},
+	"ip_prefix_list":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModelAttrTypes},
+	"ip_threat_category_list": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModelAttrTypes},
+	"tls_fingerprint_matcher": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModel represents asn_list block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModel represents asn_matcher block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModel struct {
 	AsnSets []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModelAttrTypes = map[string]attr.Type{
+	"asn_sets": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
@@ -585,15 +1112,35 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsM
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModel represents client_selector block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModel represents ip_matcher block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModel struct {
 	InvertMatcher types.Bool                                                                          `tfsdk:"invert_matcher"`
 	PrefixSets    []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"prefix_sets":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
@@ -605,10 +1152,25 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSet
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
@@ -616,11 +1178,23 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryLi
 	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPThreatCategoryListModelAttrTypes = map[string]attr.Type{
+	"ip_threat_categories": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel struct {
 	Classes        types.List `tfsdk:"classes"`
 	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherTLSFingerprintMatcherModelAttrTypes = map[string]attr.Type{
+	"classes":         types.ListType{ElemType: types.StringType},
+	"exact_values":    types.ListType{ElemType: types.StringType},
+	"excluded_values": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel represents inline_rate_limiter block
@@ -631,11 +1205,26 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel struct {
 	UseHTTPLBUserID *HTTPLoadBalancerEmptyModel                                                  `tfsdk:"use_http_lb_user_id"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModelAttrTypes = map[string]attr.Type{
+	"threshold":           types.Int64Type,
+	"unit":                types.StringType,
+	"ref_user_id":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModelAttrTypes},
+	"use_http_lb_user_id": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel represents ref_user_id block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterRefUserIDModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel represents ref_rate_limiter block
@@ -645,12 +1234,27 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel represents request_matcher block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel struct {
 	CookieMatchers []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
 	JWTClaims      []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModelAttrTypes = map[string]attr.Type{
+	"cookie_matchers": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModelAttrTypes}},
+	"headers":         types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModelAttrTypes}},
+	"jwt_claims":      types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModelAttrTypes}},
+	"query_params":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
@@ -662,11 +1266,27 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersMod
 	Item            *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherCookieMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel represents headers block
@@ -678,11 +1298,27 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel stru
 	Item            *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModel represents jwt_claims block
@@ -694,11 +1330,27 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModel st
 	Item            *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherJWTClaimsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel represents query_params block
@@ -710,6 +1362,15 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel 
 	Item            *HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"key":               types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -717,9 +1378,21 @@ type HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemMo
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModel
+var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherQueryParamsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesModel represents bypass_rate_limiting_rules block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesModel struct {
 	BypassRateLimitingRules []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModel `tfsdk:"bypass_rate_limiting_rules"`
+}
+
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesModelAttrTypes = map[string]attr.Type{
+	"bypass_rate_limiting_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModel represents bypass_rate_limiting_rules block
@@ -734,15 +1407,38 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesM
 	RequestMatcher *HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel `tfsdk:"request_matcher"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesModelAttrTypes = map[string]attr.Type{
+	"base_path":       types.StringType,
+	"specific_domain": types.StringType,
+	"any_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_url":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_endpoint":    types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModelAttrTypes},
+	"api_groups":      types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModelAttrTypes},
+	"client_matcher":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_matcher": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel represents api_endpoint block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel struct {
 	Methods types.List   `tfsdk:"methods"`
 	Path    types.String `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModelAttrTypes = map[string]attr.Type{
+	"methods": types.ListType{ElemType: types.StringType},
+	"path":    types.StringType,
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModel represents api_groups block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModel struct {
 	APIGroups types.List `tfsdk:"api_groups"`
+}
+
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModelAttrTypes = map[string]attr.Type{
+	"api_groups": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModel represents client_matcher block
@@ -758,14 +1454,37 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesC
 	TLSFingerprintMatcher *HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModelAttrTypes = map[string]attr.Type{
+	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_list":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModelAttrTypes},
+	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_selector":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModelAttrTypes},
+	"ip_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModelAttrTypes},
+	"ip_prefix_list":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModelAttrTypes},
+	"ip_threat_category_list": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModelAttrTypes},
+	"tls_fingerprint_matcher": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModel represents asn_list block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModel represents asn_matcher block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModel struct {
 	AsnSets []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModelAttrTypes = map[string]attr.Type{
+	"asn_sets": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
@@ -777,15 +1496,35 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesC
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModel represents client_selector block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModel represents ip_matcher block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModel struct {
 	InvertMatcher types.Bool                                                                                                        `tfsdk:"invert_matcher"`
 	PrefixSets    []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"prefix_sets":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
@@ -797,15 +1536,35 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesC
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModel struct {
 	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
+}
+
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPThreatCategoryListModelAttrTypes = map[string]attr.Type{
+	"ip_threat_categories": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
@@ -815,12 +1574,27 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesC
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherTLSFingerprintMatcherModelAttrTypes = map[string]attr.Type{
+	"classes":         types.ListType{ElemType: types.StringType},
+	"exact_values":    types.ListType{ElemType: types.StringType},
+	"excluded_values": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel represents request_matcher block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel struct {
 	CookieMatchers []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
 	JWTClaims      []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
+}
+
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModelAttrTypes = map[string]attr.Type{
+	"cookie_matchers": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModelAttrTypes}},
+	"headers":         types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModelAttrTypes}},
+	"jwt_claims":      types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModelAttrTypes}},
+	"query_params":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
@@ -832,11 +1606,27 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesR
 	Item            *HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherCookieMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel represents headers block
@@ -848,11 +1638,27 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesR
 	Item            *HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModel represents jwt_claims block
@@ -864,11 +1670,27 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesR
 	Item            *HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherJWTClaimsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel represents query_params block
@@ -880,6 +1702,15 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesR
 	Item            *HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"key":               types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -887,9 +1718,21 @@ type HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesR
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModel
+var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherQueryParamsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerAPIRateLimitCustomIPAllowedListModel represents custom_ip_allowed_list block
 type HTTPLoadBalancerAPIRateLimitCustomIPAllowedListModel struct {
 	RateLimiterAllowedPrefixes []HTTPLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel `tfsdk:"rate_limiter_allowed_prefixes"`
+}
+
+// HTTPLoadBalancerAPIRateLimitCustomIPAllowedListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitCustomIPAllowedListModel
+var HTTPLoadBalancerAPIRateLimitCustomIPAllowedListModelAttrTypes = map[string]attr.Type{
+	"rate_limiter_allowed_prefixes": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel represents rate_limiter_allowed_prefixes block
@@ -899,9 +1742,21 @@ type HTTPLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesMo
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel
+var HTTPLoadBalancerAPIRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAPIRateLimitIPAllowedListModel represents ip_allowed_list block
 type HTTPLoadBalancerAPIRateLimitIPAllowedListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// HTTPLoadBalancerAPIRateLimitIPAllowedListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitIPAllowedListModel
+var HTTPLoadBalancerAPIRateLimitIPAllowedListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesModel represents server_url_rules block
@@ -914,6 +1769,18 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesModel struct {
 	InlineRateLimiter *HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel `tfsdk:"inline_rate_limiter"`
 	RefRateLimiter    *HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel    `tfsdk:"ref_rate_limiter"`
 	RequestMatcher    *HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel    `tfsdk:"request_matcher"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesModelAttrTypes = map[string]attr.Type{
+	"api_group":           types.StringType,
+	"base_path":           types.StringType,
+	"specific_domain":     types.StringType,
+	"any_domain":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_matcher":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inline_rate_limiter": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModelAttrTypes},
+	"ref_rate_limiter":    types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModelAttrTypes},
+	"request_matcher":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel represents client_matcher block
@@ -929,14 +1796,37 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel struct {
 	TLSFingerprintMatcher *HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModelAttrTypes = map[string]attr.Type{
+	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_list":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModelAttrTypes},
+	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_selector":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModelAttrTypes},
+	"ip_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModelAttrTypes},
+	"ip_prefix_list":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModelAttrTypes},
+	"ip_threat_category_list": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModelAttrTypes},
+	"tls_fingerprint_matcher": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModel represents asn_list block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModel represents asn_matcher block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModel struct {
 	AsnSets []HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModelAttrTypes = map[string]attr.Type{
+	"asn_sets": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModel represents asn_sets block
@@ -948,15 +1838,35 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsMod
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherAsnSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModel represents client_selector block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModel represents ip_matcher block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModel struct {
 	InvertMatcher types.Bool                                                                        `tfsdk:"invert_matcher"`
 	PrefixSets    []HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"prefix_sets":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModel represents prefix_sets block
@@ -968,10 +1878,25 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsM
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherPrefixSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModel represents ip_prefix_list block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModel represents ip_threat_category_list block
@@ -979,11 +1904,23 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryList
 	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPThreatCategoryListModelAttrTypes = map[string]attr.Type{
+	"ip_threat_categories": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModel struct {
 	Classes        types.List `tfsdk:"classes"`
 	ExactValues    types.List `tfsdk:"exact_values"`
 	ExcludedValues types.List `tfsdk:"excluded_values"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherTLSFingerprintMatcherModelAttrTypes = map[string]attr.Type{
+	"classes":         types.ListType{ElemType: types.StringType},
+	"exact_values":    types.ListType{ElemType: types.StringType},
+	"excluded_values": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel represents inline_rate_limiter block
@@ -994,11 +1931,26 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel struct {
 	UseHTTPLBUserID *HTTPLoadBalancerEmptyModel                                                `tfsdk:"use_http_lb_user_id"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModelAttrTypes = map[string]attr.Type{
+	"threshold":           types.Int64Type,
+	"unit":                types.StringType,
+	"ref_user_id":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModelAttrTypes},
+	"use_http_lb_user_id": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel represents ref_user_id block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterRefUserIDModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel represents ref_rate_limiter block
@@ -1008,12 +1960,27 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel represents request_matcher block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel struct {
 	CookieMatchers []HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel `tfsdk:"cookie_matchers"`
 	Headers        []HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel        `tfsdk:"headers"`
 	JWTClaims      []HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModel      `tfsdk:"jwt_claims"`
 	QueryParams    []HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel    `tfsdk:"query_params"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModelAttrTypes = map[string]attr.Type{
+	"cookie_matchers": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModelAttrTypes}},
+	"headers":         types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModelAttrTypes}},
+	"jwt_claims":      types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModelAttrTypes}},
+	"query_params":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel represents cookie_matchers block
@@ -1025,11 +1992,27 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel
 	Item            *HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherCookieMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel represents headers block
@@ -1041,11 +2024,27 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel struct
 	Item            *HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModel represents jwt_claims block
@@ -1057,11 +2056,27 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModel stru
 	Item            *HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherJWTClaimsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel represents query_params block
@@ -1073,11 +2088,27 @@ type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel st
 	Item            *HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"key":               types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel represents item block
 type HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModel
+var HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherQueryParamsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerAPISpecificationModel represents api_specification block
@@ -1088,11 +2119,26 @@ type HTTPLoadBalancerAPISpecificationModel struct {
 	ValidationDisabled         *HTTPLoadBalancerEmptyModel                                      `tfsdk:"validation_disabled"`
 }
 
+// HTTPLoadBalancerAPISpecificationModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationModel
+var HTTPLoadBalancerAPISpecificationModelAttrTypes = map[string]attr.Type{
+	"api_definition":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationAPIDefinitionModelAttrTypes},
+	"validation_all_spec_endpoints": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validation_custom_list":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validation_disabled":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPISpecificationAPIDefinitionModel represents api_definition block
 type HTTPLoadBalancerAPISpecificationAPIDefinitionModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerAPISpecificationAPIDefinitionModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationAPIDefinitionModel
+var HTTPLoadBalancerAPISpecificationAPIDefinitionModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsModel represents validation_all_spec_endpoints block
@@ -1102,15 +2148,33 @@ type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsModel struct {
 	ValidationMode  *HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModel  `tfsdk:"validation_mode"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsModelAttrTypes = map[string]attr.Type{
+	"fall_through_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"settings":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validation_mode":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel represents fall_through_mode block
 type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel struct {
 	FallThroughModeAllow  *HTTPLoadBalancerEmptyModel                                                                          `tfsdk:"fall_through_mode_allow"`
 	FallThroughModeCustom *HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModel `tfsdk:"fall_through_mode_custom"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModelAttrTypes = map[string]attr.Type{
+	"fall_through_mode_allow":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fall_through_mode_custom": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModel represents fall_through_mode_custom block
 type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModel struct {
 	OpenAPIValidationRules []HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel `tfsdk:"open_api_validation_rules"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModelAttrTypes = map[string]attr.Type{
+	"open_api_validation_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel represents open_api_validation_rules block
@@ -1124,16 +2188,39 @@ type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFa
 	Metadata     *HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel    `tfsdk:"metadata"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModelAttrTypes = map[string]attr.Type{
+	"api_group":     types.StringType,
+	"base_path":     types.StringType,
+	"action_block":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action_report": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action_skip":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_endpoint":  types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModelAttrTypes},
+	"metadata":      types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
 type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel struct {
 	Methods types.List   `tfsdk:"methods"`
 	Path    types.String `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModelAttrTypes = map[string]attr.Type{
+	"methods": types.ListType{ElemType: types.StringType},
+	"path":    types.StringType,
+}
+
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel represents metadata block
 type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel represents settings block
@@ -1144,15 +2231,34 @@ type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel str
 	PropertyValidationSettingsDefault *HTTPLoadBalancerEmptyModel                                                                              `tfsdk:"property_validation_settings_default"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModelAttrTypes = map[string]attr.Type{
+	"oversized_body_fail_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"oversized_body_skip_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"property_validation_settings_custom":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"property_validation_settings_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel represents property_validation_settings_custom block
 type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel struct {
 	Queryparameters *HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel `tfsdk:"query_parameters"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModelAttrTypes = map[string]attr.Type{
+	"query_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel represents query_parameters block
 type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel struct {
 	AllowAdditionalParameters    *HTTPLoadBalancerEmptyModel `tfsdk:"allow_additional_parameters"`
 	DisallowAdditionalParameters *HTTPLoadBalancerEmptyModel `tfsdk:"disallow_additional_parameters"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModelAttrTypes = map[string]attr.Type{
+	"allow_additional_parameters":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disallow_additional_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModel represents validation_mode block
@@ -1163,11 +2269,26 @@ type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeMod
 	ValidationModeActive         *HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModel         `tfsdk:"validation_mode_active"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModelAttrTypes = map[string]attr.Type{
+	"response_validation_mode_active": types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModelAttrTypes},
+	"skip_response_validation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"skip_validation":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validation_mode_active":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModel represents response_validation_mode_active block
 type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModel struct {
 	ResponseValidationProperties types.List                  `tfsdk:"response_validation_properties"`
 	EnforcementBlock             *HTTPLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
 	EnforcementReport            *HTTPLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeResponseValidationModeActiveModelAttrTypes = map[string]attr.Type{
+	"response_validation_properties": types.ListType{ElemType: types.StringType},
+	"enforcement_block":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enforcement_report":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModel represents validation_mode_active block
@@ -1177,11 +2298,25 @@ type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeVal
 	EnforcementReport           *HTTPLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModel
+var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeValidationModeActiveModelAttrTypes = map[string]attr.Type{
+	"request_validation_properties": types.ListType{ElemType: types.StringType},
+	"enforcement_block":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enforcement_report":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationCustomListModel represents validation_custom_list block
 type HTTPLoadBalancerAPISpecificationValidationCustomListModel struct {
 	FallThroughMode        *HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel         `tfsdk:"fall_through_mode"`
 	OpenAPIValidationRules []HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModel `tfsdk:"open_api_validation_rules"`
 	Settings               *HTTPLoadBalancerAPISpecificationValidationCustomListSettingsModel                `tfsdk:"settings"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationCustomListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListModelAttrTypes = map[string]attr.Type{
+	"fall_through_mode":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"open_api_validation_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModelAttrTypes}},
+	"settings":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel represents fall_through_mode block
@@ -1190,9 +2325,20 @@ type HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel st
 	FallThroughModeCustom *HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModel `tfsdk:"fall_through_mode_custom"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModelAttrTypes = map[string]attr.Type{
+	"fall_through_mode_allow":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fall_through_mode_custom": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModel represents fall_through_mode_custom block
 type HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModel struct {
 	OpenAPIValidationRules []HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel `tfsdk:"open_api_validation_rules"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModelAttrTypes = map[string]attr.Type{
+	"open_api_validation_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel represents open_api_validation_rules block
@@ -1206,16 +2352,39 @@ type HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThro
 	Metadata     *HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel    `tfsdk:"metadata"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesModelAttrTypes = map[string]attr.Type{
+	"api_group":     types.StringType,
+	"base_path":     types.StringType,
+	"action_block":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action_report": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action_skip":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_endpoint":  types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModelAttrTypes},
+	"metadata":      types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
 type HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel struct {
 	Methods types.List   `tfsdk:"methods"`
 	Path    types.String `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesAPIEndpointModelAttrTypes = map[string]attr.Type{
+	"methods": types.ListType{ElemType: types.StringType},
+	"path":    types.StringType,
+}
+
 // HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel represents metadata block
 type HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomOpenAPIValidationRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModel represents open_api_validation_rules block
@@ -1229,16 +2398,39 @@ type HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesM
 	ValidationMode *HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModel `tfsdk:"validation_mode"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModelAttrTypes = map[string]attr.Type{
+	"api_group":       types.StringType,
+	"base_path":       types.StringType,
+	"specific_domain": types.StringType,
+	"any_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_endpoint":    types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModelAttrTypes},
+	"metadata":        types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModelAttrTypes},
+	"validation_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
 type HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel struct {
 	Methods types.List   `tfsdk:"methods"`
 	Path    types.String `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModelAttrTypes = map[string]attr.Type{
+	"methods": types.ListType{ElemType: types.StringType},
+	"path":    types.StringType,
+}
+
 // HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel represents metadata block
 type HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModel represents validation_mode block
@@ -1249,6 +2441,14 @@ type HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesV
 	ValidationModeActive         *HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel         `tfsdk:"validation_mode_active"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModelAttrTypes = map[string]attr.Type{
+	"response_validation_mode_active": types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModelAttrTypes},
+	"skip_response_validation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"skip_validation":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validation_mode_active":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModelAttrTypes},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModel represents response_validation_mode_active block
 type HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModel struct {
 	ResponseValidationProperties types.List                  `tfsdk:"response_validation_properties"`
@@ -1256,11 +2456,25 @@ type HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesV
 	EnforcementReport            *HTTPLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeResponseValidationModeActiveModelAttrTypes = map[string]attr.Type{
+	"response_validation_properties": types.ListType{ElemType: types.StringType},
+	"enforcement_block":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enforcement_report":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel represents validation_mode_active block
 type HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel struct {
 	RequestValidationProperties types.List                  `tfsdk:"request_validation_properties"`
 	EnforcementBlock            *HTTPLoadBalancerEmptyModel `tfsdk:"enforcement_block"`
 	EnforcementReport           *HTTPLoadBalancerEmptyModel `tfsdk:"enforcement_report"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeValidationModeActiveModelAttrTypes = map[string]attr.Type{
+	"request_validation_properties": types.ListType{ElemType: types.StringType},
+	"enforcement_block":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enforcement_report":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListSettingsModel represents settings block
@@ -1271,15 +2485,34 @@ type HTTPLoadBalancerAPISpecificationValidationCustomListSettingsModel struct {
 	PropertyValidationSettingsDefault *HTTPLoadBalancerEmptyModel                                                                        `tfsdk:"property_validation_settings_default"`
 }
 
+// HTTPLoadBalancerAPISpecificationValidationCustomListSettingsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListSettingsModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListSettingsModelAttrTypes = map[string]attr.Type{
+	"oversized_body_fail_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"oversized_body_skip_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"property_validation_settings_custom":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"property_validation_settings_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel represents property_validation_settings_custom block
 type HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel struct {
 	Queryparameters *HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel `tfsdk:"query_parameters"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModelAttrTypes = map[string]attr.Type{
+	"query_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel represents query_parameters block
 type HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel struct {
 	AllowAdditionalParameters    *HTTPLoadBalancerEmptyModel `tfsdk:"allow_additional_parameters"`
 	DisallowAdditionalParameters *HTTPLoadBalancerEmptyModel `tfsdk:"disallow_additional_parameters"`
+}
+
+// HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel
+var HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModelAttrTypes = map[string]attr.Type{
+	"allow_additional_parameters":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disallow_additional_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerAPITestingModel represents api_testing block
@@ -1291,11 +2524,27 @@ type HTTPLoadBalancerAPITestingModel struct {
 	EveryWeek         *HTTPLoadBalancerEmptyModel              `tfsdk:"every_week"`
 }
 
+// HTTPLoadBalancerAPITestingModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingModel
+var HTTPLoadBalancerAPITestingModelAttrTypes = map[string]attr.Type{
+	"custom_header_value": types.StringType,
+	"domains":             types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsModelAttrTypes}},
+	"every_day":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"every_month":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"every_week":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPITestingDomainsModel represents domains block
 type HTTPLoadBalancerAPITestingDomainsModel struct {
 	AllowDestructiveMethods types.Bool                                          `tfsdk:"allow_destructive_methods"`
 	Domain                  types.String                                        `tfsdk:"domain"`
 	Credentials             []HTTPLoadBalancerAPITestingDomainsCredentialsModel `tfsdk:"credentials"`
+}
+
+// HTTPLoadBalancerAPITestingDomainsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsModel
+var HTTPLoadBalancerAPITestingDomainsModelAttrTypes = map[string]attr.Type{
+	"allow_destructive_methods": types.BoolType,
+	"domain":                    types.StringType,
+	"credentials":               types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsModel represents credentials block
@@ -1309,16 +2558,39 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsModel struct {
 	Standard       *HTTPLoadBalancerEmptyModel                                     `tfsdk:"standard"`
 }
 
+// HTTPLoadBalancerAPITestingDomainsCredentialsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsModelAttrTypes = map[string]attr.Type{
+	"credential_name": types.StringType,
+	"admin":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_key":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModelAttrTypes},
+	"basic_auth":      types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModelAttrTypes},
+	"bearer_token":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"login_endpoint":  types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointModelAttrTypes},
+	"standard":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModel represents api_key block
 type HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModel struct {
 	Key   types.String                                                  `tfsdk:"key"`
 	Value *HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueModel `tfsdk:"value"`
 }
 
+// HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModelAttrTypes = map[string]attr.Type{
+	"key":   types.StringType,
+	"value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueModel represents value block
 type HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -1328,10 +2600,23 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoM
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueClearSecretInfoModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModel represents basic_auth block
@@ -1340,10 +2625,22 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModel struct {
 	Password *HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordModel `tfsdk:"password"`
 }
 
+// HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModelAttrTypes = map[string]attr.Type{
+	"user":     types.StringType,
+	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordModel represents password block
 type HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -1353,10 +2650,23 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecre
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenModel represents bearer_token block
@@ -1364,10 +2674,21 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenModel struct {
 	Token *HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenModel `tfsdk:"token"`
 }
 
+// HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenModelAttrTypes = map[string]attr.Type{
+	"token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenModel represents token block
 type HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -1377,10 +2698,23 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenBlindfoldSecret
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointModel represents login_endpoint block
@@ -1391,10 +2725,24 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointModel struct {
 	JSONPayload      *HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModel `tfsdk:"json_payload"`
 }
 
+// HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointModelAttrTypes = map[string]attr.Type{
+	"method":             types.StringType,
+	"path":               types.StringType,
+	"token_response_key": types.StringType,
+	"json_payload":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModel represents json_payload block
 type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -1404,10 +2752,23 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModel
+var HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerAppFirewallModel represents app_firewall block
@@ -1415,6 +2776,13 @@ type HTTPLoadBalancerAppFirewallModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerAppFirewallModelAttrTypes defines the attribute types for HTTPLoadBalancerAppFirewallModel
+var HTTPLoadBalancerAppFirewallModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerBlockedClientsModel represents blocked_clients block
@@ -1432,9 +2800,29 @@ type HTTPLoadBalancerBlockedClientsModel struct {
 	WAFSkipProcessing   *HTTPLoadBalancerEmptyModel                    `tfsdk:"waf_skip_processing"`
 }
 
+// HTTPLoadBalancerBlockedClientsModelAttrTypes defines the attribute types for HTTPLoadBalancerBlockedClientsModel
+var HTTPLoadBalancerBlockedClientsModelAttrTypes = map[string]attr.Type{
+	"actions":              types.ListType{ElemType: types.StringType},
+	"as_number":            types.Int64Type,
+	"expiration_timestamp": types.StringType,
+	"ip_prefix":            types.StringType,
+	"ipv6_prefix":          types.StringType,
+	"user_identifier":      types.StringType,
+	"bot_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_header":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metadata":             types.ObjectType{AttrTypes: HTTPLoadBalancerBlockedClientsMetadataModelAttrTypes},
+	"skip_processing":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"waf_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerBlockedClientsHTTPHeaderModel represents http_header block
 type HTTPLoadBalancerBlockedClientsHTTPHeaderModel struct {
 	Headers []HTTPLoadBalancerBlockedClientsHTTPHeaderHeadersModel `tfsdk:"headers"`
+}
+
+// HTTPLoadBalancerBlockedClientsHTTPHeaderModelAttrTypes defines the attribute types for HTTPLoadBalancerBlockedClientsHTTPHeaderModel
+var HTTPLoadBalancerBlockedClientsHTTPHeaderModelAttrTypes = map[string]attr.Type{
+	"headers": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBlockedClientsHTTPHeaderHeadersModelAttrTypes}},
 }
 
 // HTTPLoadBalancerBlockedClientsHTTPHeaderHeadersModel represents headers block
@@ -1446,10 +2834,25 @@ type HTTPLoadBalancerBlockedClientsHTTPHeaderHeadersModel struct {
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerBlockedClientsHTTPHeaderHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerBlockedClientsHTTPHeaderHeadersModel
+var HTTPLoadBalancerBlockedClientsHTTPHeaderHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // HTTPLoadBalancerBlockedClientsMetadataModel represents metadata block
 type HTTPLoadBalancerBlockedClientsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerBlockedClientsMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerBlockedClientsMetadataModel
+var HTTPLoadBalancerBlockedClientsMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerBotDefenseModel represents bot_defense block
@@ -1459,6 +2862,15 @@ type HTTPLoadBalancerBotDefenseModel struct {
 	DisableCORSSupport *HTTPLoadBalancerEmptyModel            `tfsdk:"disable_cors_support"`
 	EnableCORSSupport  *HTTPLoadBalancerEmptyModel            `tfsdk:"enable_cors_support"`
 	Policy             *HTTPLoadBalancerBotDefensePolicyModel `tfsdk:"policy"`
+}
+
+// HTTPLoadBalancerBotDefenseModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseModel
+var HTTPLoadBalancerBotDefenseModelAttrTypes = map[string]attr.Type{
+	"regional_endpoint":    types.StringType,
+	"timeout":              types.Int64Type,
+	"disable_cors_support": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_cors_support":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policy":               types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyModelAttrTypes},
 }
 
 // HTTPLoadBalancerBotDefensePolicyModel represents policy block
@@ -1474,15 +2886,39 @@ type HTTPLoadBalancerBotDefensePolicyModel struct {
 	ProtectedAppEndpoints  []HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsModel `tfsdk:"protected_app_endpoints"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyModel
+var HTTPLoadBalancerBotDefensePolicyModelAttrTypes = map[string]attr.Type{
+	"javascript_mode":            types.StringType,
+	"js_download_path":           types.StringType,
+	"disable_js_insert":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_mobile_sdk":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_insert_all_pages":        types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesModelAttrTypes},
+	"js_insert_all_pages_except": types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModelAttrTypes},
+	"js_insertion_rules":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mobile_sdk_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"protected_app_endpoints":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsModelAttrTypes}},
+}
+
 // HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesModel represents js_insert_all_pages block
 type HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesModel struct {
 	JavascriptLocation types.String `tfsdk:"javascript_location"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesModelAttrTypes = map[string]attr.Type{
+	"javascript_location": types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel represents js_insert_all_pages_except block
 type HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel struct {
 	JavascriptLocation types.String                                                             `tfsdk:"javascript_location"`
 	ExcludeList        []HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel `tfsdk:"exclude_list"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModelAttrTypes = map[string]attr.Type{
+	"javascript_location": types.StringType,
+	"exclude_list":        types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel represents exclude_list block
@@ -1493,6 +2929,14 @@ type HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel stru
 	Path      *HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel     `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModelAttrTypes = map[string]attr.Type{
+	"any_domain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":     types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModelAttrTypes},
+	"metadata":   types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModelAttrTypes},
+	"path":       types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel represents domain block
 type HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
@@ -1500,10 +2944,23 @@ type HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainMode
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
+}
+
 // HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel represents metadata block
 type HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel represents path block
@@ -1513,10 +2970,23 @@ type HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel 
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // HTTPLoadBalancerBotDefensePolicyJsInsertionRulesModel represents js_insertion_rules block
 type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesModel struct {
 	ExcludeList []HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModel `tfsdk:"exclude_list"`
 	Rules       []HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel       `tfsdk:"rules"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyJsInsertionRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertionRulesModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertionRulesModelAttrTypes = map[string]attr.Type{
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"rules":        types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModel represents exclude_list block
@@ -1527,11 +2997,26 @@ type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModel struct {
 	Path      *HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel     `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModelAttrTypes = map[string]attr.Type{
+	"any_domain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":     types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModelAttrTypes},
+	"metadata":   types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModelAttrTypes},
+	"path":       types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel represents domain block
 type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
 	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel represents metadata block
@@ -1540,11 +3025,24 @@ type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel st
 	Name            types.String `tfsdk:"name"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel represents path block
 type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel represents rules block
@@ -1556,6 +3054,15 @@ type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel struct {
 	Path               *HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel     `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesModelAttrTypes = map[string]attr.Type{
+	"javascript_location": types.StringType,
+	"any_domain":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":              types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModelAttrTypes},
+	"metadata":            types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModelAttrTypes},
+	"path":                types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel represents domain block
 type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
@@ -1563,10 +3070,23 @@ type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel struct {
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
+}
+
 // HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel represents metadata block
 type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel represents path block
@@ -1576,14 +3096,31 @@ type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel struct {
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModel
+var HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // HTTPLoadBalancerBotDefensePolicyMobileSdkConfigModel represents mobile_sdk_config block
 type HTTPLoadBalancerBotDefensePolicyMobileSdkConfigModel struct {
 	MobileIdentifier *HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModel `tfsdk:"mobile_identifier"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyMobileSdkConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyMobileSdkConfigModel
+var HTTPLoadBalancerBotDefensePolicyMobileSdkConfigModelAttrTypes = map[string]attr.Type{
+	"mobile_identifier": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModel represents mobile_identifier block
 type HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModel struct {
 	Headers []HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModel `tfsdk:"headers"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModel
+var HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModelAttrTypes = map[string]attr.Type{
+	"headers": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModelAttrTypes}},
 }
 
 // HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModel represents headers block
@@ -1594,11 +3131,26 @@ type HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModel
 	Item            *HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModel
+var HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersModelAttrTypes = map[string]attr.Type{
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel represents item block
 type HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModel
+var HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsModel represents protected_app_endpoints block
@@ -1621,11 +3173,38 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsModel struct {
 	WebMobile          *HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModel    `tfsdk:"web_mobile"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsModelAttrTypes = map[string]attr.Type{
+	"http_methods":         types.ListType{ElemType: types.StringType},
+	"protocol":             types.StringType,
+	"allow_good_bots":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_domain":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":               types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModelAttrTypes},
+	"flow_label":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"headers":              types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModelAttrTypes}},
+	"metadata":             types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModelAttrTypes},
+	"mitigate_good_bots":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mitigation":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mobile":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"path":                 types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModelAttrTypes},
+	"query_params":         types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModelAttrTypes}},
+	"undefined_flow_label": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"web":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"web_mobile":           types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModel represents domain block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
 	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel represents flow_label block
@@ -1639,10 +3218,27 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel struct 
 	ShoppingGiftCards *HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModel `tfsdk:"shopping_gift_cards"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModelAttrTypes = map[string]attr.Type{
+	"account_management":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"authentication":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"financial_services":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"flight":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"profile_management":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"search":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shopping_gift_cards": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel represents account_management block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel struct {
 	Create        *HTTPLoadBalancerEmptyModel `tfsdk:"create"`
 	PasswordReset *HTTPLoadBalancerEmptyModel `tfsdk:"password_reset"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModelAttrTypes = map[string]attr.Type{
+	"create":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password_reset": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel represents authentication block
@@ -1654,16 +3250,37 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticatio
 	TokenRefresh *HTTPLoadBalancerEmptyModel                                                             `tfsdk:"token_refresh"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModelAttrTypes = map[string]attr.Type{
+	"login":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"login_mfa":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"login_partner": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"logout":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"token_refresh": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel represents login block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel struct {
 	DisableTransactionResult *HTTPLoadBalancerEmptyModel                                                                              `tfsdk:"disable_transaction_result"`
 	TransactionResult        *HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel `tfsdk:"transaction_result"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModelAttrTypes = map[string]attr.Type{
+	"disable_transaction_result": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"transaction_result":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel represents transaction_result block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel struct {
 	FailureConditions []HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModel `tfsdk:"failure_conditions"`
 	SuccessConditions []HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModel `tfsdk:"success_conditions"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModelAttrTypes = map[string]attr.Type{
+	"failure_conditions": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModelAttrTypes}},
+	"success_conditions": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModel represents failure_conditions block
@@ -1673,11 +3290,25 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticatio
 	Status      types.String `tfsdk:"status"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultFailureConditionsModelAttrTypes = map[string]attr.Type{
+	"name":         types.StringType,
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"status":       types.StringType,
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModel represents success_conditions block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModel struct {
 	Name        types.String `tfsdk:"name"`
 	RegexValues types.List   `tfsdk:"regex_values"`
 	Status      types.String `tfsdk:"status"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultSuccessConditionsModelAttrTypes = map[string]attr.Type{
+	"name":         types.StringType,
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"status":       types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModel represents financial_services block
@@ -1686,9 +3317,20 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServ
 	MoneyTransfer *HTTPLoadBalancerEmptyModel `tfsdk:"money_transfer"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModelAttrTypes = map[string]attr.Type{
+	"apply":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"money_transfer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModel represents flight block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModel struct {
 	Checkin *HTTPLoadBalancerEmptyModel `tfsdk:"checkin"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModelAttrTypes = map[string]attr.Type{
+	"checkin": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModel represents profile_management block
@@ -1698,12 +3340,27 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManage
 	View   *HTTPLoadBalancerEmptyModel `tfsdk:"view"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModelAttrTypes = map[string]attr.Type{
+	"create": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"update": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"view":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModel represents search block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModel struct {
 	FlightSearch      *HTTPLoadBalancerEmptyModel `tfsdk:"flight_search"`
 	ProductSearch     *HTTPLoadBalancerEmptyModel `tfsdk:"product_search"`
 	ReservationSearch *HTTPLoadBalancerEmptyModel `tfsdk:"reservation_search"`
 	RoomSearch        *HTTPLoadBalancerEmptyModel `tfsdk:"room_search"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModelAttrTypes = map[string]attr.Type{
+	"flight_search":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"product_search":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"reservation_search": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"room_search":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModel represents shopping_gift_cards block
@@ -1722,6 +3379,22 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftC
 	ShopUpdateQuantity               *HTTPLoadBalancerEmptyModel `tfsdk:"shop_update_quantity"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModelAttrTypes = map[string]attr.Type{
+	"gift_card_make_purchase_with_gift_card": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"gift_card_validation":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shop_add_to_cart":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shop_checkout":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shop_choose_seat":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shop_enter_drawing_submission":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shop_make_payment":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shop_order":                             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shop_price_inquiry":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shop_promo_code_validation":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shop_purchase_gift_card":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"shop_update_quantity":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel represents headers block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel struct {
 	InvertMatcher   types.Bool                                                             `tfsdk:"invert_matcher"`
@@ -1731,6 +3404,15 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel struct {
 	Item            *HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel represents item block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -1738,10 +3420,23 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel struc
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel represents metadata block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel represents mitigation block
@@ -1751,10 +3446,23 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel struct
 	Redirect *HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModel `tfsdk:"redirect"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModelAttrTypes = map[string]attr.Type{
+	"block":    types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModelAttrTypes},
+	"flag":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"redirect": types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModel represents block block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModel struct {
 	Body   types.String `tfsdk:"body"`
 	Status types.String `tfsdk:"status"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModelAttrTypes = map[string]attr.Type{
+	"body":   types.StringType,
+	"status": types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModel represents flag block
@@ -1763,10 +3471,22 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModel st
 	NoHeaders     *HTTPLoadBalancerEmptyModel                                                            `tfsdk:"no_headers"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModelAttrTypes = map[string]attr.Type{
+	"append_headers": types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModelAttrTypes},
+	"no_headers":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModel represents append_headers block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModel struct {
 	AutoTypeHeaderName  types.String `tfsdk:"auto_type_header_name"`
 	InferenceHeaderName types.String `tfsdk:"inference_header_name"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagAppendHeadersModelAttrTypes = map[string]attr.Type{
+	"auto_type_header_name": types.StringType,
+	"inference_header_name": types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModel represents redirect block
@@ -1774,11 +3494,23 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectMode
 	URI types.String `tfsdk:"uri"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModelAttrTypes = map[string]attr.Type{
+	"uri": types.StringType,
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModel represents path block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModel represents query_params block
@@ -1790,6 +3522,15 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModel struc
 	Item            *HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"key":               types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel represents item block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -1797,9 +3538,21 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel s
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModel represents web_mobile block
 type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModel struct {
 	MobileIdentifier types.String `tfsdk:"mobile_identifier"`
+}
+
+// HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModel
+var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsWebMobileModelAttrTypes = map[string]attr.Type{
+	"mobile_identifier": types.StringType,
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedModel represents bot_defense_advanced block
@@ -1814,15 +3567,38 @@ type HTTPLoadBalancerBotDefenseAdvancedModel struct {
 	Web                    *HTTPLoadBalancerBotDefenseAdvancedWebModel                    `tfsdk:"web"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedModel
+var HTTPLoadBalancerBotDefenseAdvancedModelAttrTypes = map[string]attr.Type{
+	"disable_js_insert":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_mobile_sdk":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_insert_all_pages":        types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesModelAttrTypes},
+	"js_insert_all_pages_except": types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModelAttrTypes},
+	"js_insertion_rules":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mobile":                     types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedMobileModelAttrTypes},
+	"mobile_sdk_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"web":                        types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedWebModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesModel represents js_insert_all_pages block
 type HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesModel struct {
 	JavascriptLocation types.String `tfsdk:"javascript_location"`
+}
+
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesModelAttrTypes = map[string]attr.Type{
+	"javascript_location": types.StringType,
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModel represents js_insert_all_pages_except block
 type HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModel struct {
 	JavascriptLocation types.String                                                               `tfsdk:"javascript_location"`
 	ExcludeList        []HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListModel `tfsdk:"exclude_list"`
+}
+
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModelAttrTypes = map[string]attr.Type{
+	"javascript_location": types.StringType,
+	"exclude_list":        types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListModel represents exclude_list block
@@ -1833,6 +3609,14 @@ type HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListModel st
 	Path      *HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListPathModel     `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListModelAttrTypes = map[string]attr.Type{
+	"any_domain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":     types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListDomainModelAttrTypes},
+	"metadata":   types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListMetadataModelAttrTypes},
+	"path":       types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListPathModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListDomainModel represents domain block
 type HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListDomainModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
@@ -1840,10 +3624,23 @@ type HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListDomainMo
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListDomainModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListMetadataModel represents metadata block
 type HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListMetadataModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListPathModel represents path block
@@ -1853,10 +3650,23 @@ type HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListPathMode
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListPathModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListPathModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesModel represents js_insertion_rules block
 type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesModel struct {
 	ExcludeList []HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListModel `tfsdk:"exclude_list"`
 	Rules       []HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesModel       `tfsdk:"rules"`
+}
+
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesModelAttrTypes = map[string]attr.Type{
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"rules":        types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListModel represents exclude_list block
@@ -1867,11 +3677,26 @@ type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListModel struct {
 	Path      *HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListPathModel     `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListModelAttrTypes = map[string]attr.Type{
+	"any_domain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":     types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListDomainModelAttrTypes},
+	"metadata":   types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListMetadataModelAttrTypes},
+	"path":       types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListPathModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListDomainModel represents domain block
 type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListDomainModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
 	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListDomainModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListMetadataModel represents metadata block
@@ -1880,11 +3705,24 @@ type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListMetadataModel 
 	Name            types.String `tfsdk:"name"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListMetadataModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListPathModel represents path block
 type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListPathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListPathModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListPathModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesModel represents rules block
@@ -1896,6 +3734,15 @@ type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesModel struct {
 	Path               *HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesPathModel     `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesModelAttrTypes = map[string]attr.Type{
+	"javascript_location": types.StringType,
+	"any_domain":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":              types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesDomainModelAttrTypes},
+	"metadata":            types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesMetadataModelAttrTypes},
+	"path":                types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesPathModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesDomainModel represents domain block
 type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesDomainModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
@@ -1903,10 +3750,23 @@ type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesDomainModel struct {
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesDomainModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesMetadataModel represents metadata block
 type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesMetadataModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesPathModel represents path block
@@ -1916,6 +3776,13 @@ type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesPathModel struct {
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesPathModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesPathModel
+var HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedMobileModel represents mobile block
 type HTTPLoadBalancerBotDefenseAdvancedMobileModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -1923,14 +3790,31 @@ type HTTPLoadBalancerBotDefenseAdvancedMobileModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedMobileModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedMobileModel
+var HTTPLoadBalancerBotDefenseAdvancedMobileModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigModel represents mobile_sdk_config block
 type HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigModel struct {
 	MobileIdentifier *HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierModel `tfsdk:"mobile_identifier"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigModel
+var HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigModelAttrTypes = map[string]attr.Type{
+	"mobile_identifier": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierModel represents mobile_identifier block
 type HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierModel struct {
 	Headers []HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersModel `tfsdk:"headers"`
+}
+
+// HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierModel
+var HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierModelAttrTypes = map[string]attr.Type{
+	"headers": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersModelAttrTypes}},
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersModel represents headers block
@@ -1941,11 +3825,26 @@ type HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersMod
 	Item            *HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersModel
+var HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersModelAttrTypes = map[string]attr.Type{
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersItemModel represents item block
 type HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersItemModel
+var HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedWebModel represents web block
@@ -1955,15 +3854,33 @@ type HTTPLoadBalancerBotDefenseAdvancedWebModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerBotDefenseAdvancedWebModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedWebModel
+var HTTPLoadBalancerBotDefenseAdvancedWebModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerCachingPolicyModel represents caching_policy block
 type HTTPLoadBalancerCachingPolicyModel struct {
 	CustomCacheRule    *HTTPLoadBalancerCachingPolicyCustomCacheRuleModel    `tfsdk:"custom_cache_rule"`
 	DefaultCacheAction *HTTPLoadBalancerCachingPolicyDefaultCacheActionModel `tfsdk:"default_cache_action"`
 }
 
+// HTTPLoadBalancerCachingPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerCachingPolicyModel
+var HTTPLoadBalancerCachingPolicyModelAttrTypes = map[string]attr.Type{
+	"custom_cache_rule":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_cache_action": types.ObjectType{AttrTypes: HTTPLoadBalancerCachingPolicyDefaultCacheActionModelAttrTypes},
+}
+
 // HTTPLoadBalancerCachingPolicyCustomCacheRuleModel represents custom_cache_rule block
 type HTTPLoadBalancerCachingPolicyCustomCacheRuleModel struct {
 	CDNCacheRules []HTTPLoadBalancerCachingPolicyCustomCacheRuleCDNCacheRulesModel `tfsdk:"cdn_cache_rules"`
+}
+
+// HTTPLoadBalancerCachingPolicyCustomCacheRuleModelAttrTypes defines the attribute types for HTTPLoadBalancerCachingPolicyCustomCacheRuleModel
+var HTTPLoadBalancerCachingPolicyCustomCacheRuleModelAttrTypes = map[string]attr.Type{
+	"cdn_cache_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerCachingPolicyCustomCacheRuleCDNCacheRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerCachingPolicyCustomCacheRuleCDNCacheRulesModel represents cdn_cache_rules block
@@ -1973,11 +3890,25 @@ type HTTPLoadBalancerCachingPolicyCustomCacheRuleCDNCacheRulesModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerCachingPolicyCustomCacheRuleCDNCacheRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerCachingPolicyCustomCacheRuleCDNCacheRulesModel
+var HTTPLoadBalancerCachingPolicyCustomCacheRuleCDNCacheRulesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerCachingPolicyDefaultCacheActionModel represents default_cache_action block
 type HTTPLoadBalancerCachingPolicyDefaultCacheActionModel struct {
 	CacheTTLDefault  types.String                `tfsdk:"cache_ttl_default"`
 	CacheTTLOverride types.String                `tfsdk:"cache_ttl_override"`
 	CacheDisabled    *HTTPLoadBalancerEmptyModel `tfsdk:"cache_disabled"`
+}
+
+// HTTPLoadBalancerCachingPolicyDefaultCacheActionModelAttrTypes defines the attribute types for HTTPLoadBalancerCachingPolicyDefaultCacheActionModel
+var HTTPLoadBalancerCachingPolicyDefaultCacheActionModelAttrTypes = map[string]attr.Type{
+	"cache_ttl_default":  types.StringType,
+	"cache_ttl_override": types.StringType,
+	"cache_disabled":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerCaptchaChallengeModel represents captcha_challenge block
@@ -1986,9 +3917,20 @@ type HTTPLoadBalancerCaptchaChallengeModel struct {
 	CustomPage   types.String `tfsdk:"custom_page"`
 }
 
+// HTTPLoadBalancerCaptchaChallengeModelAttrTypes defines the attribute types for HTTPLoadBalancerCaptchaChallengeModel
+var HTTPLoadBalancerCaptchaChallengeModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry": types.Int64Type,
+	"custom_page":   types.StringType,
+}
+
 // HTTPLoadBalancerClientSideDefenseModel represents client_side_defense block
 type HTTPLoadBalancerClientSideDefenseModel struct {
 	Policy *HTTPLoadBalancerClientSideDefensePolicyModel `tfsdk:"policy"`
+}
+
+// HTTPLoadBalancerClientSideDefenseModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefenseModel
+var HTTPLoadBalancerClientSideDefenseModelAttrTypes = map[string]attr.Type{
+	"policy": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyModel represents policy block
@@ -1999,9 +3941,22 @@ type HTTPLoadBalancerClientSideDefensePolicyModel struct {
 	JsInsertionRules       *HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModel       `tfsdk:"js_insertion_rules"`
 }
 
+// HTTPLoadBalancerClientSideDefensePolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyModel
+var HTTPLoadBalancerClientSideDefensePolicyModelAttrTypes = map[string]attr.Type{
+	"disable_js_insert":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_insert_all_pages":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_insert_all_pages_except": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_insertion_rules":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel represents js_insert_all_pages_except block
 type HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel struct {
 	ExcludeList []HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModel `tfsdk:"exclude_list"`
+}
+
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModelAttrTypes = map[string]attr.Type{
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModel represents exclude_list block
@@ -2012,6 +3967,14 @@ type HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMod
 	Path      *HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModel     `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModelAttrTypes = map[string]attr.Type{
+	"any_domain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":     types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModelAttrTypes},
+	"metadata":   types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModelAttrTypes},
+	"path":       types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModelAttrTypes},
+}
+
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel represents domain block
 type HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
@@ -2019,10 +3982,23 @@ type HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDom
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
+}
+
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel represents metadata block
 type HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModel represents path block
@@ -2032,10 +4008,23 @@ type HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPat
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModel represents js_insertion_rules block
 type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModel struct {
 	ExcludeList []HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel `tfsdk:"exclude_list"`
 	Rules       []HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel       `tfsdk:"rules"`
+}
+
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModelAttrTypes = map[string]attr.Type{
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"rules":        types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel represents exclude_list block
@@ -2046,11 +4035,26 @@ type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel str
 	Path      *HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel     `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModelAttrTypes = map[string]attr.Type{
+	"any_domain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":     types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModelAttrTypes},
+	"metadata":   types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModelAttrTypes},
+	"path":       types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModelAttrTypes},
+}
+
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModel represents domain block
 type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
 	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel represents metadata block
@@ -2059,11 +4063,24 @@ type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataM
 	Name            types.String `tfsdk:"name"`
 }
 
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel represents path block
 type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel represents rules block
@@ -2074,11 +4091,26 @@ type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel struct {
 	Path      *HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel     `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModelAttrTypes = map[string]attr.Type{
+	"any_domain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":     types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModelAttrTypes},
+	"metadata":   types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModelAttrTypes},
+	"path":       types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModelAttrTypes},
+}
+
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel represents domain block
 type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel struct {
 	ExactValue  types.String `tfsdk:"exact_value"`
 	RegexValue  types.String `tfsdk:"regex_value"`
 	SuffixValue types.String `tfsdk:"suffix_value"`
+}
+
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel represents metadata block
@@ -2087,11 +4119,24 @@ type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel s
 	Name            types.String `tfsdk:"name"`
 }
 
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel represents path block
 type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModel
+var HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // HTTPLoadBalancerCookieStickinessModel represents cookie_stickiness block
@@ -2109,6 +4154,21 @@ type HTTPLoadBalancerCookieStickinessModel struct {
 	SamesiteStrict *HTTPLoadBalancerEmptyModel `tfsdk:"samesite_strict"`
 }
 
+// HTTPLoadBalancerCookieStickinessModelAttrTypes defines the attribute types for HTTPLoadBalancerCookieStickinessModel
+var HTTPLoadBalancerCookieStickinessModelAttrTypes = map[string]attr.Type{
+	"name":            types.StringType,
+	"path":            types.StringType,
+	"ttl":             types.Int64Type,
+	"add_httponly":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_secure":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_httponly": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_samesite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_secure":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_lax":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_none":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_strict": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerCORSPolicyModel represents cors_policy block
 type HTTPLoadBalancerCORSPolicyModel struct {
 	AllowCredentials types.Bool   `tfsdk:"allow_credentials"`
@@ -2121,6 +4181,18 @@ type HTTPLoadBalancerCORSPolicyModel struct {
 	MaximumAge       types.Int64  `tfsdk:"maximum_age"`
 }
 
+// HTTPLoadBalancerCORSPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerCORSPolicyModel
+var HTTPLoadBalancerCORSPolicyModelAttrTypes = map[string]attr.Type{
+	"allow_credentials":  types.BoolType,
+	"allow_headers":      types.StringType,
+	"allow_methods":      types.StringType,
+	"allow_origin":       types.ListType{ElemType: types.StringType},
+	"allow_origin_regex": types.ListType{ElemType: types.StringType},
+	"disabled":           types.BoolType,
+	"expose_headers":     types.StringType,
+	"maximum_age":        types.Int64Type,
+}
+
 // HTTPLoadBalancerCSRFPolicyModel represents csrf_policy block
 type HTTPLoadBalancerCSRFPolicyModel struct {
 	AllLoadBalancerDomains *HTTPLoadBalancerEmptyModel                      `tfsdk:"all_load_balancer_domains"`
@@ -2128,9 +4200,21 @@ type HTTPLoadBalancerCSRFPolicyModel struct {
 	Disabled               *HTTPLoadBalancerEmptyModel                      `tfsdk:"disabled"`
 }
 
+// HTTPLoadBalancerCSRFPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerCSRFPolicyModel
+var HTTPLoadBalancerCSRFPolicyModelAttrTypes = map[string]attr.Type{
+	"all_load_balancer_domains": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_domain_list":        types.ObjectType{AttrTypes: HTTPLoadBalancerCSRFPolicyCustomDomainListModelAttrTypes},
+	"disabled":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerCSRFPolicyCustomDomainListModel represents custom_domain_list block
 type HTTPLoadBalancerCSRFPolicyCustomDomainListModel struct {
 	Domains types.List `tfsdk:"domains"`
+}
+
+// HTTPLoadBalancerCSRFPolicyCustomDomainListModelAttrTypes defines the attribute types for HTTPLoadBalancerCSRFPolicyCustomDomainListModel
+var HTTPLoadBalancerCSRFPolicyCustomDomainListModelAttrTypes = map[string]attr.Type{
+	"domains": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerDataGuardRulesModel represents data_guard_rules block
@@ -2144,10 +4228,27 @@ type HTTPLoadBalancerDataGuardRulesModel struct {
 	SkipDataGuard  *HTTPLoadBalancerEmptyModel                  `tfsdk:"skip_data_guard"`
 }
 
+// HTTPLoadBalancerDataGuardRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerDataGuardRulesModel
+var HTTPLoadBalancerDataGuardRulesModelAttrTypes = map[string]attr.Type{
+	"exact_value":      types.StringType,
+	"suffix_value":     types.StringType,
+	"any_domain":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"apply_data_guard": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metadata":         types.ObjectType{AttrTypes: HTTPLoadBalancerDataGuardRulesMetadataModelAttrTypes},
+	"path":             types.ObjectType{AttrTypes: HTTPLoadBalancerDataGuardRulesPathModelAttrTypes},
+	"skip_data_guard":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerDataGuardRulesMetadataModel represents metadata block
 type HTTPLoadBalancerDataGuardRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerDataGuardRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerDataGuardRulesMetadataModel
+var HTTPLoadBalancerDataGuardRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerDataGuardRulesPathModel represents path block
@@ -2155,6 +4256,13 @@ type HTTPLoadBalancerDataGuardRulesPathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// HTTPLoadBalancerDataGuardRulesPathModelAttrTypes defines the attribute types for HTTPLoadBalancerDataGuardRulesPathModel
+var HTTPLoadBalancerDataGuardRulesPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // HTTPLoadBalancerDDOSMitigationRulesModel represents ddos_mitigation_rules block
@@ -2166,6 +4274,15 @@ type HTTPLoadBalancerDDOSMitigationRulesModel struct {
 	Metadata            *HTTPLoadBalancerDDOSMitigationRulesMetadataModel         `tfsdk:"metadata"`
 }
 
+// HTTPLoadBalancerDDOSMitigationRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerDDOSMitigationRulesModel
+var HTTPLoadBalancerDDOSMitigationRulesModelAttrTypes = map[string]attr.Type{
+	"expiration_timestamp": types.StringType,
+	"block":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ddos_client_source":   types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModelAttrTypes},
+	"ip_prefix_list":       types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModelAttrTypes},
+	"metadata":             types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesMetadataModelAttrTypes},
+}
+
 // HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel represents ddos_client_source block
 type HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel struct {
 	CountryList              types.List                                                                        `tfsdk:"country_list"`
@@ -2174,14 +4291,32 @@ type HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel struct {
 	TLSFingerprintMatcher    *HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModel    `tfsdk:"tls_fingerprint_matcher"`
 }
 
+// HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModelAttrTypes defines the attribute types for HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModel
+var HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceModelAttrTypes = map[string]attr.Type{
+	"country_list":                types.ListType{ElemType: types.StringType},
+	"asn_list":                    types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModelAttrTypes},
+	"ja4_tls_fingerprint_matcher": types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModelAttrTypes},
+	"tls_fingerprint_matcher":     types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModelAttrTypes},
+}
+
 // HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModel represents asn_list block
 type HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModelAttrTypes defines the attribute types for HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModel
+var HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModel represents ja4_tls_fingerprint_matcher block
 type HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
+}
+
+// HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModel
+var HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceJa4TLSFingerprintMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
@@ -2191,16 +4326,35 @@ type HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherMod
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
+// HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModel
+var HTTPLoadBalancerDDOSMitigationRulesDDOSClientSourceTLSFingerprintMatcherModelAttrTypes = map[string]attr.Type{
+	"classes":         types.ListType{ElemType: types.StringType},
+	"exact_values":    types.ListType{ElemType: types.StringType},
+	"excluded_values": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel represents ip_prefix_list block
 type HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
+// HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModelAttrTypes defines the attribute types for HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModel
+var HTTPLoadBalancerDDOSMitigationRulesIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerDDOSMitigationRulesMetadataModel represents metadata block
 type HTTPLoadBalancerDDOSMitigationRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerDDOSMitigationRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerDDOSMitigationRulesMetadataModel
+var HTTPLoadBalancerDDOSMitigationRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerDefaultPoolModel represents default_pool block
@@ -2219,6 +4373,24 @@ type HTTPLoadBalancerDefaultPoolModel struct {
 	UpstreamConnPoolReuseType *HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModel `tfsdk:"upstream_conn_pool_reuse_type"`
 	UseTLS                    *HTTPLoadBalancerDefaultPoolUseTLSModel                    `tfsdk:"use_tls"`
 	ViewInternal              *HTTPLoadBalancerDefaultPoolViewInternalModel              `tfsdk:"view_internal"`
+}
+
+// HTTPLoadBalancerDefaultPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolModel
+var HTTPLoadBalancerDefaultPoolModelAttrTypes = map[string]attr.Type{
+	"endpoint_selection":            types.StringType,
+	"health_check_port":             types.Int64Type,
+	"loadbalancer_algorithm":        types.StringType,
+	"port":                          types.Int64Type,
+	"advanced_options":              types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsModelAttrTypes},
+	"automatic_port":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"healthcheck":                   types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolHealthcheckModelAttrTypes}},
+	"lb_port":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_tls":                        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"origin_servers":                types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"same_as_endpoint_port":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"upstream_conn_pool_reuse_type": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_tls":                       types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSModelAttrTypes},
+	"view_internal":                 types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolViewInternalModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsModel represents advanced_options block
@@ -2244,6 +4416,29 @@ type HTTPLoadBalancerDefaultPoolAdvancedOptionsModel struct {
 	ProxyProtocolV2              *HTTPLoadBalancerEmptyModel                                      `tfsdk:"proxy_protocol_v2"`
 }
 
+// HTTPLoadBalancerDefaultPoolAdvancedOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsModel
+var HTTPLoadBalancerDefaultPoolAdvancedOptionsModelAttrTypes = map[string]attr.Type{
+	"connection_timeout":               types.Int64Type,
+	"http_idle_timeout":                types.Int64Type,
+	"panic_threshold":                  types.Int64Type,
+	"auto_http_config":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"circuit_breaker":                  types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsCircuitBreakerModelAttrTypes},
+	"default_circuit_breaker":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_circuit_breaker":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_lb_source_ip_persistance": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_outlier_detection":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_proxy_protocol":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_subsets":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_lb_source_ip_persistance":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_subsets":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http1_config":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http2_options":                    types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp2OptionsModelAttrTypes},
+	"no_panic_threshold":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outlier_detection":                types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsOutlierDetectionModelAttrTypes},
+	"proxy_protocol_v1":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proxy_protocol_v2":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsCircuitBreakerModel represents circuit_breaker block
 type HTTPLoadBalancerDefaultPoolAdvancedOptionsCircuitBreakerModel struct {
 	ConnectionLimit types.Int64  `tfsdk:"connection_limit"`
@@ -2251,6 +4446,15 @@ type HTTPLoadBalancerDefaultPoolAdvancedOptionsCircuitBreakerModel struct {
 	PendingRequests types.Int64  `tfsdk:"pending_requests"`
 	Priority        types.String `tfsdk:"priority"`
 	Retries         types.Int64  `tfsdk:"retries"`
+}
+
+// HTTPLoadBalancerDefaultPoolAdvancedOptionsCircuitBreakerModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsCircuitBreakerModel
+var HTTPLoadBalancerDefaultPoolAdvancedOptionsCircuitBreakerModelAttrTypes = map[string]attr.Type{
+	"connection_limit": types.Int64Type,
+	"max_requests":     types.Int64Type,
+	"pending_requests": types.Int64Type,
+	"priority":         types.StringType,
+	"retries":          types.Int64Type,
 }
 
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModel represents enable_subsets block
@@ -2261,9 +4465,22 @@ type HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModel struct {
 	FailRequest     *HTTPLoadBalancerEmptyModel                                                   `tfsdk:"fail_request"`
 }
 
+// HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModel
+var HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModelAttrTypes = map[string]attr.Type{
+	"any_endpoint":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_subset":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"endpoint_subsets": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModelAttrTypes}},
+	"fail_request":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsDefaultSubsetModel represents default_subset block
 type HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsDefaultSubsetModel struct {
 	DefaultSubset *HTTPLoadBalancerEmptyModel `tfsdk:"default_subset"`
+}
+
+// HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsDefaultSubsetModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsDefaultSubsetModel
+var HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsDefaultSubsetModelAttrTypes = map[string]attr.Type{
+	"default_subset": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModel represents endpoint_subsets block
@@ -2271,9 +4488,19 @@ type HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModel
 	Keys types.List `tfsdk:"keys"`
 }
 
+// HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModel
+var HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModelAttrTypes = map[string]attr.Type{
+	"keys": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModel represents http1_config block
 type HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModel struct {
 	HeaderTransformation *HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModel
+var HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigHeaderTransformationModel represents header_transformation block
@@ -2284,9 +4511,22 @@ type HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigHeaderTransformationMo
 	ProperCaseHeaderTransformation   *HTTPLoadBalancerEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigHeaderTransformationModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigHeaderTransformationModel
+var HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp2OptionsModel represents http2_options block
 type HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp2OptionsModel struct {
 	Enabled types.Bool `tfsdk:"enabled"`
+}
+
+// HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp2OptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp2OptionsModel
+var HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp2OptionsModelAttrTypes = map[string]attr.Type{
+	"enabled": types.BoolType,
 }
 
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsOutlierDetectionModel represents outlier_detection block
@@ -2298,11 +4538,27 @@ type HTTPLoadBalancerDefaultPoolAdvancedOptionsOutlierDetectionModel struct {
 	MaxEjectionPercent        types.Int64 `tfsdk:"max_ejection_percent"`
 }
 
+// HTTPLoadBalancerDefaultPoolAdvancedOptionsOutlierDetectionModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsOutlierDetectionModel
+var HTTPLoadBalancerDefaultPoolAdvancedOptionsOutlierDetectionModelAttrTypes = map[string]attr.Type{
+	"base_ejection_time":          types.Int64Type,
+	"consecutive_5xx":             types.Int64Type,
+	"consecutive_gateway_failure": types.Int64Type,
+	"interval":                    types.Int64Type,
+	"max_ejection_percent":        types.Int64Type,
+}
+
 // HTTPLoadBalancerDefaultPoolHealthcheckModel represents healthcheck block
 type HTTPLoadBalancerDefaultPoolHealthcheckModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerDefaultPoolHealthcheckModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolHealthcheckModel
+var HTTPLoadBalancerDefaultPoolHealthcheckModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersModel represents origin_servers block
@@ -2320,9 +4576,29 @@ type HTTPLoadBalancerDefaultPoolOriginServersModel struct {
 	VnPrivateName        *HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModel        `tfsdk:"vn_private_name"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersModel
+var HTTPLoadBalancerDefaultPoolOriginServersModelAttrTypes = map[string]attr.Type{
+	"cbip_service":           types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModelAttrTypes},
+	"consul_service":         types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModelAttrTypes},
+	"custom_endpoint_object": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"k8s_service":            types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModelAttrTypes},
+	"labels":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_ip":             types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModelAttrTypes},
+	"private_name":           types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModelAttrTypes},
+	"public_ip":              types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPublicIPModelAttrTypes},
+	"public_name":            types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPublicNameModelAttrTypes},
+	"vn_private_ip":          types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPModelAttrTypes},
+	"vn_private_name":        types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModelAttrTypes},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModel represents cbip_service block
 type HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModel struct {
 	ServiceName types.String `tfsdk:"service_name"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModel
+var HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModelAttrTypes = map[string]attr.Type{
+	"service_name": types.StringType,
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModel represents consul_service block
@@ -2334,10 +4610,25 @@ type HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModel struct {
 	SnatPool       *HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolModel    `tfsdk:"snat_pool"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModel
+var HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModelAttrTypes = map[string]attr.Type{
+	"service_name":    types.StringType,
+	"inside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_locator":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"snat_pool":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorModel represents site_locator block
 type HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorModel struct {
 	Site        *HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorSiteModel        `tfsdk:"site"`
 	VirtualSite *HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorModel
+var HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorVirtualSiteModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorSiteModel represents site block
@@ -2347,11 +4638,25 @@ type HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorSiteModel s
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorSiteModel
+var HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorVirtualSiteModel represents virtual_site block
 type HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorVirtualSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorVirtualSiteModel
+var HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolModel represents snat_pool block
@@ -2360,9 +4665,20 @@ type HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolModel struct {
 	SnatPool   *HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolModel
+var HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolModelAttrTypes = map[string]attr.Type{
+	"no_snat_pool": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"snat_pool":    types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolSnatPoolModelAttrTypes},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolSnatPoolModel represents snat_pool block
 type HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolSnatPoolModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolSnatPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolSnatPoolModel
+var HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolSnatPoolModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectModel represents custom_endpoint_object block
@@ -2370,11 +4686,23 @@ type HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectModel struct {
 	Endpoint *HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectEndpointModel `tfsdk:"endpoint"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectModel
+var HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectModelAttrTypes = map[string]attr.Type{
+	"endpoint": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectEndpointModelAttrTypes},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectEndpointModel represents endpoint block
 type HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectEndpointModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectEndpointModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectEndpointModel
+var HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectEndpointModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModel represents k8s_service block
@@ -2388,10 +4716,27 @@ type HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModel struct {
 	Vk8sNetworks   *HTTPLoadBalancerEmptyModel                                         `tfsdk:"vk8s_networks"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModel
+var HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModelAttrTypes = map[string]attr.Type{
+	"protocol":        types.StringType,
+	"service_name":    types.StringType,
+	"inside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_locator":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"snat_pool":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vk8s_networks":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorModel represents site_locator block
 type HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorModel struct {
 	Site        *HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorSiteModel        `tfsdk:"site"`
 	VirtualSite *HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorModel
+var HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorVirtualSiteModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorSiteModel represents site block
@@ -2401,11 +4746,25 @@ type HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorSiteModel stru
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorSiteModel
+var HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorVirtualSiteModel represents virtual_site block
 type HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorVirtualSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorVirtualSiteModel
+var HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolModel represents snat_pool block
@@ -2414,9 +4773,20 @@ type HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolModel struct {
 	SnatPool   *HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolModel
+var HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolModelAttrTypes = map[string]attr.Type{
+	"no_snat_pool": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"snat_pool":    types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolSnatPoolModelAttrTypes},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolSnatPoolModel represents snat_pool block
 type HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolSnatPoolModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolSnatPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolSnatPoolModel
+var HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolSnatPoolModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModel represents private_ip block
@@ -2429,6 +4799,16 @@ type HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModel struct {
 	SnatPool       *HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolModel    `tfsdk:"snat_pool"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModelAttrTypes = map[string]attr.Type{
+	"ip":              types.StringType,
+	"inside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"segment":         types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSegmentModelAttrTypes},
+	"site_locator":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"snat_pool":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSegmentModel represents segment block
 type HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSegmentModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -2436,10 +4816,23 @@ type HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSegmentModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSegmentModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSegmentModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSegmentModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorModel represents site_locator block
 type HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorModel struct {
 	Site        *HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorSiteModel        `tfsdk:"site"`
 	VirtualSite *HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorVirtualSiteModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorSiteModel represents site block
@@ -2449,11 +4842,25 @@ type HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorSiteModel struc
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorSiteModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorVirtualSiteModel represents virtual_site block
 type HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorVirtualSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorVirtualSiteModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolModel represents snat_pool block
@@ -2462,9 +4869,20 @@ type HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolModel struct {
 	SnatPool   *HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolModelAttrTypes = map[string]attr.Type{
+	"no_snat_pool": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"snat_pool":    types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolSnatPoolModelAttrTypes},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolSnatPoolModel represents snat_pool block
 type HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolSnatPoolModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolSnatPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolSnatPoolModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolSnatPoolModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModel represents private_name block
@@ -2478,6 +4896,17 @@ type HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModel struct {
 	SnatPool        *HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolModel    `tfsdk:"snat_pool"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModelAttrTypes = map[string]attr.Type{
+	"dns_name":         types.StringType,
+	"refresh_interval": types.Int64Type,
+	"inside_network":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"segment":          types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSegmentModelAttrTypes},
+	"site_locator":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"snat_pool":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSegmentModel represents segment block
 type HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSegmentModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -2485,10 +4914,23 @@ type HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSegmentModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSegmentModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSegmentModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSegmentModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorModel represents site_locator block
 type HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorModel struct {
 	Site        *HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorSiteModel        `tfsdk:"site"`
 	VirtualSite *HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorVirtualSiteModel `tfsdk:"virtual_site"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorModelAttrTypes = map[string]attr.Type{
+	"site":         types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorSiteModelAttrTypes},
+	"virtual_site": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorVirtualSiteModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorSiteModel represents site block
@@ -2498,11 +4940,25 @@ type HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorSiteModel str
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorSiteModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorVirtualSiteModel represents virtual_site block
 type HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorVirtualSiteModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorVirtualSiteModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorVirtualSiteModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorVirtualSiteModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolModel represents snat_pool block
@@ -2511,14 +4967,30 @@ type HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolModel struct {
 	SnatPool   *HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolSnatPoolModel `tfsdk:"snat_pool"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolModelAttrTypes = map[string]attr.Type{
+	"no_snat_pool": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"snat_pool":    types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolSnatPoolModelAttrTypes},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolSnatPoolModel represents snat_pool block
 type HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolSnatPoolModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolSnatPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolSnatPoolModel
+var HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolSnatPoolModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersPublicIPModel represents public_ip block
 type HTTPLoadBalancerDefaultPoolOriginServersPublicIPModel struct {
 	IP types.String `tfsdk:"ip"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersPublicIPModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPublicIPModel
+var HTTPLoadBalancerDefaultPoolOriginServersPublicIPModelAttrTypes = map[string]attr.Type{
+	"ip": types.StringType,
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersPublicNameModel represents public_name block
@@ -2527,10 +4999,22 @@ type HTTPLoadBalancerDefaultPoolOriginServersPublicNameModel struct {
 	RefreshInterval types.Int64  `tfsdk:"refresh_interval"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersPublicNameModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersPublicNameModel
+var HTTPLoadBalancerDefaultPoolOriginServersPublicNameModelAttrTypes = map[string]attr.Type{
+	"dns_name":         types.StringType,
+	"refresh_interval": types.Int64Type,
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPModel represents vn_private_ip block
 type HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPModel struct {
 	IP             types.String                                                            `tfsdk:"ip"`
 	VirtualNetwork *HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPVirtualNetworkModel `tfsdk:"virtual_network"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPModel
+var HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPModelAttrTypes = map[string]attr.Type{
+	"ip":              types.StringType,
+	"virtual_network": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPVirtualNetworkModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPVirtualNetworkModel represents virtual_network block
@@ -2540,10 +5024,23 @@ type HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPVirtualNetworkModel stru
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPVirtualNetworkModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPVirtualNetworkModel
+var HTTPLoadBalancerDefaultPoolOriginServersVnPrivateIPVirtualNetworkModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModel represents vn_private_name block
 type HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModel struct {
 	DNSName        types.String                                                              `tfsdk:"dns_name"`
 	PrivateNetwork *HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNamePrivateNetworkModel `tfsdk:"private_network"`
+}
+
+// HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModel
+var HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNameModelAttrTypes = map[string]attr.Type{
+	"dns_name":        types.StringType,
+	"private_network": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNamePrivateNetworkModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNamePrivateNetworkModel represents private_network block
@@ -2553,10 +5050,23 @@ type HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNamePrivateNetworkModel st
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNamePrivateNetworkModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNamePrivateNetworkModel
+var HTTPLoadBalancerDefaultPoolOriginServersVnPrivateNamePrivateNetworkModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModel represents upstream_conn_pool_reuse_type block
 type HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModel struct {
 	DisableConnPoolReuse *HTTPLoadBalancerEmptyModel `tfsdk:"disable_conn_pool_reuse"`
 	EnableConnPoolReuse  *HTTPLoadBalancerEmptyModel `tfsdk:"enable_conn_pool_reuse"`
+}
+
+// HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModel
+var HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModelAttrTypes = map[string]attr.Type{
+	"disable_conn_pool_reuse": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_conn_pool_reuse":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerDefaultPoolUseTLSModel represents use_tls block
@@ -2576,12 +5086,37 @@ type HTTPLoadBalancerDefaultPoolUseTLSModel struct {
 	VolterraTrustedCA        *HTTPLoadBalancerEmptyModel                                  `tfsdk:"volterra_trusted_ca"`
 }
 
+// HTTPLoadBalancerDefaultPoolUseTLSModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSModel
+var HTTPLoadBalancerDefaultPoolUseTLSModelAttrTypes = map[string]attr.Type{
+	"max_session_keys":            types.Int64Type,
+	"sni":                         types.StringType,
+	"default_session_key_caching": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_session_key_caching": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_sni":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_mtls":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"skip_server_verification":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_host_header_as_sni":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls_obj":                types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseMtlsObjModelAttrTypes},
+	"use_server_verification":     types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationModelAttrTypes},
+	"volterra_trusted_ca":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerDefaultPoolUseTLSTLSConfigModel represents tls_config block
 type HTTPLoadBalancerDefaultPoolUseTLSTLSConfigModel struct {
 	CustomSecurity  *HTTPLoadBalancerDefaultPoolUseTLSTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
 	DefaultSecurity *HTTPLoadBalancerEmptyModel                                    `tfsdk:"default_security"`
 	LowSecurity     *HTTPLoadBalancerEmptyModel                                    `tfsdk:"low_security"`
 	MediumSecurity  *HTTPLoadBalancerEmptyModel                                    `tfsdk:"medium_security"`
+}
+
+// HTTPLoadBalancerDefaultPoolUseTLSTLSConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSTLSConfigModel
+var HTTPLoadBalancerDefaultPoolUseTLSTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerDefaultPoolUseTLSTLSConfigCustomSecurityModel represents custom_security block
@@ -2591,9 +5126,21 @@ type HTTPLoadBalancerDefaultPoolUseTLSTLSConfigCustomSecurityModel struct {
 	MinVersion   types.String `tfsdk:"min_version"`
 }
 
+// HTTPLoadBalancerDefaultPoolUseTLSTLSConfigCustomSecurityModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSTLSConfigCustomSecurityModel
+var HTTPLoadBalancerDefaultPoolUseTLSTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolUseTLSUseMtlsModel represents use_mtls block
 type HTTPLoadBalancerDefaultPoolUseTLSUseMtlsModel struct {
 	TLSCertificates []HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesModel `tfsdk:"tls_certificates"`
+}
+
+// HTTPLoadBalancerDefaultPoolUseTLSUseMtlsModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSUseMtlsModel
+var HTTPLoadBalancerDefaultPoolUseTLSUseMtlsModelAttrTypes = map[string]attr.Type{
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesModel represents tls_certificates block
@@ -2606,15 +5153,36 @@ type HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesModel struct {
 	UseSystemDefaults    *HTTPLoadBalancerEmptyModel                                                       `tfsdk:"use_system_defaults"`
 }
 
+// HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesModel
+var HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModel
+var HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel represents private_key block
 type HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModel
+var HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -2624,10 +5192,23 @@ type HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldS
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModel
+var HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerDefaultPoolUseTLSUseMtlsObjModel represents use_mtls_obj block
@@ -2637,10 +5218,23 @@ type HTTPLoadBalancerDefaultPoolUseTLSUseMtlsObjModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolUseTLSUseMtlsObjModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSUseMtlsObjModel
+var HTTPLoadBalancerDefaultPoolUseTLSUseMtlsObjModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationModel represents use_server_verification block
 type HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationModel struct {
 	TrustedCAURL types.String                                                          `tfsdk:"trusted_ca_url"`
 	TrustedCA    *HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCAModel `tfsdk:"trusted_ca"`
+}
+
+// HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationModel
+var HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationModelAttrTypes = map[string]attr.Type{
+	"trusted_ca_url": types.StringType,
+	"trusted_ca":     types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCAModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCAModel represents trusted_ca block
@@ -2650,6 +5244,13 @@ type HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCAModel struct
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCAModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCAModel
+var HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolViewInternalModel represents view_internal block
 type HTTPLoadBalancerDefaultPoolViewInternalModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -2657,9 +5258,21 @@ type HTTPLoadBalancerDefaultPoolViewInternalModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolViewInternalModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolViewInternalModel
+var HTTPLoadBalancerDefaultPoolViewInternalModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolListModel represents default_pool_list block
 type HTTPLoadBalancerDefaultPoolListModel struct {
 	Pools []HTTPLoadBalancerDefaultPoolListPoolsModel `tfsdk:"pools"`
+}
+
+// HTTPLoadBalancerDefaultPoolListModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolListModel
+var HTTPLoadBalancerDefaultPoolListModelAttrTypes = map[string]attr.Type{
+	"pools": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolListPoolsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerDefaultPoolListPoolsModel represents pools block
@@ -2671,6 +5284,15 @@ type HTTPLoadBalancerDefaultPoolListPoolsModel struct {
 	Pool            *HTTPLoadBalancerDefaultPoolListPoolsPoolModel    `tfsdk:"pool"`
 }
 
+// HTTPLoadBalancerDefaultPoolListPoolsModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolListPoolsModel
+var HTTPLoadBalancerDefaultPoolListPoolsModelAttrTypes = map[string]attr.Type{
+	"priority":         types.Int64Type,
+	"weight":           types.Int64Type,
+	"cluster":          types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolListPoolsClusterModelAttrTypes},
+	"endpoint_subsets": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pool":             types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolListPoolsPoolModelAttrTypes},
+}
+
 // HTTPLoadBalancerDefaultPoolListPoolsClusterModel represents cluster block
 type HTTPLoadBalancerDefaultPoolListPoolsClusterModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -2678,11 +5300,25 @@ type HTTPLoadBalancerDefaultPoolListPoolsClusterModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultPoolListPoolsClusterModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolListPoolsClusterModel
+var HTTPLoadBalancerDefaultPoolListPoolsClusterModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultPoolListPoolsPoolModel represents pool block
 type HTTPLoadBalancerDefaultPoolListPoolsPoolModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerDefaultPoolListPoolsPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolListPoolsPoolModel
+var HTTPLoadBalancerDefaultPoolListPoolsPoolModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerDefaultRoutePoolsModel represents default_route_pools block
@@ -2694,6 +5330,15 @@ type HTTPLoadBalancerDefaultRoutePoolsModel struct {
 	Pool            *HTTPLoadBalancerDefaultRoutePoolsPoolModel    `tfsdk:"pool"`
 }
 
+// HTTPLoadBalancerDefaultRoutePoolsModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultRoutePoolsModel
+var HTTPLoadBalancerDefaultRoutePoolsModelAttrTypes = map[string]attr.Type{
+	"priority":         types.Int64Type,
+	"weight":           types.Int64Type,
+	"cluster":          types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultRoutePoolsClusterModelAttrTypes},
+	"endpoint_subsets": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pool":             types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultRoutePoolsPoolModelAttrTypes},
+}
+
 // HTTPLoadBalancerDefaultRoutePoolsClusterModel represents cluster block
 type HTTPLoadBalancerDefaultRoutePoolsClusterModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -2701,11 +5346,25 @@ type HTTPLoadBalancerDefaultRoutePoolsClusterModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerDefaultRoutePoolsClusterModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultRoutePoolsClusterModel
+var HTTPLoadBalancerDefaultRoutePoolsClusterModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerDefaultRoutePoolsPoolModel represents pool block
 type HTTPLoadBalancerDefaultRoutePoolsPoolModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerDefaultRoutePoolsPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultRoutePoolsPoolModel
+var HTTPLoadBalancerDefaultRoutePoolsPoolModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerEnableAPIDiscoveryModel represents enable_api_discovery block
@@ -2719,15 +5378,37 @@ type HTTPLoadBalancerEnableAPIDiscoveryModel struct {
 	EnableLearnFromRedirectTraffic  *HTTPLoadBalancerEmptyModel                                      `tfsdk:"enable_learn_from_redirect_traffic"`
 }
 
+// HTTPLoadBalancerEnableAPIDiscoveryModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryModel
+var HTTPLoadBalancerEnableAPIDiscoveryModelAttrTypes = map[string]attr.Type{
+	"api_crawler":                         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_discovery_from_code_scan":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_api_auth_discovery":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_api_auth_discovery":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_learn_from_redirect_traffic": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"discovered_api_settings":             types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModelAttrTypes},
+	"enable_learn_from_redirect_traffic":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerModel represents api_crawler block
 type HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerModel struct {
 	APICrawlerConfig  *HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel `tfsdk:"api_crawler_config"`
 	DisableAPICrawler *HTTPLoadBalancerEmptyModel                                        `tfsdk:"disable_api_crawler"`
 }
 
+// HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerModelAttrTypes = map[string]attr.Type{
+	"api_crawler_config":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_api_crawler": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel represents api_crawler_config block
 type HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel struct {
 	Domains []HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModel `tfsdk:"domains"`
+}
+
+// HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModelAttrTypes = map[string]attr.Type{
+	"domains": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModel represents domains block
@@ -2736,16 +5417,34 @@ type HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModel st
 	SimpleLogin *HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel `tfsdk:"simple_login"`
 }
 
+// HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsModelAttrTypes = map[string]attr.Type{
+	"domain":       types.StringType,
+	"simple_login": types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes},
+}
+
 // HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel represents simple_login block
 type HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel struct {
 	User     types.String                                                                                 `tfsdk:"user"`
 	Password *HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel `tfsdk:"password"`
 }
 
+// HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes = map[string]attr.Type{
+	"user":     types.StringType,
+	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel represents password block
 type HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -2755,15 +5454,33 @@ type HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel represents api_discovery_from_code_scan block
 type HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel struct {
 	CodeBaseIntegrations []HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel `tfsdk:"code_base_integrations"`
+}
+
+// HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes = map[string]attr.Type{
+	"code_base_integrations": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel represents code_base_integrations block
@@ -2773,6 +5490,13 @@ type HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrati
 	SelectedRepos       *HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel       `tfsdk:"selected_repos"`
 }
 
+// HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModelAttrTypes = map[string]attr.Type{
+	"all_repos":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"code_base_integration": types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModelAttrTypes},
+	"selected_repos":        types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModelAttrTypes},
+}
+
 // HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel represents code_base_integration block
 type HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -2780,14 +5504,31 @@ type HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrati
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel represents selected_repos block
 type HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel struct {
 	APICodeRepo types.List `tfsdk:"api_code_repo"`
 }
 
+// HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel
+var HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModelAttrTypes = map[string]attr.Type{
+	"api_code_repo": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModel represents custom_api_auth_discovery block
 type HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModel struct {
 	APIDiscoveryRef *HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel `tfsdk:"api_discovery_ref"`
+}
+
+// HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModel
+var HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModelAttrTypes = map[string]attr.Type{
+	"api_discovery_ref": types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModelAttrTypes},
 }
 
 // HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel represents api_discovery_ref block
@@ -2797,9 +5538,21 @@ type HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefMode
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel
+var HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModel represents discovered_api_settings block
 type HTTPLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModel struct {
 	PurgeDurationForInactiveDiscoveredApis types.Int64 `tfsdk:"purge_duration_for_inactive_discovered_apis"`
+}
+
+// HTTPLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModel
+var HTTPLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModelAttrTypes = map[string]attr.Type{
+	"purge_duration_for_inactive_discovered_apis": types.Int64Type,
 }
 
 // HTTPLoadBalancerEnableChallengeModel represents enable_challenge block
@@ -2812,10 +5565,26 @@ type HTTPLoadBalancerEnableChallengeModel struct {
 	MaliciousUserMitigation           *HTTPLoadBalancerEnableChallengeMaliciousUserMitigationModel    `tfsdk:"malicious_user_mitigation"`
 }
 
+// HTTPLoadBalancerEnableChallengeModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableChallengeModel
+var HTTPLoadBalancerEnableChallengeModelAttrTypes = map[string]attr.Type{
+	"captcha_challenge_parameters":         types.ObjectType{AttrTypes: HTTPLoadBalancerEnableChallengeCaptchaChallengeParametersModelAttrTypes},
+	"default_captcha_challenge_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_js_challenge_parameters":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_mitigation_settings":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_challenge_parameters":              types.ObjectType{AttrTypes: HTTPLoadBalancerEnableChallengeJsChallengeParametersModelAttrTypes},
+	"malicious_user_mitigation":            types.ObjectType{AttrTypes: HTTPLoadBalancerEnableChallengeMaliciousUserMitigationModelAttrTypes},
+}
+
 // HTTPLoadBalancerEnableChallengeCaptchaChallengeParametersModel represents captcha_challenge_parameters block
 type HTTPLoadBalancerEnableChallengeCaptchaChallengeParametersModel struct {
 	CookieExpiry types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage   types.String `tfsdk:"custom_page"`
+}
+
+// HTTPLoadBalancerEnableChallengeCaptchaChallengeParametersModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableChallengeCaptchaChallengeParametersModel
+var HTTPLoadBalancerEnableChallengeCaptchaChallengeParametersModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry": types.Int64Type,
+	"custom_page":   types.StringType,
 }
 
 // HTTPLoadBalancerEnableChallengeJsChallengeParametersModel represents js_challenge_parameters block
@@ -2825,6 +5594,13 @@ type HTTPLoadBalancerEnableChallengeJsChallengeParametersModel struct {
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
+// HTTPLoadBalancerEnableChallengeJsChallengeParametersModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableChallengeJsChallengeParametersModel
+var HTTPLoadBalancerEnableChallengeJsChallengeParametersModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry":   types.Int64Type,
+	"custom_page":     types.StringType,
+	"js_script_delay": types.Int64Type,
+}
+
 // HTTPLoadBalancerEnableChallengeMaliciousUserMitigationModel represents malicious_user_mitigation block
 type HTTPLoadBalancerEnableChallengeMaliciousUserMitigationModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -2832,14 +5608,31 @@ type HTTPLoadBalancerEnableChallengeMaliciousUserMitigationModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerEnableChallengeMaliciousUserMitigationModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableChallengeMaliciousUserMitigationModel
+var HTTPLoadBalancerEnableChallengeMaliciousUserMitigationModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerEnableIPReputationModel represents enable_ip_reputation block
 type HTTPLoadBalancerEnableIPReputationModel struct {
 	IPThreatCategories types.List `tfsdk:"ip_threat_categories"`
 }
 
+// HTTPLoadBalancerEnableIPReputationModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableIPReputationModel
+var HTTPLoadBalancerEnableIPReputationModelAttrTypes = map[string]attr.Type{
+	"ip_threat_categories": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerEnableTrustClientIPHeadersModel represents enable_trust_client_ip_headers block
 type HTTPLoadBalancerEnableTrustClientIPHeadersModel struct {
 	ClientIPHeaders types.List `tfsdk:"client_ip_headers"`
+}
+
+// HTTPLoadBalancerEnableTrustClientIPHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableTrustClientIPHeadersModel
+var HTTPLoadBalancerEnableTrustClientIPHeadersModelAttrTypes = map[string]attr.Type{
+	"client_ip_headers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerGraphqlRulesModel represents graphql_rules block
@@ -2854,6 +5647,18 @@ type HTTPLoadBalancerGraphqlRulesModel struct {
 	MethodPost      *HTTPLoadBalancerEmptyModel                       `tfsdk:"method_post"`
 }
 
+// HTTPLoadBalancerGraphqlRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerGraphqlRulesModel
+var HTTPLoadBalancerGraphqlRulesModelAttrTypes = map[string]attr.Type{
+	"exact_path":       types.StringType,
+	"exact_value":      types.StringType,
+	"suffix_value":     types.StringType,
+	"any_domain":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"graphql_settings": types.ObjectType{AttrTypes: HTTPLoadBalancerGraphqlRulesGraphqlSettingsModelAttrTypes},
+	"metadata":         types.ObjectType{AttrTypes: HTTPLoadBalancerGraphqlRulesMetadataModelAttrTypes},
+	"method_get":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"method_post":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel represents graphql_settings block
 type HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel struct {
 	MaxBatchedQueries    types.Int64                 `tfsdk:"max_batched_queries"`
@@ -2863,10 +5668,25 @@ type HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel struct {
 	EnableIntrospection  *HTTPLoadBalancerEmptyModel `tfsdk:"enable_introspection"`
 }
 
+// HTTPLoadBalancerGraphqlRulesGraphqlSettingsModelAttrTypes defines the attribute types for HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel
+var HTTPLoadBalancerGraphqlRulesGraphqlSettingsModelAttrTypes = map[string]attr.Type{
+	"max_batched_queries":   types.Int64Type,
+	"max_depth":             types.Int64Type,
+	"max_total_length":      types.Int64Type,
+	"disable_introspection": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_introspection":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerGraphqlRulesMetadataModel represents metadata block
 type HTTPLoadBalancerGraphqlRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerGraphqlRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerGraphqlRulesMetadataModel
+var HTTPLoadBalancerGraphqlRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerHTTPModel represents http block
@@ -2874,6 +5694,13 @@ type HTTPLoadBalancerHTTPModel struct {
 	DNSVolterraManaged types.Bool   `tfsdk:"dns_volterra_managed"`
 	Port               types.Int64  `tfsdk:"port"`
 	PortRanges         types.String `tfsdk:"port_ranges"`
+}
+
+// HTTPLoadBalancerHTTPModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPModel
+var HTTPLoadBalancerHTTPModelAttrTypes = map[string]attr.Type{
+	"dns_volterra_managed": types.BoolType,
+	"port":                 types.Int64Type,
+	"port_ranges":          types.StringType,
 }
 
 // HTTPLoadBalancerHTTPSModel represents https block
@@ -2897,10 +5724,37 @@ type HTTPLoadBalancerHTTPSModel struct {
 	TLSParameters          *HTTPLoadBalancerHTTPSTLSParametersModel       `tfsdk:"tls_parameters"`
 }
 
+// HTTPLoadBalancerHTTPSModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSModel
+var HTTPLoadBalancerHTTPSModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
 type HTTPLoadBalancerHTTPSCoalescingOptionsModel struct {
 	DefaultCoalescing *HTTPLoadBalancerEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *HTTPLoadBalancerEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// HTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSCoalescingOptionsModel
+var HTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerHTTPSHTTPProtocolOptionsModel represents http_protocol_options block
@@ -2910,9 +5764,21 @@ type HTTPLoadBalancerHTTPSHTTPProtocolOptionsModel struct {
 	HTTPProtocolEnableV2Only *HTTPLoadBalancerEmptyModel                                            `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// HTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
+var HTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -2923,6 +5789,14 @@ type HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTrans
 	ProperCaseHeaderTransformation   *HTTPLoadBalancerEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerHTTPSTLSCertParamsModel represents tls_cert_params block
 type HTTPLoadBalancerHTTPSTLSCertParamsModel struct {
 	Certificates []HTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel `tfsdk:"certificates"`
@@ -2931,11 +5805,26 @@ type HTTPLoadBalancerHTTPSTLSCertParamsModel struct {
 	UseMtls      *HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel       `tfsdk:"use_mtls"`
 }
 
+// HTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSCertParamsModel
+var HTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
+	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
+	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":     types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
+}
+
 // HTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel represents certificates block
 type HTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSCertParamsCertificatesModel
+var HTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel represents tls_config block
@@ -2946,11 +5835,26 @@ type HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel struct {
 	MediumSecurity  *HTTPLoadBalancerEmptyModel                                     `tfsdk:"medium_security"`
 }
 
+// HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModel
+var HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel represents custom_security block
 type HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModel
+var HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel represents use_mtls block
@@ -2964,11 +5868,29 @@ type HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel struct {
 	XfccOptions               *HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModel
+var HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel represents crl block
 type HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModel
+var HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel represents trusted_ca block
@@ -2978,9 +5900,21 @@ type HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModel
+var HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel represents xfcc_options block
 type HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModel
+var HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerHTTPSTLSParametersModel represents tls_parameters block
@@ -2989,6 +5923,14 @@ type HTTPLoadBalancerHTTPSTLSParametersModel struct {
 	TLSCertificates []HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel `tfsdk:"tls_certificates"`
 	TLSConfig       *HTTPLoadBalancerHTTPSTLSParametersTLSConfigModel        `tfsdk:"tls_config"`
 	UseMtls         *HTTPLoadBalancerHTTPSTLSParametersUseMtlsModel          `tfsdk:"use_mtls"`
+}
+
+// HTTPLoadBalancerHTTPSTLSParametersModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersModel
+var HTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
+	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
+	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":         types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
 // HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel represents tls_certificates block
@@ -3001,15 +5943,36 @@ type HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel struct {
 	UseSystemDefaults    *HTTPLoadBalancerEmptyModel                                                 `tfsdk:"use_system_defaults"`
 }
 
+// HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModel
+var HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes = map[string]attr.Type{
+	"certificate_url":        types.StringType,
+	"description_spec":       types.StringType,
+	"custom_hash_algorithms": types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
+	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel represents custom_hash_algorithms block
 type HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel struct {
 	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModel
+var HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel represents private_key block
 type HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModel
+var HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -3019,10 +5982,23 @@ type HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretI
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModel
+var HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModel
+var HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerHTTPSTLSParametersTLSConfigModel represents tls_config block
@@ -3033,11 +6009,26 @@ type HTTPLoadBalancerHTTPSTLSParametersTLSConfigModel struct {
 	MediumSecurity  *HTTPLoadBalancerEmptyModel                                     `tfsdk:"medium_security"`
 }
 
+// HTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersTLSConfigModel
+var HTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel represents custom_security block
 type HTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// HTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModel
+var HTTPLoadBalancerHTTPSTLSParametersTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // HTTPLoadBalancerHTTPSTLSParametersUseMtlsModel represents use_mtls block
@@ -3051,11 +6042,29 @@ type HTTPLoadBalancerHTTPSTLSParametersUseMtlsModel struct {
 	XfccOptions               *HTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// HTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersUseMtlsModel
+var HTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // HTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel represents crl block
 type HTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModel
+var HTTPLoadBalancerHTTPSTLSParametersUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel represents trusted_ca block
@@ -3065,9 +6074,21 @@ type HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModel
+var HTTPLoadBalancerHTTPSTLSParametersUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel represents xfcc_options block
 type HTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// HTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModel
+var HTTPLoadBalancerHTTPSTLSParametersUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerHTTPSAutoCertModel represents https_auto_cert block
@@ -3092,10 +6113,38 @@ type HTTPLoadBalancerHTTPSAutoCertModel struct {
 	UseMtls                *HTTPLoadBalancerHTTPSAutoCertUseMtlsModel             `tfsdk:"use_mtls"`
 }
 
+// HTTPLoadBalancerHTTPSAutoCertModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertModel
+var HTTPLoadBalancerHTTPSAutoCertModelAttrTypes = map[string]attr.Type{
+	"add_hsts":                 types.BoolType,
+	"append_server_name":       types.StringType,
+	"connection_idle_timeout":  types.Int64Type,
+	"http_redirect":            types.BoolType,
+	"port":                     types.Int64Type,
+	"port_ranges":              types.StringType,
+	"server_name":              types.StringType,
+	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                 types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
+}
+
 // HTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel represents coalescing_options block
 type HTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel struct {
 	DefaultCoalescing *HTTPLoadBalancerEmptyModel `tfsdk:"default_coalescing"`
 	StrictCoalescing  *HTTPLoadBalancerEmptyModel `tfsdk:"strict_coalescing"`
+}
+
+// HTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModel
+var HTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes = map[string]attr.Type{
+	"default_coalescing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"strict_coalescing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel represents http_protocol_options block
@@ -3105,9 +6154,21 @@ type HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel struct {
 	HTTPProtocolEnableV2Only *HTTPLoadBalancerEmptyModel                                                    `tfsdk:"http_protocol_enable_v2_only"`
 }
 
+// HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
+var HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel represents http_protocol_enable_v1_only block
 type HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 	HeaderTransformation *HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel `tfsdk:"header_transformation"`
+}
+
+// HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
+var HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
+	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -3118,6 +6179,14 @@ type HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHea
 	ProperCaseHeaderTransformation   *HTTPLoadBalancerEmptyModel `tfsdk:"proper_case_header_transformation"`
 }
 
+// HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel
+var HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes = map[string]attr.Type{
+	"default_header_transformation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"legacy_header_transformation":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"preserve_case_header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"proper_case_header_transformation":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
 type HTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
 	CustomSecurity  *HTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel `tfsdk:"custom_security"`
@@ -3126,11 +6195,26 @@ type HTTPLoadBalancerHTTPSAutoCertTLSConfigModel struct {
 	MediumSecurity  *HTTPLoadBalancerEmptyModel                                `tfsdk:"medium_security"`
 }
 
+// HTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertTLSConfigModel
+var HTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes = map[string]attr.Type{
+	"custom_security":  types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes},
+	"default_security": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"low_security":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"medium_security":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel represents custom_security block
 type HTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel struct {
 	CipherSuites types.List   `tfsdk:"cipher_suites"`
 	MaxVersion   types.String `tfsdk:"max_version"`
 	MinVersion   types.String `tfsdk:"min_version"`
+}
+
+// HTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModel
+var HTTPLoadBalancerHTTPSAutoCertTLSConfigCustomSecurityModelAttrTypes = map[string]attr.Type{
+	"cipher_suites": types.ListType{ElemType: types.StringType},
+	"max_version":   types.StringType,
+	"min_version":   types.StringType,
 }
 
 // HTTPLoadBalancerHTTPSAutoCertUseMtlsModel represents use_mtls block
@@ -3144,11 +6228,29 @@ type HTTPLoadBalancerHTTPSAutoCertUseMtlsModel struct {
 	XfccOptions               *HTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel `tfsdk:"xfcc_options"`
 }
 
+// HTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertUseMtlsModel
+var HTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes = map[string]attr.Type{
+	"client_certificate_optional": types.BoolType,
+	"trusted_ca_url":              types.StringType,
+	"crl":                         types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes},
+	"no_crl":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                  types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes},
+	"xfcc_disabled":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"xfcc_options":                types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes},
+}
+
 // HTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel represents crl block
 type HTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModel
+var HTTPLoadBalancerHTTPSAutoCertUseMtlsCRLModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel represents trusted_ca block
@@ -3158,9 +6260,21 @@ type HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModel
+var HTTPLoadBalancerHTTPSAutoCertUseMtlsTrustedCAModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel represents xfcc_options block
 type HTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel struct {
 	XfccHeaderElements types.List `tfsdk:"xfcc_header_elements"`
+}
+
+// HTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModel
+var HTTPLoadBalancerHTTPSAutoCertUseMtlsXfccOptionsModelAttrTypes = map[string]attr.Type{
+	"xfcc_header_elements": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerJsChallengeModel represents js_challenge block
@@ -3168,6 +6282,13 @@ type HTTPLoadBalancerJsChallengeModel struct {
 	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage    types.String `tfsdk:"custom_page"`
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
+}
+
+// HTTPLoadBalancerJsChallengeModelAttrTypes defines the attribute types for HTTPLoadBalancerJsChallengeModel
+var HTTPLoadBalancerJsChallengeModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry":   types.Int64Type,
+	"custom_page":     types.StringType,
+	"js_script_delay": types.Int64Type,
 }
 
 // HTTPLoadBalancerJWTValidationModel represents jwt_validation block
@@ -3180,10 +6301,26 @@ type HTTPLoadBalancerJWTValidationModel struct {
 	TokenLocation   *HTTPLoadBalancerJWTValidationTokenLocationModel   `tfsdk:"token_location"`
 }
 
+// HTTPLoadBalancerJWTValidationModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationModel
+var HTTPLoadBalancerJWTValidationModelAttrTypes = map[string]attr.Type{
+	"action":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"jwks_config":      types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationJwksConfigModelAttrTypes},
+	"mandatory_claims": types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationMandatoryClaimsModelAttrTypes},
+	"reserved_claims":  types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationReservedClaimsModelAttrTypes},
+	"target":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"token_location":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerJWTValidationActionModel represents action block
 type HTTPLoadBalancerJWTValidationActionModel struct {
 	Block  *HTTPLoadBalancerEmptyModel `tfsdk:"block"`
 	Report *HTTPLoadBalancerEmptyModel `tfsdk:"report"`
+}
+
+// HTTPLoadBalancerJWTValidationActionModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationActionModel
+var HTTPLoadBalancerJWTValidationActionModelAttrTypes = map[string]attr.Type{
+	"block":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"report": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerJWTValidationJwksConfigModel represents jwks_config block
@@ -3191,9 +6328,19 @@ type HTTPLoadBalancerJWTValidationJwksConfigModel struct {
 	Cleartext types.String `tfsdk:"cleartext"`
 }
 
+// HTTPLoadBalancerJWTValidationJwksConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationJwksConfigModel
+var HTTPLoadBalancerJWTValidationJwksConfigModelAttrTypes = map[string]attr.Type{
+	"cleartext": types.StringType,
+}
+
 // HTTPLoadBalancerJWTValidationMandatoryClaimsModel represents mandatory_claims block
 type HTTPLoadBalancerJWTValidationMandatoryClaimsModel struct {
 	ClaimNames types.List `tfsdk:"claim_names"`
+}
+
+// HTTPLoadBalancerJWTValidationMandatoryClaimsModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationMandatoryClaimsModel
+var HTTPLoadBalancerJWTValidationMandatoryClaimsModelAttrTypes = map[string]attr.Type{
+	"claim_names": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerJWTValidationReservedClaimsModel represents reserved_claims block
@@ -3206,9 +6353,24 @@ type HTTPLoadBalancerJWTValidationReservedClaimsModel struct {
 	ValidatePeriodEnable  *HTTPLoadBalancerEmptyModel                               `tfsdk:"validate_period_enable"`
 }
 
+// HTTPLoadBalancerJWTValidationReservedClaimsModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationReservedClaimsModel
+var HTTPLoadBalancerJWTValidationReservedClaimsModelAttrTypes = map[string]attr.Type{
+	"issuer":                  types.StringType,
+	"audience":                types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationReservedClaimsAudienceModelAttrTypes},
+	"audience_disable":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"issuer_disable":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validate_period_disable": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validate_period_enable":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerJWTValidationReservedClaimsAudienceModel represents audience block
 type HTTPLoadBalancerJWTValidationReservedClaimsAudienceModel struct {
 	Audiences types.List `tfsdk:"audiences"`
+}
+
+// HTTPLoadBalancerJWTValidationReservedClaimsAudienceModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationReservedClaimsAudienceModel
+var HTTPLoadBalancerJWTValidationReservedClaimsAudienceModelAttrTypes = map[string]attr.Type{
+	"audiences": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerJWTValidationTargetModel represents target block
@@ -3218,9 +6380,21 @@ type HTTPLoadBalancerJWTValidationTargetModel struct {
 	BasePaths   *HTTPLoadBalancerJWTValidationTargetBasePathsModel `tfsdk:"base_paths"`
 }
 
+// HTTPLoadBalancerJWTValidationTargetModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationTargetModel
+var HTTPLoadBalancerJWTValidationTargetModelAttrTypes = map[string]attr.Type{
+	"all_endpoint": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_groups":   types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationTargetAPIGroupsModelAttrTypes},
+	"base_paths":   types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationTargetBasePathsModelAttrTypes},
+}
+
 // HTTPLoadBalancerJWTValidationTargetAPIGroupsModel represents api_groups block
 type HTTPLoadBalancerJWTValidationTargetAPIGroupsModel struct {
 	APIGroups types.List `tfsdk:"api_groups"`
+}
+
+// HTTPLoadBalancerJWTValidationTargetAPIGroupsModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationTargetAPIGroupsModel
+var HTTPLoadBalancerJWTValidationTargetAPIGroupsModelAttrTypes = map[string]attr.Type{
+	"api_groups": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerJWTValidationTargetBasePathsModel represents base_paths block
@@ -3228,9 +6402,19 @@ type HTTPLoadBalancerJWTValidationTargetBasePathsModel struct {
 	BasePaths types.List `tfsdk:"base_paths"`
 }
 
+// HTTPLoadBalancerJWTValidationTargetBasePathsModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationTargetBasePathsModel
+var HTTPLoadBalancerJWTValidationTargetBasePathsModelAttrTypes = map[string]attr.Type{
+	"base_paths": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerJWTValidationTokenLocationModel represents token_location block
 type HTTPLoadBalancerJWTValidationTokenLocationModel struct {
 	BearerToken *HTTPLoadBalancerEmptyModel `tfsdk:"bearer_token"`
+}
+
+// HTTPLoadBalancerJWTValidationTokenLocationModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationTokenLocationModel
+var HTTPLoadBalancerJWTValidationTokenLocationModelAttrTypes = map[string]attr.Type{
+	"bearer_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerL7DDOSActionJsChallengeModel represents l7_ddos_action_js_challenge block
@@ -3238,6 +6422,13 @@ type HTTPLoadBalancerL7DDOSActionJsChallengeModel struct {
 	CookieExpiry  types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage    types.String `tfsdk:"custom_page"`
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
+}
+
+// HTTPLoadBalancerL7DDOSActionJsChallengeModelAttrTypes defines the attribute types for HTTPLoadBalancerL7DDOSActionJsChallengeModel
+var HTTPLoadBalancerL7DDOSActionJsChallengeModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry":   types.Int64Type,
+	"custom_page":     types.StringType,
+	"js_script_delay": types.Int64Type,
 }
 
 // HTTPLoadBalancerL7DDOSProtectionModel represents l7_ddos_protection block
@@ -3254,10 +6445,30 @@ type HTTPLoadBalancerL7DDOSProtectionModel struct {
 	MitigationJsChallenge            *HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel            `tfsdk:"mitigation_js_challenge"`
 }
 
+// HTTPLoadBalancerL7DDOSProtectionModelAttrTypes defines the attribute types for HTTPLoadBalancerL7DDOSProtectionModel
+var HTTPLoadBalancerL7DDOSProtectionModelAttrTypes = map[string]attr.Type{
+	"rps_threshold":                       types.Int64Type,
+	"clientside_action_captcha_challenge": types.ObjectType{AttrTypes: HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModelAttrTypes},
+	"clientside_action_js_challenge":      types.ObjectType{AttrTypes: HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModelAttrTypes},
+	"clientside_action_none":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ddos_policy_custom":                  types.ObjectType{AttrTypes: HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModelAttrTypes},
+	"ddos_policy_none":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_rps_threshold":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mitigation_block":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mitigation_captcha_challenge":        types.ObjectType{AttrTypes: HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModelAttrTypes},
+	"mitigation_js_challenge":             types.ObjectType{AttrTypes: HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModelAttrTypes},
+}
+
 // HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel represents clientside_action_captcha_challenge block
 type HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel struct {
 	CookieExpiry types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage   types.String `tfsdk:"custom_page"`
+}
+
+// HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModelAttrTypes defines the attribute types for HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModel
+var HTTPLoadBalancerL7DDOSProtectionClientsideActionCaptchaChallengeModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry": types.Int64Type,
+	"custom_page":   types.StringType,
 }
 
 // HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel represents clientside_action_js_challenge block
@@ -3267,6 +6478,13 @@ type HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel struct {
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
+// HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModelAttrTypes defines the attribute types for HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModel
+var HTTPLoadBalancerL7DDOSProtectionClientsideActionJsChallengeModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry":   types.Int64Type,
+	"custom_page":     types.StringType,
+	"js_script_delay": types.Int64Type,
+}
+
 // HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel represents ddos_policy_custom block
 type HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -3274,10 +6492,23 @@ type HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModelAttrTypes defines the attribute types for HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModel
+var HTTPLoadBalancerL7DDOSProtectionDDOSPolicyCustomModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel represents mitigation_captcha_challenge block
 type HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel struct {
 	CookieExpiry types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage   types.String `tfsdk:"custom_page"`
+}
+
+// HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModelAttrTypes defines the attribute types for HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModel
+var HTTPLoadBalancerL7DDOSProtectionMitigationCaptchaChallengeModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry": types.Int64Type,
+	"custom_page":   types.StringType,
 }
 
 // HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel represents mitigation_js_challenge block
@@ -3287,9 +6518,21 @@ type HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel struct {
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
+// HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModelAttrTypes defines the attribute types for HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModel
+var HTTPLoadBalancerL7DDOSProtectionMitigationJsChallengeModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry":   types.Int64Type,
+	"custom_page":     types.StringType,
+	"js_script_delay": types.Int64Type,
+}
+
 // HTTPLoadBalancerMalwareProtectionSettingsModel represents malware_protection_settings block
 type HTTPLoadBalancerMalwareProtectionSettingsModel struct {
 	MalwareProtectionRules []HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel `tfsdk:"malware_protection_rules"`
+}
+
+// HTTPLoadBalancerMalwareProtectionSettingsModelAttrTypes defines the attribute types for HTTPLoadBalancerMalwareProtectionSettingsModel
+var HTTPLoadBalancerMalwareProtectionSettingsModelAttrTypes = map[string]attr.Type{
+	"malware_protection_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel represents malware_protection_rules block
@@ -3301,16 +6544,37 @@ type HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel struct
 	Path        *HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModel     `tfsdk:"path"`
 }
 
+// HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel
+var HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModelAttrTypes = map[string]attr.Type{
+	"http_methods": types.ListType{ElemType: types.StringType},
+	"action":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metadata":     types.ObjectType{AttrTypes: HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModelAttrTypes},
+	"path":         types.ObjectType{AttrTypes: HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModelAttrTypes},
+}
+
 // HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesActionModel represents action block
 type HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesActionModel struct {
 	Block  *HTTPLoadBalancerEmptyModel `tfsdk:"block"`
 	Report *HTTPLoadBalancerEmptyModel `tfsdk:"report"`
 }
 
+// HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesActionModelAttrTypes defines the attribute types for HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesActionModel
+var HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesActionModelAttrTypes = map[string]attr.Type{
+	"block":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"report": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainModel represents domain block
 type HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainModel struct {
 	AnyDomain *HTTPLoadBalancerEmptyModel                                                       `tfsdk:"any_domain"`
 	Domain    *HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainDomainModel `tfsdk:"domain"`
+}
+
+// HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainModel
+var HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainModelAttrTypes = map[string]attr.Type{
+	"any_domain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain":     types.ObjectType{AttrTypes: HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainDomainModelAttrTypes},
 }
 
 // HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainDomainModel represents domain block
@@ -3320,10 +6584,23 @@ type HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainDomain
 	SuffixValue types.String `tfsdk:"suffix_value"`
 }
 
+// HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainDomainModelAttrTypes defines the attribute types for HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainDomainModel
+var HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainDomainModelAttrTypes = map[string]attr.Type{
+	"exact_value":  types.StringType,
+	"regex_value":  types.StringType,
+	"suffix_value": types.StringType,
+}
+
 // HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModel represents metadata block
 type HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModel
+var HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModel represents path block
@@ -3331,6 +6608,13 @@ type HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModel st
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModelAttrTypes defines the attribute types for HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModel
+var HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // HTTPLoadBalancerMoreOptionModel represents more_option block
@@ -3353,10 +6637,36 @@ type HTTPLoadBalancerMoreOptionModel struct {
 	ResponseHeadersToAdd     []HTTPLoadBalancerMoreOptionResponseHeadersToAddModel `tfsdk:"response_headers_to_add"`
 }
 
+// HTTPLoadBalancerMoreOptionModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionModel
+var HTTPLoadBalancerMoreOptionModelAttrTypes = map[string]attr.Type{
+	"disable_default_error_pages": types.BoolType,
+	"idle_timeout":                types.Int64Type,
+	"max_request_header_size":     types.Int64Type,
+	"request_cookies_to_remove":   types.ListType{ElemType: types.StringType},
+	"request_headers_to_remove":   types.ListType{ElemType: types.StringType},
+	"response_cookies_to_remove":  types.ListType{ElemType: types.StringType},
+	"response_headers_to_remove":  types.ListType{ElemType: types.StringType},
+	"buffer_policy":               types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionBufferPolicyModelAttrTypes},
+	"compression_params":          types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionCompressionParamsModelAttrTypes},
+	"custom_errors":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_path_normalize":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_path_normalize":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_cookies_to_add":      types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionRequestCookiesToAddModelAttrTypes}},
+	"request_headers_to_add":      types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionRequestHeadersToAddModelAttrTypes}},
+	"response_cookies_to_add":     types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionResponseCookiesToAddModelAttrTypes}},
+	"response_headers_to_add":     types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionResponseHeadersToAddModelAttrTypes}},
+}
+
 // HTTPLoadBalancerMoreOptionBufferPolicyModel represents buffer_policy block
 type HTTPLoadBalancerMoreOptionBufferPolicyModel struct {
 	Disabled        types.Bool  `tfsdk:"disabled"`
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
+}
+
+// HTTPLoadBalancerMoreOptionBufferPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionBufferPolicyModel
+var HTTPLoadBalancerMoreOptionBufferPolicyModelAttrTypes = map[string]attr.Type{
+	"disabled":          types.BoolType,
+	"max_request_bytes": types.Int64Type,
 }
 
 // HTTPLoadBalancerMoreOptionCompressionParamsModel represents compression_params block
@@ -3367,6 +6677,14 @@ type HTTPLoadBalancerMoreOptionCompressionParamsModel struct {
 	RemoveAcceptEncodingHeader types.Bool  `tfsdk:"remove_accept_encoding_header"`
 }
 
+// HTTPLoadBalancerMoreOptionCompressionParamsModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionCompressionParamsModel
+var HTTPLoadBalancerMoreOptionCompressionParamsModelAttrTypes = map[string]attr.Type{
+	"content_length":                types.Int64Type,
+	"content_type":                  types.ListType{ElemType: types.StringType},
+	"disable_on_etag_header":        types.BoolType,
+	"remove_accept_encoding_header": types.BoolType,
+}
+
 // HTTPLoadBalancerMoreOptionRequestCookiesToAddModel represents request_cookies_to_add block
 type HTTPLoadBalancerMoreOptionRequestCookiesToAddModel struct {
 	Name        types.String                                                   `tfsdk:"name"`
@@ -3375,10 +6693,24 @@ type HTTPLoadBalancerMoreOptionRequestCookiesToAddModel struct {
 	SecretValue *HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// HTTPLoadBalancerMoreOptionRequestCookiesToAddModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionRequestCookiesToAddModel
+var HTTPLoadBalancerMoreOptionRequestCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"name":         types.StringType,
+	"overwrite":    types.BoolType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
 type HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModel
+var HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -3388,10 +6720,23 @@ type HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModel
+var HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModel
+var HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerMoreOptionRequestHeadersToAddModel represents request_headers_to_add block
@@ -3402,10 +6747,24 @@ type HTTPLoadBalancerMoreOptionRequestHeadersToAddModel struct {
 	SecretValue *HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// HTTPLoadBalancerMoreOptionRequestHeadersToAddModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionRequestHeadersToAddModel
+var HTTPLoadBalancerMoreOptionRequestHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
 type HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModel
+var HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -3415,10 +6774,23 @@ type HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfo
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModel
+var HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModel
+var HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerMoreOptionResponseCookiesToAddModel represents response_cookies_to_add block
@@ -3448,10 +6820,43 @@ type HTTPLoadBalancerMoreOptionResponseCookiesToAddModel struct {
 	SecretValue       *HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// HTTPLoadBalancerMoreOptionResponseCookiesToAddModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionResponseCookiesToAddModel
+var HTTPLoadBalancerMoreOptionResponseCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"add_domain":         types.StringType,
+	"add_expiry":         types.StringType,
+	"add_path":           types.StringType,
+	"max_age_value":      types.Int64Type,
+	"name":               types.StringType,
+	"overwrite":          types.BoolType,
+	"value":              types.StringType,
+	"add_httponly":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_partitioned":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_secure":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_expiry":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_httponly":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_max_age":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_partitioned": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_path":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_samesite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_secure":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
 type HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModel
+var HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -3461,10 +6866,23 @@ type HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInf
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModel
+var HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModel
+var HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerMoreOptionResponseHeadersToAddModel represents response_headers_to_add block
@@ -3475,10 +6893,24 @@ type HTTPLoadBalancerMoreOptionResponseHeadersToAddModel struct {
 	SecretValue *HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// HTTPLoadBalancerMoreOptionResponseHeadersToAddModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionResponseHeadersToAddModel
+var HTTPLoadBalancerMoreOptionResponseHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
 type HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModel
+var HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -3488,15 +6920,33 @@ type HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInf
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModel
+var HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModel
+var HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // HTTPLoadBalancerOriginServerSubsetRuleListModel represents origin_server_subset_rule_list block
 type HTTPLoadBalancerOriginServerSubsetRuleListModel struct {
 	OriginServerSubsetRules []HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel `tfsdk:"origin_server_subset_rules"`
+}
+
+// HTTPLoadBalancerOriginServerSubsetRuleListModelAttrTypes defines the attribute types for HTTPLoadBalancerOriginServerSubsetRuleListModel
+var HTTPLoadBalancerOriginServerSubsetRuleListModelAttrTypes = map[string]attr.Type{
+	"origin_server_subset_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel represents origin_server_subset_rules block
@@ -3515,14 +6965,40 @@ type HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel stru
 	OriginServerSubsetsAction *HTTPLoadBalancerEmptyModel                                                           `tfsdk:"origin_server_subsets_action"`
 }
 
+// HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModel
+var HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModelAttrTypes = map[string]attr.Type{
+	"country_codes":                types.ListType{ElemType: types.StringType},
+	"re_name_list":                 types.ListType{ElemType: types.StringType},
+	"any_asn":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_ip":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_list":                     types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModelAttrTypes},
+	"asn_matcher":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_selector":              types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModelAttrTypes},
+	"ip_matcher":                   types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModelAttrTypes},
+	"ip_prefix_list":               types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModelAttrTypes},
+	"metadata":                     types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesMetadataModelAttrTypes},
+	"none":                         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"origin_server_subsets_action": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModel represents asn_list block
 type HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModelAttrTypes defines the attribute types for HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModel
+var HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherModel represents asn_matcher block
 type HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherModel struct {
 	AsnSets []HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherModel
+var HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherModelAttrTypes = map[string]attr.Type{
+	"asn_sets": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherAsnSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherAsnSetsModel represents asn_sets block
@@ -3534,15 +7010,35 @@ type HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcher
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherAsnSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherAsnSetsModel
+var HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherAsnSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModel represents client_selector block
 type HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModelAttrTypes defines the attribute types for HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModel
+var HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModel represents ip_matcher block
 type HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModel struct {
 	InvertMatcher types.Bool                                                                                  `tfsdk:"invert_matcher"`
 	PrefixSets    []HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModel
+var HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"prefix_sets":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherPrefixSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherPrefixSetsModel represents prefix_sets block
@@ -3554,16 +7050,37 @@ type HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherP
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherPrefixSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherPrefixSetsModel
+var HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherPrefixSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModel represents ip_prefix_list block
 type HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
 }
 
+// HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModelAttrTypes defines the attribute types for HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModel
+var HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesMetadataModel represents metadata block
 type HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesMetadataModel
+var HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeModel represents policy_based_challenge block
@@ -3582,10 +7099,32 @@ type HTTPLoadBalancerPolicyBasedChallengeModel struct {
 	TemporaryUserBlocking              *HTTPLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModel      `tfsdk:"temporary_user_blocking"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeModel
+var HTTPLoadBalancerPolicyBasedChallengeModelAttrTypes = map[string]attr.Type{
+	"always_enable_captcha_challenge":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"always_enable_js_challenge":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"captcha_challenge_parameters":          types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModelAttrTypes},
+	"default_captcha_challenge_parameters":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_js_challenge_parameters":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_mitigation_settings":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_temporary_blocking_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_challenge_parameters":               types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeJsChallengeParametersModelAttrTypes},
+	"malicious_user_mitigation":             types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModelAttrTypes},
+	"no_challenge":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"rule_list":                             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"temporary_user_blocking":               types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModelAttrTypes},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModel represents captcha_challenge_parameters block
 type HTTPLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModel struct {
 	CookieExpiry types.Int64  `tfsdk:"cookie_expiry"`
 	CustomPage   types.String `tfsdk:"custom_page"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModel
+var HTTPLoadBalancerPolicyBasedChallengeCaptchaChallengeParametersModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry": types.Int64Type,
+	"custom_page":   types.StringType,
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeJsChallengeParametersModel represents js_challenge_parameters block
@@ -3595,6 +7134,13 @@ type HTTPLoadBalancerPolicyBasedChallengeJsChallengeParametersModel struct {
 	JsScriptDelay types.Int64  `tfsdk:"js_script_delay"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeJsChallengeParametersModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeJsChallengeParametersModel
+var HTTPLoadBalancerPolicyBasedChallengeJsChallengeParametersModelAttrTypes = map[string]attr.Type{
+	"cookie_expiry":   types.Int64Type,
+	"custom_page":     types.StringType,
+	"js_script_delay": types.Int64Type,
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel represents malicious_user_mitigation block
 type HTTPLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -3602,9 +7148,21 @@ type HTTPLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModel
+var HTTPLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListModel represents rule_list block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListModel struct {
 	Rules []HTTPLoadBalancerPolicyBasedChallengeRuleListRulesModel `tfsdk:"rules"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeRuleListModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListModelAttrTypes = map[string]attr.Type{
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesModel represents rules block
@@ -3613,10 +7171,22 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesModel struct {
 	Spec     *HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel     `tfsdk:"spec"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesModelAttrTypes = map[string]attr.Type{
+	"metadata": types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModelAttrTypes},
+	"spec":     types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecModelAttrTypes},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel represents metadata block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel represents spec block
@@ -3644,6 +7214,31 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel struct {
 	TLSFingerprintMatcher     *HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModel `tfsdk:"tls_fingerprint_matcher"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecModelAttrTypes = map[string]attr.Type{
+	"expiration_timestamp":        types.StringType,
+	"any_asn":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_client":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_ip":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"arg_matchers":                types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModelAttrTypes}},
+	"asn_list":                    types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModelAttrTypes},
+	"asn_matcher":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"body_matcher":                types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModelAttrTypes},
+	"client_selector":             types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModelAttrTypes},
+	"cookie_matchers":             types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModelAttrTypes}},
+	"disable_challenge":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"domain_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModelAttrTypes},
+	"enable_captcha_challenge":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_javascript_challenge": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"headers":                     types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModelAttrTypes}},
+	"http_method":                 types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModelAttrTypes},
+	"ip_matcher":                  types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModelAttrTypes},
+	"ip_prefix_list":              types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModelAttrTypes},
+	"path":                        types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModelAttrTypes},
+	"query_params":                types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModelAttrTypes}},
+	"tls_fingerprint_matcher":     types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModelAttrTypes},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel represents arg_matchers block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel struct {
 	InvertMatcher   types.Bool                                                                 `tfsdk:"invert_matcher"`
@@ -3653,6 +7248,15 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel struc
 	Item            *HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel represents item block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -3660,14 +7264,31 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel s
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModel represents asn_list block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModel struct {
 	AsNumbers types.List `tfsdk:"as_numbers"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModelAttrTypes = map[string]attr.Type{
+	"as_numbers": types.ListType{ElemType: types.Int64Type},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModel represents asn_matcher block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModel struct {
 	AsnSets []HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModel `tfsdk:"asn_sets"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModelAttrTypes = map[string]attr.Type{
+	"asn_sets": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModel represents asn_sets block
@@ -3679,6 +7300,15 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModel
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherAsnSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel represents body_matcher block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -3686,9 +7316,21 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel struc
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModel represents client_selector block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModel struct {
 	Expressions types.List `tfsdk:"expressions"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModelAttrTypes = map[string]attr.Type{
+	"expressions": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModel represents cookie_matchers block
@@ -3700,6 +7342,15 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModel st
 	Item            *HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel represents item block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
@@ -3707,10 +7358,23 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemMode
 	Transformers types.List `tfsdk:"transformers"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModel represents domain_matcher block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModel struct {
 	ExactValues types.List `tfsdk:"exact_values"`
 	RegexValues types.List `tfsdk:"regex_values"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecDomainMatcherModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModel represents headers block
@@ -3722,11 +7386,27 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModel struct {
 	Item            *HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"name":              types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel represents item block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHeadersItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModel represents http_method block
@@ -3735,10 +7415,22 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModel struct
 	Methods       types.List `tfsdk:"methods"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecHTTPMethodModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"methods":        types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModel represents ip_matcher block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModel struct {
 	InvertMatcher types.Bool                                                                      `tfsdk:"invert_matcher"`
 	PrefixSets    []HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModel `tfsdk:"prefix_sets"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherModelAttrTypes = map[string]attr.Type{
+	"invert_matcher": types.BoolType,
+	"prefix_sets":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModel represents prefix_sets block
@@ -3750,10 +7442,25 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsMod
 	Uid       types.String `tfsdk:"uid"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPMatcherPrefixSetsModelAttrTypes = map[string]attr.Type{
+	"kind":      types.StringType,
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+	"uid":       types.StringType,
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModel represents ip_prefix_list block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModel struct {
 	InvertMatch types.Bool `tfsdk:"invert_match"`
 	IPPrefixes  types.List `tfsdk:"ip_prefixes"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecIPPrefixListModelAttrTypes = map[string]attr.Type{
+	"invert_match": types.BoolType,
+	"ip_prefixes":  types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModel represents path block
@@ -3766,6 +7473,16 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModel struct {
 	Transformers  types.List `tfsdk:"transformers"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecPathModelAttrTypes = map[string]attr.Type{
+	"exact_values":   types.ListType{ElemType: types.StringType},
+	"invert_matcher": types.BoolType,
+	"prefix_values":  types.ListType{ElemType: types.StringType},
+	"regex_values":   types.ListType{ElemType: types.StringType},
+	"suffix_values":  types.ListType{ElemType: types.StringType},
+	"transformers":   types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel represents query_params block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel struct {
 	InvertMatcher   types.Bool                                                                 `tfsdk:"invert_matcher"`
@@ -3775,11 +7492,27 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel struc
 	Item            *HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel `tfsdk:"item"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsModelAttrTypes = map[string]attr.Type{
+	"invert_matcher":    types.BoolType,
+	"key":               types.StringType,
+	"check_not_present": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"check_present":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"item":              types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModelAttrTypes},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel represents item block
 type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel struct {
 	ExactValues  types.List `tfsdk:"exact_values"`
 	RegexValues  types.List `tfsdk:"regex_values"`
 	Transformers types.List `tfsdk:"transformers"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecQueryParamsItemModelAttrTypes = map[string]attr.Type{
+	"exact_values": types.ListType{ElemType: types.StringType},
+	"regex_values": types.ListType{ElemType: types.StringType},
+	"transformers": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModel represents tls_fingerprint_matcher block
@@ -3789,9 +7522,21 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherM
 	ExcludedValues types.List `tfsdk:"excluded_values"`
 }
 
+// HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModel
+var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecTLSFingerprintMatcherModelAttrTypes = map[string]attr.Type{
+	"classes":         types.ListType{ElemType: types.StringType},
+	"exact_values":    types.ListType{ElemType: types.StringType},
+	"excluded_values": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModel represents temporary_user_blocking block
 type HTTPLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModel struct {
 	CustomPage types.String `tfsdk:"custom_page"`
+}
+
+// HTTPLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModel
+var HTTPLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModelAttrTypes = map[string]attr.Type{
+	"custom_page": types.StringType,
 }
 
 // HTTPLoadBalancerProtectedCookiesModel represents protected_cookies block
@@ -3811,6 +7556,23 @@ type HTTPLoadBalancerProtectedCookiesModel struct {
 	SamesiteStrict             *HTTPLoadBalancerEmptyModel `tfsdk:"samesite_strict"`
 }
 
+// HTTPLoadBalancerProtectedCookiesModelAttrTypes defines the attribute types for HTTPLoadBalancerProtectedCookiesModel
+var HTTPLoadBalancerProtectedCookiesModelAttrTypes = map[string]attr.Type{
+	"max_age_value":                types.Int64Type,
+	"name":                         types.StringType,
+	"add_httponly":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_secure":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_tampering_protection": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_tampering_protection":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_httponly":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_max_age":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_samesite":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_secure":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_lax":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_none":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_strict":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRateLimitModel represents rate_limit block
 type HTTPLoadBalancerRateLimitModel struct {
 	CustomIPAllowedList *HTTPLoadBalancerRateLimitCustomIPAllowedListModel `tfsdk:"custom_ip_allowed_list"`
@@ -3821,9 +7583,24 @@ type HTTPLoadBalancerRateLimitModel struct {
 	RateLimiter         *HTTPLoadBalancerRateLimitRateLimiterModel         `tfsdk:"rate_limiter"`
 }
 
+// HTTPLoadBalancerRateLimitModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitModel
+var HTTPLoadBalancerRateLimitModelAttrTypes = map[string]attr.Type{
+	"custom_ip_allowed_list": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_allowed_list":        types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitIPAllowedListModelAttrTypes},
+	"no_ip_allowed_list":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_policies":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policies":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"rate_limiter":           types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitRateLimiterModelAttrTypes},
+}
+
 // HTTPLoadBalancerRateLimitCustomIPAllowedListModel represents custom_ip_allowed_list block
 type HTTPLoadBalancerRateLimitCustomIPAllowedListModel struct {
 	RateLimiterAllowedPrefixes []HTTPLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel `tfsdk:"rate_limiter_allowed_prefixes"`
+}
+
+// HTTPLoadBalancerRateLimitCustomIPAllowedListModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitCustomIPAllowedListModel
+var HTTPLoadBalancerRateLimitCustomIPAllowedListModelAttrTypes = map[string]attr.Type{
+	"rate_limiter_allowed_prefixes": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel represents rate_limiter_allowed_prefixes block
@@ -3833,9 +7610,21 @@ type HTTPLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModel
+var HTTPLoadBalancerRateLimitCustomIPAllowedListRateLimiterAllowedPrefixesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerRateLimitIPAllowedListModel represents ip_allowed_list block
 type HTTPLoadBalancerRateLimitIPAllowedListModel struct {
 	Prefixes types.List `tfsdk:"prefixes"`
+}
+
+// HTTPLoadBalancerRateLimitIPAllowedListModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitIPAllowedListModel
+var HTTPLoadBalancerRateLimitIPAllowedListModelAttrTypes = map[string]attr.Type{
+	"prefixes": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerRateLimitPoliciesModel represents policies block
@@ -3843,11 +7632,23 @@ type HTTPLoadBalancerRateLimitPoliciesModel struct {
 	Policies []HTTPLoadBalancerRateLimitPoliciesPoliciesModel `tfsdk:"policies"`
 }
 
+// HTTPLoadBalancerRateLimitPoliciesModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitPoliciesModel
+var HTTPLoadBalancerRateLimitPoliciesModelAttrTypes = map[string]attr.Type{
+	"policies": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitPoliciesPoliciesModelAttrTypes}},
+}
+
 // HTTPLoadBalancerRateLimitPoliciesPoliciesModel represents policies block
 type HTTPLoadBalancerRateLimitPoliciesPoliciesModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerRateLimitPoliciesPoliciesModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitPoliciesPoliciesModel
+var HTTPLoadBalancerRateLimitPoliciesPoliciesModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerRateLimitRateLimiterModel represents rate_limiter block
@@ -3862,6 +7663,18 @@ type HTTPLoadBalancerRateLimitRateLimiterModel struct {
 	TokenBucket      *HTTPLoadBalancerEmptyModel                           `tfsdk:"token_bucket"`
 }
 
+// HTTPLoadBalancerRateLimitRateLimiterModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitRateLimiterModel
+var HTTPLoadBalancerRateLimitRateLimiterModelAttrTypes = map[string]attr.Type{
+	"burst_multiplier":  types.Int64Type,
+	"period_multiplier": types.Int64Type,
+	"total_number":      types.Int64Type,
+	"unit":              types.StringType,
+	"action_block":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"leaky_bucket":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"token_bucket":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRateLimitRateLimiterActionBlockModel represents action_block block
 type HTTPLoadBalancerRateLimitRateLimiterActionBlockModel struct {
 	Hours   *HTTPLoadBalancerRateLimitRateLimiterActionBlockHoursModel   `tfsdk:"hours"`
@@ -3869,9 +7682,21 @@ type HTTPLoadBalancerRateLimitRateLimiterActionBlockModel struct {
 	Seconds *HTTPLoadBalancerRateLimitRateLimiterActionBlockSecondsModel `tfsdk:"seconds"`
 }
 
+// HTTPLoadBalancerRateLimitRateLimiterActionBlockModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitRateLimiterActionBlockModel
+var HTTPLoadBalancerRateLimitRateLimiterActionBlockModelAttrTypes = map[string]attr.Type{
+	"hours":   types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitRateLimiterActionBlockHoursModelAttrTypes},
+	"minutes": types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitRateLimiterActionBlockMinutesModelAttrTypes},
+	"seconds": types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitRateLimiterActionBlockSecondsModelAttrTypes},
+}
+
 // HTTPLoadBalancerRateLimitRateLimiterActionBlockHoursModel represents hours block
 type HTTPLoadBalancerRateLimitRateLimiterActionBlockHoursModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
+}
+
+// HTTPLoadBalancerRateLimitRateLimiterActionBlockHoursModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitRateLimiterActionBlockHoursModel
+var HTTPLoadBalancerRateLimitRateLimiterActionBlockHoursModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
 }
 
 // HTTPLoadBalancerRateLimitRateLimiterActionBlockMinutesModel represents minutes block
@@ -3879,14 +7704,29 @@ type HTTPLoadBalancerRateLimitRateLimiterActionBlockMinutesModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
 }
 
+// HTTPLoadBalancerRateLimitRateLimiterActionBlockMinutesModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitRateLimiterActionBlockMinutesModel
+var HTTPLoadBalancerRateLimitRateLimiterActionBlockMinutesModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
+}
+
 // HTTPLoadBalancerRateLimitRateLimiterActionBlockSecondsModel represents seconds block
 type HTTPLoadBalancerRateLimitRateLimiterActionBlockSecondsModel struct {
 	Duration types.Int64 `tfsdk:"duration"`
 }
 
+// HTTPLoadBalancerRateLimitRateLimiterActionBlockSecondsModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitRateLimiterActionBlockSecondsModel
+var HTTPLoadBalancerRateLimitRateLimiterActionBlockSecondsModelAttrTypes = map[string]attr.Type{
+	"duration": types.Int64Type,
+}
+
 // HTTPLoadBalancerRingHashModel represents ring_hash block
 type HTTPLoadBalancerRingHashModel struct {
 	HashPolicy []HTTPLoadBalancerRingHashHashPolicyModel `tfsdk:"hash_policy"`
+}
+
+// HTTPLoadBalancerRingHashModelAttrTypes defines the attribute types for HTTPLoadBalancerRingHashModel
+var HTTPLoadBalancerRingHashModelAttrTypes = map[string]attr.Type{
+	"hash_policy": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRingHashHashPolicyModelAttrTypes}},
 }
 
 // HTTPLoadBalancerRingHashHashPolicyModel represents hash_policy block
@@ -3895,6 +7735,14 @@ type HTTPLoadBalancerRingHashHashPolicyModel struct {
 	SourceIP   types.Bool                                     `tfsdk:"source_ip"`
 	Terminal   types.Bool                                     `tfsdk:"terminal"`
 	Cookie     *HTTPLoadBalancerRingHashHashPolicyCookieModel `tfsdk:"cookie"`
+}
+
+// HTTPLoadBalancerRingHashHashPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerRingHashHashPolicyModel
+var HTTPLoadBalancerRingHashHashPolicyModelAttrTypes = map[string]attr.Type{
+	"header_name": types.StringType,
+	"source_ip":   types.BoolType,
+	"terminal":    types.BoolType,
+	"cookie":      types.ObjectType{AttrTypes: HTTPLoadBalancerRingHashHashPolicyCookieModelAttrTypes},
 }
 
 // HTTPLoadBalancerRingHashHashPolicyCookieModel represents cookie block
@@ -3912,6 +7760,21 @@ type HTTPLoadBalancerRingHashHashPolicyCookieModel struct {
 	SamesiteStrict *HTTPLoadBalancerEmptyModel `tfsdk:"samesite_strict"`
 }
 
+// HTTPLoadBalancerRingHashHashPolicyCookieModelAttrTypes defines the attribute types for HTTPLoadBalancerRingHashHashPolicyCookieModel
+var HTTPLoadBalancerRingHashHashPolicyCookieModelAttrTypes = map[string]attr.Type{
+	"name":            types.StringType,
+	"path":            types.StringType,
+	"ttl":             types.Int64Type,
+	"add_httponly":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_secure":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_httponly": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_samesite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_secure":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_lax":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_none":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_strict": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRoutesModel represents routes block
 type HTTPLoadBalancerRoutesModel struct {
 	CustomRouteObject   *HTTPLoadBalancerRoutesCustomRouteObjectModel   `tfsdk:"custom_route_object"`
@@ -3920,9 +7783,22 @@ type HTTPLoadBalancerRoutesModel struct {
 	SimpleRoute         *HTTPLoadBalancerRoutesSimpleRouteModel         `tfsdk:"simple_route"`
 }
 
+// HTTPLoadBalancerRoutesModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesModel
+var HTTPLoadBalancerRoutesModelAttrTypes = map[string]attr.Type{
+	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"direct_response_route": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesDirectResponseRouteModelAttrTypes},
+	"redirect_route":        types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesRedirectRouteModelAttrTypes},
+	"simple_route":          types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteModelAttrTypes},
+}
+
 // HTTPLoadBalancerRoutesCustomRouteObjectModel represents custom_route_object block
 type HTTPLoadBalancerRoutesCustomRouteObjectModel struct {
 	RouteRef *HTTPLoadBalancerRoutesCustomRouteObjectRouteRefModel `tfsdk:"route_ref"`
+}
+
+// HTTPLoadBalancerRoutesCustomRouteObjectModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesCustomRouteObjectModel
+var HTTPLoadBalancerRoutesCustomRouteObjectModelAttrTypes = map[string]attr.Type{
+	"route_ref": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesCustomRouteObjectRouteRefModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesCustomRouteObjectRouteRefModel represents route_ref block
@@ -3930,6 +7806,13 @@ type HTTPLoadBalancerRoutesCustomRouteObjectRouteRefModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerRoutesCustomRouteObjectRouteRefModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesCustomRouteObjectRouteRefModel
+var HTTPLoadBalancerRoutesCustomRouteObjectRouteRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerRoutesDirectResponseRouteModel represents direct_response_route block
@@ -3941,6 +7824,15 @@ type HTTPLoadBalancerRoutesDirectResponseRouteModel struct {
 	RouteDirectResponse *HTTPLoadBalancerRoutesDirectResponseRouteRouteDirectResponseModel `tfsdk:"route_direct_response"`
 }
 
+// HTTPLoadBalancerRoutesDirectResponseRouteModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesDirectResponseRouteModel
+var HTTPLoadBalancerRoutesDirectResponseRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":           types.StringType,
+	"headers":               types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesDirectResponseRouteHeadersModelAttrTypes}},
+	"incoming_port":         types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesDirectResponseRouteIncomingPortModelAttrTypes},
+	"path":                  types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesDirectResponseRoutePathModelAttrTypes},
+	"route_direct_response": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes},
+}
+
 // HTTPLoadBalancerRoutesDirectResponseRouteHeadersModel represents headers block
 type HTTPLoadBalancerRoutesDirectResponseRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -3950,11 +7842,27 @@ type HTTPLoadBalancerRoutesDirectResponseRouteHeadersModel struct {
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerRoutesDirectResponseRouteHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesDirectResponseRouteHeadersModel
+var HTTPLoadBalancerRoutesDirectResponseRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // HTTPLoadBalancerRoutesDirectResponseRouteIncomingPortModel represents incoming_port block
 type HTTPLoadBalancerRoutesDirectResponseRouteIncomingPortModel struct {
 	Port        types.Int64                 `tfsdk:"port"`
 	PortRanges  types.String                `tfsdk:"port_ranges"`
 	NoPortMatch *HTTPLoadBalancerEmptyModel `tfsdk:"no_port_match"`
+}
+
+// HTTPLoadBalancerRoutesDirectResponseRouteIncomingPortModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesDirectResponseRouteIncomingPortModel
+var HTTPLoadBalancerRoutesDirectResponseRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerRoutesDirectResponseRoutePathModel represents path block
@@ -3964,10 +7872,23 @@ type HTTPLoadBalancerRoutesDirectResponseRoutePathModel struct {
 	Regex  types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerRoutesDirectResponseRoutePathModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesDirectResponseRoutePathModel
+var HTTPLoadBalancerRoutesDirectResponseRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
+}
+
 // HTTPLoadBalancerRoutesDirectResponseRouteRouteDirectResponseModel represents route_direct_response block
 type HTTPLoadBalancerRoutesDirectResponseRouteRouteDirectResponseModel struct {
 	ResponseBodyEncoded types.String `tfsdk:"response_body_encoded"`
 	ResponseCode        types.Int64  `tfsdk:"response_code"`
+}
+
+// HTTPLoadBalancerRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesDirectResponseRouteRouteDirectResponseModel
+var HTTPLoadBalancerRoutesDirectResponseRouteRouteDirectResponseModelAttrTypes = map[string]attr.Type{
+	"response_body_encoded": types.StringType,
+	"response_code":         types.Int64Type,
 }
 
 // HTTPLoadBalancerRoutesRedirectRouteModel represents redirect_route block
@@ -3979,6 +7900,15 @@ type HTTPLoadBalancerRoutesRedirectRouteModel struct {
 	RouteRedirect *HTTPLoadBalancerRoutesRedirectRouteRouteRedirectModel `tfsdk:"route_redirect"`
 }
 
+// HTTPLoadBalancerRoutesRedirectRouteModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesRedirectRouteModel
+var HTTPLoadBalancerRoutesRedirectRouteModelAttrTypes = map[string]attr.Type{
+	"http_method":    types.StringType,
+	"headers":        types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesRedirectRouteHeadersModelAttrTypes}},
+	"incoming_port":  types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesRedirectRouteIncomingPortModelAttrTypes},
+	"path":           types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesRedirectRoutePathModelAttrTypes},
+	"route_redirect": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesRedirectRouteRouteRedirectModelAttrTypes},
+}
+
 // HTTPLoadBalancerRoutesRedirectRouteHeadersModel represents headers block
 type HTTPLoadBalancerRoutesRedirectRouteHeadersModel struct {
 	Exact       types.String `tfsdk:"exact"`
@@ -3988,6 +7918,15 @@ type HTTPLoadBalancerRoutesRedirectRouteHeadersModel struct {
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerRoutesRedirectRouteHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesRedirectRouteHeadersModel
+var HTTPLoadBalancerRoutesRedirectRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // HTTPLoadBalancerRoutesRedirectRouteIncomingPortModel represents incoming_port block
 type HTTPLoadBalancerRoutesRedirectRouteIncomingPortModel struct {
 	Port        types.Int64                 `tfsdk:"port"`
@@ -3995,11 +7934,25 @@ type HTTPLoadBalancerRoutesRedirectRouteIncomingPortModel struct {
 	NoPortMatch *HTTPLoadBalancerEmptyModel `tfsdk:"no_port_match"`
 }
 
+// HTTPLoadBalancerRoutesRedirectRouteIncomingPortModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesRedirectRouteIncomingPortModel
+var HTTPLoadBalancerRoutesRedirectRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRoutesRedirectRoutePathModel represents path block
 type HTTPLoadBalancerRoutesRedirectRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// HTTPLoadBalancerRoutesRedirectRoutePathModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesRedirectRoutePathModel
+var HTTPLoadBalancerRoutesRedirectRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // HTTPLoadBalancerRoutesRedirectRouteRouteRedirectModel represents route_redirect block
@@ -4014,6 +7967,18 @@ type HTTPLoadBalancerRoutesRedirectRouteRouteRedirectModel struct {
 	RetainAllParams *HTTPLoadBalancerEmptyModel `tfsdk:"retain_all_params"`
 }
 
+// HTTPLoadBalancerRoutesRedirectRouteRouteRedirectModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesRedirectRouteRouteRedirectModel
+var HTTPLoadBalancerRoutesRedirectRouteRouteRedirectModelAttrTypes = map[string]attr.Type{
+	"host_redirect":     types.StringType,
+	"path_redirect":     types.StringType,
+	"prefix_rewrite":    types.StringType,
+	"proto_redirect":    types.StringType,
+	"replace_params":    types.StringType,
+	"response_code":     types.Int64Type,
+	"remove_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"retain_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteModel represents simple_route block
 type HTTPLoadBalancerRoutesSimpleRouteModel struct {
 	HostRewrite        types.String                                           `tfsdk:"host_rewrite"`
@@ -4026,6 +7991,20 @@ type HTTPLoadBalancerRoutesSimpleRouteModel struct {
 	OriginPools        []HTTPLoadBalancerRoutesSimpleRouteOriginPoolsModel    `tfsdk:"origin_pools"`
 	Path               *HTTPLoadBalancerRoutesSimpleRoutePathModel            `tfsdk:"path"`
 	QueryParams        *HTTPLoadBalancerRoutesSimpleRouteQueryParamsModel     `tfsdk:"query_params"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteModel
+var HTTPLoadBalancerRoutesSimpleRouteModelAttrTypes = map[string]attr.Type{
+	"host_rewrite":         types.StringType,
+	"http_method":          types.StringType,
+	"advanced_options":     types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsModelAttrTypes},
+	"auto_host_rewrite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_host_rewrite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"headers":              types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteHeadersModelAttrTypes}},
+	"incoming_port":        types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteIncomingPortModelAttrTypes},
+	"origin_pools":         types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteOriginPoolsModelAttrTypes}},
+	"path":                 types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRoutePathModelAttrTypes},
+	"query_params":         types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteQueryParamsModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsModel represents advanced_options block
@@ -4071,11 +8050,61 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsModel struct {
 	WebSocketConfig                        *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWebSocketConfigModel               `tfsdk:"web_socket_config"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsModelAttrTypes = map[string]attr.Type{
+	"disable_location_add":                       types.BoolType,
+	"prefix_rewrite":                             types.StringType,
+	"priority":                                   types.StringType,
+	"request_cookies_to_remove":                  types.ListType{ElemType: types.StringType},
+	"request_headers_to_remove":                  types.ListType{ElemType: types.StringType},
+	"response_cookies_to_remove":                 types.ListType{ElemType: types.StringType},
+	"response_headers_to_remove":                 types.ListType{ElemType: types.StringType},
+	"timeout":                                    types.Int64Type,
+	"app_firewall":                               types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsAppFirewallModelAttrTypes},
+	"bot_defense_javascript_injection":           types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionModelAttrTypes},
+	"buffer_policy":                              types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBufferPolicyModelAttrTypes},
+	"common_buffering":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"common_hash_policy":                         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cors_policy":                                types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCORSPolicyModelAttrTypes},
+	"csrf_policy":                                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_retry_policy":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_mirroring":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_prefix_rewrite":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_spdy":                               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_waf":                                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_web_socket_config":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"do_not_retract_cluster":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_spdy":                                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"endpoint_subsets":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inherited_bot_defense_javascript_injection": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inherited_waf":                              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inherited_waf_exclusion":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mirror_policy":                              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"no_retry_policy":                            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"regex_rewrite":                              types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRegexRewriteModelAttrTypes},
+	"request_cookies_to_add":                     types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddModelAttrTypes}},
+	"request_headers_to_add":                     types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddModelAttrTypes}},
+	"response_cookies_to_add":                    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddModelAttrTypes}},
+	"response_headers_to_add":                    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddModelAttrTypes}},
+	"retract_cluster":                            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"retry_policy":                               types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyModelAttrTypes},
+	"specific_hash_policy":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"waf_exclusion_policy":                       types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWAFExclusionPolicyModelAttrTypes},
+	"web_socket_config":                          types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWebSocketConfigModelAttrTypes},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsAppFirewallModel represents app_firewall block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsAppFirewallModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsAppFirewallModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsAppFirewallModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsAppFirewallModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionModel represents bot_defense_javascript_injection block
@@ -4084,10 +8113,22 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjecti
 	JavascriptTags     []HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsModel `tfsdk:"javascript_tags"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionModelAttrTypes = map[string]attr.Type{
+	"javascript_location": types.StringType,
+	"javascript_tags":     types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsModelAttrTypes}},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsModel represents javascript_tags block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsModel struct {
 	JavascriptURL types.String                                                                                                    `tfsdk:"javascript_url"`
 	TagAttributes []HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModel `tfsdk:"tag_attributes"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsModelAttrTypes = map[string]attr.Type{
+	"javascript_url": types.StringType,
+	"tag_attributes": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModel represents tag_attributes block
@@ -4096,10 +8137,22 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjecti
 	TagValue      types.String `tfsdk:"tag_value"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBotDefenseJavascriptInjectionJavascriptTagsTagAttributesModelAttrTypes = map[string]attr.Type{
+	"javascript_tag": types.StringType,
+	"tag_value":      types.StringType,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBufferPolicyModel represents buffer_policy block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBufferPolicyModel struct {
 	Disabled        types.Bool  `tfsdk:"disabled"`
 	MaxRequestBytes types.Int64 `tfsdk:"max_request_bytes"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBufferPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBufferPolicyModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsBufferPolicyModelAttrTypes = map[string]attr.Type{
+	"disabled":          types.BoolType,
+	"max_request_bytes": types.Int64Type,
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCORSPolicyModel represents cors_policy block
@@ -4114,6 +8167,18 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCORSPolicyModel struct {
 	MaximumAge       types.Int64  `tfsdk:"maximum_age"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCORSPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCORSPolicyModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCORSPolicyModelAttrTypes = map[string]attr.Type{
+	"allow_credentials":  types.BoolType,
+	"allow_headers":      types.StringType,
+	"allow_methods":      types.StringType,
+	"allow_origin":       types.ListType{ElemType: types.StringType},
+	"allow_origin_regex": types.ListType{ElemType: types.StringType},
+	"disabled":           types.BoolType,
+	"expose_headers":     types.StringType,
+	"maximum_age":        types.Int64Type,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyModel represents csrf_policy block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyModel struct {
 	AllLoadBalancerDomains *HTTPLoadBalancerEmptyModel                                                      `tfsdk:"all_load_balancer_domains"`
@@ -4121,15 +8186,33 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyModel struct {
 	Disabled               *HTTPLoadBalancerEmptyModel                                                      `tfsdk:"disabled"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyModelAttrTypes = map[string]attr.Type{
+	"all_load_balancer_domains": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_domain_list":        types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyCustomDomainListModelAttrTypes},
+	"disabled":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyCustomDomainListModel represents custom_domain_list block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyCustomDomainListModel struct {
 	Domains types.List `tfsdk:"domains"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyCustomDomainListModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyCustomDomainListModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyCustomDomainListModelAttrTypes = map[string]attr.Type{
+	"domains": types.ListType{ElemType: types.StringType},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyModel represents mirror_policy block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyModel struct {
 	OriginPool *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyOriginPoolModel `tfsdk:"origin_pool"`
 	Percent    *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyPercentModel    `tfsdk:"percent"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyModelAttrTypes = map[string]attr.Type{
+	"origin_pool": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyOriginPoolModelAttrTypes},
+	"percent":     types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyPercentModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyOriginPoolModel represents origin_pool block
@@ -4139,16 +8222,35 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyOriginPoolModel
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyOriginPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyOriginPoolModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyOriginPoolModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyPercentModel represents percent block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyPercentModel struct {
 	Denominator types.String `tfsdk:"denominator"`
 	Numerator   types.Int64  `tfsdk:"numerator"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyPercentModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyPercentModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyPercentModelAttrTypes = map[string]attr.Type{
+	"denominator": types.StringType,
+	"numerator":   types.Int64Type,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRegexRewriteModel represents regex_rewrite block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRegexRewriteModel struct {
 	Pattern      types.String `tfsdk:"pattern"`
 	Substitution types.String `tfsdk:"substitution"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRegexRewriteModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRegexRewriteModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRegexRewriteModelAttrTypes = map[string]attr.Type{
+	"pattern":      types.StringType,
+	"substitution": types.StringType,
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddModel represents request_cookies_to_add block
@@ -4159,10 +8261,24 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddModel st
 	SecretValue *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"name":         types.StringType,
+	"overwrite":    types.BoolType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueModel represents secret_value block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -4172,10 +8288,23 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretVa
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueBlindfoldSecretInfoModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueClearSecretInfoModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddModel represents request_headers_to_add block
@@ -4186,10 +8315,24 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddModel st
 	SecretValue *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueModel represents secret_value block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -4199,10 +8342,23 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretVa
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueClearSecretInfoModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddModel represents response_cookies_to_add block
@@ -4232,10 +8388,43 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddModel s
 	SecretValue       *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddModelAttrTypes = map[string]attr.Type{
+	"add_domain":         types.StringType,
+	"add_expiry":         types.StringType,
+	"add_path":           types.StringType,
+	"max_age_value":      types.Int64Type,
+	"name":               types.StringType,
+	"overwrite":          types.BoolType,
+	"value":              types.StringType,
+	"add_httponly":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_partitioned":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_secure":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_expiry":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_httponly":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_max_age":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_partitioned": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_path":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_samesite":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_secure":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueModel represents secret_value block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -4245,10 +8434,23 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretV
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueBlindfoldSecretInfoModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueClearSecretInfoModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddModel represents response_headers_to_add block
@@ -4259,10 +8461,24 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddModel s
 	SecretValue *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueModel `tfsdk:"secret_value"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddModelAttrTypes = map[string]attr.Type{
+	"append":       types.BoolType,
+	"name":         types.StringType,
+	"value":        types.StringType,
+	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueModel represents secret_value block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -4272,10 +8488,23 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretV
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueClearSecretInfoModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyModel represents retry_policy block
@@ -4287,15 +8516,35 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyModel struct {
 	BackOff              *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyBackOffModel `tfsdk:"back_off"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyModelAttrTypes = map[string]attr.Type{
+	"num_retries":            types.Int64Type,
+	"per_try_timeout":        types.Int64Type,
+	"retriable_status_codes": types.ListType{ElemType: types.Int64Type},
+	"retry_condition":        types.ListType{ElemType: types.StringType},
+	"back_off":               types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyBackOffModelAttrTypes},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyBackOffModel represents back_off block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyBackOffModel struct {
 	BaseInterval types.Int64 `tfsdk:"base_interval"`
 	MaxInterval  types.Int64 `tfsdk:"max_interval"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyBackOffModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyBackOffModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyBackOffModelAttrTypes = map[string]attr.Type{
+	"base_interval": types.Int64Type,
+	"max_interval":  types.Int64Type,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyModel represents specific_hash_policy block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyModel struct {
 	HashPolicy []HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyModel `tfsdk:"hash_policy"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyModelAttrTypes = map[string]attr.Type{
+	"hash_policy": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyModelAttrTypes}},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyModel represents hash_policy block
@@ -4304,6 +8553,14 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolic
 	SourceIP   types.Bool                                                                               `tfsdk:"source_ip"`
 	Terminal   types.Bool                                                                               `tfsdk:"terminal"`
 	Cookie     *HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyCookieModel `tfsdk:"cookie"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyModelAttrTypes = map[string]attr.Type{
+	"header_name": types.StringType,
+	"source_ip":   types.BoolType,
+	"terminal":    types.BoolType,
+	"cookie":      types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyCookieModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyCookieModel represents cookie block
@@ -4321,6 +8578,21 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolic
 	SamesiteStrict *HTTPLoadBalancerEmptyModel `tfsdk:"samesite_strict"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyCookieModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyCookieModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyHashPolicyCookieModelAttrTypes = map[string]attr.Type{
+	"name":            types.StringType,
+	"path":            types.StringType,
+	"ttl":             types.Int64Type,
+	"add_httponly":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"add_secure":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_httponly": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_samesite": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ignore_secure":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_lax":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_none":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"samesite_strict": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWAFExclusionPolicyModel represents waf_exclusion_policy block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWAFExclusionPolicyModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -4328,9 +8600,21 @@ type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWAFExclusionPolicyModel str
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWAFExclusionPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWAFExclusionPolicyModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWAFExclusionPolicyModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWebSocketConfigModel represents web_socket_config block
 type HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWebSocketConfigModel struct {
 	UseWebSocket types.Bool `tfsdk:"use_websocket"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWebSocketConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWebSocketConfigModel
+var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWebSocketConfigModelAttrTypes = map[string]attr.Type{
+	"use_websocket": types.BoolType,
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteHeadersModel represents headers block
@@ -4342,11 +8626,27 @@ type HTTPLoadBalancerRoutesSimpleRouteHeadersModel struct {
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteHeadersModel
+var HTTPLoadBalancerRoutesSimpleRouteHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteIncomingPortModel represents incoming_port block
 type HTTPLoadBalancerRoutesSimpleRouteIncomingPortModel struct {
 	Port        types.Int64                 `tfsdk:"port"`
 	PortRanges  types.String                `tfsdk:"port_ranges"`
 	NoPortMatch *HTTPLoadBalancerEmptyModel `tfsdk:"no_port_match"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteIncomingPortModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteIncomingPortModel
+var HTTPLoadBalancerRoutesSimpleRouteIncomingPortModelAttrTypes = map[string]attr.Type{
+	"port":          types.Int64Type,
+	"port_ranges":   types.StringType,
+	"no_port_match": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteOriginPoolsModel represents origin_pools block
@@ -4358,11 +8658,27 @@ type HTTPLoadBalancerRoutesSimpleRouteOriginPoolsModel struct {
 	Pool            *HTTPLoadBalancerRoutesSimpleRouteOriginPoolsPoolModel    `tfsdk:"pool"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteOriginPoolsModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteOriginPoolsModel
+var HTTPLoadBalancerRoutesSimpleRouteOriginPoolsModelAttrTypes = map[string]attr.Type{
+	"priority":         types.Int64Type,
+	"weight":           types.Int64Type,
+	"cluster":          types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteOriginPoolsClusterModelAttrTypes},
+	"endpoint_subsets": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"pool":             types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteOriginPoolsPoolModelAttrTypes},
+}
+
 // HTTPLoadBalancerRoutesSimpleRouteOriginPoolsClusterModel represents cluster block
 type HTTPLoadBalancerRoutesSimpleRouteOriginPoolsClusterModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRouteOriginPoolsClusterModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteOriginPoolsClusterModel
+var HTTPLoadBalancerRoutesSimpleRouteOriginPoolsClusterModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteOriginPoolsPoolModel represents pool block
@@ -4372,11 +8688,25 @@ type HTTPLoadBalancerRoutesSimpleRouteOriginPoolsPoolModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteOriginPoolsPoolModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteOriginPoolsPoolModel
+var HTTPLoadBalancerRoutesSimpleRouteOriginPoolsPoolModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerRoutesSimpleRoutePathModel represents path block
 type HTTPLoadBalancerRoutesSimpleRoutePathModel struct {
 	Path   types.String `tfsdk:"path"`
 	Prefix types.String `tfsdk:"prefix"`
 	Regex  types.String `tfsdk:"regex"`
+}
+
+// HTTPLoadBalancerRoutesSimpleRoutePathModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRoutePathModel
+var HTTPLoadBalancerRoutesSimpleRoutePathModelAttrTypes = map[string]attr.Type{
+	"path":   types.StringType,
+	"prefix": types.StringType,
+	"regex":  types.StringType,
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteQueryParamsModel represents query_params block
@@ -4386,9 +8716,21 @@ type HTTPLoadBalancerRoutesSimpleRouteQueryParamsModel struct {
 	RetainAllParams *HTTPLoadBalancerEmptyModel `tfsdk:"retain_all_params"`
 }
 
+// HTTPLoadBalancerRoutesSimpleRouteQueryParamsModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesSimpleRouteQueryParamsModel
+var HTTPLoadBalancerRoutesSimpleRouteQueryParamsModelAttrTypes = map[string]attr.Type{
+	"replace_params":    types.StringType,
+	"remove_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"retain_all_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerSensitiveDataDisclosureRulesModel represents sensitive_data_disclosure_rules block
 type HTTPLoadBalancerSensitiveDataDisclosureRulesModel struct {
 	SensitiveDataTypesInResponse []HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModel `tfsdk:"sensitive_data_types_in_response"`
+}
+
+// HTTPLoadBalancerSensitiveDataDisclosureRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerSensitiveDataDisclosureRulesModel
+var HTTPLoadBalancerSensitiveDataDisclosureRulesModelAttrTypes = map[string]attr.Type{
+	"sensitive_data_types_in_response": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModel represents sensitive_data_types_in_response block
@@ -4399,10 +8741,24 @@ type HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseMod
 	Report      *HTTPLoadBalancerEmptyModel                                                               `tfsdk:"report"`
 }
 
+// HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModelAttrTypes defines the attribute types for HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModel
+var HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModelAttrTypes = map[string]attr.Type{
+	"api_endpoint": types.ObjectType{AttrTypes: HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseAPIEndpointModelAttrTypes},
+	"body":         types.ObjectType{AttrTypes: HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseBodyModelAttrTypes},
+	"mask":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"report":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseAPIEndpointModel represents api_endpoint block
 type HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseAPIEndpointModel struct {
 	Methods types.List   `tfsdk:"methods"`
 	Path    types.String `tfsdk:"path"`
+}
+
+// HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseAPIEndpointModelAttrTypes defines the attribute types for HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseAPIEndpointModel
+var HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseAPIEndpointModelAttrTypes = map[string]attr.Type{
+	"methods": types.ListType{ElemType: types.StringType},
+	"path":    types.StringType,
 }
 
 // HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseBodyModel represents body block
@@ -4410,9 +8766,19 @@ type HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseBod
 	Fields types.List `tfsdk:"fields"`
 }
 
+// HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseBodyModelAttrTypes defines the attribute types for HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseBodyModel
+var HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseBodyModelAttrTypes = map[string]attr.Type{
+	"fields": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerSensitiveDataPolicyModel represents sensitive_data_policy block
 type HTTPLoadBalancerSensitiveDataPolicyModel struct {
 	SensitiveDataPolicyRef *HTTPLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel `tfsdk:"sensitive_data_policy_ref"`
+}
+
+// HTTPLoadBalancerSensitiveDataPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerSensitiveDataPolicyModel
+var HTTPLoadBalancerSensitiveDataPolicyModelAttrTypes = map[string]attr.Type{
+	"sensitive_data_policy_ref": types.ObjectType{AttrTypes: HTTPLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModelAttrTypes},
 }
 
 // HTTPLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel represents sensitive_data_policy_ref block
@@ -4422,12 +8788,27 @@ type HTTPLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModelAttrTypes defines the attribute types for HTTPLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModel
+var HTTPLoadBalancerSensitiveDataPolicySensitiveDataPolicyRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerSingleLBAppModel represents single_lb_app block
 type HTTPLoadBalancerSingleLBAppModel struct {
 	DisableDiscovery              *HTTPLoadBalancerEmptyModel                      `tfsdk:"disable_discovery"`
 	DisableMaliciousUserDetection *HTTPLoadBalancerEmptyModel                      `tfsdk:"disable_malicious_user_detection"`
 	EnableDiscovery               *HTTPLoadBalancerSingleLBAppEnableDiscoveryModel `tfsdk:"enable_discovery"`
 	EnableMaliciousUserDetection  *HTTPLoadBalancerEmptyModel                      `tfsdk:"enable_malicious_user_detection"`
+}
+
+// HTTPLoadBalancerSingleLBAppModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppModel
+var HTTPLoadBalancerSingleLBAppModelAttrTypes = map[string]attr.Type{
+	"disable_discovery":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_malicious_user_detection": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_discovery":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_malicious_user_detection":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryModel represents enable_discovery block
@@ -4441,15 +8822,37 @@ type HTTPLoadBalancerSingleLBAppEnableDiscoveryModel struct {
 	EnableLearnFromRedirectTraffic  *HTTPLoadBalancerEmptyModel                                              `tfsdk:"enable_learn_from_redirect_traffic"`
 }
 
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryModelAttrTypes = map[string]attr.Type{
+	"api_crawler":                         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_discovery_from_code_scan":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_api_auth_discovery":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_api_auth_discovery":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_learn_from_redirect_traffic": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"discovered_api_settings":             types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryDiscoveredAPISettingsModelAttrTypes},
+	"enable_learn_from_redirect_traffic":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModel represents api_crawler block
 type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModel struct {
 	APICrawlerConfig  *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigModel `tfsdk:"api_crawler_config"`
 	DisableAPICrawler *HTTPLoadBalancerEmptyModel                                                `tfsdk:"disable_api_crawler"`
 }
 
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModelAttrTypes = map[string]attr.Type{
+	"api_crawler_config":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"disable_api_crawler": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigModel represents api_crawler_config block
 type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigModel struct {
 	Domains []HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModel `tfsdk:"domains"`
+}
+
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigModelAttrTypes = map[string]attr.Type{
+	"domains": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModel represents domains block
@@ -4458,16 +8861,34 @@ type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomains
 	SimpleLogin *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel `tfsdk:"simple_login"`
 }
 
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsModelAttrTypes = map[string]attr.Type{
+	"domain":       types.StringType,
+	"simple_login": types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes},
+}
+
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel represents simple_login block
 type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel struct {
 	User     types.String                                                                                         `tfsdk:"user"`
 	Password *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel `tfsdk:"password"`
 }
 
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes = map[string]attr.Type{
+	"user":     types.StringType,
+	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel represents password block
 type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel struct {
 	BlindfoldSecretInfo *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
 	ClearSecretInfo     *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModelAttrTypes},
 }
 
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel represents blindfold_secret_info block
@@ -4477,15 +8898,33 @@ type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomains
 	StoreProvider      types.String `tfsdk:"store_provider"`
 }
 
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel represents clear_secret_info block
 type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel struct {
 	Provider types.String `tfsdk:"provider_ref"`
 	URL      types.String `tfsdk:"url"`
 }
 
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModel represents api_discovery_from_code_scan block
 type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModel struct {
 	CodeBaseIntegrations []HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel `tfsdk:"code_base_integrations"`
+}
+
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes = map[string]attr.Type{
+	"code_base_integrations": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
 }
 
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel represents code_base_integrations block
@@ -4495,6 +8934,13 @@ type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseI
 	SelectedRepos       *HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel       `tfsdk:"selected_repos"`
 }
 
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModelAttrTypes = map[string]attr.Type{
+	"all_repos":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"code_base_integration": types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModelAttrTypes},
+	"selected_repos":        types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModelAttrTypes},
+}
+
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel represents code_base_integration block
 type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel struct {
 	Name      types.String `tfsdk:"name"`
@@ -4502,14 +8948,31 @@ type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseI
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsCodeBaseIntegrationModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel represents selected_repos block
 type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel struct {
 	APICodeRepo types.List `tfsdk:"api_code_repo"`
 }
 
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsSelectedReposModelAttrTypes = map[string]attr.Type{
+	"api_code_repo": types.ListType{ElemType: types.StringType},
+}
+
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryModel represents custom_api_auth_discovery block
 type HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryModel struct {
 	APIDiscoveryRef *HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel `tfsdk:"api_discovery_ref"`
+}
+
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryModelAttrTypes = map[string]attr.Type{
+	"api_discovery_ref": types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModelAttrTypes},
 }
 
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel represents api_discovery_ref block
@@ -4519,9 +8982,21 @@ type HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscover
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryAPIDiscoveryRefModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryDiscoveredAPISettingsModel represents discovered_api_settings block
 type HTTPLoadBalancerSingleLBAppEnableDiscoveryDiscoveredAPISettingsModel struct {
 	PurgeDurationForInactiveDiscoveredApis types.Int64 `tfsdk:"purge_duration_for_inactive_discovered_apis"`
+}
+
+// HTTPLoadBalancerSingleLBAppEnableDiscoveryDiscoveredAPISettingsModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryDiscoveredAPISettingsModel
+var HTTPLoadBalancerSingleLBAppEnableDiscoveryDiscoveredAPISettingsModelAttrTypes = map[string]attr.Type{
+	"purge_duration_for_inactive_discovered_apis": types.Int64Type,
 }
 
 // HTTPLoadBalancerSlowDDOSMitigationModel represents slow_ddos_mitigation block
@@ -4529,6 +9004,13 @@ type HTTPLoadBalancerSlowDDOSMitigationModel struct {
 	RequestHeadersTimeout types.Int64                 `tfsdk:"request_headers_timeout"`
 	RequestTimeout        types.Int64                 `tfsdk:"request_timeout"`
 	DisableRequestTimeout *HTTPLoadBalancerEmptyModel `tfsdk:"disable_request_timeout"`
+}
+
+// HTTPLoadBalancerSlowDDOSMitigationModelAttrTypes defines the attribute types for HTTPLoadBalancerSlowDDOSMitigationModel
+var HTTPLoadBalancerSlowDDOSMitigationModelAttrTypes = map[string]attr.Type{
+	"request_headers_timeout": types.Int64Type,
+	"request_timeout":         types.Int64Type,
+	"disable_request_timeout": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // HTTPLoadBalancerTrustedClientsModel represents trusted_clients block
@@ -4546,9 +9028,29 @@ type HTTPLoadBalancerTrustedClientsModel struct {
 	WAFSkipProcessing   *HTTPLoadBalancerEmptyModel                    `tfsdk:"waf_skip_processing"`
 }
 
+// HTTPLoadBalancerTrustedClientsModelAttrTypes defines the attribute types for HTTPLoadBalancerTrustedClientsModel
+var HTTPLoadBalancerTrustedClientsModelAttrTypes = map[string]attr.Type{
+	"actions":              types.ListType{ElemType: types.StringType},
+	"as_number":            types.Int64Type,
+	"expiration_timestamp": types.StringType,
+	"ip_prefix":            types.StringType,
+	"ipv6_prefix":          types.StringType,
+	"user_identifier":      types.StringType,
+	"bot_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_header":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metadata":             types.ObjectType{AttrTypes: HTTPLoadBalancerTrustedClientsMetadataModelAttrTypes},
+	"skip_processing":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"waf_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerTrustedClientsHTTPHeaderModel represents http_header block
 type HTTPLoadBalancerTrustedClientsHTTPHeaderModel struct {
 	Headers []HTTPLoadBalancerTrustedClientsHTTPHeaderHeadersModel `tfsdk:"headers"`
+}
+
+// HTTPLoadBalancerTrustedClientsHTTPHeaderModelAttrTypes defines the attribute types for HTTPLoadBalancerTrustedClientsHTTPHeaderModel
+var HTTPLoadBalancerTrustedClientsHTTPHeaderModelAttrTypes = map[string]attr.Type{
+	"headers": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerTrustedClientsHTTPHeaderHeadersModelAttrTypes}},
 }
 
 // HTTPLoadBalancerTrustedClientsHTTPHeaderHeadersModel represents headers block
@@ -4560,10 +9062,25 @@ type HTTPLoadBalancerTrustedClientsHTTPHeaderHeadersModel struct {
 	Regex       types.String `tfsdk:"regex"`
 }
 
+// HTTPLoadBalancerTrustedClientsHTTPHeaderHeadersModelAttrTypes defines the attribute types for HTTPLoadBalancerTrustedClientsHTTPHeaderHeadersModel
+var HTTPLoadBalancerTrustedClientsHTTPHeaderHeadersModelAttrTypes = map[string]attr.Type{
+	"exact":        types.StringType,
+	"invert_match": types.BoolType,
+	"name":         types.StringType,
+	"presence":     types.BoolType,
+	"regex":        types.StringType,
+}
+
 // HTTPLoadBalancerTrustedClientsMetadataModel represents metadata block
 type HTTPLoadBalancerTrustedClientsMetadataModel struct {
 	DescriptionSpec types.String `tfsdk:"description_spec"`
 	Name            types.String `tfsdk:"name"`
+}
+
+// HTTPLoadBalancerTrustedClientsMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerTrustedClientsMetadataModel
+var HTTPLoadBalancerTrustedClientsMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
 }
 
 // HTTPLoadBalancerUserIdentificationModel represents user_identification block
@@ -4573,15 +9090,33 @@ type HTTPLoadBalancerUserIdentificationModel struct {
 	Tenant    types.String `tfsdk:"tenant"`
 }
 
+// HTTPLoadBalancerUserIdentificationModelAttrTypes defines the attribute types for HTTPLoadBalancerUserIdentificationModel
+var HTTPLoadBalancerUserIdentificationModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // HTTPLoadBalancerWAFExclusionModel represents waf_exclusion block
 type HTTPLoadBalancerWAFExclusionModel struct {
 	WAFExclusionInlineRules *HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesModel `tfsdk:"waf_exclusion_inline_rules"`
 	WAFExclusionPolicy      *HTTPLoadBalancerWAFExclusionWAFExclusionPolicyModel      `tfsdk:"waf_exclusion_policy"`
 }
 
+// HTTPLoadBalancerWAFExclusionModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionModel
+var HTTPLoadBalancerWAFExclusionModelAttrTypes = map[string]attr.Type{
+	"waf_exclusion_inline_rules": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"waf_exclusion_policy":       types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionPolicyModelAttrTypes},
+}
+
 // HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesModel represents waf_exclusion_inline_rules block
 type HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesModel struct {
 	Rules []HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModel `tfsdk:"rules"`
+}
+
+// HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesModel
+var HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesModelAttrTypes = map[string]attr.Type{
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModel represents rules block
@@ -4599,12 +9134,35 @@ type HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModel struct {
 	WAFSkipProcessing           *HTTPLoadBalancerEmptyModel                                                               `tfsdk:"waf_skip_processing"`
 }
 
+// HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModel
+var HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModelAttrTypes = map[string]attr.Type{
+	"exact_value":                    types.StringType,
+	"expiration_timestamp":           types.StringType,
+	"methods":                        types.ListType{ElemType: types.StringType},
+	"path_prefix":                    types.StringType,
+	"path_regex":                     types.StringType,
+	"suffix_value":                   types.StringType,
+	"any_domain":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"any_path":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"app_firewall_detection_control": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"metadata":                       types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModelAttrTypes},
+	"waf_skip_processing":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
 // HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModel represents app_firewall_detection_control block
 type HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModel struct {
 	ExcludeAttackTypeContexts []HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel `tfsdk:"exclude_attack_type_contexts"`
 	ExcludeBotNameContexts    []HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModel    `tfsdk:"exclude_bot_name_contexts"`
 	ExcludeSignatureContexts  []HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModel  `tfsdk:"exclude_signature_contexts"`
 	ExcludeViolationContexts  []HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel  `tfsdk:"exclude_violation_contexts"`
+}
+
+// HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModel
+var HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModelAttrTypes = map[string]attr.Type{
+	"exclude_attack_type_contexts": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModelAttrTypes}},
+	"exclude_bot_name_contexts":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModelAttrTypes}},
+	"exclude_signature_contexts":   types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModelAttrTypes}},
+	"exclude_violation_contexts":   types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel represents exclude_attack_type_contexts block
@@ -4614,9 +9172,21 @@ type HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectio
 	ExcludeAttackType types.String `tfsdk:"exclude_attack_type"`
 }
 
+// HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModel
+var HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeAttackTypeContextsModelAttrTypes = map[string]attr.Type{
+	"context":             types.StringType,
+	"context_name":        types.StringType,
+	"exclude_attack_type": types.StringType,
+}
+
 // HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModel represents exclude_bot_name_contexts block
 type HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModel struct {
 	BotName types.String `tfsdk:"bot_name"`
+}
+
+// HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModel
+var HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeBotNameContextsModelAttrTypes = map[string]attr.Type{
+	"bot_name": types.StringType,
 }
 
 // HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModel represents exclude_signature_contexts block
@@ -4626,11 +9196,25 @@ type HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectio
 	SignatureID types.Int64  `tfsdk:"signature_id"`
 }
 
+// HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModel
+var HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeSignatureContextsModelAttrTypes = map[string]attr.Type{
+	"context":      types.StringType,
+	"context_name": types.StringType,
+	"signature_id": types.Int64Type,
+}
+
 // HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel represents exclude_violation_contexts block
 type HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel struct {
 	Context          types.String `tfsdk:"context"`
 	ContextName      types.String `tfsdk:"context_name"`
 	ExcludeViolation types.String `tfsdk:"exclude_violation"`
+}
+
+// HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModel
+var HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlExcludeViolationContextsModelAttrTypes = map[string]attr.Type{
+	"context":           types.StringType,
+	"context_name":      types.StringType,
+	"exclude_violation": types.StringType,
 }
 
 // HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel represents metadata block
@@ -4639,11 +9223,24 @@ type HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel struc
 	Name            types.String `tfsdk:"name"`
 }
 
+// HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModel
+var HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModelAttrTypes = map[string]attr.Type{
+	"description_spec": types.StringType,
+	"name":             types.StringType,
+}
+
 // HTTPLoadBalancerWAFExclusionWAFExclusionPolicyModel represents waf_exclusion_policy block
 type HTTPLoadBalancerWAFExclusionWAFExclusionPolicyModel struct {
 	Name      types.String `tfsdk:"name"`
 	Namespace types.String `tfsdk:"namespace"`
 	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// HTTPLoadBalancerWAFExclusionWAFExclusionPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionWAFExclusionPolicyModel
+var HTTPLoadBalancerWAFExclusionWAFExclusionPolicyModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 type HTTPLoadBalancerResourceModel struct {
@@ -4666,7 +9263,7 @@ type HTTPLoadBalancerResourceModel struct {
 	APISpecification              *HTTPLoadBalancerAPISpecificationModel             `tfsdk:"api_specification"`
 	APITesting                    *HTTPLoadBalancerAPITestingModel                   `tfsdk:"api_testing"`
 	AppFirewall                   *HTTPLoadBalancerAppFirewallModel                  `tfsdk:"app_firewall"`
-	BlockedClients                []HTTPLoadBalancerBlockedClientsModel              `tfsdk:"blocked_clients"`
+	BlockedClients                types.List                                         `tfsdk:"blocked_clients"`
 	BotDefense                    *HTTPLoadBalancerBotDefenseModel                   `tfsdk:"bot_defense"`
 	BotDefenseAdvanced            *HTTPLoadBalancerBotDefenseAdvancedModel           `tfsdk:"bot_defense_advanced"`
 	CachingPolicy                 *HTTPLoadBalancerCachingPolicyModel                `tfsdk:"caching_policy"`
@@ -4675,11 +9272,11 @@ type HTTPLoadBalancerResourceModel struct {
 	CookieStickiness              *HTTPLoadBalancerCookieStickinessModel             `tfsdk:"cookie_stickiness"`
 	CORSPolicy                    *HTTPLoadBalancerCORSPolicyModel                   `tfsdk:"cors_policy"`
 	CSRFPolicy                    *HTTPLoadBalancerCSRFPolicyModel                   `tfsdk:"csrf_policy"`
-	DataGuardRules                []HTTPLoadBalancerDataGuardRulesModel              `tfsdk:"data_guard_rules"`
-	DDOSMitigationRules           []HTTPLoadBalancerDDOSMitigationRulesModel         `tfsdk:"ddos_mitigation_rules"`
+	DataGuardRules                types.List                                         `tfsdk:"data_guard_rules"`
+	DDOSMitigationRules           types.List                                         `tfsdk:"ddos_mitigation_rules"`
 	DefaultPool                   *HTTPLoadBalancerDefaultPoolModel                  `tfsdk:"default_pool"`
 	DefaultPoolList               *HTTPLoadBalancerDefaultPoolListModel              `tfsdk:"default_pool_list"`
-	DefaultRoutePools             []HTTPLoadBalancerDefaultRoutePoolsModel           `tfsdk:"default_route_pools"`
+	DefaultRoutePools             types.List                                         `tfsdk:"default_route_pools"`
 	DefaultSensitiveDataPolicy    *HTTPLoadBalancerEmptyModel                        `tfsdk:"default_sensitive_data_policy"`
 	DisableAPIDefinition          *HTTPLoadBalancerEmptyModel                        `tfsdk:"disable_api_definition"`
 	DisableAPIDiscovery           *HTTPLoadBalancerEmptyModel                        `tfsdk:"disable_api_discovery"`
@@ -4701,7 +9298,7 @@ type HTTPLoadBalancerResourceModel struct {
 	EnableMaliciousUserDetection  *HTTPLoadBalancerEmptyModel                        `tfsdk:"enable_malicious_user_detection"`
 	EnableThreatMesh              *HTTPLoadBalancerEmptyModel                        `tfsdk:"enable_threat_mesh"`
 	EnableTrustClientIPHeaders    *HTTPLoadBalancerEnableTrustClientIPHeadersModel   `tfsdk:"enable_trust_client_ip_headers"`
-	GraphqlRules                  []HTTPLoadBalancerGraphqlRulesModel                `tfsdk:"graphql_rules"`
+	GraphqlRules                  types.List                                         `tfsdk:"graphql_rules"`
 	HTTP                          *HTTPLoadBalancerHTTPModel                         `tfsdk:"http"`
 	HTTPS                         *HTTPLoadBalancerHTTPSModel                        `tfsdk:"https"`
 	HTTPSAutoCert                 *HTTPLoadBalancerHTTPSAutoCertModel                `tfsdk:"https_auto_cert"`
@@ -4719,12 +9316,12 @@ type HTTPLoadBalancerResourceModel struct {
 	NoServicePolicies             *HTTPLoadBalancerEmptyModel                        `tfsdk:"no_service_policies"`
 	OriginServerSubsetRuleList    *HTTPLoadBalancerOriginServerSubsetRuleListModel   `tfsdk:"origin_server_subset_rule_list"`
 	PolicyBasedChallenge          *HTTPLoadBalancerPolicyBasedChallengeModel         `tfsdk:"policy_based_challenge"`
-	ProtectedCookies              []HTTPLoadBalancerProtectedCookiesModel            `tfsdk:"protected_cookies"`
+	ProtectedCookies              types.List                                         `tfsdk:"protected_cookies"`
 	Random                        *HTTPLoadBalancerEmptyModel                        `tfsdk:"random"`
 	RateLimit                     *HTTPLoadBalancerRateLimitModel                    `tfsdk:"rate_limit"`
 	RingHash                      *HTTPLoadBalancerRingHashModel                     `tfsdk:"ring_hash"`
 	RoundRobin                    *HTTPLoadBalancerEmptyModel                        `tfsdk:"round_robin"`
-	Routes                        []HTTPLoadBalancerRoutesModel                      `tfsdk:"routes"`
+	Routes                        types.List                                         `tfsdk:"routes"`
 	SensitiveDataDisclosureRules  *HTTPLoadBalancerSensitiveDataDisclosureRulesModel `tfsdk:"sensitive_data_disclosure_rules"`
 	SensitiveDataPolicy           *HTTPLoadBalancerSensitiveDataPolicyModel          `tfsdk:"sensitive_data_policy"`
 	ServicePoliciesFromNamespace  *HTTPLoadBalancerEmptyModel                        `tfsdk:"service_policies_from_namespace"`
@@ -4732,7 +9329,7 @@ type HTTPLoadBalancerResourceModel struct {
 	SlowDDOSMitigation            *HTTPLoadBalancerSlowDDOSMitigationModel           `tfsdk:"slow_ddos_mitigation"`
 	SourceIPStickiness            *HTTPLoadBalancerEmptyModel                        `tfsdk:"source_ip_stickiness"`
 	SystemDefaultTimeouts         *HTTPLoadBalancerEmptyModel                        `tfsdk:"system_default_timeouts"`
-	TrustedClients                []HTTPLoadBalancerTrustedClientsModel              `tfsdk:"trusted_clients"`
+	TrustedClients                types.List                                         `tfsdk:"trusted_clients"`
 	UserIDClientIP                *HTTPLoadBalancerEmptyModel                        `tfsdk:"user_id_client_ip"`
 	UserIdentification            *HTTPLoadBalancerUserIdentificationModel           `tfsdk:"user_identification"`
 	WAFExclusion                  *HTTPLoadBalancerWAFExclusionModel                 `tfsdk:"waf_exclusion"`
@@ -4833,6 +9430,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -4876,6 +9476,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -4909,6 +9512,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -4951,6 +9557,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -4980,6 +9589,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -5013,6 +9625,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -5037,6 +9652,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -5055,6 +9673,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -5084,6 +9705,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -5171,6 +9795,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5184,11 +9811,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -5222,6 +9855,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5235,11 +9871,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -5551,6 +10193,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5564,11 +10209,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -5602,6 +10253,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5615,11 +10269,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -5935,6 +10595,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5948,11 +10611,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -5986,6 +10655,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -5999,11 +10671,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -6084,6 +10762,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -6107,6 +10788,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -6371,6 +11055,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -6384,11 +11071,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																},
 															},
@@ -6422,6 +11115,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -6435,11 +11131,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																},
 															},
@@ -6695,6 +11397,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -6767,6 +11472,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -6780,11 +11488,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -6818,6 +11532,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"name": schema.StringAttribute{
 																MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -6831,11 +11548,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 															"uid": schema.StringAttribute{
 																MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																Optional:            true,
 																Computed:            true,
+																PlanModifiers: []planmodifier.String{
+																	stringplanmodifier.UseStateForUnknown(),
+																},
 															},
 														},
 													},
@@ -6916,6 +11639,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -6939,6 +11665,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -7144,6 +11873,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -7775,6 +12507,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -8810,6 +13545,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -8879,6 +13617,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -8908,6 +13649,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -9614,6 +14358,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -9672,6 +14419,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -9690,6 +14440,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -9735,6 +14488,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -9778,6 +14534,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -9796,6 +14555,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -9858,6 +14620,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -9880,6 +14645,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -9898,6 +14666,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -9958,6 +14729,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -9980,6 +14754,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -9998,6 +14775,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -10070,6 +14850,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -10099,6 +14882,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -10276,6 +15062,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -10303,6 +15092,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -10328,6 +15120,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -10366,6 +15161,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -10387,6 +15185,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -10424,6 +15225,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -10445,6 +15249,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 									Optional:            true,
 									Computed:            true,
+									PlanModifiers: []planmodifier.String{
+										stringplanmodifier.UseStateForUnknown(),
+									},
 								},
 							},
 						},
@@ -10602,6 +15409,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -10639,6 +15449,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -10722,6 +15535,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -10957,6 +15773,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -11025,6 +15844,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -11046,6 +15868,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -11203,6 +16028,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -11224,6 +16052,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -11409,6 +16240,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -11430,6 +16264,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 										Optional:            true,
 										Computed:            true,
+										PlanModifiers: []planmodifier.String{
+											stringplanmodifier.UseStateForUnknown(),
+										},
 									},
 								},
 							},
@@ -11655,6 +16492,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -12219,6 +17059,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -12232,11 +17075,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -12270,6 +17119,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"name": schema.StringAttribute{
 														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -12283,11 +17135,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 													"uid": schema.StringAttribute{
 														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -12399,6 +17257,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -12510,6 +17371,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -12523,11 +17387,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																},
 															},
@@ -12705,6 +17575,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"name": schema.StringAttribute{
 																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
@@ -12718,11 +17591,17 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																	"uid": schema.StringAttribute{
 																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
+																		PlanModifiers: []planmodifier.String{
+																			stringplanmodifier.UseStateForUnknown(),
+																		},
 																	},
 																},
 															},
@@ -12935,6 +17814,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -12977,6 +17859,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -13147,6 +18032,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 											Optional:            true,
 											Computed:            true,
+											PlanModifiers: []planmodifier.String{
+												stringplanmodifier.UseStateForUnknown(),
+											},
 										},
 									},
 								},
@@ -13417,6 +18305,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -13594,6 +18485,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -14043,6 +18937,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 													Optional:            true,
 													Computed:            true,
+													PlanModifiers: []planmodifier.String{
+														stringplanmodifier.UseStateForUnknown(),
+													},
 												},
 											},
 										},
@@ -14137,6 +19034,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -14158,6 +19058,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 														Optional:            true,
 														Computed:            true,
+														PlanModifiers: []planmodifier.String{
+															stringplanmodifier.UseStateForUnknown(),
+														},
 													},
 												},
 											},
@@ -14266,6 +19169,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -14390,6 +19296,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 															Optional:            true,
 															Computed:            true,
+															PlanModifiers: []planmodifier.String{
+																stringplanmodifier.UseStateForUnknown(),
+															},
 														},
 													},
 												},
@@ -14427,6 +19336,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 												Optional:            true,
 												Computed:            true,
+												PlanModifiers: []planmodifier.String{
+													stringplanmodifier.UseStateForUnknown(),
+												},
 											},
 										},
 									},
@@ -14588,6 +19500,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 						Optional:            true,
 						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
 					},
 				},
 			},
@@ -14746,6 +19661,9 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
 								Optional:            true,
 								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
 							},
 						},
 					},
@@ -15343,74 +20261,79 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["app_firewall"] = app_firewallMap
 	}
-	if len(data.BlockedClients) > 0 {
-		var blocked_clientsList []map[string]interface{}
-		for _, item := range data.BlockedClients {
-			itemMap := make(map[string]interface{})
-			if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
-				itemMap["as_number"] = item.AsNumber.ValueInt64()
-			}
-			if item.BotSkipProcessing != nil {
-				itemMap["bot_skip_processing"] = map[string]interface{}{}
-			}
-			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
-				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
-			}
-			if item.HTTPHeader != nil {
-				http_headerNestedMap := make(map[string]interface{})
-				if len(item.HTTPHeader.Headers) > 0 {
-					var headersDeepList []map[string]interface{}
-					for _, deepListItem := range item.HTTPHeader.Headers {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
-							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+	if !data.BlockedClients.IsNull() && !data.BlockedClients.IsUnknown() {
+		var blocked_clientsItems []HTTPLoadBalancerBlockedClientsModel
+		diags := data.BlockedClients.ElementsAs(ctx, &blocked_clientsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(blocked_clientsItems) > 0 {
+			var blocked_clientsList []map[string]interface{}
+			for _, item := range blocked_clientsItems {
+				itemMap := make(map[string]interface{})
+				if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
+					itemMap["as_number"] = item.AsNumber.ValueInt64()
+				}
+				if item.BotSkipProcessing != nil {
+					itemMap["bot_skip_processing"] = map[string]interface{}{}
+				}
+				if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+					itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+				}
+				if item.HTTPHeader != nil {
+					http_headerNestedMap := make(map[string]interface{})
+					if len(item.HTTPHeader.Headers) > 0 {
+						var headersDeepList []map[string]interface{}
+						for _, deepListItem := range item.HTTPHeader.Headers {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+								deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+							}
+							if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+								deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+								deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+							}
+							if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+								deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+							}
+							headersDeepList = append(headersDeepList, deepListItemMap)
 						}
-						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
-							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
-							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
-						}
-						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
-							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
-						}
-						headersDeepList = append(headersDeepList, deepListItemMap)
+						http_headerNestedMap["headers"] = headersDeepList
 					}
-					http_headerNestedMap["headers"] = headersDeepList
+					itemMap["http_header"] = http_headerNestedMap
 				}
-				itemMap["http_header"] = http_headerNestedMap
-			}
-			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
-				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
-			}
-			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
-			}
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
+					itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+					itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 				}
-				itemMap["metadata"] = metadataNestedMap
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+					}
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+					}
+					itemMap["metadata"] = metadataNestedMap
+				}
+				if item.SkipProcessing != nil {
+					itemMap["skip_processing"] = map[string]interface{}{}
+				}
+				if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
+					itemMap["user_identifier"] = item.UserIdentifier.ValueString()
+				}
+				if item.WAFSkipProcessing != nil {
+					itemMap["waf_skip_processing"] = map[string]interface{}{}
+				}
+				blocked_clientsList = append(blocked_clientsList, itemMap)
 			}
-			if item.SkipProcessing != nil {
-				itemMap["skip_processing"] = map[string]interface{}{}
-			}
-			if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
-				itemMap["user_identifier"] = item.UserIdentifier.ValueString()
-			}
-			if item.WAFSkipProcessing != nil {
-				itemMap["waf_skip_processing"] = map[string]interface{}{}
-			}
-			blocked_clientsList = append(blocked_clientsList, itemMap)
+			createReq.Spec["blocked_clients"] = blocked_clientsList
 		}
-		createReq.Spec["blocked_clients"] = blocked_clientsList
 	}
 	if data.BotDefense != nil {
 		bot_defenseMap := make(map[string]interface{})
@@ -15619,140 +20542,150 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["csrf_policy"] = csrf_policyMap
 	}
-	if len(data.DataGuardRules) > 0 {
-		var data_guard_rulesList []map[string]interface{}
-		for _, item := range data.DataGuardRules {
-			itemMap := make(map[string]interface{})
-			if item.AnyDomain != nil {
-				itemMap["any_domain"] = map[string]interface{}{}
-			}
-			if item.ApplyDataGuard != nil {
-				itemMap["apply_data_guard"] = map[string]interface{}{}
-			}
-			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
-				itemMap["exact_value"] = item.ExactValue.ValueString()
-			}
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+	if !data.DataGuardRules.IsNull() && !data.DataGuardRules.IsUnknown() {
+		var data_guard_rulesItems []HTTPLoadBalancerDataGuardRulesModel
+		diags := data.DataGuardRules.ElementsAs(ctx, &data_guard_rulesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(data_guard_rulesItems) > 0 {
+			var data_guard_rulesList []map[string]interface{}
+			for _, item := range data_guard_rulesItems {
+				itemMap := make(map[string]interface{})
+				if item.AnyDomain != nil {
+					itemMap["any_domain"] = map[string]interface{}{}
 				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				if item.ApplyDataGuard != nil {
+					itemMap["apply_data_guard"] = map[string]interface{}{}
 				}
-				itemMap["metadata"] = metadataNestedMap
-			}
-			if item.Path != nil {
-				pathNestedMap := make(map[string]interface{})
-				if !item.Path.Path.IsNull() && !item.Path.Path.IsUnknown() {
-					pathNestedMap["path"] = item.Path.Path.ValueString()
+				if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
+					itemMap["exact_value"] = item.ExactValue.ValueString()
 				}
-				if !item.Path.Prefix.IsNull() && !item.Path.Prefix.IsUnknown() {
-					pathNestedMap["prefix"] = item.Path.Prefix.ValueString()
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+					}
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+					}
+					itemMap["metadata"] = metadataNestedMap
 				}
-				if !item.Path.Regex.IsNull() && !item.Path.Regex.IsUnknown() {
-					pathNestedMap["regex"] = item.Path.Regex.ValueString()
+				if item.Path != nil {
+					pathNestedMap := make(map[string]interface{})
+					if !item.Path.Path.IsNull() && !item.Path.Path.IsUnknown() {
+						pathNestedMap["path"] = item.Path.Path.ValueString()
+					}
+					if !item.Path.Prefix.IsNull() && !item.Path.Prefix.IsUnknown() {
+						pathNestedMap["prefix"] = item.Path.Prefix.ValueString()
+					}
+					if !item.Path.Regex.IsNull() && !item.Path.Regex.IsUnknown() {
+						pathNestedMap["regex"] = item.Path.Regex.ValueString()
+					}
+					itemMap["path"] = pathNestedMap
 				}
-				itemMap["path"] = pathNestedMap
+				if item.SkipDataGuard != nil {
+					itemMap["skip_data_guard"] = map[string]interface{}{}
+				}
+				if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
+					itemMap["suffix_value"] = item.SuffixValue.ValueString()
+				}
+				data_guard_rulesList = append(data_guard_rulesList, itemMap)
 			}
-			if item.SkipDataGuard != nil {
-				itemMap["skip_data_guard"] = map[string]interface{}{}
-			}
-			if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
-				itemMap["suffix_value"] = item.SuffixValue.ValueString()
-			}
-			data_guard_rulesList = append(data_guard_rulesList, itemMap)
+			createReq.Spec["data_guard_rules"] = data_guard_rulesList
 		}
-		createReq.Spec["data_guard_rules"] = data_guard_rulesList
 	}
-	if len(data.DDOSMitigationRules) > 0 {
-		var ddos_mitigation_rulesList []map[string]interface{}
-		for _, item := range data.DDOSMitigationRules {
-			itemMap := make(map[string]interface{})
-			if item.Block != nil {
-				itemMap["block"] = map[string]interface{}{}
-			}
-			if item.DDOSClientSource != nil {
-				ddos_client_sourceNestedMap := make(map[string]interface{})
-				if item.DDOSClientSource.AsnList != nil {
-					asn_listDeepMap := make(map[string]interface{})
-					ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
+	if !data.DDOSMitigationRules.IsNull() && !data.DDOSMitigationRules.IsUnknown() {
+		var ddos_mitigation_rulesItems []HTTPLoadBalancerDDOSMitigationRulesModel
+		diags := data.DDOSMitigationRules.ElementsAs(ctx, &ddos_mitigation_rulesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(ddos_mitigation_rulesItems) > 0 {
+			var ddos_mitigation_rulesList []map[string]interface{}
+			for _, item := range ddos_mitigation_rulesItems {
+				itemMap := make(map[string]interface{})
+				if item.Block != nil {
+					itemMap["block"] = map[string]interface{}{}
 				}
-				if !item.DDOSClientSource.CountryList.IsNull() && !item.DDOSClientSource.CountryList.IsUnknown() {
-					var CountryListItems []string
-					diags := item.DDOSClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
-					if !diags.HasError() {
-						ddos_client_sourceNestedMap["country_list"] = CountryListItems
+				if item.DDOSClientSource != nil {
+					ddos_client_sourceNestedMap := make(map[string]interface{})
+					if item.DDOSClientSource.AsnList != nil {
+						asn_listDeepMap := make(map[string]interface{})
+						ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
 					}
-				}
-				if item.DDOSClientSource.Ja4TLSFingerprintMatcher != nil {
-					ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
-						var ExactValuesItems []string
-						diags := item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !item.DDOSClientSource.CountryList.IsNull() && !item.DDOSClientSource.CountryList.IsUnknown() {
+						var CountryListItems []string
+						diags := item.DDOSClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
 						if !diags.HasError() {
-							ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+							ddos_client_sourceNestedMap["country_list"] = CountryListItems
 						}
 					}
-					ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
+					if item.DDOSClientSource.Ja4TLSFingerprintMatcher != nil {
+						ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+						if !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
+							var ExactValuesItems []string
+							diags := item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+							if !diags.HasError() {
+								ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+							}
+						}
+						ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
+					}
+					if item.DDOSClientSource.TLSFingerprintMatcher != nil {
+						tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+						if !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
+							var ClassesItems []string
+							diags := item.DDOSClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+							if !diags.HasError() {
+								tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
+							}
+						}
+						if !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+							var ExactValuesItems []string
+							diags := item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+							if !diags.HasError() {
+								tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+							}
+						}
+						if !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+							var ExcludedValuesItems []string
+							diags := item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
+							if !diags.HasError() {
+								tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
+							}
+						}
+						ddos_client_sourceNestedMap["tls_fingerprint_matcher"] = tls_fingerprint_matcherDeepMap
+					}
+					itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
 				}
-				if item.DDOSClientSource.TLSFingerprintMatcher != nil {
-					tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
-						var ClassesItems []string
-						diags := item.DDOSClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+				if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+					itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+				}
+				if item.IPPrefixList != nil {
+					ip_prefix_listNestedMap := make(map[string]interface{})
+					if !item.IPPrefixList.InvertMatch.IsNull() && !item.IPPrefixList.InvertMatch.IsUnknown() {
+						ip_prefix_listNestedMap["invert_match"] = item.IPPrefixList.InvertMatch.ValueBool()
+					}
+					if !item.IPPrefixList.IPPrefixes.IsNull() && !item.IPPrefixList.IPPrefixes.IsUnknown() {
+						var IPPrefixesItems []string
+						diags := item.IPPrefixList.IPPrefixes.ElementsAs(ctx, &IPPrefixesItems, false)
 						if !diags.HasError() {
-							tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
+							ip_prefix_listNestedMap["ip_prefixes"] = IPPrefixesItems
 						}
 					}
-					if !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
-						var ExactValuesItems []string
-						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-						if !diags.HasError() {
-							tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
-						}
+					itemMap["ip_prefix_list"] = ip_prefix_listNestedMap
+				}
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
 					}
-					if !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
-						var ExcludedValuesItems []string
-						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
-						if !diags.HasError() {
-							tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
-						}
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
 					}
-					ddos_client_sourceNestedMap["tls_fingerprint_matcher"] = tls_fingerprint_matcherDeepMap
+					itemMap["metadata"] = metadataNestedMap
 				}
-				itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, itemMap)
 			}
-			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
-				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
-			}
-			if item.IPPrefixList != nil {
-				ip_prefix_listNestedMap := make(map[string]interface{})
-				if !item.IPPrefixList.InvertMatch.IsNull() && !item.IPPrefixList.InvertMatch.IsUnknown() {
-					ip_prefix_listNestedMap["invert_match"] = item.IPPrefixList.InvertMatch.ValueBool()
-				}
-				if !item.IPPrefixList.IPPrefixes.IsNull() && !item.IPPrefixList.IPPrefixes.IsUnknown() {
-					var IPPrefixesItems []string
-					diags := item.IPPrefixList.IPPrefixes.ElementsAs(ctx, &IPPrefixesItems, false)
-					if !diags.HasError() {
-						ip_prefix_listNestedMap["ip_prefixes"] = IPPrefixesItems
-					}
-				}
-				itemMap["ip_prefix_list"] = ip_prefix_listNestedMap
-			}
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
-				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
-				}
-				itemMap["metadata"] = metadataNestedMap
-			}
-			ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, itemMap)
+			createReq.Spec["ddos_mitigation_rules"] = ddos_mitigation_rulesList
 		}
-		createReq.Spec["ddos_mitigation_rules"] = ddos_mitigation_rulesList
 	}
 	if data.DefaultPool != nil {
 		default_poolMap := make(map[string]interface{})
@@ -16000,48 +20933,53 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["default_pool_list"] = default_pool_listMap
 	}
-	if len(data.DefaultRoutePools) > 0 {
-		var default_route_poolsList []map[string]interface{}
-		for _, item := range data.DefaultRoutePools {
-			itemMap := make(map[string]interface{})
-			if item.Cluster != nil {
-				clusterNestedMap := make(map[string]interface{})
-				if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
-					clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+	if !data.DefaultRoutePools.IsNull() && !data.DefaultRoutePools.IsUnknown() {
+		var default_route_poolsItems []HTTPLoadBalancerDefaultRoutePoolsModel
+		diags := data.DefaultRoutePools.ElementsAs(ctx, &default_route_poolsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(default_route_poolsItems) > 0 {
+			var default_route_poolsList []map[string]interface{}
+			for _, item := range default_route_poolsItems {
+				itemMap := make(map[string]interface{})
+				if item.Cluster != nil {
+					clusterNestedMap := make(map[string]interface{})
+					if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
+						clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+					}
+					if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
+						clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+					}
+					if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
+						clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+					}
+					itemMap["cluster"] = clusterNestedMap
 				}
-				if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
-					clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+				if item.EndpointSubsets != nil {
+					itemMap["endpoint_subsets"] = map[string]interface{}{}
 				}
-				if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
-					clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+				if item.Pool != nil {
+					poolNestedMap := make(map[string]interface{})
+					if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
+						poolNestedMap["name"] = item.Pool.Name.ValueString()
+					}
+					if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
+						poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
+					}
+					if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
+						poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
+					}
+					itemMap["pool"] = poolNestedMap
 				}
-				itemMap["cluster"] = clusterNestedMap
+				if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
+					itemMap["priority"] = item.Priority.ValueInt64()
+				}
+				if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
+					itemMap["weight"] = item.Weight.ValueInt64()
+				}
+				default_route_poolsList = append(default_route_poolsList, itemMap)
 			}
-			if item.EndpointSubsets != nil {
-				itemMap["endpoint_subsets"] = map[string]interface{}{}
-			}
-			if item.Pool != nil {
-				poolNestedMap := make(map[string]interface{})
-				if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
-					poolNestedMap["name"] = item.Pool.Name.ValueString()
-				}
-				if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
-					poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
-				}
-				if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
-					poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
-				}
-				itemMap["pool"] = poolNestedMap
-			}
-			if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
-				itemMap["priority"] = item.Priority.ValueInt64()
-			}
-			if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
-				itemMap["weight"] = item.Weight.ValueInt64()
-			}
-			default_route_poolsList = append(default_route_poolsList, itemMap)
+			createReq.Spec["default_route_pools"] = default_route_poolsList
 		}
-		createReq.Spec["default_route_pools"] = default_route_poolsList
 	}
 	if data.DefaultSensitiveDataPolicy != nil {
 		default_sensitive_data_policyMap := make(map[string]interface{})
@@ -16221,60 +21159,65 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["enable_trust_client_ip_headers"] = enable_trust_client_ip_headersMap
 	}
-	if len(data.GraphqlRules) > 0 {
-		var graphql_rulesList []map[string]interface{}
-		for _, item := range data.GraphqlRules {
-			itemMap := make(map[string]interface{})
-			if item.AnyDomain != nil {
-				itemMap["any_domain"] = map[string]interface{}{}
-			}
-			if !item.ExactPath.IsNull() && !item.ExactPath.IsUnknown() {
-				itemMap["exact_path"] = item.ExactPath.ValueString()
-			}
-			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
-				itemMap["exact_value"] = item.ExactValue.ValueString()
-			}
-			if item.GraphqlSettings != nil {
-				graphql_settingsNestedMap := make(map[string]interface{})
-				if item.GraphqlSettings.DisableIntrospection != nil {
-					graphql_settingsNestedMap["disable_introspection"] = map[string]interface{}{}
+	if !data.GraphqlRules.IsNull() && !data.GraphqlRules.IsUnknown() {
+		var graphql_rulesItems []HTTPLoadBalancerGraphqlRulesModel
+		diags := data.GraphqlRules.ElementsAs(ctx, &graphql_rulesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(graphql_rulesItems) > 0 {
+			var graphql_rulesList []map[string]interface{}
+			for _, item := range graphql_rulesItems {
+				itemMap := make(map[string]interface{})
+				if item.AnyDomain != nil {
+					itemMap["any_domain"] = map[string]interface{}{}
 				}
-				if item.GraphqlSettings.EnableIntrospection != nil {
-					graphql_settingsNestedMap["enable_introspection"] = map[string]interface{}{}
+				if !item.ExactPath.IsNull() && !item.ExactPath.IsUnknown() {
+					itemMap["exact_path"] = item.ExactPath.ValueString()
 				}
-				if !item.GraphqlSettings.MaxBatchedQueries.IsNull() && !item.GraphqlSettings.MaxBatchedQueries.IsUnknown() {
-					graphql_settingsNestedMap["max_batched_queries"] = item.GraphqlSettings.MaxBatchedQueries.ValueInt64()
+				if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
+					itemMap["exact_value"] = item.ExactValue.ValueString()
 				}
-				if !item.GraphqlSettings.MaxDepth.IsNull() && !item.GraphqlSettings.MaxDepth.IsUnknown() {
-					graphql_settingsNestedMap["max_depth"] = item.GraphqlSettings.MaxDepth.ValueInt64()
+				if item.GraphqlSettings != nil {
+					graphql_settingsNestedMap := make(map[string]interface{})
+					if item.GraphqlSettings.DisableIntrospection != nil {
+						graphql_settingsNestedMap["disable_introspection"] = map[string]interface{}{}
+					}
+					if item.GraphqlSettings.EnableIntrospection != nil {
+						graphql_settingsNestedMap["enable_introspection"] = map[string]interface{}{}
+					}
+					if !item.GraphqlSettings.MaxBatchedQueries.IsNull() && !item.GraphqlSettings.MaxBatchedQueries.IsUnknown() {
+						graphql_settingsNestedMap["max_batched_queries"] = item.GraphqlSettings.MaxBatchedQueries.ValueInt64()
+					}
+					if !item.GraphqlSettings.MaxDepth.IsNull() && !item.GraphqlSettings.MaxDepth.IsUnknown() {
+						graphql_settingsNestedMap["max_depth"] = item.GraphqlSettings.MaxDepth.ValueInt64()
+					}
+					if !item.GraphqlSettings.MaxTotalLength.IsNull() && !item.GraphqlSettings.MaxTotalLength.IsUnknown() {
+						graphql_settingsNestedMap["max_total_length"] = item.GraphqlSettings.MaxTotalLength.ValueInt64()
+					}
+					itemMap["graphql_settings"] = graphql_settingsNestedMap
 				}
-				if !item.GraphqlSettings.MaxTotalLength.IsNull() && !item.GraphqlSettings.MaxTotalLength.IsUnknown() {
-					graphql_settingsNestedMap["max_total_length"] = item.GraphqlSettings.MaxTotalLength.ValueInt64()
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+					}
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+					}
+					itemMap["metadata"] = metadataNestedMap
 				}
-				itemMap["graphql_settings"] = graphql_settingsNestedMap
+				if item.MethodGet != nil {
+					itemMap["method_get"] = map[string]interface{}{}
+				}
+				if item.MethodPost != nil {
+					itemMap["method_post"] = map[string]interface{}{}
+				}
+				if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
+					itemMap["suffix_value"] = item.SuffixValue.ValueString()
+				}
+				graphql_rulesList = append(graphql_rulesList, itemMap)
 			}
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
-				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
-				}
-				itemMap["metadata"] = metadataNestedMap
-			}
-			if item.MethodGet != nil {
-				itemMap["method_get"] = map[string]interface{}{}
-			}
-			if item.MethodPost != nil {
-				itemMap["method_post"] = map[string]interface{}{}
-			}
-			if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
-				itemMap["suffix_value"] = item.SuffixValue.ValueString()
-			}
-			graphql_rulesList = append(graphql_rulesList, itemMap)
+			createReq.Spec["graphql_rules"] = graphql_rulesList
 		}
-		createReq.Spec["graphql_rules"] = graphql_rulesList
 	}
 	if data.HTTP != nil {
 		httpMap := make(map[string]interface{})
@@ -16976,52 +21919,57 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		}
 		createReq.Spec["policy_based_challenge"] = policy_based_challengeMap
 	}
-	if len(data.ProtectedCookies) > 0 {
-		var protected_cookiesList []map[string]interface{}
-		for _, item := range data.ProtectedCookies {
-			itemMap := make(map[string]interface{})
-			if item.AddHttponly != nil {
-				itemMap["add_httponly"] = map[string]interface{}{}
+	if !data.ProtectedCookies.IsNull() && !data.ProtectedCookies.IsUnknown() {
+		var protected_cookiesItems []HTTPLoadBalancerProtectedCookiesModel
+		diags := data.ProtectedCookies.ElementsAs(ctx, &protected_cookiesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(protected_cookiesItems) > 0 {
+			var protected_cookiesList []map[string]interface{}
+			for _, item := range protected_cookiesItems {
+				itemMap := make(map[string]interface{})
+				if item.AddHttponly != nil {
+					itemMap["add_httponly"] = map[string]interface{}{}
+				}
+				if item.AddSecure != nil {
+					itemMap["add_secure"] = map[string]interface{}{}
+				}
+				if item.DisableTamperingProtection != nil {
+					itemMap["disable_tampering_protection"] = map[string]interface{}{}
+				}
+				if item.EnableTamperingProtection != nil {
+					itemMap["enable_tampering_protection"] = map[string]interface{}{}
+				}
+				if item.IgnoreHttponly != nil {
+					itemMap["ignore_httponly"] = map[string]interface{}{}
+				}
+				if item.IgnoreMaxAge != nil {
+					itemMap["ignore_max_age"] = map[string]interface{}{}
+				}
+				if item.IgnoreSamesite != nil {
+					itemMap["ignore_samesite"] = map[string]interface{}{}
+				}
+				if item.IgnoreSecure != nil {
+					itemMap["ignore_secure"] = map[string]interface{}{}
+				}
+				if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
+					itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if item.SamesiteLax != nil {
+					itemMap["samesite_lax"] = map[string]interface{}{}
+				}
+				if item.SamesiteNone != nil {
+					itemMap["samesite_none"] = map[string]interface{}{}
+				}
+				if item.SamesiteStrict != nil {
+					itemMap["samesite_strict"] = map[string]interface{}{}
+				}
+				protected_cookiesList = append(protected_cookiesList, itemMap)
 			}
-			if item.AddSecure != nil {
-				itemMap["add_secure"] = map[string]interface{}{}
-			}
-			if item.DisableTamperingProtection != nil {
-				itemMap["disable_tampering_protection"] = map[string]interface{}{}
-			}
-			if item.EnableTamperingProtection != nil {
-				itemMap["enable_tampering_protection"] = map[string]interface{}{}
-			}
-			if item.IgnoreHttponly != nil {
-				itemMap["ignore_httponly"] = map[string]interface{}{}
-			}
-			if item.IgnoreMaxAge != nil {
-				itemMap["ignore_max_age"] = map[string]interface{}{}
-			}
-			if item.IgnoreSamesite != nil {
-				itemMap["ignore_samesite"] = map[string]interface{}{}
-			}
-			if item.IgnoreSecure != nil {
-				itemMap["ignore_secure"] = map[string]interface{}{}
-			}
-			if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
-				itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
-			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if item.SamesiteLax != nil {
-				itemMap["samesite_lax"] = map[string]interface{}{}
-			}
-			if item.SamesiteNone != nil {
-				itemMap["samesite_none"] = map[string]interface{}{}
-			}
-			if item.SamesiteStrict != nil {
-				itemMap["samesite_strict"] = map[string]interface{}{}
-			}
-			protected_cookiesList = append(protected_cookiesList, itemMap)
+			createReq.Spec["protected_cookies"] = protected_cookiesList
 		}
-		createReq.Spec["protected_cookies"] = protected_cookiesList
 	}
 	if data.Random != nil {
 		randomMap := make(map[string]interface{})
@@ -17127,367 +22075,372 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		round_robinMap := make(map[string]interface{})
 		createReq.Spec["round_robin"] = round_robinMap
 	}
-	if len(data.Routes) > 0 {
-		var routesList []map[string]interface{}
-		for _, item := range data.Routes {
-			itemMap := make(map[string]interface{})
-			if item.CustomRouteObject != nil {
-				custom_route_objectNestedMap := make(map[string]interface{})
-				if item.CustomRouteObject.RouteRef != nil {
-					route_refDeepMap := make(map[string]interface{})
-					if !item.CustomRouteObject.RouteRef.Name.IsNull() && !item.CustomRouteObject.RouteRef.Name.IsUnknown() {
-						route_refDeepMap["name"] = item.CustomRouteObject.RouteRef.Name.ValueString()
+	if !data.Routes.IsNull() && !data.Routes.IsUnknown() {
+		var routesItems []HTTPLoadBalancerRoutesModel
+		diags := data.Routes.ElementsAs(ctx, &routesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(routesItems) > 0 {
+			var routesList []map[string]interface{}
+			for _, item := range routesItems {
+				itemMap := make(map[string]interface{})
+				if item.CustomRouteObject != nil {
+					custom_route_objectNestedMap := make(map[string]interface{})
+					if item.CustomRouteObject.RouteRef != nil {
+						route_refDeepMap := make(map[string]interface{})
+						if !item.CustomRouteObject.RouteRef.Name.IsNull() && !item.CustomRouteObject.RouteRef.Name.IsUnknown() {
+							route_refDeepMap["name"] = item.CustomRouteObject.RouteRef.Name.ValueString()
+						}
+						if !item.CustomRouteObject.RouteRef.Namespace.IsNull() && !item.CustomRouteObject.RouteRef.Namespace.IsUnknown() {
+							route_refDeepMap["namespace"] = item.CustomRouteObject.RouteRef.Namespace.ValueString()
+						}
+						if !item.CustomRouteObject.RouteRef.Tenant.IsNull() && !item.CustomRouteObject.RouteRef.Tenant.IsUnknown() {
+							route_refDeepMap["tenant"] = item.CustomRouteObject.RouteRef.Tenant.ValueString()
+						}
+						custom_route_objectNestedMap["route_ref"] = route_refDeepMap
 					}
-					if !item.CustomRouteObject.RouteRef.Namespace.IsNull() && !item.CustomRouteObject.RouteRef.Namespace.IsUnknown() {
-						route_refDeepMap["namespace"] = item.CustomRouteObject.RouteRef.Namespace.ValueString()
-					}
-					if !item.CustomRouteObject.RouteRef.Tenant.IsNull() && !item.CustomRouteObject.RouteRef.Tenant.IsUnknown() {
-						route_refDeepMap["tenant"] = item.CustomRouteObject.RouteRef.Tenant.ValueString()
-					}
-					custom_route_objectNestedMap["route_ref"] = route_refDeepMap
+					itemMap["custom_route_object"] = custom_route_objectNestedMap
 				}
-				itemMap["custom_route_object"] = custom_route_objectNestedMap
+				if item.DirectResponseRoute != nil {
+					direct_response_routeNestedMap := make(map[string]interface{})
+					if len(item.DirectResponseRoute.Headers) > 0 {
+						var headersDeepList []map[string]interface{}
+						for _, deepListItem := range item.DirectResponseRoute.Headers {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+								deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+							}
+							if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+								deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+								deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+							}
+							if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+								deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+							}
+							headersDeepList = append(headersDeepList, deepListItemMap)
+						}
+						direct_response_routeNestedMap["headers"] = headersDeepList
+					}
+					if !item.DirectResponseRoute.HTTPMethod.IsNull() && !item.DirectResponseRoute.HTTPMethod.IsUnknown() {
+						direct_response_routeNestedMap["http_method"] = item.DirectResponseRoute.HTTPMethod.ValueString()
+					}
+					if item.DirectResponseRoute.IncomingPort != nil {
+						incoming_portDeepMap := make(map[string]interface{})
+						if item.DirectResponseRoute.IncomingPort.NoPortMatch != nil {
+							incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+						}
+						if !item.DirectResponseRoute.IncomingPort.Port.IsNull() && !item.DirectResponseRoute.IncomingPort.Port.IsUnknown() {
+							incoming_portDeepMap["port"] = item.DirectResponseRoute.IncomingPort.Port.ValueInt64()
+						}
+						if !item.DirectResponseRoute.IncomingPort.PortRanges.IsNull() && !item.DirectResponseRoute.IncomingPort.PortRanges.IsUnknown() {
+							incoming_portDeepMap["port_ranges"] = item.DirectResponseRoute.IncomingPort.PortRanges.ValueString()
+						}
+						direct_response_routeNestedMap["incoming_port"] = incoming_portDeepMap
+					}
+					if item.DirectResponseRoute.Path != nil {
+						pathDeepMap := make(map[string]interface{})
+						if !item.DirectResponseRoute.Path.Path.IsNull() && !item.DirectResponseRoute.Path.Path.IsUnknown() {
+							pathDeepMap["path"] = item.DirectResponseRoute.Path.Path.ValueString()
+						}
+						if !item.DirectResponseRoute.Path.Prefix.IsNull() && !item.DirectResponseRoute.Path.Prefix.IsUnknown() {
+							pathDeepMap["prefix"] = item.DirectResponseRoute.Path.Prefix.ValueString()
+						}
+						if !item.DirectResponseRoute.Path.Regex.IsNull() && !item.DirectResponseRoute.Path.Regex.IsUnknown() {
+							pathDeepMap["regex"] = item.DirectResponseRoute.Path.Regex.ValueString()
+						}
+						direct_response_routeNestedMap["path"] = pathDeepMap
+					}
+					if item.DirectResponseRoute.RouteDirectResponse != nil {
+						route_direct_responseDeepMap := make(map[string]interface{})
+						if !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsUnknown() {
+							route_direct_responseDeepMap["response_body_encoded"] = item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.ValueString()
+						}
+						if !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsUnknown() {
+							route_direct_responseDeepMap["response_code"] = item.DirectResponseRoute.RouteDirectResponse.ResponseCode.ValueInt64()
+						}
+						direct_response_routeNestedMap["route_direct_response"] = route_direct_responseDeepMap
+					}
+					itemMap["direct_response_route"] = direct_response_routeNestedMap
+				}
+				if item.RedirectRoute != nil {
+					redirect_routeNestedMap := make(map[string]interface{})
+					if len(item.RedirectRoute.Headers) > 0 {
+						var headersDeepList []map[string]interface{}
+						for _, deepListItem := range item.RedirectRoute.Headers {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+								deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+							}
+							if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+								deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+								deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+							}
+							if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+								deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+							}
+							headersDeepList = append(headersDeepList, deepListItemMap)
+						}
+						redirect_routeNestedMap["headers"] = headersDeepList
+					}
+					if !item.RedirectRoute.HTTPMethod.IsNull() && !item.RedirectRoute.HTTPMethod.IsUnknown() {
+						redirect_routeNestedMap["http_method"] = item.RedirectRoute.HTTPMethod.ValueString()
+					}
+					if item.RedirectRoute.IncomingPort != nil {
+						incoming_portDeepMap := make(map[string]interface{})
+						if item.RedirectRoute.IncomingPort.NoPortMatch != nil {
+							incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+						}
+						if !item.RedirectRoute.IncomingPort.Port.IsNull() && !item.RedirectRoute.IncomingPort.Port.IsUnknown() {
+							incoming_portDeepMap["port"] = item.RedirectRoute.IncomingPort.Port.ValueInt64()
+						}
+						if !item.RedirectRoute.IncomingPort.PortRanges.IsNull() && !item.RedirectRoute.IncomingPort.PortRanges.IsUnknown() {
+							incoming_portDeepMap["port_ranges"] = item.RedirectRoute.IncomingPort.PortRanges.ValueString()
+						}
+						redirect_routeNestedMap["incoming_port"] = incoming_portDeepMap
+					}
+					if item.RedirectRoute.Path != nil {
+						pathDeepMap := make(map[string]interface{})
+						if !item.RedirectRoute.Path.Path.IsNull() && !item.RedirectRoute.Path.Path.IsUnknown() {
+							pathDeepMap["path"] = item.RedirectRoute.Path.Path.ValueString()
+						}
+						if !item.RedirectRoute.Path.Prefix.IsNull() && !item.RedirectRoute.Path.Prefix.IsUnknown() {
+							pathDeepMap["prefix"] = item.RedirectRoute.Path.Prefix.ValueString()
+						}
+						if !item.RedirectRoute.Path.Regex.IsNull() && !item.RedirectRoute.Path.Regex.IsUnknown() {
+							pathDeepMap["regex"] = item.RedirectRoute.Path.Regex.ValueString()
+						}
+						redirect_routeNestedMap["path"] = pathDeepMap
+					}
+					if item.RedirectRoute.RouteRedirect != nil {
+						route_redirectDeepMap := make(map[string]interface{})
+						if !item.RedirectRoute.RouteRedirect.HostRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.HostRedirect.IsUnknown() {
+							route_redirectDeepMap["host_redirect"] = item.RedirectRoute.RouteRedirect.HostRedirect.ValueString()
+						}
+						if !item.RedirectRoute.RouteRedirect.PathRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.PathRedirect.IsUnknown() {
+							route_redirectDeepMap["path_redirect"] = item.RedirectRoute.RouteRedirect.PathRedirect.ValueString()
+						}
+						if !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsNull() && !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsUnknown() {
+							route_redirectDeepMap["prefix_rewrite"] = item.RedirectRoute.RouteRedirect.PrefixRewrite.ValueString()
+						}
+						if !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsUnknown() {
+							route_redirectDeepMap["proto_redirect"] = item.RedirectRoute.RouteRedirect.ProtoRedirect.ValueString()
+						}
+						if item.RedirectRoute.RouteRedirect.RemoveAllParams != nil {
+							route_redirectDeepMap["remove_all_params"] = map[string]interface{}{}
+						}
+						if !item.RedirectRoute.RouteRedirect.ReplaceParams.IsNull() && !item.RedirectRoute.RouteRedirect.ReplaceParams.IsUnknown() {
+							route_redirectDeepMap["replace_params"] = item.RedirectRoute.RouteRedirect.ReplaceParams.ValueString()
+						}
+						if !item.RedirectRoute.RouteRedirect.ResponseCode.IsNull() && !item.RedirectRoute.RouteRedirect.ResponseCode.IsUnknown() {
+							route_redirectDeepMap["response_code"] = item.RedirectRoute.RouteRedirect.ResponseCode.ValueInt64()
+						}
+						if item.RedirectRoute.RouteRedirect.RetainAllParams != nil {
+							route_redirectDeepMap["retain_all_params"] = map[string]interface{}{}
+						}
+						redirect_routeNestedMap["route_redirect"] = route_redirectDeepMap
+					}
+					itemMap["redirect_route"] = redirect_routeNestedMap
+				}
+				if item.SimpleRoute != nil {
+					simple_routeNestedMap := make(map[string]interface{})
+					if item.SimpleRoute.AdvancedOptions != nil {
+						advanced_optionsDeepMap := make(map[string]interface{})
+						if item.SimpleRoute.AdvancedOptions.CommonBuffering != nil {
+							advanced_optionsDeepMap["common_buffering"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.CommonHashPolicy != nil {
+							advanced_optionsDeepMap["common_hash_policy"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DefaultRetryPolicy != nil {
+							advanced_optionsDeepMap["default_retry_policy"] = map[string]interface{}{}
+						}
+						if !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsNull() && !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsUnknown() {
+							advanced_optionsDeepMap["disable_location_add"] = item.SimpleRoute.AdvancedOptions.DisableLocationAdd.ValueBool()
+						}
+						if item.SimpleRoute.AdvancedOptions.DisableMirroring != nil {
+							advanced_optionsDeepMap["disable_mirroring"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DisablePrefixRewrite != nil {
+							advanced_optionsDeepMap["disable_prefix_rewrite"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DisableSpdy != nil {
+							advanced_optionsDeepMap["disable_spdy"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DisableWAF != nil {
+							advanced_optionsDeepMap["disable_waf"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DisableWebSocketConfig != nil {
+							advanced_optionsDeepMap["disable_web_socket_config"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DoNotRetractCluster != nil {
+							advanced_optionsDeepMap["do_not_retract_cluster"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.EnableSpdy != nil {
+							advanced_optionsDeepMap["enable_spdy"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.EndpointSubsets != nil {
+							advanced_optionsDeepMap["endpoint_subsets"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.InheritedBotDefenseJavascriptInjection != nil {
+							advanced_optionsDeepMap["inherited_bot_defense_javascript_injection"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.InheritedWAF != nil {
+							advanced_optionsDeepMap["inherited_waf"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.InheritedWAFExclusion != nil {
+							advanced_optionsDeepMap["inherited_waf_exclusion"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.NoRetryPolicy != nil {
+							advanced_optionsDeepMap["no_retry_policy"] = map[string]interface{}{}
+						}
+						if !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsNull() && !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsUnknown() {
+							advanced_optionsDeepMap["prefix_rewrite"] = item.SimpleRoute.AdvancedOptions.PrefixRewrite.ValueString()
+						}
+						if !item.SimpleRoute.AdvancedOptions.Priority.IsNull() && !item.SimpleRoute.AdvancedOptions.Priority.IsUnknown() {
+							advanced_optionsDeepMap["priority"] = item.SimpleRoute.AdvancedOptions.Priority.ValueString()
+						}
+						if !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsUnknown() {
+							var RequestCookiesToRemoveItems []string
+							diags := item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.ElementsAs(ctx, &RequestCookiesToRemoveItems, false)
+							if !diags.HasError() {
+								advanced_optionsDeepMap["request_cookies_to_remove"] = RequestCookiesToRemoveItems
+							}
+						}
+						if !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsUnknown() {
+							var RequestHeadersToRemoveItems []string
+							diags := item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.ElementsAs(ctx, &RequestHeadersToRemoveItems, false)
+							if !diags.HasError() {
+								advanced_optionsDeepMap["request_headers_to_remove"] = RequestHeadersToRemoveItems
+							}
+						}
+						if !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsUnknown() {
+							var ResponseCookiesToRemoveItems []string
+							diags := item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.ElementsAs(ctx, &ResponseCookiesToRemoveItems, false)
+							if !diags.HasError() {
+								advanced_optionsDeepMap["response_cookies_to_remove"] = ResponseCookiesToRemoveItems
+							}
+						}
+						if !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsUnknown() {
+							var ResponseHeadersToRemoveItems []string
+							diags := item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.ElementsAs(ctx, &ResponseHeadersToRemoveItems, false)
+							if !diags.HasError() {
+								advanced_optionsDeepMap["response_headers_to_remove"] = ResponseHeadersToRemoveItems
+							}
+						}
+						if item.SimpleRoute.AdvancedOptions.RetractCluster != nil {
+							advanced_optionsDeepMap["retract_cluster"] = map[string]interface{}{}
+						}
+						if !item.SimpleRoute.AdvancedOptions.Timeout.IsNull() && !item.SimpleRoute.AdvancedOptions.Timeout.IsUnknown() {
+							advanced_optionsDeepMap["timeout"] = item.SimpleRoute.AdvancedOptions.Timeout.ValueInt64()
+						}
+						simple_routeNestedMap["advanced_options"] = advanced_optionsDeepMap
+					}
+					if item.SimpleRoute.AutoHostRewrite != nil {
+						simple_routeNestedMap["auto_host_rewrite"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.DisableHostRewrite != nil {
+						simple_routeNestedMap["disable_host_rewrite"] = map[string]interface{}{}
+					}
+					if len(item.SimpleRoute.Headers) > 0 {
+						var headersDeepList []map[string]interface{}
+						for _, deepListItem := range item.SimpleRoute.Headers {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+								deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+							}
+							if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+								deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+								deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+							}
+							if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+								deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+							}
+							headersDeepList = append(headersDeepList, deepListItemMap)
+						}
+						simple_routeNestedMap["headers"] = headersDeepList
+					}
+					if !item.SimpleRoute.HostRewrite.IsNull() && !item.SimpleRoute.HostRewrite.IsUnknown() {
+						simple_routeNestedMap["host_rewrite"] = item.SimpleRoute.HostRewrite.ValueString()
+					}
+					if !item.SimpleRoute.HTTPMethod.IsNull() && !item.SimpleRoute.HTTPMethod.IsUnknown() {
+						simple_routeNestedMap["http_method"] = item.SimpleRoute.HTTPMethod.ValueString()
+					}
+					if item.SimpleRoute.IncomingPort != nil {
+						incoming_portDeepMap := make(map[string]interface{})
+						if item.SimpleRoute.IncomingPort.NoPortMatch != nil {
+							incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+						}
+						if !item.SimpleRoute.IncomingPort.Port.IsNull() && !item.SimpleRoute.IncomingPort.Port.IsUnknown() {
+							incoming_portDeepMap["port"] = item.SimpleRoute.IncomingPort.Port.ValueInt64()
+						}
+						if !item.SimpleRoute.IncomingPort.PortRanges.IsNull() && !item.SimpleRoute.IncomingPort.PortRanges.IsUnknown() {
+							incoming_portDeepMap["port_ranges"] = item.SimpleRoute.IncomingPort.PortRanges.ValueString()
+						}
+						simple_routeNestedMap["incoming_port"] = incoming_portDeepMap
+					}
+					if len(item.SimpleRoute.OriginPools) > 0 {
+						var origin_poolsDeepList []map[string]interface{}
+						for _, deepListItem := range item.SimpleRoute.OriginPools {
+							deepListItemMap := make(map[string]interface{})
+							if deepListItem.EndpointSubsets != nil {
+								deepListItemMap["endpoint_subsets"] = map[string]interface{}{}
+							}
+							if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
+								deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
+							}
+							if !deepListItem.Weight.IsNull() && !deepListItem.Weight.IsUnknown() {
+								deepListItemMap["weight"] = deepListItem.Weight.ValueInt64()
+							}
+							origin_poolsDeepList = append(origin_poolsDeepList, deepListItemMap)
+						}
+						simple_routeNestedMap["origin_pools"] = origin_poolsDeepList
+					}
+					if item.SimpleRoute.Path != nil {
+						pathDeepMap := make(map[string]interface{})
+						if !item.SimpleRoute.Path.Path.IsNull() && !item.SimpleRoute.Path.Path.IsUnknown() {
+							pathDeepMap["path"] = item.SimpleRoute.Path.Path.ValueString()
+						}
+						if !item.SimpleRoute.Path.Prefix.IsNull() && !item.SimpleRoute.Path.Prefix.IsUnknown() {
+							pathDeepMap["prefix"] = item.SimpleRoute.Path.Prefix.ValueString()
+						}
+						if !item.SimpleRoute.Path.Regex.IsNull() && !item.SimpleRoute.Path.Regex.IsUnknown() {
+							pathDeepMap["regex"] = item.SimpleRoute.Path.Regex.ValueString()
+						}
+						simple_routeNestedMap["path"] = pathDeepMap
+					}
+					if item.SimpleRoute.QueryParams != nil {
+						query_paramsDeepMap := make(map[string]interface{})
+						if item.SimpleRoute.QueryParams.RemoveAllParams != nil {
+							query_paramsDeepMap["remove_all_params"] = map[string]interface{}{}
+						}
+						if !item.SimpleRoute.QueryParams.ReplaceParams.IsNull() && !item.SimpleRoute.QueryParams.ReplaceParams.IsUnknown() {
+							query_paramsDeepMap["replace_params"] = item.SimpleRoute.QueryParams.ReplaceParams.ValueString()
+						}
+						if item.SimpleRoute.QueryParams.RetainAllParams != nil {
+							query_paramsDeepMap["retain_all_params"] = map[string]interface{}{}
+						}
+						simple_routeNestedMap["query_params"] = query_paramsDeepMap
+					}
+					itemMap["simple_route"] = simple_routeNestedMap
+				}
+				routesList = append(routesList, itemMap)
 			}
-			if item.DirectResponseRoute != nil {
-				direct_response_routeNestedMap := make(map[string]interface{})
-				if len(item.DirectResponseRoute.Headers) > 0 {
-					var headersDeepList []map[string]interface{}
-					for _, deepListItem := range item.DirectResponseRoute.Headers {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
-							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
-						}
-						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
-							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
-							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
-						}
-						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
-							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
-						}
-						headersDeepList = append(headersDeepList, deepListItemMap)
-					}
-					direct_response_routeNestedMap["headers"] = headersDeepList
-				}
-				if !item.DirectResponseRoute.HTTPMethod.IsNull() && !item.DirectResponseRoute.HTTPMethod.IsUnknown() {
-					direct_response_routeNestedMap["http_method"] = item.DirectResponseRoute.HTTPMethod.ValueString()
-				}
-				if item.DirectResponseRoute.IncomingPort != nil {
-					incoming_portDeepMap := make(map[string]interface{})
-					if item.DirectResponseRoute.IncomingPort.NoPortMatch != nil {
-						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
-					}
-					if !item.DirectResponseRoute.IncomingPort.Port.IsNull() && !item.DirectResponseRoute.IncomingPort.Port.IsUnknown() {
-						incoming_portDeepMap["port"] = item.DirectResponseRoute.IncomingPort.Port.ValueInt64()
-					}
-					if !item.DirectResponseRoute.IncomingPort.PortRanges.IsNull() && !item.DirectResponseRoute.IncomingPort.PortRanges.IsUnknown() {
-						incoming_portDeepMap["port_ranges"] = item.DirectResponseRoute.IncomingPort.PortRanges.ValueString()
-					}
-					direct_response_routeNestedMap["incoming_port"] = incoming_portDeepMap
-				}
-				if item.DirectResponseRoute.Path != nil {
-					pathDeepMap := make(map[string]interface{})
-					if !item.DirectResponseRoute.Path.Path.IsNull() && !item.DirectResponseRoute.Path.Path.IsUnknown() {
-						pathDeepMap["path"] = item.DirectResponseRoute.Path.Path.ValueString()
-					}
-					if !item.DirectResponseRoute.Path.Prefix.IsNull() && !item.DirectResponseRoute.Path.Prefix.IsUnknown() {
-						pathDeepMap["prefix"] = item.DirectResponseRoute.Path.Prefix.ValueString()
-					}
-					if !item.DirectResponseRoute.Path.Regex.IsNull() && !item.DirectResponseRoute.Path.Regex.IsUnknown() {
-						pathDeepMap["regex"] = item.DirectResponseRoute.Path.Regex.ValueString()
-					}
-					direct_response_routeNestedMap["path"] = pathDeepMap
-				}
-				if item.DirectResponseRoute.RouteDirectResponse != nil {
-					route_direct_responseDeepMap := make(map[string]interface{})
-					if !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsUnknown() {
-						route_direct_responseDeepMap["response_body_encoded"] = item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.ValueString()
-					}
-					if !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsUnknown() {
-						route_direct_responseDeepMap["response_code"] = item.DirectResponseRoute.RouteDirectResponse.ResponseCode.ValueInt64()
-					}
-					direct_response_routeNestedMap["route_direct_response"] = route_direct_responseDeepMap
-				}
-				itemMap["direct_response_route"] = direct_response_routeNestedMap
-			}
-			if item.RedirectRoute != nil {
-				redirect_routeNestedMap := make(map[string]interface{})
-				if len(item.RedirectRoute.Headers) > 0 {
-					var headersDeepList []map[string]interface{}
-					for _, deepListItem := range item.RedirectRoute.Headers {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
-							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
-						}
-						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
-							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
-							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
-						}
-						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
-							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
-						}
-						headersDeepList = append(headersDeepList, deepListItemMap)
-					}
-					redirect_routeNestedMap["headers"] = headersDeepList
-				}
-				if !item.RedirectRoute.HTTPMethod.IsNull() && !item.RedirectRoute.HTTPMethod.IsUnknown() {
-					redirect_routeNestedMap["http_method"] = item.RedirectRoute.HTTPMethod.ValueString()
-				}
-				if item.RedirectRoute.IncomingPort != nil {
-					incoming_portDeepMap := make(map[string]interface{})
-					if item.RedirectRoute.IncomingPort.NoPortMatch != nil {
-						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
-					}
-					if !item.RedirectRoute.IncomingPort.Port.IsNull() && !item.RedirectRoute.IncomingPort.Port.IsUnknown() {
-						incoming_portDeepMap["port"] = item.RedirectRoute.IncomingPort.Port.ValueInt64()
-					}
-					if !item.RedirectRoute.IncomingPort.PortRanges.IsNull() && !item.RedirectRoute.IncomingPort.PortRanges.IsUnknown() {
-						incoming_portDeepMap["port_ranges"] = item.RedirectRoute.IncomingPort.PortRanges.ValueString()
-					}
-					redirect_routeNestedMap["incoming_port"] = incoming_portDeepMap
-				}
-				if item.RedirectRoute.Path != nil {
-					pathDeepMap := make(map[string]interface{})
-					if !item.RedirectRoute.Path.Path.IsNull() && !item.RedirectRoute.Path.Path.IsUnknown() {
-						pathDeepMap["path"] = item.RedirectRoute.Path.Path.ValueString()
-					}
-					if !item.RedirectRoute.Path.Prefix.IsNull() && !item.RedirectRoute.Path.Prefix.IsUnknown() {
-						pathDeepMap["prefix"] = item.RedirectRoute.Path.Prefix.ValueString()
-					}
-					if !item.RedirectRoute.Path.Regex.IsNull() && !item.RedirectRoute.Path.Regex.IsUnknown() {
-						pathDeepMap["regex"] = item.RedirectRoute.Path.Regex.ValueString()
-					}
-					redirect_routeNestedMap["path"] = pathDeepMap
-				}
-				if item.RedirectRoute.RouteRedirect != nil {
-					route_redirectDeepMap := make(map[string]interface{})
-					if !item.RedirectRoute.RouteRedirect.HostRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.HostRedirect.IsUnknown() {
-						route_redirectDeepMap["host_redirect"] = item.RedirectRoute.RouteRedirect.HostRedirect.ValueString()
-					}
-					if !item.RedirectRoute.RouteRedirect.PathRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.PathRedirect.IsUnknown() {
-						route_redirectDeepMap["path_redirect"] = item.RedirectRoute.RouteRedirect.PathRedirect.ValueString()
-					}
-					if !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsNull() && !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsUnknown() {
-						route_redirectDeepMap["prefix_rewrite"] = item.RedirectRoute.RouteRedirect.PrefixRewrite.ValueString()
-					}
-					if !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsUnknown() {
-						route_redirectDeepMap["proto_redirect"] = item.RedirectRoute.RouteRedirect.ProtoRedirect.ValueString()
-					}
-					if item.RedirectRoute.RouteRedirect.RemoveAllParams != nil {
-						route_redirectDeepMap["remove_all_params"] = map[string]interface{}{}
-					}
-					if !item.RedirectRoute.RouteRedirect.ReplaceParams.IsNull() && !item.RedirectRoute.RouteRedirect.ReplaceParams.IsUnknown() {
-						route_redirectDeepMap["replace_params"] = item.RedirectRoute.RouteRedirect.ReplaceParams.ValueString()
-					}
-					if !item.RedirectRoute.RouteRedirect.ResponseCode.IsNull() && !item.RedirectRoute.RouteRedirect.ResponseCode.IsUnknown() {
-						route_redirectDeepMap["response_code"] = item.RedirectRoute.RouteRedirect.ResponseCode.ValueInt64()
-					}
-					if item.RedirectRoute.RouteRedirect.RetainAllParams != nil {
-						route_redirectDeepMap["retain_all_params"] = map[string]interface{}{}
-					}
-					redirect_routeNestedMap["route_redirect"] = route_redirectDeepMap
-				}
-				itemMap["redirect_route"] = redirect_routeNestedMap
-			}
-			if item.SimpleRoute != nil {
-				simple_routeNestedMap := make(map[string]interface{})
-				if item.SimpleRoute.AdvancedOptions != nil {
-					advanced_optionsDeepMap := make(map[string]interface{})
-					if item.SimpleRoute.AdvancedOptions.CommonBuffering != nil {
-						advanced_optionsDeepMap["common_buffering"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.CommonHashPolicy != nil {
-						advanced_optionsDeepMap["common_hash_policy"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DefaultRetryPolicy != nil {
-						advanced_optionsDeepMap["default_retry_policy"] = map[string]interface{}{}
-					}
-					if !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsNull() && !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsUnknown() {
-						advanced_optionsDeepMap["disable_location_add"] = item.SimpleRoute.AdvancedOptions.DisableLocationAdd.ValueBool()
-					}
-					if item.SimpleRoute.AdvancedOptions.DisableMirroring != nil {
-						advanced_optionsDeepMap["disable_mirroring"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DisablePrefixRewrite != nil {
-						advanced_optionsDeepMap["disable_prefix_rewrite"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DisableSpdy != nil {
-						advanced_optionsDeepMap["disable_spdy"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DisableWAF != nil {
-						advanced_optionsDeepMap["disable_waf"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DisableWebSocketConfig != nil {
-						advanced_optionsDeepMap["disable_web_socket_config"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DoNotRetractCluster != nil {
-						advanced_optionsDeepMap["do_not_retract_cluster"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.EnableSpdy != nil {
-						advanced_optionsDeepMap["enable_spdy"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.EndpointSubsets != nil {
-						advanced_optionsDeepMap["endpoint_subsets"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.InheritedBotDefenseJavascriptInjection != nil {
-						advanced_optionsDeepMap["inherited_bot_defense_javascript_injection"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.InheritedWAF != nil {
-						advanced_optionsDeepMap["inherited_waf"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.InheritedWAFExclusion != nil {
-						advanced_optionsDeepMap["inherited_waf_exclusion"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.NoRetryPolicy != nil {
-						advanced_optionsDeepMap["no_retry_policy"] = map[string]interface{}{}
-					}
-					if !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsNull() && !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsUnknown() {
-						advanced_optionsDeepMap["prefix_rewrite"] = item.SimpleRoute.AdvancedOptions.PrefixRewrite.ValueString()
-					}
-					if !item.SimpleRoute.AdvancedOptions.Priority.IsNull() && !item.SimpleRoute.AdvancedOptions.Priority.IsUnknown() {
-						advanced_optionsDeepMap["priority"] = item.SimpleRoute.AdvancedOptions.Priority.ValueString()
-					}
-					if !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsUnknown() {
-						var RequestCookiesToRemoveItems []string
-						diags := item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.ElementsAs(ctx, &RequestCookiesToRemoveItems, false)
-						if !diags.HasError() {
-							advanced_optionsDeepMap["request_cookies_to_remove"] = RequestCookiesToRemoveItems
-						}
-					}
-					if !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsUnknown() {
-						var RequestHeadersToRemoveItems []string
-						diags := item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.ElementsAs(ctx, &RequestHeadersToRemoveItems, false)
-						if !diags.HasError() {
-							advanced_optionsDeepMap["request_headers_to_remove"] = RequestHeadersToRemoveItems
-						}
-					}
-					if !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsUnknown() {
-						var ResponseCookiesToRemoveItems []string
-						diags := item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.ElementsAs(ctx, &ResponseCookiesToRemoveItems, false)
-						if !diags.HasError() {
-							advanced_optionsDeepMap["response_cookies_to_remove"] = ResponseCookiesToRemoveItems
-						}
-					}
-					if !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsUnknown() {
-						var ResponseHeadersToRemoveItems []string
-						diags := item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.ElementsAs(ctx, &ResponseHeadersToRemoveItems, false)
-						if !diags.HasError() {
-							advanced_optionsDeepMap["response_headers_to_remove"] = ResponseHeadersToRemoveItems
-						}
-					}
-					if item.SimpleRoute.AdvancedOptions.RetractCluster != nil {
-						advanced_optionsDeepMap["retract_cluster"] = map[string]interface{}{}
-					}
-					if !item.SimpleRoute.AdvancedOptions.Timeout.IsNull() && !item.SimpleRoute.AdvancedOptions.Timeout.IsUnknown() {
-						advanced_optionsDeepMap["timeout"] = item.SimpleRoute.AdvancedOptions.Timeout.ValueInt64()
-					}
-					simple_routeNestedMap["advanced_options"] = advanced_optionsDeepMap
-				}
-				if item.SimpleRoute.AutoHostRewrite != nil {
-					simple_routeNestedMap["auto_host_rewrite"] = map[string]interface{}{}
-				}
-				if item.SimpleRoute.DisableHostRewrite != nil {
-					simple_routeNestedMap["disable_host_rewrite"] = map[string]interface{}{}
-				}
-				if len(item.SimpleRoute.Headers) > 0 {
-					var headersDeepList []map[string]interface{}
-					for _, deepListItem := range item.SimpleRoute.Headers {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
-							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
-						}
-						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
-							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
-							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
-						}
-						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
-							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
-						}
-						headersDeepList = append(headersDeepList, deepListItemMap)
-					}
-					simple_routeNestedMap["headers"] = headersDeepList
-				}
-				if !item.SimpleRoute.HostRewrite.IsNull() && !item.SimpleRoute.HostRewrite.IsUnknown() {
-					simple_routeNestedMap["host_rewrite"] = item.SimpleRoute.HostRewrite.ValueString()
-				}
-				if !item.SimpleRoute.HTTPMethod.IsNull() && !item.SimpleRoute.HTTPMethod.IsUnknown() {
-					simple_routeNestedMap["http_method"] = item.SimpleRoute.HTTPMethod.ValueString()
-				}
-				if item.SimpleRoute.IncomingPort != nil {
-					incoming_portDeepMap := make(map[string]interface{})
-					if item.SimpleRoute.IncomingPort.NoPortMatch != nil {
-						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
-					}
-					if !item.SimpleRoute.IncomingPort.Port.IsNull() && !item.SimpleRoute.IncomingPort.Port.IsUnknown() {
-						incoming_portDeepMap["port"] = item.SimpleRoute.IncomingPort.Port.ValueInt64()
-					}
-					if !item.SimpleRoute.IncomingPort.PortRanges.IsNull() && !item.SimpleRoute.IncomingPort.PortRanges.IsUnknown() {
-						incoming_portDeepMap["port_ranges"] = item.SimpleRoute.IncomingPort.PortRanges.ValueString()
-					}
-					simple_routeNestedMap["incoming_port"] = incoming_portDeepMap
-				}
-				if len(item.SimpleRoute.OriginPools) > 0 {
-					var origin_poolsDeepList []map[string]interface{}
-					for _, deepListItem := range item.SimpleRoute.OriginPools {
-						deepListItemMap := make(map[string]interface{})
-						if deepListItem.EndpointSubsets != nil {
-							deepListItemMap["endpoint_subsets"] = map[string]interface{}{}
-						}
-						if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
-							deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
-						}
-						if !deepListItem.Weight.IsNull() && !deepListItem.Weight.IsUnknown() {
-							deepListItemMap["weight"] = deepListItem.Weight.ValueInt64()
-						}
-						origin_poolsDeepList = append(origin_poolsDeepList, deepListItemMap)
-					}
-					simple_routeNestedMap["origin_pools"] = origin_poolsDeepList
-				}
-				if item.SimpleRoute.Path != nil {
-					pathDeepMap := make(map[string]interface{})
-					if !item.SimpleRoute.Path.Path.IsNull() && !item.SimpleRoute.Path.Path.IsUnknown() {
-						pathDeepMap["path"] = item.SimpleRoute.Path.Path.ValueString()
-					}
-					if !item.SimpleRoute.Path.Prefix.IsNull() && !item.SimpleRoute.Path.Prefix.IsUnknown() {
-						pathDeepMap["prefix"] = item.SimpleRoute.Path.Prefix.ValueString()
-					}
-					if !item.SimpleRoute.Path.Regex.IsNull() && !item.SimpleRoute.Path.Regex.IsUnknown() {
-						pathDeepMap["regex"] = item.SimpleRoute.Path.Regex.ValueString()
-					}
-					simple_routeNestedMap["path"] = pathDeepMap
-				}
-				if item.SimpleRoute.QueryParams != nil {
-					query_paramsDeepMap := make(map[string]interface{})
-					if item.SimpleRoute.QueryParams.RemoveAllParams != nil {
-						query_paramsDeepMap["remove_all_params"] = map[string]interface{}{}
-					}
-					if !item.SimpleRoute.QueryParams.ReplaceParams.IsNull() && !item.SimpleRoute.QueryParams.ReplaceParams.IsUnknown() {
-						query_paramsDeepMap["replace_params"] = item.SimpleRoute.QueryParams.ReplaceParams.ValueString()
-					}
-					if item.SimpleRoute.QueryParams.RetainAllParams != nil {
-						query_paramsDeepMap["retain_all_params"] = map[string]interface{}{}
-					}
-					simple_routeNestedMap["query_params"] = query_paramsDeepMap
-				}
-				itemMap["simple_route"] = simple_routeNestedMap
-			}
-			routesList = append(routesList, itemMap)
+			createReq.Spec["routes"] = routesList
 		}
-		createReq.Spec["routes"] = routesList
 	}
 	if data.SensitiveDataDisclosureRules != nil {
 		sensitive_data_disclosure_rulesMap := make(map[string]interface{})
@@ -17577,74 +22530,79 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 		system_default_timeoutsMap := make(map[string]interface{})
 		createReq.Spec["system_default_timeouts"] = system_default_timeoutsMap
 	}
-	if len(data.TrustedClients) > 0 {
-		var trusted_clientsList []map[string]interface{}
-		for _, item := range data.TrustedClients {
-			itemMap := make(map[string]interface{})
-			if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
-				itemMap["as_number"] = item.AsNumber.ValueInt64()
-			}
-			if item.BotSkipProcessing != nil {
-				itemMap["bot_skip_processing"] = map[string]interface{}{}
-			}
-			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
-				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
-			}
-			if item.HTTPHeader != nil {
-				http_headerNestedMap := make(map[string]interface{})
-				if len(item.HTTPHeader.Headers) > 0 {
-					var headersDeepList []map[string]interface{}
-					for _, deepListItem := range item.HTTPHeader.Headers {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
-							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+	if !data.TrustedClients.IsNull() && !data.TrustedClients.IsUnknown() {
+		var trusted_clientsItems []HTTPLoadBalancerTrustedClientsModel
+		diags := data.TrustedClients.ElementsAs(ctx, &trusted_clientsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(trusted_clientsItems) > 0 {
+			var trusted_clientsList []map[string]interface{}
+			for _, item := range trusted_clientsItems {
+				itemMap := make(map[string]interface{})
+				if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
+					itemMap["as_number"] = item.AsNumber.ValueInt64()
+				}
+				if item.BotSkipProcessing != nil {
+					itemMap["bot_skip_processing"] = map[string]interface{}{}
+				}
+				if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+					itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+				}
+				if item.HTTPHeader != nil {
+					http_headerNestedMap := make(map[string]interface{})
+					if len(item.HTTPHeader.Headers) > 0 {
+						var headersDeepList []map[string]interface{}
+						for _, deepListItem := range item.HTTPHeader.Headers {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+								deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+							}
+							if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+								deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+								deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+							}
+							if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+								deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+							}
+							headersDeepList = append(headersDeepList, deepListItemMap)
 						}
-						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
-							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
-							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
-						}
-						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
-							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
-						}
-						headersDeepList = append(headersDeepList, deepListItemMap)
+						http_headerNestedMap["headers"] = headersDeepList
 					}
-					http_headerNestedMap["headers"] = headersDeepList
+					itemMap["http_header"] = http_headerNestedMap
 				}
-				itemMap["http_header"] = http_headerNestedMap
-			}
-			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
-				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
-			}
-			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
-			}
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
+					itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+					itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 				}
-				itemMap["metadata"] = metadataNestedMap
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+					}
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+					}
+					itemMap["metadata"] = metadataNestedMap
+				}
+				if item.SkipProcessing != nil {
+					itemMap["skip_processing"] = map[string]interface{}{}
+				}
+				if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
+					itemMap["user_identifier"] = item.UserIdentifier.ValueString()
+				}
+				if item.WAFSkipProcessing != nil {
+					itemMap["waf_skip_processing"] = map[string]interface{}{}
+				}
+				trusted_clientsList = append(trusted_clientsList, itemMap)
 			}
-			if item.SkipProcessing != nil {
-				itemMap["skip_processing"] = map[string]interface{}{}
-			}
-			if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
-				itemMap["user_identifier"] = item.UserIdentifier.ValueString()
-			}
-			if item.WAFSkipProcessing != nil {
-				itemMap["waf_skip_processing"] = map[string]interface{}{}
-			}
-			trusted_clientsList = append(trusted_clientsList, itemMap)
+			createReq.Spec["trusted_clients"] = trusted_clientsList
 		}
-		createReq.Spec["trusted_clients"] = trusted_clientsList
 	}
 	if data.UserIDClientIP != nil {
 		user_id_client_ipMap := make(map[string]interface{})
@@ -18479,6 +23437,10 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if listData, ok := apiResource.Spec["blocked_clients"].([]interface{}); ok && len(listData) > 0 {
 		var blocked_clientsList []HTTPLoadBalancerBlockedClientsModel
+		var existingBlockedClientsItems []HTTPLoadBalancerBlockedClientsModel
+		if !data.BlockedClients.IsNull() && !data.BlockedClients.IsUnknown() {
+			data.BlockedClients.ElementsAs(ctx, &existingBlockedClientsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -18503,7 +23465,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						return types.Int64Null()
 					}(),
 					BotSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].BotSkipProcessing != nil {
+						if !isImport && len(existingBlockedClientsItems) > listIdx && existingBlockedClientsItems[listIdx].BotSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -18552,7 +23514,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						return nil
 					}(),
 					SkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].SkipProcessing != nil {
+						if !isImport && len(existingBlockedClientsItems) > listIdx && existingBlockedClientsItems[listIdx].SkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -18564,7 +23526,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].WAFSkipProcessing != nil {
+						if !isImport && len(existingBlockedClientsItems) > listIdx && existingBlockedClientsItems[listIdx].WAFSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -18572,7 +23534,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				})
 			}
 		}
-		data.BlockedClients = blocked_clientsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerBlockedClientsModelAttrTypes}, blocked_clientsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.BlockedClients = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.BlockedClients = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerBlockedClientsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &HTTPLoadBalancerBotDefenseModel{
@@ -18870,18 +23839,22 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
 		var data_guard_rulesList []HTTPLoadBalancerDataGuardRulesModel
+		var existingDataGuardRulesItems []HTTPLoadBalancerDataGuardRulesModel
+		if !data.DataGuardRules.IsNull() && !data.DataGuardRules.IsUnknown() {
+			data.DataGuardRules.ElementsAs(ctx, &existingDataGuardRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				data_guard_rulesList = append(data_guard_rulesList, HTTPLoadBalancerDataGuardRulesModel{
 					AnyDomain: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].AnyDomain != nil {
+						if !isImport && len(existingDataGuardRulesItems) > listIdx && existingDataGuardRulesItems[listIdx].AnyDomain != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					ApplyDataGuard: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].ApplyDataGuard != nil {
+						if !isImport && len(existingDataGuardRulesItems) > listIdx && existingDataGuardRulesItems[listIdx].ApplyDataGuard != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -18937,7 +23910,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						return nil
 					}(),
 					SkipDataGuard: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].SkipDataGuard != nil {
+						if !isImport && len(existingDataGuardRulesItems) > listIdx && existingDataGuardRulesItems[listIdx].SkipDataGuard != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -18951,16 +23924,27 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				})
 			}
 		}
-		data.DataGuardRules = data_guard_rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerDataGuardRulesModelAttrTypes}, data_guard_rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DataGuardRules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DataGuardRules = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerDataGuardRulesModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
 		var ddos_mitigation_rulesList []HTTPLoadBalancerDDOSMitigationRulesModel
+		var existingDDOSMitigationRulesItems []HTTPLoadBalancerDDOSMitigationRulesModel
+		if !data.DDOSMitigationRules.IsNull() && !data.DDOSMitigationRules.IsUnknown() {
+			data.DDOSMitigationRules.ElementsAs(ctx, &existingDDOSMitigationRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDDOSMitigationRulesModel{
 					Block: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DDOSMitigationRules) > listIdx && data.DDOSMitigationRules[listIdx].Block != nil {
+						if !isImport && len(existingDDOSMitigationRulesItems) > listIdx && existingDDOSMitigationRulesItems[listIdx].Block != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -19039,7 +24023,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				})
 			}
 		}
-		data.DDOSMitigationRules = ddos_mitigation_rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesModelAttrTypes}, ddos_mitigation_rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DDOSMitigationRules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DDOSMitigationRules = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["default_pool"].(map[string]interface{}); ok && (isImport || data.DefaultPool != nil) {
 		data.DefaultPool = &HTTPLoadBalancerDefaultPoolModel{
@@ -19544,6 +24535,10 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if listData, ok := apiResource.Spec["default_route_pools"].([]interface{}); ok && len(listData) > 0 {
 		var default_route_poolsList []HTTPLoadBalancerDefaultRoutePoolsModel
+		var existingDefaultRoutePoolsItems []HTTPLoadBalancerDefaultRoutePoolsModel
+		if !data.DefaultRoutePools.IsNull() && !data.DefaultRoutePools.IsUnknown() {
+			data.DefaultRoutePools.ElementsAs(ctx, &existingDefaultRoutePoolsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -19574,7 +24569,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						return nil
 					}(),
 					EndpointSubsets: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DefaultRoutePools) > listIdx && data.DefaultRoutePools[listIdx].EndpointSubsets != nil {
+						if !isImport && len(existingDefaultRoutePoolsItems) > listIdx && existingDefaultRoutePoolsItems[listIdx].EndpointSubsets != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -19619,7 +24614,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				})
 			}
 		}
-		data.DefaultRoutePools = default_route_poolsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultRoutePoolsModelAttrTypes}, default_route_poolsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DefaultRoutePools = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DefaultRoutePools = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultRoutePoolsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["default_sensitive_data_policy"].(map[string]interface{}); ok && isImport && data.DefaultSensitiveDataPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -19767,12 +24769,16 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	}
 	if listData, ok := apiResource.Spec["graphql_rules"].([]interface{}); ok && len(listData) > 0 {
 		var graphql_rulesList []HTTPLoadBalancerGraphqlRulesModel
+		var existingGraphqlRulesItems []HTTPLoadBalancerGraphqlRulesModel
+		if !data.GraphqlRules.IsNull() && !data.GraphqlRules.IsUnknown() {
+			data.GraphqlRules.ElementsAs(ctx, &existingGraphqlRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				graphql_rulesList = append(graphql_rulesList, HTTPLoadBalancerGraphqlRulesModel{
 					AnyDomain: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].AnyDomain != nil {
+						if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].AnyDomain != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -19793,13 +24799,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						if nestedMap, ok := itemMap["graphql_settings"].(map[string]interface{}); ok {
 							return &HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel{
 								DisableIntrospection: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.DisableIntrospection != nil {
+									if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].GraphqlSettings != nil && existingGraphqlRulesItems[listIdx].GraphqlSettings.DisableIntrospection != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
 								}(),
 								EnableIntrospection: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.EnableIntrospection != nil {
+									if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].GraphqlSettings != nil && existingGraphqlRulesItems[listIdx].GraphqlSettings.EnableIntrospection != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
@@ -19846,13 +24852,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						return nil
 					}(),
 					MethodGet: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodGet != nil {
+						if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].MethodGet != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					MethodPost: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodPost != nil {
+						if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].MethodPost != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -19866,7 +24872,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				})
 			}
 		}
-		data.GraphqlRules = graphql_rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerGraphqlRulesModelAttrTypes}, graphql_rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.GraphqlRules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.GraphqlRules = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerGraphqlRulesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["http"].(map[string]interface{}); ok && (isImport || data.HTTP != nil) {
 		data.HTTP = &HTTPLoadBalancerHTTPModel{
@@ -21187,54 +26200,58 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["protected_cookies"].([]interface{}); ok && len(listData) > 0 {
 		var protected_cookiesList []HTTPLoadBalancerProtectedCookiesModel
+		var existingProtectedCookiesItems []HTTPLoadBalancerProtectedCookiesModel
+		if !data.ProtectedCookies.IsNull() && !data.ProtectedCookies.IsUnknown() {
+			data.ProtectedCookies.ElementsAs(ctx, &existingProtectedCookiesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				protected_cookiesList = append(protected_cookiesList, HTTPLoadBalancerProtectedCookiesModel{
 					AddHttponly: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddHttponly != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].AddHttponly != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					AddSecure: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddSecure != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].AddSecure != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					DisableTamperingProtection: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].DisableTamperingProtection != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].DisableTamperingProtection != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					EnableTamperingProtection: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].EnableTamperingProtection != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].EnableTamperingProtection != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreHttponly != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreHttponly != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreMaxAge: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreMaxAge != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreMaxAge != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSamesite != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreSamesite != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSecure != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreSecure != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -21252,19 +26269,19 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						return types.StringNull()
 					}(),
 					SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteLax != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].SamesiteLax != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteNone != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].SamesiteNone != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteStrict != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].SamesiteStrict != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -21272,7 +26289,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				})
 			}
 		}
-		data.ProtectedCookies = protected_cookiesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerProtectedCookiesModelAttrTypes}, protected_cookiesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ProtectedCookies = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ProtectedCookies = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerProtectedCookiesModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["random"].(map[string]interface{}); ok && isImport && data.Random == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -21399,6 +26423,10 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
 		var routesList []HTTPLoadBalancerRoutesModel
+		var existingRoutesItems []HTTPLoadBalancerRoutesModel
+		if !data.Routes.IsNull() && !data.Routes.IsUnknown() {
+			data.Routes.ElementsAs(ctx, &existingRoutesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -21439,13 +26467,13 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						if nestedMap, ok := itemMap["simple_route"].(map[string]interface{}); ok {
 							return &HTTPLoadBalancerRoutesSimpleRouteModel{
 								AutoHostRewrite: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].SimpleRoute != nil && data.Routes[listIdx].SimpleRoute.AutoHostRewrite != nil {
+									if !isImport && len(existingRoutesItems) > listIdx && existingRoutesItems[listIdx].SimpleRoute != nil && existingRoutesItems[listIdx].SimpleRoute.AutoHostRewrite != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
 								}(),
 								DisableHostRewrite: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].SimpleRoute != nil && data.Routes[listIdx].SimpleRoute.DisableHostRewrite != nil {
+									if !isImport && len(existingRoutesItems) > listIdx && existingRoutesItems[listIdx].SimpleRoute != nil && existingRoutesItems[listIdx].SimpleRoute.DisableHostRewrite != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
@@ -21469,7 +26497,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				})
 			}
 		}
-		data.Routes = routesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesModelAttrTypes}, routesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Routes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Routes = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["sensitive_data_disclosure_rules"].(map[string]interface{}); ok && (isImport || data.SensitiveDataDisclosureRules != nil) {
 		data.SensitiveDataDisclosureRules = &HTTPLoadBalancerSensitiveDataDisclosureRulesModel{
@@ -21574,6 +26609,10 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["trusted_clients"].([]interface{}); ok && len(listData) > 0 {
 		var trusted_clientsList []HTTPLoadBalancerTrustedClientsModel
+		var existingTrustedClientsItems []HTTPLoadBalancerTrustedClientsModel
+		if !data.TrustedClients.IsNull() && !data.TrustedClients.IsUnknown() {
+			data.TrustedClients.ElementsAs(ctx, &existingTrustedClientsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -21598,7 +26637,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						return types.Int64Null()
 					}(),
 					BotSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].BotSkipProcessing != nil {
+						if !isImport && len(existingTrustedClientsItems) > listIdx && existingTrustedClientsItems[listIdx].BotSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -21647,7 +26686,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						return nil
 					}(),
 					SkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].SkipProcessing != nil {
+						if !isImport && len(existingTrustedClientsItems) > listIdx && existingTrustedClientsItems[listIdx].SkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -21659,7 +26698,7 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].WAFSkipProcessing != nil {
+						if !isImport && len(existingTrustedClientsItems) > listIdx && existingTrustedClientsItems[listIdx].WAFSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -21667,7 +26706,14 @@ func (r *HTTPLoadBalancerResource) Create(ctx context.Context, req resource.Crea
 				})
 			}
 		}
-		data.TrustedClients = trusted_clientsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerTrustedClientsModelAttrTypes}, trusted_clientsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.TrustedClients = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.TrustedClients = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerTrustedClientsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["user_id_client_ip"].(map[string]interface{}); ok && isImport && data.UserIDClientIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -21776,11 +26822,17 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 		data.Description = types.StringNull()
 	}
 
+	// Filter out system-managed labels (ves.io/*) that are injected by the platform
 	if len(apiResource.Metadata.Labels) > 0 {
-		labels, diags := types.MapValueFrom(ctx, types.StringType, apiResource.Metadata.Labels)
-		resp.Diagnostics.Append(diags...)
-		if !resp.Diagnostics.HasError() {
-			data.Labels = labels
+		filteredLabels := filterSystemLabels(apiResource.Metadata.Labels)
+		if len(filteredLabels) > 0 {
+			labels, diags := types.MapValueFrom(ctx, types.StringType, filteredLabels)
+			resp.Diagnostics.Append(diags...)
+			if !resp.Diagnostics.HasError() {
+				data.Labels = labels
+			}
+		} else {
+			data.Labels = types.MapNull(types.StringType)
 		}
 	} else {
 		data.Labels = types.MapNull(types.StringType)
@@ -22584,6 +27636,10 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if listData, ok := apiResource.Spec["blocked_clients"].([]interface{}); ok && len(listData) > 0 {
 		var blocked_clientsList []HTTPLoadBalancerBlockedClientsModel
+		var existingBlockedClientsItems []HTTPLoadBalancerBlockedClientsModel
+		if !data.BlockedClients.IsNull() && !data.BlockedClients.IsUnknown() {
+			data.BlockedClients.ElementsAs(ctx, &existingBlockedClientsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -22608,7 +27664,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return types.Int64Null()
 					}(),
 					BotSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].BotSkipProcessing != nil {
+						if !isImport && len(existingBlockedClientsItems) > listIdx && existingBlockedClientsItems[listIdx].BotSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -22657,7 +27713,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					SkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].SkipProcessing != nil {
+						if !isImport && len(existingBlockedClientsItems) > listIdx && existingBlockedClientsItems[listIdx].SkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -22669,7 +27725,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].WAFSkipProcessing != nil {
+						if !isImport && len(existingBlockedClientsItems) > listIdx && existingBlockedClientsItems[listIdx].WAFSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -22677,7 +27733,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				})
 			}
 		}
-		data.BlockedClients = blocked_clientsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerBlockedClientsModelAttrTypes}, blocked_clientsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.BlockedClients = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.BlockedClients = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerBlockedClientsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &HTTPLoadBalancerBotDefenseModel{
@@ -22975,18 +28038,22 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
 		var data_guard_rulesList []HTTPLoadBalancerDataGuardRulesModel
+		var existingDataGuardRulesItems []HTTPLoadBalancerDataGuardRulesModel
+		if !data.DataGuardRules.IsNull() && !data.DataGuardRules.IsUnknown() {
+			data.DataGuardRules.ElementsAs(ctx, &existingDataGuardRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				data_guard_rulesList = append(data_guard_rulesList, HTTPLoadBalancerDataGuardRulesModel{
 					AnyDomain: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].AnyDomain != nil {
+						if !isImport && len(existingDataGuardRulesItems) > listIdx && existingDataGuardRulesItems[listIdx].AnyDomain != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					ApplyDataGuard: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].ApplyDataGuard != nil {
+						if !isImport && len(existingDataGuardRulesItems) > listIdx && existingDataGuardRulesItems[listIdx].ApplyDataGuard != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -23042,7 +28109,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					SkipDataGuard: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].SkipDataGuard != nil {
+						if !isImport && len(existingDataGuardRulesItems) > listIdx && existingDataGuardRulesItems[listIdx].SkipDataGuard != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -23056,16 +28123,27 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				})
 			}
 		}
-		data.DataGuardRules = data_guard_rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerDataGuardRulesModelAttrTypes}, data_guard_rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DataGuardRules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DataGuardRules = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerDataGuardRulesModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
 		var ddos_mitigation_rulesList []HTTPLoadBalancerDDOSMitigationRulesModel
+		var existingDDOSMitigationRulesItems []HTTPLoadBalancerDDOSMitigationRulesModel
+		if !data.DDOSMitigationRules.IsNull() && !data.DDOSMitigationRules.IsUnknown() {
+			data.DDOSMitigationRules.ElementsAs(ctx, &existingDDOSMitigationRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDDOSMitigationRulesModel{
 					Block: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DDOSMitigationRules) > listIdx && data.DDOSMitigationRules[listIdx].Block != nil {
+						if !isImport && len(existingDDOSMitigationRulesItems) > listIdx && existingDDOSMitigationRulesItems[listIdx].Block != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -23144,7 +28222,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				})
 			}
 		}
-		data.DDOSMitigationRules = ddos_mitigation_rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesModelAttrTypes}, ddos_mitigation_rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DDOSMitigationRules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DDOSMitigationRules = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["default_pool"].(map[string]interface{}); ok && (isImport || data.DefaultPool != nil) {
 		data.DefaultPool = &HTTPLoadBalancerDefaultPoolModel{
@@ -23649,6 +28734,10 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if listData, ok := apiResource.Spec["default_route_pools"].([]interface{}); ok && len(listData) > 0 {
 		var default_route_poolsList []HTTPLoadBalancerDefaultRoutePoolsModel
+		var existingDefaultRoutePoolsItems []HTTPLoadBalancerDefaultRoutePoolsModel
+		if !data.DefaultRoutePools.IsNull() && !data.DefaultRoutePools.IsUnknown() {
+			data.DefaultRoutePools.ElementsAs(ctx, &existingDefaultRoutePoolsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -23679,7 +28768,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					EndpointSubsets: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DefaultRoutePools) > listIdx && data.DefaultRoutePools[listIdx].EndpointSubsets != nil {
+						if !isImport && len(existingDefaultRoutePoolsItems) > listIdx && existingDefaultRoutePoolsItems[listIdx].EndpointSubsets != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -23724,7 +28813,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				})
 			}
 		}
-		data.DefaultRoutePools = default_route_poolsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultRoutePoolsModelAttrTypes}, default_route_poolsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DefaultRoutePools = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DefaultRoutePools = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultRoutePoolsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["default_sensitive_data_policy"].(map[string]interface{}); ok && isImport && data.DefaultSensitiveDataPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -23872,12 +28968,16 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	}
 	if listData, ok := apiResource.Spec["graphql_rules"].([]interface{}); ok && len(listData) > 0 {
 		var graphql_rulesList []HTTPLoadBalancerGraphqlRulesModel
+		var existingGraphqlRulesItems []HTTPLoadBalancerGraphqlRulesModel
+		if !data.GraphqlRules.IsNull() && !data.GraphqlRules.IsUnknown() {
+			data.GraphqlRules.ElementsAs(ctx, &existingGraphqlRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				graphql_rulesList = append(graphql_rulesList, HTTPLoadBalancerGraphqlRulesModel{
 					AnyDomain: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].AnyDomain != nil {
+						if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].AnyDomain != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -23898,13 +28998,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						if nestedMap, ok := itemMap["graphql_settings"].(map[string]interface{}); ok {
 							return &HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel{
 								DisableIntrospection: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.DisableIntrospection != nil {
+									if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].GraphqlSettings != nil && existingGraphqlRulesItems[listIdx].GraphqlSettings.DisableIntrospection != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
 								}(),
 								EnableIntrospection: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.EnableIntrospection != nil {
+									if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].GraphqlSettings != nil && existingGraphqlRulesItems[listIdx].GraphqlSettings.EnableIntrospection != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
@@ -23951,13 +29051,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					MethodGet: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodGet != nil {
+						if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].MethodGet != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					MethodPost: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodPost != nil {
+						if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].MethodPost != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -23971,7 +29071,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				})
 			}
 		}
-		data.GraphqlRules = graphql_rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerGraphqlRulesModelAttrTypes}, graphql_rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.GraphqlRules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.GraphqlRules = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerGraphqlRulesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["http"].(map[string]interface{}); ok && (isImport || data.HTTP != nil) {
 		data.HTTP = &HTTPLoadBalancerHTTPModel{
@@ -25292,54 +30399,58 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["protected_cookies"].([]interface{}); ok && len(listData) > 0 {
 		var protected_cookiesList []HTTPLoadBalancerProtectedCookiesModel
+		var existingProtectedCookiesItems []HTTPLoadBalancerProtectedCookiesModel
+		if !data.ProtectedCookies.IsNull() && !data.ProtectedCookies.IsUnknown() {
+			data.ProtectedCookies.ElementsAs(ctx, &existingProtectedCookiesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				protected_cookiesList = append(protected_cookiesList, HTTPLoadBalancerProtectedCookiesModel{
 					AddHttponly: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddHttponly != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].AddHttponly != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					AddSecure: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddSecure != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].AddSecure != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					DisableTamperingProtection: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].DisableTamperingProtection != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].DisableTamperingProtection != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					EnableTamperingProtection: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].EnableTamperingProtection != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].EnableTamperingProtection != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreHttponly != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreHttponly != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreMaxAge: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreMaxAge != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreMaxAge != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSamesite != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreSamesite != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSecure != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreSecure != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -25357,19 +30468,19 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return types.StringNull()
 					}(),
 					SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteLax != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].SamesiteLax != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteNone != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].SamesiteNone != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteStrict != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].SamesiteStrict != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -25377,7 +30488,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				})
 			}
 		}
-		data.ProtectedCookies = protected_cookiesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerProtectedCookiesModelAttrTypes}, protected_cookiesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ProtectedCookies = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ProtectedCookies = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerProtectedCookiesModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["random"].(map[string]interface{}); ok && isImport && data.Random == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -25504,6 +30622,10 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
 		var routesList []HTTPLoadBalancerRoutesModel
+		var existingRoutesItems []HTTPLoadBalancerRoutesModel
+		if !data.Routes.IsNull() && !data.Routes.IsUnknown() {
+			data.Routes.ElementsAs(ctx, &existingRoutesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -25544,13 +30666,13 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						if nestedMap, ok := itemMap["simple_route"].(map[string]interface{}); ok {
 							return &HTTPLoadBalancerRoutesSimpleRouteModel{
 								AutoHostRewrite: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].SimpleRoute != nil && data.Routes[listIdx].SimpleRoute.AutoHostRewrite != nil {
+									if !isImport && len(existingRoutesItems) > listIdx && existingRoutesItems[listIdx].SimpleRoute != nil && existingRoutesItems[listIdx].SimpleRoute.AutoHostRewrite != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
 								}(),
 								DisableHostRewrite: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].SimpleRoute != nil && data.Routes[listIdx].SimpleRoute.DisableHostRewrite != nil {
+									if !isImport && len(existingRoutesItems) > listIdx && existingRoutesItems[listIdx].SimpleRoute != nil && existingRoutesItems[listIdx].SimpleRoute.DisableHostRewrite != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
@@ -25574,7 +30696,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				})
 			}
 		}
-		data.Routes = routesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesModelAttrTypes}, routesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Routes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Routes = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["sensitive_data_disclosure_rules"].(map[string]interface{}); ok && (isImport || data.SensitiveDataDisclosureRules != nil) {
 		data.SensitiveDataDisclosureRules = &HTTPLoadBalancerSensitiveDataDisclosureRulesModel{
@@ -25679,6 +30808,10 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["trusted_clients"].([]interface{}); ok && len(listData) > 0 {
 		var trusted_clientsList []HTTPLoadBalancerTrustedClientsModel
+		var existingTrustedClientsItems []HTTPLoadBalancerTrustedClientsModel
+		if !data.TrustedClients.IsNull() && !data.TrustedClients.IsUnknown() {
+			data.TrustedClients.ElementsAs(ctx, &existingTrustedClientsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -25703,7 +30836,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return types.Int64Null()
 					}(),
 					BotSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].BotSkipProcessing != nil {
+						if !isImport && len(existingTrustedClientsItems) > listIdx && existingTrustedClientsItems[listIdx].BotSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -25752,7 +30885,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return nil
 					}(),
 					SkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].SkipProcessing != nil {
+						if !isImport && len(existingTrustedClientsItems) > listIdx && existingTrustedClientsItems[listIdx].SkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -25764,7 +30897,7 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].WAFSkipProcessing != nil {
+						if !isImport && len(existingTrustedClientsItems) > listIdx && existingTrustedClientsItems[listIdx].WAFSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -25772,7 +30905,14 @@ func (r *HTTPLoadBalancerResource) Read(ctx context.Context, req resource.ReadRe
 				})
 			}
 		}
-		data.TrustedClients = trusted_clientsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerTrustedClientsModelAttrTypes}, trusted_clientsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.TrustedClients = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.TrustedClients = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerTrustedClientsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["user_id_client_ip"].(map[string]interface{}); ok && isImport && data.UserIDClientIP == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -26321,74 +31461,79 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["app_firewall"] = app_firewallMap
 	}
-	if len(data.BlockedClients) > 0 {
-		var blocked_clientsList []map[string]interface{}
-		for _, item := range data.BlockedClients {
-			itemMap := make(map[string]interface{})
-			if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
-				itemMap["as_number"] = item.AsNumber.ValueInt64()
-			}
-			if item.BotSkipProcessing != nil {
-				itemMap["bot_skip_processing"] = map[string]interface{}{}
-			}
-			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
-				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
-			}
-			if item.HTTPHeader != nil {
-				http_headerNestedMap := make(map[string]interface{})
-				if len(item.HTTPHeader.Headers) > 0 {
-					var headersDeepList []map[string]interface{}
-					for _, deepListItem := range item.HTTPHeader.Headers {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
-							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+	if !data.BlockedClients.IsNull() && !data.BlockedClients.IsUnknown() {
+		var blocked_clientsItems []HTTPLoadBalancerBlockedClientsModel
+		diags := data.BlockedClients.ElementsAs(ctx, &blocked_clientsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(blocked_clientsItems) > 0 {
+			var blocked_clientsList []map[string]interface{}
+			for _, item := range blocked_clientsItems {
+				itemMap := make(map[string]interface{})
+				if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
+					itemMap["as_number"] = item.AsNumber.ValueInt64()
+				}
+				if item.BotSkipProcessing != nil {
+					itemMap["bot_skip_processing"] = map[string]interface{}{}
+				}
+				if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+					itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+				}
+				if item.HTTPHeader != nil {
+					http_headerNestedMap := make(map[string]interface{})
+					if len(item.HTTPHeader.Headers) > 0 {
+						var headersDeepList []map[string]interface{}
+						for _, deepListItem := range item.HTTPHeader.Headers {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+								deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+							}
+							if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+								deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+								deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+							}
+							if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+								deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+							}
+							headersDeepList = append(headersDeepList, deepListItemMap)
 						}
-						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
-							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
-							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
-						}
-						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
-							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
-						}
-						headersDeepList = append(headersDeepList, deepListItemMap)
+						http_headerNestedMap["headers"] = headersDeepList
 					}
-					http_headerNestedMap["headers"] = headersDeepList
+					itemMap["http_header"] = http_headerNestedMap
 				}
-				itemMap["http_header"] = http_headerNestedMap
-			}
-			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
-				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
-			}
-			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
-			}
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
+					itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+					itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 				}
-				itemMap["metadata"] = metadataNestedMap
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+					}
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+					}
+					itemMap["metadata"] = metadataNestedMap
+				}
+				if item.SkipProcessing != nil {
+					itemMap["skip_processing"] = map[string]interface{}{}
+				}
+				if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
+					itemMap["user_identifier"] = item.UserIdentifier.ValueString()
+				}
+				if item.WAFSkipProcessing != nil {
+					itemMap["waf_skip_processing"] = map[string]interface{}{}
+				}
+				blocked_clientsList = append(blocked_clientsList, itemMap)
 			}
-			if item.SkipProcessing != nil {
-				itemMap["skip_processing"] = map[string]interface{}{}
-			}
-			if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
-				itemMap["user_identifier"] = item.UserIdentifier.ValueString()
-			}
-			if item.WAFSkipProcessing != nil {
-				itemMap["waf_skip_processing"] = map[string]interface{}{}
-			}
-			blocked_clientsList = append(blocked_clientsList, itemMap)
+			apiResource.Spec["blocked_clients"] = blocked_clientsList
 		}
-		apiResource.Spec["blocked_clients"] = blocked_clientsList
 	}
 	if data.BotDefense != nil {
 		bot_defenseMap := make(map[string]interface{})
@@ -26597,140 +31742,150 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["csrf_policy"] = csrf_policyMap
 	}
-	if len(data.DataGuardRules) > 0 {
-		var data_guard_rulesList []map[string]interface{}
-		for _, item := range data.DataGuardRules {
-			itemMap := make(map[string]interface{})
-			if item.AnyDomain != nil {
-				itemMap["any_domain"] = map[string]interface{}{}
-			}
-			if item.ApplyDataGuard != nil {
-				itemMap["apply_data_guard"] = map[string]interface{}{}
-			}
-			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
-				itemMap["exact_value"] = item.ExactValue.ValueString()
-			}
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+	if !data.DataGuardRules.IsNull() && !data.DataGuardRules.IsUnknown() {
+		var data_guard_rulesItems []HTTPLoadBalancerDataGuardRulesModel
+		diags := data.DataGuardRules.ElementsAs(ctx, &data_guard_rulesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(data_guard_rulesItems) > 0 {
+			var data_guard_rulesList []map[string]interface{}
+			for _, item := range data_guard_rulesItems {
+				itemMap := make(map[string]interface{})
+				if item.AnyDomain != nil {
+					itemMap["any_domain"] = map[string]interface{}{}
 				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				if item.ApplyDataGuard != nil {
+					itemMap["apply_data_guard"] = map[string]interface{}{}
 				}
-				itemMap["metadata"] = metadataNestedMap
-			}
-			if item.Path != nil {
-				pathNestedMap := make(map[string]interface{})
-				if !item.Path.Path.IsNull() && !item.Path.Path.IsUnknown() {
-					pathNestedMap["path"] = item.Path.Path.ValueString()
+				if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
+					itemMap["exact_value"] = item.ExactValue.ValueString()
 				}
-				if !item.Path.Prefix.IsNull() && !item.Path.Prefix.IsUnknown() {
-					pathNestedMap["prefix"] = item.Path.Prefix.ValueString()
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+					}
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+					}
+					itemMap["metadata"] = metadataNestedMap
 				}
-				if !item.Path.Regex.IsNull() && !item.Path.Regex.IsUnknown() {
-					pathNestedMap["regex"] = item.Path.Regex.ValueString()
+				if item.Path != nil {
+					pathNestedMap := make(map[string]interface{})
+					if !item.Path.Path.IsNull() && !item.Path.Path.IsUnknown() {
+						pathNestedMap["path"] = item.Path.Path.ValueString()
+					}
+					if !item.Path.Prefix.IsNull() && !item.Path.Prefix.IsUnknown() {
+						pathNestedMap["prefix"] = item.Path.Prefix.ValueString()
+					}
+					if !item.Path.Regex.IsNull() && !item.Path.Regex.IsUnknown() {
+						pathNestedMap["regex"] = item.Path.Regex.ValueString()
+					}
+					itemMap["path"] = pathNestedMap
 				}
-				itemMap["path"] = pathNestedMap
+				if item.SkipDataGuard != nil {
+					itemMap["skip_data_guard"] = map[string]interface{}{}
+				}
+				if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
+					itemMap["suffix_value"] = item.SuffixValue.ValueString()
+				}
+				data_guard_rulesList = append(data_guard_rulesList, itemMap)
 			}
-			if item.SkipDataGuard != nil {
-				itemMap["skip_data_guard"] = map[string]interface{}{}
-			}
-			if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
-				itemMap["suffix_value"] = item.SuffixValue.ValueString()
-			}
-			data_guard_rulesList = append(data_guard_rulesList, itemMap)
+			apiResource.Spec["data_guard_rules"] = data_guard_rulesList
 		}
-		apiResource.Spec["data_guard_rules"] = data_guard_rulesList
 	}
-	if len(data.DDOSMitigationRules) > 0 {
-		var ddos_mitigation_rulesList []map[string]interface{}
-		for _, item := range data.DDOSMitigationRules {
-			itemMap := make(map[string]interface{})
-			if item.Block != nil {
-				itemMap["block"] = map[string]interface{}{}
-			}
-			if item.DDOSClientSource != nil {
-				ddos_client_sourceNestedMap := make(map[string]interface{})
-				if item.DDOSClientSource.AsnList != nil {
-					asn_listDeepMap := make(map[string]interface{})
-					ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
+	if !data.DDOSMitigationRules.IsNull() && !data.DDOSMitigationRules.IsUnknown() {
+		var ddos_mitigation_rulesItems []HTTPLoadBalancerDDOSMitigationRulesModel
+		diags := data.DDOSMitigationRules.ElementsAs(ctx, &ddos_mitigation_rulesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(ddos_mitigation_rulesItems) > 0 {
+			var ddos_mitigation_rulesList []map[string]interface{}
+			for _, item := range ddos_mitigation_rulesItems {
+				itemMap := make(map[string]interface{})
+				if item.Block != nil {
+					itemMap["block"] = map[string]interface{}{}
 				}
-				if !item.DDOSClientSource.CountryList.IsNull() && !item.DDOSClientSource.CountryList.IsUnknown() {
-					var CountryListItems []string
-					diags := item.DDOSClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
-					if !diags.HasError() {
-						ddos_client_sourceNestedMap["country_list"] = CountryListItems
+				if item.DDOSClientSource != nil {
+					ddos_client_sourceNestedMap := make(map[string]interface{})
+					if item.DDOSClientSource.AsnList != nil {
+						asn_listDeepMap := make(map[string]interface{})
+						ddos_client_sourceNestedMap["asn_list"] = asn_listDeepMap
 					}
-				}
-				if item.DDOSClientSource.Ja4TLSFingerprintMatcher != nil {
-					ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
-						var ExactValuesItems []string
-						diags := item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+					if !item.DDOSClientSource.CountryList.IsNull() && !item.DDOSClientSource.CountryList.IsUnknown() {
+						var CountryListItems []string
+						diags := item.DDOSClientSource.CountryList.ElementsAs(ctx, &CountryListItems, false)
 						if !diags.HasError() {
-							ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+							ddos_client_sourceNestedMap["country_list"] = CountryListItems
 						}
 					}
-					ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
+					if item.DDOSClientSource.Ja4TLSFingerprintMatcher != nil {
+						ja4_tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+						if !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.IsUnknown() {
+							var ExactValuesItems []string
+							diags := item.DDOSClientSource.Ja4TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+							if !diags.HasError() {
+								ja4_tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+							}
+						}
+						ddos_client_sourceNestedMap["ja4_tls_fingerprint_matcher"] = ja4_tls_fingerprint_matcherDeepMap
+					}
+					if item.DDOSClientSource.TLSFingerprintMatcher != nil {
+						tls_fingerprint_matcherDeepMap := make(map[string]interface{})
+						if !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
+							var ClassesItems []string
+							diags := item.DDOSClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+							if !diags.HasError() {
+								tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
+							}
+						}
+						if !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
+							var ExactValuesItems []string
+							diags := item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
+							if !diags.HasError() {
+								tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
+							}
+						}
+						if !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
+							var ExcludedValuesItems []string
+							diags := item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
+							if !diags.HasError() {
+								tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
+							}
+						}
+						ddos_client_sourceNestedMap["tls_fingerprint_matcher"] = tls_fingerprint_matcherDeepMap
+					}
+					itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
 				}
-				if item.DDOSClientSource.TLSFingerprintMatcher != nil {
-					tls_fingerprint_matcherDeepMap := make(map[string]interface{})
-					if !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.Classes.IsUnknown() {
-						var ClassesItems []string
-						diags := item.DDOSClientSource.TLSFingerprintMatcher.Classes.ElementsAs(ctx, &ClassesItems, false)
+				if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+					itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+				}
+				if item.IPPrefixList != nil {
+					ip_prefix_listNestedMap := make(map[string]interface{})
+					if !item.IPPrefixList.InvertMatch.IsNull() && !item.IPPrefixList.InvertMatch.IsUnknown() {
+						ip_prefix_listNestedMap["invert_match"] = item.IPPrefixList.InvertMatch.ValueBool()
+					}
+					if !item.IPPrefixList.IPPrefixes.IsNull() && !item.IPPrefixList.IPPrefixes.IsUnknown() {
+						var IPPrefixesItems []string
+						diags := item.IPPrefixList.IPPrefixes.ElementsAs(ctx, &IPPrefixesItems, false)
 						if !diags.HasError() {
-							tls_fingerprint_matcherDeepMap["classes"] = ClassesItems
+							ip_prefix_listNestedMap["ip_prefixes"] = IPPrefixesItems
 						}
 					}
-					if !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.IsUnknown() {
-						var ExactValuesItems []string
-						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExactValues.ElementsAs(ctx, &ExactValuesItems, false)
-						if !diags.HasError() {
-							tls_fingerprint_matcherDeepMap["exact_values"] = ExactValuesItems
-						}
+					itemMap["ip_prefix_list"] = ip_prefix_listNestedMap
+				}
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
 					}
-					if !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsNull() && !item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.IsUnknown() {
-						var ExcludedValuesItems []string
-						diags := item.DDOSClientSource.TLSFingerprintMatcher.ExcludedValues.ElementsAs(ctx, &ExcludedValuesItems, false)
-						if !diags.HasError() {
-							tls_fingerprint_matcherDeepMap["excluded_values"] = ExcludedValuesItems
-						}
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
 					}
-					ddos_client_sourceNestedMap["tls_fingerprint_matcher"] = tls_fingerprint_matcherDeepMap
+					itemMap["metadata"] = metadataNestedMap
 				}
-				itemMap["ddos_client_source"] = ddos_client_sourceNestedMap
+				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, itemMap)
 			}
-			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
-				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
-			}
-			if item.IPPrefixList != nil {
-				ip_prefix_listNestedMap := make(map[string]interface{})
-				if !item.IPPrefixList.InvertMatch.IsNull() && !item.IPPrefixList.InvertMatch.IsUnknown() {
-					ip_prefix_listNestedMap["invert_match"] = item.IPPrefixList.InvertMatch.ValueBool()
-				}
-				if !item.IPPrefixList.IPPrefixes.IsNull() && !item.IPPrefixList.IPPrefixes.IsUnknown() {
-					var IPPrefixesItems []string
-					diags := item.IPPrefixList.IPPrefixes.ElementsAs(ctx, &IPPrefixesItems, false)
-					if !diags.HasError() {
-						ip_prefix_listNestedMap["ip_prefixes"] = IPPrefixesItems
-					}
-				}
-				itemMap["ip_prefix_list"] = ip_prefix_listNestedMap
-			}
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
-				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
-				}
-				itemMap["metadata"] = metadataNestedMap
-			}
-			ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, itemMap)
+			apiResource.Spec["ddos_mitigation_rules"] = ddos_mitigation_rulesList
 		}
-		apiResource.Spec["ddos_mitigation_rules"] = ddos_mitigation_rulesList
 	}
 	if data.DefaultPool != nil {
 		default_poolMap := make(map[string]interface{})
@@ -26978,48 +32133,53 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["default_pool_list"] = default_pool_listMap
 	}
-	if len(data.DefaultRoutePools) > 0 {
-		var default_route_poolsList []map[string]interface{}
-		for _, item := range data.DefaultRoutePools {
-			itemMap := make(map[string]interface{})
-			if item.Cluster != nil {
-				clusterNestedMap := make(map[string]interface{})
-				if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
-					clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+	if !data.DefaultRoutePools.IsNull() && !data.DefaultRoutePools.IsUnknown() {
+		var default_route_poolsItems []HTTPLoadBalancerDefaultRoutePoolsModel
+		diags := data.DefaultRoutePools.ElementsAs(ctx, &default_route_poolsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(default_route_poolsItems) > 0 {
+			var default_route_poolsList []map[string]interface{}
+			for _, item := range default_route_poolsItems {
+				itemMap := make(map[string]interface{})
+				if item.Cluster != nil {
+					clusterNestedMap := make(map[string]interface{})
+					if !item.Cluster.Name.IsNull() && !item.Cluster.Name.IsUnknown() {
+						clusterNestedMap["name"] = item.Cluster.Name.ValueString()
+					}
+					if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
+						clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+					}
+					if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
+						clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+					}
+					itemMap["cluster"] = clusterNestedMap
 				}
-				if !item.Cluster.Namespace.IsNull() && !item.Cluster.Namespace.IsUnknown() {
-					clusterNestedMap["namespace"] = item.Cluster.Namespace.ValueString()
+				if item.EndpointSubsets != nil {
+					itemMap["endpoint_subsets"] = map[string]interface{}{}
 				}
-				if !item.Cluster.Tenant.IsNull() && !item.Cluster.Tenant.IsUnknown() {
-					clusterNestedMap["tenant"] = item.Cluster.Tenant.ValueString()
+				if item.Pool != nil {
+					poolNestedMap := make(map[string]interface{})
+					if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
+						poolNestedMap["name"] = item.Pool.Name.ValueString()
+					}
+					if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
+						poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
+					}
+					if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
+						poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
+					}
+					itemMap["pool"] = poolNestedMap
 				}
-				itemMap["cluster"] = clusterNestedMap
+				if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
+					itemMap["priority"] = item.Priority.ValueInt64()
+				}
+				if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
+					itemMap["weight"] = item.Weight.ValueInt64()
+				}
+				default_route_poolsList = append(default_route_poolsList, itemMap)
 			}
-			if item.EndpointSubsets != nil {
-				itemMap["endpoint_subsets"] = map[string]interface{}{}
-			}
-			if item.Pool != nil {
-				poolNestedMap := make(map[string]interface{})
-				if !item.Pool.Name.IsNull() && !item.Pool.Name.IsUnknown() {
-					poolNestedMap["name"] = item.Pool.Name.ValueString()
-				}
-				if !item.Pool.Namespace.IsNull() && !item.Pool.Namespace.IsUnknown() {
-					poolNestedMap["namespace"] = item.Pool.Namespace.ValueString()
-				}
-				if !item.Pool.Tenant.IsNull() && !item.Pool.Tenant.IsUnknown() {
-					poolNestedMap["tenant"] = item.Pool.Tenant.ValueString()
-				}
-				itemMap["pool"] = poolNestedMap
-			}
-			if !item.Priority.IsNull() && !item.Priority.IsUnknown() {
-				itemMap["priority"] = item.Priority.ValueInt64()
-			}
-			if !item.Weight.IsNull() && !item.Weight.IsUnknown() {
-				itemMap["weight"] = item.Weight.ValueInt64()
-			}
-			default_route_poolsList = append(default_route_poolsList, itemMap)
+			apiResource.Spec["default_route_pools"] = default_route_poolsList
 		}
-		apiResource.Spec["default_route_pools"] = default_route_poolsList
 	}
 	if data.DefaultSensitiveDataPolicy != nil {
 		default_sensitive_data_policyMap := make(map[string]interface{})
@@ -27199,60 +32359,65 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["enable_trust_client_ip_headers"] = enable_trust_client_ip_headersMap
 	}
-	if len(data.GraphqlRules) > 0 {
-		var graphql_rulesList []map[string]interface{}
-		for _, item := range data.GraphqlRules {
-			itemMap := make(map[string]interface{})
-			if item.AnyDomain != nil {
-				itemMap["any_domain"] = map[string]interface{}{}
-			}
-			if !item.ExactPath.IsNull() && !item.ExactPath.IsUnknown() {
-				itemMap["exact_path"] = item.ExactPath.ValueString()
-			}
-			if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
-				itemMap["exact_value"] = item.ExactValue.ValueString()
-			}
-			if item.GraphqlSettings != nil {
-				graphql_settingsNestedMap := make(map[string]interface{})
-				if item.GraphqlSettings.DisableIntrospection != nil {
-					graphql_settingsNestedMap["disable_introspection"] = map[string]interface{}{}
+	if !data.GraphqlRules.IsNull() && !data.GraphqlRules.IsUnknown() {
+		var graphql_rulesItems []HTTPLoadBalancerGraphqlRulesModel
+		diags := data.GraphqlRules.ElementsAs(ctx, &graphql_rulesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(graphql_rulesItems) > 0 {
+			var graphql_rulesList []map[string]interface{}
+			for _, item := range graphql_rulesItems {
+				itemMap := make(map[string]interface{})
+				if item.AnyDomain != nil {
+					itemMap["any_domain"] = map[string]interface{}{}
 				}
-				if item.GraphqlSettings.EnableIntrospection != nil {
-					graphql_settingsNestedMap["enable_introspection"] = map[string]interface{}{}
+				if !item.ExactPath.IsNull() && !item.ExactPath.IsUnknown() {
+					itemMap["exact_path"] = item.ExactPath.ValueString()
 				}
-				if !item.GraphqlSettings.MaxBatchedQueries.IsNull() && !item.GraphqlSettings.MaxBatchedQueries.IsUnknown() {
-					graphql_settingsNestedMap["max_batched_queries"] = item.GraphqlSettings.MaxBatchedQueries.ValueInt64()
+				if !item.ExactValue.IsNull() && !item.ExactValue.IsUnknown() {
+					itemMap["exact_value"] = item.ExactValue.ValueString()
 				}
-				if !item.GraphqlSettings.MaxDepth.IsNull() && !item.GraphqlSettings.MaxDepth.IsUnknown() {
-					graphql_settingsNestedMap["max_depth"] = item.GraphqlSettings.MaxDepth.ValueInt64()
+				if item.GraphqlSettings != nil {
+					graphql_settingsNestedMap := make(map[string]interface{})
+					if item.GraphqlSettings.DisableIntrospection != nil {
+						graphql_settingsNestedMap["disable_introspection"] = map[string]interface{}{}
+					}
+					if item.GraphqlSettings.EnableIntrospection != nil {
+						graphql_settingsNestedMap["enable_introspection"] = map[string]interface{}{}
+					}
+					if !item.GraphqlSettings.MaxBatchedQueries.IsNull() && !item.GraphqlSettings.MaxBatchedQueries.IsUnknown() {
+						graphql_settingsNestedMap["max_batched_queries"] = item.GraphqlSettings.MaxBatchedQueries.ValueInt64()
+					}
+					if !item.GraphqlSettings.MaxDepth.IsNull() && !item.GraphqlSettings.MaxDepth.IsUnknown() {
+						graphql_settingsNestedMap["max_depth"] = item.GraphqlSettings.MaxDepth.ValueInt64()
+					}
+					if !item.GraphqlSettings.MaxTotalLength.IsNull() && !item.GraphqlSettings.MaxTotalLength.IsUnknown() {
+						graphql_settingsNestedMap["max_total_length"] = item.GraphqlSettings.MaxTotalLength.ValueInt64()
+					}
+					itemMap["graphql_settings"] = graphql_settingsNestedMap
 				}
-				if !item.GraphqlSettings.MaxTotalLength.IsNull() && !item.GraphqlSettings.MaxTotalLength.IsUnknown() {
-					graphql_settingsNestedMap["max_total_length"] = item.GraphqlSettings.MaxTotalLength.ValueInt64()
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+					}
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+					}
+					itemMap["metadata"] = metadataNestedMap
 				}
-				itemMap["graphql_settings"] = graphql_settingsNestedMap
+				if item.MethodGet != nil {
+					itemMap["method_get"] = map[string]interface{}{}
+				}
+				if item.MethodPost != nil {
+					itemMap["method_post"] = map[string]interface{}{}
+				}
+				if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
+					itemMap["suffix_value"] = item.SuffixValue.ValueString()
+				}
+				graphql_rulesList = append(graphql_rulesList, itemMap)
 			}
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
-				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
-				}
-				itemMap["metadata"] = metadataNestedMap
-			}
-			if item.MethodGet != nil {
-				itemMap["method_get"] = map[string]interface{}{}
-			}
-			if item.MethodPost != nil {
-				itemMap["method_post"] = map[string]interface{}{}
-			}
-			if !item.SuffixValue.IsNull() && !item.SuffixValue.IsUnknown() {
-				itemMap["suffix_value"] = item.SuffixValue.ValueString()
-			}
-			graphql_rulesList = append(graphql_rulesList, itemMap)
+			apiResource.Spec["graphql_rules"] = graphql_rulesList
 		}
-		apiResource.Spec["graphql_rules"] = graphql_rulesList
 	}
 	if data.HTTP != nil {
 		httpMap := make(map[string]interface{})
@@ -27954,52 +33119,57 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		}
 		apiResource.Spec["policy_based_challenge"] = policy_based_challengeMap
 	}
-	if len(data.ProtectedCookies) > 0 {
-		var protected_cookiesList []map[string]interface{}
-		for _, item := range data.ProtectedCookies {
-			itemMap := make(map[string]interface{})
-			if item.AddHttponly != nil {
-				itemMap["add_httponly"] = map[string]interface{}{}
+	if !data.ProtectedCookies.IsNull() && !data.ProtectedCookies.IsUnknown() {
+		var protected_cookiesItems []HTTPLoadBalancerProtectedCookiesModel
+		diags := data.ProtectedCookies.ElementsAs(ctx, &protected_cookiesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(protected_cookiesItems) > 0 {
+			var protected_cookiesList []map[string]interface{}
+			for _, item := range protected_cookiesItems {
+				itemMap := make(map[string]interface{})
+				if item.AddHttponly != nil {
+					itemMap["add_httponly"] = map[string]interface{}{}
+				}
+				if item.AddSecure != nil {
+					itemMap["add_secure"] = map[string]interface{}{}
+				}
+				if item.DisableTamperingProtection != nil {
+					itemMap["disable_tampering_protection"] = map[string]interface{}{}
+				}
+				if item.EnableTamperingProtection != nil {
+					itemMap["enable_tampering_protection"] = map[string]interface{}{}
+				}
+				if item.IgnoreHttponly != nil {
+					itemMap["ignore_httponly"] = map[string]interface{}{}
+				}
+				if item.IgnoreMaxAge != nil {
+					itemMap["ignore_max_age"] = map[string]interface{}{}
+				}
+				if item.IgnoreSamesite != nil {
+					itemMap["ignore_samesite"] = map[string]interface{}{}
+				}
+				if item.IgnoreSecure != nil {
+					itemMap["ignore_secure"] = map[string]interface{}{}
+				}
+				if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
+					itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
+				}
+				if !item.Name.IsNull() && !item.Name.IsUnknown() {
+					itemMap["name"] = item.Name.ValueString()
+				}
+				if item.SamesiteLax != nil {
+					itemMap["samesite_lax"] = map[string]interface{}{}
+				}
+				if item.SamesiteNone != nil {
+					itemMap["samesite_none"] = map[string]interface{}{}
+				}
+				if item.SamesiteStrict != nil {
+					itemMap["samesite_strict"] = map[string]interface{}{}
+				}
+				protected_cookiesList = append(protected_cookiesList, itemMap)
 			}
-			if item.AddSecure != nil {
-				itemMap["add_secure"] = map[string]interface{}{}
-			}
-			if item.DisableTamperingProtection != nil {
-				itemMap["disable_tampering_protection"] = map[string]interface{}{}
-			}
-			if item.EnableTamperingProtection != nil {
-				itemMap["enable_tampering_protection"] = map[string]interface{}{}
-			}
-			if item.IgnoreHttponly != nil {
-				itemMap["ignore_httponly"] = map[string]interface{}{}
-			}
-			if item.IgnoreMaxAge != nil {
-				itemMap["ignore_max_age"] = map[string]interface{}{}
-			}
-			if item.IgnoreSamesite != nil {
-				itemMap["ignore_samesite"] = map[string]interface{}{}
-			}
-			if item.IgnoreSecure != nil {
-				itemMap["ignore_secure"] = map[string]interface{}{}
-			}
-			if !item.MaxAgeValue.IsNull() && !item.MaxAgeValue.IsUnknown() {
-				itemMap["max_age_value"] = item.MaxAgeValue.ValueInt64()
-			}
-			if !item.Name.IsNull() && !item.Name.IsUnknown() {
-				itemMap["name"] = item.Name.ValueString()
-			}
-			if item.SamesiteLax != nil {
-				itemMap["samesite_lax"] = map[string]interface{}{}
-			}
-			if item.SamesiteNone != nil {
-				itemMap["samesite_none"] = map[string]interface{}{}
-			}
-			if item.SamesiteStrict != nil {
-				itemMap["samesite_strict"] = map[string]interface{}{}
-			}
-			protected_cookiesList = append(protected_cookiesList, itemMap)
+			apiResource.Spec["protected_cookies"] = protected_cookiesList
 		}
-		apiResource.Spec["protected_cookies"] = protected_cookiesList
 	}
 	if data.Random != nil {
 		randomMap := make(map[string]interface{})
@@ -28105,367 +33275,372 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		round_robinMap := make(map[string]interface{})
 		apiResource.Spec["round_robin"] = round_robinMap
 	}
-	if len(data.Routes) > 0 {
-		var routesList []map[string]interface{}
-		for _, item := range data.Routes {
-			itemMap := make(map[string]interface{})
-			if item.CustomRouteObject != nil {
-				custom_route_objectNestedMap := make(map[string]interface{})
-				if item.CustomRouteObject.RouteRef != nil {
-					route_refDeepMap := make(map[string]interface{})
-					if !item.CustomRouteObject.RouteRef.Name.IsNull() && !item.CustomRouteObject.RouteRef.Name.IsUnknown() {
-						route_refDeepMap["name"] = item.CustomRouteObject.RouteRef.Name.ValueString()
+	if !data.Routes.IsNull() && !data.Routes.IsUnknown() {
+		var routesItems []HTTPLoadBalancerRoutesModel
+		diags := data.Routes.ElementsAs(ctx, &routesItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(routesItems) > 0 {
+			var routesList []map[string]interface{}
+			for _, item := range routesItems {
+				itemMap := make(map[string]interface{})
+				if item.CustomRouteObject != nil {
+					custom_route_objectNestedMap := make(map[string]interface{})
+					if item.CustomRouteObject.RouteRef != nil {
+						route_refDeepMap := make(map[string]interface{})
+						if !item.CustomRouteObject.RouteRef.Name.IsNull() && !item.CustomRouteObject.RouteRef.Name.IsUnknown() {
+							route_refDeepMap["name"] = item.CustomRouteObject.RouteRef.Name.ValueString()
+						}
+						if !item.CustomRouteObject.RouteRef.Namespace.IsNull() && !item.CustomRouteObject.RouteRef.Namespace.IsUnknown() {
+							route_refDeepMap["namespace"] = item.CustomRouteObject.RouteRef.Namespace.ValueString()
+						}
+						if !item.CustomRouteObject.RouteRef.Tenant.IsNull() && !item.CustomRouteObject.RouteRef.Tenant.IsUnknown() {
+							route_refDeepMap["tenant"] = item.CustomRouteObject.RouteRef.Tenant.ValueString()
+						}
+						custom_route_objectNestedMap["route_ref"] = route_refDeepMap
 					}
-					if !item.CustomRouteObject.RouteRef.Namespace.IsNull() && !item.CustomRouteObject.RouteRef.Namespace.IsUnknown() {
-						route_refDeepMap["namespace"] = item.CustomRouteObject.RouteRef.Namespace.ValueString()
-					}
-					if !item.CustomRouteObject.RouteRef.Tenant.IsNull() && !item.CustomRouteObject.RouteRef.Tenant.IsUnknown() {
-						route_refDeepMap["tenant"] = item.CustomRouteObject.RouteRef.Tenant.ValueString()
-					}
-					custom_route_objectNestedMap["route_ref"] = route_refDeepMap
+					itemMap["custom_route_object"] = custom_route_objectNestedMap
 				}
-				itemMap["custom_route_object"] = custom_route_objectNestedMap
+				if item.DirectResponseRoute != nil {
+					direct_response_routeNestedMap := make(map[string]interface{})
+					if len(item.DirectResponseRoute.Headers) > 0 {
+						var headersDeepList []map[string]interface{}
+						for _, deepListItem := range item.DirectResponseRoute.Headers {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+								deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+							}
+							if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+								deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+								deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+							}
+							if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+								deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+							}
+							headersDeepList = append(headersDeepList, deepListItemMap)
+						}
+						direct_response_routeNestedMap["headers"] = headersDeepList
+					}
+					if !item.DirectResponseRoute.HTTPMethod.IsNull() && !item.DirectResponseRoute.HTTPMethod.IsUnknown() {
+						direct_response_routeNestedMap["http_method"] = item.DirectResponseRoute.HTTPMethod.ValueString()
+					}
+					if item.DirectResponseRoute.IncomingPort != nil {
+						incoming_portDeepMap := make(map[string]interface{})
+						if item.DirectResponseRoute.IncomingPort.NoPortMatch != nil {
+							incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+						}
+						if !item.DirectResponseRoute.IncomingPort.Port.IsNull() && !item.DirectResponseRoute.IncomingPort.Port.IsUnknown() {
+							incoming_portDeepMap["port"] = item.DirectResponseRoute.IncomingPort.Port.ValueInt64()
+						}
+						if !item.DirectResponseRoute.IncomingPort.PortRanges.IsNull() && !item.DirectResponseRoute.IncomingPort.PortRanges.IsUnknown() {
+							incoming_portDeepMap["port_ranges"] = item.DirectResponseRoute.IncomingPort.PortRanges.ValueString()
+						}
+						direct_response_routeNestedMap["incoming_port"] = incoming_portDeepMap
+					}
+					if item.DirectResponseRoute.Path != nil {
+						pathDeepMap := make(map[string]interface{})
+						if !item.DirectResponseRoute.Path.Path.IsNull() && !item.DirectResponseRoute.Path.Path.IsUnknown() {
+							pathDeepMap["path"] = item.DirectResponseRoute.Path.Path.ValueString()
+						}
+						if !item.DirectResponseRoute.Path.Prefix.IsNull() && !item.DirectResponseRoute.Path.Prefix.IsUnknown() {
+							pathDeepMap["prefix"] = item.DirectResponseRoute.Path.Prefix.ValueString()
+						}
+						if !item.DirectResponseRoute.Path.Regex.IsNull() && !item.DirectResponseRoute.Path.Regex.IsUnknown() {
+							pathDeepMap["regex"] = item.DirectResponseRoute.Path.Regex.ValueString()
+						}
+						direct_response_routeNestedMap["path"] = pathDeepMap
+					}
+					if item.DirectResponseRoute.RouteDirectResponse != nil {
+						route_direct_responseDeepMap := make(map[string]interface{})
+						if !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsUnknown() {
+							route_direct_responseDeepMap["response_body_encoded"] = item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.ValueString()
+						}
+						if !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsUnknown() {
+							route_direct_responseDeepMap["response_code"] = item.DirectResponseRoute.RouteDirectResponse.ResponseCode.ValueInt64()
+						}
+						direct_response_routeNestedMap["route_direct_response"] = route_direct_responseDeepMap
+					}
+					itemMap["direct_response_route"] = direct_response_routeNestedMap
+				}
+				if item.RedirectRoute != nil {
+					redirect_routeNestedMap := make(map[string]interface{})
+					if len(item.RedirectRoute.Headers) > 0 {
+						var headersDeepList []map[string]interface{}
+						for _, deepListItem := range item.RedirectRoute.Headers {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+								deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+							}
+							if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+								deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+								deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+							}
+							if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+								deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+							}
+							headersDeepList = append(headersDeepList, deepListItemMap)
+						}
+						redirect_routeNestedMap["headers"] = headersDeepList
+					}
+					if !item.RedirectRoute.HTTPMethod.IsNull() && !item.RedirectRoute.HTTPMethod.IsUnknown() {
+						redirect_routeNestedMap["http_method"] = item.RedirectRoute.HTTPMethod.ValueString()
+					}
+					if item.RedirectRoute.IncomingPort != nil {
+						incoming_portDeepMap := make(map[string]interface{})
+						if item.RedirectRoute.IncomingPort.NoPortMatch != nil {
+							incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+						}
+						if !item.RedirectRoute.IncomingPort.Port.IsNull() && !item.RedirectRoute.IncomingPort.Port.IsUnknown() {
+							incoming_portDeepMap["port"] = item.RedirectRoute.IncomingPort.Port.ValueInt64()
+						}
+						if !item.RedirectRoute.IncomingPort.PortRanges.IsNull() && !item.RedirectRoute.IncomingPort.PortRanges.IsUnknown() {
+							incoming_portDeepMap["port_ranges"] = item.RedirectRoute.IncomingPort.PortRanges.ValueString()
+						}
+						redirect_routeNestedMap["incoming_port"] = incoming_portDeepMap
+					}
+					if item.RedirectRoute.Path != nil {
+						pathDeepMap := make(map[string]interface{})
+						if !item.RedirectRoute.Path.Path.IsNull() && !item.RedirectRoute.Path.Path.IsUnknown() {
+							pathDeepMap["path"] = item.RedirectRoute.Path.Path.ValueString()
+						}
+						if !item.RedirectRoute.Path.Prefix.IsNull() && !item.RedirectRoute.Path.Prefix.IsUnknown() {
+							pathDeepMap["prefix"] = item.RedirectRoute.Path.Prefix.ValueString()
+						}
+						if !item.RedirectRoute.Path.Regex.IsNull() && !item.RedirectRoute.Path.Regex.IsUnknown() {
+							pathDeepMap["regex"] = item.RedirectRoute.Path.Regex.ValueString()
+						}
+						redirect_routeNestedMap["path"] = pathDeepMap
+					}
+					if item.RedirectRoute.RouteRedirect != nil {
+						route_redirectDeepMap := make(map[string]interface{})
+						if !item.RedirectRoute.RouteRedirect.HostRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.HostRedirect.IsUnknown() {
+							route_redirectDeepMap["host_redirect"] = item.RedirectRoute.RouteRedirect.HostRedirect.ValueString()
+						}
+						if !item.RedirectRoute.RouteRedirect.PathRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.PathRedirect.IsUnknown() {
+							route_redirectDeepMap["path_redirect"] = item.RedirectRoute.RouteRedirect.PathRedirect.ValueString()
+						}
+						if !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsNull() && !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsUnknown() {
+							route_redirectDeepMap["prefix_rewrite"] = item.RedirectRoute.RouteRedirect.PrefixRewrite.ValueString()
+						}
+						if !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsUnknown() {
+							route_redirectDeepMap["proto_redirect"] = item.RedirectRoute.RouteRedirect.ProtoRedirect.ValueString()
+						}
+						if item.RedirectRoute.RouteRedirect.RemoveAllParams != nil {
+							route_redirectDeepMap["remove_all_params"] = map[string]interface{}{}
+						}
+						if !item.RedirectRoute.RouteRedirect.ReplaceParams.IsNull() && !item.RedirectRoute.RouteRedirect.ReplaceParams.IsUnknown() {
+							route_redirectDeepMap["replace_params"] = item.RedirectRoute.RouteRedirect.ReplaceParams.ValueString()
+						}
+						if !item.RedirectRoute.RouteRedirect.ResponseCode.IsNull() && !item.RedirectRoute.RouteRedirect.ResponseCode.IsUnknown() {
+							route_redirectDeepMap["response_code"] = item.RedirectRoute.RouteRedirect.ResponseCode.ValueInt64()
+						}
+						if item.RedirectRoute.RouteRedirect.RetainAllParams != nil {
+							route_redirectDeepMap["retain_all_params"] = map[string]interface{}{}
+						}
+						redirect_routeNestedMap["route_redirect"] = route_redirectDeepMap
+					}
+					itemMap["redirect_route"] = redirect_routeNestedMap
+				}
+				if item.SimpleRoute != nil {
+					simple_routeNestedMap := make(map[string]interface{})
+					if item.SimpleRoute.AdvancedOptions != nil {
+						advanced_optionsDeepMap := make(map[string]interface{})
+						if item.SimpleRoute.AdvancedOptions.CommonBuffering != nil {
+							advanced_optionsDeepMap["common_buffering"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.CommonHashPolicy != nil {
+							advanced_optionsDeepMap["common_hash_policy"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DefaultRetryPolicy != nil {
+							advanced_optionsDeepMap["default_retry_policy"] = map[string]interface{}{}
+						}
+						if !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsNull() && !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsUnknown() {
+							advanced_optionsDeepMap["disable_location_add"] = item.SimpleRoute.AdvancedOptions.DisableLocationAdd.ValueBool()
+						}
+						if item.SimpleRoute.AdvancedOptions.DisableMirroring != nil {
+							advanced_optionsDeepMap["disable_mirroring"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DisablePrefixRewrite != nil {
+							advanced_optionsDeepMap["disable_prefix_rewrite"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DisableSpdy != nil {
+							advanced_optionsDeepMap["disable_spdy"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DisableWAF != nil {
+							advanced_optionsDeepMap["disable_waf"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DisableWebSocketConfig != nil {
+							advanced_optionsDeepMap["disable_web_socket_config"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.DoNotRetractCluster != nil {
+							advanced_optionsDeepMap["do_not_retract_cluster"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.EnableSpdy != nil {
+							advanced_optionsDeepMap["enable_spdy"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.EndpointSubsets != nil {
+							advanced_optionsDeepMap["endpoint_subsets"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.InheritedBotDefenseJavascriptInjection != nil {
+							advanced_optionsDeepMap["inherited_bot_defense_javascript_injection"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.InheritedWAF != nil {
+							advanced_optionsDeepMap["inherited_waf"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.InheritedWAFExclusion != nil {
+							advanced_optionsDeepMap["inherited_waf_exclusion"] = map[string]interface{}{}
+						}
+						if item.SimpleRoute.AdvancedOptions.NoRetryPolicy != nil {
+							advanced_optionsDeepMap["no_retry_policy"] = map[string]interface{}{}
+						}
+						if !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsNull() && !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsUnknown() {
+							advanced_optionsDeepMap["prefix_rewrite"] = item.SimpleRoute.AdvancedOptions.PrefixRewrite.ValueString()
+						}
+						if !item.SimpleRoute.AdvancedOptions.Priority.IsNull() && !item.SimpleRoute.AdvancedOptions.Priority.IsUnknown() {
+							advanced_optionsDeepMap["priority"] = item.SimpleRoute.AdvancedOptions.Priority.ValueString()
+						}
+						if !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsUnknown() {
+							var RequestCookiesToRemoveItems []string
+							diags := item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.ElementsAs(ctx, &RequestCookiesToRemoveItems, false)
+							if !diags.HasError() {
+								advanced_optionsDeepMap["request_cookies_to_remove"] = RequestCookiesToRemoveItems
+							}
+						}
+						if !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsUnknown() {
+							var RequestHeadersToRemoveItems []string
+							diags := item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.ElementsAs(ctx, &RequestHeadersToRemoveItems, false)
+							if !diags.HasError() {
+								advanced_optionsDeepMap["request_headers_to_remove"] = RequestHeadersToRemoveItems
+							}
+						}
+						if !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsUnknown() {
+							var ResponseCookiesToRemoveItems []string
+							diags := item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.ElementsAs(ctx, &ResponseCookiesToRemoveItems, false)
+							if !diags.HasError() {
+								advanced_optionsDeepMap["response_cookies_to_remove"] = ResponseCookiesToRemoveItems
+							}
+						}
+						if !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsUnknown() {
+							var ResponseHeadersToRemoveItems []string
+							diags := item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.ElementsAs(ctx, &ResponseHeadersToRemoveItems, false)
+							if !diags.HasError() {
+								advanced_optionsDeepMap["response_headers_to_remove"] = ResponseHeadersToRemoveItems
+							}
+						}
+						if item.SimpleRoute.AdvancedOptions.RetractCluster != nil {
+							advanced_optionsDeepMap["retract_cluster"] = map[string]interface{}{}
+						}
+						if !item.SimpleRoute.AdvancedOptions.Timeout.IsNull() && !item.SimpleRoute.AdvancedOptions.Timeout.IsUnknown() {
+							advanced_optionsDeepMap["timeout"] = item.SimpleRoute.AdvancedOptions.Timeout.ValueInt64()
+						}
+						simple_routeNestedMap["advanced_options"] = advanced_optionsDeepMap
+					}
+					if item.SimpleRoute.AutoHostRewrite != nil {
+						simple_routeNestedMap["auto_host_rewrite"] = map[string]interface{}{}
+					}
+					if item.SimpleRoute.DisableHostRewrite != nil {
+						simple_routeNestedMap["disable_host_rewrite"] = map[string]interface{}{}
+					}
+					if len(item.SimpleRoute.Headers) > 0 {
+						var headersDeepList []map[string]interface{}
+						for _, deepListItem := range item.SimpleRoute.Headers {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+								deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+							}
+							if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+								deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+								deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+							}
+							if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+								deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+							}
+							headersDeepList = append(headersDeepList, deepListItemMap)
+						}
+						simple_routeNestedMap["headers"] = headersDeepList
+					}
+					if !item.SimpleRoute.HostRewrite.IsNull() && !item.SimpleRoute.HostRewrite.IsUnknown() {
+						simple_routeNestedMap["host_rewrite"] = item.SimpleRoute.HostRewrite.ValueString()
+					}
+					if !item.SimpleRoute.HTTPMethod.IsNull() && !item.SimpleRoute.HTTPMethod.IsUnknown() {
+						simple_routeNestedMap["http_method"] = item.SimpleRoute.HTTPMethod.ValueString()
+					}
+					if item.SimpleRoute.IncomingPort != nil {
+						incoming_portDeepMap := make(map[string]interface{})
+						if item.SimpleRoute.IncomingPort.NoPortMatch != nil {
+							incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
+						}
+						if !item.SimpleRoute.IncomingPort.Port.IsNull() && !item.SimpleRoute.IncomingPort.Port.IsUnknown() {
+							incoming_portDeepMap["port"] = item.SimpleRoute.IncomingPort.Port.ValueInt64()
+						}
+						if !item.SimpleRoute.IncomingPort.PortRanges.IsNull() && !item.SimpleRoute.IncomingPort.PortRanges.IsUnknown() {
+							incoming_portDeepMap["port_ranges"] = item.SimpleRoute.IncomingPort.PortRanges.ValueString()
+						}
+						simple_routeNestedMap["incoming_port"] = incoming_portDeepMap
+					}
+					if len(item.SimpleRoute.OriginPools) > 0 {
+						var origin_poolsDeepList []map[string]interface{}
+						for _, deepListItem := range item.SimpleRoute.OriginPools {
+							deepListItemMap := make(map[string]interface{})
+							if deepListItem.EndpointSubsets != nil {
+								deepListItemMap["endpoint_subsets"] = map[string]interface{}{}
+							}
+							if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
+								deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
+							}
+							if !deepListItem.Weight.IsNull() && !deepListItem.Weight.IsUnknown() {
+								deepListItemMap["weight"] = deepListItem.Weight.ValueInt64()
+							}
+							origin_poolsDeepList = append(origin_poolsDeepList, deepListItemMap)
+						}
+						simple_routeNestedMap["origin_pools"] = origin_poolsDeepList
+					}
+					if item.SimpleRoute.Path != nil {
+						pathDeepMap := make(map[string]interface{})
+						if !item.SimpleRoute.Path.Path.IsNull() && !item.SimpleRoute.Path.Path.IsUnknown() {
+							pathDeepMap["path"] = item.SimpleRoute.Path.Path.ValueString()
+						}
+						if !item.SimpleRoute.Path.Prefix.IsNull() && !item.SimpleRoute.Path.Prefix.IsUnknown() {
+							pathDeepMap["prefix"] = item.SimpleRoute.Path.Prefix.ValueString()
+						}
+						if !item.SimpleRoute.Path.Regex.IsNull() && !item.SimpleRoute.Path.Regex.IsUnknown() {
+							pathDeepMap["regex"] = item.SimpleRoute.Path.Regex.ValueString()
+						}
+						simple_routeNestedMap["path"] = pathDeepMap
+					}
+					if item.SimpleRoute.QueryParams != nil {
+						query_paramsDeepMap := make(map[string]interface{})
+						if item.SimpleRoute.QueryParams.RemoveAllParams != nil {
+							query_paramsDeepMap["remove_all_params"] = map[string]interface{}{}
+						}
+						if !item.SimpleRoute.QueryParams.ReplaceParams.IsNull() && !item.SimpleRoute.QueryParams.ReplaceParams.IsUnknown() {
+							query_paramsDeepMap["replace_params"] = item.SimpleRoute.QueryParams.ReplaceParams.ValueString()
+						}
+						if item.SimpleRoute.QueryParams.RetainAllParams != nil {
+							query_paramsDeepMap["retain_all_params"] = map[string]interface{}{}
+						}
+						simple_routeNestedMap["query_params"] = query_paramsDeepMap
+					}
+					itemMap["simple_route"] = simple_routeNestedMap
+				}
+				routesList = append(routesList, itemMap)
 			}
-			if item.DirectResponseRoute != nil {
-				direct_response_routeNestedMap := make(map[string]interface{})
-				if len(item.DirectResponseRoute.Headers) > 0 {
-					var headersDeepList []map[string]interface{}
-					for _, deepListItem := range item.DirectResponseRoute.Headers {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
-							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
-						}
-						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
-							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
-							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
-						}
-						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
-							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
-						}
-						headersDeepList = append(headersDeepList, deepListItemMap)
-					}
-					direct_response_routeNestedMap["headers"] = headersDeepList
-				}
-				if !item.DirectResponseRoute.HTTPMethod.IsNull() && !item.DirectResponseRoute.HTTPMethod.IsUnknown() {
-					direct_response_routeNestedMap["http_method"] = item.DirectResponseRoute.HTTPMethod.ValueString()
-				}
-				if item.DirectResponseRoute.IncomingPort != nil {
-					incoming_portDeepMap := make(map[string]interface{})
-					if item.DirectResponseRoute.IncomingPort.NoPortMatch != nil {
-						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
-					}
-					if !item.DirectResponseRoute.IncomingPort.Port.IsNull() && !item.DirectResponseRoute.IncomingPort.Port.IsUnknown() {
-						incoming_portDeepMap["port"] = item.DirectResponseRoute.IncomingPort.Port.ValueInt64()
-					}
-					if !item.DirectResponseRoute.IncomingPort.PortRanges.IsNull() && !item.DirectResponseRoute.IncomingPort.PortRanges.IsUnknown() {
-						incoming_portDeepMap["port_ranges"] = item.DirectResponseRoute.IncomingPort.PortRanges.ValueString()
-					}
-					direct_response_routeNestedMap["incoming_port"] = incoming_portDeepMap
-				}
-				if item.DirectResponseRoute.Path != nil {
-					pathDeepMap := make(map[string]interface{})
-					if !item.DirectResponseRoute.Path.Path.IsNull() && !item.DirectResponseRoute.Path.Path.IsUnknown() {
-						pathDeepMap["path"] = item.DirectResponseRoute.Path.Path.ValueString()
-					}
-					if !item.DirectResponseRoute.Path.Prefix.IsNull() && !item.DirectResponseRoute.Path.Prefix.IsUnknown() {
-						pathDeepMap["prefix"] = item.DirectResponseRoute.Path.Prefix.ValueString()
-					}
-					if !item.DirectResponseRoute.Path.Regex.IsNull() && !item.DirectResponseRoute.Path.Regex.IsUnknown() {
-						pathDeepMap["regex"] = item.DirectResponseRoute.Path.Regex.ValueString()
-					}
-					direct_response_routeNestedMap["path"] = pathDeepMap
-				}
-				if item.DirectResponseRoute.RouteDirectResponse != nil {
-					route_direct_responseDeepMap := make(map[string]interface{})
-					if !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.IsUnknown() {
-						route_direct_responseDeepMap["response_body_encoded"] = item.DirectResponseRoute.RouteDirectResponse.ResponseBodyEncoded.ValueString()
-					}
-					if !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsNull() && !item.DirectResponseRoute.RouteDirectResponse.ResponseCode.IsUnknown() {
-						route_direct_responseDeepMap["response_code"] = item.DirectResponseRoute.RouteDirectResponse.ResponseCode.ValueInt64()
-					}
-					direct_response_routeNestedMap["route_direct_response"] = route_direct_responseDeepMap
-				}
-				itemMap["direct_response_route"] = direct_response_routeNestedMap
-			}
-			if item.RedirectRoute != nil {
-				redirect_routeNestedMap := make(map[string]interface{})
-				if len(item.RedirectRoute.Headers) > 0 {
-					var headersDeepList []map[string]interface{}
-					for _, deepListItem := range item.RedirectRoute.Headers {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
-							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
-						}
-						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
-							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
-							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
-						}
-						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
-							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
-						}
-						headersDeepList = append(headersDeepList, deepListItemMap)
-					}
-					redirect_routeNestedMap["headers"] = headersDeepList
-				}
-				if !item.RedirectRoute.HTTPMethod.IsNull() && !item.RedirectRoute.HTTPMethod.IsUnknown() {
-					redirect_routeNestedMap["http_method"] = item.RedirectRoute.HTTPMethod.ValueString()
-				}
-				if item.RedirectRoute.IncomingPort != nil {
-					incoming_portDeepMap := make(map[string]interface{})
-					if item.RedirectRoute.IncomingPort.NoPortMatch != nil {
-						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
-					}
-					if !item.RedirectRoute.IncomingPort.Port.IsNull() && !item.RedirectRoute.IncomingPort.Port.IsUnknown() {
-						incoming_portDeepMap["port"] = item.RedirectRoute.IncomingPort.Port.ValueInt64()
-					}
-					if !item.RedirectRoute.IncomingPort.PortRanges.IsNull() && !item.RedirectRoute.IncomingPort.PortRanges.IsUnknown() {
-						incoming_portDeepMap["port_ranges"] = item.RedirectRoute.IncomingPort.PortRanges.ValueString()
-					}
-					redirect_routeNestedMap["incoming_port"] = incoming_portDeepMap
-				}
-				if item.RedirectRoute.Path != nil {
-					pathDeepMap := make(map[string]interface{})
-					if !item.RedirectRoute.Path.Path.IsNull() && !item.RedirectRoute.Path.Path.IsUnknown() {
-						pathDeepMap["path"] = item.RedirectRoute.Path.Path.ValueString()
-					}
-					if !item.RedirectRoute.Path.Prefix.IsNull() && !item.RedirectRoute.Path.Prefix.IsUnknown() {
-						pathDeepMap["prefix"] = item.RedirectRoute.Path.Prefix.ValueString()
-					}
-					if !item.RedirectRoute.Path.Regex.IsNull() && !item.RedirectRoute.Path.Regex.IsUnknown() {
-						pathDeepMap["regex"] = item.RedirectRoute.Path.Regex.ValueString()
-					}
-					redirect_routeNestedMap["path"] = pathDeepMap
-				}
-				if item.RedirectRoute.RouteRedirect != nil {
-					route_redirectDeepMap := make(map[string]interface{})
-					if !item.RedirectRoute.RouteRedirect.HostRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.HostRedirect.IsUnknown() {
-						route_redirectDeepMap["host_redirect"] = item.RedirectRoute.RouteRedirect.HostRedirect.ValueString()
-					}
-					if !item.RedirectRoute.RouteRedirect.PathRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.PathRedirect.IsUnknown() {
-						route_redirectDeepMap["path_redirect"] = item.RedirectRoute.RouteRedirect.PathRedirect.ValueString()
-					}
-					if !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsNull() && !item.RedirectRoute.RouteRedirect.PrefixRewrite.IsUnknown() {
-						route_redirectDeepMap["prefix_rewrite"] = item.RedirectRoute.RouteRedirect.PrefixRewrite.ValueString()
-					}
-					if !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsNull() && !item.RedirectRoute.RouteRedirect.ProtoRedirect.IsUnknown() {
-						route_redirectDeepMap["proto_redirect"] = item.RedirectRoute.RouteRedirect.ProtoRedirect.ValueString()
-					}
-					if item.RedirectRoute.RouteRedirect.RemoveAllParams != nil {
-						route_redirectDeepMap["remove_all_params"] = map[string]interface{}{}
-					}
-					if !item.RedirectRoute.RouteRedirect.ReplaceParams.IsNull() && !item.RedirectRoute.RouteRedirect.ReplaceParams.IsUnknown() {
-						route_redirectDeepMap["replace_params"] = item.RedirectRoute.RouteRedirect.ReplaceParams.ValueString()
-					}
-					if !item.RedirectRoute.RouteRedirect.ResponseCode.IsNull() && !item.RedirectRoute.RouteRedirect.ResponseCode.IsUnknown() {
-						route_redirectDeepMap["response_code"] = item.RedirectRoute.RouteRedirect.ResponseCode.ValueInt64()
-					}
-					if item.RedirectRoute.RouteRedirect.RetainAllParams != nil {
-						route_redirectDeepMap["retain_all_params"] = map[string]interface{}{}
-					}
-					redirect_routeNestedMap["route_redirect"] = route_redirectDeepMap
-				}
-				itemMap["redirect_route"] = redirect_routeNestedMap
-			}
-			if item.SimpleRoute != nil {
-				simple_routeNestedMap := make(map[string]interface{})
-				if item.SimpleRoute.AdvancedOptions != nil {
-					advanced_optionsDeepMap := make(map[string]interface{})
-					if item.SimpleRoute.AdvancedOptions.CommonBuffering != nil {
-						advanced_optionsDeepMap["common_buffering"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.CommonHashPolicy != nil {
-						advanced_optionsDeepMap["common_hash_policy"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DefaultRetryPolicy != nil {
-						advanced_optionsDeepMap["default_retry_policy"] = map[string]interface{}{}
-					}
-					if !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsNull() && !item.SimpleRoute.AdvancedOptions.DisableLocationAdd.IsUnknown() {
-						advanced_optionsDeepMap["disable_location_add"] = item.SimpleRoute.AdvancedOptions.DisableLocationAdd.ValueBool()
-					}
-					if item.SimpleRoute.AdvancedOptions.DisableMirroring != nil {
-						advanced_optionsDeepMap["disable_mirroring"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DisablePrefixRewrite != nil {
-						advanced_optionsDeepMap["disable_prefix_rewrite"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DisableSpdy != nil {
-						advanced_optionsDeepMap["disable_spdy"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DisableWAF != nil {
-						advanced_optionsDeepMap["disable_waf"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DisableWebSocketConfig != nil {
-						advanced_optionsDeepMap["disable_web_socket_config"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.DoNotRetractCluster != nil {
-						advanced_optionsDeepMap["do_not_retract_cluster"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.EnableSpdy != nil {
-						advanced_optionsDeepMap["enable_spdy"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.EndpointSubsets != nil {
-						advanced_optionsDeepMap["endpoint_subsets"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.InheritedBotDefenseJavascriptInjection != nil {
-						advanced_optionsDeepMap["inherited_bot_defense_javascript_injection"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.InheritedWAF != nil {
-						advanced_optionsDeepMap["inherited_waf"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.InheritedWAFExclusion != nil {
-						advanced_optionsDeepMap["inherited_waf_exclusion"] = map[string]interface{}{}
-					}
-					if item.SimpleRoute.AdvancedOptions.NoRetryPolicy != nil {
-						advanced_optionsDeepMap["no_retry_policy"] = map[string]interface{}{}
-					}
-					if !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsNull() && !item.SimpleRoute.AdvancedOptions.PrefixRewrite.IsUnknown() {
-						advanced_optionsDeepMap["prefix_rewrite"] = item.SimpleRoute.AdvancedOptions.PrefixRewrite.ValueString()
-					}
-					if !item.SimpleRoute.AdvancedOptions.Priority.IsNull() && !item.SimpleRoute.AdvancedOptions.Priority.IsUnknown() {
-						advanced_optionsDeepMap["priority"] = item.SimpleRoute.AdvancedOptions.Priority.ValueString()
-					}
-					if !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.IsUnknown() {
-						var RequestCookiesToRemoveItems []string
-						diags := item.SimpleRoute.AdvancedOptions.RequestCookiesToRemove.ElementsAs(ctx, &RequestCookiesToRemoveItems, false)
-						if !diags.HasError() {
-							advanced_optionsDeepMap["request_cookies_to_remove"] = RequestCookiesToRemoveItems
-						}
-					}
-					if !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.IsUnknown() {
-						var RequestHeadersToRemoveItems []string
-						diags := item.SimpleRoute.AdvancedOptions.RequestHeadersToRemove.ElementsAs(ctx, &RequestHeadersToRemoveItems, false)
-						if !diags.HasError() {
-							advanced_optionsDeepMap["request_headers_to_remove"] = RequestHeadersToRemoveItems
-						}
-					}
-					if !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.IsUnknown() {
-						var ResponseCookiesToRemoveItems []string
-						diags := item.SimpleRoute.AdvancedOptions.ResponseCookiesToRemove.ElementsAs(ctx, &ResponseCookiesToRemoveItems, false)
-						if !diags.HasError() {
-							advanced_optionsDeepMap["response_cookies_to_remove"] = ResponseCookiesToRemoveItems
-						}
-					}
-					if !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsNull() && !item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.IsUnknown() {
-						var ResponseHeadersToRemoveItems []string
-						diags := item.SimpleRoute.AdvancedOptions.ResponseHeadersToRemove.ElementsAs(ctx, &ResponseHeadersToRemoveItems, false)
-						if !diags.HasError() {
-							advanced_optionsDeepMap["response_headers_to_remove"] = ResponseHeadersToRemoveItems
-						}
-					}
-					if item.SimpleRoute.AdvancedOptions.RetractCluster != nil {
-						advanced_optionsDeepMap["retract_cluster"] = map[string]interface{}{}
-					}
-					if !item.SimpleRoute.AdvancedOptions.Timeout.IsNull() && !item.SimpleRoute.AdvancedOptions.Timeout.IsUnknown() {
-						advanced_optionsDeepMap["timeout"] = item.SimpleRoute.AdvancedOptions.Timeout.ValueInt64()
-					}
-					simple_routeNestedMap["advanced_options"] = advanced_optionsDeepMap
-				}
-				if item.SimpleRoute.AutoHostRewrite != nil {
-					simple_routeNestedMap["auto_host_rewrite"] = map[string]interface{}{}
-				}
-				if item.SimpleRoute.DisableHostRewrite != nil {
-					simple_routeNestedMap["disable_host_rewrite"] = map[string]interface{}{}
-				}
-				if len(item.SimpleRoute.Headers) > 0 {
-					var headersDeepList []map[string]interface{}
-					for _, deepListItem := range item.SimpleRoute.Headers {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
-							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
-						}
-						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
-							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
-							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
-						}
-						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
-							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
-						}
-						headersDeepList = append(headersDeepList, deepListItemMap)
-					}
-					simple_routeNestedMap["headers"] = headersDeepList
-				}
-				if !item.SimpleRoute.HostRewrite.IsNull() && !item.SimpleRoute.HostRewrite.IsUnknown() {
-					simple_routeNestedMap["host_rewrite"] = item.SimpleRoute.HostRewrite.ValueString()
-				}
-				if !item.SimpleRoute.HTTPMethod.IsNull() && !item.SimpleRoute.HTTPMethod.IsUnknown() {
-					simple_routeNestedMap["http_method"] = item.SimpleRoute.HTTPMethod.ValueString()
-				}
-				if item.SimpleRoute.IncomingPort != nil {
-					incoming_portDeepMap := make(map[string]interface{})
-					if item.SimpleRoute.IncomingPort.NoPortMatch != nil {
-						incoming_portDeepMap["no_port_match"] = map[string]interface{}{}
-					}
-					if !item.SimpleRoute.IncomingPort.Port.IsNull() && !item.SimpleRoute.IncomingPort.Port.IsUnknown() {
-						incoming_portDeepMap["port"] = item.SimpleRoute.IncomingPort.Port.ValueInt64()
-					}
-					if !item.SimpleRoute.IncomingPort.PortRanges.IsNull() && !item.SimpleRoute.IncomingPort.PortRanges.IsUnknown() {
-						incoming_portDeepMap["port_ranges"] = item.SimpleRoute.IncomingPort.PortRanges.ValueString()
-					}
-					simple_routeNestedMap["incoming_port"] = incoming_portDeepMap
-				}
-				if len(item.SimpleRoute.OriginPools) > 0 {
-					var origin_poolsDeepList []map[string]interface{}
-					for _, deepListItem := range item.SimpleRoute.OriginPools {
-						deepListItemMap := make(map[string]interface{})
-						if deepListItem.EndpointSubsets != nil {
-							deepListItemMap["endpoint_subsets"] = map[string]interface{}{}
-						}
-						if !deepListItem.Priority.IsNull() && !deepListItem.Priority.IsUnknown() {
-							deepListItemMap["priority"] = deepListItem.Priority.ValueInt64()
-						}
-						if !deepListItem.Weight.IsNull() && !deepListItem.Weight.IsUnknown() {
-							deepListItemMap["weight"] = deepListItem.Weight.ValueInt64()
-						}
-						origin_poolsDeepList = append(origin_poolsDeepList, deepListItemMap)
-					}
-					simple_routeNestedMap["origin_pools"] = origin_poolsDeepList
-				}
-				if item.SimpleRoute.Path != nil {
-					pathDeepMap := make(map[string]interface{})
-					if !item.SimpleRoute.Path.Path.IsNull() && !item.SimpleRoute.Path.Path.IsUnknown() {
-						pathDeepMap["path"] = item.SimpleRoute.Path.Path.ValueString()
-					}
-					if !item.SimpleRoute.Path.Prefix.IsNull() && !item.SimpleRoute.Path.Prefix.IsUnknown() {
-						pathDeepMap["prefix"] = item.SimpleRoute.Path.Prefix.ValueString()
-					}
-					if !item.SimpleRoute.Path.Regex.IsNull() && !item.SimpleRoute.Path.Regex.IsUnknown() {
-						pathDeepMap["regex"] = item.SimpleRoute.Path.Regex.ValueString()
-					}
-					simple_routeNestedMap["path"] = pathDeepMap
-				}
-				if item.SimpleRoute.QueryParams != nil {
-					query_paramsDeepMap := make(map[string]interface{})
-					if item.SimpleRoute.QueryParams.RemoveAllParams != nil {
-						query_paramsDeepMap["remove_all_params"] = map[string]interface{}{}
-					}
-					if !item.SimpleRoute.QueryParams.ReplaceParams.IsNull() && !item.SimpleRoute.QueryParams.ReplaceParams.IsUnknown() {
-						query_paramsDeepMap["replace_params"] = item.SimpleRoute.QueryParams.ReplaceParams.ValueString()
-					}
-					if item.SimpleRoute.QueryParams.RetainAllParams != nil {
-						query_paramsDeepMap["retain_all_params"] = map[string]interface{}{}
-					}
-					simple_routeNestedMap["query_params"] = query_paramsDeepMap
-				}
-				itemMap["simple_route"] = simple_routeNestedMap
-			}
-			routesList = append(routesList, itemMap)
+			apiResource.Spec["routes"] = routesList
 		}
-		apiResource.Spec["routes"] = routesList
 	}
 	if data.SensitiveDataDisclosureRules != nil {
 		sensitive_data_disclosure_rulesMap := make(map[string]interface{})
@@ -28555,74 +33730,79 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 		system_default_timeoutsMap := make(map[string]interface{})
 		apiResource.Spec["system_default_timeouts"] = system_default_timeoutsMap
 	}
-	if len(data.TrustedClients) > 0 {
-		var trusted_clientsList []map[string]interface{}
-		for _, item := range data.TrustedClients {
-			itemMap := make(map[string]interface{})
-			if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
-				itemMap["as_number"] = item.AsNumber.ValueInt64()
-			}
-			if item.BotSkipProcessing != nil {
-				itemMap["bot_skip_processing"] = map[string]interface{}{}
-			}
-			if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
-				itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
-			}
-			if item.HTTPHeader != nil {
-				http_headerNestedMap := make(map[string]interface{})
-				if len(item.HTTPHeader.Headers) > 0 {
-					var headersDeepList []map[string]interface{}
-					for _, deepListItem := range item.HTTPHeader.Headers {
-						deepListItemMap := make(map[string]interface{})
-						if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
-							deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+	if !data.TrustedClients.IsNull() && !data.TrustedClients.IsUnknown() {
+		var trusted_clientsItems []HTTPLoadBalancerTrustedClientsModel
+		diags := data.TrustedClients.ElementsAs(ctx, &trusted_clientsItems, false)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() && len(trusted_clientsItems) > 0 {
+			var trusted_clientsList []map[string]interface{}
+			for _, item := range trusted_clientsItems {
+				itemMap := make(map[string]interface{})
+				if !item.AsNumber.IsNull() && !item.AsNumber.IsUnknown() {
+					itemMap["as_number"] = item.AsNumber.ValueInt64()
+				}
+				if item.BotSkipProcessing != nil {
+					itemMap["bot_skip_processing"] = map[string]interface{}{}
+				}
+				if !item.ExpirationTimestamp.IsNull() && !item.ExpirationTimestamp.IsUnknown() {
+					itemMap["expiration_timestamp"] = item.ExpirationTimestamp.ValueString()
+				}
+				if item.HTTPHeader != nil {
+					http_headerNestedMap := make(map[string]interface{})
+					if len(item.HTTPHeader.Headers) > 0 {
+						var headersDeepList []map[string]interface{}
+						for _, deepListItem := range item.HTTPHeader.Headers {
+							deepListItemMap := make(map[string]interface{})
+							if !deepListItem.Exact.IsNull() && !deepListItem.Exact.IsUnknown() {
+								deepListItemMap["exact"] = deepListItem.Exact.ValueString()
+							}
+							if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
+								deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
+							}
+							if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
+								deepListItemMap["name"] = deepListItem.Name.ValueString()
+							}
+							if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
+								deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
+							}
+							if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
+								deepListItemMap["regex"] = deepListItem.Regex.ValueString()
+							}
+							headersDeepList = append(headersDeepList, deepListItemMap)
 						}
-						if !deepListItem.InvertMatch.IsNull() && !deepListItem.InvertMatch.IsUnknown() {
-							deepListItemMap["invert_match"] = deepListItem.InvertMatch.ValueBool()
-						}
-						if !deepListItem.Name.IsNull() && !deepListItem.Name.IsUnknown() {
-							deepListItemMap["name"] = deepListItem.Name.ValueString()
-						}
-						if !deepListItem.Presence.IsNull() && !deepListItem.Presence.IsUnknown() {
-							deepListItemMap["presence"] = deepListItem.Presence.ValueBool()
-						}
-						if !deepListItem.Regex.IsNull() && !deepListItem.Regex.IsUnknown() {
-							deepListItemMap["regex"] = deepListItem.Regex.ValueString()
-						}
-						headersDeepList = append(headersDeepList, deepListItemMap)
+						http_headerNestedMap["headers"] = headersDeepList
 					}
-					http_headerNestedMap["headers"] = headersDeepList
+					itemMap["http_header"] = http_headerNestedMap
 				}
-				itemMap["http_header"] = http_headerNestedMap
-			}
-			if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
-				itemMap["ip_prefix"] = item.IPPrefix.ValueString()
-			}
-			if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
-				itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
-			}
-			if item.Metadata != nil {
-				metadataNestedMap := make(map[string]interface{})
-				if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
-					metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+				if !item.IPPrefix.IsNull() && !item.IPPrefix.IsUnknown() {
+					itemMap["ip_prefix"] = item.IPPrefix.ValueString()
 				}
-				if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
-					metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+				if !item.Ipv6Prefix.IsNull() && !item.Ipv6Prefix.IsUnknown() {
+					itemMap["ipv6_prefix"] = item.Ipv6Prefix.ValueString()
 				}
-				itemMap["metadata"] = metadataNestedMap
+				if item.Metadata != nil {
+					metadataNestedMap := make(map[string]interface{})
+					if !item.Metadata.DescriptionSpec.IsNull() && !item.Metadata.DescriptionSpec.IsUnknown() {
+						metadataNestedMap["description"] = item.Metadata.DescriptionSpec.ValueString()
+					}
+					if !item.Metadata.Name.IsNull() && !item.Metadata.Name.IsUnknown() {
+						metadataNestedMap["name"] = item.Metadata.Name.ValueString()
+					}
+					itemMap["metadata"] = metadataNestedMap
+				}
+				if item.SkipProcessing != nil {
+					itemMap["skip_processing"] = map[string]interface{}{}
+				}
+				if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
+					itemMap["user_identifier"] = item.UserIdentifier.ValueString()
+				}
+				if item.WAFSkipProcessing != nil {
+					itemMap["waf_skip_processing"] = map[string]interface{}{}
+				}
+				trusted_clientsList = append(trusted_clientsList, itemMap)
 			}
-			if item.SkipProcessing != nil {
-				itemMap["skip_processing"] = map[string]interface{}{}
-			}
-			if !item.UserIdentifier.IsNull() && !item.UserIdentifier.IsUnknown() {
-				itemMap["user_identifier"] = item.UserIdentifier.ValueString()
-			}
-			if item.WAFSkipProcessing != nil {
-				itemMap["waf_skip_processing"] = map[string]interface{}{}
-			}
-			trusted_clientsList = append(trusted_clientsList, itemMap)
+			apiResource.Spec["trusted_clients"] = trusted_clientsList
 		}
-		apiResource.Spec["trusted_clients"] = trusted_clientsList
 	}
 	if data.UserIDClientIP != nil {
 		user_id_client_ipMap := make(map[string]interface{})
@@ -29475,6 +34655,10 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if listData, ok := apiResource.Spec["blocked_clients"].([]interface{}); ok && len(listData) > 0 {
 		var blocked_clientsList []HTTPLoadBalancerBlockedClientsModel
+		var existingBlockedClientsItems []HTTPLoadBalancerBlockedClientsModel
+		if !data.BlockedClients.IsNull() && !data.BlockedClients.IsUnknown() {
+			data.BlockedClients.ElementsAs(ctx, &existingBlockedClientsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -29499,7 +34683,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						return types.Int64Null()
 					}(),
 					BotSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].BotSkipProcessing != nil {
+						if !isImport && len(existingBlockedClientsItems) > listIdx && existingBlockedClientsItems[listIdx].BotSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -29548,7 +34732,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						return nil
 					}(),
 					SkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].SkipProcessing != nil {
+						if !isImport && len(existingBlockedClientsItems) > listIdx && existingBlockedClientsItems[listIdx].SkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -29560,7 +34744,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.BlockedClients) > listIdx && data.BlockedClients[listIdx].WAFSkipProcessing != nil {
+						if !isImport && len(existingBlockedClientsItems) > listIdx && existingBlockedClientsItems[listIdx].WAFSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -29568,7 +34752,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				})
 			}
 		}
-		data.BlockedClients = blocked_clientsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerBlockedClientsModelAttrTypes}, blocked_clientsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.BlockedClients = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.BlockedClients = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerBlockedClientsModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["bot_defense"].(map[string]interface{}); ok && (isImport || data.BotDefense != nil) {
 		data.BotDefense = &HTTPLoadBalancerBotDefenseModel{
@@ -29866,18 +35057,22 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["data_guard_rules"].([]interface{}); ok && len(listData) > 0 {
 		var data_guard_rulesList []HTTPLoadBalancerDataGuardRulesModel
+		var existingDataGuardRulesItems []HTTPLoadBalancerDataGuardRulesModel
+		if !data.DataGuardRules.IsNull() && !data.DataGuardRules.IsUnknown() {
+			data.DataGuardRules.ElementsAs(ctx, &existingDataGuardRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				data_guard_rulesList = append(data_guard_rulesList, HTTPLoadBalancerDataGuardRulesModel{
 					AnyDomain: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].AnyDomain != nil {
+						if !isImport && len(existingDataGuardRulesItems) > listIdx && existingDataGuardRulesItems[listIdx].AnyDomain != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					ApplyDataGuard: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].ApplyDataGuard != nil {
+						if !isImport && len(existingDataGuardRulesItems) > listIdx && existingDataGuardRulesItems[listIdx].ApplyDataGuard != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -29933,7 +35128,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						return nil
 					}(),
 					SkipDataGuard: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DataGuardRules) > listIdx && data.DataGuardRules[listIdx].SkipDataGuard != nil {
+						if !isImport && len(existingDataGuardRulesItems) > listIdx && existingDataGuardRulesItems[listIdx].SkipDataGuard != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -29947,16 +35142,27 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				})
 			}
 		}
-		data.DataGuardRules = data_guard_rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerDataGuardRulesModelAttrTypes}, data_guard_rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DataGuardRules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DataGuardRules = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerDataGuardRulesModelAttrTypes})
 	}
 	if listData, ok := apiResource.Spec["ddos_mitigation_rules"].([]interface{}); ok && len(listData) > 0 {
 		var ddos_mitigation_rulesList []HTTPLoadBalancerDDOSMitigationRulesModel
+		var existingDDOSMitigationRulesItems []HTTPLoadBalancerDDOSMitigationRulesModel
+		if !data.DDOSMitigationRules.IsNull() && !data.DDOSMitigationRules.IsUnknown() {
+			data.DDOSMitigationRules.ElementsAs(ctx, &existingDDOSMitigationRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				ddos_mitigation_rulesList = append(ddos_mitigation_rulesList, HTTPLoadBalancerDDOSMitigationRulesModel{
 					Block: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DDOSMitigationRules) > listIdx && data.DDOSMitigationRules[listIdx].Block != nil {
+						if !isImport && len(existingDDOSMitigationRulesItems) > listIdx && existingDDOSMitigationRulesItems[listIdx].Block != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -30035,7 +35241,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				})
 			}
 		}
-		data.DDOSMitigationRules = ddos_mitigation_rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesModelAttrTypes}, ddos_mitigation_rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DDOSMitigationRules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DDOSMitigationRules = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerDDOSMitigationRulesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["default_pool"].(map[string]interface{}); ok && (isImport || data.DefaultPool != nil) {
 		data.DefaultPool = &HTTPLoadBalancerDefaultPoolModel{
@@ -30540,6 +35753,10 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if listData, ok := apiResource.Spec["default_route_pools"].([]interface{}); ok && len(listData) > 0 {
 		var default_route_poolsList []HTTPLoadBalancerDefaultRoutePoolsModel
+		var existingDefaultRoutePoolsItems []HTTPLoadBalancerDefaultRoutePoolsModel
+		if !data.DefaultRoutePools.IsNull() && !data.DefaultRoutePools.IsUnknown() {
+			data.DefaultRoutePools.ElementsAs(ctx, &existingDefaultRoutePoolsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -30570,7 +35787,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						return nil
 					}(),
 					EndpointSubsets: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.DefaultRoutePools) > listIdx && data.DefaultRoutePools[listIdx].EndpointSubsets != nil {
+						if !isImport && len(existingDefaultRoutePoolsItems) > listIdx && existingDefaultRoutePoolsItems[listIdx].EndpointSubsets != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -30615,7 +35832,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				})
 			}
 		}
-		data.DefaultRoutePools = default_route_poolsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultRoutePoolsModelAttrTypes}, default_route_poolsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.DefaultRoutePools = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.DefaultRoutePools = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultRoutePoolsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["default_sensitive_data_policy"].(map[string]interface{}); ok && isImport && data.DefaultSensitiveDataPolicy == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -30763,12 +35987,16 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	}
 	if listData, ok := apiResource.Spec["graphql_rules"].([]interface{}); ok && len(listData) > 0 {
 		var graphql_rulesList []HTTPLoadBalancerGraphqlRulesModel
+		var existingGraphqlRulesItems []HTTPLoadBalancerGraphqlRulesModel
+		if !data.GraphqlRules.IsNull() && !data.GraphqlRules.IsUnknown() {
+			data.GraphqlRules.ElementsAs(ctx, &existingGraphqlRulesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				graphql_rulesList = append(graphql_rulesList, HTTPLoadBalancerGraphqlRulesModel{
 					AnyDomain: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].AnyDomain != nil {
+						if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].AnyDomain != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -30789,13 +36017,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						if nestedMap, ok := itemMap["graphql_settings"].(map[string]interface{}); ok {
 							return &HTTPLoadBalancerGraphqlRulesGraphqlSettingsModel{
 								DisableIntrospection: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.DisableIntrospection != nil {
+									if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].GraphqlSettings != nil && existingGraphqlRulesItems[listIdx].GraphqlSettings.DisableIntrospection != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
 								}(),
 								EnableIntrospection: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].GraphqlSettings != nil && data.GraphqlRules[listIdx].GraphqlSettings.EnableIntrospection != nil {
+									if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].GraphqlSettings != nil && existingGraphqlRulesItems[listIdx].GraphqlSettings.EnableIntrospection != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
@@ -30842,13 +36070,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						return nil
 					}(),
 					MethodGet: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodGet != nil {
+						if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].MethodGet != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					MethodPost: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.GraphqlRules) > listIdx && data.GraphqlRules[listIdx].MethodPost != nil {
+						if !isImport && len(existingGraphqlRulesItems) > listIdx && existingGraphqlRulesItems[listIdx].MethodPost != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -30862,7 +36090,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				})
 			}
 		}
-		data.GraphqlRules = graphql_rulesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerGraphqlRulesModelAttrTypes}, graphql_rulesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.GraphqlRules = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.GraphqlRules = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerGraphqlRulesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["http"].(map[string]interface{}); ok && (isImport || data.HTTP != nil) {
 		data.HTTP = &HTTPLoadBalancerHTTPModel{
@@ -32183,54 +37418,58 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["protected_cookies"].([]interface{}); ok && len(listData) > 0 {
 		var protected_cookiesList []HTTPLoadBalancerProtectedCookiesModel
+		var existingProtectedCookiesItems []HTTPLoadBalancerProtectedCookiesModel
+		if !data.ProtectedCookies.IsNull() && !data.ProtectedCookies.IsUnknown() {
+			data.ProtectedCookies.ElementsAs(ctx, &existingProtectedCookiesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
 				protected_cookiesList = append(protected_cookiesList, HTTPLoadBalancerProtectedCookiesModel{
 					AddHttponly: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddHttponly != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].AddHttponly != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					AddSecure: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].AddSecure != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].AddSecure != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					DisableTamperingProtection: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].DisableTamperingProtection != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].DisableTamperingProtection != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					EnableTamperingProtection: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].EnableTamperingProtection != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].EnableTamperingProtection != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreHttponly: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreHttponly != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreHttponly != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreMaxAge: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreMaxAge != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreMaxAge != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSamesite: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSamesite != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreSamesite != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					IgnoreSecure: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].IgnoreSecure != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].IgnoreSecure != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -32248,19 +37487,19 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						return types.StringNull()
 					}(),
 					SamesiteLax: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteLax != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].SamesiteLax != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteNone: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteNone != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].SamesiteNone != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
 					}(),
 					SamesiteStrict: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.ProtectedCookies) > listIdx && data.ProtectedCookies[listIdx].SamesiteStrict != nil {
+						if !isImport && len(existingProtectedCookiesItems) > listIdx && existingProtectedCookiesItems[listIdx].SamesiteStrict != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -32268,7 +37507,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				})
 			}
 		}
-		data.ProtectedCookies = protected_cookiesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerProtectedCookiesModelAttrTypes}, protected_cookiesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.ProtectedCookies = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.ProtectedCookies = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerProtectedCookiesModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["random"].(map[string]interface{}); ok && isImport && data.Random == nil {
 		// Import case: populate from API since state is nil and psd is empty
@@ -32395,6 +37641,10 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["routes"].([]interface{}); ok && len(listData) > 0 {
 		var routesList []HTTPLoadBalancerRoutesModel
+		var existingRoutesItems []HTTPLoadBalancerRoutesModel
+		if !data.Routes.IsNull() && !data.Routes.IsUnknown() {
+			data.Routes.ElementsAs(ctx, &existingRoutesItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -32435,13 +37685,13 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						if nestedMap, ok := itemMap["simple_route"].(map[string]interface{}); ok {
 							return &HTTPLoadBalancerRoutesSimpleRouteModel{
 								AutoHostRewrite: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].SimpleRoute != nil && data.Routes[listIdx].SimpleRoute.AutoHostRewrite != nil {
+									if !isImport && len(existingRoutesItems) > listIdx && existingRoutesItems[listIdx].SimpleRoute != nil && existingRoutesItems[listIdx].SimpleRoute.AutoHostRewrite != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
 								}(),
 								DisableHostRewrite: func() *HTTPLoadBalancerEmptyModel {
-									if !isImport && len(data.Routes) > listIdx && data.Routes[listIdx].SimpleRoute != nil && data.Routes[listIdx].SimpleRoute.DisableHostRewrite != nil {
+									if !isImport && len(existingRoutesItems) > listIdx && existingRoutesItems[listIdx].SimpleRoute != nil && existingRoutesItems[listIdx].SimpleRoute.DisableHostRewrite != nil {
 										return &HTTPLoadBalancerEmptyModel{}
 									}
 									return nil
@@ -32465,7 +37715,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				})
 			}
 		}
-		data.Routes = routesList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesModelAttrTypes}, routesList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.Routes = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.Routes = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesModelAttrTypes})
 	}
 	if blockData, ok := apiResource.Spec["sensitive_data_disclosure_rules"].(map[string]interface{}); ok && (isImport || data.SensitiveDataDisclosureRules != nil) {
 		data.SensitiveDataDisclosureRules = &HTTPLoadBalancerSensitiveDataDisclosureRulesModel{
@@ -32570,6 +37827,10 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 	// Normal Read: preserve existing state value
 	if listData, ok := apiResource.Spec["trusted_clients"].([]interface{}); ok && len(listData) > 0 {
 		var trusted_clientsList []HTTPLoadBalancerTrustedClientsModel
+		var existingTrustedClientsItems []HTTPLoadBalancerTrustedClientsModel
+		if !data.TrustedClients.IsNull() && !data.TrustedClients.IsUnknown() {
+			data.TrustedClients.ElementsAs(ctx, &existingTrustedClientsItems, false)
+		}
 		for listIdx, item := range listData {
 			_ = listIdx // May be unused if no empty marker blocks in list item
 			if itemMap, ok := item.(map[string]interface{}); ok {
@@ -32594,7 +37855,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						return types.Int64Null()
 					}(),
 					BotSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].BotSkipProcessing != nil {
+						if !isImport && len(existingTrustedClientsItems) > listIdx && existingTrustedClientsItems[listIdx].BotSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -32643,7 +37904,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						return nil
 					}(),
 					SkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].SkipProcessing != nil {
+						if !isImport && len(existingTrustedClientsItems) > listIdx && existingTrustedClientsItems[listIdx].SkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -32655,7 +37916,7 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 						return types.StringNull()
 					}(),
 					WAFSkipProcessing: func() *HTTPLoadBalancerEmptyModel {
-						if !isImport && len(data.TrustedClients) > listIdx && data.TrustedClients[listIdx].WAFSkipProcessing != nil {
+						if !isImport && len(existingTrustedClientsItems) > listIdx && existingTrustedClientsItems[listIdx].WAFSkipProcessing != nil {
 							return &HTTPLoadBalancerEmptyModel{}
 						}
 						return nil
@@ -32663,7 +37924,14 @@ func (r *HTTPLoadBalancerResource) Update(ctx context.Context, req resource.Upda
 				})
 			}
 		}
-		data.TrustedClients = trusted_clientsList
+		listVal, diags := types.ListValueFrom(ctx, types.ObjectType{AttrTypes: HTTPLoadBalancerTrustedClientsModelAttrTypes}, trusted_clientsList)
+		resp.Diagnostics.Append(diags...)
+		if !resp.Diagnostics.HasError() {
+			data.TrustedClients = listVal
+		}
+	} else {
+		// No data from API - set to null list
+		data.TrustedClients = types.ListNull(types.ObjectType{AttrTypes: HTTPLoadBalancerTrustedClientsModelAttrTypes})
 	}
 	if _, ok := apiResource.Spec["user_id_client_ip"].(map[string]interface{}); ok && isImport && data.UserIDClientIP == nil {
 		// Import case: populate from API since state is nil and psd is empty

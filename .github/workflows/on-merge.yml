@@ -264,16 +264,15 @@ jobs:
       npm-token: ${{ secrets.NPM_TOKEN }}
 
   # ===========================================================================
-  # STEP 5b: Sync MCP Server version on bot commits (ensures npm matches release)
+  # STEP 5b: Sync MCP Server version after any release (ensures npm matches GitHub)
   # ===========================================================================
   sync-mcp-version:
     name: Sync MCP Server Version
     needs: [detect-changes, tag-release]
-    # Only run for bot commits after successful tag/release
-    # This ensures npm version stays in sync with GitHub releases
+    # Run after ANY successful tag/release to ensure npm version matches
+    # This guarantees npm package and GitHub release always have the same version
     if: |
       always() &&
-      needs.detect-changes.outputs.is-bot-commit == 'true' &&
       needs.tag-release.result == 'success'
     uses: ./.github/workflows/_build-mcp-server.yml
     with:
@@ -562,4 +561,5 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### MCP Server Version Sync" >> $GITHUB_STEP_SUMMARY
           echo "- Human commits with MCP/docs changes -> Build and publish to npm" >> $GITHUB_STEP_SUMMARY
-          echo "- Bot commits after successful release -> Sync npm version to match GitHub release" >> $GITHUB_STEP_SUMMARY
+          echo "- After ANY successful release -> Sync npm version to match GitHub release" >> $GITHUB_STEP_SUMMARY
+          echo "- This guarantees npm and GitHub release ALWAYS have matching versions" >> $GITHUB_STEP_SUMMARY

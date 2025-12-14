@@ -121,7 +121,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up Go
         uses: actions/setup-go@v6
@@ -168,7 +168,7 @@ jobs:
           echo "failed=$FAILED" >> $GITHUB_OUTPUT
 
       - name: Upload mock test reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: mock-test-reports
@@ -176,7 +176,7 @@ jobs:
           retention-days: 30
 
       - name: Publish JUnit Results
-        uses: mikepenz/action-junit-report@v4
+        uses: mikepenz/action-junit-report@v6
         if: always()
         with:
           report_paths: 'test-reports/mock-tests.xml'
@@ -215,7 +215,7 @@ jobs:
           echo "Verifying F5 XC API connectivity..."
 
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up Go
         uses: actions/setup-go@v6
@@ -334,7 +334,7 @@ jobs:
           fi
 
       - name: Upload real API test reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: real-api-test-reports
@@ -342,7 +342,7 @@ jobs:
           retention-days: 30
 
       - name: Publish JUnit Results
-        uses: mikepenz/action-junit-report@v4
+        uses: mikepenz/action-junit-report@v6
         if: always()
         with:
           report_paths: 'test-reports/real-tests.xml'
@@ -363,7 +363,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up Go
         uses: actions/setup-go@v6
@@ -461,7 +461,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up Go
         uses: actions/setup-go@v6
@@ -470,13 +470,13 @@ jobs:
           cache: true
 
       - name: Download mock test reports
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: mock-test-reports
           path: mock-reports/
 
       - name: Download real API test reports
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: real-api-test-reports
           path: real-reports/
@@ -532,7 +532,7 @@ jobs:
           fi
 
       - name: Upload comparison reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: steps.compare.outputs.available == 'true'
         with:
           name: comparison-reports
@@ -562,7 +562,7 @@ jobs:
 
     steps:
       - name: Download all reports
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           path: all-reports/
         continue-on-error: true

@@ -37,7 +37,7 @@ jobs:
       created: ${{ steps.create.outputs.created }}
     steps:
       - name: Checkout latest main
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           # Fetch the LATEST main HEAD, not github.sha
           # This ensures we tag the commit that includes regeneration

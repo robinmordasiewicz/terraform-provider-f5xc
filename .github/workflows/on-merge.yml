@@ -64,7 +64,7 @@ jobs:
       needs-regeneration: ${{ steps.should-process.outputs.needs_regeneration }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 2
 
@@ -285,7 +285,7 @@ jobs:
       pr-number: ${{ steps.create-pr.outputs.pr_number }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           token: ${{ secrets.AUTO_MERGE_TOKEN }}

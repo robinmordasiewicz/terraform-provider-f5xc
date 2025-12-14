@@ -933,14 +933,35 @@ func cleanDescription(desc string) string {
 	// Remove example and validation rules sections
 	desc = regexp.MustCompile(`\s*Example:.*`).ReplaceAllString(desc, "")
 	desc = regexp.MustCompile(`\s*Validation Rules:.*`).ReplaceAllString(desc, "")
+
+	// Remove x-example annotations (OpenAPI 2.0 vendor extension for Swagger UI examples)
+	// Pattern: x-example: "value" or x-example: 'value' embedded in description text
+	desc = regexp.MustCompile(`\s*x-example:\s*["']?[^"'\n]*["']?`).ReplaceAllString(desc, "")
+	// Also handle x-required annotations
+	desc = regexp.MustCompile(`\s*x-required\s*`).ReplaceAllString(desc, "")
+
 	// Remove ves.io validation annotations (common pattern in F5 XC specs)
+	// These are internal protobuf validation rules that leaked into OpenAPI descriptions
 	// Pattern: ves.io.schema.rules.xxx.yyy: value or ves.io.schema.xxx: value
 	desc = regexp.MustCompile(`\s*ves\.io\.schema[^\s]*:\s*\S+`).ReplaceAllString(desc, "")
 	desc = regexp.MustCompile(`\s*ves\.io\.[^\s]*:\s*\[.*?\]`).ReplaceAllString(desc, "")
+
 	// Remove "Required: YES" or "Required: NO" annotations
 	desc = regexp.MustCompile(`\s*Required:\s*(YES|NO)\s*`).ReplaceAllString(desc, " ")
 	// Remove "Exclusive with [xxx]" patterns
 	desc = regexp.MustCompile(`\s*Exclusive with\s*\[[^\]]*\]\s*`).ReplaceAllString(desc, " ")
+
+	// Normalize generic empty message descriptions to user-friendly text
+	// "Empty. This can be used for messages where no values are needed" → "Enable this option"
+	desc = regexp.MustCompile(`(?i)Empty\.?\s*This can be used for messages where no values are needed\.?`).ReplaceAllString(desc, "Enable this option")
+	// Also handle variations
+	desc = regexp.MustCompile(`(?i)This can be used for messages where no values are needed\.?`).ReplaceAllString(desc, "Enable this option")
+
+	// Normalize "Shape of the X specification" to "Configuration for X"
+	// This converts internal F5 terminology to user-friendly Terraform terminology
+	desc = regexp.MustCompile(`(?i)Shape of the ([^\s]+) specification`).ReplaceAllString(desc, "Configuration for $1")
+	desc = regexp.MustCompile(`(?i)Shape of ([^\s]+) specification`).ReplaceAllString(desc, "Configuration for $1")
+
 	// Remove escaped quotes and backslashes from raw spec data
 	desc = strings.ReplaceAll(desc, `\"`, `"`)
 	desc = strings.ReplaceAll(desc, `\\`, `\`)

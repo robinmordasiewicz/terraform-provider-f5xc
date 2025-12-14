@@ -1740,9 +1740,20 @@ func cleanDescription(desc, attrPath string) string {
 	nestedRefRegex := regexp.MustCompile(`\s*\(see \[below for nested schema\]\([^)]+\)\)`)
 	desc = nestedRefRegex.ReplaceAllString(desc, "")
 
+	// Remove x-example annotations (OpenAPI 2.0 vendor extension for Swagger UI examples)
+	// Pattern: x-example: "value" or x-example: 'value' embedded in description text
+	xExampleRegex := regexp.MustCompile(`\s*x-example:\s*["']?[^"'\n]*["']?`)
+	desc = xExampleRegex.ReplaceAllString(desc, "")
+	// Also handle x-required annotations
+	xRequiredRegex := regexp.MustCompile(`\s*x-required\s*`)
+	desc = xRequiredRegex.ReplaceAllString(desc, "")
+
 	// Remove ves.io.schema validation annotations that may have passed through
+	// These are internal protobuf validation rules that leaked into OpenAPI descriptions
 	vesSchemaRegex := regexp.MustCompile(`\s*ves\.io\.schema[^\s]*:\s*\S+`)
 	desc = vesSchemaRegex.ReplaceAllString(desc, "")
+	vesSchemaArrayRegex := regexp.MustCompile(`\s*ves\.io\.[^\s]*:\s*\[.*?\]`)
+	desc = vesSchemaArrayRegex.ReplaceAllString(desc, "")
 
 	// Remove "Required: YES" or "Required: NO" annotations
 	requiredRegex := regexp.MustCompile(`\s*Required:\s*(YES|NO)\s*`)
@@ -1751,6 +1762,21 @@ func cleanDescription(desc, attrPath string) string {
 	// Remove "Exclusive with [xxx]" patterns
 	exclusiveRegex := regexp.MustCompile(`\s*Exclusive with\s*\[[^\]]*\]\s*`)
 	desc = exclusiveRegex.ReplaceAllString(desc, " ")
+
+	// Normalize generic empty message descriptions to user-friendly text
+	// "Empty. This can be used for messages where no values are needed" → "Enable this option"
+	emptyMsgRegex := regexp.MustCompile(`(?i)Empty\.?\s*This can be used for messages where no values are needed\.?`)
+	desc = emptyMsgRegex.ReplaceAllString(desc, "Enable this option")
+	// Also handle variations without "Empty." prefix
+	emptyMsgVariantRegex := regexp.MustCompile(`(?i)This can be used for messages where no values are needed\.?`)
+	desc = emptyMsgVariantRegex.ReplaceAllString(desc, "Enable this option")
+
+	// Normalize "Shape of the X specification" to "Configuration for X"
+	// This converts internal F5 terminology to user-friendly Terraform terminology
+	shapeOfTheRegex := regexp.MustCompile(`(?i)Shape of the ([^\s]+) specification`)
+	desc = shapeOfTheRegex.ReplaceAllString(desc, "Configuration for $1")
+	shapeOfRegex := regexp.MustCompile(`(?i)Shape of ([^\s]+) specification`)
+	desc = shapeOfRegex.ReplaceAllString(desc, "Configuration for $1")
 
 	// Fix bare URLs by wrapping in backticks (MD034 compliance)
 	// Match URLs not already in backticks

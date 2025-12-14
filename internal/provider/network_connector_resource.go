@@ -85,7 +85,7 @@ var NetworkConnectorEnableForwardProxyTLSInterceptModelAttrTypes = map[string]at
 	"trusted_ca_url":         types.StringType,
 	"custom_certificate":     types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModelAttrTypes},
 	"enable_for_all_domains": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policy":                 types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptPolicyModelAttrTypes},
 	"volterra_certificate":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"volterra_trusted_ca":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -106,7 +106,7 @@ var NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateModelAttrType
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptCustomCertificatePrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -165,7 +165,7 @@ type NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel struct {
 
 // NetworkConnectorEnableForwardProxyTLSInterceptPolicyModelAttrTypes defines the attribute types for NetworkConnectorEnableForwardProxyTLSInterceptPolicyModel
 var NetworkConnectorEnableForwardProxyTLSInterceptPolicyModelAttrTypes = map[string]attr.Type{
-	"interception_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"interception_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModelAttrTypes}},
 }
 
 // NetworkConnectorEnableForwardProxyTLSInterceptPolicyInterceptionRulesModel represents interception_rules block

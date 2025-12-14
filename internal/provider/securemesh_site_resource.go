@@ -154,15 +154,15 @@ type SecuremeshSiteCustomNetworkConfigModel struct {
 var SecuremeshSiteCustomNetworkConfigModelAttrTypes = map[string]attr.Type{
 	"tunnel_dead_timeout":               types.Int64Type,
 	"vip_vrrp_mode":                     types.StringType,
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_network_policies":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModelAttrTypes},
+	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigActiveForwardProxyPoliciesModelAttrTypes},
+	"active_network_policies":           types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigActiveNetworkPoliciesModelAttrTypes},
 	"default_config":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_interface_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_sli_config":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_list":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"global_network_list":               types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigGlobalNetworkListModelAttrTypes},
+	"interface_list":                    types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListModelAttrTypes},
 	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_global_network":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -251,7 +251,7 @@ type SecuremeshSiteCustomNetworkConfigGlobalNetworkListModel struct {
 
 // SecuremeshSiteCustomNetworkConfigGlobalNetworkListModelAttrTypes defines the attribute types for SecuremeshSiteCustomNetworkConfigGlobalNetworkListModel
 var SecuremeshSiteCustomNetworkConfigGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
 }
 
 // SecuremeshSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
@@ -262,8 +262,8 @@ type SecuremeshSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsM
 
 // SecuremeshSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for SecuremeshSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModel
 var SecuremeshSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_to_global_dr": types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
 }
 
 // SecuremeshSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
@@ -421,8 +421,8 @@ var SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceMod
 	"vlan_id":                   types.Int64Type,
 	"cluster":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_client":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dhcp_server":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"ipv6_auto_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_server":               types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModelAttrTypes},
+	"ipv6_auto_config":          types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModelAttrTypes},
 	"is_primary":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -430,8 +430,8 @@ var SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceMod
 	"not_primary":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ip":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ipv6_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":                 types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModelAttrTypes},
+	"static_ipv6_address":       types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModelAttrTypes},
 	"storage_network":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"untagged":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -451,7 +451,7 @@ var SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHC
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModel represents dhcp_networks block
@@ -522,8 +522,8 @@ type SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIp
 // SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModel
 var SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -577,7 +577,7 @@ var SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -624,7 +624,7 @@ type SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceSt
 
 // SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModelAttrTypes defines the attribute types for SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel
 var SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModelAttrTypes},
 }
 
@@ -658,7 +658,7 @@ type SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceSt
 
 // SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModel
 var SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -706,8 +706,8 @@ var SecuremeshSiteCustomNetworkConfigSLIConfigModelAttrTypes = map[string]attr.T
 	"no_dc_cluster_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_v6_static_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_v6_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_routes":       types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigSLIConfigStaticRoutesModelAttrTypes},
+	"static_v6_routes":    types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigSLIConfigStaticV6RoutesModelAttrTypes},
 }
 
 // SecuremeshSiteCustomNetworkConfigSLIConfigDcClusterGroupModel represents dc_cluster_group block
@@ -749,7 +749,7 @@ var SecuremeshSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModelAttrT
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // SecuremeshSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -817,7 +817,7 @@ var SecuremeshSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModelAtt
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // SecuremeshSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -882,8 +882,8 @@ var SecuremeshSiteCustomNetworkConfigSloConfigModelAttrTypes = map[string]attr.T
 	"no_dc_cluster_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_v6_static_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_v6_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_routes":       types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigSloConfigStaticRoutesModelAttrTypes},
+	"static_v6_routes":    types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigSloConfigStaticV6RoutesModelAttrTypes},
 }
 
 // SecuremeshSiteCustomNetworkConfigSloConfigDcClusterGroupModel represents dc_cluster_group block
@@ -925,7 +925,7 @@ var SecuremeshSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModelAttrT
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // SecuremeshSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -993,7 +993,7 @@ var SecuremeshSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModelAtt
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: SecuremeshSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // SecuremeshSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -1122,7 +1122,7 @@ type SecuremeshSitePerformanceEnhancementModeModel struct {
 
 // SecuremeshSitePerformanceEnhancementModeModelAttrTypes defines the attribute types for SecuremeshSitePerformanceEnhancementModeModel
 var SecuremeshSitePerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: SecuremeshSitePerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
 	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 

@@ -62,7 +62,7 @@ type CDNCacheRuleCacheRulesModel struct {
 var CDNCacheRuleCacheRulesModelAttrTypes = map[string]attr.Type{
 	"rule_name":            types.StringType,
 	"cache_bypass":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"eligible_for_cache":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"eligible_for_cache":   types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesEligibleForCacheModelAttrTypes},
 	"rule_expression_list": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListModelAttrTypes}},
 }
 
@@ -115,7 +115,7 @@ type CDNCacheRuleCacheRulesRuleExpressionListModel struct {
 // CDNCacheRuleCacheRulesRuleExpressionListModelAttrTypes defines the attribute types for CDNCacheRuleCacheRulesRuleExpressionListModel
 var CDNCacheRuleCacheRulesRuleExpressionListModelAttrTypes = map[string]attr.Type{
 	"expression_name":       types.StringType,
-	"cache_rule_expression": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"cache_rule_expression": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModelAttrTypes}},
 }
 
 // CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel represents cache_rule_expression block
@@ -130,7 +130,7 @@ type CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModel struct {
 var CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionModelAttrTypes = map[string]attr.Type{
 	"cache_headers":    types.ListType{ElemType: types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCacheHeadersModelAttrTypes}},
 	"cookie_matcher":   types.ListType{ElemType: types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionCookieMatcherModelAttrTypes}},
-	"path_match":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"path_match":       types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionPathMatchModelAttrTypes},
 	"query_parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNCacheRuleCacheRulesRuleExpressionListCacheRuleExpressionQueryParametersModelAttrTypes}},
 }
 

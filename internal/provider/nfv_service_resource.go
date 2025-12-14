@@ -96,10 +96,10 @@ type NfvServiceF5BigIPAWSServiceModel struct {
 var NfvServiceF5BigIPAWSServiceModelAttrTypes = map[string]attr.Type{
 	"admin_username":      types.StringType,
 	"ssh_key":             types.StringType,
-	"admin_password":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"aws_tgw_site_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"admin_password":      types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceAdminPasswordModelAttrTypes},
+	"aws_tgw_site_params": types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceAWSTGWSiteParamsModelAttrTypes},
 	"endpoint_service":    types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceEndpointServiceModelAttrTypes},
-	"market_place_image":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"market_place_image":  types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceMarketPlaceImageModelAttrTypes},
 	"nodes":               types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceF5BigIPAWSServiceNodesModelAttrTypes}},
 	"tags":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -289,12 +289,12 @@ type NfvServiceHTTPSManagementModel struct {
 var NfvServiceHTTPSManagementModelAttrTypes = map[string]attr.Type{
 	"domain_suffix":                     types.StringType,
 	"https_port":                        types.Int64Type,
-	"advertise_on_internet":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_internet":             types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnInternetModelAttrTypes},
 	"advertise_on_internet_default_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_on_sli_vip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_on_slo_internet_vip":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_on_slo_sli":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_on_slo_vip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_sli_vip":              types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPModelAttrTypes},
+	"advertise_on_slo_internet_vip":     types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModelAttrTypes},
+	"advertise_on_slo_sli":              types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLIModelAttrTypes},
+	"advertise_on_slo_vip":              types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPModelAttrTypes},
 	"default_https_port":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -334,7 +334,7 @@ type NfvServiceHTTPSManagementAdvertiseOnSLIVIPModel struct {
 var NfvServiceHTTPSManagementAdvertiseOnSLIVIPModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPUseMtlsModelAttrTypes},
 }
 
@@ -354,7 +354,7 @@ var NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModelAttrTypes = ma
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -508,7 +508,7 @@ type NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModel struct {
 var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModelAttrTypes},
 }
 
@@ -528,7 +528,7 @@ var NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModelAttrTy
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -682,7 +682,7 @@ type NfvServiceHTTPSManagementAdvertiseOnSloSLIModel struct {
 var NfvServiceHTTPSManagementAdvertiseOnSloSLIModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLITLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLIUseMtlsModelAttrTypes},
 }
 
@@ -702,7 +702,7 @@ var NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesModelAttrTypes = ma
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -856,7 +856,7 @@ type NfvServiceHTTPSManagementAdvertiseOnSloVIPModel struct {
 var NfvServiceHTTPSManagementAdvertiseOnSloVIPModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPUseMtlsModelAttrTypes},
 }
 
@@ -876,7 +876,7 @@ var NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModelAttrTypes = ma
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: NfvServiceHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1044,7 +1044,7 @@ var NfvServicePaloAltoFwServiceModelAttrTypes = map[string]attr.Type{
 	"pan_ami_bundle1":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pan_ami_bundle2":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"panorama_server":  types.ObjectType{AttrTypes: NfvServicePaloAltoFwServicePanoramaServerModelAttrTypes},
-	"service_nodes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"service_nodes":    types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceServiceNodesModelAttrTypes},
 	"tags":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1058,7 +1058,7 @@ type NfvServicePaloAltoFwServiceAutoSetupModel struct {
 // NfvServicePaloAltoFwServiceAutoSetupModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAutoSetupModel
 var NfvServicePaloAltoFwServiceAutoSetupModelAttrTypes = map[string]attr.Type{
 	"admin_username":  types.StringType,
-	"admin_password":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"admin_password":  types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceAutoSetupAdminPasswordModelAttrTypes},
 	"manual_ssh_keys": types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModelAttrTypes},
 }
 
@@ -1109,7 +1109,7 @@ type NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModel struct {
 // NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModelAttrTypes defines the attribute types for NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModel
 var NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysModelAttrTypes = map[string]attr.Type{
 	"public_key":  types.StringType,
-	"private_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key": types.ObjectType{AttrTypes: NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModelAttrTypes},
 }
 
 // NfvServicePaloAltoFwServiceAutoSetupManualSSHKeysPrivateKeyModel represents private_key block
@@ -1177,7 +1177,7 @@ var NfvServicePaloAltoFwServicePanoramaServerModelAttrTypes = map[string]attr.Ty
 	"device_group_name":   types.StringType,
 	"server":              types.StringType,
 	"template_stack_name": types.StringType,
-	"authorization_key":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"authorization_key":   types.ObjectType{AttrTypes: NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModelAttrTypes},
 }
 
 // NfvServicePaloAltoFwServicePanoramaServerAuthorizationKeyModel represents authorization_key block

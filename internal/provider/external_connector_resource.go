@@ -99,7 +99,7 @@ var ExternalConnectorIpsecIKEParametersModelAttrTypes = map[string]attr.Type{
 	"ike_phase2_profile":        types.ObjectType{AttrTypes: ExternalConnectorIpsecIKEParametersIKEPhase2ProfileModelAttrTypes},
 	"initiator":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"responder":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"rm_ip_address":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"rm_ip_address":             types.ObjectType{AttrTypes: ExternalConnectorIpsecIKEParametersRmIPAddressModelAttrTypes},
 	"use_default_local_ike_id":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"use_default_remote_ike_id": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -190,7 +190,7 @@ var ExternalConnectorIpsecIpsecTunnelParametersModelAttrTypes = map[string]attr.
 	"psk":                       types.StringType,
 	"tunnel_mtu":                types.Int64Type,
 	"peer_ip_address":           types.ObjectType{AttrTypes: ExternalConnectorIpsecIpsecTunnelParametersPeerIPAddressModelAttrTypes},
-	"segment":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"segment":                   types.ObjectType{AttrTypes: ExternalConnectorIpsecIpsecTunnelParametersSegmentModelAttrTypes},
 	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tunnel_eps":                types.ListType{ElemType: types.ObjectType{AttrTypes: ExternalConnectorIpsecIpsecTunnelParametersTunnelEpsModelAttrTypes}},

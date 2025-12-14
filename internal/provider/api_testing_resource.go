@@ -81,7 +81,7 @@ var APITestingDomainsCredentialsModelAttrTypes = map[string]attr.Type{
 	"admin":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"api_key":         types.ObjectType{AttrTypes: APITestingDomainsCredentialsAPIKeyModelAttrTypes},
 	"basic_auth":      types.ObjectType{AttrTypes: APITestingDomainsCredentialsBasicAuthModelAttrTypes},
-	"bearer_token":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"bearer_token":    types.ObjectType{AttrTypes: APITestingDomainsCredentialsBearerTokenModelAttrTypes},
 	"login_endpoint":  types.ObjectType{AttrTypes: APITestingDomainsCredentialsLoginEndpointModelAttrTypes},
 	"standard":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -95,7 +95,7 @@ type APITestingDomainsCredentialsAPIKeyModel struct {
 // APITestingDomainsCredentialsAPIKeyModelAttrTypes defines the attribute types for APITestingDomainsCredentialsAPIKeyModel
 var APITestingDomainsCredentialsAPIKeyModelAttrTypes = map[string]attr.Type{
 	"key":   types.StringType,
-	"value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"value": types.ObjectType{AttrTypes: APITestingDomainsCredentialsAPIKeyValueModelAttrTypes},
 }
 
 // APITestingDomainsCredentialsAPIKeyValueModel represents value block
@@ -145,7 +145,7 @@ type APITestingDomainsCredentialsBasicAuthModel struct {
 // APITestingDomainsCredentialsBasicAuthModelAttrTypes defines the attribute types for APITestingDomainsCredentialsBasicAuthModel
 var APITestingDomainsCredentialsBasicAuthModelAttrTypes = map[string]attr.Type{
 	"user":     types.StringType,
-	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password": types.ObjectType{AttrTypes: APITestingDomainsCredentialsBasicAuthPasswordModelAttrTypes},
 }
 
 // APITestingDomainsCredentialsBasicAuthPasswordModel represents password block
@@ -193,7 +193,7 @@ type APITestingDomainsCredentialsBearerTokenModel struct {
 
 // APITestingDomainsCredentialsBearerTokenModelAttrTypes defines the attribute types for APITestingDomainsCredentialsBearerTokenModel
 var APITestingDomainsCredentialsBearerTokenModelAttrTypes = map[string]attr.Type{
-	"token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"token": types.ObjectType{AttrTypes: APITestingDomainsCredentialsBearerTokenTokenModelAttrTypes},
 }
 
 // APITestingDomainsCredentialsBearerTokenTokenModel represents token block
@@ -247,7 +247,7 @@ var APITestingDomainsCredentialsLoginEndpointModelAttrTypes = map[string]attr.Ty
 	"method":             types.StringType,
 	"path":               types.StringType,
 	"token_response_key": types.StringType,
-	"json_payload":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"json_payload":       types.ObjectType{AttrTypes: APITestingDomainsCredentialsLoginEndpointJSONPayloadModelAttrTypes},
 }
 
 // APITestingDomainsCredentialsLoginEndpointJSONPayloadModel represents json_payload block

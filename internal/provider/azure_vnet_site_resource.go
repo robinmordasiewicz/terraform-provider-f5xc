@@ -183,17 +183,17 @@ type AzureVNETSiteIngressEgressGwModel struct {
 // AzureVNETSiteIngressEgressGwModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwModel
 var AzureVNETSiteIngressEgressGwModelAttrTypes = map[string]attr.Type{
 	"azure_certified_hw":                types.StringType,
-	"accelerated_networking":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_network_policies":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"accelerated_networking":            types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwAcceleratedNetworkingModelAttrTypes},
+	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwActiveEnhancedFirewallPoliciesModelAttrTypes},
+	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwActiveForwardProxyPoliciesModelAttrTypes},
+	"active_network_policies":           types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwActiveNetworkPoliciesModelAttrTypes},
 	"az_nodes":                          types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwAzNodesModelAttrTypes}},
 	"dc_cluster_group_inside_vn":        types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwDcClusterGroupInsideVnModelAttrTypes},
 	"dc_cluster_group_outside_vn":       types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwDcClusterGroupOutsideVnModelAttrTypes},
 	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"hub":                               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"inside_static_routes":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"global_network_list":               types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwGlobalNetworkListModelAttrTypes},
+	"hub":                               types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwHubModelAttrTypes},
+	"inside_static_routes":              types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwInsideStaticRoutesModelAttrTypes},
 	"no_dc_cluster_group":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_global_network":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -201,8 +201,8 @@ var AzureVNETSiteIngressEgressGwModelAttrTypes = map[string]attr.Type{
 	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_outside_static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"not_hub":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"outside_static_routes":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"performance_enhancement_mode":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_static_routes":             types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwOutsideStaticRoutesModelAttrTypes},
+	"performance_enhancement_mode":      types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModelAttrTypes},
 	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -301,8 +301,8 @@ type AzureVNETSiteIngressEgressGwAzNodesModel struct {
 // AzureVNETSiteIngressEgressGwAzNodesModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwAzNodesModel
 var AzureVNETSiteIngressEgressGwAzNodesModelAttrTypes = map[string]attr.Type{
 	"azure_az":       types.StringType,
-	"inside_subnet":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"outside_subnet": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inside_subnet":  types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModelAttrTypes},
+	"outside_subnet": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwAzNodesOutsideSubnetModelAttrTypes},
 }
 
 // AzureVNETSiteIngressEgressGwAzNodesInsideSubnetModel represents inside_subnet block
@@ -412,7 +412,7 @@ type AzureVNETSiteIngressEgressGwGlobalNetworkListModel struct {
 
 // AzureVNETSiteIngressEgressGwGlobalNetworkListModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwGlobalNetworkListModel
 var AzureVNETSiteIngressEgressGwGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
 }
 
 // AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
@@ -423,8 +423,8 @@ type AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel 
 
 // AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel
 var AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_to_global_dr": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
 }
 
 // AzureVNETSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
@@ -486,7 +486,7 @@ type AzureVNETSiteIngressEgressGwHubModel struct {
 var AzureVNETSiteIngressEgressGwHubModelAttrTypes = map[string]attr.Type{
 	"express_route_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"express_route_enabled":  types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwHubExpressRouteEnabledModelAttrTypes},
-	"spoke_vnets":            types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"spoke_vnets":            types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwHubSpokeVnetsModelAttrTypes}},
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledModel represents express_route_enabled block
@@ -513,8 +513,8 @@ var AzureVNETSiteIngressEgressGwHubExpressRouteEnabledModelAttrTypes = map[strin
 	"auto_asn":                             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"connections":                          types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsModelAttrTypes}},
 	"do_not_advertise_to_route_server":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"gateway_subnet":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"route_server_subnet":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"gateway_subnet":                       types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModelAttrTypes},
+	"route_server_subnet":                  types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModelAttrTypes},
 	"site_registration_over_express_route": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModelAttrTypes},
 	"site_registration_over_internet":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sku_ergw1az":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -560,7 +560,7 @@ type AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscript
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel
 var AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModelAttrTypes = map[string]attr.Type{
 	"circuit_id":     types.StringType,
-	"authorized_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"authorized_key": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModelAttrTypes},
 }
 
 // AzureVNETSiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel represents authorized_key block
@@ -750,7 +750,7 @@ var AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRou
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -764,7 +764,7 @@ type AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRo
 var AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AzureVNETSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
@@ -888,7 +888,7 @@ var AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRo
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -902,7 +902,7 @@ type AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticR
 var AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AzureVNETSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
@@ -999,7 +999,7 @@ type AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel struct {
 
 // AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModel
 var AzureVNETSiteIngressEgressGwPerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
 	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1045,16 +1045,16 @@ type AzureVNETSiteIngressEgressGwArModel struct {
 // AzureVNETSiteIngressEgressGwArModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwArModel
 var AzureVNETSiteIngressEgressGwArModelAttrTypes = map[string]attr.Type{
 	"azure_certified_hw":                types.StringType,
-	"accelerated_networking":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_network_policies":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"accelerated_networking":            types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArAcceleratedNetworkingModelAttrTypes},
+	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArActiveEnhancedFirewallPoliciesModelAttrTypes},
+	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArActiveForwardProxyPoliciesModelAttrTypes},
+	"active_network_policies":           types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArActiveNetworkPoliciesModelAttrTypes},
 	"dc_cluster_group_inside_vn":        types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArDcClusterGroupInsideVnModelAttrTypes},
 	"dc_cluster_group_outside_vn":       types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArDcClusterGroupOutsideVnModelAttrTypes},
 	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"hub":                               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"inside_static_routes":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"global_network_list":               types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArGlobalNetworkListModelAttrTypes},
+	"hub":                               types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArHubModelAttrTypes},
+	"inside_static_routes":              types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArInsideStaticRoutesModelAttrTypes},
 	"no_dc_cluster_group":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_global_network":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -1063,8 +1063,8 @@ var AzureVNETSiteIngressEgressGwArModelAttrTypes = map[string]attr.Type{
 	"no_outside_static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"node":                              types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArNodeModelAttrTypes},
 	"not_hub":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"outside_static_routes":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"performance_enhancement_mode":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_static_routes":             types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArOutsideStaticRoutesModelAttrTypes},
+	"performance_enhancement_mode":      types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModelAttrTypes},
 	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -1188,7 +1188,7 @@ type AzureVNETSiteIngressEgressGwArGlobalNetworkListModel struct {
 
 // AzureVNETSiteIngressEgressGwArGlobalNetworkListModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwArGlobalNetworkListModel
 var AzureVNETSiteIngressEgressGwArGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
 }
 
 // AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
@@ -1199,8 +1199,8 @@ type AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsMode
 
 // AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModel
 var AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_to_global_dr": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
 }
 
 // AzureVNETSiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
@@ -1262,7 +1262,7 @@ type AzureVNETSiteIngressEgressGwArHubModel struct {
 var AzureVNETSiteIngressEgressGwArHubModelAttrTypes = map[string]attr.Type{
 	"express_route_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"express_route_enabled":  types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledModelAttrTypes},
-	"spoke_vnets":            types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"spoke_vnets":            types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArHubSpokeVnetsModelAttrTypes}},
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledModel represents express_route_enabled block
@@ -1289,8 +1289,8 @@ var AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledModelAttrTypes = map[str
 	"auto_asn":                             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"connections":                          types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsModelAttrTypes}},
 	"do_not_advertise_to_route_server":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"gateway_subnet":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"route_server_subnet":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"gateway_subnet":                       types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModelAttrTypes},
+	"route_server_subnet":                  types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModelAttrTypes},
 	"site_registration_over_express_route": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModelAttrTypes},
 	"site_registration_over_internet":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sku_ergw1az":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -1336,7 +1336,7 @@ type AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscri
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel
 var AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModelAttrTypes = map[string]attr.Type{
 	"circuit_id":     types.StringType,
-	"authorized_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"authorized_key": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModelAttrTypes},
 }
 
 // AzureVNETSiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel represents authorized_key block
@@ -1526,7 +1526,7 @@ var AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticR
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -1540,7 +1540,7 @@ type AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStatic
 var AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AzureVNETSiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
@@ -1643,8 +1643,8 @@ var AzureVNETSiteIngressEgressGwArNodeModelAttrTypes = map[string]attr.Type{
 	"fault_domain":   types.Int64Type,
 	"node_number":    types.Int64Type,
 	"update_domain":  types.Int64Type,
-	"inside_subnet":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"outside_subnet": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"inside_subnet":  types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArNodeInsideSubnetModelAttrTypes},
+	"outside_subnet": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArNodeOutsideSubnetModelAttrTypes},
 }
 
 // AzureVNETSiteIngressEgressGwArNodeInsideSubnetModel represents inside_subnet block
@@ -1754,7 +1754,7 @@ var AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStatic
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -1768,7 +1768,7 @@ type AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStati
 var AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AzureVNETSiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
@@ -1865,7 +1865,7 @@ type AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel struct {
 
 // AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModelAttrTypes defines the attribute types for AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModel
 var AzureVNETSiteIngressEgressGwArPerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: AzureVNETSiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
 	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1892,9 +1892,9 @@ type AzureVNETSiteIngressGwModel struct {
 // AzureVNETSiteIngressGwModelAttrTypes defines the attribute types for AzureVNETSiteIngressGwModel
 var AzureVNETSiteIngressGwModelAttrTypes = map[string]attr.Type{
 	"azure_certified_hw":           types.StringType,
-	"accelerated_networking":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"accelerated_networking":       types.ObjectType{AttrTypes: AzureVNETSiteIngressGwAcceleratedNetworkingModelAttrTypes},
 	"az_nodes":                     types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteIngressGwAzNodesModelAttrTypes}},
-	"performance_enhancement_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"performance_enhancement_mode": types.ObjectType{AttrTypes: AzureVNETSiteIngressGwPerformanceEnhancementModeModelAttrTypes},
 }
 
 // AzureVNETSiteIngressGwAcceleratedNetworkingModel represents accelerated_networking block
@@ -1918,7 +1918,7 @@ type AzureVNETSiteIngressGwAzNodesModel struct {
 // AzureVNETSiteIngressGwAzNodesModelAttrTypes defines the attribute types for AzureVNETSiteIngressGwAzNodesModel
 var AzureVNETSiteIngressGwAzNodesModelAttrTypes = map[string]attr.Type{
 	"azure_az":     types.StringType,
-	"local_subnet": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"local_subnet": types.ObjectType{AttrTypes: AzureVNETSiteIngressGwAzNodesLocalSubnetModelAttrTypes},
 }
 
 // AzureVNETSiteIngressGwAzNodesLocalSubnetModel represents local_subnet block
@@ -1965,7 +1965,7 @@ type AzureVNETSiteIngressGwPerformanceEnhancementModeModel struct {
 
 // AzureVNETSiteIngressGwPerformanceEnhancementModeModelAttrTypes defines the attribute types for AzureVNETSiteIngressGwPerformanceEnhancementModeModel
 var AzureVNETSiteIngressGwPerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: AzureVNETSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
 	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1992,9 +1992,9 @@ type AzureVNETSiteIngressGwArModel struct {
 // AzureVNETSiteIngressGwArModelAttrTypes defines the attribute types for AzureVNETSiteIngressGwArModel
 var AzureVNETSiteIngressGwArModelAttrTypes = map[string]attr.Type{
 	"azure_certified_hw":           types.StringType,
-	"accelerated_networking":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"accelerated_networking":       types.ObjectType{AttrTypes: AzureVNETSiteIngressGwArAcceleratedNetworkingModelAttrTypes},
 	"node":                         types.ObjectType{AttrTypes: AzureVNETSiteIngressGwArNodeModelAttrTypes},
-	"performance_enhancement_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"performance_enhancement_mode": types.ObjectType{AttrTypes: AzureVNETSiteIngressGwArPerformanceEnhancementModeModelAttrTypes},
 }
 
 // AzureVNETSiteIngressGwArAcceleratedNetworkingModel represents accelerated_networking block
@@ -2022,7 +2022,7 @@ var AzureVNETSiteIngressGwArNodeModelAttrTypes = map[string]attr.Type{
 	"fault_domain":  types.Int64Type,
 	"node_number":   types.Int64Type,
 	"update_domain": types.Int64Type,
-	"local_subnet":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"local_subnet":  types.ObjectType{AttrTypes: AzureVNETSiteIngressGwArNodeLocalSubnetModelAttrTypes},
 }
 
 // AzureVNETSiteIngressGwArNodeLocalSubnetModel represents local_subnet block
@@ -2069,7 +2069,7 @@ type AzureVNETSiteIngressGwArPerformanceEnhancementModeModel struct {
 
 // AzureVNETSiteIngressGwArPerformanceEnhancementModeModelAttrTypes defines the attribute types for AzureVNETSiteIngressGwArPerformanceEnhancementModeModel
 var AzureVNETSiteIngressGwArPerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: AzureVNETSiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
 	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -2233,15 +2233,15 @@ type AzureVNETSiteVoltstackClusterModel struct {
 // AzureVNETSiteVoltstackClusterModelAttrTypes defines the attribute types for AzureVNETSiteVoltstackClusterModel
 var AzureVNETSiteVoltstackClusterModelAttrTypes = map[string]attr.Type{
 	"azure_certified_hw":                types.StringType,
-	"accelerated_networking":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_network_policies":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"accelerated_networking":            types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterAcceleratedNetworkingModelAttrTypes},
+	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterActiveEnhancedFirewallPoliciesModelAttrTypes},
+	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterActiveForwardProxyPoliciesModelAttrTypes},
+	"active_network_policies":           types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterActiveNetworkPoliciesModelAttrTypes},
 	"az_nodes":                          types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterAzNodesModelAttrTypes}},
 	"dc_cluster_group":                  types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterDcClusterGroupModelAttrTypes},
 	"default_storage":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"global_network_list":               types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterGlobalNetworkListModelAttrTypes},
 	"k8s_cluster":                       types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterK8SClusterModelAttrTypes},
 	"no_dc_cluster_group":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -2249,10 +2249,10 @@ var AzureVNETSiteVoltstackClusterModelAttrTypes = map[string]attr.Type{
 	"no_k8s_cluster":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_outside_static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"outside_static_routes":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_static_routes":             types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterOutsideStaticRoutesModelAttrTypes},
 	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"storage_class_list":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"storage_class_list":                types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterStorageClassListModelAttrTypes},
 }
 
 // AzureVNETSiteVoltstackClusterAcceleratedNetworkingModel represents accelerated_networking block
@@ -2348,7 +2348,7 @@ type AzureVNETSiteVoltstackClusterAzNodesModel struct {
 // AzureVNETSiteVoltstackClusterAzNodesModelAttrTypes defines the attribute types for AzureVNETSiteVoltstackClusterAzNodesModel
 var AzureVNETSiteVoltstackClusterAzNodesModelAttrTypes = map[string]attr.Type{
 	"azure_az":     types.StringType,
-	"local_subnet": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"local_subnet": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModelAttrTypes},
 }
 
 // AzureVNETSiteVoltstackClusterAzNodesLocalSubnetModel represents local_subnet block
@@ -2408,7 +2408,7 @@ type AzureVNETSiteVoltstackClusterGlobalNetworkListModel struct {
 
 // AzureVNETSiteVoltstackClusterGlobalNetworkListModelAttrTypes defines the attribute types for AzureVNETSiteVoltstackClusterGlobalNetworkListModel
 var AzureVNETSiteVoltstackClusterGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
 }
 
 // AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
@@ -2419,8 +2419,8 @@ type AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel
 
 // AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel
 var AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_to_global_dr": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
 }
 
 // AzureVNETSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
@@ -2520,7 +2520,7 @@ var AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticR
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -2534,7 +2534,7 @@ type AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStatic
 var AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AzureVNETSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
@@ -2673,14 +2673,14 @@ type AzureVNETSiteVoltstackClusterArModel struct {
 // AzureVNETSiteVoltstackClusterArModelAttrTypes defines the attribute types for AzureVNETSiteVoltstackClusterArModel
 var AzureVNETSiteVoltstackClusterArModelAttrTypes = map[string]attr.Type{
 	"azure_certified_hw":                types.StringType,
-	"accelerated_networking":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_network_policies":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"accelerated_networking":            types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModelAttrTypes},
+	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArActiveEnhancedFirewallPoliciesModelAttrTypes},
+	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArActiveForwardProxyPoliciesModelAttrTypes},
+	"active_network_policies":           types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArActiveNetworkPoliciesModelAttrTypes},
 	"dc_cluster_group":                  types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArDcClusterGroupModelAttrTypes},
 	"default_storage":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"global_network_list":               types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArGlobalNetworkListModelAttrTypes},
 	"k8s_cluster":                       types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArK8SClusterModelAttrTypes},
 	"no_dc_cluster_group":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -2689,10 +2689,10 @@ var AzureVNETSiteVoltstackClusterArModelAttrTypes = map[string]attr.Type{
 	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_outside_static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"node":                              types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArNodeModelAttrTypes},
-	"outside_static_routes":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_static_routes":             types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArOutsideStaticRoutesModelAttrTypes},
 	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"storage_class_list":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"storage_class_list":                types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArStorageClassListModelAttrTypes},
 }
 
 // AzureVNETSiteVoltstackClusterArAcceleratedNetworkingModel represents accelerated_networking block
@@ -2800,7 +2800,7 @@ type AzureVNETSiteVoltstackClusterArGlobalNetworkListModel struct {
 
 // AzureVNETSiteVoltstackClusterArGlobalNetworkListModelAttrTypes defines the attribute types for AzureVNETSiteVoltstackClusterArGlobalNetworkListModel
 var AzureVNETSiteVoltstackClusterArGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
 }
 
 // AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
@@ -2811,8 +2811,8 @@ type AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsMod
 
 // AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModel
 var AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_to_global_dr": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
 }
 
 // AzureVNETSiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
@@ -2890,7 +2890,7 @@ var AzureVNETSiteVoltstackClusterArNodeModelAttrTypes = map[string]attr.Type{
 	"fault_domain":  types.Int64Type,
 	"node_number":   types.Int64Type,
 	"update_domain": types.Int64Type,
-	"local_subnet":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"local_subnet":  types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArNodeLocalSubnetModelAttrTypes},
 }
 
 // AzureVNETSiteVoltstackClusterArNodeLocalSubnetModel represents local_subnet block
@@ -2964,7 +2964,7 @@ var AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStati
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -2978,7 +2978,7 @@ type AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStat
 var AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AzureVNETSiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block

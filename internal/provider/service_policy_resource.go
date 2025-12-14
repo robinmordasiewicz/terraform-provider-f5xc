@@ -209,7 +209,7 @@ type ServicePolicyRuleListModel struct {
 
 // ServicePolicyRuleListModelAttrTypes defines the attribute types for ServicePolicyRuleListModel
 var ServicePolicyRuleListModelAttrTypes = map[string]attr.Type{
-	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesModelAttrTypes}},
 }
 
 // ServicePolicyRuleListRulesModel represents rules block
@@ -284,9 +284,9 @@ var ServicePolicyRuleListRulesSpecModelAttrTypes = map[string]attr.Type{
 	"api_group_matcher":       types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecAPIGroupMatcherModelAttrTypes},
 	"arg_matchers":            types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecArgMatchersModelAttrTypes}},
 	"asn_list":                types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecAsnListModelAttrTypes},
-	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":             types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecAsnMatcherModelAttrTypes},
 	"body_matcher":            types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecBodyMatcherModelAttrTypes},
-	"bot_action":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"bot_action":              types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecBotActionModelAttrTypes},
 	"client_name_matcher":     types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecClientNameMatcherModelAttrTypes},
 	"client_selector":         types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecClientSelectorModelAttrTypes},
 	"cookie_matchers":         types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecCookieMatchersModelAttrTypes}},
@@ -299,15 +299,15 @@ var ServicePolicyRuleListRulesSpecModelAttrTypes = map[string]attr.Type{
 	"ja4_tls_fingerprint":     types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecJa4TLSFingerprintModelAttrTypes},
 	"jwt_claims":              types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecJWTClaimsModelAttrTypes}},
 	"label_matcher":           types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecLabelMatcherModelAttrTypes},
-	"mum_action":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mum_action":              types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecMumActionModelAttrTypes},
 	"path":                    types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecPathModelAttrTypes},
 	"port_matcher":            types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecPortMatcherModelAttrTypes},
 	"query_params":            types.ListType{ElemType: types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecQueryParamsModelAttrTypes}},
 	"request_constraints":     types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecRequestConstraintsModelAttrTypes},
-	"segment_policy":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"segment_policy":          types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecSegmentPolicyModelAttrTypes},
 	"tls_fingerprint_matcher": types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecTLSFingerprintMatcherModelAttrTypes},
 	"user_identity_matcher":   types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecUserIdentityMatcherModelAttrTypes},
-	"waf_action":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"waf_action":              types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecWAFActionModelAttrTypes},
 }
 
 // ServicePolicyRuleListRulesSpecAPIGroupMatcherModel represents api_group_matcher block
@@ -784,10 +784,10 @@ type ServicePolicyRuleListRulesSpecSegmentPolicyModel struct {
 // ServicePolicyRuleListRulesSpecSegmentPolicyModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecSegmentPolicyModel
 var ServicePolicyRuleListRulesSpecSegmentPolicyModelAttrTypes = map[string]attr.Type{
 	"dst_any":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dst_segments":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dst_segments":  types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModelAttrTypes},
 	"intra_segment": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"src_any":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"src_segments":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"src_segments":  types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecSegmentPolicySrcSegmentsModelAttrTypes},
 }
 
 // ServicePolicyRuleListRulesSpecSegmentPolicyDstSegmentsModel represents dst_segments block
@@ -873,7 +873,7 @@ type ServicePolicyRuleListRulesSpecWAFActionModel struct {
 
 // ServicePolicyRuleListRulesSpecWAFActionModelAttrTypes defines the attribute types for ServicePolicyRuleListRulesSpecWAFActionModel
 var ServicePolicyRuleListRulesSpecWAFActionModelAttrTypes = map[string]attr.Type{
-	"app_firewall_detection_control": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"app_firewall_detection_control": types.ObjectType{AttrTypes: ServicePolicyRuleListRulesSpecWAFActionAppFirewallDetectionControlModelAttrTypes},
 	"none":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"waf_skip_processing":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }

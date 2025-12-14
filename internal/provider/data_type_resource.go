@@ -61,7 +61,7 @@ type DataTypeRulesModel struct {
 // DataTypeRulesModelAttrTypes defines the attribute types for DataTypeRulesModel
 var DataTypeRulesModelAttrTypes = map[string]attr.Type{
 	"key_pattern":       types.ObjectType{AttrTypes: DataTypeRulesKeyPatternModelAttrTypes},
-	"key_value_pattern": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"key_value_pattern": types.ObjectType{AttrTypes: DataTypeRulesKeyValuePatternModelAttrTypes},
 	"value_pattern":     types.ObjectType{AttrTypes: DataTypeRulesValuePatternModelAttrTypes},
 }
 

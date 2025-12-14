@@ -63,12 +63,12 @@ type CodeBaseIntegrationCodeBaseIntegrationModel struct {
 
 // CodeBaseIntegrationCodeBaseIntegrationModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationModel
 var CodeBaseIntegrationCodeBaseIntegrationModelAttrTypes = map[string]attr.Type{
-	"azure_repos":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"azure_repos":       types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationAzureReposModelAttrTypes},
 	"bitbucket":         types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationBitbucketModelAttrTypes},
 	"bitbucket_server":  types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModelAttrTypes},
 	"github":            types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGithubModelAttrTypes},
 	"github_enterprise": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModelAttrTypes},
-	"gitlab":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"gitlab":            types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGitlabModelAttrTypes},
 	"gitlab_enterprise": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModelAttrTypes},
 }
 
@@ -79,7 +79,7 @@ type CodeBaseIntegrationCodeBaseIntegrationAzureReposModel struct {
 
 // CodeBaseIntegrationCodeBaseIntegrationAzureReposModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationAzureReposModel
 var CodeBaseIntegrationCodeBaseIntegrationAzureReposModelAttrTypes = map[string]attr.Type{
-	"access_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"access_token": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationAzureReposAccessTokenModel represents access_token block
@@ -129,7 +129,7 @@ type CodeBaseIntegrationCodeBaseIntegrationBitbucketModel struct {
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationBitbucketModel
 var CodeBaseIntegrationCodeBaseIntegrationBitbucketModelAttrTypes = map[string]attr.Type{
 	"username": types.StringType,
-	"passwd":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"passwd":   types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketPasswdModel represents passwd block
@@ -183,7 +183,7 @@ var CodeBaseIntegrationCodeBaseIntegrationBitbucketServerModelAttrTypes = map[st
 	"url":        types.StringType,
 	"username":   types.StringType,
 	"verify_ssl": types.BoolType,
-	"passwd":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"passwd":     types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationBitbucketServerPasswdModel represents passwd block
@@ -235,7 +235,7 @@ type CodeBaseIntegrationCodeBaseIntegrationGithubModel struct {
 var CodeBaseIntegrationCodeBaseIntegrationGithubModelAttrTypes = map[string]attr.Type{
 	"username":     types.StringType,
 	"verify_ssl":   types.BoolType,
-	"access_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"access_token": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubAccessTokenModel represents access_token block
@@ -287,7 +287,7 @@ type CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModel struct {
 var CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseModelAttrTypes = map[string]attr.Type{
 	"hostname":     types.StringType,
 	"username":     types.StringType,
-	"access_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"access_token": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGithubEnterpriseAccessTokenModel represents access_token block
@@ -335,7 +335,7 @@ type CodeBaseIntegrationCodeBaseIntegrationGitlabModel struct {
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGitlabModel
 var CodeBaseIntegrationCodeBaseIntegrationGitlabModelAttrTypes = map[string]attr.Type{
-	"access_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"access_token": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabAccessTokenModel represents access_token block
@@ -385,7 +385,7 @@ type CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel struct {
 // CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModelAttrTypes defines the attribute types for CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModel
 var CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseModelAttrTypes = map[string]attr.Type{
 	"url":          types.StringType,
-	"access_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"access_token": types.ObjectType{AttrTypes: CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModelAttrTypes},
 }
 
 // CodeBaseIntegrationCodeBaseIntegrationGitlabEnterpriseAccessTokenModel represents access_token block

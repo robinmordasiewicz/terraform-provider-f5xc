@@ -58,8 +58,8 @@ type TunnelLocalIPModel struct {
 
 // TunnelLocalIPModelAttrTypes defines the attribute types for TunnelLocalIPModel
 var TunnelLocalIPModelAttrTypes = map[string]attr.Type{
-	"intf":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"ip_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"intf":       types.ObjectType{AttrTypes: TunnelLocalIPIntfModelAttrTypes},
+	"ip_address": types.ObjectType{AttrTypes: TunnelLocalIPIPAddressModelAttrTypes},
 }
 
 // TunnelLocalIPIntfModel represents intf block
@@ -100,8 +100,8 @@ type TunnelLocalIPIPAddressModel struct {
 // TunnelLocalIPIPAddressModelAttrTypes defines the attribute types for TunnelLocalIPIPAddressModel
 var TunnelLocalIPIPAddressModelAttrTypes = map[string]attr.Type{
 	"auto":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"ip_address":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"virtual_network_type": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_address":           types.ObjectType{AttrTypes: TunnelLocalIPIPAddressIPAddressModelAttrTypes},
+	"virtual_network_type": types.ObjectType{AttrTypes: TunnelLocalIPIPAddressVirtualNetworkTypeModelAttrTypes},
 }
 
 // TunnelLocalIPIPAddressIPAddressModel represents ip_address block
@@ -157,7 +157,7 @@ type TunnelParamsModel struct {
 
 // TunnelParamsModelAttrTypes defines the attribute types for TunnelParamsModel
 var TunnelParamsModelAttrTypes = map[string]attr.Type{
-	"ipsec": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipsec": types.ObjectType{AttrTypes: TunnelParamsIpsecModelAttrTypes},
 }
 
 // TunnelParamsIpsecModel represents ipsec block
@@ -167,7 +167,7 @@ type TunnelParamsIpsecModel struct {
 
 // TunnelParamsIpsecModelAttrTypes defines the attribute types for TunnelParamsIpsecModel
 var TunnelParamsIpsecModelAttrTypes = map[string]attr.Type{
-	"ipsec_psk": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipsec_psk": types.ObjectType{AttrTypes: TunnelParamsIpsecIpsecPskModelAttrTypes},
 }
 
 // TunnelParamsIpsecIpsecPskModel represents ipsec_psk block
@@ -216,8 +216,8 @@ type TunnelRemoteIPModel struct {
 
 // TunnelRemoteIPModelAttrTypes defines the attribute types for TunnelRemoteIPModel
 var TunnelRemoteIPModelAttrTypes = map[string]attr.Type{
-	"endpoints": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"ip":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"endpoints": types.ObjectType{AttrTypes: TunnelRemoteIPEndpointsModelAttrTypes},
+	"ip":        types.ObjectType{AttrTypes: TunnelRemoteIPIPModelAttrTypes},
 }
 
 // TunnelRemoteIPEndpointsModel represents endpoints block

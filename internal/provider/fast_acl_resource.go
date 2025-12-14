@@ -76,7 +76,7 @@ type FastACLREACLModel struct {
 var FastACLREACLModelAttrTypes = map[string]attr.Type{
 	"all_public_vips":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_tenant_vip":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"fast_acl_rules":      types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"fast_acl_rules":      types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesModelAttrTypes}},
 	"selected_tenant_vip": types.ObjectType{AttrTypes: FastACLREACLSelectedTenantVIPModelAttrTypes},
 }
 
@@ -92,7 +92,7 @@ type FastACLREACLFastACLRulesModel struct {
 // FastACLREACLFastACLRulesModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesModel
 var FastACLREACLFastACLRulesModelAttrTypes = map[string]attr.Type{
 	"action":        types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionModelAttrTypes},
-	"ip_prefix_set": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_prefix_set": types.ObjectType{AttrTypes: FastACLREACLFastACLRulesIPPrefixSetModelAttrTypes},
 	"metadata":      types.ObjectType{AttrTypes: FastACLREACLFastACLRulesMetadataModelAttrTypes},
 	"port":          types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLREACLFastACLRulesPortModelAttrTypes}},
 	"prefix":        types.ObjectType{AttrTypes: FastACLREACLFastACLRulesPrefixModelAttrTypes},
@@ -108,8 +108,8 @@ type FastACLREACLFastACLRulesActionModel struct {
 // FastACLREACLFastACLRulesActionModelAttrTypes defines the attribute types for FastACLREACLFastACLRulesActionModel
 var FastACLREACLFastACLRulesActionModelAttrTypes = map[string]attr.Type{
 	"simple_action":           types.StringType,
-	"policer_action":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"protocol_policer_action": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policer_action":          types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionPolicerActionModelAttrTypes},
+	"protocol_policer_action": types.ObjectType{AttrTypes: FastACLREACLFastACLRulesActionProtocolPolicerActionModelAttrTypes},
 }
 
 // FastACLREACLFastACLRulesActionPolicerActionModel represents policer_action block
@@ -271,7 +271,7 @@ type FastACLSiteACLModel struct {
 // FastACLSiteACLModelAttrTypes defines the attribute types for FastACLSiteACLModel
 var FastACLSiteACLModelAttrTypes = map[string]attr.Type{
 	"all_services":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"fast_acl_rules":     types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"fast_acl_rules":     types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesModelAttrTypes}},
 	"inside_network":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"interface_services": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outside_network":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -290,7 +290,7 @@ type FastACLSiteACLFastACLRulesModel struct {
 // FastACLSiteACLFastACLRulesModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesModel
 var FastACLSiteACLFastACLRulesModelAttrTypes = map[string]attr.Type{
 	"action":        types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionModelAttrTypes},
-	"ip_prefix_set": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_prefix_set": types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesIPPrefixSetModelAttrTypes},
 	"metadata":      types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesMetadataModelAttrTypes},
 	"port":          types.ListType{ElemType: types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesPortModelAttrTypes}},
 	"prefix":        types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesPrefixModelAttrTypes},
@@ -306,8 +306,8 @@ type FastACLSiteACLFastACLRulesActionModel struct {
 // FastACLSiteACLFastACLRulesActionModelAttrTypes defines the attribute types for FastACLSiteACLFastACLRulesActionModel
 var FastACLSiteACLFastACLRulesActionModelAttrTypes = map[string]attr.Type{
 	"simple_action":           types.StringType,
-	"policer_action":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"protocol_policer_action": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policer_action":          types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionPolicerActionModelAttrTypes},
+	"protocol_policer_action": types.ObjectType{AttrTypes: FastACLSiteACLFastACLRulesActionProtocolPolicerActionModelAttrTypes},
 }
 
 // FastACLSiteACLFastACLRulesActionPolicerActionModel represents policer_action block

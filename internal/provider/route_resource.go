@@ -93,7 +93,7 @@ var RouteRoutesModelAttrTypes = map[string]attr.Type{
 	"route_redirect":                             types.ObjectType{AttrTypes: RouteRoutesRouteRedirectModelAttrTypes},
 	"service_policy":                             types.ObjectType{AttrTypes: RouteRoutesServicePolicyModelAttrTypes},
 	"waf_exclusion_policy":                       types.ObjectType{AttrTypes: RouteRoutesWAFExclusionPolicyModelAttrTypes},
-	"waf_type":                                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"waf_type":                                   types.ObjectType{AttrTypes: RouteRoutesWAFTypeModelAttrTypes},
 }
 
 // RouteRoutesBotDefenseJavascriptInjectionModel represents bot_defense_javascript_injection block
@@ -223,7 +223,7 @@ var RouteRoutesRequestCookiesToAddModelAttrTypes = map[string]attr.Type{
 	"name":         types.StringType,
 	"overwrite":    types.BoolType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: RouteRoutesRequestCookiesToAddSecretValueModelAttrTypes},
 }
 
 // RouteRoutesRequestCookiesToAddSecretValueModel represents secret_value block
@@ -277,7 +277,7 @@ var RouteRoutesRequestHeadersToAddModelAttrTypes = map[string]attr.Type{
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: RouteRoutesRequestHeadersToAddSecretValueModelAttrTypes},
 }
 
 // RouteRoutesRequestHeadersToAddSecretValueModel represents secret_value block
@@ -369,7 +369,7 @@ var RouteRoutesResponseCookiesToAddModelAttrTypes = map[string]attr.Type{
 	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: RouteRoutesResponseCookiesToAddSecretValueModelAttrTypes},
 }
 
 // RouteRoutesResponseCookiesToAddSecretValueModel represents secret_value block
@@ -423,7 +423,7 @@ var RouteRoutesResponseHeadersToAddModelAttrTypes = map[string]attr.Type{
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: RouteRoutesResponseHeadersToAddSecretValueModelAttrTypes},
 }
 
 // RouteRoutesResponseHeadersToAddSecretValueModel represents secret_value block
@@ -496,12 +496,12 @@ var RouteRoutesRouteDestinationModelAttrTypes = map[string]attr.Type{
 	"timeout":                types.Int64Type,
 	"buffer_policy":          types.ObjectType{AttrTypes: RouteRoutesRouteDestinationBufferPolicyModelAttrTypes},
 	"cors_policy":            types.ObjectType{AttrTypes: RouteRoutesRouteDestinationCORSPolicyModelAttrTypes},
-	"csrf_policy":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"csrf_policy":            types.ObjectType{AttrTypes: RouteRoutesRouteDestinationCSRFPolicyModelAttrTypes},
 	"destinations":           types.ListType{ElemType: types.ObjectType{AttrTypes: RouteRoutesRouteDestinationDestinationsModelAttrTypes}},
 	"do_not_retract_cluster": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"endpoint_subsets":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"hash_policy":            types.ListType{ElemType: types.ObjectType{AttrTypes: RouteRoutesRouteDestinationHashPolicyModelAttrTypes}},
-	"mirror_policy":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mirror_policy":          types.ObjectType{AttrTypes: RouteRoutesRouteDestinationMirrorPolicyModelAttrTypes},
 	"query_params":           types.ObjectType{AttrTypes: RouteRoutesRouteDestinationQueryParamsModelAttrTypes},
 	"regex_rewrite":          types.ObjectType{AttrTypes: RouteRoutesRouteDestinationRegexRewriteModelAttrTypes},
 	"retract_cluster":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -837,7 +837,7 @@ type RouteRoutesWAFTypeModel struct {
 
 // RouteRoutesWAFTypeModelAttrTypes defines the attribute types for RouteRoutesWAFTypeModel
 var RouteRoutesWAFTypeModelAttrTypes = map[string]attr.Type{
-	"app_firewall": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"app_firewall": types.ObjectType{AttrTypes: RouteRoutesWAFTypeAppFirewallModelAttrTypes},
 	"disable_waf":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"inherit_waf":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }

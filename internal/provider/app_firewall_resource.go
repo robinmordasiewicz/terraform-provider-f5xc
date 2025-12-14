@@ -107,7 +107,7 @@ type AppFirewallCustomAnonymizationModel struct {
 
 // AppFirewallCustomAnonymizationModelAttrTypes defines the attribute types for AppFirewallCustomAnonymizationModel
 var AppFirewallCustomAnonymizationModelAttrTypes = map[string]attr.Type{
-	"anonymization_config": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"anonymization_config": types.ListType{ElemType: types.ObjectType{AttrTypes: AppFirewallCustomAnonymizationAnonymizationConfigModelAttrTypes}},
 }
 
 // AppFirewallCustomAnonymizationAnonymizationConfigModel represents anonymization_config block
@@ -180,7 +180,7 @@ var AppFirewallDetectionSettingsModelAttrTypes = map[string]attr.Type{
 	"disable_threat_campaigns":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_suppression":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_threat_campaigns":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"signature_selection_setting":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"signature_selection_setting":      types.ObjectType{AttrTypes: AppFirewallDetectionSettingsSignatureSelectionSettingModelAttrTypes},
 	"stage_new_and_updated_signatures": types.ObjectType{AttrTypes: AppFirewallDetectionSettingsStageNewAndUpdatedSignaturesModelAttrTypes},
 	"stage_new_signatures":             types.ObjectType{AttrTypes: AppFirewallDetectionSettingsStageNewSignaturesModelAttrTypes},
 	"violation_settings":               types.ObjectType{AttrTypes: AppFirewallDetectionSettingsViolationSettingsModelAttrTypes},

@@ -61,7 +61,7 @@ type CloudLinkAWSModel struct {
 var CloudLinkAWSModelAttrTypes = map[string]attr.Type{
 	"custom_asn": types.Int64Type,
 	"aws_cred":   types.ObjectType{AttrTypes: CloudLinkAWSAWSCredModelAttrTypes},
-	"byoc":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"byoc":       types.ObjectType{AttrTypes: CloudLinkAWSByocModelAttrTypes},
 }
 
 // CloudLinkAWSAWSCredModel represents aws_cred block
@@ -111,7 +111,7 @@ var CloudLinkAWSByocConnectionsModelAttrTypes = map[string]attr.Type{
 	"user_assigned_name":     types.StringType,
 	"virtual_interface_type": types.StringType,
 	"vlan":                   types.Int64Type,
-	"auth_key":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"auth_key":               types.ObjectType{AttrTypes: CloudLinkAWSByocConnectionsAuthKeyModelAttrTypes},
 	"ipv4":                   types.ObjectType{AttrTypes: CloudLinkAWSByocConnectionsIpv4ModelAttrTypes},
 	"metadata":               types.ObjectType{AttrTypes: CloudLinkAWSByocConnectionsMetadataModelAttrTypes},
 	"system_generated_name":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -198,7 +198,7 @@ type CloudLinkGCPModel struct {
 
 // CloudLinkGCPModelAttrTypes defines the attribute types for CloudLinkGCPModel
 var CloudLinkGCPModelAttrTypes = map[string]attr.Type{
-	"byoc":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"byoc":     types.ObjectType{AttrTypes: CloudLinkGCPByocModelAttrTypes},
 	"gcp_cred": types.ObjectType{AttrTypes: CloudLinkGCPGCPCredModelAttrTypes},
 }
 

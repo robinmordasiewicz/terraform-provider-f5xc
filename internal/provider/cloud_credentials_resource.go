@@ -81,7 +81,7 @@ type CloudCredentialsAWSSecretKeyModel struct {
 // CloudCredentialsAWSSecretKeyModelAttrTypes defines the attribute types for CloudCredentialsAWSSecretKeyModel
 var CloudCredentialsAWSSecretKeyModelAttrTypes = map[string]attr.Type{
 	"access_key": types.StringType,
-	"secret_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_key": types.ObjectType{AttrTypes: CloudCredentialsAWSSecretKeySecretKeyModelAttrTypes},
 }
 
 // CloudCredentialsAWSSecretKeySecretKeyModel represents secret_key block
@@ -135,7 +135,7 @@ var CloudCredentialsAzureClientSecretModelAttrTypes = map[string]attr.Type{
 	"client_id":       types.StringType,
 	"subscription_id": types.StringType,
 	"tenant_id":       types.StringType,
-	"client_secret":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_secret":   types.ObjectType{AttrTypes: CloudCredentialsAzureClientSecretClientSecretModelAttrTypes},
 }
 
 // CloudCredentialsAzureClientSecretClientSecretModel represents client_secret block
@@ -191,7 +191,7 @@ var CloudCredentialsAzurePfxCertificateModelAttrTypes = map[string]attr.Type{
 	"client_id":       types.StringType,
 	"subscription_id": types.StringType,
 	"tenant_id":       types.StringType,
-	"password":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":        types.ObjectType{AttrTypes: CloudCredentialsAzurePfxCertificatePasswordModelAttrTypes},
 }
 
 // CloudCredentialsAzurePfxCertificatePasswordModel represents password block
@@ -239,7 +239,7 @@ type CloudCredentialsGCPCredFileModel struct {
 
 // CloudCredentialsGCPCredFileModelAttrTypes defines the attribute types for CloudCredentialsGCPCredFileModel
 var CloudCredentialsGCPCredFileModelAttrTypes = map[string]attr.Type{
-	"credential_file": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"credential_file": types.ObjectType{AttrTypes: CloudCredentialsGCPCredFileCredentialFileModelAttrTypes},
 }
 
 // CloudCredentialsGCPCredFileCredentialFileModel represents credential_file block

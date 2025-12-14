@@ -125,8 +125,8 @@ var NetworkInterfaceEthernetInterfaceModelAttrTypes = map[string]attr.Type{
 	"vlan_id":                   types.Int64Type,
 	"cluster":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_client":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dhcp_server":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"ipv6_auto_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_server":               types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceDHCPServerModelAttrTypes},
+	"ipv6_auto_config":          types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceIpv6AutoConfigModelAttrTypes},
 	"is_primary":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -134,8 +134,8 @@ var NetworkInterfaceEthernetInterfaceModelAttrTypes = map[string]attr.Type{
 	"not_primary":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ip":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ipv6_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":                 types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceStaticIPModelAttrTypes},
+	"static_ipv6_address":       types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceStaticIpv6AddressModelAttrTypes},
 	"storage_network":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"untagged":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -155,7 +155,7 @@ var NetworkInterfaceEthernetInterfaceDHCPServerModelAttrTypes = map[string]attr.
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceDHCPServerInterfaceIPMapModelAttrTypes},
 }
 
 // NetworkInterfaceEthernetInterfaceDHCPServerDHCPNetworksModel represents dhcp_networks block
@@ -226,8 +226,8 @@ type NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModel struct {
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModel
 var NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -281,7 +281,7 @@ var NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulModelAttrTypes 
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // NetworkInterfaceEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -328,7 +328,7 @@ type NetworkInterfaceEthernetInterfaceStaticIPModel struct {
 
 // NetworkInterfaceEthernetInterfaceStaticIPModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceStaticIPModel
 var NetworkInterfaceEthernetInterfaceStaticIPModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceStaticIPClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceStaticIPNodeStaticIPModelAttrTypes},
 }
 
@@ -362,7 +362,7 @@ type NetworkInterfaceEthernetInterfaceStaticIpv6AddressModel struct {
 
 // NetworkInterfaceEthernetInterfaceStaticIpv6AddressModelAttrTypes defines the attribute types for NetworkInterfaceEthernetInterfaceStaticIpv6AddressModel
 var NetworkInterfaceEthernetInterfaceStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: NetworkInterfaceEthernetInterfaceStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -456,7 +456,7 @@ var NetworkInterfaceTunnelInterfaceModelAttrTypes = map[string]attr.Type{
 	"priority":                  types.Int64Type,
 	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ip":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":                 types.ObjectType{AttrTypes: NetworkInterfaceTunnelInterfaceStaticIPModelAttrTypes},
 	"tunnel":                    types.ObjectType{AttrTypes: NetworkInterfaceTunnelInterfaceTunnelModelAttrTypes},
 }
 
@@ -468,7 +468,7 @@ type NetworkInterfaceTunnelInterfaceStaticIPModel struct {
 
 // NetworkInterfaceTunnelInterfaceStaticIPModelAttrTypes defines the attribute types for NetworkInterfaceTunnelInterfaceStaticIPModel
 var NetworkInterfaceTunnelInterfaceStaticIPModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: NetworkInterfaceTunnelInterfaceStaticIPClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: NetworkInterfaceTunnelInterfaceStaticIPNodeStaticIPModelAttrTypes},
 }
 

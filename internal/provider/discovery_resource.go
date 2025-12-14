@@ -58,8 +58,8 @@ type DiscoveryDiscoveryConsulModel struct {
 
 // DiscoveryDiscoveryConsulModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulModel
 var DiscoveryDiscoveryConsulModelAttrTypes = map[string]attr.Type{
-	"access_info":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"publish_info": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"access_info":  types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulAccessInfoModelAttrTypes},
+	"publish_info": types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulPublishInfoModelAttrTypes},
 }
 
 // DiscoveryDiscoveryConsulAccessInfoModel represents access_info block
@@ -99,7 +99,7 @@ var DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoModelAttrTypes = map[
 	"certificate":    types.StringType,
 	"server_name":    types.StringType,
 	"trusted_ca_url": types.StringType,
-	"key_url":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"key_url":        types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModelAttrTypes},
 }
 
 // DiscoveryDiscoveryConsulAccessInfoConnectionInfoTLSInfoKeyURLModel represents key_url block
@@ -149,7 +149,7 @@ type DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel struct {
 // DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModelAttrTypes defines the attribute types for DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModel
 var DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoModelAttrTypes = map[string]attr.Type{
 	"user_name":  types.StringType,
-	"passwd_url": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"passwd_url": types.ObjectType{AttrTypes: DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModelAttrTypes},
 }
 
 // DiscoveryDiscoveryConsulAccessInfoHTTPBasicAuthInfoPasswdURLModel represents passwd_url block
@@ -212,10 +212,10 @@ type DiscoveryDiscoveryK8SModel struct {
 
 // DiscoveryDiscoveryK8SModelAttrTypes defines the attribute types for DiscoveryDiscoveryK8SModel
 var DiscoveryDiscoveryK8SModelAttrTypes = map[string]attr.Type{
-	"access_info":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"access_info":       types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SAccessInfoModelAttrTypes},
 	"default_all":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"namespace_mapping": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"publish_info":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"namespace_mapping": types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SNamespaceMappingModelAttrTypes},
+	"publish_info":      types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SPublishInfoModelAttrTypes},
 }
 
 // DiscoveryDiscoveryK8SAccessInfoModel represents access_info block
@@ -230,7 +230,7 @@ type DiscoveryDiscoveryK8SAccessInfoModel struct {
 var DiscoveryDiscoveryK8SAccessInfoModelAttrTypes = map[string]attr.Type{
 	"connection_info": types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SAccessInfoConnectionInfoModelAttrTypes},
 	"isolated":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"kubeconfig_url":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"kubeconfig_url":  types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SAccessInfoKubeconfigURLModelAttrTypes},
 	"reachable":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -259,7 +259,7 @@ var DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoModelAttrTypes = map[str
 	"certificate":    types.StringType,
 	"server_name":    types.StringType,
 	"trusted_ca_url": types.StringType,
-	"key_url":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"key_url":        types.ObjectType{AttrTypes: DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModelAttrTypes},
 }
 
 // DiscoveryDiscoveryK8SAccessInfoConnectionInfoTLSInfoKeyURLModel represents key_url block
@@ -408,7 +408,7 @@ type DiscoveryWhereModel struct {
 // DiscoveryWhereModelAttrTypes defines the attribute types for DiscoveryWhereModel
 var DiscoveryWhereModelAttrTypes = map[string]attr.Type{
 	"site":            types.ObjectType{AttrTypes: DiscoveryWhereSiteModelAttrTypes},
-	"virtual_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network": types.ObjectType{AttrTypes: DiscoveryWhereVirtualNetworkModelAttrTypes},
 	"virtual_site":    types.ObjectType{AttrTypes: DiscoveryWhereVirtualSiteModelAttrTypes},
 }
 

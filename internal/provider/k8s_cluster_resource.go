@@ -57,7 +57,7 @@ type K8SClusterClusterWideAppListModel struct {
 
 // K8SClusterClusterWideAppListModelAttrTypes defines the attribute types for K8SClusterClusterWideAppListModel
 var K8SClusterClusterWideAppListModelAttrTypes = map[string]attr.Type{
-	"cluster_wide_apps": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"cluster_wide_apps": types.ListType{ElemType: types.ObjectType{AttrTypes: K8SClusterClusterWideAppListClusterWideAppsModelAttrTypes}},
 }
 
 // K8SClusterClusterWideAppListClusterWideAppsModel represents cluster_wide_apps block
@@ -70,7 +70,7 @@ type K8SClusterClusterWideAppListClusterWideAppsModel struct {
 
 // K8SClusterClusterWideAppListClusterWideAppsModelAttrTypes defines the attribute types for K8SClusterClusterWideAppListClusterWideAppsModel
 var K8SClusterClusterWideAppListClusterWideAppsModelAttrTypes = map[string]attr.Type{
-	"argo_cd":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"argo_cd":        types.ObjectType{AttrTypes: K8SClusterClusterWideAppListClusterWideAppsArgoCdModelAttrTypes},
 	"dashboard":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"metrics_server": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"prometheus":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -99,7 +99,7 @@ var K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainModelAttrTypes =
 	"local_domain": types.StringType,
 	"port":         types.Int64Type,
 	"default_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"password":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":     types.ObjectType{AttrTypes: K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModelAttrTypes},
 }
 
 // K8SClusterClusterWideAppListClusterWideAppsArgoCdLocalDomainPasswordModel represents password block

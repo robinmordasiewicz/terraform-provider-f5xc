@@ -75,7 +75,7 @@ var WAFExclusionPolicyWAFExclusionRulesModelAttrTypes = map[string]attr.Type{
 	"suffix_value":                   types.StringType,
 	"any_domain":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_path":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"app_firewall_detection_control": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"app_firewall_detection_control": types.ObjectType{AttrTypes: WAFExclusionPolicyWAFExclusionRulesAppFirewallDetectionControlModelAttrTypes},
 	"metadata":                       types.ObjectType{AttrTypes: WAFExclusionPolicyWAFExclusionRulesMetadataModelAttrTypes},
 	"waf_skip_processing":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }

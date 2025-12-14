@@ -119,7 +119,7 @@ type EndpointWhereModel struct {
 // EndpointWhereModelAttrTypes defines the attribute types for EndpointWhereModel
 var EndpointWhereModelAttrTypes = map[string]attr.Type{
 	"site":            types.ObjectType{AttrTypes: EndpointWhereSiteModelAttrTypes},
-	"virtual_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network": types.ObjectType{AttrTypes: EndpointWhereVirtualNetworkModelAttrTypes},
 	"virtual_site":    types.ObjectType{AttrTypes: EndpointWhereVirtualSiteModelAttrTypes},
 }
 

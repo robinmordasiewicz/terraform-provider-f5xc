@@ -58,7 +58,7 @@ type SecretPolicyRuleListModel struct {
 
 // SecretPolicyRuleListModelAttrTypes defines the attribute types for SecretPolicyRuleListModel
 var SecretPolicyRuleListModelAttrTypes = map[string]attr.Type{
-	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: SecretPolicyRuleListRulesModelAttrTypes}},
 }
 
 // SecretPolicyRuleListRulesModel represents rules block

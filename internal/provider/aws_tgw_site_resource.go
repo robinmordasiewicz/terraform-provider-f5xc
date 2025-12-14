@@ -83,7 +83,7 @@ var AWSTGWSiteAWSParametersModelAttrTypes = map[string]attr.Type{
 	"ssh_key":               types.StringType,
 	"total_nodes":           types.Int64Type,
 	"vpc_id":                types.StringType,
-	"admin_password":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"admin_password":        types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAdminPasswordModelAttrTypes},
 	"aws_cred":              types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAWSCredModelAttrTypes},
 	"az_nodes":              types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersAzNodesModelAttrTypes}},
 	"custom_security_group": types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersCustomSecurityGroupModelAttrTypes},
@@ -91,7 +91,7 @@ var AWSTGWSiteAWSParametersModelAttrTypes = map[string]attr.Type{
 	"enable_internet_vip":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"existing_tgw":          types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersExistingTGWModelAttrTypes},
 	"f5xc_security_group":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"new_tgw":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"new_tgw":               types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersNewTGWModelAttrTypes},
 	"new_vpc":               types.ObjectType{AttrTypes: AWSTGWSiteAWSParametersNewVPCModelAttrTypes},
 	"no_worker_nodes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"reserved_tgw_cidr":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -370,7 +370,7 @@ type AWSTGWSiteDirectConnectEnabledModel struct {
 var AWSTGWSiteDirectConnectEnabledModelAttrTypes = map[string]attr.Type{
 	"custom_asn":    types.Int64Type,
 	"auto_asn":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"hosted_vifs":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"hosted_vifs":   types.ObjectType{AttrTypes: AWSTGWSiteDirectConnectEnabledHostedVifsModelAttrTypes},
 	"standard_vifs": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -486,7 +486,7 @@ type AWSTGWSitePerformanceEnhancementModeModel struct {
 
 // AWSTGWSitePerformanceEnhancementModeModelAttrTypes defines the attribute types for AWSTGWSitePerformanceEnhancementModeModel
 var AWSTGWSitePerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: AWSTGWSitePerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
 	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -557,10 +557,10 @@ type AWSTGWSiteTGWSecurityModel struct {
 
 // AWSTGWSiteTGWSecurityModelAttrTypes defines the attribute types for AWSTGWSiteTGWSecurityModel
 var AWSTGWSiteTGWSecurityModelAttrTypes = map[string]attr.Type{
-	"active_east_west_service_policies":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_enhanced_firewall_policies":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_forward_proxy_policies":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_network_policies":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"active_east_west_service_policies":  types.ObjectType{AttrTypes: AWSTGWSiteTGWSecurityActiveEastWestServicePoliciesModelAttrTypes},
+	"active_enhanced_firewall_policies":  types.ObjectType{AttrTypes: AWSTGWSiteTGWSecurityActiveEnhancedFirewallPoliciesModelAttrTypes},
+	"active_forward_proxy_policies":      types.ObjectType{AttrTypes: AWSTGWSiteTGWSecurityActiveForwardProxyPoliciesModelAttrTypes},
+	"active_network_policies":            types.ObjectType{AttrTypes: AWSTGWSiteTGWSecurityActiveNetworkPoliciesModelAttrTypes},
 	"east_west_service_policy_allow_all": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"forward_proxy_allow_all":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_east_west_policy":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -683,17 +683,17 @@ type AWSTGWSiteVnConfigModel struct {
 
 // AWSTGWSiteVnConfigModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigModel
 var AWSTGWSiteVnConfigModelAttrTypes = map[string]attr.Type{
-	"allowed_vip_port":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"allowed_vip_port_sli":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"allowed_vip_port":            types.ObjectType{AttrTypes: AWSTGWSiteVnConfigAllowedVIPPortModelAttrTypes},
+	"allowed_vip_port_sli":        types.ObjectType{AttrTypes: AWSTGWSiteVnConfigAllowedVIPPortSLIModelAttrTypes},
 	"dc_cluster_group_inside_vn":  types.ObjectType{AttrTypes: AWSTGWSiteVnConfigDcClusterGroupInsideVnModelAttrTypes},
 	"dc_cluster_group_outside_vn": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigDcClusterGroupOutsideVnModelAttrTypes},
-	"global_network_list":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"inside_static_routes":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"global_network_list":         types.ObjectType{AttrTypes: AWSTGWSiteVnConfigGlobalNetworkListModelAttrTypes},
+	"inside_static_routes":        types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesModelAttrTypes},
 	"no_dc_cluster_group":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_global_network":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_inside_static_routes":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_outside_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"outside_static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_static_routes":       types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesModelAttrTypes},
 	"sm_connection_public_ip":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sm_connection_pvt_ip":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -789,7 +789,7 @@ type AWSTGWSiteVnConfigGlobalNetworkListModel struct {
 
 // AWSTGWSiteVnConfigGlobalNetworkListModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigGlobalNetworkListModel
 var AWSTGWSiteVnConfigGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
 }
 
 // AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
@@ -800,8 +800,8 @@ type AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel struct {
 
 // AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModel
 var AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_to_global_dr": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
 }
 
 // AWSTGWSiteVnConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
@@ -887,7 +887,7 @@ var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteModelAtt
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -901,7 +901,7 @@ type AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthop
 var AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AWSTGWSiteVnConfigInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
@@ -1025,7 +1025,7 @@ var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAt
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -1039,7 +1039,7 @@ type AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNextho
 var AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AWSTGWSiteVnConfigOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block

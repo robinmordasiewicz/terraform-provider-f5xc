@@ -97,7 +97,7 @@ type EnhancedFirewallPolicyRuleListModel struct {
 
 // EnhancedFirewallPolicyRuleListModelAttrTypes defines the attribute types for EnhancedFirewallPolicyRuleListModel
 var EnhancedFirewallPolicyRuleListModelAttrTypes = map[string]attr.Type{
-	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesModelAttrTypes}},
 }
 
 // EnhancedFirewallPolicyRuleListRulesModel represents rules block
@@ -145,10 +145,10 @@ var EnhancedFirewallPolicyRuleListRulesModelAttrTypes = map[string]attr.Type{
 	"applications":               types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesApplicationsModelAttrTypes},
 	"deny":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"destination_aws_vpc_ids":    types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesDestinationAWSVPCIdsModelAttrTypes},
-	"destination_ip_prefix_set":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"destination_ip_prefix_set":  types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesDestinationIPPrefixSetModelAttrTypes},
 	"destination_label_selector": types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesDestinationLabelSelectorModelAttrTypes},
 	"destination_prefix_list":    types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesDestinationPrefixListModelAttrTypes},
-	"insert_service":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"insert_service":             types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesInsertServiceModelAttrTypes},
 	"inside_destinations":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"inside_sources":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"label_matcher":              types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesLabelMatcherModelAttrTypes},
@@ -157,7 +157,7 @@ var EnhancedFirewallPolicyRuleListRulesModelAttrTypes = map[string]attr.Type{
 	"outside_sources":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"protocol_port_range":        types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesProtocolPortRangeModelAttrTypes},
 	"source_aws_vpc_ids":         types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesSourceAWSVPCIdsModelAttrTypes},
-	"source_ip_prefix_set":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"source_ip_prefix_set":       types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesSourceIPPrefixSetModelAttrTypes},
 	"source_label_selector":      types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesSourceLabelSelectorModelAttrTypes},
 	"source_prefix_list":         types.ObjectType{AttrTypes: EnhancedFirewallPolicyRuleListRulesSourcePrefixListModelAttrTypes},
 }

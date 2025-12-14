@@ -118,7 +118,7 @@ type DNSLoadBalancerRuleListRulesModel struct {
 var DNSLoadBalancerRuleListRulesModelAttrTypes = map[string]attr.Type{
 	"score":                       types.Int64Type,
 	"asn_list":                    types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesAsnListModelAttrTypes},
-	"asn_matcher":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":                 types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesAsnMatcherModelAttrTypes},
 	"geo_location_label_selector": types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesGeoLocationLabelSelectorModelAttrTypes},
 	"geo_location_set":            types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesGeoLocationSetModelAttrTypes},
 	"ip_prefix_list":              types.ObjectType{AttrTypes: DNSLoadBalancerRuleListRulesIPPrefixListModelAttrTypes},

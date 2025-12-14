@@ -177,7 +177,7 @@ type AWSVPCSiteDirectConnectEnabledModel struct {
 var AWSVPCSiteDirectConnectEnabledModelAttrTypes = map[string]attr.Type{
 	"custom_asn":    types.Int64Type,
 	"auto_asn":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"hosted_vifs":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"hosted_vifs":   types.ObjectType{AttrTypes: AWSVPCSiteDirectConnectEnabledHostedVifsModelAttrTypes},
 	"standard_vifs": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -268,25 +268,25 @@ type AWSVPCSiteIngressEgressGwModel struct {
 // AWSVPCSiteIngressEgressGwModelAttrTypes defines the attribute types for AWSVPCSiteIngressEgressGwModel
 var AWSVPCSiteIngressEgressGwModelAttrTypes = map[string]attr.Type{
 	"aws_certified_hw":                  types.StringType,
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_network_policies":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"allowed_vip_port":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"allowed_vip_port_sli":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwActiveEnhancedFirewallPoliciesModelAttrTypes},
+	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwActiveForwardProxyPoliciesModelAttrTypes},
+	"active_network_policies":           types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwActiveNetworkPoliciesModelAttrTypes},
+	"allowed_vip_port":                  types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwAllowedVIPPortModelAttrTypes},
+	"allowed_vip_port_sli":              types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwAllowedVIPPortSLIModelAttrTypes},
 	"az_nodes":                          types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwAzNodesModelAttrTypes}},
 	"dc_cluster_group_inside_vn":        types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwDcClusterGroupInsideVnModelAttrTypes},
 	"dc_cluster_group_outside_vn":       types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwDcClusterGroupOutsideVnModelAttrTypes},
 	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"inside_static_routes":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"global_network_list":               types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwGlobalNetworkListModelAttrTypes},
+	"inside_static_routes":              types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwInsideStaticRoutesModelAttrTypes},
 	"no_dc_cluster_group":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_global_network":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_inside_static_routes":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_outside_static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"outside_static_routes":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"performance_enhancement_mode":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_static_routes":             types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwOutsideStaticRoutesModelAttrTypes},
+	"performance_enhancement_mode":      types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwPerformanceEnhancementModeModelAttrTypes},
 	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -538,7 +538,7 @@ type AWSVPCSiteIngressEgressGwGlobalNetworkListModel struct {
 
 // AWSVPCSiteIngressEgressGwGlobalNetworkListModelAttrTypes defines the attribute types for AWSVPCSiteIngressEgressGwGlobalNetworkListModel
 var AWSVPCSiteIngressEgressGwGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
 }
 
 // AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
@@ -549,8 +549,8 @@ type AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel str
 
 // AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModel
 var AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_to_global_dr": types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
 }
 
 // AWSVPCSiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
@@ -636,7 +636,7 @@ var AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteM
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -650,7 +650,7 @@ type AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRoute
 var AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AWSVPCSiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
@@ -774,7 +774,7 @@ var AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRoute
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -788,7 +788,7 @@ type AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRout
 var AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AWSVPCSiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
@@ -885,7 +885,7 @@ type AWSVPCSiteIngressEgressGwPerformanceEnhancementModeModel struct {
 
 // AWSVPCSiteIngressEgressGwPerformanceEnhancementModeModelAttrTypes defines the attribute types for AWSVPCSiteIngressEgressGwPerformanceEnhancementModeModel
 var AWSVPCSiteIngressEgressGwPerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: AWSVPCSiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
 	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -912,9 +912,9 @@ type AWSVPCSiteIngressGwModel struct {
 // AWSVPCSiteIngressGwModelAttrTypes defines the attribute types for AWSVPCSiteIngressGwModel
 var AWSVPCSiteIngressGwModelAttrTypes = map[string]attr.Type{
 	"aws_certified_hw":             types.StringType,
-	"allowed_vip_port":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"allowed_vip_port":             types.ObjectType{AttrTypes: AWSVPCSiteIngressGwAllowedVIPPortModelAttrTypes},
 	"az_nodes":                     types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteIngressGwAzNodesModelAttrTypes}},
-	"performance_enhancement_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"performance_enhancement_mode": types.ObjectType{AttrTypes: AWSVPCSiteIngressGwPerformanceEnhancementModeModelAttrTypes},
 }
 
 // AWSVPCSiteIngressGwAllowedVIPPortModel represents allowed_vip_port block
@@ -987,7 +987,7 @@ type AWSVPCSiteIngressGwPerformanceEnhancementModeModel struct {
 
 // AWSVPCSiteIngressGwPerformanceEnhancementModeModelAttrTypes defines the attribute types for AWSVPCSiteIngressGwPerformanceEnhancementModeModel
 var AWSVPCSiteIngressGwPerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: AWSVPCSiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
 	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1137,15 +1137,15 @@ type AWSVPCSiteVoltstackClusterModel struct {
 // AWSVPCSiteVoltstackClusterModelAttrTypes defines the attribute types for AWSVPCSiteVoltstackClusterModel
 var AWSVPCSiteVoltstackClusterModelAttrTypes = map[string]attr.Type{
 	"aws_certified_hw":                  types.StringType,
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_network_policies":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"allowed_vip_port":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModelAttrTypes},
+	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterActiveForwardProxyPoliciesModelAttrTypes},
+	"active_network_policies":           types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterActiveNetworkPoliciesModelAttrTypes},
+	"allowed_vip_port":                  types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterAllowedVIPPortModelAttrTypes},
 	"az_nodes":                          types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterAzNodesModelAttrTypes}},
 	"dc_cluster_group":                  types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterDcClusterGroupModelAttrTypes},
 	"default_storage":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"global_network_list":               types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterGlobalNetworkListModelAttrTypes},
 	"k8s_cluster":                       types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterK8SClusterModelAttrTypes},
 	"no_dc_cluster_group":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -1153,10 +1153,10 @@ var AWSVPCSiteVoltstackClusterModelAttrTypes = map[string]attr.Type{
 	"no_k8s_cluster":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_outside_static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"outside_static_routes":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_static_routes":             types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterOutsideStaticRoutesModelAttrTypes},
 	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"storage_class_list":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"storage_class_list":                types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterStorageClassListModelAttrTypes},
 }
 
 // AWSVPCSiteVoltstackClusterActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
@@ -1314,7 +1314,7 @@ type AWSVPCSiteVoltstackClusterGlobalNetworkListModel struct {
 
 // AWSVPCSiteVoltstackClusterGlobalNetworkListModelAttrTypes defines the attribute types for AWSVPCSiteVoltstackClusterGlobalNetworkListModel
 var AWSVPCSiteVoltstackClusterGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
 }
 
 // AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
@@ -1325,8 +1325,8 @@ type AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel st
 
 // AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModel
 var AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_to_global_dr": types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
 }
 
 // AWSVPCSiteVoltstackClusterGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
@@ -1426,7 +1426,7 @@ var AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRout
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
 }
 
 // AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
@@ -1440,7 +1440,7 @@ type AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRou
 var AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
 }
 
 // AWSVPCSiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block

@@ -520,10 +520,10 @@ type ServicePolicyRuleSegmentPolicyModel struct {
 // ServicePolicyRuleSegmentPolicyModelAttrTypes defines the attribute types for ServicePolicyRuleSegmentPolicyModel
 var ServicePolicyRuleSegmentPolicyModelAttrTypes = map[string]attr.Type{
 	"dst_any":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dst_segments":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dst_segments":  types.ObjectType{AttrTypes: ServicePolicyRuleSegmentPolicyDstSegmentsModelAttrTypes},
 	"intra_segment": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"src_any":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"src_segments":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"src_segments":  types.ObjectType{AttrTypes: ServicePolicyRuleSegmentPolicySrcSegmentsModelAttrTypes},
 }
 
 // ServicePolicyRuleSegmentPolicyDstSegmentsModel represents dst_segments block
@@ -597,7 +597,7 @@ type ServicePolicyRuleWAFActionModel struct {
 
 // ServicePolicyRuleWAFActionModelAttrTypes defines the attribute types for ServicePolicyRuleWAFActionModel
 var ServicePolicyRuleWAFActionModelAttrTypes = map[string]attr.Type{
-	"app_firewall_detection_control": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"app_firewall_detection_control": types.ObjectType{AttrTypes: ServicePolicyRuleWAFActionAppFirewallDetectionControlModelAttrTypes},
 	"none":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"waf_skip_processing":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }

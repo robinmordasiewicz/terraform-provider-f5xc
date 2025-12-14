@@ -176,20 +176,20 @@ var VoltstackSiteCustomNetworkConfigModelAttrTypes = map[string]attr.Type{
 	"site_to_site_tunnel_ip":            types.StringType,
 	"tunnel_dead_timeout":               types.Int64Type,
 	"vip_vrrp_mode":                     types.StringType,
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"active_network_policies":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigActiveEnhancedFirewallPoliciesModelAttrTypes},
+	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigActiveForwardProxyPoliciesModelAttrTypes},
+	"active_network_policies":           types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigActiveNetworkPoliciesModelAttrTypes},
 	"default_config":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_interface_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_sli_config":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_list":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"global_network_list":               types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigGlobalNetworkListModelAttrTypes},
+	"interface_list":                    types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListModelAttrTypes},
 	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_global_network":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sli_config":                        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"slo_config":                        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_config":                        types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigSLIConfigModelAttrTypes},
+	"slo_config":                        types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigSloConfigModelAttrTypes},
 	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -273,7 +273,7 @@ type VoltstackSiteCustomNetworkConfigGlobalNetworkListModel struct {
 
 // VoltstackSiteCustomNetworkConfigGlobalNetworkListModelAttrTypes defines the attribute types for VoltstackSiteCustomNetworkConfigGlobalNetworkListModel
 var VoltstackSiteCustomNetworkConfigGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
 }
 
 // VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
@@ -284,8 +284,8 @@ type VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsMo
 
 // VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModel
 var VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"sli_to_global_dr": types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
+	"slo_to_global_dr": types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
 }
 
 // VoltstackSiteCustomNetworkConfigGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
@@ -445,8 +445,8 @@ var VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceMode
 	"vlan_id":                   types.Int64Type,
 	"cluster":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_client":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dhcp_server":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"ipv6_auto_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_server":               types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerModelAttrTypes},
+	"ipv6_auto_config":          types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigModelAttrTypes},
 	"is_primary":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -454,8 +454,8 @@ var VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceMode
 	"not_primary":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ip":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ipv6_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":                 types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModelAttrTypes},
+	"static_ipv6_address":       types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModelAttrTypes},
 	"storage_network":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"untagged":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -475,7 +475,7 @@ var VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCP
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerInterfaceIPMapModelAttrTypes},
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceDHCPServerDHCPNetworksModel represents dhcp_networks block
@@ -546,8 +546,8 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes defines the attribute types for VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModel
 var VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -601,7 +601,7 @@ var VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -648,7 +648,7 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceSta
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModelAttrTypes defines the attribute types for VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModel
 var VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIPNodeStaticIPModelAttrTypes},
 }
 
@@ -682,7 +682,7 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceSta
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModelAttrTypes defines the attribute types for VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModel
 var VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesEthernetInterfaceStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -726,7 +726,7 @@ var VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceModelA
 	"priority":                  types.Int64Type,
 	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ip":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":                 types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPModelAttrTypes},
 	"tunnel":                    types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceTunnelModelAttrTypes},
 }
 
@@ -738,7 +738,7 @@ type VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStati
 
 // VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPModelAttrTypes defines the attribute types for VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPModel
 var VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigInterfaceListInterfacesTunnelInterfaceStaticIPNodeStaticIPModelAttrTypes},
 }
 
@@ -790,8 +790,8 @@ type VoltstackSiteCustomNetworkConfigSLIConfigModel struct {
 var VoltstackSiteCustomNetworkConfigSLIConfigModelAttrTypes = map[string]attr.Type{
 	"no_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_v6_static_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_v6_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_routes":       types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesModelAttrTypes},
+	"static_v6_routes":    types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesModelAttrTypes},
 }
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesModel represents static_routes block
@@ -819,7 +819,7 @@ var VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesModelAttrTy
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -887,7 +887,7 @@ var VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesModelAttr
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // VoltstackSiteCustomNetworkConfigSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -948,8 +948,8 @@ var VoltstackSiteCustomNetworkConfigSloConfigModelAttrTypes = map[string]attr.Ty
 	"no_dc_cluster_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_static_v6_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_v6_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_routes":       types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesModelAttrTypes},
+	"static_v6_routes":    types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesModelAttrTypes},
 }
 
 // VoltstackSiteCustomNetworkConfigSloConfigDcClusterGroupModel represents dc_cluster_group block
@@ -991,7 +991,7 @@ var VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesModelAttrTy
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // VoltstackSiteCustomNetworkConfigSloConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -1059,7 +1059,7 @@ var VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesModelAttr
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // VoltstackSiteCustomNetworkConfigSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -1120,10 +1120,10 @@ var VoltstackSiteCustomStorageConfigModelAttrTypes = map[string]attr.Type{
 	"no_static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_storage_device":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_storage_interfaces":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"storage_class_list":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"storage_device_list":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"storage_interface_list": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_routes":          types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStaticRoutesModelAttrTypes},
+	"storage_class_list":     types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageClassListModelAttrTypes},
+	"storage_device_list":    types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListModelAttrTypes},
+	"storage_interface_list": types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListModelAttrTypes},
 }
 
 // VoltstackSiteCustomStorageConfigStaticRoutesModel represents static_routes block
@@ -1151,7 +1151,7 @@ var VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesModelAttrTypes = map
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // VoltstackSiteCustomStorageConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -1336,7 +1336,7 @@ var VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesModelAttrType
 	"advanced_advanced_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"custom_storage":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"hpe_storage":                  types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageModelAttrTypes},
-	"netapp_trident":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"netapp_trident":               types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentModelAttrTypes},
 	"pure_service_orchestrator":    types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorModelAttrTypes},
 }
 
@@ -1358,8 +1358,8 @@ var VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageMod
 	"storage_server_ip_address": types.StringType,
 	"storage_server_name":       types.StringType,
 	"username":                  types.StringType,
-	"iscsi_chap_password":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"password":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"iscsi_chap_password":       types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModelAttrTypes},
+	"password":                  types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStoragePasswordModelAttrTypes},
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel represents iscsi_chap_password block
@@ -1495,9 +1495,9 @@ var VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTrident
 	"trusted_ca_certificate":  types.StringType,
 	"username":                types.StringType,
 	"auto_export_cidrs":       types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModelAttrTypes},
-	"client_private_key":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_private_key":      types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModelAttrTypes},
 	"labels":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"password":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":                types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModelAttrTypes},
 	"storage":                 types.ListType{ElemType: types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModelAttrTypes}},
 	"volume_defaults":         types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModelAttrTypes},
 }
@@ -1711,10 +1711,10 @@ var VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTrident
 	"svm":                     types.StringType,
 	"trusted_ca_certificate":  types.StringType,
 	"username":                types.StringType,
-	"client_private_key":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_private_key":      types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModelAttrTypes},
 	"labels":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_chap":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"password":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":                types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModelAttrTypes},
 	"storage":                 types.ListType{ElemType: types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModelAttrTypes}},
 	"use_chap":                types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModelAttrTypes},
 	"volume_defaults":         types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModelAttrTypes},
@@ -1856,8 +1856,8 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTriden
 var VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModelAttrTypes = map[string]attr.Type{
 	"chap_target_username":         types.StringType,
 	"chap_username":                types.StringType,
-	"chap_initiator_secret":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"chap_target_initiator_secret": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"chap_initiator_secret":        types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModelAttrTypes},
+	"chap_target_initiator_secret": types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModelAttrTypes},
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel represents chap_initiator_secret block
@@ -1983,7 +1983,7 @@ var VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOr
 	"cluster_id":              types.StringType,
 	"enable_storage_topology": types.BoolType,
 	"enable_strict_topology":  types.BoolType,
-	"arrays":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"arrays":                  types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModelAttrTypes},
 }
 
 // VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel represents arrays block
@@ -2032,7 +2032,7 @@ type VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceO
 var VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModelAttrTypes = map[string]attr.Type{
 	"mgmt_dns_name": types.StringType,
 	"mgmt_ip":       types.StringType,
-	"api_token":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_token":     types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModelAttrTypes},
 	"labels":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -2104,7 +2104,7 @@ var VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOr
 	"mgmt_ip":               types.StringType,
 	"nfs_endpoint_dns_name": types.StringType,
 	"nfs_endpoint_ip":       types.StringType,
-	"api_token":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_token":             types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModelAttrTypes},
 	"lables":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -2203,8 +2203,8 @@ var VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorage
 	"vlan_id":                   types.Int64Type,
 	"cluster":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_client":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"dhcp_server":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"ipv6_auto_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dhcp_server":               types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerModelAttrTypes},
+	"ipv6_auto_config":          types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigModelAttrTypes},
 	"is_primary":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -2212,8 +2212,8 @@ var VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorage
 	"not_primary":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_inside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_local_network":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ip":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_ipv6_address":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ip":                 types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPModelAttrTypes},
+	"static_ipv6_address":       types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressModelAttrTypes},
 	"storage_network":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"untagged":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -2233,7 +2233,7 @@ var VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorage
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerInterfaceIPMapModelAttrTypes},
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceDHCPServerDHCPNetworksModel represents dhcp_networks block
@@ -2304,8 +2304,8 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorag
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterModelAttrTypes defines the attribute types for VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterModel
 var VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -2359,7 +2359,7 @@ var VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorage
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -2406,7 +2406,7 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorag
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPModelAttrTypes defines the attribute types for VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPModel
 var VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIPNodeStaticIPModelAttrTypes},
 }
 
@@ -2440,7 +2440,7 @@ type VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorag
 
 // VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressModelAttrTypes defines the attribute types for VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressModel
 var VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: VoltstackSiteCustomStorageConfigStorageInterfaceListStorageInterfacesStorageInterfaceStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -2571,7 +2571,7 @@ var VoltstackSiteLocalControlPlaneBGPConfigPeersModelAttrTypes = map[string]attr
 	"metadata":              types.ObjectType{AttrTypes: VoltstackSiteLocalControlPlaneBGPConfigPeersMetadataModelAttrTypes},
 	"passive_mode_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"passive_mode_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"routing_policies":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"routing_policies":      types.ObjectType{AttrTypes: VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesModelAttrTypes},
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersBfdEnabledModel represents bfd_enabled block
@@ -2628,11 +2628,11 @@ var VoltstackSiteLocalControlPlaneBGPConfigPeersExternalModelAttrTypes = map[str
 	"disable":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_v6":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"external_connector":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"family_inet":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"family_inet":            types.ObjectType{AttrTypes: VoltstackSiteLocalControlPlaneBGPConfigPeersExternalFamilyInetModelAttrTypes},
 	"from_site":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"from_site_v6":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"interface":              types.ObjectType{AttrTypes: VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceModelAttrTypes},
-	"interface_list":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_list":         types.ObjectType{AttrTypes: VoltstackSiteLocalControlPlaneBGPConfigPeersExternalInterfaceListModelAttrTypes},
 	"no_authentication":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -2705,7 +2705,7 @@ type VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesModel struct {
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesModelAttrTypes defines the attribute types for VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesModel
 var VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesModelAttrTypes = map[string]attr.Type{
-	"route_policy": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"route_policy": types.ListType{ElemType: types.ObjectType{AttrTypes: VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyModelAttrTypes}},
 }
 
 // VoltstackSiteLocalControlPlaneBGPConfigPeersRoutingPoliciesRoutePolicyModel represents route_policy block

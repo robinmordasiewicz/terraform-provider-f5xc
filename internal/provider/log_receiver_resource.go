@@ -111,7 +111,7 @@ type LogReceiverSyslogTLSServerMtlsEnableModel struct {
 // LogReceiverSyslogTLSServerMtlsEnableModelAttrTypes defines the attribute types for LogReceiverSyslogTLSServerMtlsEnableModel
 var LogReceiverSyslogTLSServerMtlsEnableModelAttrTypes = map[string]attr.Type{
 	"certificate": types.StringType,
-	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"key_url":     types.ObjectType{AttrTypes: LogReceiverSyslogTLSServerMtlsEnableKeyURLModelAttrTypes},
 }
 
 // LogReceiverSyslogTLSServerMtlsEnableKeyURLModel represents key_url block

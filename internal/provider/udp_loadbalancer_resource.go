@@ -79,13 +79,13 @@ type UDPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
 var UDPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes = map[string]attr.Type{
 	"port":                  types.Int64Type,
 	"port_ranges":           types.StringType,
-	"advertise_on_public":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_public":   types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModelAttrTypes},
 	"site":                  types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes},
 	"use_default_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"virtual_network":       types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes},
 	"virtual_site":          types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes},
 	"virtual_site_with_vip": types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes},
-	"vk8s_service":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vk8s_service":          types.ObjectType{AttrTypes: UDPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes},
 }
 
 // UDPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel represents advertise_on_public block

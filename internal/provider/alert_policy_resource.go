@@ -118,7 +118,7 @@ var AlertPolicyRoutesModelAttrTypes = map[string]attr.Type{
 	"alertname":               types.StringType,
 	"alertname_regex":         types.StringType,
 	"any":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"custom":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom":                  types.ObjectType{AttrTypes: AlertPolicyRoutesCustomModelAttrTypes},
 	"dont_send":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"group":                   types.ObjectType{AttrTypes: AlertPolicyRoutesGroupModelAttrTypes},
 	"notification_parameters": types.ObjectType{AttrTypes: AlertPolicyRoutesNotificationParametersModelAttrTypes},

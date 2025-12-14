@@ -17,7 +17,8 @@ type ManagedTenant struct {
 // CreateManagedTenant creates a new ManagedTenant
 func (c *Client) CreateManagedTenant(ctx context.Context, resource *ManagedTenant) (*ManagedTenant, error) {
 	var result ManagedTenant
-	path := fmt.Sprintf("/api/web/namespaces/%s/managed_tenants", resource.Metadata.Namespace)
+	path := "/api/web/namespaces/system/support-tenant/managed_tenants"
+	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
 	err := c.Post(ctx, path, resource, &result)
 	return &result, err
 }
@@ -25,7 +26,8 @@ func (c *Client) CreateManagedTenant(ctx context.Context, resource *ManagedTenan
 // GetManagedTenant retrieves a ManagedTenant
 func (c *Client) GetManagedTenant(ctx context.Context, namespace, name string) (*ManagedTenant, error) {
 	var result ManagedTenant
-	path := fmt.Sprintf("/api/web/namespaces/%s/managed_tenants/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/system/support-tenant/managed_tenants/%s", name)
+	_ = namespace // Namespace not required in API path for this resource
 	err := c.Get(ctx, path, &result)
 	return &result, err
 }
@@ -33,13 +35,15 @@ func (c *Client) GetManagedTenant(ctx context.Context, namespace, name string) (
 // UpdateManagedTenant updates a ManagedTenant
 func (c *Client) UpdateManagedTenant(ctx context.Context, resource *ManagedTenant) (*ManagedTenant, error) {
 	var result ManagedTenant
-	path := fmt.Sprintf("/api/web/namespaces/%s/managed_tenants/%s", resource.Metadata.Namespace, resource.Metadata.Name)
+	path := fmt.Sprintf("/api/web/namespaces/system/support-tenant/managed_tenants/%s", resource.Metadata.Name)
+	_ = resource.Metadata.Namespace // Namespace not required in API path for this resource
 	err := c.Put(ctx, path, resource, &result)
 	return &result, err
 }
 
 // DeleteManagedTenant deletes a ManagedTenant
 func (c *Client) DeleteManagedTenant(ctx context.Context, namespace, name string) error {
-	path := fmt.Sprintf("/api/web/namespaces/%s/managed_tenants/%s", namespace, name)
+	path := fmt.Sprintf("/api/web/namespaces/system/support-tenant/managed_tenants/%s", name)
+	_ = namespace // Namespace not required in API path for this resource
 	return c.Delete(ctx, path)
 }

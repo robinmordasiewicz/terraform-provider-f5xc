@@ -80,8 +80,8 @@ type AuthenticationCookieParamsAuthHMACModel struct {
 var AuthenticationCookieParamsAuthHMACModelAttrTypes = map[string]attr.Type{
 	"prim_key_expiry": types.StringType,
 	"sec_key_expiry":  types.StringType,
-	"prim_key":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sec_key":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"prim_key":        types.ObjectType{AttrTypes: AuthenticationCookieParamsAuthHMACPrimKeyModelAttrTypes},
+	"sec_key":         types.ObjectType{AttrTypes: AuthenticationCookieParamsAuthHMACSecKeyModelAttrTypes},
 }
 
 // AuthenticationCookieParamsAuthHMACPrimKeyModel represents prim_key block
@@ -172,7 +172,7 @@ type AuthenticationOIDCAuthModel struct {
 var AuthenticationOIDCAuthModelAttrTypes = map[string]attr.Type{
 	"oidc_client_id":             types.StringType,
 	"oidc_well_known_config_url": types.StringType,
-	"client_secret":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_secret":              types.ObjectType{AttrTypes: AuthenticationOIDCAuthClientSecretModelAttrTypes},
 	"oidc_auth_params":           types.ObjectType{AttrTypes: AuthenticationOIDCAuthOIDCAuthParamsModelAttrTypes},
 }
 

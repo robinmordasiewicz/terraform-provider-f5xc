@@ -88,8 +88,8 @@ var OriginPoolAdvancedOptionsModelAttrTypes = map[string]attr.Type{
 	"disable_proxy_protocol":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_subsets":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_lb_source_ip_persistance":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"enable_subsets":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http1_config":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_subsets":                   types.ObjectType{AttrTypes: OriginPoolAdvancedOptionsEnableSubsetsModelAttrTypes},
+	"http1_config":                     types.ObjectType{AttrTypes: OriginPoolAdvancedOptionsHttp1ConfigModelAttrTypes},
 	"http2_options":                    types.ObjectType{AttrTypes: OriginPoolAdvancedOptionsHttp2OptionsModelAttrTypes},
 	"no_panic_threshold":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outlier_detection":                types.ObjectType{AttrTypes: OriginPoolAdvancedOptionsOutlierDetectionModelAttrTypes},
@@ -126,7 +126,7 @@ type OriginPoolAdvancedOptionsEnableSubsetsModel struct {
 // OriginPoolAdvancedOptionsEnableSubsetsModelAttrTypes defines the attribute types for OriginPoolAdvancedOptionsEnableSubsetsModel
 var OriginPoolAdvancedOptionsEnableSubsetsModelAttrTypes = map[string]attr.Type{
 	"any_endpoint":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"default_subset":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_subset":   types.ObjectType{AttrTypes: OriginPoolAdvancedOptionsEnableSubsetsDefaultSubsetModelAttrTypes},
 	"endpoint_subsets": types.ListType{ElemType: types.ObjectType{AttrTypes: OriginPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModelAttrTypes}},
 	"fail_request":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -158,7 +158,7 @@ type OriginPoolAdvancedOptionsHttp1ConfigModel struct {
 
 // OriginPoolAdvancedOptionsHttp1ConfigModelAttrTypes defines the attribute types for OriginPoolAdvancedOptionsHttp1ConfigModel
 var OriginPoolAdvancedOptionsHttp1ConfigModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: OriginPoolAdvancedOptionsHttp1ConfigHeaderTransformationModelAttrTypes},
 }
 
 // OriginPoolAdvancedOptionsHttp1ConfigHeaderTransformationModel represents header_transformation block
@@ -238,7 +238,7 @@ type OriginPoolOriginServersModel struct {
 var OriginPoolOriginServersModelAttrTypes = map[string]attr.Type{
 	"cbip_service":           types.ObjectType{AttrTypes: OriginPoolOriginServersCbipServiceModelAttrTypes},
 	"consul_service":         types.ObjectType{AttrTypes: OriginPoolOriginServersConsulServiceModelAttrTypes},
-	"custom_endpoint_object": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_endpoint_object": types.ObjectType{AttrTypes: OriginPoolOriginServersCustomEndpointObjectModelAttrTypes},
 	"k8s_service":            types.ObjectType{AttrTypes: OriginPoolOriginServersK8SServiceModelAttrTypes},
 	"labels":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"private_ip":             types.ObjectType{AttrTypes: OriginPoolOriginServersPrivateIPModelAttrTypes},
@@ -273,8 +273,8 @@ var OriginPoolOriginServersConsulServiceModelAttrTypes = map[string]attr.Type{
 	"service_name":    types.StringType,
 	"inside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"site_locator":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"snat_pool":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_locator":    types.ObjectType{AttrTypes: OriginPoolOriginServersConsulServiceSiteLocatorModelAttrTypes},
+	"snat_pool":       types.ObjectType{AttrTypes: OriginPoolOriginServersConsulServiceSnatPoolModelAttrTypes},
 }
 
 // OriginPoolOriginServersConsulServiceSiteLocatorModel represents site_locator block
@@ -380,8 +380,8 @@ var OriginPoolOriginServersK8SServiceModelAttrTypes = map[string]attr.Type{
 	"service_name":    types.StringType,
 	"inside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"site_locator":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"snat_pool":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_locator":    types.ObjectType{AttrTypes: OriginPoolOriginServersK8SServiceSiteLocatorModelAttrTypes},
+	"snat_pool":       types.ObjectType{AttrTypes: OriginPoolOriginServersK8SServiceSnatPoolModelAttrTypes},
 	"vk8s_networks":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -463,8 +463,8 @@ var OriginPoolOriginServersPrivateIPModelAttrTypes = map[string]attr.Type{
 	"inside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"segment":         types.ObjectType{AttrTypes: OriginPoolOriginServersPrivateIPSegmentModelAttrTypes},
-	"site_locator":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"snat_pool":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_locator":    types.ObjectType{AttrTypes: OriginPoolOriginServersPrivateIPSiteLocatorModelAttrTypes},
+	"snat_pool":       types.ObjectType{AttrTypes: OriginPoolOriginServersPrivateIPSnatPoolModelAttrTypes},
 }
 
 // OriginPoolOriginServersPrivateIPSegmentModel represents segment block
@@ -561,8 +561,8 @@ var OriginPoolOriginServersPrivateNameModelAttrTypes = map[string]attr.Type{
 	"inside_network":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"segment":          types.ObjectType{AttrTypes: OriginPoolOriginServersPrivateNameSegmentModelAttrTypes},
-	"site_locator":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"snat_pool":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_locator":     types.ObjectType{AttrTypes: OriginPoolOriginServersPrivateNameSiteLocatorModelAttrTypes},
+	"snat_pool":        types.ObjectType{AttrTypes: OriginPoolOriginServersPrivateNameSnatPoolModelAttrTypes},
 }
 
 // OriginPoolOriginServersPrivateNameSegmentModel represents segment block
@@ -753,9 +753,9 @@ var OriginPoolUseTLSModelAttrTypes = map[string]attr.Type{
 	"disable_sni":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_mtls":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"skip_server_verification":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":                  types.ObjectType{AttrTypes: OriginPoolUseTLSTLSConfigModelAttrTypes},
 	"use_host_header_as_sni":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"use_mtls":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                    types.ObjectType{AttrTypes: OriginPoolUseTLSUseMtlsModelAttrTypes},
 	"use_mtls_obj":                types.ObjectType{AttrTypes: OriginPoolUseTLSUseMtlsObjModelAttrTypes},
 	"use_server_verification":     types.ObjectType{AttrTypes: OriginPoolUseTLSUseServerVerificationModelAttrTypes},
 	"volterra_trusted_ca":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -817,7 +817,7 @@ var OriginPoolUseTLSUseMtlsTLSCertificatesModelAttrTypes = map[string]attr.Type{
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: OriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: OriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 

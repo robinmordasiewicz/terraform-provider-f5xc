@@ -136,8 +136,8 @@ type VirtualHostAuthenticationCookieParamsAuthHMACModel struct {
 var VirtualHostAuthenticationCookieParamsAuthHMACModelAttrTypes = map[string]attr.Type{
 	"prim_key_expiry": types.StringType,
 	"sec_key_expiry":  types.StringType,
-	"prim_key":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sec_key":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"prim_key":        types.ObjectType{AttrTypes: VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyModelAttrTypes},
+	"sec_key":         types.ObjectType{AttrTypes: VirtualHostAuthenticationCookieParamsAuthHMACSecKeyModelAttrTypes},
 }
 
 // VirtualHostAuthenticationCookieParamsAuthHMACPrimKeyModel represents prim_key block
@@ -359,7 +359,7 @@ type VirtualHostHTTPProtocolOptionsModel struct {
 
 // VirtualHostHTTPProtocolOptionsModelAttrTypes defines the attribute types for VirtualHostHTTPProtocolOptionsModel
 var VirtualHostHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -371,7 +371,7 @@ type VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struct {
 
 // VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // VirtualHostHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -435,7 +435,7 @@ var VirtualHostRequestCookiesToAddModelAttrTypes = map[string]attr.Type{
 	"name":         types.StringType,
 	"overwrite":    types.BoolType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: VirtualHostRequestCookiesToAddSecretValueModelAttrTypes},
 }
 
 // VirtualHostRequestCookiesToAddSecretValueModel represents secret_value block
@@ -489,7 +489,7 @@ var VirtualHostRequestHeadersToAddModelAttrTypes = map[string]attr.Type{
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: VirtualHostRequestHeadersToAddSecretValueModelAttrTypes},
 }
 
 // VirtualHostRequestHeadersToAddSecretValueModel represents secret_value block
@@ -581,7 +581,7 @@ var VirtualHostResponseCookiesToAddModelAttrTypes = map[string]attr.Type{
 	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: VirtualHostResponseCookiesToAddSecretValueModelAttrTypes},
 }
 
 // VirtualHostResponseCookiesToAddSecretValueModel represents secret_value block
@@ -635,7 +635,7 @@ var VirtualHostResponseHeadersToAddModelAttrTypes = map[string]attr.Type{
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: VirtualHostResponseHeadersToAddSecretValueModelAttrTypes},
 }
 
 // VirtualHostResponseHeadersToAddSecretValueModel represents secret_value block
@@ -813,7 +813,7 @@ var VirtualHostTLSCertParamsValidationParamsModelAttrTypes = map[string]attr.Typ
 	"skip_hostname_verification": types.BoolType,
 	"trusted_ca_url":             types.StringType,
 	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
-	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                 types.ObjectType{AttrTypes: VirtualHostTLSCertParamsValidationParamsTrustedCAModelAttrTypes},
 }
 
 // VirtualHostTLSCertParamsValidationParamsTrustedCAModel represents trusted_ca block
@@ -896,7 +896,7 @@ var VirtualHostTLSParametersCommonParamsTLSCertificatesModelAttrTypes = map[stri
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: VirtualHostTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: VirtualHostTLSParametersCommonParamsTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -961,7 +961,7 @@ var VirtualHostTLSParametersCommonParamsValidationParamsModelAttrTypes = map[str
 	"skip_hostname_verification": types.BoolType,
 	"trusted_ca_url":             types.StringType,
 	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
-	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                 types.ObjectType{AttrTypes: VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModelAttrTypes},
 }
 
 // VirtualHostTLSParametersCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
@@ -1019,7 +1019,7 @@ type VirtualHostWAFTypeModel struct {
 
 // VirtualHostWAFTypeModelAttrTypes defines the attribute types for VirtualHostWAFTypeModel
 var VirtualHostWAFTypeModelAttrTypes = map[string]attr.Type{
-	"app_firewall": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"app_firewall": types.ObjectType{AttrTypes: VirtualHostWAFTypeAppFirewallModelAttrTypes},
 	"disable_waf":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"inherit_waf":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }

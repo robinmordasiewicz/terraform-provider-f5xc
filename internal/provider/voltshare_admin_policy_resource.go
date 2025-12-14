@@ -61,9 +61,9 @@ type VoltshareAdminPolicyAuthorRestrictionsModel struct {
 // VoltshareAdminPolicyAuthorRestrictionsModelAttrTypes defines the attribute types for VoltshareAdminPolicyAuthorRestrictionsModel
 var VoltshareAdminPolicyAuthorRestrictionsModelAttrTypes = map[string]attr.Type{
 	"allow_all":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"allow_list": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"allow_list": types.ObjectType{AttrTypes: VoltshareAdminPolicyAuthorRestrictionsAllowListModelAttrTypes},
 	"deny_all":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deny_list":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deny_list":  types.ObjectType{AttrTypes: VoltshareAdminPolicyAuthorRestrictionsDenyListModelAttrTypes},
 }
 
 // VoltshareAdminPolicyAuthorRestrictionsAllowListModel represents allow_list block
@@ -123,7 +123,7 @@ var VoltshareAdminPolicyUserRestrictionsModelAttrTypes = map[string]attr.Type{
 	"tenant":            types.StringType,
 	"all_tenants":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"individual_users":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"user_restrictions": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"user_restrictions": types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsUserRestrictionsModelAttrTypes},
 }
 
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel represents user_restrictions block
@@ -137,9 +137,9 @@ type VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel struct {
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsModelAttrTypes defines the attribute types for VoltshareAdminPolicyUserRestrictionsUserRestrictionsModel
 var VoltshareAdminPolicyUserRestrictionsUserRestrictionsModelAttrTypes = map[string]attr.Type{
 	"allow_all":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"allow_list": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"allow_list": types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListModelAttrTypes},
 	"deny_all":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deny_list":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deny_list":  types.ObjectType{AttrTypes: VoltshareAdminPolicyUserRestrictionsUserRestrictionsDenyListModelAttrTypes},
 }
 
 // VoltshareAdminPolicyUserRestrictionsUserRestrictionsAllowListModel represents allow_list block

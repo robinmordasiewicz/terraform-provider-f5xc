@@ -349,7 +349,7 @@ type FleetPerformanceEnhancementModeModel struct {
 
 // FleetPerformanceEnhancementModeModelAttrTypes defines the attribute types for FleetPerformanceEnhancementModeModel
 var FleetPerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: FleetPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
 	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -531,7 +531,7 @@ var FleetStorageDeviceListStorageDevicesModelAttrTypes = map[string]attr.Type{
 	"advanced_advanced_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"custom_storage":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"hpe_storage":                  types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesHpeStorageModelAttrTypes},
-	"netapp_trident":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"netapp_trident":               types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentModelAttrTypes},
 	"pure_service_orchestrator":    types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModelAttrTypes},
 }
 
@@ -553,8 +553,8 @@ var FleetStorageDeviceListStorageDevicesHpeStorageModelAttrTypes = map[string]at
 	"storage_server_ip_address": types.StringType,
 	"storage_server_name":       types.StringType,
 	"username":                  types.StringType,
-	"iscsi_chap_password":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"password":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"iscsi_chap_password":       types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModelAttrTypes},
+	"password":                  types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesHpeStoragePasswordModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesHpeStorageIscsiChapPasswordModel represents iscsi_chap_password block
@@ -690,9 +690,9 @@ var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasModelA
 	"trusted_ca_certificate":  types.StringType,
 	"username":                types.StringType,
 	"auto_export_cidrs":       types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasAutoExportCidrsModelAttrTypes},
-	"client_private_key":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_private_key":      types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasClientPrivateKeyModelAttrTypes},
 	"labels":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"password":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":                types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasPasswordModelAttrTypes},
 	"storage":                 types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasStorageModelAttrTypes}},
 	"volume_defaults":         types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapNasVolumeDefaultsModelAttrTypes},
 }
@@ -906,10 +906,10 @@ var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanModelA
 	"svm":                     types.StringType,
 	"trusted_ca_certificate":  types.StringType,
 	"username":                types.StringType,
-	"client_private_key":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_private_key":      types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanClientPrivateKeyModelAttrTypes},
 	"labels":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_chap":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"password":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":                types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanPasswordModelAttrTypes},
 	"storage":                 types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanStorageModelAttrTypes}},
 	"use_chap":                types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModelAttrTypes},
 	"volume_defaults":         types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanVolumeDefaultsModelAttrTypes},
@@ -1051,8 +1051,8 @@ type FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseCh
 var FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapModelAttrTypes = map[string]attr.Type{
 	"chap_target_username":         types.StringType,
 	"chap_username":                types.StringType,
-	"chap_initiator_secret":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"chap_target_initiator_secret": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"chap_initiator_secret":        types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModelAttrTypes},
+	"chap_target_initiator_secret": types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapTargetInitiatorSecretModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesNetappTridentNetappBackendOntapSanUseChapChapInitiatorSecretModel represents chap_initiator_secret block
@@ -1178,7 +1178,7 @@ var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorModelAttrTypes = 
 	"cluster_id":              types.StringType,
 	"enable_storage_topology": types.BoolType,
 	"enable_strict_topology":  types.BoolType,
-	"arrays":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"arrays":                  types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModelAttrTypes},
 }
 
 // FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysModel represents arrays block
@@ -1227,7 +1227,7 @@ type FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArray
 var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysModelAttrTypes = map[string]attr.Type{
 	"mgmt_dns_name": types.StringType,
 	"mgmt_ip":       types.StringType,
-	"api_token":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_token":     types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashArrayFlashArraysAPITokenModelAttrTypes},
 	"labels":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1299,7 +1299,7 @@ var FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeF
 	"mgmt_ip":               types.StringType,
 	"nfs_endpoint_dns_name": types.StringType,
 	"nfs_endpoint_ip":       types.StringType,
-	"api_token":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_token":             types.ObjectType{AttrTypes: FleetStorageDeviceListStorageDevicesPureServiceOrchestratorArraysFlashBladeFlashBladesAPITokenModelAttrTypes},
 	"lables":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1388,7 +1388,7 @@ var FleetStorageStaticRoutesStorageRoutesModelAttrTypes = map[string]attr.Type{
 	"attrs":   types.ListType{ElemType: types.StringType},
 	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"nexthop": types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesSubnetsModelAttrTypes}},
 }
 
 // FleetStorageStaticRoutesStorageRoutesNexthopModel represents nexthop block
@@ -1402,7 +1402,7 @@ type FleetStorageStaticRoutesStorageRoutesNexthopModel struct {
 var FleetStorageStaticRoutesStorageRoutesNexthopModelAttrTypes = map[string]attr.Type{
 	"type":            types.StringType,
 	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"nexthop_address": types.ObjectType{AttrTypes: FleetStorageStaticRoutesStorageRoutesNexthopNexthopAddressModelAttrTypes},
 }
 
 // FleetStorageStaticRoutesStorageRoutesNexthopInterfaceModel represents interface block

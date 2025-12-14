@@ -65,7 +65,7 @@ var VirtualNetworkStaticRoutesModelAttrTypes = map[string]attr.Type{
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: VirtualNetworkStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // VirtualNetworkStaticRoutesNodeInterfaceModel represents node_interface block

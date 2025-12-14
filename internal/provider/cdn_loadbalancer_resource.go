@@ -87,8 +87,8 @@ type CDNLoadBalancerAPIRateLimitModel struct {
 // CDNLoadBalancerAPIRateLimitModelAttrTypes defines the attribute types for CDNLoadBalancerAPIRateLimitModel
 var CDNLoadBalancerAPIRateLimitModelAttrTypes = map[string]attr.Type{
 	"api_endpoint_rules":         types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesModelAttrTypes}},
-	"bypass_rate_limiting_rules": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"custom_ip_allowed_list":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"bypass_rate_limiting_rules": types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesModelAttrTypes},
+	"custom_ip_allowed_list":     types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitCustomIPAllowedListModelAttrTypes},
 	"ip_allowed_list":            types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitIPAllowedListModelAttrTypes},
 	"no_ip_allowed_list":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"server_url_rules":           types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitServerURLRulesModelAttrTypes}},
@@ -112,10 +112,10 @@ var CDNLoadBalancerAPIRateLimitAPIEndpointRulesModelAttrTypes = map[string]attr.
 	"specific_domain":     types.StringType,
 	"any_domain":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"api_endpoint_method": types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModelAttrTypes},
-	"client_matcher":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_matcher":      types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModelAttrTypes},
 	"inline_rate_limiter": types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModelAttrTypes},
 	"ref_rate_limiter":    types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModelAttrTypes},
-	"request_matcher":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_matcher":     types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModelAttrTypes},
 }
 
 // CDNLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel represents api_endpoint_method block
@@ -148,7 +148,7 @@ var CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModelAttrTypes = map
 	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"asn_list":                types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModelAttrTypes},
-	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":             types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModelAttrTypes},
 	"client_selector":         types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModelAttrTypes},
 	"ip_matcher":              types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModelAttrTypes},
 	"ip_prefix_list":          types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModelAttrTypes},
@@ -488,8 +488,8 @@ var CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesMod
 	"any_url":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"api_endpoint":    types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModelAttrTypes},
 	"api_groups":      types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModelAttrTypes},
-	"client_matcher":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"request_matcher": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_matcher":  types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModelAttrTypes},
+	"request_matcher": types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModelAttrTypes},
 }
 
 // CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel represents api_endpoint block
@@ -532,7 +532,7 @@ var CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesCli
 	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"asn_list":                types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModelAttrTypes},
-	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":             types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModelAttrTypes},
 	"client_selector":         types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModelAttrTypes},
 	"ip_matcher":              types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModelAttrTypes},
 	"ip_prefix_list":          types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModelAttrTypes},
@@ -850,10 +850,10 @@ var CDNLoadBalancerAPIRateLimitServerURLRulesModelAttrTypes = map[string]attr.Ty
 	"base_path":           types.StringType,
 	"specific_domain":     types.StringType,
 	"any_domain":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"client_matcher":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_matcher":      types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModelAttrTypes},
 	"inline_rate_limiter": types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModelAttrTypes},
 	"ref_rate_limiter":    types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModelAttrTypes},
-	"request_matcher":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_matcher":     types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModelAttrTypes},
 }
 
 // CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel represents client_matcher block
@@ -874,7 +874,7 @@ var CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherModelAttrTypes = map[s
 	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"asn_list":                types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModelAttrTypes},
-	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":             types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModelAttrTypes},
 	"client_selector":         types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModelAttrTypes},
 	"ip_matcher":              types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModelAttrTypes},
 	"ip_prefix_list":          types.ObjectType{AttrTypes: CDNLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModelAttrTypes},
@@ -1195,8 +1195,8 @@ type CDNLoadBalancerAPISpecificationModel struct {
 // CDNLoadBalancerAPISpecificationModelAttrTypes defines the attribute types for CDNLoadBalancerAPISpecificationModel
 var CDNLoadBalancerAPISpecificationModelAttrTypes = map[string]attr.Type{
 	"api_definition":                types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationAPIDefinitionModelAttrTypes},
-	"validation_all_spec_endpoints": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"validation_custom_list":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validation_all_spec_endpoints": types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModelAttrTypes},
+	"validation_custom_list":        types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationCustomListModelAttrTypes},
 	"validation_disabled":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1223,9 +1223,9 @@ type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModel struct {
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModelAttrTypes defines the attribute types for CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModel
 var CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsModelAttrTypes = map[string]attr.Type{
-	"fall_through_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"settings":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"validation_mode":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fall_through_mode": types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModelAttrTypes},
+	"settings":          types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModelAttrTypes},
+	"validation_mode":   types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModelAttrTypes},
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel represents fall_through_mode block
@@ -1237,7 +1237,7 @@ type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeMod
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModelAttrTypes defines the attribute types for CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel
 var CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModelAttrTypes = map[string]attr.Type{
 	"fall_through_mode_allow":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"fall_through_mode_custom": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fall_through_mode_custom": types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModelAttrTypes},
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModel represents fall_through_mode_custom block
@@ -1308,7 +1308,7 @@ type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel stru
 var CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModelAttrTypes = map[string]attr.Type{
 	"oversized_body_fail_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"oversized_body_skip_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"property_validation_settings_custom":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"property_validation_settings_custom":  types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModelAttrTypes},
 	"property_validation_settings_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1319,7 +1319,7 @@ type CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyVa
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModelAttrTypes defines the attribute types for CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel
 var CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModelAttrTypes = map[string]attr.Type{
-	"query_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"query_parameters": types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModelAttrTypes},
 }
 
 // CDNLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel represents query_parameters block
@@ -1387,9 +1387,9 @@ type CDNLoadBalancerAPISpecificationValidationCustomListModel struct {
 
 // CDNLoadBalancerAPISpecificationValidationCustomListModelAttrTypes defines the attribute types for CDNLoadBalancerAPISpecificationValidationCustomListModel
 var CDNLoadBalancerAPISpecificationValidationCustomListModelAttrTypes = map[string]attr.Type{
-	"fall_through_mode":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fall_through_mode":         types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModelAttrTypes},
 	"open_api_validation_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModelAttrTypes}},
-	"settings":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"settings":                  types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationCustomListSettingsModelAttrTypes},
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel represents fall_through_mode block
@@ -1401,7 +1401,7 @@ type CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel str
 // CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModelAttrTypes defines the attribute types for CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel
 var CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeModelAttrTypes = map[string]attr.Type{
 	"fall_through_mode_allow":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"fall_through_mode_custom": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fall_through_mode_custom": types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModelAttrTypes},
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModel represents fall_through_mode_custom block
@@ -1479,7 +1479,7 @@ var CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMod
 	"any_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"api_endpoint":    types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModelAttrTypes},
 	"metadata":        types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModelAttrTypes},
-	"validation_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validation_mode": types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModelAttrTypes},
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
@@ -1562,7 +1562,7 @@ type CDNLoadBalancerAPISpecificationValidationCustomListSettingsModel struct {
 var CDNLoadBalancerAPISpecificationValidationCustomListSettingsModelAttrTypes = map[string]attr.Type{
 	"oversized_body_fail_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"oversized_body_skip_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"property_validation_settings_custom":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"property_validation_settings_custom":  types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModelAttrTypes},
 	"property_validation_settings_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1573,7 +1573,7 @@ type CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidati
 
 // CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModelAttrTypes defines the attribute types for CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel
 var CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModelAttrTypes = map[string]attr.Type{
-	"query_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"query_parameters": types.ObjectType{AttrTypes: CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModelAttrTypes},
 }
 
 // CDNLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel represents query_parameters block
@@ -1626,7 +1626,7 @@ var CDNLoadBalancerBlockedClientsModelAttrTypes = map[string]attr.Type{
 	"ipv6_prefix":          types.StringType,
 	"user_identifier":      types.StringType,
 	"bot_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_header":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_header":          types.ObjectType{AttrTypes: CDNLoadBalancerBlockedClientsHTTPHeaderModelAttrTypes},
 	"metadata":             types.ObjectType{AttrTypes: CDNLoadBalancerBlockedClientsMetadataModelAttrTypes},
 	"skip_processing":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"waf_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -1711,8 +1711,8 @@ var CDNLoadBalancerBotDefensePolicyModelAttrTypes = map[string]attr.Type{
 	"disable_mobile_sdk":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"js_insert_all_pages":        types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyJsInsertAllPagesModelAttrTypes},
 	"js_insert_all_pages_except": types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModelAttrTypes},
-	"js_insertion_rules":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"mobile_sdk_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_insertion_rules":         types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyJsInsertionRulesModelAttrTypes},
+	"mobile_sdk_config":          types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyMobileSdkConfigModelAttrTypes},
 	"protected_app_endpoints":    types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsModelAttrTypes}},
 }
 
@@ -1735,7 +1735,7 @@ type CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel struct {
 // CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModelAttrTypes defines the attribute types for CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel
 var CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModelAttrTypes = map[string]attr.Type{
 	"javascript_location": types.StringType,
-	"exclude_list":        types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"exclude_list":        types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModelAttrTypes}},
 }
 
 // CDNLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel represents exclude_list block
@@ -1802,7 +1802,7 @@ type CDNLoadBalancerBotDefensePolicyJsInsertionRulesModel struct {
 
 // CDNLoadBalancerBotDefensePolicyJsInsertionRulesModelAttrTypes defines the attribute types for CDNLoadBalancerBotDefensePolicyJsInsertionRulesModel
 var CDNLoadBalancerBotDefensePolicyJsInsertionRulesModelAttrTypes = map[string]attr.Type{
-	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModelAttrTypes}},
 	"rules":        types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyJsInsertionRulesRulesModelAttrTypes}},
 }
 
@@ -1927,7 +1927,7 @@ type CDNLoadBalancerBotDefensePolicyMobileSdkConfigModel struct {
 
 // CDNLoadBalancerBotDefensePolicyMobileSdkConfigModelAttrTypes defines the attribute types for CDNLoadBalancerBotDefensePolicyMobileSdkConfigModel
 var CDNLoadBalancerBotDefensePolicyMobileSdkConfigModelAttrTypes = map[string]attr.Type{
-	"mobile_identifier": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mobile_identifier": types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModelAttrTypes},
 }
 
 // CDNLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModel represents mobile_identifier block
@@ -1997,11 +1997,11 @@ var CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsModelAttrTypes = map[str
 	"allow_good_bots":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_domain":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"domain":               types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModelAttrTypes},
-	"flow_label":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"flow_label":           types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModelAttrTypes},
 	"headers":              types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModelAttrTypes}},
 	"metadata":             types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModelAttrTypes},
 	"mitigate_good_bots":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"mitigation":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mitigation":           types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModelAttrTypes},
 	"mobile":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"path":                 types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModelAttrTypes},
 	"query_params":         types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModelAttrTypes}},
@@ -2037,13 +2037,13 @@ type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel struct {
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModelAttrTypes defines the attribute types for CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel
 var CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModelAttrTypes = map[string]attr.Type{
-	"account_management":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"authentication":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"financial_services":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"flight":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"profile_management":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"search":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"shopping_gift_cards": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"account_management":  types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModelAttrTypes},
+	"authentication":      types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModelAttrTypes},
+	"financial_services":  types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModelAttrTypes},
+	"flight":              types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModelAttrTypes},
+	"profile_management":  types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModelAttrTypes},
+	"search":              types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModelAttrTypes},
+	"shopping_gift_cards": types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModelAttrTypes},
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel represents account_management block
@@ -2069,7 +2069,7 @@ type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthentication
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModelAttrTypes defines the attribute types for CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel
 var CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModelAttrTypes = map[string]attr.Type{
-	"login":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"login":         types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModelAttrTypes},
 	"login_mfa":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"login_partner": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"logout":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -2085,7 +2085,7 @@ type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthentication
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModelAttrTypes defines the attribute types for CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel
 var CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModelAttrTypes = map[string]attr.Type{
 	"disable_transaction_result": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"transaction_result":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"transaction_result":         types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModelAttrTypes},
 }
 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel represents transaction_result block
@@ -2266,7 +2266,7 @@ type CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel struct 
 // CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModelAttrTypes defines the attribute types for CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel
 var CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModelAttrTypes = map[string]attr.Type{
 	"block":    types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModelAttrTypes},
-	"flag":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"flag":     types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModelAttrTypes},
 	"redirect": types.ObjectType{AttrTypes: CDNLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModelAttrTypes},
 }
 
@@ -2391,7 +2391,7 @@ type CDNLoadBalancerClientSideDefenseModel struct {
 
 // CDNLoadBalancerClientSideDefenseModelAttrTypes defines the attribute types for CDNLoadBalancerClientSideDefenseModel
 var CDNLoadBalancerClientSideDefenseModelAttrTypes = map[string]attr.Type{
-	"policy": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policy": types.ObjectType{AttrTypes: CDNLoadBalancerClientSideDefensePolicyModelAttrTypes},
 }
 
 // CDNLoadBalancerClientSideDefensePolicyModel represents policy block
@@ -2406,8 +2406,8 @@ type CDNLoadBalancerClientSideDefensePolicyModel struct {
 var CDNLoadBalancerClientSideDefensePolicyModelAttrTypes = map[string]attr.Type{
 	"disable_js_insert":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"js_insert_all_pages":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"js_insert_all_pages_except": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"js_insertion_rules":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_insert_all_pages_except": types.ObjectType{AttrTypes: CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModelAttrTypes},
+	"js_insertion_rules":         types.ObjectType{AttrTypes: CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModelAttrTypes},
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel represents js_insert_all_pages_except block
@@ -2417,7 +2417,7 @@ type CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel struct {
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModelAttrTypes defines the attribute types for CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel
 var CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModelAttrTypes = map[string]attr.Type{
-	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModelAttrTypes}},
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModel represents exclude_list block
@@ -2484,8 +2484,8 @@ type CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModel struct {
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModelAttrTypes defines the attribute types for CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModel
 var CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesModelAttrTypes = map[string]attr.Type{
-	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
-	"rules":        types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModelAttrTypes}},
+	"rules":        types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModelAttrTypes}},
 }
 
 // CDNLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel represents exclude_list block
@@ -2839,9 +2839,9 @@ type CDNLoadBalancerEnableAPIDiscoveryModel struct {
 
 // CDNLoadBalancerEnableAPIDiscoveryModelAttrTypes defines the attribute types for CDNLoadBalancerEnableAPIDiscoveryModel
 var CDNLoadBalancerEnableAPIDiscoveryModelAttrTypes = map[string]attr.Type{
-	"api_crawler":                         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"api_discovery_from_code_scan":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"custom_api_auth_discovery":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_crawler":                         types.ObjectType{AttrTypes: CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModelAttrTypes},
+	"api_discovery_from_code_scan":        types.ObjectType{AttrTypes: CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes},
+	"custom_api_auth_discovery":           types.ObjectType{AttrTypes: CDNLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModelAttrTypes},
 	"default_api_auth_discovery":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_learn_from_redirect_traffic": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"discovered_api_settings":             types.ObjectType{AttrTypes: CDNLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModelAttrTypes},
@@ -2856,7 +2856,7 @@ type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModel struct {
 
 // CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModelAttrTypes defines the attribute types for CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModel
 var CDNLoadBalancerEnableAPIDiscoveryAPICrawlerModelAttrTypes = map[string]attr.Type{
-	"api_crawler_config":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_crawler_config":  types.ObjectType{AttrTypes: CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModelAttrTypes},
 	"disable_api_crawler": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -2891,7 +2891,7 @@ type CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLog
 // CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes defines the attribute types for CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel
 var CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes = map[string]attr.Type{
 	"user":     types.StringType,
-	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password": types.ObjectType{AttrTypes: CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModelAttrTypes},
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel represents password block
@@ -2939,7 +2939,7 @@ type CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel struct {
 
 // CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes defines the attribute types for CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel
 var CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes = map[string]attr.Type{
-	"code_base_integrations": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"code_base_integrations": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModelAttrTypes}},
 }
 
 // CDNLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel represents code_base_integrations block
@@ -3163,7 +3163,7 @@ type CDNLoadBalancerHTTPSModel struct {
 var CDNLoadBalancerHTTPSModelAttrTypes = map[string]attr.Type{
 	"add_hsts":         types.BoolType,
 	"http_redirect":    types.BoolType,
-	"tls_cert_options": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_options": types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsModelAttrTypes},
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsModel represents tls_cert_options block
@@ -3174,8 +3174,8 @@ type CDNLoadBalancerHTTPSTLSCertOptionsModel struct {
 
 // CDNLoadBalancerHTTPSTLSCertOptionsModelAttrTypes defines the attribute types for CDNLoadBalancerHTTPSTLSCertOptionsModel
 var CDNLoadBalancerHTTPSTLSCertOptionsModelAttrTypes = map[string]attr.Type{
-	"tls_cert_params":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_inline_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":   types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModelAttrTypes},
+	"tls_inline_params": types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsModelAttrTypes},
 }
 
 // CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModel represents tls_cert_params block
@@ -3190,7 +3190,7 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModel struct {
 var CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsModelAttrTypes = map[string]attr.Type{
 	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsCertificatesModelAttrTypes}},
 	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsTLSConfigModelAttrTypes},
 	"use_mtls":     types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsTLSCertParamsUseMtlsModelAttrTypes},
 }
 
@@ -3310,7 +3310,7 @@ type CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsModel struct {
 var CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsUseMtlsModelAttrTypes},
 }
 
@@ -3330,7 +3330,7 @@ var CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesModelAttrTyp
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSTLSCertOptionsTLSInlineParamsTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -3483,7 +3483,7 @@ type CDNLoadBalancerHTTPSAutoCertModel struct {
 var CDNLoadBalancerHTTPSAutoCertModelAttrTypes = map[string]attr.Type{
 	"add_hsts":      types.BoolType,
 	"http_redirect": types.BoolType,
-	"tls_config":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":    types.ObjectType{AttrTypes: CDNLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes},
 }
 
 // CDNLoadBalancerHTTPSAutoCertTLSConfigModel represents tls_config block
@@ -3524,12 +3524,12 @@ type CDNLoadBalancerJWTValidationModel struct {
 
 // CDNLoadBalancerJWTValidationModelAttrTypes defines the attribute types for CDNLoadBalancerJWTValidationModel
 var CDNLoadBalancerJWTValidationModelAttrTypes = map[string]attr.Type{
-	"action":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action":           types.ObjectType{AttrTypes: CDNLoadBalancerJWTValidationActionModelAttrTypes},
 	"jwks_config":      types.ObjectType{AttrTypes: CDNLoadBalancerJWTValidationJwksConfigModelAttrTypes},
 	"mandatory_claims": types.ObjectType{AttrTypes: CDNLoadBalancerJWTValidationMandatoryClaimsModelAttrTypes},
 	"reserved_claims":  types.ObjectType{AttrTypes: CDNLoadBalancerJWTValidationReservedClaimsModelAttrTypes},
-	"target":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"token_location":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"target":           types.ObjectType{AttrTypes: CDNLoadBalancerJWTValidationTargetModelAttrTypes},
+	"token_location":   types.ObjectType{AttrTypes: CDNLoadBalancerJWTValidationTokenLocationModelAttrTypes},
 }
 
 // CDNLoadBalancerJWTValidationActionModel represents action block
@@ -3758,9 +3758,9 @@ var CDNLoadBalancerOriginPoolUseTLSModelAttrTypes = map[string]attr.Type{
 	"disable_sni":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_mtls":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"skip_server_verification":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":                  types.ObjectType{AttrTypes: CDNLoadBalancerOriginPoolUseTLSTLSConfigModelAttrTypes},
 	"use_host_header_as_sni":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"use_mtls":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                    types.ObjectType{AttrTypes: CDNLoadBalancerOriginPoolUseTLSUseMtlsModelAttrTypes},
 	"use_mtls_obj":                types.ObjectType{AttrTypes: CDNLoadBalancerOriginPoolUseTLSUseMtlsObjModelAttrTypes},
 	"use_server_verification":     types.ObjectType{AttrTypes: CDNLoadBalancerOriginPoolUseTLSUseServerVerificationModelAttrTypes},
 	"volterra_trusted_ca":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -3822,7 +3822,7 @@ var CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesModelAttrTypes = map[st
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: CDNLoadBalancerOriginPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -3925,7 +3925,7 @@ type CDNLoadBalancerOtherSettingsModel struct {
 var CDNLoadBalancerOtherSettingsModelAttrTypes = map[string]attr.Type{
 	"add_location":    types.BoolType,
 	"header_options":  types.ObjectType{AttrTypes: CDNLoadBalancerOtherSettingsHeaderOptionsModelAttrTypes},
-	"logging_options": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"logging_options": types.ObjectType{AttrTypes: CDNLoadBalancerOtherSettingsLoggingOptionsModelAttrTypes},
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsModel represents header_options block
@@ -3957,7 +3957,7 @@ var CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddModelAttrTypes =
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueModelAttrTypes},
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsRequestHeadersToAddSecretValueModel represents secret_value block
@@ -4011,7 +4011,7 @@ var CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddModelAttrTypes 
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueModelAttrTypes},
 }
 
 // CDNLoadBalancerOtherSettingsHeaderOptionsResponseHeadersToAddSecretValueModel represents secret_value block
@@ -4112,7 +4112,7 @@ var CDNLoadBalancerPolicyBasedChallengeModelAttrTypes = map[string]attr.Type{
 	"js_challenge_parameters":               types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeJsChallengeParametersModelAttrTypes},
 	"malicious_user_mitigation":             types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModelAttrTypes},
 	"no_challenge":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"rule_list":                             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"rule_list":                             types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeRuleListModelAttrTypes},
 	"temporary_user_blocking":               types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModelAttrTypes},
 }
 
@@ -4163,7 +4163,7 @@ type CDNLoadBalancerPolicyBasedChallengeRuleListModel struct {
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListModelAttrTypes defines the attribute types for CDNLoadBalancerPolicyBasedChallengeRuleListModel
 var CDNLoadBalancerPolicyBasedChallengeRuleListModelAttrTypes = map[string]attr.Type{
-	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeRuleListRulesModelAttrTypes}},
 }
 
 // CDNLoadBalancerPolicyBasedChallengeRuleListRulesModel represents rules block
@@ -4223,7 +4223,7 @@ var CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecModelAttrTypes = map[str
 	"any_ip":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"arg_matchers":                types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModelAttrTypes}},
 	"asn_list":                    types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModelAttrTypes},
-	"asn_matcher":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":                 types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModelAttrTypes},
 	"body_matcher":                types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModelAttrTypes},
 	"client_selector":             types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModelAttrTypes},
 	"cookie_matchers":             types.ListType{ElemType: types.ObjectType{AttrTypes: CDNLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModelAttrTypes}},
@@ -4586,11 +4586,11 @@ type CDNLoadBalancerRateLimitModel struct {
 
 // CDNLoadBalancerRateLimitModelAttrTypes defines the attribute types for CDNLoadBalancerRateLimitModel
 var CDNLoadBalancerRateLimitModelAttrTypes = map[string]attr.Type{
-	"custom_ip_allowed_list": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_ip_allowed_list": types.ObjectType{AttrTypes: CDNLoadBalancerRateLimitCustomIPAllowedListModelAttrTypes},
 	"ip_allowed_list":        types.ObjectType{AttrTypes: CDNLoadBalancerRateLimitIPAllowedListModelAttrTypes},
 	"no_ip_allowed_list":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_policies":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"policies":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policies":               types.ObjectType{AttrTypes: CDNLoadBalancerRateLimitPoliciesModelAttrTypes},
 	"rate_limiter":           types.ObjectType{AttrTypes: CDNLoadBalancerRateLimitRateLimiterModelAttrTypes},
 }
 
@@ -4670,7 +4670,7 @@ var CDNLoadBalancerRateLimitRateLimiterModelAttrTypes = map[string]attr.Type{
 	"period_multiplier": types.Int64Type,
 	"total_number":      types.Int64Type,
 	"unit":              types.StringType,
-	"action_block":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action_block":      types.ObjectType{AttrTypes: CDNLoadBalancerRateLimitRateLimiterActionBlockModelAttrTypes},
 	"disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"leaky_bucket":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"token_bucket":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -4782,7 +4782,7 @@ var CDNLoadBalancerTrustedClientsModelAttrTypes = map[string]attr.Type{
 	"ipv6_prefix":          types.StringType,
 	"user_identifier":      types.StringType,
 	"bot_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_header":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_header":          types.ObjectType{AttrTypes: CDNLoadBalancerTrustedClientsHTTPHeaderModelAttrTypes},
 	"metadata":             types.ObjectType{AttrTypes: CDNLoadBalancerTrustedClientsMetadataModelAttrTypes},
 	"skip_processing":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"waf_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -4850,7 +4850,7 @@ type CDNLoadBalancerWAFExclusionModel struct {
 
 // CDNLoadBalancerWAFExclusionModelAttrTypes defines the attribute types for CDNLoadBalancerWAFExclusionModel
 var CDNLoadBalancerWAFExclusionModelAttrTypes = map[string]attr.Type{
-	"waf_exclusion_inline_rules": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"waf_exclusion_inline_rules": types.ObjectType{AttrTypes: CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesModelAttrTypes},
 	"waf_exclusion_policy":       types.ObjectType{AttrTypes: CDNLoadBalancerWAFExclusionWAFExclusionPolicyModelAttrTypes},
 }
 
@@ -4889,7 +4889,7 @@ var CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModelAttrTypes = map[
 	"suffix_value":                   types.StringType,
 	"any_domain":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_path":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"app_firewall_detection_control": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"app_firewall_detection_control": types.ObjectType{AttrTypes: CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModelAttrTypes},
 	"metadata":                       types.ObjectType{AttrTypes: CDNLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModelAttrTypes},
 	"waf_skip_processing":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }

@@ -67,7 +67,7 @@ type K8SClusterRolePolicyRuleListModel struct {
 
 // K8SClusterRolePolicyRuleListModelAttrTypes defines the attribute types for K8SClusterRolePolicyRuleListModel
 var K8SClusterRolePolicyRuleListModelAttrTypes = map[string]attr.Type{
-	"policy_rule": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"policy_rule": types.ListType{ElemType: types.ObjectType{AttrTypes: K8SClusterRolePolicyRuleListPolicyRuleModelAttrTypes}},
 }
 
 // K8SClusterRolePolicyRuleListPolicyRuleModel represents policy_rule block

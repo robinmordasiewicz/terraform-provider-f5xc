@@ -90,8 +90,8 @@ var ProxyDynamicProxyModelAttrTypes = map[string]attr.Type{
 	"domains":                types.ListType{ElemType: types.StringType},
 	"disable_dns_masquerade": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_dns_masquerade":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_proxy":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"https_proxy":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_proxy":             types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyModelAttrTypes},
+	"https_proxy":            types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyModelAttrTypes},
 	"sni_proxy":              types.ObjectType{AttrTypes: ProxyDynamicProxySniProxyModelAttrTypes},
 }
 
@@ -186,7 +186,7 @@ var ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddModelAttrTypes = map[
 	"name":         types.StringType,
 	"overwrite":    types.BoolType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
@@ -240,7 +240,7 @@ var ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddModelAttrTypes = map[
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
@@ -332,7 +332,7 @@ var ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddModelAttrTypes = map
 	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
@@ -386,7 +386,7 @@ var ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddModelAttrTypes = map
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
@@ -436,7 +436,7 @@ type ProxyDynamicProxyHTTPSProxyModel struct {
 // ProxyDynamicProxyHTTPSProxyModelAttrTypes defines the attribute types for ProxyDynamicProxyHTTPSProxyModel
 var ProxyDynamicProxyHTTPSProxyModelAttrTypes = map[string]attr.Type{
 	"more_option": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionModelAttrTypes},
-	"tls_params":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_params":  types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionModel represents more_option block
@@ -520,7 +520,7 @@ var ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddModelAttrTypes = map
 	"name":         types.StringType,
 	"overwrite":    types.BoolType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
@@ -574,7 +574,7 @@ var ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddModelAttrTypes = map
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
@@ -666,7 +666,7 @@ var ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddModelAttrTypes = ma
 	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
@@ -720,7 +720,7 @@ var ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddModelAttrTypes = ma
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModelAttrTypes},
 }
 
 // ProxyDynamicProxyHTTPSProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
@@ -773,7 +773,7 @@ type ProxyDynamicProxyHTTPSProxyTLSParamsModel struct {
 var ProxyDynamicProxyHTTPSProxyTLSParamsModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsUseMtlsModelAttrTypes},
 }
 
@@ -793,7 +793,7 @@ var ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesModelAttrTypes = map[stri
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: ProxyDynamicProxyHTTPSProxyTLSParamsTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1038,7 +1038,7 @@ var ProxyHTTPProxyMoreOptionRequestCookiesToAddModelAttrTypes = map[string]attr.
 	"name":         types.StringType,
 	"overwrite":    types.BoolType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModelAttrTypes},
 }
 
 // ProxyHTTPProxyMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
@@ -1092,7 +1092,7 @@ var ProxyHTTPProxyMoreOptionRequestHeadersToAddModelAttrTypes = map[string]attr.
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModelAttrTypes},
 }
 
 // ProxyHTTPProxyMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
@@ -1184,7 +1184,7 @@ var ProxyHTTPProxyMoreOptionResponseCookiesToAddModelAttrTypes = map[string]attr
 	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModelAttrTypes},
 }
 
 // ProxyHTTPProxyMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
@@ -1238,7 +1238,7 @@ var ProxyHTTPProxyMoreOptionResponseHeadersToAddModelAttrTypes = map[string]attr
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModelAttrTypes},
 }
 
 // ProxyHTTPProxyMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
@@ -1374,7 +1374,7 @@ var ProxyTLSInterceptModelAttrTypes = map[string]attr.Type{
 	"trusted_ca_url":         types.StringType,
 	"custom_certificate":     types.ObjectType{AttrTypes: ProxyTLSInterceptCustomCertificateModelAttrTypes},
 	"enable_for_all_domains": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policy":                 types.ObjectType{AttrTypes: ProxyTLSInterceptPolicyModelAttrTypes},
 	"volterra_certificate":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"volterra_trusted_ca":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -1395,7 +1395,7 @@ var ProxyTLSInterceptCustomCertificateModelAttrTypes = map[string]attr.Type{
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: ProxyTLSInterceptCustomCertificateCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: ProxyTLSInterceptCustomCertificatePrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1454,7 +1454,7 @@ type ProxyTLSInterceptPolicyModel struct {
 
 // ProxyTLSInterceptPolicyModelAttrTypes defines the attribute types for ProxyTLSInterceptPolicyModel
 var ProxyTLSInterceptPolicyModelAttrTypes = map[string]attr.Type{
-	"interception_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"interception_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: ProxyTLSInterceptPolicyInterceptionRulesModelAttrTypes}},
 }
 
 // ProxyTLSInterceptPolicyInterceptionRulesModel represents interception_rules block

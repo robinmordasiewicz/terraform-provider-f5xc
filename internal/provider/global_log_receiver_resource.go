@@ -67,7 +67,7 @@ var GlobalLogReceiverAWSCloudWatchReceiverModelAttrTypes = map[string]attr.Type{
 	"stream_name": types.StringType,
 	"aws_cred":    types.ObjectType{AttrTypes: GlobalLogReceiverAWSCloudWatchReceiverAWSCredModelAttrTypes},
 	"batch":       types.ObjectType{AttrTypes: GlobalLogReceiverAWSCloudWatchReceiverBatchModelAttrTypes},
-	"compression": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression": types.ObjectType{AttrTypes: GlobalLogReceiverAWSCloudWatchReceiverCompressionModelAttrTypes},
 }
 
 // GlobalLogReceiverAWSCloudWatchReceiverAWSCredModel represents aws_cred block
@@ -129,7 +129,7 @@ type GlobalLogReceiverAzureEventHubsReceiverModel struct {
 var GlobalLogReceiverAzureEventHubsReceiverModelAttrTypes = map[string]attr.Type{
 	"instance":          types.StringType,
 	"namespace":         types.StringType,
-	"connection_string": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"connection_string": types.ObjectType{AttrTypes: GlobalLogReceiverAzureEventHubsReceiverConnectionStringModelAttrTypes},
 }
 
 // GlobalLogReceiverAzureEventHubsReceiverConnectionStringModel represents connection_string block
@@ -183,8 +183,8 @@ type GlobalLogReceiverAzureReceiverModel struct {
 var GlobalLogReceiverAzureReceiverModelAttrTypes = map[string]attr.Type{
 	"container_name":    types.StringType,
 	"batch":             types.ObjectType{AttrTypes: GlobalLogReceiverAzureReceiverBatchModelAttrTypes},
-	"compression":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"connection_string": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression":       types.ObjectType{AttrTypes: GlobalLogReceiverAzureReceiverCompressionModelAttrTypes},
+	"connection_string": types.ObjectType{AttrTypes: GlobalLogReceiverAzureReceiverConnectionStringModelAttrTypes},
 	"filename_options":  types.ObjectType{AttrTypes: GlobalLogReceiverAzureReceiverFilenameOptionsModelAttrTypes},
 }
 
@@ -290,8 +290,8 @@ var GlobalLogReceiverDatadogReceiverModelAttrTypes = map[string]attr.Type{
 	"endpoint":        types.StringType,
 	"site":            types.StringType,
 	"batch":           types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverBatchModelAttrTypes},
-	"compression":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"datadog_api_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression":     types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverCompressionModelAttrTypes},
+	"datadog_api_key": types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverDatadogAPIKeyModelAttrTypes},
 	"no_tls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"use_tls":         types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverUseTLSModelAttrTypes},
 }
@@ -401,7 +401,7 @@ type GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel struct {
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModel
 var GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
 	"certificate": types.StringType,
-	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"key_url":     types.ObjectType{AttrTypes: GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModelAttrTypes},
 }
 
 // GlobalLogReceiverDatadogReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
@@ -455,7 +455,7 @@ type GlobalLogReceiverGCPBucketReceiverModel struct {
 var GlobalLogReceiverGCPBucketReceiverModelAttrTypes = map[string]attr.Type{
 	"bucket":           types.StringType,
 	"batch":            types.ObjectType{AttrTypes: GlobalLogReceiverGCPBucketReceiverBatchModelAttrTypes},
-	"compression":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression":      types.ObjectType{AttrTypes: GlobalLogReceiverGCPBucketReceiverCompressionModelAttrTypes},
 	"filename_options": types.ObjectType{AttrTypes: GlobalLogReceiverGCPBucketReceiverFilenameOptionsModelAttrTypes},
 	"gcp_cred":         types.ObjectType{AttrTypes: GlobalLogReceiverGCPBucketReceiverGCPCredModelAttrTypes},
 }
@@ -539,9 +539,9 @@ var GlobalLogReceiverHTTPReceiverModelAttrTypes = map[string]attr.Type{
 	"uri":         types.StringType,
 	"auth_basic":  types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverAuthBasicModelAttrTypes},
 	"auth_none":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"auth_token":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"auth_token":  types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverAuthTokenModelAttrTypes},
 	"batch":       types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverBatchModelAttrTypes},
-	"compression": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression": types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverCompressionModelAttrTypes},
 	"no_tls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"use_tls":     types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverUseTLSModelAttrTypes},
 }
@@ -555,7 +555,7 @@ type GlobalLogReceiverHTTPReceiverAuthBasicModel struct {
 // GlobalLogReceiverHTTPReceiverAuthBasicModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverAuthBasicModel
 var GlobalLogReceiverHTTPReceiverAuthBasicModelAttrTypes = map[string]attr.Type{
 	"user_name": types.StringType,
-	"password":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":  types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverAuthBasicPasswordModelAttrTypes},
 }
 
 // GlobalLogReceiverHTTPReceiverAuthBasicPasswordModel represents password block
@@ -603,7 +603,7 @@ type GlobalLogReceiverHTTPReceiverAuthTokenModel struct {
 
 // GlobalLogReceiverHTTPReceiverAuthTokenModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverAuthTokenModel
 var GlobalLogReceiverHTTPReceiverAuthTokenModelAttrTypes = map[string]attr.Type{
-	"token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"token": types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverAuthTokenTokenModelAttrTypes},
 }
 
 // GlobalLogReceiverHTTPReceiverAuthTokenTokenModel represents token block
@@ -711,7 +711,7 @@ type GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel struct {
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModel
 var GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
 	"certificate": types.StringType,
-	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"key_url":     types.ObjectType{AttrTypes: GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModelAttrTypes},
 }
 
 // GlobalLogReceiverHTTPReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
@@ -767,7 +767,7 @@ var GlobalLogReceiverKafkaReceiverModelAttrTypes = map[string]attr.Type{
 	"bootstrap_servers": types.ListType{ElemType: types.StringType},
 	"kafka_topic":       types.StringType,
 	"batch":             types.ObjectType{AttrTypes: GlobalLogReceiverKafkaReceiverBatchModelAttrTypes},
-	"compression":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression":       types.ObjectType{AttrTypes: GlobalLogReceiverKafkaReceiverCompressionModelAttrTypes},
 	"no_tls":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"use_tls":           types.ObjectType{AttrTypes: GlobalLogReceiverKafkaReceiverUseTLSModelAttrTypes},
 }
@@ -839,7 +839,7 @@ type GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel struct {
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModel
 var GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
 	"certificate": types.StringType,
-	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"key_url":     types.ObjectType{AttrTypes: GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModelAttrTypes},
 }
 
 // GlobalLogReceiverKafkaReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
@@ -889,7 +889,7 @@ type GlobalLogReceiverNewRelicReceiverModel struct {
 
 // GlobalLogReceiverNewRelicReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverNewRelicReceiverModel
 var GlobalLogReceiverNewRelicReceiverModelAttrTypes = map[string]attr.Type{
-	"api_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_key": types.ObjectType{AttrTypes: GlobalLogReceiverNewRelicReceiverAPIKeyModelAttrTypes},
 	"eu":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"us":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -955,7 +955,7 @@ type GlobalLogReceiverQradarReceiverModel struct {
 var GlobalLogReceiverQradarReceiverModelAttrTypes = map[string]attr.Type{
 	"uri":         types.StringType,
 	"batch":       types.ObjectType{AttrTypes: GlobalLogReceiverQradarReceiverBatchModelAttrTypes},
-	"compression": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression": types.ObjectType{AttrTypes: GlobalLogReceiverQradarReceiverCompressionModelAttrTypes},
 	"no_tls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"use_tls":     types.ObjectType{AttrTypes: GlobalLogReceiverQradarReceiverUseTLSModelAttrTypes},
 }
@@ -1027,7 +1027,7 @@ type GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel struct {
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModel
 var GlobalLogReceiverQradarReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
 	"certificate": types.StringType,
-	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"key_url":     types.ObjectType{AttrTypes: GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModelAttrTypes},
 }
 
 // GlobalLogReceiverQradarReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
@@ -1084,7 +1084,7 @@ var GlobalLogReceiverS3ReceiverModelAttrTypes = map[string]attr.Type{
 	"bucket":           types.StringType,
 	"aws_cred":         types.ObjectType{AttrTypes: GlobalLogReceiverS3ReceiverAWSCredModelAttrTypes},
 	"batch":            types.ObjectType{AttrTypes: GlobalLogReceiverS3ReceiverBatchModelAttrTypes},
-	"compression":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression":      types.ObjectType{AttrTypes: GlobalLogReceiverS3ReceiverCompressionModelAttrTypes},
 	"filename_options": types.ObjectType{AttrTypes: GlobalLogReceiverS3ReceiverFilenameOptionsModelAttrTypes},
 }
 
@@ -1164,9 +1164,9 @@ type GlobalLogReceiverSplunkReceiverModel struct {
 var GlobalLogReceiverSplunkReceiverModelAttrTypes = map[string]attr.Type{
 	"endpoint":         types.StringType,
 	"batch":            types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverBatchModelAttrTypes},
-	"compression":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"compression":      types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverCompressionModelAttrTypes},
 	"no_tls":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"splunk_hec_token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"splunk_hec_token": types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverSplunkHecTokenModelAttrTypes},
 	"use_tls":          types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverUseTLSModelAttrTypes},
 }
 
@@ -1275,7 +1275,7 @@ type GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel struct {
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModelAttrTypes defines the attribute types for GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModel
 var GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableModelAttrTypes = map[string]attr.Type{
 	"certificate": types.StringType,
-	"key_url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"key_url":     types.ObjectType{AttrTypes: GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModelAttrTypes},
 }
 
 // GlobalLogReceiverSplunkReceiverUseTLSMtlsEnableKeyURLModel represents key_url block
@@ -1323,7 +1323,7 @@ type GlobalLogReceiverSumoLogicReceiverModel struct {
 
 // GlobalLogReceiverSumoLogicReceiverModelAttrTypes defines the attribute types for GlobalLogReceiverSumoLogicReceiverModel
 var GlobalLogReceiverSumoLogicReceiverModelAttrTypes = map[string]attr.Type{
-	"url": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"url": types.ObjectType{AttrTypes: GlobalLogReceiverSumoLogicReceiverURLModelAttrTypes},
 }
 
 // GlobalLogReceiverSumoLogicReceiverURLModel represents url block

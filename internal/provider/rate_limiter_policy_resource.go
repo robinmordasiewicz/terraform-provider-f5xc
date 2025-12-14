@@ -59,7 +59,7 @@ type RateLimiterPolicyRulesModel struct {
 // RateLimiterPolicyRulesModelAttrTypes defines the attribute types for RateLimiterPolicyRulesModel
 var RateLimiterPolicyRulesModelAttrTypes = map[string]attr.Type{
 	"metadata": types.ObjectType{AttrTypes: RateLimiterPolicyRulesMetadataModelAttrTypes},
-	"spec":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"spec":     types.ObjectType{AttrTypes: RateLimiterPolicyRulesSpecModelAttrTypes},
 }
 
 // RateLimiterPolicyRulesMetadataModel represents metadata block
@@ -100,7 +100,7 @@ var RateLimiterPolicyRulesSpecModelAttrTypes = map[string]attr.Type{
 	"any_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"apply_rate_limiter":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"asn_list":            types.ObjectType{AttrTypes: RateLimiterPolicyRulesSpecAsnListModelAttrTypes},
-	"asn_matcher":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":         types.ObjectType{AttrTypes: RateLimiterPolicyRulesSpecAsnMatcherModelAttrTypes},
 	"bypass_rate_limiter": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"country_list":        types.ObjectType{AttrTypes: RateLimiterPolicyRulesSpecCountryListModelAttrTypes},
 	"custom_rate_limiter": types.ObjectType{AttrTypes: RateLimiterPolicyRulesSpecCustomRateLimiterModelAttrTypes},

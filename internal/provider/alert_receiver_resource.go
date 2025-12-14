@@ -69,7 +69,7 @@ type AlertReceiverOpsgenieModel struct {
 // AlertReceiverOpsgenieModelAttrTypes defines the attribute types for AlertReceiverOpsgenieModel
 var AlertReceiverOpsgenieModelAttrTypes = map[string]attr.Type{
 	"url":     types.StringType,
-	"api_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_key": types.ObjectType{AttrTypes: AlertReceiverOpsgenieAPIKeyModelAttrTypes},
 }
 
 // AlertReceiverOpsgenieAPIKeyModel represents api_key block
@@ -119,7 +119,7 @@ type AlertReceiverPagerdutyModel struct {
 // AlertReceiverPagerdutyModelAttrTypes defines the attribute types for AlertReceiverPagerdutyModel
 var AlertReceiverPagerdutyModelAttrTypes = map[string]attr.Type{
 	"url":         types.StringType,
-	"routing_key": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"routing_key": types.ObjectType{AttrTypes: AlertReceiverPagerdutyRoutingKeyModelAttrTypes},
 }
 
 // AlertReceiverPagerdutyRoutingKeyModel represents routing_key block
@@ -169,7 +169,7 @@ type AlertReceiverSlackModel struct {
 // AlertReceiverSlackModelAttrTypes defines the attribute types for AlertReceiverSlackModel
 var AlertReceiverSlackModelAttrTypes = map[string]attr.Type{
 	"channel": types.StringType,
-	"url":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"url":     types.ObjectType{AttrTypes: AlertReceiverSlackURLModelAttrTypes},
 }
 
 // AlertReceiverSlackURLModel represents url block
@@ -229,7 +229,7 @@ type AlertReceiverWebhookModel struct {
 // AlertReceiverWebhookModelAttrTypes defines the attribute types for AlertReceiverWebhookModel
 var AlertReceiverWebhookModelAttrTypes = map[string]attr.Type{
 	"http_config": types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigModelAttrTypes},
-	"url":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"url":         types.ObjectType{AttrTypes: AlertReceiverWebhookURLModelAttrTypes},
 }
 
 // AlertReceiverWebhookHTTPConfigModel represents http_config block
@@ -248,9 +248,9 @@ type AlertReceiverWebhookHTTPConfigModel struct {
 var AlertReceiverWebhookHTTPConfigModelAttrTypes = map[string]attr.Type{
 	"enable_http2":     types.BoolType,
 	"follow_redirects": types.BoolType,
-	"auth_token":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"auth_token":       types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigAuthTokenModelAttrTypes},
 	"basic_auth":       types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigBasicAuthModelAttrTypes},
-	"client_cert_obj":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_cert_obj":  types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigClientCertObjModelAttrTypes},
 	"no_authorization": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_tls":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"use_tls":          types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigUseTLSModelAttrTypes},
@@ -263,7 +263,7 @@ type AlertReceiverWebhookHTTPConfigAuthTokenModel struct {
 
 // AlertReceiverWebhookHTTPConfigAuthTokenModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigAuthTokenModel
 var AlertReceiverWebhookHTTPConfigAuthTokenModelAttrTypes = map[string]attr.Type{
-	"token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"token": types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigAuthTokenTokenModelAttrTypes},
 }
 
 // AlertReceiverWebhookHTTPConfigAuthTokenTokenModel represents token block
@@ -313,7 +313,7 @@ type AlertReceiverWebhookHTTPConfigBasicAuthModel struct {
 // AlertReceiverWebhookHTTPConfigBasicAuthModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigBasicAuthModel
 var AlertReceiverWebhookHTTPConfigBasicAuthModelAttrTypes = map[string]attr.Type{
 	"user_name": types.StringType,
-	"password":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":  types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigBasicAuthPasswordModelAttrTypes},
 }
 
 // AlertReceiverWebhookHTTPConfigBasicAuthPasswordModel represents password block
@@ -398,7 +398,7 @@ var AlertReceiverWebhookHTTPConfigUseTLSModelAttrTypes = map[string]attr.Type{
 	"min_version":             types.StringType,
 	"sni":                     types.StringType,
 	"disable_sni":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"use_server_verification": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_server_verification": types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModelAttrTypes},
 	"volterra_trusted_ca":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -409,7 +409,7 @@ type AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel struct {
 
 // AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModelAttrTypes defines the attribute types for AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModel
 var AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationModelAttrTypes = map[string]attr.Type{
-	"ca_cert_obj": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ca_cert_obj": types.ObjectType{AttrTypes: AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModelAttrTypes},
 }
 
 // AlertReceiverWebhookHTTPConfigUseTLSUseServerVerificationCACertObjModel represents ca_cert_obj block

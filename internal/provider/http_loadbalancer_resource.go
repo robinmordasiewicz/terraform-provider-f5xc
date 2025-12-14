@@ -102,13 +102,13 @@ type HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
 var HTTPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes = map[string]attr.Type{
 	"port":                  types.Int64Type,
 	"port_ranges":           types.StringType,
-	"advertise_on_public":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_public":   types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModelAttrTypes},
 	"site":                  types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes},
 	"use_default_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"virtual_network":       types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes},
 	"virtual_site":          types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes},
 	"virtual_site_with_vip": types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes},
-	"vk8s_service":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vk8s_service":          types.ObjectType{AttrTypes: HTTPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes},
 }
 
 // HTTPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel represents advertise_on_public block
@@ -341,12 +341,12 @@ type HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModel struct {
 var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesModelAttrTypes = map[string]attr.Type{
 	"api_endpoint_path":   types.StringType,
 	"specific_domain":     types.StringType,
-	"action":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModelAttrTypes},
 	"any_domain":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"api_endpoint_method": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesAPIEndpointMethodModelAttrTypes},
-	"client_matcher":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_matcher":      types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModelAttrTypes},
 	"metadata":            types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesMetadataModelAttrTypes},
-	"request_matcher":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_matcher":     types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesRequestMatcherModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesActionModel represents action block
@@ -391,7 +391,7 @@ var HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherModelAttrType
 	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"asn_list":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnListModelAttrTypes},
-	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":             types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherAsnMatcherModelAttrTypes},
 	"client_selector":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherClientSelectorModelAttrTypes},
 	"ip_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPMatcherModelAttrTypes},
 	"ip_prefix_list":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIEndpointRulesClientMatcherIPPrefixListModelAttrTypes},
@@ -686,11 +686,11 @@ var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesModelAttrTypes = map[string]
 	"api_group":       types.StringType,
 	"base_path":       types.StringType,
 	"specific_domain": types.StringType,
-	"action":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModelAttrTypes},
 	"any_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"client_matcher":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_matcher":  types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModelAttrTypes},
 	"metadata":        types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesMetadataModelAttrTypes},
-	"request_matcher": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_matcher": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesRequestMatcherModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesActionModel represents action block
@@ -723,7 +723,7 @@ var HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherModelAttrTypes 
 	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"asn_list":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnListModelAttrTypes},
-	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":             types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherAsnMatcherModelAttrTypes},
 	"client_selector":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherClientSelectorModelAttrTypes},
 	"ip_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPMatcherModelAttrTypes},
 	"ip_prefix_list":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIProtectionRulesAPIGroupsRulesClientMatcherIPPrefixListModelAttrTypes},
@@ -1014,8 +1014,8 @@ type HTTPLoadBalancerAPIRateLimitModel struct {
 // HTTPLoadBalancerAPIRateLimitModelAttrTypes defines the attribute types for HTTPLoadBalancerAPIRateLimitModel
 var HTTPLoadBalancerAPIRateLimitModelAttrTypes = map[string]attr.Type{
 	"api_endpoint_rules":         types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModelAttrTypes}},
-	"bypass_rate_limiting_rules": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"custom_ip_allowed_list":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"bypass_rate_limiting_rules": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesModelAttrTypes},
+	"custom_ip_allowed_list":     types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitCustomIPAllowedListModelAttrTypes},
 	"ip_allowed_list":            types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitIPAllowedListModelAttrTypes},
 	"no_ip_allowed_list":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"server_url_rules":           types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesModelAttrTypes}},
@@ -1039,10 +1039,10 @@ var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesModelAttrTypes = map[string]attr
 	"specific_domain":     types.StringType,
 	"any_domain":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"api_endpoint_method": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModelAttrTypes},
-	"client_matcher":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_matcher":      types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModelAttrTypes},
 	"inline_rate_limiter": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesInlineRateLimiterModelAttrTypes},
 	"ref_rate_limiter":    types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRefRateLimiterModelAttrTypes},
-	"request_matcher":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_matcher":     types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesRequestMatcherModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPIRateLimitAPIEndpointRulesAPIEndpointMethodModel represents api_endpoint_method block
@@ -1075,7 +1075,7 @@ var HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherModelAttrTypes = ma
 	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"asn_list":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnListModelAttrTypes},
-	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":             types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherAsnMatcherModelAttrTypes},
 	"client_selector":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherClientSelectorModelAttrTypes},
 	"ip_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPMatcherModelAttrTypes},
 	"ip_prefix_list":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitAPIEndpointRulesClientMatcherIPPrefixListModelAttrTypes},
@@ -1415,8 +1415,8 @@ var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesMo
 	"any_url":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"api_endpoint":    types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModelAttrTypes},
 	"api_groups":      types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIGroupsModelAttrTypes},
-	"client_matcher":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"request_matcher": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_matcher":  types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherModelAttrTypes},
+	"request_matcher": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesRequestMatcherModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesAPIEndpointModel represents api_endpoint block
@@ -1459,7 +1459,7 @@ var HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesCl
 	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"asn_list":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnListModelAttrTypes},
-	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":             types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherAsnMatcherModelAttrTypes},
 	"client_selector":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherClientSelectorModelAttrTypes},
 	"ip_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPMatcherModelAttrTypes},
 	"ip_prefix_list":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitBypassRateLimitingRulesBypassRateLimitingRulesClientMatcherIPPrefixListModelAttrTypes},
@@ -1777,10 +1777,10 @@ var HTTPLoadBalancerAPIRateLimitServerURLRulesModelAttrTypes = map[string]attr.T
 	"base_path":           types.StringType,
 	"specific_domain":     types.StringType,
 	"any_domain":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"client_matcher":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"client_matcher":      types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModelAttrTypes},
 	"inline_rate_limiter": types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesInlineRateLimiterModelAttrTypes},
 	"ref_rate_limiter":    types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRefRateLimiterModelAttrTypes},
-	"request_matcher":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"request_matcher":     types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesRequestMatcherModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModel represents client_matcher block
@@ -1801,7 +1801,7 @@ var HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherModelAttrTypes = map[
 	"any_client":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_ip":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"asn_list":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnListModelAttrTypes},
-	"asn_matcher":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":             types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherAsnMatcherModelAttrTypes},
 	"client_selector":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherClientSelectorModelAttrTypes},
 	"ip_matcher":              types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPMatcherModelAttrTypes},
 	"ip_prefix_list":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPIRateLimitServerURLRulesClientMatcherIPPrefixListModelAttrTypes},
@@ -2122,8 +2122,8 @@ type HTTPLoadBalancerAPISpecificationModel struct {
 // HTTPLoadBalancerAPISpecificationModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationModel
 var HTTPLoadBalancerAPISpecificationModelAttrTypes = map[string]attr.Type{
 	"api_definition":                types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationAPIDefinitionModelAttrTypes},
-	"validation_all_spec_endpoints": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"validation_custom_list":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validation_all_spec_endpoints": types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsModelAttrTypes},
+	"validation_custom_list":        types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListModelAttrTypes},
 	"validation_disabled":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -2150,9 +2150,9 @@ type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsModel struct {
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsModel
 var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsModelAttrTypes = map[string]attr.Type{
-	"fall_through_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"settings":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"validation_mode":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fall_through_mode": types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModelAttrTypes},
+	"settings":          types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModelAttrTypes},
+	"validation_mode":   types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsValidationModeModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel represents fall_through_mode block
@@ -2164,7 +2164,7 @@ type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeMo
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModel
 var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeModelAttrTypes = map[string]attr.Type{
 	"fall_through_mode_allow":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"fall_through_mode_custom": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fall_through_mode_custom": types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsFallThroughModeFallThroughModeCustomModel represents fall_through_mode_custom block
@@ -2235,7 +2235,7 @@ type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModel str
 var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsModelAttrTypes = map[string]attr.Type{
 	"oversized_body_fail_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"oversized_body_skip_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"property_validation_settings_custom":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"property_validation_settings_custom":  types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModelAttrTypes},
 	"property_validation_settings_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -2246,7 +2246,7 @@ type HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyV
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModel
 var HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomModelAttrTypes = map[string]attr.Type{
-	"query_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"query_parameters": types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationAllSpecEndpointsSettingsPropertyValidationSettingsCustomQueryParametersModel represents query_parameters block
@@ -2314,9 +2314,9 @@ type HTTPLoadBalancerAPISpecificationValidationCustomListModel struct {
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListModel
 var HTTPLoadBalancerAPISpecificationValidationCustomListModelAttrTypes = map[string]attr.Type{
-	"fall_through_mode":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fall_through_mode":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModelAttrTypes},
 	"open_api_validation_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesModelAttrTypes}},
-	"settings":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"settings":                  types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListSettingsModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel represents fall_through_mode block
@@ -2328,7 +2328,7 @@ type HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel st
 // HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModel
 var HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeModelAttrTypes = map[string]attr.Type{
 	"fall_through_mode_allow":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"fall_through_mode_custom": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"fall_through_mode_custom": types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListFallThroughModeFallThroughModeCustomModel represents fall_through_mode_custom block
@@ -2406,7 +2406,7 @@ var HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMo
 	"any_domain":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"api_endpoint":    types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModelAttrTypes},
 	"metadata":        types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesMetadataModelAttrTypes},
-	"validation_mode": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"validation_mode": types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesValidationModeModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListOpenAPIValidationRulesAPIEndpointModel represents api_endpoint block
@@ -2489,7 +2489,7 @@ type HTTPLoadBalancerAPISpecificationValidationCustomListSettingsModel struct {
 var HTTPLoadBalancerAPISpecificationValidationCustomListSettingsModelAttrTypes = map[string]attr.Type{
 	"oversized_body_fail_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"oversized_body_skip_validation":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"property_validation_settings_custom":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"property_validation_settings_custom":  types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModelAttrTypes},
 	"property_validation_settings_default": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -2500,7 +2500,7 @@ type HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidat
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModelAttrTypes defines the attribute types for HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModel
 var HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomModelAttrTypes = map[string]attr.Type{
-	"query_parameters": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"query_parameters": types.ObjectType{AttrTypes: HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPISpecificationValidationCustomListSettingsPropertyValidationSettingsCustomQueryParametersModel represents query_parameters block
@@ -2564,7 +2564,7 @@ var HTTPLoadBalancerAPITestingDomainsCredentialsModelAttrTypes = map[string]attr
 	"admin":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"api_key":         types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModelAttrTypes},
 	"basic_auth":      types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModelAttrTypes},
-	"bearer_token":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"bearer_token":    types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenModelAttrTypes},
 	"login_endpoint":  types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointModelAttrTypes},
 	"standard":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -2578,7 +2578,7 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModel struct {
 // HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModel
 var HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyModelAttrTypes = map[string]attr.Type{
 	"key":   types.StringType,
-	"value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"value": types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsAPIKeyValueModel represents value block
@@ -2628,7 +2628,7 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModel struct {
 // HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModel
 var HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthModelAttrTypes = map[string]attr.Type{
 	"user":     types.StringType,
-	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password": types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsBasicAuthPasswordModel represents password block
@@ -2676,7 +2676,7 @@ type HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenModel struct {
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenModelAttrTypes defines the attribute types for HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenModel
 var HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenModelAttrTypes = map[string]attr.Type{
-	"token": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"token": types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsBearerTokenTokenModel represents token block
@@ -2730,7 +2730,7 @@ var HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointModelAttrTypes = ma
 	"method":             types.StringType,
 	"path":               types.StringType,
 	"token_response_key": types.StringType,
-	"json_payload":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"json_payload":       types.ObjectType{AttrTypes: HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModelAttrTypes},
 }
 
 // HTTPLoadBalancerAPITestingDomainsCredentialsLoginEndpointJSONPayloadModel represents json_payload block
@@ -2809,7 +2809,7 @@ var HTTPLoadBalancerBlockedClientsModelAttrTypes = map[string]attr.Type{
 	"ipv6_prefix":          types.StringType,
 	"user_identifier":      types.StringType,
 	"bot_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_header":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_header":          types.ObjectType{AttrTypes: HTTPLoadBalancerBlockedClientsHTTPHeaderModelAttrTypes},
 	"metadata":             types.ObjectType{AttrTypes: HTTPLoadBalancerBlockedClientsMetadataModelAttrTypes},
 	"skip_processing":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"waf_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -2894,8 +2894,8 @@ var HTTPLoadBalancerBotDefensePolicyModelAttrTypes = map[string]attr.Type{
 	"disable_mobile_sdk":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"js_insert_all_pages":        types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesModelAttrTypes},
 	"js_insert_all_pages_except": types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModelAttrTypes},
-	"js_insertion_rules":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"mobile_sdk_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_insertion_rules":         types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertionRulesModelAttrTypes},
+	"mobile_sdk_config":          types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyMobileSdkConfigModelAttrTypes},
 	"protected_app_endpoints":    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsModelAttrTypes}},
 }
 
@@ -2918,7 +2918,7 @@ type HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel struct {
 // HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModel
 var HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptModelAttrTypes = map[string]attr.Type{
 	"javascript_location": types.StringType,
-	"exclude_list":        types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"exclude_list":        types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModelAttrTypes}},
 }
 
 // HTTPLoadBalancerBotDefensePolicyJsInsertAllPagesExceptExcludeListModel represents exclude_list block
@@ -2985,7 +2985,7 @@ type HTTPLoadBalancerBotDefensePolicyJsInsertionRulesModel struct {
 
 // HTTPLoadBalancerBotDefensePolicyJsInsertionRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyJsInsertionRulesModel
 var HTTPLoadBalancerBotDefensePolicyJsInsertionRulesModelAttrTypes = map[string]attr.Type{
-	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertionRulesExcludeListModelAttrTypes}},
 	"rules":        types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyJsInsertionRulesRulesModelAttrTypes}},
 }
 
@@ -3110,7 +3110,7 @@ type HTTPLoadBalancerBotDefensePolicyMobileSdkConfigModel struct {
 
 // HTTPLoadBalancerBotDefensePolicyMobileSdkConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyMobileSdkConfigModel
 var HTTPLoadBalancerBotDefensePolicyMobileSdkConfigModelAttrTypes = map[string]attr.Type{
-	"mobile_identifier": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mobile_identifier": types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModelAttrTypes},
 }
 
 // HTTPLoadBalancerBotDefensePolicyMobileSdkConfigMobileIdentifierModel represents mobile_identifier block
@@ -3180,11 +3180,11 @@ var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsModelAttrTypes = map[st
 	"allow_good_bots":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_domain":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"domain":               types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsDomainModelAttrTypes},
-	"flow_label":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"flow_label":           types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModelAttrTypes},
 	"headers":              types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsHeadersModelAttrTypes}},
 	"metadata":             types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMetadataModelAttrTypes},
 	"mitigate_good_bots":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"mitigation":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mitigation":           types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModelAttrTypes},
 	"mobile":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"path":                 types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsPathModelAttrTypes},
 	"query_params":         types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsQueryParamsModelAttrTypes}},
@@ -3220,13 +3220,13 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel struct 
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModel
 var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelModelAttrTypes = map[string]attr.Type{
-	"account_management":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"authentication":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"financial_services":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"flight":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"profile_management":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"search":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"shopping_gift_cards": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"account_management":  types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModelAttrTypes},
+	"authentication":      types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModelAttrTypes},
+	"financial_services":  types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFinancialServicesModelAttrTypes},
+	"flight":              types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelFlightModelAttrTypes},
+	"profile_management":  types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelProfileManagementModelAttrTypes},
+	"search":              types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelSearchModelAttrTypes},
+	"shopping_gift_cards": types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelShoppingGiftCardsModelAttrTypes},
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAccountManagementModel represents account_management block
@@ -3252,7 +3252,7 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticatio
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModel
 var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationModelAttrTypes = map[string]attr.Type{
-	"login":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"login":         types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModelAttrTypes},
 	"login_mfa":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"login_partner": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"logout":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -3268,7 +3268,7 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticatio
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModel
 var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginModelAttrTypes = map[string]attr.Type{
 	"disable_transaction_result": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"transaction_result":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"transaction_result":         types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModelAttrTypes},
 }
 
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsFlowLabelAuthenticationLoginTransactionResultModel represents transaction_result block
@@ -3449,7 +3449,7 @@ type HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel struct
 // HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModel
 var HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationModelAttrTypes = map[string]attr.Type{
 	"block":    types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationBlockModelAttrTypes},
-	"flag":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"flag":     types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationFlagModelAttrTypes},
 	"redirect": types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefensePolicyProtectedAppEndpointsMitigationRedirectModelAttrTypes},
 }
 
@@ -3573,9 +3573,9 @@ var HTTPLoadBalancerBotDefenseAdvancedModelAttrTypes = map[string]attr.Type{
 	"disable_mobile_sdk":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"js_insert_all_pages":        types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesModelAttrTypes},
 	"js_insert_all_pages_except": types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModelAttrTypes},
-	"js_insertion_rules":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_insertion_rules":         types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesModelAttrTypes},
 	"mobile":                     types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedMobileModelAttrTypes},
-	"mobile_sdk_config":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mobile_sdk_config":          types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigModelAttrTypes},
 	"web":                        types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedWebModelAttrTypes},
 }
 
@@ -3598,7 +3598,7 @@ type HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModel struct {
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModel
 var HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptModelAttrTypes = map[string]attr.Type{
 	"javascript_location": types.StringType,
-	"exclude_list":        types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"exclude_list":        types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListModelAttrTypes}},
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertAllPagesExceptExcludeListModel represents exclude_list block
@@ -3665,7 +3665,7 @@ type HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesModel struct {
 
 // HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesModel
 var HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesModelAttrTypes = map[string]attr.Type{
-	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesExcludeListModelAttrTypes}},
 	"rules":        types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedJsInsertionRulesRulesModelAttrTypes}},
 }
 
@@ -3804,7 +3804,7 @@ type HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigModel struct {
 
 // HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigModel
 var HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigModelAttrTypes = map[string]attr.Type{
-	"mobile_identifier": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mobile_identifier": types.ObjectType{AttrTypes: HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierModelAttrTypes},
 }
 
 // HTTPLoadBalancerBotDefenseAdvancedMobileSdkConfigMobileIdentifierModel represents mobile_identifier block
@@ -3869,7 +3869,7 @@ type HTTPLoadBalancerCachingPolicyModel struct {
 
 // HTTPLoadBalancerCachingPolicyModelAttrTypes defines the attribute types for HTTPLoadBalancerCachingPolicyModel
 var HTTPLoadBalancerCachingPolicyModelAttrTypes = map[string]attr.Type{
-	"custom_cache_rule":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_cache_rule":    types.ObjectType{AttrTypes: HTTPLoadBalancerCachingPolicyCustomCacheRuleModelAttrTypes},
 	"default_cache_action": types.ObjectType{AttrTypes: HTTPLoadBalancerCachingPolicyDefaultCacheActionModelAttrTypes},
 }
 
@@ -3930,7 +3930,7 @@ type HTTPLoadBalancerClientSideDefenseModel struct {
 
 // HTTPLoadBalancerClientSideDefenseModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefenseModel
 var HTTPLoadBalancerClientSideDefenseModelAttrTypes = map[string]attr.Type{
-	"policy": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policy": types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyModelAttrTypes},
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyModel represents policy block
@@ -3945,8 +3945,8 @@ type HTTPLoadBalancerClientSideDefensePolicyModel struct {
 var HTTPLoadBalancerClientSideDefensePolicyModelAttrTypes = map[string]attr.Type{
 	"disable_js_insert":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"js_insert_all_pages":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"js_insert_all_pages_except": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"js_insertion_rules":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"js_insert_all_pages_except": types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModelAttrTypes},
+	"js_insertion_rules":         types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModelAttrTypes},
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel represents js_insert_all_pages_except block
@@ -3956,7 +3956,7 @@ type HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel struct {
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModel
 var HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptModelAttrTypes = map[string]attr.Type{
-	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModelAttrTypes}},
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertAllPagesExceptExcludeListModel represents exclude_list block
@@ -4023,8 +4023,8 @@ type HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModel struct {
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModel
 var HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesModelAttrTypes = map[string]attr.Type{
-	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
-	"rules":        types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"exclude_list": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModelAttrTypes}},
+	"rules":        types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerClientSideDefensePolicyJsInsertionRulesExcludeListModel represents exclude_list block
@@ -4386,9 +4386,9 @@ var HTTPLoadBalancerDefaultPoolModelAttrTypes = map[string]attr.Type{
 	"healthcheck":                   types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolHealthcheckModelAttrTypes}},
 	"lb_port":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_tls":                        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"origin_servers":                types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"origin_servers":                types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersModelAttrTypes}},
 	"same_as_endpoint_port":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"upstream_conn_pool_reuse_type": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"upstream_conn_pool_reuse_type": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUpstreamConnPoolReuseTypeModelAttrTypes},
 	"use_tls":                       types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSModelAttrTypes},
 	"view_internal":                 types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolViewInternalModelAttrTypes},
 }
@@ -4430,8 +4430,8 @@ var HTTPLoadBalancerDefaultPoolAdvancedOptionsModelAttrTypes = map[string]attr.T
 	"disable_proxy_protocol":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_subsets":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_lb_source_ip_persistance":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"enable_subsets":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http1_config":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_subsets":                   types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModelAttrTypes},
+	"http1_config":                     types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModelAttrTypes},
 	"http2_options":                    types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp2OptionsModelAttrTypes},
 	"no_panic_threshold":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outlier_detection":                types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsOutlierDetectionModelAttrTypes},
@@ -4468,7 +4468,7 @@ type HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModel struct {
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModel
 var HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsModelAttrTypes = map[string]attr.Type{
 	"any_endpoint":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"default_subset":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"default_subset":   types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsDefaultSubsetModelAttrTypes},
 	"endpoint_subsets": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsEnableSubsetsEndpointSubsetsModelAttrTypes}},
 	"fail_request":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -4500,7 +4500,7 @@ type HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModel struct {
 
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModelAttrTypes defines the attribute types for HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModel
 var HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigHeaderTransformationModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolAdvancedOptionsHttp1ConfigHeaderTransformationModel represents header_transformation block
@@ -4580,7 +4580,7 @@ type HTTPLoadBalancerDefaultPoolOriginServersModel struct {
 var HTTPLoadBalancerDefaultPoolOriginServersModelAttrTypes = map[string]attr.Type{
 	"cbip_service":           types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersCbipServiceModelAttrTypes},
 	"consul_service":         types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModelAttrTypes},
-	"custom_endpoint_object": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_endpoint_object": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersCustomEndpointObjectModelAttrTypes},
 	"k8s_service":            types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModelAttrTypes},
 	"labels":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"private_ip":             types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModelAttrTypes},
@@ -4615,8 +4615,8 @@ var HTTPLoadBalancerDefaultPoolOriginServersConsulServiceModelAttrTypes = map[st
 	"service_name":    types.StringType,
 	"inside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"site_locator":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"snat_pool":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_locator":    types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorModelAttrTypes},
+	"snat_pool":       types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSnatPoolModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersConsulServiceSiteLocatorModel represents site_locator block
@@ -4722,8 +4722,8 @@ var HTTPLoadBalancerDefaultPoolOriginServersK8SServiceModelAttrTypes = map[strin
 	"service_name":    types.StringType,
 	"inside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"site_locator":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"snat_pool":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_locator":    types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSiteLocatorModelAttrTypes},
+	"snat_pool":       types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersK8SServiceSnatPoolModelAttrTypes},
 	"vk8s_networks":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -4805,8 +4805,8 @@ var HTTPLoadBalancerDefaultPoolOriginServersPrivateIPModelAttrTypes = map[string
 	"inside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outside_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"segment":         types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSegmentModelAttrTypes},
-	"site_locator":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"snat_pool":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_locator":    types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSiteLocatorModelAttrTypes},
+	"snat_pool":       types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSnatPoolModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateIPSegmentModel represents segment block
@@ -4903,8 +4903,8 @@ var HTTPLoadBalancerDefaultPoolOriginServersPrivateNameModelAttrTypes = map[stri
 	"inside_network":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outside_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"segment":          types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSegmentModelAttrTypes},
-	"site_locator":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"snat_pool":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"site_locator":     types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSiteLocatorModelAttrTypes},
+	"snat_pool":        types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSnatPoolModelAttrTypes},
 }
 
 // HTTPLoadBalancerDefaultPoolOriginServersPrivateNameSegmentModel represents segment block
@@ -5095,9 +5095,9 @@ var HTTPLoadBalancerDefaultPoolUseTLSModelAttrTypes = map[string]attr.Type{
 	"disable_sni":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_mtls":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"skip_server_verification":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":                  types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSTLSConfigModelAttrTypes},
 	"use_host_header_as_sni":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"use_mtls":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"use_mtls":                    types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseMtlsModelAttrTypes},
 	"use_mtls_obj":                types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseMtlsObjModelAttrTypes},
 	"use_server_verification":     types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseServerVerificationModelAttrTypes},
 	"volterra_trusted_ca":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -5159,7 +5159,7 @@ var HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesModelAttrTypes = map[
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: HTTPLoadBalancerDefaultPoolUseTLSUseMtlsTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -5380,9 +5380,9 @@ type HTTPLoadBalancerEnableAPIDiscoveryModel struct {
 
 // HTTPLoadBalancerEnableAPIDiscoveryModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryModel
 var HTTPLoadBalancerEnableAPIDiscoveryModelAttrTypes = map[string]attr.Type{
-	"api_crawler":                         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"api_discovery_from_code_scan":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"custom_api_auth_discovery":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_crawler":                         types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerModelAttrTypes},
+	"api_discovery_from_code_scan":        types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes},
+	"custom_api_auth_discovery":           types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryCustomAPIAuthDiscoveryModelAttrTypes},
 	"default_api_auth_discovery":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_learn_from_redirect_traffic": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"discovered_api_settings":             types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryDiscoveredAPISettingsModelAttrTypes},
@@ -5397,7 +5397,7 @@ type HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerModel struct {
 
 // HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerModel
 var HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerModelAttrTypes = map[string]attr.Type{
-	"api_crawler_config":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_crawler_config":  types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigModelAttrTypes},
 	"disable_api_crawler": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -5432,7 +5432,7 @@ type HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLo
 // HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel
 var HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes = map[string]attr.Type{
 	"user":     types.StringType,
-	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password": types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModelAttrTypes},
 }
 
 // HTTPLoadBalancerEnableAPIDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel represents password block
@@ -5480,7 +5480,7 @@ type HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel struct {
 
 // HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes defines the attribute types for HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModel
 var HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes = map[string]attr.Type{
-	"code_base_integrations": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"code_base_integrations": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerEnableAPIDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel represents code_base_integrations block
@@ -5733,16 +5733,16 @@ var HTTPLoadBalancerHTTPSModelAttrTypes = map[string]attr.Type{
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes},
+	"tls_parameters":           types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersModelAttrTypes},
 }
 
 // HTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
@@ -5766,7 +5766,7 @@ type HTTPLoadBalancerHTTPSHTTPProtocolOptionsModel struct {
 
 // HTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
 var HTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -5778,7 +5778,7 @@ type HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel struc
 
 // HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // HTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -5809,7 +5809,7 @@ type HTTPLoadBalancerHTTPSTLSCertParamsModel struct {
 var HTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
 	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
 	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes},
 	"use_mtls":     types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
 }
 
@@ -5929,7 +5929,7 @@ type HTTPLoadBalancerHTTPSTLSParametersModel struct {
 var HTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
@@ -5949,7 +5949,7 @@ var HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes = map[string
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -6122,16 +6122,16 @@ var HTTPLoadBalancerHTTPSAutoCertModelAttrTypes = map[string]attr.Type{
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes},
 	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes},
 	"use_mtls":                 types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
 }
 
@@ -6156,7 +6156,7 @@ type HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel struct {
 
 // HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
 var HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -6168,7 +6168,7 @@ type HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyMod
 
 // HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // HTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -6303,12 +6303,12 @@ type HTTPLoadBalancerJWTValidationModel struct {
 
 // HTTPLoadBalancerJWTValidationModelAttrTypes defines the attribute types for HTTPLoadBalancerJWTValidationModel
 var HTTPLoadBalancerJWTValidationModelAttrTypes = map[string]attr.Type{
-	"action":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action":           types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationActionModelAttrTypes},
 	"jwks_config":      types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationJwksConfigModelAttrTypes},
 	"mandatory_claims": types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationMandatoryClaimsModelAttrTypes},
 	"reserved_claims":  types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationReservedClaimsModelAttrTypes},
-	"target":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"token_location":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"target":           types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationTargetModelAttrTypes},
+	"token_location":   types.ObjectType{AttrTypes: HTTPLoadBalancerJWTValidationTokenLocationModelAttrTypes},
 }
 
 // HTTPLoadBalancerJWTValidationActionModel represents action block
@@ -6547,8 +6547,8 @@ type HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel struct
 // HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModel
 var HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesModelAttrTypes = map[string]attr.Type{
 	"http_methods": types.ListType{ElemType: types.StringType},
-	"action":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"domain":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action":       types.ObjectType{AttrTypes: HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesActionModelAttrTypes},
+	"domain":       types.ObjectType{AttrTypes: HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesDomainModelAttrTypes},
 	"metadata":     types.ObjectType{AttrTypes: HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesMetadataModelAttrTypes},
 	"path":         types.ObjectType{AttrTypes: HTTPLoadBalancerMalwareProtectionSettingsMalwareProtectionRulesPathModelAttrTypes},
 }
@@ -6698,7 +6698,7 @@ var HTTPLoadBalancerMoreOptionRequestCookiesToAddModelAttrTypes = map[string]att
 	"name":         types.StringType,
 	"overwrite":    types.BoolType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModelAttrTypes},
 }
 
 // HTTPLoadBalancerMoreOptionRequestCookiesToAddSecretValueModel represents secret_value block
@@ -6752,7 +6752,7 @@ var HTTPLoadBalancerMoreOptionRequestHeadersToAddModelAttrTypes = map[string]att
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModelAttrTypes},
 }
 
 // HTTPLoadBalancerMoreOptionRequestHeadersToAddSecretValueModel represents secret_value block
@@ -6844,7 +6844,7 @@ var HTTPLoadBalancerMoreOptionResponseCookiesToAddModelAttrTypes = map[string]at
 	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModelAttrTypes},
 }
 
 // HTTPLoadBalancerMoreOptionResponseCookiesToAddSecretValueModel represents secret_value block
@@ -6898,7 +6898,7 @@ var HTTPLoadBalancerMoreOptionResponseHeadersToAddModelAttrTypes = map[string]at
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModelAttrTypes},
 }
 
 // HTTPLoadBalancerMoreOptionResponseHeadersToAddSecretValueModel represents secret_value block
@@ -6972,7 +6972,7 @@ var HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesModelAttrTy
 	"any_asn":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_ip":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"asn_list":                     types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnListModelAttrTypes},
-	"asn_matcher":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":                  types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesAsnMatcherModelAttrTypes},
 	"client_selector":              types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesClientSelectorModelAttrTypes},
 	"ip_matcher":                   types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPMatcherModelAttrTypes},
 	"ip_prefix_list":               types.ObjectType{AttrTypes: HTTPLoadBalancerOriginServerSubsetRuleListOriginServerSubsetRulesIPPrefixListModelAttrTypes},
@@ -7111,7 +7111,7 @@ var HTTPLoadBalancerPolicyBasedChallengeModelAttrTypes = map[string]attr.Type{
 	"js_challenge_parameters":               types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeJsChallengeParametersModelAttrTypes},
 	"malicious_user_mitigation":             types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeMaliciousUserMitigationModelAttrTypes},
 	"no_challenge":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"rule_list":                             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"rule_list":                             types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListModelAttrTypes},
 	"temporary_user_blocking":               types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeTemporaryUserBlockingModelAttrTypes},
 }
 
@@ -7162,7 +7162,7 @@ type HTTPLoadBalancerPolicyBasedChallengeRuleListModel struct {
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListModelAttrTypes defines the attribute types for HTTPLoadBalancerPolicyBasedChallengeRuleListModel
 var HTTPLoadBalancerPolicyBasedChallengeRuleListModelAttrTypes = map[string]attr.Type{
-	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesModelAttrTypes}},
 }
 
 // HTTPLoadBalancerPolicyBasedChallengeRuleListRulesModel represents rules block
@@ -7222,7 +7222,7 @@ var HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecModelAttrTypes = map[st
 	"any_ip":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"arg_matchers":                types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecArgMatchersModelAttrTypes}},
 	"asn_list":                    types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnListModelAttrTypes},
-	"asn_matcher":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"asn_matcher":                 types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecAsnMatcherModelAttrTypes},
 	"body_matcher":                types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecBodyMatcherModelAttrTypes},
 	"client_selector":             types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecClientSelectorModelAttrTypes},
 	"cookie_matchers":             types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerPolicyBasedChallengeRuleListRulesSpecCookieMatchersModelAttrTypes}},
@@ -7585,11 +7585,11 @@ type HTTPLoadBalancerRateLimitModel struct {
 
 // HTTPLoadBalancerRateLimitModelAttrTypes defines the attribute types for HTTPLoadBalancerRateLimitModel
 var HTTPLoadBalancerRateLimitModelAttrTypes = map[string]attr.Type{
-	"custom_ip_allowed_list": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_ip_allowed_list": types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitCustomIPAllowedListModelAttrTypes},
 	"ip_allowed_list":        types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitIPAllowedListModelAttrTypes},
 	"no_ip_allowed_list":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_policies":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"policies":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policies":               types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitPoliciesModelAttrTypes},
 	"rate_limiter":           types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitRateLimiterModelAttrTypes},
 }
 
@@ -7669,7 +7669,7 @@ var HTTPLoadBalancerRateLimitRateLimiterModelAttrTypes = map[string]attr.Type{
 	"period_multiplier": types.Int64Type,
 	"total_number":      types.Int64Type,
 	"unit":              types.StringType,
-	"action_block":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action_block":      types.ObjectType{AttrTypes: HTTPLoadBalancerRateLimitRateLimiterActionBlockModelAttrTypes},
 	"disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"leaky_bucket":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"token_bucket":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -7785,7 +7785,7 @@ type HTTPLoadBalancerRoutesModel struct {
 
 // HTTPLoadBalancerRoutesModelAttrTypes defines the attribute types for HTTPLoadBalancerRoutesModel
 var HTTPLoadBalancerRoutesModelAttrTypes = map[string]attr.Type{
-	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_route_object":   types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesCustomRouteObjectModelAttrTypes},
 	"direct_response_route": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesDirectResponseRouteModelAttrTypes},
 	"redirect_route":        types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesRedirectRouteModelAttrTypes},
 	"simple_route":          types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteModelAttrTypes},
@@ -8066,7 +8066,7 @@ var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsModelAttrTypes = map[string]
 	"common_buffering":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"common_hash_policy":                         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"cors_policy":                                types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCORSPolicyModelAttrTypes},
-	"csrf_policy":                                types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"csrf_policy":                                types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsCSRFPolicyModelAttrTypes},
 	"default_retry_policy":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_mirroring":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_prefix_rewrite":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -8079,7 +8079,7 @@ var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsModelAttrTypes = map[string]
 	"inherited_bot_defense_javascript_injection": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"inherited_waf":                              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"inherited_waf_exclusion":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"mirror_policy":                              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mirror_policy":                              types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsMirrorPolicyModelAttrTypes},
 	"no_retry_policy":                            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"regex_rewrite":                              types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRegexRewriteModelAttrTypes},
 	"request_cookies_to_add":                     types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddModelAttrTypes}},
@@ -8088,7 +8088,7 @@ var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsModelAttrTypes = map[string]
 	"response_headers_to_add":                    types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddModelAttrTypes}},
 	"retract_cluster":                            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"retry_policy":                               types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRetryPolicyModelAttrTypes},
-	"specific_hash_policy":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"specific_hash_policy":                       types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsSpecificHashPolicyModelAttrTypes},
 	"waf_exclusion_policy":                       types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWAFExclusionPolicyModelAttrTypes},
 	"web_socket_config":                          types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsWebSocketConfigModelAttrTypes},
 }
@@ -8266,7 +8266,7 @@ var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddModelAttr
 	"name":         types.StringType,
 	"overwrite":    types.BoolType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestCookiesToAddSecretValueModel represents secret_value block
@@ -8320,7 +8320,7 @@ var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddModelAttr
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsRequestHeadersToAddSecretValueModel represents secret_value block
@@ -8412,7 +8412,7 @@ var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddModelAtt
 	"samesite_lax":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_none":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"samesite_strict":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"secret_value":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value":       types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseCookiesToAddSecretValueModel represents secret_value block
@@ -8466,7 +8466,7 @@ var HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddModelAtt
 	"append":       types.BoolType,
 	"name":         types.StringType,
 	"value":        types.StringType,
-	"secret_value": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_value": types.ObjectType{AttrTypes: HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueModelAttrTypes},
 }
 
 // HTTPLoadBalancerRoutesSimpleRouteAdvancedOptionsResponseHeadersToAddSecretValueModel represents secret_value block
@@ -8730,7 +8730,7 @@ type HTTPLoadBalancerSensitiveDataDisclosureRulesModel struct {
 
 // HTTPLoadBalancerSensitiveDataDisclosureRulesModelAttrTypes defines the attribute types for HTTPLoadBalancerSensitiveDataDisclosureRulesModel
 var HTTPLoadBalancerSensitiveDataDisclosureRulesModelAttrTypes = map[string]attr.Type{
-	"sensitive_data_types_in_response": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"sensitive_data_types_in_response": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModelAttrTypes}},
 }
 
 // HTTPLoadBalancerSensitiveDataDisclosureRulesSensitiveDataTypesInResponseModel represents sensitive_data_types_in_response block
@@ -8807,7 +8807,7 @@ type HTTPLoadBalancerSingleLBAppModel struct {
 var HTTPLoadBalancerSingleLBAppModelAttrTypes = map[string]attr.Type{
 	"disable_discovery":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_malicious_user_detection": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"enable_discovery":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"enable_discovery":                 types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryModelAttrTypes},
 	"enable_malicious_user_detection":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -8824,9 +8824,9 @@ type HTTPLoadBalancerSingleLBAppEnableDiscoveryModel struct {
 
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryModel
 var HTTPLoadBalancerSingleLBAppEnableDiscoveryModelAttrTypes = map[string]attr.Type{
-	"api_crawler":                         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"api_discovery_from_code_scan":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"custom_api_auth_discovery":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_crawler":                         types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModelAttrTypes},
+	"api_discovery_from_code_scan":        types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes},
+	"custom_api_auth_discovery":           types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryCustomAPIAuthDiscoveryModelAttrTypes},
 	"default_api_auth_discovery":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_learn_from_redirect_traffic": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"discovered_api_settings":             types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryDiscoveredAPISettingsModelAttrTypes},
@@ -8841,7 +8841,7 @@ type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModel struct {
 
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModel
 var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerModelAttrTypes = map[string]attr.Type{
-	"api_crawler_config":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"api_crawler_config":  types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigModelAttrTypes},
 	"disable_api_crawler": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -8876,7 +8876,7 @@ type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomains
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModel
 var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginModelAttrTypes = map[string]attr.Type{
 	"user":     types.StringType,
-	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password": types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModelAttrTypes},
 }
 
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPICrawlerAPICrawlerConfigDomainsSimpleLoginPasswordModel represents password block
@@ -8924,7 +8924,7 @@ type HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModel str
 
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes defines the attribute types for HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModel
 var HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanModelAttrTypes = map[string]attr.Type{
-	"code_base_integrations": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"code_base_integrations": types.ListType{ElemType: types.ObjectType{AttrTypes: HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModelAttrTypes}},
 }
 
 // HTTPLoadBalancerSingleLBAppEnableDiscoveryAPIDiscoveryFromCodeScanCodeBaseIntegrationsModel represents code_base_integrations block
@@ -9037,7 +9037,7 @@ var HTTPLoadBalancerTrustedClientsModelAttrTypes = map[string]attr.Type{
 	"ipv6_prefix":          types.StringType,
 	"user_identifier":      types.StringType,
 	"bot_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_header":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_header":          types.ObjectType{AttrTypes: HTTPLoadBalancerTrustedClientsHTTPHeaderModelAttrTypes},
 	"metadata":             types.ObjectType{AttrTypes: HTTPLoadBalancerTrustedClientsMetadataModelAttrTypes},
 	"skip_processing":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"waf_skip_processing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -9105,7 +9105,7 @@ type HTTPLoadBalancerWAFExclusionModel struct {
 
 // HTTPLoadBalancerWAFExclusionModelAttrTypes defines the attribute types for HTTPLoadBalancerWAFExclusionModel
 var HTTPLoadBalancerWAFExclusionModelAttrTypes = map[string]attr.Type{
-	"waf_exclusion_inline_rules": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"waf_exclusion_inline_rules": types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesModelAttrTypes},
 	"waf_exclusion_policy":       types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionPolicyModelAttrTypes},
 }
 
@@ -9144,7 +9144,7 @@ var HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesModelAttrTypes = map
 	"suffix_value":                   types.StringType,
 	"any_domain":                     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"any_path":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"app_firewall_detection_control": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"app_firewall_detection_control": types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesAppFirewallDetectionControlModelAttrTypes},
 	"metadata":                       types.ObjectType{AttrTypes: HTTPLoadBalancerWAFExclusionWAFExclusionInlineRulesRulesMetadataModelAttrTypes},
 	"waf_skip_processing":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }

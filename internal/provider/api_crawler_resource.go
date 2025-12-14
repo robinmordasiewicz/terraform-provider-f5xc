@@ -71,7 +71,7 @@ type APICrawlerDomainsSimpleLoginModel struct {
 // APICrawlerDomainsSimpleLoginModelAttrTypes defines the attribute types for APICrawlerDomainsSimpleLoginModel
 var APICrawlerDomainsSimpleLoginModelAttrTypes = map[string]attr.Type{
 	"user":     types.StringType,
-	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password": types.ObjectType{AttrTypes: APICrawlerDomainsSimpleLoginPasswordModelAttrTypes},
 }
 
 // APICrawlerDomainsSimpleLoginPasswordModel represents password block

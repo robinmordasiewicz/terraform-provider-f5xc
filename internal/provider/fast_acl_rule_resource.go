@@ -60,8 +60,8 @@ type FastACLRuleActionModel struct {
 // FastACLRuleActionModelAttrTypes defines the attribute types for FastACLRuleActionModel
 var FastACLRuleActionModelAttrTypes = map[string]attr.Type{
 	"simple_action":           types.StringType,
-	"policer_action":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"protocol_policer_action": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"policer_action":          types.ObjectType{AttrTypes: FastACLRuleActionPolicerActionModelAttrTypes},
+	"protocol_policer_action": types.ObjectType{AttrTypes: FastACLRuleActionProtocolPolicerActionModelAttrTypes},
 }
 
 // FastACLRuleActionPolicerActionModel represents policer_action block

@@ -108,7 +108,7 @@ type SecuremeshSiteV2AdminUserCredentialsModel struct {
 // SecuremeshSiteV2AdminUserCredentialsModelAttrTypes defines the attribute types for SecuremeshSiteV2AdminUserCredentialsModel
 var SecuremeshSiteV2AdminUserCredentialsModelAttrTypes = map[string]attr.Type{
 	"ssh_key":        types.StringType,
-	"admin_password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"admin_password": types.ObjectType{AttrTypes: SecuremeshSiteV2AdminUserCredentialsAdminPasswordModelAttrTypes},
 }
 
 // SecuremeshSiteV2AdminUserCredentialsAdminPasswordModel represents admin_password block
@@ -156,7 +156,7 @@ type SecuremeshSiteV2AWSModel struct {
 
 // SecuremeshSiteV2AWSModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSModel
 var SecuremeshSiteV2AWSModelAttrTypes = map[string]attr.Type{
-	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_managed": types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedModelAttrTypes},
 }
 
 // SecuremeshSiteV2AWSNotManagedModel represents not_managed block
@@ -217,17 +217,17 @@ var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListModelAttrTypes = map[strin
 	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
 	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
-	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes},
 	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes},
 	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
-	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address": types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes},
 	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
 }
 
@@ -295,8 +295,8 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -350,7 +350,7 @@ var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatef
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -421,7 +421,7 @@ type SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressModel st
 
 // SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressModel
 var SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2AWSNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -466,7 +466,7 @@ type SecuremeshSiteV2AzureModel struct {
 
 // SecuremeshSiteV2AzureModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureModel
 var SecuremeshSiteV2AzureModelAttrTypes = map[string]attr.Type{
-	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_managed": types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedModelAttrTypes},
 }
 
 // SecuremeshSiteV2AzureNotManagedModel represents not_managed block
@@ -527,17 +527,17 @@ var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListModelAttrTypes = map[str
 	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
 	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
-	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes},
 	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes},
 	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
-	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address": types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes},
 	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
 }
 
@@ -605,8 +605,8 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterMod
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -660,7 +660,7 @@ var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStat
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -731,7 +731,7 @@ type SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressModel 
 
 // SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressModel
 var SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2AzureNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -776,7 +776,7 @@ type SecuremeshSiteV2BaremetalModel struct {
 
 // SecuremeshSiteV2BaremetalModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalModel
 var SecuremeshSiteV2BaremetalModelAttrTypes = map[string]attr.Type{
-	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_managed": types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedModelAttrTypes},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedModel represents not_managed block
@@ -837,17 +837,17 @@ var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListModelAttrTypes = map
 	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
 	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
-	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes},
 	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes},
 	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
-	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address": types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes},
 	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
 }
 
@@ -915,8 +915,8 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRoute
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -970,7 +970,7 @@ var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouter
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -1041,7 +1041,7 @@ type SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressMo
 
 // SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressModel
 var SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2BaremetalNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -1122,7 +1122,7 @@ var SecuremeshSiteV2CustomProxyModelAttrTypes = map[string]attr.Type{
 	"username":          types.StringType,
 	"disable_re_tunnel": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_re_tunnel":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"password":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":          types.ObjectType{AttrTypes: SecuremeshSiteV2CustomProxyPasswordModelAttrTypes},
 }
 
 // SecuremeshSiteV2CustomProxyPasswordModel represents password block
@@ -1244,7 +1244,7 @@ type SecuremeshSiteV2EquinixModel struct {
 
 // SecuremeshSiteV2EquinixModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixModel
 var SecuremeshSiteV2EquinixModelAttrTypes = map[string]attr.Type{
-	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_managed": types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedModelAttrTypes},
 }
 
 // SecuremeshSiteV2EquinixNotManagedModel represents not_managed block
@@ -1305,17 +1305,17 @@ var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListModelAttrTypes = map[s
 	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
 	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
-	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes},
 	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes},
 	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
-	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address": types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes},
 	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
 }
 
@@ -1383,8 +1383,8 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterM
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -1438,7 +1438,7 @@ var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterSt
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -1509,7 +1509,7 @@ type SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressMode
 
 // SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressModel
 var SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2EquinixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -1554,7 +1554,7 @@ type SecuremeshSiteV2GCPModel struct {
 
 // SecuremeshSiteV2GCPModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPModel
 var SecuremeshSiteV2GCPModelAttrTypes = map[string]attr.Type{
-	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_managed": types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedModelAttrTypes},
 }
 
 // SecuremeshSiteV2GCPNotManagedModel represents not_managed block
@@ -1615,17 +1615,17 @@ var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListModelAttrTypes = map[strin
 	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
 	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
-	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes},
 	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes},
 	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
-	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address": types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes},
 	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
 }
 
@@ -1693,8 +1693,8 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -1748,7 +1748,7 @@ var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatef
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -1819,7 +1819,7 @@ type SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressModel st
 
 // SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressModel
 var SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2GCPNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -1864,7 +1864,7 @@ type SecuremeshSiteV2KvmModel struct {
 
 // SecuremeshSiteV2KvmModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmModel
 var SecuremeshSiteV2KvmModelAttrTypes = map[string]attr.Type{
-	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_managed": types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedModelAttrTypes},
 }
 
 // SecuremeshSiteV2KvmNotManagedModel represents not_managed block
@@ -1925,17 +1925,17 @@ var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListModelAttrTypes = map[strin
 	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
 	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
-	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes},
 	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes},
 	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
-	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address": types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes},
 	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
 }
 
@@ -2003,8 +2003,8 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -2058,7 +2058,7 @@ var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatef
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -2129,7 +2129,7 @@ type SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressModel st
 
 // SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressModel
 var SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2KvmNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -2211,8 +2211,8 @@ var SecuremeshSiteV2LocalVrfSLIConfigModelAttrTypes = map[string]attr.Type{
 	"labels":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_v6_static_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_v6_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_routes":       types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModelAttrTypes},
+	"static_v6_routes":    types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesModelAttrTypes},
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesModel represents static_routes block
@@ -2240,7 +2240,7 @@ var SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesModelAttrTypes = ma
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -2308,7 +2308,7 @@ var SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesModelAttrTypes = 
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // SecuremeshSiteV2LocalVrfSLIConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -2369,8 +2369,8 @@ var SecuremeshSiteV2LocalVrfSloConfigModelAttrTypes = map[string]attr.Type{
 	"labels":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_static_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_v6_static_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_routes":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"static_v6_routes":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_routes":       types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigStaticRoutesModelAttrTypes},
+	"static_v6_routes":    types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesModelAttrTypes},
 }
 
 // SecuremeshSiteV2LocalVrfSloConfigStaticRoutesModel represents static_routes block
@@ -2398,7 +2398,7 @@ var SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesModelAttrTypes = ma
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // SecuremeshSiteV2LocalVrfSloConfigStaticRoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -2466,7 +2466,7 @@ var SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesModelAttrTypes = 
 	"ip_address":      types.StringType,
 	"ip_prefixes":     types.ListType{ElemType: types.StringType},
 	"default_gateway": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node_interface":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"node_interface":  types.ObjectType{AttrTypes: SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModelAttrTypes},
 }
 
 // SecuremeshSiteV2LocalVrfSloConfigStaticV6RoutesStaticRoutesNodeInterfaceModel represents node_interface block
@@ -2530,7 +2530,7 @@ type SecuremeshSiteV2NutanixModel struct {
 
 // SecuremeshSiteV2NutanixModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixModel
 var SecuremeshSiteV2NutanixModelAttrTypes = map[string]attr.Type{
-	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_managed": types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedModelAttrTypes},
 }
 
 // SecuremeshSiteV2NutanixNotManagedModel represents not_managed block
@@ -2591,17 +2591,17 @@ var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListModelAttrTypes = map[s
 	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
 	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
-	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes},
 	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes},
 	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
-	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address": types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes},
 	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
 }
 
@@ -2669,8 +2669,8 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterM
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -2724,7 +2724,7 @@ var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterSt
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -2795,7 +2795,7 @@ type SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressMode
 
 // SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressModel
 var SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2NutanixNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -2840,7 +2840,7 @@ type SecuremeshSiteV2OciModel struct {
 
 // SecuremeshSiteV2OciModelAttrTypes defines the attribute types for SecuremeshSiteV2OciModel
 var SecuremeshSiteV2OciModelAttrTypes = map[string]attr.Type{
-	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_managed": types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedModelAttrTypes},
 }
 
 // SecuremeshSiteV2OciNotManagedModel represents not_managed block
@@ -2901,17 +2901,17 @@ var SecuremeshSiteV2OciNotManagedNodeListInterfaceListModelAttrTypes = map[strin
 	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
 	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
-	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes},
 	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes},
 	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
-	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address": types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes},
 	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
 }
 
@@ -2979,8 +2979,8 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -3034,7 +3034,7 @@ var SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatef
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -3105,7 +3105,7 @@ type SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressModel st
 
 // SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressModel
 var SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2OciNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -3162,7 +3162,7 @@ type SecuremeshSiteV2OpenstackModel struct {
 
 // SecuremeshSiteV2OpenstackModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackModel
 var SecuremeshSiteV2OpenstackModelAttrTypes = map[string]attr.Type{
-	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_managed": types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedModelAttrTypes},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedModel represents not_managed block
@@ -3223,17 +3223,17 @@ var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListModelAttrTypes = map
 	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
 	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
-	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes},
 	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes},
 	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
-	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address": types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes},
 	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
 }
 
@@ -3301,8 +3301,8 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRoute
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -3356,7 +3356,7 @@ var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouter
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -3427,7 +3427,7 @@ type SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressMo
 
 // SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressModel
 var SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2OpenstackNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 
@@ -3473,7 +3473,7 @@ type SecuremeshSiteV2PerformanceEnhancementModeModel struct {
 
 // SecuremeshSiteV2PerformanceEnhancementModeModelAttrTypes defines the attribute types for SecuremeshSiteV2PerformanceEnhancementModeModel
 var SecuremeshSiteV2PerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: SecuremeshSiteV2PerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
 	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -3584,7 +3584,7 @@ type SecuremeshSiteV2UpgradeSettingsModel struct {
 
 // SecuremeshSiteV2UpgradeSettingsModelAttrTypes defines the attribute types for SecuremeshSiteV2UpgradeSettingsModel
 var SecuremeshSiteV2UpgradeSettingsModelAttrTypes = map[string]attr.Type{
-	"kubernetes_upgrade_drain": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"kubernetes_upgrade_drain": types.ObjectType{AttrTypes: SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModelAttrTypes},
 }
 
 // SecuremeshSiteV2UpgradeSettingsKubernetesUpgradeDrainModel represents kubernetes_upgrade_drain block
@@ -3622,7 +3622,7 @@ type SecuremeshSiteV2VmwareModel struct {
 
 // SecuremeshSiteV2VmwareModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareModel
 var SecuremeshSiteV2VmwareModelAttrTypes = map[string]attr.Type{
-	"not_managed": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"not_managed": types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedModelAttrTypes},
 }
 
 // SecuremeshSiteV2VmwareNotManagedModel represents not_managed block
@@ -3683,17 +3683,17 @@ var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListModelAttrTypes = map[st
 	"bond_interface":     types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListBondInterfaceModelAttrTypes},
 	"dhcp_client":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ethernet_interface": types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListEthernetInterfaceModelAttrTypes},
-	"ipv6_auto_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ipv6_auto_config":   types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigModelAttrTypes},
 	"labels":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"monitor_disabled":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_option":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_option":     types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListNetworkOptionModelAttrTypes},
 	"no_ipv4_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_ipv6_address":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site_to_site_connectivity_interface_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"static_ip":           types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIPModelAttrTypes},
-	"static_ipv6_address": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"static_ipv6_address": types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes},
 	"vlan_interface":      types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListVLANInterfaceModelAttrTypes},
 }
 
@@ -3761,8 +3761,8 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterMo
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterModel
 var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterModelAttrTypes = map[string]attr.Type{
 	"network_prefix": types.StringType,
-	"dns_config":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"stateful":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dns_config":     types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModelAttrTypes},
+	"stateful":       types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulModelAttrTypes},
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterDNSConfigModel represents dns_config block
@@ -3816,7 +3816,7 @@ var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterSta
 	"automatic_from_start": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"dhcp_networks":        types.ListType{ElemType: types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModelAttrTypes}},
 	"fixed_ip_map":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"interface_ip_map":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_ip_map":     types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulInterfaceIPMapModelAttrTypes},
 }
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListIpv6AutoConfigRouterStatefulDHCPNetworksModel represents dhcp_networks block
@@ -3887,7 +3887,7 @@ type SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressModel
 
 // SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes defines the attribute types for SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressModel
 var SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressModelAttrTypes = map[string]attr.Type{
-	"cluster_static_ip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cluster_static_ip": types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressClusterStaticIPModelAttrTypes},
 	"node_static_ip":    types.ObjectType{AttrTypes: SecuremeshSiteV2VmwareNotManagedNodeListInterfaceListStaticIpv6AddressNodeStaticIPModelAttrTypes},
 }
 

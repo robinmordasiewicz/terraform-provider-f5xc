@@ -59,7 +59,7 @@ type APMAWSSiteTypeChoiceModel struct {
 // APMAWSSiteTypeChoiceModelAttrTypes defines the attribute types for APMAWSSiteTypeChoiceModel
 var APMAWSSiteTypeChoiceModelAttrTypes = map[string]attr.Type{
 	"apm_aws_site":       types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteModelAttrTypes},
-	"market_place_image": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"market_place_image": types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceMarketPlaceImageModelAttrTypes},
 }
 
 // APMAWSSiteTypeChoiceAPMAWSSiteModel represents apm_aws_site block
@@ -77,8 +77,8 @@ type APMAWSSiteTypeChoiceAPMAWSSiteModel struct {
 var APMAWSSiteTypeChoiceAPMAWSSiteModelAttrTypes = map[string]attr.Type{
 	"admin_username":   types.StringType,
 	"ssh_key":          types.StringType,
-	"admin_password":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"aws_tgw_site":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"admin_password":   types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteAdminPasswordModelAttrTypes},
+	"aws_tgw_site":     types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteAWSTGWSiteModelAttrTypes},
 	"endpoint_service": types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteEndpointServiceModelAttrTypes},
 	"nodes":            types.ListType{ElemType: types.ObjectType{AttrTypes: APMAWSSiteTypeChoiceAPMAWSSiteNodesModelAttrTypes}},
 	"tags":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -278,7 +278,7 @@ var APMBaremetalSiteTypeChoiceF5BareMetalSiteModelAttrTypes = map[string]attr.Ty
 	"admin_username":      types.StringType,
 	"public_download_url": types.StringType,
 	"ssh_key":             types.StringType,
-	"admin_password":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"admin_password":      types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteAdminPasswordModelAttrTypes},
 	"bare_metal_site":     types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteBareMetalSiteModelAttrTypes},
 	"bigiq_instance":      types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModelAttrTypes},
 	"nodes":               types.ListType{ElemType: types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteNodesModelAttrTypes}},
@@ -351,7 +351,7 @@ var APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstanceModelAttrTypes = map[s
 	"license_server_ip": types.StringType,
 	"sku_name":          types.StringType,
 	"username":          types.StringType,
-	"password":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password":          types.ObjectType{AttrTypes: APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModelAttrTypes},
 }
 
 // APMBaremetalSiteTypeChoiceF5BareMetalSiteBigiqInstancePasswordModel represents password block
@@ -483,12 +483,12 @@ type APMHTTPSManagementModel struct {
 var APMHTTPSManagementModelAttrTypes = map[string]attr.Type{
 	"domain_suffix":                     types.StringType,
 	"https_port":                        types.Int64Type,
-	"advertise_on_internet":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_internet":             types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnInternetModelAttrTypes},
 	"advertise_on_internet_default_vip": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_on_sli_vip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_on_slo_internet_vip":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_on_slo_sli":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_on_slo_vip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_sli_vip":              types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPModelAttrTypes},
+	"advertise_on_slo_internet_vip":     types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPModelAttrTypes},
+	"advertise_on_slo_sli":              types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLIModelAttrTypes},
+	"advertise_on_slo_vip":              types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPModelAttrTypes},
 	"default_https_port":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -528,7 +528,7 @@ type APMHTTPSManagementAdvertiseOnSLIVIPModel struct {
 var APMHTTPSManagementAdvertiseOnSLIVIPModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPUseMtlsModelAttrTypes},
 }
 
@@ -548,7 +548,7 @@ var APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesModelAttrTypes = map[strin
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSLIVIPTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -702,7 +702,7 @@ type APMHTTPSManagementAdvertiseOnSloInternetVIPModel struct {
 var APMHTTPSManagementAdvertiseOnSloInternetVIPModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPUseMtlsModelAttrTypes},
 }
 
@@ -722,7 +722,7 @@ var APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesModelAttrTypes = m
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloInternetVIPTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -876,7 +876,7 @@ type APMHTTPSManagementAdvertiseOnSloSLIModel struct {
 var APMHTTPSManagementAdvertiseOnSloSLIModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLITLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLIUseMtlsModelAttrTypes},
 }
 
@@ -896,7 +896,7 @@ var APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesModelAttrTypes = map[strin
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloSLITLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1050,7 +1050,7 @@ type APMHTTPSManagementAdvertiseOnSloVIPModel struct {
 var APMHTTPSManagementAdvertiseOnSloVIPModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPUseMtlsModelAttrTypes},
 }
 
@@ -1070,7 +1070,7 @@ var APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesModelAttrTypes = map[strin
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: APMHTTPSManagementAdvertiseOnSloVIPTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 

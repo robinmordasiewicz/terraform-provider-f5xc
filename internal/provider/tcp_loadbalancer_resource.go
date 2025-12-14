@@ -103,13 +103,13 @@ type TCPLoadBalancerAdvertiseCustomAdvertiseWhereModel struct {
 var TCPLoadBalancerAdvertiseCustomAdvertiseWhereModelAttrTypes = map[string]attr.Type{
 	"port":                  types.Int64Type,
 	"port_ranges":           types.StringType,
-	"advertise_on_public":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_on_public":   types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModelAttrTypes},
 	"site":                  types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereSiteModelAttrTypes},
 	"use_default_port":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"virtual_network":       types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualNetworkModelAttrTypes},
 	"virtual_site":          types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes},
 	"virtual_site_with_vip": types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVirtualSiteWithVIPModelAttrTypes},
-	"vk8s_service":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vk8s_service":          types.ObjectType{AttrTypes: TCPLoadBalancerAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes},
 }
 
 // TCPLoadBalancerAdvertiseCustomAdvertiseWhereAdvertiseOnPublicModel represents advertise_on_public block
@@ -368,8 +368,8 @@ type TCPLoadBalancerTLSTCPModel struct {
 
 // TCPLoadBalancerTLSTCPModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPModel
 var TCPLoadBalancerTLSTCPModelAttrTypes = map[string]attr.Type{
-	"tls_cert_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_parameters":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params": types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSCertParamsModelAttrTypes},
+	"tls_parameters":  types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersModelAttrTypes},
 }
 
 // TCPLoadBalancerTLSTCPTLSCertParamsModel represents tls_cert_params block
@@ -384,7 +384,7 @@ type TCPLoadBalancerTLSTCPTLSCertParamsModel struct {
 var TCPLoadBalancerTLSTCPTLSCertParamsModelAttrTypes = map[string]attr.Type{
 	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSCertParamsCertificatesModelAttrTypes}},
 	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSCertParamsTLSConfigModelAttrTypes},
 	"use_mtls":     types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSCertParamsUseMtlsModelAttrTypes},
 }
 
@@ -504,7 +504,7 @@ type TCPLoadBalancerTLSTCPTLSParametersModel struct {
 var TCPLoadBalancerTLSTCPTLSParametersModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersUseMtlsModelAttrTypes},
 }
 
@@ -524,7 +524,7 @@ var TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesModelAttrTypes = map[string
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPTLSParametersTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -676,7 +676,7 @@ type TCPLoadBalancerTLSTCPAutoCertModel struct {
 // TCPLoadBalancerTLSTCPAutoCertModelAttrTypes defines the attribute types for TCPLoadBalancerTLSTCPAutoCertModel
 var TCPLoadBalancerTLSTCPAutoCertModelAttrTypes = map[string]attr.Type{
 	"no_mtls":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config": types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPAutoCertTLSConfigModelAttrTypes},
 	"use_mtls":   types.ObjectType{AttrTypes: TCPLoadBalancerTLSTCPAutoCertUseMtlsModelAttrTypes},
 }
 

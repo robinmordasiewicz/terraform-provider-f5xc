@@ -255,14 +255,14 @@ var ForwardProxyPolicyRuleListRulesModelAttrTypes = map[string]attr.Type{
 	"dst_ip_prefix_set":    types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesDstIPPrefixSetModelAttrTypes},
 	"dst_label_selector":   types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesDstLabelSelectorModelAttrTypes},
 	"dst_prefix_list":      types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesDstPrefixListModelAttrTypes},
-	"http_list":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_list":            types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesHTTPListModelAttrTypes},
 	"ip_prefix_set":        types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesIPPrefixSetModelAttrTypes},
 	"label_selector":       types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesLabelSelectorModelAttrTypes},
 	"metadata":             types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesMetadataModelAttrTypes},
 	"no_http_connect_port": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"port_matcher":         types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesPortMatcherModelAttrTypes},
 	"prefix_list":          types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesPrefixListModelAttrTypes},
-	"tls_list":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_list":             types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesTLSListModelAttrTypes},
 	"url_category_list":    types.ObjectType{AttrTypes: ForwardProxyPolicyRuleListRulesURLCategoryListModelAttrTypes},
 }
 

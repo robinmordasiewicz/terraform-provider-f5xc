@@ -68,7 +68,7 @@ var RateLimiterLimitsModelAttrTypes = map[string]attr.Type{
 	"period_multiplier": types.Int64Type,
 	"total_number":      types.Int64Type,
 	"unit":              types.StringType,
-	"action_block":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"action_block":      types.ObjectType{AttrTypes: RateLimiterLimitsActionBlockModelAttrTypes},
 	"disabled":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"leaky_bucket":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"token_bucket":      types.ObjectType{AttrTypes: map[string]attr.Type{}},

@@ -63,9 +63,9 @@ type SecretManagementAccessAccessInfoModel struct {
 var SecretManagementAccessAccessInfoModelAttrTypes = map[string]attr.Type{
 	"scheme":          types.StringType,
 	"server_endpoint": types.StringType,
-	"rest_auth_info":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"rest_auth_info":  types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoRESTAuthInfoModelAttrTypes},
 	"tls_config":      types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigModelAttrTypes},
-	"vault_auth_info": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vault_auth_info": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoVaultAuthInfoModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoRESTAuthInfoModel represents rest_auth_info block
@@ -78,8 +78,8 @@ type SecretManagementAccessAccessInfoRESTAuthInfoModel struct {
 // SecretManagementAccessAccessInfoRESTAuthInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoRESTAuthInfoModel
 var SecretManagementAccessAccessInfoRESTAuthInfoModelAttrTypes = map[string]attr.Type{
 	"basic_auth":        types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModelAttrTypes},
-	"headers_auth":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"query_params_auth": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"headers_auth":      types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoRESTAuthInfoHeadersAuthModelAttrTypes},
+	"query_params_auth": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoRESTAuthInfoQueryParamsAuthModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModel represents basic_auth block
@@ -91,7 +91,7 @@ type SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModel struct {
 // SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModel
 var SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthModelAttrTypes = map[string]attr.Type{
 	"username": types.StringType,
-	"password": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"password": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoRESTAuthInfoBasicAuthPasswordModel represents password block
@@ -225,7 +225,7 @@ var SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsModelAttr
 	"skip_hostname_verification": types.BoolType,
 	"trusted_ca_url":             types.StringType,
 	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
-	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                 types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoTLSConfigCertParamsValidationParamsTrustedCAModel represents trusted_ca block
@@ -290,7 +290,7 @@ var SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesModelAtt
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCommonParamsTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -355,7 +355,7 @@ var SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsModelAt
 	"skip_hostname_verification": types.BoolType,
 	"trusted_ca_url":             types.StringType,
 	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
-	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                 types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoTLSConfigCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
@@ -395,7 +395,7 @@ type SecretManagementAccessAccessInfoVaultAuthInfoModel struct {
 // SecretManagementAccessAccessInfoVaultAuthInfoModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoVaultAuthInfoModel
 var SecretManagementAccessAccessInfoVaultAuthInfoModelAttrTypes = map[string]attr.Type{
 	"app_role_auth": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModelAttrTypes},
-	"token":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"token":         types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoVaultAuthInfoTokenModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModel represents app_role_auth block
@@ -407,7 +407,7 @@ type SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModel struct {
 // SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModelAttrTypes defines the attribute types for SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModel
 var SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthModelAttrTypes = map[string]attr.Type{
 	"role_id":   types.StringType,
-	"secret_id": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"secret_id": types.ObjectType{AttrTypes: SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDModelAttrTypes},
 }
 
 // SecretManagementAccessAccessInfoVaultAuthInfoAppRoleAuthSecretIDModel represents secret_id block
@@ -496,7 +496,7 @@ type SecretManagementAccessWhereModel struct {
 // SecretManagementAccessWhereModelAttrTypes defines the attribute types for SecretManagementAccessWhereModel
 var SecretManagementAccessWhereModelAttrTypes = map[string]attr.Type{
 	"site":            types.ObjectType{AttrTypes: SecretManagementAccessWhereSiteModelAttrTypes},
-	"virtual_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network": types.ObjectType{AttrTypes: SecretManagementAccessWhereVirtualNetworkModelAttrTypes},
 	"virtual_site":    types.ObjectType{AttrTypes: SecretManagementAccessWhereVirtualSiteModelAttrTypes},
 }
 

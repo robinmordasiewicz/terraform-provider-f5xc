@@ -62,9 +62,9 @@ type WorkloadJobModel struct {
 // WorkloadJobModelAttrTypes defines the attribute types for WorkloadJobModel
 var WorkloadJobModelAttrTypes = map[string]attr.Type{
 	"num_replicas":   types.Int64Type,
-	"configuration":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"configuration":  types.ObjectType{AttrTypes: WorkloadJobConfigurationModelAttrTypes},
 	"containers":     types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadJobContainersModelAttrTypes}},
-	"deploy_options": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_options": types.ObjectType{AttrTypes: WorkloadJobDeployOptionsModelAttrTypes},
 	"volumes":        types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadJobVolumesModelAttrTypes}},
 }
 
@@ -75,7 +75,7 @@ type WorkloadJobConfigurationModel struct {
 
 // WorkloadJobConfigurationModelAttrTypes defines the attribute types for WorkloadJobConfigurationModel
 var WorkloadJobConfigurationModelAttrTypes = map[string]attr.Type{
-	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadJobConfigurationParametersModelAttrTypes}},
 }
 
 // WorkloadJobConfigurationParametersModel represents parameters block
@@ -225,7 +225,7 @@ var WorkloadJobContainersLivenessCheckModelAttrTypes = map[string]attr.Type{
 	"unhealthy_threshold": types.Int64Type,
 	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadJobContainersLivenessCheckExecHealthCheckModelAttrTypes},
 	"http_health_check":   types.ObjectType{AttrTypes: WorkloadJobContainersLivenessCheckHTTPHealthCheckModelAttrTypes},
-	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp_health_check":    types.ObjectType{AttrTypes: WorkloadJobContainersLivenessCheckTCPHealthCheckModelAttrTypes},
 }
 
 // WorkloadJobContainersLivenessCheckExecHealthCheckModel represents exec_health_check block
@@ -309,7 +309,7 @@ var WorkloadJobContainersReadinessCheckModelAttrTypes = map[string]attr.Type{
 	"unhealthy_threshold": types.Int64Type,
 	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadJobContainersReadinessCheckExecHealthCheckModelAttrTypes},
 	"http_health_check":   types.ObjectType{AttrTypes: WorkloadJobContainersReadinessCheckHTTPHealthCheckModelAttrTypes},
-	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp_health_check":    types.ObjectType{AttrTypes: WorkloadJobContainersReadinessCheckTCPHealthCheckModelAttrTypes},
 }
 
 // WorkloadJobContainersReadinessCheckExecHealthCheckModel represents exec_health_check block
@@ -386,10 +386,10 @@ type WorkloadJobDeployOptionsModel struct {
 var WorkloadJobDeployOptionsModelAttrTypes = map[string]attr.Type{
 	"all_res":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_virtual_sites":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_ce_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_ce_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_re_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_re_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_ce_sites":         types.ObjectType{AttrTypes: WorkloadJobDeployOptionsDeployCESitesModelAttrTypes},
+	"deploy_ce_virtual_sites": types.ObjectType{AttrTypes: WorkloadJobDeployOptionsDeployCEVirtualSitesModelAttrTypes},
+	"deploy_re_sites":         types.ObjectType{AttrTypes: WorkloadJobDeployOptionsDeployRESitesModelAttrTypes},
+	"deploy_re_virtual_sites": types.ObjectType{AttrTypes: WorkloadJobDeployOptionsDeployREVirtualSitesModelAttrTypes},
 }
 
 // WorkloadJobDeployOptionsDeployCESitesModel represents deploy_ce_sites block
@@ -501,7 +501,7 @@ var WorkloadJobVolumesModelAttrTypes = map[string]attr.Type{
 	"name":              types.StringType,
 	"empty_dir":         types.ObjectType{AttrTypes: WorkloadJobVolumesEmptyDirModelAttrTypes},
 	"host_path":         types.ObjectType{AttrTypes: WorkloadJobVolumesHostPathModelAttrTypes},
-	"persistent_volume": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"persistent_volume": types.ObjectType{AttrTypes: WorkloadJobVolumesPersistentVolumeModelAttrTypes},
 }
 
 // WorkloadJobVolumesEmptyDirModel represents empty_dir block
@@ -612,10 +612,10 @@ type WorkloadServiceModel struct {
 // WorkloadServiceModelAttrTypes defines the attribute types for WorkloadServiceModel
 var WorkloadServiceModelAttrTypes = map[string]attr.Type{
 	"num_replicas":      types.Int64Type,
-	"advertise_options": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"configuration":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_options": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsModelAttrTypes},
+	"configuration":     types.ObjectType{AttrTypes: WorkloadServiceConfigurationModelAttrTypes},
 	"containers":        types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceContainersModelAttrTypes}},
-	"deploy_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_options":    types.ObjectType{AttrTypes: WorkloadServiceDeployOptionsModelAttrTypes},
 	"scale_to_zero":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"volumes":           types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceVolumesModelAttrTypes}},
 }
@@ -630,9 +630,9 @@ type WorkloadServiceAdvertiseOptionsModel struct {
 
 // WorkloadServiceAdvertiseOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsModel
 var WorkloadServiceAdvertiseOptionsModelAttrTypes = map[string]attr.Type{
-	"advertise_custom":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_in_cluster": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_on_public":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_custom":     types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomModelAttrTypes},
+	"advertise_in_cluster": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseInClusterModelAttrTypes},
+	"advertise_on_public":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModelAttrTypes},
 	"do_not_advertise":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -644,8 +644,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomModel struct {
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomModel
 var WorkloadServiceAdvertiseOptionsAdvertiseCustomModelAttrTypes = map[string]attr.Type{
-	"advertise_where": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
-	"ports":           types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"advertise_where": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModelAttrTypes}},
+	"ports":           types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsModelAttrTypes}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel represents advertise_where block
@@ -659,7 +659,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel struct {
 var WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModelAttrTypes = map[string]attr.Type{
 	"site":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModelAttrTypes},
 	"virtual_site": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes},
-	"vk8s_service": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vk8s_service": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel represents site block
@@ -787,7 +787,7 @@ var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerModelAttr
 	"http":            types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModelAttrTypes},
 	"https":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModelAttrTypes},
 	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
-	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"specific_routes": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
@@ -848,16 +848,16 @@ var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSMode
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes},
+	"tls_parameters":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
@@ -881,7 +881,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTT
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
 var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -893,7 +893,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTT
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -924,7 +924,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
 	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
 	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes},
 	"use_mtls":     types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
 }
 
@@ -1044,7 +1044,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLS
 var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
@@ -1064,7 +1064,7 @@ var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSP
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -1237,16 +1237,16 @@ var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAuto
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes},
 	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes},
 	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
 }
 
@@ -1271,7 +1271,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAut
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
 var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -1283,7 +1283,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAut
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -1399,7 +1399,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel
 var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
-	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -1412,7 +1412,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecific
 
 // WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel
 var WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
-	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_route_object":   types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes},
 	"direct_response_route": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
 	"redirect_route":        types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
 	"simple_route":          types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
@@ -1686,8 +1686,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseInClusterModel struct {
 
 // WorkloadServiceAdvertiseOptionsAdvertiseInClusterModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseInClusterModel
 var WorkloadServiceAdvertiseOptionsAdvertiseInClusterModelAttrTypes = map[string]attr.Type{
-	"multi_ports": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"port":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"multi_ports": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModelAttrTypes},
+	"port":        types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseInClusterPortModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel represents multi_ports block
@@ -1762,8 +1762,8 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModel struct {
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicModelAttrTypes = map[string]attr.Type{
-	"multi_ports": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"port":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"multi_ports": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModelAttrTypes},
+	"port":        types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel represents multi_ports block
@@ -1773,7 +1773,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel struct {
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModelAttrTypes = map[string]attr.Type{
-	"ports": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"ports": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModelAttrTypes}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel represents ports block
@@ -1807,7 +1807,7 @@ var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalan
 	"http":            types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModelAttrTypes},
 	"https":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModelAttrTypes},
 	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
-	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"specific_routes": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
@@ -1868,16 +1868,16 @@ var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalan
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes},
+	"tls_parameters":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
@@ -1901,7 +1901,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -1913,7 +1913,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -1944,7 +1944,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
 	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
 	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes},
 	"use_mtls":     types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
 }
 
@@ -2064,7 +2064,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
@@ -2084,7 +2084,7 @@ var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalan
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -2257,16 +2257,16 @@ var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalan
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes},
 	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes},
 	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
 }
 
@@ -2291,7 +2291,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -2303,7 +2303,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -2419,7 +2419,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
-	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -2432,7 +2432,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBala
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
-	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_route_object":   types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes},
 	"direct_response_route": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
 	"redirect_route":        types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
 	"simple_route":          types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
@@ -2708,7 +2708,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModel struct {
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortModelAttrTypes = map[string]attr.Type{
 	"http_loadbalancer": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModelAttrTypes},
-	"port":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":              types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortPortModelAttrTypes},
 	"tcp_loadbalancer":  types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModelAttrTypes},
 }
 
@@ -2729,7 +2729,7 @@ var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModelAtt
 	"http":            types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModelAttrTypes},
 	"https":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModelAttrTypes},
 	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
-	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"specific_routes": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel represents default_route block
@@ -2790,16 +2790,16 @@ var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSMod
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes},
+	"tls_parameters":           types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
@@ -2823,7 +2823,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHT
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -2835,7 +2835,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHT
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -2866,7 +2866,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
 	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
 	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes},
 	"use_mtls":     types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
 }
 
@@ -2986,7 +2986,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTL
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
@@ -3006,7 +3006,7 @@ var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLS
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -3179,16 +3179,16 @@ var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAut
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes},
 	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes},
 	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
 }
 
@@ -3213,7 +3213,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAu
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -3225,7 +3225,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAu
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -3341,7 +3341,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
-	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes}},
 }
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -3354,7 +3354,7 @@ type WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecifi
 
 // WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel
 var WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
-	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_route_object":   types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes},
 	"direct_response_route": types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
 	"redirect_route":        types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
 	"simple_route":          types.ObjectType{AttrTypes: WorkloadServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
@@ -3625,7 +3625,7 @@ type WorkloadServiceConfigurationModel struct {
 
 // WorkloadServiceConfigurationModelAttrTypes defines the attribute types for WorkloadServiceConfigurationModel
 var WorkloadServiceConfigurationModelAttrTypes = map[string]attr.Type{
-	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadServiceConfigurationParametersModelAttrTypes}},
 }
 
 // WorkloadServiceConfigurationParametersModel represents parameters block
@@ -3775,7 +3775,7 @@ var WorkloadServiceContainersLivenessCheckModelAttrTypes = map[string]attr.Type{
 	"unhealthy_threshold": types.Int64Type,
 	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadServiceContainersLivenessCheckExecHealthCheckModelAttrTypes},
 	"http_health_check":   types.ObjectType{AttrTypes: WorkloadServiceContainersLivenessCheckHTTPHealthCheckModelAttrTypes},
-	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp_health_check":    types.ObjectType{AttrTypes: WorkloadServiceContainersLivenessCheckTCPHealthCheckModelAttrTypes},
 }
 
 // WorkloadServiceContainersLivenessCheckExecHealthCheckModel represents exec_health_check block
@@ -3859,7 +3859,7 @@ var WorkloadServiceContainersReadinessCheckModelAttrTypes = map[string]attr.Type
 	"unhealthy_threshold": types.Int64Type,
 	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadServiceContainersReadinessCheckExecHealthCheckModelAttrTypes},
 	"http_health_check":   types.ObjectType{AttrTypes: WorkloadServiceContainersReadinessCheckHTTPHealthCheckModelAttrTypes},
-	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp_health_check":    types.ObjectType{AttrTypes: WorkloadServiceContainersReadinessCheckTCPHealthCheckModelAttrTypes},
 }
 
 // WorkloadServiceContainersReadinessCheckExecHealthCheckModel represents exec_health_check block
@@ -3936,10 +3936,10 @@ type WorkloadServiceDeployOptionsModel struct {
 var WorkloadServiceDeployOptionsModelAttrTypes = map[string]attr.Type{
 	"all_res":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_virtual_sites":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_ce_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_ce_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_re_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_re_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_ce_sites":         types.ObjectType{AttrTypes: WorkloadServiceDeployOptionsDeployCESitesModelAttrTypes},
+	"deploy_ce_virtual_sites": types.ObjectType{AttrTypes: WorkloadServiceDeployOptionsDeployCEVirtualSitesModelAttrTypes},
+	"deploy_re_sites":         types.ObjectType{AttrTypes: WorkloadServiceDeployOptionsDeployRESitesModelAttrTypes},
+	"deploy_re_virtual_sites": types.ObjectType{AttrTypes: WorkloadServiceDeployOptionsDeployREVirtualSitesModelAttrTypes},
 }
 
 // WorkloadServiceDeployOptionsDeployCESitesModel represents deploy_ce_sites block
@@ -4051,7 +4051,7 @@ var WorkloadServiceVolumesModelAttrTypes = map[string]attr.Type{
 	"name":              types.StringType,
 	"empty_dir":         types.ObjectType{AttrTypes: WorkloadServiceVolumesEmptyDirModelAttrTypes},
 	"host_path":         types.ObjectType{AttrTypes: WorkloadServiceVolumesHostPathModelAttrTypes},
-	"persistent_volume": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"persistent_volume": types.ObjectType{AttrTypes: WorkloadServiceVolumesPersistentVolumeModelAttrTypes},
 }
 
 // WorkloadServiceVolumesEmptyDirModel represents empty_dir block
@@ -4162,7 +4162,7 @@ type WorkloadSimpleServiceModel struct {
 // WorkloadSimpleServiceModelAttrTypes defines the attribute types for WorkloadSimpleServiceModel
 var WorkloadSimpleServiceModelAttrTypes = map[string]attr.Type{
 	"scale_to_zero":    types.BoolType,
-	"configuration":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"configuration":    types.ObjectType{AttrTypes: WorkloadSimpleServiceConfigurationModelAttrTypes},
 	"container":        types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerModelAttrTypes},
 	"disabled":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"do_not_advertise": types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -4177,7 +4177,7 @@ type WorkloadSimpleServiceConfigurationModel struct {
 
 // WorkloadSimpleServiceConfigurationModelAttrTypes defines the attribute types for WorkloadSimpleServiceConfigurationModel
 var WorkloadSimpleServiceConfigurationModelAttrTypes = map[string]attr.Type{
-	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadSimpleServiceConfigurationParametersModelAttrTypes}},
 }
 
 // WorkloadSimpleServiceConfigurationParametersModel represents parameters block
@@ -4327,7 +4327,7 @@ var WorkloadSimpleServiceContainerLivenessCheckModelAttrTypes = map[string]attr.
 	"unhealthy_threshold": types.Int64Type,
 	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModelAttrTypes},
 	"http_health_check":   types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerLivenessCheckHTTPHealthCheckModelAttrTypes},
-	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp_health_check":    types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerLivenessCheckTCPHealthCheckModelAttrTypes},
 }
 
 // WorkloadSimpleServiceContainerLivenessCheckExecHealthCheckModel represents exec_health_check block
@@ -4411,7 +4411,7 @@ var WorkloadSimpleServiceContainerReadinessCheckModelAttrTypes = map[string]attr
 	"unhealthy_threshold": types.Int64Type,
 	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModelAttrTypes},
 	"http_health_check":   types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerReadinessCheckHTTPHealthCheckModelAttrTypes},
-	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp_health_check":    types.ObjectType{AttrTypes: WorkloadSimpleServiceContainerReadinessCheckTCPHealthCheckModelAttrTypes},
 }
 
 // WorkloadSimpleServiceContainerReadinessCheckExecHealthCheckModel represents exec_health_check block
@@ -4483,7 +4483,7 @@ type WorkloadSimpleServiceEnabledModel struct {
 // WorkloadSimpleServiceEnabledModelAttrTypes defines the attribute types for WorkloadSimpleServiceEnabledModel
 var WorkloadSimpleServiceEnabledModelAttrTypes = map[string]attr.Type{
 	"name":              types.StringType,
-	"persistent_volume": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"persistent_volume": types.ObjectType{AttrTypes: WorkloadSimpleServiceEnabledPersistentVolumeModelAttrTypes},
 }
 
 // WorkloadSimpleServiceEnabledPersistentVolumeModel represents persistent_volume block
@@ -4555,10 +4555,10 @@ type WorkloadStatefulServiceModel struct {
 // WorkloadStatefulServiceModelAttrTypes defines the attribute types for WorkloadStatefulServiceModel
 var WorkloadStatefulServiceModelAttrTypes = map[string]attr.Type{
 	"num_replicas":       types.Int64Type,
-	"advertise_options":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"configuration":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_options":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsModelAttrTypes},
+	"configuration":      types.ObjectType{AttrTypes: WorkloadStatefulServiceConfigurationModelAttrTypes},
 	"containers":         types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersModelAttrTypes}},
-	"deploy_options":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_options":     types.ObjectType{AttrTypes: WorkloadStatefulServiceDeployOptionsModelAttrTypes},
 	"persistent_volumes": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServicePersistentVolumesModelAttrTypes}},
 	"scale_to_zero":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"volumes":            types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceVolumesModelAttrTypes}},
@@ -4574,9 +4574,9 @@ type WorkloadStatefulServiceAdvertiseOptionsModel struct {
 
 // WorkloadStatefulServiceAdvertiseOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsModel
 var WorkloadStatefulServiceAdvertiseOptionsModelAttrTypes = map[string]attr.Type{
-	"advertise_custom":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_in_cluster": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"advertise_on_public":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"advertise_custom":     types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModelAttrTypes},
+	"advertise_in_cluster": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModelAttrTypes},
+	"advertise_on_public":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModelAttrTypes},
 	"do_not_advertise":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -4588,8 +4588,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModel struct {
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomModelAttrTypes = map[string]attr.Type{
-	"advertise_where": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
-	"ports":           types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"advertise_where": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModelAttrTypes}},
+	"ports":           types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel represents advertise_where block
@@ -4603,7 +4603,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModel s
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereModelAttrTypes = map[string]attr.Type{
 	"site":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModelAttrTypes},
 	"virtual_site": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVirtualSiteModelAttrTypes},
-	"vk8s_service": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vk8s_service": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereVk8sServiceModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomAdvertiseWhereSiteModel represents site block
@@ -4731,7 +4731,7 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerM
 	"http":            types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPModelAttrTypes},
 	"https":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSModelAttrTypes},
 	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
-	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"specific_routes": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
@@ -4792,16 +4792,16 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerH
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes},
+	"tls_parameters":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
@@ -4825,7 +4825,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -4837,7 +4837,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -4868,7 +4868,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
 	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
 	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes},
 	"use_mtls":     types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
 }
 
@@ -4988,7 +4988,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
@@ -5008,7 +5008,7 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerH
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -5181,16 +5181,16 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerH
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes},
 	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes},
 	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
 }
 
@@ -5215,7 +5215,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -5227,7 +5227,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -5343,7 +5343,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
-	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -5356,7 +5356,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancer
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
-	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_route_object":   types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes},
 	"direct_response_route": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
 	"redirect_route":        types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
 	"simple_route":          types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseCustomPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
@@ -5630,8 +5630,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModel struct {
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterModelAttrTypes = map[string]attr.Type{
-	"multi_ports": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"port":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"multi_ports": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModelAttrTypes},
+	"port":        types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterPortModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseInClusterMultiPortsModel represents multi_ports block
@@ -5706,8 +5706,8 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModel struct {
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicModelAttrTypes = map[string]attr.Type{
-	"multi_ports": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"port":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"multi_ports": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModelAttrTypes},
+	"port":        types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel represents multi_ports block
@@ -5717,7 +5717,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel str
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsModelAttrTypes = map[string]attr.Type{
-	"ports": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"ports": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsModel represents ports block
@@ -5751,7 +5751,7 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPL
 	"http":            types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPModelAttrTypes},
 	"https":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSModelAttrTypes},
 	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
-	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"specific_routes": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerDefaultRouteModel represents default_route block
@@ -5812,16 +5812,16 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPL
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes},
+	"tls_parameters":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
@@ -5845,7 +5845,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -5857,7 +5857,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -5888,7 +5888,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
 	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
 	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes},
 	"use_mtls":     types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
 }
 
@@ -6008,7 +6008,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
@@ -6028,7 +6028,7 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPL
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -6201,16 +6201,16 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPL
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes},
 	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes},
 	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
 }
 
@@ -6235,7 +6235,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -6247,7 +6247,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -6363,7 +6363,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
-	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -6376,7 +6376,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTP
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
-	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_route_object":   types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes},
 	"direct_response_route": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
 	"redirect_route":        types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
 	"simple_route":          types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicMultiPortsPortsHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
@@ -6652,7 +6652,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModel struct {
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortModelAttrTypes = map[string]attr.Type{
 	"http_loadbalancer": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerModelAttrTypes},
-	"port":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"port":              types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortPortModelAttrTypes},
 	"tcp_loadbalancer":  types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortTCPLoadBalancerModelAttrTypes},
 }
 
@@ -6673,7 +6673,7 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancer
 	"http":            types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPModelAttrTypes},
 	"https":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSModelAttrTypes},
 	"https_auto_cert": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertModelAttrTypes},
-	"specific_routes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"specific_routes": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerDefaultRouteModel represents default_route block
@@ -6734,16 +6734,16 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancer
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_cert_params":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_parameters":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_cert_params":          types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes},
+	"tls_parameters":           types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSCoalescingOptionsModel represents coalescing_options block
@@ -6767,7 +6767,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -6779,7 +6779,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -6810,7 +6810,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsModelAttrTypes = map[string]attr.Type{
 	"certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsCertificatesModelAttrTypes}},
 	"no_mtls":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":   types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsTLSConfigModelAttrTypes},
 	"use_mtls":     types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSCertParamsUseMtlsModelAttrTypes},
 }
 
@@ -6930,7 +6930,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersModelAttrTypes = map[string]attr.Type{
 	"no_mtls":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"tls_certificates": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesModelAttrTypes}},
-	"tls_config":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":       types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSConfigModelAttrTypes},
 	"use_mtls":         types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersUseMtlsModelAttrTypes},
 }
 
@@ -6950,7 +6950,7 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancer
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSTLSParametersTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -7123,16 +7123,16 @@ var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancer
 	"port":                     types.Int64Type,
 	"port_ranges":              types.StringType,
 	"server_name":              types.StringType,
-	"coalescing_options":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"coalescing_options":       types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertCoalescingOptionsModelAttrTypes},
 	"default_header":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_loadbalancer":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_path_normalize":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable_path_normalize":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"http_protocol_options":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_options":    types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes},
 	"no_mtls":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"non_default_loadbalancer": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"pass_through":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"tls_config":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_config":               types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertTLSConfigModelAttrTypes},
 	"use_mtls":                 types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertUseMtlsModelAttrTypes},
 }
 
@@ -7157,7 +7157,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsModelAttrTypes = map[string]attr.Type{
-	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_protocol_enable_v1_only": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes},
 	"http_protocol_enable_v1_v2":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"http_protocol_enable_v2_only": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -7169,7 +7169,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModelAttrTypes},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerHTTPSAutoCertHTTPProtocolOptionsHTTPProtocolEnableV1OnlyHeaderTransformationModel represents header_transformation block
@@ -7285,7 +7285,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesModelAttrTypes = map[string]attr.Type{
-	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"routes": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel represents routes block
@@ -7298,7 +7298,7 @@ type WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalance
 
 // WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes defines the attribute types for WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModel
 var WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesModelAttrTypes = map[string]attr.Type{
-	"custom_route_object":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_route_object":   types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesCustomRouteObjectModelAttrTypes},
 	"direct_response_route": types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesDirectResponseRouteModelAttrTypes},
 	"redirect_route":        types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesRedirectRouteModelAttrTypes},
 	"simple_route":          types.ObjectType{AttrTypes: WorkloadStatefulServiceAdvertiseOptionsAdvertiseOnPublicPortHTTPLoadBalancerSpecificRoutesRoutesSimpleRouteModelAttrTypes},
@@ -7569,7 +7569,7 @@ type WorkloadStatefulServiceConfigurationModel struct {
 
 // WorkloadStatefulServiceConfigurationModelAttrTypes defines the attribute types for WorkloadStatefulServiceConfigurationModel
 var WorkloadStatefulServiceConfigurationModelAttrTypes = map[string]attr.Type{
-	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"parameters": types.ListType{ElemType: types.ObjectType{AttrTypes: WorkloadStatefulServiceConfigurationParametersModelAttrTypes}},
 }
 
 // WorkloadStatefulServiceConfigurationParametersModel represents parameters block
@@ -7719,7 +7719,7 @@ var WorkloadStatefulServiceContainersLivenessCheckModelAttrTypes = map[string]at
 	"unhealthy_threshold": types.Int64Type,
 	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModelAttrTypes},
 	"http_health_check":   types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersLivenessCheckHTTPHealthCheckModelAttrTypes},
-	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp_health_check":    types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersLivenessCheckTCPHealthCheckModelAttrTypes},
 }
 
 // WorkloadStatefulServiceContainersLivenessCheckExecHealthCheckModel represents exec_health_check block
@@ -7803,7 +7803,7 @@ var WorkloadStatefulServiceContainersReadinessCheckModelAttrTypes = map[string]a
 	"unhealthy_threshold": types.Int64Type,
 	"exec_health_check":   types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModelAttrTypes},
 	"http_health_check":   types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersReadinessCheckHTTPHealthCheckModelAttrTypes},
-	"tcp_health_check":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp_health_check":    types.ObjectType{AttrTypes: WorkloadStatefulServiceContainersReadinessCheckTCPHealthCheckModelAttrTypes},
 }
 
 // WorkloadStatefulServiceContainersReadinessCheckExecHealthCheckModel represents exec_health_check block
@@ -7880,10 +7880,10 @@ type WorkloadStatefulServiceDeployOptionsModel struct {
 var WorkloadStatefulServiceDeployOptionsModelAttrTypes = map[string]attr.Type{
 	"all_res":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"default_virtual_sites":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_ce_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_ce_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_re_sites":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"deploy_re_virtual_sites": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"deploy_ce_sites":         types.ObjectType{AttrTypes: WorkloadStatefulServiceDeployOptionsDeployCESitesModelAttrTypes},
+	"deploy_ce_virtual_sites": types.ObjectType{AttrTypes: WorkloadStatefulServiceDeployOptionsDeployCEVirtualSitesModelAttrTypes},
+	"deploy_re_sites":         types.ObjectType{AttrTypes: WorkloadStatefulServiceDeployOptionsDeployRESitesModelAttrTypes},
+	"deploy_re_virtual_sites": types.ObjectType{AttrTypes: WorkloadStatefulServiceDeployOptionsDeployREVirtualSitesModelAttrTypes},
 }
 
 // WorkloadStatefulServiceDeployOptionsDeployCESitesModel represents deploy_ce_sites block
@@ -7991,7 +7991,7 @@ type WorkloadStatefulServicePersistentVolumesModel struct {
 // WorkloadStatefulServicePersistentVolumesModelAttrTypes defines the attribute types for WorkloadStatefulServicePersistentVolumesModel
 var WorkloadStatefulServicePersistentVolumesModelAttrTypes = map[string]attr.Type{
 	"name":              types.StringType,
-	"persistent_volume": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"persistent_volume": types.ObjectType{AttrTypes: WorkloadStatefulServicePersistentVolumesPersistentVolumeModelAttrTypes},
 }
 
 // WorkloadStatefulServicePersistentVolumesPersistentVolumeModel represents persistent_volume block

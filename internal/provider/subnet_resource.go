@@ -87,7 +87,7 @@ var SubnetSiteSubnetParamsModelAttrTypes = map[string]attr.Type{
 	"dhcp":                      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"site":                      types.ObjectType{AttrTypes: SubnetSiteSubnetParamsSiteModelAttrTypes},
 	"static_ip":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"subnet_dhcp_server_params": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"subnet_dhcp_server_params": types.ObjectType{AttrTypes: SubnetSiteSubnetParamsSubnetDHCPServerParamsModelAttrTypes},
 }
 
 // SubnetSiteSubnetParamsSiteModel represents site block

@@ -74,7 +74,7 @@ var InfraprotectTunnelBGPInformationModelAttrTypes = map[string]attr.Type{
 	"holddown_timer_seconds": types.Int64Type,
 	"asn":                    types.ObjectType{AttrTypes: InfraprotectTunnelBGPInformationAsnModelAttrTypes},
 	"no_secret":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"peer_secret_override":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"peer_secret_override":   types.ObjectType{AttrTypes: InfraprotectTunnelBGPInformationPeerSecretOverrideModelAttrTypes},
 	"use_default_secret":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 

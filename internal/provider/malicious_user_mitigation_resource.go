@@ -57,7 +57,7 @@ type MaliciousUserMitigationMitigationTypeModel struct {
 
 // MaliciousUserMitigationMitigationTypeModelAttrTypes defines the attribute types for MaliciousUserMitigationMitigationTypeModel
 var MaliciousUserMitigationMitigationTypeModelAttrTypes = map[string]attr.Type{
-	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"rules": types.ListType{ElemType: types.ObjectType{AttrTypes: MaliciousUserMitigationMitigationTypeRulesModelAttrTypes}},
 }
 
 // MaliciousUserMitigationMitigationTypeRulesModel represents rules block
@@ -68,8 +68,8 @@ type MaliciousUserMitigationMitigationTypeRulesModel struct {
 
 // MaliciousUserMitigationMitigationTypeRulesModelAttrTypes defines the attribute types for MaliciousUserMitigationMitigationTypeRulesModel
 var MaliciousUserMitigationMitigationTypeRulesModelAttrTypes = map[string]attr.Type{
-	"mitigation_action": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"threat_level":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"mitigation_action": types.ObjectType{AttrTypes: MaliciousUserMitigationMitigationTypeRulesMitigationActionModelAttrTypes},
+	"threat_level":      types.ObjectType{AttrTypes: MaliciousUserMitigationMitigationTypeRulesThreatLevelModelAttrTypes},
 }
 
 // MaliciousUserMitigationMitigationTypeRulesMitigationActionModel represents mitigation_action block

@@ -57,7 +57,7 @@ type PolicyBasedRoutingForwardProxyPbrModel struct {
 
 // PolicyBasedRoutingForwardProxyPbrModelAttrTypes defines the attribute types for PolicyBasedRoutingForwardProxyPbrModel
 var PolicyBasedRoutingForwardProxyPbrModelAttrTypes = map[string]attr.Type{
-	"forward_proxy_pbr_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"forward_proxy_pbr_rules": types.ListType{ElemType: types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModelAttrTypes}},
 }
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModel represents forward_proxy_pbr_rules block
@@ -78,12 +78,12 @@ var PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesModelAttrTypes = map[st
 	"all_destinations":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"all_sources":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"forwarding_class_list": types.ListType{ElemType: types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModelAttrTypes}},
-	"http_list":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"http_list":             types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesHTTPListModelAttrTypes},
 	"ip_prefix_set":         types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesIPPrefixSetModelAttrTypes},
 	"label_selector":        types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesLabelSelectorModelAttrTypes},
 	"metadata":              types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesMetadataModelAttrTypes},
 	"prefix_list":           types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesPrefixListModelAttrTypes},
-	"tls_list":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tls_list":              types.ObjectType{AttrTypes: PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesTLSListModelAttrTypes},
 }
 
 // PolicyBasedRoutingForwardProxyPbrForwardProxyPbrRulesForwardingClassListModel represents forwarding_class_list block
@@ -266,7 +266,7 @@ var PolicyBasedRoutingNetworkPbrNetworkPbrRulesModelAttrTypes = map[string]attr.
 	"any":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"applications":          types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesApplicationsModelAttrTypes},
 	"forwarding_class_list": types.ListType{ElemType: types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesForwardingClassListModelAttrTypes}},
-	"ip_prefix_set":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_prefix_set":         types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesIPPrefixSetModelAttrTypes},
 	"metadata":              types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesMetadataModelAttrTypes},
 	"prefix_list":           types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesPrefixListModelAttrTypes},
 	"protocol_port_range":   types.ObjectType{AttrTypes: PolicyBasedRoutingNetworkPbrNetworkPbrRulesProtocolPortRangeModelAttrTypes},

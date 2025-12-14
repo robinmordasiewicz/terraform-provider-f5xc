@@ -105,7 +105,7 @@ type BGPRoutingPolicyRulesMatchModel struct {
 var BGPRoutingPolicyRulesMatchModelAttrTypes = map[string]attr.Type{
 	"as_path":     types.StringType,
 	"community":   types.ObjectType{AttrTypes: BGPRoutingPolicyRulesMatchCommunityModelAttrTypes},
-	"ip_prefixes": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"ip_prefixes": types.ObjectType{AttrTypes: BGPRoutingPolicyRulesMatchIPPrefixesModelAttrTypes},
 }
 
 // BGPRoutingPolicyRulesMatchCommunityModel represents community block

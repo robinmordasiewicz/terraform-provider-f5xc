@@ -67,13 +67,13 @@ type NATPolicyRulesModel struct {
 var NATPolicyRulesModelAttrTypes = map[string]attr.Type{
 	"name":              types.StringType,
 	"action":            types.ObjectType{AttrTypes: NATPolicyRulesActionModelAttrTypes},
-	"cloud_connect":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"cloud_connect":     types.ObjectType{AttrTypes: NATPolicyRulesCloudConnectModelAttrTypes},
 	"criteria":          types.ObjectType{AttrTypes: NATPolicyRulesCriteriaModelAttrTypes},
 	"disable":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"enable":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"network_interface": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"segment":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"virtual_network":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"network_interface": types.ObjectType{AttrTypes: NATPolicyRulesNetworkInterfaceModelAttrTypes},
+	"segment":           types.ObjectType{AttrTypes: NATPolicyRulesSegmentModelAttrTypes},
+	"virtual_network":   types.ObjectType{AttrTypes: NATPolicyRulesVirtualNetworkModelAttrTypes},
 }
 
 // NATPolicyRulesActionModel represents action block
@@ -85,7 +85,7 @@ type NATPolicyRulesActionModel struct {
 // NATPolicyRulesActionModelAttrTypes defines the attribute types for NATPolicyRulesActionModel
 var NATPolicyRulesActionModelAttrTypes = map[string]attr.Type{
 	"virtual_cidr": types.StringType,
-	"dynamic":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"dynamic":      types.ObjectType{AttrTypes: NATPolicyRulesActionDynamicModelAttrTypes},
 }
 
 // NATPolicyRulesActionDynamicModel represents dynamic block
@@ -96,7 +96,7 @@ type NATPolicyRulesActionDynamicModel struct {
 
 // NATPolicyRulesActionDynamicModelAttrTypes defines the attribute types for NATPolicyRulesActionDynamicModel
 var NATPolicyRulesActionDynamicModelAttrTypes = map[string]attr.Type{
-	"elastic_ips": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"elastic_ips": types.ObjectType{AttrTypes: NATPolicyRulesActionDynamicElasticIpsModelAttrTypes},
 	"pools":       types.ObjectType{AttrTypes: NATPolicyRulesActionDynamicPoolsModelAttrTypes},
 }
 
@@ -189,11 +189,11 @@ var NATPolicyRulesCriteriaModelAttrTypes = map[string]attr.Type{
 	"any":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"destination_port": types.ObjectType{AttrTypes: NATPolicyRulesCriteriaDestinationPortModelAttrTypes},
 	"icmp":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"segment":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"segment":          types.ObjectType{AttrTypes: NATPolicyRulesCriteriaSegmentModelAttrTypes},
 	"source_port":      types.ObjectType{AttrTypes: NATPolicyRulesCriteriaSourcePortModelAttrTypes},
-	"tcp":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"udp":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"virtual_network":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"tcp":              types.ObjectType{AttrTypes: NATPolicyRulesCriteriaTCPModelAttrTypes},
+	"udp":              types.ObjectType{AttrTypes: NATPolicyRulesCriteriaUDPModelAttrTypes},
+	"virtual_network":  types.ObjectType{AttrTypes: NATPolicyRulesCriteriaVirtualNetworkModelAttrTypes},
 }
 
 // NATPolicyRulesCriteriaDestinationPortModel represents destination_port block

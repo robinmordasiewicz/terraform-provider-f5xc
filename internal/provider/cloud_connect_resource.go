@@ -61,7 +61,7 @@ type CloudConnectAWSTGWSiteModel struct {
 var CloudConnectAWSTGWSiteModelAttrTypes = map[string]attr.Type{
 	"cred":            types.ObjectType{AttrTypes: CloudConnectAWSTGWSiteCredModelAttrTypes},
 	"site":            types.ObjectType{AttrTypes: CloudConnectAWSTGWSiteSiteModelAttrTypes},
-	"vpc_attachments": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vpc_attachments": types.ObjectType{AttrTypes: CloudConnectAWSTGWSiteVPCAttachmentsModelAttrTypes},
 }
 
 // CloudConnectAWSTGWSiteCredModel represents cred block
@@ -114,8 +114,8 @@ type CloudConnectAWSTGWSiteVPCAttachmentsVPCListModel struct {
 // CloudConnectAWSTGWSiteVPCAttachmentsVPCListModelAttrTypes defines the attribute types for CloudConnectAWSTGWSiteVPCAttachmentsVPCListModel
 var CloudConnectAWSTGWSiteVPCAttachmentsVPCListModelAttrTypes = map[string]attr.Type{
 	"vpc_id":         types.StringType,
-	"custom_routing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"default_route":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_routing": types.ObjectType{AttrTypes: CloudConnectAWSTGWSiteVPCAttachmentsVPCListCustomRoutingModelAttrTypes},
+	"default_route":  types.ObjectType{AttrTypes: CloudConnectAWSTGWSiteVPCAttachmentsVPCListDefaultRouteModelAttrTypes},
 	"labels":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"manual_routing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -173,7 +173,7 @@ type CloudConnectAzureVNETSiteModel struct {
 // CloudConnectAzureVNETSiteModelAttrTypes defines the attribute types for CloudConnectAzureVNETSiteModel
 var CloudConnectAzureVNETSiteModelAttrTypes = map[string]attr.Type{
 	"site":             types.ObjectType{AttrTypes: CloudConnectAzureVNETSiteSiteModelAttrTypes},
-	"vnet_attachments": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"vnet_attachments": types.ObjectType{AttrTypes: CloudConnectAzureVNETSiteVNETAttachmentsModelAttrTypes},
 }
 
 // CloudConnectAzureVNETSiteSiteModel represents site block
@@ -214,8 +214,8 @@ type CloudConnectAzureVNETSiteVNETAttachmentsVNETListModel struct {
 var CloudConnectAzureVNETSiteVNETAttachmentsVNETListModelAttrTypes = map[string]attr.Type{
 	"subscription_id": types.StringType,
 	"vnet_id":         types.StringType,
-	"custom_routing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"default_route":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"custom_routing":  types.ObjectType{AttrTypes: CloudConnectAzureVNETSiteVNETAttachmentsVNETListCustomRoutingModelAttrTypes},
+	"default_route":   types.ObjectType{AttrTypes: CloudConnectAzureVNETSiteVNETAttachmentsVNETListDefaultRouteModelAttrTypes},
 	"labels":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"manual_routing":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -312,11 +312,10 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted.",
-				Optional:            true,
-				Computed:            true,
+				MarkdownDescription: "Namespace where the Cloud Connect will be created.",
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+					stringplanmodifier.RequiresReplace(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),

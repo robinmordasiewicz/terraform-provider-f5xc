@@ -122,7 +122,7 @@ type ClusterHttp1ConfigModel struct {
 
 // ClusterHttp1ConfigModelAttrTypes defines the attribute types for ClusterHttp1ConfigModel
 var ClusterHttp1ConfigModelAttrTypes = map[string]attr.Type{
-	"header_transformation": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"header_transformation": types.ObjectType{AttrTypes: ClusterHttp1ConfigHeaderTransformationModelAttrTypes},
 }
 
 // ClusterHttp1ConfigHeaderTransformationModel represents header_transformation block
@@ -242,7 +242,7 @@ var ClusterTLSParametersCertParamsValidationParamsModelAttrTypes = map[string]at
 	"skip_hostname_verification": types.BoolType,
 	"trusted_ca_url":             types.StringType,
 	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
-	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                 types.ObjectType{AttrTypes: ClusterTLSParametersCertParamsValidationParamsTrustedCAModelAttrTypes},
 }
 
 // ClusterTLSParametersCertParamsValidationParamsTrustedCAModel represents trusted_ca block
@@ -307,7 +307,7 @@ var ClusterTLSParametersCommonParamsTLSCertificatesModelAttrTypes = map[string]a
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: ClusterTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: ClusterTLSParametersCommonParamsTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -372,7 +372,7 @@ var ClusterTLSParametersCommonParamsValidationParamsModelAttrTypes = map[string]
 	"skip_hostname_verification": types.BoolType,
 	"trusted_ca_url":             types.StringType,
 	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
-	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                 types.ObjectType{AttrTypes: ClusterTLSParametersCommonParamsValidationParamsTrustedCAModelAttrTypes},
 }
 
 // ClusterTLSParametersCommonParamsValidationParamsTrustedCAModel represents trusted_ca block

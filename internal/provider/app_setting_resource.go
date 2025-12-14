@@ -61,9 +61,9 @@ type AppSettingAppTypeSettingsModel struct {
 // AppSettingAppTypeSettingsModelAttrTypes defines the attribute types for AppSettingAppTypeSettingsModel
 var AppSettingAppTypeSettingsModelAttrTypes = map[string]attr.Type{
 	"app_type_ref":                   types.ListType{ElemType: types.ObjectType{AttrTypes: AppSettingAppTypeSettingsAppTypeRefModelAttrTypes}},
-	"business_logic_markup_setting":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"timeseries_analyses_setting":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"user_behavior_analysis_setting": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"business_logic_markup_setting":  types.ObjectType{AttrTypes: AppSettingAppTypeSettingsBusinessLogicMarkupSettingModelAttrTypes},
+	"timeseries_analyses_setting":    types.ObjectType{AttrTypes: AppSettingAppTypeSettingsTimeseriesAnalysesSettingModelAttrTypes},
+	"user_behavior_analysis_setting": types.ObjectType{AttrTypes: AppSettingAppTypeSettingsUserBehaviorAnalysisSettingModelAttrTypes},
 }
 
 // AppSettingAppTypeSettingsAppTypeRefModel represents app_type_ref block
@@ -172,7 +172,7 @@ var AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionModelAttr
 	"include_failed_login_activity":               types.ObjectType{AttrTypes: AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeFailedLoginActivityModelAttrTypes},
 	"include_forbidden_activity":                  types.ObjectType{AttrTypes: AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeForbiddenActivityModelAttrTypes},
 	"include_ip_reputation":                       types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"include_non_existent_url_activity_automatic": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"include_non_existent_url_activity_automatic": types.ObjectType{AttrTypes: AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeNonExistentURLActivityAutomaticModelAttrTypes},
 	"include_non_existent_url_activity_custom":    types.ObjectType{AttrTypes: AppSettingAppTypeSettingsUserBehaviorAnalysisSettingEnableDetectionIncludeNonExistentURLActivityCustomModelAttrTypes},
 	"include_rate_limit":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"include_waf_activity":                        types.ObjectType{AttrTypes: map[string]attr.Type{}},

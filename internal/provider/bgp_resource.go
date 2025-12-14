@@ -89,7 +89,7 @@ var BGPPeersModelAttrTypes = map[string]attr.Type{
 	"metadata":              types.ObjectType{AttrTypes: BGPPeersMetadataModelAttrTypes},
 	"passive_mode_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"passive_mode_enabled":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"routing_policies":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"routing_policies":      types.ObjectType{AttrTypes: BGPPeersRoutingPoliciesModelAttrTypes},
 }
 
 // BGPPeersBfdEnabledModel represents bfd_enabled block
@@ -146,11 +146,11 @@ var BGPPeersExternalModelAttrTypes = map[string]attr.Type{
 	"disable":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"disable_v6":             types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"external_connector":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"family_inet":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"family_inet":            types.ObjectType{AttrTypes: BGPPeersExternalFamilyInetModelAttrTypes},
 	"from_site":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"from_site_v6":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"interface":              types.ObjectType{AttrTypes: BGPPeersExternalInterfaceModelAttrTypes},
-	"interface_list":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"interface_list":         types.ObjectType{AttrTypes: BGPPeersExternalInterfaceListModelAttrTypes},
 	"no_authentication":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -223,7 +223,7 @@ type BGPPeersRoutingPoliciesModel struct {
 
 // BGPPeersRoutingPoliciesModelAttrTypes defines the attribute types for BGPPeersRoutingPoliciesModel
 var BGPPeersRoutingPoliciesModelAttrTypes = map[string]attr.Type{
-	"route_policy": types.ListType{ElemType: types.ObjectType{AttrTypes: map[string]attr.Type{}}},
+	"route_policy": types.ListType{ElemType: types.ObjectType{AttrTypes: BGPPeersRoutingPoliciesRoutePolicyModelAttrTypes}},
 }
 
 // BGPPeersRoutingPoliciesRoutePolicyModel represents route_policy block

@@ -122,7 +122,7 @@ var AdvertisePolicyTLSParametersCommonParamsTLSCertificatesModelAttrTypes = map[
 	"description_spec":       types.StringType,
 	"custom_hash_algorithms": types.ObjectType{AttrTypes: AdvertisePolicyTLSParametersCommonParamsTLSCertificatesCustomHashAlgorithmsModelAttrTypes},
 	"disable_ocsp_stapling":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"private_key":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"private_key":            types.ObjectType{AttrTypes: AdvertisePolicyTLSParametersCommonParamsTLSCertificatesPrivateKeyModelAttrTypes},
 	"use_system_defaults":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
@@ -187,7 +187,7 @@ var AdvertisePolicyTLSParametersCommonParamsValidationParamsModelAttrTypes = map
 	"skip_hostname_verification": types.BoolType,
 	"trusted_ca_url":             types.StringType,
 	"verify_subject_alt_names":   types.ListType{ElemType: types.StringType},
-	"trusted_ca":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"trusted_ca":                 types.ObjectType{AttrTypes: AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModelAttrTypes},
 }
 
 // AdvertisePolicyTLSParametersCommonParamsValidationParamsTrustedCAModel represents trusted_ca block
@@ -228,7 +228,7 @@ type AdvertisePolicyWhereModel struct {
 // AdvertisePolicyWhereModelAttrTypes defines the attribute types for AdvertisePolicyWhereModel
 var AdvertisePolicyWhereModelAttrTypes = map[string]attr.Type{
 	"site":            types.ObjectType{AttrTypes: AdvertisePolicyWhereSiteModelAttrTypes},
-	"virtual_network": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"virtual_network": types.ObjectType{AttrTypes: AdvertisePolicyWhereVirtualNetworkModelAttrTypes},
 	"virtual_site":    types.ObjectType{AttrTypes: AdvertisePolicyWhereVirtualSiteModelAttrTypes},
 }
 

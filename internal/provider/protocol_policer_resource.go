@@ -59,7 +59,7 @@ type ProtocolPolicerProtocolPolicerModel struct {
 // ProtocolPolicerProtocolPolicerModelAttrTypes defines the attribute types for ProtocolPolicerProtocolPolicerModel
 var ProtocolPolicerProtocolPolicerModelAttrTypes = map[string]attr.Type{
 	"policer":  types.ListType{ElemType: types.ObjectType{AttrTypes: ProtocolPolicerProtocolPolicerPolicerModelAttrTypes}},
-	"protocol": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"protocol": types.ObjectType{AttrTypes: ProtocolPolicerProtocolPolicerProtocolModelAttrTypes},
 }
 
 // ProtocolPolicerProtocolPolicerPolicerModel represents policer block

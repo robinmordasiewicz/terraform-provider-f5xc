@@ -63,6 +63,53 @@ jobs:
           fi
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
+      - name: Cache ollama models
+        uses: actions/cache@v4
+        with:
+          path: ~/.ollama
+          key: ollama-qwen2.5-coder-7b-${{ runner.os }}
+
+      - name: Cache enrichment descriptions
+        uses: actions/cache@v4
+        with:
+          path: tools/enriched-descriptions-cache.json
+          key: enrichment-cache-${{ hashFiles('internal/provider/*_resource.go') }}
+          restore-keys: |
+            enrichment-cache-
+
+      - name: Install and setup ollama
+        run: |
+          echo "::group::Installing Ollama"
+          curl -fsSL https://ollama.com/install.sh | sh
+          echo "::endgroup::"
+
+          echo "::group::Starting Ollama server"
+          ollama serve &
+          # Wait for server to be ready
+          for i in {1..30}; do
+            if curl -s http://localhost:11434/api/tags >/dev/null 2>&1; then
+              echo "Ollama server is ready"
+              break
+            fi
+            echo "Waiting for Ollama server... ($i/30)"
+            sleep 1
+          done
+          echo "::endgroup::"
+
+          echo "::group::Pulling model"
+          ollama pull qwen2.5-coder:7b
+          echo "::endgroup::"
+
+      - name: Enrich descriptions
+        run: |
+          echo "::group::Enriching descriptions with LLM"
+          go run tools/enrich-descriptions.go \
+            --spec-dir=docs/specifications/api \
+            --ollama-url=http://localhost:11434 \
+            --model=qwen2.5-coder:7b \
+            --cache-file=tools/enriched-descriptions-cache.json
+          echo "::endgroup::"
+
       - name: Calculate Terraform version requirements
         run: |
           echo "::group::Calculating minimum Terraform version"

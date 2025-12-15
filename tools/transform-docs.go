@@ -1533,9 +1533,6 @@ func transformDoc(filePath string) error {
 	// Normalize multiple consecutive blank lines to single blank lines
 	result := normalizeBlankLines(output.String())
 
-	// Compress long anchor IDs to reduce document size (Issue #287)
-	result = compressAnchors(result)
-
 	// Convert plain backticked context lines to clickable links
 	result = convertContextLinesToLinks(result)
 
@@ -1551,6 +1548,18 @@ func transformDoc(filePath string) error {
 
 	// Final pass: fix any remaining bare URLs not in backticks (MD034 compliance)
 	result = fixBareURLs(result)
+
+	// Apply size optimizations (Issue #287 completion)
+	// Deduplicate descriptions and collapse repeated blocks
+	result = applyDescriptionDeduplication(result)
+
+	// Compress long anchor IDs AFTER all link-creating transformations (Issue #287)
+	// This ensures all links (from convertContextLinesToLinks, addSeeBelowLinks,
+	// and applyDescriptionDeduplication) get updated to match compressed anchors
+	result = compressAnchors(result)
+
+	// Final normalization after optimizations to ensure markdown compliance
+	result = normalizeBlankLines(result)
 
 	return os.WriteFile(filePath, []byte(result), 0644)
 }
@@ -1960,8 +1969,7 @@ func collapseDeepNestedBlocks(content string) string {
 					blockEnd++
 				}
 
-				// Create a summary reference to parent block
-				parentPath := strings.Join(words[:len(words)-1], " ")
+				// Extract last word from header for collapsed message
 				lastWord := words[len(words)-1]
 
 				// Generate anchor from header
@@ -1972,11 +1980,9 @@ func collapseDeepNestedBlocks(content string) string {
 				// Keep header for navigation, collapse content
 				result = append(result, line)
 				result = append(result, "")
-				result = append(result, fmt.Sprintf(`<a id="%s"></a>Nested **%s** block. See parent [%s](#%s) for context.`,
+				result = append(result, fmt.Sprintf(`<a id="%s"></a>Deeply nested **%s** block collapsed for readability.`,
 					anchor,
-					lastWord,
-					parentPath,
-					strings.ToLower(strings.ReplaceAll(strings.ReplaceAll(parentPath, " ", "-"), "_", "-"))))
+					lastWord))
 				result = append(result, "")
 
 				i = blockEnd
@@ -2005,7 +2011,7 @@ The following type definitions are used throughout this resource. See the full d
 Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format ` + "`tenant/namespace/name`" + `.
 
 | Field | Type | Description |
-|-------|------|-------------|
+| ----- | ---- | ----------- |
 | ` + "`name`" + ` | String | Name of the referenced object |
 | ` + "`namespace`" + ` | String | Namespace containing the referenced object |
 | ` + "`tenant`" + ` | String | Tenant of the referenced object (system-managed) |
@@ -2015,7 +2021,7 @@ Object references establish a direct reference from one configuration object to 
 Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
 
 | Value | Description |
-|-------|-------------|
+| ----- | ----------- |
 | ` + "`LOWER_CASE`" + ` | Convert to lowercase |
 | ` + "`UPPER_CASE`" + ` | Convert to uppercase |
 | ` + "`BASE64_DECODE`" + ` | Decode base64 content |
@@ -2031,7 +2037,7 @@ Transformers apply transformations to input values before matching. Multiple tra
 HTTP methods used for request matching.
 
 | Value | Description |
-|-------|-------------|
+| ----- | ----------- |
 | ` + "`ANY`" + ` | Match any HTTP method |
 | ` + "`GET`" + ` | HTTP GET request |
 | ` + "`HEAD`" + ` | HTTP HEAD request |
@@ -2049,7 +2055,7 @@ HTTP methods used for request matching.
 TLS fingerprint categories for malicious client detection.
 
 | Value | Description |
-|-------|-------------|
+| ----- | ----------- |
 | ` + "`TLS_FINGERPRINT_NONE`" + ` | No fingerprint matching |
 | ` + "`ANY_MALICIOUS_FINGERPRINT`" + ` | Match any known malicious fingerprint |
 | ` + "`ADWARE`" + ` | Adware-associated fingerprints |
@@ -2063,7 +2069,7 @@ TLS fingerprint categories for malicious client detection.
 IP address threat categories for security filtering.
 
 | Value | Description |
-|-------|-------------|
+| ----- | ----------- |
 | ` + "`SPAM_SOURCES`" + ` | Known spam sources |
 | ` + "`WINDOWS_EXPLOITS`" + ` | Windows exploit sources |
 | ` + "`WEB_ATTACKS`" + ` | Web attack sources |

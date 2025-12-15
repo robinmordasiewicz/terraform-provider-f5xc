@@ -67,7 +67,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.ollama
-          key: ollama-qwen2.5-coder-7b-${{ runner.os }}
+          key: ollama-mistral-7b-instruct-${{ runner.os }}
 
       - name: Cache enrichment descriptions
         uses: actions/cache@v4
@@ -97,7 +97,7 @@ jobs:
           echo "::endgroup::"
 
           echo "::group::Pulling model"
-          ollama pull qwen2.5-coder:7b
+          ollama pull mistral:7b-instruct
           echo "::endgroup::"
 
       - name: Enrich descriptions
@@ -106,7 +106,7 @@ jobs:
           go run tools/enrich-descriptions.go \
             --spec-dir=docs/specifications/api \
             --ollama-url=http://localhost:11434 \
-            --model=qwen2.5-coder:7b \
+            --model=mistral:7b-instruct \
             --cache-file=tools/enriched-descriptions-cache.json \
             --workers=8
           echo "::endgroup::"

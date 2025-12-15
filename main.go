@@ -6,6 +6,8 @@
 //
 // Documentation features OneOf property grouping for mutually exclusive arguments,
 // improving clarity by grouping related properties with a single explanatory note.
+//
+// Version tagging and releases are automated via CI/CD using semantic versioning.
 
 package main
 

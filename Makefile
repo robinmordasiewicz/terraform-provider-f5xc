@@ -13,17 +13,12 @@ CLIENT_DIR=internal/client
 DOCS_DIR=docs
 SPEC_DIR?=/tmp
 
-# LLM Enrichment Configuration
-OLLAMA_URL?=http://localhost:11434
-OLLAMA_MODEL?=qwen2.5-coder:7b
-ENRICHMENT_CACHE=$(TOOLS_DIR)/enriched-descriptions-cache.json
-
 # Go commands
 GO=go
 GOFMT=gofmt
 GOLINT=golangci-lint
 
-.PHONY: all build test lint fmt clean clean-generated regenerate generate enrich-descriptions docs install help sweep sweep-dry-run testacc testacc-mock testacc-real testacc-all test-report test-comprehensive test-comprehensive-mock test-comprehensive-real test-pr-subset
+.PHONY: all build test lint fmt clean clean-generated regenerate generate docs install help sweep sweep-dry-run testacc testacc-mock testacc-real testacc-all test-report test-comprehensive test-comprehensive-mock test-comprehensive-real test-pr-subset
 
 # Default target
 all: generate build lint test docs
@@ -39,7 +34,6 @@ help:
 	@echo "  make lint         - Run linters"
 	@echo "  make fmt          - Format Go code"
 	@echo "  make generate     - Generate resources from OpenAPI specs"
-	@echo "  make enrich-descriptions - Enrich descriptions using local LLM (ollama)"
 	@echo "  make docs         - Generate Terraform documentation"
 	@echo "  make clean        - Remove build artifacts"
 	@echo "  make install      - Install provider locally"
@@ -83,8 +77,6 @@ help:
 	@echo "  F5XC_MOCK_MODE=1   - Enable mock server tests"
 	@echo "  SPEC_DIR           - Directory containing OpenAPI specs (default: /tmp)"
 	@echo "  F5XC_SPEC_DIR      - Alternative env var for spec directory"
-	@echo "  OLLAMA_URL         - Ollama server URL (default: http://localhost:11434)"
-	@echo "  OLLAMA_MODEL       - LLM model for description enrichment (default: qwen2.5-coder:7b)"
 	@echo ""
 	@echo "For real acceptance tests, set one of:"
 	@echo "  F5XC_API_URL + F5XC_P12_FILE + F5XC_P12_PASSWORD (P12 auth)"
@@ -122,22 +114,6 @@ generate-schemas:
 	else \
 		echo "No OpenAPI specs found in $(SPEC_DIR). Skipping generation."; \
 		echo "To generate, download specs to $(SPEC_DIR) or set SPEC_DIR"; \
-	fi
-
-# Enrich descriptions using local LLM (ollama)
-# This improves documentation quality by using AI to rewrite poor OpenAPI descriptions
-# Requirements: ollama installed and running with qwen2.5-coder:7b model
-# The cache is hash-based: only regenerates when schema content changes
-enrich-descriptions:
-	@echo "Enriching descriptions using LLM..."
-	@if [ -d "$(SPEC_DIR)" ] && ls $(SPEC_DIR)/docs-cloud-f5-com.*.ves-swagger.json 1>/dev/null 2>&1; then \
-		$(GO) run $(TOOLS_DIR)/enrich-descriptions.go \
-			--spec-dir=$(SPEC_DIR) \
-			--ollama-url=$(OLLAMA_URL) \
-			--model=$(OLLAMA_MODEL) \
-			--cache-file=$(ENRICHMENT_CACHE); \
-	else \
-		echo "No OpenAPI specs found in $(SPEC_DIR). Skipping enrichment."; \
 	fi
 
 # Generate Terraform documentation

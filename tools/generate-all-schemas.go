@@ -36,24 +36,12 @@ import (
 
 // Configuration
 var (
-	specDir              string
-	dryRun               bool
-	outputDir            string
-	clientDir            string
-	verbose              bool
-	enrichmentCachePath  string
-	useEnrichedDescs     bool
-	currentResourceName  string // Set during processing for cache lookups
+	specDir   string
+	dryRun    bool
+	outputDir string
+	clientDir string
+	verbose   bool
 )
-
-// EnrichmentCache holds LLM-enriched descriptions
-type EnrichmentCache struct {
-	SchemaHash   string            `json:"schema_hash"`
-	Model        string            `json:"model"`
-	Descriptions map[string]string `json:"descriptions"`
-}
-
-var enrichmentCache *EnrichmentCache
 
 // OpenAPI3Spec represents an OpenAPI 3.x specification
 type OpenAPI3Spec struct {
@@ -147,50 +135,6 @@ func init() {
 	flag.StringVar(&outputDir, "output-dir", "internal/provider", "Output directory for provider files")
 	flag.StringVar(&clientDir, "client-dir", "internal/client", "Output directory for client files")
 	flag.BoolVar(&verbose, "verbose", false, "Enable verbose output")
-	flag.StringVar(&enrichmentCachePath, "enrichment-cache", "tools/enriched-descriptions-cache.json", "Path to LLM enrichment cache")
-	flag.BoolVar(&useEnrichedDescs, "use-enriched-descriptions", true, "Use LLM-enriched descriptions from cache")
-}
-
-// loadEnrichmentCache loads the LLM enrichment cache from disk
-func loadEnrichmentCache(path string) *EnrichmentCache {
-	data, err := os.ReadFile(path)
-	if err != nil {
-		if !os.IsNotExist(err) && verbose {
-			fmt.Printf("Warning: Could not read enrichment cache: %v\n", err)
-		}
-		return nil
-	}
-
-	var cache EnrichmentCache
-	if err := json.Unmarshal(data, &cache); err != nil {
-		if verbose {
-			fmt.Printf("Warning: Could not parse enrichment cache: %v\n", err)
-		}
-		return nil
-	}
-
-	return &cache
-}
-
-// getEnrichedDescription looks up an enriched description from the cache
-func getEnrichedDescription(resourceName, fieldPath string) (string, bool) {
-	if enrichmentCache == nil || enrichmentCache.Descriptions == nil {
-		return "", false
-	}
-
-	// Try full path first: resource:schema.field.path
-	var key string
-	if fieldPath != "" {
-		key = fmt.Sprintf("%s:%s", resourceName, fieldPath)
-	} else {
-		key = resourceName
-	}
-
-	if desc, ok := enrichmentCache.Descriptions[key]; ok {
-		return desc, true
-	}
-
-	return "", false
 }
 
 func main() {
@@ -210,16 +154,6 @@ func main() {
 	fmt.Printf("📁 Output Directory: %s\n", outputDir)
 	if dryRun {
 		fmt.Println("🔍 DRY RUN MODE - No files will be written")
-	}
-
-	// Load enrichment cache if enabled
-	if useEnrichedDescs {
-		enrichmentCache = loadEnrichmentCache(enrichmentCachePath)
-		if enrichmentCache != nil {
-			fmt.Printf("📝 Loaded enrichment cache: %d descriptions\n", len(enrichmentCache.Descriptions))
-		} else if verbose {
-			fmt.Println("ℹ️  No enrichment cache found, using original descriptions")
-		}
 	}
 	fmt.Println()
 
@@ -291,9 +225,6 @@ func processSpecFile(specFile string) GenerationResult {
 	if resourceName == "" {
 		return GenerationResult{ResourceName: filepath.Base(specFile), Success: false}
 	}
-
-	// Set current resource name for enrichment cache lookups
-	currentResourceName = resourceName
 
 	// Skip internal/utility schemas
 	skipPatterns := []string{
@@ -955,7 +886,6 @@ func extractNestedAttributes(schema SchemaDefinition, spec *OpenAPI3Spec, depth 
 
 	var attrs []TerraformAttribute
 	for propName, propSchema := range schema.Properties {
-		// Build nested field path for enrichment cache lookups
 		nestedPath := propName
 		if parentPath != "" {
 			nestedPath = parentPath + "." + propName
@@ -1029,11 +959,6 @@ func mapSchemaTypeToGo(t string) string {
 }
 
 func cleanDescription(desc string, fieldPath string) string {
-	// Check enrichment cache first for LLM-improved descriptions
-	if enrichedDesc, ok := getEnrichedDescription(currentResourceName, fieldPath); ok {
-		return enrichedDesc
-	}
-
 	// Remove example and validation rules sections
 	desc = regexp.MustCompile(`\s*Example:.*`).ReplaceAllString(desc, "")
 	desc = regexp.MustCompile(`\s*Validation Rules:.*`).ReplaceAllString(desc, "")

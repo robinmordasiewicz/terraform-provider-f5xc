@@ -37,6 +37,9 @@ Thumbs.db
 dist/
 bin/
 
+# LLM enrichment cache (deprecated feature)
+tools/enriched-descriptions-cache.json
+
 # Playwright MCP artifacts
 .playwright-mcp/
 

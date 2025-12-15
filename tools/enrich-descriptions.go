@@ -72,9 +72,9 @@ type SchemaDefinition struct {
 
 // OpenAPISpec represents the top-level OpenAPI document
 type OpenAPISpec struct {
-	Info       SpecInfo                      `json:"info"`
-	Components SpecComponents                `json:"components"`
-	Paths      map[string]map[string]PathOp  `json:"paths"`
+	Info       SpecInfo       `json:"info"`
+	Components SpecComponents `json:"components"`
+	// Paths is not unmarshaled - we only need schemas, and some specs have non-standard path values
 }
 
 // SpecInfo contains API metadata
@@ -86,12 +86,6 @@ type SpecInfo struct {
 // SpecComponents contains schema definitions
 type SpecComponents struct {
 	Schemas map[string]SchemaDefinition `json:"schemas"`
-}
-
-// PathOp represents a path operation
-type PathOp struct {
-	Summary     string `json:"summary"`
-	Description string `json:"description"`
 }
 
 // DescriptionContext holds all context for a description

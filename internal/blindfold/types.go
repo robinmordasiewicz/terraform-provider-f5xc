@@ -81,9 +81,34 @@ type LabelSelectorType struct {
 }
 
 // SealedSecret represents the encrypted output from the blindfold operation.
-// This structure is serialized to JSON and base64-encoded for use in
-// blindfold_secret_info.location fields.
+// This structure uses envelope encryption (hybrid encryption):
+// - A random AES-256 key (DEK) encrypts the actual data
+// - The DEK is encrypted with RSA-OAEP using the F5XC public key (KEK)
+// This allows encrypting data of any size (up to 128KB API limit).
 type SealedSecret struct {
+	// KeyVersion identifies which public key version was used for encryption
+	KeyVersion int `json:"key_version"`
+
+	// PolicyID identifies the policy document used
+	PolicyID string `json:"policy_id"`
+
+	// Tenant is the F5XC tenant identifier
+	Tenant string `json:"tenant"`
+
+	// EncryptedKey is the base64-encoded RSA-OAEP encrypted AES-256 key (DEK)
+	EncryptedKey string `json:"encrypted_key"`
+
+	// Nonce is the base64-encoded 12-byte nonce used for AES-GCM
+	Nonce string `json:"nonce"`
+
+	// Ciphertext is the base64-encoded AES-GCM encrypted data (includes auth tag)
+	Ciphertext string `json:"ciphertext"`
+}
+
+// SealedSecretLegacy represents the old direct RSA-OAEP format.
+// Kept for backwards compatibility with secrets < 190 bytes.
+// Deprecated: Use SealedSecret with envelope encryption instead.
+type SealedSecretLegacy struct {
 	// KeyVersion identifies which public key version was used for encryption
 	KeyVersion int `json:"key_version"`
 

@@ -1290,7 +1290,7 @@ func (r *NfvServiceResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             nfv_serviceSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages new NFV service with configured parameters in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new NFV service with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Nfv Service. Must be unique within the namespace.",

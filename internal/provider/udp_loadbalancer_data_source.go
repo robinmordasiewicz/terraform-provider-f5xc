@@ -42,7 +42,7 @@ func (d *UDPLoadBalancerDataSource) Metadata(ctx context.Context, req datasource
 
 func (d *UDPLoadBalancerDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a UDP Load Balancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.",
+		MarkdownDescription: "Manages a UDP Load Balancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

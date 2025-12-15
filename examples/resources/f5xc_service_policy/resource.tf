@@ -1,5 +1,5 @@
 # Service Policy Resource Example
-# [Category: Security] [Namespace: required] [DependsOn: namespace] Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Service Policy configuration
 resource "f5xc_service_policy" "example" {

@@ -2,12 +2,12 @@
 page_title: "f5xc_waf_exclusion_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  [Category: Security] [Namespace: required] Manages WAF exclusion policy in F5 Distributed Cloud.
+  Manages WAF exclusion policy in F5 Distributed Cloud.
 ---
 
 # f5xc_waf_exclusion_policy (Resource)
 
-[Category: Security] [Namespace: required] Manages WAF exclusion policy in F5 Distributed Cloud.
+Manages WAF exclusion policy in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [WAF Exclusion Policy API docs](https://docs.cloud.f5.com/docs-v2/api/waf-exclusion-policy) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # WAF Exclusion Policy Resource Example
-# [Category: Security] [Namespace: required] Manages WAF exclusion policy in F5 Distributed Cloud.
+# Manages WAF exclusion policy in F5 Distributed Cloud.
 
 # Basic WAF Exclusion Policy configuration
 resource "f5xc_waf_exclusion_policy" "example" {
@@ -106,7 +106,7 @@ A [`waf_exclusion_rules`](#waf-exclusion-rules) block supports the following:
 
 <a id="waf-exclusion-rules-metadata"></a>&#x2022; [`metadata`](#waf-exclusion-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#waf-exclusion-rules-metadata) below.
 
-<a id="waf-exclusion-rules-methods"></a>&#x2022; [`methods`](#waf-exclusion-rules-methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Methods. methods to be matched
+<a id="waf-exclusion-rules-methods"></a>&#x2022; [`methods`](#waf-exclusion-rules-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Methods. methods to be matched
 
 <a id="waf-exclusion-rules-path-prefix"></a>&#x2022; [`path_prefix`](#waf-exclusion-rules-path-prefix) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
 
@@ -130,39 +130,19 @@ An [`app_firewall_detection_control`](#control-b277f9) block (within [`waf_exclu
 
 #### WAF Exclusion Rules App Firewall Detection Control Exclude Attack Type Contexts
 
-An [`exclude_attack_type_contexts`](#contexts-73e1d1) block (within [`waf_exclusion_rules.app_firewall_detection_control`](#control-b277f9)) supports the following:
-
-<a id="context-1e5859"></a>&#x2022; [`context`](#context-1e5859) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
-
-<a id="name-a3a84e"></a>&#x2022; [`context_name`](#name-a3a84e) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
-
-<a id="type-663059"></a>&#x2022; [`exclude_attack_type`](#type-663059) - Optional String  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>[Enum: ATTACK_TYPE_NONE|ATTACK_TYPE_NON_BROWSER_CLIENT|ATTACK_TYPE_OTHER_APPLICATION_ATTACKS|ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE|ATTACK_TYPE_DETECTION_EVASION|ATTACK_TYPE_VULNERABILITY_SCAN|ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY|ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS|ATTACK_TYPE_BUFFER_OVERFLOW|ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION|ATTACK_TYPE_INFORMATION_LEAKAGE|ATTACK_TYPE_DIRECTORY_INDEXING|ATTACK_TYPE_PATH_TRAVERSAL|ATTACK_TYPE_XPATH_INJECTION|ATTACK_TYPE_LDAP_INJECTION|ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION|ATTACK_TYPE_COMMAND_EXECUTION|ATTACK_TYPE_SQL_INJECTION|ATTACK_TYPE_CROSS_SITE_SCRIPTING|ATTACK_TYPE_DENIAL_OF_SERVICE|ATTACK_TYPE_HTTP_PARSER_ATTACK|ATTACK_TYPE_SESSION_HIJACKING|ATTACK_TYPE_HTTP_RESPONSE_SPLITTING|ATTACK_TYPE_FORCEFUL_BROWSING|ATTACK_TYPE_REMOTE_FILE_INCLUDE|ATTACK_TYPE_MALICIOUS_FILE_UPLOAD|ATTACK_TYPE_GRAPHQL_PARSER_ATTACK] Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK
+<a id="deep-f2967d"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### WAF Exclusion Rules App Firewall Detection Control Exclude Bot Name Contexts
 
-An [`exclude_bot_name_contexts`](#contexts-c4dd1b) block (within [`waf_exclusion_rules.app_firewall_detection_control`](#control-b277f9)) supports the following:
-
-<a id="name-aa988a"></a>&#x2022; [`bot_name`](#name-aa988a) - Optional String<br>Bot Name
+<a id="deep-a720a1"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### WAF Exclusion Rules App Firewall Detection Control Exclude Signature Contexts
 
-An [`exclude_signature_contexts`](#contexts-5bc5d9) block (within [`waf_exclusion_rules.app_firewall_detection_control`](#control-b277f9)) supports the following:
-
-<a id="context-cdf70d"></a>&#x2022; [`context`](#context-cdf70d) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
-
-<a id="name-b0a9ac"></a>&#x2022; [`context_name`](#name-b0a9ac) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
-
-<a id="signature-id-b6c222"></a>&#x2022; [`signature_id`](#signature-id-b6c222) - Optional Number<br>SignatureID. The allowed values for signature ID are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context
+<a id="deep-a49b34"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### WAF Exclusion Rules App Firewall Detection Control Exclude Violation Contexts
 
-An [`exclude_violation_contexts`](#contexts-f20556) block (within [`waf_exclusion_rules.app_firewall_detection_control`](#control-b277f9)) supports the following:
-
-<a id="context-09b703"></a>&#x2022; [`context`](#context-09b703) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
-
-<a id="name-1f5a51"></a>&#x2022; [`context_name`](#name-1f5a51) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
-
-<a id="violation-1ddbf2"></a>&#x2022; [`exclude_violation`](#violation-1ddbf2) - Optional String  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>[Enum: VIOL_NONE|VIOL_FILETYPE|VIOL_METHOD|VIOL_MANDATORY_HEADER|VIOL_HTTP_RESPONSE_STATUS|VIOL_REQUEST_MAX_LENGTH|VIOL_FILE_UPLOAD|VIOL_FILE_UPLOAD_IN_BODY|VIOL_XML_MALFORMED|VIOL_JSON_MALFORMED|VIOL_ASM_COOKIE_MODIFIED|VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS|VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE|VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT|VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST|VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION|VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS|VIOL_EVASION_DIRECTORY_TRAVERSALS|VIOL_MALFORMED_REQUEST|VIOL_EVASION_MULTIPLE_DECODING|VIOL_DATA_GUARD|VIOL_EVASION_APACHE_WHITESPACE|VIOL_COOKIE_MODIFIED|VIOL_EVASION_IIS_UNICODE_CODEPOINTS|VIOL_EVASION_IIS_BACKSLASHES|VIOL_EVASION_PERCENT_U_DECODING|VIOL_EVASION_BARE_BYTE_DECODING|VIOL_EVASION_BAD_UNESCAPE|VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST|VIOL_ENCODING|VIOL_COOKIE_MALFORMED|VIOL_GRAPHQL_FORMAT|VIOL_GRAPHQL_MALFORMED|VIOL_GRAPHQL_INTROSPECTION_QUERY] App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY
+<a id="deep-f110f3"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### WAF Exclusion Rules Metadata
 
@@ -171,6 +151,89 @@ A [`metadata`](#waf-exclusion-rules-metadata) block (within [`waf_exclusion_rule
 <a id="spec-9494c5"></a>&#x2022; [`description_spec`](#spec-9494c5) - Optional String<br>Description. Human readable description
 
 <a id="waf-exclusion-rules-metadata-name"></a>&#x2022; [`name`](#waf-exclusion-rules-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

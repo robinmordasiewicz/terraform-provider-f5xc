@@ -2,12 +2,12 @@
 page_title: "f5xc_nfv_service Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  [Namespace: required] Manages new NFV service with configured parameters in F5 Distributed Cloud.
+  Manages new NFV service with configured parameters in F5 Distributed Cloud.
 ---
 
 # f5xc_nfv_service (Resource)
 
-[Namespace: required] Manages new NFV service with configured parameters in F5 Distributed Cloud.
+Manages new NFV service with configured parameters in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Nfv Service API docs](https://docs.cloud.f5.com/docs-v2/api/nfv-service) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Nfv Service Resource Example
-# [Namespace: required] Manages new NFV service with configured parameters in F5 Distributed Cloud.
+# Manages new NFV service with configured parameters in F5 Distributed Cloud.
 
 # Basic Nfv Service configuration
 resource "f5xc_nfv_service" "example" {
@@ -142,37 +142,19 @@ An [`admin_password`](#f5-big-ip-aws-service-admin-password) block (within [`f5_
 
 #### F5 Big IP AWS Service Admin Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-937ada) block (within [`f5_big_ip_aws_service.admin_password`](#f5-big-ip-aws-service-admin-password)) supports the following:
-
-<a id="provider-ca6fa3"></a>&#x2022; [`decryption_provider`](#provider-ca6fa3) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-53b6be"></a>&#x2022; [`location`](#location-53b6be) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-6451ef"></a>&#x2022; [`store_provider`](#provider-6451ef) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-9e13eb"></a>Deeply nested **Info** block collapsed for readability.
 
 #### F5 Big IP AWS Service Admin Password Clear Secret Info
 
-A [`clear_secret_info`](#info-a3c75d) block (within [`f5_big_ip_aws_service.admin_password`](#f5-big-ip-aws-service-admin-password)) supports the following:
-
-<a id="ref-79e9d6"></a>&#x2022; [`provider_ref`](#ref-79e9d6) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-0043f2"></a>&#x2022; [`url`](#url-0043f2) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-6eab84"></a>Deeply nested **Info** block collapsed for readability.
 
 #### F5 Big IP AWS Service AWS TGW Site Params
 
-An [`aws_tgw_site_params`](#params-7322b1) block (within [`f5_big_ip_aws_service`](#f5-big-ip-aws-service)) supports the following:
-
-<a id="site-d5cef8"></a>&#x2022; [`aws_tgw_site`](#site-d5cef8) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS TGW Site](#site-d5cef8) below.
+<a id="deep-88ab50"></a>Deeply nested **Params** block collapsed for readability.
 
 #### F5 Big IP AWS Service AWS TGW Site Params AWS TGW Site
 
-An [`aws_tgw_site`](#site-d5cef8) block (within [`f5_big_ip_aws_service.aws_tgw_site_params`](#params-7322b1)) supports the following:
-
-<a id="name-090b93"></a>&#x2022; [`name`](#name-090b93) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-71f773"></a>&#x2022; [`namespace`](#namespace-71f773) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-5ded3d"></a>&#x2022; [`tenant`](#tenant-5ded3d) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-7bd52c"></a>Deeply nested **Site** block collapsed for readability.
 
 #### F5 Big IP AWS Service Endpoint Service
 
@@ -204,23 +186,15 @@ An [`endpoint_service`](#f5-big-ip-aws-service-endpoint-service) block (within [
 
 #### F5 Big IP AWS Service Endpoint Service Custom TCP Ports
 
-A [`custom_tcp_ports`](#ports-afbd6c) block (within [`f5_big_ip_aws_service.endpoint_service`](#f5-big-ip-aws-service-endpoint-service)) supports the following:
-
-<a id="ports-669cb6"></a>&#x2022; [`ports`](#ports-669cb6) - Optional List<br>Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
+<a id="deep-6dc521"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### F5 Big IP AWS Service Endpoint Service Custom UDP Ports
 
-A [`custom_udp_ports`](#ports-775f61) block (within [`f5_big_ip_aws_service.endpoint_service`](#f5-big-ip-aws-service-endpoint-service)) supports the following:
-
-<a id="ports-1dc486"></a>&#x2022; [`ports`](#ports-1dc486) - Optional List<br>Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
+<a id="deep-ba573c"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### F5 Big IP AWS Service Market Place Image
 
-A [`market_place_image`](#image-4d64b2) block (within [`f5_big_ip_aws_service`](#f5-big-ip-aws-service)) supports the following:
-
-<a id="mbps-4a5484"></a>&#x2022; [`awafpay_g200_mbps`](#mbps-4a5484) - Optional Block<br>Enable this option
-
-<a id="gbps-45d6d3"></a>&#x2022; [`awafpay_g3_gbps`](#gbps-45d6d3) - Optional Block<br>Enable this option
+<a id="deep-05bf5d"></a>Deeply nested **Image** block collapsed for readability.
 
 #### F5 Big IP AWS Service Nodes
 
@@ -240,17 +214,11 @@ A [`nodes`](#f5-big-ip-aws-service-nodes) block (within [`f5_big_ip_aws_service`
 
 #### F5 Big IP AWS Service Nodes Mgmt Subnet
 
-A [`mgmt_subnet`](#f5-big-ip-aws-service-nodes-mgmt-subnet) block (within [`f5_big_ip_aws_service.nodes`](#f5-big-ip-aws-service-nodes)) supports the following:
-
-<a id="subnet-id-f666a1"></a>&#x2022; [`existing_subnet_id`](#subnet-id-f666a1) - Optional String<br>Existing Subnet ID. Information about existing subnet ID
-
-<a id="param-44c864"></a>&#x2022; [`subnet_param`](#param-44c864) - Optional Block<br>New Cloud Subnet Parameters. Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-44c864) below.
+<a id="deep-5bd00b"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### F5 Big IP AWS Service Nodes Mgmt Subnet Subnet Param
 
-A [`subnet_param`](#param-44c864) block (within [`f5_big_ip_aws_service.nodes.mgmt_subnet`](#f5-big-ip-aws-service-nodes-mgmt-subnet)) supports the following:
-
-<a id="ipv4-852430"></a>&#x2022; [`ipv4`](#ipv4-852430) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-b956ce"></a>Deeply nested **Param** block collapsed for readability.
 
 #### HTTPS Management
 
@@ -282,13 +250,7 @@ An [`advertise_on_internet`](#https-management-advertise-on-internet) block (wit
 
 #### HTTPS Management Advertise On Internet Public IP
 
-A [`public_ip`](#public-ip-e501cc) block (within [`https_management.advertise_on_internet`](#https-management-advertise-on-internet)) supports the following:
-
-<a id="name-c549a1"></a>&#x2022; [`name`](#name-c549a1) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-8fcb5e"></a>&#x2022; [`namespace`](#namespace-8fcb5e) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-5cb820"></a>&#x2022; [`tenant`](#tenant-5cb820) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-e501cc"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### HTTPS Management Advertise On SLI VIP
 
@@ -304,117 +266,47 @@ An [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) block (withi
 
 #### HTTPS Management Advertise On SLI VIP TLS Certificates
 
-A [`tls_certificates`](#certificates-5355d7) block (within [`https_management.advertise_on_sli_vip`](#https-management-advertise-on-sli-vip)) supports the following:
-
-<a id="url-6da58e"></a>&#x2022; [`certificate_url`](#url-6da58e) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-df25ed"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-df25ed) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-df25ed) below.
-
-<a id="spec-ca69ee"></a>&#x2022; [`description_spec`](#spec-ca69ee) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-2e3125"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-2e3125) - Optional Block<br>Enable this option
-
-<a id="key-7c0097"></a>&#x2022; [`private_key`](#key-7c0097) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-7c0097) below.
-
-<a id="defaults-18ac4e"></a>&#x2022; [`use_system_defaults`](#defaults-18ac4e) - Optional Block<br>Enable this option
+<a id="deep-f98383"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### HTTPS Management Advertise On SLI VIP TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-df25ed) block (within [`https_management.advertise_on_sli_vip.tls_certificates`](#certificates-5355d7)) supports the following:
-
-<a id="algorithms-083c58"></a>&#x2022; [`hash_algorithms`](#algorithms-083c58) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-d5385c"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### HTTPS Management Advertise On SLI VIP TLS Certificates Private Key
 
-A [`private_key`](#key-7c0097) block (within [`https_management.advertise_on_sli_vip.tls_certificates`](#certificates-5355d7)) supports the following:
-
-<a id="info-d9df15"></a>&#x2022; [`blindfold_secret_info`](#info-d9df15) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-d9df15) below.
-
-<a id="info-54e3b2"></a>&#x2022; [`clear_secret_info`](#info-54e3b2) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-54e3b2) below.
+<a id="deep-d94d1f"></a>Deeply nested **Key** block collapsed for readability.
 
 #### HTTPS Management Advertise On SLI VIP TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-d9df15) block (within [`https_management.advertise_on_sli_vip.tls_certificates.private_key`](#key-7c0097)) supports the following:
-
-<a id="provider-5f1a70"></a>&#x2022; [`decryption_provider`](#provider-5f1a70) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-fa523c"></a>&#x2022; [`location`](#location-fa523c) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-12c9c1"></a>&#x2022; [`store_provider`](#provider-12c9c1) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-991677"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTPS Management Advertise On SLI VIP TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-54e3b2) block (within [`https_management.advertise_on_sli_vip.tls_certificates.private_key`](#key-7c0097)) supports the following:
-
-<a id="ref-98dcbd"></a>&#x2022; [`provider_ref`](#ref-98dcbd) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-ab8c1e"></a>&#x2022; [`url`](#url-ab8c1e) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-688a17"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTPS Management Advertise On SLI VIP TLS Config
 
-A [`tls_config`](#config-9f094b) block (within [`https_management.advertise_on_sli_vip`](#https-management-advertise-on-sli-vip)) supports the following:
-
-<a id="security-dfdc05"></a>&#x2022; [`custom_security`](#security-dfdc05) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-dfdc05) below.
-
-<a id="security-9de532"></a>&#x2022; [`default_security`](#security-9de532) - Optional Block<br>Enable this option
-
-<a id="security-69850d"></a>&#x2022; [`low_security`](#security-69850d) - Optional Block<br>Enable this option
-
-<a id="security-214afa"></a>&#x2022; [`medium_security`](#security-214afa) - Optional Block<br>Enable this option
+<a id="deep-e3f25e"></a>Deeply nested **Config** block collapsed for readability.
 
 #### HTTPS Management Advertise On SLI VIP TLS Config Custom Security
 
-A [`custom_security`](#security-dfdc05) block (within [`https_management.advertise_on_sli_vip.tls_config`](#config-9f094b)) supports the following:
-
-<a id="suites-fb1fde"></a>&#x2022; [`cipher_suites`](#suites-fb1fde) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-b07adb"></a>&#x2022; [`max_version`](#version-b07adb) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-2c0f87"></a>&#x2022; [`min_version`](#version-2c0f87) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-ff90f4"></a>Deeply nested **Security** block collapsed for readability.
 
 #### HTTPS Management Advertise On SLI VIP Use mTLS
 
-An [`use_mtls`](#mtls-c1dce4) block (within [`https_management.advertise_on_sli_vip`](#https-management-advertise-on-sli-vip)) supports the following:
-
-<a id="optional-68adb9"></a>&#x2022; [`client_certificate_optional`](#optional-68adb9) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-19936d"></a>&#x2022; [`crl`](#crl-19936d) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-19936d) below.
-
-<a id="crl-fac420"></a>&#x2022; [`no_crl`](#crl-fac420) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-b9e38a"></a>&#x2022; [`trusted_ca`](#trusted-ca-b9e38a) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-b9e38a) below.
-
-<a id="url-b6ba65"></a>&#x2022; [`trusted_ca_url`](#url-b6ba65) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-e8c4ec"></a>&#x2022; [`xfcc_disabled`](#disabled-e8c4ec) - Optional Block<br>Enable this option
-
-<a id="options-ca97b0"></a>&#x2022; [`xfcc_options`](#options-ca97b0) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-ca97b0) below.
+<a id="deep-9bf922"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### HTTPS Management Advertise On SLI VIP Use mTLS CRL
 
-A [`crl`](#crl-19936d) block (within [`https_management.advertise_on_sli_vip.use_mtls`](#mtls-c1dce4)) supports the following:
-
-<a id="name-fed988"></a>&#x2022; [`name`](#name-fed988) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b0813f"></a>&#x2022; [`namespace`](#namespace-b0813f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-374a05"></a>&#x2022; [`tenant`](#tenant-374a05) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-22ca79"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### HTTPS Management Advertise On SLI VIP Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-b9e38a) block (within [`https_management.advertise_on_sli_vip.use_mtls`](#mtls-c1dce4)) supports the following:
-
-<a id="name-1925aa"></a>&#x2022; [`name`](#name-1925aa) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-65c37d"></a>&#x2022; [`namespace`](#namespace-65c37d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-2c045b"></a>&#x2022; [`tenant`](#tenant-2c045b) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-6b41d6"></a>Deeply nested **CA** block collapsed for readability.
 
 #### HTTPS Management Advertise On SLI VIP Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-ca97b0) block (within [`https_management.advertise_on_sli_vip.use_mtls`](#mtls-c1dce4)) supports the following:
-
-<a id="elements-1f3d82"></a>&#x2022; [`xfcc_header_elements`](#elements-1f3d82) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-660fe3"></a>Deeply nested **Options** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP
 
@@ -430,117 +322,47 @@ An [`advertise_on_slo_internet_vip`](#vip-6dd6e5) block (within [`https_manageme
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Certificates
 
-A [`tls_certificates`](#certificates-748bff) block (within [`https_management.advertise_on_slo_internet_vip`](#vip-6dd6e5)) supports the following:
-
-<a id="url-538fd1"></a>&#x2022; [`certificate_url`](#url-538fd1) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-396399"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-396399) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-396399) below.
-
-<a id="spec-319b4d"></a>&#x2022; [`description_spec`](#spec-319b4d) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-26e75e"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-26e75e) - Optional Block<br>Enable this option
-
-<a id="key-d9eadd"></a>&#x2022; [`private_key`](#key-d9eadd) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-d9eadd) below.
-
-<a id="defaults-eae44a"></a>&#x2022; [`use_system_defaults`](#defaults-eae44a) - Optional Block<br>Enable this option
+<a id="deep-997d27"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-396399) block (within [`https_management.advertise_on_slo_internet_vip.tls_certificates`](#certificates-748bff)) supports the following:
-
-<a id="algorithms-0fe11a"></a>&#x2022; [`hash_algorithms`](#algorithms-0fe11a) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-c2426d"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key
 
-A [`private_key`](#key-d9eadd) block (within [`https_management.advertise_on_slo_internet_vip.tls_certificates`](#certificates-748bff)) supports the following:
-
-<a id="info-fb4948"></a>&#x2022; [`blindfold_secret_info`](#info-fb4948) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-fb4948) below.
-
-<a id="info-7e382d"></a>&#x2022; [`clear_secret_info`](#info-7e382d) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-7e382d) below.
+<a id="deep-5ae0f7"></a>Deeply nested **Key** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-fb4948) block (within [`https_management.advertise_on_slo_internet_vip.tls_certificates.private_key`](#key-d9eadd)) supports the following:
-
-<a id="provider-3f630f"></a>&#x2022; [`decryption_provider`](#provider-3f630f) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-da3b9c"></a>&#x2022; [`location`](#location-da3b9c) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-84b5f6"></a>&#x2022; [`store_provider`](#provider-84b5f6) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-b65fa7"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-7e382d) block (within [`https_management.advertise_on_slo_internet_vip.tls_certificates.private_key`](#key-d9eadd)) supports the following:
-
-<a id="ref-218907"></a>&#x2022; [`provider_ref`](#ref-218907) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-19877d"></a>&#x2022; [`url`](#url-19877d) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-3f5ebc"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Config
 
-A [`tls_config`](#config-3dcb79) block (within [`https_management.advertise_on_slo_internet_vip`](#vip-6dd6e5)) supports the following:
-
-<a id="security-b809cf"></a>&#x2022; [`custom_security`](#security-b809cf) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-b809cf) below.
-
-<a id="security-e059f2"></a>&#x2022; [`default_security`](#security-e059f2) - Optional Block<br>Enable this option
-
-<a id="security-9a6aa9"></a>&#x2022; [`low_security`](#security-9a6aa9) - Optional Block<br>Enable this option
-
-<a id="security-e4549d"></a>&#x2022; [`medium_security`](#security-e4549d) - Optional Block<br>Enable this option
+<a id="deep-c14ee2"></a>Deeply nested **Config** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP TLS Config Custom Security
 
-A [`custom_security`](#security-b809cf) block (within [`https_management.advertise_on_slo_internet_vip.tls_config`](#config-3dcb79)) supports the following:
-
-<a id="suites-8ab58a"></a>&#x2022; [`cipher_suites`](#suites-8ab58a) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-fe0ab6"></a>&#x2022; [`max_version`](#version-fe0ab6) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-c193af"></a>&#x2022; [`min_version`](#version-c193af) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-659bc5"></a>Deeply nested **Security** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP Use mTLS
 
-An [`use_mtls`](#mtls-2fcd89) block (within [`https_management.advertise_on_slo_internet_vip`](#vip-6dd6e5)) supports the following:
-
-<a id="optional-bb69f8"></a>&#x2022; [`client_certificate_optional`](#optional-bb69f8) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-d07bf8"></a>&#x2022; [`crl`](#crl-d07bf8) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-d07bf8) below.
-
-<a id="crl-aeab3f"></a>&#x2022; [`no_crl`](#crl-aeab3f) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-046a20"></a>&#x2022; [`trusted_ca`](#trusted-ca-046a20) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-046a20) below.
-
-<a id="url-248df7"></a>&#x2022; [`trusted_ca_url`](#url-248df7) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-369402"></a>&#x2022; [`xfcc_disabled`](#disabled-369402) - Optional Block<br>Enable this option
-
-<a id="options-683773"></a>&#x2022; [`xfcc_options`](#options-683773) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-683773) below.
+<a id="deep-a13568"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP Use mTLS CRL
 
-A [`crl`](#crl-d07bf8) block (within [`https_management.advertise_on_slo_internet_vip.use_mtls`](#mtls-2fcd89)) supports the following:
-
-<a id="name-7fe25b"></a>&#x2022; [`name`](#name-7fe25b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-a1ad51"></a>&#x2022; [`namespace`](#namespace-a1ad51) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-3af425"></a>&#x2022; [`tenant`](#tenant-3af425) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-8c2bfd"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-046a20) block (within [`https_management.advertise_on_slo_internet_vip.use_mtls`](#mtls-2fcd89)) supports the following:
-
-<a id="name-f0c02e"></a>&#x2022; [`name`](#name-f0c02e) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-571413"></a>&#x2022; [`namespace`](#namespace-571413) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-b6f682"></a>&#x2022; [`tenant`](#tenant-b6f682) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-c10aab"></a>Deeply nested **CA** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo Internet VIP Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-683773) block (within [`https_management.advertise_on_slo_internet_vip.use_mtls`](#mtls-2fcd89)) supports the following:
-
-<a id="elements-37d5da"></a>&#x2022; [`xfcc_header_elements`](#elements-37d5da) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-94a3cb"></a>Deeply nested **Options** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI
 
@@ -556,117 +378,47 @@ An [`advertise_on_slo_sli`](#https-management-advertise-on-slo-sli) block (withi
 
 #### HTTPS Management Advertise On Slo SLI TLS Certificates
 
-A [`tls_certificates`](#certificates-b923c1) block (within [`https_management.advertise_on_slo_sli`](#https-management-advertise-on-slo-sli)) supports the following:
-
-<a id="url-599a7a"></a>&#x2022; [`certificate_url`](#url-599a7a) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-54e57d"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-54e57d) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-54e57d) below.
-
-<a id="spec-674aab"></a>&#x2022; [`description_spec`](#spec-674aab) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-2445e8"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-2445e8) - Optional Block<br>Enable this option
-
-<a id="key-f51e15"></a>&#x2022; [`private_key`](#key-f51e15) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-f51e15) below.
-
-<a id="defaults-bb55aa"></a>&#x2022; [`use_system_defaults`](#defaults-bb55aa) - Optional Block<br>Enable this option
+<a id="deep-0b2a49"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-54e57d) block (within [`https_management.advertise_on_slo_sli.tls_certificates`](#certificates-b923c1)) supports the following:
-
-<a id="algorithms-c29f03"></a>&#x2022; [`hash_algorithms`](#algorithms-c29f03) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-eef6f6"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI TLS Certificates Private Key
 
-A [`private_key`](#key-f51e15) block (within [`https_management.advertise_on_slo_sli.tls_certificates`](#certificates-b923c1)) supports the following:
-
-<a id="info-4c3e9e"></a>&#x2022; [`blindfold_secret_info`](#info-4c3e9e) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-4c3e9e) below.
-
-<a id="info-0591f3"></a>&#x2022; [`clear_secret_info`](#info-0591f3) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-0591f3) below.
+<a id="deep-40d26d"></a>Deeply nested **Key** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-4c3e9e) block (within [`https_management.advertise_on_slo_sli.tls_certificates.private_key`](#key-f51e15)) supports the following:
-
-<a id="provider-77378b"></a>&#x2022; [`decryption_provider`](#provider-77378b) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-6e8882"></a>&#x2022; [`location`](#location-6e8882) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-23e4a9"></a>&#x2022; [`store_provider`](#provider-23e4a9) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-ea20d6"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-0591f3) block (within [`https_management.advertise_on_slo_sli.tls_certificates.private_key`](#key-f51e15)) supports the following:
-
-<a id="ref-2692e5"></a>&#x2022; [`provider_ref`](#ref-2692e5) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-9ede10"></a>&#x2022; [`url`](#url-9ede10) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-19eb92"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI TLS Config
 
-A [`tls_config`](#config-2cd93f) block (within [`https_management.advertise_on_slo_sli`](#https-management-advertise-on-slo-sli)) supports the following:
-
-<a id="security-57cb09"></a>&#x2022; [`custom_security`](#security-57cb09) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-57cb09) below.
-
-<a id="security-66b767"></a>&#x2022; [`default_security`](#security-66b767) - Optional Block<br>Enable this option
-
-<a id="security-bc0213"></a>&#x2022; [`low_security`](#security-bc0213) - Optional Block<br>Enable this option
-
-<a id="security-23b628"></a>&#x2022; [`medium_security`](#security-23b628) - Optional Block<br>Enable this option
+<a id="deep-422f0d"></a>Deeply nested **Config** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI TLS Config Custom Security
 
-A [`custom_security`](#security-57cb09) block (within [`https_management.advertise_on_slo_sli.tls_config`](#config-2cd93f)) supports the following:
-
-<a id="suites-17c459"></a>&#x2022; [`cipher_suites`](#suites-17c459) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-941401"></a>&#x2022; [`max_version`](#version-941401) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-cc08f5"></a>&#x2022; [`min_version`](#version-cc08f5) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-b31050"></a>Deeply nested **Security** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI Use mTLS
 
-An [`use_mtls`](#mtls-b8036a) block (within [`https_management.advertise_on_slo_sli`](#https-management-advertise-on-slo-sli)) supports the following:
-
-<a id="optional-c1d942"></a>&#x2022; [`client_certificate_optional`](#optional-c1d942) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-341796"></a>&#x2022; [`crl`](#crl-341796) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-341796) below.
-
-<a id="crl-438487"></a>&#x2022; [`no_crl`](#crl-438487) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-baa118"></a>&#x2022; [`trusted_ca`](#trusted-ca-baa118) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-baa118) below.
-
-<a id="url-379c50"></a>&#x2022; [`trusted_ca_url`](#url-379c50) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-d3e7d3"></a>&#x2022; [`xfcc_disabled`](#disabled-d3e7d3) - Optional Block<br>Enable this option
-
-<a id="options-375329"></a>&#x2022; [`xfcc_options`](#options-375329) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-375329) below.
+<a id="deep-f3602e"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI Use mTLS CRL
 
-A [`crl`](#crl-341796) block (within [`https_management.advertise_on_slo_sli.use_mtls`](#mtls-b8036a)) supports the following:
-
-<a id="name-58addb"></a>&#x2022; [`name`](#name-58addb) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-cc6b41"></a>&#x2022; [`namespace`](#namespace-cc6b41) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-9a7435"></a>&#x2022; [`tenant`](#tenant-9a7435) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-53cbcf"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-baa118) block (within [`https_management.advertise_on_slo_sli.use_mtls`](#mtls-b8036a)) supports the following:
-
-<a id="name-db371b"></a>&#x2022; [`name`](#name-db371b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-57369f"></a>&#x2022; [`namespace`](#namespace-57369f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e6475c"></a>&#x2022; [`tenant`](#tenant-e6475c) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-3ed4b6"></a>Deeply nested **CA** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo SLI Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-375329) block (within [`https_management.advertise_on_slo_sli.use_mtls`](#mtls-b8036a)) supports the following:
-
-<a id="elements-c28be3"></a>&#x2022; [`xfcc_header_elements`](#elements-c28be3) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-db5591"></a>Deeply nested **Options** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP
 
@@ -682,117 +434,47 @@ An [`advertise_on_slo_vip`](#https-management-advertise-on-slo-vip) block (withi
 
 #### HTTPS Management Advertise On Slo VIP TLS Certificates
 
-A [`tls_certificates`](#certificates-49cf23) block (within [`https_management.advertise_on_slo_vip`](#https-management-advertise-on-slo-vip)) supports the following:
-
-<a id="url-ba483c"></a>&#x2022; [`certificate_url`](#url-ba483c) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-e4042d"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-e4042d) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-e4042d) below.
-
-<a id="spec-8a3b62"></a>&#x2022; [`description_spec`](#spec-8a3b62) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-ba3445"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-ba3445) - Optional Block<br>Enable this option
-
-<a id="key-5c1b57"></a>&#x2022; [`private_key`](#key-5c1b57) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-5c1b57) below.
-
-<a id="defaults-81b355"></a>&#x2022; [`use_system_defaults`](#defaults-81b355) - Optional Block<br>Enable this option
+<a id="deep-3e4d5c"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-e4042d) block (within [`https_management.advertise_on_slo_vip.tls_certificates`](#certificates-49cf23)) supports the following:
-
-<a id="algorithms-ba763b"></a>&#x2022; [`hash_algorithms`](#algorithms-ba763b) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-966ac1"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP TLS Certificates Private Key
 
-A [`private_key`](#key-5c1b57) block (within [`https_management.advertise_on_slo_vip.tls_certificates`](#certificates-49cf23)) supports the following:
-
-<a id="info-2120cd"></a>&#x2022; [`blindfold_secret_info`](#info-2120cd) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-2120cd) below.
-
-<a id="info-915c8d"></a>&#x2022; [`clear_secret_info`](#info-915c8d) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-915c8d) below.
+<a id="deep-859627"></a>Deeply nested **Key** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-2120cd) block (within [`https_management.advertise_on_slo_vip.tls_certificates.private_key`](#key-5c1b57)) supports the following:
-
-<a id="provider-51ffab"></a>&#x2022; [`decryption_provider`](#provider-51ffab) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-d426d5"></a>&#x2022; [`location`](#location-d426d5) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-080ee2"></a>&#x2022; [`store_provider`](#provider-080ee2) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-16e9a3"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-915c8d) block (within [`https_management.advertise_on_slo_vip.tls_certificates.private_key`](#key-5c1b57)) supports the following:
-
-<a id="ref-e449ae"></a>&#x2022; [`provider_ref`](#ref-e449ae) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-a017e0"></a>&#x2022; [`url`](#url-a017e0) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-c37768"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP TLS Config
 
-A [`tls_config`](#config-eb7c38) block (within [`https_management.advertise_on_slo_vip`](#https-management-advertise-on-slo-vip)) supports the following:
-
-<a id="security-0bffe9"></a>&#x2022; [`custom_security`](#security-0bffe9) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-0bffe9) below.
-
-<a id="security-37fb06"></a>&#x2022; [`default_security`](#security-37fb06) - Optional Block<br>Enable this option
-
-<a id="security-9296e2"></a>&#x2022; [`low_security`](#security-9296e2) - Optional Block<br>Enable this option
-
-<a id="security-cfb564"></a>&#x2022; [`medium_security`](#security-cfb564) - Optional Block<br>Enable this option
+<a id="deep-9abb3e"></a>Deeply nested **Config** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP TLS Config Custom Security
 
-A [`custom_security`](#security-0bffe9) block (within [`https_management.advertise_on_slo_vip.tls_config`](#config-eb7c38)) supports the following:
-
-<a id="suites-f86936"></a>&#x2022; [`cipher_suites`](#suites-f86936) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-b8932f"></a>&#x2022; [`max_version`](#version-b8932f) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-84a755"></a>&#x2022; [`min_version`](#version-84a755) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-fd9c84"></a>Deeply nested **Security** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP Use mTLS
 
-An [`use_mtls`](#mtls-85e7e5) block (within [`https_management.advertise_on_slo_vip`](#https-management-advertise-on-slo-vip)) supports the following:
-
-<a id="optional-ceba52"></a>&#x2022; [`client_certificate_optional`](#optional-ceba52) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-35cfce"></a>&#x2022; [`crl`](#crl-35cfce) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-35cfce) below.
-
-<a id="crl-80dcbd"></a>&#x2022; [`no_crl`](#crl-80dcbd) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-eefedc"></a>&#x2022; [`trusted_ca`](#trusted-ca-eefedc) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-eefedc) below.
-
-<a id="url-478a70"></a>&#x2022; [`trusted_ca_url`](#url-478a70) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-2827c4"></a>&#x2022; [`xfcc_disabled`](#disabled-2827c4) - Optional Block<br>Enable this option
-
-<a id="options-564de6"></a>&#x2022; [`xfcc_options`](#options-564de6) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-564de6) below.
+<a id="deep-583fba"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP Use mTLS CRL
 
-A [`crl`](#crl-35cfce) block (within [`https_management.advertise_on_slo_vip.use_mtls`](#mtls-85e7e5)) supports the following:
-
-<a id="name-9593de"></a>&#x2022; [`name`](#name-9593de) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-dd54d0"></a>&#x2022; [`namespace`](#namespace-dd54d0) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d019a6"></a>&#x2022; [`tenant`](#tenant-d019a6) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-16ae59"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-eefedc) block (within [`https_management.advertise_on_slo_vip.use_mtls`](#mtls-85e7e5)) supports the following:
-
-<a id="name-eea57c"></a>&#x2022; [`name`](#name-eea57c) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-121754"></a>&#x2022; [`namespace`](#namespace-121754) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-7e45d7"></a>&#x2022; [`tenant`](#tenant-7e45d7) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-87bb14"></a>Deeply nested **CA** block collapsed for readability.
 
 #### HTTPS Management Advertise On Slo VIP Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-564de6) block (within [`https_management.advertise_on_slo_vip.use_mtls`](#mtls-85e7e5)) supports the following:
-
-<a id="elements-b77b32"></a>&#x2022; [`xfcc_header_elements`](#elements-b77b32) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-80967d"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Palo Alto Fw Service
 
@@ -832,73 +514,35 @@ An [`auto_setup`](#palo-alto-fw-service-auto-setup) block (within [`palo_alto_fw
 
 #### Palo Alto Fw Service Auto Setup Admin Password
 
-An [`admin_password`](#password-aba55b) block (within [`palo_alto_fw_service.auto_setup`](#palo-alto-fw-service-auto-setup)) supports the following:
-
-<a id="info-42765a"></a>&#x2022; [`blindfold_secret_info`](#info-42765a) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-42765a) below.
-
-<a id="info-6f6642"></a>&#x2022; [`clear_secret_info`](#info-6f6642) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-6f6642) below.
+<a id="deep-6c8ce3"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Palo Alto Fw Service Auto Setup Admin Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-42765a) block (within [`palo_alto_fw_service.auto_setup.admin_password`](#password-aba55b)) supports the following:
-
-<a id="provider-be80f2"></a>&#x2022; [`decryption_provider`](#provider-be80f2) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-14c132"></a>&#x2022; [`location`](#location-14c132) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-91ebb8"></a>&#x2022; [`store_provider`](#provider-91ebb8) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-4e00fc"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Palo Alto Fw Service Auto Setup Admin Password Clear Secret Info
 
-A [`clear_secret_info`](#info-6f6642) block (within [`palo_alto_fw_service.auto_setup.admin_password`](#password-aba55b)) supports the following:
-
-<a id="ref-33e07f"></a>&#x2022; [`provider_ref`](#ref-33e07f) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-6fa130"></a>&#x2022; [`url`](#url-6fa130) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-92f9d0"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Palo Alto Fw Service Auto Setup Manual SSH Keys
 
-A [`manual_ssh_keys`](#keys-dcb1f4) block (within [`palo_alto_fw_service.auto_setup`](#palo-alto-fw-service-auto-setup)) supports the following:
-
-<a id="key-ab4e3d"></a>&#x2022; [`private_key`](#key-ab4e3d) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-ab4e3d) below.
-
-<a id="key-e96ae4"></a>&#x2022; [`public_key`](#key-e96ae4) - Optional String<br>Public SSH key. Authorized Public SSH key which will be programmed on the node
+<a id="deep-dc1bb9"></a>Deeply nested **Keys** block collapsed for readability.
 
 #### Palo Alto Fw Service Auto Setup Manual SSH Keys Private Key
 
-A [`private_key`](#key-ab4e3d) block (within [`palo_alto_fw_service.auto_setup.manual_ssh_keys`](#keys-dcb1f4)) supports the following:
-
-<a id="info-5da35d"></a>&#x2022; [`blindfold_secret_info`](#info-5da35d) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-5da35d) below.
-
-<a id="info-34ed95"></a>&#x2022; [`clear_secret_info`](#info-34ed95) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-34ed95) below.
+<a id="deep-0b2465"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Palo Alto Fw Service Auto Setup Manual SSH Keys Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-5da35d) block (within [`palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key`](#key-ab4e3d)) supports the following:
-
-<a id="provider-18987c"></a>&#x2022; [`decryption_provider`](#provider-18987c) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-882c7e"></a>&#x2022; [`location`](#location-882c7e) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-e1294e"></a>&#x2022; [`store_provider`](#provider-e1294e) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-81cb14"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Palo Alto Fw Service Auto Setup Manual SSH Keys Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-34ed95) block (within [`palo_alto_fw_service.auto_setup.manual_ssh_keys.private_key`](#key-ab4e3d)) supports the following:
-
-<a id="ref-b0dddb"></a>&#x2022; [`provider_ref`](#ref-b0dddb) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-341486"></a>&#x2022; [`url`](#url-341486) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-73698d"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Palo Alto Fw Service AWS TGW Site
 
-An [`aws_tgw_site`](#palo-alto-fw-service-aws-tgw-site) block (within [`palo_alto_fw_service`](#palo-alto-fw-service)) supports the following:
-
-<a id="palo-alto-fw-service-aws-tgw-site-name"></a>&#x2022; [`name`](#palo-alto-fw-service-aws-tgw-site-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-4bee71"></a>&#x2022; [`namespace`](#namespace-4bee71) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-f4683d"></a>&#x2022; [`tenant`](#tenant-f4683d) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-193c32"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Palo Alto Fw Service Panorama Server
 
@@ -914,29 +558,15 @@ A [`panorama_server`](#palo-alto-fw-service-panorama-server) block (within [`pal
 
 #### Palo Alto Fw Service Panorama Server Authorization Key
 
-An [`authorization_key`](#key-d798d1) block (within [`palo_alto_fw_service.panorama_server`](#palo-alto-fw-service-panorama-server)) supports the following:
-
-<a id="info-58289d"></a>&#x2022; [`blindfold_secret_info`](#info-58289d) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-58289d) below.
-
-<a id="info-ab1329"></a>&#x2022; [`clear_secret_info`](#info-ab1329) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-ab1329) below.
+<a id="deep-6484d2"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Palo Alto Fw Service Panorama Server Authorization Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-58289d) block (within [`palo_alto_fw_service.panorama_server.authorization_key`](#key-d798d1)) supports the following:
-
-<a id="provider-3a9cc4"></a>&#x2022; [`decryption_provider`](#provider-3a9cc4) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-41fa5e"></a>&#x2022; [`location`](#location-41fa5e) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-b5f70f"></a>&#x2022; [`store_provider`](#provider-b5f70f) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-e427f7"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Palo Alto Fw Service Panorama Server Authorization Key Clear Secret Info
 
-A [`clear_secret_info`](#info-ab1329) block (within [`palo_alto_fw_service.panorama_server.authorization_key`](#key-d798d1)) supports the following:
-
-<a id="ref-3fb4fb"></a>&#x2022; [`provider_ref`](#ref-3fb4fb) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-8cca66"></a>&#x2022; [`url`](#url-8cca66) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-80a64b"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Palo Alto Fw Service Service Nodes
 
@@ -958,17 +588,11 @@ A [`nodes`](#nodes-b8137e) block (within [`palo_alto_fw_service.service_nodes`](
 
 #### Palo Alto Fw Service Service Nodes Nodes Mgmt Subnet
 
-A [`mgmt_subnet`](#subnet-0f55cf) block (within [`palo_alto_fw_service.service_nodes.nodes`](#nodes-b8137e)) supports the following:
-
-<a id="subnet-id-78d1a0"></a>&#x2022; [`existing_subnet_id`](#subnet-id-78d1a0) - Optional String<br>Existing Subnet ID. Information about existing subnet ID
-
-<a id="param-712914"></a>&#x2022; [`subnet_param`](#param-712914) - Optional Block<br>New Cloud Subnet Parameters. Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-712914) below.
+<a id="deep-b03fb2"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Palo Alto Fw Service Service Nodes Nodes Mgmt Subnet Subnet Param
 
-A [`subnet_param`](#param-712914) block (within [`palo_alto_fw_service.service_nodes.nodes.mgmt_subnet`](#subnet-0f55cf)) supports the following:
-
-<a id="ipv4-2522ae"></a>&#x2022; [`ipv4`](#ipv4-2522ae) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-819895"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Timeouts
 
@@ -981,6 +605,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

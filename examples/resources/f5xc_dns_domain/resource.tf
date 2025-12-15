@@ -1,5 +1,5 @@
 # DNS Domain Resource Example
-# [Category: DNS] [Namespace: not_required] Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+# Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS Domain configuration
 resource "f5xc_dns_domain" "example" {

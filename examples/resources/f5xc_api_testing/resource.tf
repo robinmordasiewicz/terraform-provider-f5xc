@@ -1,5 +1,5 @@
 # API Testing Resource Example
-# [Category: API Security] [Namespace: required] Manages a API Testing resource in F5 Distributed Cloud.
+# Manages a API Testing resource in F5 Distributed Cloud.
 
 # Basic API Testing configuration
 resource "f5xc_api_testing" "example" {

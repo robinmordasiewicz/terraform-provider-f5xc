@@ -2,12 +2,12 @@
 page_title: "f5xc_subnet Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  [Namespace: required] Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
+  Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
 ---
 
 # f5xc_subnet (Resource)
 
-[Namespace: required] Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
+Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
 
 ~> **Note** Please refer to [Subnet API docs](https://docs.cloud.f5.com/docs-v2/api/subnet) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Subnet Resource Example
-# [Namespace: required] Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
+# Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
 
 # Basic Subnet configuration
 resource "f5xc_subnet" "example" {
@@ -91,13 +91,7 @@ A [`connect_to_layer2`](#connect-to-layer2) block supports the following:
 
 #### Connect To Layer2 Layer2 Intf Ref
 
-A [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) block (within [`connect_to_layer2`](#connect-to-layer2)) supports the following:
-
-<a id="connect-to-layer2-layer2-intf-ref-name"></a>&#x2022; [`name`](#connect-to-layer2-layer2-intf-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-afda4a"></a>&#x2022; [`namespace`](#namespace-afda4a) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-0fab0d"></a>&#x2022; [`tenant`](#tenant-0fab0d) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-6ea749"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Site Subnet Params
 
@@ -113,13 +107,7 @@ A [`site_subnet_params`](#site-subnet-params) block supports the following:
 
 #### Site Subnet Params Site
 
-A [`site`](#site-subnet-params-site) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
-
-<a id="site-subnet-params-site-name"></a>&#x2022; [`name`](#site-subnet-params-site-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="site-subnet-params-site-namespace"></a>&#x2022; [`namespace`](#site-subnet-params-site-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="site-subnet-params-site-tenant"></a>&#x2022; [`tenant`](#site-subnet-params-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-fdf6de"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Site Subnet Params Subnet DHCP Server Params
 
@@ -129,9 +117,7 @@ A [`subnet_dhcp_server_params`](#params-2a5102) block (within [`site_subnet_para
 
 #### Site Subnet Params Subnet DHCP Server Params DHCP Networks
 
-A [`dhcp_networks`](#networks-b234bf) block (within [`site_subnet_params.subnet_dhcp_server_params`](#params-2a5102)) supports the following:
-
-<a id="prefix-1fa00d"></a>&#x2022; [`network_prefix`](#prefix-1fa00d) - Optional String<br>Network Prefix. Network prefix for subnet
+<a id="deep-0d5553"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Timeouts
 
@@ -144,6 +130,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

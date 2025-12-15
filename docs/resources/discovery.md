@@ -2,12 +2,12 @@
 page_title: "f5xc_discovery Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  [Namespace: required] Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
+  Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
 ---
 
 # f5xc_discovery (Resource)
 
-[Namespace: required] Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
+Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
 
 ~> **Note** Please refer to [Discovery API docs](https://docs.cloud.f5.com/docs-v2/api/discovery) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Discovery Resource Example
-# [Namespace: required] Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
+# Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.
 
 # Basic Discovery configuration
 resource "f5xc_discovery" "example" {
@@ -125,75 +125,35 @@ A [`connection_info`](#info-c7c3de) block (within [`discovery_consul.access_info
 
 #### Discovery Consul Access Info Connection Info TLS Info
 
-A [`tls_info`](#info-72d38f) block (within [`discovery_consul.access_info.connection_info`](#info-c7c3de)) supports the following:
-
-<a id="certificate-76bba3"></a>&#x2022; [`certificate`](#certificate-76bba3) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
-
-<a id="url-2f392f"></a>&#x2022; [`key_url`](#url-2f392f) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#url-2f392f) below.
-
-<a id="name-d19379"></a>&#x2022; [`server_name`](#name-d19379) - Optional String<br>SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used
-
-<a id="url-2e26a9"></a>&#x2022; [`trusted_ca_url`](#url-2e26a9) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+<a id="deep-2a9ae1"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery Consul Access Info Connection Info TLS Info Key URL
 
-A [`key_url`](#url-2f392f) block (within [`discovery_consul.access_info.connection_info.tls_info`](#info-72d38f)) supports the following:
-
-<a id="info-795098"></a>&#x2022; [`blindfold_secret_info`](#info-795098) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-795098) below.
-
-<a id="info-25cbe5"></a>&#x2022; [`clear_secret_info`](#info-25cbe5) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-25cbe5) below.
+<a id="deep-9298be"></a>Deeply nested **URL** block collapsed for readability.
 
 #### Discovery Consul Access Info Connection Info TLS Info Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-795098) block (within [`discovery_consul.access_info.connection_info.tls_info.key_url`](#url-2f392f)) supports the following:
-
-<a id="provider-a0db12"></a>&#x2022; [`decryption_provider`](#provider-a0db12) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-d91df6"></a>&#x2022; [`location`](#location-d91df6) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-bdff0e"></a>&#x2022; [`store_provider`](#provider-bdff0e) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-14dd70"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery Consul Access Info Connection Info TLS Info Key URL Clear Secret Info
 
-A [`clear_secret_info`](#info-25cbe5) block (within [`discovery_consul.access_info.connection_info.tls_info.key_url`](#url-2f392f)) supports the following:
-
-<a id="ref-ba5961"></a>&#x2022; [`provider_ref`](#ref-ba5961) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-cd17ea"></a>&#x2022; [`url`](#url-cd17ea) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-ed594e"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery Consul Access Info HTTP Basic Auth Info
 
-A [`http_basic_auth_info`](#info-28e890) block (within [`discovery_consul.access_info`](#discovery-consul-access-info)) supports the following:
-
-<a id="url-f10130"></a>&#x2022; [`passwd_url`](#url-f10130) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Passwd URL](#url-f10130) below.
-
-<a id="name-1f38a5"></a>&#x2022; [`user_name`](#name-1f38a5) - Optional String<br>User Name. username in consul
+<a id="deep-bbf940"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery Consul Access Info HTTP Basic Auth Info Passwd URL
 
-A [`passwd_url`](#url-f10130) block (within [`discovery_consul.access_info.http_basic_auth_info`](#info-28e890)) supports the following:
-
-<a id="info-c6fde9"></a>&#x2022; [`blindfold_secret_info`](#info-c6fde9) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-c6fde9) below.
-
-<a id="info-f147bc"></a>&#x2022; [`clear_secret_info`](#info-f147bc) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-f147bc) below.
+<a id="deep-ee109b"></a>Deeply nested **URL** block collapsed for readability.
 
 #### Discovery Consul Access Info HTTP Basic Auth Info Passwd URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-c6fde9) block (within [`discovery_consul.access_info.http_basic_auth_info.passwd_url`](#url-f10130)) supports the following:
-
-<a id="provider-b778a8"></a>&#x2022; [`decryption_provider`](#provider-b778a8) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-46e2b7"></a>&#x2022; [`location`](#location-46e2b7) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-d0e688"></a>&#x2022; [`store_provider`](#provider-d0e688) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-6be94c"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery Consul Access Info HTTP Basic Auth Info Passwd URL Clear Secret Info
 
-A [`clear_secret_info`](#info-f147bc) block (within [`discovery_consul.access_info.http_basic_auth_info.passwd_url`](#url-f10130)) supports the following:
-
-<a id="ref-c71575"></a>&#x2022; [`provider_ref`](#ref-c71575) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-8704ad"></a>&#x2022; [`url`](#url-8704ad) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-82d259"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery Consul Publish Info
 
@@ -237,41 +197,19 @@ A [`connection_info`](#info-731c25) block (within [`discovery_k8s.access_info`](
 
 #### Discovery K8S Access Info Connection Info TLS Info
 
-A [`tls_info`](#info-16e7c5) block (within [`discovery_k8s.access_info.connection_info`](#info-731c25)) supports the following:
-
-<a id="certificate-a20a33"></a>&#x2022; [`certificate`](#certificate-a20a33) - Optional String<br>Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain
-
-<a id="url-a24c45"></a>&#x2022; [`key_url`](#url-a24c45) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Key URL](#url-a24c45) below.
-
-<a id="name-de16f2"></a>&#x2022; [`server_name`](#name-de16f2) - Optional String<br>SNI name. ServerName is passed to the server for SNI and is used in the client to check server certificates against. If ServerName is empty, the hostname used to contact the server is used
-
-<a id="url-2f0b33"></a>&#x2022; [`trusted_ca_url`](#url-2f0b33) - Optional String<br>Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers
+<a id="deep-4a5283"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery K8S Access Info Connection Info TLS Info Key URL
 
-A [`key_url`](#url-a24c45) block (within [`discovery_k8s.access_info.connection_info.tls_info`](#info-16e7c5)) supports the following:
-
-<a id="info-6a0978"></a>&#x2022; [`blindfold_secret_info`](#info-6a0978) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-6a0978) below.
-
-<a id="info-48bdf2"></a>&#x2022; [`clear_secret_info`](#info-48bdf2) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-48bdf2) below.
+<a id="deep-a976c1"></a>Deeply nested **URL** block collapsed for readability.
 
 #### Discovery K8S Access Info Connection Info TLS Info Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-6a0978) block (within [`discovery_k8s.access_info.connection_info.tls_info.key_url`](#url-a24c45)) supports the following:
-
-<a id="provider-014b88"></a>&#x2022; [`decryption_provider`](#provider-014b88) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-a75d09"></a>&#x2022; [`location`](#location-a75d09) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-44bd87"></a>&#x2022; [`store_provider`](#provider-44bd87) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-c49615"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery K8S Access Info Connection Info TLS Info Key URL Clear Secret Info
 
-A [`clear_secret_info`](#info-48bdf2) block (within [`discovery_k8s.access_info.connection_info.tls_info.key_url`](#url-a24c45)) supports the following:
-
-<a id="ref-ac3f1a"></a>&#x2022; [`provider_ref`](#ref-ac3f1a) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-a539e6"></a>&#x2022; [`url`](#url-a539e6) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-b39c26"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery K8S Access Info Kubeconfig URL
 
@@ -283,21 +221,11 @@ A [`kubeconfig_url`](#url-d50898) block (within [`discovery_k8s.access_info`](#d
 
 #### Discovery K8S Access Info Kubeconfig URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-fef53c) block (within [`discovery_k8s.access_info.kubeconfig_url`](#url-d50898)) supports the following:
-
-<a id="provider-138cbc"></a>&#x2022; [`decryption_provider`](#provider-138cbc) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-aa600f"></a>&#x2022; [`location`](#location-aa600f) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-5ceac5"></a>&#x2022; [`store_provider`](#provider-5ceac5) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-faaa11"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery K8S Access Info Kubeconfig URL Clear Secret Info
 
-A [`clear_secret_info`](#info-ba8969) block (within [`discovery_k8s.access_info.kubeconfig_url`](#url-d50898)) supports the following:
-
-<a id="ref-56d71f"></a>&#x2022; [`provider_ref`](#ref-56d71f) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-88dd37"></a>&#x2022; [`url`](#url-88dd37) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-4a4f8b"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Discovery K8S Namespace Mapping
 
@@ -377,15 +305,15 @@ A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
 A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
 
-<a id="where-site-ref-kind"></a>&#x2022; [`kind`](#where-site-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="where-site-ref-kind"></a>&#x2022; [`kind`](#where-site-ref-kind) - Optional String<br>Object reference kind
 
-<a id="where-site-ref-name"></a>&#x2022; [`name`](#where-site-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="where-site-ref-name"></a>&#x2022; [`name`](#where-site-ref-name) - Optional String<br>Object reference name
 
-<a id="where-site-ref-namespace"></a>&#x2022; [`namespace`](#where-site-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="where-site-ref-namespace"></a>&#x2022; [`namespace`](#where-site-ref-namespace) - Optional String<br>Object reference namespace
 
-<a id="where-site-ref-tenant"></a>&#x2022; [`tenant`](#where-site-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="where-site-ref-tenant"></a>&#x2022; [`tenant`](#where-site-ref-tenant) - Optional String<br>Object reference tenant
 
-<a id="where-site-ref-uid"></a>&#x2022; [`uid`](#where-site-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="where-site-ref-uid"></a>&#x2022; [`uid`](#where-site-ref-uid) - Optional String<br>Object reference UID
 
 #### Where Virtual Network
 
@@ -397,15 +325,15 @@ A [`virtual_network`](#where-virtual-network) block (within [`where`](#where)) s
 
 A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#where-virtual-network)) supports the following:
 
-<a id="where-virtual-network-ref-kind"></a>&#x2022; [`kind`](#where-virtual-network-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="where-virtual-network-ref-kind"></a>&#x2022; [`kind`](#where-virtual-network-ref-kind) - Optional String<br>Object reference kind
 
-<a id="where-virtual-network-ref-name"></a>&#x2022; [`name`](#where-virtual-network-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="where-virtual-network-ref-name"></a>&#x2022; [`name`](#where-virtual-network-ref-name) - Optional String<br>Object reference name
 
-<a id="where-virtual-network-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-network-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="where-virtual-network-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-network-ref-namespace) - Optional String<br>Object reference namespace
 
-<a id="where-virtual-network-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-network-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="where-virtual-network-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-network-ref-tenant) - Optional String<br>Object reference tenant
 
-<a id="where-virtual-network-ref-uid"></a>&#x2022; [`uid`](#where-virtual-network-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="where-virtual-network-ref-uid"></a>&#x2022; [`uid`](#where-virtual-network-ref-uid) - Optional String<br>Object reference UID
 
 #### Where Virtual Site
 
@@ -423,15 +351,98 @@ A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) support
 
 A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
 
-<a id="where-virtual-site-ref-kind"></a>&#x2022; [`kind`](#where-virtual-site-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="where-virtual-site-ref-kind"></a>&#x2022; [`kind`](#where-virtual-site-ref-kind) - Optional String<br>Object reference kind
 
-<a id="where-virtual-site-ref-name"></a>&#x2022; [`name`](#where-virtual-site-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="where-virtual-site-ref-name"></a>&#x2022; [`name`](#where-virtual-site-ref-name) - Optional String<br>Object reference name
 
-<a id="where-virtual-site-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-site-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="where-virtual-site-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-site-ref-namespace) - Optional String<br>Object reference namespace
 
-<a id="where-virtual-site-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-site-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="where-virtual-site-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-site-ref-tenant) - Optional String<br>Object reference tenant
 
-<a id="where-virtual-site-ref-uid"></a>&#x2022; [`uid`](#where-virtual-site-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="where-virtual-site-ref-uid"></a>&#x2022; [`uid`](#where-virtual-site-ref-uid) - Optional String<br>Object reference UID
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

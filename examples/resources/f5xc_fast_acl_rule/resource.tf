@@ -1,5 +1,5 @@
 # Fast ACL Rule Resource Example
-# [Namespace: required] Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+# Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
 
 # Basic Fast ACL Rule configuration
 resource "f5xc_fast_acl_rule" "example" {

@@ -2,12 +2,12 @@
 page_title: "f5xc_voltshare_admin_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  [Namespace: required] Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_voltshare_admin_policy (Resource)
 
-[Namespace: required] Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Voltshare Admin Policy API docs](https://docs.cloud.f5.com/docs-v2/api/voltshare-admin-policy) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Voltshare Admin Policy Resource Example
-# [Namespace: required] Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages voltshare_admin_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Voltshare Admin Policy configuration
 resource "f5xc_voltshare_admin_policy" "example" {
@@ -166,11 +166,7 @@ An [`allow_list`](#list-2c1ff3) block (within [`user_restrictions.user_restricti
 
 #### User Restrictions User Restrictions Allow List Custom List
 
-A [`custom_list`](#list-bd1704) block (within [`user_restrictions.user_restrictions.allow_list`](#list-2c1ff3)) supports the following:
-
-<a id="value-31e535"></a>&#x2022; [`exact_value`](#value-31e535) - Optional String<br>Exact User ID. exact_match contains user_id to match against
-
-<a id="pattern-e4f8d4"></a>&#x2022; [`regex_pattern`](#pattern-e4f8d4) - Optional String<br>Regex For User ID. regex_values contains a regex pattern to match against
+<a id="deep-331175"></a>Deeply nested **List** block collapsed for readability.
 
 #### User Restrictions User Restrictions Deny List
 
@@ -180,11 +176,90 @@ A [`deny_list`](#list-fc497b) block (within [`user_restrictions.user_restriction
 
 #### User Restrictions User Restrictions Deny List Custom List
 
-A [`custom_list`](#list-8cc74e) block (within [`user_restrictions.user_restrictions.deny_list`](#list-fc497b)) supports the following:
+<a id="deep-2f3f46"></a>Deeply nested **List** block collapsed for readability.
 
-<a id="value-2775f1"></a>&#x2022; [`exact_value`](#value-2775f1) - Optional String<br>Exact User ID. exact_match contains user_id to match against
+---
 
-<a id="pattern-c4594d"></a>&#x2022; [`regex_pattern`](#pattern-c4594d) - Optional String<br>Regex For User ID. regex_values contains a regex pattern to match against
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

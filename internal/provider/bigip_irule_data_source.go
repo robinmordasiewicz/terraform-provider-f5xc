@@ -42,7 +42,7 @@ func (d *BigIPIruleDataSource) Metadata(ctx context.Context, req datasource.Meta
 
 func (d *BigIPIruleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Namespace: required] Manages a BIG-IP Irule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.",
+		MarkdownDescription: "Manages a BIG-IP Irule resource in F5 Distributed Cloud for desired state for big-ip irule service configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

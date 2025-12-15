@@ -107,7 +107,7 @@ func (r *UserIdentificationResource) Metadata(ctx context.Context, req resource.
 func (r *UserIdentificationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             user_identificationSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the User Identification. Must be unique within the namespace.",

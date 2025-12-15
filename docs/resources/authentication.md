@@ -2,12 +2,12 @@
 page_title: "f5xc_authentication Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  [Category: Authentication] [Namespace: required] Manages a Authentication resource in F5 Distributed Cloud.
+  Manages a Authentication resource in F5 Distributed Cloud.
 ---
 
 # f5xc_authentication (Resource)
 
-[Category: Authentication] [Namespace: required] Manages a Authentication resource in F5 Distributed Cloud.
+Manages a Authentication resource in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Authentication API docs](https://docs.cloud.f5.com/docs-v2/api/authentication) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Authentication Resource Example
-# [Category: Authentication] [Namespace: required] Manages a Authentication resource in F5 Distributed Cloud.
+# Manages a Authentication resource in F5 Distributed Cloud.
 
 # Basic Authentication configuration
 resource "f5xc_authentication" "example" {
@@ -116,21 +116,11 @@ A [`prim_key`](#cookie-params-auth-hmac-prim-key) block (within [`cookie_params.
 
 #### Cookie Params Auth HMAC Prim Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-6001c9) block (within [`cookie_params.auth_hmac.prim_key`](#cookie-params-auth-hmac-prim-key)) supports the following:
-
-<a id="provider-34c240"></a>&#x2022; [`decryption_provider`](#provider-34c240) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-11df7f"></a>&#x2022; [`location`](#location-11df7f) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-8bf57c"></a>&#x2022; [`store_provider`](#provider-8bf57c) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-dc15bc"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Cookie Params Auth HMAC Prim Key Clear Secret Info
 
-A [`clear_secret_info`](#info-73f0e1) block (within [`cookie_params.auth_hmac.prim_key`](#cookie-params-auth-hmac-prim-key)) supports the following:
-
-<a id="ref-d1d558"></a>&#x2022; [`provider_ref`](#ref-d1d558) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-925101"></a>&#x2022; [`url`](#url-925101) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-675a29"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Cookie Params Auth HMAC Sec Key
 
@@ -142,21 +132,11 @@ A [`sec_key`](#cookie-params-auth-hmac-sec-key) block (within [`cookie_params.au
 
 #### Cookie Params Auth HMAC Sec Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-e2433d) block (within [`cookie_params.auth_hmac.sec_key`](#cookie-params-auth-hmac-sec-key)) supports the following:
-
-<a id="provider-314a2f"></a>&#x2022; [`decryption_provider`](#provider-314a2f) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-4e76ff"></a>&#x2022; [`location`](#location-4e76ff) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-bfe090"></a>&#x2022; [`store_provider`](#provider-bfe090) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-b4f1ef"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Cookie Params Auth HMAC Sec Key Clear Secret Info
 
-A [`clear_secret_info`](#info-15d634) block (within [`cookie_params.auth_hmac.sec_key`](#cookie-params-auth-hmac-sec-key)) supports the following:
-
-<a id="ref-5ec27e"></a>&#x2022; [`provider_ref`](#ref-5ec27e) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-64f8f3"></a>&#x2022; [`url`](#url-64f8f3) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-636e81"></a>Deeply nested **Info** block collapsed for readability.
 
 #### OIDC Auth
 
@@ -217,6 +197,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

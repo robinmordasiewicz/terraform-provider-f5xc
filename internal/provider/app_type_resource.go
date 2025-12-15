@@ -104,7 +104,7 @@ func (r *AppTypeResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             app_typeSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the App Type. Must be unique within the namespace.",

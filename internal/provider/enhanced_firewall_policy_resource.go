@@ -381,7 +381,7 @@ func (r *EnhancedFirewallPolicyResource) Metadata(ctx context.Context, req resou
 func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             enhanced_firewall_policySchemaVersion,
-		MarkdownDescription: "[Category: Security] [Namespace: required] Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.",
+		MarkdownDescription: "Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Enhanced Firewall Policy. Must be unique within the namespace.",

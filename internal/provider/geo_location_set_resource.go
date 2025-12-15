@@ -80,7 +80,7 @@ func (r *GeoLocationSetResource) Metadata(ctx context.Context, req resource.Meta
 func (r *GeoLocationSetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             geo_location_setSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages Geolocation Set in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages Geolocation Set in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Geo Location Set. Must be unique within the namespace.",

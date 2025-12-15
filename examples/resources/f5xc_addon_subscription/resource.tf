@@ -1,5 +1,5 @@
 # Addon Subscription Resource Example
-# [Namespace: required] Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
+# Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.
 
 # Basic Addon Subscription configuration
 resource "f5xc_addon_subscription" "example" {

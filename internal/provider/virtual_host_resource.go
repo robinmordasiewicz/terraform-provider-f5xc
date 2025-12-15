@@ -1117,7 +1117,7 @@ func (r *VirtualHostResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *VirtualHostResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             virtual_hostSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages virtual host in a given namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages virtual host in a given namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Virtual Host. Must be unique within the namespace.",

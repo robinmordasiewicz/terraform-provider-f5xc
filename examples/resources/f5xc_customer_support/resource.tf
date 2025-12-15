@@ -1,5 +1,5 @@
 # Customer Support Resource Example
-# [Namespace: required] Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.
+# Manages new customer support ticket in our customer support provider system. in F5 Distributed Cloud.
 
 # Basic Customer Support configuration
 resource "f5xc_customer_support" "example" {

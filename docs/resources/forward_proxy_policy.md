@@ -2,12 +2,12 @@
 page_title: "f5xc_forward_proxy_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  [Category: Security] [Namespace: required] Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
+  Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
 ---
 
 # f5xc_forward_proxy_policy (Resource)
 
-[Category: Security] [Namespace: required] Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
+Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
 
 ~> **Note** Please refer to [Forward Proxy Policy API docs](https://docs.cloud.f5.com/docs-v2/api/views-forward-proxy-policy) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Forward Proxy Policy Resource Example
-# [Category: Security] [Namespace: required] Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
+# Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
 
 # Basic Forward Proxy Policy configuration
 resource "f5xc_forward_proxy_policy" "example" {
@@ -206,13 +206,7 @@ A [`tls_list`](#deny-list-tls-list) block (within [`deny_list`](#deny-list)) sup
 
 #### Network Connector
 
-A [`network_connector`](#network-connector) block supports the following:
-
-<a id="network-connector-name"></a>&#x2022; [`name`](#network-connector-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="network-connector-namespace"></a>&#x2022; [`namespace`](#network-connector-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="network-connector-tenant"></a>&#x2022; [`tenant`](#network-connector-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-c6dbb2"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Proxy Label Selector
 
@@ -272,23 +266,11 @@ A [`dst_asn_list`](#rule-list-rules-dst-asn-list) block (within [`rule_list.rule
 
 #### Rule List Rules Dst Asn Set
 
-A [`dst_asn_set`](#rule-list-rules-dst-asn-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
-
-<a id="rule-list-rules-dst-asn-set-name"></a>&#x2022; [`name`](#rule-list-rules-dst-asn-set-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="rule-list-rules-dst-asn-set-namespace"></a>&#x2022; [`namespace`](#rule-list-rules-dst-asn-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="rule-list-rules-dst-asn-set-tenant"></a>&#x2022; [`tenant`](#rule-list-rules-dst-asn-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0f930a"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Rule List Rules Dst IP Prefix Set
 
-A [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
-
-<a id="rule-list-rules-dst-ip-prefix-set-name"></a>&#x2022; [`name`](#rule-list-rules-dst-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-098663"></a>&#x2022; [`namespace`](#namespace-098663) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-047089"></a>&#x2022; [`tenant`](#tenant-047089) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-9d2299"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Rule List Rules Dst Label Selector
 
@@ -328,13 +310,7 @@ A [`http_list`](#rule-list-rules-http-list-http-list) block (within [`rule_list.
 
 #### Rule List Rules IP Prefix Set
 
-An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
-
-<a id="rule-list-rules-ip-prefix-set-name"></a>&#x2022; [`name`](#rule-list-rules-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="rule-list-rules-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#rule-list-rules-ip-prefix-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="rule-list-rules-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#rule-list-rules-ip-prefix-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-d85b6e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Rule List Rules Label Selector
 
@@ -397,6 +373,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

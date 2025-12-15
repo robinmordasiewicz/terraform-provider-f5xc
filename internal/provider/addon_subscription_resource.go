@@ -119,7 +119,7 @@ func (r *AddonSubscriptionResource) Metadata(ctx context.Context, req resource.M
 func (r *AddonSubscriptionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             addon_subscriptionSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new Addon Subscription with Addon Subscription State in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Addon Subscription. Must be unique within the namespace.",

@@ -179,7 +179,7 @@ func (r *WAFExclusionPolicyResource) Metadata(ctx context.Context, req resource.
 func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             waf_exclusion_policySchemaVersion,
-		MarkdownDescription: "[Category: Security] [Namespace: required] Manages WAF exclusion policy in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages WAF exclusion policy in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the WAF Exclusion Policy. Must be unique within the namespace.",

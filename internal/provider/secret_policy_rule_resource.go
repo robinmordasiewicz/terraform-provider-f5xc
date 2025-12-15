@@ -94,7 +94,7 @@ func (r *SecretPolicyRuleResource) Metadata(ctx context.Context, req resource.Me
 func (r *SecretPolicyRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             secret_policy_ruleSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages secret_policy_rule creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Secret Policy Rule. Must be unique within the namespace.",

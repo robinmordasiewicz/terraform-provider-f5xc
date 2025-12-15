@@ -136,7 +136,7 @@ func (r *CertificateResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             certificateSchemaVersion,
-		MarkdownDescription: "[Category: Certificates] [Namespace: not_required] [DependsOn: namespace] Manages a Certificate resource in F5 Distributed Cloud for certificate configuration.",
+		MarkdownDescription: "Manages a Certificate resource in F5 Distributed Cloud for certificate configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Certificate. Must be unique within the namespace.",

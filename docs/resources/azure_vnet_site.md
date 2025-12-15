@@ -2,12 +2,12 @@
 page_title: "f5xc_azure_vnet_site Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  [Category: Sites] [Namespace: required] Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
+  Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 ---
 
 # f5xc_azure_vnet_site (Resource)
 
-[Category: Sites] [Namespace: required] Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
+Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
 ~> **Note** Please refer to [Azure VNET Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-azure-vnet-site) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Azure VNET Site Resource Example
-# [Category: Sites] [Namespace: required] Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
+# Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.
 
 # Basic Azure VNET Site configuration
 resource "f5xc_azure_vnet_site" "example" {
@@ -192,13 +192,7 @@ A [`clear_secret_info`](#admin-password-clear-secret-info) block (within [`admin
 
 #### Azure Cred
 
-An [`azure_cred`](#azure-cred) block supports the following:
-
-<a id="azure-cred-name"></a>&#x2022; [`name`](#azure-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="azure-cred-namespace"></a>&#x2022; [`namespace`](#azure-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="azure-cred-tenant"></a>&#x2022; [`tenant`](#azure-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-5b15e7"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Blocked Services
 
@@ -300,13 +294,7 @@ An [`active_enhanced_firewall_policies`](#policies-4e1d03) block (within [`ingre
 
 #### Ingress Egress Gw Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced_firewall_policies`](#policies-b74f29) block (within [`ingress_egress_gw.active_enhanced_firewall_policies`](#policies-4e1d03)) supports the following:
-
-<a id="name-ab5965"></a>&#x2022; [`name`](#name-ab5965) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e270e7"></a>&#x2022; [`namespace`](#namespace-e270e7) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-764864"></a>&#x2022; [`tenant`](#tenant-764864) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-3cb2d1"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Ingress Egress Gw Active Forward Proxy Policies
 
@@ -316,13 +304,7 @@ An [`active_forward_proxy_policies`](#policies-265acf) block (within [`ingress_e
 
 #### Ingress Egress Gw Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward_proxy_policies`](#policies-ae49bd) block (within [`ingress_egress_gw.active_forward_proxy_policies`](#policies-265acf)) supports the following:
-
-<a id="name-bfef18"></a>&#x2022; [`name`](#name-bfef18) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-81bd64"></a>&#x2022; [`namespace`](#namespace-81bd64) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-9f3c36"></a>&#x2022; [`tenant`](#tenant-9f3c36) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-54c023"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Ingress Egress Gw Active Network Policies
 
@@ -332,13 +314,7 @@ An [`active_network_policies`](#policies-a2ee20) block (within [`ingress_egress_
 
 #### Ingress Egress Gw Active Network Policies Network Policies
 
-A [`network_policies`](#policies-e07db8) block (within [`ingress_egress_gw.active_network_policies`](#policies-a2ee20)) supports the following:
-
-<a id="name-e51ade"></a>&#x2022; [`name`](#name-e51ade) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-38019d"></a>&#x2022; [`namespace`](#namespace-38019d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-30c101"></a>&#x2022; [`tenant`](#tenant-30c101) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-18bd39"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Ingress Egress Gw Az Nodes
 
@@ -360,19 +336,11 @@ An [`inside_subnet`](#subnet-c4f554) block (within [`ingress_egress_gw.az_nodes`
 
 #### Ingress Egress Gw Az Nodes Inside Subnet Subnet
 
-A [`subnet`](#subnet-c9a09c) block (within [`ingress_egress_gw.az_nodes.inside_subnet`](#subnet-c4f554)) supports the following:
-
-<a id="name-5c8654"></a>&#x2022; [`subnet_name`](#name-5c8654) - Optional String<br>Subnet Name. Name of existing subnet
-
-<a id="grp-ab1b8b"></a>&#x2022; [`subnet_resource_grp`](#grp-ab1b8b) - Optional String<br>Resource Group Name. Specify name of Resource Group
-
-<a id="group-f9b2ed"></a>&#x2022; [`vnet_resource_group`](#group-f9b2ed) - Optional Block<br>Enable this option
+<a id="deep-b03698"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Az Nodes Inside Subnet Subnet Param
 
-A [`subnet_param`](#param-cef0bb) block (within [`ingress_egress_gw.az_nodes.inside_subnet`](#subnet-c4f554)) supports the following:
-
-<a id="ipv4-89a3fa"></a>&#x2022; [`ipv4`](#ipv4-89a3fa) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-7b2aa4"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Egress Gw Az Nodes Outside Subnet
 
@@ -384,39 +352,19 @@ An [`outside_subnet`](#subnet-631d3b) block (within [`ingress_egress_gw.az_nodes
 
 #### Ingress Egress Gw Az Nodes Outside Subnet Subnet
 
-A [`subnet`](#subnet-251935) block (within [`ingress_egress_gw.az_nodes.outside_subnet`](#subnet-631d3b)) supports the following:
-
-<a id="name-438f7b"></a>&#x2022; [`subnet_name`](#name-438f7b) - Optional String<br>Subnet Name. Name of existing subnet
-
-<a id="grp-9f6f4a"></a>&#x2022; [`subnet_resource_grp`](#grp-9f6f4a) - Optional String<br>Resource Group Name. Specify name of Resource Group
-
-<a id="group-d97420"></a>&#x2022; [`vnet_resource_group`](#group-d97420) - Optional Block<br>Enable this option
+<a id="deep-ab232b"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Az Nodes Outside Subnet Subnet Param
 
-A [`subnet_param`](#param-c11d6b) block (within [`ingress_egress_gw.az_nodes.outside_subnet`](#subnet-631d3b)) supports the following:
-
-<a id="ipv4-75cdeb"></a>&#x2022; [`ipv4`](#ipv4-75cdeb) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-4b83fd"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Egress Gw Dc Cluster Group Inside Vn
 
-A [`dc_cluster_group_inside_vn`](#inside-vn-3ce96a) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
-
-<a id="name-342c18"></a>&#x2022; [`name`](#name-342c18) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-cc6a03"></a>&#x2022; [`namespace`](#namespace-cc6a03) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ae2545"></a>&#x2022; [`tenant`](#tenant-ae2545) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-23860c"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Ingress Egress Gw Dc Cluster Group Outside Vn
 
-A [`dc_cluster_group_outside_vn`](#outside-vn-3594d6) block (within [`ingress_egress_gw`](#ingress-egress-gw)) supports the following:
-
-<a id="name-574a1c"></a>&#x2022; [`name`](#name-574a1c) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-789ef2"></a>&#x2022; [`namespace`](#namespace-789ef2) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-652bd4"></a>&#x2022; [`tenant`](#tenant-652bd4) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-53ac3b"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Ingress Egress Gw Global Network List
 
@@ -426,43 +374,23 @@ A [`global_network_list`](#ingress-egress-gw-global-network-list) block (within 
 
 #### Ingress Egress Gw Global Network List Global Network Connections
 
-A [`global_network_connections`](#connections-bde45c) block (within [`ingress_egress_gw.global_network_list`](#ingress-egress-gw-global-network-list)) supports the following:
-
-<a id="global-dr-049c69"></a>&#x2022; [`sli_to_global_dr`](#global-dr-049c69) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#global-dr-049c69) below.
-
-<a id="global-dr-ec468f"></a>&#x2022; [`slo_to_global_dr`](#global-dr-ec468f) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#global-dr-ec468f) below.
+<a id="deep-88f40a"></a>Deeply nested **Connections** block collapsed for readability.
 
 #### Ingress Egress Gw Global Network List Global Network Connections SLI To Global DR
 
-A [`sli_to_global_dr`](#global-dr-049c69) block (within [`ingress_egress_gw.global_network_list.global_network_connections`](#connections-bde45c)) supports the following:
-
-<a id="global-vn-8d0c54"></a>&#x2022; [`global_vn`](#global-vn-8d0c54) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-8d0c54) below.
+<a id="deep-c2be4c"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Ingress Egress Gw Global Network List Global Network Connections SLI To Global DR Global Vn
 
-A [`global_vn`](#global-vn-8d0c54) block (within [`ingress_egress_gw.global_network_list.global_network_connections.sli_to_global_dr`](#global-dr-049c69)) supports the following:
-
-<a id="name-5efbfb"></a>&#x2022; [`name`](#name-5efbfb) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-d4eda9"></a>&#x2022; [`namespace`](#namespace-d4eda9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1d0ee2"></a>&#x2022; [`tenant`](#tenant-1d0ee2) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-60d106"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR
 
-A [`slo_to_global_dr`](#global-dr-ec468f) block (within [`ingress_egress_gw.global_network_list.global_network_connections`](#connections-bde45c)) supports the following:
-
-<a id="global-vn-11211b"></a>&#x2022; [`global_vn`](#global-vn-11211b) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-11211b) below.
+<a id="deep-c00d54"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Ingress Egress Gw Global Network List Global Network Connections Slo To Global DR Global Vn
 
-A [`global_vn`](#global-vn-11211b) block (within [`ingress_egress_gw.global_network_list.global_network_connections.slo_to_global_dr`](#global-dr-ec468f)) supports the following:
-
-<a id="name-3b8a7d"></a>&#x2022; [`name`](#name-3b8a7d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c26dd7"></a>&#x2022; [`namespace`](#namespace-c26dd7) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-6c2850"></a>&#x2022; [`tenant`](#tenant-6c2850) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-184e24"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Ingress Egress Gw Hub
 
@@ -506,111 +434,55 @@ An [`express_route_enabled`](#enabled-af8996) block (within [`ingress_egress_gw.
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections
 
-A [`connections`](#connections-cb7206) block (within [`ingress_egress_gw.hub.express_route_enabled`](#enabled-af8996)) supports the following:
-
-<a id="circuit-id-6f4584"></a>&#x2022; [`circuit_id`](#circuit-id-6f4584) - Optional String<br>Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site
-
-<a id="metadata-143676"></a>&#x2022; [`metadata`](#metadata-143676) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-143676) below.
-
-<a id="subscription-d31ede"></a>&#x2022; [`other_subscription`](#subscription-d31ede) - Optional Block<br>Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription<br>See [Other Subscription](#subscription-d31ede) below.
-
-<a id="weight-c5cebc"></a>&#x2022; [`weight`](#weight-c5cebc) - Optional Number  Defaults to `10`<br>Routing Weight. The weight (or priority) for the routes received from this connection. The
+<a id="deep-5aa2b8"></a>Deeply nested **Connections** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections Metadata
 
-A [`metadata`](#metadata-143676) block (within [`ingress_egress_gw.hub.express_route_enabled.connections`](#connections-cb7206)) supports the following:
-
-<a id="spec-915ad6"></a>&#x2022; [`description_spec`](#spec-915ad6) - Optional String<br>Description. Human readable description
-
-<a id="name-471aef"></a>&#x2022; [`name`](#name-471aef) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-4a8577"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription
 
-An [`other_subscription`](#subscription-d31ede) block (within [`ingress_egress_gw.hub.express_route_enabled.connections`](#connections-cb7206)) supports the following:
-
-<a id="key-ea3934"></a>&#x2022; [`authorized_key`](#key-ea3934) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Authorized Key](#key-ea3934) below.
-
-<a id="circuit-id-60a388"></a>&#x2022; [`circuit_id`](#circuit-id-60a388) - Optional String<br>Circuit ID. Circuit ID
+<a id="deep-57f4c5"></a>Deeply nested **Subscription** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key
 
-An [`authorized_key`](#key-ea3934) block (within [`ingress_egress_gw.hub.express_route_enabled.connections.other_subscription`](#subscription-d31ede)) supports the following:
-
-<a id="info-c4b7a7"></a>&#x2022; [`blindfold_secret_info`](#info-c4b7a7) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-c4b7a7) below.
-
-<a id="info-3df906"></a>&#x2022; [`clear_secret_info`](#info-3df906) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-3df906) below.
+<a id="deep-739be2"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-c4b7a7) block (within [`ingress_egress_gw.hub.express_route_enabled.connections.other_subscription.authorized_key`](#key-ea3934)) supports the following:
-
-<a id="provider-df2cb8"></a>&#x2022; [`decryption_provider`](#provider-df2cb8) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-f47f65"></a>&#x2022; [`location`](#location-f47f65) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-c07254"></a>&#x2022; [`store_provider`](#provider-c07254) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-a418eb"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Connections Other Subscription Authorized Key Clear Secret Info
 
-A [`clear_secret_info`](#info-3df906) block (within [`ingress_egress_gw.hub.express_route_enabled.connections.other_subscription.authorized_key`](#key-ea3934)) supports the following:
-
-<a id="ref-33a4fd"></a>&#x2022; [`provider_ref`](#ref-33a4fd) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-39b402"></a>&#x2022; [`url`](#url-39b402) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-a1a294"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet
 
-A [`gateway_subnet`](#subnet-500a14) block (within [`ingress_egress_gw.hub.express_route_enabled`](#enabled-af8996)) supports the following:
-
-<a id="auto-dc2067"></a>&#x2022; [`auto`](#auto-dc2067) - Optional Block<br>Enable this option
-
-<a id="subnet-ef5900"></a>&#x2022; [`subnet`](#subnet-ef5900) - Optional Block<br>Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)<br>See [Subnet](#subnet-ef5900) below.
-
-<a id="param-27ace3"></a>&#x2022; [`subnet_param`](#param-27ace3) - Optional Block<br>New Cloud Subnet Parameters. Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-27ace3) below.
+<a id="deep-e54791"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet Subnet
 
-A [`subnet`](#subnet-ef5900) block (within [`ingress_egress_gw.hub.express_route_enabled.gateway_subnet`](#subnet-500a14)) supports the following:
-
-<a id="grp-6a261d"></a>&#x2022; [`subnet_resource_grp`](#grp-6a261d) - Optional String<br>Resource Group Name. Specify name of Resource Group
-
-<a id="group-d2fc36"></a>&#x2022; [`vnet_resource_group`](#group-d2fc36) - Optional Block<br>Enable this option
+<a id="deep-ad7509"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Gateway Subnet Subnet Param
 
-A [`subnet_param`](#param-27ace3) block (within [`ingress_egress_gw.hub.express_route_enabled.gateway_subnet`](#subnet-500a14)) supports the following:
-
-<a id="ipv4-1f516e"></a>&#x2022; [`ipv4`](#ipv4-1f516e) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-c9d7f7"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet
 
-A [`route_server_subnet`](#subnet-b569ad) block (within [`ingress_egress_gw.hub.express_route_enabled`](#enabled-af8996)) supports the following:
-
-<a id="auto-04a6d0"></a>&#x2022; [`auto`](#auto-04a6d0) - Optional Block<br>Enable this option
-
-<a id="subnet-5ae90f"></a>&#x2022; [`subnet`](#subnet-5ae90f) - Optional Block<br>Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)<br>See [Subnet](#subnet-5ae90f) below.
-
-<a id="param-0305a7"></a>&#x2022; [`subnet_param`](#param-0305a7) - Optional Block<br>New Cloud Subnet Parameters. Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-0305a7) below.
+<a id="deep-839302"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet Subnet
 
-A [`subnet`](#subnet-5ae90f) block (within [`ingress_egress_gw.hub.express_route_enabled.route_server_subnet`](#subnet-b569ad)) supports the following:
-
-<a id="grp-3a501f"></a>&#x2022; [`subnet_resource_grp`](#grp-3a501f) - Optional String<br>Resource Group Name. Specify name of Resource Group
-
-<a id="group-9ebfc8"></a>&#x2022; [`vnet_resource_group`](#group-9ebfc8) - Optional Block<br>Enable this option
+<a id="deep-b8be72"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Route Server Subnet Subnet Param
 
-A [`subnet_param`](#param-0305a7) block (within [`ingress_egress_gw.hub.express_route_enabled.route_server_subnet`](#subnet-b569ad)) supports the following:
-
-<a id="ipv4-b83bd5"></a>&#x2022; [`ipv4`](#ipv4-b83bd5) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-4b1835"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Express Route Enabled Site Registration Over Express Route
 
-A [`site_registration_over_express_route`](#route-bcfd74) block (within [`ingress_egress_gw.hub.express_route_enabled`](#enabled-af8996)) supports the following:
-
-<a id="name-221fc8"></a>&#x2022; [`cloudlink_network_name`](#name-221fc8) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
+<a id="deep-277a06"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Ingress Egress Gw Hub Spoke Vnets
 
@@ -644,91 +516,43 @@ An [`inside_static_routes`](#ingress-egress-gw-inside-static-routes) block (with
 
 #### Ingress Egress Gw Inside Static Routes Static Route List
 
-A [`static_route_list`](#list-ed095e) block (within [`ingress_egress_gw.inside_static_routes`](#ingress-egress-gw-inside-static-routes)) supports the following:
-
-<a id="route-7ac126"></a>&#x2022; [`custom_static_route`](#route-7ac126) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#route-7ac126) below.
-
-<a id="route-94e0d0"></a>&#x2022; [`simple_static_route`](#route-94e0d0) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="deep-922a6f"></a>Deeply nested **List** block collapsed for readability.
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route
 
-A [`custom_static_route`](#route-7ac126) block (within [`ingress_egress_gw.inside_static_routes.static_route_list`](#list-ed095e)) supports the following:
-
-<a id="attrs-22f1b8"></a>&#x2022; [`attrs`](#attrs-22f1b8) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route
-
-<a id="labels-9dfcd4"></a>&#x2022; [`labels`](#labels-9dfcd4) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
-
-<a id="nexthop-7d2d56"></a>&#x2022; [`nexthop`](#nexthop-7d2d56) - Optional Block<br>Nexthop. Identifies the next-hop for a route<br>See [Nexthop](#nexthop-7d2d56) below.
-
-<a id="subnets-b031cc"></a>&#x2022; [`subnets`](#subnets-b031cc) - Optional Block<br>Subnets. List of route prefixes<br>See [Subnets](#subnets-b031cc) below.
+<a id="deep-3b67c8"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#nexthop-7d2d56) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route`](#route-7ac126)) supports the following:
-
-<a id="interface-f01cea"></a>&#x2022; [`interface`](#interface-f01cea) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#interface-f01cea) below.
-
-<a id="address-8c43d9"></a>&#x2022; [`nexthop_address`](#address-8c43d9) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#address-8c43d9) below.
-
-<a id="type-adab80"></a>&#x2022; [`type`](#type-adab80) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="deep-373011"></a>Deeply nested **Nexthop** block collapsed for readability.
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#interface-f01cea) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-7d2d56)) supports the following:
-
-<a id="kind-78aaeb"></a>&#x2022; [`kind`](#kind-78aaeb) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-583914"></a>&#x2022; [`name`](#name-583914) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b9966b"></a>&#x2022; [`namespace`](#namespace-b9966b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-378e7d"></a>&#x2022; [`tenant`](#tenant-378e7d) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-bc70b8"></a>&#x2022; [`uid`](#uid-bc70b8) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-a58927"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#address-8c43d9) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-7d2d56)) supports the following:
-
-<a id="ipv4-2963dd"></a>&#x2022; [`ipv4`](#ipv4-2963dd) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipv4-2963dd) below.
-
-<a id="ipv6-93054b"></a>&#x2022; [`ipv6`](#ipv6-93054b) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipv6-93054b) below.
+<a id="deep-6b64ce"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ipv4-2963dd) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-8c43d9)) supports the following:
-
-<a id="addr-e2a75c"></a>&#x2022; [`addr`](#addr-e2a75c) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="deep-3b45f1"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ipv6-93054b) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-8c43d9)) supports the following:
-
-<a id="addr-52e089"></a>&#x2022; [`addr`](#addr-52e089) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="deep-976e31"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#subnets-b031cc) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route`](#route-7ac126)) supports the following:
-
-<a id="ipv4-16e182"></a>&#x2022; [`ipv4`](#ipv4-16e182) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ipv4-16e182) below.
-
-<a id="ipv6-11ab7a"></a>&#x2022; [`ipv6`](#ipv6-11ab7a) - Optional Block<br>IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128<br>See [IPv6](#ipv6-11ab7a) below.
+<a id="deep-7e5beb"></a>Deeply nested **Subnets** block collapsed for readability.
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ipv4-16e182) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-b031cc)) supports the following:
-
-<a id="plen-8ca949"></a>&#x2022; [`plen`](#plen-8ca949) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
-
-<a id="prefix-b7b9eb"></a>&#x2022; [`prefix`](#prefix-b7b9eb) - Optional String<br>Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation
+<a id="deep-4bd73c"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Ingress Egress Gw Inside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ipv6-11ab7a) block (within [`ingress_egress_gw.inside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-b031cc)) supports the following:
-
-<a id="plen-b0bfa4"></a>&#x2022; [`plen`](#plen-b0bfa4) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
-
-<a id="prefix-e8a4ca"></a>&#x2022; [`prefix`](#prefix-e8a4ca) - Optional String<br>Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'
+<a id="deep-5dec85"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Ingress Egress Gw Outside Static Routes
 
@@ -738,91 +562,43 @@ An [`outside_static_routes`](#ingress-egress-gw-outside-static-routes) block (wi
 
 #### Ingress Egress Gw Outside Static Routes Static Route List
 
-A [`static_route_list`](#list-445efb) block (within [`ingress_egress_gw.outside_static_routes`](#ingress-egress-gw-outside-static-routes)) supports the following:
-
-<a id="route-55f86a"></a>&#x2022; [`custom_static_route`](#route-55f86a) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#route-55f86a) below.
-
-<a id="route-ea718a"></a>&#x2022; [`simple_static_route`](#route-ea718a) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="deep-fdf27e"></a>Deeply nested **List** block collapsed for readability.
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route
 
-A [`custom_static_route`](#route-55f86a) block (within [`ingress_egress_gw.outside_static_routes.static_route_list`](#list-445efb)) supports the following:
-
-<a id="attrs-24ed10"></a>&#x2022; [`attrs`](#attrs-24ed10) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route
-
-<a id="labels-651945"></a>&#x2022; [`labels`](#labels-651945) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
-
-<a id="nexthop-f39255"></a>&#x2022; [`nexthop`](#nexthop-f39255) - Optional Block<br>Nexthop. Identifies the next-hop for a route<br>See [Nexthop](#nexthop-f39255) below.
-
-<a id="subnets-cefcc9"></a>&#x2022; [`subnets`](#subnets-cefcc9) - Optional Block<br>Subnets. List of route prefixes<br>See [Subnets](#subnets-cefcc9) below.
+<a id="deep-025383"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#nexthop-f39255) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route`](#route-55f86a)) supports the following:
-
-<a id="interface-5eacb3"></a>&#x2022; [`interface`](#interface-5eacb3) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#interface-5eacb3) below.
-
-<a id="address-411670"></a>&#x2022; [`nexthop_address`](#address-411670) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#address-411670) below.
-
-<a id="type-c6db35"></a>&#x2022; [`type`](#type-c6db35) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="deep-390b03"></a>Deeply nested **Nexthop** block collapsed for readability.
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#interface-5eacb3) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-f39255)) supports the following:
-
-<a id="kind-58fcb1"></a>&#x2022; [`kind`](#kind-58fcb1) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-4c6764"></a>&#x2022; [`name`](#name-4c6764) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-689a1b"></a>&#x2022; [`namespace`](#namespace-689a1b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-a1071b"></a>&#x2022; [`tenant`](#tenant-a1071b) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-2e6063"></a>&#x2022; [`uid`](#uid-2e6063) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-214d2f"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#address-411670) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-f39255)) supports the following:
-
-<a id="ipv4-4c5698"></a>&#x2022; [`ipv4`](#ipv4-4c5698) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipv4-4c5698) below.
-
-<a id="ipv6-3d8ca8"></a>&#x2022; [`ipv6`](#ipv6-3d8ca8) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipv6-3d8ca8) below.
+<a id="deep-f33e18"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ipv4-4c5698) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-411670)) supports the following:
-
-<a id="addr-62656e"></a>&#x2022; [`addr`](#addr-62656e) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="deep-f90bc5"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ipv6-3d8ca8) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-411670)) supports the following:
-
-<a id="addr-0c4871"></a>&#x2022; [`addr`](#addr-0c4871) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="deep-23b94d"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#subnets-cefcc9) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route`](#route-55f86a)) supports the following:
-
-<a id="ipv4-2db8dc"></a>&#x2022; [`ipv4`](#ipv4-2db8dc) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ipv4-2db8dc) below.
-
-<a id="ipv6-90c565"></a>&#x2022; [`ipv6`](#ipv6-90c565) - Optional Block<br>IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128<br>See [IPv6](#ipv6-90c565) below.
+<a id="deep-5d8217"></a>Deeply nested **Subnets** block collapsed for readability.
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ipv4-2db8dc) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-cefcc9)) supports the following:
-
-<a id="plen-2e5fac"></a>&#x2022; [`plen`](#plen-2e5fac) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
-
-<a id="prefix-1630ef"></a>&#x2022; [`prefix`](#prefix-1630ef) - Optional String<br>Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation
+<a id="deep-f9fb39"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Ingress Egress Gw Outside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ipv6-90c565) block (within [`ingress_egress_gw.outside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-cefcc9)) supports the following:
-
-<a id="plen-e53a4b"></a>&#x2022; [`plen`](#plen-e53a4b) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
-
-<a id="prefix-26a2eb"></a>&#x2022; [`prefix`](#prefix-26a2eb) - Optional String<br>Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'
+<a id="deep-21fa47"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Ingress Egress Gw Performance Enhancement Mode
 
@@ -834,11 +610,7 @@ A [`performance_enhancement_mode`](#mode-4d23c2) block (within [`ingress_egress_
 
 #### Ingress Egress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
-A [`perf_mode_l3_enhanced`](#enhanced-410f18) block (within [`ingress_egress_gw.performance_enhancement_mode`](#mode-4d23c2)) supports the following:
-
-<a id="jumbo-5d0c5a"></a>&#x2022; [`jumbo`](#jumbo-5d0c5a) - Optional Block<br>Enable this option
-
-<a id="jumbo-2198f8"></a>&#x2022; [`no_jumbo`](#jumbo-2198f8) - Optional Block<br>Enable this option
+<a id="deep-4a39a0"></a>Deeply nested **Enhanced** block collapsed for readability.
 
 #### Ingress Egress Gw Ar
 
@@ -900,35 +672,19 @@ An [`accelerated_networking`](#networking-017a12) block (within [`ingress_egress
 
 #### Ingress Egress Gw Ar Active Enhanced Firewall Policies
 
-An [`active_enhanced_firewall_policies`](#policies-191004) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
-
-<a id="policies-c7665a"></a>&#x2022; [`enhanced_firewall_policies`](#policies-c7665a) - Optional Block<br>Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active<br>See [Enhanced Firewall Policies](#policies-c7665a) below.
+<a id="deep-99ea01"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced_firewall_policies`](#policies-c7665a) block (within [`ingress_egress_gw_ar.active_enhanced_firewall_policies`](#policies-191004)) supports the following:
-
-<a id="name-fdbdce"></a>&#x2022; [`name`](#name-fdbdce) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-4d800a"></a>&#x2022; [`namespace`](#namespace-4d800a) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-258614"></a>&#x2022; [`tenant`](#tenant-258614) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-6382e5"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Active Forward Proxy Policies
 
-An [`active_forward_proxy_policies`](#policies-1dcf3f) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
-
-<a id="policies-14019c"></a>&#x2022; [`forward_proxy_policies`](#policies-14019c) - Optional Block<br>Forward Proxy Policies. Ordered List of Forward Proxy Policies active<br>See [Forward Proxy Policies](#policies-14019c) below.
+<a id="deep-629c89"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward_proxy_policies`](#policies-14019c) block (within [`ingress_egress_gw_ar.active_forward_proxy_policies`](#policies-1dcf3f)) supports the following:
-
-<a id="name-e52b84"></a>&#x2022; [`name`](#name-e52b84) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-3336eb"></a>&#x2022; [`namespace`](#namespace-3336eb) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-8c053a"></a>&#x2022; [`tenant`](#tenant-8c053a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-5a296c"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Active Network Policies
 
@@ -938,33 +694,15 @@ An [`active_network_policies`](#policies-f5e0fc) block (within [`ingress_egress_
 
 #### Ingress Egress Gw Ar Active Network Policies Network Policies
 
-A [`network_policies`](#policies-17c802) block (within [`ingress_egress_gw_ar.active_network_policies`](#policies-f5e0fc)) supports the following:
-
-<a id="name-86c5ff"></a>&#x2022; [`name`](#name-86c5ff) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-193c79"></a>&#x2022; [`namespace`](#namespace-193c79) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-87703c"></a>&#x2022; [`tenant`](#tenant-87703c) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-e63033"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Dc Cluster Group Inside Vn
 
-A [`dc_cluster_group_inside_vn`](#inside-vn-d5b061) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
-
-<a id="name-c4f0fb"></a>&#x2022; [`name`](#name-c4f0fb) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b74ba9"></a>&#x2022; [`namespace`](#namespace-b74ba9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-2c2570"></a>&#x2022; [`tenant`](#tenant-2c2570) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-7e63ae"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Dc Cluster Group Outside Vn
 
-A [`dc_cluster_group_outside_vn`](#outside-vn-b1ca44) block (within [`ingress_egress_gw_ar`](#ingress-egress-gw-ar)) supports the following:
-
-<a id="name-39f30d"></a>&#x2022; [`name`](#name-39f30d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f08f56"></a>&#x2022; [`namespace`](#namespace-f08f56) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-7c84cc"></a>&#x2022; [`tenant`](#tenant-7c84cc) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-9155be"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Global Network List
 
@@ -974,43 +712,23 @@ A [`global_network_list`](#list-37dd04) block (within [`ingress_egress_gw_ar`](#
 
 #### Ingress Egress Gw Ar Global Network List Global Network Connections
 
-A [`global_network_connections`](#connections-2d2600) block (within [`ingress_egress_gw_ar.global_network_list`](#list-37dd04)) supports the following:
-
-<a id="global-dr-24b159"></a>&#x2022; [`sli_to_global_dr`](#global-dr-24b159) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#global-dr-24b159) below.
-
-<a id="global-dr-7eaa8a"></a>&#x2022; [`slo_to_global_dr`](#global-dr-7eaa8a) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#global-dr-7eaa8a) below.
+<a id="deep-49fbad"></a>Deeply nested **Connections** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Global Network List Global Network Connections SLI To Global DR
 
-A [`sli_to_global_dr`](#global-dr-24b159) block (within [`ingress_egress_gw_ar.global_network_list.global_network_connections`](#connections-2d2600)) supports the following:
-
-<a id="global-vn-42bfc7"></a>&#x2022; [`global_vn`](#global-vn-42bfc7) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-42bfc7) below.
+<a id="deep-a26164"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Global Network List Global Network Connections SLI To Global DR Global Vn
 
-A [`global_vn`](#global-vn-42bfc7) block (within [`ingress_egress_gw_ar.global_network_list.global_network_connections.sli_to_global_dr`](#global-dr-24b159)) supports the following:
-
-<a id="name-d6e5f1"></a>&#x2022; [`name`](#name-d6e5f1) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-6df158"></a>&#x2022; [`namespace`](#namespace-6df158) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-39cf8e"></a>&#x2022; [`tenant`](#tenant-39cf8e) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-d461d0"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Global Network List Global Network Connections Slo To Global DR
 
-A [`slo_to_global_dr`](#global-dr-7eaa8a) block (within [`ingress_egress_gw_ar.global_network_list.global_network_connections`](#connections-2d2600)) supports the following:
-
-<a id="global-vn-9e6960"></a>&#x2022; [`global_vn`](#global-vn-9e6960) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-9e6960) below.
+<a id="deep-169664"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Global Network List Global Network Connections Slo To Global DR Global Vn
 
-A [`global_vn`](#global-vn-9e6960) block (within [`ingress_egress_gw_ar.global_network_list.global_network_connections.slo_to_global_dr`](#global-dr-7eaa8a)) supports the following:
-
-<a id="name-677d73"></a>&#x2022; [`name`](#name-677d73) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f672d5"></a>&#x2022; [`namespace`](#namespace-f672d5) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-280ca2"></a>&#x2022; [`tenant`](#tenant-280ca2) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-8c1065"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub
 
@@ -1024,141 +742,59 @@ A [`hub`](#ingress-egress-gw-ar-hub) block (within [`ingress_egress_gw_ar`](#ing
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled
 
-An [`express_route_enabled`](#enabled-cf06b8) block (within [`ingress_egress_gw_ar.hub`](#ingress-egress-gw-ar-hub)) supports the following:
-
-<a id="server-43aea4"></a>&#x2022; [`advertise_to_route_server`](#server-43aea4) - Optional Block<br>Enable this option
-
-<a id="asn-d9e5dd"></a>&#x2022; [`auto_asn`](#asn-d9e5dd) - Optional Block<br>Enable this option
-
-<a id="connections-dafa29"></a>&#x2022; [`connections`](#connections-dafa29) - Optional Block<br>Connections. Add the ExpressRoute Circuit Connections to this site<br>See [Connections](#connections-dafa29) below.
-
-<a id="asn-f599dc"></a>&#x2022; [`custom_asn`](#asn-f599dc) - Optional Number<br>Custom ASN. Set custom ASN for F5XC Site
-
-<a id="server-4fc051"></a>&#x2022; [`do_not_advertise_to_route_server`](#server-4fc051) - Optional Block<br>Enable this option
-
-<a id="subnet-c6aeff"></a>&#x2022; [`gateway_subnet`](#subnet-c6aeff) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Gateway Subnet](#subnet-c6aeff) below.
-
-<a id="subnet-64a9ad"></a>&#x2022; [`route_server_subnet`](#subnet-64a9ad) - Optional Block<br>Azure Subnet. Parameters for Azure subnet<br>See [Route Server Subnet](#subnet-64a9ad) below.
-
-<a id="route-4e615d"></a>&#x2022; [`site_registration_over_express_route`](#route-4e615d) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Express Route](#route-4e615d) below.
-
-<a id="internet-df4086"></a>&#x2022; [`site_registration_over_internet`](#internet-df4086) - Optional Block<br>Enable this option
-
-<a id="ergw1az-e17eb9"></a>&#x2022; [`sku_ergw1az`](#ergw1az-e17eb9) - Optional Block<br>Enable this option
-
-<a id="ergw2az-0e6fd4"></a>&#x2022; [`sku_ergw2az`](#ergw2az-0e6fd4) - Optional Block<br>Enable this option
-
-<a id="perf-81410a"></a>&#x2022; [`sku_high_perf`](#perf-81410a) - Optional Block<br>Enable this option
-
-<a id="standard-0cf524"></a>&#x2022; [`sku_standard`](#standard-0cf524) - Optional Block<br>Enable this option
+<a id="deep-66e513"></a>Deeply nested **Enabled** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections
 
-A [`connections`](#connections-dafa29) block (within [`ingress_egress_gw_ar.hub.express_route_enabled`](#enabled-cf06b8)) supports the following:
-
-<a id="circuit-id-f828b9"></a>&#x2022; [`circuit_id`](#circuit-id-f828b9) - Optional String<br>Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site
-
-<a id="metadata-3b0ee2"></a>&#x2022; [`metadata`](#metadata-3b0ee2) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-3b0ee2) below.
-
-<a id="subscription-aae9c3"></a>&#x2022; [`other_subscription`](#subscription-aae9c3) - Optional Block<br>Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription<br>See [Other Subscription](#subscription-aae9c3) below.
-
-<a id="weight-a13f81"></a>&#x2022; [`weight`](#weight-a13f81) - Optional Number  Defaults to `10`<br>Routing Weight. The weight (or priority) for the routes received from this connection. The
+<a id="deep-19c95b"></a>Deeply nested **Connections** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections Metadata
 
-A [`metadata`](#metadata-3b0ee2) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections`](#connections-dafa29)) supports the following:
-
-<a id="spec-d688d9"></a>&#x2022; [`description_spec`](#spec-d688d9) - Optional String<br>Description. Human readable description
-
-<a id="name-2d8208"></a>&#x2022; [`name`](#name-2d8208) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-bd1fbe"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription
 
-An [`other_subscription`](#subscription-aae9c3) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections`](#connections-dafa29)) supports the following:
-
-<a id="key-e43e5c"></a>&#x2022; [`authorized_key`](#key-e43e5c) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Authorized Key](#key-e43e5c) below.
-
-<a id="circuit-id-1b134c"></a>&#x2022; [`circuit_id`](#circuit-id-1b134c) - Optional String<br>Circuit ID. Circuit ID
+<a id="deep-3b2ce8"></a>Deeply nested **Subscription** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key
 
-An [`authorized_key`](#key-e43e5c) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections.other_subscription`](#subscription-aae9c3)) supports the following:
-
-<a id="info-5b62de"></a>&#x2022; [`blindfold_secret_info`](#info-5b62de) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-5b62de) below.
-
-<a id="info-b1f743"></a>&#x2022; [`clear_secret_info`](#info-b1f743) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b1f743) below.
+<a id="deep-eac236"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-5b62de) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections.other_subscription.authorized_key`](#key-e43e5c)) supports the following:
-
-<a id="provider-072037"></a>&#x2022; [`decryption_provider`](#provider-072037) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-17d1d8"></a>&#x2022; [`location`](#location-17d1d8) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-022d11"></a>&#x2022; [`store_provider`](#provider-022d11) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-af12fa"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Connections Other Subscription Authorized Key Clear Secret Info
 
-A [`clear_secret_info`](#info-b1f743) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.connections.other_subscription.authorized_key`](#key-e43e5c)) supports the following:
-
-<a id="ref-6c291c"></a>&#x2022; [`provider_ref`](#ref-6c291c) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-dc3f27"></a>&#x2022; [`url`](#url-dc3f27) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-d3a5d0"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet
 
-A [`gateway_subnet`](#subnet-c6aeff) block (within [`ingress_egress_gw_ar.hub.express_route_enabled`](#enabled-cf06b8)) supports the following:
-
-<a id="auto-b53576"></a>&#x2022; [`auto`](#auto-b53576) - Optional Block<br>Enable this option
-
-<a id="subnet-0cc807"></a>&#x2022; [`subnet`](#subnet-0cc807) - Optional Block<br>Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)<br>See [Subnet](#subnet-0cc807) below.
-
-<a id="param-45d5b0"></a>&#x2022; [`subnet_param`](#param-45d5b0) - Optional Block<br>New Cloud Subnet Parameters. Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-45d5b0) below.
+<a id="deep-7b4661"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet Subnet
 
-A [`subnet`](#subnet-0cc807) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet`](#subnet-c6aeff)) supports the following:
-
-<a id="grp-868582"></a>&#x2022; [`subnet_resource_grp`](#grp-868582) - Optional String<br>Resource Group Name. Specify name of Resource Group
-
-<a id="group-1a3c90"></a>&#x2022; [`vnet_resource_group`](#group-1a3c90) - Optional Block<br>Enable this option
+<a id="deep-520d02"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Gateway Subnet Subnet Param
 
-A [`subnet_param`](#param-45d5b0) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.gateway_subnet`](#subnet-c6aeff)) supports the following:
-
-<a id="ipv4-15b412"></a>&#x2022; [`ipv4`](#ipv4-15b412) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-07265b"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet
 
-A [`route_server_subnet`](#subnet-64a9ad) block (within [`ingress_egress_gw_ar.hub.express_route_enabled`](#enabled-cf06b8)) supports the following:
-
-<a id="auto-2f125b"></a>&#x2022; [`auto`](#auto-2f125b) - Optional Block<br>Enable this option
-
-<a id="subnet-e329c3"></a>&#x2022; [`subnet`](#subnet-e329c3) - Optional Block<br>Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)<br>See [Subnet](#subnet-e329c3) below.
-
-<a id="param-97476d"></a>&#x2022; [`subnet_param`](#param-97476d) - Optional Block<br>New Cloud Subnet Parameters. Parameters for creating a new cloud subnet<br>See [Subnet Param](#param-97476d) below.
+<a id="deep-05872f"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet Subnet
 
-A [`subnet`](#subnet-e329c3) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.route_server_subnet`](#subnet-64a9ad)) supports the following:
-
-<a id="grp-8f8245"></a>&#x2022; [`subnet_resource_grp`](#grp-8f8245) - Optional String<br>Resource Group Name. Specify name of Resource Group
-
-<a id="group-4a50b0"></a>&#x2022; [`vnet_resource_group`](#group-4a50b0) - Optional Block<br>Enable this option
+<a id="deep-080d0f"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Route Server Subnet Subnet Param
 
-A [`subnet_param`](#param-97476d) block (within [`ingress_egress_gw_ar.hub.express_route_enabled.route_server_subnet`](#subnet-64a9ad)) supports the following:
-
-<a id="ipv4-1525c6"></a>&#x2022; [`ipv4`](#ipv4-1525c6) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-ba3a3b"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Express Route Enabled Site Registration Over Express Route
 
-A [`site_registration_over_express_route`](#route-4e615d) block (within [`ingress_egress_gw_ar.hub.express_route_enabled`](#enabled-cf06b8)) supports the following:
-
-<a id="name-fd265f"></a>&#x2022; [`cloudlink_network_name`](#name-fd265f) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
+<a id="deep-646d3d"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Hub Spoke Vnets
 
@@ -1174,15 +810,7 @@ A [`spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets) block (within [`ingress
 
 #### Ingress Egress Gw Ar Hub Spoke Vnets VNET
 
-A [`vnet`](#vnet-f6d2c3) block (within [`ingress_egress_gw_ar.hub.spoke_vnets`](#ingress-egress-gw-ar-hub-spoke-vnets)) supports the following:
-
-<a id="routing-32e287"></a>&#x2022; [`f5_orchestrated_routing`](#routing-32e287) - Optional Block<br>Enable this option
-
-<a id="routing-0a553a"></a>&#x2022; [`manual_routing`](#routing-0a553a) - Optional Block<br>Enable this option
-
-<a id="group-846375"></a>&#x2022; [`resource_group`](#group-846375) - Optional String<br>Existing VNET Resource Group. Resource group of existing VNET
-
-<a id="name-885582"></a>&#x2022; [`vnet_name`](#name-885582) - Optional String<br>Existing VNET Name. Name of existing VNET
+<a id="deep-401418"></a>Deeply nested **VNET** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Inside Static Routes
 
@@ -1192,91 +820,43 @@ An [`inside_static_routes`](#routes-87089c) block (within [`ingress_egress_gw_ar
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List
 
-A [`static_route_list`](#list-de3cbc) block (within [`ingress_egress_gw_ar.inside_static_routes`](#routes-87089c)) supports the following:
-
-<a id="route-9362ec"></a>&#x2022; [`custom_static_route`](#route-9362ec) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#route-9362ec) below.
-
-<a id="route-0d270c"></a>&#x2022; [`simple_static_route`](#route-0d270c) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="deep-a451e2"></a>Deeply nested **List** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route
 
-A [`custom_static_route`](#route-9362ec) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list`](#list-de3cbc)) supports the following:
-
-<a id="attrs-1f7fa2"></a>&#x2022; [`attrs`](#attrs-1f7fa2) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route
-
-<a id="labels-166067"></a>&#x2022; [`labels`](#labels-166067) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
-
-<a id="nexthop-95aa77"></a>&#x2022; [`nexthop`](#nexthop-95aa77) - Optional Block<br>Nexthop. Identifies the next-hop for a route<br>See [Nexthop](#nexthop-95aa77) below.
-
-<a id="subnets-acddd0"></a>&#x2022; [`subnets`](#subnets-acddd0) - Optional Block<br>Subnets. List of route prefixes<br>See [Subnets](#subnets-acddd0) below.
+<a id="deep-30a730"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#nexthop-95aa77) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route`](#route-9362ec)) supports the following:
-
-<a id="interface-b04909"></a>&#x2022; [`interface`](#interface-b04909) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#interface-b04909) below.
-
-<a id="address-b5efaa"></a>&#x2022; [`nexthop_address`](#address-b5efaa) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#address-b5efaa) below.
-
-<a id="type-fcd26f"></a>&#x2022; [`type`](#type-fcd26f) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="deep-ab56e2"></a>Deeply nested **Nexthop** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#interface-b04909) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-95aa77)) supports the following:
-
-<a id="kind-89dd96"></a>&#x2022; [`kind`](#kind-89dd96) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-0f5d72"></a>&#x2022; [`name`](#name-0f5d72) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-94544e"></a>&#x2022; [`namespace`](#namespace-94544e) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-10954c"></a>&#x2022; [`tenant`](#tenant-10954c) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-3dd583"></a>&#x2022; [`uid`](#uid-3dd583) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-4846fe"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#address-b5efaa) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-95aa77)) supports the following:
-
-<a id="ipv4-1f3e71"></a>&#x2022; [`ipv4`](#ipv4-1f3e71) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipv4-1f3e71) below.
-
-<a id="ipv6-434406"></a>&#x2022; [`ipv6`](#ipv6-434406) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipv6-434406) below.
+<a id="deep-b3f69a"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ipv4-1f3e71) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-b5efaa)) supports the following:
-
-<a id="addr-8a5275"></a>&#x2022; [`addr`](#addr-8a5275) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="deep-c5d876"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ipv6-434406) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-b5efaa)) supports the following:
-
-<a id="addr-4427c0"></a>&#x2022; [`addr`](#addr-4427c0) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="deep-e0eb85"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#subnets-acddd0) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route`](#route-9362ec)) supports the following:
-
-<a id="ipv4-e74f0c"></a>&#x2022; [`ipv4`](#ipv4-e74f0c) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ipv4-e74f0c) below.
-
-<a id="ipv6-2faf6a"></a>&#x2022; [`ipv6`](#ipv6-2faf6a) - Optional Block<br>IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128<br>See [IPv6](#ipv6-2faf6a) below.
+<a id="deep-556713"></a>Deeply nested **Subnets** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ipv4-e74f0c) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-acddd0)) supports the following:
-
-<a id="plen-9f85b1"></a>&#x2022; [`plen`](#plen-9f85b1) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
-
-<a id="prefix-8baeca"></a>&#x2022; [`prefix`](#prefix-8baeca) - Optional String<br>Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation
+<a id="deep-1d5ab6"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Inside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ipv6-2faf6a) block (within [`ingress_egress_gw_ar.inside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-acddd0)) supports the following:
-
-<a id="plen-5eb1b9"></a>&#x2022; [`plen`](#plen-5eb1b9) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
-
-<a id="prefix-84b31b"></a>&#x2022; [`prefix`](#prefix-84b31b) - Optional String<br>Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'
+<a id="deep-2d5b97"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Node
 
@@ -1302,19 +882,11 @@ An [`inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet) block (within [`i
 
 #### Ingress Egress Gw Ar Node Inside Subnet Subnet
 
-A [`subnet`](#subnet-fde5af) block (within [`ingress_egress_gw_ar.node.inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet)) supports the following:
-
-<a id="name-8d0d89"></a>&#x2022; [`subnet_name`](#name-8d0d89) - Optional String<br>Subnet Name. Name of existing subnet
-
-<a id="grp-9a91f4"></a>&#x2022; [`subnet_resource_grp`](#grp-9a91f4) - Optional String<br>Resource Group Name. Specify name of Resource Group
-
-<a id="group-746ad0"></a>&#x2022; [`vnet_resource_group`](#group-746ad0) - Optional Block<br>Enable this option
+<a id="deep-b79408"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Node Inside Subnet Subnet Param
 
-A [`subnet_param`](#param-791f8c) block (within [`ingress_egress_gw_ar.node.inside_subnet`](#ingress-egress-gw-ar-node-inside-subnet)) supports the following:
-
-<a id="ipv4-a7f682"></a>&#x2022; [`ipv4`](#ipv4-a7f682) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-e5f785"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Node Outside Subnet
 
@@ -1326,19 +898,11 @@ An [`outside_subnet`](#subnet-a70a4a) block (within [`ingress_egress_gw_ar.node`
 
 #### Ingress Egress Gw Ar Node Outside Subnet Subnet
 
-A [`subnet`](#subnet-8747e2) block (within [`ingress_egress_gw_ar.node.outside_subnet`](#subnet-a70a4a)) supports the following:
-
-<a id="name-0ab44b"></a>&#x2022; [`subnet_name`](#name-0ab44b) - Optional String<br>Subnet Name. Name of existing subnet
-
-<a id="grp-fa254a"></a>&#x2022; [`subnet_resource_grp`](#grp-fa254a) - Optional String<br>Resource Group Name. Specify name of Resource Group
-
-<a id="group-4b86ce"></a>&#x2022; [`vnet_resource_group`](#group-4b86ce) - Optional Block<br>Enable this option
+<a id="deep-2ece90"></a>Deeply nested **Subnet** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Node Outside Subnet Subnet Param
 
-A [`subnet_param`](#param-e03dee) block (within [`ingress_egress_gw_ar.node.outside_subnet`](#subnet-a70a4a)) supports the following:
-
-<a id="ipv4-c662f4"></a>&#x2022; [`ipv4`](#ipv4-c662f4) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-182910"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Outside Static Routes
 
@@ -1348,91 +912,43 @@ An [`outside_static_routes`](#routes-2c1b12) block (within [`ingress_egress_gw_a
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List
 
-A [`static_route_list`](#list-70cc33) block (within [`ingress_egress_gw_ar.outside_static_routes`](#routes-2c1b12)) supports the following:
-
-<a id="route-50b5a0"></a>&#x2022; [`custom_static_route`](#route-50b5a0) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#route-50b5a0) below.
-
-<a id="route-b112b4"></a>&#x2022; [`simple_static_route`](#route-b112b4) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="deep-73d901"></a>Deeply nested **List** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route
 
-A [`custom_static_route`](#route-50b5a0) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list`](#list-70cc33)) supports the following:
-
-<a id="attrs-d76291"></a>&#x2022; [`attrs`](#attrs-d76291) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route
-
-<a id="labels-931718"></a>&#x2022; [`labels`](#labels-931718) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
-
-<a id="nexthop-5dc063"></a>&#x2022; [`nexthop`](#nexthop-5dc063) - Optional Block<br>Nexthop. Identifies the next-hop for a route<br>See [Nexthop](#nexthop-5dc063) below.
-
-<a id="subnets-df5c0d"></a>&#x2022; [`subnets`](#subnets-df5c0d) - Optional Block<br>Subnets. List of route prefixes<br>See [Subnets](#subnets-df5c0d) below.
+<a id="deep-b4e4bd"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#nexthop-5dc063) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route`](#route-50b5a0)) supports the following:
-
-<a id="interface-2a1551"></a>&#x2022; [`interface`](#interface-2a1551) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#interface-2a1551) below.
-
-<a id="address-a6ec84"></a>&#x2022; [`nexthop_address`](#address-a6ec84) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#address-a6ec84) below.
-
-<a id="type-1b3ff6"></a>&#x2022; [`type`](#type-1b3ff6) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="deep-120b78"></a>Deeply nested **Nexthop** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#interface-2a1551) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-5dc063)) supports the following:
-
-<a id="kind-23527b"></a>&#x2022; [`kind`](#kind-23527b) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-bff741"></a>&#x2022; [`name`](#name-bff741) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-5fd6d8"></a>&#x2022; [`namespace`](#namespace-5fd6d8) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-eed1cf"></a>&#x2022; [`tenant`](#tenant-eed1cf) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-1361e7"></a>&#x2022; [`uid`](#uid-1361e7) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-c4d29c"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#address-a6ec84) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-5dc063)) supports the following:
-
-<a id="ipv4-0c891c"></a>&#x2022; [`ipv4`](#ipv4-0c891c) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipv4-0c891c) below.
-
-<a id="ipv6-51d982"></a>&#x2022; [`ipv6`](#ipv6-51d982) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipv6-51d982) below.
+<a id="deep-ad9b56"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ipv4-0c891c) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-a6ec84)) supports the following:
-
-<a id="addr-eca2b6"></a>&#x2022; [`addr`](#addr-eca2b6) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="deep-9a451e"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ipv6-51d982) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-a6ec84)) supports the following:
-
-<a id="addr-c3c83d"></a>&#x2022; [`addr`](#addr-c3c83d) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="deep-e4b363"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#subnets-df5c0d) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route`](#route-50b5a0)) supports the following:
-
-<a id="ipv4-a9be2f"></a>&#x2022; [`ipv4`](#ipv4-a9be2f) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ipv4-a9be2f) below.
-
-<a id="ipv6-d3adeb"></a>&#x2022; [`ipv6`](#ipv6-d3adeb) - Optional Block<br>IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128<br>See [IPv6](#ipv6-d3adeb) below.
+<a id="deep-06c441"></a>Deeply nested **Subnets** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ipv4-a9be2f) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-df5c0d)) supports the following:
-
-<a id="plen-0e8ae8"></a>&#x2022; [`plen`](#plen-0e8ae8) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
-
-<a id="prefix-68fda6"></a>&#x2022; [`prefix`](#prefix-68fda6) - Optional String<br>Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation
+<a id="deep-f3e7f6"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ipv6-d3adeb) block (within [`ingress_egress_gw_ar.outside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-df5c0d)) supports the following:
-
-<a id="plen-81b568"></a>&#x2022; [`plen`](#plen-81b568) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
-
-<a id="prefix-3aa867"></a>&#x2022; [`prefix`](#prefix-3aa867) - Optional String<br>Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'
+<a id="deep-68de1f"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Ingress Egress Gw Ar Performance Enhancement Mode
 
@@ -1444,11 +960,7 @@ A [`performance_enhancement_mode`](#mode-81547a) block (within [`ingress_egress_
 
 #### Ingress Egress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
 
-A [`perf_mode_l3_enhanced`](#enhanced-514f84) block (within [`ingress_egress_gw_ar.performance_enhancement_mode`](#mode-81547a)) supports the following:
-
-<a id="jumbo-b20dcd"></a>&#x2022; [`jumbo`](#jumbo-b20dcd) - Optional Block<br>Enable this option
-
-<a id="jumbo-ed97f3"></a>&#x2022; [`no_jumbo`](#jumbo-ed97f3) - Optional Block<br>Enable this option
+<a id="deep-fcdd56"></a>Deeply nested **Enhanced** block collapsed for readability.
 
 #### Ingress Gw
 
@@ -1498,9 +1010,7 @@ A [`subnet`](#ingress-gw-az-nodes-local-subnet-subnet) block (within [`ingress_g
 
 #### Ingress Gw Az Nodes Local Subnet Subnet Param
 
-A [`subnet_param`](#param-f9e489) block (within [`ingress_gw.az_nodes.local_subnet`](#ingress-gw-az-nodes-local-subnet)) supports the following:
-
-<a id="ipv4-7f42bf"></a>&#x2022; [`ipv4`](#ipv4-7f42bf) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-2c0fa5"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Gw Performance Enhancement Mode
 
@@ -1512,11 +1022,7 @@ A [`performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode) blo
 
 #### Ingress Gw Performance Enhancement Mode Perf Mode L3 Enhanced
 
-A [`perf_mode_l3_enhanced`](#enhanced-5a06c8) block (within [`ingress_gw.performance_enhancement_mode`](#ingress-gw-performance-enhancement-mode)) supports the following:
-
-<a id="jumbo-c8d405"></a>&#x2022; [`jumbo`](#jumbo-c8d405) - Optional Block<br>Enable this option
-
-<a id="jumbo-8f8311"></a>&#x2022; [`no_jumbo`](#jumbo-8f8311) - Optional Block<br>Enable this option
+<a id="deep-690f7e"></a>Deeply nested **Enhanced** block collapsed for readability.
 
 #### Ingress Gw Ar
 
@@ -1570,9 +1076,7 @@ A [`subnet`](#ingress-gw-ar-node-local-subnet-subnet) block (within [`ingress_gw
 
 #### Ingress Gw Ar Node Local Subnet Subnet Param
 
-A [`subnet_param`](#param-f4eea4) block (within [`ingress_gw_ar.node.local_subnet`](#ingress-gw-ar-node-local-subnet)) supports the following:
-
-<a id="ipv4-d90c1f"></a>&#x2022; [`ipv4`](#ipv4-d90c1f) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-da8cef"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Ingress Gw Ar Performance Enhancement Mode
 
@@ -1584,11 +1088,7 @@ A [`performance_enhancement_mode`](#mode-2270b9) block (within [`ingress_gw_ar`]
 
 #### Ingress Gw Ar Performance Enhancement Mode Perf Mode L3 Enhanced
 
-A [`perf_mode_l3_enhanced`](#enhanced-2005f7) block (within [`ingress_gw_ar.performance_enhancement_mode`](#mode-2270b9)) supports the following:
-
-<a id="jumbo-cf87c6"></a>&#x2022; [`jumbo`](#jumbo-cf87c6) - Optional Block<br>Enable this option
-
-<a id="jumbo-358a4a"></a>&#x2022; [`no_jumbo`](#jumbo-358a4a) - Optional Block<br>Enable this option
+<a id="deep-c7f2da"></a>Deeply nested **Enhanced** block collapsed for readability.
 
 #### Kubernetes Upgrade Drain
 
@@ -1612,13 +1112,7 @@ An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_dr
 
 #### Log Receiver
 
-A [`log_receiver`](#log-receiver) block supports the following:
-
-<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0da9d9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Offline Survivability Mode
 
@@ -1748,13 +1242,7 @@ An [`active_enhanced_firewall_policies`](#policies-a80edf) block (within [`volts
 
 #### Voltstack Cluster Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced_firewall_policies`](#policies-49239d) block (within [`voltstack_cluster.active_enhanced_firewall_policies`](#policies-a80edf)) supports the following:
-
-<a id="name-4e17e8"></a>&#x2022; [`name`](#name-4e17e8) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-578dab"></a>&#x2022; [`namespace`](#namespace-578dab) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-c4eab9"></a>&#x2022; [`tenant`](#tenant-c4eab9) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-bf6f5b"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Voltstack Cluster Active Forward Proxy Policies
 
@@ -1764,13 +1252,7 @@ An [`active_forward_proxy_policies`](#policies-91541d) block (within [`voltstack
 
 #### Voltstack Cluster Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward_proxy_policies`](#policies-e4aa24) block (within [`voltstack_cluster.active_forward_proxy_policies`](#policies-91541d)) supports the following:
-
-<a id="name-f2d0c8"></a>&#x2022; [`name`](#name-f2d0c8) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-434bd5"></a>&#x2022; [`namespace`](#namespace-434bd5) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-2cb0e4"></a>&#x2022; [`tenant`](#tenant-2cb0e4) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-73e925"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Voltstack Cluster Active Network Policies
 
@@ -1780,13 +1262,7 @@ An [`active_network_policies`](#policies-704e06) block (within [`voltstack_clust
 
 #### Voltstack Cluster Active Network Policies Network Policies
 
-A [`network_policies`](#policies-0d13f8) block (within [`voltstack_cluster.active_network_policies`](#policies-704e06)) supports the following:
-
-<a id="name-77e23a"></a>&#x2022; [`name`](#name-77e23a) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-a545c4"></a>&#x2022; [`namespace`](#namespace-a545c4) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-fa44e1"></a>&#x2022; [`tenant`](#tenant-fa44e1) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0d13f8"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Voltstack Cluster Az Nodes
 
@@ -1816,19 +1292,11 @@ A [`subnet`](#subnet-4f7eec) block (within [`voltstack_cluster.az_nodes.local_su
 
 #### Voltstack Cluster Az Nodes Local Subnet Subnet Param
 
-A [`subnet_param`](#param-9b306d) block (within [`voltstack_cluster.az_nodes.local_subnet`](#voltstack-cluster-az-nodes-local-subnet)) supports the following:
-
-<a id="ipv4-59d886"></a>&#x2022; [`ipv4`](#ipv4-59d886) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-5303b7"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Voltstack Cluster Dc Cluster Group
 
-A [`dc_cluster_group`](#voltstack-cluster-dc-cluster-group) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
-
-<a id="voltstack-cluster-dc-cluster-group-name"></a>&#x2022; [`name`](#voltstack-cluster-dc-cluster-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e43a60"></a>&#x2022; [`namespace`](#namespace-e43a60) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-597aab"></a>&#x2022; [`tenant`](#tenant-597aab) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-3e2e4b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Voltstack Cluster Global Network List
 
@@ -1838,53 +1306,27 @@ A [`global_network_list`](#voltstack-cluster-global-network-list) block (within 
 
 #### Voltstack Cluster Global Network List Global Network Connections
 
-A [`global_network_connections`](#connections-8e8842) block (within [`voltstack_cluster.global_network_list`](#voltstack-cluster-global-network-list)) supports the following:
-
-<a id="global-dr-a3894c"></a>&#x2022; [`sli_to_global_dr`](#global-dr-a3894c) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#global-dr-a3894c) below.
-
-<a id="global-dr-80fe7c"></a>&#x2022; [`slo_to_global_dr`](#global-dr-80fe7c) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#global-dr-80fe7c) below.
+<a id="deep-974094"></a>Deeply nested **Connections** block collapsed for readability.
 
 #### Voltstack Cluster Global Network List Global Network Connections SLI To Global DR
 
-A [`sli_to_global_dr`](#global-dr-a3894c) block (within [`voltstack_cluster.global_network_list.global_network_connections`](#connections-8e8842)) supports the following:
-
-<a id="global-vn-97431f"></a>&#x2022; [`global_vn`](#global-vn-97431f) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-97431f) below.
+<a id="deep-8abeaa"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Voltstack Cluster Global Network List Global Network Connections SLI To Global DR Global Vn
 
-A [`global_vn`](#global-vn-97431f) block (within [`voltstack_cluster.global_network_list.global_network_connections.sli_to_global_dr`](#global-dr-a3894c)) supports the following:
-
-<a id="name-5b09ef"></a>&#x2022; [`name`](#name-5b09ef) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b0678c"></a>&#x2022; [`namespace`](#namespace-b0678c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-c9e383"></a>&#x2022; [`tenant`](#tenant-c9e383) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-44dfa7"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Voltstack Cluster Global Network List Global Network Connections Slo To Global DR
 
-A [`slo_to_global_dr`](#global-dr-80fe7c) block (within [`voltstack_cluster.global_network_list.global_network_connections`](#connections-8e8842)) supports the following:
-
-<a id="global-vn-8e7f3e"></a>&#x2022; [`global_vn`](#global-vn-8e7f3e) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-8e7f3e) below.
+<a id="deep-a8283c"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Voltstack Cluster Global Network List Global Network Connections Slo To Global DR Global Vn
 
-A [`global_vn`](#global-vn-8e7f3e) block (within [`voltstack_cluster.global_network_list.global_network_connections.slo_to_global_dr`](#global-dr-80fe7c)) supports the following:
-
-<a id="name-28c777"></a>&#x2022; [`name`](#name-28c777) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b5893f"></a>&#x2022; [`namespace`](#namespace-b5893f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-3618b6"></a>&#x2022; [`tenant`](#tenant-3618b6) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-3168f1"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Voltstack Cluster K8S Cluster
 
-A [`k8s_cluster`](#voltstack-cluster-k8s-cluster) block (within [`voltstack_cluster`](#voltstack-cluster)) supports the following:
-
-<a id="voltstack-cluster-k8s-cluster-name"></a>&#x2022; [`name`](#voltstack-cluster-k8s-cluster-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="voltstack-cluster-k8s-cluster-namespace"></a>&#x2022; [`namespace`](#voltstack-cluster-k8s-cluster-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="voltstack-cluster-k8s-cluster-tenant"></a>&#x2022; [`tenant`](#voltstack-cluster-k8s-cluster-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-eac574"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Voltstack Cluster Outside Static Routes
 
@@ -1894,91 +1336,43 @@ An [`outside_static_routes`](#voltstack-cluster-outside-static-routes) block (wi
 
 #### Voltstack Cluster Outside Static Routes Static Route List
 
-A [`static_route_list`](#list-72d88b) block (within [`voltstack_cluster.outside_static_routes`](#voltstack-cluster-outside-static-routes)) supports the following:
-
-<a id="route-da6ade"></a>&#x2022; [`custom_static_route`](#route-da6ade) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#route-da6ade) below.
-
-<a id="route-0c2505"></a>&#x2022; [`simple_static_route`](#route-0c2505) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="deep-8327ca"></a>Deeply nested **List** block collapsed for readability.
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route
 
-A [`custom_static_route`](#route-da6ade) block (within [`voltstack_cluster.outside_static_routes.static_route_list`](#list-72d88b)) supports the following:
-
-<a id="attrs-2d9908"></a>&#x2022; [`attrs`](#attrs-2d9908) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route
-
-<a id="labels-edf112"></a>&#x2022; [`labels`](#labels-edf112) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
-
-<a id="nexthop-2200a0"></a>&#x2022; [`nexthop`](#nexthop-2200a0) - Optional Block<br>Nexthop. Identifies the next-hop for a route<br>See [Nexthop](#nexthop-2200a0) below.
-
-<a id="subnets-44314e"></a>&#x2022; [`subnets`](#subnets-44314e) - Optional Block<br>Subnets. List of route prefixes<br>See [Subnets](#subnets-44314e) below.
+<a id="deep-a60273"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#nexthop-2200a0) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route`](#route-da6ade)) supports the following:
-
-<a id="interface-0a5e11"></a>&#x2022; [`interface`](#interface-0a5e11) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#interface-0a5e11) below.
-
-<a id="address-cd7e50"></a>&#x2022; [`nexthop_address`](#address-cd7e50) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#address-cd7e50) below.
-
-<a id="type-2776eb"></a>&#x2022; [`type`](#type-2776eb) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="deep-9cbea6"></a>Deeply nested **Nexthop** block collapsed for readability.
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#interface-0a5e11) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-2200a0)) supports the following:
-
-<a id="kind-259f85"></a>&#x2022; [`kind`](#kind-259f85) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-e48065"></a>&#x2022; [`name`](#name-e48065) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e0e9cb"></a>&#x2022; [`namespace`](#namespace-e0e9cb) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-6316b5"></a>&#x2022; [`tenant`](#tenant-6316b5) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-138f50"></a>&#x2022; [`uid`](#uid-138f50) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-81201b"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#address-cd7e50) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-2200a0)) supports the following:
-
-<a id="ipv4-ab79af"></a>&#x2022; [`ipv4`](#ipv4-ab79af) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipv4-ab79af) below.
-
-<a id="ipv6-a7b4d1"></a>&#x2022; [`ipv6`](#ipv6-a7b4d1) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipv6-a7b4d1) below.
+<a id="deep-fe330c"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ipv4-ab79af) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-cd7e50)) supports the following:
-
-<a id="addr-cba5ec"></a>&#x2022; [`addr`](#addr-cba5ec) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="deep-f7834a"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ipv6-a7b4d1) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-cd7e50)) supports the following:
-
-<a id="addr-11b987"></a>&#x2022; [`addr`](#addr-11b987) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="deep-0d1284"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#subnets-44314e) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route`](#route-da6ade)) supports the following:
-
-<a id="ipv4-479b3c"></a>&#x2022; [`ipv4`](#ipv4-479b3c) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ipv4-479b3c) below.
-
-<a id="ipv6-410cd3"></a>&#x2022; [`ipv6`](#ipv6-410cd3) - Optional Block<br>IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128<br>See [IPv6](#ipv6-410cd3) below.
+<a id="deep-626be0"></a>Deeply nested **Subnets** block collapsed for readability.
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ipv4-479b3c) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-44314e)) supports the following:
-
-<a id="plen-929f11"></a>&#x2022; [`plen`](#plen-929f11) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
-
-<a id="prefix-951720"></a>&#x2022; [`prefix`](#prefix-951720) - Optional String<br>Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation
+<a id="deep-a073ef"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Voltstack Cluster Outside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ipv6-410cd3) block (within [`voltstack_cluster.outside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-44314e)) supports the following:
-
-<a id="plen-3a44c6"></a>&#x2022; [`plen`](#plen-3a44c6) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
-
-<a id="prefix-b83771"></a>&#x2022; [`prefix`](#prefix-b83771) - Optional String<br>Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'
+<a id="deep-85f420"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Voltstack Cluster Storage Class List
 
@@ -2056,13 +1450,7 @@ An [`active_enhanced_firewall_policies`](#policies-af1ab1) block (within [`volts
 
 #### Voltstack Cluster Ar Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced_firewall_policies`](#policies-95f5fa) block (within [`voltstack_cluster_ar.active_enhanced_firewall_policies`](#policies-af1ab1)) supports the following:
-
-<a id="name-fbf257"></a>&#x2022; [`name`](#name-fbf257) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-0eb9d8"></a>&#x2022; [`namespace`](#namespace-0eb9d8) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-066fe9"></a>&#x2022; [`tenant`](#tenant-066fe9) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-93d92f"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Voltstack Cluster Ar Active Forward Proxy Policies
 
@@ -2072,13 +1460,7 @@ An [`active_forward_proxy_policies`](#policies-37b472) block (within [`voltstack
 
 #### Voltstack Cluster Ar Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward_proxy_policies`](#policies-9a6e22) block (within [`voltstack_cluster_ar.active_forward_proxy_policies`](#policies-37b472)) supports the following:
-
-<a id="name-5a52da"></a>&#x2022; [`name`](#name-5a52da) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-ae3345"></a>&#x2022; [`namespace`](#namespace-ae3345) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-b5507b"></a>&#x2022; [`tenant`](#tenant-b5507b) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-9cf721"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Voltstack Cluster Ar Active Network Policies
 
@@ -2088,23 +1470,11 @@ An [`active_network_policies`](#policies-32b156) block (within [`voltstack_clust
 
 #### Voltstack Cluster Ar Active Network Policies Network Policies
 
-A [`network_policies`](#policies-8548e6) block (within [`voltstack_cluster_ar.active_network_policies`](#policies-32b156)) supports the following:
-
-<a id="name-7d8322"></a>&#x2022; [`name`](#name-7d8322) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f31e84"></a>&#x2022; [`namespace`](#namespace-f31e84) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ed9e6a"></a>&#x2022; [`tenant`](#tenant-ed9e6a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-38a720"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Voltstack Cluster Ar Dc Cluster Group
 
-A [`dc_cluster_group`](#voltstack-cluster-ar-dc-cluster-group) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="name-0fe452"></a>&#x2022; [`name`](#name-0fe452) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-153248"></a>&#x2022; [`namespace`](#namespace-153248) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-80a2c5"></a>&#x2022; [`tenant`](#tenant-80a2c5) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-4236f8"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Voltstack Cluster Ar Global Network List
 
@@ -2114,53 +1484,27 @@ A [`global_network_list`](#list-7b202d) block (within [`voltstack_cluster_ar`](#
 
 #### Voltstack Cluster Ar Global Network List Global Network Connections
 
-A [`global_network_connections`](#connections-cbb7ff) block (within [`voltstack_cluster_ar.global_network_list`](#list-7b202d)) supports the following:
-
-<a id="global-dr-f9a596"></a>&#x2022; [`sli_to_global_dr`](#global-dr-f9a596) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#global-dr-f9a596) below.
-
-<a id="global-dr-1779d9"></a>&#x2022; [`slo_to_global_dr`](#global-dr-1779d9) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#global-dr-1779d9) below.
+<a id="deep-1198a7"></a>Deeply nested **Connections** block collapsed for readability.
 
 #### Voltstack Cluster Ar Global Network List Global Network Connections SLI To Global DR
 
-A [`sli_to_global_dr`](#global-dr-f9a596) block (within [`voltstack_cluster_ar.global_network_list.global_network_connections`](#connections-cbb7ff)) supports the following:
-
-<a id="global-vn-5cc59f"></a>&#x2022; [`global_vn`](#global-vn-5cc59f) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-5cc59f) below.
+<a id="deep-a69e8f"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Voltstack Cluster Ar Global Network List Global Network Connections SLI To Global DR Global Vn
 
-A [`global_vn`](#global-vn-5cc59f) block (within [`voltstack_cluster_ar.global_network_list.global_network_connections.sli_to_global_dr`](#global-dr-f9a596)) supports the following:
-
-<a id="name-161533"></a>&#x2022; [`name`](#name-161533) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b7bfb1"></a>&#x2022; [`namespace`](#namespace-b7bfb1) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d2e4ac"></a>&#x2022; [`tenant`](#tenant-d2e4ac) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-951e13"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Voltstack Cluster Ar Global Network List Global Network Connections Slo To Global DR
 
-A [`slo_to_global_dr`](#global-dr-1779d9) block (within [`voltstack_cluster_ar.global_network_list.global_network_connections`](#connections-cbb7ff)) supports the following:
-
-<a id="global-vn-f0b76c"></a>&#x2022; [`global_vn`](#global-vn-f0b76c) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-f0b76c) below.
+<a id="deep-cb868c"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Voltstack Cluster Ar Global Network List Global Network Connections Slo To Global DR Global Vn
 
-A [`global_vn`](#global-vn-f0b76c) block (within [`voltstack_cluster_ar.global_network_list.global_network_connections.slo_to_global_dr`](#global-dr-1779d9)) supports the following:
-
-<a id="name-428443"></a>&#x2022; [`name`](#name-428443) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e0953a"></a>&#x2022; [`namespace`](#namespace-e0953a) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-352a65"></a>&#x2022; [`tenant`](#tenant-352a65) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-bde99c"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Voltstack Cluster Ar K8S Cluster
 
-A [`k8s_cluster`](#voltstack-cluster-ar-k8s-cluster) block (within [`voltstack_cluster_ar`](#voltstack-cluster-ar)) supports the following:
-
-<a id="voltstack-cluster-ar-k8s-cluster-name"></a>&#x2022; [`name`](#voltstack-cluster-ar-k8s-cluster-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-bfaf47"></a>&#x2022; [`namespace`](#namespace-bfaf47) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="voltstack-cluster-ar-k8s-cluster-tenant"></a>&#x2022; [`tenant`](#voltstack-cluster-ar-k8s-cluster-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-9518cd"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Voltstack Cluster Ar Node
 
@@ -2194,9 +1538,7 @@ A [`subnet`](#subnet-cc9194) block (within [`voltstack_cluster_ar.node.local_sub
 
 #### Voltstack Cluster Ar Node Local Subnet Subnet Param
 
-A [`subnet_param`](#param-6c574d) block (within [`voltstack_cluster_ar.node.local_subnet`](#voltstack-cluster-ar-node-local-subnet)) supports the following:
-
-<a id="ipv4-0cfcbe"></a>&#x2022; [`ipv4`](#ipv4-0cfcbe) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-db8b2c"></a>Deeply nested **Param** block collapsed for readability.
 
 #### Voltstack Cluster Ar Outside Static Routes
 
@@ -2206,91 +1548,43 @@ An [`outside_static_routes`](#routes-ac3db8) block (within [`voltstack_cluster_a
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List
 
-A [`static_route_list`](#list-e1e081) block (within [`voltstack_cluster_ar.outside_static_routes`](#routes-ac3db8)) supports the following:
-
-<a id="route-9c148c"></a>&#x2022; [`custom_static_route`](#route-9c148c) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#route-9c148c) below.
-
-<a id="route-607a29"></a>&#x2022; [`simple_static_route`](#route-607a29) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="deep-859dd7"></a>Deeply nested **List** block collapsed for readability.
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route
 
-A [`custom_static_route`](#route-9c148c) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list`](#list-e1e081)) supports the following:
-
-<a id="attrs-398328"></a>&#x2022; [`attrs`](#attrs-398328) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route
-
-<a id="labels-7baa36"></a>&#x2022; [`labels`](#labels-7baa36) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
-
-<a id="nexthop-558c0c"></a>&#x2022; [`nexthop`](#nexthop-558c0c) - Optional Block<br>Nexthop. Identifies the next-hop for a route<br>See [Nexthop](#nexthop-558c0c) below.
-
-<a id="subnets-e1850e"></a>&#x2022; [`subnets`](#subnets-e1850e) - Optional Block<br>Subnets. List of route prefixes<br>See [Subnets](#subnets-e1850e) below.
+<a id="deep-611948"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#nexthop-558c0c) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route`](#route-9c148c)) supports the following:
-
-<a id="interface-2c79dd"></a>&#x2022; [`interface`](#interface-2c79dd) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#interface-2c79dd) below.
-
-<a id="address-39bb13"></a>&#x2022; [`nexthop_address`](#address-39bb13) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#address-39bb13) below.
-
-<a id="type-bfdc3d"></a>&#x2022; [`type`](#type-bfdc3d) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="deep-d38345"></a>Deeply nested **Nexthop** block collapsed for readability.
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#interface-2c79dd) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-558c0c)) supports the following:
-
-<a id="kind-73f386"></a>&#x2022; [`kind`](#kind-73f386) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-807149"></a>&#x2022; [`name`](#name-807149) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-a2c7ee"></a>&#x2022; [`namespace`](#namespace-a2c7ee) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1d7b30"></a>&#x2022; [`tenant`](#tenant-1d7b30) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-4a3586"></a>&#x2022; [`uid`](#uid-4a3586) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-f5a887"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#address-39bb13) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-558c0c)) supports the following:
-
-<a id="ipv4-e57fbd"></a>&#x2022; [`ipv4`](#ipv4-e57fbd) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipv4-e57fbd) below.
-
-<a id="ipv6-4e08b0"></a>&#x2022; [`ipv6`](#ipv6-4e08b0) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipv6-4e08b0) below.
+<a id="deep-ae52ed"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ipv4-e57fbd) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-39bb13)) supports the following:
-
-<a id="addr-2eb479"></a>&#x2022; [`addr`](#addr-2eb479) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="deep-77e9bc"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ipv6-4e08b0) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-39bb13)) supports the following:
-
-<a id="addr-04915a"></a>&#x2022; [`addr`](#addr-04915a) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="deep-ddfd10"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#subnets-e1850e) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route`](#route-9c148c)) supports the following:
-
-<a id="ipv4-a0dea4"></a>&#x2022; [`ipv4`](#ipv4-a0dea4) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ipv4-a0dea4) below.
-
-<a id="ipv6-9cf0ff"></a>&#x2022; [`ipv6`](#ipv6-9cf0ff) - Optional Block<br>IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128<br>See [IPv6](#ipv6-9cf0ff) below.
+<a id="deep-ad5565"></a>Deeply nested **Subnets** block collapsed for readability.
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ipv4-a0dea4) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-e1850e)) supports the following:
-
-<a id="plen-a6098f"></a>&#x2022; [`plen`](#plen-a6098f) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
-
-<a id="prefix-7859b2"></a>&#x2022; [`prefix`](#prefix-7859b2) - Optional String<br>Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation
+<a id="deep-651e2b"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Voltstack Cluster Ar Outside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ipv6-9cf0ff) block (within [`voltstack_cluster_ar.outside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-e1850e)) supports the following:
-
-<a id="plen-127d4d"></a>&#x2022; [`plen`](#plen-127d4d) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
-
-<a id="prefix-a5cdc9"></a>&#x2022; [`prefix`](#prefix-a5cdc9) - Optional String<br>Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'
+<a id="deep-7e1352"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Voltstack Cluster Ar Storage Class List
 
@@ -2300,11 +1594,90 @@ A [`storage_class_list`](#voltstack-cluster-ar-storage-class-list) block (within
 
 #### Voltstack Cluster Ar Storage Class List Storage Classes
 
-A [`storage_classes`](#classes-a6c13f) block (within [`voltstack_cluster_ar.storage_class_list`](#voltstack-cluster-ar-storage-class-list)) supports the following:
+<a id="deep-865f74"></a>Deeply nested **Classes** block collapsed for readability.
 
-<a id="class-909e60"></a>&#x2022; [`default_storage_class`](#class-909e60) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
+---
 
-<a id="name-584ccc"></a>&#x2022; [`storage_class_name`](#name-584ccc) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

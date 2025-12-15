@@ -278,7 +278,7 @@ func (r *CloudLinkResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             cloud_linkSchemaVersion,
-		MarkdownDescription: "[Category: Networking] [Namespace: required] Manages new CloudLink with configured parameters in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new CloudLink with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Cloud Link. Must be unique within the namespace.",

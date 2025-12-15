@@ -389,7 +389,7 @@ func (r *PolicyBasedRoutingResource) Metadata(ctx context.Context, req resource.
 func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             policy_based_routingSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.",
+		MarkdownDescription: "Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Policy Based Routing. Must be unique within the namespace.",

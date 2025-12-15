@@ -2,12 +2,12 @@
 page_title: "f5xc_proxy Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  [Namespace: required] Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+  Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
 ---
 
 # f5xc_proxy (Resource)
 
-[Namespace: required] Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
 
 ~> **Note** Please refer to [Proxy API docs](https://docs.cloud.f5.com/docs-v2/api/views-proxy) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Proxy Resource Example
-# [Namespace: required] Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+# Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
 
 # Basic Proxy configuration
 resource "f5xc_proxy" "example" {
@@ -97,13 +97,7 @@ An [`active_forward_proxy_policies`](#active-forward-proxy-policies) block suppo
 
 #### Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward_proxy_policies`](#policies-42e2f7) block (within [`active_forward_proxy_policies`](#active-forward-proxy-policies)) supports the following:
-
-<a id="name-c2d06e"></a>&#x2022; [`name`](#name-c2d06e) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-63e125"></a>&#x2022; [`namespace`](#namespace-63e125) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e68ab4"></a>&#x2022; [`tenant`](#tenant-e68ab4) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-42e2f7"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Dynamic Proxy
 
@@ -165,213 +159,75 @@ A [`more_option`](#dynamic-proxy-http-proxy-more-option) block (within [`dynamic
 
 #### Dynamic Proxy HTTP Proxy More Option Buffer Policy
 
-A [`buffer_policy`](#policy-dc12bf) block (within [`dynamic_proxy.http_proxy.more_option`](#dynamic-proxy-http-proxy-more-option)) supports the following:
-
-<a id="disabled-58d7eb"></a>&#x2022; [`disabled`](#disabled-58d7eb) - Optional Bool<br>Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
-
-<a id="bytes-a69ae9"></a>&#x2022; [`max_request_bytes`](#bytes-a69ae9) - Optional Number<br>Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response
+<a id="deep-a5f206"></a>Deeply nested **Policy** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Compression Params
 
-A [`compression_params`](#params-c9d1d2) block (within [`dynamic_proxy.http_proxy.more_option`](#dynamic-proxy-http-proxy-more-option)) supports the following:
-
-<a id="length-acd260"></a>&#x2022; [`content_length`](#length-acd260) - Optional Number  Defaults to `30`<br>Content Length. Minimum response length, in bytes, which will trigger compression. The
-
-<a id="type-596051"></a>&#x2022; [`content_type`](#type-596051) - Optional List<br>Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/JSON', 'application/xhtml+XML' 'image/svg+XML' 'text/CSS' 'text/HTML' 'text/plain' 'text/XML'
-
-<a id="header-eba324"></a>&#x2022; [`disable_on_etag_header`](#header-eba324) - Optional Bool<br>Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed
-
-<a id="header-c1b850"></a>&#x2022; [`remove_accept_encoding_header`](#header-c1b850) - Optional Bool<br>Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter
+<a id="deep-01a7f1"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Request Cookies To Add
 
-A [`request_cookies_to_add`](#add-a872f8) block (within [`dynamic_proxy.http_proxy.more_option`](#dynamic-proxy-http-proxy-more-option)) supports the following:
-
-<a id="name-9fa714"></a>&#x2022; [`name`](#name-9fa714) - Optional String<br>Name. Name of the cookie in Cookie header
-
-<a id="overwrite-4b4cf0"></a>&#x2022; [`overwrite`](#overwrite-4b4cf0) - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
-
-<a id="value-ce6641"></a>&#x2022; [`secret_value`](#value-ce6641) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-ce6641) below.
-
-<a id="value-cc351d"></a>&#x2022; [`value`](#value-cc351d) - Optional String<br>Value. Value of the Cookie header
+<a id="deep-23409b"></a>Deeply nested **Add** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Request Cookies To Add Secret Value
 
-A [`secret_value`](#value-ce6641) block (within [`dynamic_proxy.http_proxy.more_option.request_cookies_to_add`](#add-a872f8)) supports the following:
-
-<a id="info-c47605"></a>&#x2022; [`blindfold_secret_info`](#info-c47605) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-c47605) below.
-
-<a id="info-aebb29"></a>&#x2022; [`clear_secret_info`](#info-aebb29) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-aebb29) below.
+<a id="deep-5d14ea"></a>Deeply nested **Value** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Request Cookies To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-c47605) block (within [`dynamic_proxy.http_proxy.more_option.request_cookies_to_add.secret_value`](#value-ce6641)) supports the following:
-
-<a id="provider-6e2fe4"></a>&#x2022; [`decryption_provider`](#provider-6e2fe4) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-5af68a"></a>&#x2022; [`location`](#location-5af68a) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-94eb47"></a>&#x2022; [`store_provider`](#provider-94eb47) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-a31169"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Request Cookies To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-aebb29) block (within [`dynamic_proxy.http_proxy.more_option.request_cookies_to_add.secret_value`](#value-ce6641)) supports the following:
-
-<a id="ref-166aeb"></a>&#x2022; [`provider_ref`](#ref-166aeb) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-f57563"></a>&#x2022; [`url`](#url-f57563) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-67dc1f"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Request Headers To Add
 
-A [`request_headers_to_add`](#add-3661bf) block (within [`dynamic_proxy.http_proxy.more_option`](#dynamic-proxy-http-proxy-more-option)) supports the following:
-
-<a id="append-7cbdc2"></a>&#x2022; [`append`](#append-7cbdc2) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
-
-<a id="name-f9c73b"></a>&#x2022; [`name`](#name-f9c73b) - Optional String<br>Name. Name of the HTTP header
-
-<a id="value-b59cb1"></a>&#x2022; [`secret_value`](#value-b59cb1) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-b59cb1) below.
-
-<a id="value-c61e93"></a>&#x2022; [`value`](#value-c61e93) - Optional String<br>Value. Value of the HTTP header
+<a id="deep-4e5871"></a>Deeply nested **Add** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Request Headers To Add Secret Value
 
-A [`secret_value`](#value-b59cb1) block (within [`dynamic_proxy.http_proxy.more_option.request_headers_to_add`](#add-3661bf)) supports the following:
-
-<a id="info-194179"></a>&#x2022; [`blindfold_secret_info`](#info-194179) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-194179) below.
-
-<a id="info-119525"></a>&#x2022; [`clear_secret_info`](#info-119525) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-119525) below.
+<a id="deep-519491"></a>Deeply nested **Value** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Request Headers To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-194179) block (within [`dynamic_proxy.http_proxy.more_option.request_headers_to_add.secret_value`](#value-b59cb1)) supports the following:
-
-<a id="provider-aff7d3"></a>&#x2022; [`decryption_provider`](#provider-aff7d3) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-9eaf7a"></a>&#x2022; [`location`](#location-9eaf7a) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-af5cde"></a>&#x2022; [`store_provider`](#provider-af5cde) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-bd6322"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Request Headers To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-119525) block (within [`dynamic_proxy.http_proxy.more_option.request_headers_to_add.secret_value`](#value-b59cb1)) supports the following:
-
-<a id="ref-d80107"></a>&#x2022; [`provider_ref`](#ref-d80107) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-588206"></a>&#x2022; [`url`](#url-588206) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-2c36ea"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Response Cookies To Add
 
-A [`response_cookies_to_add`](#add-9ca95a) block (within [`dynamic_proxy.http_proxy.more_option`](#dynamic-proxy-http-proxy-more-option)) supports the following:
-
-<a id="domain-08783a"></a>&#x2022; [`add_domain`](#domain-08783a) - Optional String<br>Add Domain. Add domain attribute
-
-<a id="expiry-6a734b"></a>&#x2022; [`add_expiry`](#expiry-6a734b) - Optional String<br>Add expiry. Add expiry attribute
-
-<a id="httponly-dd776b"></a>&#x2022; [`add_httponly`](#httponly-dd776b) - Optional Block<br>Enable this option
-
-<a id="partitioned-ccfc66"></a>&#x2022; [`add_partitioned`](#partitioned-ccfc66) - Optional Block<br>Enable this option
-
-<a id="path-118771"></a>&#x2022; [`add_path`](#path-118771) - Optional String<br>Add path. Add path attribute
-
-<a id="secure-d40bba"></a>&#x2022; [`add_secure`](#secure-d40bba) - Optional Block<br>Enable this option
-
-<a id="domain-6cf3f1"></a>&#x2022; [`ignore_domain`](#domain-6cf3f1) - Optional Block<br>Enable this option
-
-<a id="expiry-c0b405"></a>&#x2022; [`ignore_expiry`](#expiry-c0b405) - Optional Block<br>Enable this option
-
-<a id="httponly-6e1f25"></a>&#x2022; [`ignore_httponly`](#httponly-6e1f25) - Optional Block<br>Enable this option
-
-<a id="age-ccc973"></a>&#x2022; [`ignore_max_age`](#age-ccc973) - Optional Block<br>Enable this option
-
-<a id="partitioned-d62000"></a>&#x2022; [`ignore_partitioned`](#partitioned-d62000) - Optional Block<br>Enable this option
-
-<a id="path-c41359"></a>&#x2022; [`ignore_path`](#path-c41359) - Optional Block<br>Enable this option
-
-<a id="samesite-ad6396"></a>&#x2022; [`ignore_samesite`](#samesite-ad6396) - Optional Block<br>Enable this option
-
-<a id="secure-6680d6"></a>&#x2022; [`ignore_secure`](#secure-6680d6) - Optional Block<br>Enable this option
-
-<a id="value-885f6c"></a>&#x2022; [`ignore_value`](#value-885f6c) - Optional Block<br>Enable this option
-
-<a id="value-6b6157"></a>&#x2022; [`max_age_value`](#value-6b6157) - Optional Number<br>Add Max Age. Add max age attribute
-
-<a id="name-26628a"></a>&#x2022; [`name`](#name-26628a) - Optional String<br>Name. Name of the cookie in Cookie header
-
-<a id="overwrite-813b7a"></a>&#x2022; [`overwrite`](#overwrite-813b7a) - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
-
-<a id="lax-c3cb8c"></a>&#x2022; [`samesite_lax`](#lax-c3cb8c) - Optional Block<br>Enable this option
-
-<a id="none-6eb774"></a>&#x2022; [`samesite_none`](#none-6eb774) - Optional Block<br>Enable this option
-
-<a id="strict-e2c697"></a>&#x2022; [`samesite_strict`](#strict-e2c697) - Optional Block<br>Enable this option
-
-<a id="value-f2f686"></a>&#x2022; [`secret_value`](#value-f2f686) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-f2f686) below.
-
-<a id="value-3542a3"></a>&#x2022; [`value`](#value-3542a3) - Optional String<br>Value. Value of the Cookie header
+<a id="deep-236633"></a>Deeply nested **Add** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Response Cookies To Add Secret Value
 
-A [`secret_value`](#value-f2f686) block (within [`dynamic_proxy.http_proxy.more_option.response_cookies_to_add`](#add-9ca95a)) supports the following:
-
-<a id="info-1b6e67"></a>&#x2022; [`blindfold_secret_info`](#info-1b6e67) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-1b6e67) below.
-
-<a id="info-bbd78a"></a>&#x2022; [`clear_secret_info`](#info-bbd78a) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-bbd78a) below.
+<a id="deep-dadcde"></a>Deeply nested **Value** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Response Cookies To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-1b6e67) block (within [`dynamic_proxy.http_proxy.more_option.response_cookies_to_add.secret_value`](#value-f2f686)) supports the following:
-
-<a id="provider-182990"></a>&#x2022; [`decryption_provider`](#provider-182990) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-10d8d6"></a>&#x2022; [`location`](#location-10d8d6) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-78495f"></a>&#x2022; [`store_provider`](#provider-78495f) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-ae55bc"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Response Cookies To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-bbd78a) block (within [`dynamic_proxy.http_proxy.more_option.response_cookies_to_add.secret_value`](#value-f2f686)) supports the following:
-
-<a id="ref-1dfa6c"></a>&#x2022; [`provider_ref`](#ref-1dfa6c) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-bc1d03"></a>&#x2022; [`url`](#url-bc1d03) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-70e69a"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Response Headers To Add
 
-A [`response_headers_to_add`](#add-91639a) block (within [`dynamic_proxy.http_proxy.more_option`](#dynamic-proxy-http-proxy-more-option)) supports the following:
-
-<a id="append-a43849"></a>&#x2022; [`append`](#append-a43849) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
-
-<a id="name-d9f09b"></a>&#x2022; [`name`](#name-d9f09b) - Optional String<br>Name. Name of the HTTP header
-
-<a id="value-daf041"></a>&#x2022; [`secret_value`](#value-daf041) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-daf041) below.
-
-<a id="value-428d7d"></a>&#x2022; [`value`](#value-428d7d) - Optional String<br>Value. Value of the HTTP header
+<a id="deep-c8d37d"></a>Deeply nested **Add** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Response Headers To Add Secret Value
 
-A [`secret_value`](#value-daf041) block (within [`dynamic_proxy.http_proxy.more_option.response_headers_to_add`](#add-91639a)) supports the following:
-
-<a id="info-fc0cf5"></a>&#x2022; [`blindfold_secret_info`](#info-fc0cf5) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-fc0cf5) below.
-
-<a id="info-8946b7"></a>&#x2022; [`clear_secret_info`](#info-8946b7) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-8946b7) below.
+<a id="deep-c6cd69"></a>Deeply nested **Value** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Response Headers To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-fc0cf5) block (within [`dynamic_proxy.http_proxy.more_option.response_headers_to_add.secret_value`](#value-daf041)) supports the following:
-
-<a id="provider-cfd697"></a>&#x2022; [`decryption_provider`](#provider-cfd697) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-e68812"></a>&#x2022; [`location`](#location-e68812) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-1c24b4"></a>&#x2022; [`store_provider`](#provider-1c24b4) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-5bb53d"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTP Proxy More Option Response Headers To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-8946b7) block (within [`dynamic_proxy.http_proxy.more_option.response_headers_to_add.secret_value`](#value-daf041)) supports the following:
-
-<a id="ref-7e7d99"></a>&#x2022; [`provider_ref`](#ref-7e7d99) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-85d846"></a>&#x2022; [`url`](#url-85d846) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-cc90ba"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy
 
@@ -419,213 +275,75 @@ A [`more_option`](#dynamic-proxy-https-proxy-more-option) block (within [`dynami
 
 #### Dynamic Proxy HTTPS Proxy More Option Buffer Policy
 
-A [`buffer_policy`](#policy-5af133) block (within [`dynamic_proxy.https_proxy.more_option`](#dynamic-proxy-https-proxy-more-option)) supports the following:
-
-<a id="disabled-e7ba98"></a>&#x2022; [`disabled`](#disabled-e7ba98) - Optional Bool<br>Disable. Disable buffering for a particular route. This is useful when virtual-host has buffering, but we need to disable it on a specific route. The value of this field is ignored for virtual-host
-
-<a id="bytes-7ef8da"></a>&#x2022; [`max_request_bytes`](#bytes-7ef8da) - Optional Number<br>Max Request Bytes. The maximum request size that the filter will buffer before the connection manager will stop buffering and return a RequestEntityTooLarge (413) response
+<a id="deep-2d0cd8"></a>Deeply nested **Policy** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Compression Params
 
-A [`compression_params`](#params-013546) block (within [`dynamic_proxy.https_proxy.more_option`](#dynamic-proxy-https-proxy-more-option)) supports the following:
-
-<a id="length-6f9398"></a>&#x2022; [`content_length`](#length-6f9398) - Optional Number  Defaults to `30`<br>Content Length. Minimum response length, in bytes, which will trigger compression. The
-
-<a id="type-3ddae9"></a>&#x2022; [`content_type`](#type-3ddae9) - Optional List<br>Content Type. Set of strings that allows specifying which mime-types yield compression When this field is not defined, compression will be applied to the following mime-types: 'application/javascript' 'application/JSON', 'application/xhtml+XML' 'image/svg+XML' 'text/CSS' 'text/HTML' 'text/plain' 'text/XML'
-
-<a id="header-889176"></a>&#x2022; [`disable_on_etag_header`](#header-889176) - Optional Bool<br>Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed
-
-<a id="header-4466c4"></a>&#x2022; [`remove_accept_encoding_header`](#header-4466c4) - Optional Bool<br>Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter
+<a id="deep-159dd4"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add
 
-A [`request_cookies_to_add`](#add-1b5bcd) block (within [`dynamic_proxy.https_proxy.more_option`](#dynamic-proxy-https-proxy-more-option)) supports the following:
-
-<a id="name-72cbb0"></a>&#x2022; [`name`](#name-72cbb0) - Optional String<br>Name. Name of the cookie in Cookie header
-
-<a id="overwrite-06d573"></a>&#x2022; [`overwrite`](#overwrite-06d573) - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
-
-<a id="value-6045be"></a>&#x2022; [`secret_value`](#value-6045be) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-6045be) below.
-
-<a id="value-ad88ec"></a>&#x2022; [`value`](#value-ad88ec) - Optional String<br>Value. Value of the Cookie header
+<a id="deep-e766a8"></a>Deeply nested **Add** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add Secret Value
 
-A [`secret_value`](#value-6045be) block (within [`dynamic_proxy.https_proxy.more_option.request_cookies_to_add`](#add-1b5bcd)) supports the following:
-
-<a id="info-29fb7b"></a>&#x2022; [`blindfold_secret_info`](#info-29fb7b) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-29fb7b) below.
-
-<a id="info-0bb306"></a>&#x2022; [`clear_secret_info`](#info-0bb306) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-0bb306) below.
+<a id="deep-5208fc"></a>Deeply nested **Value** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-29fb7b) block (within [`dynamic_proxy.https_proxy.more_option.request_cookies_to_add.secret_value`](#value-6045be)) supports the following:
-
-<a id="provider-068d69"></a>&#x2022; [`decryption_provider`](#provider-068d69) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-b1d6d8"></a>&#x2022; [`location`](#location-b1d6d8) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-e1da40"></a>&#x2022; [`store_provider`](#provider-e1da40) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-116682"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Request Cookies To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-0bb306) block (within [`dynamic_proxy.https_proxy.more_option.request_cookies_to_add.secret_value`](#value-6045be)) supports the following:
-
-<a id="ref-012399"></a>&#x2022; [`provider_ref`](#ref-012399) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-9b0063"></a>&#x2022; [`url`](#url-9b0063) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-080eee"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Request Headers To Add
 
-A [`request_headers_to_add`](#add-0332ff) block (within [`dynamic_proxy.https_proxy.more_option`](#dynamic-proxy-https-proxy-more-option)) supports the following:
-
-<a id="append-f1fa51"></a>&#x2022; [`append`](#append-f1fa51) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
-
-<a id="name-866e07"></a>&#x2022; [`name`](#name-866e07) - Optional String<br>Name. Name of the HTTP header
-
-<a id="value-844a57"></a>&#x2022; [`secret_value`](#value-844a57) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-844a57) below.
-
-<a id="value-28cfab"></a>&#x2022; [`value`](#value-28cfab) - Optional String<br>Value. Value of the HTTP header
+<a id="deep-5c737b"></a>Deeply nested **Add** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Request Headers To Add Secret Value
 
-A [`secret_value`](#value-844a57) block (within [`dynamic_proxy.https_proxy.more_option.request_headers_to_add`](#add-0332ff)) supports the following:
-
-<a id="info-235140"></a>&#x2022; [`blindfold_secret_info`](#info-235140) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-235140) below.
-
-<a id="info-2c92f9"></a>&#x2022; [`clear_secret_info`](#info-2c92f9) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-2c92f9) below.
+<a id="deep-b70ddf"></a>Deeply nested **Value** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Request Headers To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-235140) block (within [`dynamic_proxy.https_proxy.more_option.request_headers_to_add.secret_value`](#value-844a57)) supports the following:
-
-<a id="provider-9a17a7"></a>&#x2022; [`decryption_provider`](#provider-9a17a7) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-ea5ee1"></a>&#x2022; [`location`](#location-ea5ee1) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-ff3d40"></a>&#x2022; [`store_provider`](#provider-ff3d40) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-da9153"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Request Headers To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-2c92f9) block (within [`dynamic_proxy.https_proxy.more_option.request_headers_to_add.secret_value`](#value-844a57)) supports the following:
-
-<a id="ref-88d66f"></a>&#x2022; [`provider_ref`](#ref-88d66f) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-af773d"></a>&#x2022; [`url`](#url-af773d) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-a8ba19"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add
 
-A [`response_cookies_to_add`](#add-dd9473) block (within [`dynamic_proxy.https_proxy.more_option`](#dynamic-proxy-https-proxy-more-option)) supports the following:
-
-<a id="domain-bb40b7"></a>&#x2022; [`add_domain`](#domain-bb40b7) - Optional String<br>Add Domain. Add domain attribute
-
-<a id="expiry-3ac22c"></a>&#x2022; [`add_expiry`](#expiry-3ac22c) - Optional String<br>Add expiry. Add expiry attribute
-
-<a id="httponly-365800"></a>&#x2022; [`add_httponly`](#httponly-365800) - Optional Block<br>Enable this option
-
-<a id="partitioned-f58591"></a>&#x2022; [`add_partitioned`](#partitioned-f58591) - Optional Block<br>Enable this option
-
-<a id="path-d545b7"></a>&#x2022; [`add_path`](#path-d545b7) - Optional String<br>Add path. Add path attribute
-
-<a id="secure-c374f3"></a>&#x2022; [`add_secure`](#secure-c374f3) - Optional Block<br>Enable this option
-
-<a id="domain-67347f"></a>&#x2022; [`ignore_domain`](#domain-67347f) - Optional Block<br>Enable this option
-
-<a id="expiry-c76728"></a>&#x2022; [`ignore_expiry`](#expiry-c76728) - Optional Block<br>Enable this option
-
-<a id="httponly-32f941"></a>&#x2022; [`ignore_httponly`](#httponly-32f941) - Optional Block<br>Enable this option
-
-<a id="age-cb1a3b"></a>&#x2022; [`ignore_max_age`](#age-cb1a3b) - Optional Block<br>Enable this option
-
-<a id="partitioned-c83fca"></a>&#x2022; [`ignore_partitioned`](#partitioned-c83fca) - Optional Block<br>Enable this option
-
-<a id="path-12aff8"></a>&#x2022; [`ignore_path`](#path-12aff8) - Optional Block<br>Enable this option
-
-<a id="samesite-2e0036"></a>&#x2022; [`ignore_samesite`](#samesite-2e0036) - Optional Block<br>Enable this option
-
-<a id="secure-1c3d65"></a>&#x2022; [`ignore_secure`](#secure-1c3d65) - Optional Block<br>Enable this option
-
-<a id="value-076f8a"></a>&#x2022; [`ignore_value`](#value-076f8a) - Optional Block<br>Enable this option
-
-<a id="value-fb3fd6"></a>&#x2022; [`max_age_value`](#value-fb3fd6) - Optional Number<br>Add Max Age. Add max age attribute
-
-<a id="name-873a5a"></a>&#x2022; [`name`](#name-873a5a) - Optional String<br>Name. Name of the cookie in Cookie header
-
-<a id="overwrite-43e915"></a>&#x2022; [`overwrite`](#overwrite-43e915) - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
-
-<a id="lax-c6b5ca"></a>&#x2022; [`samesite_lax`](#lax-c6b5ca) - Optional Block<br>Enable this option
-
-<a id="none-b9d918"></a>&#x2022; [`samesite_none`](#none-b9d918) - Optional Block<br>Enable this option
-
-<a id="strict-612562"></a>&#x2022; [`samesite_strict`](#strict-612562) - Optional Block<br>Enable this option
-
-<a id="value-de62ba"></a>&#x2022; [`secret_value`](#value-de62ba) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-de62ba) below.
-
-<a id="value-8dc2bb"></a>&#x2022; [`value`](#value-8dc2bb) - Optional String<br>Value. Value of the Cookie header
+<a id="deep-dfa548"></a>Deeply nested **Add** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add Secret Value
 
-A [`secret_value`](#value-de62ba) block (within [`dynamic_proxy.https_proxy.more_option.response_cookies_to_add`](#add-dd9473)) supports the following:
-
-<a id="info-514c21"></a>&#x2022; [`blindfold_secret_info`](#info-514c21) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-514c21) below.
-
-<a id="info-7a2c83"></a>&#x2022; [`clear_secret_info`](#info-7a2c83) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-7a2c83) below.
+<a id="deep-d3f531"></a>Deeply nested **Value** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-514c21) block (within [`dynamic_proxy.https_proxy.more_option.response_cookies_to_add.secret_value`](#value-de62ba)) supports the following:
-
-<a id="provider-db3cc8"></a>&#x2022; [`decryption_provider`](#provider-db3cc8) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-14eece"></a>&#x2022; [`location`](#location-14eece) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-f0aa83"></a>&#x2022; [`store_provider`](#provider-f0aa83) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-b63067"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Response Cookies To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-7a2c83) block (within [`dynamic_proxy.https_proxy.more_option.response_cookies_to_add.secret_value`](#value-de62ba)) supports the following:
-
-<a id="ref-db5db4"></a>&#x2022; [`provider_ref`](#ref-db5db4) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-641eba"></a>&#x2022; [`url`](#url-641eba) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-a7050a"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Response Headers To Add
 
-A [`response_headers_to_add`](#add-db908d) block (within [`dynamic_proxy.https_proxy.more_option`](#dynamic-proxy-https-proxy-more-option)) supports the following:
-
-<a id="append-4a420f"></a>&#x2022; [`append`](#append-4a420f) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
-
-<a id="name-8840ac"></a>&#x2022; [`name`](#name-8840ac) - Optional String<br>Name. Name of the HTTP header
-
-<a id="value-e3f492"></a>&#x2022; [`secret_value`](#value-e3f492) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-e3f492) below.
-
-<a id="value-012158"></a>&#x2022; [`value`](#value-012158) - Optional String<br>Value. Value of the HTTP header
+<a id="deep-1a85b4"></a>Deeply nested **Add** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Response Headers To Add Secret Value
 
-A [`secret_value`](#value-e3f492) block (within [`dynamic_proxy.https_proxy.more_option.response_headers_to_add`](#add-db908d)) supports the following:
-
-<a id="info-e47c89"></a>&#x2022; [`blindfold_secret_info`](#info-e47c89) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e47c89) below.
-
-<a id="info-05b2fe"></a>&#x2022; [`clear_secret_info`](#info-05b2fe) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-05b2fe) below.
+<a id="deep-8bea5d"></a>Deeply nested **Value** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Response Headers To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-e47c89) block (within [`dynamic_proxy.https_proxy.more_option.response_headers_to_add.secret_value`](#value-e3f492)) supports the following:
-
-<a id="provider-dc8eff"></a>&#x2022; [`decryption_provider`](#provider-dc8eff) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-b8c733"></a>&#x2022; [`location`](#location-b8c733) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-8cc7c8"></a>&#x2022; [`store_provider`](#provider-8cc7c8) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-483163"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy More Option Response Headers To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-05b2fe) block (within [`dynamic_proxy.https_proxy.more_option.response_headers_to_add.secret_value`](#value-e3f492)) supports the following:
-
-<a id="ref-e9c302"></a>&#x2022; [`provider_ref`](#ref-e9c302) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-f0ff56"></a>&#x2022; [`url`](#url-f0ff56) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-b7350c"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params
 
@@ -641,117 +359,47 @@ A [`tls_params`](#dynamic-proxy-https-proxy-tls-params) block (within [`dynamic_
 
 #### Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates
 
-A [`tls_certificates`](#certificates-6f0e81) block (within [`dynamic_proxy.https_proxy.tls_params`](#dynamic-proxy-https-proxy-tls-params)) supports the following:
-
-<a id="url-6959f0"></a>&#x2022; [`certificate_url`](#url-6959f0) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-66d0af"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-66d0af) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-66d0af) below.
-
-<a id="spec-2152cf"></a>&#x2022; [`description_spec`](#spec-2152cf) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-c1ba62"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-c1ba62) - Optional Block<br>Enable this option
-
-<a id="key-f28f27"></a>&#x2022; [`private_key`](#key-f28f27) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-f28f27) below.
-
-<a id="defaults-66958d"></a>&#x2022; [`use_system_defaults`](#defaults-66958d) - Optional Block<br>Enable this option
+<a id="deep-191b91"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-66d0af) block (within [`dynamic_proxy.https_proxy.tls_params.tls_certificates`](#certificates-6f0e81)) supports the following:
-
-<a id="algorithms-0c215f"></a>&#x2022; [`hash_algorithms`](#algorithms-0c215f) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-5b3bf1"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Private Key
 
-A [`private_key`](#key-f28f27) block (within [`dynamic_proxy.https_proxy.tls_params.tls_certificates`](#certificates-6f0e81)) supports the following:
-
-<a id="info-266b8f"></a>&#x2022; [`blindfold_secret_info`](#info-266b8f) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-266b8f) below.
-
-<a id="info-802bf6"></a>&#x2022; [`clear_secret_info`](#info-802bf6) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-802bf6) below.
+<a id="deep-f10431"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-266b8f) block (within [`dynamic_proxy.https_proxy.tls_params.tls_certificates.private_key`](#key-f28f27)) supports the following:
-
-<a id="provider-ce3adf"></a>&#x2022; [`decryption_provider`](#provider-ce3adf) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-8698a7"></a>&#x2022; [`location`](#location-8698a7) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-0fdffe"></a>&#x2022; [`store_provider`](#provider-0fdffe) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-1db132"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-802bf6) block (within [`dynamic_proxy.https_proxy.tls_params.tls_certificates.private_key`](#key-f28f27)) supports the following:
-
-<a id="ref-68694d"></a>&#x2022; [`provider_ref`](#ref-68694d) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-c20ef6"></a>&#x2022; [`url`](#url-c20ef6) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-2b70cd"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params TLS Config
 
-A [`tls_config`](#config-116b33) block (within [`dynamic_proxy.https_proxy.tls_params`](#dynamic-proxy-https-proxy-tls-params)) supports the following:
-
-<a id="security-335dc3"></a>&#x2022; [`custom_security`](#security-335dc3) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-335dc3) below.
-
-<a id="security-248310"></a>&#x2022; [`default_security`](#security-248310) - Optional Block<br>Enable this option
-
-<a id="security-219dfe"></a>&#x2022; [`low_security`](#security-219dfe) - Optional Block<br>Enable this option
-
-<a id="security-b487a1"></a>&#x2022; [`medium_security`](#security-b487a1) - Optional Block<br>Enable this option
+<a id="deep-68f6bc"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params TLS Config Custom Security
 
-A [`custom_security`](#security-335dc3) block (within [`dynamic_proxy.https_proxy.tls_params.tls_config`](#config-116b33)) supports the following:
-
-<a id="suites-b04d48"></a>&#x2022; [`cipher_suites`](#suites-b04d48) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-de0254"></a>&#x2022; [`max_version`](#version-de0254) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-bdda16"></a>&#x2022; [`min_version`](#version-bdda16) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-37426e"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params Use mTLS
 
-An [`use_mtls`](#mtls-7179b9) block (within [`dynamic_proxy.https_proxy.tls_params`](#dynamic-proxy-https-proxy-tls-params)) supports the following:
-
-<a id="optional-f7906c"></a>&#x2022; [`client_certificate_optional`](#optional-f7906c) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-ac3c64"></a>&#x2022; [`crl`](#crl-ac3c64) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-ac3c64) below.
-
-<a id="crl-4b3c5f"></a>&#x2022; [`no_crl`](#crl-4b3c5f) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-655e45"></a>&#x2022; [`trusted_ca`](#trusted-ca-655e45) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-655e45) below.
-
-<a id="url-6c6756"></a>&#x2022; [`trusted_ca_url`](#url-6c6756) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-042596"></a>&#x2022; [`xfcc_disabled`](#disabled-042596) - Optional Block<br>Enable this option
-
-<a id="options-abc253"></a>&#x2022; [`xfcc_options`](#options-abc253) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-abc253) below.
+<a id="deep-cbb142"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params Use mTLS CRL
 
-A [`crl`](#crl-ac3c64) block (within [`dynamic_proxy.https_proxy.tls_params.use_mtls`](#mtls-7179b9)) supports the following:
-
-<a id="name-4e8edf"></a>&#x2022; [`name`](#name-4e8edf) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-4cfc57"></a>&#x2022; [`namespace`](#namespace-4cfc57) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-7f22c9"></a>&#x2022; [`tenant`](#tenant-7f22c9) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-4e5a20"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-655e45) block (within [`dynamic_proxy.https_proxy.tls_params.use_mtls`](#mtls-7179b9)) supports the following:
-
-<a id="name-3460e6"></a>&#x2022; [`name`](#name-3460e6) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-388d7f"></a>&#x2022; [`namespace`](#namespace-388d7f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-7b3005"></a>&#x2022; [`tenant`](#tenant-7b3005) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-b473b7"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Dynamic Proxy HTTPS Proxy TLS Params Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-abc253) block (within [`dynamic_proxy.https_proxy.tls_params.use_mtls`](#mtls-7179b9)) supports the following:
-
-<a id="elements-5e9ae7"></a>&#x2022; [`xfcc_header_elements`](#elements-5e9ae7) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-23370a"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Dynamic Proxy Sni Proxy
 
@@ -825,193 +473,67 @@ A [`compression_params`](#params-c32856) block (within [`http_proxy.more_option`
 
 #### HTTP Proxy More Option Request Cookies To Add
 
-A [`request_cookies_to_add`](#add-19fe20) block (within [`http_proxy.more_option`](#http-proxy-more-option)) supports the following:
-
-<a id="name-1e2d3b"></a>&#x2022; [`name`](#name-1e2d3b) - Optional String<br>Name. Name of the cookie in Cookie header
-
-<a id="overwrite-962b6c"></a>&#x2022; [`overwrite`](#overwrite-962b6c) - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
-
-<a id="value-a4c9dc"></a>&#x2022; [`secret_value`](#value-a4c9dc) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-a4c9dc) below.
-
-<a id="value-89c552"></a>&#x2022; [`value`](#value-89c552) - Optional String<br>Value. Value of the Cookie header
+<a id="deep-807053"></a>Deeply nested **Add** block collapsed for readability.
 
 #### HTTP Proxy More Option Request Cookies To Add Secret Value
 
-A [`secret_value`](#value-a4c9dc) block (within [`http_proxy.more_option.request_cookies_to_add`](#add-19fe20)) supports the following:
-
-<a id="info-7deac1"></a>&#x2022; [`blindfold_secret_info`](#info-7deac1) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-7deac1) below.
-
-<a id="info-1a6b08"></a>&#x2022; [`clear_secret_info`](#info-1a6b08) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-1a6b08) below.
+<a id="deep-b501bd"></a>Deeply nested **Value** block collapsed for readability.
 
 #### HTTP Proxy More Option Request Cookies To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-7deac1) block (within [`http_proxy.more_option.request_cookies_to_add.secret_value`](#value-a4c9dc)) supports the following:
-
-<a id="provider-ea830a"></a>&#x2022; [`decryption_provider`](#provider-ea830a) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-f9a713"></a>&#x2022; [`location`](#location-f9a713) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-9de5e7"></a>&#x2022; [`store_provider`](#provider-9de5e7) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-4d9c42"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Proxy More Option Request Cookies To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-1a6b08) block (within [`http_proxy.more_option.request_cookies_to_add.secret_value`](#value-a4c9dc)) supports the following:
-
-<a id="ref-fdc0c3"></a>&#x2022; [`provider_ref`](#ref-fdc0c3) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-e1a1a1"></a>&#x2022; [`url`](#url-e1a1a1) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-9d45bb"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Proxy More Option Request Headers To Add
 
-A [`request_headers_to_add`](#add-1a07e4) block (within [`http_proxy.more_option`](#http-proxy-more-option)) supports the following:
-
-<a id="append-f431a4"></a>&#x2022; [`append`](#append-f431a4) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
-
-<a id="name-015632"></a>&#x2022; [`name`](#name-015632) - Optional String<br>Name. Name of the HTTP header
-
-<a id="value-9a1eaa"></a>&#x2022; [`secret_value`](#value-9a1eaa) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-9a1eaa) below.
-
-<a id="value-5c9796"></a>&#x2022; [`value`](#value-5c9796) - Optional String<br>Value. Value of the HTTP header
+<a id="deep-3c896c"></a>Deeply nested **Add** block collapsed for readability.
 
 #### HTTP Proxy More Option Request Headers To Add Secret Value
 
-A [`secret_value`](#value-9a1eaa) block (within [`http_proxy.more_option.request_headers_to_add`](#add-1a07e4)) supports the following:
-
-<a id="info-7ea53d"></a>&#x2022; [`blindfold_secret_info`](#info-7ea53d) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-7ea53d) below.
-
-<a id="info-c88c74"></a>&#x2022; [`clear_secret_info`](#info-c88c74) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-c88c74) below.
+<a id="deep-19fb1a"></a>Deeply nested **Value** block collapsed for readability.
 
 #### HTTP Proxy More Option Request Headers To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-7ea53d) block (within [`http_proxy.more_option.request_headers_to_add.secret_value`](#value-9a1eaa)) supports the following:
-
-<a id="provider-fad46f"></a>&#x2022; [`decryption_provider`](#provider-fad46f) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-7c8a75"></a>&#x2022; [`location`](#location-7c8a75) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-a6071e"></a>&#x2022; [`store_provider`](#provider-a6071e) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-f433c8"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Proxy More Option Request Headers To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-c88c74) block (within [`http_proxy.more_option.request_headers_to_add.secret_value`](#value-9a1eaa)) supports the following:
-
-<a id="ref-d915f3"></a>&#x2022; [`provider_ref`](#ref-d915f3) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-a57542"></a>&#x2022; [`url`](#url-a57542) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-f2497c"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Proxy More Option Response Cookies To Add
 
-A [`response_cookies_to_add`](#add-9fc6d2) block (within [`http_proxy.more_option`](#http-proxy-more-option)) supports the following:
-
-<a id="domain-4afb2c"></a>&#x2022; [`add_domain`](#domain-4afb2c) - Optional String<br>Add Domain. Add domain attribute
-
-<a id="expiry-a39393"></a>&#x2022; [`add_expiry`](#expiry-a39393) - Optional String<br>Add expiry. Add expiry attribute
-
-<a id="httponly-49f4f1"></a>&#x2022; [`add_httponly`](#httponly-49f4f1) - Optional Block<br>Enable this option
-
-<a id="partitioned-227c4d"></a>&#x2022; [`add_partitioned`](#partitioned-227c4d) - Optional Block<br>Enable this option
-
-<a id="path-e663f0"></a>&#x2022; [`add_path`](#path-e663f0) - Optional String<br>Add path. Add path attribute
-
-<a id="secure-f1da73"></a>&#x2022; [`add_secure`](#secure-f1da73) - Optional Block<br>Enable this option
-
-<a id="domain-ae69ee"></a>&#x2022; [`ignore_domain`](#domain-ae69ee) - Optional Block<br>Enable this option
-
-<a id="expiry-173d3a"></a>&#x2022; [`ignore_expiry`](#expiry-173d3a) - Optional Block<br>Enable this option
-
-<a id="httponly-246148"></a>&#x2022; [`ignore_httponly`](#httponly-246148) - Optional Block<br>Enable this option
-
-<a id="age-7f22f4"></a>&#x2022; [`ignore_max_age`](#age-7f22f4) - Optional Block<br>Enable this option
-
-<a id="partitioned-c9151d"></a>&#x2022; [`ignore_partitioned`](#partitioned-c9151d) - Optional Block<br>Enable this option
-
-<a id="path-eafca4"></a>&#x2022; [`ignore_path`](#path-eafca4) - Optional Block<br>Enable this option
-
-<a id="samesite-648cd1"></a>&#x2022; [`ignore_samesite`](#samesite-648cd1) - Optional Block<br>Enable this option
-
-<a id="secure-4a37ad"></a>&#x2022; [`ignore_secure`](#secure-4a37ad) - Optional Block<br>Enable this option
-
-<a id="value-0c9d49"></a>&#x2022; [`ignore_value`](#value-0c9d49) - Optional Block<br>Enable this option
-
-<a id="value-a7c923"></a>&#x2022; [`max_age_value`](#value-a7c923) - Optional Number<br>Add Max Age. Add max age attribute
-
-<a id="name-6a8889"></a>&#x2022; [`name`](#name-6a8889) - Optional String<br>Name. Name of the cookie in Cookie header
-
-<a id="overwrite-b71a9b"></a>&#x2022; [`overwrite`](#overwrite-b71a9b) - Optional Bool  Defaults to `do`<br>Overwrite. Should the value be overwritten? If true, the value is overwritten to existing values. not overwrite
-
-<a id="lax-a82ffa"></a>&#x2022; [`samesite_lax`](#lax-a82ffa) - Optional Block<br>Enable this option
-
-<a id="none-b1c4de"></a>&#x2022; [`samesite_none`](#none-b1c4de) - Optional Block<br>Enable this option
-
-<a id="strict-af8892"></a>&#x2022; [`samesite_strict`](#strict-af8892) - Optional Block<br>Enable this option
-
-<a id="value-4c5b93"></a>&#x2022; [`secret_value`](#value-4c5b93) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-4c5b93) below.
-
-<a id="value-e5d31b"></a>&#x2022; [`value`](#value-e5d31b) - Optional String<br>Value. Value of the Cookie header
+<a id="deep-ecab43"></a>Deeply nested **Add** block collapsed for readability.
 
 #### HTTP Proxy More Option Response Cookies To Add Secret Value
 
-A [`secret_value`](#value-4c5b93) block (within [`http_proxy.more_option.response_cookies_to_add`](#add-9fc6d2)) supports the following:
-
-<a id="info-88f657"></a>&#x2022; [`blindfold_secret_info`](#info-88f657) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-88f657) below.
-
-<a id="info-866bf6"></a>&#x2022; [`clear_secret_info`](#info-866bf6) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-866bf6) below.
+<a id="deep-362886"></a>Deeply nested **Value** block collapsed for readability.
 
 #### HTTP Proxy More Option Response Cookies To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-88f657) block (within [`http_proxy.more_option.response_cookies_to_add.secret_value`](#value-4c5b93)) supports the following:
-
-<a id="provider-3e6f08"></a>&#x2022; [`decryption_provider`](#provider-3e6f08) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-b0b077"></a>&#x2022; [`location`](#location-b0b077) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-448df7"></a>&#x2022; [`store_provider`](#provider-448df7) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-46fca8"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Proxy More Option Response Cookies To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-866bf6) block (within [`http_proxy.more_option.response_cookies_to_add.secret_value`](#value-4c5b93)) supports the following:
-
-<a id="ref-d2be56"></a>&#x2022; [`provider_ref`](#ref-d2be56) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-38d095"></a>&#x2022; [`url`](#url-38d095) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-5bbf2a"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Proxy More Option Response Headers To Add
 
-A [`response_headers_to_add`](#add-3fc2d5) block (within [`http_proxy.more_option`](#http-proxy-more-option)) supports the following:
-
-<a id="append-50d79c"></a>&#x2022; [`append`](#append-50d79c) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
-
-<a id="name-ffa93f"></a>&#x2022; [`name`](#name-ffa93f) - Optional String<br>Name. Name of the HTTP header
-
-<a id="value-097035"></a>&#x2022; [`secret_value`](#value-097035) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-097035) below.
-
-<a id="value-a694e5"></a>&#x2022; [`value`](#value-a694e5) - Optional String<br>Value. Value of the HTTP header
+<a id="deep-265006"></a>Deeply nested **Add** block collapsed for readability.
 
 #### HTTP Proxy More Option Response Headers To Add Secret Value
 
-A [`secret_value`](#value-097035) block (within [`http_proxy.more_option.response_headers_to_add`](#add-3fc2d5)) supports the following:
-
-<a id="info-9529ae"></a>&#x2022; [`blindfold_secret_info`](#info-9529ae) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-9529ae) below.
-
-<a id="info-4480b0"></a>&#x2022; [`clear_secret_info`](#info-4480b0) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-4480b0) below.
+<a id="deep-576775"></a>Deeply nested **Value** block collapsed for readability.
 
 #### HTTP Proxy More Option Response Headers To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-9529ae) block (within [`http_proxy.more_option.response_headers_to_add.secret_value`](#value-097035)) supports the following:
-
-<a id="provider-029b0e"></a>&#x2022; [`decryption_provider`](#provider-029b0e) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-dde4ed"></a>&#x2022; [`location`](#location-dde4ed) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-53041d"></a>&#x2022; [`store_provider`](#provider-53041d) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-3ab8e3"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Proxy More Option Response Headers To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-4480b0) block (within [`http_proxy.more_option.response_headers_to_add.secret_value`](#value-097035)) supports the following:
-
-<a id="ref-755a3e"></a>&#x2022; [`provider_ref`](#ref-755a3e) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-5a6d87"></a>&#x2022; [`url`](#url-5a6d87) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-5256f6"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Site Virtual Sites
 
@@ -1043,13 +565,7 @@ A [`site`](#site-virtual-sites-advertise-where-site) block (within [`site_virtua
 
 #### Site Virtual Sites Advertise Where Site Site
 
-A [`site`](#site-91e167) block (within [`site_virtual_sites.advertise_where.site`](#site-virtual-sites-advertise-where-site)) supports the following:
-
-<a id="name-e8af64"></a>&#x2022; [`name`](#name-e8af64) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-81a6ad"></a>&#x2022; [`namespace`](#namespace-81a6ad) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d56172"></a>&#x2022; [`tenant`](#tenant-d56172) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-91e167"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Site Virtual Sites Advertise Where Virtual Site
 
@@ -1061,13 +577,7 @@ A [`virtual_site`](#site-7107b1) block (within [`site_virtual_sites.advertise_wh
 
 #### Site Virtual Sites Advertise Where Virtual Site Virtual Site
 
-A [`virtual_site`](#site-ba773e) block (within [`site_virtual_sites.advertise_where.virtual_site`](#site-7107b1)) supports the following:
-
-<a id="name-5ca0eb"></a>&#x2022; [`name`](#name-5ca0eb) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b5e1da"></a>&#x2022; [`namespace`](#namespace-b5e1da) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-0a6cf8"></a>&#x2022; [`tenant`](#tenant-0a6cf8) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-2b5ce3"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Timeouts
 
@@ -1129,21 +639,11 @@ A [`private_key`](#key-64ce0d) block (within [`tls_intercept.custom_certificate`
 
 #### TLS Intercept Custom Certificate Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-678e4d) block (within [`tls_intercept.custom_certificate.private_key`](#key-64ce0d)) supports the following:
-
-<a id="provider-e5c325"></a>&#x2022; [`decryption_provider`](#provider-e5c325) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-1fa93a"></a>&#x2022; [`location`](#location-1fa93a) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-205f6b"></a>&#x2022; [`store_provider`](#provider-205f6b) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-76805f"></a>Deeply nested **Info** block collapsed for readability.
 
 #### TLS Intercept Custom Certificate Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-cd6226) block (within [`tls_intercept.custom_certificate.private_key`](#key-64ce0d)) supports the following:
-
-<a id="ref-3ab118"></a>&#x2022; [`provider_ref`](#ref-3ab118) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-78646a"></a>&#x2022; [`url`](#url-78646a) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-e6b706"></a>Deeply nested **Info** block collapsed for readability.
 
 #### TLS Intercept Policy
 
@@ -1170,6 +670,89 @@ A [`domain_match`](#match-42a3da) block (within [`tls_intercept.policy.intercept
 <a id="value-7aa963"></a>&#x2022; [`regex_value`](#value-7aa963) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
 
 <a id="value-5d0d1d"></a>&#x2022; [`suffix_value`](#value-5d0d1d) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

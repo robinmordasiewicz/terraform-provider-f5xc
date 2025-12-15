@@ -1,5 +1,5 @@
 # Sensitive Data Policy Resource Example
-# [Namespace: required] Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Sensitive Data Policy configuration
 resource "f5xc_sensitive_data_policy" "example" {

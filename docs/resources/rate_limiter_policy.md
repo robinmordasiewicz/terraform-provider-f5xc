@@ -2,12 +2,12 @@
 page_title: "f5xc_rate_limiter_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  [Namespace: required] Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
+  Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 ---
 
 # f5xc_rate_limiter_policy (Resource)
 
-[Namespace: required] Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
+Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 
 ~> **Note** Please refer to [Rate Limiter Policy API docs](https://docs.cloud.f5.com/docs-v2/api/views-rate-limiter-policy) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Rate Limiter Policy Resource Example
-# [Namespace: required] Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
+# Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 
 # Basic Rate Limiter Policy configuration
 resource "f5xc_rate_limiter_policy" "example" {
@@ -146,15 +146,15 @@ An [`asn_matcher`](#rules-spec-asn-matcher) block (within [`rules.spec`](#rules-
 
 An [`asn_sets`](#rules-spec-asn-matcher-asn-sets) block (within [`rules.spec.asn_matcher`](#rules-spec-asn-matcher)) supports the following:
 
-<a id="rules-spec-asn-matcher-asn-sets-kind"></a>&#x2022; [`kind`](#rules-spec-asn-matcher-asn-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="rules-spec-asn-matcher-asn-sets-kind"></a>&#x2022; [`kind`](#rules-spec-asn-matcher-asn-sets-kind) - Optional String<br>Object reference kind
 
-<a id="rules-spec-asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#rules-spec-asn-matcher-asn-sets-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="rules-spec-asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#rules-spec-asn-matcher-asn-sets-name) - Optional String<br>Object reference name
 
-<a id="namespace-3ce633"></a>&#x2022; [`namespace`](#namespace-3ce633) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-3ce633"></a>&#x2022; [`namespace`](#namespace-3ce633) - Optional String<br>Object reference namespace
 
-<a id="rules-spec-asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#rules-spec-asn-matcher-asn-sets-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="rules-spec-asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#rules-spec-asn-matcher-asn-sets-tenant) - Optional String<br>Object reference tenant
 
-<a id="rules-spec-asn-matcher-asn-sets-uid"></a>&#x2022; [`uid`](#rules-spec-asn-matcher-asn-sets-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="rules-spec-asn-matcher-asn-sets-uid"></a>&#x2022; [`uid`](#rules-spec-asn-matcher-asn-sets-uid) - Optional String<br>Object reference UID
 
 #### Rules Spec Country List
 
@@ -166,13 +166,7 @@ A [`country_list`](#rules-spec-country-list) block (within [`rules.spec`](#rules
 
 #### Rules Spec Custom Rate Limiter
 
-A [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules.spec`](#rules-spec)) supports the following:
-
-<a id="rules-spec-custom-rate-limiter-name"></a>&#x2022; [`name`](#rules-spec-custom-rate-limiter-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-339376"></a>&#x2022; [`namespace`](#namespace-339376) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="rules-spec-custom-rate-limiter-tenant"></a>&#x2022; [`tenant`](#rules-spec-custom-rate-limiter-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-ab0d1b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Rules Spec Domain Matcher
 
@@ -204,7 +198,7 @@ An [`item`](#rules-spec-headers-item) block (within [`rules.spec.headers`](#rule
 
 <a id="rules-spec-headers-item-regex-values"></a>&#x2022; [`regex_values`](#rules-spec-headers-item-regex-values) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="rules-spec-headers-item-transformers"></a>&#x2022; [`transformers`](#rules-spec-headers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="rules-spec-headers-item-transformers"></a>&#x2022; [`transformers`](#rules-spec-headers-item-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rules Spec HTTP Method
 
@@ -212,7 +206,7 @@ A [`http_method`](#rules-spec-http-method) block (within [`rules.spec`](#rules-s
 
 <a id="rules-spec-http-method-invert-matcher"></a>&#x2022; [`invert_matcher`](#rules-spec-http-method-invert-matcher) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
-<a id="rules-spec-http-method-methods"></a>&#x2022; [`methods`](#rules-spec-http-method-methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Method List. List of methods values to match against
+<a id="rules-spec-http-method-methods"></a>&#x2022; [`methods`](#rules-spec-http-method-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Method List. List of methods values to match against
 
 #### Rules Spec IP Matcher
 
@@ -226,15 +220,15 @@ An [`ip_matcher`](#rules-spec-ip-matcher) block (within [`rules.spec`](#rules-sp
 
 A [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) block (within [`rules.spec.ip_matcher`](#rules-spec-ip-matcher)) supports the following:
 
-<a id="rules-spec-ip-matcher-prefix-sets-kind"></a>&#x2022; [`kind`](#rules-spec-ip-matcher-prefix-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="rules-spec-ip-matcher-prefix-sets-kind"></a>&#x2022; [`kind`](#rules-spec-ip-matcher-prefix-sets-kind) - Optional String<br>Object reference kind
 
-<a id="rules-spec-ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#rules-spec-ip-matcher-prefix-sets-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="rules-spec-ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#rules-spec-ip-matcher-prefix-sets-name) - Optional String<br>Object reference name
 
-<a id="namespace-5d9a15"></a>&#x2022; [`namespace`](#namespace-5d9a15) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-5d9a15"></a>&#x2022; [`namespace`](#namespace-5d9a15) - Optional String<br>Object reference namespace
 
-<a id="tenant-68e36f"></a>&#x2022; [`tenant`](#tenant-68e36f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-68e36f"></a>&#x2022; [`tenant`](#tenant-68e36f) - Optional String<br>Object reference tenant
 
-<a id="rules-spec-ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#rules-spec-ip-matcher-prefix-sets-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="rules-spec-ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#rules-spec-ip-matcher-prefix-sets-uid) - Optional String<br>Object reference UID
 
 #### Rules Spec IP Prefix List
 
@@ -258,7 +252,7 @@ A [`path`](#rules-spec-path) block (within [`rules.spec`](#rules-spec)) supports
 
 <a id="rules-spec-path-suffix-values"></a>&#x2022; [`suffix_values`](#rules-spec-path-suffix-values) - Optional List<br>Suffix Values. A list of path suffix values to match the input HTTP path against
 
-<a id="rules-spec-path-transformers"></a>&#x2022; [`transformers`](#rules-spec-path-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="rules-spec-path-transformers"></a>&#x2022; [`transformers`](#rules-spec-path-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Server Name Matcher
 
@@ -285,6 +279,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

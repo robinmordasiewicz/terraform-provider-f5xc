@@ -1188,7 +1188,7 @@ func (r *AWSTGWSiteResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *AWSTGWSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             aws_tgw_siteSchemaVersion,
-		MarkdownDescription: "[Category: Sites] [Namespace: required] Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.",
+		MarkdownDescription: "Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AWS TGW Site. Must be unique within the namespace.",

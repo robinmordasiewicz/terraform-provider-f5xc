@@ -42,7 +42,7 @@ func (d *FastACLRuleDataSource) Metadata(ctx context.Context, req datasource.Met
 
 func (d *FastACLRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Namespace: required] Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

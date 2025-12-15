@@ -1,5 +1,5 @@
 # App Setting Resource Example
-# [Namespace: required] Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
+# Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic App Setting configuration
 resource "f5xc_app_setting" "example" {

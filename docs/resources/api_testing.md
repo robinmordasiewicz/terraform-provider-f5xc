@@ -2,12 +2,12 @@
 page_title: "f5xc_api_testing Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  [Category: API Security] [Namespace: required] Manages a API Testing resource in F5 Distributed Cloud.
+  Manages a API Testing resource in F5 Distributed Cloud.
 ---
 
 # f5xc_api_testing (Resource)
 
-[Category: API Security] [Namespace: required] Manages a API Testing resource in F5 Distributed Cloud.
+Manages a API Testing resource in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [API Testing API docs](https://docs.cloud.f5.com/docs-v2/api/api-sec-api-testing) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # API Testing Resource Example
-# [Category: API Security] [Namespace: required] Manages a API Testing resource in F5 Distributed Cloud.
+# Manages a API Testing resource in F5 Distributed Cloud.
 
 # Basic API Testing configuration
 resource "f5xc_api_testing" "example" {
@@ -131,21 +131,11 @@ A [`value`](#domains-credentials-api-key-value) block (within [`domains.credenti
 
 #### Domains Credentials API Key Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-bf6763) block (within [`domains.credentials.api_key.value`](#domains-credentials-api-key-value)) supports the following:
-
-<a id="provider-17b3d8"></a>&#x2022; [`decryption_provider`](#provider-17b3d8) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-a47376"></a>&#x2022; [`location`](#location-a47376) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-599922"></a>&#x2022; [`store_provider`](#provider-599922) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-632140"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Domains Credentials API Key Value Clear Secret Info
 
-A [`clear_secret_info`](#info-b50323) block (within [`domains.credentials.api_key.value`](#domains-credentials-api-key-value)) supports the following:
-
-<a id="ref-fe7d7a"></a>&#x2022; [`provider_ref`](#ref-fe7d7a) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-e221bd"></a>&#x2022; [`url`](#url-e221bd) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-9f0e32"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Domains Credentials Basic Auth
 
@@ -165,21 +155,11 @@ A [`password`](#domains-credentials-basic-auth-password) block (within [`domains
 
 #### Domains Credentials Basic Auth Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-8ba200) block (within [`domains.credentials.basic_auth.password`](#domains-credentials-basic-auth-password)) supports the following:
-
-<a id="provider-016603"></a>&#x2022; [`decryption_provider`](#provider-016603) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-6685d8"></a>&#x2022; [`location`](#location-6685d8) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-26b643"></a>&#x2022; [`store_provider`](#provider-26b643) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-5806a6"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Domains Credentials Basic Auth Password Clear Secret Info
 
-A [`clear_secret_info`](#info-1c1b32) block (within [`domains.credentials.basic_auth.password`](#domains-credentials-basic-auth-password)) supports the following:
-
-<a id="ref-2f9dbc"></a>&#x2022; [`provider_ref`](#ref-2f9dbc) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-4e453d"></a>&#x2022; [`url`](#url-4e453d) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-49240b"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Domains Credentials Bearer Token
 
@@ -197,21 +177,11 @@ A [`token`](#domains-credentials-bearer-token-token) block (within [`domains.cre
 
 #### Domains Credentials Bearer Token Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-961400) block (within [`domains.credentials.bearer_token.token`](#domains-credentials-bearer-token-token)) supports the following:
-
-<a id="provider-a2e692"></a>&#x2022; [`decryption_provider`](#provider-a2e692) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-fe2993"></a>&#x2022; [`location`](#location-fe2993) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-7eb3c2"></a>&#x2022; [`store_provider`](#provider-7eb3c2) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-64161e"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Domains Credentials Bearer Token Token Clear Secret Info
 
-A [`clear_secret_info`](#info-35b8eb) block (within [`domains.credentials.bearer_token.token`](#domains-credentials-bearer-token-token)) supports the following:
-
-<a id="ref-c6a5d7"></a>&#x2022; [`provider_ref`](#ref-c6a5d7) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-df9487"></a>&#x2022; [`url`](#url-df9487) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-3dfb39"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Domains Credentials Login Endpoint
 
@@ -219,7 +189,7 @@ A [`login_endpoint`](#domains-credentials-login-endpoint) block (within [`domain
 
 <a id="payload-c266f9"></a>&#x2022; [`json_payload`](#payload-c266f9) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [JSON Payload](#payload-c266f9) below.
 
-<a id="method-967184"></a>&#x2022; [`method`](#method-967184) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="method-967184"></a>&#x2022; [`method`](#method-967184) - Optional String  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 <a id="domains-credentials-login-endpoint-path"></a>&#x2022; [`path`](#domains-credentials-login-endpoint-path) - Optional String<br>Path
 
@@ -235,21 +205,11 @@ A [`json_payload`](#payload-c266f9) block (within [`domains.credentials.login_en
 
 #### Domains Credentials Login Endpoint JSON Payload Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-a09a15) block (within [`domains.credentials.login_endpoint.json_payload`](#payload-c266f9)) supports the following:
-
-<a id="provider-974037"></a>&#x2022; [`decryption_provider`](#provider-974037) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-7ba862"></a>&#x2022; [`location`](#location-7ba862) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-d6f842"></a>&#x2022; [`store_provider`](#provider-d6f842) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-10e5d9"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Domains Credentials Login Endpoint JSON Payload Clear Secret Info
 
-A [`clear_secret_info`](#info-cd9709) block (within [`domains.credentials.login_endpoint.json_payload`](#payload-c266f9)) supports the following:
-
-<a id="ref-a3e0e0"></a>&#x2022; [`provider_ref`](#ref-a3e0e0) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-ebaa63"></a>&#x2022; [`url`](#url-ebaa63) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-2ae113"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Timeouts
 
@@ -262,6 +222,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

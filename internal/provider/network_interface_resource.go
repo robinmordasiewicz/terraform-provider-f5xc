@@ -531,7 +531,7 @@ func (r *NetworkInterfaceResource) Metadata(ctx context.Context, req resource.Me
 func (r *NetworkInterfaceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             network_interfaceSchemaVersion,
-		MarkdownDescription: "[Category: Networking] [Namespace: required] Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.",
+		MarkdownDescription: "Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Network Interface. Must be unique within the namespace.",

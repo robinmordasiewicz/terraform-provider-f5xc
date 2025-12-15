@@ -1,5 +1,5 @@
 # Network Policy View Resource Example
-# [Namespace: required] Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
+# Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
 
 # Basic Network Policy View configuration
 resource "f5xc_network_policy_view" "example" {

@@ -68,7 +68,7 @@ func (r *Srv6NetworkSliceResource) Metadata(ctx context.Context, req resource.Me
 func (r *Srv6NetworkSliceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             srv6_network_sliceSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages srv6_network_slice creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Srv6 Network Slice. Must be unique within the namespace.",

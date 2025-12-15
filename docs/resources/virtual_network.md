@@ -2,12 +2,12 @@
 page_title: "f5xc_virtual_network Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  [Category: Networking] [Namespace: required] Manages virtual network in given namespace in F5 Distributed Cloud.
+  Manages virtual network in given namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_virtual_network (Resource)
 
-[Category: Networking] [Namespace: required] Manages virtual network in given namespace in F5 Distributed Cloud.
+Manages virtual network in given namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Virtual Network API docs](https://docs.cloud.f5.com/docs-v2/api/virtual-network) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Virtual Network Resource Example
-# [Category: Networking] [Namespace: required] Manages virtual network in given namespace in F5 Distributed Cloud.
+# Manages virtual network in given namespace in F5 Distributed Cloud.
 
 # Basic Virtual Network configuration
 resource "f5xc_virtual_network" "example" {
@@ -117,15 +117,15 @@ A [`list`](#static-routes-node-interface-list) block (within [`static_routes.nod
 
 An [`interface`](#interface-94c51c) block (within [`static_routes.node_interface.list`](#static-routes-node-interface-list)) supports the following:
 
-<a id="kind-86bbe9"></a>&#x2022; [`kind`](#kind-86bbe9) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-86bbe9"></a>&#x2022; [`kind`](#kind-86bbe9) - Optional String<br>Object reference kind
 
-<a id="name-3e9abe"></a>&#x2022; [`name`](#name-3e9abe) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="name-3e9abe"></a>&#x2022; [`name`](#name-3e9abe) - Optional String<br>Object reference name
 
-<a id="namespace-1e21c2"></a>&#x2022; [`namespace`](#namespace-1e21c2) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-1e21c2"></a>&#x2022; [`namespace`](#namespace-1e21c2) - Optional String<br>Object reference namespace
 
-<a id="tenant-530222"></a>&#x2022; [`tenant`](#tenant-530222) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-530222"></a>&#x2022; [`tenant`](#tenant-530222) - Optional String<br>Object reference tenant
 
-<a id="uid-feb6f3"></a>&#x2022; [`uid`](#uid-feb6f3) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="uid-feb6f3"></a>&#x2022; [`uid`](#uid-feb6f3) - Optional String<br>Object reference UID
 
 #### Timeouts
 
@@ -138,6 +138,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

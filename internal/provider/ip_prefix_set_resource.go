@@ -81,7 +81,7 @@ func (r *IPPrefixSetResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             ip_prefix_setSchemaVersion,
-		MarkdownDescription: "[Category: Networking] [Namespace: required] Manages ip_prefix_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages ip_prefix_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the IP Prefix Set. Must be unique within the namespace.",

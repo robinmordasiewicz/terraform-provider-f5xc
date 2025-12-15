@@ -1,5 +1,5 @@
 # BGP Resource Example
-# [Category: Networking] [Namespace: required] Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
+# Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.
 
 # Basic BGP configuration
 resource "f5xc_bgp" "example" {

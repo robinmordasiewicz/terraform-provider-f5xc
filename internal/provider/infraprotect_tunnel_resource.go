@@ -240,7 +240,7 @@ func (r *InfraprotectTunnelResource) Metadata(ctx context.Context, req resource.
 func (r *InfraprotectTunnelResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             infraprotect_tunnelSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages DDoS transit tunnel in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages DDoS transit tunnel in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Infraprotect Tunnel. Must be unique within the namespace.",

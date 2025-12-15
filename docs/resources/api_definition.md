@@ -2,12 +2,12 @@
 page_title: "f5xc_api_definition Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  [Category: API Security] [Namespace: required] [DependsOn: namespace] Manages API Definition. in F5 Distributed Cloud.
+  Manages API Definition. in F5 Distributed Cloud.
 ---
 
 # f5xc_api_definition (Resource)
 
-[Category: API Security] [Namespace: required] [DependsOn: namespace] Manages API Definition. in F5 Distributed Cloud.
+Manages API Definition. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [API Definition API docs](https://docs.cloud.f5.com/docs-v2/api/views-api-definition) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # API Definition Resource Example
-# [Category: API Security] [Namespace: required] [DependsOn: namespace] Manages API Definition. in F5 Distributed Cloud.
+# Manages API Definition. in F5 Distributed Cloud.
 
 # Basic API Definition configuration
 resource "f5xc_api_definition" "example" {
@@ -85,7 +85,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block supports the following:
 
-<a id="api-inventory-exclusion-list-method"></a>&#x2022; [`method`](#api-inventory-exclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="api-inventory-exclusion-list-method"></a>&#x2022; [`method`](#api-inventory-exclusion-list-method) - Optional String  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 <a id="api-inventory-exclusion-list-path"></a>&#x2022; [`path`](#api-inventory-exclusion-list-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
@@ -93,7 +93,7 @@ An [`api_inventory_exclusion_list`](#api-inventory-exclusion-list) block support
 
 An [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) block supports the following:
 
-<a id="api-inventory-inclusion-list-method"></a>&#x2022; [`method`](#api-inventory-inclusion-list-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="api-inventory-inclusion-list-method"></a>&#x2022; [`method`](#api-inventory-inclusion-list-method) - Optional String  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 <a id="api-inventory-inclusion-list-path"></a>&#x2022; [`path`](#api-inventory-inclusion-list-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
@@ -101,7 +101,7 @@ An [`api_inventory_inclusion_list`](#api-inventory-inclusion-list) block support
 
 A [`non_api_endpoints`](#non-api-endpoints) block supports the following:
 
-<a id="non-api-endpoints-method"></a>&#x2022; [`method`](#non-api-endpoints-method) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
+<a id="non-api-endpoints-method"></a>&#x2022; [`method`](#non-api-endpoints-method) - Optional String  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
 
 <a id="non-api-endpoints-path"></a>&#x2022; [`path`](#non-api-endpoints-path) - Optional String<br>Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification
 
@@ -116,6 +116,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

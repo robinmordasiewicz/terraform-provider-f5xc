@@ -720,7 +720,7 @@ func (r *ServicePolicyRuleResource) Metadata(ctx context.Context, req resource.M
 func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             service_policy_ruleSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Service Policy Rule. Must be unique within the namespace.",

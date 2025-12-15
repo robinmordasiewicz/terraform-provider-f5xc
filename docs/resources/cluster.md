@@ -2,12 +2,12 @@
 page_title: "f5xc_cluster Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  [Namespace: required] Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_cluster (Resource)
 
-[Namespace: required] Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Cluster API docs](https://docs.cloud.f5.com/docs-v2/api/cluster) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Cluster Resource Example
-# [Namespace: required] Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+# Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic Cluster configuration
 resource "f5xc_cluster" "example" {
@@ -142,29 +142,29 @@ An [`endpoint_subsets`](#endpoint-subsets) block supports the following:
 
 An [`endpoints`](#endpoints) block supports the following:
 
-<a id="endpoints-kind"></a>&#x2022; [`kind`](#endpoints-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="endpoints-kind"></a>&#x2022; [`kind`](#endpoints-kind) - Optional String<br>Object reference kind
 
-<a id="endpoints-name"></a>&#x2022; [`name`](#endpoints-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="endpoints-name"></a>&#x2022; [`name`](#endpoints-name) - Optional String<br>Object reference name
 
-<a id="endpoints-namespace"></a>&#x2022; [`namespace`](#endpoints-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="endpoints-namespace"></a>&#x2022; [`namespace`](#endpoints-namespace) - Optional String<br>Object reference namespace
 
-<a id="endpoints-tenant"></a>&#x2022; [`tenant`](#endpoints-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="endpoints-tenant"></a>&#x2022; [`tenant`](#endpoints-tenant) - Optional String<br>Object reference tenant
 
-<a id="endpoints-uid"></a>&#x2022; [`uid`](#endpoints-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="endpoints-uid"></a>&#x2022; [`uid`](#endpoints-uid) - Optional String<br>Object reference UID
 
 #### Health Checks
 
 A [`health_checks`](#health-checks) block supports the following:
 
-<a id="health-checks-kind"></a>&#x2022; [`kind`](#health-checks-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="health-checks-kind"></a>&#x2022; [`kind`](#health-checks-kind) - Optional String<br>Object reference kind
 
-<a id="health-checks-name"></a>&#x2022; [`name`](#health-checks-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="health-checks-name"></a>&#x2022; [`name`](#health-checks-name) - Optional String<br>Object reference name
 
-<a id="health-checks-namespace"></a>&#x2022; [`namespace`](#health-checks-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="health-checks-namespace"></a>&#x2022; [`namespace`](#health-checks-namespace) - Optional String<br>Object reference namespace
 
-<a id="health-checks-tenant"></a>&#x2022; [`tenant`](#health-checks-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="health-checks-tenant"></a>&#x2022; [`tenant`](#health-checks-tenant) - Optional String<br>Object reference tenant
 
-<a id="health-checks-uid"></a>&#x2022; [`uid`](#health-checks-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="health-checks-uid"></a>&#x2022; [`uid`](#health-checks-uid) - Optional String<br>Object reference UID
 
 #### Http1 Config
 
@@ -254,15 +254,15 @@ A [`cert_params`](#tls-parameters-cert-params) block (within [`tls_parameters`](
 
 A [`certificates`](#tls-parameters-cert-params-certificates) block (within [`tls_parameters.cert_params`](#tls-parameters-cert-params)) supports the following:
 
-<a id="kind-8b8a07"></a>&#x2022; [`kind`](#kind-8b8a07) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-8b8a07"></a>&#x2022; [`kind`](#kind-8b8a07) - Optional String<br>Object reference kind
 
-<a id="name-d17505"></a>&#x2022; [`name`](#name-d17505) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="name-d17505"></a>&#x2022; [`name`](#name-d17505) - Optional String<br>Object reference name
 
-<a id="namespace-d38fb9"></a>&#x2022; [`namespace`](#namespace-d38fb9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-d38fb9"></a>&#x2022; [`namespace`](#namespace-d38fb9) - Optional String<br>Object reference namespace
 
-<a id="tenant-34f974"></a>&#x2022; [`tenant`](#tenant-34f974) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-34f974"></a>&#x2022; [`tenant`](#tenant-34f974) - Optional String<br>Object reference tenant
 
-<a id="uid-29a359"></a>&#x2022; [`uid`](#uid-29a359) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="uid-29a359"></a>&#x2022; [`uid`](#uid-29a359) - Optional String<br>Object reference UID
 
 #### TLS Parameters Cert Params Validation Params
 
@@ -278,23 +278,11 @@ A [`validation_params`](#params-0d9f11) block (within [`tls_parameters.cert_para
 
 #### TLS Parameters Cert Params Validation Params Trusted CA
 
-A [`trusted_ca`](#trusted-ca-91d5d8) block (within [`tls_parameters.cert_params.validation_params`](#params-0d9f11)) supports the following:
-
-<a id="list-20bc64"></a>&#x2022; [`trusted_ca_list`](#list-20bc64) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#list-20bc64) below.
+<a id="deep-1467d3"></a>Deeply nested **CA** block collapsed for readability.
 
 #### TLS Parameters Cert Params Validation Params Trusted CA Trusted CA List
 
-A [`trusted_ca_list`](#list-20bc64) block (within [`tls_parameters.cert_params.validation_params.trusted_ca`](#trusted-ca-91d5d8)) supports the following:
-
-<a id="kind-338daa"></a>&#x2022; [`kind`](#kind-338daa) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-f56f86"></a>&#x2022; [`name`](#name-f56f86) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e9404a"></a>&#x2022; [`namespace`](#namespace-e9404a) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-211069"></a>&#x2022; [`tenant`](#tenant-211069) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-04ebc1"></a>&#x2022; [`uid`](#uid-04ebc1) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-758090"></a>Deeply nested **List** block collapsed for readability.
 
 #### TLS Parameters Common Params
 
@@ -328,35 +316,19 @@ A [`tls_certificates`](#certificates-c9caff) block (within [`tls_parameters.comm
 
 #### TLS Parameters Common Params TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-eb62be) block (within [`tls_parameters.common_params.tls_certificates`](#certificates-c9caff)) supports the following:
-
-<a id="algorithms-707f27"></a>&#x2022; [`hash_algorithms`](#algorithms-707f27) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-2bb8e0"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### TLS Parameters Common Params TLS Certificates Private Key
 
-A [`private_key`](#key-da7979) block (within [`tls_parameters.common_params.tls_certificates`](#certificates-c9caff)) supports the following:
-
-<a id="info-eaa266"></a>&#x2022; [`blindfold_secret_info`](#info-eaa266) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-eaa266) below.
-
-<a id="info-b039d1"></a>&#x2022; [`clear_secret_info`](#info-b039d1) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b039d1) below.
+<a id="deep-9d0eb1"></a>Deeply nested **Key** block collapsed for readability.
 
 #### TLS Parameters Common Params TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-eaa266) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#key-da7979)) supports the following:
-
-<a id="provider-fc3d7d"></a>&#x2022; [`decryption_provider`](#provider-fc3d7d) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-373b8d"></a>&#x2022; [`location`](#location-373b8d) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-68c63b"></a>&#x2022; [`store_provider`](#provider-68c63b) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-188353"></a>Deeply nested **Info** block collapsed for readability.
 
 #### TLS Parameters Common Params TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-b039d1) block (within [`tls_parameters.common_params.tls_certificates.private_key`](#key-da7979)) supports the following:
-
-<a id="ref-571118"></a>&#x2022; [`provider_ref`](#ref-571118) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-65b084"></a>&#x2022; [`url`](#url-65b084) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-fbf9ed"></a>Deeply nested **Info** block collapsed for readability.
 
 #### TLS Parameters Common Params Validation Params
 
@@ -372,23 +344,11 @@ A [`validation_params`](#params-6e95a6) block (within [`tls_parameters.common_pa
 
 #### TLS Parameters Common Params Validation Params Trusted CA
 
-A [`trusted_ca`](#trusted-ca-39c22f) block (within [`tls_parameters.common_params.validation_params`](#params-6e95a6)) supports the following:
-
-<a id="list-01ba8e"></a>&#x2022; [`trusted_ca_list`](#list-01ba8e) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#list-01ba8e) below.
+<a id="deep-79bc8f"></a>Deeply nested **CA** block collapsed for readability.
 
 #### TLS Parameters Common Params Validation Params Trusted CA Trusted CA List
 
-A [`trusted_ca_list`](#list-01ba8e) block (within [`tls_parameters.common_params.validation_params.trusted_ca`](#trusted-ca-39c22f)) supports the following:
-
-<a id="kind-c488bc"></a>&#x2022; [`kind`](#kind-c488bc) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-dedff6"></a>&#x2022; [`name`](#name-dedff6) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-1917fa"></a>&#x2022; [`namespace`](#namespace-1917fa) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-eb6cbc"></a>&#x2022; [`tenant`](#tenant-eb6cbc) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-a48fb2"></a>&#x2022; [`uid`](#uid-a48fb2) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-7e09ed"></a>Deeply nested **List** block collapsed for readability.
 
 #### Upstream Conn Pool Reuse Type
 
@@ -397,6 +357,89 @@ An [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) block suppo
 <a id="reuse-008a14"></a>&#x2022; [`disable_conn_pool_reuse`](#reuse-008a14) - Optional Block<br>Enable this option
 
 <a id="reuse-ad4462"></a>&#x2022; [`enable_conn_pool_reuse`](#reuse-ad4462) - Optional Block<br>Enable this option
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

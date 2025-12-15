@@ -2,12 +2,12 @@
 page_title: "f5xc_external_connector Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  [Namespace: required] Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
+  Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
 ---
 
 # f5xc_external_connector (Resource)
 
-[Namespace: required] Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
+Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
 
 ~> **Note** Please refer to [External Connector API docs](https://docs.cloud.f5.com/docs-v2/api/views-external-connector) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # External Connector Resource Example
-# [Namespace: required] Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
+# Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
 
 # Basic External Connector configuration
 resource "f5xc_external_connector" "example" {
@@ -82,13 +82,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### CE Site Reference
 
-A [`ce_site_reference`](#ce-site-reference) block supports the following:
-
-<a id="ce-site-reference-name"></a>&#x2022; [`name`](#ce-site-reference-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="ce-site-reference-namespace"></a>&#x2022; [`namespace`](#ce-site-reference-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="ce-site-reference-tenant"></a>&#x2022; [`tenant`](#ce-site-reference-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-1dcf51"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Ipsec
 
@@ -130,23 +124,11 @@ A [`dpd_keep_alive_timer`](#timer-0d12ec) block (within [`ipsec.ike_parameters`]
 
 #### Ipsec IKE Parameters IKE Phase1 Profile
 
-An [`ike_phase1_profile`](#ipsec-ike-parameters-ike-phase1-profile) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
-
-<a id="name-0a829b"></a>&#x2022; [`name`](#name-0a829b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-82c294"></a>&#x2022; [`namespace`](#namespace-82c294) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-6d0cb2"></a>&#x2022; [`tenant`](#tenant-6d0cb2) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-efe17e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Ipsec IKE Parameters IKE Phase2 Profile
 
-An [`ike_phase2_profile`](#ipsec-ike-parameters-ike-phase2-profile) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
-
-<a id="name-73184f"></a>&#x2022; [`name`](#name-73184f) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-2427e8"></a>&#x2022; [`namespace`](#namespace-2427e8) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-58d877"></a>&#x2022; [`tenant`](#tenant-58d877) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-c5820d"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Ipsec IKE Parameters Rm IP Address
 
@@ -202,15 +184,15 @@ A [`segment`](#ipsec-ipsec-tunnel-parameters-segment) block (within [`ipsec.ipse
 
 A [`refs`](#refs-349f3e) block (within [`ipsec.ipsec_tunnel_parameters.segment`](#ipsec-ipsec-tunnel-parameters-segment)) supports the following:
 
-<a id="kind-035e6e"></a>&#x2022; [`kind`](#kind-035e6e) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-035e6e"></a>&#x2022; [`kind`](#kind-035e6e) - Optional String<br>Object reference kind
 
-<a id="name-cfde45"></a>&#x2022; [`name`](#name-cfde45) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="name-cfde45"></a>&#x2022; [`name`](#name-cfde45) - Optional String<br>Object reference name
 
-<a id="namespace-b2c80c"></a>&#x2022; [`namespace`](#namespace-b2c80c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-b2c80c"></a>&#x2022; [`namespace`](#namespace-b2c80c) - Optional String<br>Object reference namespace
 
-<a id="tenant-f2a3ef"></a>&#x2022; [`tenant`](#tenant-f2a3ef) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-f2a3ef"></a>&#x2022; [`tenant`](#tenant-f2a3ef) - Optional String<br>Object reference tenant
 
-<a id="uid-c4bbc4"></a>&#x2022; [`uid`](#uid-c4bbc4) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="uid-c4bbc4"></a>&#x2022; [`uid`](#uid-c4bbc4) - Optional String<br>Object reference UID
 
 #### Ipsec Ipsec Tunnel Parameters Tunnel Eps
 
@@ -235,6 +217,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

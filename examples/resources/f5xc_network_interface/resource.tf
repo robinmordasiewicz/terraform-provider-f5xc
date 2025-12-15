@@ -1,5 +1,5 @@
 # Network Interface Resource Example
-# [Category: Networking] [Namespace: required] Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
+# Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
 # Basic Network Interface configuration
 resource "f5xc_network_interface" "example" {

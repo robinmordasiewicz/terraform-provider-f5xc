@@ -42,7 +42,7 @@ func (d *CloudCredentialsDataSource) Metadata(ctx context.Context, req datasourc
 
 func (d *CloudCredentialsDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Category: Authentication] [Namespace: not_required] Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.",
+		MarkdownDescription: "Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

@@ -1,5 +1,5 @@
 # AWS TGW Site Resource Example
-# [Category: Sites] [Namespace: required] Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
+# Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 
 # Basic AWS TGW Site configuration
 resource "f5xc_aws_tgw_site" "example" {

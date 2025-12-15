@@ -1,5 +1,5 @@
 # Ticket Tracking System Resource Example
-# [Namespace: required] Manages Ticket Tracking System in F5 Distributed Cloud.
+# Manages Ticket Tracking System in F5 Distributed Cloud.
 
 # Basic Ticket Tracking System configuration
 resource "f5xc_ticket_tracking_system" "example" {

@@ -5059,7 +5059,7 @@ func (r *CDNLoadBalancerResource) Metadata(ctx context.Context, req resource.Met
 func (r *CDNLoadBalancerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             cdn_loadbalancerSchemaVersion,
-		MarkdownDescription: "[Category: Load Balancing] [Namespace: required] Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.",
+		MarkdownDescription: "Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CDN Load Balancer. Must be unique within the namespace.",

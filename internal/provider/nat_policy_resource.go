@@ -492,7 +492,7 @@ func (r *NATPolicyResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *NATPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             nat_policySchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.",
+		MarkdownDescription: "Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the NAT Policy. Must be unique within the namespace.",

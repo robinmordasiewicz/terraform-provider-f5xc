@@ -1,5 +1,5 @@
 # Data Group Resource Example
-# [Namespace: required] Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
+# Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
 # Basic Data Group configuration
 resource "f5xc_data_group" "example" {

@@ -156,7 +156,7 @@ func (r *AppAPIGroupResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *AppAPIGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             app_api_groupSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the App API Group. Must be unique within the namespace.",

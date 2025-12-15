@@ -1,5 +1,5 @@
 # Quota Resource Example
-# [Namespace: required] Manages quota creates a given object from storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages quota creates a given object from storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Quota configuration
 resource "f5xc_quota" "example" {

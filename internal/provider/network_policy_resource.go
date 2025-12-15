@@ -400,7 +400,7 @@ func (r *NetworkPolicyResource) Metadata(ctx context.Context, req resource.Metad
 func (r *NetworkPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             network_policySchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages new network policy with configured parameters in specified namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new network policy with configured parameters in specified namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Network Policy. Must be unique within the namespace.",

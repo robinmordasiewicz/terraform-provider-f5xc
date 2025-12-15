@@ -1,5 +1,5 @@
 # Route Resource Example
-# [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, http_loadbalancer] Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+# Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
 
 # Basic Route configuration
 resource "f5xc_route" "example" {

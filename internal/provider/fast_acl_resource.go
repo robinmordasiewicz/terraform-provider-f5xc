@@ -451,7 +451,7 @@ func (r *FastACLResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *FastACLResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             fast_aclSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Fast ACL. Must be unique within the namespace.",

@@ -9342,7 +9342,7 @@ func (r *HTTPLoadBalancerResource) Metadata(ctx context.Context, req resource.Me
 func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             http_loadbalancerSchemaVersion,
-		MarkdownDescription: "[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a HTTP Load Balancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.",
+		MarkdownDescription: "Manages a HTTP Load Balancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the HTTP Load Balancer. Must be unique within the namespace.",

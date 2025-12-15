@@ -502,7 +502,7 @@ func (r *AlertReceiverResource) Metadata(ctx context.Context, req resource.Metad
 func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             alert_receiverSchemaVersion,
-		MarkdownDescription: "[Category: Monitoring] [Namespace: required] Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.",
+		MarkdownDescription: "Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Alert Receiver. Must be unique within the namespace.",

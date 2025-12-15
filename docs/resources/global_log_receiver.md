@@ -2,12 +2,12 @@
 page_title: "f5xc_global_log_receiver Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  [Category: Monitoring] [Namespace: required] Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
+  Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
 ---
 
 # f5xc_global_log_receiver (Resource)
 
-[Category: Monitoring] [Namespace: required] Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
+Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
 
 ~> **Note** Please refer to [Global Log Receiver API docs](https://docs.cloud.f5.com/docs-v2/api/global-log-receiver) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Global Log Receiver Resource Example
-# [Category: Monitoring] [Namespace: required] Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
+# Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
 
 # Basic Global Log Receiver configuration
 resource "f5xc_global_log_receiver" "example" {
@@ -119,13 +119,7 @@ An [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver) block supports the fo
 
 #### AWS Cloud Watch Receiver AWS Cred
 
-An [`aws_cred`](#aws-cloud-watch-receiver-aws-cred) block (within [`aws_cloud_watch_receiver`](#aws-cloud-watch-receiver)) supports the following:
-
-<a id="aws-cloud-watch-receiver-aws-cred-name"></a>&#x2022; [`name`](#aws-cloud-watch-receiver-aws-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b9cb40"></a>&#x2022; [`namespace`](#namespace-b9cb40) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-fc3ba9"></a>&#x2022; [`tenant`](#tenant-fc3ba9) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-39c988"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### AWS Cloud Watch Receiver Batch
 
@@ -173,21 +167,11 @@ A [`connection_string`](#string-b729f9) block (within [`azure_event_hubs_receive
 
 #### Azure Event Hubs Receiver Connection String Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-0b01ca) block (within [`azure_event_hubs_receiver.connection_string`](#string-b729f9)) supports the following:
-
-<a id="provider-9b65ec"></a>&#x2022; [`decryption_provider`](#provider-9b65ec) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-44aff0"></a>&#x2022; [`location`](#location-44aff0) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-5ab1d8"></a>&#x2022; [`store_provider`](#provider-5ab1d8) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-93e549"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Azure Event Hubs Receiver Connection String Clear Secret Info
 
-A [`clear_secret_info`](#info-a586ad) block (within [`azure_event_hubs_receiver.connection_string`](#string-b729f9)) supports the following:
-
-<a id="ref-8b7732"></a>&#x2022; [`provider_ref`](#ref-8b7732) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-70e945"></a>&#x2022; [`url`](#url-70e945) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-2ae3ac"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Azure Receiver
 
@@ -319,21 +303,11 @@ A [`datadog_api_key`](#datadog-receiver-datadog-api-key) block (within [`datadog
 
 #### Datadog Receiver Datadog API Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-c8197d) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
-
-<a id="provider-476ad5"></a>&#x2022; [`decryption_provider`](#provider-476ad5) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-e0276e"></a>&#x2022; [`location`](#location-e0276e) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-41aa89"></a>&#x2022; [`store_provider`](#provider-41aa89) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-c2b922"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Datadog Receiver Datadog API Key Clear Secret Info
 
-A [`clear_secret_info`](#info-400d24) block (within [`datadog_receiver.datadog_api_key`](#datadog-receiver-datadog-api-key)) supports the following:
-
-<a id="ref-6ec775"></a>&#x2022; [`provider_ref`](#ref-6ec775) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-744ac8"></a>&#x2022; [`url`](#url-744ac8) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-e21218"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Datadog Receiver Use TLS
 
@@ -365,29 +339,15 @@ A [`mtls_enable`](#datadog-receiver-use-tls-mtls-enable) block (within [`datadog
 
 #### Datadog Receiver Use TLS mTLS Enable Key URL
 
-A [`key_url`](#url-266095) block (within [`datadog_receiver.use_tls.mtls_enable`](#datadog-receiver-use-tls-mtls-enable)) supports the following:
-
-<a id="info-c88ca3"></a>&#x2022; [`blindfold_secret_info`](#info-c88ca3) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-c88ca3) below.
-
-<a id="info-dca784"></a>&#x2022; [`clear_secret_info`](#info-dca784) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-dca784) below.
+<a id="deep-fe94b6"></a>Deeply nested **URL** block collapsed for readability.
 
 #### Datadog Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-c88ca3) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#url-266095)) supports the following:
-
-<a id="provider-ef2180"></a>&#x2022; [`decryption_provider`](#provider-ef2180) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-f6ec2e"></a>&#x2022; [`location`](#location-f6ec2e) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-ee5a93"></a>&#x2022; [`store_provider`](#provider-ee5a93) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-5cf738"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Datadog Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#info-dca784) block (within [`datadog_receiver.use_tls.mtls_enable.key_url`](#url-266095)) supports the following:
-
-<a id="ref-88b7a5"></a>&#x2022; [`provider_ref`](#ref-88b7a5) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-b8d364"></a>&#x2022; [`url`](#url-b8d364) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-3705c0"></a>Deeply nested **Info** block collapsed for readability.
 
 #### GCP Bucket Receiver
 
@@ -441,13 +401,7 @@ A [`filename_options`](#gcp-bucket-receiver-filename-options) block (within [`gc
 
 #### GCP Bucket Receiver GCP Cred
 
-A [`gcp_cred`](#gcp-bucket-receiver-gcp-cred) block (within [`gcp_bucket_receiver`](#gcp-bucket-receiver)) supports the following:
-
-<a id="gcp-bucket-receiver-gcp-cred-name"></a>&#x2022; [`name`](#gcp-bucket-receiver-gcp-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="gcp-bucket-receiver-gcp-cred-namespace"></a>&#x2022; [`namespace`](#gcp-bucket-receiver-gcp-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="gcp-bucket-receiver-gcp-cred-tenant"></a>&#x2022; [`tenant`](#gcp-bucket-receiver-gcp-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-9c508f"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### HTTP Receiver
 
@@ -487,21 +441,11 @@ A [`password`](#http-receiver-auth-basic-password) block (within [`http_receiver
 
 #### HTTP Receiver Auth Basic Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-265ff8) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
-
-<a id="provider-fdc07f"></a>&#x2022; [`decryption_provider`](#provider-fdc07f) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-6186b7"></a>&#x2022; [`location`](#location-6186b7) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-0b42a0"></a>&#x2022; [`store_provider`](#provider-0b42a0) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-b0986f"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Receiver Auth Basic Password Clear Secret Info
 
-A [`clear_secret_info`](#info-b23662) block (within [`http_receiver.auth_basic.password`](#http-receiver-auth-basic-password)) supports the following:
-
-<a id="ref-9763da"></a>&#x2022; [`provider_ref`](#ref-9763da) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-579bb2"></a>&#x2022; [`url`](#url-579bb2) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-7ce803"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Receiver Auth Token
 
@@ -519,21 +463,11 @@ A [`token`](#http-receiver-auth-token-token) block (within [`http_receiver.auth_
 
 #### HTTP Receiver Auth Token Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-5dfb53) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
-
-<a id="provider-81048b"></a>&#x2022; [`decryption_provider`](#provider-81048b) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-5f4c4b"></a>&#x2022; [`location`](#location-5f4c4b) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-efd8bc"></a>&#x2022; [`store_provider`](#provider-efd8bc) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-8c7fd3"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Receiver Auth Token Token Clear Secret Info
 
-A [`clear_secret_info`](#info-f68d67) block (within [`http_receiver.auth_token.token`](#http-receiver-auth-token-token)) supports the following:
-
-<a id="ref-3278a3"></a>&#x2022; [`provider_ref`](#ref-3278a3) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-72879f"></a>&#x2022; [`url`](#url-72879f) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-99cc0d"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Receiver Batch
 
@@ -591,29 +525,15 @@ A [`mtls_enable`](#http-receiver-use-tls-mtls-enable) block (within [`http_recei
 
 #### HTTP Receiver Use TLS mTLS Enable Key URL
 
-A [`key_url`](#url-12d8b8) block (within [`http_receiver.use_tls.mtls_enable`](#http-receiver-use-tls-mtls-enable)) supports the following:
-
-<a id="info-e6a85d"></a>&#x2022; [`blindfold_secret_info`](#info-e6a85d) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e6a85d) below.
-
-<a id="info-45b078"></a>&#x2022; [`clear_secret_info`](#info-45b078) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-45b078) below.
+<a id="deep-905126"></a>Deeply nested **URL** block collapsed for readability.
 
 #### HTTP Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-e6a85d) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#url-12d8b8)) supports the following:
-
-<a id="provider-aacbf7"></a>&#x2022; [`decryption_provider`](#provider-aacbf7) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-54b8ed"></a>&#x2022; [`location`](#location-54b8ed) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-573c3b"></a>&#x2022; [`store_provider`](#provider-573c3b) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-3f60c5"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTP Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#info-45b078) block (within [`http_receiver.use_tls.mtls_enable.key_url`](#url-12d8b8)) supports the following:
-
-<a id="ref-00a2ea"></a>&#x2022; [`provider_ref`](#ref-00a2ea) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-47a3bc"></a>&#x2022; [`url`](#url-47a3bc) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-0d953c"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Kafka Receiver
 
@@ -687,29 +607,15 @@ A [`mtls_enable`](#kafka-receiver-use-tls-mtls-enable) block (within [`kafka_rec
 
 #### Kafka Receiver Use TLS mTLS Enable Key URL
 
-A [`key_url`](#url-27a26d) block (within [`kafka_receiver.use_tls.mtls_enable`](#kafka-receiver-use-tls-mtls-enable)) supports the following:
-
-<a id="info-883e9f"></a>&#x2022; [`blindfold_secret_info`](#info-883e9f) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-883e9f) below.
-
-<a id="info-6fa295"></a>&#x2022; [`clear_secret_info`](#info-6fa295) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-6fa295) below.
+<a id="deep-6a8d7d"></a>Deeply nested **URL** block collapsed for readability.
 
 #### Kafka Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-883e9f) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#url-27a26d)) supports the following:
-
-<a id="provider-e30698"></a>&#x2022; [`decryption_provider`](#provider-e30698) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-9e7b8a"></a>&#x2022; [`location`](#location-9e7b8a) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-4c39fb"></a>&#x2022; [`store_provider`](#provider-4c39fb) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-f04153"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Kafka Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#info-6fa295) block (within [`kafka_receiver.use_tls.mtls_enable.key_url`](#url-27a26d)) supports the following:
-
-<a id="ref-a5f55b"></a>&#x2022; [`provider_ref`](#ref-a5f55b) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-2a65ad"></a>&#x2022; [`url`](#url-2a65ad) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-95b0cb"></a>Deeply nested **Info** block collapsed for readability.
 
 #### New Relic Receiver
 
@@ -731,21 +637,11 @@ An [`api_key`](#new-relic-receiver-api-key) block (within [`new_relic_receiver`]
 
 #### New Relic Receiver API Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-262674) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
-
-<a id="provider-5ff769"></a>&#x2022; [`decryption_provider`](#provider-5ff769) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-1de208"></a>&#x2022; [`location`](#location-1de208) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-e1f9b6"></a>&#x2022; [`store_provider`](#provider-e1f9b6) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-f36179"></a>Deeply nested **Info** block collapsed for readability.
 
 #### New Relic Receiver API Key Clear Secret Info
 
-A [`clear_secret_info`](#info-6a5234) block (within [`new_relic_receiver.api_key`](#new-relic-receiver-api-key)) supports the following:
-
-<a id="ref-7c2f92"></a>&#x2022; [`provider_ref`](#ref-7c2f92) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-370d40"></a>&#x2022; [`url`](#url-370d40) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-48a9d0"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Ns List
 
@@ -823,29 +719,15 @@ A [`mtls_enable`](#qradar-receiver-use-tls-mtls-enable) block (within [`qradar_r
 
 #### Qradar Receiver Use TLS mTLS Enable Key URL
 
-A [`key_url`](#url-b85773) block (within [`qradar_receiver.use_tls.mtls_enable`](#qradar-receiver-use-tls-mtls-enable)) supports the following:
-
-<a id="info-851e2b"></a>&#x2022; [`blindfold_secret_info`](#info-851e2b) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-851e2b) below.
-
-<a id="info-885da4"></a>&#x2022; [`clear_secret_info`](#info-885da4) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-885da4) below.
+<a id="deep-ebd591"></a>Deeply nested **URL** block collapsed for readability.
 
 #### Qradar Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-851e2b) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#url-b85773)) supports the following:
-
-<a id="provider-b7b9fd"></a>&#x2022; [`decryption_provider`](#provider-b7b9fd) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-b94fb0"></a>&#x2022; [`location`](#location-b94fb0) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-893bbf"></a>&#x2022; [`store_provider`](#provider-893bbf) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-272547"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Qradar Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#info-885da4) block (within [`qradar_receiver.use_tls.mtls_enable.key_url`](#url-b85773)) supports the following:
-
-<a id="ref-abbb53"></a>&#x2022; [`provider_ref`](#ref-abbb53) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-f261a8"></a>&#x2022; [`url`](#url-f261a8) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-7c4a8f"></a>Deeply nested **Info** block collapsed for readability.
 
 #### S3 Receiver
 
@@ -865,13 +747,7 @@ A [`s3_receiver`](#s3-receiver) block supports the following:
 
 #### S3 Receiver AWS Cred
 
-An [`aws_cred`](#s3-receiver-aws-cred) block (within [`s3_receiver`](#s3-receiver)) supports the following:
-
-<a id="s3-receiver-aws-cred-name"></a>&#x2022; [`name`](#s3-receiver-aws-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="s3-receiver-aws-cred-namespace"></a>&#x2022; [`namespace`](#s3-receiver-aws-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="s3-receiver-aws-cred-tenant"></a>&#x2022; [`tenant`](#s3-receiver-aws-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-910957"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### S3 Receiver Batch
 
@@ -961,21 +837,11 @@ A [`splunk_hec_token`](#splunk-receiver-splunk-hec-token) block (within [`splunk
 
 #### Splunk Receiver Splunk Hec Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-2c09a2) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
-
-<a id="provider-2db5ec"></a>&#x2022; [`decryption_provider`](#provider-2db5ec) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-c834c3"></a>&#x2022; [`location`](#location-c834c3) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-54f419"></a>&#x2022; [`store_provider`](#provider-54f419) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-6ec437"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Splunk Receiver Splunk Hec Token Clear Secret Info
 
-A [`clear_secret_info`](#info-08aaec) block (within [`splunk_receiver.splunk_hec_token`](#splunk-receiver-splunk-hec-token)) supports the following:
-
-<a id="ref-a5a9ad"></a>&#x2022; [`provider_ref`](#ref-a5a9ad) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-79ea29"></a>&#x2022; [`url`](#url-79ea29) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-546f66"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Splunk Receiver Use TLS
 
@@ -1007,29 +873,15 @@ A [`mtls_enable`](#splunk-receiver-use-tls-mtls-enable) block (within [`splunk_r
 
 #### Splunk Receiver Use TLS mTLS Enable Key URL
 
-A [`key_url`](#url-04f122) block (within [`splunk_receiver.use_tls.mtls_enable`](#splunk-receiver-use-tls-mtls-enable)) supports the following:
-
-<a id="info-e6bdf7"></a>&#x2022; [`blindfold_secret_info`](#info-e6bdf7) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e6bdf7) below.
-
-<a id="info-72a8f2"></a>&#x2022; [`clear_secret_info`](#info-72a8f2) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-72a8f2) below.
+<a id="deep-9e0e9c"></a>Deeply nested **URL** block collapsed for readability.
 
 #### Splunk Receiver Use TLS mTLS Enable Key URL Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-e6bdf7) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#url-04f122)) supports the following:
-
-<a id="provider-12370d"></a>&#x2022; [`decryption_provider`](#provider-12370d) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-8e22e7"></a>&#x2022; [`location`](#location-8e22e7) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-3723d8"></a>&#x2022; [`store_provider`](#provider-3723d8) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-4bbc82"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Splunk Receiver Use TLS mTLS Enable Key URL Clear Secret Info
 
-A [`clear_secret_info`](#info-72a8f2) block (within [`splunk_receiver.use_tls.mtls_enable.key_url`](#url-04f122)) supports the following:
-
-<a id="ref-895ddc"></a>&#x2022; [`provider_ref`](#ref-895ddc) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-aff9f7"></a>&#x2022; [`url`](#url-aff9f7) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-f64deb"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Sumo Logic Receiver
 
@@ -1074,6 +926,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

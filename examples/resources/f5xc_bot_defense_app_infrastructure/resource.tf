@@ -1,5 +1,5 @@
 # Bot Defense App Infrastructure Resource Example
-# [Category: Security] [Namespace: required] Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
+# Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
 
 # Basic Bot Defense App Infrastructure configuration
 resource "f5xc_bot_defense_app_infrastructure" "example" {

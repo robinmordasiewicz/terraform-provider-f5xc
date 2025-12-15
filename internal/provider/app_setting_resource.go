@@ -241,7 +241,7 @@ func (r *AppSettingResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             app_settingSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the App Setting. Must be unique within the namespace.",

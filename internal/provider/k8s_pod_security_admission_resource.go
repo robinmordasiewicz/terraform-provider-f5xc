@@ -89,7 +89,7 @@ func (r *K8SPodSecurityAdmissionResource) Metadata(ctx context.Context, req reso
 func (r *K8SPodSecurityAdmissionResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             k8s_pod_security_admissionSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages k8s_pod_security_admission will create the object in the storage backend in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the K8S Pod Security Admission. Must be unique within the namespace.",

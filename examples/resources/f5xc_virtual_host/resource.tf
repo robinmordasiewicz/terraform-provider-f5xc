@@ -1,5 +1,5 @@
 # Virtual Host Resource Example
-# [Namespace: required] Manages virtual host in a given namespace. in F5 Distributed Cloud.
+# Manages virtual host in a given namespace. in F5 Distributed Cloud.
 
 # Basic Virtual Host configuration
 resource "f5xc_virtual_host" "example" {

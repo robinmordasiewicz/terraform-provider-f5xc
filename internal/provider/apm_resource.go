@@ -1233,7 +1233,7 @@ func (r *APMResource) Metadata(ctx context.Context, req resource.MetadataRequest
 func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             apmSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages new APM as a service with configured parameters in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new APM as a service with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the APM. Must be unique within the namespace.",

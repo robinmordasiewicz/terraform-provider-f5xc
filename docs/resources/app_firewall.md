@@ -2,12 +2,12 @@
 page_title: "f5xc_app_firewall Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  [Category: Security] [Namespace: required] [DependsOn: namespace] Manages Application Firewall in F5 Distributed Cloud.
+  Manages Application Firewall in F5 Distributed Cloud.
 ---
 
 # f5xc_app_firewall (Resource)
 
-[Category: Security] [Namespace: required] [DependsOn: namespace] Manages Application Firewall in F5 Distributed Cloud.
+Manages Application Firewall in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [App Firewall API docs](https://docs.cloud.f5.com/docs-v2/api/app-firewall) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # App Firewall Resource Example
-# [Category: Security] [Namespace: required] [DependsOn: namespace] Manages Application Firewall in F5 Distributed Cloud.
+# Manages Application Firewall in F5 Distributed Cloud.
 
 # Basic App Firewall configuration
 resource "f5xc_app_firewall" "example" {
@@ -238,9 +238,7 @@ A [`signature_selection_setting`](#setting-306450) block (within [`detection_set
 
 #### Detection Settings Signature Selection Setting Attack Type Settings
 
-An [`attack_type_settings`](#settings-72f64b) block (within [`detection_settings.signature_selection_setting`](#setting-306450)) supports the following:
-
-<a id="types-46774e"></a>&#x2022; [`disabled_attack_types`](#types-46774e) - Optional List  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>[Enum: ATTACK_TYPE_NONE|ATTACK_TYPE_NON_BROWSER_CLIENT|ATTACK_TYPE_OTHER_APPLICATION_ATTACKS|ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE|ATTACK_TYPE_DETECTION_EVASION|ATTACK_TYPE_VULNERABILITY_SCAN|ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY|ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS|ATTACK_TYPE_BUFFER_OVERFLOW|ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION|ATTACK_TYPE_INFORMATION_LEAKAGE|ATTACK_TYPE_DIRECTORY_INDEXING|ATTACK_TYPE_PATH_TRAVERSAL|ATTACK_TYPE_XPATH_INJECTION|ATTACK_TYPE_LDAP_INJECTION|ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION|ATTACK_TYPE_COMMAND_EXECUTION|ATTACK_TYPE_SQL_INJECTION|ATTACK_TYPE_CROSS_SITE_SCRIPTING|ATTACK_TYPE_DENIAL_OF_SERVICE|ATTACK_TYPE_HTTP_PARSER_ATTACK|ATTACK_TYPE_SESSION_HIJACKING|ATTACK_TYPE_HTTP_RESPONSE_SPLITTING|ATTACK_TYPE_FORCEFUL_BROWSING|ATTACK_TYPE_REMOTE_FILE_INCLUDE|ATTACK_TYPE_MALICIOUS_FILE_UPLOAD|ATTACK_TYPE_GRAPHQL_PARSER_ATTACK] Disabled Attack Types. List of Attack Types that will be ignored and not trigger a detection
+<a id="deep-c427aa"></a>Deeply nested **Settings** block collapsed for readability.
 
 #### Detection Settings Stage New And Updated Signatures
 
@@ -271,6 +269,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

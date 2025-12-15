@@ -42,7 +42,7 @@ func (d *FastACLDataSource) Metadata(ctx context.Context, req datasource.Metadat
 
 func (d *FastACLDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Namespace: required] Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

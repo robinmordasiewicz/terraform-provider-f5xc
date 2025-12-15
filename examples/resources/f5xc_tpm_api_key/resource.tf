@@ -1,5 +1,5 @@
 # Tpm API Key Resource Example
-# [Namespace: required] Manages a Tpm API Key resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
+# Manages a Tpm API Key resource in F5 Distributed Cloud for apikey object when successfully created returns actual apikey bytes which is used by the users to call in to tpm provisioning api. configuration.
 
 # Basic Tpm API Key configuration
 resource "f5xc_tpm_api_key" "example" {

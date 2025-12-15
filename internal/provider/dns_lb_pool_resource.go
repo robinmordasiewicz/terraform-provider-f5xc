@@ -243,7 +243,7 @@ func (r *DNSLBPoolResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *DNSLBPoolResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dns_lb_poolSchemaVersion,
-		MarkdownDescription: "[Category: DNS] [Namespace: required] Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNS LB Pool. Must be unique within the namespace.",

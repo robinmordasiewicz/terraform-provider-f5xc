@@ -2,12 +2,12 @@
 page_title: "f5xc_fast_acl Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  [Namespace: required] Manages fast_acl object, fast_acl object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to fast_acl_rule in F5 Distributed Cloud.
+  Manages fast_acl object, fast_acl object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to fast_acl_rule in F5 Distributed Cloud.
 ---
 
 # f5xc_fast_acl (Resource)
 
-[Namespace: required] Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
+Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Fast ACL API docs](https://docs.cloud.f5.com/docs-v2/api/fast-acl) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Fast ACL Resource Example
-# [Namespace: required] Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
+# Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
 
 # Basic Fast ACL configuration
 resource "f5xc_fast_acl" "example" {
@@ -84,13 +84,7 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Protocol Policer
 
-A [`protocol_policer`](#protocol-policer) block supports the following:
-
-<a id="protocol-policer-name"></a>&#x2022; [`name`](#protocol-policer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="protocol-policer-namespace"></a>&#x2022; [`namespace`](#protocol-policer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="protocol-policer-tenant"></a>&#x2022; [`tenant`](#protocol-policer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-1f70c8"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### RE ACL
 
@@ -130,63 +124,27 @@ An [`action`](#re-acl-fast-acl-rules-action) block (within [`re_acl.fast_acl_rul
 
 #### RE ACL Fast ACL Rules Action Policer Action
 
-A [`policer_action`](#action-09a22d) block (within [`re_acl.fast_acl_rules.action`](#re-acl-fast-acl-rules-action)) supports the following:
-
-<a id="ref-d8c8e7"></a>&#x2022; [`ref`](#ref-d8c8e7) - Optional Block<br>Reference. A policer direct reference<br>See [Ref](#ref-d8c8e7) below.
+<a id="deep-64211b"></a>Deeply nested **Action** block collapsed for readability.
 
 #### RE ACL Fast ACL Rules Action Policer Action Ref
 
-A [`ref`](#ref-d8c8e7) block (within [`re_acl.fast_acl_rules.action.policer_action`](#action-09a22d)) supports the following:
-
-<a id="kind-4b43e9"></a>&#x2022; [`kind`](#kind-4b43e9) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-d8f2b2"></a>&#x2022; [`name`](#name-d8f2b2) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-415e68"></a>&#x2022; [`namespace`](#namespace-415e68) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-9381b2"></a>&#x2022; [`tenant`](#tenant-9381b2) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-932414"></a>&#x2022; [`uid`](#uid-932414) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-f6253f"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### RE ACL Fast ACL Rules Action Protocol Policer Action
 
-A [`protocol_policer_action`](#action-1f2796) block (within [`re_acl.fast_acl_rules.action`](#re-acl-fast-acl-rules-action)) supports the following:
-
-<a id="ref-cdffd0"></a>&#x2022; [`ref`](#ref-cdffd0) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#ref-cdffd0) below.
+<a id="deep-eb61a3"></a>Deeply nested **Action** block collapsed for readability.
 
 #### RE ACL Fast ACL Rules Action Protocol Policer Action Ref
 
-A [`ref`](#ref-cdffd0) block (within [`re_acl.fast_acl_rules.action.protocol_policer_action`](#action-1f2796)) supports the following:
-
-<a id="kind-7e34dc"></a>&#x2022; [`kind`](#kind-7e34dc) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-f104c6"></a>&#x2022; [`name`](#name-f104c6) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-d67b0b"></a>&#x2022; [`namespace`](#namespace-d67b0b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-194246"></a>&#x2022; [`tenant`](#tenant-194246) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-f50fa2"></a>&#x2022; [`uid`](#uid-f50fa2) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-8ac143"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### RE ACL Fast ACL Rules IP Prefix Set
 
-An [`ip_prefix_set`](#re-acl-fast-acl-rules-ip-prefix-set) block (within [`re_acl.fast_acl_rules`](#re-acl-fast-acl-rules)) supports the following:
-
-<a id="re-acl-fast-acl-rules-ip-prefix-set-ref"></a>&#x2022; [`ref`](#re-acl-fast-acl-rules-ip-prefix-set-ref) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#re-acl-fast-acl-rules-ip-prefix-set-ref) below.
+<a id="deep-5eb942"></a>Deeply nested **Set** block collapsed for readability.
 
 #### RE ACL Fast ACL Rules IP Prefix Set Ref
 
-A [`ref`](#re-acl-fast-acl-rules-ip-prefix-set-ref) block (within [`re_acl.fast_acl_rules.ip_prefix_set`](#re-acl-fast-acl-rules-ip-prefix-set)) supports the following:
-
-<a id="kind-05b7d3"></a>&#x2022; [`kind`](#kind-05b7d3) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-694068"></a>&#x2022; [`name`](#name-694068) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-74785c"></a>&#x2022; [`namespace`](#namespace-74785c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-361760"></a>&#x2022; [`tenant`](#tenant-361760) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-49617d"></a>&#x2022; [`uid`](#uid-49617d) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-8005c0"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### RE ACL Fast ACL Rules Metadata
 
@@ -222,13 +180,7 @@ A [`selected_tenant_vip`](#re-acl-selected-tenant-vip) block (within [`re_acl`](
 
 #### RE ACL Selected Tenant VIP Public IP Refs
 
-A [`public_ip_refs`](#refs-523a60) block (within [`re_acl.selected_tenant_vip`](#re-acl-selected-tenant-vip)) supports the following:
-
-<a id="name-b5b290"></a>&#x2022; [`name`](#name-b5b290) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-8f0128"></a>&#x2022; [`namespace`](#namespace-8f0128) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e04a6a"></a>&#x2022; [`tenant`](#tenant-e04a6a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-2edc68"></a>Deeply nested **Refs** block collapsed for readability.
 
 #### Site ACL
 
@@ -272,63 +224,27 @@ An [`action`](#site-acl-fast-acl-rules-action) block (within [`site_acl.fast_acl
 
 #### Site ACL Fast ACL Rules Action Policer Action
 
-A [`policer_action`](#action-2f2674) block (within [`site_acl.fast_acl_rules.action`](#site-acl-fast-acl-rules-action)) supports the following:
-
-<a id="ref-5b6a78"></a>&#x2022; [`ref`](#ref-5b6a78) - Optional Block<br>Reference. A policer direct reference<br>See [Ref](#ref-5b6a78) below.
+<a id="deep-a4b94e"></a>Deeply nested **Action** block collapsed for readability.
 
 #### Site ACL Fast ACL Rules Action Policer Action Ref
 
-A [`ref`](#ref-5b6a78) block (within [`site_acl.fast_acl_rules.action.policer_action`](#action-2f2674)) supports the following:
-
-<a id="kind-13e0fe"></a>&#x2022; [`kind`](#kind-13e0fe) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-33192d"></a>&#x2022; [`name`](#name-33192d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-25dff1"></a>&#x2022; [`namespace`](#namespace-25dff1) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-fdf4db"></a>&#x2022; [`tenant`](#tenant-fdf4db) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-6bc021"></a>&#x2022; [`uid`](#uid-6bc021) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-e41b5f"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Site ACL Fast ACL Rules Action Protocol Policer Action
 
-A [`protocol_policer_action`](#action-31624c) block (within [`site_acl.fast_acl_rules.action`](#site-acl-fast-acl-rules-action)) supports the following:
-
-<a id="ref-314bc6"></a>&#x2022; [`ref`](#ref-314bc6) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#ref-314bc6) below.
+<a id="deep-a68215"></a>Deeply nested **Action** block collapsed for readability.
 
 #### Site ACL Fast ACL Rules Action Protocol Policer Action Ref
 
-A [`ref`](#ref-314bc6) block (within [`site_acl.fast_acl_rules.action.protocol_policer_action`](#action-31624c)) supports the following:
-
-<a id="kind-714795"></a>&#x2022; [`kind`](#kind-714795) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-e70af0"></a>&#x2022; [`name`](#name-e70af0) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-8d624d"></a>&#x2022; [`namespace`](#namespace-8d624d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ea9c33"></a>&#x2022; [`tenant`](#tenant-ea9c33) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-3e18f0"></a>&#x2022; [`uid`](#uid-3e18f0) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-9ef6c0"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Site ACL Fast ACL Rules IP Prefix Set
 
-An [`ip_prefix_set`](#site-acl-fast-acl-rules-ip-prefix-set) block (within [`site_acl.fast_acl_rules`](#site-acl-fast-acl-rules)) supports the following:
-
-<a id="ref-68170b"></a>&#x2022; [`ref`](#ref-68170b) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ref-68170b) below.
+<a id="deep-176f71"></a>Deeply nested **Set** block collapsed for readability.
 
 #### Site ACL Fast ACL Rules IP Prefix Set Ref
 
-A [`ref`](#ref-68170b) block (within [`site_acl.fast_acl_rules.ip_prefix_set`](#site-acl-fast-acl-rules-ip-prefix-set)) supports the following:
-
-<a id="kind-ecdd5b"></a>&#x2022; [`kind`](#kind-ecdd5b) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-bbef63"></a>&#x2022; [`name`](#name-bbef63) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-5d2796"></a>&#x2022; [`namespace`](#namespace-5d2796) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-fe7f3f"></a>&#x2022; [`tenant`](#tenant-fe7f3f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-0e5bde"></a>&#x2022; [`uid`](#uid-0e5bde) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-be6e78"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Site ACL Fast ACL Rules Metadata
 
@@ -365,6 +281,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

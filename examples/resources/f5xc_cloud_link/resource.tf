@@ -1,5 +1,5 @@
 # Cloud Link Resource Example
-# [Category: Networking] [Namespace: required] Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+# Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
 # Basic Cloud Link configuration
 resource "f5xc_cloud_link" "example" {

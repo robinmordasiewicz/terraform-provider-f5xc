@@ -67,7 +67,7 @@ func (r *APICredentialResource) Metadata(ctx context.Context, req resource.Metad
 func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             api_credentialSchemaVersion,
-		MarkdownDescription: "[Category: Authentication] [Namespace: required] Manages request specification. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages request specification. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the API Credential. Must be unique within the namespace.",
@@ -80,11 +80,10 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace for the API Credential. For this resource type, namespace should be empty or omitted.",
-				Optional:            true,
-				Computed:            true,
+				MarkdownDescription: "Namespace where the API Credential will be created.",
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+					stringplanmodifier.RequiresReplace(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),

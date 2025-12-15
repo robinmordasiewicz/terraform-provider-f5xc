@@ -2,12 +2,12 @@
 page_title: "f5xc_managed_tenant Resource - terraform-provider-f5xc"
 subcategory: "Organization"
 description: |-
-  [Namespace: required] Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
+  Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 ---
 
 # f5xc_managed_tenant (Resource)
 
-[Namespace: required] Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
+Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Managed Tenant API docs](https://docs.cloud.f5.com/docs-v2/api/tenant-management-managed-tenant) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Managed Tenant Resource Example
-# [Namespace: required] Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
+# Manages managed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.
 
 # Basic Managed Tenant configuration
 resource "f5xc_managed_tenant" "example" {
@@ -50,6 +50,8 @@ resource "f5xc_managed_tenant" "example" {
 
 <a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Managed Tenant. Must be unique within the namespace
 
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Managed Tenant will be created
+
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -57,8 +59,6 @@ resource "f5xc_managed_tenant" "example" {
 <a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
-
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the Managed Tenant. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 
@@ -86,13 +86,7 @@ A [`groups`](#groups) block supports the following:
 
 #### Groups Group
 
-A [`group`](#groups-group) block (within [`groups`](#groups)) supports the following:
-
-<a id="groups-group-name"></a>&#x2022; [`name`](#groups-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="groups-group-namespace"></a>&#x2022; [`namespace`](#groups-group-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="groups-group-tenant"></a>&#x2022; [`tenant`](#groups-group-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-8dbe1b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Timeouts
 
@@ -105,6 +99,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

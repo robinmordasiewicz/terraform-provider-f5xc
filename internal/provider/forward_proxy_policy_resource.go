@@ -474,7 +474,7 @@ func (r *ForwardProxyPolicyResource) Metadata(ctx context.Context, req resource.
 func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             forward_proxy_policySchemaVersion,
-		MarkdownDescription: "[Category: Security] [Namespace: required] Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.",
+		MarkdownDescription: "Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Forward Proxy Policy. Must be unique within the namespace.",

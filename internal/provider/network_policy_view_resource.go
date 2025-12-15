@@ -389,7 +389,7 @@ func (r *NetworkPolicyViewResource) Metadata(ctx context.Context, req resource.M
 func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             network_policy_viewSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.",
+		MarkdownDescription: "Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Network Policy View. Must be unique within the namespace.",

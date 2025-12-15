@@ -135,7 +135,7 @@ func (r *ProtocolPolicerResource) Metadata(ctx context.Context, req resource.Met
 func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             protocol_policerSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Protocol Policer. Must be unique within the namespace.",

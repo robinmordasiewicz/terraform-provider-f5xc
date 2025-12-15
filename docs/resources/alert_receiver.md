@@ -2,12 +2,12 @@
 page_title: "f5xc_alert_receiver Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  [Category: Monitoring] [Namespace: required] Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
+  Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
 ---
 
 # f5xc_alert_receiver (Resource)
 
-[Category: Monitoring] [Namespace: required] Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
+Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
 
 ~> **Note** Please refer to [Alert Receiver API docs](https://docs.cloud.f5.com/docs-v2/api/alert-receiver) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Alert Receiver Resource Example
-# [Category: Monitoring] [Namespace: required] Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
+# Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
 
 # Basic Alert Receiver configuration
 resource "f5xc_alert_receiver" "example" {
@@ -246,21 +246,11 @@ A [`token`](#webhook-http-config-auth-token-token) block (within [`webhook.http_
 
 #### Webhook HTTP Config Auth Token Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-cf9560) block (within [`webhook.http_config.auth_token.token`](#webhook-http-config-auth-token-token)) supports the following:
-
-<a id="provider-ad4084"></a>&#x2022; [`decryption_provider`](#provider-ad4084) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-d3f8ec"></a>&#x2022; [`location`](#location-d3f8ec) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-5f2a25"></a>&#x2022; [`store_provider`](#provider-5f2a25) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-4e8c99"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Webhook HTTP Config Auth Token Token Clear Secret Info
 
-A [`clear_secret_info`](#info-a3e44e) block (within [`webhook.http_config.auth_token.token`](#webhook-http-config-auth-token-token)) supports the following:
-
-<a id="ref-d42769"></a>&#x2022; [`provider_ref`](#ref-d42769) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-ef7aba"></a>&#x2022; [`url`](#url-ef7aba) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-b2e701"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Webhook HTTP Config Basic Auth
 
@@ -280,21 +270,11 @@ A [`password`](#webhook-http-config-basic-auth-password) block (within [`webhook
 
 #### Webhook HTTP Config Basic Auth Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-f1b0b0) block (within [`webhook.http_config.basic_auth.password`](#webhook-http-config-basic-auth-password)) supports the following:
-
-<a id="provider-02b0c1"></a>&#x2022; [`decryption_provider`](#provider-02b0c1) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-1830c9"></a>&#x2022; [`location`](#location-1830c9) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-d2aae4"></a>&#x2022; [`store_provider`](#provider-d2aae4) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-b7e99b"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Webhook HTTP Config Basic Auth Password Clear Secret Info
 
-A [`clear_secret_info`](#info-71ce91) block (within [`webhook.http_config.basic_auth.password`](#webhook-http-config-basic-auth-password)) supports the following:
-
-<a id="ref-6a1af3"></a>&#x2022; [`provider_ref`](#ref-6a1af3) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-0c3a90"></a>&#x2022; [`url`](#url-0c3a90) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-74a056"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Webhook HTTP Config Client Cert Obj
 
@@ -304,17 +284,7 @@ A [`client_cert_obj`](#webhook-http-config-client-cert-obj) block (within [`webh
 
 #### Webhook HTTP Config Client Cert Obj Use TLS Obj
 
-An [`use_tls_obj`](#obj-01cbbb) block (within [`webhook.http_config.client_cert_obj`](#webhook-http-config-client-cert-obj)) supports the following:
-
-<a id="kind-360876"></a>&#x2022; [`kind`](#kind-360876) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-099202"></a>&#x2022; [`name`](#name-099202) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-76e0fd"></a>&#x2022; [`namespace`](#namespace-76e0fd) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-feac07"></a>&#x2022; [`tenant`](#tenant-feac07) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-749e53"></a>&#x2022; [`uid`](#uid-749e53) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-798f27"></a>Deeply nested **Obj** block collapsed for readability.
 
 #### Webhook HTTP Config Use TLS
 
@@ -334,29 +304,15 @@ An [`use_tls`](#webhook-http-config-use-tls) block (within [`webhook.http_config
 
 #### Webhook HTTP Config Use TLS Use Server Verification
 
-An [`use_server_verification`](#verification-b3e5f0) block (within [`webhook.http_config.use_tls`](#webhook-http-config-use-tls)) supports the following:
-
-<a id="obj-431ae9"></a>&#x2022; [`ca_cert_obj`](#obj-431ae9) - Optional Block<br>CA Certificate Object. Configuration for CA certificate<br>See [CA Cert Obj](#obj-431ae9) below.
+<a id="deep-6ddd35"></a>Deeply nested **Verification** block collapsed for readability.
 
 #### Webhook HTTP Config Use TLS Use Server Verification CA Cert Obj
 
-A [`ca_cert_obj`](#obj-431ae9) block (within [`webhook.http_config.use_tls.use_server_verification`](#verification-b3e5f0)) supports the following:
-
-<a id="trusted-ca-5529d1"></a>&#x2022; [`trusted_ca`](#trusted-ca-5529d1) - Optional Block<br>Certificate Object. Reference to client certificate object<br>See [Trusted CA](#trusted-ca-5529d1) below.
+<a id="deep-d7bb11"></a>Deeply nested **Obj** block collapsed for readability.
 
 #### Webhook HTTP Config Use TLS Use Server Verification CA Cert Obj Trusted CA
 
-A [`trusted_ca`](#trusted-ca-5529d1) block (within [`webhook.http_config.use_tls.use_server_verification.ca_cert_obj`](#obj-431ae9)) supports the following:
-
-<a id="kind-990ae1"></a>&#x2022; [`kind`](#kind-990ae1) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-982ce2"></a>&#x2022; [`name`](#name-982ce2) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-80ff46"></a>&#x2022; [`namespace`](#namespace-80ff46) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-4195ea"></a>&#x2022; [`tenant`](#tenant-4195ea) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-703af6"></a>&#x2022; [`uid`](#uid-703af6) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-6b4c01"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Webhook URL
 
@@ -383,6 +339,89 @@ A [`clear_secret_info`](#webhook-url-clear-secret-info) block (within [`webhook.
 <a id="ref-16bc23"></a>&#x2022; [`provider_ref`](#ref-16bc23) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 <a id="webhook-url-clear-secret-info-url"></a>&#x2022; [`url`](#webhook-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

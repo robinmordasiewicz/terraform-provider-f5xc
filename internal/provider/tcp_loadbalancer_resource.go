@@ -813,7 +813,7 @@ func (r *TCPLoadBalancerResource) Metadata(ctx context.Context, req resource.Met
 func (r *TCPLoadBalancerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             tcp_loadbalancerSchemaVersion,
-		MarkdownDescription: "[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.",
+		MarkdownDescription: "Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the TCP Load Balancer. Must be unique within the namespace.",

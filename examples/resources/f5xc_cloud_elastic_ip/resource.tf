@@ -1,5 +1,5 @@
 # Cloud Elastic IP Resource Example
-# [Namespace: required] Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
+# Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
 
 # Basic Cloud Elastic IP configuration
 resource "f5xc_cloud_elastic_ip" "example" {

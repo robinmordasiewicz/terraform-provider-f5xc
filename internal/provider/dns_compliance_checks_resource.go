@@ -66,7 +66,7 @@ func (r *DNSComplianceChecksResource) Metadata(ctx context.Context, req resource
 func (r *DNSComplianceChecksResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dns_compliance_checksSchemaVersion,
-		MarkdownDescription: "[Category: DNS] [Namespace: required] Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNS Compliance Checks. Must be unique within the namespace.",

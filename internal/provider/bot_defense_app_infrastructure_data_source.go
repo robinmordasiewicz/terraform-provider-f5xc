@@ -42,7 +42,7 @@ func (d *BotDefenseAppInfrastructureDataSource) Metadata(ctx context.Context, re
 
 func (d *BotDefenseAppInfrastructureDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Category: Security] [Namespace: required] Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

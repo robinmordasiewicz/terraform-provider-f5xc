@@ -68,7 +68,7 @@ func (r *PolicerResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *PolicerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             policerSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages new policer with traffic rate limits in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new policer with traffic rate limits in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Policer. Must be unique within the namespace.",

@@ -84,7 +84,7 @@ func (r *AllowedTenantResource) Metadata(ctx context.Context, req resource.Metad
 func (r *AllowedTenantResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             allowed_tenantSchemaVersion,
-		MarkdownDescription: "[Category: Organization] [Namespace: not_required] Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages allowed_tenant config instance. Name of the object is name of the tenant that is allowed to manage. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Allowed Tenant. Must be unique within the namespace.",

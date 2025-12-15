@@ -1,5 +1,5 @@
 # TCP Loadbalancer Resource Example
-# [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
+# Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 
 # Basic TCP Loadbalancer configuration
 resource "f5xc_tcp_loadbalancer" "example" {

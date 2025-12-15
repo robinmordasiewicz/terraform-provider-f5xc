@@ -2,12 +2,12 @@
 page_title: "f5xc_origin_pool Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, healthcheck] Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+  Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 ---
 
 # f5xc_origin_pool (Resource)
 
-[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, healthcheck] Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
 ~> **Note** Please refer to [Origin Pool API docs](https://docs.cloud.f5.com/docs-v2/api/views-origin-pool) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Origin Pool Resource Example
-# [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, healthcheck] Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
+# Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
 # Basic Origin Pool configuration
 resource "f5xc_origin_pool" "example" {
@@ -277,13 +277,7 @@ An [`outlier_detection`](#advanced-options-outlier-detection) block (within [`ad
 
 #### Healthcheck
 
-A [`healthcheck`](#healthcheck) block supports the following:
-
-<a id="healthcheck-name"></a>&#x2022; [`name`](#healthcheck-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="healthcheck-namespace"></a>&#x2022; [`namespace`](#healthcheck-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="healthcheck-tenant"></a>&#x2022; [`tenant`](#healthcheck-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-37c72e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Servers
 
@@ -341,23 +335,11 @@ A [`site_locator`](#locator-0ecb39) block (within [`origin_servers.consul_servic
 
 #### Origin Servers Consul Service Site Locator Site
 
-A [`site`](#site-a096eb) block (within [`origin_servers.consul_service.site_locator`](#locator-0ecb39)) supports the following:
-
-<a id="name-8a907a"></a>&#x2022; [`name`](#name-8a907a) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-933dcd"></a>&#x2022; [`namespace`](#namespace-933dcd) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-c92ea9"></a>&#x2022; [`tenant`](#tenant-c92ea9) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-a096eb"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Servers Consul Service Site Locator Virtual Site
 
-A [`virtual_site`](#site-faf4b5) block (within [`origin_servers.consul_service.site_locator`](#locator-0ecb39)) supports the following:
-
-<a id="name-012b0c"></a>&#x2022; [`name`](#name-012b0c) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-5cf80b"></a>&#x2022; [`namespace`](#namespace-5cf80b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1ef7ff"></a>&#x2022; [`tenant`](#tenant-1ef7ff) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-d86f80"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Origin Servers Consul Service Snat Pool
 
@@ -369,9 +351,7 @@ A [`snat_pool`](#origin-servers-consul-service-snat-pool) block (within [`origin
 
 #### Origin Servers Consul Service Snat Pool Snat Pool
 
-A [`snat_pool`](#pool-fc27df) block (within [`origin_servers.consul_service.snat_pool`](#origin-servers-consul-service-snat-pool)) supports the following:
-
-<a id="prefixes-5cbcd5"></a>&#x2022; [`prefixes`](#prefixes-5cbcd5) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="deep-3f6411"></a>Deeply nested **Pool** block collapsed for readability.
 
 #### Origin Servers Custom Endpoint Object
 
@@ -381,13 +361,7 @@ A [`custom_endpoint_object`](#origin-servers-custom-endpoint-object) block (with
 
 #### Origin Servers Custom Endpoint Object Endpoint
 
-An [`endpoint`](#endpoint-6a2e33) block (within [`origin_servers.custom_endpoint_object`](#origin-servers-custom-endpoint-object)) supports the following:
-
-<a id="name-33e632"></a>&#x2022; [`name`](#name-33e632) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-ea699e"></a>&#x2022; [`namespace`](#namespace-ea699e) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-45ea6c"></a>&#x2022; [`tenant`](#tenant-45ea6c) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-6a2e33"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Servers K8S Service
 
@@ -417,23 +391,11 @@ A [`site_locator`](#origin-servers-k8s-service-site-locator) block (within [`ori
 
 #### Origin Servers K8S Service Site Locator Site
 
-A [`site`](#site-e35217) block (within [`origin_servers.k8s_service.site_locator`](#origin-servers-k8s-service-site-locator)) supports the following:
-
-<a id="name-b0bc0e"></a>&#x2022; [`name`](#name-b0bc0e) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-bc6979"></a>&#x2022; [`namespace`](#namespace-bc6979) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-097ea8"></a>&#x2022; [`tenant`](#tenant-097ea8) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-e35217"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Servers K8S Service Site Locator Virtual Site
 
-A [`virtual_site`](#site-0ef9ba) block (within [`origin_servers.k8s_service.site_locator`](#origin-servers-k8s-service-site-locator)) supports the following:
-
-<a id="name-36f81a"></a>&#x2022; [`name`](#name-36f81a) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-13f85f"></a>&#x2022; [`namespace`](#namespace-13f85f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-3746a4"></a>&#x2022; [`tenant`](#tenant-3746a4) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-3d5b03"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Origin Servers K8S Service Snat Pool
 
@@ -445,9 +407,7 @@ A [`snat_pool`](#origin-servers-k8s-service-snat-pool) block (within [`origin_se
 
 #### Origin Servers K8S Service Snat Pool Snat Pool
 
-A [`snat_pool`](#pool-8c0889) block (within [`origin_servers.k8s_service.snat_pool`](#origin-servers-k8s-service-snat-pool)) supports the following:
-
-<a id="prefixes-3a9bbf"></a>&#x2022; [`prefixes`](#prefixes-3a9bbf) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="deep-2b6198"></a>Deeply nested **Pool** block collapsed for readability.
 
 #### Origin Servers Private IP
 
@@ -467,13 +427,7 @@ A [`private_ip`](#origin-servers-private-ip) block (within [`origin_servers`](#o
 
 #### Origin Servers Private IP Segment
 
-A [`segment`](#origin-servers-private-ip-segment) block (within [`origin_servers.private_ip`](#origin-servers-private-ip)) supports the following:
-
-<a id="origin-servers-private-ip-segment-name"></a>&#x2022; [`name`](#origin-servers-private-ip-segment-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-a2f7e0"></a>&#x2022; [`namespace`](#namespace-a2f7e0) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-4d8d8b"></a>&#x2022; [`tenant`](#tenant-4d8d8b) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-f7f087"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Servers Private IP Site Locator
 
@@ -485,23 +439,11 @@ A [`site_locator`](#origin-servers-private-ip-site-locator) block (within [`orig
 
 #### Origin Servers Private IP Site Locator Site
 
-A [`site`](#site-9000e8) block (within [`origin_servers.private_ip.site_locator`](#origin-servers-private-ip-site-locator)) supports the following:
-
-<a id="name-dc4f48"></a>&#x2022; [`name`](#name-dc4f48) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-43a893"></a>&#x2022; [`namespace`](#namespace-43a893) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ae5087"></a>&#x2022; [`tenant`](#tenant-ae5087) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-9000e8"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Servers Private IP Site Locator Virtual Site
 
-A [`virtual_site`](#site-5bd329) block (within [`origin_servers.private_ip.site_locator`](#origin-servers-private-ip-site-locator)) supports the following:
-
-<a id="name-ee8828"></a>&#x2022; [`name`](#name-ee8828) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-2b7ae1"></a>&#x2022; [`namespace`](#namespace-2b7ae1) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-756ab7"></a>&#x2022; [`tenant`](#tenant-756ab7) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-6b2d63"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Origin Servers Private IP Snat Pool
 
@@ -513,9 +455,7 @@ A [`snat_pool`](#origin-servers-private-ip-snat-pool) block (within [`origin_ser
 
 #### Origin Servers Private IP Snat Pool Snat Pool
 
-A [`snat_pool`](#pool-cc6a33) block (within [`origin_servers.private_ip.snat_pool`](#origin-servers-private-ip-snat-pool)) supports the following:
-
-<a id="prefixes-44db1f"></a>&#x2022; [`prefixes`](#prefixes-44db1f) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="deep-f849fc"></a>Deeply nested **Pool** block collapsed for readability.
 
 #### Origin Servers Private Name
 
@@ -537,13 +477,7 @@ A [`private_name`](#origin-servers-private-name) block (within [`origin_servers`
 
 #### Origin Servers Private Name Segment
 
-A [`segment`](#origin-servers-private-name-segment) block (within [`origin_servers.private_name`](#origin-servers-private-name)) supports the following:
-
-<a id="name-6839c1"></a>&#x2022; [`name`](#name-6839c1) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-217e43"></a>&#x2022; [`namespace`](#namespace-217e43) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-522e3c"></a>&#x2022; [`tenant`](#tenant-522e3c) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-4ad322"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Servers Private Name Site Locator
 
@@ -555,23 +489,11 @@ A [`site_locator`](#locator-0c95f1) block (within [`origin_servers.private_name`
 
 #### Origin Servers Private Name Site Locator Site
 
-A [`site`](#site-771c33) block (within [`origin_servers.private_name.site_locator`](#locator-0c95f1)) supports the following:
-
-<a id="name-5e7e2b"></a>&#x2022; [`name`](#name-5e7e2b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-a2ea97"></a>&#x2022; [`namespace`](#namespace-a2ea97) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-33ad25"></a>&#x2022; [`tenant`](#tenant-33ad25) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-771c33"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Servers Private Name Site Locator Virtual Site
 
-A [`virtual_site`](#site-cf2f53) block (within [`origin_servers.private_name.site_locator`](#locator-0c95f1)) supports the following:
-
-<a id="name-ebea38"></a>&#x2022; [`name`](#name-ebea38) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-acc320"></a>&#x2022; [`namespace`](#namespace-acc320) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-5aa9b8"></a>&#x2022; [`tenant`](#tenant-5aa9b8) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-9ab8ed"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Origin Servers Private Name Snat Pool
 
@@ -583,9 +505,7 @@ A [`snat_pool`](#origin-servers-private-name-snat-pool) block (within [`origin_s
 
 #### Origin Servers Private Name Snat Pool Snat Pool
 
-A [`snat_pool`](#pool-b6c3f7) block (within [`origin_servers.private_name.snat_pool`](#origin-servers-private-name-snat-pool)) supports the following:
-
-<a id="prefixes-5e0cb5"></a>&#x2022; [`prefixes`](#prefixes-5e0cb5) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="deep-16fee3"></a>Deeply nested **Pool** block collapsed for readability.
 
 #### Origin Servers Public IP
 
@@ -611,13 +531,7 @@ A [`vn_private_ip`](#origin-servers-vn-private-ip) block (within [`origin_server
 
 #### Origin Servers Vn Private IP Virtual Network
 
-A [`virtual_network`](#network-e703ab) block (within [`origin_servers.vn_private_ip`](#origin-servers-vn-private-ip)) supports the following:
-
-<a id="name-6c5e61"></a>&#x2022; [`name`](#name-6c5e61) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-fd2396"></a>&#x2022; [`namespace`](#namespace-fd2396) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-550f0b"></a>&#x2022; [`tenant`](#tenant-550f0b) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-e703ab"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Servers Vn Private Name
 
@@ -629,13 +543,7 @@ A [`vn_private_name`](#origin-servers-vn-private-name) block (within [`origin_se
 
 #### Origin Servers Vn Private Name Private Network
 
-A [`private_network`](#network-ff3b00) block (within [`origin_servers.vn_private_name`](#origin-servers-vn-private-name)) supports the following:
-
-<a id="name-6e42c8"></a>&#x2022; [`name`](#name-6e42c8) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-145fbd"></a>&#x2022; [`namespace`](#namespace-145fbd) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e702ea"></a>&#x2022; [`tenant`](#tenant-e702ea) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-ff3b00"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Timeouts
 
@@ -733,45 +641,23 @@ A [`tls_certificates`](#use-tls-use-mtls-tls-certificates) block (within [`use_t
 
 #### Use TLS Use mTLS TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-d28b5f) block (within [`use_tls.use_mtls.tls_certificates`](#use-tls-use-mtls-tls-certificates)) supports the following:
-
-<a id="algorithms-84374d"></a>&#x2022; [`hash_algorithms`](#algorithms-84374d) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-72a520"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Use TLS Use mTLS TLS Certificates Private Key
 
-A [`private_key`](#key-dc1b14) block (within [`use_tls.use_mtls.tls_certificates`](#use-tls-use-mtls-tls-certificates)) supports the following:
-
-<a id="info-1c2679"></a>&#x2022; [`blindfold_secret_info`](#info-1c2679) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-1c2679) below.
-
-<a id="info-c1bbfc"></a>&#x2022; [`clear_secret_info`](#info-c1bbfc) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-c1bbfc) below.
+<a id="deep-c84101"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Use TLS Use mTLS TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-1c2679) block (within [`use_tls.use_mtls.tls_certificates.private_key`](#key-dc1b14)) supports the following:
-
-<a id="provider-cb3258"></a>&#x2022; [`decryption_provider`](#provider-cb3258) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-67e6a9"></a>&#x2022; [`location`](#location-67e6a9) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-52f8e6"></a>&#x2022; [`store_provider`](#provider-52f8e6) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-8c7089"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Use TLS Use mTLS TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-c1bbfc) block (within [`use_tls.use_mtls.tls_certificates.private_key`](#key-dc1b14)) supports the following:
-
-<a id="ref-83c284"></a>&#x2022; [`provider_ref`](#ref-83c284) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-b3c802"></a>&#x2022; [`url`](#url-b3c802) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-88949c"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Use TLS Use mTLS Obj
 
-An [`use_mtls_obj`](#use-tls-use-mtls-obj) block (within [`use_tls`](#use-tls)) supports the following:
-
-<a id="use-tls-use-mtls-obj-name"></a>&#x2022; [`name`](#use-tls-use-mtls-obj-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="use-tls-use-mtls-obj-namespace"></a>&#x2022; [`namespace`](#use-tls-use-mtls-obj-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="use-tls-use-mtls-obj-tenant"></a>&#x2022; [`tenant`](#use-tls-use-mtls-obj-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-6cfffd"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Use TLS Use Server Verification
 
@@ -783,13 +669,90 @@ An [`use_server_verification`](#use-tls-use-server-verification) block (within [
 
 #### Use TLS Use Server Verification Trusted CA
 
-A [`trusted_ca`](#trusted-ca-965dea) block (within [`use_tls.use_server_verification`](#use-tls-use-server-verification)) supports the following:
+<a id="objref-965dea"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
-<a id="name-3590a2"></a>&#x2022; [`name`](#name-3590a2) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+---
 
-<a id="namespace-ac41ae"></a>&#x2022; [`namespace`](#namespace-ac41ae) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+## Common Types
 
-<a id="tenant-892ff9"></a>&#x2022; [`tenant`](#tenant-892ff9) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

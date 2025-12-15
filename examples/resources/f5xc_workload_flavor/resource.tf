@@ -1,5 +1,5 @@
 # Workload Flavor Resource Example
-# [Namespace: required] Manages workload_flavor in F5 Distributed Cloud.
+# Manages workload_flavor in F5 Distributed Cloud.
 
 # Basic Workload Flavor configuration
 resource "f5xc_workload_flavor" "example" {

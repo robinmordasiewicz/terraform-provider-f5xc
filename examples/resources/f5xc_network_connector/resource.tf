@@ -1,5 +1,5 @@
 # Network Connector Resource Example
-# [Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+# Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 
 # Basic Network Connector configuration
 resource "f5xc_network_connector" "example" {

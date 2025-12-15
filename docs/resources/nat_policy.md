@@ -2,12 +2,12 @@
 page_title: "f5xc_nat_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  [Namespace: required] Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+  Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 ---
 
 # f5xc_nat_policy (Resource)
 
-[Namespace: required] Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
 ~> **Note** Please refer to [NAT Policy API docs](https://docs.cloud.f5.com/docs-v2/api/nat-policy) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # NAT Policy Resource Example
-# [Namespace: required] Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
+# Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules, configuration.
 
 # Basic NAT Policy configuration
 resource "f5xc_nat_policy" "example" {
@@ -128,15 +128,15 @@ An [`elastic_ips`](#rules-action-dynamic-elastic-ips) block (within [`rules.acti
 
 A [`refs`](#rules-action-dynamic-elastic-ips-refs) block (within [`rules.action.dynamic.elastic_ips`](#rules-action-dynamic-elastic-ips)) supports the following:
 
-<a id="kind-df4674"></a>&#x2022; [`kind`](#kind-df4674) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-df4674"></a>&#x2022; [`kind`](#kind-df4674) - Optional String<br>Object reference kind
 
-<a id="name-fdfa81"></a>&#x2022; [`name`](#name-fdfa81) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="name-fdfa81"></a>&#x2022; [`name`](#name-fdfa81) - Optional String<br>Object reference name
 
-<a id="namespace-fa1e70"></a>&#x2022; [`namespace`](#namespace-fa1e70) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-fa1e70"></a>&#x2022; [`namespace`](#namespace-fa1e70) - Optional String<br>Object reference namespace
 
-<a id="tenant-aec1f4"></a>&#x2022; [`tenant`](#tenant-aec1f4) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-aec1f4"></a>&#x2022; [`tenant`](#tenant-aec1f4) - Optional String<br>Object reference tenant
 
-<a id="uid-83b949"></a>&#x2022; [`uid`](#uid-83b949) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="uid-83b949"></a>&#x2022; [`uid`](#uid-83b949) - Optional String<br>Object reference UID
 
 #### Rules Action Dynamic Pools
 
@@ -154,15 +154,15 @@ A [`cloud_connect`](#rules-cloud-connect) block (within [`rules`](#rules)) suppo
 
 A [`refs`](#rules-cloud-connect-refs) block (within [`rules.cloud_connect`](#rules-cloud-connect)) supports the following:
 
-<a id="rules-cloud-connect-refs-kind"></a>&#x2022; [`kind`](#rules-cloud-connect-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="rules-cloud-connect-refs-kind"></a>&#x2022; [`kind`](#rules-cloud-connect-refs-kind) - Optional String<br>Object reference kind
 
-<a id="rules-cloud-connect-refs-name"></a>&#x2022; [`name`](#rules-cloud-connect-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="rules-cloud-connect-refs-name"></a>&#x2022; [`name`](#rules-cloud-connect-refs-name) - Optional String<br>Object reference name
 
-<a id="rules-cloud-connect-refs-namespace"></a>&#x2022; [`namespace`](#rules-cloud-connect-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="rules-cloud-connect-refs-namespace"></a>&#x2022; [`namespace`](#rules-cloud-connect-refs-namespace) - Optional String<br>Object reference namespace
 
-<a id="rules-cloud-connect-refs-tenant"></a>&#x2022; [`tenant`](#rules-cloud-connect-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="rules-cloud-connect-refs-tenant"></a>&#x2022; [`tenant`](#rules-cloud-connect-refs-tenant) - Optional String<br>Object reference tenant
 
-<a id="rules-cloud-connect-refs-uid"></a>&#x2022; [`uid`](#rules-cloud-connect-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="rules-cloud-connect-refs-uid"></a>&#x2022; [`uid`](#rules-cloud-connect-refs-uid) - Optional String<br>Object reference UID
 
 #### Rules Criteria
 
@@ -210,15 +210,15 @@ A [`segment`](#rules-criteria-segment) block (within [`rules.criteria`](#rules-c
 
 A [`refs`](#rules-criteria-segment-refs) block (within [`rules.criteria.segment`](#rules-criteria-segment)) supports the following:
 
-<a id="rules-criteria-segment-refs-kind"></a>&#x2022; [`kind`](#rules-criteria-segment-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="rules-criteria-segment-refs-kind"></a>&#x2022; [`kind`](#rules-criteria-segment-refs-kind) - Optional String<br>Object reference kind
 
-<a id="rules-criteria-segment-refs-name"></a>&#x2022; [`name`](#rules-criteria-segment-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="rules-criteria-segment-refs-name"></a>&#x2022; [`name`](#rules-criteria-segment-refs-name) - Optional String<br>Object reference name
 
-<a id="rules-criteria-segment-refs-namespace"></a>&#x2022; [`namespace`](#rules-criteria-segment-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="rules-criteria-segment-refs-namespace"></a>&#x2022; [`namespace`](#rules-criteria-segment-refs-namespace) - Optional String<br>Object reference namespace
 
-<a id="rules-criteria-segment-refs-tenant"></a>&#x2022; [`tenant`](#rules-criteria-segment-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="rules-criteria-segment-refs-tenant"></a>&#x2022; [`tenant`](#rules-criteria-segment-refs-tenant) - Optional String<br>Object reference tenant
 
-<a id="rules-criteria-segment-refs-uid"></a>&#x2022; [`uid`](#rules-criteria-segment-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="rules-criteria-segment-refs-uid"></a>&#x2022; [`uid`](#rules-criteria-segment-refs-uid) - Optional String<br>Object reference UID
 
 #### Rules Criteria Source Port
 
@@ -296,15 +296,15 @@ A [`virtual_network`](#rules-criteria-virtual-network) block (within [`rules.cri
 
 A [`refs`](#rules-criteria-virtual-network-refs) block (within [`rules.criteria.virtual_network`](#rules-criteria-virtual-network)) supports the following:
 
-<a id="kind-8d8876"></a>&#x2022; [`kind`](#kind-8d8876) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-8d8876"></a>&#x2022; [`kind`](#kind-8d8876) - Optional String<br>Object reference kind
 
-<a id="name-369d2b"></a>&#x2022; [`name`](#name-369d2b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="name-369d2b"></a>&#x2022; [`name`](#name-369d2b) - Optional String<br>Object reference name
 
-<a id="namespace-a79f74"></a>&#x2022; [`namespace`](#namespace-a79f74) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-a79f74"></a>&#x2022; [`namespace`](#namespace-a79f74) - Optional String<br>Object reference namespace
 
-<a id="tenant-79ff48"></a>&#x2022; [`tenant`](#tenant-79ff48) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-79ff48"></a>&#x2022; [`tenant`](#tenant-79ff48) - Optional String<br>Object reference tenant
 
-<a id="rules-criteria-virtual-network-refs-uid"></a>&#x2022; [`uid`](#rules-criteria-virtual-network-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="rules-criteria-virtual-network-refs-uid"></a>&#x2022; [`uid`](#rules-criteria-virtual-network-refs-uid) - Optional String<br>Object reference UID
 
 #### Rules Network Interface
 
@@ -316,15 +316,15 @@ A [`network_interface`](#rules-network-interface) block (within [`rules`](#rules
 
 A [`refs`](#rules-network-interface-refs) block (within [`rules.network_interface`](#rules-network-interface)) supports the following:
 
-<a id="rules-network-interface-refs-kind"></a>&#x2022; [`kind`](#rules-network-interface-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="rules-network-interface-refs-kind"></a>&#x2022; [`kind`](#rules-network-interface-refs-kind) - Optional String<br>Object reference kind
 
-<a id="rules-network-interface-refs-name"></a>&#x2022; [`name`](#rules-network-interface-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="rules-network-interface-refs-name"></a>&#x2022; [`name`](#rules-network-interface-refs-name) - Optional String<br>Object reference name
 
-<a id="rules-network-interface-refs-namespace"></a>&#x2022; [`namespace`](#rules-network-interface-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="rules-network-interface-refs-namespace"></a>&#x2022; [`namespace`](#rules-network-interface-refs-namespace) - Optional String<br>Object reference namespace
 
-<a id="rules-network-interface-refs-tenant"></a>&#x2022; [`tenant`](#rules-network-interface-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="rules-network-interface-refs-tenant"></a>&#x2022; [`tenant`](#rules-network-interface-refs-tenant) - Optional String<br>Object reference tenant
 
-<a id="rules-network-interface-refs-uid"></a>&#x2022; [`uid`](#rules-network-interface-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="rules-network-interface-refs-uid"></a>&#x2022; [`uid`](#rules-network-interface-refs-uid) - Optional String<br>Object reference UID
 
 #### Rules Segment
 
@@ -336,15 +336,15 @@ A [`segment`](#rules-segment) block (within [`rules`](#rules)) supports the foll
 
 A [`refs`](#rules-segment-refs) block (within [`rules.segment`](#rules-segment)) supports the following:
 
-<a id="rules-segment-refs-kind"></a>&#x2022; [`kind`](#rules-segment-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="rules-segment-refs-kind"></a>&#x2022; [`kind`](#rules-segment-refs-kind) - Optional String<br>Object reference kind
 
-<a id="rules-segment-refs-name"></a>&#x2022; [`name`](#rules-segment-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="rules-segment-refs-name"></a>&#x2022; [`name`](#rules-segment-refs-name) - Optional String<br>Object reference name
 
-<a id="rules-segment-refs-namespace"></a>&#x2022; [`namespace`](#rules-segment-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="rules-segment-refs-namespace"></a>&#x2022; [`namespace`](#rules-segment-refs-namespace) - Optional String<br>Object reference namespace
 
-<a id="rules-segment-refs-tenant"></a>&#x2022; [`tenant`](#rules-segment-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="rules-segment-refs-tenant"></a>&#x2022; [`tenant`](#rules-segment-refs-tenant) - Optional String<br>Object reference tenant
 
-<a id="rules-segment-refs-uid"></a>&#x2022; [`uid`](#rules-segment-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="rules-segment-refs-uid"></a>&#x2022; [`uid`](#rules-segment-refs-uid) - Optional String<br>Object reference UID
 
 #### Rules Virtual Network
 
@@ -356,15 +356,15 @@ A [`virtual_network`](#rules-virtual-network) block (within [`rules`](#rules)) s
 
 A [`refs`](#rules-virtual-network-refs) block (within [`rules.virtual_network`](#rules-virtual-network)) supports the following:
 
-<a id="rules-virtual-network-refs-kind"></a>&#x2022; [`kind`](#rules-virtual-network-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="rules-virtual-network-refs-kind"></a>&#x2022; [`kind`](#rules-virtual-network-refs-kind) - Optional String<br>Object reference kind
 
-<a id="rules-virtual-network-refs-name"></a>&#x2022; [`name`](#rules-virtual-network-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="rules-virtual-network-refs-name"></a>&#x2022; [`name`](#rules-virtual-network-refs-name) - Optional String<br>Object reference name
 
-<a id="rules-virtual-network-refs-namespace"></a>&#x2022; [`namespace`](#rules-virtual-network-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="rules-virtual-network-refs-namespace"></a>&#x2022; [`namespace`](#rules-virtual-network-refs-namespace) - Optional String<br>Object reference namespace
 
-<a id="rules-virtual-network-refs-tenant"></a>&#x2022; [`tenant`](#rules-virtual-network-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="rules-virtual-network-refs-tenant"></a>&#x2022; [`tenant`](#rules-virtual-network-refs-tenant) - Optional String<br>Object reference tenant
 
-<a id="rules-virtual-network-refs-uid"></a>&#x2022; [`uid`](#rules-virtual-network-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="rules-virtual-network-refs-uid"></a>&#x2022; [`uid`](#rules-virtual-network-refs-uid) - Optional String<br>Object reference UID
 
 #### Site
 
@@ -376,15 +376,15 @@ A [`site`](#site) block supports the following:
 
 A [`refs`](#site-refs) block (within [`site`](#site)) supports the following:
 
-<a id="site-refs-kind"></a>&#x2022; [`kind`](#site-refs-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="site-refs-kind"></a>&#x2022; [`kind`](#site-refs-kind) - Optional String<br>Object reference kind
 
-<a id="site-refs-name"></a>&#x2022; [`name`](#site-refs-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="site-refs-name"></a>&#x2022; [`name`](#site-refs-name) - Optional String<br>Object reference name
 
-<a id="site-refs-namespace"></a>&#x2022; [`namespace`](#site-refs-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="site-refs-namespace"></a>&#x2022; [`namespace`](#site-refs-namespace) - Optional String<br>Object reference namespace
 
-<a id="site-refs-tenant"></a>&#x2022; [`tenant`](#site-refs-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="site-refs-tenant"></a>&#x2022; [`tenant`](#site-refs-tenant) - Optional String<br>Object reference tenant
 
-<a id="site-refs-uid"></a>&#x2022; [`uid`](#site-refs-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="site-refs-uid"></a>&#x2022; [`uid`](#site-refs-uid) - Optional String<br>Object reference UID
 
 #### Timeouts
 
@@ -397,6 +397,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

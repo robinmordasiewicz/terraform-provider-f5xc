@@ -1514,7 +1514,7 @@ func (r *ProxyResource) Metadata(ctx context.Context, req resource.MetadataReque
 func (r *ProxyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             proxySchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.",
+		MarkdownDescription: "Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Proxy. Must be unique within the namespace.",

@@ -131,7 +131,7 @@ func (r *VirtualNetworkResource) Metadata(ctx context.Context, req resource.Meta
 func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             virtual_networkSchemaVersion,
-		MarkdownDescription: "[Category: Networking] [Namespace: required] Manages virtual network in given namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages virtual network in given namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Virtual Network. Must be unique within the namespace.",

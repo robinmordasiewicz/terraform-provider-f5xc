@@ -290,7 +290,7 @@ func (r *AppFirewallResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             app_firewallSchemaVersion,
-		MarkdownDescription: "[Category: Security] [Namespace: required] [DependsOn: namespace] Manages Application Firewall in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages Application Firewall in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the App Firewall. Must be unique within the namespace.",

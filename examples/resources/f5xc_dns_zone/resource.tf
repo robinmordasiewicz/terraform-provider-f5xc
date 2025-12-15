@@ -1,5 +1,5 @@
 # DNS Zone Resource Example
-# [Category: DNS] [Namespace: not_required] Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+# Manages a DNS Zone resource in F5 Distributed Cloud.
 
 # Basic DNS Zone configuration
 resource "f5xc_dns_zone" "example" {

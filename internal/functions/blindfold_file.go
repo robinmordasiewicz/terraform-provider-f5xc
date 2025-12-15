@@ -220,17 +220,10 @@ func (f *BlindfoldFileFunction) Run(ctx context.Context, req function.RunRequest
 		return
 	}
 
-	// Check plaintext size against RSA limits
-	maxSize, err := blindfold.MaxPlaintextSize(pubKey)
-	if err != nil {
-		resp.Error = function.NewFuncError(
-			fmt.Sprintf("Failed to determine maximum plaintext size: %s", err),
-		)
-		return
-	}
-	if len(plaintext) > maxSize {
+	// Check plaintext size against API limit (128KB with envelope encryption)
+	if len(plaintext) > blindfold.MaxSecretSize {
 		resp.Error = function.NewArgumentFuncError(0,
-			fmt.Sprintf("File too large (%d bytes). Maximum size for this key is %d bytes. File: %s", len(plaintext), maxSize, cleanPath),
+			fmt.Sprintf("File too large (%d bytes). Maximum size is %d bytes (128KB). File: %s", len(plaintext), blindfold.MaxSecretSize, cleanPath),
 		)
 		return
 	}

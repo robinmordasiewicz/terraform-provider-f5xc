@@ -439,10 +439,11 @@ func TestBlindfoldFileFunction_Run_FileTooLarge(t *testing.T) {
 	os.Setenv(blindfold.EnvAPIToken, "test-token")
 	os.Setenv(blindfold.EnvAPIURL, server.URL)
 
-	// Create a temporary file that exceeds max size for 2048-bit key (190 bytes)
+	// Create a temporary file that exceeds max size (128KB API limit)
+	// With envelope encryption, we can now encrypt up to 128KB
 	tmpDir := t.TempDir()
 	largeFile := filepath.Join(tmpDir, "large.txt")
-	largeContent := make([]byte, 500)
+	largeContent := make([]byte, blindfold.MaxSecretSize+1) // 131073 bytes
 	for i := range largeContent {
 		largeContent[i] = byte(i % 256)
 	}

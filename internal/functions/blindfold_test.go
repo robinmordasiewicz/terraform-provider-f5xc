@@ -351,8 +351,9 @@ func TestBlindfoldFunction_Run_PlaintextTooLarge(t *testing.T) {
 
 	fn := &BlindfoldFunction{}
 
-	// Create plaintext that exceeds max size for 2048-bit key (190 bytes)
-	largePlaintext := make([]byte, 500)
+	// Create plaintext that exceeds max size (128KB = 131072 bytes)
+	// With envelope encryption, we can now encrypt up to 128KB
+	largePlaintext := make([]byte, blindfold.MaxSecretSize+1) // 131073 bytes
 	for i := range largePlaintext {
 		largePlaintext[i] = byte(i % 256)
 	}
@@ -375,7 +376,7 @@ func TestBlindfoldFunction_Run_PlaintextTooLarge(t *testing.T) {
 	}
 
 	errStr := got.Error.Error()
-	if !strings.Contains(errStr, "too large") {
+	if !strings.Contains(errStr, "too large") && !strings.Contains(errStr, "Maximum size") {
 		t.Errorf("error should mention size limit, got: %s", errStr)
 	}
 }

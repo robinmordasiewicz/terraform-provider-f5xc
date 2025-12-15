@@ -7,6 +7,7 @@ import (
 	"crypto/rsa"
 	"encoding/base64"
 	"encoding/json"
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -128,8 +129,15 @@ func TestSeal(t *testing.T) {
 			if sealedSecret.PolicyID != policy.PolicyID {
 				t.Errorf("policy ID mismatch: got %q, want %q", sealedSecret.PolicyID, policy.PolicyID)
 			}
-			if sealedSecret.Data == "" {
-				t.Error("sealed data should not be empty")
+			// Verify envelope encryption fields are present
+			if sealedSecret.EncryptedKey == "" {
+				t.Error("encrypted_key should not be empty")
+			}
+			if sealedSecret.Nonce == "" {
+				t.Error("nonce should not be empty")
+			}
+			if sealedSecret.Ciphertext == "" {
+				t.Error("ciphertext should not be empty")
 			}
 		})
 	}
@@ -252,10 +260,24 @@ func TestMaxPlaintextSize(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
+	// With envelope encryption, max size is now the API limit (128KB)
+	if maxSize != MaxSecretSize {
+		t.Errorf("max plaintext size: got %d, want %d", maxSize, MaxSecretSize)
+	}
+}
+
+func TestMaxRSAPlaintextSize(t *testing.T) {
+	_, pubKey := generateTestKeyPair(t, 2048)
+
+	maxSize, err := MaxRSAPlaintextSize(pubKey)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
 	// For 2048-bit key with SHA-256: 256 - 66 = 190 bytes
 	expectedMax := 256 - 66
 	if maxSize != expectedMax {
-		t.Errorf("max plaintext size: got %d, want %d", maxSize, expectedMax)
+		t.Errorf("max RSA plaintext size: got %d, want %d", maxSize, expectedMax)
 	}
 }
 
@@ -268,7 +290,7 @@ func min(a, b int) int {
 
 // TestSealOutputFormat validates that the sealed output matches F5XC expected format.
 // The format is: string:///<base64-encoded-json>
-// where the JSON contains: key_version, policy_id, tenant, data
+// where the JSON contains envelope encryption fields: key_version, policy_id, tenant, encrypted_key, nonce, ciphertext
 func TestSealOutputFormat(t *testing.T) {
 	_, pubKey := generateTestKeyPair(t, 2048)
 	policy := &SecretPolicyDocument{
@@ -311,19 +333,46 @@ func TestSealOutputFormat(t *testing.T) {
 	if result.Tenant != pubKey.Tenant {
 		t.Errorf("tenant mismatch: got %q, want %q", result.Tenant, pubKey.Tenant)
 	}
-	if result.Data == "" {
-		t.Error("data field must not be empty")
+
+	// Validate envelope encryption fields
+	if result.EncryptedKey == "" {
+		t.Error("encrypted_key field must not be empty")
+	}
+	if result.Nonce == "" {
+		t.Error("nonce field must not be empty")
+	}
+	if result.Ciphertext == "" {
+		t.Error("ciphertext field must not be empty")
 	}
 
-	// Validate data is valid base64 (the encrypted ciphertext)
-	_, err = base64.StdEncoding.DecodeString(result.Data)
+	// Validate encrypted_key is valid base64 (RSA-OAEP encrypted AES key)
+	encKey, err := base64.StdEncoding.DecodeString(result.EncryptedKey)
 	if err != nil {
-		t.Errorf("data field must be valid base64: %v", err)
+		t.Errorf("encrypted_key field must be valid base64: %v", err)
+	}
+	// RSA-2048 produces 256 bytes of ciphertext
+	if len(encKey) != 256 {
+		t.Errorf("encrypted_key length: got %d, want 256 (RSA-2048)", len(encKey))
+	}
+
+	// Validate nonce is valid base64 (12 bytes for GCM)
+	nonceBytes, err := base64.StdEncoding.DecodeString(result.Nonce)
+	if err != nil {
+		t.Errorf("nonce field must be valid base64: %v", err)
+	}
+	if len(nonceBytes) != GCMNonceSize {
+		t.Errorf("nonce length: got %d, want %d", len(nonceBytes), GCMNonceSize)
+	}
+
+	// Validate ciphertext is valid base64
+	_, err = base64.StdEncoding.DecodeString(result.Ciphertext)
+	if err != nil {
+		t.Errorf("ciphertext field must be valid base64: %v", err)
 	}
 }
 
 // TestSealJSONFieldNames verifies the exact JSON field names used in output.
-// F5XC expects snake_case field names: key_version, policy_id, tenant, data
+// With envelope encryption: key_version, policy_id, tenant, encrypted_key, nonce, ciphertext
 func TestSealJSONFieldNames(t *testing.T) {
 	_, pubKey := generateTestKeyPair(t, 2048)
 	policy := &SecretPolicyDocument{
@@ -348,7 +397,7 @@ func TestSealJSONFieldNames(t *testing.T) {
 		t.Fatalf("failed to parse JSON: %v", err)
 	}
 
-	requiredFields := []string{"key_version", "policy_id", "tenant", "data"}
+	requiredFields := []string{"key_version", "policy_id", "tenant", "encrypted_key", "nonce", "ciphertext"}
 	for _, field := range requiredFields {
 		if _, exists := rawJSON[field]; !exists {
 			t.Errorf("missing required field: %q", field)
@@ -361,8 +410,8 @@ func TestSealJSONFieldNames(t *testing.T) {
 	}
 }
 
-// TestSealNonDeterministic verifies RSA-OAEP encryption is non-deterministic.
-// Same input encrypted twice should produce different ciphertext (due to random padding).
+// TestSealNonDeterministic verifies envelope encryption is non-deterministic.
+// Same input encrypted twice should produce different ciphertext (due to random DEK and nonce).
 func TestSealNonDeterministic(t *testing.T) {
 	_, pubKey := generateTestKeyPair(t, 2048)
 	policy := &SecretPolicyDocument{
@@ -382,58 +431,98 @@ func TestSealNonDeterministic(t *testing.T) {
 	}
 
 	if sealed1 == sealed2 {
-		t.Error("RSA-OAEP encryption should be non-deterministic; same plaintext produced identical output")
+		t.Error("envelope encryption should be non-deterministic; same plaintext produced identical output")
 	}
 
-	// Extract and compare the 'data' fields specifically
-	extract := func(sealed string) string {
+	// Extract and compare the encrypted fields specifically
+	extract := func(sealed string) (string, string, string) {
 		payload := strings.TrimPrefix(sealed, "string:///")
 		decoded, _ := base64.StdEncoding.DecodeString(payload)
 		var result SealedSecret
 		json.Unmarshal(decoded, &result)
-		return result.Data
+		return result.EncryptedKey, result.Nonce, result.Ciphertext
 	}
 
-	data1 := extract(sealed1)
-	data2 := extract(sealed2)
+	key1, nonce1, ct1 := extract(sealed1)
+	key2, nonce2, ct2 := extract(sealed2)
 
-	if data1 == data2 {
-		t.Error("encrypted data should differ between calls due to OAEP random padding")
+	// Each call generates a new random DEK
+	if key1 == key2 {
+		t.Error("encrypted_key should differ between calls due to random DEK")
+	}
+
+	// Each call generates a new random nonce
+	if nonce1 == nonce2 {
+		t.Error("nonce should differ between calls due to random generation")
+	}
+
+	// Ciphertext should differ due to different DEK/nonce
+	if ct1 == ct2 {
+		t.Error("ciphertext should differ between calls")
 	}
 }
 
-// TestSealLargePlaintext verifies handling of plaintext at the size limit.
+// TestSealLargePlaintext verifies handling of large plaintexts with envelope encryption.
+// With envelope encryption, we can now encrypt data up to 128KB (API limit).
 func TestSealLargePlaintext(t *testing.T) {
 	_, pubKey := generateTestKeyPair(t, 2048)
 	policy := &SecretPolicyDocument{
 		PolicyID: "policy-123",
 	}
 
-	// Get max size for this key
-	maxSize, err := MaxPlaintextSize(pubKey)
-	if err != nil {
-		t.Fatalf("failed to get max size: %v", err)
+	// Test various large sizes that would fail with direct RSA-OAEP
+	testSizes := []int{
+		200,    // Just over old RSA limit (190)
+		500,    // Typical API key size
+		1700,   // RSA-2048 private key PEM
+		2000,   // TLS certificate
+		10000,  // 10KB
+		50000,  // 50KB
+		100000, // 100KB
 	}
 
-	// Test exactly at max size
-	t.Run("exact max size", func(t *testing.T) {
-		plaintext := make([]byte, maxSize)
+	for _, size := range testSizes {
+		t.Run(strings.ReplaceAll(fmt.Sprintf("%d_bytes", size), "", ""), func(t *testing.T) {
+			plaintext := make([]byte, size)
+			for i := range plaintext {
+				plaintext[i] = byte(i % 256)
+			}
+
+			sealed, err := Seal(plaintext, pubKey, policy)
+			if err != nil {
+				t.Errorf("should accept plaintext of %d bytes: %v", size, err)
+				return
+			}
+
+			// Verify the output is valid
+			if !strings.HasPrefix(sealed, "string:///") {
+				t.Error("output format broken")
+			}
+		})
+	}
+
+	// Test exactly at max size (128KB)
+	t.Run("exact max size 128KB", func(t *testing.T) {
+		plaintext := make([]byte, MaxSecretSize)
 		for i := range plaintext {
 			plaintext[i] = byte(i % 256)
 		}
 
 		_, err := Seal(plaintext, pubKey, policy)
 		if err != nil {
-			t.Errorf("should accept plaintext at max size (%d bytes): %v", maxSize, err)
+			t.Errorf("should accept plaintext at max size (%d bytes): %v", MaxSecretSize, err)
 		}
 	})
 
-	// Test one byte over max size
+	// Test one byte over max size (should fail)
 	t.Run("one over max size", func(t *testing.T) {
-		plaintext := make([]byte, maxSize+1)
+		plaintext := make([]byte, MaxSecretSize+1)
 		_, err := Seal(plaintext, pubKey, policy)
 		if err == nil {
 			t.Error("should reject plaintext exceeding max size")
+		}
+		if !strings.Contains(err.Error(), "exceeds maximum allowed size") {
+			t.Errorf("unexpected error message: %v", err)
 		}
 	})
 }
@@ -490,8 +579,8 @@ func TestSealSpecialCharacters(t *testing.T) {
 	}
 }
 
-// TestMaxPlaintextSize_VariousKeySizes tests max plaintext calculation for different key sizes.
-func TestMaxPlaintextSize_VariousKeySizes(t *testing.T) {
+// TestMaxRSAPlaintextSize_VariousKeySizes tests RSA max plaintext calculation for different key sizes.
+func TestMaxRSAPlaintextSize_VariousKeySizes(t *testing.T) {
 	tests := []struct {
 		keyBits     int
 		wantMaxSize int // keySize - 2*hashSize - 2 = keySize - 66 for SHA-256
@@ -502,16 +591,37 @@ func TestMaxPlaintextSize_VariousKeySizes(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		t.Run(strings.ReplaceAll(string(rune(tt.keyBits))+"bit", "", ""), func(t *testing.T) {
+		t.Run(fmt.Sprintf("%d_bit", tt.keyBits), func(t *testing.T) {
 			_, pubKey := generateTestKeyPair(t, tt.keyBits)
+
+			maxSize, err := MaxRSAPlaintextSize(pubKey)
+			if err != nil {
+				t.Fatalf("unexpected error: %v", err)
+			}
+
+			if maxSize != tt.wantMaxSize {
+				t.Errorf("max RSA size for %d-bit key: got %d, want %d", tt.keyBits, maxSize, tt.wantMaxSize)
+			}
+		})
+	}
+}
+
+// TestMaxPlaintextSize_AllKeySizes verifies MaxPlaintextSize returns API limit for all key sizes.
+func TestMaxPlaintextSize_AllKeySizes(t *testing.T) {
+	keySizes := []int{2048, 3072, 4096}
+
+	for _, bits := range keySizes {
+		t.Run(fmt.Sprintf("%d_bit", bits), func(t *testing.T) {
+			_, pubKey := generateTestKeyPair(t, bits)
 
 			maxSize, err := MaxPlaintextSize(pubKey)
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			if maxSize != tt.wantMaxSize {
-				t.Errorf("max size for %d-bit key: got %d, want %d", tt.keyBits, maxSize, tt.wantMaxSize)
+			// With envelope encryption, all key sizes support the same max (API limit)
+			if maxSize != MaxSecretSize {
+				t.Errorf("max size for %d-bit key: got %d, want %d", bits, maxSize, MaxSecretSize)
 			}
 		})
 	}

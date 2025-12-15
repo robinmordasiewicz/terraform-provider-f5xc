@@ -1370,12 +1370,9 @@ func getResourceAIMetadata(resourceName string) string {
 
 // transformResourceDescription converts technical API descriptions into user-friendly
 // Terraform resource descriptions following HashiCorp best practices.
-// Pattern: "[AI Metadata] Manages a [Resource] in F5 Distributed Cloud [for purpose/capability]."
+// Pattern: "Manages a [Resource] in F5 Distributed Cloud [for purpose/capability]."
 func transformResourceDescription(resourceName, rawDescription string) string {
 	humanName := toHumanName(resourceName)
-
-	// Get AI-parseable metadata prefix
-	aiMetadata := getResourceAIMetadata(resourceName)
 
 	// Clean and normalize the raw description first
 	// Pass empty fieldPath since this is the resource-level description
@@ -1444,10 +1441,10 @@ func transformResourceDescription(resourceName, rawDescription string) string {
 		}
 	}
 
-	// Combine AI metadata prefix with human-readable description
-	if aiMetadata != "" {
-		return fmt.Sprintf("%s %s", aiMetadata, humanDesc)
-	}
+	// Return human-readable description only
+	// Note: AI metadata was previously added here for the terraform-schema-ai tool,
+	// but that tool was removed in commit 0c45bb3 as unused. The metadata was
+	// polluting Terraform Registry documentation for human users.
 	return humanDesc
 }
 

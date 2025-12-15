@@ -3,6 +3,8 @@
 package blindfold
 
 import (
+	"crypto/aes"
+	"crypto/cipher"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/sha256"
@@ -12,9 +14,25 @@ import (
 	"math/big"
 )
 
-// Seal encrypts plaintext using RSA-OAEP with SHA-256 and the provided public key.
-// The result is a base64-encoded JSON structure suitable for use in
-// blindfold_secret_info.location fields with the "string:///" prefix.
+const (
+	// AES256KeySize is the size of the AES-256 key in bytes
+	AES256KeySize = 32
+
+	// GCMNonceSize is the standard nonce size for AES-GCM (12 bytes)
+	GCMNonceSize = 12
+
+	// MaxSecretSize is the maximum size of a secret that can be encrypted (128KB API limit)
+	MaxSecretSize = 131072
+)
+
+// Seal encrypts plaintext using envelope encryption (hybrid encryption):
+// 1. Generate a random AES-256 key (DEK - Data Encryption Key)
+// 2. Encrypt the plaintext using AES-256-GCM with the DEK
+// 3. Encrypt the DEK using RSA-OAEP with SHA-256 (KEK - Key Encryption Key)
+// 4. Pack everything into a JSON structure
+//
+// This approach allows encrypting data of any size (up to 128KB API limit)
+// while staying within RSA size constraints.
 //
 // Parameters:
 //   - plaintext: Raw bytes to encrypt (not base64-encoded)
@@ -34,6 +52,9 @@ func Seal(plaintext []byte, pubKey *PublicKey, policy *SecretPolicyDocument) (st
 	if len(plaintext) == 0 {
 		return "", fmt.Errorf("plaintext cannot be empty")
 	}
+	if len(plaintext) > MaxSecretSize {
+		return "", fmt.Errorf("plaintext size %d exceeds maximum allowed size %d bytes", len(plaintext), MaxSecretSize)
+	}
 
 	// Build RSA public key from components
 	rsaPubKey, err := buildRSAPublicKey(pubKey)
@@ -41,24 +62,52 @@ func Seal(plaintext []byte, pubKey *PublicKey, policy *SecretPolicyDocument) (st
 		return "", fmt.Errorf("failed to build RSA public key: %w", err)
 	}
 
-	// Encrypt using RSA-OAEP with SHA-256
-	ciphertext, err := rsa.EncryptOAEP(
+	// Step 1: Generate random AES-256 key (DEK)
+	dek := make([]byte, AES256KeySize)
+	if _, err := rand.Read(dek); err != nil {
+		return "", fmt.Errorf("failed to generate AES key: %w", err)
+	}
+
+	// Step 2: Encrypt plaintext with AES-256-GCM
+	block, err := aes.NewCipher(dek)
+	if err != nil {
+		return "", fmt.Errorf("failed to create AES cipher: %w", err)
+	}
+
+	gcm, err := cipher.NewGCM(block)
+	if err != nil {
+		return "", fmt.Errorf("failed to create GCM: %w", err)
+	}
+
+	// Generate random nonce
+	nonce := make([]byte, GCMNonceSize)
+	if _, err := rand.Read(nonce); err != nil {
+		return "", fmt.Errorf("failed to generate nonce: %w", err)
+	}
+
+	// Encrypt and authenticate (ciphertext includes the auth tag)
+	ciphertext := gcm.Seal(nil, nonce, plaintext, nil)
+
+	// Step 3: Encrypt the DEK with RSA-OAEP
+	encryptedKey, err := rsa.EncryptOAEP(
 		sha256.New(),
 		rand.Reader,
 		rsaPubKey,
-		plaintext,
+		dek,
 		nil, // No label
 	)
 	if err != nil {
-		return "", fmt.Errorf("RSA-OAEP encryption failed: %w", err)
+		return "", fmt.Errorf("RSA-OAEP key encryption failed: %w", err)
 	}
 
-	// Create sealed secret structure
+	// Step 4: Create sealed secret structure
 	sealed := SealedSecret{
-		KeyVersion: pubKey.KeyVersion,
-		PolicyID:   policy.PolicyID,
-		Tenant:     pubKey.Tenant,
-		Data:       base64.StdEncoding.EncodeToString(ciphertext),
+		KeyVersion:   pubKey.KeyVersion,
+		PolicyID:     policy.PolicyID,
+		Tenant:       pubKey.Tenant,
+		EncryptedKey: base64.StdEncoding.EncodeToString(encryptedKey),
+		Nonce:        base64.StdEncoding.EncodeToString(nonce),
+		Ciphertext:   base64.StdEncoding.EncodeToString(ciphertext),
 	}
 
 	// Serialize to JSON
@@ -140,11 +189,28 @@ func buildRSAPublicKey(pubKey *PublicKey) (*rsa.PublicKey, error) {
 	}, nil
 }
 
-// MaxPlaintextSize returns the maximum plaintext size that can be encrypted
-// with the given public key using RSA-OAEP with SHA-256.
+// MaxPlaintextSize returns the maximum plaintext size that can be encrypted.
+// With envelope encryption, the limit is now the F5XC API limit (128KB),
+// not the RSA key size limit.
+//
+// Deprecated: This function is kept for backwards compatibility but no longer
+// reflects the actual limit. Use MaxSecretSize constant instead.
+func MaxPlaintextSize(pubKey *PublicKey) (int, error) {
+	// Validate the public key can be built (sanity check)
+	_, err := buildRSAPublicKey(pubKey)
+	if err != nil {
+		return 0, err
+	}
+
+	// With envelope encryption, we're limited by the API, not RSA
+	return MaxSecretSize, nil
+}
+
+// MaxRSAPlaintextSize returns the maximum size for direct RSA-OAEP encryption
+// (used only for encrypting the DEK, not user data).
 // For RSA-OAEP: max = keySize - 2*hashSize - 2
 // With SHA-256 (32 bytes): max = keySize - 66
-func MaxPlaintextSize(pubKey *PublicKey) (int, error) {
+func MaxRSAPlaintextSize(pubKey *PublicKey) (int, error) {
 	rsaPubKey, err := buildRSAPublicKey(pubKey)
 	if err != nil {
 		return 0, err

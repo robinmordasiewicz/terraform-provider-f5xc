@@ -107,7 +107,8 @@ jobs:
             --spec-dir=docs/specifications/api \
             --ollama-url=http://localhost:11434 \
             --model=qwen2.5-coder:7b \
-            --cache-file=tools/enriched-descriptions-cache.json
+            --cache-file=tools/enriched-descriptions-cache.json \
+            --workers=8
           echo "::endgroup::"
 
       - name: Calculate Terraform version requirements

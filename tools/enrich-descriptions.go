@@ -24,6 +24,8 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -435,38 +437,119 @@ func needsEnrichment(desc string) bool {
 	return false
 }
 
-// enrichDescriptions enriches all descriptions using ollama
+// enrichmentJob represents a description to be enriched
+type enrichmentJob struct {
+	key string
+	ctx DescriptionContext
+}
+
+// enrichmentResult represents the result of an enrichment
+type enrichmentResult struct {
+	key       string
+	value     string
+	enriched  bool
+}
+
+// enrichDescriptions enriches all descriptions using ollama with parallel processing
 func enrichDescriptions(descriptions map[string]DescriptionContext) map[string]string {
 	result := make(map[string]string)
+	var resultMu sync.Mutex
 
 	total := len(descriptions)
-	enriched := 0
-	passthrough := 0
+	var enriched atomic.Int64
+	var passthrough atomic.Int64
+	var processed atomic.Int64
 
+	// Separate items that need enrichment from passthrough
+	var needsWork []enrichmentJob
 	for key, ctx := range descriptions {
 		if !needsEnrichment(ctx.Description) {
 			// Pass through already-good descriptions
 			result[key] = ctx.Description
-			passthrough++
-			continue
-		}
-
-		// Enrich with LLM
-		improved := callOllama(ctx)
-		if improved != "" && validateEnrichment(ctx.Description, improved) {
-			result[key] = improved
-			enriched++
+			passthrough.Add(1)
 		} else {
-			result[key] = ctx.Description
-			passthrough++
-		}
-
-		// Progress
-		if *verbose || (enriched+passthrough)%100 == 0 {
-			log.Printf("Progress: %d/%d (enriched: %d, passthrough: %d)",
-				enriched+passthrough, total, enriched, passthrough)
+			needsWork = append(needsWork, enrichmentJob{key: key, ctx: ctx})
 		}
 	}
+
+	log.Printf("Descriptions: %d total, %d passthrough, %d need enrichment",
+		total, passthrough.Load(), len(needsWork))
+
+	if len(needsWork) == 0 {
+		return result
+	}
+
+	// Create worker pool
+	workers := *maxWorkers
+	if workers < 1 {
+		workers = 1
+	}
+	if workers > len(needsWork) {
+		workers = len(needsWork)
+	}
+
+	log.Printf("Starting enrichment with %d workers...", workers)
+
+	jobs := make(chan enrichmentJob, len(needsWork))
+	results := make(chan enrichmentResult, len(needsWork))
+
+	// Start workers
+	var wg sync.WaitGroup
+	for i := 0; i < workers; i++ {
+		wg.Add(1)
+		go func(workerID int) {
+			defer wg.Done()
+			for job := range jobs {
+				improved := callOllama(job.ctx)
+				wasEnriched := improved != "" && validateEnrichment(job.ctx.Description, improved)
+				if wasEnriched {
+					results <- enrichmentResult{key: job.key, value: improved, enriched: true}
+				} else {
+					results <- enrichmentResult{key: job.key, value: job.ctx.Description, enriched: false}
+				}
+			}
+		}(i)
+	}
+
+	// Send jobs
+	go func() {
+		for _, job := range needsWork {
+			jobs <- job
+		}
+		close(jobs)
+	}()
+
+	// Collect results with progress reporting
+	go func() {
+		wg.Wait()
+		close(results)
+	}()
+
+	lastProgress := time.Now()
+	for res := range results {
+		resultMu.Lock()
+		result[res.key] = res.value
+		resultMu.Unlock()
+
+		if res.enriched {
+			enriched.Add(1)
+		} else {
+			passthrough.Add(1)
+		}
+		processed.Add(1)
+
+		// Progress every 10 seconds or every 100 items
+		p := processed.Load()
+		if time.Since(lastProgress) > 10*time.Second || p%100 == 0 {
+			log.Printf("Progress: %d/%d enriched, %d/%d total (%.1f%%)",
+				enriched.Load(), len(needsWork), p, len(needsWork),
+				float64(p)/float64(len(needsWork))*100)
+			lastProgress = time.Now()
+		}
+	}
+
+	log.Printf("Enrichment complete: %d enriched, %d passthrough",
+		enriched.Load(), passthrough.Load())
 
 	return result
 }

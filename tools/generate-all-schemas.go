@@ -8,7 +8,7 @@
 //   Changes to this file trigger the generate.yml workflow which regenerates all
 //   provider resources from the latest OpenAPI specifications.
 //
-// Pipeline Verification: 2025-11-29T08:15 - Add logging to Create Regeneration PR workflow #281
+// Pipeline Verification: 2025-12-15 - Full end-to-end workflow validation #488
 //
 // Usage: go run tools/generate-all-schemas.go [--spec-dir=/path/to/specs] [--dry-run]
 //

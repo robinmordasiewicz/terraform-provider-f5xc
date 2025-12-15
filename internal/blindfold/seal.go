@@ -83,6 +83,8 @@ func SealBase64(plaintextBase64 string, pubKey *PublicKey, policy *SecretPolicyD
 }
 
 // buildRSAPublicKey constructs an RSA public key from the F5XC public key components.
+// F5XC uses a custom format where the exponent bytes may include a version prefix byte (0x03).
+// When present, this prefix must be stripped to extract the actual RSA exponent.
 func buildRSAPublicKey(pubKey *PublicKey) (*rsa.PublicKey, error) {
 	// Decode modulus from base64
 	modulusBytes, err := base64.StdEncoding.DecodeString(pubKey.ModulusBase64)
@@ -102,14 +104,31 @@ func buildRSAPublicKey(pubKey *PublicKey) (*rsa.PublicKey, error) {
 		return nil, fmt.Errorf("public exponent is empty")
 	}
 
+	// F5XC exponent format: The first byte (0x03) is a version/type indicator
+	// that must be stripped to get the actual RSA exponent value.
+	// Example: base64 "AzzBVP0=" decodes to [0x03, 0x3c, 0xc1, 0x54, 0xfd]
+	//          With prefix: 13904205053 (doesn't fit in int32)
+	//          Without prefix (0x3cc154fd): 1019303165 (valid RSA exponent)
+	actualExponentBytes := exponentBytes
+	if len(exponentBytes) > 1 && exponentBytes[0] == 0x03 {
+		actualExponentBytes = exponentBytes[1:]
+	}
+
 	// Convert to big integers
 	modulus := new(big.Int).SetBytes(modulusBytes)
-	exponent := new(big.Int).SetBytes(exponentBytes)
+	exponent := new(big.Int).SetBytes(actualExponentBytes)
 
-	// Validate exponent fits in int (should be 65537 typically)
+	// Validate exponent fits in int (should be 65537 typically, but F5XC uses larger values)
 	if !exponent.IsInt64() {
-		return nil, fmt.Errorf("public exponent too large")
+		return nil, fmt.Errorf("public exponent too large to fit in int64")
 	}
+
+	// Check Go crypto/rsa limit (must be <= 2^31-1)
+	maxExponent := int64(1<<31 - 1)
+	if exponent.Int64() > maxExponent {
+		return nil, fmt.Errorf("public exponent %d exceeds Go crypto/rsa limit (%d)", exponent.Int64(), maxExponent)
+	}
+
 	e := int(exponent.Int64())
 	if e <= 0 {
 		return nil, fmt.Errorf("public exponent must be positive")

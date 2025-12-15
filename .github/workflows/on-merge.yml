@@ -15,10 +15,16 @@
 #   - Human commit NOT needing regeneration -> Tag immediately (content complete)
 #   - Bot commit (regeneration merged) -> Tag now (content complete)
 #
+# FIX FOR MISSING RELEASES (Issue #484) - TAG ON ANY CHANGE:
+# Previously, only changes that triggered regeneration would create releases.
+# Now, ANY substantive change (code, docs, README, etc.) triggers a release.
+# Only workflow file and .gitignore changes are excluded from tagging.
+#
 # FLOW:
 # Human PR merges -> detect-changes -> build-test -> regenerate?
 #   -> If regeneration needed: Create PR, skip tagging (wait for PR to merge)
-#   -> If no regeneration: Tag and release immediately
+#   -> If no regeneration BUT has substantive changes: Tag and release immediately
+#   -> If only workflow/gitignore changes: Skip (no release needed)
 # Bot commit (regeneration PR merged) -> Tag and release
 #
 # REPLACED WORKFLOWS:
@@ -31,11 +37,8 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '*.md'
-      # Note: Don't ignore workflow files - changes to on-merge.yml itself
-      # should be testable via CI, but won't trigger regeneration anyway
-      # since the detect-changes job filters by actual code changes.
+    # Note: No paths-ignore - all changes should trigger workflow
+    # Specific path filtering happens in detect-changes job
 
 permissions:
   contents: write
@@ -59,6 +62,7 @@ jobs:
       functions-changed: ${{ steps.changes.outputs.functions }}
       mcp-changed: ${{ steps.changes.outputs.mcp }}
       docs-changed: ${{ steps.changes.outputs.docs }}
+      has-any-changes: ${{ steps.changes.outputs.has_any_changes }}
       is-bot-commit: ${{ steps.check-author.outputs.is_bot }}
       should-process: ${{ steps.should-process.outputs.result }}
       needs-regeneration: ${{ steps.should-process.outputs.needs_regeneration }}
@@ -156,6 +160,16 @@ jobs:
             echo "docs=false" >> $GITHUB_OUTPUT
           fi
 
+          # Check for ANY substantive changes (for tagging even without regeneration)
+          # Exclude only workflow files and gitignore - everything else is substantive
+          SUBSTANTIVE_CHANGES=$(echo "$CHANGED" | grep -vE '^\.github/workflows/|^\.gitignore' || true)
+          if [ -n "$SUBSTANTIVE_CHANGES" ]; then
+            echo "has_any_changes=true" >> $GITHUB_OUTPUT
+            echo "Substantive changes detected (will trigger tagging)"
+          else
+            echo "has_any_changes=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Determine if processing should proceed
         id: should-process
         run: |
@@ -165,6 +179,7 @@ jobs:
           TOOLS="${{ steps.changes.outputs.tools }}"
           FUNCTIONS="${{ steps.changes.outputs.functions }}"
           MCP="${{ steps.changes.outputs.mcp }}"
+          HAS_ANY_CHANGES="${{ steps.changes.outputs.has_any_changes }}"
 
           # Determine if regeneration would be needed
           NEEDS_REGEN="false"
@@ -184,10 +199,16 @@ jobs:
             echo "Processing: Bot commit - will proceed to tag/release"
             echo "result=true" >> $GITHUB_OUTPUT
           elif [[ "$NEEDS_REGEN" == "false" && "$NEEDS_MCP" == "false" ]]; then
-            echo "Skipping: No relevant changes detected"
-            echo "result=false" >> $GITHUB_OUTPUT
+            # No regeneration needed - check if there are any substantive changes for tagging
+            if [[ "$HAS_ANY_CHANGES" == "true" ]]; then
+              echo "Processing: Substantive changes without regeneration - will tag"
+              echo "result=true" >> $GITHUB_OUTPUT
+            else
+              echo "Skipping: No relevant changes detected"
+              echo "result=false" >> $GITHUB_OUTPUT
+            fi
           else
-            echo "Processing: Human commit with relevant changes"
+            echo "Processing: Human commit with regeneration/MCP changes"
             echo "result=true" >> $GITHUB_OUTPUT
           fi
 
@@ -497,12 +518,14 @@ jobs:
   # ===========================================================================
   # CRITICAL: Tags are ONLY created when content is definitively complete:
   #   1. Bot commit (regeneration PR was merged) -> Tag now, content is complete
-  #   2. Human commit that didn't need regeneration -> Tag now, content is complete
+  #   2. Human commit with substantive changes (no regen) -> Tag now, content is complete
   #   3. Human commit that created regeneration PR -> DON'T tag, wait for PR merge
+  #   4. Human commit with only workflow/gitignore changes -> Skip (no release needed)
   # Tagging conditions (comments cannot be inside if expressions):
   # - Case 1: Bot commit -> Tag immediately (regeneration is complete)
-  # - Case 2: Human commit without regeneration -> Tag immediately (PR job was skipped)
+  # - Case 2: Human commit with substantive changes, no regen -> Tag immediately (build passed)
   # - Case 3: Human commit WITH regeneration -> DON'T tag (wait for regen PR to merge)
+  # - Case 4: Only workflow/gitignore changes -> Skip (not substantive)
   tag-release:
     name: Tag and Release
     needs: [detect-changes, build-test, create-regeneration-pr]

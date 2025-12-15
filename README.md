@@ -37,6 +37,8 @@ This provider uses automated workflows for documentation generation and releases
 - **Releases**: Triggered automatically using [semantic versioning](https://semver.org/) based on conventional commits
 - **Testing**: All PRs require passing tests and lint checks
 
+All substantive changes (code, documentation, configuration) automatically trigger a new release with appropriate version bumping.
+
 For detailed contribution guidelines, see [CLAUDE.md](CLAUDE.md).
 
 ## License

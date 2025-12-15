@@ -29,6 +29,16 @@ export F5XC_API_TOKEN="your-api-token"
 - [Provider Documentation](https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest/docs)
 - [F5 Distributed Cloud API](https://docs.cloud.f5.com/)
 
+## Contributing
+
+This provider uses automated workflows for documentation generation and releases:
+
+- **Documentation**: Auto-generated from OpenAPI specs on merge to main
+- **Releases**: Triggered automatically using [semantic versioning](https://semver.org/) based on conventional commits
+- **Testing**: All PRs require passing tests and lint checks
+
+For detailed contribution guidelines, see [CLAUDE.md](CLAUDE.md).
+
 ## License
 
 [Mozilla Public License 2.0](LICENSE)

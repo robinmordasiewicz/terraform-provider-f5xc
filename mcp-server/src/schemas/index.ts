@@ -132,6 +132,17 @@ export const GetSummarySchema = z.object({
   response_format: ResponseFormatSchema,
 }).strict();
 
+// Get subscription info schema
+export const GetSubscriptionInfoSchema = z.object({
+  resource: z.string()
+    .optional()
+    .describe('Resource name to check (omit to get all Advanced tier resources)'),
+  tier: z.enum(['STANDARD', 'ADVANCED'])
+    .optional()
+    .describe('Filter by subscription tier'),
+  response_format: ResponseFormatSchema,
+}).strict();
+
 // Export type inference helpers
 export type SearchDocsInput = z.infer<typeof SearchDocsSchema>;
 export type GetDocInput = z.infer<typeof GetDocSchema>;
@@ -142,3 +153,4 @@ export type FindEndpointsInput = z.infer<typeof FindEndpointsSchema>;
 export type GetSchemaDefInput = z.infer<typeof GetSchemaDefSchema>;
 export type ListDefinitionsInput = z.infer<typeof ListDefinitionsSchema>;
 export type GetSummaryInput = z.infer<typeof GetSummarySchema>;
+export type GetSubscriptionInfoInput = z.infer<typeof GetSubscriptionInfoSchema>;

@@ -24,6 +24,9 @@ import {
   getDocumentation,
   listDocumentation,
   getDocumentationSummary,
+  getResourceSubscriptionInfo,
+  getAdvancedTierResources,
+  getSubscriptionSummary,
 } from './services/documentation.js';
 import {
   searchApiSpecs,
@@ -44,6 +47,7 @@ import {
   GetSchemaDefSchema,
   ListDefinitionsSchema,
   GetSummarySchema,
+  GetSubscriptionInfoSchema,
   type SearchDocsInput,
   type GetDocInput,
   type ListDocsInput,
@@ -53,6 +57,7 @@ import {
   type GetSchemaDefInput,
   type ListDefinitionsInput,
   type GetSummaryInput,
+  type GetSubscriptionInfoInput,
 } from './schemas/index.js';
 
 // Constants
@@ -754,6 +759,172 @@ Returns:
       lines.push('- `f5xc_terraform_find_endpoints` - Find API endpoints');
       lines.push('- `f5xc_terraform_get_schema_definition` - Get schema definition');
       lines.push('- `f5xc_terraform_list_definitions` - List definitions in a spec');
+      lines.push('- `f5xc_terraform_get_subscription_info` - Check subscription tier requirements');
+
+      textContent = lines.join('\n');
+    } else {
+      textContent = JSON.stringify(output, null, 2);
+    }
+
+    return {
+      content: [{ type: 'text', text: textContent }],
+      structuredContent: output,
+    };
+  }
+);
+
+// =============================================================================
+// SUBSCRIPTION TIER TOOL
+// =============================================================================
+
+server.registerTool(
+  'f5xc_terraform_get_subscription_info',
+  {
+    title: 'Get F5XC Subscription Tier Info',
+    description: `Get subscription tier requirements for F5 Distributed Cloud resources.
+
+Returns information about which resources require an Advanced subscription tier.
+Only Standard and Advanced subscription tiers are available.
+Resources not requiring Advanced are available with Standard subscription.
+
+Args:
+  - resource (optional): Specific resource name to check
+  - tier (optional): Filter by 'STANDARD' or 'ADVANCED'
+  - response_format: 'markdown' or 'json'
+
+Returns:
+  - For specific resource: Tier requirement and any Advanced-only features
+  - For no resource specified: List of all resources requiring Advanced tier
+
+Examples:
+  - resource="http_loadbalancer" -> Shows features requiring Advanced
+  - tier="ADVANCED" -> Lists all resources requiring Advanced subscription
+  - No args -> Summary of Advanced tier requirements`,
+    inputSchema: GetSubscriptionInfoSchema,
+    annotations: {
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+  },
+  async (params: GetSubscriptionInfoInput) => {
+    // Query for specific resource
+    if (params.resource) {
+      const info = getResourceSubscriptionInfo(params.resource);
+
+      if (!info) {
+        return {
+          content: [{
+            type: 'text',
+            text: `No subscription information found for resource "${params.resource}". The resource may not exist or may not have tier metadata.`,
+          }],
+        };
+      }
+
+      const output = {
+        resource: params.resource,
+        tier: info.tier,
+        service: info.service,
+        requires_advanced: info.requiresAdvanced,
+        advanced_features: info.advancedFeatures || [],
+      };
+
+      let textContent: string;
+      if (params.response_format === ResponseFormat.MARKDOWN) {
+        const lines = [
+          `# Subscription Info: ${params.resource}`,
+          '',
+          `**Minimum Tier**: ${info.tier}`,
+          `**Service**: ${info.service}`,
+          `**Requires Advanced**: ${info.requiresAdvanced ? 'Yes' : 'No'}`,
+          '',
+        ];
+
+        if (info.advancedFeatures && info.advancedFeatures.length > 0) {
+          lines.push('## Features Requiring Advanced Subscription');
+          lines.push('');
+          for (const feature of info.advancedFeatures) {
+            lines.push(`- \`${feature}\``);
+          }
+        } else if (!info.requiresAdvanced) {
+          lines.push('This resource is fully available with a Standard subscription.');
+        }
+
+        textContent = lines.join('\n');
+      } else {
+        textContent = JSON.stringify(output, null, 2);
+      }
+
+      return {
+        content: [{ type: 'text', text: textContent }],
+        structuredContent: output,
+      };
+    }
+
+    // List all Advanced tier resources
+    const advancedResources = getAdvancedTierResources();
+    const summary = getSubscriptionSummary();
+
+    // Filter by tier if specified
+    let filteredResources = advancedResources;
+    if (params.tier === 'ADVANCED') {
+      filteredResources = advancedResources.filter(r => r.subscriptionTier === 'ADVANCED');
+    }
+
+    const output = {
+      summary: {
+        total_resources: summary.totalResources,
+        advanced_only_resources: summary.advancedOnlyResources,
+        resources_with_advanced_features: summary.resourcesWithAdvancedFeatures,
+        advanced_features: summary.advancedFeaturesList,
+      },
+      resources: filteredResources.map(r => ({
+        name: r.name,
+        type: r.type,
+        tier: r.subscriptionTier,
+        service: r.addonService,
+        advanced_features: r.advancedFeatures,
+      })),
+    };
+
+    let textContent: string;
+    if (params.response_format === ResponseFormat.MARKDOWN) {
+      const lines = [
+        '# F5XC Subscription Tier Requirements',
+        '',
+        '## Summary',
+        '',
+        `- **Total Resources**: ${summary.totalResources}`,
+        `- **Resources Requiring Advanced**: ${summary.advancedOnlyResources}`,
+        `- **Resources with Advanced Features**: ${summary.resourcesWithAdvancedFeatures}`,
+        '',
+      ];
+
+      if (filteredResources.length > 0) {
+        lines.push('## Resources Requiring Advanced Subscription');
+        lines.push('');
+        for (const res of filteredResources) {
+          lines.push(`### ${res.name} (${res.type})`);
+          if (res.subscriptionTier === 'ADVANCED') {
+            lines.push('**Requires Advanced subscription**');
+          }
+          if (res.advancedFeatures && res.advancedFeatures.length > 0) {
+            lines.push('');
+            lines.push('Advanced-only features:');
+            for (const feat of res.advancedFeatures) {
+              lines.push(`- \`${feat}\``);
+            }
+          }
+          lines.push('');
+        }
+      }
+
+      if (summary.advancedFeaturesList.length > 0) {
+        lines.push('## All Advanced Features');
+        lines.push('');
+        lines.push(summary.advancedFeaturesList.map(f => `\`${f}\``).join(', '));
+      }
 
       textContent = lines.join('\n');
     } else {

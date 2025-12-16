@@ -1,0 +1,1165 @@
+{
+  "generated_at": "2025-12-16T21:47:06Z",
+  "source": "F5 XC Catalog API",
+  "services": {
+    "client-side-defense": {
+      "tier": "NO_TIER",
+      "display_name": "Client-Side Defense"
+    },
+    "data-intelligence": {
+      "tier": "NO_TIER",
+      "display_name": "Data Intelligence"
+    },
+    "f5xc-ai-assistant": {
+      "tier": "NO_TIER",
+      "display_name": "AI Assistant"
+    },
+    "f5xc-ai-assistant-standard": {
+      "tier": "STANDARD",
+      "display_name": "F5XC AI Assistant Standard",
+      "group_name": "f5xc-ai-assistant"
+    },
+    "f5xc-application-traffic-insight": {
+      "tier": "NO_TIER",
+      "display_name": "Application Traffic Insight"
+    },
+    "f5xc-application-traffic-insight-standard": {
+      "tier": "NO_TIER",
+      "display_name": "Application Traffic Insight",
+      "group_name": "f5xc-application-traffic-insight"
+    },
+    "f5xc-appstack": {
+      "tier": "NO_TIER",
+      "display_name": "App Stack"
+    },
+    "f5xc-appstack-standard": {
+      "tier": "NO_TIER",
+      "display_name": "App Stack",
+      "group_name": "f5xc-appstack"
+    },
+    "f5xc-big-ip-irule": {
+      "tier": "NO_TIER",
+      "display_name": "iRules"
+    },
+    "f5xc-big-ip-irule-standard": {
+      "tier": "NO_TIER",
+      "display_name": "iRules",
+      "group_name": "f5xc-big-ip-irule"
+    },
+    "f5xc-bigip-utilities": {
+      "tier": "NO_TIER",
+      "display_name": "iHealth"
+    },
+    "f5xc-bigip-utilities-standard": {
+      "tier": "NO_TIER",
+      "display_name": "BIG-IP Utilities",
+      "group_name": "f5xc-bigip-utilities"
+    },
+    "f5xc-bot-defense": {
+      "tier": "NO_TIER",
+      "display_name": "Bot Defense"
+    },
+    "f5xc-bot-defense-advanced": {
+      "tier": "ADVANCED",
+      "display_name": "Bot Defense Advanced (coming soon)",
+      "group_name": "f5xc-bot-defense"
+    },
+    "f5xc-bot-defense-standard": {
+      "tier": "STANDARD",
+      "display_name": "Bot Defense Standard",
+      "group_name": "f5xc-bot-defense"
+    },
+    "f5xc-client-side-defense-standard": {
+      "tier": "NO_TIER",
+      "display_name": "Client-Side Defense (Preview)",
+      "group_name": "client-side-defense"
+    },
+    "f5xc-console-advanced": {
+      "tier": "ADVANCED",
+      "display_name": "F5XC Console Advanced",
+      "group_name": "f5xc-console-base"
+    },
+    "f5xc-console-base": {
+      "tier": "ADVANCED",
+      "display_name": "Console"
+    },
+    "f5xc-console-basic": {
+      "tier": "BASIC",
+      "display_name": "F5XC Console Basic",
+      "group_name": "f5xc-console-base"
+    },
+    "f5xc-console-standard": {
+      "tier": "STANDARD",
+      "display_name": "F5XC Console Standard",
+      "group_name": "f5xc-console-base"
+    },
+    "f5xc-content-delivery-network-standard": {
+      "tier": "STANDARD",
+      "display_name": "Content Delivery Network",
+      "group_name": "lilac-cdn"
+    },
+    "f5xc-core-platform-services": {
+      "tier": "ADVANCED",
+      "display_name": "Core Platform Services"
+    },
+    "f5xc-core-platform-services-advanced": {
+      "tier": "ADVANCED",
+      "display_name": "F5XC Core Platform Services Advanced",
+      "group_name": "f5xc-core-platform-services"
+    },
+    "f5xc-core-platform-services-standard": {
+      "tier": "STANDARD",
+      "display_name": "F5XC Core Platform Services Standard",
+      "group_name": "f5xc-core-platform-services"
+    },
+    "f5xc-data-intelligence-standard": {
+      "tier": "NO_TIER",
+      "display_name": "Data Intelligence",
+      "group_name": "data-intelligence"
+    },
+    "f5xc-delegated-access-standard": {
+      "tier": "NO_TIER",
+      "display_name": "Delegated Access",
+      "group_name": "ves-io-tenant-management"
+    },
+    "f5xc-dns": {
+      "tier": "NO_TIER",
+      "display_name": "DNS"
+    },
+    "f5xc-dns-standard": {
+      "tier": "NO_TIER",
+      "display_name": "DNS Management",
+      "group_name": "f5xc-dns"
+    },
+    "f5xc-malware-protection": {
+      "tier": "NO_TIER",
+      "display_name": "Malware Protection"
+    },
+    "f5xc-malware-protection-standard": {
+      "tier": "STANDARD",
+      "display_name": "Malware Protection",
+      "group_name": "f5xc-malware-protection"
+    },
+    "f5xc-mobile-app-shield": {
+      "tier": "NO_TIER",
+      "display_name": "Mobile App Shield"
+    },
+    "f5xc-mobile-app-shield-standard": {
+      "tier": "STANDARD",
+      "display_name": "Mobile App Shield",
+      "group_name": "f5xc-mobile-app-shield"
+    },
+    "f5xc-mobile-integrator": {
+      "tier": "NO_TIER",
+      "display_name": "Mobile Integrator"
+    },
+    "f5xc-mobile-integrator-standard": {
+      "tier": "STANDARD",
+      "display_name": "Mobile SDK Integrator",
+      "group_name": "f5xc-mobile-integrator"
+    },
+    "f5xc-nginx-one-standard": {
+      "tier": "STANDARD",
+      "display_name": "NGINX One Console",
+      "group_name": "nginx-one"
+    },
+    "f5xc-routed-ddos": {
+      "tier": "NO_TIER",
+      "display_name": "Routed DDoS"
+    },
+    "f5xc-routed-ddos-standard": {
+      "tier": "NO_TIER",
+      "display_name": "Routed DDoS",
+      "group_name": "f5xc-routed-ddos"
+    },
+    "f5xc-securemesh": {
+      "tier": "ADVANCED",
+      "display_name": "Secure Mesh"
+    },
+    "f5xc-securemesh-advanced": {
+      "tier": "ADVANCED",
+      "display_name": "Secure Mesh Advanced",
+      "group_name": "f5xc-securemesh"
+    },
+    "f5xc-securemesh-standard": {
+      "tier": "STANDARD",
+      "display_name": "Secure Mesh Standard",
+      "group_name": "f5xc-securemesh"
+    },
+    "f5xc-site-management": {
+      "tier": "NO_TIER",
+      "display_name": "Site Management"
+    },
+    "f5xc-site-management-standard": {
+      "tier": "NO_TIER",
+      "display_name": "Site Management Standard",
+      "group_name": "f5xc-site-management"
+    },
+    "f5xc-synthetic-monitoring-standard": {
+      "tier": "NO_TIER",
+      "display_name": "Synthetic Monitoring",
+      "group_name": "synthetic-monitor"
+    },
+    "f5xc-waap": {
+      "tier": "ADVANCED",
+      "display_name": "Web App \u0026 API Protection"
+    },
+    "f5xc-waap-advanced": {
+      "tier": "ADVANCED",
+      "display_name": "Web Application and API Protection (WAAP) Advanced",
+      "group_name": "f5xc-waap"
+    },
+    "f5xc-waap-standard": {
+      "tier": "STANDARD",
+      "display_name": "Web Application and API Protection (WAAP) Standard",
+      "group_name": "f5xc-waap"
+    },
+    "f5xc-web-app-scanning": {
+      "tier": "NO_TIER",
+      "display_name": "Web App Scanning"
+    },
+    "f5xc-web-app-scanning-standard": {
+      "tier": "STANDARD",
+      "display_name": "Web App Scanning Standard",
+      "group_name": "f5xc-web-app-scanning"
+    },
+    "lilac-cdn": {
+      "tier": "NO_TIER",
+      "display_name": "Content Delivery Network"
+    },
+    "nginx-one": {
+      "tier": "NO_TIER",
+      "display_name": "NGINX One Console"
+    },
+    "safeap": {
+      "tier": "NO_TIER",
+      "display_name": "Account Protection",
+      "group_name": "safeap"
+    },
+    "shape-recognize": {
+      "tier": "NO_TIER",
+      "display_name": "Authentication Intelligence",
+      "group_name": "shape-recognize"
+    },
+    "synthetic-monitor": {
+      "tier": "NO_TIER",
+      "display_name": "Synthetic Monitoring"
+    },
+    "ves-io-tenant-management": {
+      "tier": "NO_TIER",
+      "display_name": "Delegated Access"
+    }
+  },
+  "resources": {
+    "address_allocator": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "advertise_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "ai_assistant": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "alert": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "alert_gen_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "alert_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "alert_receiver": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "alert_template": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "allowed_domain": {
+      "service": "client_side_defense",
+      "minimum_tier": "ADVANCED"
+    },
+    "api_crawler": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "api_credential": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "api_definition": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "api_discovery": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "api_group": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "api_group_element": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "api_testing": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "apm": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "app_api_group": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "app_firewall": {
+      "service": "waap",
+      "minimum_tier": "STANDARD",
+      "advanced_features": [
+        "advanced_detection_settings",
+        "ai_bot_defense"
+      ]
+    },
+    "app_security": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "app_setting": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "app_type": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "authentication": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "aws_tgw_site": {
+      "service": "site_management",
+      "minimum_tier": "STANDARD"
+    },
+    "aws_vpc_site": {
+      "service": "site_management",
+      "minimum_tier": "STANDARD"
+    },
+    "azure_vnet_site": {
+      "service": "site_management",
+      "minimum_tier": "STANDARD"
+    },
+    "bfdp": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "bgp": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "bgp_asn_set": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "bgp_routing_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "bigip_irule": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "bigip_virtual_server": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "bot_allowlist_policy": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "bot_defense_app_infrastructure": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "bot_detection_rule": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "bot_detection_update": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "bot_endpoint_policy": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "bot_infrastructure": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "bot_network_policy": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "cdn_cache_rule": {
+      "service": "cdn",
+      "minimum_tier": "STANDARD"
+    },
+    "cdn_loadbalancer": {
+      "service": "cdn",
+      "minimum_tier": "STANDARD",
+      "advanced_features": [
+        "advanced_caching",
+        "edge_compute"
+      ]
+    },
+    "certificate": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "certificate_chain": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "certified_hardware": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "client_side_defense": {
+      "service": "client_side_defense",
+      "minimum_tier": "ADVANCED"
+    },
+    "cloud_connect": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "cloud_credentials": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "cloud_elastic_ip": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "cloud_link": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "cloud_region": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "cluster": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "cminstance": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "code_base_integration": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "contact": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "container_registry": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "crl": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "customer_support": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "data_delivery": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "data_group": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "data_type": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "dc_cluster_group": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "device_id": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "discovered_service": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "discovery": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "dns_compliance_checks": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "dns_domain": {
+      "service": "dns",
+      "minimum_tier": "STANDARD"
+    },
+    "dns_lb_health_check": {
+      "service": "dns",
+      "minimum_tier": "STANDARD"
+    },
+    "dns_lb_pool": {
+      "service": "dns",
+      "minimum_tier": "STANDARD"
+    },
+    "dns_load_balancer": {
+      "service": "dns",
+      "minimum_tier": "STANDARD"
+    },
+    "dns_zone": {
+      "service": "dns",
+      "minimum_tier": "STANDARD"
+    },
+    "endpoint": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "enhanced_firewall_policy": {
+      "service": "network_connect",
+      "minimum_tier": "STANDARD"
+    },
+    "external_connector": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "fast_acl": {
+      "service": "network_connect",
+      "minimum_tier": "STANDARD"
+    },
+    "fast_acl_rule": {
+      "service": "network_connect",
+      "minimum_tier": "STANDARD"
+    },
+    "filter_set": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "fleet": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "flow": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "flow_anomaly": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "forward_proxy_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "forwarding_class": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "gcp_vpc_site": {
+      "service": "site_management",
+      "minimum_tier": "STANDARD"
+    },
+    "geo_config": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "geo_location_set": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "gia": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "global_log_receiver": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "healthcheck": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "http_loadbalancer": {
+      "service": "waap",
+      "minimum_tier": "STANDARD",
+      "advanced_features": [
+        "api_discovery",
+        "bot_defense",
+        "malicious_user_detection",
+        "sensitive_data_policy"
+      ]
+    },
+    "ike1": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "ike2": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "ike_phase1_profile": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "ike_phase2_profile": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "implicit_label": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "infraprotect": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "infraprotect_asn": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "infraprotect_asn_prefix": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "infraprotect_deny_list_rule": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "infraprotect_firewall_rule": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "infraprotect_firewall_rule_group": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "infraprotect_firewall_ruleset": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "infraprotect_information": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "infraprotect_internet_prefix_advertisement": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "infraprotect_tunnel": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "ip_prefix_set": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "irule": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "k8s_cluster": {
+      "service": "appstack",
+      "minimum_tier": "STANDARD"
+    },
+    "k8s_cluster_role": {
+      "service": "appstack",
+      "minimum_tier": "STANDARD"
+    },
+    "k8s_cluster_role_binding": {
+      "service": "appstack",
+      "minimum_tier": "STANDARD"
+    },
+    "k8s_pod_security_admission": {
+      "service": "appstack",
+      "minimum_tier": "STANDARD"
+    },
+    "k8s_pod_security_policy": {
+      "service": "appstack",
+      "minimum_tier": "STANDARD"
+    },
+    "known_label": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "known_label_key": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "lma_region": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "log": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "log_receiver": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "maintenance_status": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "malicious_user_mitigation": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "mitigated_domain": {
+      "service": "client_side_defense",
+      "minimum_tier": "ADVANCED"
+    },
+    "mobile_base_config": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "mobile_sdk": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "module_management": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "namespace": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "namespace_role": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "nat_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "network_connector": {
+      "service": "network_connect",
+      "minimum_tier": "STANDARD"
+    },
+    "network_firewall": {
+      "service": "network_connect",
+      "minimum_tier": "STANDARD"
+    },
+    "network_interface": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "network_policy": {
+      "service": "network_connect",
+      "minimum_tier": "STANDARD"
+    },
+    "network_policy_rule": {
+      "service": "network_connect",
+      "minimum_tier": "STANDARD"
+    },
+    "network_policy_set": {
+      "service": "network_connect",
+      "minimum_tier": "STANDARD"
+    },
+    "network_policy_view": {
+      "service": "network_connect",
+      "minimum_tier": "STANDARD"
+    },
+    "nfv_service": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "nginx_csg": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "nginx_instance": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "nginx_server": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "nginx_service_discovery": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "oidc_provider": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "origin_pool": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "policer": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "policy_based_routing": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "protected_application": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "protected_domain": {
+      "service": "client_side_defense",
+      "minimum_tier": "ADVANCED"
+    },
+    "protocol_inspection": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "protocol_policer": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "proxy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "public_ip": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "quota": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "rate_limiter": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "rate_limiter_policy": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "rbac_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "receiver": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "recognize": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "registration": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "report": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "report_config": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "reporting": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "role": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "route": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "rrset": {
+      "service": "dns",
+      "minimum_tier": "STANDARD"
+    },
+    "rule_suggestion": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "safe": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "safeap": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "scim": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "secret_management": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "secret_management_access": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "secret_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "secret_policy_rule": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "securemesh_site": {
+      "service": "securemesh",
+      "minimum_tier": "STANDARD"
+    },
+    "securemesh_site_v2": {
+      "service": "securemesh",
+      "minimum_tier": "STANDARD"
+    },
+    "segment": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "segment_connection": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "sensitive_data_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "service_policy": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "service_policy_rule": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "service_policy_set": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "shape_bot_defense_instance": {
+      "service": "waap_advanced",
+      "minimum_tier": "ADVANCED"
+    },
+    "signup": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "site": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "site_mesh_group": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "srv6_network_slice": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "status_at_site": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "stored_object": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "subnet": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "subscription": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "synthetic_monitor": {
+      "service": "synthetic_monitoring",
+      "minimum_tier": "STANDARD"
+    },
+    "tcp_loadbalancer": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "tenant": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "tenant_configuration": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "tenant_management": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "terraform_parameters": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "third_party_application": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "ticket_tracking_system": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "token": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "topology": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "tpm_api_key": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "tpm_category": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "tpm_manager": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "tpm_provision": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "trusted_ca_list": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "tunnel": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "udp_loadbalancer": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "upgrade_status": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "usage": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "usb_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "user": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "user_group": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "user_identification": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "user_token": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "v1_dns_monitor": {
+      "service": "synthetic_monitoring",
+      "minimum_tier": "STANDARD"
+    },
+    "v1_http_monitor": {
+      "service": "synthetic_monitoring",
+      "minimum_tier": "STANDARD"
+    },
+    "view_internal": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "virtual_appliance": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "virtual_host": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "virtual_k8s": {
+      "service": "appstack",
+      "minimum_tier": "STANDARD"
+    },
+    "virtual_network": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "virtual_site": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "voltshare": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "voltshare_admin_policy": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    },
+    "voltstack_site": {
+      "service": "securemesh",
+      "minimum_tier": "STANDARD"
+    },
+    "waf": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "waf_exclusion_policy": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "waf_signatures_changelog": {
+      "service": "waap",
+      "minimum_tier": "STANDARD"
+    },
+    "workload": {
+      "service": "appstack",
+      "minimum_tier": "STANDARD"
+    },
+    "workload_flavor": {
+      "service": "core",
+      "minimum_tier": "NO_TIER"
+    }
+  }
+}

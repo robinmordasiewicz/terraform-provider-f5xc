@@ -10,6 +10,7 @@ package main
 import (
 	"crypto/md5"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -24,6 +25,136 @@ import (
 
 // Global defaults store for API-discovered default values
 var apiDefaultsStore *defaults.Store
+
+// SubscriptionMetadata holds subscription tier information loaded from tools/subscription-tiers.json
+type SubscriptionMetadata struct {
+	GeneratedAt string                      `json:"generated_at"`
+	Source      string                      `json:"source"`
+	Services    map[string]ServiceMetadata  `json:"services"`
+	Resources   map[string]ResourceMetadata `json:"resources"`
+}
+
+// ServiceMetadata contains metadata about an addon service
+type ServiceMetadata struct {
+	Tier        string `json:"tier"`
+	DisplayName string `json:"display_name"`
+	GroupName   string `json:"group_name,omitempty"`
+}
+
+// ResourceMetadata contains subscription metadata for a Terraform resource
+type ResourceMetadata struct {
+	Service          string   `json:"service"`
+	MinimumTier      string   `json:"minimum_tier"`
+	AdvancedFeatures []string `json:"advanced_features,omitempty"`
+}
+
+// Global subscription metadata store
+var subscriptionMetadata *SubscriptionMetadata
+
+// loadSubscriptionMetadata loads the subscription tier metadata from tools/subscription-tiers.json
+func loadSubscriptionMetadata() {
+	metadataPath := "tools/subscription-tiers.json"
+	data, err := os.ReadFile(metadataPath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Note: Could not load subscription tier metadata from %s: %v\n", metadataPath, err)
+		fmt.Fprintf(os.Stderr, "      Run 'scripts/update-subscription-metadata.sh' to generate it\n")
+		return
+	}
+
+	subscriptionMetadata = &SubscriptionMetadata{}
+	if err := json.Unmarshal(data, subscriptionMetadata); err != nil {
+		fmt.Fprintf(os.Stderr, "Warning: Could not parse subscription tier metadata: %v\n", err)
+		subscriptionMetadata = nil
+		return
+	}
+
+	fmt.Printf("Loaded subscription metadata: %d resources\n", len(subscriptionMetadata.Resources))
+}
+
+// getSubscriptionTierNote returns a Terraform Registry-compatible note for resources requiring
+// Advanced subscription tier or having Advanced-only features. Returns empty string for
+// Standard/NO_TIER resources without Advanced features.
+func getSubscriptionTierNote(resourceName string) string {
+	if subscriptionMetadata == nil {
+		return ""
+	}
+
+	// Try to find resource metadata using multiple name variations
+	// The Terraform resource names may differ from OpenAPI schema names
+	resMeta, ok := findResourceMetadata(resourceName)
+	if !ok {
+		return ""
+	}
+
+	// Case 1: Resource requires Advanced tier entirely
+	if resMeta.MinimumTier == "ADVANCED" {
+		return "~> **Subscription Required:** This resource requires an F5 Distributed Cloud " +
+			"**Advanced** subscription. [Compare subscription tiers](https://www.f5.com/products/get-f5/compare)."
+	}
+
+	// Case 2: Standard tier resource with some features requiring Advanced
+	if len(resMeta.AdvancedFeatures) > 0 {
+		features := strings.Join(resMeta.AdvancedFeatures, "`, `")
+		return fmt.Sprintf("~> **Note:** Some features of this resource (`%s`) require an F5 Distributed Cloud "+
+			"**Advanced** subscription. [Compare subscription tiers](https://www.f5.com/products/get-f5/compare).", features)
+	}
+
+	// Case 3: No subscription note needed
+	return ""
+}
+
+// findResourceMetadata attempts to find resource metadata using various name patterns
+// This handles differences between Terraform resource names and OpenAPI schema names
+func findResourceMetadata(resourceName string) (*ResourceMetadata, bool) {
+	if subscriptionMetadata == nil {
+		return nil, false
+	}
+
+	// Try exact match first
+	if resMeta, ok := subscriptionMetadata.Resources[resourceName]; ok {
+		return &resMeta, true
+	}
+
+	// Common name transformations to try
+	nameVariants := []string{
+		// Remove common prefixes
+		strings.TrimPrefix(resourceName, "f5xc_"),
+
+		// Remove common suffixes that differ from schema names
+		strings.TrimSuffix(resourceName, "_resource"),
+
+		// Handle bot_defense_app_infrastructure -> bot_infrastructure mapping
+		strings.Replace(resourceName, "bot_defense_app_", "bot_", 1),
+		strings.Replace(resourceName, "bot_defense_", "", 1),
+
+		// Handle shape_ prefix variations
+		"shape_" + resourceName,
+		strings.TrimPrefix(resourceName, "shape_"),
+
+		// Handle client_side_defense variations
+		strings.Replace(resourceName, "client_side_defense_", "", 1),
+
+		// Handle underscore variations (some use snake_case differently)
+		strings.ReplaceAll(resourceName, "__", "_"),
+	}
+
+	// Try each variant
+	for _, variant := range nameVariants {
+		if resMeta, ok := subscriptionMetadata.Resources[variant]; ok {
+			return &resMeta, true
+		}
+	}
+
+	// Try partial matching for nested resources (e.g., "bot_allowlist_policy" in "shape.bot_defense.bot_allowlist_policy")
+	for key, resMeta := range subscriptionMetadata.Resources {
+		if strings.HasSuffix(key, resourceName) || strings.Contains(key, resourceName) {
+			rm := resMeta // Create a copy to return pointer
+			return &rm, true
+		}
+	}
+
+	return nil, false
+}
 
 // metadataFields defines the standard F5 XC metadata fields that should be grouped
 // under "Metadata Argument Reference" section, following Volterra provider conventions
@@ -144,6 +275,9 @@ func main() {
 		resources := apiDefaultsStore.ListResources()
 		fmt.Printf("Loaded API defaults for %d resources\n", len(resources))
 	}
+
+	// Load subscription tier metadata for documentation notes
+	loadSubscriptionMetadata()
 
 	docsDir := "docs/resources"
 	var docWarnings []docWarning
@@ -630,6 +764,21 @@ func transformAnchorsOnly(filePath string, content string) error {
 	// Phase 2: Apply description deduplication to collapse ObjectRef blocks (Issue #287)
 	result = applyDescriptionDeduplication(result)
 
+	// Inject subscription tier note as FINAL step (after all escaping/URL processing)
+	if tierNote := getSubscriptionTierNote(resourceName); tierNote != "" {
+		if !strings.Contains(result, "Subscription Required") && !strings.Contains(result, "Some features of this resource") {
+			// Find the position to inject: right before "## Schema" (for already-transformed files)
+			// or "## Argument Reference" (for fully processed files)
+			schemaMarker := "## Schema"
+			argRefMarker := "## Argument Reference"
+			if idx := strings.Index(result, schemaMarker); idx > 0 {
+				result = result[:idx] + tierNote + "\n\n" + result[idx:]
+			} else if idx := strings.Index(result, argRefMarker); idx > 0 {
+				result = result[:idx] + tierNote + "\n\n" + result[idx:]
+			}
+		}
+	}
+
 	return os.WriteFile(filePath, []byte(result), 0644)
 }
 
@@ -961,6 +1110,9 @@ func transformDoc(filePath string) error {
 		output.WriteString("\n")
 	}
 	_ = genericAPILink // suppress unused variable warning (used for documentation)
+
+	// NOTE: Subscription tier note injection moved to end of transformDoc (after all escaping)
+	// to avoid asterisks being escaped by escapeEmphasisMarkersInContent
 
 	// Process the Schema section
 	output.WriteString("## Argument Reference\n\n")
@@ -1560,6 +1712,17 @@ func transformDoc(filePath string) error {
 
 	// Final normalization after optimizations to ensure markdown compliance
 	result = normalizeBlankLines(result)
+
+	// Inject subscription tier note as FINAL step (after all escaping/URL processing)
+	if tierNote := getSubscriptionTierNote(resourceName); tierNote != "" {
+		if !strings.Contains(result, "Subscription Required") && !strings.Contains(result, "Some features of this resource") {
+			// Find the position to inject: right before "## Argument Reference"
+			argRefMarker := "## Argument Reference"
+			if idx := strings.Index(result, argRefMarker); idx > 0 {
+				result = result[:idx] + tierNote + "\n\n" + result[idx:]
+			}
+		}
+	}
 
 	return os.WriteFile(filePath, []byte(result), 0644)
 }

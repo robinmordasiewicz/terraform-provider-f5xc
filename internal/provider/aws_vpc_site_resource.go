@@ -1633,7 +1633,7 @@ func (r *AWSVPCSiteResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *AWSVPCSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             aws_vpc_siteSchemaVersion,
-		MarkdownDescription: "[Category: Sites] [Namespace: required] Manages a AWS VPC Site resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.",
+		MarkdownDescription: "Manages a AWS VPC Site resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the AWS VPC Site. Must be unique within the namespace.",

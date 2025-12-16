@@ -2,12 +2,12 @@
 page_title: "f5xc_network_connector Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  [Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+  Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 ---
 
 # f5xc_network_connector (Resource)
 
-[Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 
 ~> **Note** Please refer to [Network Connector API docs](https://docs.cloud.f5.com/docs-v2/api/network-connector) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Network Connector Resource Example
-# [Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+# Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
 
 # Basic Network Connector configuration
 resource "f5xc_network_connector" "example" {
@@ -134,35 +134,19 @@ A [`custom_certificate`](#certificate-1f025c) block (within [`enable_forward_pro
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-5c3932) block (within [`enable_forward_proxy.tls_intercept.custom_certificate`](#certificate-1f025c)) supports the following:
-
-<a id="algorithms-a9b03c"></a>&#x2022; [`hash_algorithms`](#algorithms-a9b03c) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-6c6e2f"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Private Key
 
-A [`private_key`](#key-363f83) block (within [`enable_forward_proxy.tls_intercept.custom_certificate`](#certificate-1f025c)) supports the following:
-
-<a id="info-6eeb5b"></a>&#x2022; [`blindfold_secret_info`](#info-6eeb5b) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-6eeb5b) below.
-
-<a id="info-9a0968"></a>&#x2022; [`clear_secret_info`](#info-9a0968) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-9a0968) below.
+<a id="deep-4fd3d2"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-6eeb5b) block (within [`enable_forward_proxy.tls_intercept.custom_certificate.private_key`](#key-363f83)) supports the following:
-
-<a id="provider-37674c"></a>&#x2022; [`decryption_provider`](#provider-37674c) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-cd381c"></a>&#x2022; [`location`](#location-cd381c) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-87c69a"></a>&#x2022; [`store_provider`](#provider-87c69a) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-6645c5"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Enable Forward Proxy TLS Intercept Custom Certificate Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-9a0968) block (within [`enable_forward_proxy.tls_intercept.custom_certificate.private_key`](#key-363f83)) supports the following:
-
-<a id="ref-10c196"></a>&#x2022; [`provider_ref`](#ref-10c196) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-c964f8"></a>&#x2022; [`url`](#url-c964f8) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-221ddd"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Enable Forward Proxy TLS Intercept Policy
 
@@ -172,23 +156,11 @@ A [`policy`](#policy-3a19ff) block (within [`enable_forward_proxy.tls_intercept`
 
 #### Enable Forward Proxy TLS Intercept Policy Interception Rules
 
-An [`interception_rules`](#rules-e7522a) block (within [`enable_forward_proxy.tls_intercept.policy`](#policy-3a19ff)) supports the following:
-
-<a id="interception-56a6e3"></a>&#x2022; [`disable_interception`](#interception-56a6e3) - Optional Block<br>Enable this option
-
-<a id="match-4943d0"></a>&#x2022; [`domain_match`](#match-4943d0) - Optional Block<br>Domains. Domains names<br>See [Domain Match](#match-4943d0) below.
-
-<a id="interception-efdc2a"></a>&#x2022; [`enable_interception`](#interception-efdc2a) - Optional Block<br>Enable this option
+<a id="deep-a7a09a"></a>Deeply nested **Rules** block collapsed for readability.
 
 #### Enable Forward Proxy TLS Intercept Policy Interception Rules Domain Match
 
-A [`domain_match`](#match-4943d0) block (within [`enable_forward_proxy.tls_intercept.policy.interception_rules`](#rules-e7522a)) supports the following:
-
-<a id="value-3ef7b1"></a>&#x2022; [`exact_value`](#value-3ef7b1) - Optional String<br>Exact Value. Exact domain name
-
-<a id="value-abfb47"></a>&#x2022; [`regex_value`](#value-abfb47) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
-
-<a id="value-87b156"></a>&#x2022; [`suffix_value`](#value-87b156) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="deep-bd11da"></a>Deeply nested **Match** block collapsed for readability.
 
 #### SLI To Global DR
 
@@ -198,13 +170,7 @@ A [`sli_to_global_dr`](#sli-to-global-dr) block supports the following:
 
 #### SLI To Global DR Global Vn
 
-A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](#sli-to-global-dr)) supports the following:
-
-<a id="sli-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#sli-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="sli-to-global-dr-global-vn-namespace"></a>&#x2022; [`namespace`](#sli-to-global-dr-global-vn-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="sli-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#sli-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-d5c083"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### SLI To Slo Snat
 
@@ -222,13 +188,7 @@ A [`slo_to_global_dr`](#slo-to-global-dr) block supports the following:
 
 #### Slo To Global DR Global Vn
 
-A [`global_vn`](#slo-to-global-dr-global-vn) block (within [`slo_to_global_dr`](#slo-to-global-dr)) supports the following:
-
-<a id="slo-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#slo-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="slo-to-global-dr-global-vn-namespace"></a>&#x2022; [`namespace`](#slo-to-global-dr-global-vn-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="slo-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#slo-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-df6523"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Timeouts
 
@@ -241,6 +201,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

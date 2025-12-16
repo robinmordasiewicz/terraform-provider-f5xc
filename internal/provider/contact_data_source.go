@@ -42,7 +42,7 @@ func (d *ContactDataSource) Metadata(ctx context.Context, req datasource.Metadat
 
 func (d *ContactDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Namespace: required] Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

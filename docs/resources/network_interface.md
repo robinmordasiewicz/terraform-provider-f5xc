@@ -2,12 +2,12 @@
 page_title: "f5xc_network_interface Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  [Category: Networking] [Namespace: required] Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
+  Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 ---
 
 # f5xc_network_interface (Resource)
 
-[Category: Networking] [Namespace: required] Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
+Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
 ~> **Note** Please refer to [Network Interface API docs](https://docs.cloud.f5.com/docs-v2/api/network-interface) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Network Interface Resource Example
-# [Category: Networking] [Namespace: required] Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
+# Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
 # Basic Network Interface configuration
 resource "f5xc_network_interface" "example" {
@@ -229,27 +229,15 @@ A [`router`](#router-6def67) block (within [`ethernet_interface.ipv6_auto_config
 
 #### Ethernet Interface IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-158527) block (within [`ethernet_interface.ipv6_auto_config.router`](#router-6def67)) supports the following:
-
-<a id="list-97dc97"></a>&#x2022; [`configured_list`](#list-97dc97) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-97dc97) below.
-
-<a id="dns-4f2edd"></a>&#x2022; [`local_dns`](#dns-4f2edd) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-4f2edd) below.
+<a id="deep-855d8b"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Ethernet Interface IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-97dc97) block (within [`ethernet_interface.ipv6_auto_config.router.dns_config`](#config-158527)) supports the following:
-
-<a id="list-d2555f"></a>&#x2022; [`dns_list`](#list-d2555f) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-9a771b"></a>Deeply nested **List** block collapsed for readability.
 
 #### Ethernet Interface IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-4f2edd) block (within [`ethernet_interface.ipv6_auto_config.router.dns_config`](#config-158527)) supports the following:
-
-<a id="address-e28f23"></a>&#x2022; [`configured_address`](#address-e28f23) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-2afc2b"></a>&#x2022; [`first_address`](#address-2afc2b) - Optional Block<br>Enable this option
-
-<a id="address-dcd04c"></a>&#x2022; [`last_address`](#address-dcd04c) - Optional Block<br>Enable this option
+<a id="deep-13bdeb"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Ethernet Interface IPv6 Auto Config Router Stateful
 
@@ -267,27 +255,15 @@ A [`stateful`](#stateful-79d901) block (within [`ethernet_interface.ipv6_auto_co
 
 #### Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-d6f901) block (within [`ethernet_interface.ipv6_auto_config.router.stateful`](#stateful-79d901)) supports the following:
-
-<a id="prefix-565b87"></a>&#x2022; [`network_prefix`](#prefix-565b87) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-33d269"></a>&#x2022; [`pool_settings`](#settings-33d269) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-4f3a5b"></a>&#x2022; [`pools`](#pools-4f3a5b) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-4f3a5b) below.
+<a id="deep-fbbc37"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-4f3a5b) block (within [`ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-d6f901)) supports the following:
-
-<a id="end-ip-8f8c63"></a>&#x2022; [`end_ip`](#end-ip-8f8c63) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-c200b0"></a>&#x2022; [`start_ip`](#start-ip-c200b0) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-2b5c2c"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Ethernet Interface IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-f0bf9b) block (within [`ethernet_interface.ipv6_auto_config.router.stateful`](#stateful-79d901)) supports the following:
-
-<a id="map-e391fe"></a>&#x2022; [`interface_ip_map`](#map-e391fe) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-1f1e49"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Ethernet Interface Static IP
 
@@ -321,17 +297,11 @@ A [`static_ipv6_address`](#ethernet-interface-static-ipv6-address) block (within
 
 #### Ethernet Interface Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-b271a0) block (within [`ethernet_interface.static_ipv6_address`](#ethernet-interface-static-ipv6-address)) supports the following:
-
-<a id="map-fe379f"></a>&#x2022; [`interface_ip_map`](#map-fe379f) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-1cbe36"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Ethernet Interface Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-638f79) block (within [`ethernet_interface.static_ipv6_address`](#ethernet-interface-static-ipv6-address)) supports the following:
-
-<a id="default-gw-97edac"></a>&#x2022; [`default_gw`](#default-gw-97edac) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-237e0d"></a>&#x2022; [`ip_address`](#address-237e0d) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-f967cc"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Layer2 Interface
 
@@ -421,13 +391,90 @@ A [`node_static_ip`](#static-ip-b510ab) block (within [`tunnel_interface.static_
 
 #### Tunnel Interface Tunnel
 
-A [`tunnel`](#tunnel-interface-tunnel) block (within [`tunnel_interface`](#tunnel-interface)) supports the following:
+<a id="objref-42545e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
-<a id="tunnel-interface-tunnel-name"></a>&#x2022; [`name`](#tunnel-interface-tunnel-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+---
 
-<a id="tunnel-interface-tunnel-namespace"></a>&#x2022; [`namespace`](#tunnel-interface-tunnel-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+## Common Types
 
-<a id="tunnel-interface-tunnel-tenant"></a>&#x2022; [`tenant`](#tunnel-interface-tunnel-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

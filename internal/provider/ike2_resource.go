@@ -103,7 +103,7 @@ func (r *Ike2Resource) Metadata(ctx context.Context, req resource.MetadataReques
 func (r *Ike2Resource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             ike2SchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.",
+		MarkdownDescription: "Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Ike2. Must be unique within the namespace.",

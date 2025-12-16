@@ -1,5 +1,5 @@
 # IKE Phase2 Profile Resource Example
-# [Namespace: required] Manages a IKE Phase2 Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.
+# Manages a IKE Phase2 Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.
 
 # Basic IKE Phase2 Profile configuration
 resource "f5xc_ike_phase2_profile" "example" {

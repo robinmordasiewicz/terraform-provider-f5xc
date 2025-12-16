@@ -95,7 +95,7 @@ func (r *SensitiveDataPolicyResource) Metadata(ctx context.Context, req resource
 func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             sensitive_data_policySchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Sensitive Data Policy. Must be unique within the namespace.",

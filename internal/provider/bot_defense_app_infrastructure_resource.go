@@ -156,7 +156,7 @@ func (r *BotDefenseAppInfrastructureResource) Metadata(ctx context.Context, req 
 func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             bot_defense_app_infrastructureSchemaVersion,
-		MarkdownDescription: "[Category: Security] [Namespace: required] Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Bot Defense App Infrastructure. Must be unique within the namespace.",

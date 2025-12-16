@@ -2,12 +2,12 @@
 page_title: "f5xc_app_api_group Resource - terraform-provider-f5xc"
 subcategory: "API Security"
 description: |-
-  [Namespace: required] Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_app_api_group (Resource)
 
-[Namespace: required] Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [App API Group API docs](https://docs.cloud.f5.com/docs-v2/api/views-app-api-group) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # App API Group Resource Example
-# [Namespace: required] Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic App API Group configuration
 resource "f5xc_app_api_group" "example" {
@@ -91,13 +91,7 @@ A [`bigip_virtual_server`](#bigip-virtual-server) block supports the following:
 
 #### Bigip Virtual Server Bigip Virtual Server
 
-A [`bigip_virtual_server`](#server-575600) block (within [`bigip_virtual_server`](#bigip-virtual-server)) supports the following:
-
-<a id="name-9fb983"></a>&#x2022; [`name`](#name-9fb983) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-4ecc61"></a>&#x2022; [`namespace`](#namespace-4ecc61) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-c4d0e6"></a>&#x2022; [`tenant`](#tenant-c4d0e6) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-575600"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### CDN Loadbalancer
 
@@ -107,19 +101,13 @@ A [`cdn_loadbalancer`](#cdn-loadbalancer) block supports the following:
 
 #### CDN Loadbalancer CDN Loadbalancer
 
-A [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) block (within [`cdn_loadbalancer`](#cdn-loadbalancer)) supports the following:
-
-<a id="cdn-loadbalancer-cdn-loadbalancer-name"></a>&#x2022; [`name`](#cdn-loadbalancer-cdn-loadbalancer-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-8ae5bf"></a>&#x2022; [`namespace`](#namespace-8ae5bf) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ea0b41"></a>&#x2022; [`tenant`](#tenant-ea0b41) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-06a3ba"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Elements
 
 An [`elements`](#elements) block supports the following:
 
-<a id="elements-methods"></a>&#x2022; [`methods`](#elements-methods) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list
+<a id="elements-methods"></a>&#x2022; [`methods`](#elements-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> HTTP Methods. List of method values to match the input request API method against. The match is considered to succeed if the input request API method is a member of the list
 
 <a id="elements-path-regex"></a>&#x2022; [`path_regex`](#elements-path-regex) - Optional String<br>Path Regex. Regular expression to match the input request API path against. The match is considered to succeed if the input request API path matches the specified path regex
 
@@ -131,13 +119,7 @@ A [`http_loadbalancer`](#http-loadbalancer) block supports the following:
 
 #### HTTP Loadbalancer HTTP Loadbalancer
 
-A [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) block (within [`http_loadbalancer`](#http-loadbalancer)) supports the following:
-
-<a id="name-9dca0b"></a>&#x2022; [`name`](#name-9dca0b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c94608"></a>&#x2022; [`namespace`](#namespace-c94608) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-fa3b49"></a>&#x2022; [`tenant`](#tenant-fa3b49) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-b83ede"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Timeouts
 
@@ -150,6 +132,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

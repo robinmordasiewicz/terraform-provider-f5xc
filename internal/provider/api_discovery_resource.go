@@ -81,7 +81,7 @@ func (r *APIDiscoveryResource) Metadata(ctx context.Context, req resource.Metada
 func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             api_discoverySchemaVersion,
-		MarkdownDescription: "[Category: API Security] [Namespace: required] Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the API Discovery. Must be unique within the namespace.",

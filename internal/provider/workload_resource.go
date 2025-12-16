@@ -8124,7 +8124,7 @@ func (r *WorkloadResource) Metadata(ctx context.Context, req resource.MetadataRe
 func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             workloadSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a Workload resource in F5 Distributed Cloud for workload configuration.",
+		MarkdownDescription: "Manages a Workload resource in F5 Distributed Cloud for workload configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Workload. Must be unique within the namespace.",

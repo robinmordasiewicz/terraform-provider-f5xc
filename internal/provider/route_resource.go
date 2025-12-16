@@ -889,7 +889,7 @@ func (r *RouteResource) Metadata(ctx context.Context, req resource.MetadataReque
 func (r *RouteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             routeSchemaVersion,
-		MarkdownDescription: "[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, http_loadbalancer] Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.",
+		MarkdownDescription: "Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Route. Must be unique within the namespace.",

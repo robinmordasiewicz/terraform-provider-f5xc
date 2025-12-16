@@ -531,7 +531,7 @@ func (r *DiscoveryResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *DiscoveryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             discoverySchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.",
+		MarkdownDescription: "Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Discovery. Must be unique within the namespace.",

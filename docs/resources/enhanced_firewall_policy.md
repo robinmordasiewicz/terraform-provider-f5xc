@@ -2,12 +2,12 @@
 page_title: "f5xc_enhanced_firewall_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  [Category: Security] [Namespace: required] Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
+  Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
 ---
 
 # f5xc_enhanced_firewall_policy (Resource)
 
-[Category: Security] [Namespace: required] Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
+Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
 
 ~> **Note** Please refer to [Enhanced Firewall Policy API docs](https://docs.cloud.f5.com/docs-v2/api/enhanced-firewall-policy) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Enhanced Firewall Policy Resource Example
-# [Category: Security] [Namespace: required] Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
+# Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy configuration.
 
 # Basic Enhanced Firewall Policy configuration
 resource "f5xc_enhanced_firewall_policy" "example" {
@@ -205,17 +205,7 @@ A [`destination_ip_prefix_set`](#set-c1c996) block (within [`rule_list.rules`](#
 
 #### Rule List Rules Destination IP Prefix Set Ref
 
-A [`ref`](#ref-f1c1ed) block (within [`rule_list.rules.destination_ip_prefix_set`](#set-c1c996)) supports the following:
-
-<a id="kind-cca342"></a>&#x2022; [`kind`](#kind-cca342) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-abe77e"></a>&#x2022; [`name`](#name-abe77e) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-9d6d88"></a>&#x2022; [`namespace`](#namespace-9d6d88) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-b24f47"></a>&#x2022; [`tenant`](#tenant-b24f47) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-cb3131"></a>&#x2022; [`uid`](#uid-cb3131) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-e21ead"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Rule List Rules Destination Label Selector
 
@@ -237,13 +227,7 @@ An [`insert_service`](#rule-list-rules-insert-service) block (within [`rule_list
 
 #### Rule List Rules Insert Service Nfv Service
 
-A [`nfv_service`](#service-b8915d) block (within [`rule_list.rules.insert_service`](#rule-list-rules-insert-service)) supports the following:
-
-<a id="name-d47ddb"></a>&#x2022; [`name`](#name-d47ddb) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-d44c62"></a>&#x2022; [`namespace`](#namespace-d44c62) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-0d7aca"></a>&#x2022; [`tenant`](#tenant-0d7aca) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-b8915d"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Rule List Rules Label Matcher
 
@@ -281,17 +265,7 @@ A [`source_ip_prefix_set`](#rule-list-rules-source-ip-prefix-set) block (within 
 
 #### Rule List Rules Source IP Prefix Set Ref
 
-A [`ref`](#ref-f78649) block (within [`rule_list.rules.source_ip_prefix_set`](#rule-list-rules-source-ip-prefix-set)) supports the following:
-
-<a id="kind-d0f5f3"></a>&#x2022; [`kind`](#kind-d0f5f3) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-e61b5b"></a>&#x2022; [`name`](#name-e61b5b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-989d41"></a>&#x2022; [`namespace`](#namespace-989d41) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-fd695e"></a>&#x2022; [`tenant`](#tenant-fd695e) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-fcadac"></a>&#x2022; [`uid`](#uid-fcadac) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-d72b93"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Rule List Rules Source Label Selector
 
@@ -316,6 +290,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

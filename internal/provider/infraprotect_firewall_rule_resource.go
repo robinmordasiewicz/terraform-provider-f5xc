@@ -177,7 +177,7 @@ func (r *InfraprotectFirewallRuleResource) Metadata(ctx context.Context, req res
 func (r *InfraprotectFirewallRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             infraprotect_firewall_ruleSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages DDoS transit Firewall Rule in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages DDoS transit Firewall Rule in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Infraprotect Firewall Rule. Must be unique within the namespace.",

@@ -1,5 +1,5 @@
 # Infraprotect Firewall Rule Group Resource Example
-# [Namespace: required] Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
+# Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.
 
 # Basic Infraprotect Firewall Rule Group configuration
 resource "f5xc_infraprotect_firewall_rule_group" "example" {

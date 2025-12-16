@@ -156,7 +156,7 @@ func (r *RateLimiterResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             rate_limiterSchemaVersion,
-		MarkdownDescription: "[Category: Security] [Namespace: required] [DependsOn: namespace] Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Rate Limiter. Must be unique within the namespace.",

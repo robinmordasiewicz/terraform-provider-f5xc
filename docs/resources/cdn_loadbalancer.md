@@ -2,12 +2,12 @@
 page_title: "f5xc_cdn_loadbalancer Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  [Category: Load Balancing] [Namespace: required] Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
+  Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 ---
 
 # f5xc_cdn_loadbalancer (Resource)
 
-[Category: Load Balancing] [Namespace: required] Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
+Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 
 ~> **Note** Please refer to [CDN Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-cdn-loadbalancer) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # CDN Loadbalancer Resource Example
-# [Category: Load Balancing] [Namespace: required] Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
+# Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 
 # Basic CDN Loadbalancer configuration
 resource "f5xc_cdn_loadbalancer" "example" {
@@ -208,13 +208,7 @@ An [`active_service_policies`](#active-service-policies) block supports the foll
 
 #### Active Service Policies Policies
 
-A [`policies`](#active-service-policies-policies) block (within [`active_service_policies`](#active-service-policies)) supports the following:
-
-<a id="active-service-policies-policies-name"></a>&#x2022; [`name`](#active-service-policies-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-df0e5f"></a>&#x2022; [`namespace`](#namespace-df0e5f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="active-service-policies-policies-tenant"></a>&#x2022; [`tenant`](#active-service-policies-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-460dca"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### API Rate Limit
 
@@ -254,251 +248,95 @@ An [`api_endpoint_rules`](#api-rate-limit-api-endpoint-rules) block (within [`ap
 
 #### API Rate Limit API Endpoint Rules API Endpoint Method
 
-An [`api_endpoint_method`](#method-1e49b0) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
-
-<a id="matcher-25dd70"></a>&#x2022; [`invert_matcher`](#matcher-25dd70) - Optional Bool<br>Invert Method Matcher. Invert the match result
-
-<a id="methods-bf7e55"></a>&#x2022; [`methods`](#methods-bf7e55) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Method List. List of methods values to match against
+<a id="deep-e1c30c"></a>Deeply nested **Method** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Client Matcher
 
-A [`client_matcher`](#matcher-794c7c) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
-
-<a id="client-dd4b14"></a>&#x2022; [`any_client`](#client-dd4b14) - Optional Block<br>Enable this option
-
-<a id="any-ip-2507e5"></a>&#x2022; [`any_ip`](#any-ip-2507e5) - Optional Block<br>Enable this option
-
-<a id="list-541161"></a>&#x2022; [`asn_list`](#list-541161) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#list-541161) below.
-
-<a id="matcher-cd99ef"></a>&#x2022; [`asn_matcher`](#matcher-cd99ef) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#matcher-cd99ef) below.
-
-<a id="selector-1b39eb"></a>&#x2022; [`client_selector`](#selector-1b39eb) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#selector-1b39eb) below.
-
-<a id="matcher-2d1e1b"></a>&#x2022; [`ip_matcher`](#matcher-2d1e1b) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#matcher-2d1e1b) below.
-
-<a id="list-19e2d7"></a>&#x2022; [`ip_prefix_list`](#list-19e2d7) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#list-19e2d7) below.
-
-<a id="list-d4ce55"></a>&#x2022; [`ip_threat_category_list`](#list-d4ce55) - Optional Block<br>IP Threat Category List Type. List of IP threat categories<br>See [IP Threat Category List](#list-d4ce55) below.
-
-<a id="matcher-ab7cce"></a>&#x2022; [`tls_fingerprint_matcher`](#matcher-ab7cce) - Optional Block<br>TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values<br>See [TLS Fingerprint Matcher](#matcher-ab7cce) below.
+<a id="deep-89d214"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Client Matcher Asn List
 
-An [`asn_list`](#list-541161) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#matcher-794c7c)) supports the following:
-
-<a id="numbers-7bb86e"></a>&#x2022; [`as_numbers`](#numbers-7bb86e) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="deep-5b26f9"></a>Deeply nested **List** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Client Matcher Asn Matcher
 
-An [`asn_matcher`](#matcher-cd99ef) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#matcher-794c7c)) supports the following:
-
-<a id="sets-d85457"></a>&#x2022; [`asn_sets`](#sets-d85457) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#sets-d85457) below.
+<a id="deep-fb456a"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Client Matcher Asn Matcher Asn Sets
 
-An [`asn_sets`](#sets-d85457) block (within [`api_rate_limit.api_endpoint_rules.client_matcher.asn_matcher`](#matcher-cd99ef)) supports the following:
-
-<a id="kind-d515ee"></a>&#x2022; [`kind`](#kind-d515ee) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-8f5645"></a>&#x2022; [`name`](#name-8f5645) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e278b9"></a>&#x2022; [`namespace`](#namespace-e278b9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e59381"></a>&#x2022; [`tenant`](#tenant-e59381) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-3ba47f"></a>&#x2022; [`uid`](#uid-3ba47f) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-5b15e9"></a>Deeply nested **Sets** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Client Matcher Client Selector
 
-A [`client_selector`](#selector-1b39eb) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#matcher-794c7c)) supports the following:
-
-<a id="expressions-f101e1"></a>&#x2022; [`expressions`](#expressions-f101e1) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="deep-2d36e2"></a>Deeply nested **Selector** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Client Matcher IP Matcher
 
-An [`ip_matcher`](#matcher-2d1e1b) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#matcher-794c7c)) supports the following:
-
-<a id="matcher-91fa13"></a>&#x2022; [`invert_matcher`](#matcher-91fa13) - Optional Bool<br>Invert IP Matcher. Invert the match result
-
-<a id="sets-cb5183"></a>&#x2022; [`prefix_sets`](#sets-cb5183) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#sets-cb5183) below.
+<a id="deep-c0f678"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Client Matcher IP Matcher Prefix Sets
 
-A [`prefix_sets`](#sets-cb5183) block (within [`api_rate_limit.api_endpoint_rules.client_matcher.ip_matcher`](#matcher-2d1e1b)) supports the following:
-
-<a id="kind-ccd934"></a>&#x2022; [`kind`](#kind-ccd934) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-19bb1b"></a>&#x2022; [`name`](#name-19bb1b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c8c75b"></a>&#x2022; [`namespace`](#namespace-c8c75b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-f57c6e"></a>&#x2022; [`tenant`](#tenant-f57c6e) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-97a716"></a>&#x2022; [`uid`](#uid-97a716) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-70b0c0"></a>Deeply nested **Sets** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Client Matcher IP Prefix List
 
-An [`ip_prefix_list`](#list-19e2d7) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#matcher-794c7c)) supports the following:
-
-<a id="match-169cde"></a>&#x2022; [`invert_match`](#match-169cde) - Optional Bool<br>Invert Match Result. Invert the match result
-
-<a id="prefixes-c54632"></a>&#x2022; [`ip_prefixes`](#prefixes-c54632) - Optional List<br>IPv4 Prefix List. List of IPv4 prefix strings
+<a id="deep-5a2c8c"></a>Deeply nested **List** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Client Matcher IP Threat Category List
 
-An [`ip_threat_category_list`](#list-d4ce55) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#matcher-794c7c)) supports the following:
-
-<a id="categories-33fa18"></a>&#x2022; [`ip_threat_categories`](#categories-33fa18) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>[Enum: SPAM_SOURCES|WINDOWS_EXPLOITS|WEB_ATTACKS|BOTNETS|SCANNERS|REPUTATION|PHISHING|PROXY|MOBILE_THREATS|TOR_PROXY|DENIAL_OF_SERVICE|NETWORK] List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
+<a id="deep-67d5ee"></a>Deeply nested **List** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Client Matcher TLS Fingerprint Matcher
 
-A [`tls_fingerprint_matcher`](#matcher-ab7cce) block (within [`api_rate_limit.api_endpoint_rules.client_matcher`](#matcher-794c7c)) supports the following:
-
-<a id="classes-fe5ffc"></a>&#x2022; [`classes`](#classes-fe5ffc) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
-
-<a id="values-442dc5"></a>&#x2022; [`exact_values`](#values-442dc5) - Optional List<br>Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
-
-<a id="values-ea7eff"></a>&#x2022; [`excluded_values`](#values-ea7eff) - Optional List<br>Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
+<a id="deep-09252e"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Inline Rate Limiter
 
-An [`inline_rate_limiter`](#limiter-38a124) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
-
-<a id="user-id-48be18"></a>&#x2022; [`ref_user_id`](#user-id-48be18) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Ref User ID](#user-id-48be18) below.
-
-<a id="threshold-e13d5c"></a>&#x2022; [`threshold`](#threshold-e13d5c) - Optional Number<br>Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period
-
-<a id="unit-4402df"></a>&#x2022; [`unit`](#unit-4402df) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>[Enum: SECOND|MINUTE|HOUR] Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
-
-<a id="user-id-ddc28d"></a>&#x2022; [`use_http_lb_user_id`](#user-id-ddc28d) - Optional Block<br>Enable this option
+<a id="deep-5cd429"></a>Deeply nested **Limiter** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Inline Rate Limiter Ref User ID
 
-A [`ref_user_id`](#user-id-48be18) block (within [`api_rate_limit.api_endpoint_rules.inline_rate_limiter`](#limiter-38a124)) supports the following:
-
-<a id="name-44d974"></a>&#x2022; [`name`](#name-44d974) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-7c0a17"></a>&#x2022; [`namespace`](#namespace-7c0a17) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-568dd6"></a>&#x2022; [`tenant`](#tenant-568dd6) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-70ee5d"></a>Deeply nested **ID** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Ref Rate Limiter
 
-A [`ref_rate_limiter`](#limiter-f23897) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
-
-<a id="name-feb57b"></a>&#x2022; [`name`](#name-feb57b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-8702e9"></a>&#x2022; [`namespace`](#namespace-8702e9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-93c30b"></a>&#x2022; [`tenant`](#tenant-93c30b) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-1175ac"></a>Deeply nested **Limiter** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Request Matcher
 
-A [`request_matcher`](#matcher-869fa1) block (within [`api_rate_limit.api_endpoint_rules`](#api-rate-limit-api-endpoint-rules)) supports the following:
-
-<a id="matchers-77386d"></a>&#x2022; [`cookie_matchers`](#matchers-77386d) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#matchers-77386d) below.
-
-<a id="headers-4b4f60"></a>&#x2022; [`headers`](#headers-4b4f60) - Optional Block<br>HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true<br>See [Headers](#headers-4b4f60) below.
-
-<a id="claims-eecbd4"></a>&#x2022; [`jwt_claims`](#claims-eecbd4) - Optional Block<br>JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled<br>See [JWT Claims](#claims-eecbd4) below.
-
-<a id="params-153b4d"></a>&#x2022; [`query_params`](#params-153b4d) - Optional Block<br>HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true<br>See [Query Params](#params-153b4d) below.
+<a id="deep-b66b99"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Request Matcher Cookie Matchers
 
-A [`cookie_matchers`](#matchers-77386d) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#matcher-869fa1)) supports the following:
-
-<a id="present-50637d"></a>&#x2022; [`check_not_present`](#present-50637d) - Optional Block<br>Enable this option
-
-<a id="present-334dd3"></a>&#x2022; [`check_present`](#present-334dd3) - Optional Block<br>Enable this option
-
-<a id="matcher-3e072a"></a>&#x2022; [`invert_matcher`](#matcher-3e072a) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
-
-<a id="item-8fd79b"></a>&#x2022; [`item`](#item-8fd79b) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-8fd79b) below.
-
-<a id="name-0761c7"></a>&#x2022; [`name`](#name-0761c7) - Optional String<br>Cookie Name. A case-sensitive cookie name
+<a id="deep-137e54"></a>Deeply nested **Matchers** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Request Matcher Cookie Matchers Item
 
-An [`item`](#item-8fd79b) block (within [`api_rate_limit.api_endpoint_rules.request_matcher.cookie_matchers`](#matchers-77386d)) supports the following:
-
-<a id="values-da29fa"></a>&#x2022; [`exact_values`](#values-da29fa) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-cd25b5"></a>&#x2022; [`regex_values`](#values-cd25b5) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-8d7fe4"></a>&#x2022; [`transformers`](#transformers-8d7fe4) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-b2970b"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Request Matcher Headers
 
-A [`headers`](#headers-4b4f60) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#matcher-869fa1)) supports the following:
-
-<a id="present-4ee0a5"></a>&#x2022; [`check_not_present`](#present-4ee0a5) - Optional Block<br>Enable this option
-
-<a id="present-a33cbd"></a>&#x2022; [`check_present`](#present-a33cbd) - Optional Block<br>Enable this option
-
-<a id="matcher-633667"></a>&#x2022; [`invert_matcher`](#matcher-633667) - Optional Bool<br>Invert Header Matcher. Invert the match result
-
-<a id="item-ad545a"></a>&#x2022; [`item`](#item-ad545a) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-ad545a) below.
-
-<a id="name-9984d9"></a>&#x2022; [`name`](#name-9984d9) - Optional String<br>Header Name. A case-insensitive HTTP header name
+<a id="deep-78dc03"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Request Matcher Headers Item
 
-An [`item`](#item-ad545a) block (within [`api_rate_limit.api_endpoint_rules.request_matcher.headers`](#headers-4b4f60)) supports the following:
-
-<a id="values-637456"></a>&#x2022; [`exact_values`](#values-637456) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-2c77df"></a>&#x2022; [`regex_values`](#values-2c77df) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-c3442a"></a>&#x2022; [`transformers`](#transformers-c3442a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-a29608"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Request Matcher JWT Claims
 
-A [`jwt_claims`](#claims-eecbd4) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#matcher-869fa1)) supports the following:
-
-<a id="present-935ed5"></a>&#x2022; [`check_not_present`](#present-935ed5) - Optional Block<br>Enable this option
-
-<a id="present-fcd929"></a>&#x2022; [`check_present`](#present-fcd929) - Optional Block<br>Enable this option
-
-<a id="matcher-cd173e"></a>&#x2022; [`invert_matcher`](#matcher-cd173e) - Optional Bool<br>Invert Matcher. Invert the match result
-
-<a id="item-69e131"></a>&#x2022; [`item`](#item-69e131) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-69e131) below.
-
-<a id="name-b37439"></a>&#x2022; [`name`](#name-b37439) - Optional String<br>JWT Claim Name. JWT claim name
+<a id="deep-01f53c"></a>Deeply nested **Claims** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Request Matcher JWT Claims Item
 
-An [`item`](#item-69e131) block (within [`api_rate_limit.api_endpoint_rules.request_matcher.jwt_claims`](#claims-eecbd4)) supports the following:
-
-<a id="values-959e73"></a>&#x2022; [`exact_values`](#values-959e73) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-e5f104"></a>&#x2022; [`regex_values`](#values-e5f104) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-cedd59"></a>&#x2022; [`transformers`](#transformers-cedd59) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-1ae8a7"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Request Matcher Query Params
 
-A [`query_params`](#params-153b4d) block (within [`api_rate_limit.api_endpoint_rules.request_matcher`](#matcher-869fa1)) supports the following:
-
-<a id="present-6edbea"></a>&#x2022; [`check_not_present`](#present-6edbea) - Optional Block<br>Enable this option
-
-<a id="present-1cdabc"></a>&#x2022; [`check_present`](#present-1cdabc) - Optional Block<br>Enable this option
-
-<a id="matcher-c07a30"></a>&#x2022; [`invert_matcher`](#matcher-c07a30) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
-
-<a id="item-b0554c"></a>&#x2022; [`item`](#item-b0554c) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-b0554c) below.
-
-<a id="key-c4c42f"></a>&#x2022; [`key`](#key-c4c42f) - Optional String<br>Query Parameter Name. A case-sensitive HTTP query parameter name
+<a id="deep-bb70f4"></a>Deeply nested **Params** block collapsed for readability.
 
 #### API Rate Limit API Endpoint Rules Request Matcher Query Params Item
 
-An [`item`](#item-b0554c) block (within [`api_rate_limit.api_endpoint_rules.request_matcher.query_params`](#params-153b4d)) supports the following:
-
-<a id="values-36f490"></a>&#x2022; [`exact_values`](#values-36f490) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-6e357a"></a>&#x2022; [`regex_values`](#values-6e357a) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-03d03b"></a>&#x2022; [`transformers`](#transformers-03d03b) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-8ff910"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules
 
@@ -508,245 +346,91 @@ A [`bypass_rate_limiting_rules`](#rules-776e97) block (within [`api_rate_limit`]
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules
 
-A [`bypass_rate_limiting_rules`](#rules-51aa34) block (within [`api_rate_limit.bypass_rate_limiting_rules`](#rules-776e97)) supports the following:
-
-<a id="domain-0985ea"></a>&#x2022; [`any_domain`](#domain-0985ea) - Optional Block<br>Enable this option
-
-<a id="url-7b53df"></a>&#x2022; [`any_url`](#url-7b53df) - Optional Block<br>Enable this option
-
-<a id="endpoint-e28aa4"></a>&#x2022; [`api_endpoint`](#endpoint-e28aa4) - Optional Block<br>API Endpoint. This defines API endpoint<br>See [API Endpoint](#endpoint-e28aa4) below.
-
-<a id="groups-c92822"></a>&#x2022; [`api_groups`](#groups-c92822) - Optional Block<br>API Groups<br>See [API Groups](#groups-c92822) below.
-
-<a id="path-b16510"></a>&#x2022; [`base_path`](#path-b16510) - Optional String<br>Base Path. The base path which this validation applies to
-
-<a id="matcher-a9da18"></a>&#x2022; [`client_matcher`](#matcher-a9da18) - Optional Block<br>Client Matcher. Client conditions for matching a rule<br>See [Client Matcher](#matcher-a9da18) below.
-
-<a id="matcher-e9bb4d"></a>&#x2022; [`request_matcher`](#matcher-e9bb4d) - Optional Block<br>Request Matcher. Request conditions for matching a rule<br>See [Request Matcher](#matcher-e9bb4d) below.
-
-<a id="domain-451df1"></a>&#x2022; [`specific_domain`](#domain-451df1) - Optional String<br>Specific Domain. The rule will apply for a specific domain. For example: API.example.com
+<a id="deep-057f78"></a>Deeply nested **Rules** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules API Endpoint
 
-An [`api_endpoint`](#endpoint-e28aa4) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`](#rules-51aa34)) supports the following:
-
-<a id="methods-2f7610"></a>&#x2022; [`methods`](#methods-2f7610) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Methods. Methods to be matched
-
-<a id="path-79e5a9"></a>&#x2022; [`path`](#path-79e5a9) - Optional String<br>Path. Path to be matched
+<a id="deep-64f716"></a>Deeply nested **Endpoint** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules API Groups
 
-An [`api_groups`](#groups-c92822) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`](#rules-51aa34)) supports the following:
-
-<a id="groups-56ebad"></a>&#x2022; [`api_groups`](#groups-56ebad) - Optional List<br>API Groups
+<a id="deep-fc711c"></a>Deeply nested **Groups** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher
 
-A [`client_matcher`](#matcher-a9da18) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`](#rules-51aa34)) supports the following:
-
-<a id="client-10be2f"></a>&#x2022; [`any_client`](#client-10be2f) - Optional Block<br>Enable this option
-
-<a id="any-ip-7c4970"></a>&#x2022; [`any_ip`](#any-ip-7c4970) - Optional Block<br>Enable this option
-
-<a id="list-221e4b"></a>&#x2022; [`asn_list`](#list-221e4b) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#list-221e4b) below.
-
-<a id="matcher-d64a47"></a>&#x2022; [`asn_matcher`](#matcher-d64a47) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#matcher-d64a47) below.
-
-<a id="selector-8bcea5"></a>&#x2022; [`client_selector`](#selector-8bcea5) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#selector-8bcea5) below.
-
-<a id="matcher-273263"></a>&#x2022; [`ip_matcher`](#matcher-273263) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#matcher-273263) below.
-
-<a id="list-3ef91d"></a>&#x2022; [`ip_prefix_list`](#list-3ef91d) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#list-3ef91d) below.
-
-<a id="list-94743d"></a>&#x2022; [`ip_threat_category_list`](#list-94743d) - Optional Block<br>IP Threat Category List Type. List of IP threat categories<br>See [IP Threat Category List](#list-94743d) below.
-
-<a id="matcher-c87ce2"></a>&#x2022; [`tls_fingerprint_matcher`](#matcher-c87ce2) - Optional Block<br>TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values<br>See [TLS Fingerprint Matcher](#matcher-c87ce2) below.
+<a id="deep-ffaf3a"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Asn List
 
-An [`asn_list`](#list-221e4b) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#matcher-a9da18)) supports the following:
-
-<a id="numbers-9c8ce1"></a>&#x2022; [`as_numbers`](#numbers-9c8ce1) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="deep-242661"></a>Deeply nested **List** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Asn Matcher
 
-An [`asn_matcher`](#matcher-d64a47) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#matcher-a9da18)) supports the following:
-
-<a id="sets-489c65"></a>&#x2022; [`asn_sets`](#sets-489c65) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#sets-489c65) below.
+<a id="deep-d519c0"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Asn Matcher Asn Sets
 
-An [`asn_sets`](#sets-489c65) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher.asn_matcher`](#matcher-d64a47)) supports the following:
-
-<a id="kind-cf32d0"></a>&#x2022; [`kind`](#kind-cf32d0) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-3a9c74"></a>&#x2022; [`name`](#name-3a9c74) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-d9cfc4"></a>&#x2022; [`namespace`](#namespace-d9cfc4) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-c5db47"></a>&#x2022; [`tenant`](#tenant-c5db47) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-d6cdd9"></a>&#x2022; [`uid`](#uid-d6cdd9) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-30e257"></a>Deeply nested **Sets** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher Client Selector
 
-A [`client_selector`](#selector-8bcea5) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#matcher-a9da18)) supports the following:
-
-<a id="expressions-e48729"></a>&#x2022; [`expressions`](#expressions-e48729) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="deep-4a08b6"></a>Deeply nested **Selector** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Matcher
 
-An [`ip_matcher`](#matcher-273263) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#matcher-a9da18)) supports the following:
-
-<a id="matcher-939f7d"></a>&#x2022; [`invert_matcher`](#matcher-939f7d) - Optional Bool<br>Invert IP Matcher. Invert the match result
-
-<a id="sets-377781"></a>&#x2022; [`prefix_sets`](#sets-377781) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#sets-377781) below.
+<a id="deep-16bba4"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Matcher Prefix Sets
 
-A [`prefix_sets`](#sets-377781) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher.ip_matcher`](#matcher-273263)) supports the following:
-
-<a id="kind-566b63"></a>&#x2022; [`kind`](#kind-566b63) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-80111f"></a>&#x2022; [`name`](#name-80111f) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-39558d"></a>&#x2022; [`namespace`](#namespace-39558d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-80e0d0"></a>&#x2022; [`tenant`](#tenant-80e0d0) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-232063"></a>&#x2022; [`uid`](#uid-232063) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-da95b1"></a>Deeply nested **Sets** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Prefix List
 
-An [`ip_prefix_list`](#list-3ef91d) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#matcher-a9da18)) supports the following:
-
-<a id="match-710e3e"></a>&#x2022; [`invert_match`](#match-710e3e) - Optional Bool<br>Invert Match Result. Invert the match result
-
-<a id="prefixes-fe1028"></a>&#x2022; [`ip_prefixes`](#prefixes-fe1028) - Optional List<br>IPv4 Prefix List. List of IPv4 prefix strings
+<a id="deep-60dc79"></a>Deeply nested **List** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher IP Threat Category List
 
-An [`ip_threat_category_list`](#list-94743d) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#matcher-a9da18)) supports the following:
-
-<a id="categories-abf09a"></a>&#x2022; [`ip_threat_categories`](#categories-abf09a) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>[Enum: SPAM_SOURCES|WINDOWS_EXPLOITS|WEB_ATTACKS|BOTNETS|SCANNERS|REPUTATION|PHISHING|PROXY|MOBILE_THREATS|TOR_PROXY|DENIAL_OF_SERVICE|NETWORK] List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
+<a id="deep-ed2c35"></a>Deeply nested **List** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Client Matcher TLS Fingerprint Matcher
 
-A [`tls_fingerprint_matcher`](#matcher-c87ce2) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.client_matcher`](#matcher-a9da18)) supports the following:
-
-<a id="classes-5a5e36"></a>&#x2022; [`classes`](#classes-5a5e36) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
-
-<a id="values-918a08"></a>&#x2022; [`exact_values`](#values-918a08) - Optional List<br>Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
-
-<a id="values-a7d1eb"></a>&#x2022; [`excluded_values`](#values-a7d1eb) - Optional List<br>Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
+<a id="deep-0e8717"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher
 
-A [`request_matcher`](#matcher-e9bb4d) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules`](#rules-51aa34)) supports the following:
-
-<a id="matchers-f34f88"></a>&#x2022; [`cookie_matchers`](#matchers-f34f88) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#matchers-f34f88) below.
-
-<a id="headers-4161e4"></a>&#x2022; [`headers`](#headers-4161e4) - Optional Block<br>HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true<br>See [Headers](#headers-4161e4) below.
-
-<a id="claims-13ffa7"></a>&#x2022; [`jwt_claims`](#claims-13ffa7) - Optional Block<br>JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled<br>See [JWT Claims](#claims-13ffa7) below.
-
-<a id="params-bfd454"></a>&#x2022; [`query_params`](#params-bfd454) - Optional Block<br>HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true<br>See [Query Params](#params-bfd454) below.
+<a id="deep-9eed33"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Cookie Matchers
 
-A [`cookie_matchers`](#matchers-f34f88) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#matcher-e9bb4d)) supports the following:
-
-<a id="present-25beab"></a>&#x2022; [`check_not_present`](#present-25beab) - Optional Block<br>Enable this option
-
-<a id="present-c78615"></a>&#x2022; [`check_present`](#present-c78615) - Optional Block<br>Enable this option
-
-<a id="matcher-e0ea9b"></a>&#x2022; [`invert_matcher`](#matcher-e0ea9b) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
-
-<a id="item-69d8e4"></a>&#x2022; [`item`](#item-69d8e4) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-69d8e4) below.
-
-<a id="name-2d8fee"></a>&#x2022; [`name`](#name-2d8fee) - Optional String<br>Cookie Name. A case-sensitive cookie name
+<a id="deep-dd7483"></a>Deeply nested **Matchers** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Cookie Matchers Item
 
-An [`item`](#item-69d8e4) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.cookie_matchers`](#matchers-f34f88)) supports the following:
-
-<a id="values-9bae32"></a>&#x2022; [`exact_values`](#values-9bae32) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-9362bb"></a>&#x2022; [`regex_values`](#values-9362bb) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-a8c5ff"></a>&#x2022; [`transformers`](#transformers-a8c5ff) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-746a10"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Headers
 
-A [`headers`](#headers-4161e4) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#matcher-e9bb4d)) supports the following:
-
-<a id="present-ae8198"></a>&#x2022; [`check_not_present`](#present-ae8198) - Optional Block<br>Enable this option
-
-<a id="present-2f4647"></a>&#x2022; [`check_present`](#present-2f4647) - Optional Block<br>Enable this option
-
-<a id="matcher-65dc3a"></a>&#x2022; [`invert_matcher`](#matcher-65dc3a) - Optional Bool<br>Invert Header Matcher. Invert the match result
-
-<a id="item-4706a3"></a>&#x2022; [`item`](#item-4706a3) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-4706a3) below.
-
-<a id="name-b0a7d3"></a>&#x2022; [`name`](#name-b0a7d3) - Optional String<br>Header Name. A case-insensitive HTTP header name
+<a id="deep-4e8a54"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Headers Item
 
-An [`item`](#item-4706a3) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.headers`](#headers-4161e4)) supports the following:
-
-<a id="values-3baf40"></a>&#x2022; [`exact_values`](#values-3baf40) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-ce8cc2"></a>&#x2022; [`regex_values`](#values-ce8cc2) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-e84879"></a>&#x2022; [`transformers`](#transformers-e84879) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-328c40"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher JWT Claims
 
-A [`jwt_claims`](#claims-13ffa7) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#matcher-e9bb4d)) supports the following:
-
-<a id="present-0e108d"></a>&#x2022; [`check_not_present`](#present-0e108d) - Optional Block<br>Enable this option
-
-<a id="present-0ac17d"></a>&#x2022; [`check_present`](#present-0ac17d) - Optional Block<br>Enable this option
-
-<a id="matcher-43cde9"></a>&#x2022; [`invert_matcher`](#matcher-43cde9) - Optional Bool<br>Invert Matcher. Invert the match result
-
-<a id="item-ca8646"></a>&#x2022; [`item`](#item-ca8646) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-ca8646) below.
-
-<a id="name-3618ff"></a>&#x2022; [`name`](#name-3618ff) - Optional String<br>JWT Claim Name. JWT claim name
+<a id="deep-d34315"></a>Deeply nested **Claims** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher JWT Claims Item
 
-An [`item`](#item-ca8646) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.jwt_claims`](#claims-13ffa7)) supports the following:
-
-<a id="values-1ac86b"></a>&#x2022; [`exact_values`](#values-1ac86b) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-44ceff"></a>&#x2022; [`regex_values`](#values-44ceff) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-c7f562"></a>&#x2022; [`transformers`](#transformers-c7f562) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-9cd3b4"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Query Params
 
-A [`query_params`](#params-bfd454) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher`](#matcher-e9bb4d)) supports the following:
-
-<a id="present-928f2f"></a>&#x2022; [`check_not_present`](#present-928f2f) - Optional Block<br>Enable this option
-
-<a id="present-0997e1"></a>&#x2022; [`check_present`](#present-0997e1) - Optional Block<br>Enable this option
-
-<a id="matcher-94883f"></a>&#x2022; [`invert_matcher`](#matcher-94883f) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
-
-<a id="item-1cc059"></a>&#x2022; [`item`](#item-1cc059) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-1cc059) below.
-
-<a id="key-4059d5"></a>&#x2022; [`key`](#key-4059d5) - Optional String<br>Query Parameter Name. A case-sensitive HTTP query parameter name
+<a id="deep-8194a5"></a>Deeply nested **Params** block collapsed for readability.
 
 #### API Rate Limit Bypass Rate Limiting Rules Bypass Rate Limiting Rules Request Matcher Query Params Item
 
-An [`item`](#item-1cc059) block (within [`api_rate_limit.bypass_rate_limiting_rules.bypass_rate_limiting_rules.request_matcher.query_params`](#params-bfd454)) supports the following:
-
-<a id="values-1b4d75"></a>&#x2022; [`exact_values`](#values-1b4d75) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-76def7"></a>&#x2022; [`regex_values`](#values-76def7) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-9a24cd"></a>&#x2022; [`transformers`](#transformers-9a24cd) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-4cdff3"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit Custom IP Allowed List
 
@@ -756,13 +440,7 @@ A [`custom_ip_allowed_list`](#api-rate-limit-custom-ip-allowed-list) block (with
 
 #### API Rate Limit Custom IP Allowed List Rate Limiter Allowed Prefixes
 
-A [`rate_limiter_allowed_prefixes`](#prefixes-73df46) block (within [`api_rate_limit.custom_ip_allowed_list`](#api-rate-limit-custom-ip-allowed-list)) supports the following:
-
-<a id="name-3a08ca"></a>&#x2022; [`name`](#name-3a08ca) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-8714e1"></a>&#x2022; [`namespace`](#namespace-8714e1) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-89acd3"></a>&#x2022; [`tenant`](#tenant-89acd3) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-85bfc8"></a>Deeply nested **Prefixes** block collapsed for readability.
 
 #### API Rate Limit IP Allowed List
 
@@ -792,243 +470,91 @@ A [`server_url_rules`](#api-rate-limit-server-url-rules) block (within [`api_rat
 
 #### API Rate Limit Server URL Rules Client Matcher
 
-A [`client_matcher`](#matcher-ed4b34) block (within [`api_rate_limit.server_url_rules`](#api-rate-limit-server-url-rules)) supports the following:
-
-<a id="client-d95ee8"></a>&#x2022; [`any_client`](#client-d95ee8) - Optional Block<br>Enable this option
-
-<a id="any-ip-e752c7"></a>&#x2022; [`any_ip`](#any-ip-e752c7) - Optional Block<br>Enable this option
-
-<a id="list-52dae1"></a>&#x2022; [`asn_list`](#list-52dae1) - Optional Block<br>ASN Match List. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#list-52dae1) below.
-
-<a id="matcher-9643c3"></a>&#x2022; [`asn_matcher`](#matcher-9643c3) - Optional Block<br>ASN Matcher. Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#matcher-9643c3) below.
-
-<a id="selector-75ec07"></a>&#x2022; [`client_selector`](#selector-75ec07) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#selector-75ec07) below.
-
-<a id="matcher-74485b"></a>&#x2022; [`ip_matcher`](#matcher-74485b) - Optional Block<br>IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true<br>See [IP Matcher](#matcher-74485b) below.
-
-<a id="list-047465"></a>&#x2022; [`ip_prefix_list`](#list-047465) - Optional Block<br>IP Prefix Match List. List of IP Prefix strings to match against<br>See [IP Prefix List](#list-047465) below.
-
-<a id="list-ac4c85"></a>&#x2022; [`ip_threat_category_list`](#list-ac4c85) - Optional Block<br>IP Threat Category List Type. List of IP threat categories<br>See [IP Threat Category List](#list-ac4c85) below.
-
-<a id="matcher-d896f3"></a>&#x2022; [`tls_fingerprint_matcher`](#matcher-d896f3) - Optional Block<br>TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values<br>See [TLS Fingerprint Matcher](#matcher-d896f3) below.
+<a id="deep-ecbdb7"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Client Matcher Asn List
 
-An [`asn_list`](#list-52dae1) block (within [`api_rate_limit.server_url_rules.client_matcher`](#matcher-ed4b34)) supports the following:
-
-<a id="numbers-826050"></a>&#x2022; [`as_numbers`](#numbers-826050) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="deep-e9df5c"></a>Deeply nested **List** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Client Matcher Asn Matcher
 
-An [`asn_matcher`](#matcher-9643c3) block (within [`api_rate_limit.server_url_rules.client_matcher`](#matcher-ed4b34)) supports the following:
-
-<a id="sets-2c4adf"></a>&#x2022; [`asn_sets`](#sets-2c4adf) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#sets-2c4adf) below.
+<a id="deep-da7cfe"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Client Matcher Asn Matcher Asn Sets
 
-An [`asn_sets`](#sets-2c4adf) block (within [`api_rate_limit.server_url_rules.client_matcher.asn_matcher`](#matcher-9643c3)) supports the following:
-
-<a id="kind-901b29"></a>&#x2022; [`kind`](#kind-901b29) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-b807d9"></a>&#x2022; [`name`](#name-b807d9) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f14602"></a>&#x2022; [`namespace`](#namespace-f14602) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d3fbe6"></a>&#x2022; [`tenant`](#tenant-d3fbe6) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-e2fb5d"></a>&#x2022; [`uid`](#uid-e2fb5d) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-641e85"></a>Deeply nested **Sets** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Client Matcher Client Selector
 
-A [`client_selector`](#selector-75ec07) block (within [`api_rate_limit.server_url_rules.client_matcher`](#matcher-ed4b34)) supports the following:
-
-<a id="expressions-6e94c4"></a>&#x2022; [`expressions`](#expressions-6e94c4) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="deep-1cd130"></a>Deeply nested **Selector** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Client Matcher IP Matcher
 
-An [`ip_matcher`](#matcher-74485b) block (within [`api_rate_limit.server_url_rules.client_matcher`](#matcher-ed4b34)) supports the following:
-
-<a id="matcher-348dd9"></a>&#x2022; [`invert_matcher`](#matcher-348dd9) - Optional Bool<br>Invert IP Matcher. Invert the match result
-
-<a id="sets-13bcb5"></a>&#x2022; [`prefix_sets`](#sets-13bcb5) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#sets-13bcb5) below.
+<a id="deep-51ff2b"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Client Matcher IP Matcher Prefix Sets
 
-A [`prefix_sets`](#sets-13bcb5) block (within [`api_rate_limit.server_url_rules.client_matcher.ip_matcher`](#matcher-74485b)) supports the following:
-
-<a id="kind-6b5e2d"></a>&#x2022; [`kind`](#kind-6b5e2d) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-f97673"></a>&#x2022; [`name`](#name-f97673) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-77b4df"></a>&#x2022; [`namespace`](#namespace-77b4df) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-2de84a"></a>&#x2022; [`tenant`](#tenant-2de84a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-b93ef7"></a>&#x2022; [`uid`](#uid-b93ef7) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-df562f"></a>Deeply nested **Sets** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Client Matcher IP Prefix List
 
-An [`ip_prefix_list`](#list-047465) block (within [`api_rate_limit.server_url_rules.client_matcher`](#matcher-ed4b34)) supports the following:
-
-<a id="match-2b3904"></a>&#x2022; [`invert_match`](#match-2b3904) - Optional Bool<br>Invert Match Result. Invert the match result
-
-<a id="prefixes-4fcef5"></a>&#x2022; [`ip_prefixes`](#prefixes-4fcef5) - Optional List<br>IPv4 Prefix List. List of IPv4 prefix strings
+<a id="deep-d61862"></a>Deeply nested **List** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Client Matcher IP Threat Category List
 
-An [`ip_threat_category_list`](#list-ac4c85) block (within [`api_rate_limit.server_url_rules.client_matcher`](#matcher-ed4b34)) supports the following:
-
-<a id="categories-f2e19c"></a>&#x2022; [`ip_threat_categories`](#categories-f2e19c) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>[Enum: SPAM_SOURCES|WINDOWS_EXPLOITS|WEB_ATTACKS|BOTNETS|SCANNERS|REPUTATION|PHISHING|PROXY|MOBILE_THREATS|TOR_PROXY|DENIAL_OF_SERVICE|NETWORK] List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
+<a id="deep-d4b74b"></a>Deeply nested **List** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Client Matcher TLS Fingerprint Matcher
 
-A [`tls_fingerprint_matcher`](#matcher-d896f3) block (within [`api_rate_limit.server_url_rules.client_matcher`](#matcher-ed4b34)) supports the following:
-
-<a id="classes-c89726"></a>&#x2022; [`classes`](#classes-c89726) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
-
-<a id="values-e9c2ed"></a>&#x2022; [`exact_values`](#values-e9c2ed) - Optional List<br>Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
-
-<a id="values-c878a8"></a>&#x2022; [`excluded_values`](#values-c878a8) - Optional List<br>Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
+<a id="deep-fab698"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Inline Rate Limiter
 
-An [`inline_rate_limiter`](#limiter-9faa53) block (within [`api_rate_limit.server_url_rules`](#api-rate-limit-server-url-rules)) supports the following:
-
-<a id="user-id-2410cf"></a>&#x2022; [`ref_user_id`](#user-id-2410cf) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Ref User ID](#user-id-2410cf) below.
-
-<a id="threshold-e1f6ce"></a>&#x2022; [`threshold`](#threshold-e1f6ce) - Optional Number<br>Threshold. The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period
-
-<a id="unit-23f142"></a>&#x2022; [`unit`](#unit-23f142) - Optional String  Defaults to `SECOND`<br>Possible values are `SECOND`, `MINUTE`, `HOUR`<br>[Enum: SECOND|MINUTE|HOUR] Rate Limit Period Unit. Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days
-
-<a id="user-id-560a62"></a>&#x2022; [`use_http_lb_user_id`](#user-id-560a62) - Optional Block<br>Enable this option
+<a id="deep-758e39"></a>Deeply nested **Limiter** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Inline Rate Limiter Ref User ID
 
-A [`ref_user_id`](#user-id-2410cf) block (within [`api_rate_limit.server_url_rules.inline_rate_limiter`](#limiter-9faa53)) supports the following:
-
-<a id="name-91d5b8"></a>&#x2022; [`name`](#name-91d5b8) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-9a5eae"></a>&#x2022; [`namespace`](#namespace-9a5eae) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-4c9142"></a>&#x2022; [`tenant`](#tenant-4c9142) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-37d9ec"></a>Deeply nested **ID** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Ref Rate Limiter
 
-A [`ref_rate_limiter`](#limiter-383ca9) block (within [`api_rate_limit.server_url_rules`](#api-rate-limit-server-url-rules)) supports the following:
-
-<a id="name-33d109"></a>&#x2022; [`name`](#name-33d109) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-bdf110"></a>&#x2022; [`namespace`](#namespace-bdf110) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-3c7e29"></a>&#x2022; [`tenant`](#tenant-3c7e29) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-6a8465"></a>Deeply nested **Limiter** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Request Matcher
 
-A [`request_matcher`](#matcher-d0eea8) block (within [`api_rate_limit.server_url_rules`](#api-rate-limit-server-url-rules)) supports the following:
-
-<a id="matchers-834089"></a>&#x2022; [`cookie_matchers`](#matchers-834089) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#matchers-834089) below.
-
-<a id="headers-f3e5bd"></a>&#x2022; [`headers`](#headers-f3e5bd) - Optional Block<br>HTTP Headers. A list of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type. Note that all specified header predicates must evaluate to true<br>See [Headers](#headers-f3e5bd) below.
-
-<a id="claims-12c338"></a>&#x2022; [`jwt_claims`](#claims-12c338) - Optional Block<br>JWT Claims. A list of predicates for various JWT claims that need to match. The criteria for matching each JWT claim are described in individual JWTClaimMatcherType instances. The actual JWT claims values are extracted from the JWT payload as a list of strings. Note that all specified JWT claim predicates must evaluate to true. Note that this feature only works on LBs with JWT Validation feature enabled<br>See [JWT Claims](#claims-12c338) below.
-
-<a id="params-176d8b"></a>&#x2022; [`query_params`](#params-176d8b) - Optional Block<br>HTTP Query Parameters. A list of predicates for all query parameters that need to be matched. The criteria for matching each query parameter are described in individual instances of QueryParameterMatcherType. The actual query parameter values are extracted from the request API as a list of strings for each query parameter name. Note that all specified query parameter predicates must evaluate to true<br>See [Query Params](#params-176d8b) below.
+<a id="deep-f791bc"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Request Matcher Cookie Matchers
 
-A [`cookie_matchers`](#matchers-834089) block (within [`api_rate_limit.server_url_rules.request_matcher`](#matcher-d0eea8)) supports the following:
-
-<a id="present-4a314d"></a>&#x2022; [`check_not_present`](#present-4a314d) - Optional Block<br>Enable this option
-
-<a id="present-bfd192"></a>&#x2022; [`check_present`](#present-bfd192) - Optional Block<br>Enable this option
-
-<a id="matcher-5a5e9f"></a>&#x2022; [`invert_matcher`](#matcher-5a5e9f) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
-
-<a id="item-4904af"></a>&#x2022; [`item`](#item-4904af) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-4904af) below.
-
-<a id="name-764850"></a>&#x2022; [`name`](#name-764850) - Optional String<br>Cookie Name. A case-sensitive cookie name
+<a id="deep-11f932"></a>Deeply nested **Matchers** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Request Matcher Cookie Matchers Item
 
-An [`item`](#item-4904af) block (within [`api_rate_limit.server_url_rules.request_matcher.cookie_matchers`](#matchers-834089)) supports the following:
-
-<a id="values-1a1200"></a>&#x2022; [`exact_values`](#values-1a1200) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-d6047d"></a>&#x2022; [`regex_values`](#values-d6047d) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-c3e045"></a>&#x2022; [`transformers`](#transformers-c3e045) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-b08554"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Request Matcher Headers
 
-A [`headers`](#headers-f3e5bd) block (within [`api_rate_limit.server_url_rules.request_matcher`](#matcher-d0eea8)) supports the following:
-
-<a id="present-b8a223"></a>&#x2022; [`check_not_present`](#present-b8a223) - Optional Block<br>Enable this option
-
-<a id="present-de3982"></a>&#x2022; [`check_present`](#present-de3982) - Optional Block<br>Enable this option
-
-<a id="matcher-7ed807"></a>&#x2022; [`invert_matcher`](#matcher-7ed807) - Optional Bool<br>Invert Header Matcher. Invert the match result
-
-<a id="item-8635a7"></a>&#x2022; [`item`](#item-8635a7) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-8635a7) below.
-
-<a id="name-7ac50b"></a>&#x2022; [`name`](#name-7ac50b) - Optional String<br>Header Name. A case-insensitive HTTP header name
+<a id="deep-a738af"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Request Matcher Headers Item
 
-An [`item`](#item-8635a7) block (within [`api_rate_limit.server_url_rules.request_matcher.headers`](#headers-f3e5bd)) supports the following:
-
-<a id="values-bb1d87"></a>&#x2022; [`exact_values`](#values-bb1d87) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-99be35"></a>&#x2022; [`regex_values`](#values-99be35) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-17e679"></a>&#x2022; [`transformers`](#transformers-17e679) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-28a0f1"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Request Matcher JWT Claims
 
-A [`jwt_claims`](#claims-12c338) block (within [`api_rate_limit.server_url_rules.request_matcher`](#matcher-d0eea8)) supports the following:
-
-<a id="present-b2dfb7"></a>&#x2022; [`check_not_present`](#present-b2dfb7) - Optional Block<br>Enable this option
-
-<a id="present-54a989"></a>&#x2022; [`check_present`](#present-54a989) - Optional Block<br>Enable this option
-
-<a id="matcher-a26813"></a>&#x2022; [`invert_matcher`](#matcher-a26813) - Optional Bool<br>Invert Matcher. Invert the match result
-
-<a id="item-b8fbc9"></a>&#x2022; [`item`](#item-b8fbc9) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-b8fbc9) below.
-
-<a id="name-eb48e1"></a>&#x2022; [`name`](#name-eb48e1) - Optional String<br>JWT Claim Name. JWT claim name
+<a id="deep-4069dc"></a>Deeply nested **Claims** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Request Matcher JWT Claims Item
 
-An [`item`](#item-b8fbc9) block (within [`api_rate_limit.server_url_rules.request_matcher.jwt_claims`](#claims-12c338)) supports the following:
-
-<a id="values-db3fa8"></a>&#x2022; [`exact_values`](#values-db3fa8) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-477cf3"></a>&#x2022; [`regex_values`](#values-477cf3) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-9a6b31"></a>&#x2022; [`transformers`](#transformers-9a6b31) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-e1e8f7"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Request Matcher Query Params
 
-A [`query_params`](#params-176d8b) block (within [`api_rate_limit.server_url_rules.request_matcher`](#matcher-d0eea8)) supports the following:
-
-<a id="present-3444e4"></a>&#x2022; [`check_not_present`](#present-3444e4) - Optional Block<br>Enable this option
-
-<a id="present-e16059"></a>&#x2022; [`check_present`](#present-e16059) - Optional Block<br>Enable this option
-
-<a id="matcher-1e387b"></a>&#x2022; [`invert_matcher`](#matcher-1e387b) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
-
-<a id="item-b75d42"></a>&#x2022; [`item`](#item-b75d42) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-b75d42) below.
-
-<a id="key-049198"></a>&#x2022; [`key`](#key-049198) - Optional String<br>Query Parameter Name. A case-sensitive HTTP query parameter name
+<a id="deep-015644"></a>Deeply nested **Params** block collapsed for readability.
 
 #### API Rate Limit Server URL Rules Request Matcher Query Params Item
 
-An [`item`](#item-b75d42) block (within [`api_rate_limit.server_url_rules.request_matcher.query_params`](#params-176d8b)) supports the following:
-
-<a id="values-1feeac"></a>&#x2022; [`exact_values`](#values-1feeac) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-2381e5"></a>&#x2022; [`regex_values`](#values-2381e5) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-8b8f7c"></a>&#x2022; [`transformers`](#transformers-8b8f7c) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-ba63fa"></a>Deeply nested **Item** block collapsed for readability.
 
 #### API Specification
 
@@ -1044,13 +570,7 @@ An [`api_specification`](#api-specification) block supports the following:
 
 #### API Specification API Definition
 
-An [`api_definition`](#api-specification-api-definition) block (within [`api_specification`](#api-specification)) supports the following:
-
-<a id="api-specification-api-definition-name"></a>&#x2022; [`name`](#api-specification-api-definition-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c685bf"></a>&#x2022; [`namespace`](#namespace-c685bf) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="api-specification-api-definition-tenant"></a>&#x2022; [`tenant`](#api-specification-api-definition-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-d119bc"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### API Specification Validation All Spec Endpoints
 
@@ -1064,51 +584,23 @@ A [`validation_all_spec_endpoints`](#endpoints-4158a4) block (within [`api_speci
 
 #### API Specification Validation All Spec Endpoints Fall Through Mode
 
-A [`fall_through_mode`](#mode-8425c5) block (within [`api_specification.validation_all_spec_endpoints`](#endpoints-4158a4)) supports the following:
-
-<a id="allow-fe1e6a"></a>&#x2022; [`fall_through_mode_allow`](#allow-fe1e6a) - Optional Block<br>Enable this option
-
-<a id="custom-aadcaa"></a>&#x2022; [`fall_through_mode_custom`](#custom-aadcaa) - Optional Block<br>Custom Fall Through Mode. Define the fall through settings<br>See [Fall Through Mode Custom](#custom-aadcaa) below.
+<a id="deep-93854f"></a>Deeply nested **Mode** block collapsed for readability.
 
 #### API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom
 
-A [`fall_through_mode_custom`](#custom-aadcaa) block (within [`api_specification.validation_all_spec_endpoints.fall_through_mode`](#mode-8425c5)) supports the following:
-
-<a id="rules-7e1bb3"></a>&#x2022; [`open_api_validation_rules`](#rules-7e1bb3) - Optional Block<br>Custom Fall Through Rule List<br>See [Open API Validation Rules](#rules-7e1bb3) below.
+<a id="deep-fcb4c6"></a>Deeply nested **Custom** block collapsed for readability.
 
 #### API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom Open API Validation Rules
 
-An [`open_api_validation_rules`](#rules-7e1bb3) block (within [`api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom`](#custom-aadcaa)) supports the following:
-
-<a id="block-392345"></a>&#x2022; [`action_block`](#block-392345) - Optional Block<br>Enable this option
-
-<a id="report-70f264"></a>&#x2022; [`action_report`](#report-70f264) - Optional Block<br>Enable this option
-
-<a id="skip-5ad739"></a>&#x2022; [`action_skip`](#skip-5ad739) - Optional Block<br>Enable this option
-
-<a id="endpoint-eb6d3c"></a>&#x2022; [`api_endpoint`](#endpoint-eb6d3c) - Optional Block<br>API Endpoint. This defines API endpoint<br>See [API Endpoint](#endpoint-eb6d3c) below.
-
-<a id="group-ba04ab"></a>&#x2022; [`api_group`](#group-ba04ab) - Optional String<br>API Group. The API group which this validation applies to
-
-<a id="path-822099"></a>&#x2022; [`base_path`](#path-822099) - Optional String<br>Base Path. The base path which this validation applies to
-
-<a id="metadata-868613"></a>&#x2022; [`metadata`](#metadata-868613) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-868613) below.
+<a id="deep-5bd981"></a>Deeply nested **Rules** block collapsed for readability.
 
 #### API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom Open API Validation Rules API Endpoint
 
-An [`api_endpoint`](#endpoint-eb6d3c) block (within [`api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`](#rules-7e1bb3)) supports the following:
-
-<a id="methods-782949"></a>&#x2022; [`methods`](#methods-782949) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Methods. Methods to be matched
-
-<a id="path-f12bb6"></a>&#x2022; [`path`](#path-f12bb6) - Optional String<br>Path. Path to be matched
+<a id="deep-96d6ca"></a>Deeply nested **Endpoint** block collapsed for readability.
 
 #### API Specification Validation All Spec Endpoints Fall Through Mode Fall Through Mode Custom Open API Validation Rules Metadata
 
-A [`metadata`](#metadata-868613) block (within [`api_specification.validation_all_spec_endpoints.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`](#rules-7e1bb3)) supports the following:
-
-<a id="spec-d3d0fc"></a>&#x2022; [`description_spec`](#spec-d3d0fc) - Optional String<br>Description. Human readable description
-
-<a id="name-7c2811"></a>&#x2022; [`name`](#name-7c2811) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-d275eb"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### API Specification Validation All Spec Endpoints Settings
 
@@ -1124,49 +616,23 @@ A [`settings`](#settings-a83a93) block (within [`api_specification.validation_al
 
 #### API Specification Validation All Spec Endpoints Settings Property Validation Settings Custom
 
-A [`property_validation_settings_custom`](#custom-8254df) block (within [`api_specification.validation_all_spec_endpoints.settings`](#settings-a83a93)) supports the following:
-
-<a id="parameters-83e343"></a>&#x2022; [`query_parameters`](#parameters-83e343) - Optional Block<br>Validation Settings For Query Parameters. Custom settings for query parameters validation<br>See [Query Parameters](#parameters-83e343) below.
+<a id="deep-57507d"></a>Deeply nested **Custom** block collapsed for readability.
 
 #### API Specification Validation All Spec Endpoints Settings Property Validation Settings Custom Query Parameters
 
-A [`query_parameters`](#parameters-83e343) block (within [`api_specification.validation_all_spec_endpoints.settings.property_validation_settings_custom`](#custom-8254df)) supports the following:
-
-<a id="parameters-788bd4"></a>&#x2022; [`allow_additional_parameters`](#parameters-788bd4) - Optional Block<br>Enable this option
-
-<a id="parameters-84cc51"></a>&#x2022; [`disallow_additional_parameters`](#parameters-84cc51) - Optional Block<br>Enable this option
+<a id="deep-761ec3"></a>Deeply nested **Parameters** block collapsed for readability.
 
 #### API Specification Validation All Spec Endpoints Validation Mode
 
-A [`validation_mode`](#mode-cd4a1c) block (within [`api_specification.validation_all_spec_endpoints`](#endpoints-4158a4)) supports the following:
-
-<a id="active-df510e"></a>&#x2022; [`response_validation_mode_active`](#active-df510e) - Optional Block<br>Open API Validation Mode Active. Validation mode properties of response<br>See [Response Validation Mode Active](#active-df510e) below.
-
-<a id="validation-5ae35e"></a>&#x2022; [`skip_response_validation`](#validation-5ae35e) - Optional Block<br>Enable this option
-
-<a id="validation-a6bc43"></a>&#x2022; [`skip_validation`](#validation-a6bc43) - Optional Block<br>Enable this option
-
-<a id="active-876e02"></a>&#x2022; [`validation_mode_active`](#active-876e02) - Optional Block<br>Open API Validation Mode Active. Validation mode properties of request<br>See [Validation Mode Active](#active-876e02) below.
+<a id="deep-a84c66"></a>Deeply nested **Mode** block collapsed for readability.
 
 #### API Specification Validation All Spec Endpoints Validation Mode Response Validation Mode Active
 
-A [`response_validation_mode_active`](#active-df510e) block (within [`api_specification.validation_all_spec_endpoints.validation_mode`](#mode-cd4a1c)) supports the following:
-
-<a id="block-ff5c27"></a>&#x2022; [`enforcement_block`](#block-ff5c27) - Optional Block<br>Enable this option
-
-<a id="report-0b6c08"></a>&#x2022; [`enforcement_report`](#report-0b6c08) - Optional Block<br>Enable this option
-
-<a id="properties-138811"></a>&#x2022; [`response_validation_properties`](#properties-138811) - Optional List  Defaults to `PROPERTY_QUERY_PARAMETERS`<br>Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`<br>[Enum: PROPERTY_QUERY_PARAMETERS|PROPERTY_PATH_PARAMETERS|PROPERTY_CONTENT_TYPE|PROPERTY_COOKIE_PARAMETERS|PROPERTY_HTTP_HEADERS|PROPERTY_HTTP_BODY|PROPERTY_SECURITY_SCHEMA|PROPERTY_RESPONSE_CODE] Response Validation Properties. List of properties of the response to validate according to the OpenAPI specification file (a.k.a. swagger)
+<a id="deep-7d440a"></a>Deeply nested **Active** block collapsed for readability.
 
 #### API Specification Validation All Spec Endpoints Validation Mode Validation Mode Active
 
-A [`validation_mode_active`](#active-876e02) block (within [`api_specification.validation_all_spec_endpoints.validation_mode`](#mode-cd4a1c)) supports the following:
-
-<a id="block-cb8976"></a>&#x2022; [`enforcement_block`](#block-cb8976) - Optional Block<br>Enable this option
-
-<a id="report-c50e43"></a>&#x2022; [`enforcement_report`](#report-c50e43) - Optional Block<br>Enable this option
-
-<a id="properties-029aa9"></a>&#x2022; [`request_validation_properties`](#properties-029aa9) - Optional List  Defaults to `PROPERTY_QUERY_PARAMETERS`<br>Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`<br>[Enum: PROPERTY_QUERY_PARAMETERS|PROPERTY_PATH_PARAMETERS|PROPERTY_CONTENT_TYPE|PROPERTY_COOKIE_PARAMETERS|PROPERTY_HTTP_HEADERS|PROPERTY_HTTP_BODY|PROPERTY_SECURITY_SCHEMA|PROPERTY_RESPONSE_CODE] Request Validation Properties. List of properties of the request to validate according to the OpenAPI specification file (a.k.a. swagger)
+<a id="deep-dcf3e9"></a>Deeply nested **Active** block collapsed for readability.
 
 #### API Specification Validation Custom List
 
@@ -1180,117 +646,47 @@ A [`validation_custom_list`](#list-23b577) block (within [`api_specification`](#
 
 #### API Specification Validation Custom List Fall Through Mode
 
-A [`fall_through_mode`](#mode-146cc3) block (within [`api_specification.validation_custom_list`](#list-23b577)) supports the following:
-
-<a id="allow-c0dd39"></a>&#x2022; [`fall_through_mode_allow`](#allow-c0dd39) - Optional Block<br>Enable this option
-
-<a id="custom-c29bcd"></a>&#x2022; [`fall_through_mode_custom`](#custom-c29bcd) - Optional Block<br>Custom Fall Through Mode. Define the fall through settings<br>See [Fall Through Mode Custom](#custom-c29bcd) below.
+<a id="deep-08870a"></a>Deeply nested **Mode** block collapsed for readability.
 
 #### API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom
 
-A [`fall_through_mode_custom`](#custom-c29bcd) block (within [`api_specification.validation_custom_list.fall_through_mode`](#mode-146cc3)) supports the following:
-
-<a id="rules-ed6696"></a>&#x2022; [`open_api_validation_rules`](#rules-ed6696) - Optional Block<br>Custom Fall Through Rule List<br>See [Open API Validation Rules](#rules-ed6696) below.
+<a id="deep-1af5fd"></a>Deeply nested **Custom** block collapsed for readability.
 
 #### API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom Open API Validation Rules
 
-An [`open_api_validation_rules`](#rules-ed6696) block (within [`api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom`](#custom-c29bcd)) supports the following:
-
-<a id="block-31614e"></a>&#x2022; [`action_block`](#block-31614e) - Optional Block<br>Enable this option
-
-<a id="report-e29f47"></a>&#x2022; [`action_report`](#report-e29f47) - Optional Block<br>Enable this option
-
-<a id="skip-c4580b"></a>&#x2022; [`action_skip`](#skip-c4580b) - Optional Block<br>Enable this option
-
-<a id="endpoint-997b3f"></a>&#x2022; [`api_endpoint`](#endpoint-997b3f) - Optional Block<br>API Endpoint. This defines API endpoint<br>See [API Endpoint](#endpoint-997b3f) below.
-
-<a id="group-e515e8"></a>&#x2022; [`api_group`](#group-e515e8) - Optional String<br>API Group. The API group which this validation applies to
-
-<a id="path-835b18"></a>&#x2022; [`base_path`](#path-835b18) - Optional String<br>Base Path. The base path which this validation applies to
-
-<a id="metadata-6c686f"></a>&#x2022; [`metadata`](#metadata-6c686f) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-6c686f) below.
+<a id="deep-e08601"></a>Deeply nested **Rules** block collapsed for readability.
 
 #### API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom Open API Validation Rules API Endpoint
 
-An [`api_endpoint`](#endpoint-997b3f) block (within [`api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`](#rules-ed6696)) supports the following:
-
-<a id="methods-9c3511"></a>&#x2022; [`methods`](#methods-9c3511) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Methods. Methods to be matched
-
-<a id="path-0f1169"></a>&#x2022; [`path`](#path-0f1169) - Optional String<br>Path. Path to be matched
+<a id="deep-f88a1e"></a>Deeply nested **Endpoint** block collapsed for readability.
 
 #### API Specification Validation Custom List Fall Through Mode Fall Through Mode Custom Open API Validation Rules Metadata
 
-A [`metadata`](#metadata-6c686f) block (within [`api_specification.validation_custom_list.fall_through_mode.fall_through_mode_custom.open_api_validation_rules`](#rules-ed6696)) supports the following:
-
-<a id="spec-a68d3b"></a>&#x2022; [`description_spec`](#spec-a68d3b) - Optional String<br>Description. Human readable description
-
-<a id="name-f578bb"></a>&#x2022; [`name`](#name-f578bb) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-8b9a6c"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### API Specification Validation Custom List Open API Validation Rules
 
-An [`open_api_validation_rules`](#rules-f51668) block (within [`api_specification.validation_custom_list`](#list-23b577)) supports the following:
-
-<a id="domain-b31fd1"></a>&#x2022; [`any_domain`](#domain-b31fd1) - Optional Block<br>Enable this option
-
-<a id="endpoint-1f50db"></a>&#x2022; [`api_endpoint`](#endpoint-1f50db) - Optional Block<br>API Endpoint. This defines API endpoint<br>See [API Endpoint](#endpoint-1f50db) below.
-
-<a id="group-ba8ad2"></a>&#x2022; [`api_group`](#group-ba8ad2) - Optional String<br>API Group. The API group which this validation applies to
-
-<a id="path-ca1339"></a>&#x2022; [`base_path`](#path-ca1339) - Optional String<br>Base Path. The base path which this validation applies to
-
-<a id="metadata-304b10"></a>&#x2022; [`metadata`](#metadata-304b10) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-304b10) below.
-
-<a id="domain-221c29"></a>&#x2022; [`specific_domain`](#domain-221c29) - Optional String<br>Specific Domain. The rule will apply for a specific domain
-
-<a id="mode-79470e"></a>&#x2022; [`validation_mode`](#mode-79470e) - Optional Block<br>Validation Mode.Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. swagger)<br>See [Validation Mode](#mode-79470e) below.
+<a id="deep-59b908"></a>Deeply nested **Rules** block collapsed for readability.
 
 #### API Specification Validation Custom List Open API Validation Rules API Endpoint
 
-An [`api_endpoint`](#endpoint-1f50db) block (within [`api_specification.validation_custom_list.open_api_validation_rules`](#rules-f51668)) supports the following:
-
-<a id="methods-acc02e"></a>&#x2022; [`methods`](#methods-acc02e) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Methods. Methods to be matched
-
-<a id="path-cb14d1"></a>&#x2022; [`path`](#path-cb14d1) - Optional String<br>Path. Path to be matched
+<a id="deep-287681"></a>Deeply nested **Endpoint** block collapsed for readability.
 
 #### API Specification Validation Custom List Open API Validation Rules Metadata
 
-A [`metadata`](#metadata-304b10) block (within [`api_specification.validation_custom_list.open_api_validation_rules`](#rules-f51668)) supports the following:
-
-<a id="spec-cef192"></a>&#x2022; [`description_spec`](#spec-cef192) - Optional String<br>Description. Human readable description
-
-<a id="name-5500dd"></a>&#x2022; [`name`](#name-5500dd) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-bdc351"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### API Specification Validation Custom List Open API Validation Rules Validation Mode
 
-A [`validation_mode`](#mode-79470e) block (within [`api_specification.validation_custom_list.open_api_validation_rules`](#rules-f51668)) supports the following:
-
-<a id="active-871b48"></a>&#x2022; [`response_validation_mode_active`](#active-871b48) - Optional Block<br>Open API Validation Mode Active. Validation mode properties of response<br>See [Response Validation Mode Active](#active-871b48) below.
-
-<a id="validation-6f1b64"></a>&#x2022; [`skip_response_validation`](#validation-6f1b64) - Optional Block<br>Enable this option
-
-<a id="validation-902520"></a>&#x2022; [`skip_validation`](#validation-902520) - Optional Block<br>Enable this option
-
-<a id="active-984dc6"></a>&#x2022; [`validation_mode_active`](#active-984dc6) - Optional Block<br>Open API Validation Mode Active. Validation mode properties of request<br>See [Validation Mode Active](#active-984dc6) below.
+<a id="deep-e4ce7e"></a>Deeply nested **Mode** block collapsed for readability.
 
 #### API Specification Validation Custom List Open API Validation Rules Validation Mode Response Validation Mode Active
 
-A [`response_validation_mode_active`](#active-871b48) block (within [`api_specification.validation_custom_list.open_api_validation_rules.validation_mode`](#mode-79470e)) supports the following:
-
-<a id="block-410bdc"></a>&#x2022; [`enforcement_block`](#block-410bdc) - Optional Block<br>Enable this option
-
-<a id="report-129a90"></a>&#x2022; [`enforcement_report`](#report-129a90) - Optional Block<br>Enable this option
-
-<a id="properties-b162cc"></a>&#x2022; [`response_validation_properties`](#properties-b162cc) - Optional List  Defaults to `PROPERTY_QUERY_PARAMETERS`<br>Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`<br>[Enum: PROPERTY_QUERY_PARAMETERS|PROPERTY_PATH_PARAMETERS|PROPERTY_CONTENT_TYPE|PROPERTY_COOKIE_PARAMETERS|PROPERTY_HTTP_HEADERS|PROPERTY_HTTP_BODY|PROPERTY_SECURITY_SCHEMA|PROPERTY_RESPONSE_CODE] Response Validation Properties. List of properties of the response to validate according to the OpenAPI specification file (a.k.a. swagger)
+<a id="deep-c312ba"></a>Deeply nested **Active** block collapsed for readability.
 
 #### API Specification Validation Custom List Open API Validation Rules Validation Mode Validation Mode Active
 
-A [`validation_mode_active`](#active-984dc6) block (within [`api_specification.validation_custom_list.open_api_validation_rules.validation_mode`](#mode-79470e)) supports the following:
-
-<a id="block-d25b95"></a>&#x2022; [`enforcement_block`](#block-d25b95) - Optional Block<br>Enable this option
-
-<a id="report-dda104"></a>&#x2022; [`enforcement_report`](#report-dda104) - Optional Block<br>Enable this option
-
-<a id="properties-aae899"></a>&#x2022; [`request_validation_properties`](#properties-aae899) - Optional List  Defaults to `PROPERTY_QUERY_PARAMETERS`<br>Possible values are `PROPERTY_QUERY_PARAMETERS`, `PROPERTY_PATH_PARAMETERS`, `PROPERTY_CONTENT_TYPE`, `PROPERTY_COOKIE_PARAMETERS`, `PROPERTY_HTTP_HEADERS`, `PROPERTY_HTTP_BODY`, `PROPERTY_SECURITY_SCHEMA`, `PROPERTY_RESPONSE_CODE`<br>[Enum: PROPERTY_QUERY_PARAMETERS|PROPERTY_PATH_PARAMETERS|PROPERTY_CONTENT_TYPE|PROPERTY_COOKIE_PARAMETERS|PROPERTY_HTTP_HEADERS|PROPERTY_HTTP_BODY|PROPERTY_SECURITY_SCHEMA|PROPERTY_RESPONSE_CODE] Request Validation Properties. List of properties of the request to validate according to the OpenAPI specification file (a.k.a. swagger)
+<a id="deep-0ccdf9"></a>Deeply nested **Active** block collapsed for readability.
 
 #### API Specification Validation Custom List Settings
 
@@ -1306,27 +702,15 @@ A [`settings`](#settings-940e64) block (within [`api_specification.validation_cu
 
 #### API Specification Validation Custom List Settings Property Validation Settings Custom
 
-A [`property_validation_settings_custom`](#custom-8e6ea6) block (within [`api_specification.validation_custom_list.settings`](#settings-940e64)) supports the following:
-
-<a id="parameters-bb35d2"></a>&#x2022; [`query_parameters`](#parameters-bb35d2) - Optional Block<br>Validation Settings For Query Parameters. Custom settings for query parameters validation<br>See [Query Parameters](#parameters-bb35d2) below.
+<a id="deep-c74d74"></a>Deeply nested **Custom** block collapsed for readability.
 
 #### API Specification Validation Custom List Settings Property Validation Settings Custom Query Parameters
 
-A [`query_parameters`](#parameters-bb35d2) block (within [`api_specification.validation_custom_list.settings.property_validation_settings_custom`](#custom-8e6ea6)) supports the following:
-
-<a id="parameters-547273"></a>&#x2022; [`allow_additional_parameters`](#parameters-547273) - Optional Block<br>Enable this option
-
-<a id="parameters-22e36d"></a>&#x2022; [`disallow_additional_parameters`](#parameters-22e36d) - Optional Block<br>Enable this option
+<a id="deep-b42c34"></a>Deeply nested **Parameters** block collapsed for readability.
 
 #### App Firewall
 
-An [`app_firewall`](#app-firewall) block supports the following:
-
-<a id="app-firewall-name"></a>&#x2022; [`name`](#app-firewall-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="app-firewall-namespace"></a>&#x2022; [`namespace`](#app-firewall-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="app-firewall-tenant"></a>&#x2022; [`tenant`](#app-firewall-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-f225e5"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Blocked Clients
 
@@ -1426,51 +810,23 @@ A [`js_insert_all_pages`](#bot-defense-policy-js-insert-all-pages) block (within
 
 #### Bot Defense Policy Js Insert All Pages Except
 
-A [`js_insert_all_pages_except`](#except-2f0f51) block (within [`bot_defense.policy`](#bot-defense-policy)) supports the following:
-
-<a id="list-c11e8a"></a>&#x2022; [`exclude_list`](#list-c11e8a) - Optional Block<br>Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers<br>See [Exclude List](#list-c11e8a) below.
-
-<a id="location-7d08dc"></a>&#x2022; [`javascript_location`](#location-7d08dc) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>[Enum: AFTER_HEAD|AFTER_TITLE_END|BEFORE_SCRIPT] JavaScript Location. All inside networks. Insert JavaScript after `<head>` tag Insert JavaScript after `</title>` tag. Insert JavaScript before first `<script>` tag
+<a id="deep-5eada5"></a>Deeply nested **Except** block collapsed for readability.
 
 #### Bot Defense Policy Js Insert All Pages Except Exclude List
 
-An [`exclude_list`](#list-c11e8a) block (within [`bot_defense.policy.js_insert_all_pages_except`](#except-2f0f51)) supports the following:
-
-<a id="domain-73ce27"></a>&#x2022; [`any_domain`](#domain-73ce27) - Optional Block<br>Enable this option
-
-<a id="domain-503442"></a>&#x2022; [`domain`](#domain-503442) - Optional Block<br>Domains. Domains names<br>See [Domain](#domain-503442) below.
-
-<a id="metadata-f70b11"></a>&#x2022; [`metadata`](#metadata-f70b11) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-f70b11) below.
-
-<a id="path-e8b4e3"></a>&#x2022; [`path`](#path-e8b4e3) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-e8b4e3) below.
+<a id="deep-cc9d4f"></a>Deeply nested **List** block collapsed for readability.
 
 #### Bot Defense Policy Js Insert All Pages Except Exclude List Domain
 
-A [`domain`](#domain-503442) block (within [`bot_defense.policy.js_insert_all_pages_except.exclude_list`](#list-c11e8a)) supports the following:
-
-<a id="value-64604c"></a>&#x2022; [`exact_value`](#value-64604c) - Optional String<br>Exact Value. Exact domain name
-
-<a id="value-a33f5c"></a>&#x2022; [`regex_value`](#value-a33f5c) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
-
-<a id="value-ae4d1e"></a>&#x2022; [`suffix_value`](#value-ae4d1e) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="deep-58ae8c"></a>Deeply nested **Domain** block collapsed for readability.
 
 #### Bot Defense Policy Js Insert All Pages Except Exclude List Metadata
 
-A [`metadata`](#metadata-f70b11) block (within [`bot_defense.policy.js_insert_all_pages_except.exclude_list`](#list-c11e8a)) supports the following:
-
-<a id="spec-aabb87"></a>&#x2022; [`description_spec`](#spec-aabb87) - Optional String<br>Description. Human readable description
-
-<a id="name-644012"></a>&#x2022; [`name`](#name-644012) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-ac7397"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### Bot Defense Policy Js Insert All Pages Except Exclude List Path
 
-A [`path`](#path-e8b4e3) block (within [`bot_defense.policy.js_insert_all_pages_except.exclude_list`](#list-c11e8a)) supports the following:
-
-<a id="path-39fb60"></a>&#x2022; [`path`](#path-39fb60) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-fe375b"></a>&#x2022; [`prefix`](#prefix-fe375b) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-93d4f7"></a>&#x2022; [`regex`](#regex-93d4f7) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-9d17be"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Bot Defense Policy Js Insertion Rules
 
@@ -1482,43 +838,19 @@ A [`js_insertion_rules`](#bot-defense-policy-js-insertion-rules) block (within [
 
 #### Bot Defense Policy Js Insertion Rules Exclude List
 
-An [`exclude_list`](#list-51668b) block (within [`bot_defense.policy.js_insertion_rules`](#bot-defense-policy-js-insertion-rules)) supports the following:
-
-<a id="domain-090b66"></a>&#x2022; [`any_domain`](#domain-090b66) - Optional Block<br>Enable this option
-
-<a id="domain-47cfd3"></a>&#x2022; [`domain`](#domain-47cfd3) - Optional Block<br>Domains. Domains names<br>See [Domain](#domain-47cfd3) below.
-
-<a id="metadata-7d33fd"></a>&#x2022; [`metadata`](#metadata-7d33fd) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-7d33fd) below.
-
-<a id="path-a9cb42"></a>&#x2022; [`path`](#path-a9cb42) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-a9cb42) below.
+<a id="deep-5976c7"></a>Deeply nested **List** block collapsed for readability.
 
 #### Bot Defense Policy Js Insertion Rules Exclude List Domain
 
-A [`domain`](#domain-47cfd3) block (within [`bot_defense.policy.js_insertion_rules.exclude_list`](#list-51668b)) supports the following:
-
-<a id="value-19618a"></a>&#x2022; [`exact_value`](#value-19618a) - Optional String<br>Exact Value. Exact domain name
-
-<a id="value-84ab50"></a>&#x2022; [`regex_value`](#value-84ab50) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
-
-<a id="value-f83edf"></a>&#x2022; [`suffix_value`](#value-f83edf) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="deep-c9a8a1"></a>Deeply nested **Domain** block collapsed for readability.
 
 #### Bot Defense Policy Js Insertion Rules Exclude List Metadata
 
-A [`metadata`](#metadata-7d33fd) block (within [`bot_defense.policy.js_insertion_rules.exclude_list`](#list-51668b)) supports the following:
-
-<a id="spec-1f6f3a"></a>&#x2022; [`description_spec`](#spec-1f6f3a) - Optional String<br>Description. Human readable description
-
-<a id="name-487812"></a>&#x2022; [`name`](#name-487812) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-4b3d6a"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### Bot Defense Policy Js Insertion Rules Exclude List Path
 
-A [`path`](#path-a9cb42) block (within [`bot_defense.policy.js_insertion_rules.exclude_list`](#list-51668b)) supports the following:
-
-<a id="path-0e9a9e"></a>&#x2022; [`path`](#path-0e9a9e) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-635824"></a>&#x2022; [`prefix`](#prefix-635824) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-1d9ec1"></a>&#x2022; [`regex`](#regex-1d9ec1) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-fa04d6"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Bot Defense Policy Js Insertion Rules Rules
 
@@ -1536,31 +868,15 @@ A [`rules`](#rules-15d983) block (within [`bot_defense.policy.js_insertion_rules
 
 #### Bot Defense Policy Js Insertion Rules Rules Domain
 
-A [`domain`](#domain-834b0f) block (within [`bot_defense.policy.js_insertion_rules.rules`](#rules-15d983)) supports the following:
-
-<a id="value-761413"></a>&#x2022; [`exact_value`](#value-761413) - Optional String<br>Exact Value. Exact domain name
-
-<a id="value-626e98"></a>&#x2022; [`regex_value`](#value-626e98) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
-
-<a id="value-a64bf5"></a>&#x2022; [`suffix_value`](#value-a64bf5) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="deep-72024a"></a>Deeply nested **Domain** block collapsed for readability.
 
 #### Bot Defense Policy Js Insertion Rules Rules Metadata
 
-A [`metadata`](#metadata-e15703) block (within [`bot_defense.policy.js_insertion_rules.rules`](#rules-15d983)) supports the following:
-
-<a id="spec-bd4771"></a>&#x2022; [`description_spec`](#spec-bd4771) - Optional String<br>Description. Human readable description
-
-<a id="name-1bd3d4"></a>&#x2022; [`name`](#name-1bd3d4) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-e9d554"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### Bot Defense Policy Js Insertion Rules Rules Path
 
-A [`path`](#path-711518) block (within [`bot_defense.policy.js_insertion_rules.rules`](#rules-15d983)) supports the following:
-
-<a id="path-6d550e"></a>&#x2022; [`path`](#path-6d550e) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-cee2d1"></a>&#x2022; [`prefix`](#prefix-cee2d1) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-597dd8"></a>&#x2022; [`regex`](#regex-597dd8) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-3fdb24"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Bot Defense Policy Mobile Sdk Config
 
@@ -1570,31 +886,15 @@ A [`mobile_sdk_config`](#bot-defense-policy-mobile-sdk-config) block (within [`b
 
 #### Bot Defense Policy Mobile Sdk Config Mobile Identifier
 
-A [`mobile_identifier`](#identifier-e34e48) block (within [`bot_defense.policy.mobile_sdk_config`](#bot-defense-policy-mobile-sdk-config)) supports the following:
-
-<a id="headers-529e3c"></a>&#x2022; [`headers`](#headers-529e3c) - Optional Block<br>Headers. Headers that can be used to identify mobile traffic<br>See [Headers](#headers-529e3c) below.
+<a id="deep-8f9ee4"></a>Deeply nested **Identifier** block collapsed for readability.
 
 #### Bot Defense Policy Mobile Sdk Config Mobile Identifier Headers
 
-A [`headers`](#headers-529e3c) block (within [`bot_defense.policy.mobile_sdk_config.mobile_identifier`](#identifier-e34e48)) supports the following:
-
-<a id="present-c23fa6"></a>&#x2022; [`check_not_present`](#present-c23fa6) - Optional Block<br>Enable this option
-
-<a id="present-1d1c99"></a>&#x2022; [`check_present`](#present-1d1c99) - Optional Block<br>Enable this option
-
-<a id="item-6622e2"></a>&#x2022; [`item`](#item-6622e2) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-6622e2) below.
-
-<a id="name-581daa"></a>&#x2022; [`name`](#name-581daa) - Optional String<br>Header Name. A case-insensitive HTTP header name
+<a id="deep-235998"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Bot Defense Policy Mobile Sdk Config Mobile Identifier Headers Item
 
-An [`item`](#item-6622e2) block (within [`bot_defense.policy.mobile_sdk_config.mobile_identifier.headers`](#headers-529e3c)) supports the following:
-
-<a id="values-f1a647"></a>&#x2022; [`exact_values`](#values-f1a647) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-102e01"></a>&#x2022; [`regex_values`](#values-102e01) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-e54cc5"></a>&#x2022; [`transformers`](#transformers-e54cc5) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-ba14c6"></a>Deeply nested **Item** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints
 
@@ -1644,143 +944,51 @@ A [`domain`](#domain-18bf1a) block (within [`bot_defense.policy.protected_app_en
 
 #### Bot Defense Policy Protected App Endpoints Flow Label
 
-A [`flow_label`](#label-244fef) block (within [`bot_defense.policy.protected_app_endpoints`](#endpoints-01a2f3)) supports the following:
-
-<a id="management-d237e9"></a>&#x2022; [`account_management`](#management-d237e9) - Optional Block<br>Bot Defense Flow Label Account Management Category. Bot Defense Flow Label Account Management Category<br>See [Account Management](#management-d237e9) below.
-
-<a id="authentication-60331f"></a>&#x2022; [`authentication`](#authentication-60331f) - Optional Block<br>Bot Defense Flow Label Authentication Category. Bot Defense Flow Label Authentication Category<br>See [Authentication](#authentication-60331f) below.
-
-<a id="services-acd29e"></a>&#x2022; [`financial_services`](#services-acd29e) - Optional Block<br>Bot Defense Flow Label Financial Services Category. Bot Defense Flow Label Financial Services Category<br>See [Financial Services](#services-acd29e) below.
-
-<a id="flight-0c8cf6"></a>&#x2022; [`flight`](#flight-0c8cf6) - Optional Block<br>Bot Defense Flow Label Flight Category. Bot Defense Flow Label Flight Category<br>See [Flight](#flight-0c8cf6) below.
-
-<a id="management-9be6b5"></a>&#x2022; [`profile_management`](#management-9be6b5) - Optional Block<br>Bot Defense Flow Label Profile Management Category. Bot Defense Flow Label Profile Management Category<br>See [Profile Management](#management-9be6b5) below.
-
-<a id="search-d60360"></a>&#x2022; [`search`](#search-d60360) - Optional Block<br>Bot Defense Flow Label Search Category. Bot Defense Flow Label Search Category<br>See [Search](#search-d60360) below.
-
-<a id="cards-f10d47"></a>&#x2022; [`shopping_gift_cards`](#cards-f10d47) - Optional Block<br>Bot Defense Flow Label Shopping & Gift Cards Category. Bot Defense Flow Label Shopping & Gift Cards Category<br>See [Shopping Gift Cards](#cards-f10d47) below.
+<a id="deep-aedbc5"></a>Deeply nested **Label** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Account Management
 
-An [`account_management`](#management-d237e9) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#label-244fef)) supports the following:
-
-<a id="create-c8c685"></a>&#x2022; [`create`](#create-c8c685) - Optional Block<br>Enable this option
-
-<a id="reset-862ec4"></a>&#x2022; [`password_reset`](#reset-862ec4) - Optional Block<br>Enable this option
+<a id="deep-e2bcec"></a>Deeply nested **Management** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Authentication
 
-An [`authentication`](#authentication-60331f) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#label-244fef)) supports the following:
-
-<a id="login-79d094"></a>&#x2022; [`login`](#login-79d094) - Optional Block<br>Bot Defense Transaction Result. Bot Defense Transaction Result<br>See [Login](#login-79d094) below.
-
-<a id="mfa-43e4fe"></a>&#x2022; [`login_mfa`](#mfa-43e4fe) - Optional Block<br>Enable this option
-
-<a id="partner-c06e70"></a>&#x2022; [`login_partner`](#partner-c06e70) - Optional Block<br>Enable this option
-
-<a id="logout-01c637"></a>&#x2022; [`logout`](#logout-01c637) - Optional Block<br>Enable this option
-
-<a id="refresh-89934b"></a>&#x2022; [`token_refresh`](#refresh-89934b) - Optional Block<br>Enable this option
+<a id="deep-9d3bff"></a>Deeply nested **Authentication** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Authentication Login
 
-A [`login`](#login-79d094) block (within [`bot_defense.policy.protected_app_endpoints.flow_label.authentication`](#authentication-60331f)) supports the following:
-
-<a id="result-60e1f0"></a>&#x2022; [`disable_transaction_result`](#result-60e1f0) - Optional Block<br>Enable this option
-
-<a id="result-c2e927"></a>&#x2022; [`transaction_result`](#result-c2e927) - Optional Block<br>Bot Defense Transaction Result Type. Bot Defense Transaction ResultType<br>See [Transaction Result](#result-c2e927) below.
+<a id="deep-f6b65a"></a>Deeply nested **Login** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Authentication Login Transaction Result
 
-A [`transaction_result`](#result-c2e927) block (within [`bot_defense.policy.protected_app_endpoints.flow_label.authentication.login`](#login-79d094)) supports the following:
-
-<a id="conditions-86ce87"></a>&#x2022; [`failure_conditions`](#conditions-86ce87) - Optional Block<br>Failure Conditions. Failure Conditions<br>See [Failure Conditions](#conditions-86ce87) below.
-
-<a id="conditions-0b5152"></a>&#x2022; [`success_conditions`](#conditions-0b5152) - Optional Block<br>Success Conditions. Success Conditions<br>See [Success Conditions](#conditions-0b5152) below.
+<a id="deep-1cd500"></a>Deeply nested **Result** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Authentication Login Transaction Result Failure Conditions
 
-A [`failure_conditions`](#conditions-86ce87) block (within [`bot_defense.policy.protected_app_endpoints.flow_label.authentication.login.transaction_result`](#result-c2e927)) supports the following:
-
-<a id="name-eed9c2"></a>&#x2022; [`name`](#name-eed9c2) - Optional String<br>Header Name. A case-insensitive HTTP header name
-
-<a id="values-15e71a"></a>&#x2022; [`regex_values`](#values-15e71a) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="status-b492f7"></a>&#x2022; [`status`](#status-b492f7) - Optional String  Defaults to `EmptyStatusCode`<br>Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`<br>[Enum: EmptyStatusCode|Continue|OK|Created|Accepted|NonAuthoritativeInformation|NoContent|ResetContent|PartialContent|MultiStatus|AlreadyReported|IMUsed|MultipleChoices|MovedPermanently|Found|SeeOther|NotModified|UseProxy|TemporaryRedirect|PermanentRedirect|BadRequest|Unauthorized|PaymentRequired|Forbidden|NotFound|MethodNotAllowed|NotAcceptable|ProxyAuthenticationRequired|RequestTimeout|Conflict|Gone|LengthRequired|PreconditionFailed|PayloadTooLarge|URITooLong|UnsupportedMediaType|RangeNotSatisfiable|ExpectationFailed|MisdirectedRequest|UnprocessableEntity|Locked|FailedDependency|UpgradeRequired|PreconditionRequired|TooManyRequests|RequestHeaderFieldsTooLarge|InternalServerError|NotImplemented|BadGateway|ServiceUnavailable|GatewayTimeout|HTTPVersionNotSupported|VariantAlsoNegotiates|InsufficientStorage|LoopDetected|NotExtended|NetworkAuthenticationRequired] HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code URI Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code HTTP Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code
+<a id="deep-95bfe3"></a>Deeply nested **Conditions** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Authentication Login Transaction Result Success Conditions
 
-A [`success_conditions`](#conditions-0b5152) block (within [`bot_defense.policy.protected_app_endpoints.flow_label.authentication.login.transaction_result`](#result-c2e927)) supports the following:
-
-<a id="name-98fa41"></a>&#x2022; [`name`](#name-98fa41) - Optional String<br>Header Name. A case-insensitive HTTP header name
-
-<a id="values-9be26f"></a>&#x2022; [`regex_values`](#values-9be26f) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="status-c08615"></a>&#x2022; [`status`](#status-c08615) - Optional String  Defaults to `EmptyStatusCode`<br>Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`<br>[Enum: EmptyStatusCode|Continue|OK|Created|Accepted|NonAuthoritativeInformation|NoContent|ResetContent|PartialContent|MultiStatus|AlreadyReported|IMUsed|MultipleChoices|MovedPermanently|Found|SeeOther|NotModified|UseProxy|TemporaryRedirect|PermanentRedirect|BadRequest|Unauthorized|PaymentRequired|Forbidden|NotFound|MethodNotAllowed|NotAcceptable|ProxyAuthenticationRequired|RequestTimeout|Conflict|Gone|LengthRequired|PreconditionFailed|PayloadTooLarge|URITooLong|UnsupportedMediaType|RangeNotSatisfiable|ExpectationFailed|MisdirectedRequest|UnprocessableEntity|Locked|FailedDependency|UpgradeRequired|PreconditionRequired|TooManyRequests|RequestHeaderFieldsTooLarge|InternalServerError|NotImplemented|BadGateway|ServiceUnavailable|GatewayTimeout|HTTPVersionNotSupported|VariantAlsoNegotiates|InsufficientStorage|LoopDetected|NotExtended|NetworkAuthenticationRequired] HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code URI Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code HTTP Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code
+<a id="deep-0eb365"></a>Deeply nested **Conditions** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Financial Services
 
-A [`financial_services`](#services-acd29e) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#label-244fef)) supports the following:
-
-<a id="apply-9bb5b8"></a>&#x2022; [`apply`](#apply-9bb5b8) - Optional Block<br>Enable this option
-
-<a id="transfer-ec9dc0"></a>&#x2022; [`money_transfer`](#transfer-ec9dc0) - Optional Block<br>Enable this option
+<a id="deep-e8aad0"></a>Deeply nested **Services** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Flight
 
-A [`flight`](#flight-0c8cf6) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#label-244fef)) supports the following:
-
-<a id="checkin-f1e656"></a>&#x2022; [`checkin`](#checkin-f1e656) - Optional Block<br>Enable this option
+<a id="deep-fe2123"></a>Deeply nested **Flight** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Profile Management
 
-A [`profile_management`](#management-9be6b5) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#label-244fef)) supports the following:
-
-<a id="create-63ed29"></a>&#x2022; [`create`](#create-63ed29) - Optional Block<br>Enable this option
-
-<a id="update-c7e26c"></a>&#x2022; [`update`](#update-c7e26c) - Optional Block<br>Enable this option
-
-<a id="view-2c180c"></a>&#x2022; [`view`](#view-2c180c) - Optional Block<br>Enable this option
+<a id="deep-e241e6"></a>Deeply nested **Management** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Search
 
-A [`search`](#search-d60360) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#label-244fef)) supports the following:
-
-<a id="search-de8571"></a>&#x2022; [`flight_search`](#search-de8571) - Optional Block<br>Enable this option
-
-<a id="search-389b2b"></a>&#x2022; [`product_search`](#search-389b2b) - Optional Block<br>Enable this option
-
-<a id="search-0f9951"></a>&#x2022; [`reservation_search`](#search-0f9951) - Optional Block<br>Enable this option
-
-<a id="search-3917b2"></a>&#x2022; [`room_search`](#search-3917b2) - Optional Block<br>Enable this option
+<a id="deep-b86aa6"></a>Deeply nested **Search** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Flow Label Shopping Gift Cards
 
-A [`shopping_gift_cards`](#cards-f10d47) block (within [`bot_defense.policy.protected_app_endpoints.flow_label`](#label-244fef)) supports the following:
-
-<a id="card-a0f859"></a>&#x2022; [`gift_card_make_purchase_with_gift_card`](#card-a0f859) - Optional Block<br>Enable this option
-
-<a id="validation-1fa308"></a>&#x2022; [`gift_card_validation`](#validation-1fa308) - Optional Block<br>Enable this option
-
-<a id="cart-6e5d88"></a>&#x2022; [`shop_add_to_cart`](#cart-6e5d88) - Optional Block<br>Enable this option
-
-<a id="checkout-e4a04e"></a>&#x2022; [`shop_checkout`](#checkout-e4a04e) - Optional Block<br>Enable this option
-
-<a id="seat-cb52da"></a>&#x2022; [`shop_choose_seat`](#seat-cb52da) - Optional Block<br>Enable this option
-
-<a id="submission-f6e144"></a>&#x2022; [`shop_enter_drawing_submission`](#submission-f6e144) - Optional Block<br>Enable this option
-
-<a id="payment-d25ab7"></a>&#x2022; [`shop_make_payment`](#payment-d25ab7) - Optional Block<br>Enable this option
-
-<a id="order-c19bbe"></a>&#x2022; [`shop_order`](#order-c19bbe) - Optional Block<br>Enable this option
-
-<a id="inquiry-9ca8c2"></a>&#x2022; [`shop_price_inquiry`](#inquiry-9ca8c2) - Optional Block<br>Enable this option
-
-<a id="validation-b02840"></a>&#x2022; [`shop_promo_code_validation`](#validation-b02840) - Optional Block<br>Enable this option
-
-<a id="card-2cf94e"></a>&#x2022; [`shop_purchase_gift_card`](#card-2cf94e) - Optional Block<br>Enable this option
-
-<a id="quantity-4339b1"></a>&#x2022; [`shop_update_quantity`](#quantity-4339b1) - Optional Block<br>Enable this option
+<a id="deep-ae3c07"></a>Deeply nested **Cards** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Headers
 
@@ -1798,13 +1006,7 @@ A [`headers`](#headers-986193) block (within [`bot_defense.policy.protected_app_
 
 #### Bot Defense Policy Protected App Endpoints Headers Item
 
-An [`item`](#item-ca0df2) block (within [`bot_defense.policy.protected_app_endpoints.headers`](#headers-986193)) supports the following:
-
-<a id="values-13c944"></a>&#x2022; [`exact_values`](#values-13c944) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-b0d727"></a>&#x2022; [`regex_values`](#values-b0d727) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-eb2f5b"></a>&#x2022; [`transformers`](#transformers-eb2f5b) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-92cb3a"></a>Deeply nested **Item** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Metadata
 
@@ -1826,33 +1028,19 @@ A [`mitigation`](#mitigation-cc96eb) block (within [`bot_defense.policy.protecte
 
 #### Bot Defense Policy Protected App Endpoints Mitigation Block
 
-A [`block`](#block-d25b81) block (within [`bot_defense.policy.protected_app_endpoints.mitigation`](#mitigation-cc96eb)) supports the following:
-
-<a id="body-fe6d39"></a>&#x2022; [`body`](#body-fe6d39) - Optional String<br>Body. Custom body message is of type uri_ref. Currently supported URL schemes is string:///. For string:/// scheme, message needs to be encoded in Base64 format. You can specify this message as base64 encoded plain text message e.g. 'Your request was blocked' or it can be HTML paragraph or a body string encoded as base64 string E.g. '`<p>` Your request was blocked `</p>`'. Base64 encoded string for this HTML is 'LzxwPiBZb3VyIHJlcXVlc3Qgd2FzIGJsb2NrZWQgPC9wPg=='
-
-<a id="status-590093"></a>&#x2022; [`status`](#status-590093) - Optional String  Defaults to `EmptyStatusCode`<br>Possible values are `EmptyStatusCode`, `Continue`, `OK`, `Created`, `Accepted`, `NonAuthoritativeInformation`, `NoContent`, `ResetContent`, `PartialContent`, `MultiStatus`, `AlreadyReported`, `IMUsed`, `MultipleChoices`, `MovedPermanently`, `Found`, `SeeOther`, `NotModified`, `UseProxy`, `TemporaryRedirect`, `PermanentRedirect`, `BadRequest`, `Unauthorized`, `PaymentRequired`, `Forbidden`, `NotFound`, `MethodNotAllowed`, `NotAcceptable`, `ProxyAuthenticationRequired`, `RequestTimeout`, `Conflict`, `Gone`, `LengthRequired`, `PreconditionFailed`, `PayloadTooLarge`, `URITooLong`, `UnsupportedMediaType`, `RangeNotSatisfiable`, `ExpectationFailed`, `MisdirectedRequest`, `UnprocessableEntity`, `Locked`, `FailedDependency`, `UpgradeRequired`, `PreconditionRequired`, `TooManyRequests`, `RequestHeaderFieldsTooLarge`, `InternalServerError`, `NotImplemented`, `BadGateway`, `ServiceUnavailable`, `GatewayTimeout`, `HTTPVersionNotSupported`, `VariantAlsoNegotiates`, `InsufficientStorage`, `LoopDetected`, `NotExtended`, `NetworkAuthenticationRequired`<br>[Enum: EmptyStatusCode|Continue|OK|Created|Accepted|NonAuthoritativeInformation|NoContent|ResetContent|PartialContent|MultiStatus|AlreadyReported|IMUsed|MultipleChoices|MovedPermanently|Found|SeeOther|NotModified|UseProxy|TemporaryRedirect|PermanentRedirect|BadRequest|Unauthorized|PaymentRequired|Forbidden|NotFound|MethodNotAllowed|NotAcceptable|ProxyAuthenticationRequired|RequestTimeout|Conflict|Gone|LengthRequired|PreconditionFailed|PayloadTooLarge|URITooLong|UnsupportedMediaType|RangeNotSatisfiable|ExpectationFailed|MisdirectedRequest|UnprocessableEntity|Locked|FailedDependency|UpgradeRequired|PreconditionRequired|TooManyRequests|RequestHeaderFieldsTooLarge|InternalServerError|NotImplemented|BadGateway|ServiceUnavailable|GatewayTimeout|HTTPVersionNotSupported|VariantAlsoNegotiates|InsufficientStorage|LoopDetected|NotExtended|NetworkAuthenticationRequired] HTTP Status Code. HTTP response status codes EmptyStatusCode response codes means it is not specified Continue status code OK status code Created status code Accepted status code Non Authoritative Information status code No Content status code Reset Content status code Partial Content status code Multi Status status code Already Reported status code Im Used status code Multiple Choices status code Moved Permanently status code Found status code See Other status code Not Modified status code Use Proxy status code Temporary Redirect status code Permanent Redirect status code Bad Request status code Unauthorized status code Payment Required status code Forbidden status code Not Found status code Method Not Allowed status code Not Acceptable status code Proxy Authentication Required status code Request Timeout status code Conflict status code Gone status code Length Required status code Precondition Failed status code Payload Too Large status code URI Too Long status code Unsupported Media Type status code Range Not Satisfiable status code Expectation Failed status code Misdirected Request status code Unprocessable Entity status code Locked status code Failed Dependency status code Upgrade Required status code Precondition Required status code Too Many Requests status code Request Header Fields Too Large status code Internal Server Error status code Not Implemented status code Bad Gateway status code Service Unavailable status code Gateway Timeout status code HTTP Version Not Supported status code Variant Also Negotiates status code Insufficient Storage status code Loop Detected status code Not Extended status code Network Authentication Required status code
+<a id="deep-3c0d5a"></a>Deeply nested **Block** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Mitigation Flag
 
-A [`flag`](#flag-50a52b) block (within [`bot_defense.policy.protected_app_endpoints.mitigation`](#mitigation-cc96eb)) supports the following:
-
-<a id="headers-cba7f7"></a>&#x2022; [`append_headers`](#headers-cba7f7) - Optional Block<br>Append Flag Mitigation Headers. Append flag mitigation headers to forwarded request<br>See [Append Headers](#headers-cba7f7) below.
-
-<a id="headers-25974d"></a>&#x2022; [`no_headers`](#headers-25974d) - Optional Block<br>Enable this option
+<a id="deep-31a90f"></a>Deeply nested **Flag** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Mitigation Flag Append Headers
 
-An [`append_headers`](#headers-cba7f7) block (within [`bot_defense.policy.protected_app_endpoints.mitigation.flag`](#flag-50a52b)) supports the following:
-
-<a id="name-c64f18"></a>&#x2022; [`auto_type_header_name`](#name-c64f18) - Optional String<br>Automation Type Header Name. A case-insensitive HTTP header name
-
-<a id="name-66a056"></a>&#x2022; [`inference_header_name`](#name-66a056) - Optional String<br>Inference Header Name. A case-insensitive HTTP header name
+<a id="deep-be96ae"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Mitigation Redirect
 
-A [`redirect`](#redirect-2c8f41) block (within [`bot_defense.policy.protected_app_endpoints.mitigation`](#mitigation-cc96eb)) supports the following:
-
-<a id="uri-56c0f3"></a>&#x2022; [`uri`](#uri-56c0f3) - Optional String<br>URI. URI location for redirect may be relative or absolute
+<a id="deep-7565c4"></a>Deeply nested **Redirect** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Path
 
@@ -1866,33 +1054,15 @@ A [`path`](#path-d5ee15) block (within [`bot_defense.policy.protected_app_endpoi
 
 #### Bot Defense Policy Protected App Endpoints Query Params
 
-A [`query_params`](#params-8f5791) block (within [`bot_defense.policy.protected_app_endpoints`](#endpoints-01a2f3)) supports the following:
-
-<a id="present-966c69"></a>&#x2022; [`check_not_present`](#present-966c69) - Optional Block<br>Enable this option
-
-<a id="present-f5250d"></a>&#x2022; [`check_present`](#present-f5250d) - Optional Block<br>Enable this option
-
-<a id="matcher-6361dd"></a>&#x2022; [`invert_matcher`](#matcher-6361dd) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
-
-<a id="item-92c230"></a>&#x2022; [`item`](#item-92c230) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-92c230) below.
-
-<a id="key-2452b1"></a>&#x2022; [`key`](#key-2452b1) - Optional String<br>Query Parameter Name. A case-sensitive HTTP query parameter name
+<a id="deep-0d34ba"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Query Params Item
 
-An [`item`](#item-92c230) block (within [`bot_defense.policy.protected_app_endpoints.query_params`](#params-8f5791)) supports the following:
-
-<a id="values-b9ca65"></a>&#x2022; [`exact_values`](#values-b9ca65) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-836047"></a>&#x2022; [`regex_values`](#values-836047) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-794fb2"></a>&#x2022; [`transformers`](#transformers-794fb2) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-479116"></a>Deeply nested **Item** block collapsed for readability.
 
 #### Bot Defense Policy Protected App Endpoints Web Mobile
 
-A [`web_mobile`](#mobile-0ffdfb) block (within [`bot_defense.policy.protected_app_endpoints`](#endpoints-01a2f3)) supports the following:
-
-<a id="identifier-0e0f05"></a>&#x2022; [`mobile_identifier`](#identifier-0e0f05) - Optional String  Defaults to `HEADERS`<br>[Enum: HEADERS] Mobile Identifier. Mobile identifier type - HEADERS: Headers Headers. The only possible value is `HEADERS`
+<a id="deep-ee5137"></a>Deeply nested **Mobile** block collapsed for readability.
 
 #### Captcha Challenge
 
@@ -1922,49 +1092,23 @@ A [`policy`](#client-side-defense-policy) block (within [`client_side_defense`](
 
 #### Client Side Defense Policy Js Insert All Pages Except
 
-A [`js_insert_all_pages_except`](#except-7bfe85) block (within [`client_side_defense.policy`](#client-side-defense-policy)) supports the following:
-
-<a id="list-fc1c50"></a>&#x2022; [`exclude_list`](#list-fc1c50) - Optional Block<br>Exclude Pages. Optional JavaScript insertions exclude list of domain and path matchers<br>See [Exclude List](#list-fc1c50) below.
+<a id="deep-357348"></a>Deeply nested **Except** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insert All Pages Except Exclude List
 
-An [`exclude_list`](#list-fc1c50) block (within [`client_side_defense.policy.js_insert_all_pages_except`](#except-7bfe85)) supports the following:
-
-<a id="domain-cfab55"></a>&#x2022; [`any_domain`](#domain-cfab55) - Optional Block<br>Enable this option
-
-<a id="domain-15fe0c"></a>&#x2022; [`domain`](#domain-15fe0c) - Optional Block<br>Domains. Domains names<br>See [Domain](#domain-15fe0c) below.
-
-<a id="metadata-50baa8"></a>&#x2022; [`metadata`](#metadata-50baa8) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-50baa8) below.
-
-<a id="path-82c392"></a>&#x2022; [`path`](#path-82c392) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-82c392) below.
+<a id="deep-e071ac"></a>Deeply nested **List** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insert All Pages Except Exclude List Domain
 
-A [`domain`](#domain-15fe0c) block (within [`client_side_defense.policy.js_insert_all_pages_except.exclude_list`](#list-fc1c50)) supports the following:
-
-<a id="value-f9285b"></a>&#x2022; [`exact_value`](#value-f9285b) - Optional String<br>Exact Value. Exact domain name
-
-<a id="value-4207c5"></a>&#x2022; [`regex_value`](#value-4207c5) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
-
-<a id="value-2a8824"></a>&#x2022; [`suffix_value`](#value-2a8824) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="deep-05664f"></a>Deeply nested **Domain** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insert All Pages Except Exclude List Metadata
 
-A [`metadata`](#metadata-50baa8) block (within [`client_side_defense.policy.js_insert_all_pages_except.exclude_list`](#list-fc1c50)) supports the following:
-
-<a id="spec-28351b"></a>&#x2022; [`description_spec`](#spec-28351b) - Optional String<br>Description. Human readable description
-
-<a id="name-3e26d9"></a>&#x2022; [`name`](#name-3e26d9) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-ec44bf"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insert All Pages Except Exclude List Path
 
-A [`path`](#path-82c392) block (within [`client_side_defense.policy.js_insert_all_pages_except.exclude_list`](#list-fc1c50)) supports the following:
-
-<a id="path-390fcf"></a>&#x2022; [`path`](#path-390fcf) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-d5139b"></a>&#x2022; [`prefix`](#prefix-d5139b) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-0010b2"></a>&#x2022; [`regex`](#regex-0010b2) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-eba2d4"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insertion Rules
 
@@ -1976,83 +1120,35 @@ A [`js_insertion_rules`](#rules-ad3671) block (within [`client_side_defense.poli
 
 #### Client Side Defense Policy Js Insertion Rules Exclude List
 
-An [`exclude_list`](#list-dfecb6) block (within [`client_side_defense.policy.js_insertion_rules`](#rules-ad3671)) supports the following:
-
-<a id="domain-7b414f"></a>&#x2022; [`any_domain`](#domain-7b414f) - Optional Block<br>Enable this option
-
-<a id="domain-7c7a7c"></a>&#x2022; [`domain`](#domain-7c7a7c) - Optional Block<br>Domains. Domains names<br>See [Domain](#domain-7c7a7c) below.
-
-<a id="metadata-bd2353"></a>&#x2022; [`metadata`](#metadata-bd2353) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-bd2353) below.
-
-<a id="path-962e59"></a>&#x2022; [`path`](#path-962e59) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-962e59) below.
+<a id="deep-1639b0"></a>Deeply nested **List** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insertion Rules Exclude List Domain
 
-A [`domain`](#domain-7c7a7c) block (within [`client_side_defense.policy.js_insertion_rules.exclude_list`](#list-dfecb6)) supports the following:
-
-<a id="value-f64365"></a>&#x2022; [`exact_value`](#value-f64365) - Optional String<br>Exact Value. Exact domain name
-
-<a id="value-b28460"></a>&#x2022; [`regex_value`](#value-b28460) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
-
-<a id="value-9e64cb"></a>&#x2022; [`suffix_value`](#value-9e64cb) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="deep-949064"></a>Deeply nested **Domain** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insertion Rules Exclude List Metadata
 
-A [`metadata`](#metadata-bd2353) block (within [`client_side_defense.policy.js_insertion_rules.exclude_list`](#list-dfecb6)) supports the following:
-
-<a id="spec-13fe6d"></a>&#x2022; [`description_spec`](#spec-13fe6d) - Optional String<br>Description. Human readable description
-
-<a id="name-b1fc08"></a>&#x2022; [`name`](#name-b1fc08) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-3af08a"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insertion Rules Exclude List Path
 
-A [`path`](#path-962e59) block (within [`client_side_defense.policy.js_insertion_rules.exclude_list`](#list-dfecb6)) supports the following:
-
-<a id="path-c659e3"></a>&#x2022; [`path`](#path-c659e3) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-d88a45"></a>&#x2022; [`prefix`](#prefix-d88a45) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-424dc4"></a>&#x2022; [`regex`](#regex-424dc4) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-44c104"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insertion Rules Rules
 
-A [`rules`](#rules-6276bc) block (within [`client_side_defense.policy.js_insertion_rules`](#rules-ad3671)) supports the following:
-
-<a id="domain-a7aac7"></a>&#x2022; [`any_domain`](#domain-a7aac7) - Optional Block<br>Enable this option
-
-<a id="domain-4b295f"></a>&#x2022; [`domain`](#domain-4b295f) - Optional Block<br>Domains. Domains names<br>See [Domain](#domain-4b295f) below.
-
-<a id="metadata-60fc86"></a>&#x2022; [`metadata`](#metadata-60fc86) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-60fc86) below.
-
-<a id="path-71b688"></a>&#x2022; [`path`](#path-71b688) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-71b688) below.
+<a id="deep-ad681e"></a>Deeply nested **Rules** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insertion Rules Rules Domain
 
-A [`domain`](#domain-4b295f) block (within [`client_side_defense.policy.js_insertion_rules.rules`](#rules-6276bc)) supports the following:
-
-<a id="value-2357e4"></a>&#x2022; [`exact_value`](#value-2357e4) - Optional String<br>Exact Value. Exact domain name
-
-<a id="value-a4f4ae"></a>&#x2022; [`regex_value`](#value-a4f4ae) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
-
-<a id="value-a7894b"></a>&#x2022; [`suffix_value`](#value-a7894b) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="deep-15e025"></a>Deeply nested **Domain** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insertion Rules Rules Metadata
 
-A [`metadata`](#metadata-60fc86) block (within [`client_side_defense.policy.js_insertion_rules.rules`](#rules-6276bc)) supports the following:
-
-<a id="spec-f78d91"></a>&#x2022; [`description_spec`](#spec-f78d91) - Optional String<br>Description. Human readable description
-
-<a id="name-1afae7"></a>&#x2022; [`name`](#name-1afae7) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-6c411a"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### Client Side Defense Policy Js Insertion Rules Rules Path
 
-A [`path`](#path-71b688) block (within [`client_side_defense.policy.js_insertion_rules.rules`](#rules-6276bc)) supports the following:
-
-<a id="path-df67b6"></a>&#x2022; [`path`](#path-df67b6) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-7c1e21"></a>&#x2022; [`prefix`](#prefix-7c1e21) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-248fb3"></a>&#x2022; [`regex`](#regex-248fb3) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-880dda"></a>Deeply nested **Path** block collapsed for readability.
 
 #### CORS Policy
 
@@ -2098,13 +1194,7 @@ A [`custom_cache_rule`](#custom-cache-rule) block supports the following:
 
 #### Custom Cache Rule CDN Cache Rules
 
-A [`cdn_cache_rules`](#custom-cache-rule-cdn-cache-rules) block (within [`custom_cache_rule`](#custom-cache-rule)) supports the following:
-
-<a id="custom-cache-rule-cdn-cache-rules-name"></a>&#x2022; [`name`](#custom-cache-rule-cdn-cache-rules-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-953951"></a>&#x2022; [`namespace`](#namespace-953951) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-f1c5ea"></a>&#x2022; [`tenant`](#tenant-f1c5ea) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-c6bad1"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Data Guard Rules
 
@@ -2170,25 +1260,15 @@ A [`ddos_client_source`](#source-02aa55) block (within [`ddos_mitigation_rules`]
 
 #### DDOS Mitigation Rules DDOS Client Source Asn List
 
-An [`asn_list`](#list-20cb78) block (within [`ddos_mitigation_rules.ddos_client_source`](#source-02aa55)) supports the following:
-
-<a id="numbers-a2cb60"></a>&#x2022; [`as_numbers`](#numbers-a2cb60) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="deep-4fa70d"></a>Deeply nested **List** block collapsed for readability.
 
 #### DDOS Mitigation Rules DDOS Client Source Ja4 TLS Fingerprint Matcher
 
-A [`ja4_tls_fingerprint_matcher`](#matcher-a7a10e) block (within [`ddos_mitigation_rules.ddos_client_source`](#source-02aa55)) supports the following:
-
-<a id="values-d0a266"></a>&#x2022; [`exact_values`](#values-d0a266) - Optional List<br>Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against
+<a id="deep-ae859d"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### DDOS Mitigation Rules DDOS Client Source TLS Fingerprint Matcher
 
-A [`tls_fingerprint_matcher`](#matcher-d4dd17) block (within [`ddos_mitigation_rules.ddos_client_source`](#source-02aa55)) supports the following:
-
-<a id="classes-b8db1d"></a>&#x2022; [`classes`](#classes-b8db1d) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
-
-<a id="values-2a6e72"></a>&#x2022; [`exact_values`](#values-2a6e72) - Optional List<br>Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
-
-<a id="values-7f5411"></a>&#x2022; [`excluded_values`](#values-7f5411) - Optional List<br>Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
+<a id="deep-3d0bac"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### DDOS Mitigation Rules IP Prefix List
 
@@ -2244,83 +1324,43 @@ An [`api_crawler`](#enable-api-discovery-api-crawler) block (within [`enable_api
 
 #### Enable API Discovery API Crawler API Crawler Config
 
-An [`api_crawler_config`](#config-1070d6) block (within [`enable_api_discovery.api_crawler`](#enable-api-discovery-api-crawler)) supports the following:
-
-<a id="domains-5b24a2"></a>&#x2022; [`domains`](#domains-5b24a2) - Optional Block<br>Domains to Crawl. Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer<br>See [Domains](#domains-5b24a2) below.
+<a id="deep-038178"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Enable API Discovery API Crawler API Crawler Config Domains
 
-A [`domains`](#domains-5b24a2) block (within [`enable_api_discovery.api_crawler.api_crawler_config`](#config-1070d6)) supports the following:
-
-<a id="domain-101008"></a>&#x2022; [`domain`](#domain-101008) - Optional String<br>Domain. Select the domain to execute API Crawling with given credentials
-
-<a id="login-d7ed1c"></a>&#x2022; [`simple_login`](#login-d7ed1c) - Optional Block<br>Simple Login<br>See [Simple Login](#login-d7ed1c) below.
+<a id="deep-2dedc6"></a>Deeply nested **Domains** block collapsed for readability.
 
 #### Enable API Discovery API Crawler API Crawler Config Domains Simple Login
 
-A [`simple_login`](#login-d7ed1c) block (within [`enable_api_discovery.api_crawler.api_crawler_config.domains`](#domains-5b24a2)) supports the following:
-
-<a id="password-6dce3d"></a>&#x2022; [`password`](#password-6dce3d) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password-6dce3d) below.
-
-<a id="user-6538fc"></a>&#x2022; [`user`](#user-6538fc) - Optional String<br>User. Enter the username to assign credentials for the selected domain to crawl
+<a id="deep-f94bfe"></a>Deeply nested **Login** block collapsed for readability.
 
 #### Enable API Discovery API Crawler API Crawler Config Domains Simple Login Password
 
-A [`password`](#password-6dce3d) block (within [`enable_api_discovery.api_crawler.api_crawler_config.domains.simple_login`](#login-d7ed1c)) supports the following:
-
-<a id="info-0086db"></a>&#x2022; [`blindfold_secret_info`](#info-0086db) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-0086db) below.
-
-<a id="info-e77ed8"></a>&#x2022; [`clear_secret_info`](#info-e77ed8) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-e77ed8) below.
+<a id="deep-dcac2b"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Enable API Discovery API Crawler API Crawler Config Domains Simple Login Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-0086db) block (within [`enable_api_discovery.api_crawler.api_crawler_config.domains.simple_login.password`](#password-6dce3d)) supports the following:
-
-<a id="provider-5866c6"></a>&#x2022; [`decryption_provider`](#provider-5866c6) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-c9ff51"></a>&#x2022; [`location`](#location-c9ff51) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-a85d09"></a>&#x2022; [`store_provider`](#provider-a85d09) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-bb1337"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Enable API Discovery API Crawler API Crawler Config Domains Simple Login Password Clear Secret Info
 
-A [`clear_secret_info`](#info-e77ed8) block (within [`enable_api_discovery.api_crawler.api_crawler_config.domains.simple_login.password`](#password-6dce3d)) supports the following:
-
-<a id="ref-6d12d4"></a>&#x2022; [`provider_ref`](#ref-6d12d4) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-54d163"></a>&#x2022; [`url`](#url-54d163) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-790308"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Enable API Discovery API Discovery From Code Scan
 
-An [`api_discovery_from_code_scan`](#scan-930604) block (within [`enable_api_discovery`](#enable-api-discovery)) supports the following:
-
-<a id="integrations-684fd9"></a>&#x2022; [`code_base_integrations`](#integrations-684fd9) - Optional Block<br>Select Code Base Integrations<br>See [Code Base Integrations](#integrations-684fd9) below.
+<a id="deep-65081a"></a>Deeply nested **Scan** block collapsed for readability.
 
 #### Enable API Discovery API Discovery From Code Scan Code Base Integrations
 
-A [`code_base_integrations`](#integrations-684fd9) block (within [`enable_api_discovery.api_discovery_from_code_scan`](#scan-930604)) supports the following:
-
-<a id="repos-6dd9b2"></a>&#x2022; [`all_repos`](#repos-6dd9b2) - Optional Block<br>Enable this option
-
-<a id="integration-65ad07"></a>&#x2022; [`code_base_integration`](#integration-65ad07) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Code Base Integration](#integration-65ad07) below.
-
-<a id="repos-85b753"></a>&#x2022; [`selected_repos`](#repos-85b753) - Optional Block<br>API Code Repositories. Select which API repositories represent the LB applications<br>See [Selected Repos](#repos-85b753) below.
+<a id="deep-655889"></a>Deeply nested **Integrations** block collapsed for readability.
 
 #### Enable API Discovery API Discovery From Code Scan Code Base Integrations Code Base Integration
 
-A [`code_base_integration`](#integration-65ad07) block (within [`enable_api_discovery.api_discovery_from_code_scan.code_base_integrations`](#integrations-684fd9)) supports the following:
-
-<a id="name-c1c22e"></a>&#x2022; [`name`](#name-c1c22e) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-758b47"></a>&#x2022; [`namespace`](#namespace-758b47) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ab614a"></a>&#x2022; [`tenant`](#tenant-ab614a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-f966a5"></a>Deeply nested **Integration** block collapsed for readability.
 
 #### Enable API Discovery API Discovery From Code Scan Code Base Integrations Selected Repos
 
-A [`selected_repos`](#repos-85b753) block (within [`enable_api_discovery.api_discovery_from_code_scan.code_base_integrations`](#integrations-684fd9)) supports the following:
-
-<a id="repo-27b7de"></a>&#x2022; [`api_code_repo`](#repo-27b7de) - Optional List<br>API Code Repository. Code repository which contain API endpoints
+<a id="deep-24c79f"></a>Deeply nested **Repos** block collapsed for readability.
 
 #### Enable API Discovery Custom API Auth Discovery
 
@@ -2330,13 +1370,7 @@ A [`custom_api_auth_discovery`](#discovery-54db29) block (within [`enable_api_di
 
 #### Enable API Discovery Custom API Auth Discovery API Discovery Ref
 
-An [`api_discovery_ref`](#ref-a70328) block (within [`enable_api_discovery.custom_api_auth_discovery`](#discovery-54db29)) supports the following:
-
-<a id="name-168227"></a>&#x2022; [`name`](#name-168227) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-3af87c"></a>&#x2022; [`namespace`](#namespace-3af87c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e22b6f"></a>&#x2022; [`tenant`](#tenant-e22b6f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-af0566"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Enable API Discovery Discovered API Settings
 
@@ -2380,19 +1414,13 @@ A [`js_challenge_parameters`](#parameters-6f7506) block (within [`enable_challen
 
 #### Enable Challenge Malicious User Mitigation
 
-A [`malicious_user_mitigation`](#mitigation-b3e04b) block (within [`enable_challenge`](#enable-challenge)) supports the following:
-
-<a id="name-3a9364"></a>&#x2022; [`name`](#name-3a9364) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-38ef32"></a>&#x2022; [`namespace`](#namespace-38ef32) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-78def2"></a>&#x2022; [`tenant`](#tenant-78def2) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-b3e04b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Enable IP Reputation
 
 An [`enable_ip_reputation`](#enable-ip-reputation) block supports the following:
 
-<a id="categories-bb360f"></a>&#x2022; [`ip_threat_categories`](#categories-bb360f) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>[Enum: SPAM_SOURCES|WINDOWS_EXPLOITS|WEB_ATTACKS|BOTNETS|SCANNERS|REPUTATION|PHISHING|PROXY|MOBILE_THREATS|TOR_PROXY|DENIAL_OF_SERVICE|NETWORK] List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied
+<a id="categories-bb360f"></a>&#x2022; [`ip_threat_categories`](#categories-bb360f) - Optional List  Defaults to `SPAM_SOURCES`<br>See [IP Threat Categories](#common-ip-threat-categories)<br>[Enum: SPAM_SOURCES|WINDOWS_EXPLOITS|WEB_ATTACKS|BOTNETS|SCANNERS|REPUTATION|PHISHING|PROXY|MOBILE_THREATS|TOR_PROXY|DENIAL_OF_SERVICE|NETWORK] List of IP Threat Categories to choose. If the source IP matches on atleast one of the enabled IP threat categories, the request will be denied
 
 #### GraphQL Rules
 
@@ -2478,79 +1506,31 @@ A [`tls_cert_params`](#https-tls-cert-options-tls-cert-params) block (within [`h
 
 #### HTTPS TLS Cert Options TLS Cert Params Certificates
 
-A [`certificates`](#certificates-07e388) block (within [`https.tls_cert_options.tls_cert_params`](#https-tls-cert-options-tls-cert-params)) supports the following:
-
-<a id="name-2c13b1"></a>&#x2022; [`name`](#name-2c13b1) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f0d4e9"></a>&#x2022; [`namespace`](#namespace-f0d4e9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-af79c9"></a>&#x2022; [`tenant`](#tenant-af79c9) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-5f8c05"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Cert Params TLS Config
 
-A [`tls_config`](#config-904431) block (within [`https.tls_cert_options.tls_cert_params`](#https-tls-cert-options-tls-cert-params)) supports the following:
-
-<a id="security-ad30cf"></a>&#x2022; [`custom_security`](#security-ad30cf) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-ad30cf) below.
-
-<a id="security-4a43be"></a>&#x2022; [`default_security`](#security-4a43be) - Optional Block<br>Enable this option
-
-<a id="security-da78dd"></a>&#x2022; [`low_security`](#security-da78dd) - Optional Block<br>Enable this option
-
-<a id="security-7528e8"></a>&#x2022; [`medium_security`](#security-7528e8) - Optional Block<br>Enable this option
+<a id="deep-aa9282"></a>Deeply nested **Config** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Cert Params TLS Config Custom Security
 
-A [`custom_security`](#security-ad30cf) block (within [`https.tls_cert_options.tls_cert_params.tls_config`](#config-904431)) supports the following:
-
-<a id="suites-36b0f0"></a>&#x2022; [`cipher_suites`](#suites-36b0f0) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-c078c7"></a>&#x2022; [`max_version`](#version-c078c7) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-b42c6c"></a>&#x2022; [`min_version`](#version-b42c6c) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-2b4fe8"></a>Deeply nested **Security** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Cert Params Use mTLS
 
-An [`use_mtls`](#mtls-5b281c) block (within [`https.tls_cert_options.tls_cert_params`](#https-tls-cert-options-tls-cert-params)) supports the following:
-
-<a id="optional-6f691d"></a>&#x2022; [`client_certificate_optional`](#optional-6f691d) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-2e52b8"></a>&#x2022; [`crl`](#crl-2e52b8) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-2e52b8) below.
-
-<a id="crl-cd3350"></a>&#x2022; [`no_crl`](#crl-cd3350) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-67f63a"></a>&#x2022; [`trusted_ca`](#trusted-ca-67f63a) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-67f63a) below.
-
-<a id="url-d6b2d6"></a>&#x2022; [`trusted_ca_url`](#url-d6b2d6) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-55daeb"></a>&#x2022; [`xfcc_disabled`](#disabled-55daeb) - Optional Block<br>Enable this option
-
-<a id="options-43be35"></a>&#x2022; [`xfcc_options`](#options-43be35) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-43be35) below.
+<a id="deep-0ddb80"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Cert Params Use mTLS CRL
 
-A [`crl`](#crl-2e52b8) block (within [`https.tls_cert_options.tls_cert_params.use_mtls`](#mtls-5b281c)) supports the following:
-
-<a id="name-6c5098"></a>&#x2022; [`name`](#name-6c5098) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-1a2fad"></a>&#x2022; [`namespace`](#namespace-1a2fad) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-792738"></a>&#x2022; [`tenant`](#tenant-792738) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-4e8956"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Cert Params Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-67f63a) block (within [`https.tls_cert_options.tls_cert_params.use_mtls`](#mtls-5b281c)) supports the following:
-
-<a id="name-36f524"></a>&#x2022; [`name`](#name-36f524) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-4d871a"></a>&#x2022; [`namespace`](#namespace-4d871a) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-471ef0"></a>&#x2022; [`tenant`](#tenant-471ef0) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-4221b5"></a>Deeply nested **CA** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Cert Params Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-43be35) block (within [`https.tls_cert_options.tls_cert_params.use_mtls`](#mtls-5b281c)) supports the following:
-
-<a id="elements-4c0634"></a>&#x2022; [`xfcc_header_elements`](#elements-4c0634) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-96e88a"></a>Deeply nested **Options** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params
 
@@ -2566,117 +1546,47 @@ A [`tls_inline_params`](#params-9a3f4e) block (within [`https.tls_cert_options`]
 
 #### HTTPS TLS Cert Options TLS Inline Params TLS Certificates
 
-A [`tls_certificates`](#certificates-f306b2) block (within [`https.tls_cert_options.tls_inline_params`](#params-9a3f4e)) supports the following:
-
-<a id="url-e06ef2"></a>&#x2022; [`certificate_url`](#url-e06ef2) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-c24d80"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-c24d80) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-c24d80) below.
-
-<a id="spec-919b83"></a>&#x2022; [`description_spec`](#spec-919b83) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-6d0a79"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-6d0a79) - Optional Block<br>Enable this option
-
-<a id="key-e4c2f5"></a>&#x2022; [`private_key`](#key-e4c2f5) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-e4c2f5) below.
-
-<a id="defaults-fef4a6"></a>&#x2022; [`use_system_defaults`](#defaults-fef4a6) - Optional Block<br>Enable this option
+<a id="deep-910848"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-c24d80) block (within [`https.tls_cert_options.tls_inline_params.tls_certificates`](#certificates-f306b2)) supports the following:
-
-<a id="algorithms-09af2e"></a>&#x2022; [`hash_algorithms`](#algorithms-09af2e) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-5f067d"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params TLS Certificates Private Key
 
-A [`private_key`](#key-e4c2f5) block (within [`https.tls_cert_options.tls_inline_params.tls_certificates`](#certificates-f306b2)) supports the following:
-
-<a id="info-b1b95d"></a>&#x2022; [`blindfold_secret_info`](#info-b1b95d) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-b1b95d) below.
-
-<a id="info-c36e13"></a>&#x2022; [`clear_secret_info`](#info-c36e13) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-c36e13) below.
+<a id="deep-1a10f5"></a>Deeply nested **Key** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-b1b95d) block (within [`https.tls_cert_options.tls_inline_params.tls_certificates.private_key`](#key-e4c2f5)) supports the following:
-
-<a id="provider-2338d9"></a>&#x2022; [`decryption_provider`](#provider-2338d9) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-c1d1ee"></a>&#x2022; [`location`](#location-c1d1ee) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-994646"></a>&#x2022; [`store_provider`](#provider-994646) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-475fb9"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-c36e13) block (within [`https.tls_cert_options.tls_inline_params.tls_certificates.private_key`](#key-e4c2f5)) supports the following:
-
-<a id="ref-a708bd"></a>&#x2022; [`provider_ref`](#ref-a708bd) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-d2bf3c"></a>&#x2022; [`url`](#url-d2bf3c) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-088787"></a>Deeply nested **Info** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params TLS Config
 
-A [`tls_config`](#config-22f363) block (within [`https.tls_cert_options.tls_inline_params`](#params-9a3f4e)) supports the following:
-
-<a id="security-62ce0a"></a>&#x2022; [`custom_security`](#security-62ce0a) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-62ce0a) below.
-
-<a id="security-4764ca"></a>&#x2022; [`default_security`](#security-4764ca) - Optional Block<br>Enable this option
-
-<a id="security-59f0a3"></a>&#x2022; [`low_security`](#security-59f0a3) - Optional Block<br>Enable this option
-
-<a id="security-19669a"></a>&#x2022; [`medium_security`](#security-19669a) - Optional Block<br>Enable this option
+<a id="deep-218928"></a>Deeply nested **Config** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params TLS Config Custom Security
 
-A [`custom_security`](#security-62ce0a) block (within [`https.tls_cert_options.tls_inline_params.tls_config`](#config-22f363)) supports the following:
-
-<a id="suites-33ea9f"></a>&#x2022; [`cipher_suites`](#suites-33ea9f) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-e0ff8d"></a>&#x2022; [`max_version`](#version-e0ff8d) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-816966"></a>&#x2022; [`min_version`](#version-816966) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-0f112d"></a>Deeply nested **Security** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params Use mTLS
 
-An [`use_mtls`](#mtls-fdc332) block (within [`https.tls_cert_options.tls_inline_params`](#params-9a3f4e)) supports the following:
-
-<a id="optional-e832ba"></a>&#x2022; [`client_certificate_optional`](#optional-e832ba) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-8ccb71"></a>&#x2022; [`crl`](#crl-8ccb71) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-8ccb71) below.
-
-<a id="crl-8ecfcc"></a>&#x2022; [`no_crl`](#crl-8ecfcc) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-ab61c8"></a>&#x2022; [`trusted_ca`](#trusted-ca-ab61c8) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-ab61c8) below.
-
-<a id="url-d741c1"></a>&#x2022; [`trusted_ca_url`](#url-d741c1) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-1e1507"></a>&#x2022; [`xfcc_disabled`](#disabled-1e1507) - Optional Block<br>Enable this option
-
-<a id="options-e0ad26"></a>&#x2022; [`xfcc_options`](#options-e0ad26) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-e0ad26) below.
+<a id="deep-328647"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params Use mTLS CRL
 
-A [`crl`](#crl-8ccb71) block (within [`https.tls_cert_options.tls_inline_params.use_mtls`](#mtls-fdc332)) supports the following:
-
-<a id="name-f26227"></a>&#x2022; [`name`](#name-f26227) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-0c8648"></a>&#x2022; [`namespace`](#namespace-0c8648) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-0c861d"></a>&#x2022; [`tenant`](#tenant-0c861d) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-a76fcd"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-ab61c8) block (within [`https.tls_cert_options.tls_inline_params.use_mtls`](#mtls-fdc332)) supports the following:
-
-<a id="name-a58884"></a>&#x2022; [`name`](#name-a58884) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-0d9b43"></a>&#x2022; [`namespace`](#namespace-0d9b43) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-59dc74"></a>&#x2022; [`tenant`](#tenant-59dc74) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-079423"></a>Deeply nested **CA** block collapsed for readability.
 
 #### HTTPS TLS Cert Options TLS Inline Params Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-e0ad26) block (within [`https.tls_cert_options.tls_inline_params.use_mtls`](#mtls-fdc332)) supports the following:
-
-<a id="elements-ac3e86"></a>&#x2022; [`xfcc_header_elements`](#elements-ac3e86) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-5f17b1"></a>Deeply nested **Options** block collapsed for readability.
 
 #### HTTPS Auto Cert
 
@@ -2902,13 +1812,7 @@ A [`tls_config`](#origin-pool-use-tls-tls-config) block (within [`origin_pool.us
 
 #### Origin Pool Use TLS TLS Config Custom Security
 
-A [`custom_security`](#security-0634ba) block (within [`origin_pool.use_tls.tls_config`](#origin-pool-use-tls-tls-config)) supports the following:
-
-<a id="suites-2b82dd"></a>&#x2022; [`cipher_suites`](#suites-2b82dd) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-a06e54"></a>&#x2022; [`max_version`](#version-a06e54) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-601bac"></a>&#x2022; [`min_version`](#version-601bac) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-723457"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Origin Pool Use TLS Use mTLS
 
@@ -2918,61 +1822,27 @@ An [`use_mtls`](#origin-pool-use-tls-use-mtls) block (within [`origin_pool.use_t
 
 #### Origin Pool Use TLS Use mTLS TLS Certificates
 
-A [`tls_certificates`](#certificates-3ce4a4) block (within [`origin_pool.use_tls.use_mtls`](#origin-pool-use-tls-use-mtls)) supports the following:
-
-<a id="url-596918"></a>&#x2022; [`certificate_url`](#url-596918) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-e11f25"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-e11f25) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-e11f25) below.
-
-<a id="spec-ad3e86"></a>&#x2022; [`description_spec`](#spec-ad3e86) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-33fd0f"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-33fd0f) - Optional Block<br>Enable this option
-
-<a id="key-8f9e83"></a>&#x2022; [`private_key`](#key-8f9e83) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-8f9e83) below.
-
-<a id="defaults-9efe50"></a>&#x2022; [`use_system_defaults`](#defaults-9efe50) - Optional Block<br>Enable this option
+<a id="deep-c44369"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Origin Pool Use TLS Use mTLS TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-e11f25) block (within [`origin_pool.use_tls.use_mtls.tls_certificates`](#certificates-3ce4a4)) supports the following:
-
-<a id="algorithms-ba9c4c"></a>&#x2022; [`hash_algorithms`](#algorithms-ba9c4c) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-b56fdc"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Origin Pool Use TLS Use mTLS TLS Certificates Private Key
 
-A [`private_key`](#key-8f9e83) block (within [`origin_pool.use_tls.use_mtls.tls_certificates`](#certificates-3ce4a4)) supports the following:
-
-<a id="info-aa607f"></a>&#x2022; [`blindfold_secret_info`](#info-aa607f) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-aa607f) below.
-
-<a id="info-634eb3"></a>&#x2022; [`clear_secret_info`](#info-634eb3) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-634eb3) below.
+<a id="deep-986401"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Origin Pool Use TLS Use mTLS TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-aa607f) block (within [`origin_pool.use_tls.use_mtls.tls_certificates.private_key`](#key-8f9e83)) supports the following:
-
-<a id="provider-6c4e57"></a>&#x2022; [`decryption_provider`](#provider-6c4e57) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-07b7e9"></a>&#x2022; [`location`](#location-07b7e9) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-5c59f1"></a>&#x2022; [`store_provider`](#provider-5c59f1) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-9ff3ae"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Origin Pool Use TLS Use mTLS TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-634eb3) block (within [`origin_pool.use_tls.use_mtls.tls_certificates.private_key`](#key-8f9e83)) supports the following:
-
-<a id="ref-82e53f"></a>&#x2022; [`provider_ref`](#ref-82e53f) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-64f788"></a>&#x2022; [`url`](#url-64f788) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-385fe9"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Origin Pool Use TLS Use mTLS Obj
 
-An [`use_mtls_obj`](#origin-pool-use-tls-use-mtls-obj) block (within [`origin_pool.use_tls`](#origin-pool-use-tls)) supports the following:
-
-<a id="origin-pool-use-tls-use-mtls-obj-name"></a>&#x2022; [`name`](#origin-pool-use-tls-use-mtls-obj-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-cadfb2"></a>&#x2022; [`namespace`](#namespace-cadfb2) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="origin-pool-use-tls-use-mtls-obj-tenant"></a>&#x2022; [`tenant`](#origin-pool-use-tls-use-mtls-obj-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-86aaaa"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Pool Use TLS Use Server Verification
 
@@ -2984,13 +1854,7 @@ An [`use_server_verification`](#verification-1ac9e2) block (within [`origin_pool
 
 #### Origin Pool Use TLS Use Server Verification Trusted CA
 
-A [`trusted_ca`](#trusted-ca-c2c605) block (within [`origin_pool.use_tls.use_server_verification`](#verification-1ac9e2)) supports the following:
-
-<a id="name-84293c"></a>&#x2022; [`name`](#name-84293c) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-1ed910"></a>&#x2022; [`namespace`](#namespace-1ed910) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-580b39"></a>&#x2022; [`tenant`](#tenant-580b39) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-33f32d"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Other Settings
 
@@ -3016,79 +1880,35 @@ A [`header_options`](#other-settings-header-options) block (within [`other_setti
 
 #### Other Settings Header Options Request Headers To Add
 
-A [`request_headers_to_add`](#add-efdf59) block (within [`other_settings.header_options`](#other-settings-header-options)) supports the following:
-
-<a id="append-064888"></a>&#x2022; [`append`](#append-064888) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
-
-<a id="name-8a2e4c"></a>&#x2022; [`name`](#name-8a2e4c) - Optional String<br>Name. Name of the HTTP header
-
-<a id="value-1e6dac"></a>&#x2022; [`secret_value`](#value-1e6dac) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-1e6dac) below.
-
-<a id="value-bc0514"></a>&#x2022; [`value`](#value-bc0514) - Optional String<br>Value. Value of the HTTP header
+<a id="deep-8d939b"></a>Deeply nested **Add** block collapsed for readability.
 
 #### Other Settings Header Options Request Headers To Add Secret Value
 
-A [`secret_value`](#value-1e6dac) block (within [`other_settings.header_options.request_headers_to_add`](#add-efdf59)) supports the following:
-
-<a id="info-e59735"></a>&#x2022; [`blindfold_secret_info`](#info-e59735) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e59735) below.
-
-<a id="info-0a9b69"></a>&#x2022; [`clear_secret_info`](#info-0a9b69) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-0a9b69) below.
+<a id="deep-0b788e"></a>Deeply nested **Value** block collapsed for readability.
 
 #### Other Settings Header Options Request Headers To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-e59735) block (within [`other_settings.header_options.request_headers_to_add.secret_value`](#value-1e6dac)) supports the following:
-
-<a id="provider-7bfba7"></a>&#x2022; [`decryption_provider`](#provider-7bfba7) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-9709d8"></a>&#x2022; [`location`](#location-9709d8) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-186f06"></a>&#x2022; [`store_provider`](#provider-186f06) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-da70e1"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Other Settings Header Options Request Headers To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-0a9b69) block (within [`other_settings.header_options.request_headers_to_add.secret_value`](#value-1e6dac)) supports the following:
-
-<a id="ref-cc7a80"></a>&#x2022; [`provider_ref`](#ref-cc7a80) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-be193b"></a>&#x2022; [`url`](#url-be193b) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-0e70d5"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Other Settings Header Options Response Headers To Add
 
-A [`response_headers_to_add`](#add-f6ecb9) block (within [`other_settings.header_options`](#other-settings-header-options)) supports the following:
-
-<a id="append-182d05"></a>&#x2022; [`append`](#append-182d05) - Optional Bool  Defaults to `do`<br>Append. Should the value be appended? If true, the value is appended to existing values. not append
-
-<a id="name-f3846a"></a>&#x2022; [`name`](#name-f3846a) - Optional String<br>Name. Name of the HTTP header
-
-<a id="value-8ec2c3"></a>&#x2022; [`secret_value`](#value-8ec2c3) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret Value](#value-8ec2c3) below.
-
-<a id="value-fe1848"></a>&#x2022; [`value`](#value-fe1848) - Optional String<br>Value. Value of the HTTP header
+<a id="deep-91db8e"></a>Deeply nested **Add** block collapsed for readability.
 
 #### Other Settings Header Options Response Headers To Add Secret Value
 
-A [`secret_value`](#value-8ec2c3) block (within [`other_settings.header_options.response_headers_to_add`](#add-f6ecb9)) supports the following:
-
-<a id="info-b99394"></a>&#x2022; [`blindfold_secret_info`](#info-b99394) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-b99394) below.
-
-<a id="info-665bff"></a>&#x2022; [`clear_secret_info`](#info-665bff) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-665bff) below.
+<a id="deep-279dc7"></a>Deeply nested **Value** block collapsed for readability.
 
 #### Other Settings Header Options Response Headers To Add Secret Value Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-b99394) block (within [`other_settings.header_options.response_headers_to_add.secret_value`](#value-8ec2c3)) supports the following:
-
-<a id="provider-f8b5cd"></a>&#x2022; [`decryption_provider`](#provider-f8b5cd) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-f7e39f"></a>&#x2022; [`location`](#location-f7e39f) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-559907"></a>&#x2022; [`store_provider`](#provider-559907) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-6c7d71"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Other Settings Header Options Response Headers To Add Secret Value Clear Secret Info
 
-A [`clear_secret_info`](#info-665bff) block (within [`other_settings.header_options.response_headers_to_add.secret_value`](#value-8ec2c3)) supports the following:
-
-<a id="ref-3935ee"></a>&#x2022; [`provider_ref`](#ref-3935ee) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-ca80b9"></a>&#x2022; [`url`](#url-ca80b9) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-08104e"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Other Settings Logging Options
 
@@ -3158,13 +1978,7 @@ A [`js_challenge_parameters`](#parameters-65055e) block (within [`policy_based_c
 
 #### Policy Based Challenge Malicious User Mitigation
 
-A [`malicious_user_mitigation`](#mitigation-d19aea) block (within [`policy_based_challenge`](#policy-based-challenge)) supports the following:
-
-<a id="name-0fb02d"></a>&#x2022; [`name`](#name-0fb02d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-490d76"></a>&#x2022; [`namespace`](#namespace-490d76) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-cf334a"></a>&#x2022; [`tenant`](#tenant-cf334a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-d19aea"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Policy Based Challenge Rule List
 
@@ -3236,213 +2050,83 @@ A [`spec`](#spec-fbd0f9) block (within [`policy_based_challenge.rule_list.rules`
 
 #### Policy Based Challenge Rule List Rules Spec Arg Matchers
 
-An [`arg_matchers`](#matchers-86dff2) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="present-9fee6d"></a>&#x2022; [`check_not_present`](#present-9fee6d) - Optional Block<br>Enable this option
-
-<a id="present-07ddc9"></a>&#x2022; [`check_present`](#present-07ddc9) - Optional Block<br>Enable this option
-
-<a id="matcher-e00de3"></a>&#x2022; [`invert_matcher`](#matcher-e00de3) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
-
-<a id="item-ab8776"></a>&#x2022; [`item`](#item-ab8776) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-ab8776) below.
-
-<a id="name-965072"></a>&#x2022; [`name`](#name-965072) - Optional String<br>Argument Name. A case-sensitive JSON path in the HTTP request body
+<a id="deep-eb8ffe"></a>Deeply nested **Matchers** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Arg Matchers Item
 
-An [`item`](#item-ab8776) block (within [`policy_based_challenge.rule_list.rules.spec.arg_matchers`](#matchers-86dff2)) supports the following:
-
-<a id="values-b5c3b2"></a>&#x2022; [`exact_values`](#values-b5c3b2) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-8f235d"></a>&#x2022; [`regex_values`](#values-8f235d) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-707b5a"></a>&#x2022; [`transformers`](#transformers-707b5a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-e03a12"></a>Deeply nested **Item** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Asn List
 
-An [`asn_list`](#list-628bd4) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="numbers-deb154"></a>&#x2022; [`as_numbers`](#numbers-deb154) - Optional List<br>AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer
+<a id="deep-8e9207"></a>Deeply nested **List** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Asn Matcher
 
-An [`asn_matcher`](#matcher-6b840c) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="sets-be0fa6"></a>&#x2022; [`asn_sets`](#sets-be0fa6) - Optional Block<br>BGP ASN Sets. A list of references to bgp_asn_set objects<br>See [Asn Sets](#sets-be0fa6) below.
+<a id="deep-4e0cfb"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Asn Matcher Asn Sets
 
-An [`asn_sets`](#sets-be0fa6) block (within [`policy_based_challenge.rule_list.rules.spec.asn_matcher`](#matcher-6b840c)) supports the following:
-
-<a id="kind-fe53d2"></a>&#x2022; [`kind`](#kind-fe53d2) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-064ac5"></a>&#x2022; [`name`](#name-064ac5) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b9224d"></a>&#x2022; [`namespace`](#namespace-b9224d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d8d9f8"></a>&#x2022; [`tenant`](#tenant-d8d9f8) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-67bb42"></a>&#x2022; [`uid`](#uid-67bb42) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-2a5120"></a>Deeply nested **Sets** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Body Matcher
 
-A [`body_matcher`](#matcher-4075fc) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="values-597ee8"></a>&#x2022; [`exact_values`](#values-597ee8) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-4179b7"></a>&#x2022; [`regex_values`](#values-4179b7) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-71023a"></a>&#x2022; [`transformers`](#transformers-71023a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-43ae26"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Client Selector
 
-A [`client_selector`](#selector-ca44f5) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="expressions-4e019d"></a>&#x2022; [`expressions`](#expressions-4e019d) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="deep-73214b"></a>Deeply nested **Selector** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Cookie Matchers
 
-A [`cookie_matchers`](#matchers-cb349b) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="present-00c6c9"></a>&#x2022; [`check_not_present`](#present-00c6c9) - Optional Block<br>Enable this option
-
-<a id="present-df779f"></a>&#x2022; [`check_present`](#present-df779f) - Optional Block<br>Enable this option
-
-<a id="matcher-aec0f9"></a>&#x2022; [`invert_matcher`](#matcher-aec0f9) - Optional Bool<br>Invert Matcher. Invert Match of the expression defined
-
-<a id="item-951d5f"></a>&#x2022; [`item`](#item-951d5f) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-951d5f) below.
-
-<a id="name-9bddbc"></a>&#x2022; [`name`](#name-9bddbc) - Optional String<br>Cookie Name. A case-sensitive cookie name
+<a id="deep-946f25"></a>Deeply nested **Matchers** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Cookie Matchers Item
 
-An [`item`](#item-951d5f) block (within [`policy_based_challenge.rule_list.rules.spec.cookie_matchers`](#matchers-cb349b)) supports the following:
-
-<a id="values-093591"></a>&#x2022; [`exact_values`](#values-093591) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-447dbd"></a>&#x2022; [`regex_values`](#values-447dbd) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-d98df1"></a>&#x2022; [`transformers`](#transformers-d98df1) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-939b70"></a>Deeply nested **Item** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Domain Matcher
 
-A [`domain_matcher`](#matcher-888f5a) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="values-3f5560"></a>&#x2022; [`exact_values`](#values-3f5560) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-f1499c"></a>&#x2022; [`regex_values`](#values-f1499c) - Optional List<br>Regex Values. A list of regular expressions to match the input against
+<a id="deep-c2c201"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Headers
 
-A [`headers`](#headers-1bea3b) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="present-55942e"></a>&#x2022; [`check_not_present`](#present-55942e) - Optional Block<br>Enable this option
-
-<a id="present-4db691"></a>&#x2022; [`check_present`](#present-4db691) - Optional Block<br>Enable this option
-
-<a id="matcher-1277ca"></a>&#x2022; [`invert_matcher`](#matcher-1277ca) - Optional Bool<br>Invert Header Matcher. Invert the match result
-
-<a id="item-f6ed80"></a>&#x2022; [`item`](#item-f6ed80) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-f6ed80) below.
-
-<a id="name-c77daf"></a>&#x2022; [`name`](#name-c77daf) - Optional String<br>Header Name. A case-insensitive HTTP header name
+<a id="deep-c62b4f"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Headers Item
 
-An [`item`](#item-f6ed80) block (within [`policy_based_challenge.rule_list.rules.spec.headers`](#headers-1bea3b)) supports the following:
-
-<a id="values-fc746b"></a>&#x2022; [`exact_values`](#values-fc746b) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-52c029"></a>&#x2022; [`regex_values`](#values-52c029) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-12bdd9"></a>&#x2022; [`transformers`](#transformers-12bdd9) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-b6374c"></a>Deeply nested **Item** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec HTTP Method
 
-A [`http_method`](#method-9ab722) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="matcher-7f896b"></a>&#x2022; [`invert_matcher`](#matcher-7f896b) - Optional Bool<br>Invert Method Matcher. Invert the match result
-
-<a id="methods-7a62d5"></a>&#x2022; [`methods`](#methods-7a62d5) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Method List. List of methods values to match against
+<a id="deep-dba95f"></a>Deeply nested **Method** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec IP Matcher
 
-An [`ip_matcher`](#matcher-82616b) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="matcher-82cd23"></a>&#x2022; [`invert_matcher`](#matcher-82cd23) - Optional Bool<br>Invert IP Matcher. Invert the match result
-
-<a id="sets-9dc015"></a>&#x2022; [`prefix_sets`](#sets-9dc015) - Optional Block<br>IP Prefix Sets. A list of references to ip_prefix_set objects<br>See [Prefix Sets](#sets-9dc015) below.
+<a id="deep-b37ae0"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec IP Matcher Prefix Sets
 
-A [`prefix_sets`](#sets-9dc015) block (within [`policy_based_challenge.rule_list.rules.spec.ip_matcher`](#matcher-82616b)) supports the following:
-
-<a id="kind-190f46"></a>&#x2022; [`kind`](#kind-190f46) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-434336"></a>&#x2022; [`name`](#name-434336) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-2b573f"></a>&#x2022; [`namespace`](#namespace-2b573f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-86f089"></a>&#x2022; [`tenant`](#tenant-86f089) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-2efcf4"></a>&#x2022; [`uid`](#uid-2efcf4) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-73bd32"></a>Deeply nested **Sets** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec IP Prefix List
 
-An [`ip_prefix_list`](#list-537143) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="match-c9ff32"></a>&#x2022; [`invert_match`](#match-c9ff32) - Optional Bool<br>Invert Match Result. Invert the match result
-
-<a id="prefixes-607b2d"></a>&#x2022; [`ip_prefixes`](#prefixes-607b2d) - Optional List<br>IPv4 Prefix List. List of IPv4 prefix strings
+<a id="deep-fb570d"></a>Deeply nested **List** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Path
 
-A [`path`](#path-acb3cc) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="values-485c76"></a>&#x2022; [`exact_values`](#values-485c76) - Optional List<br>Exact Values. A list of exact path values to match the input HTTP path against
-
-<a id="matcher-003880"></a>&#x2022; [`invert_matcher`](#matcher-003880) - Optional Bool<br>Invert Path Matcher. Invert the match result
-
-<a id="values-083d9f"></a>&#x2022; [`prefix_values`](#values-083d9f) - Optional List<br>Prefix Values. A list of path prefix values to match the input HTTP path against
-
-<a id="values-4b2fb8"></a>&#x2022; [`regex_values`](#values-4b2fb8) - Optional List<br>Regex Values. A list of regular expressions to match the input HTTP path against
-
-<a id="values-401ec9"></a>&#x2022; [`suffix_values`](#values-401ec9) - Optional List<br>Suffix Values. A list of path suffix values to match the input HTTP path against
-
-<a id="transformers-c5ad13"></a>&#x2022; [`transformers`](#transformers-c5ad13) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-2ed6cf"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Query Params
 
-A [`query_params`](#params-04b1ad) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="present-3df5a5"></a>&#x2022; [`check_not_present`](#present-3df5a5) - Optional Block<br>Enable this option
-
-<a id="present-aa54e6"></a>&#x2022; [`check_present`](#present-aa54e6) - Optional Block<br>Enable this option
-
-<a id="matcher-c30f88"></a>&#x2022; [`invert_matcher`](#matcher-c30f88) - Optional Bool<br>Invert Query Parameter Matcher. Invert the match result
-
-<a id="item-51a3bb"></a>&#x2022; [`item`](#item-51a3bb) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Item](#item-51a3bb) below.
-
-<a id="key-3709d7"></a>&#x2022; [`key`](#key-3709d7) - Optional String<br>Query Parameter Name. A case-sensitive HTTP query parameter name
+<a id="deep-39ee89"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec Query Params Item
 
-An [`item`](#item-51a3bb) block (within [`policy_based_challenge.rule_list.rules.spec.query_params`](#params-04b1ad)) supports the following:
-
-<a id="values-f4b36f"></a>&#x2022; [`exact_values`](#values-f4b36f) - Optional List<br>Exact Values. A list of exact values to match the input against
-
-<a id="values-1b7a32"></a>&#x2022; [`regex_values`](#values-1b7a32) - Optional List<br>Regex Values. A list of regular expressions to match the input against
-
-<a id="transformers-f4e714"></a>&#x2022; [`transformers`](#transformers-f4e714) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="deep-f76120"></a>Deeply nested **Item** block collapsed for readability.
 
 #### Policy Based Challenge Rule List Rules Spec TLS Fingerprint Matcher
 
-A [`tls_fingerprint_matcher`](#matcher-3cbc4b) block (within [`policy_based_challenge.rule_list.rules.spec`](#spec-fbd0f9)) supports the following:
-
-<a id="classes-e328f3"></a>&#x2022; [`classes`](#classes-e328f3) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
-
-<a id="values-02374f"></a>&#x2022; [`exact_values`](#values-02374f) - Optional List<br>Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
-
-<a id="values-2fc745"></a>&#x2022; [`excluded_values`](#values-2fc745) - Optional List<br>Excluded Values. A list of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher
+<a id="deep-2cb28a"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### Policy Based Challenge Temporary User Blocking
 
@@ -3504,13 +2188,7 @@ A [`custom_ip_allowed_list`](#rate-limit-custom-ip-allowed-list) block (within [
 
 #### Rate Limit Custom IP Allowed List Rate Limiter Allowed Prefixes
 
-A [`rate_limiter_allowed_prefixes`](#prefixes-266335) block (within [`rate_limit.custom_ip_allowed_list`](#rate-limit-custom-ip-allowed-list)) supports the following:
-
-<a id="name-2e45f5"></a>&#x2022; [`name`](#name-2e45f5) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-cab019"></a>&#x2022; [`namespace`](#namespace-cab019) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d99ce2"></a>&#x2022; [`tenant`](#tenant-d99ce2) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-e048af"></a>Deeply nested **Prefixes** block collapsed for readability.
 
 #### Rate Limit IP Allowed List
 
@@ -3526,13 +2204,7 @@ A [`policies`](#rate-limit-policies) block (within [`rate_limit`](#rate-limit)) 
 
 #### Rate Limit Policies Policies
 
-A [`policies`](#rate-limit-policies-policies) block (within [`rate_limit.policies`](#rate-limit-policies)) supports the following:
-
-<a id="rate-limit-policies-policies-name"></a>&#x2022; [`name`](#rate-limit-policies-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="rate-limit-policies-policies-namespace"></a>&#x2022; [`namespace`](#rate-limit-policies-policies-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="rate-limit-policies-policies-tenant"></a>&#x2022; [`tenant`](#rate-limit-policies-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-15469f"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Rate Limit Rate Limiter
 
@@ -3590,13 +2262,7 @@ A [`sensitive_data_policy`](#sensitive-data-policy) block supports the following
 
 #### Sensitive Data Policy Sensitive Data Policy Ref
 
-A [`sensitive_data_policy_ref`](#ref-55b260) block (within [`sensitive_data_policy`](#sensitive-data-policy)) supports the following:
-
-<a id="name-d254a7"></a>&#x2022; [`name`](#name-d254a7) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-401387"></a>&#x2022; [`namespace`](#namespace-401387) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d10cc7"></a>&#x2022; [`tenant`](#tenant-d10cc7) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-55b260"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Slow DDOS Mitigation
 
@@ -3676,13 +2342,7 @@ A [`metadata`](#trusted-clients-metadata) block (within [`trusted_clients`](#tru
 
 #### User Identification
 
-An [`user_identification`](#user-identification) block supports the following:
-
-<a id="user-identification-name"></a>&#x2022; [`name`](#user-identification-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="user-identification-namespace"></a>&#x2022; [`namespace`](#user-identification-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="user-identification-tenant"></a>&#x2022; [`tenant`](#user-identification-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-91da1c"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### WAF Exclusion
 
@@ -3714,7 +2374,7 @@ A [`rules`](#rules-28cf34) block (within [`waf_exclusion.waf_exclusion_inline_ru
 
 <a id="metadata-09584f"></a>&#x2022; [`metadata`](#metadata-09584f) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#metadata-09584f) below.
 
-<a id="methods-19f73d"></a>&#x2022; [`methods`](#methods-19f73d) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Methods. methods to be matched
+<a id="methods-19f73d"></a>&#x2022; [`methods`](#methods-19f73d) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Methods. methods to be matched
 
 <a id="prefix-a857dd"></a>&#x2022; [`path_prefix`](#prefix-a857dd) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
 
@@ -3726,69 +2386,114 @@ A [`rules`](#rules-28cf34) block (within [`waf_exclusion.waf_exclusion_inline_ru
 
 #### WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control
 
-An [`app_firewall_detection_control`](#control-0cb52d) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules`](#rules-28cf34)) supports the following:
-
-<a id="contexts-6197b1"></a>&#x2022; [`exclude_attack_type_contexts`](#contexts-6197b1) - Optional Block<br>Attack Types. Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#contexts-6197b1) below.
-
-<a id="contexts-e832e4"></a>&#x2022; [`exclude_bot_name_contexts`](#contexts-e832e4) - Optional Block<br>Bot Names. Bot Names to be excluded for the defined match criteria<br>See [Exclude Bot Name Contexts](#contexts-e832e4) below.
-
-<a id="contexts-0794ff"></a>&#x2022; [`exclude_signature_contexts`](#contexts-0794ff) - Optional Block<br>Signature IDs. Signature IDs to be excluded for the defined match criteria<br>See [Exclude Signature Contexts](#contexts-0794ff) below.
-
-<a id="contexts-29dd68"></a>&#x2022; [`exclude_violation_contexts`](#contexts-29dd68) - Optional Block<br>Violations. Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#contexts-29dd68) below.
+<a id="deep-832ffb"></a>Deeply nested **Control** block collapsed for readability.
 
 #### WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Attack Type Contexts
 
-An [`exclude_attack_type_contexts`](#contexts-6197b1) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`](#control-0cb52d)) supports the following:
-
-<a id="context-b0f79f"></a>&#x2022; [`context`](#context-b0f79f) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
-
-<a id="name-114c4e"></a>&#x2022; [`context_name`](#name-114c4e) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
-
-<a id="type-541ccc"></a>&#x2022; [`exclude_attack_type`](#type-541ccc) - Optional String  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>[Enum: ATTACK_TYPE_NONE|ATTACK_TYPE_NON_BROWSER_CLIENT|ATTACK_TYPE_OTHER_APPLICATION_ATTACKS|ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE|ATTACK_TYPE_DETECTION_EVASION|ATTACK_TYPE_VULNERABILITY_SCAN|ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY|ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS|ATTACK_TYPE_BUFFER_OVERFLOW|ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION|ATTACK_TYPE_INFORMATION_LEAKAGE|ATTACK_TYPE_DIRECTORY_INDEXING|ATTACK_TYPE_PATH_TRAVERSAL|ATTACK_TYPE_XPATH_INJECTION|ATTACK_TYPE_LDAP_INJECTION|ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION|ATTACK_TYPE_COMMAND_EXECUTION|ATTACK_TYPE_SQL_INJECTION|ATTACK_TYPE_CROSS_SITE_SCRIPTING|ATTACK_TYPE_DENIAL_OF_SERVICE|ATTACK_TYPE_HTTP_PARSER_ATTACK|ATTACK_TYPE_SESSION_HIJACKING|ATTACK_TYPE_HTTP_RESPONSE_SPLITTING|ATTACK_TYPE_FORCEFUL_BROWSING|ATTACK_TYPE_REMOTE_FILE_INCLUDE|ATTACK_TYPE_MALICIOUS_FILE_UPLOAD|ATTACK_TYPE_GRAPHQL_PARSER_ATTACK] Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK
+<a id="deep-0e5af0"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Bot Name Contexts
 
-An [`exclude_bot_name_contexts`](#contexts-e832e4) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`](#control-0cb52d)) supports the following:
-
-<a id="name-1d3dba"></a>&#x2022; [`bot_name`](#name-1d3dba) - Optional String<br>Bot Name
+<a id="deep-22f5f8"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Signature Contexts
 
-An [`exclude_signature_contexts`](#contexts-0794ff) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`](#control-0cb52d)) supports the following:
-
-<a id="context-e1f5a0"></a>&#x2022; [`context`](#context-e1f5a0) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
-
-<a id="name-efd12c"></a>&#x2022; [`context_name`](#name-efd12c) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
-
-<a id="signature-id-f725d3"></a>&#x2022; [`signature_id`](#signature-id-f725d3) - Optional Number<br>SignatureID. The allowed values for signature ID are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context
+<a id="deep-30cc06"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### WAF Exclusion WAF Exclusion Inline Rules Rules App Firewall Detection Control Exclude Violation Contexts
 
-An [`exclude_violation_contexts`](#contexts-29dd68) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules.app_firewall_detection_control`](#control-0cb52d)) supports the following:
-
-<a id="context-5543b9"></a>&#x2022; [`context`](#context-5543b9) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
-
-<a id="name-b96b20"></a>&#x2022; [`context_name`](#name-b96b20) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
-
-<a id="violation-53384e"></a>&#x2022; [`exclude_violation`](#violation-53384e) - Optional String  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>[Enum: VIOL_NONE|VIOL_FILETYPE|VIOL_METHOD|VIOL_MANDATORY_HEADER|VIOL_HTTP_RESPONSE_STATUS|VIOL_REQUEST_MAX_LENGTH|VIOL_FILE_UPLOAD|VIOL_FILE_UPLOAD_IN_BODY|VIOL_XML_MALFORMED|VIOL_JSON_MALFORMED|VIOL_ASM_COOKIE_MODIFIED|VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS|VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE|VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT|VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST|VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION|VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS|VIOL_EVASION_DIRECTORY_TRAVERSALS|VIOL_MALFORMED_REQUEST|VIOL_EVASION_MULTIPLE_DECODING|VIOL_DATA_GUARD|VIOL_EVASION_APACHE_WHITESPACE|VIOL_COOKIE_MODIFIED|VIOL_EVASION_IIS_UNICODE_CODEPOINTS|VIOL_EVASION_IIS_BACKSLASHES|VIOL_EVASION_PERCENT_U_DECODING|VIOL_EVASION_BARE_BYTE_DECODING|VIOL_EVASION_BAD_UNESCAPE|VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST|VIOL_ENCODING|VIOL_COOKIE_MALFORMED|VIOL_GRAPHQL_FORMAT|VIOL_GRAPHQL_MALFORMED|VIOL_GRAPHQL_INTROSPECTION_QUERY] App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY
+<a id="deep-d6ba53"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### WAF Exclusion WAF Exclusion Inline Rules Rules Metadata
 
-A [`metadata`](#metadata-09584f) block (within [`waf_exclusion.waf_exclusion_inline_rules.rules`](#rules-28cf34)) supports the following:
-
-<a id="spec-942e33"></a>&#x2022; [`description_spec`](#spec-942e33) - Optional String<br>Description. Human readable description
-
-<a id="name-a43295"></a>&#x2022; [`name`](#name-a43295) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-68f59c"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### WAF Exclusion WAF Exclusion Policy
 
-A [`waf_exclusion_policy`](#waf-exclusion-waf-exclusion-policy) block (within [`waf_exclusion`](#waf-exclusion)) supports the following:
+<a id="objref-689a0e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
-<a id="waf-exclusion-waf-exclusion-policy-name"></a>&#x2022; [`name`](#waf-exclusion-waf-exclusion-policy-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+---
 
-<a id="namespace-d8f030"></a>&#x2022; [`namespace`](#namespace-d8f030) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+## Common Types
 
-<a id="tenant-d841f0"></a>&#x2022; [`tenant`](#tenant-d841f0) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

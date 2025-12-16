@@ -2,12 +2,12 @@
 page_title: "f5xc_cdn_cache_rule Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  [Namespace: required] Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+  Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 ---
 
 # f5xc_cdn_cache_rule (Resource)
 
-[Namespace: required] Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
 ~> **Note** Please refer to [CDN Cache Rule API docs](https://docs.cloud.f5.com/docs-v2/api/cdn-cache-rule) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # CDN Cache Rule Resource Example
-# [Namespace: required] Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+# Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
 
 # Basic CDN Cache Rule configuration
 resource "f5xc_cdn_cache_rule" "example" {
@@ -100,23 +100,11 @@ An [`eligible_for_cache`](#cache-rules-eligible-for-cache) block (within [`cache
 
 #### Cache Rules Eligible For Cache Scheme Proxy Host Request URI
 
-A [`scheme_proxy_host_request_uri`](#uri-1ae3d1) block (within [`cache_rules.eligible_for_cache`](#cache-rules-eligible-for-cache)) supports the following:
-
-<a id="override-e9cc1a"></a>&#x2022; [`cache_override`](#override-e9cc1a) - Optional Bool<br>Cache Override. Honour Cache Override
-
-<a id="ttl-43b883"></a>&#x2022; [`cache_ttl`](#ttl-43b883) - Optional String<br>Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days
-
-<a id="cookie-dc530e"></a>&#x2022; [`ignore_response_cookie`](#cookie-dc530e) - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
+<a id="deep-2c41fe"></a>Deeply nested **URI** block collapsed for readability.
 
 #### Cache Rules Eligible For Cache Scheme Proxy Host URI
 
-A [`scheme_proxy_host_uri`](#uri-d66a89) block (within [`cache_rules.eligible_for_cache`](#cache-rules-eligible-for-cache)) supports the following:
-
-<a id="override-2571b6"></a>&#x2022; [`cache_override`](#override-2571b6) - Optional Bool<br>Cache Override. Honour Cache Override
-
-<a id="ttl-9dd38b"></a>&#x2022; [`cache_ttl`](#ttl-9dd38b) - Optional String<br>Cache TTL. Cache TTL value is used to cache the resource/content for the specified amount of time Format: [0-9]\[smhd], where s - seconds, m - minutes, h - hours, d - days
-
-<a id="cookie-bd0cda"></a>&#x2022; [`ignore_response_cookie`](#cookie-bd0cda) - Optional Bool<br>Ignore-Response-Cookie. By default, response will not be cached if set-cookie header is present. This option will override the behavior and cache response even with set-cookie header present
+<a id="deep-0932b6"></a>Deeply nested **URI** block collapsed for readability.
 
 #### Cache Rules Rule Expression List
 
@@ -128,133 +116,39 @@ A [`rule_expression_list`](#cache-rules-rule-expression-list) block (within [`ca
 
 #### Cache Rules Rule Expression List Cache Rule Expression
 
-A [`cache_rule_expression`](#expression-140547) block (within [`cache_rules.rule_expression_list`](#cache-rules-rule-expression-list)) supports the following:
-
-<a id="headers-b21d11"></a>&#x2022; [`cache_headers`](#headers-b21d11) - Optional Block<br>Cache Headers. Configure cache rule headers to match the criteria<br>See [Cache Headers](#headers-b21d11) below.
-
-<a id="matcher-ae8137"></a>&#x2022; [`cookie_matcher`](#matcher-ae8137) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matcher](#matcher-ae8137) below.
-
-<a id="match-b606ef"></a>&#x2022; [`path_match`](#match-b606ef) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path Match](#match-b606ef) below.
-
-<a id="parameters-c90313"></a>&#x2022; [`query_parameters`](#parameters-c90313) - Optional Block<br>Query Parameters. List of (key, value) query parameters<br>See [Query Parameters](#parameters-c90313) below.
+<a id="deep-b5a68a"></a>Deeply nested **Expression** block collapsed for readability.
 
 #### Cache Rules Rule Expression List Cache Rule Expression Cache Headers
 
-A [`cache_headers`](#headers-b21d11) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#expression-140547)) supports the following:
-
-<a id="name-db8c15"></a>&#x2022; [`name`](#name-db8c15) - Optional String  Defaults to `PROXY_HOST`<br>Possible values are `PROXY_HOST`, `REFERER`, `SCHEME`, `USER_AGENT`<br>[Enum: PROXY_HOST|REFERER|SCHEME|USER_AGENT] Header Options. - PROXY_HOST: Proxy Host Name of the proxied server - REFERER: Referer This is the address of the previous web page from which a link to the currently requested page was followed - SCHEME: Scheme The HTTP scheme used: HTTP or HTTPS - USER_AGENT: User Agent The user agent string of the user agent
-
-<a id="operator-f43758"></a>&#x2022; [`operator`](#operator-f43758) - Optional Block<br>Operator<br>See [Operator](#operator-f43758) below.
+<a id="deep-e11da3"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Cache Rules Rule Expression List Cache Rule Expression Cache Headers Operator
 
-An [`operator`](#operator-f43758) block (within [`cache_rules.rule_expression_list.cache_rule_expression.cache_headers`](#headers-b21d11)) supports the following:
-
-<a id="contains-bbfd41"></a>&#x2022; [`contains`](#contains-bbfd41) - Optional String<br>Contains. Field must contain
-
-<a id="contain-289301"></a>&#x2022; [`does_not_contain`](#contain-289301) - Optional String<br>Does Not Contain. Field must not contain
-
-<a id="with-124478"></a>&#x2022; [`does_not_end_with`](#with-124478) - Optional String<br>Does Not End With. Field must not end with
-
-<a id="equal-ce5cf0"></a>&#x2022; [`does_not_equal`](#equal-ce5cf0) - Optional String<br>Does Not Equal. Field must not equal
-
-<a id="with-256700"></a>&#x2022; [`does_not_start_with`](#with-256700) - Optional String<br>Does Not Start With. Field must not start with
-
-<a id="endswith-ec30f7"></a>&#x2022; [`endswith`](#endswith-ec30f7) - Optional String<br>Ends With. Field must end with
-
-<a id="equals-7b81da"></a>&#x2022; [`equals`](#equals-7b81da) - Optional String<br>Equals. Field must exactly match
-
-<a id="regex-18f67b"></a>&#x2022; [`match_regex`](#regex-18f67b) - Optional String<br>Matches Regex. Field matches PCRE 1 compliant regular expression
-
-<a id="startswith-350b5f"></a>&#x2022; [`startswith`](#startswith-350b5f) - Optional String<br>Starts With. Field must start with
+<a id="deep-5ddd26"></a>Deeply nested **Operator** block collapsed for readability.
 
 #### Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher
 
-A [`cookie_matcher`](#matcher-ae8137) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#expression-140547)) supports the following:
-
-<a id="name-f9a0ae"></a>&#x2022; [`name`](#name-f9a0ae) - Optional String<br>Cookie Name. A case-sensitive cookie name
-
-<a id="operator-679e10"></a>&#x2022; [`operator`](#operator-679e10) - Optional Block<br>Operator<br>See [Operator](#operator-679e10) below.
+<a id="deep-3ee96e"></a>Deeply nested **Matcher** block collapsed for readability.
 
 #### Cache Rules Rule Expression List Cache Rule Expression Cookie Matcher Operator
 
-An [`operator`](#operator-679e10) block (within [`cache_rules.rule_expression_list.cache_rule_expression.cookie_matcher`](#matcher-ae8137)) supports the following:
-
-<a id="contains-09f764"></a>&#x2022; [`contains`](#contains-09f764) - Optional String<br>Contains. Field must contain
-
-<a id="contain-dd866a"></a>&#x2022; [`does_not_contain`](#contain-dd866a) - Optional String<br>Does Not Contain. Field must not contain
-
-<a id="with-7fc7a7"></a>&#x2022; [`does_not_end_with`](#with-7fc7a7) - Optional String<br>Does Not End With. Field must not end with
-
-<a id="equal-ce4974"></a>&#x2022; [`does_not_equal`](#equal-ce4974) - Optional String<br>Does Not Equal. Field must not equal
-
-<a id="with-ec0dcf"></a>&#x2022; [`does_not_start_with`](#with-ec0dcf) - Optional String<br>Does Not Start With. Field must not start with
-
-<a id="endswith-f1c147"></a>&#x2022; [`endswith`](#endswith-f1c147) - Optional String<br>Ends With. Field must end with
-
-<a id="equals-7a3d8d"></a>&#x2022; [`equals`](#equals-7a3d8d) - Optional String<br>Equals. Field must exactly match
-
-<a id="regex-6aae39"></a>&#x2022; [`match_regex`](#regex-6aae39) - Optional String<br>Matches Regex. Field matches PCRE 1 compliant regular expression
-
-<a id="startswith-fe0b21"></a>&#x2022; [`startswith`](#startswith-fe0b21) - Optional String<br>Starts With. Field must start with
+<a id="deep-5c6456"></a>Deeply nested **Operator** block collapsed for readability.
 
 #### Cache Rules Rule Expression List Cache Rule Expression Path Match
 
-A [`path_match`](#match-b606ef) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#expression-140547)) supports the following:
-
-<a id="operator-9cfb33"></a>&#x2022; [`operator`](#operator-9cfb33) - Optional Block<br>Operator<br>See [Operator](#operator-9cfb33) below.
+<a id="deep-fe2819"></a>Deeply nested **Match** block collapsed for readability.
 
 #### Cache Rules Rule Expression List Cache Rule Expression Path Match Operator
 
-An [`operator`](#operator-9cfb33) block (within [`cache_rules.rule_expression_list.cache_rule_expression.path_match`](#match-b606ef)) supports the following:
-
-<a id="contains-67d41b"></a>&#x2022; [`contains`](#contains-67d41b) - Optional String<br>Contains. Field must contain
-
-<a id="contain-ff8ad2"></a>&#x2022; [`does_not_contain`](#contain-ff8ad2) - Optional String<br>Does Not Contain. Field must not contain
-
-<a id="with-3dfc58"></a>&#x2022; [`does_not_end_with`](#with-3dfc58) - Optional String<br>Does Not End With. Field must not end with
-
-<a id="equal-873025"></a>&#x2022; [`does_not_equal`](#equal-873025) - Optional String<br>Does Not Equal. Field must not equal
-
-<a id="with-591f3b"></a>&#x2022; [`does_not_start_with`](#with-591f3b) - Optional String<br>Does Not Start With. Field must not start with
-
-<a id="endswith-3efe02"></a>&#x2022; [`endswith`](#endswith-3efe02) - Optional String<br>Ends With. Field must end with
-
-<a id="equals-b8ff72"></a>&#x2022; [`equals`](#equals-b8ff72) - Optional String<br>Equals. Field must exactly match
-
-<a id="regex-947913"></a>&#x2022; [`match_regex`](#regex-947913) - Optional String<br>Matches Regex. Field matches PCRE 1 compliant regular expression
-
-<a id="startswith-308f9f"></a>&#x2022; [`startswith`](#startswith-308f9f) - Optional String<br>Starts With. Field must start with
+<a id="deep-cb2341"></a>Deeply nested **Operator** block collapsed for readability.
 
 #### Cache Rules Rule Expression List Cache Rule Expression Query Parameters
 
-A [`query_parameters`](#parameters-c90313) block (within [`cache_rules.rule_expression_list.cache_rule_expression`](#expression-140547)) supports the following:
-
-<a id="key-811b57"></a>&#x2022; [`key`](#key-811b57) - Optional String<br>Key. Query parameter key In the above example, assignee_username is the key
-
-<a id="operator-925329"></a>&#x2022; [`operator`](#operator-925329) - Optional Block<br>Operator<br>See [Operator](#operator-925329) below.
+<a id="deep-5e738e"></a>Deeply nested **Parameters** block collapsed for readability.
 
 #### Cache Rules Rule Expression List Cache Rule Expression Query Parameters Operator
 
-An [`operator`](#operator-925329) block (within [`cache_rules.rule_expression_list.cache_rule_expression.query_parameters`](#parameters-c90313)) supports the following:
-
-<a id="contains-91bb72"></a>&#x2022; [`contains`](#contains-91bb72) - Optional String<br>Contains. Field must contain
-
-<a id="contain-f47cb5"></a>&#x2022; [`does_not_contain`](#contain-f47cb5) - Optional String<br>Does Not Contain. Field must not contain
-
-<a id="with-de3210"></a>&#x2022; [`does_not_end_with`](#with-de3210) - Optional String<br>Does Not End With. Field must not end with
-
-<a id="equal-784359"></a>&#x2022; [`does_not_equal`](#equal-784359) - Optional String<br>Does Not Equal. Field must not equal
-
-<a id="with-18ba08"></a>&#x2022; [`does_not_start_with`](#with-18ba08) - Optional String<br>Does Not Start With. Field must not start with
-
-<a id="endswith-0a1def"></a>&#x2022; [`endswith`](#endswith-0a1def) - Optional String<br>Ends With. Field must end with
-
-<a id="equals-38fe69"></a>&#x2022; [`equals`](#equals-38fe69) - Optional String<br>Equals. Field must exactly match
-
-<a id="regex-35e39d"></a>&#x2022; [`match_regex`](#regex-35e39d) - Optional String<br>Matches Regex. Field matches PCRE 1 compliant regular expression
-
-<a id="startswith-0afbf9"></a>&#x2022; [`startswith`](#startswith-0afbf9) - Optional String<br>Starts With. Field must start with
+<a id="deep-effa27"></a>Deeply nested **Operator** block collapsed for readability.
 
 #### Timeouts
 
@@ -267,6 +161,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

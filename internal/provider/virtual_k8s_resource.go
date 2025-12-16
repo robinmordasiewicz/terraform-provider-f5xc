@@ -104,7 +104,7 @@ func (r *VirtualK8SResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *VirtualK8SResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             virtual_k8sSchemaVersion,
-		MarkdownDescription: "[Category: Kubernetes] [Namespace: required] Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Virtual K8S. Must be unique within the namespace.",

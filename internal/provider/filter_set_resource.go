@@ -130,7 +130,7 @@ func (r *FilterSetResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             filter_setSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a Filter Set resource in F5 Distributed Cloud for create configuration.",
+		MarkdownDescription: "Manages a Filter Set resource in F5 Distributed Cloud for create configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Filter Set. Must be unique within the namespace.",

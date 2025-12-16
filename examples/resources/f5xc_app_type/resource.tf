@@ -1,5 +1,5 @@
 # App Type Resource Example
-# [Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
+# Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic App Type configuration
 resource "f5xc_app_type" "example" {

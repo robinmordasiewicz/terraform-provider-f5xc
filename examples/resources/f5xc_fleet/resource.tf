@@ -1,5 +1,5 @@
 # Fleet Resource Example
-# [Namespace: required] Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
+# Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
 
 # Basic Fleet configuration
 resource "f5xc_fleet" "example" {

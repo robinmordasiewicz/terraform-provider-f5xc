@@ -42,7 +42,7 @@ func (d *ForwardingClassDataSource) Metadata(ctx context.Context, req datasource
 
 func (d *ForwardingClassDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Namespace: required] Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.",
+		MarkdownDescription: "Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

@@ -42,7 +42,7 @@ func (d *APMDataSource) Metadata(ctx context.Context, req datasource.MetadataReq
 
 func (d *APMDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Namespace: required] Manages new APM as a service with configured parameters in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new APM as a service with configured parameters in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

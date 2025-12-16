@@ -67,7 +67,7 @@ func (r *APICredentialResource) Metadata(ctx context.Context, req resource.Metad
 func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             api_credentialSchemaVersion,
-		MarkdownDescription: "[Category: Authentication] [Namespace: required] Manages request specification. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages request specification. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the API Credential. Must be unique within the namespace.",
@@ -80,11 +80,10 @@ func (r *APICredentialResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace for the API Credential. For this resource type, namespace should be empty or omitted.",
-				Optional:            true,
-				Computed:            true,
+				MarkdownDescription: "Namespace where the API Credential will be created.",
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+					stringplanmodifier.RequiresReplace(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -323,6 +322,8 @@ func (r *APICredentialResource) Create(ctx context.Context, req resource.CreateR
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
+	// For resources without namespace in API path, namespace is computed from API response
+	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
@@ -662,19 +663,17 @@ func (r *APICredentialResource) Delete(ctx context.Context, req resource.DeleteR
 }
 
 func (r *APICredentialResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: namespace/name
-	parts := strings.Split(req.ID, "/")
-	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
+	// Import ID format: name (no namespace for this resource type)
+	name := req.ID
+	if name == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
+			"Expected import ID to be the resource name, got empty string",
 		)
 		return
 	}
-	namespace := parts[0]
-	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

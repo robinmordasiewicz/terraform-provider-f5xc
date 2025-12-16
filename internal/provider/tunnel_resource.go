@@ -284,7 +284,7 @@ func (r *TunnelResource) Metadata(ctx context.Context, req resource.MetadataRequ
 func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             tunnelSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Tunnel. Must be unique within the namespace.",

@@ -1,5 +1,5 @@
 # Contact Resource Example
-# [Namespace: required] Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
+# Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.
 
 # Basic Contact configuration
 resource "f5xc_contact" "example" {

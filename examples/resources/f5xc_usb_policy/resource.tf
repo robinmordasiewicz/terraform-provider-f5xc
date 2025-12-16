@@ -1,5 +1,5 @@
 # Usb Policy Resource Example
-# [Namespace: required] Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.
+# Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.
 
 # Basic Usb Policy configuration
 resource "f5xc_usb_policy" "example" {

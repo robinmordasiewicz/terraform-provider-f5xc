@@ -3985,7 +3985,7 @@ func (r *SecuremeshSiteV2Resource) Metadata(ctx context.Context, req resource.Me
 func (r *SecuremeshSiteV2Resource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             securemesh_site_v2SchemaVersion,
-		MarkdownDescription: "[Category: Sites] [Namespace: required] Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.",
+		MarkdownDescription: "Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Securemesh Site V2. Must be unique within the namespace.",

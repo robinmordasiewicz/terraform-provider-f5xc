@@ -1,5 +1,5 @@
 # APM Resource Example
-# [Namespace: required] Manages new APM as a service with configured parameters in F5 Distributed Cloud.
+# Manages new APM as a service with configured parameters in F5 Distributed Cloud.
 
 # Basic APM configuration
 resource "f5xc_apm" "example" {

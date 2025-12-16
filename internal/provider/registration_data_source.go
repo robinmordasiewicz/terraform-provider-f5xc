@@ -42,7 +42,7 @@ func (d *RegistrationDataSource) Metadata(ctx context.Context, req datasource.Me
 
 func (d *RegistrationDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Namespace: required] Manages a Registration resource in F5 Distributed Cloud for vpm creates registration using this message, never used by users. configuration.",
+		MarkdownDescription: "Manages a Registration resource in F5 Distributed Cloud for vpm creates registration using this message, never used by users. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

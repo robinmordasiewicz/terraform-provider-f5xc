@@ -2,12 +2,12 @@
 page_title: "f5xc_cloud_link Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  [Category: Networking] [Namespace: required] Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+  Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 ---
 
 # f5xc_cloud_link (Resource)
 
-[Category: Networking] [Namespace: required] Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Cloud Link API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-link) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Cloud Link Resource Example
-# [Category: Networking] [Namespace: required] Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+# Manages new CloudLink with configured parameters in F5 Distributed Cloud.
 
 # Basic Cloud Link configuration
 resource "f5xc_cloud_link" "example" {
@@ -96,13 +96,7 @@ An [`aws`](#aws) block supports the following:
 
 #### AWS AWS Cred
 
-An [`aws_cred`](#aws-aws-cred) block (within [`aws`](#aws)) supports the following:
-
-<a id="aws-aws-cred-name"></a>&#x2022; [`name`](#aws-aws-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="aws-aws-cred-namespace"></a>&#x2022; [`namespace`](#aws-aws-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="aws-aws-cred-tenant"></a>&#x2022; [`tenant`](#aws-aws-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-a57c45"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### AWS Byoc
 
@@ -146,21 +140,11 @@ An [`auth_key`](#aws-byoc-connections-auth-key) block (within [`aws.byoc.connect
 
 #### AWS Byoc Connections Auth Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-79ff82) block (within [`aws.byoc.connections.auth_key`](#aws-byoc-connections-auth-key)) supports the following:
-
-<a id="provider-d0a324"></a>&#x2022; [`decryption_provider`](#provider-d0a324) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-2c236d"></a>&#x2022; [`location`](#location-2c236d) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-01aee0"></a>&#x2022; [`store_provider`](#provider-01aee0) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-571c18"></a>Deeply nested **Info** block collapsed for readability.
 
 #### AWS Byoc Connections Auth Key Clear Secret Info
 
-A [`clear_secret_info`](#info-dc68b3) block (within [`aws.byoc.connections.auth_key`](#aws-byoc-connections-auth-key)) supports the following:
-
-<a id="ref-3bbbbe"></a>&#x2022; [`provider_ref`](#ref-3bbbbe) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-492082"></a>&#x2022; [`url`](#url-492082) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-09a58c"></a>Deeply nested **Info** block collapsed for readability.
 
 #### AWS Byoc Connections IPv4
 
@@ -222,13 +206,7 @@ A [`metadata`](#gcp-byoc-connections-metadata) block (within [`gcp.byoc.connecti
 
 #### GCP GCP Cred
 
-A [`gcp_cred`](#gcp-gcp-cred) block (within [`gcp`](#gcp)) supports the following:
-
-<a id="gcp-gcp-cred-name"></a>&#x2022; [`name`](#gcp-gcp-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="gcp-gcp-cred-namespace"></a>&#x2022; [`namespace`](#gcp-gcp-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="gcp-gcp-cred-tenant"></a>&#x2022; [`tenant`](#gcp-gcp-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-d99b19"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Timeouts
 
@@ -241,6 +219,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

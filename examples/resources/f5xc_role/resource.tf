@@ -1,5 +1,5 @@
 # Role Resource Example
-# [Category: Organization] [Namespace: not_required] Manages role in F5 Distributed Cloud.
+# Manages role in F5 Distributed Cloud.
 
 # Basic Role configuration
 resource "f5xc_role" "example" {

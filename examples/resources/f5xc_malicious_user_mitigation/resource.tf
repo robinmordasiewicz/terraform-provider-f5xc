@@ -1,5 +1,5 @@
 # Malicious User Mitigation Resource Example
-# [Category: Security] [Namespace: required] Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Malicious User Mitigation configuration
 resource "f5xc_malicious_user_mitigation" "example" {

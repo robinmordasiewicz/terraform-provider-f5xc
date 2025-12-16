@@ -2,12 +2,12 @@
 page_title: "f5xc_code_base_integration Resource - terraform-provider-f5xc"
 subcategory: "Integrations"
 description: |-
-  [Namespace: required] Manages integration details in F5 Distributed Cloud.
+  Manages integration details in F5 Distributed Cloud.
 ---
 
 # f5xc_code_base_integration (Resource)
 
-[Namespace: required] Manages integration details in F5 Distributed Cloud.
+Manages integration details in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Code Base Integration API docs](https://docs.cloud.f5.com/docs-v2/api/api-sec-code-base-integration) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Code Base Integration Resource Example
-# [Namespace: required] Manages integration details in F5 Distributed Cloud.
+# Manages integration details in F5 Distributed Cloud.
 
 # Basic Code Base Integration configuration
 resource "f5xc_code_base_integration" "example" {
@@ -112,21 +112,11 @@ An [`access_token`](#token-d4247d) block (within [`code_base_integration.azure_r
 
 #### Code Base Integration Azure Repos Access Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-088938) block (within [`code_base_integration.azure_repos.access_token`](#token-d4247d)) supports the following:
-
-<a id="provider-78d708"></a>&#x2022; [`decryption_provider`](#provider-78d708) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-ada2f1"></a>&#x2022; [`location`](#location-ada2f1) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-938064"></a>&#x2022; [`store_provider`](#provider-938064) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-bfd631"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Azure Repos Access Token Clear Secret Info
 
-A [`clear_secret_info`](#info-8fbdd3) block (within [`code_base_integration.azure_repos.access_token`](#token-d4247d)) supports the following:
-
-<a id="ref-766663"></a>&#x2022; [`provider_ref`](#ref-766663) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-ff530c"></a>&#x2022; [`url`](#url-ff530c) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-22338d"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Bitbucket
 
@@ -146,21 +136,11 @@ A [`passwd`](#code-base-integration-bitbucket-passwd) block (within [`code_base_
 
 #### Code Base Integration Bitbucket Passwd Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-6400a1) block (within [`code_base_integration.bitbucket.passwd`](#code-base-integration-bitbucket-passwd)) supports the following:
-
-<a id="provider-7e1ec3"></a>&#x2022; [`decryption_provider`](#provider-7e1ec3) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-a36cd5"></a>&#x2022; [`location`](#location-a36cd5) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-debf54"></a>&#x2022; [`store_provider`](#provider-debf54) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-3b5116"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Bitbucket Passwd Clear Secret Info
 
-A [`clear_secret_info`](#info-3c272b) block (within [`code_base_integration.bitbucket.passwd`](#code-base-integration-bitbucket-passwd)) supports the following:
-
-<a id="ref-0df26b"></a>&#x2022; [`provider_ref`](#ref-0df26b) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-850415"></a>&#x2022; [`url`](#url-850415) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-634458"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Bitbucket Server
 
@@ -184,21 +164,11 @@ A [`passwd`](#passwd-13127c) block (within [`code_base_integration.bitbucket_ser
 
 #### Code Base Integration Bitbucket Server Passwd Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-e29dd9) block (within [`code_base_integration.bitbucket_server.passwd`](#passwd-13127c)) supports the following:
-
-<a id="provider-b921a1"></a>&#x2022; [`decryption_provider`](#provider-b921a1) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-229e74"></a>&#x2022; [`location`](#location-229e74) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-6dd563"></a>&#x2022; [`store_provider`](#provider-6dd563) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-9ee144"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Bitbucket Server Passwd Clear Secret Info
 
-A [`clear_secret_info`](#info-38f71d) block (within [`code_base_integration.bitbucket_server.passwd`](#passwd-13127c)) supports the following:
-
-<a id="ref-4c4fc5"></a>&#x2022; [`provider_ref`](#ref-4c4fc5) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-a08aa5"></a>&#x2022; [`url`](#url-a08aa5) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-e3fc7b"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Github
 
@@ -220,21 +190,11 @@ An [`access_token`](#token-b77f94) block (within [`code_base_integration.github`
 
 #### Code Base Integration Github Access Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-a74f41) block (within [`code_base_integration.github.access_token`](#token-b77f94)) supports the following:
-
-<a id="provider-f15e5e"></a>&#x2022; [`decryption_provider`](#provider-f15e5e) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-7b8655"></a>&#x2022; [`location`](#location-7b8655) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-690b83"></a>&#x2022; [`store_provider`](#provider-690b83) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-46d318"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Github Access Token Clear Secret Info
 
-A [`clear_secret_info`](#info-4afb31) block (within [`code_base_integration.github.access_token`](#token-b77f94)) supports the following:
-
-<a id="ref-392814"></a>&#x2022; [`provider_ref`](#ref-392814) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-bfbf26"></a>&#x2022; [`url`](#url-bfbf26) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-773d82"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Github Enterprise
 
@@ -256,21 +216,11 @@ An [`access_token`](#token-c0b5c1) block (within [`code_base_integration.github_
 
 #### Code Base Integration Github Enterprise Access Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-113b2a) block (within [`code_base_integration.github_enterprise.access_token`](#token-c0b5c1)) supports the following:
-
-<a id="provider-24b457"></a>&#x2022; [`decryption_provider`](#provider-24b457) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-4dba95"></a>&#x2022; [`location`](#location-4dba95) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-f5bbd0"></a>&#x2022; [`store_provider`](#provider-f5bbd0) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-60c31f"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Github Enterprise Access Token Clear Secret Info
 
-A [`clear_secret_info`](#info-f7aaa0) block (within [`code_base_integration.github_enterprise.access_token`](#token-c0b5c1)) supports the following:
-
-<a id="ref-45233c"></a>&#x2022; [`provider_ref`](#ref-45233c) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-234d81"></a>&#x2022; [`url`](#url-234d81) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-a05d07"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Gitlab
 
@@ -288,21 +238,11 @@ An [`access_token`](#token-5d157b) block (within [`code_base_integration.gitlab`
 
 #### Code Base Integration Gitlab Access Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-ceae94) block (within [`code_base_integration.gitlab.access_token`](#token-5d157b)) supports the following:
-
-<a id="provider-c72635"></a>&#x2022; [`decryption_provider`](#provider-c72635) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-ea775a"></a>&#x2022; [`location`](#location-ea775a) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-492371"></a>&#x2022; [`store_provider`](#provider-492371) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-0402ca"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Gitlab Access Token Clear Secret Info
 
-A [`clear_secret_info`](#info-6cbf02) block (within [`code_base_integration.gitlab.access_token`](#token-5d157b)) supports the following:
-
-<a id="ref-36c69f"></a>&#x2022; [`provider_ref`](#ref-36c69f) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-c06b88"></a>&#x2022; [`url`](#url-c06b88) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-94a2ff"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Gitlab Enterprise
 
@@ -322,21 +262,11 @@ An [`access_token`](#token-b5c2b4) block (within [`code_base_integration.gitlab_
 
 #### Code Base Integration Gitlab Enterprise Access Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-f6945e) block (within [`code_base_integration.gitlab_enterprise.access_token`](#token-b5c2b4)) supports the following:
-
-<a id="provider-96b8db"></a>&#x2022; [`decryption_provider`](#provider-96b8db) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-575461"></a>&#x2022; [`location`](#location-575461) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-90006a"></a>&#x2022; [`store_provider`](#provider-90006a) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-2de9ae"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Code Base Integration Gitlab Enterprise Access Token Clear Secret Info
 
-A [`clear_secret_info`](#info-040ff9) block (within [`code_base_integration.gitlab_enterprise.access_token`](#token-b5c2b4)) supports the following:
-
-<a id="ref-fecacf"></a>&#x2022; [`provider_ref`](#ref-fecacf) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-82954e"></a>&#x2022; [`url`](#url-82954e) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-723dc7"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Timeouts
 
@@ -349,6 +279,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

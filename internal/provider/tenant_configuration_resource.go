@@ -115,7 +115,7 @@ func (r *TenantConfigurationResource) Metadata(ctx context.Context, req resource
 func (r *TenantConfigurationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             tenant_configurationSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration configuration.",
+		MarkdownDescription: "Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Tenant Configuration. Must be unique within the namespace.",

@@ -2,12 +2,12 @@
 page_title: "f5xc_udp_loadbalancer Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a UDP Load Balancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
+  Manages a UDP Load Balancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
 ---
 
 # f5xc_udp_loadbalancer (Resource)
 
-[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a UDP Load Balancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
+Manages a UDP Load Balancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
 
 ~> **Note** Please refer to [UDP Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-udp-loadbalancer) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # UDP Loadbalancer Resource Example
-# [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a UDP Load Balancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
+# Manages a UDP Load Balancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
 
 # Basic UDP Loadbalancer configuration
 resource "f5xc_udp_loadbalancer" "example" {
@@ -146,13 +146,7 @@ An [`advertise_on_public`](#public-618a99) block (within [`advertise_custom.adve
 
 #### Advertise Custom Advertise Where Advertise On Public Public IP
 
-A [`public_ip`](#public-ip-d10b09) block (within [`advertise_custom.advertise_where.advertise_on_public`](#public-618a99)) supports the following:
-
-<a id="name-4126f8"></a>&#x2022; [`name`](#name-4126f8) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-edf1ff"></a>&#x2022; [`namespace`](#namespace-edf1ff) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ac4633"></a>&#x2022; [`tenant`](#tenant-ac4633) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-032ffb"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Advertise Custom Advertise Where Site
 
@@ -166,13 +160,7 @@ A [`site`](#advertise-custom-advertise-where-site) block (within [`advertise_cus
 
 #### Advertise Custom Advertise Where Site Site
 
-A [`site`](#site-7ecf1d) block (within [`advertise_custom.advertise_where.site`](#advertise-custom-advertise-where-site)) supports the following:
-
-<a id="name-201d26"></a>&#x2022; [`name`](#name-201d26) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c3f40d"></a>&#x2022; [`namespace`](#namespace-c3f40d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-8a632a"></a>&#x2022; [`tenant`](#tenant-8a632a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-7ecf1d"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Advertise Custom Advertise Where Virtual Network
 
@@ -190,13 +178,7 @@ A [`virtual_network`](#network-a20be3) block (within [`advertise_custom.advertis
 
 #### Advertise Custom Advertise Where Virtual Network Virtual Network
 
-A [`virtual_network`](#network-bff334) block (within [`advertise_custom.advertise_where.virtual_network`](#network-a20be3)) supports the following:
-
-<a id="name-5596bc"></a>&#x2022; [`name`](#name-5596bc) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-030577"></a>&#x2022; [`namespace`](#namespace-030577) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-72f925"></a>&#x2022; [`tenant`](#tenant-72f925) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-802ee3"></a>Deeply nested **Network** block collapsed for readability.
 
 #### Advertise Custom Advertise Where Virtual Site
 
@@ -208,33 +190,15 @@ A [`virtual_site`](#site-5d39fd) block (within [`advertise_custom.advertise_wher
 
 #### Advertise Custom Advertise Where Virtual Site Virtual Site
 
-A [`virtual_site`](#site-04fd53) block (within [`advertise_custom.advertise_where.virtual_site`](#site-5d39fd)) supports the following:
-
-<a id="name-b7ccc7"></a>&#x2022; [`name`](#name-b7ccc7) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-a4ffcf"></a>&#x2022; [`namespace`](#namespace-a4ffcf) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-637b28"></a>&#x2022; [`tenant`](#tenant-637b28) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-22557e"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Advertise Custom Advertise Where Virtual Site With VIP
 
-A [`virtual_site_with_vip`](#vip-870b0b) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
-
-<a id="vip-ip-4850ab"></a>&#x2022; [`ip`](#vip-ip-4850ab) - Optional String<br>IP Address. Use given IP address as VIP on the site
-
-<a id="network-8b2765"></a>&#x2022; [`network`](#network-8b2765) - Optional String  Defaults to `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`<br>Possible values are `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`, `SITE_NETWORK_SPECIFIED_VIP_INSIDE`<br>[Enum: SITE_NETWORK_SPECIFIED_VIP_OUTSIDE|SITE_NETWORK_SPECIFIED_VIP_INSIDE] Site Network. This defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks
-
-<a id="site-ac753e"></a>&#x2022; [`virtual_site`](#site-ac753e) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-ac753e) below.
+<a id="deep-7807f9"></a>Deeply nested **VIP** block collapsed for readability.
 
 #### Advertise Custom Advertise Where Virtual Site With VIP Virtual Site
 
-A [`virtual_site`](#site-ac753e) block (within [`advertise_custom.advertise_where.virtual_site_with_vip`](#vip-870b0b)) supports the following:
-
-<a id="name-5f7f0d"></a>&#x2022; [`name`](#name-5f7f0d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-414bc8"></a>&#x2022; [`namespace`](#namespace-414bc8) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-130ed4"></a>&#x2022; [`tenant`](#tenant-130ed4) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-60188a"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Advertise Custom Advertise Where Vk8s Service
 
@@ -246,23 +210,11 @@ A [`vk8s_service`](#service-1fdc7a) block (within [`advertise_custom.advertise_w
 
 #### Advertise Custom Advertise Where Vk8s Service Site
 
-A [`site`](#site-ec8d32) block (within [`advertise_custom.advertise_where.vk8s_service`](#service-1fdc7a)) supports the following:
-
-<a id="name-950776"></a>&#x2022; [`name`](#name-950776) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-1faf25"></a>&#x2022; [`namespace`](#namespace-1faf25) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-98cf6a"></a>&#x2022; [`tenant`](#tenant-98cf6a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-ec8d32"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Advertise Custom Advertise Where Vk8s Service Virtual Site
 
-A [`virtual_site`](#site-5fcbf9) block (within [`advertise_custom.advertise_where.vk8s_service`](#service-1fdc7a)) supports the following:
-
-<a id="name-1cf7c0"></a>&#x2022; [`name`](#name-1cf7c0) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-3dbb7e"></a>&#x2022; [`namespace`](#namespace-3dbb7e) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-38ddda"></a>&#x2022; [`tenant`](#tenant-38ddda) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-e5d00e"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Advertise On Public
 
@@ -272,13 +224,7 @@ An [`advertise_on_public`](#advertise-on-public) block supports the following:
 
 #### Advertise On Public Public IP
 
-A [`public_ip`](#advertise-on-public-public-ip) block (within [`advertise_on_public`](#advertise-on-public)) supports the following:
-
-<a id="advertise-on-public-public-ip-name"></a>&#x2022; [`name`](#advertise-on-public-public-ip-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="advertise-on-public-public-ip-namespace"></a>&#x2022; [`namespace`](#advertise-on-public-public-ip-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="advertise-on-public-public-ip-tenant"></a>&#x2022; [`tenant`](#advertise-on-public-public-ip-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-5f3bb5"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Pools Weights
 
@@ -296,23 +242,11 @@ An [`origin_pools_weights`](#origin-pools-weights) block supports the following:
 
 #### Origin Pools Weights Cluster
 
-A [`cluster`](#origin-pools-weights-cluster) block (within [`origin_pools_weights`](#origin-pools-weights)) supports the following:
-
-<a id="origin-pools-weights-cluster-name"></a>&#x2022; [`name`](#origin-pools-weights-cluster-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="origin-pools-weights-cluster-namespace"></a>&#x2022; [`namespace`](#origin-pools-weights-cluster-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="origin-pools-weights-cluster-tenant"></a>&#x2022; [`tenant`](#origin-pools-weights-cluster-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-b05bd6"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Pools Weights Pool
 
-A [`pool`](#origin-pools-weights-pool) block (within [`origin_pools_weights`](#origin-pools-weights)) supports the following:
-
-<a id="origin-pools-weights-pool-name"></a>&#x2022; [`name`](#origin-pools-weights-pool-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="origin-pools-weights-pool-namespace"></a>&#x2022; [`namespace`](#origin-pools-weights-pool-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="origin-pools-weights-pool-tenant"></a>&#x2022; [`tenant`](#origin-pools-weights-pool-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-e7b2da"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Timeouts
 
@@ -325,6 +259,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

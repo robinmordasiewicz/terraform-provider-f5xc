@@ -1,5 +1,5 @@
 # Protocol Policer Resource Example
-# [Namespace: required] Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
+# Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
 
 # Basic Protocol Policer configuration
 resource "f5xc_protocol_policer" "example" {

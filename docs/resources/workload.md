@@ -2,12 +2,12 @@
 page_title: "f5xc_workload Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  [Namespace: required] Manages a Workload resource in F5 Distributed Cloud for workload configuration.
+  Manages a Workload resource in F5 Distributed Cloud for workload configuration.
 ---
 
 # f5xc_workload (Resource)
 
-[Namespace: required] Manages a Workload resource in F5 Distributed Cloud for workload configuration.
+Manages a Workload resource in F5 Distributed Cloud for workload configuration.
 
 ~> **Note** Please refer to [Workload API docs](https://docs.cloud.f5.com/docs-v2/api/views-workload) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Workload Resource Example
-# [Namespace: required] Manages a Workload resource in F5 Distributed Cloud for workload configuration.
+# Manages a Workload resource in F5 Distributed Cloud for workload configuration.
 
 # Basic Workload configuration
 resource "f5xc_workload" "example" {
@@ -171,13 +171,7 @@ A [`containers`](#job-containers) block (within [`job`](#job)) supports the foll
 
 #### Job Containers Custom Flavor
 
-A [`custom_flavor`](#job-containers-custom-flavor) block (within [`job.containers`](#job-containers)) supports the following:
-
-<a id="job-containers-custom-flavor-name"></a>&#x2022; [`name`](#job-containers-custom-flavor-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="job-containers-custom-flavor-namespace"></a>&#x2022; [`namespace`](#job-containers-custom-flavor-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="job-containers-custom-flavor-tenant"></a>&#x2022; [`tenant`](#job-containers-custom-flavor-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-f1fc5a"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Job Containers Image
 
@@ -193,13 +187,7 @@ An [`image`](#job-containers-image) block (within [`job.containers`](#job-contai
 
 #### Job Containers Image Container Registry
 
-A [`container_registry`](#job-containers-image-container-registry) block (within [`job.containers.image`](#job-containers-image)) supports the following:
-
-<a id="name-d8aa8e"></a>&#x2022; [`name`](#name-d8aa8e) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-0744ae"></a>&#x2022; [`namespace`](#namespace-0744ae) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-a2bf58"></a>&#x2022; [`tenant`](#tenant-a2bf58) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0b7904"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Job Containers Liveness Check
 
@@ -241,11 +229,7 @@ A [`http_health_check`](#check-052b16) block (within [`job.containers.liveness_c
 
 #### Job Containers Liveness Check HTTP Health Check Port
 
-A [`port`](#port-3d627c) block (within [`job.containers.liveness_check.http_health_check`](#check-052b16)) supports the following:
-
-<a id="name-53124d"></a>&#x2022; [`name`](#name-53124d) - Optional String<br>Port Name. Port Name
-
-<a id="num-e59262"></a>&#x2022; [`num`](#num-e59262) - Optional Number<br>Port Number. Port number
+<a id="deep-e84b03"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Job Containers Liveness Check TCP Health Check
 
@@ -255,11 +239,7 @@ A [`tcp_health_check`](#check-71da8e) block (within [`job.containers.liveness_ch
 
 #### Job Containers Liveness Check TCP Health Check Port
 
-A [`port`](#port-7cc237) block (within [`job.containers.liveness_check.tcp_health_check`](#check-71da8e)) supports the following:
-
-<a id="name-e6a9c9"></a>&#x2022; [`name`](#name-e6a9c9) - Optional String<br>Port Name. Port Name
-
-<a id="num-d29520"></a>&#x2022; [`num`](#num-d29520) - Optional Number<br>Port Number. Port number
+<a id="deep-eaa186"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Job Containers Readiness Check
 
@@ -301,11 +281,7 @@ A [`http_health_check`](#check-c5bafc) block (within [`job.containers.readiness_
 
 #### Job Containers Readiness Check HTTP Health Check Port
 
-A [`port`](#port-3b8b2e) block (within [`job.containers.readiness_check.http_health_check`](#check-c5bafc)) supports the following:
-
-<a id="name-9d2245"></a>&#x2022; [`name`](#name-9d2245) - Optional String<br>Port Name. Port Name
-
-<a id="num-b70cae"></a>&#x2022; [`num`](#num-b70cae) - Optional Number<br>Port Number. Port number
+<a id="deep-2f9b5d"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Job Containers Readiness Check TCP Health Check
 
@@ -315,11 +291,7 @@ A [`tcp_health_check`](#check-df7310) block (within [`job.containers.readiness_c
 
 #### Job Containers Readiness Check TCP Health Check Port
 
-A [`port`](#port-c9d337) block (within [`job.containers.readiness_check.tcp_health_check`](#check-df7310)) supports the following:
-
-<a id="name-679677"></a>&#x2022; [`name`](#name-679677) - Optional String<br>Port Name. Port Name
-
-<a id="num-64676f"></a>&#x2022; [`num`](#num-64676f) - Optional Number<br>Port Number. Port number
+<a id="deep-042872"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Job Deploy Options
 
@@ -345,13 +317,7 @@ A [`deploy_ce_sites`](#job-deploy-options-deploy-ce-sites) block (within [`job.d
 
 #### Job Deploy Options Deploy CE Sites Site
 
-A [`site`](#job-deploy-options-deploy-ce-sites-site) block (within [`job.deploy_options.deploy_ce_sites`](#job-deploy-options-deploy-ce-sites)) supports the following:
-
-<a id="name-e258db"></a>&#x2022; [`name`](#name-e258db) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-064f53"></a>&#x2022; [`namespace`](#namespace-064f53) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d6cc86"></a>&#x2022; [`tenant`](#tenant-d6cc86) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-a7b63e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Job Deploy Options Deploy CE Virtual Sites
 
@@ -361,13 +327,7 @@ A [`deploy_ce_virtual_sites`](#sites-f9f96a) block (within [`job.deploy_options`
 
 #### Job Deploy Options Deploy CE Virtual Sites Virtual Site
 
-A [`virtual_site`](#site-0c4045) block (within [`job.deploy_options.deploy_ce_virtual_sites`](#sites-f9f96a)) supports the following:
-
-<a id="name-dcf429"></a>&#x2022; [`name`](#name-dcf429) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-22ceee"></a>&#x2022; [`namespace`](#namespace-22ceee) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-434398"></a>&#x2022; [`tenant`](#tenant-434398) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-eef48f"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Job Deploy Options Deploy RE Sites
 
@@ -377,13 +337,7 @@ A [`deploy_re_sites`](#job-deploy-options-deploy-re-sites) block (within [`job.d
 
 #### Job Deploy Options Deploy RE Sites Site
 
-A [`site`](#job-deploy-options-deploy-re-sites-site) block (within [`job.deploy_options.deploy_re_sites`](#job-deploy-options-deploy-re-sites)) supports the following:
-
-<a id="name-03e074"></a>&#x2022; [`name`](#name-03e074) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f7dfa3"></a>&#x2022; [`namespace`](#namespace-f7dfa3) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-2ce318"></a>&#x2022; [`tenant`](#tenant-2ce318) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-b9bbc4"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Job Deploy Options Deploy RE Virtual Sites
 
@@ -393,13 +347,7 @@ A [`deploy_re_virtual_sites`](#sites-178ece) block (within [`job.deploy_options`
 
 #### Job Deploy Options Deploy RE Virtual Sites Virtual Site
 
-A [`virtual_site`](#site-3ec46d) block (within [`job.deploy_options.deploy_re_virtual_sites`](#sites-178ece)) supports the following:
-
-<a id="name-c79e73"></a>&#x2022; [`name`](#name-c79e73) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-917406"></a>&#x2022; [`namespace`](#namespace-917406) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-f61492"></a>&#x2022; [`tenant`](#tenant-f61492) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-4625a0"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Job Volumes
 
@@ -529,69 +477,31 @@ An [`advertise_where`](#where-07a5a8) block (within [`service.advertise_options.
 
 #### Service Advertise Options Advertise Custom Advertise Where Site
 
-A [`site`](#site-511518) block (within [`service.advertise_options.advertise_custom.advertise_where`](#where-07a5a8)) supports the following:
-
-<a id="site-ip-1eac8c"></a>&#x2022; [`ip`](#site-ip-1eac8c) - Optional String<br>IP Address. Use given IP address as VIP on the site
-
-<a id="network-2a4255"></a>&#x2022; [`network`](#network-2a4255) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
-
-<a id="site-d06e84"></a>&#x2022; [`site`](#site-d06e84) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-d06e84) below.
+<a id="deep-63c006"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Advertise Where Site Site
 
-A [`site`](#site-d06e84) block (within [`service.advertise_options.advertise_custom.advertise_where.site`](#site-511518)) supports the following:
-
-<a id="name-3eb851"></a>&#x2022; [`name`](#name-3eb851) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-65432f"></a>&#x2022; [`namespace`](#namespace-65432f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-dee212"></a>&#x2022; [`tenant`](#tenant-dee212) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-55fbc2"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Advertise Where Virtual Site
 
-A [`virtual_site`](#site-754a5a) block (within [`service.advertise_options.advertise_custom.advertise_where`](#where-07a5a8)) supports the following:
-
-<a id="network-e716ca"></a>&#x2022; [`network`](#network-e716ca) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
-
-<a id="site-b5199d"></a>&#x2022; [`virtual_site`](#site-b5199d) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-b5199d) below.
+<a id="deep-f8931d"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Advertise Where Virtual Site Virtual Site
 
-A [`virtual_site`](#site-b5199d) block (within [`service.advertise_options.advertise_custom.advertise_where.virtual_site`](#site-754a5a)) supports the following:
-
-<a id="name-ab9dd2"></a>&#x2022; [`name`](#name-ab9dd2) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-dfa92e"></a>&#x2022; [`namespace`](#namespace-dfa92e) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-9a1bd8"></a>&#x2022; [`tenant`](#tenant-9a1bd8) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-b4597b"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Advertise Where Vk8s Service
 
-A [`vk8s_service`](#service-1a83c0) block (within [`service.advertise_options.advertise_custom.advertise_where`](#where-07a5a8)) supports the following:
-
-<a id="site-7bf212"></a>&#x2022; [`site`](#site-7bf212) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-7bf212) below.
-
-<a id="site-f5b04f"></a>&#x2022; [`virtual_site`](#site-f5b04f) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-f5b04f) below.
+<a id="deep-9d76cc"></a>Deeply nested **Service** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Advertise Where Vk8s Service Site
 
-A [`site`](#site-7bf212) block (within [`service.advertise_options.advertise_custom.advertise_where.vk8s_service`](#service-1a83c0)) supports the following:
-
-<a id="name-b42a4d"></a>&#x2022; [`name`](#name-b42a4d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-cb3a43"></a>&#x2022; [`namespace`](#namespace-cb3a43) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-8102f2"></a>&#x2022; [`tenant`](#tenant-8102f2) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-12f52b"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Advertise Where Vk8s Service Virtual Site
 
-A [`virtual_site`](#site-f5b04f) block (within [`service.advertise_options.advertise_custom.advertise_where.vk8s_service`](#service-1a83c0)) supports the following:
-
-<a id="name-c7e318"></a>&#x2022; [`name`](#name-c7e318) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-9f6731"></a>&#x2022; [`namespace`](#namespace-9f6731) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-51ee34"></a>&#x2022; [`tenant`](#tenant-51ee34) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-631521"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports
 
@@ -605,651 +515,223 @@ A [`ports`](#ports-b755b5) block (within [`service.advertise_options.advertise_c
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer
 
-A [`http_loadbalancer`](#loadbalancer-40a524) block (within [`service.advertise_options.advertise_custom.ports`](#ports-b755b5)) supports the following:
-
-<a id="route-a01516"></a>&#x2022; [`default_route`](#route-a01516) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#route-a01516) below.
-
-<a id="domains-3ec46c"></a>&#x2022; [`domains`](#domains-3ec46c) - Optional List<br>Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and \*.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="http-dae265"></a>&#x2022; [`http`](#http-dae265) - Optional Block<br>HTTP Choice. Choice for selecting HTTP proxy<br>See [HTTP](#http-dae265) below.
-
-<a id="https-5ee3b8"></a>&#x2022; [`https`](#https-5ee3b8) - Optional Block<br>BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS](#https-5ee3b8) below.
-
-<a id="cert-6593bb"></a>&#x2022; [`https_auto_cert`](#cert-6593bb) - Optional Block<br>HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS Auto Cert](#cert-6593bb) below.
-
-<a id="routes-3e092a"></a>&#x2022; [`specific_routes`](#routes-3e092a) - Optional Block<br>Route Type. This defines various options to define a route<br>See [Specific Routes](#routes-3e092a) below.
+<a id="deep-df89c1"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Default Route
 
-A [`default_route`](#route-a01516) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer`](#loadbalancer-40a524)) supports the following:
-
-<a id="rewrite-4ee40a"></a>&#x2022; [`auto_host_rewrite`](#rewrite-4ee40a) - Optional Block<br>Enable this option
-
-<a id="rewrite-6e53d0"></a>&#x2022; [`disable_host_rewrite`](#rewrite-6e53d0) - Optional Block<br>Enable this option
-
-<a id="rewrite-952f11"></a>&#x2022; [`host_rewrite`](#rewrite-952f11) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
+<a id="deep-a3eb40"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTP
 
-A [`http`](#http-dae265) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer`](#loadbalancer-40a524)) supports the following:
-
-<a id="managed-c9c6e9"></a>&#x2022; [`dns_volterra_managed`](#managed-c9c6e9) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
-
-<a id="port-1f2f56"></a>&#x2022; [`port`](#port-1f2f56) - Optional Number<br>HTTP Listen Port. HTTP port to Listen
-
-<a id="ranges-720706"></a>&#x2022; [`port_ranges`](#ranges-720706) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<a id="deep-84a2b1"></a>Deeply nested **HTTP** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS
 
-A [`https`](#https-5ee3b8) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer`](#loadbalancer-40a524)) supports the following:
-
-<a id="hsts-65ac43"></a>&#x2022; [`add_hsts`](#hsts-65ac43) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-8d48bb"></a>&#x2022; [`append_server_name`](#name-8d48bb) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-d77507"></a>&#x2022; [`coalescing_options`](#options-d77507) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-d77507) below.
-
-<a id="timeout-4c187e"></a>&#x2022; [`connection_idle_timeout`](#timeout-4c187e) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-a00212"></a>&#x2022; [`default_header`](#header-a00212) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-50b9d8"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-50b9d8) - Optional Block<br>Enable this option
-
-<a id="normalize-81f891"></a>&#x2022; [`disable_path_normalize`](#normalize-81f891) - Optional Block<br>Enable this option
-
-<a id="normalize-f50990"></a>&#x2022; [`enable_path_normalize`](#normalize-f50990) - Optional Block<br>Enable this option
-
-<a id="options-5454a7"></a>&#x2022; [`http_protocol_options`](#options-5454a7) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-5454a7) below.
-
-<a id="redirect-ee9182"></a>&#x2022; [`http_redirect`](#redirect-ee9182) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="loadbalancer-26f429"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-26f429) - Optional Block<br>Enable this option
-
-<a id="through-3e2e9f"></a>&#x2022; [`pass_through`](#through-3e2e9f) - Optional Block<br>Enable this option
-
-<a id="port-bc7fa8"></a>&#x2022; [`port`](#port-bc7fa8) - Optional Number<br>HTTPS Port. HTTPS port to Listen
-
-<a id="ranges-956dc4"></a>&#x2022; [`port_ranges`](#ranges-956dc4) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-6eb1eb"></a>&#x2022; [`server_name`](#name-6eb1eb) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="params-591983"></a>&#x2022; [`tls_cert_params`](#params-591983) - Optional Block<br>TLS Parameters. Select TLS Parameters and Certificates<br>See [TLS Cert Params](#params-591983) below.
-
-<a id="parameters-8b3537"></a>&#x2022; [`tls_parameters`](#parameters-8b3537) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [TLS Parameters](#parameters-8b3537) below.
+<a id="deep-c3aaa7"></a>Deeply nested **HTTPS** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Coalescing Options
 
-A [`coalescing_options`](#options-d77507) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https`](#https-5ee3b8)) supports the following:
-
-<a id="coalescing-68a763"></a>&#x2022; [`default_coalescing`](#coalescing-68a763) - Optional Block<br>Enable this option
-
-<a id="coalescing-a04a4b"></a>&#x2022; [`strict_coalescing`](#coalescing-a04a4b) - Optional Block<br>Enable this option
+<a id="deep-964101"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options
 
-A [`http_protocol_options`](#options-5454a7) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https`](#https-5ee3b8)) supports the following:
-
-<a id="only-ee90f1"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-ee90f1) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-ee90f1) below.
-
-<a id="v1-v2-c6121b"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-c6121b) - Optional Block<br>Enable this option
-
-<a id="only-e91c4e"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-e91c4e) - Optional Block<br>Enable this option
+<a id="deep-18a985"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-ee90f1) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.http_protocol_options`](#options-5454a7)) supports the following:
-
-<a id="transformation-e9fcfa"></a>&#x2022; [`header_transformation`](#transformation-e9fcfa) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-e9fcfa) below.
+<a id="deep-2c8ac3"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-e9fcfa) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`](#only-ee90f1)) supports the following:
-
-<a id="transformation-a7ed38"></a>&#x2022; [`default_header_transformation`](#transformation-a7ed38) - Optional Block<br>Enable this option
-
-<a id="transformation-6ff83a"></a>&#x2022; [`legacy_header_transformation`](#transformation-6ff83a) - Optional Block<br>Enable this option
-
-<a id="transformation-1b9223"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-1b9223) - Optional Block<br>Enable this option
-
-<a id="transformation-02a157"></a>&#x2022; [`proper_case_header_transformation`](#transformation-02a157) - Optional Block<br>Enable this option
+<a id="deep-686593"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params
 
-A [`tls_cert_params`](#params-591983) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https`](#https-5ee3b8)) supports the following:
-
-<a id="certificates-1d083e"></a>&#x2022; [`certificates`](#certificates-1d083e) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#certificates-1d083e) below.
-
-<a id="mtls-cae1d3"></a>&#x2022; [`no_mtls`](#mtls-cae1d3) - Optional Block<br>Enable this option
-
-<a id="config-fc6925"></a>&#x2022; [`tls_config`](#config-fc6925) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-fc6925) below.
-
-<a id="mtls-00b979"></a>&#x2022; [`use_mtls`](#mtls-00b979) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-00b979) below.
+<a id="deep-794912"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates
 
-A [`certificates`](#certificates-1d083e) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`](#params-591983)) supports the following:
-
-<a id="name-b994a0"></a>&#x2022; [`name`](#name-b994a0) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f0c451"></a>&#x2022; [`namespace`](#namespace-f0c451) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e95e21"></a>&#x2022; [`tenant`](#tenant-e95e21) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-8f5ce4"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
 
-A [`tls_config`](#config-fc6925) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`](#params-591983)) supports the following:
-
-<a id="security-4da9d5"></a>&#x2022; [`custom_security`](#security-4da9d5) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-4da9d5) below.
-
-<a id="security-b64884"></a>&#x2022; [`default_security`](#security-b64884) - Optional Block<br>Enable this option
-
-<a id="security-72974b"></a>&#x2022; [`low_security`](#security-72974b) - Optional Block<br>Enable this option
-
-<a id="security-b4c908"></a>&#x2022; [`medium_security`](#security-b4c908) - Optional Block<br>Enable this option
+<a id="deep-586d55"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
 
-A [`custom_security`](#security-4da9d5) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.tls_config`](#config-fc6925)) supports the following:
-
-<a id="suites-ee1758"></a>&#x2022; [`cipher_suites`](#suites-ee1758) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-d7093d"></a>&#x2022; [`max_version`](#version-d7093d) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-86e4ba"></a>&#x2022; [`min_version`](#version-86e4ba) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-2197c6"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
 
-An [`use_mtls`](#mtls-00b979) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`](#params-591983)) supports the following:
-
-<a id="optional-1c1be5"></a>&#x2022; [`client_certificate_optional`](#optional-1c1be5) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-bd0efe"></a>&#x2022; [`crl`](#crl-bd0efe) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-bd0efe) below.
-
-<a id="crl-4d523f"></a>&#x2022; [`no_crl`](#crl-4d523f) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-0a12db"></a>&#x2022; [`trusted_ca`](#trusted-ca-0a12db) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-0a12db) below.
-
-<a id="url-5c33d1"></a>&#x2022; [`trusted_ca_url`](#url-5c33d1) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-1e4d0d"></a>&#x2022; [`xfcc_disabled`](#disabled-1e4d0d) - Optional Block<br>Enable this option
-
-<a id="options-83e83b"></a>&#x2022; [`xfcc_options`](#options-83e83b) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-83e83b) below.
+<a id="deep-d19b82"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
 
-A [`crl`](#crl-bd0efe) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-00b979)) supports the following:
-
-<a id="name-fdef05"></a>&#x2022; [`name`](#name-fdef05) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-58b40c"></a>&#x2022; [`namespace`](#namespace-58b40c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-77b772"></a>&#x2022; [`tenant`](#tenant-77b772) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-94e1a0"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-0a12db) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-00b979)) supports the following:
-
-<a id="name-906a4a"></a>&#x2022; [`name`](#name-906a4a) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-522b1c"></a>&#x2022; [`namespace`](#namespace-522b1c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ef2978"></a>&#x2022; [`tenant`](#tenant-ef2978) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-274fc9"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-83e83b) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-00b979)) supports the following:
-
-<a id="elements-cd0a74"></a>&#x2022; [`xfcc_header_elements`](#elements-cd0a74) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-726fe8"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters
 
-A [`tls_parameters`](#parameters-8b3537) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https`](#https-5ee3b8)) supports the following:
-
-<a id="mtls-0cfa5e"></a>&#x2022; [`no_mtls`](#mtls-0cfa5e) - Optional Block<br>Enable this option
-
-<a id="certificates-82cbd6"></a>&#x2022; [`tls_certificates`](#certificates-82cbd6) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-82cbd6) below.
-
-<a id="config-e4b22e"></a>&#x2022; [`tls_config`](#config-e4b22e) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-e4b22e) below.
-
-<a id="mtls-defb68"></a>&#x2022; [`use_mtls`](#mtls-defb68) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-defb68) below.
+<a id="deep-ff871e"></a>Deeply nested **Parameters** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
 
-A [`tls_certificates`](#certificates-82cbd6) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`](#parameters-8b3537)) supports the following:
-
-<a id="url-b7fb19"></a>&#x2022; [`certificate_url`](#url-b7fb19) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-3733b5"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-3733b5) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-3733b5) below.
-
-<a id="spec-b06fb2"></a>&#x2022; [`description_spec`](#spec-b06fb2) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-bcc624"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-bcc624) - Optional Block<br>Enable this option
-
-<a id="key-10d8d8"></a>&#x2022; [`private_key`](#key-10d8d8) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-10d8d8) below.
-
-<a id="defaults-0f0ecb"></a>&#x2022; [`use_system_defaults`](#defaults-0f0ecb) - Optional Block<br>Enable this option
+<a id="deep-bcaea7"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-3733b5) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-82cbd6)) supports the following:
-
-<a id="algorithms-a3cebf"></a>&#x2022; [`hash_algorithms`](#algorithms-a3cebf) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-78ee27"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
 
-A [`private_key`](#key-10d8d8) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-82cbd6)) supports the following:
-
-<a id="info-14abf8"></a>&#x2022; [`blindfold_secret_info`](#info-14abf8) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-14abf8) below.
-
-<a id="info-a65950"></a>&#x2022; [`clear_secret_info`](#info-a65950) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-a65950) below.
+<a id="deep-6b2af0"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-14abf8) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-10d8d8)) supports the following:
-
-<a id="provider-a34440"></a>&#x2022; [`decryption_provider`](#provider-a34440) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-df5357"></a>&#x2022; [`location`](#location-df5357) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-522a4b"></a>&#x2022; [`store_provider`](#provider-522a4b) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-c31663"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-a65950) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-10d8d8)) supports the following:
-
-<a id="ref-6ce523"></a>&#x2022; [`provider_ref`](#ref-6ce523) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-7091f9"></a>&#x2022; [`url`](#url-7091f9) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-7179e0"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config
 
-A [`tls_config`](#config-e4b22e) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`](#parameters-8b3537)) supports the following:
-
-<a id="security-a98293"></a>&#x2022; [`custom_security`](#security-a98293) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-a98293) below.
-
-<a id="security-c2d1b3"></a>&#x2022; [`default_security`](#security-c2d1b3) - Optional Block<br>Enable this option
-
-<a id="security-a03f87"></a>&#x2022; [`low_security`](#security-a03f87) - Optional Block<br>Enable this option
-
-<a id="security-8d409a"></a>&#x2022; [`medium_security`](#security-8d409a) - Optional Block<br>Enable this option
+<a id="deep-5a85c5"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
 
-A [`custom_security`](#security-a98293) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_config`](#config-e4b22e)) supports the following:
-
-<a id="suites-696838"></a>&#x2022; [`cipher_suites`](#suites-696838) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-580a3b"></a>&#x2022; [`max_version`](#version-580a3b) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-235b1e"></a>&#x2022; [`min_version`](#version-235b1e) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-8c729c"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
 
-An [`use_mtls`](#mtls-defb68) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`](#parameters-8b3537)) supports the following:
-
-<a id="optional-b5abb0"></a>&#x2022; [`client_certificate_optional`](#optional-b5abb0) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-90a146"></a>&#x2022; [`crl`](#crl-90a146) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-90a146) below.
-
-<a id="crl-d49c05"></a>&#x2022; [`no_crl`](#crl-d49c05) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-dc73aa"></a>&#x2022; [`trusted_ca`](#trusted-ca-dc73aa) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-dc73aa) below.
-
-<a id="url-5a8acb"></a>&#x2022; [`trusted_ca_url`](#url-5a8acb) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-97b04e"></a>&#x2022; [`xfcc_disabled`](#disabled-97b04e) - Optional Block<br>Enable this option
-
-<a id="options-c7d438"></a>&#x2022; [`xfcc_options`](#options-c7d438) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-c7d438) below.
+<a id="deep-0a2766"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
 
-A [`crl`](#crl-90a146) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-defb68)) supports the following:
-
-<a id="name-cc2170"></a>&#x2022; [`name`](#name-cc2170) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-d7c0c3"></a>&#x2022; [`namespace`](#namespace-d7c0c3) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-555820"></a>&#x2022; [`tenant`](#tenant-555820) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-d94c97"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-dc73aa) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-defb68)) supports the following:
-
-<a id="name-8e45fc"></a>&#x2022; [`name`](#name-8e45fc) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-cf1e15"></a>&#x2022; [`namespace`](#namespace-cf1e15) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-4a4ac3"></a>&#x2022; [`tenant`](#tenant-4a4ac3) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-ffb136"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-c7d438) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-defb68)) supports the following:
-
-<a id="elements-653626"></a>&#x2022; [`xfcc_header_elements`](#elements-653626) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-77dd02"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert
 
-A [`https_auto_cert`](#cert-6593bb) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer`](#loadbalancer-40a524)) supports the following:
-
-<a id="hsts-3e76ed"></a>&#x2022; [`add_hsts`](#hsts-3e76ed) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-db342f"></a>&#x2022; [`append_server_name`](#name-db342f) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-12bc63"></a>&#x2022; [`coalescing_options`](#options-12bc63) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-12bc63) below.
-
-<a id="timeout-0999cd"></a>&#x2022; [`connection_idle_timeout`](#timeout-0999cd) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-2d7f45"></a>&#x2022; [`default_header`](#header-2d7f45) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-4428ec"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-4428ec) - Optional Block<br>Enable this option
-
-<a id="normalize-78f05a"></a>&#x2022; [`disable_path_normalize`](#normalize-78f05a) - Optional Block<br>Enable this option
-
-<a id="normalize-500a68"></a>&#x2022; [`enable_path_normalize`](#normalize-500a68) - Optional Block<br>Enable this option
-
-<a id="options-2bb010"></a>&#x2022; [`http_protocol_options`](#options-2bb010) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-2bb010) below.
-
-<a id="redirect-ac9bcc"></a>&#x2022; [`http_redirect`](#redirect-ac9bcc) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="mtls-30d1fe"></a>&#x2022; [`no_mtls`](#mtls-30d1fe) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-bbc3be"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-bbc3be) - Optional Block<br>Enable this option
-
-<a id="through-df9bb4"></a>&#x2022; [`pass_through`](#through-df9bb4) - Optional Block<br>Enable this option
-
-<a id="port-ff7dbe"></a>&#x2022; [`port`](#port-ff7dbe) - Optional Number<br>HTTPS Listen Port. HTTPS port to Listen
-
-<a id="ranges-7b6a05"></a>&#x2022; [`port_ranges`](#ranges-7b6a05) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-628844"></a>&#x2022; [`server_name`](#name-628844) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="config-3b139c"></a>&#x2022; [`tls_config`](#config-3b139c) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-3b139c) below.
-
-<a id="mtls-533846"></a>&#x2022; [`use_mtls`](#mtls-533846) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-533846) below.
+<a id="deep-8be33c"></a>Deeply nested **Cert** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
 
-A [`coalescing_options`](#options-12bc63) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`](#cert-6593bb)) supports the following:
-
-<a id="coalescing-c79931"></a>&#x2022; [`default_coalescing`](#coalescing-c79931) - Optional Block<br>Enable this option
-
-<a id="coalescing-09d5a0"></a>&#x2022; [`strict_coalescing`](#coalescing-09d5a0) - Optional Block<br>Enable this option
+<a id="deep-316e42"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
 
-A [`http_protocol_options`](#options-2bb010) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`](#cert-6593bb)) supports the following:
-
-<a id="only-c9a322"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-c9a322) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-c9a322) below.
-
-<a id="v1-v2-fcddb1"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-fcddb1) - Optional Block<br>Enable this option
-
-<a id="only-37a3eb"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-37a3eb) - Optional Block<br>Enable this option
+<a id="deep-6e41fa"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-c9a322) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.http_protocol_options`](#options-2bb010)) supports the following:
-
-<a id="transformation-d31070"></a>&#x2022; [`header_transformation`](#transformation-d31070) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-d31070) below.
+<a id="deep-2c9770"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-d31070) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`](#only-c9a322)) supports the following:
-
-<a id="transformation-5ba6f4"></a>&#x2022; [`default_header_transformation`](#transformation-5ba6f4) - Optional Block<br>Enable this option
-
-<a id="transformation-7e25d0"></a>&#x2022; [`legacy_header_transformation`](#transformation-7e25d0) - Optional Block<br>Enable this option
-
-<a id="transformation-9b6cb5"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-9b6cb5) - Optional Block<br>Enable this option
-
-<a id="transformation-157c44"></a>&#x2022; [`proper_case_header_transformation`](#transformation-157c44) - Optional Block<br>Enable this option
+<a id="deep-3da430"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config
 
-A [`tls_config`](#config-3b139c) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`](#cert-6593bb)) supports the following:
-
-<a id="security-c8a70d"></a>&#x2022; [`custom_security`](#security-c8a70d) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-c8a70d) below.
-
-<a id="security-e52534"></a>&#x2022; [`default_security`](#security-e52534) - Optional Block<br>Enable this option
-
-<a id="security-a52c61"></a>&#x2022; [`low_security`](#security-a52c61) - Optional Block<br>Enable this option
-
-<a id="security-224423"></a>&#x2022; [`medium_security`](#security-224423) - Optional Block<br>Enable this option
+<a id="deep-cfd083"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
 
-A [`custom_security`](#security-c8a70d) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.tls_config`](#config-3b139c)) supports the following:
-
-<a id="suites-5b28b6"></a>&#x2022; [`cipher_suites`](#suites-5b28b6) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-40499c"></a>&#x2022; [`max_version`](#version-40499c) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-215593"></a>&#x2022; [`min_version`](#version-215593) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-fd8bbe"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS
 
-An [`use_mtls`](#mtls-533846) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`](#cert-6593bb)) supports the following:
-
-<a id="optional-7a31a6"></a>&#x2022; [`client_certificate_optional`](#optional-7a31a6) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-937b20"></a>&#x2022; [`crl`](#crl-937b20) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-937b20) below.
-
-<a id="crl-5a0bab"></a>&#x2022; [`no_crl`](#crl-5a0bab) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-4eaef0"></a>&#x2022; [`trusted_ca`](#trusted-ca-4eaef0) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-4eaef0) below.
-
-<a id="url-6050a3"></a>&#x2022; [`trusted_ca_url`](#url-6050a3) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-b42671"></a>&#x2022; [`xfcc_disabled`](#disabled-b42671) - Optional Block<br>Enable this option
-
-<a id="options-8ad6dc"></a>&#x2022; [`xfcc_options`](#options-8ad6dc) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-8ad6dc) below.
+<a id="deep-033783"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
 
-A [`crl`](#crl-937b20) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-533846)) supports the following:
-
-<a id="name-5d4cbc"></a>&#x2022; [`name`](#name-5d4cbc) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-d3d85b"></a>&#x2022; [`namespace`](#namespace-d3d85b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-80a627"></a>&#x2022; [`tenant`](#tenant-80a627) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-ecd09a"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-4eaef0) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-533846)) supports the following:
-
-<a id="name-da9ca0"></a>&#x2022; [`name`](#name-da9ca0) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-af67f0"></a>&#x2022; [`namespace`](#namespace-af67f0) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-5f19c7"></a>&#x2022; [`tenant`](#tenant-5f19c7) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-841dde"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-8ad6dc) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-533846)) supports the following:
-
-<a id="elements-1db5ca"></a>&#x2022; [`xfcc_header_elements`](#elements-1db5ca) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-6c38ec"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes
 
-A [`specific_routes`](#routes-3e092a) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer`](#loadbalancer-40a524)) supports the following:
-
-<a id="routes-b0dc09"></a>&#x2022; [`routes`](#routes-b0dc09) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#routes-b0dc09) below.
+<a id="deep-1f4409"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes
 
-A [`routes`](#routes-b0dc09) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes`](#routes-3e092a)) supports the following:
-
-<a id="object-80dcc6"></a>&#x2022; [`custom_route_object`](#object-80dcc6) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#object-80dcc6) below.
-
-<a id="route-156010"></a>&#x2022; [`direct_response_route`](#route-156010) - Optional Block<br>Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic<br>See [Direct Response Route](#route-156010) below.
-
-<a id="route-c77c40"></a>&#x2022; [`redirect_route`](#route-c77c40) - Optional Block<br>Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL<br>See [Redirect Route](#route-c77c40) below.
-
-<a id="route-d11b70"></a>&#x2022; [`simple_route`](#route-d11b70) - Optional Block<br>Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside<br>See [Simple Route](#route-d11b70) below.
+<a id="deep-14b5ee"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object
 
-A [`custom_route_object`](#object-80dcc6) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`](#routes-b0dc09)) supports the following:
-
-<a id="ref-e8fa84"></a>&#x2022; [`route_ref`](#ref-e8fa84) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#ref-e8fa84) below.
+<a id="deep-f308f8"></a>Deeply nested **Object** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
 
-A [`route_ref`](#ref-e8fa84) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.custom_route_object`](#object-80dcc6)) supports the following:
-
-<a id="name-6c0085"></a>&#x2022; [`name`](#name-6c0085) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-55406b"></a>&#x2022; [`namespace`](#namespace-55406b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e6e8c5"></a>&#x2022; [`tenant`](#tenant-e6e8c5) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-a05f4e"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route
 
-A [`direct_response_route`](#route-156010) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`](#routes-b0dc09)) supports the following:
-
-<a id="headers-b6c78e"></a>&#x2022; [`headers`](#headers-b6c78e) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-b6c78e) below.
-
-<a id="method-aa89ca"></a>&#x2022; [`http_method`](#method-aa89ca) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-18e65f"></a>&#x2022; [`incoming_port`](#port-18e65f) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-18e65f) below.
-
-<a id="path-2d3922"></a>&#x2022; [`path`](#path-2d3922) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-2d3922) below.
-
-<a id="response-ae3122"></a>&#x2022; [`route_direct_response`](#response-ae3122) - Optional Block<br>Direct Response. Send this direct response in case of route match action is direct response<br>See [Route Direct Response](#response-ae3122) below.
+<a id="deep-17efaa"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
 
-A [`headers`](#headers-b6c78e) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-156010)) supports the following:
-
-<a id="exact-72c2de"></a>&#x2022; [`exact`](#exact-72c2de) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-6a3017"></a>&#x2022; [`invert_match`](#match-6a3017) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-d237d2"></a>&#x2022; [`name`](#name-d237d2) - Optional String<br>Name. Name of the header
-
-<a id="presence-cc4a48"></a>&#x2022; [`presence`](#presence-cc4a48) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-4f2dd0"></a>&#x2022; [`regex`](#regex-4f2dd0) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-d77a6f"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
 
-An [`incoming_port`](#port-18e65f) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-156010)) supports the following:
-
-<a id="match-dfe74c"></a>&#x2022; [`no_port_match`](#match-dfe74c) - Optional Block<br>Enable this option
-
-<a id="port-5f05b4"></a>&#x2022; [`port`](#port-5f05b4) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-809700"></a>&#x2022; [`port_ranges`](#ranges-809700) - Optional String<br>Port range. Port range to match
+<a id="deep-972608"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
 
-A [`path`](#path-2d3922) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-156010)) supports the following:
-
-<a id="path-c9659a"></a>&#x2022; [`path`](#path-c9659a) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-dc6038"></a>&#x2022; [`prefix`](#prefix-dc6038) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-05d12a"></a>&#x2022; [`regex`](#regex-05d12a) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-547291"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
 
-A [`route_direct_response`](#response-ae3122) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-156010)) supports the following:
-
-<a id="encoded-fc9804"></a>&#x2022; [`response_body_encoded`](#encoded-fc9804) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
-
-<a id="code-de4c4e"></a>&#x2022; [`response_code`](#code-de4c4e) - Optional Number<br>Response Code. response code to send
+<a id="deep-5d8fe5"></a>Deeply nested **Response** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route
 
-A [`redirect_route`](#route-c77c40) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`](#routes-b0dc09)) supports the following:
-
-<a id="headers-6123ee"></a>&#x2022; [`headers`](#headers-6123ee) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-6123ee) below.
-
-<a id="method-5ff2f9"></a>&#x2022; [`http_method`](#method-5ff2f9) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-cf8fea"></a>&#x2022; [`incoming_port`](#port-cf8fea) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-cf8fea) below.
-
-<a id="path-dca5d4"></a>&#x2022; [`path`](#path-dca5d4) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-dca5d4) below.
-
-<a id="redirect-4b33db"></a>&#x2022; [`route_redirect`](#redirect-4b33db) - Optional Block<br>Redirect. route redirect parameters when match action is redirect<br>See [Route Redirect](#redirect-4b33db) below.
+<a id="deep-2db089"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
 
-A [`headers`](#headers-6123ee) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-c77c40)) supports the following:
-
-<a id="exact-699f38"></a>&#x2022; [`exact`](#exact-699f38) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-530d24"></a>&#x2022; [`invert_match`](#match-530d24) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-14faf1"></a>&#x2022; [`name`](#name-14faf1) - Optional String<br>Name. Name of the header
-
-<a id="presence-72c484"></a>&#x2022; [`presence`](#presence-72c484) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-e28863"></a>&#x2022; [`regex`](#regex-e28863) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-26f51e"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
 
-An [`incoming_port`](#port-cf8fea) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-c77c40)) supports the following:
-
-<a id="match-429875"></a>&#x2022; [`no_port_match`](#match-429875) - Optional Block<br>Enable this option
-
-<a id="port-823979"></a>&#x2022; [`port`](#port-823979) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-9a20ae"></a>&#x2022; [`port_ranges`](#ranges-9a20ae) - Optional String<br>Port range. Port range to match
+<a id="deep-664ee8"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path
 
-A [`path`](#path-dca5d4) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-c77c40)) supports the following:
-
-<a id="path-b2816a"></a>&#x2022; [`path`](#path-b2816a) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-6a4fe9"></a>&#x2022; [`prefix`](#prefix-6a4fe9) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-273146"></a>&#x2022; [`regex`](#regex-273146) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-7c04a1"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
 
-A [`route_redirect`](#redirect-4b33db) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-c77c40)) supports the following:
-
-<a id="redirect-36870e"></a>&#x2022; [`host_redirect`](#redirect-36870e) - Optional String<br>Host. swap host part of incoming URL in redirect URL
-
-<a id="redirect-acbcfb"></a>&#x2022; [`path_redirect`](#redirect-acbcfb) - Optional String<br>Path. swap path part of incoming URL in redirect URL
-
-<a id="rewrite-b3e40d"></a>&#x2022; [`prefix_rewrite`](#rewrite-b3e40d) - Optional String<br>Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request
-
-<a id="redirect-3551de"></a>&#x2022; [`proto_redirect`](#redirect-3551de) - Optional String<br>Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done
-
-<a id="params-1698bc"></a>&#x2022; [`remove_all_params`](#params-1698bc) - Optional Block<br>Enable this option
-
-<a id="params-e8d089"></a>&#x2022; [`replace_params`](#params-e8d089) - Optional String<br>Replace All Parameters
-
-<a id="code-a50043"></a>&#x2022; [`response_code`](#code-a50043) - Optional Number<br>Response Code. The HTTP status code to use in the redirect response
-
-<a id="params-cc86ab"></a>&#x2022; [`retain_all_params`](#params-cc86ab) - Optional Block<br>Enable this option
+<a id="deep-126497"></a>Deeply nested **Redirect** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route
 
-A [`simple_route`](#route-d11b70) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`](#routes-b0dc09)) supports the following:
-
-<a id="rewrite-d4acc2"></a>&#x2022; [`auto_host_rewrite`](#rewrite-d4acc2) - Optional Block<br>Enable this option
-
-<a id="rewrite-9004f4"></a>&#x2022; [`disable_host_rewrite`](#rewrite-9004f4) - Optional Block<br>Enable this option
-
-<a id="rewrite-aeea1d"></a>&#x2022; [`host_rewrite`](#rewrite-aeea1d) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
-
-<a id="method-a25f39"></a>&#x2022; [`http_method`](#method-a25f39) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="path-724c1b"></a>&#x2022; [`path`](#path-724c1b) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-724c1b) below.
+<a id="deep-2d1a5a"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path
 
-A [`path`](#path-724c1b) block (within [`service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.simple_route`](#route-d11b70)) supports the following:
-
-<a id="path-4f3ade"></a>&#x2022; [`path`](#path-4f3ade) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-cac025"></a>&#x2022; [`prefix`](#prefix-cac025) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-a2cd18"></a>&#x2022; [`regex`](#regex-a2cd18) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-9a6802"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports Port
 
@@ -1261,23 +743,11 @@ A [`port`](#port-49f116) block (within [`service.advertise_options.advertise_cus
 
 #### Service Advertise Options Advertise Custom Ports Port Info
 
-An [`info`](#info-66bbf6) block (within [`service.advertise_options.advertise_custom.ports.port`](#port-49f116)) supports the following:
-
-<a id="port-c35823"></a>&#x2022; [`port`](#port-c35823) - Optional Number<br>Port. Port the workload can be reached on
-
-<a id="protocol-1079ac"></a>&#x2022; [`protocol`](#protocol-1079ac) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP
-
-<a id="port-e7d98b"></a>&#x2022; [`same_as_port`](#port-e7d98b) - Optional Block<br>Enable this option
-
-<a id="port-d1008a"></a>&#x2022; [`target_port`](#port-d1008a) - Optional Number<br>Different than Port. Port the workload is listening on
+<a id="deep-aab026"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise Custom Ports TCP Loadbalancer
 
-A [`tcp_loadbalancer`](#loadbalancer-0fd9c3) block (within [`service.advertise_options.advertise_custom.ports`](#ports-b755b5)) supports the following:
-
-<a id="domains-f1f3d5"></a>&#x2022; [`domains`](#domains-f1f3d5) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="sni-681dd3"></a>&#x2022; [`with_sni`](#sni-681dd3) - Optional Bool<br>With SNI. Set to true to enable TCP loadbalancer with SNI
+<a id="deep-94c104"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Service Advertise Options Advertise In Cluster
 
@@ -1289,29 +759,15 @@ An [`advertise_in_cluster`](#cluster-9d3c24) block (within [`service.advertise_o
 
 #### Service Advertise Options Advertise In Cluster Multi Ports
 
-A [`multi_ports`](#ports-47cae5) block (within [`service.advertise_options.advertise_in_cluster`](#cluster-9d3c24)) supports the following:
-
-<a id="ports-135112"></a>&#x2022; [`ports`](#ports-135112) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#ports-135112) below.
+<a id="deep-9d2ae1"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### Service Advertise Options Advertise In Cluster Multi Ports Ports
 
-A [`ports`](#ports-135112) block (within [`service.advertise_options.advertise_in_cluster.multi_ports`](#ports-47cae5)) supports the following:
-
-<a id="info-cb0d1f"></a>&#x2022; [`info`](#info-cb0d1f) - Optional Block<br>Port Information. Port information<br>See [Info](#info-cb0d1f) below.
-
-<a id="name-a6095d"></a>&#x2022; [`name`](#name-a6095d) - Optional String<br>Name. Name of the Port
+<a id="deep-3744bf"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### Service Advertise Options Advertise In Cluster Multi Ports Ports Info
 
-An [`info`](#info-cb0d1f) block (within [`service.advertise_options.advertise_in_cluster.multi_ports.ports`](#ports-135112)) supports the following:
-
-<a id="port-3ad0e5"></a>&#x2022; [`port`](#port-3ad0e5) - Optional Number<br>Port. Port the workload can be reached on
-
-<a id="protocol-d285ba"></a>&#x2022; [`protocol`](#protocol-d285ba) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP
-
-<a id="port-6f1421"></a>&#x2022; [`same_as_port`](#port-6f1421) - Optional Block<br>Enable this option
-
-<a id="port-e3003d"></a>&#x2022; [`target_port`](#port-e3003d) - Optional Number<br>Different than Port. Port the workload is listening on
+<a id="deep-8dde36"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise In Cluster Port
 
@@ -1321,15 +777,7 @@ A [`port`](#port-fc2a3b) block (within [`service.advertise_options.advertise_in_
 
 #### Service Advertise Options Advertise In Cluster Port Info
 
-An [`info`](#info-73ea02) block (within [`service.advertise_options.advertise_in_cluster.port`](#port-fc2a3b)) supports the following:
-
-<a id="port-fa23af"></a>&#x2022; [`port`](#port-fa23af) - Optional Number<br>Port. Port the workload can be reached on
-
-<a id="protocol-e8ef4c"></a>&#x2022; [`protocol`](#protocol-e8ef4c) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP
-
-<a id="port-d6542f"></a>&#x2022; [`same_as_port`](#port-d6542f) - Optional Block<br>Enable this option
-
-<a id="port-56838a"></a>&#x2022; [`target_port`](#port-56838a) - Optional Number<br>Different than Port. Port the workload is listening on
+<a id="deep-936296"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public
 
@@ -1341,695 +789,243 @@ An [`advertise_on_public`](#public-fac1e6) block (within [`service.advertise_opt
 
 #### Service Advertise Options Advertise On Public Multi Ports
 
-A [`multi_ports`](#ports-b4a2d0) block (within [`service.advertise_options.advertise_on_public`](#public-fac1e6)) supports the following:
-
-<a id="ports-337178"></a>&#x2022; [`ports`](#ports-337178) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#ports-337178) below.
+<a id="deep-780c5a"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports
 
-A [`ports`](#ports-337178) block (within [`service.advertise_options.advertise_on_public.multi_ports`](#ports-b4a2d0)) supports the following:
-
-<a id="loadbalancer-6776e5"></a>&#x2022; [`http_loadbalancer`](#loadbalancer-6776e5) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#loadbalancer-6776e5) below.
-
-<a id="port-e2b742"></a>&#x2022; [`port`](#port-e2b742) - Optional Block<br>Port. Port of the workload<br>See [Port](#port-e2b742) below.
-
-<a id="loadbalancer-9b1f8d"></a>&#x2022; [`tcp_loadbalancer`](#loadbalancer-9b1f8d) - Optional Block<br>TCP Load Balancer. TCP loadbalancer<br>See [TCP Loadbalancer](#loadbalancer-9b1f8d) below.
+<a id="deep-d87391"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer
 
-A [`http_loadbalancer`](#loadbalancer-6776e5) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports`](#ports-337178)) supports the following:
-
-<a id="route-a6cd45"></a>&#x2022; [`default_route`](#route-a6cd45) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#route-a6cd45) below.
-
-<a id="domains-75f3ff"></a>&#x2022; [`domains`](#domains-75f3ff) - Optional List<br>Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and \*.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="http-6f214e"></a>&#x2022; [`http`](#http-6f214e) - Optional Block<br>HTTP Choice. Choice for selecting HTTP proxy<br>See [HTTP](#http-6f214e) below.
-
-<a id="https-5b2174"></a>&#x2022; [`https`](#https-5b2174) - Optional Block<br>BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS](#https-5b2174) below.
-
-<a id="cert-ed6cf0"></a>&#x2022; [`https_auto_cert`](#cert-ed6cf0) - Optional Block<br>HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS Auto Cert](#cert-ed6cf0) below.
-
-<a id="routes-ab40c2"></a>&#x2022; [`specific_routes`](#routes-ab40c2) - Optional Block<br>Route Type. This defines various options to define a route<br>See [Specific Routes](#routes-ab40c2) below.
+<a id="deep-2b84f8"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Default Route
 
-A [`default_route`](#route-a6cd45) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`](#loadbalancer-6776e5)) supports the following:
-
-<a id="rewrite-473004"></a>&#x2022; [`auto_host_rewrite`](#rewrite-473004) - Optional Block<br>Enable this option
-
-<a id="rewrite-10706a"></a>&#x2022; [`disable_host_rewrite`](#rewrite-10706a) - Optional Block<br>Enable this option
-
-<a id="rewrite-e4f5fa"></a>&#x2022; [`host_rewrite`](#rewrite-e4f5fa) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
+<a id="deep-db98d3"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTP
 
-A [`http`](#http-6f214e) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`](#loadbalancer-6776e5)) supports the following:
-
-<a id="managed-e22a24"></a>&#x2022; [`dns_volterra_managed`](#managed-e22a24) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
-
-<a id="port-2bc990"></a>&#x2022; [`port`](#port-2bc990) - Optional Number<br>HTTP Listen Port. HTTP port to Listen
-
-<a id="ranges-a2b418"></a>&#x2022; [`port_ranges`](#ranges-a2b418) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<a id="deep-db7f35"></a>Deeply nested **HTTP** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS
 
-A [`https`](#https-5b2174) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`](#loadbalancer-6776e5)) supports the following:
-
-<a id="hsts-b8e5b2"></a>&#x2022; [`add_hsts`](#hsts-b8e5b2) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-982f4b"></a>&#x2022; [`append_server_name`](#name-982f4b) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-629058"></a>&#x2022; [`coalescing_options`](#options-629058) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-629058) below.
-
-<a id="timeout-645e68"></a>&#x2022; [`connection_idle_timeout`](#timeout-645e68) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-a478c7"></a>&#x2022; [`default_header`](#header-a478c7) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-43126a"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-43126a) - Optional Block<br>Enable this option
-
-<a id="normalize-364b21"></a>&#x2022; [`disable_path_normalize`](#normalize-364b21) - Optional Block<br>Enable this option
-
-<a id="normalize-940136"></a>&#x2022; [`enable_path_normalize`](#normalize-940136) - Optional Block<br>Enable this option
-
-<a id="options-e487be"></a>&#x2022; [`http_protocol_options`](#options-e487be) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-e487be) below.
-
-<a id="redirect-e4d453"></a>&#x2022; [`http_redirect`](#redirect-e4d453) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="loadbalancer-a9a817"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-a9a817) - Optional Block<br>Enable this option
-
-<a id="through-60e9f7"></a>&#x2022; [`pass_through`](#through-60e9f7) - Optional Block<br>Enable this option
-
-<a id="port-9b6167"></a>&#x2022; [`port`](#port-9b6167) - Optional Number<br>HTTPS Port. HTTPS port to Listen
-
-<a id="ranges-027fa7"></a>&#x2022; [`port_ranges`](#ranges-027fa7) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-825564"></a>&#x2022; [`server_name`](#name-825564) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="params-787e4b"></a>&#x2022; [`tls_cert_params`](#params-787e4b) - Optional Block<br>TLS Parameters. Select TLS Parameters and Certificates<br>See [TLS Cert Params](#params-787e4b) below.
-
-<a id="parameters-df6e3a"></a>&#x2022; [`tls_parameters`](#parameters-df6e3a) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [TLS Parameters](#parameters-df6e3a) below.
+<a id="deep-e24bdc"></a>Deeply nested **HTTPS** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Coalescing Options
 
-A [`coalescing_options`](#options-629058) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`](#https-5b2174)) supports the following:
-
-<a id="coalescing-247b7d"></a>&#x2022; [`default_coalescing`](#coalescing-247b7d) - Optional Block<br>Enable this option
-
-<a id="coalescing-18c1b6"></a>&#x2022; [`strict_coalescing`](#coalescing-18c1b6) - Optional Block<br>Enable this option
+<a id="deep-202620"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options
 
-A [`http_protocol_options`](#options-e487be) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`](#https-5b2174)) supports the following:
-
-<a id="only-bb48ab"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-bb48ab) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-bb48ab) below.
-
-<a id="v1-v2-842730"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-842730) - Optional Block<br>Enable this option
-
-<a id="only-79e670"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-79e670) - Optional Block<br>Enable this option
+<a id="deep-7ec77e"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-bb48ab) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.http_protocol_options`](#options-e487be)) supports the following:
-
-<a id="transformation-3627b8"></a>&#x2022; [`header_transformation`](#transformation-3627b8) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-3627b8) below.
+<a id="deep-84a652"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-3627b8) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`](#only-bb48ab)) supports the following:
-
-<a id="transformation-dbd370"></a>&#x2022; [`default_header_transformation`](#transformation-dbd370) - Optional Block<br>Enable this option
-
-<a id="transformation-ad5809"></a>&#x2022; [`legacy_header_transformation`](#transformation-ad5809) - Optional Block<br>Enable this option
-
-<a id="transformation-ebbb34"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-ebbb34) - Optional Block<br>Enable this option
-
-<a id="transformation-9070a1"></a>&#x2022; [`proper_case_header_transformation`](#transformation-9070a1) - Optional Block<br>Enable this option
+<a id="deep-a51019"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params
 
-A [`tls_cert_params`](#params-787e4b) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`](#https-5b2174)) supports the following:
-
-<a id="certificates-8014ac"></a>&#x2022; [`certificates`](#certificates-8014ac) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#certificates-8014ac) below.
-
-<a id="mtls-6c62a9"></a>&#x2022; [`no_mtls`](#mtls-6c62a9) - Optional Block<br>Enable this option
-
-<a id="config-6b378d"></a>&#x2022; [`tls_config`](#config-6b378d) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-6b378d) below.
-
-<a id="mtls-116de5"></a>&#x2022; [`use_mtls`](#mtls-116de5) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-116de5) below.
+<a id="deep-659a12"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates
 
-A [`certificates`](#certificates-8014ac) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`](#params-787e4b)) supports the following:
-
-<a id="name-cb7ba1"></a>&#x2022; [`name`](#name-cb7ba1) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e86a32"></a>&#x2022; [`namespace`](#namespace-e86a32) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-b15caa"></a>&#x2022; [`tenant`](#tenant-b15caa) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-315ba5"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
 
-A [`tls_config`](#config-6b378d) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`](#params-787e4b)) supports the following:
-
-<a id="security-f44b35"></a>&#x2022; [`custom_security`](#security-f44b35) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-f44b35) below.
-
-<a id="security-79751d"></a>&#x2022; [`default_security`](#security-79751d) - Optional Block<br>Enable this option
-
-<a id="security-f17064"></a>&#x2022; [`low_security`](#security-f17064) - Optional Block<br>Enable this option
-
-<a id="security-71fadf"></a>&#x2022; [`medium_security`](#security-71fadf) - Optional Block<br>Enable this option
+<a id="deep-504635"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
 
-A [`custom_security`](#security-f44b35) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.tls_config`](#config-6b378d)) supports the following:
-
-<a id="suites-cc3ce5"></a>&#x2022; [`cipher_suites`](#suites-cc3ce5) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-0de75d"></a>&#x2022; [`max_version`](#version-0de75d) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-78d1bb"></a>&#x2022; [`min_version`](#version-78d1bb) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-4a5832"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
 
-An [`use_mtls`](#mtls-116de5) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`](#params-787e4b)) supports the following:
-
-<a id="optional-6e5339"></a>&#x2022; [`client_certificate_optional`](#optional-6e5339) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-e7ec5a"></a>&#x2022; [`crl`](#crl-e7ec5a) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-e7ec5a) below.
-
-<a id="crl-9afb52"></a>&#x2022; [`no_crl`](#crl-9afb52) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-764e5b"></a>&#x2022; [`trusted_ca`](#trusted-ca-764e5b) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-764e5b) below.
-
-<a id="url-f0e60b"></a>&#x2022; [`trusted_ca_url`](#url-f0e60b) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-ad0757"></a>&#x2022; [`xfcc_disabled`](#disabled-ad0757) - Optional Block<br>Enable this option
-
-<a id="options-ee42af"></a>&#x2022; [`xfcc_options`](#options-ee42af) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-ee42af) below.
+<a id="deep-ae20aa"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
 
-A [`crl`](#crl-e7ec5a) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-116de5)) supports the following:
-
-<a id="name-f5445f"></a>&#x2022; [`name`](#name-f5445f) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-ef9d20"></a>&#x2022; [`namespace`](#namespace-ef9d20) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-8611bf"></a>&#x2022; [`tenant`](#tenant-8611bf) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-2d5cca"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-764e5b) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-116de5)) supports the following:
-
-<a id="name-57401e"></a>&#x2022; [`name`](#name-57401e) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b1cbe0"></a>&#x2022; [`namespace`](#namespace-b1cbe0) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-74a52c"></a>&#x2022; [`tenant`](#tenant-74a52c) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-6f57c1"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-ee42af) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-116de5)) supports the following:
-
-<a id="elements-081728"></a>&#x2022; [`xfcc_header_elements`](#elements-081728) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-5b1fe8"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters
 
-A [`tls_parameters`](#parameters-df6e3a) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`](#https-5b2174)) supports the following:
-
-<a id="mtls-ebafad"></a>&#x2022; [`no_mtls`](#mtls-ebafad) - Optional Block<br>Enable this option
-
-<a id="certificates-903b70"></a>&#x2022; [`tls_certificates`](#certificates-903b70) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-903b70) below.
-
-<a id="config-76d267"></a>&#x2022; [`tls_config`](#config-76d267) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-76d267) below.
-
-<a id="mtls-ebf738"></a>&#x2022; [`use_mtls`](#mtls-ebf738) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-ebf738) below.
+<a id="deep-f5509b"></a>Deeply nested **Parameters** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
 
-A [`tls_certificates`](#certificates-903b70) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`](#parameters-df6e3a)) supports the following:
-
-<a id="url-09131b"></a>&#x2022; [`certificate_url`](#url-09131b) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-f09ee8"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-f09ee8) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-f09ee8) below.
-
-<a id="spec-c1366b"></a>&#x2022; [`description_spec`](#spec-c1366b) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-2ccb9f"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-2ccb9f) - Optional Block<br>Enable this option
-
-<a id="key-1e07e0"></a>&#x2022; [`private_key`](#key-1e07e0) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-1e07e0) below.
-
-<a id="defaults-fde65f"></a>&#x2022; [`use_system_defaults`](#defaults-fde65f) - Optional Block<br>Enable this option
+<a id="deep-ae0e3b"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-f09ee8) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-903b70)) supports the following:
-
-<a id="algorithms-4631c9"></a>&#x2022; [`hash_algorithms`](#algorithms-4631c9) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-c90287"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
 
-A [`private_key`](#key-1e07e0) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-903b70)) supports the following:
-
-<a id="info-ebf380"></a>&#x2022; [`blindfold_secret_info`](#info-ebf380) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-ebf380) below.
-
-<a id="info-c72ec7"></a>&#x2022; [`clear_secret_info`](#info-c72ec7) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-c72ec7) below.
+<a id="deep-e1d299"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-ebf380) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-1e07e0)) supports the following:
-
-<a id="provider-84cc5d"></a>&#x2022; [`decryption_provider`](#provider-84cc5d) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-a54f92"></a>&#x2022; [`location`](#location-a54f92) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-db0cb5"></a>&#x2022; [`store_provider`](#provider-db0cb5) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-56478b"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-c72ec7) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-1e07e0)) supports the following:
-
-<a id="ref-af023d"></a>&#x2022; [`provider_ref`](#ref-af023d) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-31cc88"></a>&#x2022; [`url`](#url-31cc88) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-9fa0e2"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config
 
-A [`tls_config`](#config-76d267) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`](#parameters-df6e3a)) supports the following:
-
-<a id="security-7c1700"></a>&#x2022; [`custom_security`](#security-7c1700) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-7c1700) below.
-
-<a id="security-cf5f9a"></a>&#x2022; [`default_security`](#security-cf5f9a) - Optional Block<br>Enable this option
-
-<a id="security-8879b7"></a>&#x2022; [`low_security`](#security-8879b7) - Optional Block<br>Enable this option
-
-<a id="security-1fac09"></a>&#x2022; [`medium_security`](#security-1fac09) - Optional Block<br>Enable this option
+<a id="deep-3a10ee"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
 
-A [`custom_security`](#security-7c1700) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_config`](#config-76d267)) supports the following:
-
-<a id="suites-298432"></a>&#x2022; [`cipher_suites`](#suites-298432) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-462d27"></a>&#x2022; [`max_version`](#version-462d27) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-2d7e87"></a>&#x2022; [`min_version`](#version-2d7e87) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-3252f9"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
 
-An [`use_mtls`](#mtls-ebf738) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`](#parameters-df6e3a)) supports the following:
-
-<a id="optional-189d88"></a>&#x2022; [`client_certificate_optional`](#optional-189d88) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-c77226"></a>&#x2022; [`crl`](#crl-c77226) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-c77226) below.
-
-<a id="crl-a67820"></a>&#x2022; [`no_crl`](#crl-a67820) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-0c231d"></a>&#x2022; [`trusted_ca`](#trusted-ca-0c231d) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-0c231d) below.
-
-<a id="url-3b8eaf"></a>&#x2022; [`trusted_ca_url`](#url-3b8eaf) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-354a2b"></a>&#x2022; [`xfcc_disabled`](#disabled-354a2b) - Optional Block<br>Enable this option
-
-<a id="options-c3bf6e"></a>&#x2022; [`xfcc_options`](#options-c3bf6e) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-c3bf6e) below.
+<a id="deep-71d78a"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
 
-A [`crl`](#crl-c77226) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-ebf738)) supports the following:
-
-<a id="name-c45a7c"></a>&#x2022; [`name`](#name-c45a7c) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-31ea33"></a>&#x2022; [`namespace`](#namespace-31ea33) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-da0c24"></a>&#x2022; [`tenant`](#tenant-da0c24) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-9c38dd"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-0c231d) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-ebf738)) supports the following:
-
-<a id="name-1d4aff"></a>&#x2022; [`name`](#name-1d4aff) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b1c39a"></a>&#x2022; [`namespace`](#namespace-b1c39a) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d07b09"></a>&#x2022; [`tenant`](#tenant-d07b09) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-76a1d2"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-c3bf6e) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-ebf738)) supports the following:
-
-<a id="elements-fbc259"></a>&#x2022; [`xfcc_header_elements`](#elements-fbc259) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-e042ef"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert
 
-A [`https_auto_cert`](#cert-ed6cf0) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`](#loadbalancer-6776e5)) supports the following:
-
-<a id="hsts-583532"></a>&#x2022; [`add_hsts`](#hsts-583532) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-fd0611"></a>&#x2022; [`append_server_name`](#name-fd0611) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-7038e1"></a>&#x2022; [`coalescing_options`](#options-7038e1) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-7038e1) below.
-
-<a id="timeout-51f220"></a>&#x2022; [`connection_idle_timeout`](#timeout-51f220) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-8c8504"></a>&#x2022; [`default_header`](#header-8c8504) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-a16786"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-a16786) - Optional Block<br>Enable this option
-
-<a id="normalize-bda3fa"></a>&#x2022; [`disable_path_normalize`](#normalize-bda3fa) - Optional Block<br>Enable this option
-
-<a id="normalize-61bc9a"></a>&#x2022; [`enable_path_normalize`](#normalize-61bc9a) - Optional Block<br>Enable this option
-
-<a id="options-7b6d1c"></a>&#x2022; [`http_protocol_options`](#options-7b6d1c) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-7b6d1c) below.
-
-<a id="redirect-07660c"></a>&#x2022; [`http_redirect`](#redirect-07660c) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="mtls-12277c"></a>&#x2022; [`no_mtls`](#mtls-12277c) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-586674"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-586674) - Optional Block<br>Enable this option
-
-<a id="through-a275d1"></a>&#x2022; [`pass_through`](#through-a275d1) - Optional Block<br>Enable this option
-
-<a id="port-edc5f0"></a>&#x2022; [`port`](#port-edc5f0) - Optional Number<br>HTTPS Listen Port. HTTPS port to Listen
-
-<a id="ranges-a74fe4"></a>&#x2022; [`port_ranges`](#ranges-a74fe4) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-9fc4e2"></a>&#x2022; [`server_name`](#name-9fc4e2) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="config-176cb8"></a>&#x2022; [`tls_config`](#config-176cb8) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-176cb8) below.
-
-<a id="mtls-1ac9ce"></a>&#x2022; [`use_mtls`](#mtls-1ac9ce) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-1ac9ce) below.
+<a id="deep-1f5bf4"></a>Deeply nested **Cert** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
 
-A [`coalescing_options`](#options-7038e1) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`](#cert-ed6cf0)) supports the following:
-
-<a id="coalescing-34af3d"></a>&#x2022; [`default_coalescing`](#coalescing-34af3d) - Optional Block<br>Enable this option
-
-<a id="coalescing-752c21"></a>&#x2022; [`strict_coalescing`](#coalescing-752c21) - Optional Block<br>Enable this option
+<a id="deep-0c944d"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
 
-A [`http_protocol_options`](#options-7b6d1c) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`](#cert-ed6cf0)) supports the following:
-
-<a id="only-77da3e"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-77da3e) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-77da3e) below.
-
-<a id="v1-v2-8d3e26"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-8d3e26) - Optional Block<br>Enable this option
-
-<a id="only-642d99"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-642d99) - Optional Block<br>Enable this option
+<a id="deep-644074"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-77da3e) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.http_protocol_options`](#options-7b6d1c)) supports the following:
-
-<a id="transformation-99bbd1"></a>&#x2022; [`header_transformation`](#transformation-99bbd1) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-99bbd1) below.
+<a id="deep-fa1fde"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-99bbd1) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`](#only-77da3e)) supports the following:
-
-<a id="transformation-145294"></a>&#x2022; [`default_header_transformation`](#transformation-145294) - Optional Block<br>Enable this option
-
-<a id="transformation-8c36f2"></a>&#x2022; [`legacy_header_transformation`](#transformation-8c36f2) - Optional Block<br>Enable this option
-
-<a id="transformation-cdb567"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-cdb567) - Optional Block<br>Enable this option
-
-<a id="transformation-3b81ff"></a>&#x2022; [`proper_case_header_transformation`](#transformation-3b81ff) - Optional Block<br>Enable this option
+<a id="deep-2f7e39"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config
 
-A [`tls_config`](#config-176cb8) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`](#cert-ed6cf0)) supports the following:
-
-<a id="security-58d18e"></a>&#x2022; [`custom_security`](#security-58d18e) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-58d18e) below.
-
-<a id="security-b299bd"></a>&#x2022; [`default_security`](#security-b299bd) - Optional Block<br>Enable this option
-
-<a id="security-5f05e5"></a>&#x2022; [`low_security`](#security-5f05e5) - Optional Block<br>Enable this option
-
-<a id="security-5f3df8"></a>&#x2022; [`medium_security`](#security-5f3df8) - Optional Block<br>Enable this option
+<a id="deep-67b420"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
 
-A [`custom_security`](#security-58d18e) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.tls_config`](#config-176cb8)) supports the following:
-
-<a id="suites-34c264"></a>&#x2022; [`cipher_suites`](#suites-34c264) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-88ebe1"></a>&#x2022; [`max_version`](#version-88ebe1) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-6b1cf9"></a>&#x2022; [`min_version`](#version-6b1cf9) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-d9d763"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS
 
-An [`use_mtls`](#mtls-1ac9ce) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`](#cert-ed6cf0)) supports the following:
-
-<a id="optional-79056d"></a>&#x2022; [`client_certificate_optional`](#optional-79056d) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-1b67dd"></a>&#x2022; [`crl`](#crl-1b67dd) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-1b67dd) below.
-
-<a id="crl-47a8d2"></a>&#x2022; [`no_crl`](#crl-47a8d2) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-bf22b6"></a>&#x2022; [`trusted_ca`](#trusted-ca-bf22b6) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-bf22b6) below.
-
-<a id="url-f69a7a"></a>&#x2022; [`trusted_ca_url`](#url-f69a7a) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-d427bb"></a>&#x2022; [`xfcc_disabled`](#disabled-d427bb) - Optional Block<br>Enable this option
-
-<a id="options-b6aa4f"></a>&#x2022; [`xfcc_options`](#options-b6aa4f) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-b6aa4f) below.
+<a id="deep-4b8890"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
 
-A [`crl`](#crl-1b67dd) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-1ac9ce)) supports the following:
-
-<a id="name-aec6f0"></a>&#x2022; [`name`](#name-aec6f0) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-989a97"></a>&#x2022; [`namespace`](#namespace-989a97) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-dd2766"></a>&#x2022; [`tenant`](#tenant-dd2766) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-99074b"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-bf22b6) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-1ac9ce)) supports the following:
-
-<a id="name-2e5c27"></a>&#x2022; [`name`](#name-2e5c27) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c5f3e3"></a>&#x2022; [`namespace`](#namespace-c5f3e3) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-3c7bf6"></a>&#x2022; [`tenant`](#tenant-3c7bf6) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-f9f4c3"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-b6aa4f) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-1ac9ce)) supports the following:
-
-<a id="elements-9d0792"></a>&#x2022; [`xfcc_header_elements`](#elements-9d0792) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-66d7da"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes
 
-A [`specific_routes`](#routes-ab40c2) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`](#loadbalancer-6776e5)) supports the following:
-
-<a id="routes-068baf"></a>&#x2022; [`routes`](#routes-068baf) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#routes-068baf) below.
+<a id="deep-30820a"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes
 
-A [`routes`](#routes-068baf) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes`](#routes-ab40c2)) supports the following:
-
-<a id="object-0160bd"></a>&#x2022; [`custom_route_object`](#object-0160bd) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#object-0160bd) below.
-
-<a id="route-de4060"></a>&#x2022; [`direct_response_route`](#route-de4060) - Optional Block<br>Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic<br>See [Direct Response Route](#route-de4060) below.
-
-<a id="route-f901a0"></a>&#x2022; [`redirect_route`](#route-f901a0) - Optional Block<br>Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL<br>See [Redirect Route](#route-f901a0) below.
-
-<a id="route-cdedbc"></a>&#x2022; [`simple_route`](#route-cdedbc) - Optional Block<br>Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside<br>See [Simple Route](#route-cdedbc) below.
+<a id="deep-b4c6e8"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object
 
-A [`custom_route_object`](#object-0160bd) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`](#routes-068baf)) supports the following:
-
-<a id="ref-d26418"></a>&#x2022; [`route_ref`](#ref-d26418) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#ref-d26418) below.
+<a id="deep-b3f649"></a>Deeply nested **Object** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
 
-A [`route_ref`](#ref-d26418) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.custom_route_object`](#object-0160bd)) supports the following:
-
-<a id="name-9d5a9d"></a>&#x2022; [`name`](#name-9d5a9d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c53710"></a>&#x2022; [`namespace`](#namespace-c53710) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-4f3f0a"></a>&#x2022; [`tenant`](#tenant-4f3f0a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-fa356c"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route
 
-A [`direct_response_route`](#route-de4060) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`](#routes-068baf)) supports the following:
-
-<a id="headers-910d0b"></a>&#x2022; [`headers`](#headers-910d0b) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-910d0b) below.
-
-<a id="method-75da3e"></a>&#x2022; [`http_method`](#method-75da3e) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-b90047"></a>&#x2022; [`incoming_port`](#port-b90047) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-b90047) below.
-
-<a id="path-dda5ca"></a>&#x2022; [`path`](#path-dda5ca) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-dda5ca) below.
-
-<a id="response-df4723"></a>&#x2022; [`route_direct_response`](#response-df4723) - Optional Block<br>Direct Response. Send this direct response in case of route match action is direct response<br>See [Route Direct Response](#response-df4723) below.
+<a id="deep-8d239e"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
 
-A [`headers`](#headers-910d0b) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-de4060)) supports the following:
-
-<a id="exact-b40f3a"></a>&#x2022; [`exact`](#exact-b40f3a) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-24fb02"></a>&#x2022; [`invert_match`](#match-24fb02) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-292a59"></a>&#x2022; [`name`](#name-292a59) - Optional String<br>Name. Name of the header
-
-<a id="presence-6c07b8"></a>&#x2022; [`presence`](#presence-6c07b8) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-cc6fda"></a>&#x2022; [`regex`](#regex-cc6fda) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-ca1e3f"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
 
-An [`incoming_port`](#port-b90047) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-de4060)) supports the following:
-
-<a id="match-6ef941"></a>&#x2022; [`no_port_match`](#match-6ef941) - Optional Block<br>Enable this option
-
-<a id="port-119927"></a>&#x2022; [`port`](#port-119927) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-9a1a62"></a>&#x2022; [`port_ranges`](#ranges-9a1a62) - Optional String<br>Port range. Port range to match
+<a id="deep-337787"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
 
-A [`path`](#path-dda5ca) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-de4060)) supports the following:
-
-<a id="path-b7904e"></a>&#x2022; [`path`](#path-b7904e) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-8c022e"></a>&#x2022; [`prefix`](#prefix-8c022e) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-4e799f"></a>&#x2022; [`regex`](#regex-4e799f) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-3daf64"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
 
-A [`route_direct_response`](#response-df4723) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-de4060)) supports the following:
-
-<a id="encoded-6dcf73"></a>&#x2022; [`response_body_encoded`](#encoded-6dcf73) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
-
-<a id="code-668a56"></a>&#x2022; [`response_code`](#code-668a56) - Optional Number<br>Response Code. response code to send
+<a id="deep-640d68"></a>Deeply nested **Response** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route
 
-A [`redirect_route`](#route-f901a0) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`](#routes-068baf)) supports the following:
-
-<a id="headers-def8d9"></a>&#x2022; [`headers`](#headers-def8d9) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-def8d9) below.
-
-<a id="method-92e30c"></a>&#x2022; [`http_method`](#method-92e30c) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-2ad0d5"></a>&#x2022; [`incoming_port`](#port-2ad0d5) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-2ad0d5) below.
-
-<a id="path-090554"></a>&#x2022; [`path`](#path-090554) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-090554) below.
-
-<a id="redirect-678316"></a>&#x2022; [`route_redirect`](#redirect-678316) - Optional Block<br>Redirect. route redirect parameters when match action is redirect<br>See [Route Redirect](#redirect-678316) below.
+<a id="deep-e97b13"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
 
-A [`headers`](#headers-def8d9) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-f901a0)) supports the following:
-
-<a id="exact-e56153"></a>&#x2022; [`exact`](#exact-e56153) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-e4e0b8"></a>&#x2022; [`invert_match`](#match-e4e0b8) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-673b9c"></a>&#x2022; [`name`](#name-673b9c) - Optional String<br>Name. Name of the header
-
-<a id="presence-34dbef"></a>&#x2022; [`presence`](#presence-34dbef) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-e6fffd"></a>&#x2022; [`regex`](#regex-e6fffd) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-893273"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
 
-An [`incoming_port`](#port-2ad0d5) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-f901a0)) supports the following:
-
-<a id="match-92a82e"></a>&#x2022; [`no_port_match`](#match-92a82e) - Optional Block<br>Enable this option
-
-<a id="port-710cf1"></a>&#x2022; [`port`](#port-710cf1) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-2d9b44"></a>&#x2022; [`port_ranges`](#ranges-2d9b44) - Optional String<br>Port range. Port range to match
+<a id="deep-7d903b"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path
 
-A [`path`](#path-090554) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-f901a0)) supports the following:
-
-<a id="path-d32978"></a>&#x2022; [`path`](#path-d32978) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-27c549"></a>&#x2022; [`prefix`](#prefix-27c549) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-c0b813"></a>&#x2022; [`regex`](#regex-c0b813) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-8eea80"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
 
-A [`route_redirect`](#redirect-678316) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-f901a0)) supports the following:
-
-<a id="redirect-0055ea"></a>&#x2022; [`host_redirect`](#redirect-0055ea) - Optional String<br>Host. swap host part of incoming URL in redirect URL
-
-<a id="redirect-45c3c2"></a>&#x2022; [`path_redirect`](#redirect-45c3c2) - Optional String<br>Path. swap path part of incoming URL in redirect URL
-
-<a id="rewrite-c0dd1b"></a>&#x2022; [`prefix_rewrite`](#rewrite-c0dd1b) - Optional String<br>Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request
-
-<a id="redirect-7ff8e9"></a>&#x2022; [`proto_redirect`](#redirect-7ff8e9) - Optional String<br>Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done
-
-<a id="params-a5e558"></a>&#x2022; [`remove_all_params`](#params-a5e558) - Optional Block<br>Enable this option
-
-<a id="params-5b3a4a"></a>&#x2022; [`replace_params`](#params-5b3a4a) - Optional String<br>Replace All Parameters
-
-<a id="code-c179ab"></a>&#x2022; [`response_code`](#code-c179ab) - Optional Number<br>Response Code. The HTTP status code to use in the redirect response
-
-<a id="params-8ec926"></a>&#x2022; [`retain_all_params`](#params-8ec926) - Optional Block<br>Enable this option
+<a id="deep-016eb6"></a>Deeply nested **Redirect** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route
 
-A [`simple_route`](#route-cdedbc) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`](#routes-068baf)) supports the following:
-
-<a id="rewrite-92745f"></a>&#x2022; [`auto_host_rewrite`](#rewrite-92745f) - Optional Block<br>Enable this option
-
-<a id="rewrite-ac530f"></a>&#x2022; [`disable_host_rewrite`](#rewrite-ac530f) - Optional Block<br>Enable this option
-
-<a id="rewrite-21e6a1"></a>&#x2022; [`host_rewrite`](#rewrite-21e6a1) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
-
-<a id="method-16ea15"></a>&#x2022; [`http_method`](#method-16ea15) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="path-d9b41c"></a>&#x2022; [`path`](#path-d9b41c) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-d9b41c) below.
+<a id="deep-1e7841"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path
 
-A [`path`](#path-d9b41c) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.simple_route`](#route-cdedbc)) supports the following:
-
-<a id="path-7d5fa2"></a>&#x2022; [`path`](#path-7d5fa2) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-3a4c27"></a>&#x2022; [`prefix`](#prefix-3a4c27) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-86d259"></a>&#x2022; [`regex`](#regex-86d259) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-1ab782"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports Port
 
-A [`port`](#port-e2b742) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports`](#ports-337178)) supports the following:
-
-<a id="info-314722"></a>&#x2022; [`info`](#info-314722) - Optional Block<br>Port Information. Port information<br>See [Info](#info-314722) below.
-
-<a id="name-4a3dd0"></a>&#x2022; [`name`](#name-4a3dd0) - Optional String<br>Name. Name of the Port
+<a id="deep-f4ab08"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports Port Info
 
-An [`info`](#info-314722) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports.port`](#port-e2b742)) supports the following:
-
-<a id="port-d31df1"></a>&#x2022; [`port`](#port-d31df1) - Optional Number<br>Port. Port the workload can be reached on
-
-<a id="protocol-133aa7"></a>&#x2022; [`protocol`](#protocol-133aa7) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP
-
-<a id="port-7d07c7"></a>&#x2022; [`same_as_port`](#port-7d07c7) - Optional Block<br>Enable this option
-
-<a id="port-3bb532"></a>&#x2022; [`target_port`](#port-3bb532) - Optional Number<br>Different than Port. Port the workload is listening on
+<a id="deep-1ce2ae"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Multi Ports Ports TCP Loadbalancer
 
-A [`tcp_loadbalancer`](#loadbalancer-9b1f8d) block (within [`service.advertise_options.advertise_on_public.multi_ports.ports`](#ports-337178)) supports the following:
-
-<a id="domains-f78eaf"></a>&#x2022; [`domains`](#domains-f78eaf) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="sni-61230f"></a>&#x2022; [`with_sni`](#sni-61230f) - Optional Bool<br>With SNI. Set to true to enable TCP loadbalancer with SNI
+<a id="deep-5977e4"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port
 
@@ -2043,677 +1039,235 @@ A [`port`](#port-c54e32) block (within [`service.advertise_options.advertise_on_
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer
 
-A [`http_loadbalancer`](#loadbalancer-96cb17) block (within [`service.advertise_options.advertise_on_public.port`](#port-c54e32)) supports the following:
-
-<a id="route-5952d2"></a>&#x2022; [`default_route`](#route-5952d2) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#route-5952d2) below.
-
-<a id="domains-fe38e2"></a>&#x2022; [`domains`](#domains-fe38e2) - Optional List<br>Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and \*.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="http-ea8239"></a>&#x2022; [`http`](#http-ea8239) - Optional Block<br>HTTP Choice. Choice for selecting HTTP proxy<br>See [HTTP](#http-ea8239) below.
-
-<a id="https-e548ff"></a>&#x2022; [`https`](#https-e548ff) - Optional Block<br>BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS](#https-e548ff) below.
-
-<a id="cert-f2ed6c"></a>&#x2022; [`https_auto_cert`](#cert-f2ed6c) - Optional Block<br>HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS Auto Cert](#cert-f2ed6c) below.
-
-<a id="routes-874498"></a>&#x2022; [`specific_routes`](#routes-874498) - Optional Block<br>Route Type. This defines various options to define a route<br>See [Specific Routes](#routes-874498) below.
+<a id="deep-8f00d7"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Default Route
 
-A [`default_route`](#route-5952d2) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer`](#loadbalancer-96cb17)) supports the following:
-
-<a id="rewrite-3971f5"></a>&#x2022; [`auto_host_rewrite`](#rewrite-3971f5) - Optional Block<br>Enable this option
-
-<a id="rewrite-13368b"></a>&#x2022; [`disable_host_rewrite`](#rewrite-13368b) - Optional Block<br>Enable this option
-
-<a id="rewrite-1abe4b"></a>&#x2022; [`host_rewrite`](#rewrite-1abe4b) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
+<a id="deep-48638b"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTP
 
-A [`http`](#http-ea8239) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer`](#loadbalancer-96cb17)) supports the following:
-
-<a id="managed-f17402"></a>&#x2022; [`dns_volterra_managed`](#managed-f17402) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
-
-<a id="port-65bead"></a>&#x2022; [`port`](#port-65bead) - Optional Number<br>HTTP Listen Port. HTTP port to Listen
-
-<a id="ranges-bc12dd"></a>&#x2022; [`port_ranges`](#ranges-bc12dd) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<a id="deep-f2a50d"></a>Deeply nested **HTTP** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS
 
-A [`https`](#https-e548ff) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer`](#loadbalancer-96cb17)) supports the following:
-
-<a id="hsts-78f561"></a>&#x2022; [`add_hsts`](#hsts-78f561) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-f3eae5"></a>&#x2022; [`append_server_name`](#name-f3eae5) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-ce2732"></a>&#x2022; [`coalescing_options`](#options-ce2732) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-ce2732) below.
-
-<a id="timeout-aa8f04"></a>&#x2022; [`connection_idle_timeout`](#timeout-aa8f04) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-e6a76e"></a>&#x2022; [`default_header`](#header-e6a76e) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-3acec3"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-3acec3) - Optional Block<br>Enable this option
-
-<a id="normalize-684595"></a>&#x2022; [`disable_path_normalize`](#normalize-684595) - Optional Block<br>Enable this option
-
-<a id="normalize-9d55f7"></a>&#x2022; [`enable_path_normalize`](#normalize-9d55f7) - Optional Block<br>Enable this option
-
-<a id="options-117819"></a>&#x2022; [`http_protocol_options`](#options-117819) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-117819) below.
-
-<a id="redirect-a67387"></a>&#x2022; [`http_redirect`](#redirect-a67387) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="loadbalancer-c8ffdc"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-c8ffdc) - Optional Block<br>Enable this option
-
-<a id="through-6f96a2"></a>&#x2022; [`pass_through`](#through-6f96a2) - Optional Block<br>Enable this option
-
-<a id="port-182972"></a>&#x2022; [`port`](#port-182972) - Optional Number<br>HTTPS Port. HTTPS port to Listen
-
-<a id="ranges-69bc81"></a>&#x2022; [`port_ranges`](#ranges-69bc81) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-e8a0b9"></a>&#x2022; [`server_name`](#name-e8a0b9) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="params-49d42e"></a>&#x2022; [`tls_cert_params`](#params-49d42e) - Optional Block<br>TLS Parameters. Select TLS Parameters and Certificates<br>See [TLS Cert Params](#params-49d42e) below.
-
-<a id="parameters-6cc510"></a>&#x2022; [`tls_parameters`](#parameters-6cc510) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [TLS Parameters](#parameters-6cc510) below.
+<a id="deep-67821c"></a>Deeply nested **HTTPS** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Coalescing Options
 
-A [`coalescing_options`](#options-ce2732) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https`](#https-e548ff)) supports the following:
-
-<a id="coalescing-bff6a1"></a>&#x2022; [`default_coalescing`](#coalescing-bff6a1) - Optional Block<br>Enable this option
-
-<a id="coalescing-5b8895"></a>&#x2022; [`strict_coalescing`](#coalescing-5b8895) - Optional Block<br>Enable this option
+<a id="deep-424d68"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options
 
-A [`http_protocol_options`](#options-117819) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https`](#https-e548ff)) supports the following:
-
-<a id="only-e49def"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-e49def) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-e49def) below.
-
-<a id="v1-v2-10571e"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-10571e) - Optional Block<br>Enable this option
-
-<a id="only-57a7bd"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-57a7bd) - Optional Block<br>Enable this option
+<a id="deep-e9a072"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-e49def) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.http_protocol_options`](#options-117819)) supports the following:
-
-<a id="transformation-aab771"></a>&#x2022; [`header_transformation`](#transformation-aab771) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-aab771) below.
+<a id="deep-0c6299"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-aab771) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`](#only-e49def)) supports the following:
-
-<a id="transformation-7fa08b"></a>&#x2022; [`default_header_transformation`](#transformation-7fa08b) - Optional Block<br>Enable this option
-
-<a id="transformation-99278f"></a>&#x2022; [`legacy_header_transformation`](#transformation-99278f) - Optional Block<br>Enable this option
-
-<a id="transformation-b6a94b"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-b6a94b) - Optional Block<br>Enable this option
-
-<a id="transformation-d587c1"></a>&#x2022; [`proper_case_header_transformation`](#transformation-d587c1) - Optional Block<br>Enable this option
+<a id="deep-4f3e9b"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params
 
-A [`tls_cert_params`](#params-49d42e) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https`](#https-e548ff)) supports the following:
-
-<a id="certificates-fa76e3"></a>&#x2022; [`certificates`](#certificates-fa76e3) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#certificates-fa76e3) below.
-
-<a id="mtls-05b50c"></a>&#x2022; [`no_mtls`](#mtls-05b50c) - Optional Block<br>Enable this option
-
-<a id="config-db89a6"></a>&#x2022; [`tls_config`](#config-db89a6) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-db89a6) below.
-
-<a id="mtls-17dfb0"></a>&#x2022; [`use_mtls`](#mtls-17dfb0) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-17dfb0) below.
+<a id="deep-e981ba"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Certificates
 
-A [`certificates`](#certificates-fa76e3) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`](#params-49d42e)) supports the following:
-
-<a id="name-279674"></a>&#x2022; [`name`](#name-279674) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-242509"></a>&#x2022; [`namespace`](#namespace-242509) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-54e257"></a>&#x2022; [`tenant`](#tenant-54e257) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-090632"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
 
-A [`tls_config`](#config-db89a6) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`](#params-49d42e)) supports the following:
-
-<a id="security-a5746f"></a>&#x2022; [`custom_security`](#security-a5746f) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-a5746f) below.
-
-<a id="security-726c3e"></a>&#x2022; [`default_security`](#security-726c3e) - Optional Block<br>Enable this option
-
-<a id="security-7f8889"></a>&#x2022; [`low_security`](#security-7f8889) - Optional Block<br>Enable this option
-
-<a id="security-880e3a"></a>&#x2022; [`medium_security`](#security-880e3a) - Optional Block<br>Enable this option
+<a id="deep-2945ab"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
 
-A [`custom_security`](#security-a5746f) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.tls_config`](#config-db89a6)) supports the following:
-
-<a id="suites-b40264"></a>&#x2022; [`cipher_suites`](#suites-b40264) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-67b5d7"></a>&#x2022; [`max_version`](#version-67b5d7) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-d339b5"></a>&#x2022; [`min_version`](#version-d339b5) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-f05e85"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
 
-An [`use_mtls`](#mtls-17dfb0) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`](#params-49d42e)) supports the following:
-
-<a id="optional-acde9a"></a>&#x2022; [`client_certificate_optional`](#optional-acde9a) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-851f68"></a>&#x2022; [`crl`](#crl-851f68) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-851f68) below.
-
-<a id="crl-9ac602"></a>&#x2022; [`no_crl`](#crl-9ac602) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-3bf579"></a>&#x2022; [`trusted_ca`](#trusted-ca-3bf579) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-3bf579) below.
-
-<a id="url-d32b7f"></a>&#x2022; [`trusted_ca_url`](#url-d32b7f) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-1b3d7d"></a>&#x2022; [`xfcc_disabled`](#disabled-1b3d7d) - Optional Block<br>Enable this option
-
-<a id="options-c37f29"></a>&#x2022; [`xfcc_options`](#options-c37f29) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-c37f29) below.
+<a id="deep-f06f40"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
 
-A [`crl`](#crl-851f68) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-17dfb0)) supports the following:
-
-<a id="name-2533b2"></a>&#x2022; [`name`](#name-2533b2) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-162578"></a>&#x2022; [`namespace`](#namespace-162578) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-4df3ce"></a>&#x2022; [`tenant`](#tenant-4df3ce) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-79b558"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-3bf579) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-17dfb0)) supports the following:
-
-<a id="name-4575c5"></a>&#x2022; [`name`](#name-4575c5) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-832fe6"></a>&#x2022; [`namespace`](#namespace-832fe6) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1cbc87"></a>&#x2022; [`tenant`](#tenant-1cbc87) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-02b65c"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-c37f29) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-17dfb0)) supports the following:
-
-<a id="elements-0c5007"></a>&#x2022; [`xfcc_header_elements`](#elements-0c5007) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-93c7bc"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters
 
-A [`tls_parameters`](#parameters-6cc510) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https`](#https-e548ff)) supports the following:
-
-<a id="mtls-465fb3"></a>&#x2022; [`no_mtls`](#mtls-465fb3) - Optional Block<br>Enable this option
-
-<a id="certificates-c9b9d9"></a>&#x2022; [`tls_certificates`](#certificates-c9b9d9) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-c9b9d9) below.
-
-<a id="config-e703f3"></a>&#x2022; [`tls_config`](#config-e703f3) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-e703f3) below.
-
-<a id="mtls-fd393a"></a>&#x2022; [`use_mtls`](#mtls-fd393a) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-fd393a) below.
+<a id="deep-6a5f00"></a>Deeply nested **Parameters** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
 
-A [`tls_certificates`](#certificates-c9b9d9) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`](#parameters-6cc510)) supports the following:
-
-<a id="url-c88824"></a>&#x2022; [`certificate_url`](#url-c88824) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-f2569c"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-f2569c) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-f2569c) below.
-
-<a id="spec-5c7410"></a>&#x2022; [`description_spec`](#spec-5c7410) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-01f655"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-01f655) - Optional Block<br>Enable this option
-
-<a id="key-5e0e01"></a>&#x2022; [`private_key`](#key-5e0e01) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-5e0e01) below.
-
-<a id="defaults-4af7fb"></a>&#x2022; [`use_system_defaults`](#defaults-4af7fb) - Optional Block<br>Enable this option
+<a id="deep-d2decf"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-f2569c) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-c9b9d9)) supports the following:
-
-<a id="algorithms-5dec62"></a>&#x2022; [`hash_algorithms`](#algorithms-5dec62) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-1c2d40"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
 
-A [`private_key`](#key-5e0e01) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-c9b9d9)) supports the following:
-
-<a id="info-4eba00"></a>&#x2022; [`blindfold_secret_info`](#info-4eba00) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-4eba00) below.
-
-<a id="info-33b33e"></a>&#x2022; [`clear_secret_info`](#info-33b33e) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-33b33e) below.
+<a id="deep-20fd03"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-4eba00) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-5e0e01)) supports the following:
-
-<a id="provider-5ce0bd"></a>&#x2022; [`decryption_provider`](#provider-5ce0bd) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-cf2c9c"></a>&#x2022; [`location`](#location-cf2c9c) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-8566a6"></a>&#x2022; [`store_provider`](#provider-8566a6) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-81b3c1"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-33b33e) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-5e0e01)) supports the following:
-
-<a id="ref-c2ac9e"></a>&#x2022; [`provider_ref`](#ref-c2ac9e) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-ccb498"></a>&#x2022; [`url`](#url-ccb498) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-e7afa8"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config
 
-A [`tls_config`](#config-e703f3) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`](#parameters-6cc510)) supports the following:
-
-<a id="security-529981"></a>&#x2022; [`custom_security`](#security-529981) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-529981) below.
-
-<a id="security-e047da"></a>&#x2022; [`default_security`](#security-e047da) - Optional Block<br>Enable this option
-
-<a id="security-256399"></a>&#x2022; [`low_security`](#security-256399) - Optional Block<br>Enable this option
-
-<a id="security-790966"></a>&#x2022; [`medium_security`](#security-790966) - Optional Block<br>Enable this option
+<a id="deep-976d3d"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
 
-A [`custom_security`](#security-529981) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_config`](#config-e703f3)) supports the following:
-
-<a id="suites-853514"></a>&#x2022; [`cipher_suites`](#suites-853514) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-aef4c3"></a>&#x2022; [`max_version`](#version-aef4c3) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-19bc29"></a>&#x2022; [`min_version`](#version-19bc29) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-332564"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
 
-An [`use_mtls`](#mtls-fd393a) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`](#parameters-6cc510)) supports the following:
-
-<a id="optional-258187"></a>&#x2022; [`client_certificate_optional`](#optional-258187) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-1c6e4d"></a>&#x2022; [`crl`](#crl-1c6e4d) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-1c6e4d) below.
-
-<a id="crl-d834bb"></a>&#x2022; [`no_crl`](#crl-d834bb) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-09af8c"></a>&#x2022; [`trusted_ca`](#trusted-ca-09af8c) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-09af8c) below.
-
-<a id="url-24eb38"></a>&#x2022; [`trusted_ca_url`](#url-24eb38) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-6c4821"></a>&#x2022; [`xfcc_disabled`](#disabled-6c4821) - Optional Block<br>Enable this option
-
-<a id="options-a6b1c2"></a>&#x2022; [`xfcc_options`](#options-a6b1c2) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-a6b1c2) below.
+<a id="deep-6f5f3a"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
 
-A [`crl`](#crl-1c6e4d) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-fd393a)) supports the following:
-
-<a id="name-484e8f"></a>&#x2022; [`name`](#name-484e8f) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-2eec00"></a>&#x2022; [`namespace`](#namespace-2eec00) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1bc184"></a>&#x2022; [`tenant`](#tenant-1bc184) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-55496a"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-09af8c) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-fd393a)) supports the following:
-
-<a id="name-c80262"></a>&#x2022; [`name`](#name-c80262) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-4a195c"></a>&#x2022; [`namespace`](#namespace-4a195c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-4efa34"></a>&#x2022; [`tenant`](#tenant-4efa34) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-20e21b"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-a6b1c2) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-fd393a)) supports the following:
-
-<a id="elements-0cec1f"></a>&#x2022; [`xfcc_header_elements`](#elements-0cec1f) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-123824"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert
 
-A [`https_auto_cert`](#cert-f2ed6c) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer`](#loadbalancer-96cb17)) supports the following:
-
-<a id="hsts-3769a2"></a>&#x2022; [`add_hsts`](#hsts-3769a2) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-f220b3"></a>&#x2022; [`append_server_name`](#name-f220b3) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-13a7a7"></a>&#x2022; [`coalescing_options`](#options-13a7a7) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-13a7a7) below.
-
-<a id="timeout-948a93"></a>&#x2022; [`connection_idle_timeout`](#timeout-948a93) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-635444"></a>&#x2022; [`default_header`](#header-635444) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-7688af"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-7688af) - Optional Block<br>Enable this option
-
-<a id="normalize-e5a6ad"></a>&#x2022; [`disable_path_normalize`](#normalize-e5a6ad) - Optional Block<br>Enable this option
-
-<a id="normalize-d69134"></a>&#x2022; [`enable_path_normalize`](#normalize-d69134) - Optional Block<br>Enable this option
-
-<a id="options-c1ced3"></a>&#x2022; [`http_protocol_options`](#options-c1ced3) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-c1ced3) below.
-
-<a id="redirect-1b5ecf"></a>&#x2022; [`http_redirect`](#redirect-1b5ecf) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="mtls-7bcb89"></a>&#x2022; [`no_mtls`](#mtls-7bcb89) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-d9f657"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-d9f657) - Optional Block<br>Enable this option
-
-<a id="through-7ce6fa"></a>&#x2022; [`pass_through`](#through-7ce6fa) - Optional Block<br>Enable this option
-
-<a id="port-b061c8"></a>&#x2022; [`port`](#port-b061c8) - Optional Number<br>HTTPS Listen Port. HTTPS port to Listen
-
-<a id="ranges-18d0b0"></a>&#x2022; [`port_ranges`](#ranges-18d0b0) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-f979f5"></a>&#x2022; [`server_name`](#name-f979f5) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="config-287d08"></a>&#x2022; [`tls_config`](#config-287d08) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-287d08) below.
-
-<a id="mtls-d53ea0"></a>&#x2022; [`use_mtls`](#mtls-d53ea0) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-d53ea0) below.
+<a id="deep-d33ae7"></a>Deeply nested **Cert** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
 
-A [`coalescing_options`](#options-13a7a7) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`](#cert-f2ed6c)) supports the following:
-
-<a id="coalescing-ba6083"></a>&#x2022; [`default_coalescing`](#coalescing-ba6083) - Optional Block<br>Enable this option
-
-<a id="coalescing-a9f893"></a>&#x2022; [`strict_coalescing`](#coalescing-a9f893) - Optional Block<br>Enable this option
+<a id="deep-04759a"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
 
-A [`http_protocol_options`](#options-c1ced3) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`](#cert-f2ed6c)) supports the following:
-
-<a id="only-de6921"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-de6921) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-de6921) below.
-
-<a id="v1-v2-2f7172"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-2f7172) - Optional Block<br>Enable this option
-
-<a id="only-34896a"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-34896a) - Optional Block<br>Enable this option
+<a id="deep-67fd92"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-de6921) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.http_protocol_options`](#options-c1ced3)) supports the following:
-
-<a id="transformation-9901a7"></a>&#x2022; [`header_transformation`](#transformation-9901a7) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-9901a7) below.
+<a id="deep-66c7c3"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-9901a7) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`](#only-de6921)) supports the following:
-
-<a id="transformation-6bc2ce"></a>&#x2022; [`default_header_transformation`](#transformation-6bc2ce) - Optional Block<br>Enable this option
-
-<a id="transformation-c71641"></a>&#x2022; [`legacy_header_transformation`](#transformation-c71641) - Optional Block<br>Enable this option
-
-<a id="transformation-a6b765"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-a6b765) - Optional Block<br>Enable this option
-
-<a id="transformation-64c945"></a>&#x2022; [`proper_case_header_transformation`](#transformation-64c945) - Optional Block<br>Enable this option
+<a id="deep-8b6fcc"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config
 
-A [`tls_config`](#config-287d08) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`](#cert-f2ed6c)) supports the following:
-
-<a id="security-888b28"></a>&#x2022; [`custom_security`](#security-888b28) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-888b28) below.
-
-<a id="security-9ad91a"></a>&#x2022; [`default_security`](#security-9ad91a) - Optional Block<br>Enable this option
-
-<a id="security-a3137c"></a>&#x2022; [`low_security`](#security-a3137c) - Optional Block<br>Enable this option
-
-<a id="security-c3c555"></a>&#x2022; [`medium_security`](#security-c3c555) - Optional Block<br>Enable this option
+<a id="deep-e0e48d"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
 
-A [`custom_security`](#security-888b28) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.tls_config`](#config-287d08)) supports the following:
-
-<a id="suites-bf6997"></a>&#x2022; [`cipher_suites`](#suites-bf6997) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-dda2f3"></a>&#x2022; [`max_version`](#version-dda2f3) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-8aba06"></a>&#x2022; [`min_version`](#version-8aba06) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-de57d7"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS
 
-An [`use_mtls`](#mtls-d53ea0) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`](#cert-f2ed6c)) supports the following:
-
-<a id="optional-5310da"></a>&#x2022; [`client_certificate_optional`](#optional-5310da) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-347258"></a>&#x2022; [`crl`](#crl-347258) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-347258) below.
-
-<a id="crl-ce2cd0"></a>&#x2022; [`no_crl`](#crl-ce2cd0) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-f109e8"></a>&#x2022; [`trusted_ca`](#trusted-ca-f109e8) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-f109e8) below.
-
-<a id="url-1089e6"></a>&#x2022; [`trusted_ca_url`](#url-1089e6) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-c25c6d"></a>&#x2022; [`xfcc_disabled`](#disabled-c25c6d) - Optional Block<br>Enable this option
-
-<a id="options-5addd2"></a>&#x2022; [`xfcc_options`](#options-5addd2) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-5addd2) below.
+<a id="deep-3f768b"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
 
-A [`crl`](#crl-347258) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-d53ea0)) supports the following:
-
-<a id="name-9837d0"></a>&#x2022; [`name`](#name-9837d0) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b6080c"></a>&#x2022; [`namespace`](#namespace-b6080c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e59195"></a>&#x2022; [`tenant`](#tenant-e59195) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-e15bac"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-f109e8) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-d53ea0)) supports the following:
-
-<a id="name-2ceb86"></a>&#x2022; [`name`](#name-2ceb86) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-eeef5c"></a>&#x2022; [`namespace`](#namespace-eeef5c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-6fb959"></a>&#x2022; [`tenant`](#tenant-6fb959) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-2315b8"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-5addd2) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-d53ea0)) supports the following:
-
-<a id="elements-8920ad"></a>&#x2022; [`xfcc_header_elements`](#elements-8920ad) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-f33892"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes
 
-A [`specific_routes`](#routes-874498) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer`](#loadbalancer-96cb17)) supports the following:
-
-<a id="routes-12a0bb"></a>&#x2022; [`routes`](#routes-12a0bb) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#routes-12a0bb) below.
+<a id="deep-b6228c"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes
 
-A [`routes`](#routes-12a0bb) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes`](#routes-874498)) supports the following:
-
-<a id="object-bc60da"></a>&#x2022; [`custom_route_object`](#object-bc60da) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#object-bc60da) below.
-
-<a id="route-ad2526"></a>&#x2022; [`direct_response_route`](#route-ad2526) - Optional Block<br>Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic<br>See [Direct Response Route](#route-ad2526) below.
-
-<a id="route-268834"></a>&#x2022; [`redirect_route`](#route-268834) - Optional Block<br>Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL<br>See [Redirect Route](#route-268834) below.
-
-<a id="route-3a5038"></a>&#x2022; [`simple_route`](#route-3a5038) - Optional Block<br>Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside<br>See [Simple Route](#route-3a5038) below.
+<a id="deep-3856c3"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object
 
-A [`custom_route_object`](#object-bc60da) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`](#routes-12a0bb)) supports the following:
-
-<a id="ref-79039f"></a>&#x2022; [`route_ref`](#ref-79039f) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#ref-79039f) below.
+<a id="deep-167a98"></a>Deeply nested **Object** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
 
-A [`route_ref`](#ref-79039f) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.custom_route_object`](#object-bc60da)) supports the following:
-
-<a id="name-8721c8"></a>&#x2022; [`name`](#name-8721c8) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-280840"></a>&#x2022; [`namespace`](#namespace-280840) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-4636f9"></a>&#x2022; [`tenant`](#tenant-4636f9) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-6c1d94"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route
 
-A [`direct_response_route`](#route-ad2526) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`](#routes-12a0bb)) supports the following:
-
-<a id="headers-7d4e50"></a>&#x2022; [`headers`](#headers-7d4e50) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-7d4e50) below.
-
-<a id="method-73e506"></a>&#x2022; [`http_method`](#method-73e506) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-c55e7d"></a>&#x2022; [`incoming_port`](#port-c55e7d) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-c55e7d) below.
-
-<a id="path-9560a7"></a>&#x2022; [`path`](#path-9560a7) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-9560a7) below.
-
-<a id="response-32822b"></a>&#x2022; [`route_direct_response`](#response-32822b) - Optional Block<br>Direct Response. Send this direct response in case of route match action is direct response<br>See [Route Direct Response](#response-32822b) below.
+<a id="deep-1a89cd"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
 
-A [`headers`](#headers-7d4e50) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-ad2526)) supports the following:
-
-<a id="exact-aba054"></a>&#x2022; [`exact`](#exact-aba054) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-a5c980"></a>&#x2022; [`invert_match`](#match-a5c980) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-9e743f"></a>&#x2022; [`name`](#name-9e743f) - Optional String<br>Name. Name of the header
-
-<a id="presence-77ac1c"></a>&#x2022; [`presence`](#presence-77ac1c) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-b50994"></a>&#x2022; [`regex`](#regex-b50994) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-9754bd"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
 
-An [`incoming_port`](#port-c55e7d) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-ad2526)) supports the following:
-
-<a id="match-8ab206"></a>&#x2022; [`no_port_match`](#match-8ab206) - Optional Block<br>Enable this option
-
-<a id="port-bb50df"></a>&#x2022; [`port`](#port-bb50df) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-ed74a5"></a>&#x2022; [`port_ranges`](#ranges-ed74a5) - Optional String<br>Port range. Port range to match
+<a id="deep-babbdb"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
 
-A [`path`](#path-9560a7) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-ad2526)) supports the following:
-
-<a id="path-b820d1"></a>&#x2022; [`path`](#path-b820d1) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-e98df6"></a>&#x2022; [`prefix`](#prefix-e98df6) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-017797"></a>&#x2022; [`regex`](#regex-017797) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-3b276b"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
 
-A [`route_direct_response`](#response-32822b) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-ad2526)) supports the following:
-
-<a id="encoded-5ed2ce"></a>&#x2022; [`response_body_encoded`](#encoded-5ed2ce) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
-
-<a id="code-f32381"></a>&#x2022; [`response_code`](#code-f32381) - Optional Number<br>Response Code. response code to send
+<a id="deep-317ed4"></a>Deeply nested **Response** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route
 
-A [`redirect_route`](#route-268834) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`](#routes-12a0bb)) supports the following:
-
-<a id="headers-d42523"></a>&#x2022; [`headers`](#headers-d42523) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-d42523) below.
-
-<a id="method-9bbc2c"></a>&#x2022; [`http_method`](#method-9bbc2c) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-b269d6"></a>&#x2022; [`incoming_port`](#port-b269d6) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-b269d6) below.
-
-<a id="path-3e1483"></a>&#x2022; [`path`](#path-3e1483) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-3e1483) below.
-
-<a id="redirect-49e622"></a>&#x2022; [`route_redirect`](#redirect-49e622) - Optional Block<br>Redirect. route redirect parameters when match action is redirect<br>See [Route Redirect](#redirect-49e622) below.
+<a id="deep-e4e340"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
 
-A [`headers`](#headers-d42523) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`](#route-268834)) supports the following:
-
-<a id="exact-b797af"></a>&#x2022; [`exact`](#exact-b797af) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-234aa4"></a>&#x2022; [`invert_match`](#match-234aa4) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-da02ce"></a>&#x2022; [`name`](#name-da02ce) - Optional String<br>Name. Name of the header
-
-<a id="presence-731262"></a>&#x2022; [`presence`](#presence-731262) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-a1eb8c"></a>&#x2022; [`regex`](#regex-a1eb8c) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-d5e00a"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
 
-An [`incoming_port`](#port-b269d6) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`](#route-268834)) supports the following:
-
-<a id="match-a29ec1"></a>&#x2022; [`no_port_match`](#match-a29ec1) - Optional Block<br>Enable this option
-
-<a id="port-afccd8"></a>&#x2022; [`port`](#port-afccd8) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-f3122f"></a>&#x2022; [`port_ranges`](#ranges-f3122f) - Optional String<br>Port range. Port range to match
+<a id="deep-916460"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Path
 
-A [`path`](#path-3e1483) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`](#route-268834)) supports the following:
-
-<a id="path-40daa7"></a>&#x2022; [`path`](#path-40daa7) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-2f2289"></a>&#x2022; [`prefix`](#prefix-2f2289) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-2bc0fe"></a>&#x2022; [`regex`](#regex-2bc0fe) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-2006d5"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
 
-A [`route_redirect`](#redirect-49e622) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`](#route-268834)) supports the following:
-
-<a id="redirect-098c08"></a>&#x2022; [`host_redirect`](#redirect-098c08) - Optional String<br>Host. swap host part of incoming URL in redirect URL
-
-<a id="redirect-323ee0"></a>&#x2022; [`path_redirect`](#redirect-323ee0) - Optional String<br>Path. swap path part of incoming URL in redirect URL
-
-<a id="rewrite-5b4edd"></a>&#x2022; [`prefix_rewrite`](#rewrite-5b4edd) - Optional String<br>Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request
-
-<a id="redirect-bd49d9"></a>&#x2022; [`proto_redirect`](#redirect-bd49d9) - Optional String<br>Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done
-
-<a id="params-26b2ea"></a>&#x2022; [`remove_all_params`](#params-26b2ea) - Optional Block<br>Enable this option
-
-<a id="params-c53ce1"></a>&#x2022; [`replace_params`](#params-c53ce1) - Optional String<br>Replace All Parameters
-
-<a id="code-d99903"></a>&#x2022; [`response_code`](#code-d99903) - Optional Number<br>Response Code. The HTTP status code to use in the redirect response
-
-<a id="params-7f385e"></a>&#x2022; [`retain_all_params`](#params-7f385e) - Optional Block<br>Enable this option
+<a id="deep-971b67"></a>Deeply nested **Redirect** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route
 
-A [`simple_route`](#route-3a5038) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`](#routes-12a0bb)) supports the following:
-
-<a id="rewrite-8ee2a7"></a>&#x2022; [`auto_host_rewrite`](#rewrite-8ee2a7) - Optional Block<br>Enable this option
-
-<a id="rewrite-658cc1"></a>&#x2022; [`disable_host_rewrite`](#rewrite-658cc1) - Optional Block<br>Enable this option
-
-<a id="rewrite-b65b71"></a>&#x2022; [`host_rewrite`](#rewrite-b65b71) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
-
-<a id="method-a7ea41"></a>&#x2022; [`http_method`](#method-a7ea41) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="path-f71dde"></a>&#x2022; [`path`](#path-f71dde) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-f71dde) below.
+<a id="deep-babfd4"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route Path
 
-A [`path`](#path-f71dde) block (within [`service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.simple_route`](#route-3a5038)) supports the following:
-
-<a id="path-a2e85c"></a>&#x2022; [`path`](#path-a2e85c) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-0e4b20"></a>&#x2022; [`prefix`](#prefix-0e4b20) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-8f60df"></a>&#x2022; [`regex`](#regex-8f60df) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-7d51e7"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port Port
 
-A [`port`](#port-c1fca3) block (within [`service.advertise_options.advertise_on_public.port`](#port-c54e32)) supports the following:
-
-<a id="info-3c9fb4"></a>&#x2022; [`info`](#info-3c9fb4) - Optional Block<br>Port Information. Port information<br>See [Info](#info-3c9fb4) below.
+<a id="deep-0c31dd"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port Port Info
 
-An [`info`](#info-3c9fb4) block (within [`service.advertise_options.advertise_on_public.port.port`](#port-c1fca3)) supports the following:
-
-<a id="port-2ce366"></a>&#x2022; [`port`](#port-2ce366) - Optional Number<br>Port. Port the workload can be reached on
-
-<a id="protocol-7b6467"></a>&#x2022; [`protocol`](#protocol-7b6467) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP
-
-<a id="port-05042e"></a>&#x2022; [`same_as_port`](#port-05042e) - Optional Block<br>Enable this option
-
-<a id="port-e2450e"></a>&#x2022; [`target_port`](#port-e2450e) - Optional Number<br>Different than Port. Port the workload is listening on
+<a id="deep-1d882f"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Service Advertise Options Advertise On Public Port TCP Loadbalancer
 
-A [`tcp_loadbalancer`](#loadbalancer-eb1f77) block (within [`service.advertise_options.advertise_on_public.port`](#port-c54e32)) supports the following:
-
-<a id="domains-0d824b"></a>&#x2022; [`domains`](#domains-0d824b) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="sni-55dc2e"></a>&#x2022; [`with_sni`](#sni-55dc2e) - Optional Bool<br>With SNI. Set to true to enable TCP loadbalancer with SNI
+<a id="deep-d0b793"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Service Configuration
 
@@ -2785,13 +1339,7 @@ A [`containers`](#service-containers) block (within [`service`](#service)) suppo
 
 #### Service Containers Custom Flavor
 
-A [`custom_flavor`](#service-containers-custom-flavor) block (within [`service.containers`](#service-containers)) supports the following:
-
-<a id="service-containers-custom-flavor-name"></a>&#x2022; [`name`](#service-containers-custom-flavor-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-d5d342"></a>&#x2022; [`namespace`](#namespace-d5d342) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="service-containers-custom-flavor-tenant"></a>&#x2022; [`tenant`](#service-containers-custom-flavor-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-72eb4e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Service Containers Image
 
@@ -2807,13 +1355,7 @@ An [`image`](#service-containers-image) block (within [`service.containers`](#se
 
 #### Service Containers Image Container Registry
 
-A [`container_registry`](#registry-ad1f41) block (within [`service.containers.image`](#service-containers-image)) supports the following:
-
-<a id="name-b1a7e7"></a>&#x2022; [`name`](#name-b1a7e7) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-993dc9"></a>&#x2022; [`namespace`](#namespace-993dc9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-882aa5"></a>&#x2022; [`tenant`](#tenant-882aa5) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-ad1f41"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Service Containers Liveness Check
 
@@ -2855,11 +1397,7 @@ A [`http_health_check`](#check-d4d023) block (within [`service.containers.livene
 
 #### Service Containers Liveness Check HTTP Health Check Port
 
-A [`port`](#port-df543d) block (within [`service.containers.liveness_check.http_health_check`](#check-d4d023)) supports the following:
-
-<a id="name-2eb708"></a>&#x2022; [`name`](#name-2eb708) - Optional String<br>Port Name. Port Name
-
-<a id="num-e2f8eb"></a>&#x2022; [`num`](#num-e2f8eb) - Optional Number<br>Port Number. Port number
+<a id="deep-ff14cb"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Containers Liveness Check TCP Health Check
 
@@ -2869,11 +1407,7 @@ A [`tcp_health_check`](#check-b2633e) block (within [`service.containers.livenes
 
 #### Service Containers Liveness Check TCP Health Check Port
 
-A [`port`](#port-7d7fdc) block (within [`service.containers.liveness_check.tcp_health_check`](#check-b2633e)) supports the following:
-
-<a id="name-a57ce4"></a>&#x2022; [`name`](#name-a57ce4) - Optional String<br>Port Name. Port Name
-
-<a id="num-4c8752"></a>&#x2022; [`num`](#num-4c8752) - Optional Number<br>Port Number. Port number
+<a id="deep-6e7f23"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Containers Readiness Check
 
@@ -2915,11 +1449,7 @@ A [`http_health_check`](#check-2e8715) block (within [`service.containers.readin
 
 #### Service Containers Readiness Check HTTP Health Check Port
 
-A [`port`](#port-3d625e) block (within [`service.containers.readiness_check.http_health_check`](#check-2e8715)) supports the following:
-
-<a id="name-8c1707"></a>&#x2022; [`name`](#name-8c1707) - Optional String<br>Port Name. Port Name
-
-<a id="num-497691"></a>&#x2022; [`num`](#num-497691) - Optional Number<br>Port Number. Port number
+<a id="deep-b02908"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Containers Readiness Check TCP Health Check
 
@@ -2929,11 +1459,7 @@ A [`tcp_health_check`](#check-6b7ea7) block (within [`service.containers.readine
 
 #### Service Containers Readiness Check TCP Health Check Port
 
-A [`port`](#port-6de51f) block (within [`service.containers.readiness_check.tcp_health_check`](#check-6b7ea7)) supports the following:
-
-<a id="name-f98740"></a>&#x2022; [`name`](#name-f98740) - Optional String<br>Port Name. Port Name
-
-<a id="num-e4a098"></a>&#x2022; [`num`](#num-e4a098) - Optional Number<br>Port Number. Port number
+<a id="deep-fcfc8b"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Service Deploy Options
 
@@ -2959,13 +1485,7 @@ A [`deploy_ce_sites`](#service-deploy-options-deploy-ce-sites) block (within [`s
 
 #### Service Deploy Options Deploy CE Sites Site
 
-A [`site`](#site-8d4fa5) block (within [`service.deploy_options.deploy_ce_sites`](#service-deploy-options-deploy-ce-sites)) supports the following:
-
-<a id="name-48099d"></a>&#x2022; [`name`](#name-48099d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-23fa32"></a>&#x2022; [`namespace`](#namespace-23fa32) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-75f6c4"></a>&#x2022; [`tenant`](#tenant-75f6c4) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-8d4fa5"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Service Deploy Options Deploy CE Virtual Sites
 
@@ -2975,13 +1495,7 @@ A [`deploy_ce_virtual_sites`](#sites-d63f27) block (within [`service.deploy_opti
 
 #### Service Deploy Options Deploy CE Virtual Sites Virtual Site
 
-A [`virtual_site`](#site-044146) block (within [`service.deploy_options.deploy_ce_virtual_sites`](#sites-d63f27)) supports the following:
-
-<a id="name-df338d"></a>&#x2022; [`name`](#name-df338d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c3b86f"></a>&#x2022; [`namespace`](#namespace-c3b86f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-60ca22"></a>&#x2022; [`tenant`](#tenant-60ca22) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-ae5488"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Service Deploy Options Deploy RE Sites
 
@@ -2991,13 +1505,7 @@ A [`deploy_re_sites`](#service-deploy-options-deploy-re-sites) block (within [`s
 
 #### Service Deploy Options Deploy RE Sites Site
 
-A [`site`](#site-e7bf20) block (within [`service.deploy_options.deploy_re_sites`](#service-deploy-options-deploy-re-sites)) supports the following:
-
-<a id="name-1ebeb9"></a>&#x2022; [`name`](#name-1ebeb9) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b4b743"></a>&#x2022; [`namespace`](#namespace-b4b743) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-68f3c1"></a>&#x2022; [`tenant`](#tenant-68f3c1) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-e7bf20"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Service Deploy Options Deploy RE Virtual Sites
 
@@ -3007,13 +1515,7 @@ A [`deploy_re_virtual_sites`](#sites-e0dada) block (within [`service.deploy_opti
 
 #### Service Deploy Options Deploy RE Virtual Sites Virtual Site
 
-A [`virtual_site`](#site-5bb43f) block (within [`service.deploy_options.deploy_re_virtual_sites`](#sites-e0dada)) supports the following:
-
-<a id="name-a7a782"></a>&#x2022; [`name`](#name-a7a782) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e63d1c"></a>&#x2022; [`namespace`](#namespace-e63d1c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-c0b756"></a>&#x2022; [`tenant`](#tenant-c0b756) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-50a367"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Service Volumes
 
@@ -3181,13 +1683,7 @@ A [`container`](#simple-service-container) block (within [`simple_service`](#sim
 
 #### Simple Service Container Custom Flavor
 
-A [`custom_flavor`](#simple-service-container-custom-flavor) block (within [`simple_service.container`](#simple-service-container)) supports the following:
-
-<a id="name-256e2d"></a>&#x2022; [`name`](#name-256e2d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-3dbb57"></a>&#x2022; [`namespace`](#namespace-3dbb57) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-bf6176"></a>&#x2022; [`tenant`](#tenant-bf6176) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-665e3a"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Simple Service Container Image
 
@@ -3203,13 +1699,7 @@ An [`image`](#simple-service-container-image) block (within [`simple_service.con
 
 #### Simple Service Container Image Container Registry
 
-A [`container_registry`](#registry-f7f6d1) block (within [`simple_service.container.image`](#simple-service-container-image)) supports the following:
-
-<a id="name-d862eb"></a>&#x2022; [`name`](#name-d862eb) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-3251f2"></a>&#x2022; [`namespace`](#namespace-3251f2) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-86a541"></a>&#x2022; [`tenant`](#tenant-86a541) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-f7f6d1"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Simple Service Container Liveness Check
 
@@ -3233,43 +1723,23 @@ A [`liveness_check`](#simple-service-container-liveness-check) block (within [`s
 
 #### Simple Service Container Liveness Check Exec Health Check
 
-An [`exec_health_check`](#check-16db8f) block (within [`simple_service.container.liveness_check`](#simple-service-container-liveness-check)) supports the following:
-
-<a id="command-dbc0b1"></a>&#x2022; [`command`](#command-dbc0b1) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
+<a id="deep-718ea8"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Simple Service Container Liveness Check HTTP Health Check
 
-A [`http_health_check`](#check-25986b) block (within [`simple_service.container.liveness_check`](#simple-service-container-liveness-check)) supports the following:
-
-<a id="headers-5e3a3a"></a>&#x2022; [`headers`](#headers-5e3a3a) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
-
-<a id="header-aff5fa"></a>&#x2022; [`host_header`](#header-aff5fa) - Optional String<br>Host Header. The value of the host header in the HTTP health check request
-
-<a id="path-c54305"></a>&#x2022; [`path`](#path-c54305) - Optional String<br>Path. Path to access on the HTTP server
-
-<a id="port-131a32"></a>&#x2022; [`port`](#port-131a32) - Optional Block<br>Port. Port<br>See [Port](#port-131a32) below.
+<a id="deep-dbda88"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Simple Service Container Liveness Check HTTP Health Check Port
 
-A [`port`](#port-131a32) block (within [`simple_service.container.liveness_check.http_health_check`](#check-25986b)) supports the following:
-
-<a id="name-b5ccd6"></a>&#x2022; [`name`](#name-b5ccd6) - Optional String<br>Port Name. Port Name
-
-<a id="num-e00848"></a>&#x2022; [`num`](#num-e00848) - Optional Number<br>Port Number. Port number
+<a id="deep-172371"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Simple Service Container Liveness Check TCP Health Check
 
-A [`tcp_health_check`](#check-f33b9a) block (within [`simple_service.container.liveness_check`](#simple-service-container-liveness-check)) supports the following:
-
-<a id="port-dcd25a"></a>&#x2022; [`port`](#port-dcd25a) - Optional Block<br>Port. Port<br>See [Port](#port-dcd25a) below.
+<a id="deep-cd2848"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Simple Service Container Liveness Check TCP Health Check Port
 
-A [`port`](#port-dcd25a) block (within [`simple_service.container.liveness_check.tcp_health_check`](#check-f33b9a)) supports the following:
-
-<a id="name-720155"></a>&#x2022; [`name`](#name-720155) - Optional String<br>Port Name. Port Name
-
-<a id="num-158232"></a>&#x2022; [`num`](#num-158232) - Optional Number<br>Port Number. Port number
+<a id="deep-40c0b7"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Simple Service Container Readiness Check
 
@@ -3293,43 +1763,23 @@ A [`readiness_check`](#check-9028f0) block (within [`simple_service.container`](
 
 #### Simple Service Container Readiness Check Exec Health Check
 
-An [`exec_health_check`](#check-083116) block (within [`simple_service.container.readiness_check`](#check-9028f0)) supports the following:
-
-<a id="command-8467a8"></a>&#x2022; [`command`](#command-8467a8) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
+<a id="deep-43a0b9"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Simple Service Container Readiness Check HTTP Health Check
 
-A [`http_health_check`](#check-71ae5b) block (within [`simple_service.container.readiness_check`](#check-9028f0)) supports the following:
-
-<a id="headers-d7e5d3"></a>&#x2022; [`headers`](#headers-d7e5d3) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
-
-<a id="header-0b5ec2"></a>&#x2022; [`host_header`](#header-0b5ec2) - Optional String<br>Host Header. The value of the host header in the HTTP health check request
-
-<a id="path-27f288"></a>&#x2022; [`path`](#path-27f288) - Optional String<br>Path. Path to access on the HTTP server
-
-<a id="port-4e523b"></a>&#x2022; [`port`](#port-4e523b) - Optional Block<br>Port. Port<br>See [Port](#port-4e523b) below.
+<a id="deep-6e41fe"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Simple Service Container Readiness Check HTTP Health Check Port
 
-A [`port`](#port-4e523b) block (within [`simple_service.container.readiness_check.http_health_check`](#check-71ae5b)) supports the following:
-
-<a id="name-63c06c"></a>&#x2022; [`name`](#name-63c06c) - Optional String<br>Port Name. Port Name
-
-<a id="num-04dc94"></a>&#x2022; [`num`](#num-04dc94) - Optional Number<br>Port Number. Port number
+<a id="deep-a15304"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Simple Service Container Readiness Check TCP Health Check
 
-A [`tcp_health_check`](#check-074b55) block (within [`simple_service.container.readiness_check`](#check-9028f0)) supports the following:
-
-<a id="port-696439"></a>&#x2022; [`port`](#port-696439) - Optional Block<br>Port. Port<br>See [Port](#port-696439) below.
+<a id="deep-ff1fc9"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Simple Service Container Readiness Check TCP Health Check Port
 
-A [`port`](#port-696439) block (within [`simple_service.container.readiness_check.tcp_health_check`](#check-074b55)) supports the following:
-
-<a id="name-c1da5c"></a>&#x2022; [`name`](#name-c1da5c) - Optional String<br>Port Name. Port Name
-
-<a id="num-439df4"></a>&#x2022; [`num`](#num-439df4) - Optional Number<br>Port Number. Port number
+<a id="deep-253286"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Simple Service Enabled
 
@@ -3419,79 +1869,35 @@ An [`advertise_custom`](#custom-2e9653) block (within [`stateful_service.adverti
 
 #### Stateful Service Advertise Options Advertise Custom Advertise Where
 
-An [`advertise_where`](#where-ecb677) block (within [`stateful_service.advertise_options.advertise_custom`](#custom-2e9653)) supports the following:
-
-<a id="site-d15f13"></a>&#x2022; [`site`](#site-d15f13) - Optional Block<br>Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#site-d15f13) below.
-
-<a id="site-f2fa79"></a>&#x2022; [`virtual_site`](#site-f2fa79) - Optional Block<br>Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised<br>See [Virtual Site](#site-f2fa79) below.
-
-<a id="service-494eb6"></a>&#x2022; [`vk8s_service`](#service-494eb6) - Optional Block<br>vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network<br>See [Vk8s Service](#service-494eb6) below.
+<a id="deep-1b9a8d"></a>Deeply nested **Where** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Advertise Where Site
 
-A [`site`](#site-d15f13) block (within [`stateful_service.advertise_options.advertise_custom.advertise_where`](#where-ecb677)) supports the following:
-
-<a id="site-ip-9048ff"></a>&#x2022; [`ip`](#site-ip-9048ff) - Optional String<br>IP Address. Use given IP address as VIP on the site
-
-<a id="network-ba2da8"></a>&#x2022; [`network`](#network-ba2da8) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
-
-<a id="site-50a5b3"></a>&#x2022; [`site`](#site-50a5b3) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-50a5b3) below.
+<a id="deep-9ff9ec"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Advertise Where Site Site
 
-A [`site`](#site-50a5b3) block (within [`stateful_service.advertise_options.advertise_custom.advertise_where.site`](#site-d15f13)) supports the following:
-
-<a id="name-0d4adb"></a>&#x2022; [`name`](#name-0d4adb) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f86b01"></a>&#x2022; [`namespace`](#namespace-f86b01) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-58621f"></a>&#x2022; [`tenant`](#tenant-58621f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-329be6"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Advertise Where Virtual Site
 
-A [`virtual_site`](#site-f2fa79) block (within [`stateful_service.advertise_options.advertise_custom.advertise_where`](#where-ecb677)) supports the following:
-
-<a id="network-791268"></a>&#x2022; [`network`](#network-791268) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
-
-<a id="site-4a0493"></a>&#x2022; [`virtual_site`](#site-4a0493) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-4a0493) below.
+<a id="deep-15a54c"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Advertise Where Virtual Site Virtual Site
 
-A [`virtual_site`](#site-4a0493) block (within [`stateful_service.advertise_options.advertise_custom.advertise_where.virtual_site`](#site-f2fa79)) supports the following:
-
-<a id="name-0c6775"></a>&#x2022; [`name`](#name-0c6775) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-ec3788"></a>&#x2022; [`namespace`](#namespace-ec3788) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-619fce"></a>&#x2022; [`tenant`](#tenant-619fce) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-3af2c4"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service
 
-A [`vk8s_service`](#service-494eb6) block (within [`stateful_service.advertise_options.advertise_custom.advertise_where`](#where-ecb677)) supports the following:
-
-<a id="site-79ed25"></a>&#x2022; [`site`](#site-79ed25) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-79ed25) below.
-
-<a id="site-eefa91"></a>&#x2022; [`virtual_site`](#site-eefa91) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-eefa91) below.
+<a id="deep-78688d"></a>Deeply nested **Service** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service Site
 
-A [`site`](#site-79ed25) block (within [`stateful_service.advertise_options.advertise_custom.advertise_where.vk8s_service`](#service-494eb6)) supports the following:
-
-<a id="name-4bcc6f"></a>&#x2022; [`name`](#name-4bcc6f) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-92eec6"></a>&#x2022; [`namespace`](#namespace-92eec6) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-19d7d1"></a>&#x2022; [`tenant`](#tenant-19d7d1) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-911694"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Advertise Where Vk8s Service Virtual Site
 
-A [`virtual_site`](#site-eefa91) block (within [`stateful_service.advertise_options.advertise_custom.advertise_where.vk8s_service`](#service-494eb6)) supports the following:
-
-<a id="name-fe1c3d"></a>&#x2022; [`name`](#name-fe1c3d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-090e53"></a>&#x2022; [`namespace`](#namespace-090e53) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-f2d6e6"></a>&#x2022; [`tenant`](#tenant-f2d6e6) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-ec2a75"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports
 
@@ -3505,679 +1911,235 @@ A [`ports`](#ports-17a1c0) block (within [`stateful_service.advertise_options.ad
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer
 
-A [`http_loadbalancer`](#loadbalancer-6acd33) block (within [`stateful_service.advertise_options.advertise_custom.ports`](#ports-17a1c0)) supports the following:
-
-<a id="route-bd50b6"></a>&#x2022; [`default_route`](#route-bd50b6) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#route-bd50b6) below.
-
-<a id="domains-8a4352"></a>&#x2022; [`domains`](#domains-8a4352) - Optional List<br>Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and \*.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="http-a17230"></a>&#x2022; [`http`](#http-a17230) - Optional Block<br>HTTP Choice. Choice for selecting HTTP proxy<br>See [HTTP](#http-a17230) below.
-
-<a id="https-830494"></a>&#x2022; [`https`](#https-830494) - Optional Block<br>BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS](#https-830494) below.
-
-<a id="cert-d95690"></a>&#x2022; [`https_auto_cert`](#cert-d95690) - Optional Block<br>HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS Auto Cert](#cert-d95690) below.
-
-<a id="routes-f9436b"></a>&#x2022; [`specific_routes`](#routes-f9436b) - Optional Block<br>Route Type. This defines various options to define a route<br>See [Specific Routes](#routes-f9436b) below.
+<a id="deep-deba7b"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Default Route
 
-A [`default_route`](#route-bd50b6) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer`](#loadbalancer-6acd33)) supports the following:
-
-<a id="rewrite-340ab0"></a>&#x2022; [`auto_host_rewrite`](#rewrite-340ab0) - Optional Block<br>Enable this option
-
-<a id="rewrite-e133f3"></a>&#x2022; [`disable_host_rewrite`](#rewrite-e133f3) - Optional Block<br>Enable this option
-
-<a id="rewrite-622de0"></a>&#x2022; [`host_rewrite`](#rewrite-622de0) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
+<a id="deep-c23a03"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTP
 
-A [`http`](#http-a17230) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer`](#loadbalancer-6acd33)) supports the following:
-
-<a id="managed-647bb5"></a>&#x2022; [`dns_volterra_managed`](#managed-647bb5) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
-
-<a id="port-327407"></a>&#x2022; [`port`](#port-327407) - Optional Number<br>HTTP Listen Port. HTTP port to Listen
-
-<a id="ranges-d2ab7c"></a>&#x2022; [`port_ranges`](#ranges-d2ab7c) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<a id="deep-c5f207"></a>Deeply nested **HTTP** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS
 
-A [`https`](#https-830494) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer`](#loadbalancer-6acd33)) supports the following:
-
-<a id="hsts-bb3058"></a>&#x2022; [`add_hsts`](#hsts-bb3058) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-91ccf4"></a>&#x2022; [`append_server_name`](#name-91ccf4) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-526d16"></a>&#x2022; [`coalescing_options`](#options-526d16) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-526d16) below.
-
-<a id="timeout-d800f1"></a>&#x2022; [`connection_idle_timeout`](#timeout-d800f1) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-65afbc"></a>&#x2022; [`default_header`](#header-65afbc) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-18b85e"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-18b85e) - Optional Block<br>Enable this option
-
-<a id="normalize-9c4bdf"></a>&#x2022; [`disable_path_normalize`](#normalize-9c4bdf) - Optional Block<br>Enable this option
-
-<a id="normalize-95ff00"></a>&#x2022; [`enable_path_normalize`](#normalize-95ff00) - Optional Block<br>Enable this option
-
-<a id="options-ea0671"></a>&#x2022; [`http_protocol_options`](#options-ea0671) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-ea0671) below.
-
-<a id="redirect-7a46bd"></a>&#x2022; [`http_redirect`](#redirect-7a46bd) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="loadbalancer-9997ea"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-9997ea) - Optional Block<br>Enable this option
-
-<a id="through-dddfb8"></a>&#x2022; [`pass_through`](#through-dddfb8) - Optional Block<br>Enable this option
-
-<a id="port-d5b402"></a>&#x2022; [`port`](#port-d5b402) - Optional Number<br>HTTPS Port. HTTPS port to Listen
-
-<a id="ranges-eae8e5"></a>&#x2022; [`port_ranges`](#ranges-eae8e5) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-939c24"></a>&#x2022; [`server_name`](#name-939c24) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="params-7982ad"></a>&#x2022; [`tls_cert_params`](#params-7982ad) - Optional Block<br>TLS Parameters. Select TLS Parameters and Certificates<br>See [TLS Cert Params](#params-7982ad) below.
-
-<a id="parameters-342bcd"></a>&#x2022; [`tls_parameters`](#parameters-342bcd) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [TLS Parameters](#parameters-342bcd) below.
+<a id="deep-54c2b3"></a>Deeply nested **HTTPS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Coalescing Options
 
-A [`coalescing_options`](#options-526d16) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https`](#https-830494)) supports the following:
-
-<a id="coalescing-633b4b"></a>&#x2022; [`default_coalescing`](#coalescing-633b4b) - Optional Block<br>Enable this option
-
-<a id="coalescing-598e28"></a>&#x2022; [`strict_coalescing`](#coalescing-598e28) - Optional Block<br>Enable this option
+<a id="deep-b206e8"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options
 
-A [`http_protocol_options`](#options-ea0671) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https`](#https-830494)) supports the following:
-
-<a id="only-4ba18b"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-4ba18b) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-4ba18b) below.
-
-<a id="v1-v2-c264d6"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-c264d6) - Optional Block<br>Enable this option
-
-<a id="only-ca8cd2"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-ca8cd2) - Optional Block<br>Enable this option
+<a id="deep-386653"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-4ba18b) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.http_protocol_options`](#options-ea0671)) supports the following:
-
-<a id="transformation-b142ea"></a>&#x2022; [`header_transformation`](#transformation-b142ea) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-b142ea) below.
+<a id="deep-9c8446"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-b142ea) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`](#only-4ba18b)) supports the following:
-
-<a id="transformation-79e699"></a>&#x2022; [`default_header_transformation`](#transformation-79e699) - Optional Block<br>Enable this option
-
-<a id="transformation-c23720"></a>&#x2022; [`legacy_header_transformation`](#transformation-c23720) - Optional Block<br>Enable this option
-
-<a id="transformation-0fcbff"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-0fcbff) - Optional Block<br>Enable this option
-
-<a id="transformation-22137b"></a>&#x2022; [`proper_case_header_transformation`](#transformation-22137b) - Optional Block<br>Enable this option
+<a id="deep-71e625"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params
 
-A [`tls_cert_params`](#params-7982ad) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https`](#https-830494)) supports the following:
-
-<a id="certificates-9e052b"></a>&#x2022; [`certificates`](#certificates-9e052b) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#certificates-9e052b) below.
-
-<a id="mtls-bbf656"></a>&#x2022; [`no_mtls`](#mtls-bbf656) - Optional Block<br>Enable this option
-
-<a id="config-a83510"></a>&#x2022; [`tls_config`](#config-a83510) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-a83510) below.
-
-<a id="mtls-1eb1bd"></a>&#x2022; [`use_mtls`](#mtls-1eb1bd) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-1eb1bd) below.
+<a id="deep-cf6057"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates
 
-A [`certificates`](#certificates-9e052b) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`](#params-7982ad)) supports the following:
-
-<a id="name-9c0c60"></a>&#x2022; [`name`](#name-9c0c60) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-4d3c65"></a>&#x2022; [`namespace`](#namespace-4d3c65) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-5c91aa"></a>&#x2022; [`tenant`](#tenant-5c91aa) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-025b6a"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
 
-A [`tls_config`](#config-a83510) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`](#params-7982ad)) supports the following:
-
-<a id="security-3b76db"></a>&#x2022; [`custom_security`](#security-3b76db) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-3b76db) below.
-
-<a id="security-0db556"></a>&#x2022; [`default_security`](#security-0db556) - Optional Block<br>Enable this option
-
-<a id="security-7c5d16"></a>&#x2022; [`low_security`](#security-7c5d16) - Optional Block<br>Enable this option
-
-<a id="security-e044ae"></a>&#x2022; [`medium_security`](#security-e044ae) - Optional Block<br>Enable this option
+<a id="deep-12bb98"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
 
-A [`custom_security`](#security-3b76db) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.tls_config`](#config-a83510)) supports the following:
-
-<a id="suites-ec80a7"></a>&#x2022; [`cipher_suites`](#suites-ec80a7) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-329552"></a>&#x2022; [`max_version`](#version-329552) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-32cc50"></a>&#x2022; [`min_version`](#version-32cc50) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-51e56c"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
 
-An [`use_mtls`](#mtls-1eb1bd) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params`](#params-7982ad)) supports the following:
-
-<a id="optional-f626dc"></a>&#x2022; [`client_certificate_optional`](#optional-f626dc) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-86c907"></a>&#x2022; [`crl`](#crl-86c907) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-86c907) below.
-
-<a id="crl-c33b80"></a>&#x2022; [`no_crl`](#crl-c33b80) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-365b38"></a>&#x2022; [`trusted_ca`](#trusted-ca-365b38) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-365b38) below.
-
-<a id="url-be99e2"></a>&#x2022; [`trusted_ca_url`](#url-be99e2) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-41905d"></a>&#x2022; [`xfcc_disabled`](#disabled-41905d) - Optional Block<br>Enable this option
-
-<a id="options-288043"></a>&#x2022; [`xfcc_options`](#options-288043) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-288043) below.
+<a id="deep-16fb45"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
 
-A [`crl`](#crl-86c907) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-1eb1bd)) supports the following:
-
-<a id="name-b83289"></a>&#x2022; [`name`](#name-b83289) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-703856"></a>&#x2022; [`namespace`](#namespace-703856) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-a6e242"></a>&#x2022; [`tenant`](#tenant-a6e242) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-21c207"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-365b38) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-1eb1bd)) supports the following:
-
-<a id="name-0e1aa5"></a>&#x2022; [`name`](#name-0e1aa5) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b99723"></a>&#x2022; [`namespace`](#namespace-b99723) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-aa6f2f"></a>&#x2022; [`tenant`](#tenant-aa6f2f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-260b64"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-288043) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-1eb1bd)) supports the following:
-
-<a id="elements-91022c"></a>&#x2022; [`xfcc_header_elements`](#elements-91022c) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-ae9db4"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters
 
-A [`tls_parameters`](#parameters-342bcd) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https`](#https-830494)) supports the following:
-
-<a id="mtls-4dacb1"></a>&#x2022; [`no_mtls`](#mtls-4dacb1) - Optional Block<br>Enable this option
-
-<a id="certificates-bca5fe"></a>&#x2022; [`tls_certificates`](#certificates-bca5fe) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-bca5fe) below.
-
-<a id="config-6a780e"></a>&#x2022; [`tls_config`](#config-6a780e) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-6a780e) below.
-
-<a id="mtls-e29689"></a>&#x2022; [`use_mtls`](#mtls-e29689) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-e29689) below.
+<a id="deep-1b3cda"></a>Deeply nested **Parameters** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
 
-A [`tls_certificates`](#certificates-bca5fe) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`](#parameters-342bcd)) supports the following:
-
-<a id="url-dfa237"></a>&#x2022; [`certificate_url`](#url-dfa237) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-e6f377"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-e6f377) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-e6f377) below.
-
-<a id="spec-38d76d"></a>&#x2022; [`description_spec`](#spec-38d76d) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-03aed8"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-03aed8) - Optional Block<br>Enable this option
-
-<a id="key-3f15ce"></a>&#x2022; [`private_key`](#key-3f15ce) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-3f15ce) below.
-
-<a id="defaults-c823a7"></a>&#x2022; [`use_system_defaults`](#defaults-c823a7) - Optional Block<br>Enable this option
+<a id="deep-286dbf"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-e6f377) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-bca5fe)) supports the following:
-
-<a id="algorithms-e1e3c5"></a>&#x2022; [`hash_algorithms`](#algorithms-e1e3c5) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-669e16"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
 
-A [`private_key`](#key-3f15ce) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-bca5fe)) supports the following:
-
-<a id="info-9af2d3"></a>&#x2022; [`blindfold_secret_info`](#info-9af2d3) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-9af2d3) below.
-
-<a id="info-24af96"></a>&#x2022; [`clear_secret_info`](#info-24af96) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-24af96) below.
+<a id="deep-0cd780"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-9af2d3) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-3f15ce)) supports the following:
-
-<a id="provider-4b422c"></a>&#x2022; [`decryption_provider`](#provider-4b422c) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-8e0671"></a>&#x2022; [`location`](#location-8e0671) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-da1545"></a>&#x2022; [`store_provider`](#provider-da1545) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-9a3590"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-24af96) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-3f15ce)) supports the following:
-
-<a id="ref-f2187f"></a>&#x2022; [`provider_ref`](#ref-f2187f) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-683845"></a>&#x2022; [`url`](#url-683845) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-c93871"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config
 
-A [`tls_config`](#config-6a780e) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`](#parameters-342bcd)) supports the following:
-
-<a id="security-fc39e9"></a>&#x2022; [`custom_security`](#security-fc39e9) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-fc39e9) below.
-
-<a id="security-f8e7d4"></a>&#x2022; [`default_security`](#security-f8e7d4) - Optional Block<br>Enable this option
-
-<a id="security-6d0539"></a>&#x2022; [`low_security`](#security-6d0539) - Optional Block<br>Enable this option
-
-<a id="security-c852fc"></a>&#x2022; [`medium_security`](#security-c852fc) - Optional Block<br>Enable this option
+<a id="deep-b5ca7c"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
 
-A [`custom_security`](#security-fc39e9) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.tls_config`](#config-6a780e)) supports the following:
-
-<a id="suites-241db4"></a>&#x2022; [`cipher_suites`](#suites-241db4) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-587653"></a>&#x2022; [`max_version`](#version-587653) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-301f4c"></a>&#x2022; [`min_version`](#version-301f4c) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-ac03b7"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
 
-An [`use_mtls`](#mtls-e29689) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters`](#parameters-342bcd)) supports the following:
-
-<a id="optional-1d72fa"></a>&#x2022; [`client_certificate_optional`](#optional-1d72fa) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-abd65d"></a>&#x2022; [`crl`](#crl-abd65d) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-abd65d) below.
-
-<a id="crl-3a9975"></a>&#x2022; [`no_crl`](#crl-3a9975) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-23aab6"></a>&#x2022; [`trusted_ca`](#trusted-ca-23aab6) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-23aab6) below.
-
-<a id="url-e64453"></a>&#x2022; [`trusted_ca_url`](#url-e64453) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-f42bb8"></a>&#x2022; [`xfcc_disabled`](#disabled-f42bb8) - Optional Block<br>Enable this option
-
-<a id="options-8fcc31"></a>&#x2022; [`xfcc_options`](#options-8fcc31) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-8fcc31) below.
+<a id="deep-4662e7"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
 
-A [`crl`](#crl-abd65d) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-e29689)) supports the following:
-
-<a id="name-21e6d7"></a>&#x2022; [`name`](#name-21e6d7) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b0988a"></a>&#x2022; [`namespace`](#namespace-b0988a) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-8b05c3"></a>&#x2022; [`tenant`](#tenant-8b05c3) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-2fe5d1"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-23aab6) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-e29689)) supports the following:
-
-<a id="name-c25884"></a>&#x2022; [`name`](#name-c25884) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-5b7554"></a>&#x2022; [`namespace`](#namespace-5b7554) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-6405ce"></a>&#x2022; [`tenant`](#tenant-6405ce) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-d70642"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-8fcc31) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-e29689)) supports the following:
-
-<a id="elements-3a5bbc"></a>&#x2022; [`xfcc_header_elements`](#elements-3a5bbc) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-ec5644"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert
 
-A [`https_auto_cert`](#cert-d95690) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer`](#loadbalancer-6acd33)) supports the following:
-
-<a id="hsts-c1a790"></a>&#x2022; [`add_hsts`](#hsts-c1a790) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-4aad8d"></a>&#x2022; [`append_server_name`](#name-4aad8d) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-e1d8d3"></a>&#x2022; [`coalescing_options`](#options-e1d8d3) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-e1d8d3) below.
-
-<a id="timeout-f87b9c"></a>&#x2022; [`connection_idle_timeout`](#timeout-f87b9c) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-00d80a"></a>&#x2022; [`default_header`](#header-00d80a) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-3dffbf"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-3dffbf) - Optional Block<br>Enable this option
-
-<a id="normalize-34170c"></a>&#x2022; [`disable_path_normalize`](#normalize-34170c) - Optional Block<br>Enable this option
-
-<a id="normalize-a5b906"></a>&#x2022; [`enable_path_normalize`](#normalize-a5b906) - Optional Block<br>Enable this option
-
-<a id="options-94056e"></a>&#x2022; [`http_protocol_options`](#options-94056e) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-94056e) below.
-
-<a id="redirect-b3a3c7"></a>&#x2022; [`http_redirect`](#redirect-b3a3c7) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="mtls-56c9d1"></a>&#x2022; [`no_mtls`](#mtls-56c9d1) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-cc8ca5"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-cc8ca5) - Optional Block<br>Enable this option
-
-<a id="through-e51c9a"></a>&#x2022; [`pass_through`](#through-e51c9a) - Optional Block<br>Enable this option
-
-<a id="port-d716ca"></a>&#x2022; [`port`](#port-d716ca) - Optional Number<br>HTTPS Listen Port. HTTPS port to Listen
-
-<a id="ranges-f5231d"></a>&#x2022; [`port_ranges`](#ranges-f5231d) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-df9c54"></a>&#x2022; [`server_name`](#name-df9c54) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="config-516ca1"></a>&#x2022; [`tls_config`](#config-516ca1) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-516ca1) below.
-
-<a id="mtls-2b0fcc"></a>&#x2022; [`use_mtls`](#mtls-2b0fcc) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-2b0fcc) below.
+<a id="deep-1c1e39"></a>Deeply nested **Cert** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
 
-A [`coalescing_options`](#options-e1d8d3) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`](#cert-d95690)) supports the following:
-
-<a id="coalescing-bf7195"></a>&#x2022; [`default_coalescing`](#coalescing-bf7195) - Optional Block<br>Enable this option
-
-<a id="coalescing-926748"></a>&#x2022; [`strict_coalescing`](#coalescing-926748) - Optional Block<br>Enable this option
+<a id="deep-f4d48f"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
 
-A [`http_protocol_options`](#options-94056e) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`](#cert-d95690)) supports the following:
-
-<a id="only-2f73d5"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-2f73d5) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-2f73d5) below.
-
-<a id="v1-v2-accbae"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-accbae) - Optional Block<br>Enable this option
-
-<a id="only-fb35ab"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-fb35ab) - Optional Block<br>Enable this option
+<a id="deep-b88856"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-2f73d5) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.http_protocol_options`](#options-94056e)) supports the following:
-
-<a id="transformation-b9e500"></a>&#x2022; [`header_transformation`](#transformation-b9e500) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-b9e500) below.
+<a id="deep-06612a"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-b9e500) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`](#only-2f73d5)) supports the following:
-
-<a id="transformation-d16439"></a>&#x2022; [`default_header_transformation`](#transformation-d16439) - Optional Block<br>Enable this option
-
-<a id="transformation-bbad76"></a>&#x2022; [`legacy_header_transformation`](#transformation-bbad76) - Optional Block<br>Enable this option
-
-<a id="transformation-82245f"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-82245f) - Optional Block<br>Enable this option
-
-<a id="transformation-efd285"></a>&#x2022; [`proper_case_header_transformation`](#transformation-efd285) - Optional Block<br>Enable this option
+<a id="deep-53e3b9"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config
 
-A [`tls_config`](#config-516ca1) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`](#cert-d95690)) supports the following:
-
-<a id="security-f8983f"></a>&#x2022; [`custom_security`](#security-f8983f) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-f8983f) below.
-
-<a id="security-10388b"></a>&#x2022; [`default_security`](#security-10388b) - Optional Block<br>Enable this option
-
-<a id="security-08f1c9"></a>&#x2022; [`low_security`](#security-08f1c9) - Optional Block<br>Enable this option
-
-<a id="security-fc5e30"></a>&#x2022; [`medium_security`](#security-fc5e30) - Optional Block<br>Enable this option
+<a id="deep-8738dd"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
 
-A [`custom_security`](#security-f8983f) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.tls_config`](#config-516ca1)) supports the following:
-
-<a id="suites-2f4d1e"></a>&#x2022; [`cipher_suites`](#suites-2f4d1e) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-dbb4a7"></a>&#x2022; [`max_version`](#version-dbb4a7) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-85b458"></a>&#x2022; [`min_version`](#version-85b458) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-5b07d2"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS
 
-An [`use_mtls`](#mtls-2b0fcc) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert`](#cert-d95690)) supports the following:
-
-<a id="optional-337e1c"></a>&#x2022; [`client_certificate_optional`](#optional-337e1c) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-665a01"></a>&#x2022; [`crl`](#crl-665a01) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-665a01) below.
-
-<a id="crl-ba2014"></a>&#x2022; [`no_crl`](#crl-ba2014) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-1ea47d"></a>&#x2022; [`trusted_ca`](#trusted-ca-1ea47d) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-1ea47d) below.
-
-<a id="url-2a65e2"></a>&#x2022; [`trusted_ca_url`](#url-2a65e2) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-9587bd"></a>&#x2022; [`xfcc_disabled`](#disabled-9587bd) - Optional Block<br>Enable this option
-
-<a id="options-e07b5b"></a>&#x2022; [`xfcc_options`](#options-e07b5b) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-e07b5b) below.
+<a id="deep-dfaa70"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
 
-A [`crl`](#crl-665a01) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-2b0fcc)) supports the following:
-
-<a id="name-ee5c0c"></a>&#x2022; [`name`](#name-ee5c0c) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-fc3861"></a>&#x2022; [`namespace`](#namespace-fc3861) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-9ee4a6"></a>&#x2022; [`tenant`](#tenant-9ee4a6) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-81e77c"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-1ea47d) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-2b0fcc)) supports the following:
-
-<a id="name-cb2624"></a>&#x2022; [`name`](#name-cb2624) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-1fd6e2"></a>&#x2022; [`namespace`](#namespace-1fd6e2) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-a01217"></a>&#x2022; [`tenant`](#tenant-a01217) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-f3a926"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-e07b5b) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-2b0fcc)) supports the following:
-
-<a id="elements-2cb734"></a>&#x2022; [`xfcc_header_elements`](#elements-2cb734) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-b48146"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes
 
-A [`specific_routes`](#routes-f9436b) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer`](#loadbalancer-6acd33)) supports the following:
-
-<a id="routes-866e74"></a>&#x2022; [`routes`](#routes-866e74) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#routes-866e74) below.
+<a id="deep-8dc3bb"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes
 
-A [`routes`](#routes-866e74) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes`](#routes-f9436b)) supports the following:
-
-<a id="object-4a54d0"></a>&#x2022; [`custom_route_object`](#object-4a54d0) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#object-4a54d0) below.
-
-<a id="route-77a7ce"></a>&#x2022; [`direct_response_route`](#route-77a7ce) - Optional Block<br>Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic<br>See [Direct Response Route](#route-77a7ce) below.
-
-<a id="route-99acc1"></a>&#x2022; [`redirect_route`](#route-99acc1) - Optional Block<br>Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL<br>See [Redirect Route](#route-99acc1) below.
-
-<a id="route-ec382e"></a>&#x2022; [`simple_route`](#route-ec382e) - Optional Block<br>Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside<br>See [Simple Route](#route-ec382e) below.
+<a id="deep-434413"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object
 
-A [`custom_route_object`](#object-4a54d0) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`](#routes-866e74)) supports the following:
-
-<a id="ref-096840"></a>&#x2022; [`route_ref`](#ref-096840) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#ref-096840) below.
+<a id="deep-5bd8c8"></a>Deeply nested **Object** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
 
-A [`route_ref`](#ref-096840) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.custom_route_object`](#object-4a54d0)) supports the following:
-
-<a id="name-d2e29d"></a>&#x2022; [`name`](#name-d2e29d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-0a0182"></a>&#x2022; [`namespace`](#namespace-0a0182) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-7c2578"></a>&#x2022; [`tenant`](#tenant-7c2578) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-a55e57"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route
 
-A [`direct_response_route`](#route-77a7ce) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`](#routes-866e74)) supports the following:
-
-<a id="headers-90a1c6"></a>&#x2022; [`headers`](#headers-90a1c6) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-90a1c6) below.
-
-<a id="method-b744ce"></a>&#x2022; [`http_method`](#method-b744ce) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-a40d05"></a>&#x2022; [`incoming_port`](#port-a40d05) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-a40d05) below.
-
-<a id="path-3c3257"></a>&#x2022; [`path`](#path-3c3257) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-3c3257) below.
-
-<a id="response-b88fe8"></a>&#x2022; [`route_direct_response`](#response-b88fe8) - Optional Block<br>Direct Response. Send this direct response in case of route match action is direct response<br>See [Route Direct Response](#response-b88fe8) below.
+<a id="deep-de733a"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
 
-A [`headers`](#headers-90a1c6) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-77a7ce)) supports the following:
-
-<a id="exact-effc21"></a>&#x2022; [`exact`](#exact-effc21) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-27f6c8"></a>&#x2022; [`invert_match`](#match-27f6c8) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-ae199f"></a>&#x2022; [`name`](#name-ae199f) - Optional String<br>Name. Name of the header
-
-<a id="presence-01044f"></a>&#x2022; [`presence`](#presence-01044f) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-e17b0c"></a>&#x2022; [`regex`](#regex-e17b0c) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-42ca44"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
 
-An [`incoming_port`](#port-a40d05) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-77a7ce)) supports the following:
-
-<a id="match-767a70"></a>&#x2022; [`no_port_match`](#match-767a70) - Optional Block<br>Enable this option
-
-<a id="port-03cfc8"></a>&#x2022; [`port`](#port-03cfc8) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-8daae3"></a>&#x2022; [`port_ranges`](#ranges-8daae3) - Optional String<br>Port range. Port range to match
+<a id="deep-bd8afd"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
 
-A [`path`](#path-3c3257) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-77a7ce)) supports the following:
-
-<a id="path-625afd"></a>&#x2022; [`path`](#path-625afd) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-46a9b0"></a>&#x2022; [`prefix`](#prefix-46a9b0) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-bd26db"></a>&#x2022; [`regex`](#regex-bd26db) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-b65bc6"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
 
-A [`route_direct_response`](#response-b88fe8) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-77a7ce)) supports the following:
-
-<a id="encoded-c71056"></a>&#x2022; [`response_body_encoded`](#encoded-c71056) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
-
-<a id="code-2c35e7"></a>&#x2022; [`response_code`](#code-2c35e7) - Optional Number<br>Response Code. response code to send
+<a id="deep-1e1cf0"></a>Deeply nested **Response** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route
 
-A [`redirect_route`](#route-99acc1) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`](#routes-866e74)) supports the following:
-
-<a id="headers-5fcf67"></a>&#x2022; [`headers`](#headers-5fcf67) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-5fcf67) below.
-
-<a id="method-ce9c8d"></a>&#x2022; [`http_method`](#method-ce9c8d) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-b2b353"></a>&#x2022; [`incoming_port`](#port-b2b353) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-b2b353) below.
-
-<a id="path-a0fb59"></a>&#x2022; [`path`](#path-a0fb59) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-a0fb59) below.
-
-<a id="redirect-b7d1f3"></a>&#x2022; [`route_redirect`](#redirect-b7d1f3) - Optional Block<br>Redirect. route redirect parameters when match action is redirect<br>See [Route Redirect](#redirect-b7d1f3) below.
+<a id="deep-ae9934"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
 
-A [`headers`](#headers-5fcf67) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-99acc1)) supports the following:
-
-<a id="exact-3582ce"></a>&#x2022; [`exact`](#exact-3582ce) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-7a0395"></a>&#x2022; [`invert_match`](#match-7a0395) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-d2d2c7"></a>&#x2022; [`name`](#name-d2d2c7) - Optional String<br>Name. Name of the header
-
-<a id="presence-937ca5"></a>&#x2022; [`presence`](#presence-937ca5) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-684294"></a>&#x2022; [`regex`](#regex-684294) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-c73ff5"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
 
-An [`incoming_port`](#port-b2b353) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-99acc1)) supports the following:
-
-<a id="match-18cd9a"></a>&#x2022; [`no_port_match`](#match-18cd9a) - Optional Block<br>Enable this option
-
-<a id="port-d2575d"></a>&#x2022; [`port`](#port-d2575d) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-66de17"></a>&#x2022; [`port_ranges`](#ranges-66de17) - Optional String<br>Port range. Port range to match
+<a id="deep-2b2330"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path
 
-A [`path`](#path-a0fb59) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-99acc1)) supports the following:
-
-<a id="path-1a3e23"></a>&#x2022; [`path`](#path-1a3e23) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-596f1f"></a>&#x2022; [`prefix`](#prefix-596f1f) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-d18266"></a>&#x2022; [`regex`](#regex-d18266) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-65c019"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
 
-A [`route_redirect`](#redirect-b7d1f3) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-99acc1)) supports the following:
-
-<a id="redirect-b4bf69"></a>&#x2022; [`host_redirect`](#redirect-b4bf69) - Optional String<br>Host. swap host part of incoming URL in redirect URL
-
-<a id="redirect-f1a02f"></a>&#x2022; [`path_redirect`](#redirect-f1a02f) - Optional String<br>Path. swap path part of incoming URL in redirect URL
-
-<a id="rewrite-1df160"></a>&#x2022; [`prefix_rewrite`](#rewrite-1df160) - Optional String<br>Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request
-
-<a id="redirect-a1728e"></a>&#x2022; [`proto_redirect`](#redirect-a1728e) - Optional String<br>Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done
-
-<a id="params-ce6a2d"></a>&#x2022; [`remove_all_params`](#params-ce6a2d) - Optional Block<br>Enable this option
-
-<a id="params-df3cee"></a>&#x2022; [`replace_params`](#params-df3cee) - Optional String<br>Replace All Parameters
-
-<a id="code-039a69"></a>&#x2022; [`response_code`](#code-039a69) - Optional Number<br>Response Code. The HTTP status code to use in the redirect response
-
-<a id="params-11898a"></a>&#x2022; [`retain_all_params`](#params-11898a) - Optional Block<br>Enable this option
+<a id="deep-248f98"></a>Deeply nested **Redirect** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route
 
-A [`simple_route`](#route-ec382e) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes`](#routes-866e74)) supports the following:
-
-<a id="rewrite-7fda49"></a>&#x2022; [`auto_host_rewrite`](#rewrite-7fda49) - Optional Block<br>Enable this option
-
-<a id="rewrite-3509d8"></a>&#x2022; [`disable_host_rewrite`](#rewrite-3509d8) - Optional Block<br>Enable this option
-
-<a id="rewrite-54b13c"></a>&#x2022; [`host_rewrite`](#rewrite-54b13c) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
-
-<a id="method-2aaab1"></a>&#x2022; [`http_method`](#method-2aaab1) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="path-313246"></a>&#x2022; [`path`](#path-313246) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-313246) below.
+<a id="deep-c9c5c6"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path
 
-A [`path`](#path-313246) block (within [`stateful_service.advertise_options.advertise_custom.ports.http_loadbalancer.specific_routes.routes.simple_route`](#route-ec382e)) supports the following:
-
-<a id="path-1d1362"></a>&#x2022; [`path`](#path-1d1362) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-c29d77"></a>&#x2022; [`prefix`](#prefix-c29d77) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-ae7972"></a>&#x2022; [`regex`](#regex-ae7972) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-1e4d1b"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports Port
 
-A [`port`](#port-018c8a) block (within [`stateful_service.advertise_options.advertise_custom.ports`](#ports-17a1c0)) supports the following:
-
-<a id="info-a3afdf"></a>&#x2022; [`info`](#info-a3afdf) - Optional Block<br>Port Information. Port information<br>See [Info](#info-a3afdf) below.
-
-<a id="name-769682"></a>&#x2022; [`name`](#name-769682) - Optional String<br>Name. Name of the Port
+<a id="deep-13234e"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports Port Info
 
-An [`info`](#info-a3afdf) block (within [`stateful_service.advertise_options.advertise_custom.ports.port`](#port-018c8a)) supports the following:
-
-<a id="port-ad32ca"></a>&#x2022; [`port`](#port-ad32ca) - Optional Number<br>Port. Port the workload can be reached on
-
-<a id="protocol-ace15a"></a>&#x2022; [`protocol`](#protocol-ace15a) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP
-
-<a id="port-6b9b3b"></a>&#x2022; [`same_as_port`](#port-6b9b3b) - Optional Block<br>Enable this option
-
-<a id="port-09b43a"></a>&#x2022; [`target_port`](#port-09b43a) - Optional Number<br>Different than Port. Port the workload is listening on
+<a id="deep-afe3d5"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise Custom Ports TCP Loadbalancer
 
-A [`tcp_loadbalancer`](#loadbalancer-6147bf) block (within [`stateful_service.advertise_options.advertise_custom.ports`](#ports-17a1c0)) supports the following:
-
-<a id="domains-f1272e"></a>&#x2022; [`domains`](#domains-f1272e) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="sni-d8428e"></a>&#x2022; [`with_sni`](#sni-d8428e) - Optional Bool<br>With SNI. Set to true to enable TCP loadbalancer with SNI
+<a id="deep-ed0465"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise In Cluster
 
@@ -4189,47 +2151,23 @@ An [`advertise_in_cluster`](#cluster-e091a1) block (within [`stateful_service.ad
 
 #### Stateful Service Advertise Options Advertise In Cluster Multi Ports
 
-A [`multi_ports`](#ports-8e674f) block (within [`stateful_service.advertise_options.advertise_in_cluster`](#cluster-e091a1)) supports the following:
-
-<a id="ports-540c57"></a>&#x2022; [`ports`](#ports-540c57) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#ports-540c57) below.
+<a id="deep-9b9d6a"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise In Cluster Multi Ports Ports
 
-A [`ports`](#ports-540c57) block (within [`stateful_service.advertise_options.advertise_in_cluster.multi_ports`](#ports-8e674f)) supports the following:
-
-<a id="info-249f0e"></a>&#x2022; [`info`](#info-249f0e) - Optional Block<br>Port Information. Port information<br>See [Info](#info-249f0e) below.
-
-<a id="name-6ee8e5"></a>&#x2022; [`name`](#name-6ee8e5) - Optional String<br>Name. Name of the Port
+<a id="deep-b2c5c2"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise In Cluster Multi Ports Ports Info
 
-An [`info`](#info-249f0e) block (within [`stateful_service.advertise_options.advertise_in_cluster.multi_ports.ports`](#ports-540c57)) supports the following:
-
-<a id="port-9b05c4"></a>&#x2022; [`port`](#port-9b05c4) - Optional Number<br>Port. Port the workload can be reached on
-
-<a id="protocol-cb44ed"></a>&#x2022; [`protocol`](#protocol-cb44ed) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP
-
-<a id="port-bb1125"></a>&#x2022; [`same_as_port`](#port-bb1125) - Optional Block<br>Enable this option
-
-<a id="port-603ed6"></a>&#x2022; [`target_port`](#port-603ed6) - Optional Number<br>Different than Port. Port the workload is listening on
+<a id="deep-5d6955"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise In Cluster Port
 
-A [`port`](#port-9af3c4) block (within [`stateful_service.advertise_options.advertise_in_cluster`](#cluster-e091a1)) supports the following:
-
-<a id="info-cb674f"></a>&#x2022; [`info`](#info-cb674f) - Optional Block<br>Port Information. Port information<br>See [Info](#info-cb674f) below.
+<a id="deep-149104"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise In Cluster Port Info
 
-An [`info`](#info-cb674f) block (within [`stateful_service.advertise_options.advertise_in_cluster.port`](#port-9af3c4)) supports the following:
-
-<a id="port-f10a8a"></a>&#x2022; [`port`](#port-f10a8a) - Optional Number<br>Port. Port the workload can be reached on
-
-<a id="protocol-efd191"></a>&#x2022; [`protocol`](#protocol-efd191) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP
-
-<a id="port-5135de"></a>&#x2022; [`same_as_port`](#port-5135de) - Optional Block<br>Enable this option
-
-<a id="port-69c140"></a>&#x2022; [`target_port`](#port-69c140) - Optional Number<br>Different than Port. Port the workload is listening on
+<a id="deep-318fb3"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public
 
@@ -4241,1379 +2179,479 @@ An [`advertise_on_public`](#public-86b094) block (within [`stateful_service.adve
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports
 
-A [`multi_ports`](#ports-63766e) block (within [`stateful_service.advertise_options.advertise_on_public`](#public-86b094)) supports the following:
-
-<a id="ports-104cf3"></a>&#x2022; [`ports`](#ports-104cf3) - Optional Block<br>Ports. Ports to advertise<br>See [Ports](#ports-104cf3) below.
+<a id="deep-fd3c5a"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports
 
-A [`ports`](#ports-104cf3) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports`](#ports-63766e)) supports the following:
-
-<a id="loadbalancer-2c975c"></a>&#x2022; [`http_loadbalancer`](#loadbalancer-2c975c) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#loadbalancer-2c975c) below.
-
-<a id="port-04ac4f"></a>&#x2022; [`port`](#port-04ac4f) - Optional Block<br>Port. Port of the workload<br>See [Port](#port-04ac4f) below.
-
-<a id="loadbalancer-e455f9"></a>&#x2022; [`tcp_loadbalancer`](#loadbalancer-e455f9) - Optional Block<br>TCP Load Balancer. TCP loadbalancer<br>See [TCP Loadbalancer](#loadbalancer-e455f9) below.
+<a id="deep-448f55"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer
 
-A [`http_loadbalancer`](#loadbalancer-2c975c) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports`](#ports-104cf3)) supports the following:
-
-<a id="route-33a7ef"></a>&#x2022; [`default_route`](#route-33a7ef) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#route-33a7ef) below.
-
-<a id="domains-2c4c3f"></a>&#x2022; [`domains`](#domains-2c4c3f) - Optional List<br>Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and \*.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="http-cde370"></a>&#x2022; [`http`](#http-cde370) - Optional Block<br>HTTP Choice. Choice for selecting HTTP proxy<br>See [HTTP](#http-cde370) below.
-
-<a id="https-1c2546"></a>&#x2022; [`https`](#https-1c2546) - Optional Block<br>BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS](#https-1c2546) below.
-
-<a id="cert-68462d"></a>&#x2022; [`https_auto_cert`](#cert-68462d) - Optional Block<br>HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS Auto Cert](#cert-68462d) below.
-
-<a id="routes-cfd13a"></a>&#x2022; [`specific_routes`](#routes-cfd13a) - Optional Block<br>Route Type. This defines various options to define a route<br>See [Specific Routes](#routes-cfd13a) below.
+<a id="deep-c554c9"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Default Route
 
-A [`default_route`](#route-33a7ef) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`](#loadbalancer-2c975c)) supports the following:
-
-<a id="rewrite-794eff"></a>&#x2022; [`auto_host_rewrite`](#rewrite-794eff) - Optional Block<br>Enable this option
-
-<a id="rewrite-496929"></a>&#x2022; [`disable_host_rewrite`](#rewrite-496929) - Optional Block<br>Enable this option
-
-<a id="rewrite-63b203"></a>&#x2022; [`host_rewrite`](#rewrite-63b203) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
+<a id="deep-30e133"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTP
 
-A [`http`](#http-cde370) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`](#loadbalancer-2c975c)) supports the following:
-
-<a id="managed-24da51"></a>&#x2022; [`dns_volterra_managed`](#managed-24da51) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
-
-<a id="port-2564b3"></a>&#x2022; [`port`](#port-2564b3) - Optional Number<br>HTTP Listen Port. HTTP port to Listen
-
-<a id="ranges-a92409"></a>&#x2022; [`port_ranges`](#ranges-a92409) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<a id="deep-d9564b"></a>Deeply nested **HTTP** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS
 
-A [`https`](#https-1c2546) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`](#loadbalancer-2c975c)) supports the following:
-
-<a id="hsts-2b317d"></a>&#x2022; [`add_hsts`](#hsts-2b317d) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-6aa186"></a>&#x2022; [`append_server_name`](#name-6aa186) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-f5101d"></a>&#x2022; [`coalescing_options`](#options-f5101d) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-f5101d) below.
-
-<a id="timeout-6586b9"></a>&#x2022; [`connection_idle_timeout`](#timeout-6586b9) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-9376a7"></a>&#x2022; [`default_header`](#header-9376a7) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-c6945a"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-c6945a) - Optional Block<br>Enable this option
-
-<a id="normalize-e79637"></a>&#x2022; [`disable_path_normalize`](#normalize-e79637) - Optional Block<br>Enable this option
-
-<a id="normalize-d8f95e"></a>&#x2022; [`enable_path_normalize`](#normalize-d8f95e) - Optional Block<br>Enable this option
-
-<a id="options-72a373"></a>&#x2022; [`http_protocol_options`](#options-72a373) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-72a373) below.
-
-<a id="redirect-b8484a"></a>&#x2022; [`http_redirect`](#redirect-b8484a) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="loadbalancer-a1131e"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-a1131e) - Optional Block<br>Enable this option
-
-<a id="through-447be9"></a>&#x2022; [`pass_through`](#through-447be9) - Optional Block<br>Enable this option
-
-<a id="port-d62a75"></a>&#x2022; [`port`](#port-d62a75) - Optional Number<br>HTTPS Port. HTTPS port to Listen
-
-<a id="ranges-f01048"></a>&#x2022; [`port_ranges`](#ranges-f01048) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-18ae6b"></a>&#x2022; [`server_name`](#name-18ae6b) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="params-c4c6a5"></a>&#x2022; [`tls_cert_params`](#params-c4c6a5) - Optional Block<br>TLS Parameters. Select TLS Parameters and Certificates<br>See [TLS Cert Params](#params-c4c6a5) below.
-
-<a id="parameters-0b7172"></a>&#x2022; [`tls_parameters`](#parameters-0b7172) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [TLS Parameters](#parameters-0b7172) below.
+<a id="deep-fd8161"></a>Deeply nested **HTTPS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Coalescing Options
 
-A [`coalescing_options`](#options-f5101d) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`](#https-1c2546)) supports the following:
-
-<a id="coalescing-29be35"></a>&#x2022; [`default_coalescing`](#coalescing-29be35) - Optional Block<br>Enable this option
-
-<a id="coalescing-36a497"></a>&#x2022; [`strict_coalescing`](#coalescing-36a497) - Optional Block<br>Enable this option
+<a id="deep-1ebf1e"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options
 
-A [`http_protocol_options`](#options-72a373) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`](#https-1c2546)) supports the following:
-
-<a id="only-836f03"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-836f03) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-836f03) below.
-
-<a id="v1-v2-8223a9"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-8223a9) - Optional Block<br>Enable this option
-
-<a id="only-00f8f7"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-00f8f7) - Optional Block<br>Enable this option
+<a id="deep-91710b"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-836f03) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.http_protocol_options`](#options-72a373)) supports the following:
-
-<a id="transformation-e24378"></a>&#x2022; [`header_transformation`](#transformation-e24378) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-e24378) below.
+<a id="deep-5f8f3e"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-e24378) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`](#only-836f03)) supports the following:
-
-<a id="transformation-952ae5"></a>&#x2022; [`default_header_transformation`](#transformation-952ae5) - Optional Block<br>Enable this option
-
-<a id="transformation-b4bc8e"></a>&#x2022; [`legacy_header_transformation`](#transformation-b4bc8e) - Optional Block<br>Enable this option
-
-<a id="transformation-f359eb"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-f359eb) - Optional Block<br>Enable this option
-
-<a id="transformation-cebfd6"></a>&#x2022; [`proper_case_header_transformation`](#transformation-cebfd6) - Optional Block<br>Enable this option
+<a id="deep-023b71"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params
 
-A [`tls_cert_params`](#params-c4c6a5) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`](#https-1c2546)) supports the following:
-
-<a id="certificates-729d7f"></a>&#x2022; [`certificates`](#certificates-729d7f) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#certificates-729d7f) below.
-
-<a id="mtls-2b5b1e"></a>&#x2022; [`no_mtls`](#mtls-2b5b1e) - Optional Block<br>Enable this option
-
-<a id="config-960075"></a>&#x2022; [`tls_config`](#config-960075) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-960075) below.
-
-<a id="mtls-cb72f1"></a>&#x2022; [`use_mtls`](#mtls-cb72f1) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-cb72f1) below.
+<a id="deep-772343"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Certificates
 
-A [`certificates`](#certificates-729d7f) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`](#params-c4c6a5)) supports the following:
-
-<a id="name-203d53"></a>&#x2022; [`name`](#name-203d53) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-03eb70"></a>&#x2022; [`namespace`](#namespace-03eb70) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-9aad23"></a>&#x2022; [`tenant`](#tenant-9aad23) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-853555"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
 
-A [`tls_config`](#config-960075) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`](#params-c4c6a5)) supports the following:
-
-<a id="security-74859e"></a>&#x2022; [`custom_security`](#security-74859e) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-74859e) below.
-
-<a id="security-354e5c"></a>&#x2022; [`default_security`](#security-354e5c) - Optional Block<br>Enable this option
-
-<a id="security-8c7fa3"></a>&#x2022; [`low_security`](#security-8c7fa3) - Optional Block<br>Enable this option
-
-<a id="security-19647e"></a>&#x2022; [`medium_security`](#security-19647e) - Optional Block<br>Enable this option
+<a id="deep-dcee5a"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
 
-A [`custom_security`](#security-74859e) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.tls_config`](#config-960075)) supports the following:
-
-<a id="suites-524029"></a>&#x2022; [`cipher_suites`](#suites-524029) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-3125fe"></a>&#x2022; [`max_version`](#version-3125fe) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-5e5473"></a>&#x2022; [`min_version`](#version-5e5473) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-fb52de"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
 
-An [`use_mtls`](#mtls-cb72f1) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params`](#params-c4c6a5)) supports the following:
-
-<a id="optional-d4fb63"></a>&#x2022; [`client_certificate_optional`](#optional-d4fb63) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-6e63dc"></a>&#x2022; [`crl`](#crl-6e63dc) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-6e63dc) below.
-
-<a id="crl-f22432"></a>&#x2022; [`no_crl`](#crl-f22432) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-058015"></a>&#x2022; [`trusted_ca`](#trusted-ca-058015) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-058015) below.
-
-<a id="url-73c9f8"></a>&#x2022; [`trusted_ca_url`](#url-73c9f8) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-fa390f"></a>&#x2022; [`xfcc_disabled`](#disabled-fa390f) - Optional Block<br>Enable this option
-
-<a id="options-7330a2"></a>&#x2022; [`xfcc_options`](#options-7330a2) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-7330a2) below.
+<a id="deep-c23b6d"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
 
-A [`crl`](#crl-6e63dc) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-cb72f1)) supports the following:
-
-<a id="name-cbf0b2"></a>&#x2022; [`name`](#name-cbf0b2) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-0d800d"></a>&#x2022; [`namespace`](#namespace-0d800d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1b5aee"></a>&#x2022; [`tenant`](#tenant-1b5aee) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-0f1756"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-058015) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-cb72f1)) supports the following:
-
-<a id="name-8ce338"></a>&#x2022; [`name`](#name-8ce338) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-ded018"></a>&#x2022; [`namespace`](#namespace-ded018) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-988b46"></a>&#x2022; [`tenant`](#tenant-988b46) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-5c48ac"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-7330a2) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-cb72f1)) supports the following:
-
-<a id="elements-6e8fb8"></a>&#x2022; [`xfcc_header_elements`](#elements-6e8fb8) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-802e32"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters
 
-A [`tls_parameters`](#parameters-0b7172) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https`](#https-1c2546)) supports the following:
-
-<a id="mtls-1e53b6"></a>&#x2022; [`no_mtls`](#mtls-1e53b6) - Optional Block<br>Enable this option
-
-<a id="certificates-2bf11c"></a>&#x2022; [`tls_certificates`](#certificates-2bf11c) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-2bf11c) below.
-
-<a id="config-4487f3"></a>&#x2022; [`tls_config`](#config-4487f3) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-4487f3) below.
-
-<a id="mtls-e64782"></a>&#x2022; [`use_mtls`](#mtls-e64782) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-e64782) below.
+<a id="deep-82afe1"></a>Deeply nested **Parameters** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
 
-A [`tls_certificates`](#certificates-2bf11c) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`](#parameters-0b7172)) supports the following:
-
-<a id="url-9440ad"></a>&#x2022; [`certificate_url`](#url-9440ad) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-6ce3a8"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-6ce3a8) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-6ce3a8) below.
-
-<a id="spec-c83f82"></a>&#x2022; [`description_spec`](#spec-c83f82) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-7f2fe2"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-7f2fe2) - Optional Block<br>Enable this option
-
-<a id="key-45c2fe"></a>&#x2022; [`private_key`](#key-45c2fe) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-45c2fe) below.
-
-<a id="defaults-c054f0"></a>&#x2022; [`use_system_defaults`](#defaults-c054f0) - Optional Block<br>Enable this option
+<a id="deep-00a8ec"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-6ce3a8) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-2bf11c)) supports the following:
-
-<a id="algorithms-1853bb"></a>&#x2022; [`hash_algorithms`](#algorithms-1853bb) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-5a20af"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
 
-A [`private_key`](#key-45c2fe) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-2bf11c)) supports the following:
-
-<a id="info-ae843e"></a>&#x2022; [`blindfold_secret_info`](#info-ae843e) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-ae843e) below.
-
-<a id="info-e82baf"></a>&#x2022; [`clear_secret_info`](#info-e82baf) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-e82baf) below.
+<a id="deep-49489e"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-ae843e) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-45c2fe)) supports the following:
-
-<a id="provider-618cc2"></a>&#x2022; [`decryption_provider`](#provider-618cc2) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-48a6c1"></a>&#x2022; [`location`](#location-48a6c1) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-d84e23"></a>&#x2022; [`store_provider`](#provider-d84e23) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-b28abf"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-e82baf) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-45c2fe)) supports the following:
-
-<a id="ref-e20add"></a>&#x2022; [`provider_ref`](#ref-e20add) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-72651c"></a>&#x2022; [`url`](#url-72651c) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-639d38"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config
 
-A [`tls_config`](#config-4487f3) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`](#parameters-0b7172)) supports the following:
-
-<a id="security-f374d3"></a>&#x2022; [`custom_security`](#security-f374d3) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-f374d3) below.
-
-<a id="security-40dd4f"></a>&#x2022; [`default_security`](#security-40dd4f) - Optional Block<br>Enable this option
-
-<a id="security-50a4a0"></a>&#x2022; [`low_security`](#security-50a4a0) - Optional Block<br>Enable this option
-
-<a id="security-de163d"></a>&#x2022; [`medium_security`](#security-de163d) - Optional Block<br>Enable this option
+<a id="deep-68cec9"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
 
-A [`custom_security`](#security-f374d3) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.tls_config`](#config-4487f3)) supports the following:
-
-<a id="suites-7f127d"></a>&#x2022; [`cipher_suites`](#suites-7f127d) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-d7b518"></a>&#x2022; [`max_version`](#version-d7b518) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-5ad259"></a>&#x2022; [`min_version`](#version-5ad259) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-e36b2c"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
 
-An [`use_mtls`](#mtls-e64782) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters`](#parameters-0b7172)) supports the following:
-
-<a id="optional-a3a0f0"></a>&#x2022; [`client_certificate_optional`](#optional-a3a0f0) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-89781b"></a>&#x2022; [`crl`](#crl-89781b) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-89781b) below.
-
-<a id="crl-2849d6"></a>&#x2022; [`no_crl`](#crl-2849d6) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-e632f3"></a>&#x2022; [`trusted_ca`](#trusted-ca-e632f3) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-e632f3) below.
-
-<a id="url-dc3a9b"></a>&#x2022; [`trusted_ca_url`](#url-dc3a9b) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-52e1bb"></a>&#x2022; [`xfcc_disabled`](#disabled-52e1bb) - Optional Block<br>Enable this option
-
-<a id="options-c9e8f8"></a>&#x2022; [`xfcc_options`](#options-c9e8f8) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-c9e8f8) below.
+<a id="deep-a4b527"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
 
-A [`crl`](#crl-89781b) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-e64782)) supports the following:
-
-<a id="name-3df443"></a>&#x2022; [`name`](#name-3df443) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e65646"></a>&#x2022; [`namespace`](#namespace-e65646) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-8da25f"></a>&#x2022; [`tenant`](#tenant-8da25f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-c3e12f"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-e632f3) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-e64782)) supports the following:
-
-<a id="name-6db906"></a>&#x2022; [`name`](#name-6db906) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-868e2d"></a>&#x2022; [`namespace`](#namespace-868e2d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ca5a44"></a>&#x2022; [`tenant`](#tenant-ca5a44) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-c797ab"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-c9e8f8) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-e64782)) supports the following:
-
-<a id="elements-527d78"></a>&#x2022; [`xfcc_header_elements`](#elements-527d78) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-2df252"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert
 
-A [`https_auto_cert`](#cert-68462d) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`](#loadbalancer-2c975c)) supports the following:
-
-<a id="hsts-7223c2"></a>&#x2022; [`add_hsts`](#hsts-7223c2) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-db1ab5"></a>&#x2022; [`append_server_name`](#name-db1ab5) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-4c8a44"></a>&#x2022; [`coalescing_options`](#options-4c8a44) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-4c8a44) below.
-
-<a id="timeout-39baf4"></a>&#x2022; [`connection_idle_timeout`](#timeout-39baf4) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-ba4d67"></a>&#x2022; [`default_header`](#header-ba4d67) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-d1cfa2"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-d1cfa2) - Optional Block<br>Enable this option
-
-<a id="normalize-ea1dde"></a>&#x2022; [`disable_path_normalize`](#normalize-ea1dde) - Optional Block<br>Enable this option
-
-<a id="normalize-fdac5d"></a>&#x2022; [`enable_path_normalize`](#normalize-fdac5d) - Optional Block<br>Enable this option
-
-<a id="options-8c88d6"></a>&#x2022; [`http_protocol_options`](#options-8c88d6) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-8c88d6) below.
-
-<a id="redirect-7d47dc"></a>&#x2022; [`http_redirect`](#redirect-7d47dc) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="mtls-085f3c"></a>&#x2022; [`no_mtls`](#mtls-085f3c) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-83dcf1"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-83dcf1) - Optional Block<br>Enable this option
-
-<a id="through-c679bf"></a>&#x2022; [`pass_through`](#through-c679bf) - Optional Block<br>Enable this option
-
-<a id="port-dcb16c"></a>&#x2022; [`port`](#port-dcb16c) - Optional Number<br>HTTPS Listen Port. HTTPS port to Listen
-
-<a id="ranges-a66ba9"></a>&#x2022; [`port_ranges`](#ranges-a66ba9) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-82ad34"></a>&#x2022; [`server_name`](#name-82ad34) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="config-f8fcc8"></a>&#x2022; [`tls_config`](#config-f8fcc8) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-f8fcc8) below.
-
-<a id="mtls-79f180"></a>&#x2022; [`use_mtls`](#mtls-79f180) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-79f180) below.
+<a id="deep-43ef50"></a>Deeply nested **Cert** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
 
-A [`coalescing_options`](#options-4c8a44) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`](#cert-68462d)) supports the following:
-
-<a id="coalescing-000c72"></a>&#x2022; [`default_coalescing`](#coalescing-000c72) - Optional Block<br>Enable this option
-
-<a id="coalescing-cf2419"></a>&#x2022; [`strict_coalescing`](#coalescing-cf2419) - Optional Block<br>Enable this option
+<a id="deep-040bd4"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
 
-A [`http_protocol_options`](#options-8c88d6) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`](#cert-68462d)) supports the following:
-
-<a id="only-abcc92"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-abcc92) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-abcc92) below.
-
-<a id="v1-v2-751b0e"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-751b0e) - Optional Block<br>Enable this option
-
-<a id="only-099587"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-099587) - Optional Block<br>Enable this option
+<a id="deep-3fe0dd"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-abcc92) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.http_protocol_options`](#options-8c88d6)) supports the following:
-
-<a id="transformation-c77774"></a>&#x2022; [`header_transformation`](#transformation-c77774) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-c77774) below.
+<a id="deep-a1efa3"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-c77774) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`](#only-abcc92)) supports the following:
-
-<a id="transformation-b5d3cc"></a>&#x2022; [`default_header_transformation`](#transformation-b5d3cc) - Optional Block<br>Enable this option
-
-<a id="transformation-aedb4d"></a>&#x2022; [`legacy_header_transformation`](#transformation-aedb4d) - Optional Block<br>Enable this option
-
-<a id="transformation-85d946"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-85d946) - Optional Block<br>Enable this option
-
-<a id="transformation-92b890"></a>&#x2022; [`proper_case_header_transformation`](#transformation-92b890) - Optional Block<br>Enable this option
+<a id="deep-f94784"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config
 
-A [`tls_config`](#config-f8fcc8) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`](#cert-68462d)) supports the following:
-
-<a id="security-d98275"></a>&#x2022; [`custom_security`](#security-d98275) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-d98275) below.
-
-<a id="security-40cf01"></a>&#x2022; [`default_security`](#security-40cf01) - Optional Block<br>Enable this option
-
-<a id="security-7efa65"></a>&#x2022; [`low_security`](#security-7efa65) - Optional Block<br>Enable this option
-
-<a id="security-4c3e80"></a>&#x2022; [`medium_security`](#security-4c3e80) - Optional Block<br>Enable this option
+<a id="deep-165f40"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
 
-A [`custom_security`](#security-d98275) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.tls_config`](#config-f8fcc8)) supports the following:
-
-<a id="suites-5d3df5"></a>&#x2022; [`cipher_suites`](#suites-5d3df5) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-ee70e5"></a>&#x2022; [`max_version`](#version-ee70e5) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-3ebf43"></a>&#x2022; [`min_version`](#version-3ebf43) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-f6ef45"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS
 
-An [`use_mtls`](#mtls-79f180) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert`](#cert-68462d)) supports the following:
-
-<a id="optional-531136"></a>&#x2022; [`client_certificate_optional`](#optional-531136) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-98da86"></a>&#x2022; [`crl`](#crl-98da86) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-98da86) below.
-
-<a id="crl-5d0d0b"></a>&#x2022; [`no_crl`](#crl-5d0d0b) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-054ef4"></a>&#x2022; [`trusted_ca`](#trusted-ca-054ef4) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-054ef4) below.
-
-<a id="url-a38cc3"></a>&#x2022; [`trusted_ca_url`](#url-a38cc3) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-dde448"></a>&#x2022; [`xfcc_disabled`](#disabled-dde448) - Optional Block<br>Enable this option
-
-<a id="options-ae755a"></a>&#x2022; [`xfcc_options`](#options-ae755a) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-ae755a) below.
+<a id="deep-3db17a"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
 
-A [`crl`](#crl-98da86) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-79f180)) supports the following:
-
-<a id="name-f03149"></a>&#x2022; [`name`](#name-f03149) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-26ce4d"></a>&#x2022; [`namespace`](#namespace-26ce4d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-9c1468"></a>&#x2022; [`tenant`](#tenant-9c1468) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-1bc609"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-054ef4) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-79f180)) supports the following:
-
-<a id="name-a43a05"></a>&#x2022; [`name`](#name-a43a05) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-bb0642"></a>&#x2022; [`namespace`](#namespace-bb0642) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-8e02b1"></a>&#x2022; [`tenant`](#tenant-8e02b1) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-cd80a3"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-ae755a) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-79f180)) supports the following:
-
-<a id="elements-41e57d"></a>&#x2022; [`xfcc_header_elements`](#elements-41e57d) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-10a93f"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes
 
-A [`specific_routes`](#routes-cfd13a) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer`](#loadbalancer-2c975c)) supports the following:
-
-<a id="routes-f63c25"></a>&#x2022; [`routes`](#routes-f63c25) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#routes-f63c25) below.
+<a id="deep-a22e01"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes
 
-A [`routes`](#routes-f63c25) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes`](#routes-cfd13a)) supports the following:
-
-<a id="object-d62e7a"></a>&#x2022; [`custom_route_object`](#object-d62e7a) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#object-d62e7a) below.
-
-<a id="route-fc391a"></a>&#x2022; [`direct_response_route`](#route-fc391a) - Optional Block<br>Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic<br>See [Direct Response Route](#route-fc391a) below.
-
-<a id="route-820772"></a>&#x2022; [`redirect_route`](#route-820772) - Optional Block<br>Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL<br>See [Redirect Route](#route-820772) below.
-
-<a id="route-41409d"></a>&#x2022; [`simple_route`](#route-41409d) - Optional Block<br>Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside<br>See [Simple Route](#route-41409d) below.
+<a id="deep-e2338f"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object
 
-A [`custom_route_object`](#object-d62e7a) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`](#routes-f63c25)) supports the following:
-
-<a id="ref-c2661c"></a>&#x2022; [`route_ref`](#ref-c2661c) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#ref-c2661c) below.
+<a id="deep-a60631"></a>Deeply nested **Object** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
 
-A [`route_ref`](#ref-c2661c) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.custom_route_object`](#object-d62e7a)) supports the following:
-
-<a id="name-64a28b"></a>&#x2022; [`name`](#name-64a28b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-70f03c"></a>&#x2022; [`namespace`](#namespace-70f03c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-42522a"></a>&#x2022; [`tenant`](#tenant-42522a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-f20d74"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route
 
-A [`direct_response_route`](#route-fc391a) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`](#routes-f63c25)) supports the following:
-
-<a id="headers-85eb59"></a>&#x2022; [`headers`](#headers-85eb59) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-85eb59) below.
-
-<a id="method-d43ac3"></a>&#x2022; [`http_method`](#method-d43ac3) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-34ac03"></a>&#x2022; [`incoming_port`](#port-34ac03) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-34ac03) below.
-
-<a id="path-b83eae"></a>&#x2022; [`path`](#path-b83eae) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-b83eae) below.
-
-<a id="response-a4efb8"></a>&#x2022; [`route_direct_response`](#response-a4efb8) - Optional Block<br>Direct Response. Send this direct response in case of route match action is direct response<br>See [Route Direct Response](#response-a4efb8) below.
+<a id="deep-2e3160"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
 
-A [`headers`](#headers-85eb59) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-fc391a)) supports the following:
-
-<a id="exact-0dcebe"></a>&#x2022; [`exact`](#exact-0dcebe) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-3dcf4d"></a>&#x2022; [`invert_match`](#match-3dcf4d) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-d9f15e"></a>&#x2022; [`name`](#name-d9f15e) - Optional String<br>Name. Name of the header
-
-<a id="presence-48a70e"></a>&#x2022; [`presence`](#presence-48a70e) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-bdef58"></a>&#x2022; [`regex`](#regex-bdef58) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-d54750"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
 
-An [`incoming_port`](#port-34ac03) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-fc391a)) supports the following:
-
-<a id="match-583345"></a>&#x2022; [`no_port_match`](#match-583345) - Optional Block<br>Enable this option
-
-<a id="port-047794"></a>&#x2022; [`port`](#port-047794) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-4ced62"></a>&#x2022; [`port_ranges`](#ranges-4ced62) - Optional String<br>Port range. Port range to match
+<a id="deep-3776d6"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
 
-A [`path`](#path-b83eae) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-fc391a)) supports the following:
-
-<a id="path-805a27"></a>&#x2022; [`path`](#path-805a27) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-92c7f9"></a>&#x2022; [`prefix`](#prefix-92c7f9) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-ab640f"></a>&#x2022; [`regex`](#regex-ab640f) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-e0dc9c"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
 
-A [`route_direct_response`](#response-a4efb8) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-fc391a)) supports the following:
-
-<a id="encoded-3bab21"></a>&#x2022; [`response_body_encoded`](#encoded-3bab21) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
-
-<a id="code-7e932e"></a>&#x2022; [`response_code`](#code-7e932e) - Optional Number<br>Response Code. response code to send
+<a id="deep-f31bdb"></a>Deeply nested **Response** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route
 
-A [`redirect_route`](#route-820772) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`](#routes-f63c25)) supports the following:
-
-<a id="headers-8daa78"></a>&#x2022; [`headers`](#headers-8daa78) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-8daa78) below.
-
-<a id="method-4c2eea"></a>&#x2022; [`http_method`](#method-4c2eea) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-d22b77"></a>&#x2022; [`incoming_port`](#port-d22b77) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-d22b77) below.
-
-<a id="path-7b02d2"></a>&#x2022; [`path`](#path-7b02d2) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-7b02d2) below.
-
-<a id="redirect-460fd2"></a>&#x2022; [`route_redirect`](#redirect-460fd2) - Optional Block<br>Redirect. route redirect parameters when match action is redirect<br>See [Route Redirect](#redirect-460fd2) below.
+<a id="deep-2f195b"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
 
-A [`headers`](#headers-8daa78) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-820772)) supports the following:
-
-<a id="exact-578499"></a>&#x2022; [`exact`](#exact-578499) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-0226ba"></a>&#x2022; [`invert_match`](#match-0226ba) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-c18162"></a>&#x2022; [`name`](#name-c18162) - Optional String<br>Name. Name of the header
-
-<a id="presence-eb895c"></a>&#x2022; [`presence`](#presence-eb895c) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-3ca71a"></a>&#x2022; [`regex`](#regex-3ca71a) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-4d2d9a"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
 
-An [`incoming_port`](#port-d22b77) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-820772)) supports the following:
-
-<a id="match-98e18d"></a>&#x2022; [`no_port_match`](#match-98e18d) - Optional Block<br>Enable this option
-
-<a id="port-549ede"></a>&#x2022; [`port`](#port-549ede) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-090bba"></a>&#x2022; [`port_ranges`](#ranges-090bba) - Optional String<br>Port range. Port range to match
+<a id="deep-6a788d"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Path
 
-A [`path`](#path-7b02d2) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-820772)) supports the following:
-
-<a id="path-136c97"></a>&#x2022; [`path`](#path-136c97) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-1956bb"></a>&#x2022; [`prefix`](#prefix-1956bb) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-d52f9b"></a>&#x2022; [`regex`](#regex-d52f9b) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-478484"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
 
-A [`route_redirect`](#redirect-460fd2) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.redirect_route`](#route-820772)) supports the following:
-
-<a id="redirect-930f91"></a>&#x2022; [`host_redirect`](#redirect-930f91) - Optional String<br>Host. swap host part of incoming URL in redirect URL
-
-<a id="redirect-564871"></a>&#x2022; [`path_redirect`](#redirect-564871) - Optional String<br>Path. swap path part of incoming URL in redirect URL
-
-<a id="rewrite-5e0784"></a>&#x2022; [`prefix_rewrite`](#rewrite-5e0784) - Optional String<br>Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request
-
-<a id="redirect-9671aa"></a>&#x2022; [`proto_redirect`](#redirect-9671aa) - Optional String<br>Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done
-
-<a id="params-c32f6b"></a>&#x2022; [`remove_all_params`](#params-c32f6b) - Optional Block<br>Enable this option
-
-<a id="params-69b04f"></a>&#x2022; [`replace_params`](#params-69b04f) - Optional String<br>Replace All Parameters
-
-<a id="code-2e38fc"></a>&#x2022; [`response_code`](#code-2e38fc) - Optional Number<br>Response Code. The HTTP status code to use in the redirect response
-
-<a id="params-fb5c76"></a>&#x2022; [`retain_all_params`](#params-fb5c76) - Optional Block<br>Enable this option
+<a id="deep-b9e553"></a>Deeply nested **Redirect** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route
 
-A [`simple_route`](#route-41409d) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes`](#routes-f63c25)) supports the following:
-
-<a id="rewrite-68222f"></a>&#x2022; [`auto_host_rewrite`](#rewrite-68222f) - Optional Block<br>Enable this option
-
-<a id="rewrite-6818a6"></a>&#x2022; [`disable_host_rewrite`](#rewrite-6818a6) - Optional Block<br>Enable this option
-
-<a id="rewrite-c9febd"></a>&#x2022; [`host_rewrite`](#rewrite-c9febd) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
-
-<a id="method-33b1b4"></a>&#x2022; [`http_method`](#method-33b1b4) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="path-58ea84"></a>&#x2022; [`path`](#path-58ea84) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-58ea84) below.
+<a id="deep-9d5c84"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports HTTP Loadbalancer Specific Routes Routes Simple Route Path
 
-A [`path`](#path-58ea84) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.http_loadbalancer.specific_routes.routes.simple_route`](#route-41409d)) supports the following:
-
-<a id="path-d24d12"></a>&#x2022; [`path`](#path-d24d12) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-790cf0"></a>&#x2022; [`prefix`](#prefix-790cf0) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-507f46"></a>&#x2022; [`regex`](#regex-507f46) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-722753"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports Port
 
-A [`port`](#port-04ac4f) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports`](#ports-104cf3)) supports the following:
-
-<a id="info-2b589b"></a>&#x2022; [`info`](#info-2b589b) - Optional Block<br>Port Information. Port information<br>See [Info](#info-2b589b) below.
-
-<a id="name-0fe9d7"></a>&#x2022; [`name`](#name-0fe9d7) - Optional String<br>Name. Name of the Port
+<a id="deep-4f3d68"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports Port Info
 
-An [`info`](#info-2b589b) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports.port`](#port-04ac4f)) supports the following:
-
-<a id="port-8392a6"></a>&#x2022; [`port`](#port-8392a6) - Optional Number<br>Port. Port the workload can be reached on
-
-<a id="protocol-b91deb"></a>&#x2022; [`protocol`](#protocol-b91deb) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP
-
-<a id="port-ac4c27"></a>&#x2022; [`same_as_port`](#port-ac4c27) - Optional Block<br>Enable this option
-
-<a id="port-6d5eac"></a>&#x2022; [`target_port`](#port-6d5eac) - Optional Number<br>Different than Port. Port the workload is listening on
+<a id="deep-63cbf3"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Multi Ports Ports TCP Loadbalancer
 
-A [`tcp_loadbalancer`](#loadbalancer-e455f9) block (within [`stateful_service.advertise_options.advertise_on_public.multi_ports.ports`](#ports-104cf3)) supports the following:
-
-<a id="domains-ff4603"></a>&#x2022; [`domains`](#domains-ff4603) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="sni-ee8d26"></a>&#x2022; [`with_sni`](#sni-ee8d26) - Optional Bool<br>With SNI. Set to true to enable TCP loadbalancer with SNI
+<a id="deep-5fa3a7"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port
 
-A [`port`](#port-1247eb) block (within [`stateful_service.advertise_options.advertise_on_public`](#public-86b094)) supports the following:
-
-<a id="loadbalancer-24e406"></a>&#x2022; [`http_loadbalancer`](#loadbalancer-24e406) - Optional Block<br>HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer<br>See [HTTP Loadbalancer](#loadbalancer-24e406) below.
-
-<a id="port-e433d9"></a>&#x2022; [`port`](#port-e433d9) - Optional Block<br>Port. Single port<br>See [Port](#port-e433d9) below.
-
-<a id="loadbalancer-bf7e95"></a>&#x2022; [`tcp_loadbalancer`](#loadbalancer-bf7e95) - Optional Block<br>TCP Load Balancer. TCP loadbalancer<br>See [TCP Loadbalancer](#loadbalancer-bf7e95) below.
+<a id="deep-8c94ab"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer
 
-A [`http_loadbalancer`](#loadbalancer-24e406) block (within [`stateful_service.advertise_options.advertise_on_public.port`](#port-1247eb)) supports the following:
-
-<a id="route-46fd07"></a>&#x2022; [`default_route`](#route-46fd07) - Optional Block<br>Default Route. Default route matching all APIs<br>See [Default Route](#route-46fd07) below.
-
-<a id="domains-609858"></a>&#x2022; [`domains`](#domains-609858) - Optional List<br>Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and \*.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="http-1b6c05"></a>&#x2022; [`http`](#http-1b6c05) - Optional Block<br>HTTP Choice. Choice for selecting HTTP proxy<br>See [HTTP](#http-1b6c05) below.
-
-<a id="https-9585a9"></a>&#x2022; [`https`](#https-9585a9) - Optional Block<br>BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS](#https-9585a9) below.
-
-<a id="cert-de5a5f"></a>&#x2022; [`https_auto_cert`](#cert-de5a5f) - Optional Block<br>HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates<br>See [HTTPS Auto Cert](#cert-de5a5f) below.
-
-<a id="routes-7cf227"></a>&#x2022; [`specific_routes`](#routes-7cf227) - Optional Block<br>Route Type. This defines various options to define a route<br>See [Specific Routes](#routes-7cf227) below.
+<a id="deep-d7478f"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Default Route
 
-A [`default_route`](#route-46fd07) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer`](#loadbalancer-24e406)) supports the following:
-
-<a id="rewrite-fc7e0b"></a>&#x2022; [`auto_host_rewrite`](#rewrite-fc7e0b) - Optional Block<br>Enable this option
-
-<a id="rewrite-783bef"></a>&#x2022; [`disable_host_rewrite`](#rewrite-783bef) - Optional Block<br>Enable this option
-
-<a id="rewrite-398b51"></a>&#x2022; [`host_rewrite`](#rewrite-398b51) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
+<a id="deep-1317ce"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTP
 
-A [`http`](#http-1b6c05) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer`](#loadbalancer-24e406)) supports the following:
-
-<a id="managed-05febd"></a>&#x2022; [`dns_volterra_managed`](#managed-05febd) - Optional Bool<br>Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal
-
-<a id="port-263716"></a>&#x2022; [`port`](#port-263716) - Optional Number<br>HTTP Listen Port. HTTP port to Listen
-
-<a id="ranges-be0962"></a>&#x2022; [`port_ranges`](#ranges-be0962) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
+<a id="deep-f8336f"></a>Deeply nested **HTTP** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS
 
-A [`https`](#https-9585a9) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer`](#loadbalancer-24e406)) supports the following:
-
-<a id="hsts-560d06"></a>&#x2022; [`add_hsts`](#hsts-560d06) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-824ed2"></a>&#x2022; [`append_server_name`](#name-824ed2) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-8276dd"></a>&#x2022; [`coalescing_options`](#options-8276dd) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-8276dd) below.
-
-<a id="timeout-e20830"></a>&#x2022; [`connection_idle_timeout`](#timeout-e20830) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-e59000"></a>&#x2022; [`default_header`](#header-e59000) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-8e1563"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-8e1563) - Optional Block<br>Enable this option
-
-<a id="normalize-3ff870"></a>&#x2022; [`disable_path_normalize`](#normalize-3ff870) - Optional Block<br>Enable this option
-
-<a id="normalize-9e1319"></a>&#x2022; [`enable_path_normalize`](#normalize-9e1319) - Optional Block<br>Enable this option
-
-<a id="options-988303"></a>&#x2022; [`http_protocol_options`](#options-988303) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-988303) below.
-
-<a id="redirect-ed5b47"></a>&#x2022; [`http_redirect`](#redirect-ed5b47) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="loadbalancer-35d516"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-35d516) - Optional Block<br>Enable this option
-
-<a id="through-b7446d"></a>&#x2022; [`pass_through`](#through-b7446d) - Optional Block<br>Enable this option
-
-<a id="port-059e6f"></a>&#x2022; [`port`](#port-059e6f) - Optional Number<br>HTTPS Port. HTTPS port to Listen
-
-<a id="ranges-7f8e82"></a>&#x2022; [`port_ranges`](#ranges-7f8e82) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-ddbb1d"></a>&#x2022; [`server_name`](#name-ddbb1d) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="params-1d823a"></a>&#x2022; [`tls_cert_params`](#params-1d823a) - Optional Block<br>TLS Parameters. Select TLS Parameters and Certificates<br>See [TLS Cert Params](#params-1d823a) below.
-
-<a id="parameters-840514"></a>&#x2022; [`tls_parameters`](#parameters-840514) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [TLS Parameters](#parameters-840514) below.
+<a id="deep-88c203"></a>Deeply nested **HTTPS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Coalescing Options
 
-A [`coalescing_options`](#options-8276dd) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https`](#https-9585a9)) supports the following:
-
-<a id="coalescing-3af406"></a>&#x2022; [`default_coalescing`](#coalescing-3af406) - Optional Block<br>Enable this option
-
-<a id="coalescing-0c0a37"></a>&#x2022; [`strict_coalescing`](#coalescing-0c0a37) - Optional Block<br>Enable this option
+<a id="deep-5b699c"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options
 
-A [`http_protocol_options`](#options-988303) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https`](#https-9585a9)) supports the following:
-
-<a id="only-32fde1"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-32fde1) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-32fde1) below.
-
-<a id="v1-v2-8db6f9"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-8db6f9) - Optional Block<br>Enable this option
-
-<a id="only-852213"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-852213) - Optional Block<br>Enable this option
+<a id="deep-3fd15d"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-32fde1) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.http_protocol_options`](#options-988303)) supports the following:
-
-<a id="transformation-c1a7af"></a>&#x2022; [`header_transformation`](#transformation-c1a7af) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-c1a7af) below.
+<a id="deep-1e9fea"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-c1a7af) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.http_protocol_options.http_protocol_enable_v1_only`](#only-32fde1)) supports the following:
-
-<a id="transformation-dbe66e"></a>&#x2022; [`default_header_transformation`](#transformation-dbe66e) - Optional Block<br>Enable this option
-
-<a id="transformation-6a81d8"></a>&#x2022; [`legacy_header_transformation`](#transformation-6a81d8) - Optional Block<br>Enable this option
-
-<a id="transformation-e85ed1"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-e85ed1) - Optional Block<br>Enable this option
-
-<a id="transformation-485e0c"></a>&#x2022; [`proper_case_header_transformation`](#transformation-485e0c) - Optional Block<br>Enable this option
+<a id="deep-96577f"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params
 
-A [`tls_cert_params`](#params-1d823a) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https`](#https-9585a9)) supports the following:
-
-<a id="certificates-e2ac78"></a>&#x2022; [`certificates`](#certificates-e2ac78) - Optional Block<br>Certificates. Select one or more certificates with any domain names<br>See [Certificates](#certificates-e2ac78) below.
-
-<a id="mtls-fef06a"></a>&#x2022; [`no_mtls`](#mtls-fef06a) - Optional Block<br>Enable this option
-
-<a id="config-319033"></a>&#x2022; [`tls_config`](#config-319033) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-319033) below.
-
-<a id="mtls-157954"></a>&#x2022; [`use_mtls`](#mtls-157954) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-157954) below.
+<a id="deep-cb4920"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Certificates
 
-A [`certificates`](#certificates-e2ac78) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`](#params-1d823a)) supports the following:
-
-<a id="name-38a1c4"></a>&#x2022; [`name`](#name-38a1c4) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-db53fd"></a>&#x2022; [`namespace`](#namespace-db53fd) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-0781bb"></a>&#x2022; [`tenant`](#tenant-0781bb) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-1406ba"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config
 
-A [`tls_config`](#config-319033) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`](#params-1d823a)) supports the following:
-
-<a id="security-5395d8"></a>&#x2022; [`custom_security`](#security-5395d8) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-5395d8) below.
-
-<a id="security-d27890"></a>&#x2022; [`default_security`](#security-d27890) - Optional Block<br>Enable this option
-
-<a id="security-75da2e"></a>&#x2022; [`low_security`](#security-75da2e) - Optional Block<br>Enable this option
-
-<a id="security-cc455c"></a>&#x2022; [`medium_security`](#security-cc455c) - Optional Block<br>Enable this option
+<a id="deep-c9f0c1"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params TLS Config Custom Security
 
-A [`custom_security`](#security-5395d8) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.tls_config`](#config-319033)) supports the following:
-
-<a id="suites-2876d9"></a>&#x2022; [`cipher_suites`](#suites-2876d9) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-bac14f"></a>&#x2022; [`max_version`](#version-bac14f) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-031550"></a>&#x2022; [`min_version`](#version-031550) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-feb32d"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS
 
-An [`use_mtls`](#mtls-157954) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params`](#params-1d823a)) supports the following:
-
-<a id="optional-df29f8"></a>&#x2022; [`client_certificate_optional`](#optional-df29f8) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-d90302"></a>&#x2022; [`crl`](#crl-d90302) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-d90302) below.
-
-<a id="crl-00f5d4"></a>&#x2022; [`no_crl`](#crl-00f5d4) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-cc7ea7"></a>&#x2022; [`trusted_ca`](#trusted-ca-cc7ea7) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-cc7ea7) below.
-
-<a id="url-eac22f"></a>&#x2022; [`trusted_ca_url`](#url-eac22f) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-12bda0"></a>&#x2022; [`xfcc_disabled`](#disabled-12bda0) - Optional Block<br>Enable this option
-
-<a id="options-9bf8e2"></a>&#x2022; [`xfcc_options`](#options-9bf8e2) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-9bf8e2) below.
+<a id="deep-5b8a3c"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS CRL
 
-A [`crl`](#crl-d90302) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-157954)) supports the following:
-
-<a id="name-db1f57"></a>&#x2022; [`name`](#name-db1f57) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-3cf5b9"></a>&#x2022; [`namespace`](#namespace-3cf5b9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ade07f"></a>&#x2022; [`tenant`](#tenant-ade07f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-49d7a4"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-cc7ea7) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-157954)) supports the following:
-
-<a id="name-31147c"></a>&#x2022; [`name`](#name-31147c) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-1b7047"></a>&#x2022; [`namespace`](#namespace-1b7047) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-527992"></a>&#x2022; [`tenant`](#tenant-527992) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-8d206a"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Cert Params Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-9bf8e2) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_cert_params.use_mtls`](#mtls-157954)) supports the following:
-
-<a id="elements-038d61"></a>&#x2022; [`xfcc_header_elements`](#elements-038d61) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-a9b8df"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters
 
-A [`tls_parameters`](#parameters-840514) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https`](#https-9585a9)) supports the following:
-
-<a id="mtls-5ab434"></a>&#x2022; [`no_mtls`](#mtls-5ab434) - Optional Block<br>Enable this option
-
-<a id="certificates-8d8e86"></a>&#x2022; [`tls_certificates`](#certificates-8d8e86) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-8d8e86) below.
-
-<a id="config-af8e64"></a>&#x2022; [`tls_config`](#config-af8e64) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-af8e64) below.
-
-<a id="mtls-1563cd"></a>&#x2022; [`use_mtls`](#mtls-1563cd) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-1563cd) below.
+<a id="deep-f7d00f"></a>Deeply nested **Parameters** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates
 
-A [`tls_certificates`](#certificates-8d8e86) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`](#parameters-840514)) supports the following:
-
-<a id="url-b6a25c"></a>&#x2022; [`certificate_url`](#url-b6a25c) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-4d99b4"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-4d99b4) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-4d99b4) below.
-
-<a id="spec-96f77b"></a>&#x2022; [`description_spec`](#spec-96f77b) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-e1de33"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-e1de33) - Optional Block<br>Enable this option
-
-<a id="key-d6ed9c"></a>&#x2022; [`private_key`](#key-d6ed9c) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-d6ed9c) below.
-
-<a id="defaults-9e874b"></a>&#x2022; [`use_system_defaults`](#defaults-9e874b) - Optional Block<br>Enable this option
+<a id="deep-24598f"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-4d99b4) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-8d8e86)) supports the following:
-
-<a id="algorithms-a6adea"></a>&#x2022; [`hash_algorithms`](#algorithms-a6adea) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-9279c2"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key
 
-A [`private_key`](#key-d6ed9c) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates`](#certificates-8d8e86)) supports the following:
-
-<a id="info-0d459a"></a>&#x2022; [`blindfold_secret_info`](#info-0d459a) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-0d459a) below.
-
-<a id="info-b26a22"></a>&#x2022; [`clear_secret_info`](#info-b26a22) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b26a22) below.
+<a id="deep-6ca79f"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-0d459a) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-d6ed9c)) supports the following:
-
-<a id="provider-7df182"></a>&#x2022; [`decryption_provider`](#provider-7df182) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-8318cc"></a>&#x2022; [`location`](#location-8318cc) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-bc4cba"></a>&#x2022; [`store_provider`](#provider-bc4cba) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-906508"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-b26a22) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_certificates.private_key`](#key-d6ed9c)) supports the following:
-
-<a id="ref-6c442e"></a>&#x2022; [`provider_ref`](#ref-6c442e) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-ae6d31"></a>&#x2022; [`url`](#url-ae6d31) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-2cb08d"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config
 
-A [`tls_config`](#config-af8e64) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`](#parameters-840514)) supports the following:
-
-<a id="security-23b361"></a>&#x2022; [`custom_security`](#security-23b361) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-23b361) below.
-
-<a id="security-825b87"></a>&#x2022; [`default_security`](#security-825b87) - Optional Block<br>Enable this option
-
-<a id="security-35c755"></a>&#x2022; [`low_security`](#security-35c755) - Optional Block<br>Enable this option
-
-<a id="security-56cd03"></a>&#x2022; [`medium_security`](#security-56cd03) - Optional Block<br>Enable this option
+<a id="deep-822220"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters TLS Config Custom Security
 
-A [`custom_security`](#security-23b361) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.tls_config`](#config-af8e64)) supports the following:
-
-<a id="suites-c231a3"></a>&#x2022; [`cipher_suites`](#suites-c231a3) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-3929f6"></a>&#x2022; [`max_version`](#version-3929f6) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-cc3b66"></a>&#x2022; [`min_version`](#version-cc3b66) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-4ec091"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS
 
-An [`use_mtls`](#mtls-1563cd) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters`](#parameters-840514)) supports the following:
-
-<a id="optional-b9848d"></a>&#x2022; [`client_certificate_optional`](#optional-b9848d) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-d3088b"></a>&#x2022; [`crl`](#crl-d3088b) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-d3088b) below.
-
-<a id="crl-057024"></a>&#x2022; [`no_crl`](#crl-057024) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-7c7e38"></a>&#x2022; [`trusted_ca`](#trusted-ca-7c7e38) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-7c7e38) below.
-
-<a id="url-90b46d"></a>&#x2022; [`trusted_ca_url`](#url-90b46d) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-02c0b6"></a>&#x2022; [`xfcc_disabled`](#disabled-02c0b6) - Optional Block<br>Enable this option
-
-<a id="options-bf2762"></a>&#x2022; [`xfcc_options`](#options-bf2762) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-bf2762) below.
+<a id="deep-966ded"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS CRL
 
-A [`crl`](#crl-d3088b) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-1563cd)) supports the following:
-
-<a id="name-6738bf"></a>&#x2022; [`name`](#name-6738bf) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c9d84f"></a>&#x2022; [`namespace`](#namespace-c9d84f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-c70543"></a>&#x2022; [`tenant`](#tenant-c70543) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-f1a4a8"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-7c7e38) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-1563cd)) supports the following:
-
-<a id="name-6914df"></a>&#x2022; [`name`](#name-6914df) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-740671"></a>&#x2022; [`namespace`](#namespace-740671) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e222b2"></a>&#x2022; [`tenant`](#tenant-e222b2) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-16c5e1"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS TLS Parameters Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-bf2762) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https.tls_parameters.use_mtls`](#mtls-1563cd)) supports the following:
-
-<a id="elements-61afee"></a>&#x2022; [`xfcc_header_elements`](#elements-61afee) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-189054"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert
 
-A [`https_auto_cert`](#cert-de5a5f) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer`](#loadbalancer-24e406)) supports the following:
-
-<a id="hsts-83ebb9"></a>&#x2022; [`add_hsts`](#hsts-83ebb9) - Optional Bool<br>Add HSTS Header. Add HTTP Strict-Transport-Security response header
-
-<a id="name-cbf0ed"></a>&#x2022; [`append_server_name`](#name-cbf0ed) - Optional String<br>Append header value. Define the header value for the header name “server”. If header value is already present, it is not overwritten and passed as-is
-
-<a id="options-b619b7"></a>&#x2022; [`coalescing_options`](#options-b619b7) - Optional Block<br>TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)<br>See [Coalescing Options](#options-b619b7) below.
-
-<a id="timeout-242b02"></a>&#x2022; [`connection_idle_timeout`](#timeout-242b02) - Optional Number  Defaults to `2`  Specified in milliseconds<br>Connection Idle Timeout. The idle timeout for downstream connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
-
-<a id="header-f8683e"></a>&#x2022; [`default_header`](#header-f8683e) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-b6e5e4"></a>&#x2022; [`default_loadbalancer`](#loadbalancer-b6e5e4) - Optional Block<br>Enable this option
-
-<a id="normalize-4d0153"></a>&#x2022; [`disable_path_normalize`](#normalize-4d0153) - Optional Block<br>Enable this option
-
-<a id="normalize-f273fb"></a>&#x2022; [`enable_path_normalize`](#normalize-f273fb) - Optional Block<br>Enable this option
-
-<a id="options-85ab1a"></a>&#x2022; [`http_protocol_options`](#options-85ab1a) - Optional Block<br>HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections<br>See [HTTP Protocol Options](#options-85ab1a) below.
-
-<a id="redirect-3f327e"></a>&#x2022; [`http_redirect`](#redirect-3f327e) - Optional Bool<br>HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS
-
-<a id="mtls-4c04c8"></a>&#x2022; [`no_mtls`](#mtls-4c04c8) - Optional Block<br>Enable this option
-
-<a id="loadbalancer-e08afa"></a>&#x2022; [`non_default_loadbalancer`](#loadbalancer-e08afa) - Optional Block<br>Enable this option
-
-<a id="through-8d7a31"></a>&#x2022; [`pass_through`](#through-8d7a31) - Optional Block<br>Enable this option
-
-<a id="port-b0e2f3"></a>&#x2022; [`port`](#port-b0e2f3) - Optional Number<br>HTTPS Listen Port. HTTPS port to Listen
-
-<a id="ranges-c5714c"></a>&#x2022; [`port_ranges`](#ranges-c5714c) - Optional String<br>Port Ranges. A string containing a comma separated list of port ranges. Each port range consists of a single port or two ports separated by '-'
-
-<a id="name-1112bb"></a>&#x2022; [`server_name`](#name-1112bb) - Optional String<br>Modify header value. Define the header value for the header name “server”. This will overwrite existing values, if any, for the server header
-
-<a id="config-b47133"></a>&#x2022; [`tls_config`](#config-b47133) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-b47133) below.
-
-<a id="mtls-711ff6"></a>&#x2022; [`use_mtls`](#mtls-711ff6) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-711ff6) below.
+<a id="deep-e6c6ca"></a>Deeply nested **Cert** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Coalescing Options
 
-A [`coalescing_options`](#options-b619b7) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`](#cert-de5a5f)) supports the following:
-
-<a id="coalescing-ee682a"></a>&#x2022; [`default_coalescing`](#coalescing-ee682a) - Optional Block<br>Enable this option
-
-<a id="coalescing-58e1ca"></a>&#x2022; [`strict_coalescing`](#coalescing-58e1ca) - Optional Block<br>Enable this option
+<a id="deep-c60043"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options
 
-A [`http_protocol_options`](#options-85ab1a) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`](#cert-de5a5f)) supports the following:
-
-<a id="only-64204f"></a>&#x2022; [`http_protocol_enable_v1_only`](#only-64204f) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections<br>See [HTTP Protocol Enable V1 Only](#only-64204f) below.
-
-<a id="v1-v2-c8a4e9"></a>&#x2022; [`http_protocol_enable_v1_v2`](#v1-v2-c8a4e9) - Optional Block<br>Enable this option
-
-<a id="only-0e1fbe"></a>&#x2022; [`http_protocol_enable_v2_only`](#only-0e1fbe) - Optional Block<br>Enable this option
+<a id="deep-acc31c"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only
 
-A [`http_protocol_enable_v1_only`](#only-64204f) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.http_protocol_options`](#options-85ab1a)) supports the following:
-
-<a id="transformation-e66208"></a>&#x2022; [`header_transformation`](#transformation-e66208) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-e66208) below.
+<a id="deep-1e5eee"></a>Deeply nested **Only** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert HTTP Protocol Options HTTP Protocol Enable V1 Only Header Transformation
 
-A [`header_transformation`](#transformation-e66208) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.http_protocol_options.http_protocol_enable_v1_only`](#only-64204f)) supports the following:
-
-<a id="transformation-d14534"></a>&#x2022; [`default_header_transformation`](#transformation-d14534) - Optional Block<br>Enable this option
-
-<a id="transformation-226009"></a>&#x2022; [`legacy_header_transformation`](#transformation-226009) - Optional Block<br>Enable this option
-
-<a id="transformation-c9d3a6"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-c9d3a6) - Optional Block<br>Enable this option
-
-<a id="transformation-981861"></a>&#x2022; [`proper_case_header_transformation`](#transformation-981861) - Optional Block<br>Enable this option
+<a id="deep-bada35"></a>Deeply nested **Transformation** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config
 
-A [`tls_config`](#config-b47133) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`](#cert-de5a5f)) supports the following:
-
-<a id="security-07f4a2"></a>&#x2022; [`custom_security`](#security-07f4a2) - Optional Block<br>Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#security-07f4a2) below.
-
-<a id="security-abb674"></a>&#x2022; [`default_security`](#security-abb674) - Optional Block<br>Enable this option
-
-<a id="security-e22926"></a>&#x2022; [`low_security`](#security-e22926) - Optional Block<br>Enable this option
-
-<a id="security-ef116b"></a>&#x2022; [`medium_security`](#security-ef116b) - Optional Block<br>Enable this option
+<a id="deep-57e2ee"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert TLS Config Custom Security
 
-A [`custom_security`](#security-07f4a2) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.tls_config`](#config-b47133)) supports the following:
-
-<a id="suites-355bf7"></a>&#x2022; [`cipher_suites`](#suites-355bf7) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-a53e04"></a>&#x2022; [`max_version`](#version-a53e04) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-851124"></a>&#x2022; [`min_version`](#version-851124) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-6df39c"></a>Deeply nested **Security** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS
 
-An [`use_mtls`](#mtls-711ff6) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert`](#cert-de5a5f)) supports the following:
-
-<a id="optional-2baf4f"></a>&#x2022; [`client_certificate_optional`](#optional-2baf4f) - Optional Bool<br>Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted
-
-<a id="crl-7c6462"></a>&#x2022; [`crl`](#crl-7c6462) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CRL](#crl-7c6462) below.
-
-<a id="crl-0a90f6"></a>&#x2022; [`no_crl`](#crl-0a90f6) - Optional Block<br>Enable this option
-
-<a id="trusted-ca-6fc485"></a>&#x2022; [`trusted_ca`](#trusted-ca-6fc485) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Trusted CA](#trusted-ca-6fc485) below.
-
-<a id="url-5ee662"></a>&#x2022; [`trusted_ca_url`](#url-5ee662) - Optional String<br>Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer
-
-<a id="disabled-e5b787"></a>&#x2022; [`xfcc_disabled`](#disabled-e5b787) - Optional Block<br>Enable this option
-
-<a id="options-994ab3"></a>&#x2022; [`xfcc_options`](#options-994ab3) - Optional Block<br>XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests<br>See [Xfcc Options](#options-994ab3) below.
+<a id="deep-43d6c1"></a>Deeply nested **mTLS** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS CRL
 
-A [`crl`](#crl-7c6462) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-711ff6)) supports the following:
-
-<a id="name-aecdde"></a>&#x2022; [`name`](#name-aecdde) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-7e34d0"></a>&#x2022; [`namespace`](#namespace-7e34d0) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ff2283"></a>&#x2022; [`tenant`](#tenant-ff2283) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-6bd648"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-6fc485) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-711ff6)) supports the following:
-
-<a id="name-411b40"></a>&#x2022; [`name`](#name-411b40) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-82f345"></a>&#x2022; [`namespace`](#namespace-82f345) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e15d82"></a>&#x2022; [`tenant`](#tenant-e15d82) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-2e4ca6"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer HTTPS Auto Cert Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-994ab3) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.https_auto_cert.use_mtls`](#mtls-711ff6)) supports the following:
-
-<a id="elements-427f1e"></a>&#x2022; [`xfcc_header_elements`](#elements-427f1e) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-6d2698"></a>Deeply nested **Options** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes
 
-A [`specific_routes`](#routes-7cf227) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer`](#loadbalancer-24e406)) supports the following:
-
-<a id="routes-c9810b"></a>&#x2022; [`routes`](#routes-c9810b) - Optional Block<br>Routes. Routes for this loadbalancer<br>See [Routes](#routes-c9810b) below.
+<a id="deep-ee8802"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes
 
-A [`routes`](#routes-c9810b) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes`](#routes-7cf227)) supports the following:
-
-<a id="object-b06876"></a>&#x2022; [`custom_route_object`](#object-b06876) - Optional Block<br>Custom Route Object. A custom route uses a route object created outside of this view<br>See [Custom Route Object](#object-b06876) below.
-
-<a id="route-9d12e6"></a>&#x2022; [`direct_response_route`](#route-9d12e6) - Optional Block<br>Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic<br>See [Direct Response Route](#route-9d12e6) below.
-
-<a id="route-236aa5"></a>&#x2022; [`redirect_route`](#route-236aa5) - Optional Block<br>Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL<br>See [Redirect Route](#route-236aa5) below.
-
-<a id="route-bf7591"></a>&#x2022; [`simple_route`](#route-bf7591) - Optional Block<br>Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside<br>See [Simple Route](#route-bf7591) below.
+<a id="deep-5b9b7f"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object
 
-A [`custom_route_object`](#object-b06876) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`](#routes-c9810b)) supports the following:
-
-<a id="ref-28c612"></a>&#x2022; [`route_ref`](#ref-28c612) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Route Ref](#ref-28c612) below.
+<a id="deep-139784"></a>Deeply nested **Object** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Custom Route Object Route Ref
 
-A [`route_ref`](#ref-28c612) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.custom_route_object`](#object-b06876)) supports the following:
-
-<a id="name-c07710"></a>&#x2022; [`name`](#name-c07710) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-83b20f"></a>&#x2022; [`namespace`](#namespace-83b20f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-26ec15"></a>&#x2022; [`tenant`](#tenant-26ec15) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-fa0b80"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route
 
-A [`direct_response_route`](#route-9d12e6) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`](#routes-c9810b)) supports the following:
-
-<a id="headers-cb6bba"></a>&#x2022; [`headers`](#headers-cb6bba) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-cb6bba) below.
-
-<a id="method-97a4e5"></a>&#x2022; [`http_method`](#method-97a4e5) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-f288f8"></a>&#x2022; [`incoming_port`](#port-f288f8) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-f288f8) below.
-
-<a id="path-9fe015"></a>&#x2022; [`path`](#path-9fe015) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-9fe015) below.
-
-<a id="response-9a5f3f"></a>&#x2022; [`route_direct_response`](#response-9a5f3f) - Optional Block<br>Direct Response. Send this direct response in case of route match action is direct response<br>See [Route Direct Response](#response-9a5f3f) below.
+<a id="deep-e4cb4d"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Headers
 
-A [`headers`](#headers-cb6bba) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-9d12e6)) supports the following:
-
-<a id="exact-f7a94e"></a>&#x2022; [`exact`](#exact-f7a94e) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-3eb10c"></a>&#x2022; [`invert_match`](#match-3eb10c) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-eaf53a"></a>&#x2022; [`name`](#name-eaf53a) - Optional String<br>Name. Name of the header
-
-<a id="presence-a785f9"></a>&#x2022; [`presence`](#presence-a785f9) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-6f1d37"></a>&#x2022; [`regex`](#regex-6f1d37) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-16b389"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Incoming Port
 
-An [`incoming_port`](#port-f288f8) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-9d12e6)) supports the following:
-
-<a id="match-35637e"></a>&#x2022; [`no_port_match`](#match-35637e) - Optional Block<br>Enable this option
-
-<a id="port-e26815"></a>&#x2022; [`port`](#port-e26815) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-85caa3"></a>&#x2022; [`port_ranges`](#ranges-85caa3) - Optional String<br>Port range. Port range to match
+<a id="deep-600cbb"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Path
 
-A [`path`](#path-9fe015) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-9d12e6)) supports the following:
-
-<a id="path-967a26"></a>&#x2022; [`path`](#path-967a26) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-048222"></a>&#x2022; [`prefix`](#prefix-048222) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-7c3d5f"></a>&#x2022; [`regex`](#regex-7c3d5f) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-8d9f69"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Direct Response Route Route Direct Response
 
-A [`route_direct_response`](#response-9a5f3f) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.direct_response_route`](#route-9d12e6)) supports the following:
-
-<a id="encoded-dffa23"></a>&#x2022; [`response_body_encoded`](#encoded-dffa23) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
-
-<a id="code-7adf57"></a>&#x2022; [`response_code`](#code-7adf57) - Optional Number<br>Response Code. response code to send
+<a id="deep-3e55b0"></a>Deeply nested **Response** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route
 
-A [`redirect_route`](#route-236aa5) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`](#routes-c9810b)) supports the following:
-
-<a id="headers-1643ce"></a>&#x2022; [`headers`](#headers-1643ce) - Optional Block<br>Headers. List of (key, value) headers<br>See [Headers](#headers-1643ce) below.
-
-<a id="method-010ac6"></a>&#x2022; [`http_method`](#method-010ac6) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="port-5ff54b"></a>&#x2022; [`incoming_port`](#port-5ff54b) - Optional Block<br>Port to Match. Port match of the request can be a range or a specific port<br>See [Incoming Port](#port-5ff54b) below.
-
-<a id="path-606953"></a>&#x2022; [`path`](#path-606953) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-606953) below.
-
-<a id="redirect-9bb621"></a>&#x2022; [`route_redirect`](#redirect-9bb621) - Optional Block<br>Redirect. route redirect parameters when match action is redirect<br>See [Route Redirect](#redirect-9bb621) below.
+<a id="deep-b619f2"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Headers
 
-A [`headers`](#headers-1643ce) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`](#route-236aa5)) supports the following:
-
-<a id="exact-90fee5"></a>&#x2022; [`exact`](#exact-90fee5) - Optional String<br>Exact. Header value to match exactly
-
-<a id="match-2e32f4"></a>&#x2022; [`invert_match`](#match-2e32f4) - Optional Bool<br>NOT of match. Invert the result of the match to detect missing header or non-matching value
-
-<a id="name-011477"></a>&#x2022; [`name`](#name-011477) - Optional String<br>Name. Name of the header
-
-<a id="presence-2b527e"></a>&#x2022; [`presence`](#presence-2b527e) - Optional Bool<br>Presence. If true, check for presence of header
-
-<a id="regex-76f9b3"></a>&#x2022; [`regex`](#regex-76f9b3) - Optional String<br>Regex. Regex match of the header value in re2 format
+<a id="deep-869c99"></a>Deeply nested **Headers** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Incoming Port
 
-An [`incoming_port`](#port-5ff54b) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`](#route-236aa5)) supports the following:
-
-<a id="match-e37493"></a>&#x2022; [`no_port_match`](#match-e37493) - Optional Block<br>Enable this option
-
-<a id="port-04353c"></a>&#x2022; [`port`](#port-04353c) - Optional Number<br>Port. Exact Port to match
-
-<a id="ranges-bddf9a"></a>&#x2022; [`port_ranges`](#ranges-bddf9a) - Optional String<br>Port range. Port range to match
+<a id="deep-df832d"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Path
 
-A [`path`](#path-606953) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`](#route-236aa5)) supports the following:
-
-<a id="path-db142b"></a>&#x2022; [`path`](#path-db142b) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-33cb33"></a>&#x2022; [`prefix`](#prefix-33cb33) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-4d41bf"></a>&#x2022; [`regex`](#regex-4d41bf) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-4adff7"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Redirect Route Route Redirect
 
-A [`route_redirect`](#redirect-9bb621) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.redirect_route`](#route-236aa5)) supports the following:
-
-<a id="redirect-80b003"></a>&#x2022; [`host_redirect`](#redirect-80b003) - Optional String<br>Host. swap host part of incoming URL in redirect URL
-
-<a id="redirect-8e0aad"></a>&#x2022; [`path_redirect`](#redirect-8e0aad) - Optional String<br>Path. swap path part of incoming URL in redirect URL
-
-<a id="rewrite-9a096d"></a>&#x2022; [`prefix_rewrite`](#rewrite-9a096d) - Optional String<br>Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request
-
-<a id="redirect-4a8feb"></a>&#x2022; [`proto_redirect`](#redirect-4a8feb) - Optional String<br>Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done
-
-<a id="params-bd2f80"></a>&#x2022; [`remove_all_params`](#params-bd2f80) - Optional Block<br>Enable this option
-
-<a id="params-a28cc2"></a>&#x2022; [`replace_params`](#params-a28cc2) - Optional String<br>Replace All Parameters
-
-<a id="code-9bf521"></a>&#x2022; [`response_code`](#code-9bf521) - Optional Number<br>Response Code. The HTTP status code to use in the redirect response
-
-<a id="params-423f5d"></a>&#x2022; [`retain_all_params`](#params-423f5d) - Optional Block<br>Enable this option
+<a id="deep-5f4ed2"></a>Deeply nested **Redirect** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route
 
-A [`simple_route`](#route-bf7591) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes`](#routes-c9810b)) supports the following:
-
-<a id="rewrite-036601"></a>&#x2022; [`auto_host_rewrite`](#rewrite-036601) - Optional Block<br>Enable this option
-
-<a id="rewrite-3a8464"></a>&#x2022; [`disable_host_rewrite`](#rewrite-3a8464) - Optional Block<br>Enable this option
-
-<a id="rewrite-34deee"></a>&#x2022; [`host_rewrite`](#rewrite-34deee) - Optional String<br>Host Rewrite Value. Host header will be swapped with this value
-
-<a id="method-7564c5"></a>&#x2022; [`http_method`](#method-7564c5) - Optional String  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method
-
-<a id="path-9e63e8"></a>&#x2022; [`path`](#path-9e63e8) - Optional Block<br>Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match<br>See [Path](#path-9e63e8) below.
+<a id="deep-be5f76"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port HTTP Loadbalancer Specific Routes Routes Simple Route Path
 
-A [`path`](#path-9e63e8) block (within [`stateful_service.advertise_options.advertise_on_public.port.http_loadbalancer.specific_routes.routes.simple_route`](#route-bf7591)) supports the following:
-
-<a id="path-f71137"></a>&#x2022; [`path`](#path-f71137) - Optional String<br>Exact. Exact path value to match
-
-<a id="prefix-bd1dcc"></a>&#x2022; [`prefix`](#prefix-bd1dcc) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
-
-<a id="regex-4d7374"></a>&#x2022; [`regex`](#regex-4d7374) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="deep-af937d"></a>Deeply nested **Path** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port Port
 
-A [`port`](#port-e433d9) block (within [`stateful_service.advertise_options.advertise_on_public.port`](#port-1247eb)) supports the following:
-
-<a id="info-4a8b2b"></a>&#x2022; [`info`](#info-4a8b2b) - Optional Block<br>Port Information. Port information<br>See [Info](#info-4a8b2b) below.
+<a id="deep-8e2e80"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port Port Info
 
-An [`info`](#info-4a8b2b) block (within [`stateful_service.advertise_options.advertise_on_public.port.port`](#port-e433d9)) supports the following:
-
-<a id="port-941cc8"></a>&#x2022; [`port`](#port-941cc8) - Optional Number<br>Port. Port the workload can be reached on
-
-<a id="protocol-60611e"></a>&#x2022; [`protocol`](#protocol-60611e) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_HTTP`, `PROTOCOL_HTTP2`, `PROTOCOL_TLS_WITH_SNI`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_HTTP|PROTOCOL_HTTP2|PROTOCOL_TLS_WITH_SNI|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP TCP - PROTOCOL_HTTP: HTTP HTTP - PROTOCOL_HTTP2: HTTP2 HTTP2 - PROTOCOL_TLS_WITH_SNI: TLS with SNI TLS with SNI - PROTOCOL_UDP: UDP UDP
-
-<a id="port-fd2390"></a>&#x2022; [`same_as_port`](#port-fd2390) - Optional Block<br>Enable this option
-
-<a id="port-c06471"></a>&#x2022; [`target_port`](#port-c06471) - Optional Number<br>Different than Port. Port the workload is listening on
+<a id="deep-c00eff"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Stateful Service Advertise Options Advertise On Public Port TCP Loadbalancer
 
-A [`tcp_loadbalancer`](#loadbalancer-bf7e95) block (within [`stateful_service.advertise_options.advertise_on_public.port`](#port-1247eb)) supports the following:
-
-<a id="domains-cc1f6e"></a>&#x2022; [`domains`](#domains-cc1f6e) - Optional List<br>Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER
-
-<a id="sni-348f35"></a>&#x2022; [`with_sni`](#sni-348f35) - Optional Bool<br>With SNI. Set to true to enable TCP loadbalancer with SNI
+<a id="deep-ee5fc5"></a>Deeply nested **Loadbalancer** block collapsed for readability.
 
 #### Stateful Service Configuration
 
@@ -5685,13 +2723,7 @@ A [`containers`](#stateful-service-containers) block (within [`stateful_service`
 
 #### Stateful Service Containers Custom Flavor
 
-A [`custom_flavor`](#flavor-0d2be0) block (within [`stateful_service.containers`](#stateful-service-containers)) supports the following:
-
-<a id="name-37698d"></a>&#x2022; [`name`](#name-37698d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-db9524"></a>&#x2022; [`namespace`](#namespace-db9524) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-a8296a"></a>&#x2022; [`tenant`](#tenant-a8296a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0d2be0"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Stateful Service Containers Image
 
@@ -5707,13 +2739,7 @@ An [`image`](#stateful-service-containers-image) block (within [`stateful_servic
 
 #### Stateful Service Containers Image Container Registry
 
-A [`container_registry`](#registry-78045a) block (within [`stateful_service.containers.image`](#stateful-service-containers-image)) supports the following:
-
-<a id="name-4d4804"></a>&#x2022; [`name`](#name-4d4804) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f6725d"></a>&#x2022; [`namespace`](#namespace-f6725d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1ee737"></a>&#x2022; [`tenant`](#tenant-1ee737) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-78045a"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Stateful Service Containers Liveness Check
 
@@ -5737,43 +2763,23 @@ A [`liveness_check`](#check-82bd07) block (within [`stateful_service.containers`
 
 #### Stateful Service Containers Liveness Check Exec Health Check
 
-An [`exec_health_check`](#check-d745b6) block (within [`stateful_service.containers.liveness_check`](#check-82bd07)) supports the following:
-
-<a id="command-5833cc"></a>&#x2022; [`command`](#command-5833cc) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
+<a id="deep-5f4a6d"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Stateful Service Containers Liveness Check HTTP Health Check
 
-A [`http_health_check`](#check-3fba6e) block (within [`stateful_service.containers.liveness_check`](#check-82bd07)) supports the following:
-
-<a id="headers-48f3e1"></a>&#x2022; [`headers`](#headers-48f3e1) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
-
-<a id="header-2ee6c3"></a>&#x2022; [`host_header`](#header-2ee6c3) - Optional String<br>Host Header. The value of the host header in the HTTP health check request
-
-<a id="path-ef5df6"></a>&#x2022; [`path`](#path-ef5df6) - Optional String<br>Path. Path to access on the HTTP server
-
-<a id="port-d2e443"></a>&#x2022; [`port`](#port-d2e443) - Optional Block<br>Port. Port<br>See [Port](#port-d2e443) below.
+<a id="deep-18c5ba"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Stateful Service Containers Liveness Check HTTP Health Check Port
 
-A [`port`](#port-d2e443) block (within [`stateful_service.containers.liveness_check.http_health_check`](#check-3fba6e)) supports the following:
-
-<a id="name-6e5435"></a>&#x2022; [`name`](#name-6e5435) - Optional String<br>Port Name. Port Name
-
-<a id="num-3bf8d1"></a>&#x2022; [`num`](#num-3bf8d1) - Optional Number<br>Port Number. Port number
+<a id="deep-13e4c2"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Containers Liveness Check TCP Health Check
 
-A [`tcp_health_check`](#check-485f86) block (within [`stateful_service.containers.liveness_check`](#check-82bd07)) supports the following:
-
-<a id="port-8d7255"></a>&#x2022; [`port`](#port-8d7255) - Optional Block<br>Port. Port<br>See [Port](#port-8d7255) below.
+<a id="deep-6439d2"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Stateful Service Containers Liveness Check TCP Health Check Port
 
-A [`port`](#port-8d7255) block (within [`stateful_service.containers.liveness_check.tcp_health_check`](#check-485f86)) supports the following:
-
-<a id="name-79356b"></a>&#x2022; [`name`](#name-79356b) - Optional String<br>Port Name. Port Name
-
-<a id="num-7c2999"></a>&#x2022; [`num`](#num-7c2999) - Optional Number<br>Port Number. Port number
+<a id="deep-b68950"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Containers Readiness Check
 
@@ -5797,43 +2803,23 @@ A [`readiness_check`](#check-81b532) block (within [`stateful_service.containers
 
 #### Stateful Service Containers Readiness Check Exec Health Check
 
-An [`exec_health_check`](#check-d067fc) block (within [`stateful_service.containers.readiness_check`](#check-81b532)) supports the following:
-
-<a id="command-f8c839"></a>&#x2022; [`command`](#command-f8c839) - Optional List<br>Command. Command is the command line to execute inside the container, the working directory for the command is root ('/') in the container's filesystem. The command is simply exec'd, it is not run inside a shell, so traditional shell instructions ('|', etc) won't work. To use a shell, you need to explicitly call out to that shell
+<a id="deep-082de5"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Stateful Service Containers Readiness Check HTTP Health Check
 
-A [`http_health_check`](#check-d4b642) block (within [`stateful_service.containers.readiness_check`](#check-81b532)) supports the following:
-
-<a id="headers-26e98c"></a>&#x2022; [`headers`](#headers-26e98c) - Optional Block<br>Request Headers to Add. Specifies a list of HTTP headers that should be added to each request that is sent to the health checked container. This is a list of key-value pairs
-
-<a id="header-27ea2e"></a>&#x2022; [`host_header`](#header-27ea2e) - Optional String<br>Host Header. The value of the host header in the HTTP health check request
-
-<a id="path-6013c2"></a>&#x2022; [`path`](#path-6013c2) - Optional String<br>Path. Path to access on the HTTP server
-
-<a id="port-0be7f7"></a>&#x2022; [`port`](#port-0be7f7) - Optional Block<br>Port. Port<br>See [Port](#port-0be7f7) below.
+<a id="deep-51404c"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Stateful Service Containers Readiness Check HTTP Health Check Port
 
-A [`port`](#port-0be7f7) block (within [`stateful_service.containers.readiness_check.http_health_check`](#check-d4b642)) supports the following:
-
-<a id="name-538e92"></a>&#x2022; [`name`](#name-538e92) - Optional String<br>Port Name. Port Name
-
-<a id="num-f07047"></a>&#x2022; [`num`](#num-f07047) - Optional Number<br>Port Number. Port number
+<a id="deep-b0f7b4"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Containers Readiness Check TCP Health Check
 
-A [`tcp_health_check`](#check-fde4eb) block (within [`stateful_service.containers.readiness_check`](#check-81b532)) supports the following:
-
-<a id="port-c7f8d9"></a>&#x2022; [`port`](#port-c7f8d9) - Optional Block<br>Port. Port<br>See [Port](#port-c7f8d9) below.
+<a id="deep-e587e5"></a>Deeply nested **Check** block collapsed for readability.
 
 #### Stateful Service Containers Readiness Check TCP Health Check Port
 
-A [`port`](#port-c7f8d9) block (within [`stateful_service.containers.readiness_check.tcp_health_check`](#check-fde4eb)) supports the following:
-
-<a id="name-b94588"></a>&#x2022; [`name`](#name-b94588) - Optional String<br>Port Name. Port Name
-
-<a id="num-c749b8"></a>&#x2022; [`num`](#num-c749b8) - Optional Number<br>Port Number. Port number
+<a id="deep-8ad9e9"></a>Deeply nested **Port** block collapsed for readability.
 
 #### Stateful Service Deploy Options
 
@@ -5859,29 +2845,15 @@ A [`deploy_ce_sites`](#sites-6c0f50) block (within [`stateful_service.deploy_opt
 
 #### Stateful Service Deploy Options Deploy CE Sites Site
 
-A [`site`](#site-0e137b) block (within [`stateful_service.deploy_options.deploy_ce_sites`](#sites-6c0f50)) supports the following:
-
-<a id="name-cdbc00"></a>&#x2022; [`name`](#name-cdbc00) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-285c76"></a>&#x2022; [`namespace`](#namespace-285c76) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-721fbf"></a>&#x2022; [`tenant`](#tenant-721fbf) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-d27353"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Stateful Service Deploy Options Deploy CE Virtual Sites
 
-A [`deploy_ce_virtual_sites`](#sites-f4950a) block (within [`stateful_service.deploy_options`](#stateful-service-deploy-options)) supports the following:
-
-<a id="site-6761a9"></a>&#x2022; [`virtual_site`](#site-6761a9) - Optional Block<br>List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed<br>See [Virtual Site](#site-6761a9) below.
+<a id="deep-030779"></a>Deeply nested **Sites** block collapsed for readability.
 
 #### Stateful Service Deploy Options Deploy CE Virtual Sites Virtual Site
 
-A [`virtual_site`](#site-6761a9) block (within [`stateful_service.deploy_options.deploy_ce_virtual_sites`](#sites-f4950a)) supports the following:
-
-<a id="name-088056"></a>&#x2022; [`name`](#name-088056) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-68cc77"></a>&#x2022; [`namespace`](#namespace-68cc77) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-0f3362"></a>&#x2022; [`tenant`](#tenant-0f3362) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-59c8af"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Stateful Service Deploy Options Deploy RE Sites
 
@@ -5891,29 +2863,15 @@ A [`deploy_re_sites`](#sites-d00d51) block (within [`stateful_service.deploy_opt
 
 #### Stateful Service Deploy Options Deploy RE Sites Site
 
-A [`site`](#site-92faf4) block (within [`stateful_service.deploy_options.deploy_re_sites`](#sites-d00d51)) supports the following:
-
-<a id="name-2ca29a"></a>&#x2022; [`name`](#name-2ca29a) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-262889"></a>&#x2022; [`namespace`](#namespace-262889) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d6ea66"></a>&#x2022; [`tenant`](#tenant-d6ea66) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-d51a07"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Stateful Service Deploy Options Deploy RE Virtual Sites
 
-A [`deploy_re_virtual_sites`](#sites-4ad049) block (within [`stateful_service.deploy_options`](#stateful-service-deploy-options)) supports the following:
-
-<a id="site-1d70ca"></a>&#x2022; [`virtual_site`](#site-1d70ca) - Optional Block<br>List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed<br>See [Virtual Site](#site-1d70ca) below.
+<a id="deep-77c59a"></a>Deeply nested **Sites** block collapsed for readability.
 
 #### Stateful Service Deploy Options Deploy RE Virtual Sites Virtual Site
 
-A [`virtual_site`](#site-1d70ca) block (within [`stateful_service.deploy_options.deploy_re_virtual_sites`](#sites-4ad049)) supports the following:
-
-<a id="name-b93422"></a>&#x2022; [`name`](#name-b93422) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-5e8e43"></a>&#x2022; [`namespace`](#namespace-5e8e43) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-f5b678"></a>&#x2022; [`tenant`](#tenant-f5b678) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-be1ff4"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Stateful Service Persistent Volumes
 
@@ -6010,6 +2968,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

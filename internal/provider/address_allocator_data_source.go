@@ -42,7 +42,7 @@ func (d *AddressAllocatorDataSource) Metadata(ctx context.Context, req datasourc
 
 func (d *AddressAllocatorDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Namespace: required] Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

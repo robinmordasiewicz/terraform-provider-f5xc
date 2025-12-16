@@ -266,7 +266,7 @@ func (r *DNSLoadBalancerResource) Metadata(ctx context.Context, req resource.Met
 func (r *DNSLoadBalancerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dns_load_balancerSchemaVersion,
-		MarkdownDescription: "[Category: Load Balancing] [Namespace: required] Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages DNS Load Balancer in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the DNS Load Balancer. Must be unique within the namespace.",

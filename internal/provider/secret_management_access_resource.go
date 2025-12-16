@@ -617,7 +617,7 @@ func (r *SecretManagementAccessResource) Metadata(ctx context.Context, req resou
 func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             secret_management_accessSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Secret Management Access. Must be unique within the namespace.",

@@ -2,12 +2,12 @@
 page_title: "f5xc_fleet Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  [Namespace: required] Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
+  Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
 ---
 
 # f5xc_fleet (Resource)
 
-[Namespace: required] Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
+Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Fleet API docs](https://docs.cloud.f5.com/docs-v2/api/fleet) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Fleet Resource Example
-# [Namespace: required] Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
+# Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
 
 # Basic Fleet configuration
 resource "f5xc_fleet" "example" {
@@ -205,23 +205,11 @@ A [`lacp`](#bond-device-list-bond-devices-lacp) block (within [`bond_device_list
 
 #### Dc Cluster Group
 
-A [`dc_cluster_group`](#dc-cluster-group) block supports the following:
-
-<a id="dc-cluster-group-name"></a>&#x2022; [`name`](#dc-cluster-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="dc-cluster-group-namespace"></a>&#x2022; [`namespace`](#dc-cluster-group-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="dc-cluster-group-tenant"></a>&#x2022; [`tenant`](#dc-cluster-group-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-2b048b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Dc Cluster Group Inside
 
-A [`dc_cluster_group_inside`](#dc-cluster-group-inside) block supports the following:
-
-<a id="dc-cluster-group-inside-name"></a>&#x2022; [`name`](#dc-cluster-group-inside-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="dc-cluster-group-inside-namespace"></a>&#x2022; [`namespace`](#dc-cluster-group-inside-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="dc-cluster-group-inside-tenant"></a>&#x2022; [`tenant`](#dc-cluster-group-inside-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-278dba"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Device List
 
@@ -251,15 +239,15 @@ A [`network_device`](#device-list-devices-network-device) block (within [`device
 
 An [`interface`](#interface-d1eaa7) block (within [`device_list.devices.network_device`](#device-list-devices-network-device)) supports the following:
 
-<a id="kind-34238d"></a>&#x2022; [`kind`](#kind-34238d) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-34238d"></a>&#x2022; [`kind`](#kind-34238d) - Optional String<br>Object reference kind
 
-<a id="name-c2b49b"></a>&#x2022; [`name`](#name-c2b49b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="name-c2b49b"></a>&#x2022; [`name`](#name-c2b49b) - Optional String<br>Object reference name
 
-<a id="namespace-32a7dc"></a>&#x2022; [`namespace`](#namespace-32a7dc) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-32a7dc"></a>&#x2022; [`namespace`](#namespace-32a7dc) - Optional String<br>Object reference namespace
 
-<a id="tenant-701ffb"></a>&#x2022; [`tenant`](#tenant-701ffb) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-701ffb"></a>&#x2022; [`tenant`](#tenant-701ffb) - Optional String<br>Object reference tenant
 
-<a id="uid-ea614b"></a>&#x2022; [`uid`](#uid-ea614b) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="uid-ea614b"></a>&#x2022; [`uid`](#uid-ea614b) - Optional String<br>Object reference UID
 
 #### Enable Vgpu
 
@@ -275,15 +263,15 @@ An [`enable_vgpu`](#enable-vgpu) block supports the following:
 
 An [`inside_virtual_network`](#inside-virtual-network) block supports the following:
 
-<a id="inside-virtual-network-kind"></a>&#x2022; [`kind`](#inside-virtual-network-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="inside-virtual-network-kind"></a>&#x2022; [`kind`](#inside-virtual-network-kind) - Optional String<br>Object reference kind
 
-<a id="inside-virtual-network-name"></a>&#x2022; [`name`](#inside-virtual-network-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="inside-virtual-network-name"></a>&#x2022; [`name`](#inside-virtual-network-name) - Optional String<br>Object reference name
 
-<a id="inside-virtual-network-namespace"></a>&#x2022; [`namespace`](#inside-virtual-network-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="inside-virtual-network-namespace"></a>&#x2022; [`namespace`](#inside-virtual-network-namespace) - Optional String<br>Object reference namespace
 
-<a id="inside-virtual-network-tenant"></a>&#x2022; [`tenant`](#inside-virtual-network-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="inside-virtual-network-tenant"></a>&#x2022; [`tenant`](#inside-virtual-network-tenant) - Optional String<br>Object reference tenant
 
-<a id="inside-virtual-network-uid"></a>&#x2022; [`uid`](#inside-virtual-network-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="inside-virtual-network-uid"></a>&#x2022; [`uid`](#inside-virtual-network-uid) - Optional String<br>Object reference UID
 
 #### Interface List
 
@@ -293,13 +281,7 @@ An [`interface_list`](#interface-list) block supports the following:
 
 #### Interface List Interfaces
 
-An [`interfaces`](#interface-list-interfaces) block (within [`interface_list`](#interface-list)) supports the following:
-
-<a id="interface-list-interfaces-name"></a>&#x2022; [`name`](#interface-list-interfaces-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="interface-list-interfaces-namespace"></a>&#x2022; [`namespace`](#interface-list-interfaces-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="interface-list-interfaces-tenant"></a>&#x2022; [`tenant`](#interface-list-interfaces-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0ef821"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Kubernetes Upgrade Drain
 
@@ -323,55 +305,49 @@ An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_dr
 
 #### Log Receiver
 
-A [`log_receiver`](#log-receiver) block supports the following:
-
-<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0da9d9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Network Connectors
 
 A [`network_connectors`](#network-connectors) block supports the following:
 
-<a id="network-connectors-kind"></a>&#x2022; [`kind`](#network-connectors-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="network-connectors-kind"></a>&#x2022; [`kind`](#network-connectors-kind) - Optional String<br>Object reference kind
 
-<a id="network-connectors-name"></a>&#x2022; [`name`](#network-connectors-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="network-connectors-name"></a>&#x2022; [`name`](#network-connectors-name) - Optional String<br>Object reference name
 
-<a id="network-connectors-namespace"></a>&#x2022; [`namespace`](#network-connectors-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="network-connectors-namespace"></a>&#x2022; [`namespace`](#network-connectors-namespace) - Optional String<br>Object reference namespace
 
-<a id="network-connectors-tenant"></a>&#x2022; [`tenant`](#network-connectors-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="network-connectors-tenant"></a>&#x2022; [`tenant`](#network-connectors-tenant) - Optional String<br>Object reference tenant
 
-<a id="network-connectors-uid"></a>&#x2022; [`uid`](#network-connectors-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="network-connectors-uid"></a>&#x2022; [`uid`](#network-connectors-uid) - Optional String<br>Object reference UID
 
 #### Network Firewall
 
 A [`network_firewall`](#network-firewall) block supports the following:
 
-<a id="network-firewall-kind"></a>&#x2022; [`kind`](#network-firewall-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="network-firewall-kind"></a>&#x2022; [`kind`](#network-firewall-kind) - Optional String<br>Object reference kind
 
-<a id="network-firewall-name"></a>&#x2022; [`name`](#network-firewall-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="network-firewall-name"></a>&#x2022; [`name`](#network-firewall-name) - Optional String<br>Object reference name
 
-<a id="network-firewall-namespace"></a>&#x2022; [`namespace`](#network-firewall-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="network-firewall-namespace"></a>&#x2022; [`namespace`](#network-firewall-namespace) - Optional String<br>Object reference namespace
 
-<a id="network-firewall-tenant"></a>&#x2022; [`tenant`](#network-firewall-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="network-firewall-tenant"></a>&#x2022; [`tenant`](#network-firewall-tenant) - Optional String<br>Object reference tenant
 
-<a id="network-firewall-uid"></a>&#x2022; [`uid`](#network-firewall-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="network-firewall-uid"></a>&#x2022; [`uid`](#network-firewall-uid) - Optional String<br>Object reference UID
 
 #### Outside Virtual Network
 
 An [`outside_virtual_network`](#outside-virtual-network) block supports the following:
 
-<a id="outside-virtual-network-kind"></a>&#x2022; [`kind`](#outside-virtual-network-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="outside-virtual-network-kind"></a>&#x2022; [`kind`](#outside-virtual-network-kind) - Optional String<br>Object reference kind
 
-<a id="outside-virtual-network-name"></a>&#x2022; [`name`](#outside-virtual-network-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="outside-virtual-network-name"></a>&#x2022; [`name`](#outside-virtual-network-name) - Optional String<br>Object reference name
 
-<a id="outside-virtual-network-namespace"></a>&#x2022; [`namespace`](#outside-virtual-network-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="outside-virtual-network-namespace"></a>&#x2022; [`namespace`](#outside-virtual-network-namespace) - Optional String<br>Object reference namespace
 
-<a id="outside-virtual-network-tenant"></a>&#x2022; [`tenant`](#outside-virtual-network-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="outside-virtual-network-tenant"></a>&#x2022; [`tenant`](#outside-virtual-network-tenant) - Optional String<br>Object reference tenant
 
-<a id="outside-virtual-network-uid"></a>&#x2022; [`uid`](#outside-virtual-network-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="outside-virtual-network-uid"></a>&#x2022; [`uid`](#outside-virtual-network-uid) - Optional String<br>Object reference UID
 
 #### Performance Enhancement Mode
 
@@ -489,13 +465,7 @@ A [`netapp_trident`](#trident-4e1932) block (within [`storage_class_list.storage
 
 #### Storage Class List Storage Classes Pure Service Orchestrator
 
-A [`pure_service_orchestrator`](#orchestrator-daa903) block (within [`storage_class_list.storage_classes`](#storage-class-list-storage-classes)) supports the following:
-
-<a id="backend-75214b"></a>&#x2022; [`backend`](#backend-75214b) - Optional String<br>Backend. Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool
-
-<a id="limit-1a1d99"></a>&#x2022; [`bandwidth_limit`](#limit-1a1d99) - Optional String<br>Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB
-
-<a id="limit-2c92ac"></a>&#x2022; [`iops_limit`](#limit-2c92ac) - Optional Number<br>IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined
+<a id="deep-329577"></a>Deeply nested **Orchestrator** block collapsed for readability.
 
 #### Storage Device List
 
@@ -539,55 +509,27 @@ A [`hpe_storage`](#storage-af052c) block (within [`storage_device_list.storage_d
 
 #### Storage Device List Storage Devices Hpe Storage iSCSI Chap Password
 
-An [`iscsi_chap_password`](#password-eb169c) block (within [`storage_device_list.storage_devices.hpe_storage`](#storage-af052c)) supports the following:
-
-<a id="info-1f8980"></a>&#x2022; [`blindfold_secret_info`](#info-1f8980) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-1f8980) below.
-
-<a id="info-9d8ea0"></a>&#x2022; [`clear_secret_info`](#info-9d8ea0) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-9d8ea0) below.
+<a id="deep-4e9992"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Storage Device List Storage Devices Hpe Storage iSCSI Chap Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-1f8980) block (within [`storage_device_list.storage_devices.hpe_storage.iscsi_chap_password`](#password-eb169c)) supports the following:
-
-<a id="provider-d52313"></a>&#x2022; [`decryption_provider`](#provider-d52313) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-632402"></a>&#x2022; [`location`](#location-632402) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-8a6fef"></a>&#x2022; [`store_provider`](#provider-8a6fef) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-eeea59"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Hpe Storage iSCSI Chap Password Clear Secret Info
 
-A [`clear_secret_info`](#info-9d8ea0) block (within [`storage_device_list.storage_devices.hpe_storage.iscsi_chap_password`](#password-eb169c)) supports the following:
-
-<a id="ref-dc30b2"></a>&#x2022; [`provider_ref`](#ref-dc30b2) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-1cfca6"></a>&#x2022; [`url`](#url-1cfca6) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-e66b78"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Hpe Storage Password
 
-A [`password`](#password-a4b1a7) block (within [`storage_device_list.storage_devices.hpe_storage`](#storage-af052c)) supports the following:
-
-<a id="info-41285b"></a>&#x2022; [`blindfold_secret_info`](#info-41285b) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-41285b) below.
-
-<a id="info-b6ab5b"></a>&#x2022; [`clear_secret_info`](#info-b6ab5b) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b6ab5b) below.
+<a id="deep-742c46"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Storage Device List Storage Devices Hpe Storage Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-41285b) block (within [`storage_device_list.storage_devices.hpe_storage.password`](#password-a4b1a7)) supports the following:
-
-<a id="provider-936b09"></a>&#x2022; [`decryption_provider`](#provider-936b09) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-d2d945"></a>&#x2022; [`location`](#location-d2d945) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-c0a07d"></a>&#x2022; [`store_provider`](#provider-c0a07d) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-f073e1"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Hpe Storage Password Clear Secret Info
 
-A [`clear_secret_info`](#info-b6ab5b) block (within [`storage_device_list.storage_devices.hpe_storage.password`](#password-a4b1a7)) supports the following:
-
-<a id="ref-6e5124"></a>&#x2022; [`provider_ref`](#ref-6e5124) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-026a9d"></a>&#x2022; [`url`](#url-026a9d) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-570979"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident
 
@@ -599,539 +541,163 @@ A [`netapp_trident`](#trident-c1203e) block (within [`storage_device_list.storag
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas
 
-A [`netapp_backend_ontap_nas`](#nas-ef24f2) block (within [`storage_device_list.storage_devices.netapp_trident`](#trident-c1203e)) supports the following:
-
-<a id="cidrs-cb7181"></a>&#x2022; [`auto_export_cidrs`](#cidrs-cb7181) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Auto Export Cidrs](#cidrs-cb7181) below.
-
-<a id="policy-5724e0"></a>&#x2022; [`auto_export_policy`](#policy-5724e0) - Optional Bool<br>Auto Export Policy. Enable automatic export policy creation and updating
-
-<a id="name-643f98"></a>&#x2022; [`backend_name`](#name-643f98) - Optional String<br>Storage Backend Name. Configuration of Backend Name. Driver is name + '_' + dataLIF
-
-<a id="certificate-408f11"></a>&#x2022; [`client_certificate`](#certificate-408f11) - Optional String<br>Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth
-
-<a id="key-231fcd"></a>&#x2022; [`client_private_key`](#key-231fcd) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Private Key](#key-231fcd) below.
-
-<a id="name-734ef6"></a>&#x2022; [`data_lif_dns_name`](#name-734ef6) - Optional String<br>Backend Data LIF Name. Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="lif-ip-1bfa42"></a>&#x2022; [`data_lif_ip`](#lif-ip-1bfa42) - Optional String<br>Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given IP address
-
-<a id="labels-adc161"></a>&#x2022; [`labels`](#labels-adc161) - Optional Block<br>Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection
-
-<a id="usage-78d0b5"></a>&#x2022; [`limit_aggregate_usage`](#usage-78d0b5) - Optional String<br>Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default
-
-<a id="size-e7688e"></a>&#x2022; [`limit_volume_size`](#size-e7688e) - Optional String<br>Limit Volume Size. Fail provisioning if requested volume size is above this value. Not enforced by default
-
-<a id="name-1d74c8"></a>&#x2022; [`management_lif_dns_name`](#name-1d74c8) - Optional String<br>Backend Management LIF Name. Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="lif-ip-000927"></a>&#x2022; [`management_lif_ip`](#lif-ip-000927) - Optional String<br>Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address
-
-<a id="options-1191c0"></a>&#x2022; [`nfs_mount_options`](#options-1191c0) - Optional String<br>NFS Mount Options. Comma-separated list of NFS mount options. Not enforced by default
-
-<a id="password-6a66a5"></a>&#x2022; [`password`](#password-6a66a5) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password-6a66a5) below.
-
-<a id="region-3c68d4"></a>&#x2022; [`region`](#region-3c68d4) - Optional String<br>Backend Region. Virtual Pool Region
-
-<a id="storage-ed6447"></a>&#x2022; [`storage`](#storage-ed6447) - Optional Block<br>Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection<br>See [Storage](#storage-ed6447) below.
-
-<a id="name-b42c48"></a>&#x2022; [`storage_driver_name`](#name-b42c48) - Optional String<br>Storage Backend Driver. Configuration of Backend Name
-
-<a id="prefix-056803"></a>&#x2022; [`storage_prefix`](#prefix-056803) - Optional String<br>Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated
-
-<a id="svm-18d887"></a>&#x2022; [`svm`](#svm-18d887) - Optional String<br>Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified
-
-<a id="certificate-66dddc"></a>&#x2022; [`trusted_ca_certificate`](#certificate-66dddc) - Optional String<br>Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth
-
-<a id="username-38b3a0"></a>&#x2022; [`username`](#username-38b3a0) - Optional String<br>Username. Username to connect to the cluster/SVM
-
-<a id="defaults-1742b7"></a>&#x2022; [`volume_defaults`](#defaults-1742b7) - Optional Block<br>Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration<br>See [Volume Defaults](#defaults-1742b7) below.
+<a id="deep-bd1024"></a>Deeply nested **Nas** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Auto Export Cidrs
 
-An [`auto_export_cidrs`](#cidrs-cb7181) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`](#nas-ef24f2)) supports the following:
-
-<a id="prefixes-06d850"></a>&#x2022; [`prefixes`](#prefixes-06d850) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="deep-0060a5"></a>Deeply nested **Cidrs** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key
 
-A [`client_private_key`](#key-231fcd) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`](#nas-ef24f2)) supports the following:
-
-<a id="info-33c413"></a>&#x2022; [`blindfold_secret_info`](#info-33c413) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-33c413) below.
-
-<a id="info-76e10a"></a>&#x2022; [`clear_secret_info`](#info-76e10a) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-76e10a) below.
+<a id="deep-75a582"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-33c413) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.client_private_key`](#key-231fcd)) supports the following:
-
-<a id="provider-e1faf3"></a>&#x2022; [`decryption_provider`](#provider-e1faf3) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-f3f07b"></a>&#x2022; [`location`](#location-f3f07b) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-87a345"></a>&#x2022; [`store_provider`](#provider-87a345) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-b559da"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-76e10a) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.client_private_key`](#key-231fcd)) supports the following:
-
-<a id="ref-bc6cbf"></a>&#x2022; [`provider_ref`](#ref-bc6cbf) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-528f85"></a>&#x2022; [`url`](#url-528f85) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-79fb66"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password
 
-A [`password`](#password-6a66a5) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`](#nas-ef24f2)) supports the following:
-
-<a id="info-25794c"></a>&#x2022; [`blindfold_secret_info`](#info-25794c) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-25794c) below.
-
-<a id="info-cc7447"></a>&#x2022; [`clear_secret_info`](#info-cc7447) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-cc7447) below.
+<a id="deep-46fd5a"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-25794c) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.password`](#password-6a66a5)) supports the following:
-
-<a id="provider-720c66"></a>&#x2022; [`decryption_provider`](#provider-720c66) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-522e73"></a>&#x2022; [`location`](#location-522e73) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-225ae7"></a>&#x2022; [`store_provider`](#provider-225ae7) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-b4f49c"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password Clear Secret Info
 
-A [`clear_secret_info`](#info-cc7447) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.password`](#password-6a66a5)) supports the following:
-
-<a id="ref-9b40a4"></a>&#x2022; [`provider_ref`](#ref-9b40a4) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-f761da"></a>&#x2022; [`url`](#url-f761da) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-322745"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Storage
 
-A [`storage`](#storage-ed6447) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`](#nas-ef24f2)) supports the following:
-
-<a id="labels-51903b"></a>&#x2022; [`labels`](#labels-51903b) - Optional Block<br>Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection
-
-<a id="defaults-9e81a2"></a>&#x2022; [`volume_defaults`](#defaults-9e81a2) - Optional Block<br>Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration<br>See [Volume Defaults](#defaults-9e81a2) below.
-
-<a id="zone-e1b1f3"></a>&#x2022; [`zone`](#zone-e1b1f3) - Optional String<br>Virtual Pool Zone. Virtual Storage Pool zone definition
+<a id="deep-1cbbe6"></a>Deeply nested **Storage** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Storage Volume Defaults
 
-A [`volume_defaults`](#defaults-9e81a2) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.storage`](#storage-ed6447)) supports the following:
-
-<a id="policy-c78803"></a>&#x2022; [`adaptive_qos_policy`](#policy-c78803) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
-
-<a id="encryption-22ec72"></a>&#x2022; [`encryption`](#encryption-22ec72) - Optional Bool<br>Enable Encryption. Enable NetApp volume encryption
-
-<a id="policy-a77654"></a>&#x2022; [`export_policy`](#policy-a77654) - Optional String<br>Export Policy. Export policy to use
-
-<a id="qos-318edc"></a>&#x2022; [`no_qos`](#qos-318edc) - Optional Block<br>Enable this option
-
-<a id="policy-238fc9"></a>&#x2022; [`qos_policy`](#policy-238fc9) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
-
-<a id="style-881850"></a>&#x2022; [`security_style`](#style-881850) - Optional String<br>Security Style. Security style for new volumes
-
-<a id="dir-86e582"></a>&#x2022; [`snapshot_dir`](#dir-86e582) - Optional Bool<br>Access to Snapshot Directory. Access to the .snapshot directory
-
-<a id="policy-3d3b46"></a>&#x2022; [`snapshot_policy`](#policy-3d3b46) - Optional String<br>Snapshot Policy. Snapshot policy to use
-
-<a id="reserve-795e0c"></a>&#x2022; [`snapshot_reserve`](#reserve-795e0c) - Optional String<br>Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''
-
-<a id="reserve-f25255"></a>&#x2022; [`space_reserve`](#reserve-f25255) - Optional String<br>Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)
-
-<a id="clone-175921"></a>&#x2022; [`split_on_clone`](#clone-175921) - Optional Bool<br>Split on Clone. Split a clone from its parent upon creation
-
-<a id="policy-aaf002"></a>&#x2022; [`tiering_policy`](#policy-aaf002) - Optional String<br>Tiering Policy. Tiering policy to use. 'none' is default
-
-<a id="permissions-c7ae9f"></a>&#x2022; [`unix_permissions`](#permissions-c7ae9f) - Optional Number<br>Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777
+<a id="deep-ea3010"></a>Deeply nested **Defaults** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Volume Defaults
 
-A [`volume_defaults`](#defaults-1742b7) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`](#nas-ef24f2)) supports the following:
-
-<a id="policy-afc18c"></a>&#x2022; [`adaptive_qos_policy`](#policy-afc18c) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
-
-<a id="encryption-4ac21e"></a>&#x2022; [`encryption`](#encryption-4ac21e) - Optional Bool<br>Enable Encryption. Enable NetApp volume encryption
-
-<a id="policy-b0348b"></a>&#x2022; [`export_policy`](#policy-b0348b) - Optional String<br>Export Policy. Export policy to use
-
-<a id="qos-8893e4"></a>&#x2022; [`no_qos`](#qos-8893e4) - Optional Block<br>Enable this option
-
-<a id="policy-6cdeef"></a>&#x2022; [`qos_policy`](#policy-6cdeef) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
-
-<a id="style-3baeea"></a>&#x2022; [`security_style`](#style-3baeea) - Optional String<br>Security Style. Security style for new volumes
-
-<a id="dir-364ff0"></a>&#x2022; [`snapshot_dir`](#dir-364ff0) - Optional Bool<br>Access to Snapshot Directory. Access to the .snapshot directory
-
-<a id="policy-da418c"></a>&#x2022; [`snapshot_policy`](#policy-da418c) - Optional String<br>Snapshot Policy. Snapshot policy to use
-
-<a id="reserve-a02a98"></a>&#x2022; [`snapshot_reserve`](#reserve-a02a98) - Optional String<br>Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''
-
-<a id="reserve-2c34a9"></a>&#x2022; [`space_reserve`](#reserve-2c34a9) - Optional String<br>Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)
-
-<a id="clone-9751f8"></a>&#x2022; [`split_on_clone`](#clone-9751f8) - Optional Bool<br>Split on Clone. Split a clone from its parent upon creation
-
-<a id="policy-140feb"></a>&#x2022; [`tiering_policy`](#policy-140feb) - Optional String<br>Tiering Policy. Tiering policy to use. 'none' is default
-
-<a id="permissions-da95e5"></a>&#x2022; [`unix_permissions`](#permissions-da95e5) - Optional Number<br>Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777
+<a id="deep-f28c80"></a>Deeply nested **Defaults** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San
 
-A [`netapp_backend_ontap_san`](#san-036a4e) block (within [`storage_device_list.storage_devices.netapp_trident`](#trident-c1203e)) supports the following:
-
-<a id="certificate-7537fa"></a>&#x2022; [`client_certificate`](#certificate-7537fa) - Optional String<br>Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth
-
-<a id="key-2cb586"></a>&#x2022; [`client_private_key`](#key-2cb586) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Private Key](#key-2cb586) below.
-
-<a id="name-e134ea"></a>&#x2022; [`data_lif_dns_name`](#name-e134ea) - Optional String<br>Backend Data LIF Name. Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="lif-ip-f5b6b8"></a>&#x2022; [`data_lif_ip`](#lif-ip-f5b6b8) - Optional String<br>Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given IP address
-
-<a id="name-5c5009"></a>&#x2022; [`igroup_name`](#name-5c5009) - Optional String<br>iGroup Name. Name of the igroup for SAN volumes to use
-
-<a id="labels-a00b7f"></a>&#x2022; [`labels`](#labels-a00b7f) - Optional Block<br>Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection
-
-<a id="usage-15b558"></a>&#x2022; [`limit_aggregate_usage`](#usage-15b558) - Optional Number<br>Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default
-
-<a id="size-251568"></a>&#x2022; [`limit_volume_size`](#size-251568) - Optional Number<br>Limit Volume Size. Fail provisioning if requested volume size in GBi is above this value. Not enforced by default
-
-<a id="name-65c8ca"></a>&#x2022; [`management_lif_dns_name`](#name-65c8ca) - Optional String<br>Backend Management LIF Name. Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="lif-ip-d284b8"></a>&#x2022; [`management_lif_ip`](#lif-ip-d284b8) - Optional String<br>Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address
-
-<a id="chap-25864e"></a>&#x2022; [`no_chap`](#chap-25864e) - Optional Block<br>Enable this option
-
-<a id="password-d967ec"></a>&#x2022; [`password`](#password-d967ec) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password-d967ec) below.
-
-<a id="region-340250"></a>&#x2022; [`region`](#region-340250) - Optional String<br>Backend Region. Virtual Pool Region
-
-<a id="storage-c76c8b"></a>&#x2022; [`storage`](#storage-c76c8b) - Optional Block<br>Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection<br>See [Storage](#storage-c76c8b) below.
-
-<a id="name-25b37c"></a>&#x2022; [`storage_driver_name`](#name-25b37c) - Optional String<br>Storage Backend Driver. Configuration of Backend Name
-
-<a id="prefix-5e7eab"></a>&#x2022; [`storage_prefix`](#prefix-5e7eab) - Optional String<br>Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated
-
-<a id="svm-647c40"></a>&#x2022; [`svm`](#svm-647c40) - Optional String<br>Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified
-
-<a id="certificate-29f204"></a>&#x2022; [`trusted_ca_certificate`](#certificate-29f204) - Optional String<br>Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth
-
-<a id="chap-0f4e56"></a>&#x2022; [`use_chap`](#chap-0f4e56) - Optional Block<br>Device NetApp Backend ONTAP SAN CHAP Configuration. Device NetApp Backend ONTAP SAN CHAP configuration options for enabled CHAP<br>See [Use Chap](#chap-0f4e56) below.
-
-<a id="username-78aacd"></a>&#x2022; [`username`](#username-78aacd) - Optional String<br>Username. Username to connect to the cluster/SVM
-
-<a id="defaults-f3272c"></a>&#x2022; [`volume_defaults`](#defaults-f3272c) - Optional Block<br>Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration<br>See [Volume Defaults](#defaults-f3272c) below.
+<a id="deep-465121"></a>Deeply nested **San** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key
 
-A [`client_private_key`](#key-2cb586) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`](#san-036a4e)) supports the following:
-
-<a id="info-17af75"></a>&#x2022; [`blindfold_secret_info`](#info-17af75) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-17af75) below.
-
-<a id="info-eb05b2"></a>&#x2022; [`clear_secret_info`](#info-eb05b2) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-eb05b2) below.
+<a id="deep-ba07c1"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-17af75) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.client_private_key`](#key-2cb586)) supports the following:
-
-<a id="provider-6e3856"></a>&#x2022; [`decryption_provider`](#provider-6e3856) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-e9a6b7"></a>&#x2022; [`location`](#location-e9a6b7) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-a83f35"></a>&#x2022; [`store_provider`](#provider-a83f35) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-62ab71"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-eb05b2) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.client_private_key`](#key-2cb586)) supports the following:
-
-<a id="ref-b68d27"></a>&#x2022; [`provider_ref`](#ref-b68d27) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-efc3f1"></a>&#x2022; [`url`](#url-efc3f1) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-be8d78"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password
 
-A [`password`](#password-d967ec) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`](#san-036a4e)) supports the following:
-
-<a id="info-943ab2"></a>&#x2022; [`blindfold_secret_info`](#info-943ab2) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-943ab2) below.
-
-<a id="info-ad15e4"></a>&#x2022; [`clear_secret_info`](#info-ad15e4) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-ad15e4) below.
+<a id="deep-e12334"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-943ab2) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.password`](#password-d967ec)) supports the following:
-
-<a id="provider-2599c8"></a>&#x2022; [`decryption_provider`](#provider-2599c8) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-488178"></a>&#x2022; [`location`](#location-488178) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-6ca73b"></a>&#x2022; [`store_provider`](#provider-6ca73b) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-355e72"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password Clear Secret Info
 
-A [`clear_secret_info`](#info-ad15e4) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.password`](#password-d967ec)) supports the following:
-
-<a id="ref-ae5280"></a>&#x2022; [`provider_ref`](#ref-ae5280) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-d952f4"></a>&#x2022; [`url`](#url-d952f4) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-e90a26"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Storage
 
-A [`storage`](#storage-c76c8b) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`](#san-036a4e)) supports the following:
-
-<a id="labels-921549"></a>&#x2022; [`labels`](#labels-921549) - Optional Block<br>Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection
-
-<a id="defaults-7006d3"></a>&#x2022; [`volume_defaults`](#defaults-7006d3) - Optional Block<br>Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration<br>See [Volume Defaults](#defaults-7006d3) below.
-
-<a id="zone-b3292d"></a>&#x2022; [`zone`](#zone-b3292d) - Optional String<br>Virtual Pool Zone. Virtual Storage Pool zone definition
+<a id="deep-9f82f2"></a>Deeply nested **Storage** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Storage Volume Defaults
 
-A [`volume_defaults`](#defaults-7006d3) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.storage`](#storage-c76c8b)) supports the following:
-
-<a id="policy-a4c6bb"></a>&#x2022; [`adaptive_qos_policy`](#policy-a4c6bb) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
-
-<a id="encryption-09759c"></a>&#x2022; [`encryption`](#encryption-09759c) - Optional Bool<br>Enable Encryption. Enable NetApp volume encryption
-
-<a id="policy-621016"></a>&#x2022; [`export_policy`](#policy-621016) - Optional String<br>Export Policy. Export policy to use
-
-<a id="qos-a6e00e"></a>&#x2022; [`no_qos`](#qos-a6e00e) - Optional Block<br>Enable this option
-
-<a id="policy-f0d5bd"></a>&#x2022; [`qos_policy`](#policy-f0d5bd) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
-
-<a id="style-129ae5"></a>&#x2022; [`security_style`](#style-129ae5) - Optional String<br>Security Style. Security style for new volumes
-
-<a id="dir-e5897b"></a>&#x2022; [`snapshot_dir`](#dir-e5897b) - Optional Bool<br>Access to Snapshot Directory. Access to the .snapshot directory
-
-<a id="policy-6ab51e"></a>&#x2022; [`snapshot_policy`](#policy-6ab51e) - Optional String<br>Snapshot Policy. Snapshot policy to use
-
-<a id="reserve-f1ed47"></a>&#x2022; [`snapshot_reserve`](#reserve-f1ed47) - Optional String<br>Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''
-
-<a id="reserve-7f6b40"></a>&#x2022; [`space_reserve`](#reserve-7f6b40) - Optional String<br>Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)
-
-<a id="clone-e5006c"></a>&#x2022; [`split_on_clone`](#clone-e5006c) - Optional Bool<br>Split on Clone. Split a clone from its parent upon creation
-
-<a id="policy-81784c"></a>&#x2022; [`tiering_policy`](#policy-81784c) - Optional String<br>Tiering Policy. Tiering policy to use. 'none' is default
-
-<a id="permissions-3aa907"></a>&#x2022; [`unix_permissions`](#permissions-3aa907) - Optional Number<br>Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777
+<a id="deep-20d6d7"></a>Deeply nested **Defaults** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap
 
-An [`use_chap`](#chap-0f4e56) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`](#san-036a4e)) supports the following:
-
-<a id="secret-0fd746"></a>&#x2022; [`chap_initiator_secret`](#secret-0fd746) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Chap Initiator Secret](#secret-0fd746) below.
-
-<a id="secret-8909b5"></a>&#x2022; [`chap_target_initiator_secret`](#secret-8909b5) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Chap Target Initiator Secret](#secret-8909b5) below.
-
-<a id="username-878b3e"></a>&#x2022; [`chap_target_username`](#username-878b3e) - Optional String<br>CHAP Target Username. Target username. Required if useCHAP=true
-
-<a id="username-297454"></a>&#x2022; [`chap_username`](#username-297454) - Optional String<br>CHAP Username. Inbound username. Required if useCHAP=true
+<a id="deep-685571"></a>Deeply nested **Chap** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret
 
-A [`chap_initiator_secret`](#secret-0fd746) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap`](#chap-0f4e56)) supports the following:
-
-<a id="info-e680db"></a>&#x2022; [`blindfold_secret_info`](#info-e680db) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e680db) below.
-
-<a id="info-318ac7"></a>&#x2022; [`clear_secret_info`](#info-318ac7) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-318ac7) below.
+<a id="deep-a27a8b"></a>Deeply nested **Secret** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-e680db) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret`](#secret-0fd746)) supports the following:
-
-<a id="provider-b4814a"></a>&#x2022; [`decryption_provider`](#provider-b4814a) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-1618df"></a>&#x2022; [`location`](#location-1618df) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-e6c767"></a>&#x2022; [`store_provider`](#provider-e6c767) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-2a9688"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret Clear Secret Info
 
-A [`clear_secret_info`](#info-318ac7) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret`](#secret-0fd746)) supports the following:
-
-<a id="ref-d51f15"></a>&#x2022; [`provider_ref`](#ref-d51f15) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-e31e10"></a>&#x2022; [`url`](#url-e31e10) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-f1cdf7"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret
 
-A [`chap_target_initiator_secret`](#secret-8909b5) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap`](#chap-0f4e56)) supports the following:
-
-<a id="info-8e6419"></a>&#x2022; [`blindfold_secret_info`](#info-8e6419) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-8e6419) below.
-
-<a id="info-0641ea"></a>&#x2022; [`clear_secret_info`](#info-0641ea) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-0641ea) below.
+<a id="deep-72767f"></a>Deeply nested **Secret** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-8e6419) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret`](#secret-8909b5)) supports the following:
-
-<a id="provider-fe5dc9"></a>&#x2022; [`decryption_provider`](#provider-fe5dc9) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-6d9a79"></a>&#x2022; [`location`](#location-6d9a79) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-ae56ce"></a>&#x2022; [`store_provider`](#provider-ae56ce) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-1f5775"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret Clear Secret Info
 
-A [`clear_secret_info`](#info-0641ea) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret`](#secret-8909b5)) supports the following:
-
-<a id="ref-99aba1"></a>&#x2022; [`provider_ref`](#ref-99aba1) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-382395"></a>&#x2022; [`url`](#url-382395) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-066b84"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Volume Defaults
 
-A [`volume_defaults`](#defaults-f3272c) block (within [`storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`](#san-036a4e)) supports the following:
-
-<a id="policy-e193e9"></a>&#x2022; [`adaptive_qos_policy`](#policy-e193e9) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
-
-<a id="encryption-c091d9"></a>&#x2022; [`encryption`](#encryption-c091d9) - Optional Bool<br>Enable Encryption. Enable NetApp volume encryption
-
-<a id="policy-97763c"></a>&#x2022; [`export_policy`](#policy-97763c) - Optional String<br>Export Policy. Export policy to use
-
-<a id="qos-912bed"></a>&#x2022; [`no_qos`](#qos-912bed) - Optional Block<br>Enable this option
-
-<a id="policy-284ca0"></a>&#x2022; [`qos_policy`](#policy-284ca0) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
-
-<a id="style-2e548e"></a>&#x2022; [`security_style`](#style-2e548e) - Optional String<br>Security Style. Security style for new volumes
-
-<a id="dir-4a749a"></a>&#x2022; [`snapshot_dir`](#dir-4a749a) - Optional Bool<br>Access to Snapshot Directory. Access to the .snapshot directory
-
-<a id="policy-c81273"></a>&#x2022; [`snapshot_policy`](#policy-c81273) - Optional String<br>Snapshot Policy. Snapshot policy to use
-
-<a id="reserve-2f4c44"></a>&#x2022; [`snapshot_reserve`](#reserve-2f4c44) - Optional String<br>Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''
-
-<a id="reserve-f362ea"></a>&#x2022; [`space_reserve`](#reserve-f362ea) - Optional String<br>Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)
-
-<a id="clone-052f1f"></a>&#x2022; [`split_on_clone`](#clone-052f1f) - Optional Bool<br>Split on Clone. Split a clone from its parent upon creation
-
-<a id="policy-c90cd3"></a>&#x2022; [`tiering_policy`](#policy-c90cd3) - Optional String<br>Tiering Policy. Tiering policy to use. 'none' is default
-
-<a id="permissions-10ed58"></a>&#x2022; [`unix_permissions`](#permissions-10ed58) - Optional Number<br>Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777
+<a id="deep-833704"></a>Deeply nested **Defaults** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator
 
-A [`pure_service_orchestrator`](#orchestrator-9f97a6) block (within [`storage_device_list.storage_devices`](#storage-device-list-storage-devices)) supports the following:
-
-<a id="arrays-27de82"></a>&#x2022; [`arrays`](#arrays-27de82) - Optional Block<br>Arrays Configuration. Device configuration for PSO Arrays<br>See [Arrays](#arrays-27de82) below.
-
-<a id="cluster-id-d2de5f"></a>&#x2022; [`cluster_id`](#cluster-id-d2de5f) - Optional String<br>Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8S clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores
-
-<a id="topology-ff58a0"></a>&#x2022; [`enable_storage_topology`](#topology-ff58a0) - Optional Bool<br>Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi
-
-<a id="topology-c0260b"></a>&#x2022; [`enable_strict_topology`](#topology-c0260b) - Optional Bool<br>Enable Strict Topology. This option is to enable/disable the strict csi topology feature for pso-csi
+<a id="deep-79fe06"></a>Deeply nested **Orchestrator** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays
 
-An [`arrays`](#arrays-27de82) block (within [`storage_device_list.storage_devices.pure_service_orchestrator`](#orchestrator-9f97a6)) supports the following:
-
-<a id="array-396b4c"></a>&#x2022; [`flash_array`](#array-396b4c) - Optional Block<br>Flash Arrays. Specify what storage flash arrays should be managed the plugin<br>See [Flash Array](#array-396b4c) below.
-
-<a id="blade-0151cf"></a>&#x2022; [`flash_blade`](#blade-0151cf) - Optional Block<br>Flash Blades. Specify what storage flash blades should be managed the plugin<br>See [Flash Blade](#blade-0151cf) below.
+<a id="deep-8f2911"></a>Deeply nested **Arrays** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array
 
-A [`flash_array`](#array-396b4c) block (within [`storage_device_list.storage_devices.pure_service_orchestrator.arrays`](#arrays-27de82)) supports the following:
-
-<a id="opt-ab680f"></a>&#x2022; [`default_fs_opt`](#opt-ab680f) - Optional String<br>Default Filesystem Options. Block volume default mkfs options. Not recommended to change!
-
-<a id="type-2ca960"></a>&#x2022; [`default_fs_type`](#type-2ca960) - Optional String<br>Default Filesystem Type. Block volume default filesystem type. Not recommended to change!
-
-<a id="opts-6cdef6"></a>&#x2022; [`default_mount_opts`](#opts-6cdef6) - Optional List<br>Default Mount Options. Block volume default filesystem mount options. Not recommended to change!
-
-<a id="attachments-b53bf2"></a>&#x2022; [`disable_preempt_attachments`](#attachments-b53bf2) - Optional Bool<br>Disable Preempt Attachments. Enable/Disable attachment preemption!
-
-<a id="arrays-7e55b2"></a>&#x2022; [`flash_arrays`](#arrays-7e55b2) - Optional Block<br>Flash Arrays. For FlashArrays you must set the 'mgmt_endpoint' and 'api_token'<br>See [Flash Arrays](#arrays-7e55b2) below.
-
-<a id="timeout-a2ab29"></a>&#x2022; [`iscsi_login_timeout`](#timeout-a2ab29) - Optional Number<br>iSCSI Login Timeout. iSCSI login timeout in seconds. Not recommended to change!
-
-<a id="type-83e3a7"></a>&#x2022; [`san_type`](#type-83e3a7) - Optional String<br>SAN Type. Block volume access protocol, either iSCSI or FC
+<a id="deep-a7e7d5"></a>Deeply nested **Array** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays
 
-A [`flash_arrays`](#arrays-7e55b2) block (within [`storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array`](#array-396b4c)) supports the following:
-
-<a id="token-93e30a"></a>&#x2022; [`api_token`](#token-93e30a) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Token](#token-93e30a) below.
-
-<a id="labels-5902e2"></a>&#x2022; [`labels`](#labels-5902e2) - Optional Block<br>Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner
-
-<a id="name-54de73"></a>&#x2022; [`mgmt_dns_name`](#name-54de73) - Optional String<br>Management Endpoint Name. Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="mgmt-ip-d14726"></a>&#x2022; [`mgmt_ip`](#mgmt-ip-d14726) - Optional String<br>Management Endpoint IP Address. Management Endpoint is reachable at the given IP address
+<a id="deep-39c71e"></a>Deeply nested **Arrays** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token
 
-An [`api_token`](#token-93e30a) block (within [`storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array.flash_arrays`](#arrays-7e55b2)) supports the following:
-
-<a id="info-568c79"></a>&#x2022; [`blindfold_secret_info`](#info-568c79) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-568c79) below.
-
-<a id="info-20d4eb"></a>&#x2022; [`clear_secret_info`](#info-20d4eb) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-20d4eb) below.
+<a id="deep-e5718c"></a>Deeply nested **Token** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-568c79) block (within [`storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array.flash_arrays.api_token`](#token-93e30a)) supports the following:
-
-<a id="provider-ec3f8f"></a>&#x2022; [`decryption_provider`](#provider-ec3f8f) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-0948eb"></a>&#x2022; [`location`](#location-0948eb) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-2554b4"></a>&#x2022; [`store_provider`](#provider-2554b4) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-cf6841"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token Clear Secret Info
 
-A [`clear_secret_info`](#info-20d4eb) block (within [`storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array.flash_arrays.api_token`](#token-93e30a)) supports the following:
-
-<a id="ref-258180"></a>&#x2022; [`provider_ref`](#ref-258180) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-8384af"></a>&#x2022; [`url`](#url-8384af) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-adee70"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade
 
-A [`flash_blade`](#blade-0151cf) block (within [`storage_device_list.storage_devices.pure_service_orchestrator.arrays`](#arrays-27de82)) supports the following:
-
-<a id="directory-733234"></a>&#x2022; [`enable_snapshot_directory`](#directory-733234) - Optional Bool<br>Enable Snapshot Directory. Enable/Disable FlashBlade snapshots
-
-<a id="rules-bca135"></a>&#x2022; [`export_rules`](#rules-bca135) - Optional String<br>NFS Export Rules. NFS Export rules
-
-<a id="blades-609da3"></a>&#x2022; [`flash_blades`](#blades-609da3) - Optional Block<br>Flash Blades. For FlashBlades you must set the 'mgmt_endpoint', 'api_token' and nfs_endpoint<br>See [Flash Blades](#blades-609da3) below.
+<a id="deep-b914ea"></a>Deeply nested **Blade** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades
 
-A [`flash_blades`](#blades-609da3) block (within [`storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade`](#blade-0151cf)) supports the following:
-
-<a id="token-289dad"></a>&#x2022; [`api_token`](#token-289dad) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Token](#token-289dad) below.
-
-<a id="lables-09c379"></a>&#x2022; [`lables`](#lables-09c379) - Optional Block<br>Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner
-
-<a id="name-bb91f7"></a>&#x2022; [`mgmt_dns_name`](#name-bb91f7) - Optional String<br>Management Endpoint Name. Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="mgmt-ip-fa9bbd"></a>&#x2022; [`mgmt_ip`](#mgmt-ip-fa9bbd) - Optional String<br>Management Endpoint IP Address. Management Endpoint is reachable at the given IP address
-
-<a id="name-4473a7"></a>&#x2022; [`nfs_endpoint_dns_name`](#name-4473a7) - Optional String<br>NFS DNS Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="endpoint-ip-209d03"></a>&#x2022; [`nfs_endpoint_ip`](#endpoint-ip-209d03) - Optional String<br>NFS IP Address. Endpoint is reachable at the given IP address
+<a id="deep-d6d9d7"></a>Deeply nested **Blades** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token
 
-An [`api_token`](#token-289dad) block (within [`storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade.flash_blades`](#blades-609da3)) supports the following:
-
-<a id="info-cc32a1"></a>&#x2022; [`blindfold_secret_info`](#info-cc32a1) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-cc32a1) below.
-
-<a id="info-6a0dd7"></a>&#x2022; [`clear_secret_info`](#info-6a0dd7) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-6a0dd7) below.
+<a id="deep-160c89"></a>Deeply nested **Token** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-cc32a1) block (within [`storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade.flash_blades.api_token`](#token-289dad)) supports the following:
-
-<a id="provider-f03a2b"></a>&#x2022; [`decryption_provider`](#provider-f03a2b) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-aac2d7"></a>&#x2022; [`location`](#location-aac2d7) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-5bdd75"></a>&#x2022; [`store_provider`](#provider-5bdd75) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-925d3f"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token Clear Secret Info
 
-A [`clear_secret_info`](#info-6a0dd7) block (within [`storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade.flash_blades.api_token`](#token-289dad)) supports the following:
-
-<a id="ref-31ec6d"></a>&#x2022; [`provider_ref`](#ref-31ec6d) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-24da3c"></a>&#x2022; [`url`](#url-24da3c) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-db07b6"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Storage Interface List
 
@@ -1141,13 +707,7 @@ A [`storage_interface_list`](#storage-interface-list) block supports the followi
 
 #### Storage Interface List Interfaces
 
-An [`interfaces`](#storage-interface-list-interfaces) block (within [`storage_interface_list`](#storage-interface-list)) supports the following:
-
-<a id="storage-interface-list-interfaces-name"></a>&#x2022; [`name`](#storage-interface-list-interfaces-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-421392"></a>&#x2022; [`namespace`](#namespace-421392) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-a0360a"></a>&#x2022; [`tenant`](#tenant-a0360a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-50d4b9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Storage Static Routes
 
@@ -1181,35 +741,27 @@ A [`nexthop`](#nexthop-e399f9) block (within [`storage_static_routes.storage_rou
 
 An [`interface`](#interface-4faa73) block (within [`storage_static_routes.storage_routes.nexthop`](#nexthop-e399f9)) supports the following:
 
-<a id="kind-6e410a"></a>&#x2022; [`kind`](#kind-6e410a) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-6e410a"></a>&#x2022; [`kind`](#kind-6e410a) - Optional String<br>Object reference kind
 
-<a id="name-e622a1"></a>&#x2022; [`name`](#name-e622a1) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="name-e622a1"></a>&#x2022; [`name`](#name-e622a1) - Optional String<br>Object reference name
 
-<a id="namespace-42a184"></a>&#x2022; [`namespace`](#namespace-42a184) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-42a184"></a>&#x2022; [`namespace`](#namespace-42a184) - Optional String<br>Object reference namespace
 
-<a id="tenant-1f9ea3"></a>&#x2022; [`tenant`](#tenant-1f9ea3) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-1f9ea3"></a>&#x2022; [`tenant`](#tenant-1f9ea3) - Optional String<br>Object reference tenant
 
-<a id="uid-d2cf5c"></a>&#x2022; [`uid`](#uid-d2cf5c) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="uid-d2cf5c"></a>&#x2022; [`uid`](#uid-d2cf5c) - Optional String<br>Object reference UID
 
 #### Storage Static Routes Storage Routes Nexthop Nexthop Address
 
-A [`nexthop_address`](#address-971ca8) block (within [`storage_static_routes.storage_routes.nexthop`](#nexthop-e399f9)) supports the following:
-
-<a id="ipv4-5b8c46"></a>&#x2022; [`ipv4`](#ipv4-5b8c46) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipv4-5b8c46) below.
-
-<a id="ipv6-fed4e9"></a>&#x2022; [`ipv6`](#ipv6-fed4e9) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipv6-fed4e9) below.
+<a id="deep-78e751"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Storage Static Routes Storage Routes Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ipv4-5b8c46) block (within [`storage_static_routes.storage_routes.nexthop.nexthop_address`](#address-971ca8)) supports the following:
-
-<a id="addr-db2501"></a>&#x2022; [`addr`](#addr-db2501) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="deep-4918e8"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Storage Static Routes Storage Routes Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ipv6-fed4e9) block (within [`storage_static_routes.storage_routes.nexthop.nexthop_address`](#address-971ca8)) supports the following:
-
-<a id="addr-f1702f"></a>&#x2022; [`addr`](#addr-f1702f) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="deep-8ce9c9"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Storage Static Routes Storage Routes Subnets
 
@@ -1249,13 +801,90 @@ A [`timeouts`](#timeouts) block supports the following:
 
 #### Usb Policy
 
-An [`usb_policy`](#usb-policy) block supports the following:
+<a id="objref-60a3be"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
-<a id="usb-policy-name"></a>&#x2022; [`name`](#usb-policy-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+---
 
-<a id="usb-policy-namespace"></a>&#x2022; [`namespace`](#usb-policy-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+## Common Types
 
-<a id="usb-policy-tenant"></a>&#x2022; [`tenant`](#usb-policy-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

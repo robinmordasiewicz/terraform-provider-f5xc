@@ -1,5 +1,5 @@
 # Ike2 Resource Example
-# [Namespace: required] Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.
+# Manages a Ike2 resource in F5 Distributed Cloud for ike phase2 profile configuration.
 
 # Basic Ike2 configuration
 resource "f5xc_ike2" "example" {

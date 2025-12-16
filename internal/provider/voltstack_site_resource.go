@@ -2906,7 +2906,7 @@ func (r *VoltstackSiteResource) Metadata(ctx context.Context, req resource.Metad
 func (r *VoltstackSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             voltstack_siteSchemaVersion,
-		MarkdownDescription: "[Category: Sites] [Namespace: required] Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.",
+		MarkdownDescription: "Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Voltstack Site. Must be unique within the namespace.",

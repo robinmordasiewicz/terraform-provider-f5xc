@@ -1,5 +1,5 @@
 # Cminstance Resource Example
-# [Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
+# Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic Cminstance configuration
 resource "f5xc_cminstance" "example" {

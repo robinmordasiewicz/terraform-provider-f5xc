@@ -64,7 +64,7 @@ func (r *InfraprotectFirewallRuleGroupResource) Metadata(ctx context.Context, re
 func (r *InfraprotectFirewallRuleGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             infraprotect_firewall_rule_groupSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.",
+		MarkdownDescription: "Manages a Infraprotect Firewall Rule Group resource in F5 Distributed Cloud for amends a ddos transit firewall rule group configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Infraprotect Firewall Rule Group. Must be unique within the namespace.",

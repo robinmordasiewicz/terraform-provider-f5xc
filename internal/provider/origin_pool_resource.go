@@ -940,7 +940,7 @@ func (r *OriginPoolResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             origin_poolSchemaVersion,
-		MarkdownDescription: "[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, healthcheck] Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.",
+		MarkdownDescription: "Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Origin Pool. Must be unique within the namespace.",

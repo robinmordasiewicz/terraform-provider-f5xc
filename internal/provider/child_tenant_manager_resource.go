@@ -110,7 +110,7 @@ func (r *ChildTenantManagerResource) Metadata(ctx context.Context, req resource.
 func (r *ChildTenantManagerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             child_tenant_managerSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages child_tenant_manager config instance. Name of the object is the name of the child tenant manager to be created. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Child Tenant Manager. Must be unique within the namespace.",

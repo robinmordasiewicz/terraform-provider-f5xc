@@ -1,5 +1,5 @@
 # Infraprotect Firewall Rule Resource Example
-# [Namespace: required] Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
+# Manages DDoS transit Firewall Rule in F5 Distributed Cloud.
 
 # Basic Infraprotect Firewall Rule configuration
 resource "f5xc_infraprotect_firewall_rule" "example" {

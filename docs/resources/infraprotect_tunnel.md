@@ -2,12 +2,12 @@
 page_title: "f5xc_infraprotect_tunnel Resource - terraform-provider-f5xc"
 subcategory: "Infrastructure Protection"
 description: |-
-  [Namespace: required] Manages DDoS transit tunnel in F5 Distributed Cloud.
+  Manages DDoS transit tunnel in F5 Distributed Cloud.
 ---
 
 # f5xc_infraprotect_tunnel (Resource)
 
-[Namespace: required] Manages DDoS transit tunnel in F5 Distributed Cloud.
+Manages DDoS transit tunnel in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Infraprotect Tunnel API docs](https://docs.cloud.f5.com/docs-v2/api/infraprotect-tunnel) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Infraprotect Tunnel Resource Example
-# [Namespace: required] Manages DDoS transit tunnel in F5 Distributed Cloud.
+# Manages DDoS transit tunnel in F5 Distributed Cloud.
 
 # Basic Infraprotect Tunnel configuration
 resource "f5xc_infraprotect_tunnel" "example" {
@@ -112,13 +112,7 @@ A [`bgp_information`](#bgp-information) block supports the following:
 
 #### BGP Information Asn
 
-An [`asn`](#bgp-information-asn) block (within [`bgp_information`](#bgp-information)) supports the following:
-
-<a id="bgp-information-asn-name"></a>&#x2022; [`name`](#bgp-information-asn-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="bgp-information-asn-namespace"></a>&#x2022; [`namespace`](#bgp-information-asn-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="bgp-information-asn-tenant"></a>&#x2022; [`tenant`](#bgp-information-asn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0bd30b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### BGP Information Peer Secret Override
 
@@ -130,31 +124,15 @@ A [`peer_secret_override`](#bgp-information-peer-secret-override) block (within 
 
 #### BGP Information Peer Secret Override Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-6d3a2a) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
-
-<a id="provider-b2f46b"></a>&#x2022; [`decryption_provider`](#provider-b2f46b) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-f9c053"></a>&#x2022; [`location`](#location-f9c053) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-2b3f27"></a>&#x2022; [`store_provider`](#provider-2b3f27) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-f359e1"></a>Deeply nested **Info** block collapsed for readability.
 
 #### BGP Information Peer Secret Override Clear Secret Info
 
-A [`clear_secret_info`](#info-586fa4) block (within [`bgp_information.peer_secret_override`](#bgp-information-peer-secret-override)) supports the following:
-
-<a id="ref-f0de71"></a>&#x2022; [`provider_ref`](#ref-f0de71) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-4c3b0f"></a>&#x2022; [`url`](#url-4c3b0f) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-6a3361"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Firewall Rule Group
 
-A [`firewall_rule_group`](#firewall-rule-group) block supports the following:
-
-<a id="firewall-rule-group-name"></a>&#x2022; [`name`](#firewall-rule-group-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="firewall-rule-group-namespace"></a>&#x2022; [`namespace`](#firewall-rule-group-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="firewall-rule-group-tenant"></a>&#x2022; [`tenant`](#firewall-rule-group-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-65bdfc"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Gre IPv4
 
@@ -217,6 +195,89 @@ A [`tunnel_location`](#tunnel-location) block supports the following:
 <a id="tunnel-location-zone1"></a>&#x2022; [`zone1`](#tunnel-location-zone1) - Optional Block<br>Enable this option
 
 <a id="tunnel-location-zone2"></a>&#x2022; [`zone2`](#tunnel-location-zone2) - Optional Block<br>Enable this option
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

@@ -1,5 +1,5 @@
 # Infraprotect Tunnel Resource Example
-# [Namespace: required] Manages DDoS transit tunnel in F5 Distributed Cloud.
+# Manages DDoS transit tunnel in F5 Distributed Cloud.
 
 # Basic Infraprotect Tunnel configuration
 resource "f5xc_infraprotect_tunnel" "example" {

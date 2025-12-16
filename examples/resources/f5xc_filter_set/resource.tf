@@ -1,5 +1,5 @@
 # Filter Set Resource Example
-# [Namespace: required] Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
+# Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
 
 # Basic Filter Set configuration
 resource "f5xc_filter_set" "example" {

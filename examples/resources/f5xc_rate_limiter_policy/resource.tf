@@ -1,5 +1,5 @@
 # Rate Limiter Policy Resource Example
-# [Namespace: required] Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
+# Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
 
 # Basic Rate Limiter Policy configuration
 resource "f5xc_rate_limiter_policy" "example" {

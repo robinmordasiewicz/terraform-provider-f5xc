@@ -1,5 +1,5 @@
 # App Firewall Resource Example
-# [Category: Security] [Namespace: required] [DependsOn: namespace] Manages Application Firewall in F5 Distributed Cloud.
+# Manages Application Firewall in F5 Distributed Cloud.
 
 # Basic App Firewall configuration
 resource "f5xc_app_firewall" "example" {

@@ -2,12 +2,12 @@
 page_title: "f5xc_cloud_credentials Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  [Category: Authentication] [Namespace: not_required] Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+  Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 ---
 
 # f5xc_cloud_credentials (Resource)
 
-[Category: Authentication] [Namespace: not_required] Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 
 ~> **Note** Please refer to [Cloud Credentials API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-credentials) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Cloud Credentials Resource Example
-# [Category: Authentication] [Namespace: not_required] Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+# Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
 
 # Basic Cloud Credentials configuration
 resource "f5xc_cloud_credentials" "example" {
@@ -116,21 +116,11 @@ A [`secret_key`](#aws-secret-key-secret-key) block (within [`aws_secret_key`](#a
 
 #### AWS Secret Key Secret Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-9190c7) block (within [`aws_secret_key.secret_key`](#aws-secret-key-secret-key)) supports the following:
-
-<a id="provider-d58e76"></a>&#x2022; [`decryption_provider`](#provider-d58e76) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-b28fee"></a>&#x2022; [`location`](#location-b28fee) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-984153"></a>&#x2022; [`store_provider`](#provider-984153) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-b992fa"></a>Deeply nested **Info** block collapsed for readability.
 
 #### AWS Secret Key Secret Key Clear Secret Info
 
-A [`clear_secret_info`](#info-498ec7) block (within [`aws_secret_key.secret_key`](#aws-secret-key-secret-key)) supports the following:
-
-<a id="ref-647211"></a>&#x2022; [`provider_ref`](#ref-647211) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-7236fa"></a>&#x2022; [`url`](#url-7236fa) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-c3d363"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Azure Client Secret
 
@@ -154,21 +144,11 @@ A [`client_secret`](#azure-client-secret-client-secret) block (within [`azure_cl
 
 #### Azure Client Secret Client Secret Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-2956b6) block (within [`azure_client_secret.client_secret`](#azure-client-secret-client-secret)) supports the following:
-
-<a id="provider-1823dc"></a>&#x2022; [`decryption_provider`](#provider-1823dc) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-7d1410"></a>&#x2022; [`location`](#location-7d1410) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-5a31e4"></a>&#x2022; [`store_provider`](#provider-5a31e4) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-f520dc"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Azure Client Secret Client Secret Clear Secret Info
 
-A [`clear_secret_info`](#info-3d8384) block (within [`azure_client_secret.client_secret`](#azure-client-secret-client-secret)) supports the following:
-
-<a id="ref-5a50b3"></a>&#x2022; [`provider_ref`](#ref-5a50b3) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-50a78b"></a>&#x2022; [`url`](#url-50a78b) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-0b460e"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Azure Pfx Certificate
 
@@ -226,21 +206,11 @@ A [`credential_file`](#gcp-cred-file-credential-file) block (within [`gcp_cred_f
 
 #### GCP Cred File Credential File Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-3869e4) block (within [`gcp_cred_file.credential_file`](#gcp-cred-file-credential-file)) supports the following:
-
-<a id="provider-492d2f"></a>&#x2022; [`decryption_provider`](#provider-492d2f) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-4d37cb"></a>&#x2022; [`location`](#location-4d37cb) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-f34db4"></a>&#x2022; [`store_provider`](#provider-f34db4) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-08b799"></a>Deeply nested **Info** block collapsed for readability.
 
 #### GCP Cred File Credential File Clear Secret Info
 
-A [`clear_secret_info`](#info-226bef) block (within [`gcp_cred_file.credential_file`](#gcp-cred-file-credential-file)) supports the following:
-
-<a id="ref-4b930a"></a>&#x2022; [`provider_ref`](#ref-4b930a) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-7669b2"></a>&#x2022; [`url`](#url-7669b2) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-df9f6e"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Timeouts
 
@@ -253,6 +223,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

@@ -1,5 +1,5 @@
 # Fast ACL Resource Example
-# [Namespace: required] Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
+# Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
 
 # Basic Fast ACL configuration
 resource "f5xc_fast_acl" "example" {

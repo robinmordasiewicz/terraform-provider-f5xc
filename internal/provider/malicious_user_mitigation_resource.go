@@ -119,7 +119,7 @@ func (r *MaliciousUserMitigationResource) Metadata(ctx context.Context, req reso
 func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             malicious_user_mitigationSchemaVersion,
-		MarkdownDescription: "[Category: Security] [Namespace: required] Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Malicious User Mitigation. Must be unique within the namespace.",

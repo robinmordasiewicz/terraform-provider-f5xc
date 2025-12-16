@@ -84,7 +84,7 @@ func (r *CRLResource) Metadata(ctx context.Context, req resource.MetadataRequest
 func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             crlSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a CRL resource in F5 Distributed Cloud for api to create crl configuration.",
+		MarkdownDescription: "Manages a CRL resource in F5 Distributed Cloud for api to create crl configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CRL. Must be unique within the namespace.",

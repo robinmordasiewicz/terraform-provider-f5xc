@@ -2,12 +2,12 @@
 page_title: "f5xc_tcp_loadbalancer Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
+  Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 ---
 
 # f5xc_tcp_loadbalancer (Resource)
 
-[Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
+Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 
 ~> **Note** Please refer to [TCP Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-tcp-loadbalancer) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # TCP Loadbalancer Resource Example
-# [Category: Load Balancing] [Namespace: required] [DependsOn: namespace, origin_pool] Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
+# Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 
 # Basic TCP Loadbalancer configuration
 resource "f5xc_tcp_loadbalancer" "example" {
@@ -139,13 +139,7 @@ An [`active_service_policies`](#active-service-policies) block supports the foll
 
 #### Active Service Policies Policies
 
-A [`policies`](#active-service-policies-policies) block (within [`active_service_policies`](#active-service-policies)) supports the following:
-
-<a id="active-service-policies-policies-name"></a>&#x2022; [`name`](#active-service-policies-policies-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-df0e5f"></a>&#x2022; [`namespace`](#namespace-df0e5f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="active-service-policies-policies-tenant"></a>&#x2022; [`tenant`](#active-service-policies-policies-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-460dca"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Advertise Custom
 
@@ -183,13 +177,7 @@ An [`advertise_on_public`](#public-618a99) block (within [`advertise_custom.adve
 
 #### Advertise Custom Advertise Where Advertise On Public Public IP
 
-A [`public_ip`](#public-ip-d10b09) block (within [`advertise_custom.advertise_where.advertise_on_public`](#public-618a99)) supports the following:
-
-<a id="name-4126f8"></a>&#x2022; [`name`](#name-4126f8) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-edf1ff"></a>&#x2022; [`namespace`](#namespace-edf1ff) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ac4633"></a>&#x2022; [`tenant`](#tenant-ac4633) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-032ffb"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Advertise Custom Advertise Where Site
 
@@ -203,13 +191,7 @@ A [`site`](#advertise-custom-advertise-where-site) block (within [`advertise_cus
 
 #### Advertise Custom Advertise Where Site Site
 
-A [`site`](#site-7ecf1d) block (within [`advertise_custom.advertise_where.site`](#advertise-custom-advertise-where-site)) supports the following:
-
-<a id="name-201d26"></a>&#x2022; [`name`](#name-201d26) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c3f40d"></a>&#x2022; [`namespace`](#namespace-c3f40d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-8a632a"></a>&#x2022; [`tenant`](#tenant-8a632a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-7ecf1d"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Advertise Custom Advertise Where Virtual Network
 
@@ -227,13 +209,7 @@ A [`virtual_network`](#network-a20be3) block (within [`advertise_custom.advertis
 
 #### Advertise Custom Advertise Where Virtual Network Virtual Network
 
-A [`virtual_network`](#network-bff334) block (within [`advertise_custom.advertise_where.virtual_network`](#network-a20be3)) supports the following:
-
-<a id="name-5596bc"></a>&#x2022; [`name`](#name-5596bc) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-030577"></a>&#x2022; [`namespace`](#namespace-030577) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-72f925"></a>&#x2022; [`tenant`](#tenant-72f925) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-802ee3"></a>Deeply nested **Network** block collapsed for readability.
 
 #### Advertise Custom Advertise Where Virtual Site
 
@@ -245,33 +221,15 @@ A [`virtual_site`](#site-5d39fd) block (within [`advertise_custom.advertise_wher
 
 #### Advertise Custom Advertise Where Virtual Site Virtual Site
 
-A [`virtual_site`](#site-04fd53) block (within [`advertise_custom.advertise_where.virtual_site`](#site-5d39fd)) supports the following:
-
-<a id="name-b7ccc7"></a>&#x2022; [`name`](#name-b7ccc7) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-a4ffcf"></a>&#x2022; [`namespace`](#namespace-a4ffcf) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-637b28"></a>&#x2022; [`tenant`](#tenant-637b28) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-22557e"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Advertise Custom Advertise Where Virtual Site With VIP
 
-A [`virtual_site_with_vip`](#vip-870b0b) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
-
-<a id="vip-ip-4850ab"></a>&#x2022; [`ip`](#vip-ip-4850ab) - Optional String<br>IP Address. Use given IP address as VIP on the site
-
-<a id="network-8b2765"></a>&#x2022; [`network`](#network-8b2765) - Optional String  Defaults to `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`<br>Possible values are `SITE_NETWORK_SPECIFIED_VIP_OUTSIDE`, `SITE_NETWORK_SPECIFIED_VIP_INSIDE`<br>[Enum: SITE_NETWORK_SPECIFIED_VIP_OUTSIDE|SITE_NETWORK_SPECIFIED_VIP_INSIDE] Site Network. This defines network types to be used on virtual-site with specified VIP All outside networks. All inside networks
-
-<a id="site-ac753e"></a>&#x2022; [`virtual_site`](#site-ac753e) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-ac753e) below.
+<a id="deep-7807f9"></a>Deeply nested **VIP** block collapsed for readability.
 
 #### Advertise Custom Advertise Where Virtual Site With VIP Virtual Site
 
-A [`virtual_site`](#site-ac753e) block (within [`advertise_custom.advertise_where.virtual_site_with_vip`](#vip-870b0b)) supports the following:
-
-<a id="name-5f7f0d"></a>&#x2022; [`name`](#name-5f7f0d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-414bc8"></a>&#x2022; [`namespace`](#namespace-414bc8) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-130ed4"></a>&#x2022; [`tenant`](#tenant-130ed4) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-60188a"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Advertise Custom Advertise Where Vk8s Service
 
@@ -283,23 +241,11 @@ A [`vk8s_service`](#service-1fdc7a) block (within [`advertise_custom.advertise_w
 
 #### Advertise Custom Advertise Where Vk8s Service Site
 
-A [`site`](#site-ec8d32) block (within [`advertise_custom.advertise_where.vk8s_service`](#service-1fdc7a)) supports the following:
-
-<a id="name-950776"></a>&#x2022; [`name`](#name-950776) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-1faf25"></a>&#x2022; [`namespace`](#namespace-1faf25) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-98cf6a"></a>&#x2022; [`tenant`](#tenant-98cf6a) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-ec8d32"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Advertise Custom Advertise Where Vk8s Service Virtual Site
 
-A [`virtual_site`](#site-5fcbf9) block (within [`advertise_custom.advertise_where.vk8s_service`](#service-1fdc7a)) supports the following:
-
-<a id="name-1cf7c0"></a>&#x2022; [`name`](#name-1cf7c0) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-3dbb7e"></a>&#x2022; [`namespace`](#namespace-3dbb7e) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-38ddda"></a>&#x2022; [`tenant`](#tenant-38ddda) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-e5d00e"></a>Deeply nested **Site** block collapsed for readability.
 
 #### Advertise On Public
 
@@ -309,13 +255,7 @@ An [`advertise_on_public`](#advertise-on-public) block supports the following:
 
 #### Advertise On Public Public IP
 
-A [`public_ip`](#advertise-on-public-public-ip) block (within [`advertise_on_public`](#advertise-on-public)) supports the following:
-
-<a id="advertise-on-public-public-ip-name"></a>&#x2022; [`name`](#advertise-on-public-public-ip-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="advertise-on-public-public-ip-namespace"></a>&#x2022; [`namespace`](#advertise-on-public-public-ip-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="advertise-on-public-public-ip-tenant"></a>&#x2022; [`tenant`](#advertise-on-public-public-ip-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-5f3bb5"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Pools Weights
 
@@ -333,23 +273,11 @@ An [`origin_pools_weights`](#origin-pools-weights) block supports the following:
 
 #### Origin Pools Weights Cluster
 
-A [`cluster`](#origin-pools-weights-cluster) block (within [`origin_pools_weights`](#origin-pools-weights)) supports the following:
-
-<a id="origin-pools-weights-cluster-name"></a>&#x2022; [`name`](#origin-pools-weights-cluster-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="origin-pools-weights-cluster-namespace"></a>&#x2022; [`namespace`](#origin-pools-weights-cluster-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="origin-pools-weights-cluster-tenant"></a>&#x2022; [`tenant`](#origin-pools-weights-cluster-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-b05bd6"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Origin Pools Weights Pool
 
-A [`pool`](#origin-pools-weights-pool) block (within [`origin_pools_weights`](#origin-pools-weights)) supports the following:
-
-<a id="origin-pools-weights-pool-name"></a>&#x2022; [`name`](#origin-pools-weights-pool-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="origin-pools-weights-pool-namespace"></a>&#x2022; [`namespace`](#origin-pools-weights-pool-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="origin-pools-weights-pool-tenant"></a>&#x2022; [`tenant`](#origin-pools-weights-pool-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-e7b2da"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Timeouts
 
@@ -385,13 +313,7 @@ A [`tls_cert_params`](#tls-tcp-tls-cert-params) block (within [`tls_tcp`](#tls-t
 
 #### TLS TCP TLS Cert Params Certificates
 
-A [`certificates`](#tls-tcp-tls-cert-params-certificates) block (within [`tls_tcp.tls_cert_params`](#tls-tcp-tls-cert-params)) supports the following:
-
-<a id="name-e9b502"></a>&#x2022; [`name`](#name-e9b502) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-19bb2b"></a>&#x2022; [`namespace`](#namespace-19bb2b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-6b64b3"></a>&#x2022; [`tenant`](#tenant-6b64b3) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-7e0c2d"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### TLS TCP TLS Cert Params TLS Config
 
@@ -407,13 +329,7 @@ A [`tls_config`](#tls-tcp-tls-cert-params-tls-config) block (within [`tls_tcp.tl
 
 #### TLS TCP TLS Cert Params TLS Config Custom Security
 
-A [`custom_security`](#security-b4cf97) block (within [`tls_tcp.tls_cert_params.tls_config`](#tls-tcp-tls-cert-params-tls-config)) supports the following:
-
-<a id="suites-e0ab0f"></a>&#x2022; [`cipher_suites`](#suites-e0ab0f) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-f5b7a8"></a>&#x2022; [`max_version`](#version-f5b7a8) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-df2e0f"></a>&#x2022; [`min_version`](#version-df2e0f) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-124b53"></a>Deeply nested **Security** block collapsed for readability.
 
 #### TLS TCP TLS Cert Params Use mTLS
 
@@ -435,29 +351,15 @@ An [`use_mtls`](#tls-tcp-tls-cert-params-use-mtls) block (within [`tls_tcp.tls_c
 
 #### TLS TCP TLS Cert Params Use mTLS CRL
 
-A [`crl`](#tls-tcp-tls-cert-params-use-mtls-crl) block (within [`tls_tcp.tls_cert_params.use_mtls`](#tls-tcp-tls-cert-params-use-mtls)) supports the following:
-
-<a id="name-bc9a84"></a>&#x2022; [`name`](#name-bc9a84) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-eda25e"></a>&#x2022; [`namespace`](#namespace-eda25e) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e6ad1f"></a>&#x2022; [`tenant`](#tenant-e6ad1f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-b2118e"></a>Deeply nested **CRL** block collapsed for readability.
 
 #### TLS TCP TLS Cert Params Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-902f4f) block (within [`tls_tcp.tls_cert_params.use_mtls`](#tls-tcp-tls-cert-params-use-mtls)) supports the following:
-
-<a id="name-4dc4bb"></a>&#x2022; [`name`](#name-4dc4bb) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-4a81e5"></a>&#x2022; [`namespace`](#namespace-4a81e5) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-0f92ae"></a>&#x2022; [`tenant`](#tenant-0f92ae) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-1980d6"></a>Deeply nested **CA** block collapsed for readability.
 
 #### TLS TCP TLS Cert Params Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-ff2b17) block (within [`tls_tcp.tls_cert_params.use_mtls`](#tls-tcp-tls-cert-params-use-mtls)) supports the following:
-
-<a id="elements-c613bc"></a>&#x2022; [`xfcc_header_elements`](#elements-c613bc) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-1bac64"></a>Deeply nested **Options** block collapsed for readability.
 
 #### TLS TCP TLS Parameters
 
@@ -489,35 +391,19 @@ A [`tls_certificates`](#tls-tcp-tls-parameters-tls-certificates) block (within [
 
 #### TLS TCP TLS Parameters TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-44739b) block (within [`tls_tcp.tls_parameters.tls_certificates`](#tls-tcp-tls-parameters-tls-certificates)) supports the following:
-
-<a id="algorithms-2a046f"></a>&#x2022; [`hash_algorithms`](#algorithms-2a046f) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-714aaa"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### TLS TCP TLS Parameters TLS Certificates Private Key
 
-A [`private_key`](#key-d0a2da) block (within [`tls_tcp.tls_parameters.tls_certificates`](#tls-tcp-tls-parameters-tls-certificates)) supports the following:
-
-<a id="info-a21c19"></a>&#x2022; [`blindfold_secret_info`](#info-a21c19) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-a21c19) below.
-
-<a id="info-58d186"></a>&#x2022; [`clear_secret_info`](#info-58d186) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-58d186) below.
+<a id="deep-966381"></a>Deeply nested **Key** block collapsed for readability.
 
 #### TLS TCP TLS Parameters TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-a21c19) block (within [`tls_tcp.tls_parameters.tls_certificates.private_key`](#key-d0a2da)) supports the following:
-
-<a id="provider-5f8f5b"></a>&#x2022; [`decryption_provider`](#provider-5f8f5b) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-8a9dd4"></a>&#x2022; [`location`](#location-8a9dd4) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-fcca21"></a>&#x2022; [`store_provider`](#provider-fcca21) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-fcac6a"></a>Deeply nested **Info** block collapsed for readability.
 
 #### TLS TCP TLS Parameters TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-58d186) block (within [`tls_tcp.tls_parameters.tls_certificates.private_key`](#key-d0a2da)) supports the following:
-
-<a id="ref-2a4095"></a>&#x2022; [`provider_ref`](#ref-2a4095) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-7c0786"></a>&#x2022; [`url`](#url-7c0786) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-710771"></a>Deeply nested **Info** block collapsed for readability.
 
 #### TLS TCP TLS Parameters TLS Config
 
@@ -533,13 +419,7 @@ A [`tls_config`](#tls-tcp-tls-parameters-tls-config) block (within [`tls_tcp.tls
 
 #### TLS TCP TLS Parameters TLS Config Custom Security
 
-A [`custom_security`](#security-101a5b) block (within [`tls_tcp.tls_parameters.tls_config`](#tls-tcp-tls-parameters-tls-config)) supports the following:
-
-<a id="suites-4a5055"></a>&#x2022; [`cipher_suites`](#suites-4a5055) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-7b5818"></a>&#x2022; [`max_version`](#version-7b5818) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-615f2b"></a>&#x2022; [`min_version`](#version-615f2b) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-f58168"></a>Deeply nested **Security** block collapsed for readability.
 
 #### TLS TCP TLS Parameters Use mTLS
 
@@ -561,29 +441,15 @@ An [`use_mtls`](#tls-tcp-tls-parameters-use-mtls) block (within [`tls_tcp.tls_pa
 
 #### TLS TCP TLS Parameters Use mTLS CRL
 
-A [`crl`](#tls-tcp-tls-parameters-use-mtls-crl) block (within [`tls_tcp.tls_parameters.use_mtls`](#tls-tcp-tls-parameters-use-mtls)) supports the following:
-
-<a id="name-90c648"></a>&#x2022; [`name`](#name-90c648) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-66647e"></a>&#x2022; [`namespace`](#namespace-66647e) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-b6dafd"></a>&#x2022; [`tenant`](#tenant-b6dafd) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-f09ed0"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### TLS TCP TLS Parameters Use mTLS Trusted CA
 
-A [`trusted_ca`](#trusted-ca-2d90f2) block (within [`tls_tcp.tls_parameters.use_mtls`](#tls-tcp-tls-parameters-use-mtls)) supports the following:
-
-<a id="name-d0b9dd"></a>&#x2022; [`name`](#name-d0b9dd) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-d9cefe"></a>&#x2022; [`namespace`](#namespace-d9cefe) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-f4ddde"></a>&#x2022; [`tenant`](#tenant-f4ddde) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-6a94df"></a>Deeply nested **CA** block collapsed for readability.
 
 #### TLS TCP TLS Parameters Use mTLS Xfcc Options
 
-A [`xfcc_options`](#options-b6e6a7) block (within [`tls_tcp.tls_parameters.use_mtls`](#tls-tcp-tls-parameters-use-mtls)) supports the following:
-
-<a id="elements-58540b"></a>&#x2022; [`xfcc_header_elements`](#elements-58540b) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+<a id="deep-10758e"></a>Deeply nested **Options** block collapsed for readability.
 
 #### TLS TCP Auto Cert
 
@@ -609,13 +475,7 @@ A [`tls_config`](#tls-tcp-auto-cert-tls-config) block (within [`tls_tcp_auto_cer
 
 #### TLS TCP Auto Cert TLS Config Custom Security
 
-A [`custom_security`](#security-efa56b) block (within [`tls_tcp_auto_cert.tls_config`](#tls-tcp-auto-cert-tls-config)) supports the following:
-
-<a id="suites-673b61"></a>&#x2022; [`cipher_suites`](#suites-673b61) - Optional List<br>Cipher Suites. The TLS listener will only support the specified cipher list
-
-<a id="version-b3c8dc"></a>&#x2022; [`max_version`](#version-b3c8dc) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
-
-<a id="version-434218"></a>&#x2022; [`min_version`](#version-434218) - Optional String  Defaults to `TLS_AUTO`<br>Possible values are `TLS_AUTO`, `TLSv1_0`, `TLSv1_1`, `TLSv1_2`, `TLSv1_3`<br>[Enum: TLS_AUTO|TLSv1_0|TLSv1_1|TLSv1_2|TLSv1_3] TLS Protocol. TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version
+<a id="deep-7c4185"></a>Deeply nested **Security** block collapsed for readability.
 
 #### TLS TCP Auto Cert Use mTLS
 
@@ -637,29 +497,98 @@ An [`use_mtls`](#tls-tcp-auto-cert-use-mtls) block (within [`tls_tcp_auto_cert`]
 
 #### TLS TCP Auto Cert Use mTLS CRL
 
-A [`crl`](#tls-tcp-auto-cert-use-mtls-crl) block (within [`tls_tcp_auto_cert.use_mtls`](#tls-tcp-auto-cert-use-mtls)) supports the following:
-
-<a id="tls-tcp-auto-cert-use-mtls-crl-name"></a>&#x2022; [`name`](#tls-tcp-auto-cert-use-mtls-crl-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-eacebb"></a>&#x2022; [`namespace`](#namespace-eacebb) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tls-tcp-auto-cert-use-mtls-crl-tenant"></a>&#x2022; [`tenant`](#tls-tcp-auto-cert-use-mtls-crl-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-9e3ef2"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### TLS TCP Auto Cert Use mTLS Trusted CA
 
-A [`trusted_ca`](#tls-tcp-auto-cert-use-mtls-trusted-ca) block (within [`tls_tcp_auto_cert.use_mtls`](#tls-tcp-auto-cert-use-mtls)) supports the following:
-
-<a id="name-0415f6"></a>&#x2022; [`name`](#name-0415f6) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-ac72fe"></a>&#x2022; [`namespace`](#namespace-ac72fe) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-fa0d7e"></a>&#x2022; [`tenant`](#tenant-fa0d7e) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-bafeed"></a>Deeply nested **CA** block collapsed for readability.
 
 #### TLS TCP Auto Cert Use mTLS Xfcc Options
 
-A [`xfcc_options`](#tls-tcp-auto-cert-use-mtls-xfcc-options) block (within [`tls_tcp_auto_cert.use_mtls`](#tls-tcp-auto-cert-use-mtls)) supports the following:
+<a id="deep-dfa8f5"></a>Deeply nested **Options** block collapsed for readability.
 
-<a id="elements-8eabec"></a>&#x2022; [`xfcc_header_elements`](#elements-8eabec) - Optional List  Defaults to `XFCC_NONE`<br>Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`<br>[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

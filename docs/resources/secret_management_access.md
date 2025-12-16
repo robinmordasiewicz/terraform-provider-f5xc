@@ -2,12 +2,12 @@
 page_title: "f5xc_secret_management_access Resource - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  [Namespace: required] Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_secret_management_access (Resource)
 
-[Namespace: required] Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Secret Management Access API docs](https://docs.cloud.f5.com/docs-v2/api/secret-management-access) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Secret Management Access Resource Example
-# [Namespace: required] Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Secret Management Access configuration
 resource "f5xc_secret_management_access" "example" {
@@ -116,29 +116,15 @@ A [`basic_auth`](#access-info-rest-auth-info-basic-auth) block (within [`access_
 
 #### Access Info REST Auth Info Basic Auth Password
 
-A [`password`](#password-969177) block (within [`access_info.rest_auth_info.basic_auth`](#access-info-rest-auth-info-basic-auth)) supports the following:
-
-<a id="info-fb2aea"></a>&#x2022; [`blindfold_secret_info`](#info-fb2aea) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-fb2aea) below.
-
-<a id="info-e0ed2e"></a>&#x2022; [`clear_secret_info`](#info-e0ed2e) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-e0ed2e) below.
+<a id="deep-f9e2c6"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Access Info REST Auth Info Basic Auth Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-fb2aea) block (within [`access_info.rest_auth_info.basic_auth.password`](#password-969177)) supports the following:
-
-<a id="provider-69e181"></a>&#x2022; [`decryption_provider`](#provider-69e181) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-23a23d"></a>&#x2022; [`location`](#location-23a23d) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-12dcba"></a>&#x2022; [`store_provider`](#provider-12dcba) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-27622a"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Access Info REST Auth Info Basic Auth Password Clear Secret Info
 
-A [`clear_secret_info`](#info-e0ed2e) block (within [`access_info.rest_auth_info.basic_auth.password`](#password-969177)) supports the following:
-
-<a id="ref-2ec5f7"></a>&#x2022; [`provider_ref`](#ref-2ec5f7) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-aefcef"></a>&#x2022; [`url`](#url-aefcef) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-63b1f5"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Access Info REST Auth Info Headers Auth
 
@@ -148,9 +134,7 @@ A [`headers_auth`](#access-info-rest-auth-info-headers-auth) block (within [`acc
 
 #### Access Info REST Auth Info Query Params Auth
 
-A [`query_params_auth`](#auth-f1c802) block (within [`access_info.rest_auth_info`](#access-info-rest-auth-info)) supports the following:
-
-<a id="params-830867"></a>&#x2022; [`query_params`](#params-830867) - Optional Block<br>Query Parameters. The set of authentication parameters to be passed as query parameters
+<a id="deep-19686a"></a>Deeply nested **Auth** block collapsed for readability.
 
 #### Access Info TLS Config
 
@@ -190,47 +174,27 @@ A [`cert_params`](#access-info-tls-config-cert-params) block (within [`access_in
 
 A [`certificates`](#certificates-817e4b) block (within [`access_info.tls_config.cert_params`](#access-info-tls-config-cert-params)) supports the following:
 
-<a id="kind-aa6391"></a>&#x2022; [`kind`](#kind-aa6391) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="kind-aa6391"></a>&#x2022; [`kind`](#kind-aa6391) - Optional String<br>Object reference kind
 
-<a id="name-b60acc"></a>&#x2022; [`name`](#name-b60acc) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="name-b60acc"></a>&#x2022; [`name`](#name-b60acc) - Optional String<br>Object reference name
 
-<a id="namespace-5cf8ce"></a>&#x2022; [`namespace`](#namespace-5cf8ce) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-5cf8ce"></a>&#x2022; [`namespace`](#namespace-5cf8ce) - Optional String<br>Object reference namespace
 
-<a id="tenant-e34095"></a>&#x2022; [`tenant`](#tenant-e34095) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="tenant-e34095"></a>&#x2022; [`tenant`](#tenant-e34095) - Optional String<br>Object reference tenant
 
-<a id="uid-9b9cc6"></a>&#x2022; [`uid`](#uid-9b9cc6) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="uid-9b9cc6"></a>&#x2022; [`uid`](#uid-9b9cc6) - Optional String<br>Object reference UID
 
 #### Access Info TLS Config Cert Params Validation Params
 
-A [`validation_params`](#params-e516d2) block (within [`access_info.tls_config.cert_params`](#access-info-tls-config-cert-params)) supports the following:
-
-<a id="verification-ccf95a"></a>&#x2022; [`skip_hostname_verification`](#verification-ccf95a) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
-
-<a id="trusted-ca-27c4ba"></a>&#x2022; [`trusted_ca`](#trusted-ca-27c4ba) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA](#trusted-ca-27c4ba) below.
-
-<a id="url-9caf14"></a>&#x2022; [`trusted_ca_url`](#url-9caf14) - Optional String<br>Inline Root CA Certificate (legacy). Inline Root CA Certificate
-
-<a id="names-f5bd05"></a>&#x2022; [`verify_subject_alt_names`](#names-f5bd05) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
+<a id="deep-8ef178"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Access Info TLS Config Cert Params Validation Params Trusted CA
 
-A [`trusted_ca`](#trusted-ca-27c4ba) block (within [`access_info.tls_config.cert_params.validation_params`](#params-e516d2)) supports the following:
-
-<a id="list-8e02e9"></a>&#x2022; [`trusted_ca_list`](#list-8e02e9) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#list-8e02e9) below.
+<a id="deep-59d04e"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Access Info TLS Config Cert Params Validation Params Trusted CA Trusted CA List
 
-A [`trusted_ca_list`](#list-8e02e9) block (within [`access_info.tls_config.cert_params.validation_params.trusted_ca`](#trusted-ca-27c4ba)) supports the following:
-
-<a id="kind-5f51c6"></a>&#x2022; [`kind`](#kind-5f51c6) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-78a62e"></a>&#x2022; [`name`](#name-78a62e) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c2eda5"></a>&#x2022; [`namespace`](#namespace-c2eda5) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-61b6f1"></a>&#x2022; [`tenant`](#tenant-61b6f1) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-b7334d"></a>&#x2022; [`uid`](#uid-b7334d) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-8ac832"></a>Deeply nested **List** block collapsed for readability.
 
 #### Access Info TLS Config Common Params
 
@@ -248,83 +212,35 @@ A [`common_params`](#access-info-tls-config-common-params) block (within [`acces
 
 #### Access Info TLS Config Common Params TLS Certificates
 
-A [`tls_certificates`](#certificates-15ac8c) block (within [`access_info.tls_config.common_params`](#access-info-tls-config-common-params)) supports the following:
-
-<a id="url-14074f"></a>&#x2022; [`certificate_url`](#url-14074f) - Optional String<br>Certificate. TLS certificate. Certificate or certificate chain in PEM format including the PEM headers
-
-<a id="algorithms-518ad0"></a>&#x2022; [`custom_hash_algorithms`](#algorithms-518ad0) - Optional Block<br>Hash Algorithms. Specifies the hash algorithms to be used<br>See [Custom Hash Algorithms](#algorithms-518ad0) below.
-
-<a id="spec-35ec52"></a>&#x2022; [`description_spec`](#spec-35ec52) - Optional String<br>Description. Description for the certificate
-
-<a id="stapling-fa8146"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-fa8146) - Optional Block<br>Enable this option
-
-<a id="key-1f214e"></a>&#x2022; [`private_key`](#key-1f214e) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-1f214e) below.
-
-<a id="defaults-5a2e96"></a>&#x2022; [`use_system_defaults`](#defaults-5a2e96) - Optional Block<br>Enable this option
+<a id="deep-b69ffc"></a>Deeply nested **Certificates** block collapsed for readability.
 
 #### Access Info TLS Config Common Params TLS Certificates Custom Hash Algorithms
 
-A [`custom_hash_algorithms`](#algorithms-518ad0) block (within [`access_info.tls_config.common_params.tls_certificates`](#certificates-15ac8c)) supports the following:
-
-<a id="algorithms-436f46"></a>&#x2022; [`hash_algorithms`](#algorithms-436f46) - Optional List  Defaults to `INVALID_HASH_ALGORITHM`<br>Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`<br>[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used
+<a id="deep-1488ef"></a>Deeply nested **Algorithms** block collapsed for readability.
 
 #### Access Info TLS Config Common Params TLS Certificates Private Key
 
-A [`private_key`](#key-1f214e) block (within [`access_info.tls_config.common_params.tls_certificates`](#certificates-15ac8c)) supports the following:
-
-<a id="info-4da3e9"></a>&#x2022; [`blindfold_secret_info`](#info-4da3e9) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-4da3e9) below.
-
-<a id="info-6c6189"></a>&#x2022; [`clear_secret_info`](#info-6c6189) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-6c6189) below.
+<a id="deep-4156c5"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Access Info TLS Config Common Params TLS Certificates Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-4da3e9) block (within [`access_info.tls_config.common_params.tls_certificates.private_key`](#key-1f214e)) supports the following:
-
-<a id="provider-7825ae"></a>&#x2022; [`decryption_provider`](#provider-7825ae) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-c1d414"></a>&#x2022; [`location`](#location-c1d414) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-424719"></a>&#x2022; [`store_provider`](#provider-424719) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-b70faa"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Access Info TLS Config Common Params TLS Certificates Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-6c6189) block (within [`access_info.tls_config.common_params.tls_certificates.private_key`](#key-1f214e)) supports the following:
-
-<a id="ref-d118a9"></a>&#x2022; [`provider_ref`](#ref-d118a9) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-af4ffb"></a>&#x2022; [`url`](#url-af4ffb) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-196841"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Access Info TLS Config Common Params Validation Params
 
-A [`validation_params`](#params-952d2c) block (within [`access_info.tls_config.common_params`](#access-info-tls-config-common-params)) supports the following:
-
-<a id="verification-6a5c90"></a>&#x2022; [`skip_hostname_verification`](#verification-6a5c90) - Optional Bool<br>Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname
-
-<a id="trusted-ca-8285bf"></a>&#x2022; [`trusted_ca`](#trusted-ca-8285bf) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA](#trusted-ca-8285bf) below.
-
-<a id="url-c24aea"></a>&#x2022; [`trusted_ca_url`](#url-c24aea) - Optional String<br>Inline Root CA Certificate (legacy). Inline Root CA Certificate
-
-<a id="names-e62b52"></a>&#x2022; [`verify_subject_alt_names`](#names-e62b52) - Optional List<br>List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate
+<a id="deep-219aa6"></a>Deeply nested **Params** block collapsed for readability.
 
 #### Access Info TLS Config Common Params Validation Params Trusted CA
 
-A [`trusted_ca`](#trusted-ca-8285bf) block (within [`access_info.tls_config.common_params.validation_params`](#params-952d2c)) supports the following:
-
-<a id="list-c6f3c0"></a>&#x2022; [`trusted_ca_list`](#list-c6f3c0) - Optional Block<br>Root CA Certificate Reference. Reference to Root CA Certificate<br>See [Trusted CA List](#list-c6f3c0) below.
+<a id="deep-523e6d"></a>Deeply nested **CA** block collapsed for readability.
 
 #### Access Info TLS Config Common Params Validation Params Trusted CA Trusted CA List
 
-A [`trusted_ca_list`](#list-c6f3c0) block (within [`access_info.tls_config.common_params.validation_params.trusted_ca`](#trusted-ca-8285bf)) supports the following:
-
-<a id="kind-a7b554"></a>&#x2022; [`kind`](#kind-a7b554) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-c38987"></a>&#x2022; [`name`](#name-c38987) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e1a99b"></a>&#x2022; [`namespace`](#namespace-e1a99b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d44c66"></a>&#x2022; [`tenant`](#tenant-d44c66) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-854466"></a>&#x2022; [`uid`](#uid-854466) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-dd547c"></a>Deeply nested **List** block collapsed for readability.
 
 #### Access Info Vault Auth Info
 
@@ -336,37 +252,19 @@ A [`vault_auth_info`](#access-info-vault-auth-info) block (within [`access_info`
 
 #### Access Info Vault Auth Info App Role Auth
 
-An [`app_role_auth`](#auth-69347c) block (within [`access_info.vault_auth_info`](#access-info-vault-auth-info)) supports the following:
-
-<a id="role-id-fa1aef"></a>&#x2022; [`role_id`](#role-id-fa1aef) - Optional String<br>Role ID. role-ID to be used for authentication
-
-<a id="secret-id-da1e5d"></a>&#x2022; [`secret_id`](#secret-id-da1e5d) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Secret ID](#secret-id-da1e5d) below.
+<a id="deep-c77100"></a>Deeply nested **Auth** block collapsed for readability.
 
 #### Access Info Vault Auth Info App Role Auth Secret ID
 
-A [`secret_id`](#secret-id-da1e5d) block (within [`access_info.vault_auth_info.app_role_auth`](#auth-69347c)) supports the following:
-
-<a id="info-abaf76"></a>&#x2022; [`blindfold_secret_info`](#info-abaf76) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-abaf76) below.
-
-<a id="info-47dc8c"></a>&#x2022; [`clear_secret_info`](#info-47dc8c) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-47dc8c) below.
+<a id="deep-773361"></a>Deeply nested **ID** block collapsed for readability.
 
 #### Access Info Vault Auth Info App Role Auth Secret ID Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-abaf76) block (within [`access_info.vault_auth_info.app_role_auth.secret_id`](#secret-id-da1e5d)) supports the following:
-
-<a id="provider-12a382"></a>&#x2022; [`decryption_provider`](#provider-12a382) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-0636af"></a>&#x2022; [`location`](#location-0636af) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-eb3f44"></a>&#x2022; [`store_provider`](#provider-eb3f44) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-5491bc"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Access Info Vault Auth Info App Role Auth Secret ID Clear Secret Info
 
-A [`clear_secret_info`](#info-47dc8c) block (within [`access_info.vault_auth_info.app_role_auth.secret_id`](#secret-id-da1e5d)) supports the following:
-
-<a id="ref-43ea58"></a>&#x2022; [`provider_ref`](#ref-43ea58) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-9760e7"></a>&#x2022; [`url`](#url-9760e7) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-0dd5a1"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Access Info Vault Auth Info Token
 
@@ -378,21 +276,11 @@ A [`token`](#access-info-vault-auth-info-token) block (within [`access_info.vaul
 
 #### Access Info Vault Auth Info Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-8a86e5) block (within [`access_info.vault_auth_info.token`](#access-info-vault-auth-info-token)) supports the following:
-
-<a id="provider-242714"></a>&#x2022; [`decryption_provider`](#provider-242714) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-eca803"></a>&#x2022; [`location`](#location-eca803) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-9c6b31"></a>&#x2022; [`store_provider`](#provider-9c6b31) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-319e57"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Access Info Vault Auth Info Token Clear Secret Info
 
-A [`clear_secret_info`](#info-d906d4) block (within [`access_info.vault_auth_info.token`](#access-info-vault-auth-info-token)) supports the following:
-
-<a id="ref-88f453"></a>&#x2022; [`provider_ref`](#ref-88f453) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-2477ab"></a>&#x2022; [`url`](#url-2477ab) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-03839f"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Timeouts
 
@@ -432,15 +320,15 @@ A [`site`](#where-site) block (within [`where`](#where)) supports the following:
 
 A [`ref`](#where-site-ref) block (within [`where.site`](#where-site)) supports the following:
 
-<a id="where-site-ref-kind"></a>&#x2022; [`kind`](#where-site-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="where-site-ref-kind"></a>&#x2022; [`kind`](#where-site-ref-kind) - Optional String<br>Object reference kind
 
-<a id="where-site-ref-name"></a>&#x2022; [`name`](#where-site-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="where-site-ref-name"></a>&#x2022; [`name`](#where-site-ref-name) - Optional String<br>Object reference name
 
-<a id="where-site-ref-namespace"></a>&#x2022; [`namespace`](#where-site-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="where-site-ref-namespace"></a>&#x2022; [`namespace`](#where-site-ref-namespace) - Optional String<br>Object reference namespace
 
-<a id="where-site-ref-tenant"></a>&#x2022; [`tenant`](#where-site-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="where-site-ref-tenant"></a>&#x2022; [`tenant`](#where-site-ref-tenant) - Optional String<br>Object reference tenant
 
-<a id="where-site-ref-uid"></a>&#x2022; [`uid`](#where-site-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="where-site-ref-uid"></a>&#x2022; [`uid`](#where-site-ref-uid) - Optional String<br>Object reference UID
 
 #### Where Virtual Network
 
@@ -452,15 +340,15 @@ A [`virtual_network`](#where-virtual-network) block (within [`where`](#where)) s
 
 A [`ref`](#where-virtual-network-ref) block (within [`where.virtual_network`](#where-virtual-network)) supports the following:
 
-<a id="where-virtual-network-ref-kind"></a>&#x2022; [`kind`](#where-virtual-network-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="where-virtual-network-ref-kind"></a>&#x2022; [`kind`](#where-virtual-network-ref-kind) - Optional String<br>Object reference kind
 
-<a id="where-virtual-network-ref-name"></a>&#x2022; [`name`](#where-virtual-network-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="where-virtual-network-ref-name"></a>&#x2022; [`name`](#where-virtual-network-ref-name) - Optional String<br>Object reference name
 
-<a id="where-virtual-network-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-network-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="where-virtual-network-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-network-ref-namespace) - Optional String<br>Object reference namespace
 
-<a id="where-virtual-network-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-network-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="where-virtual-network-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-network-ref-tenant) - Optional String<br>Object reference tenant
 
-<a id="where-virtual-network-ref-uid"></a>&#x2022; [`uid`](#where-virtual-network-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="where-virtual-network-ref-uid"></a>&#x2022; [`uid`](#where-virtual-network-ref-uid) - Optional String<br>Object reference UID
 
 #### Where Virtual Site
 
@@ -478,15 +366,98 @@ A [`virtual_site`](#where-virtual-site) block (within [`where`](#where)) support
 
 A [`ref`](#where-virtual-site-ref) block (within [`where.virtual_site`](#where-virtual-site)) supports the following:
 
-<a id="where-virtual-site-ref-kind"></a>&#x2022; [`kind`](#where-virtual-site-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="where-virtual-site-ref-kind"></a>&#x2022; [`kind`](#where-virtual-site-ref-kind) - Optional String<br>Object reference kind
 
-<a id="where-virtual-site-ref-name"></a>&#x2022; [`name`](#where-virtual-site-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="where-virtual-site-ref-name"></a>&#x2022; [`name`](#where-virtual-site-ref-name) - Optional String<br>Object reference name
 
-<a id="where-virtual-site-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-site-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="where-virtual-site-ref-namespace"></a>&#x2022; [`namespace`](#where-virtual-site-ref-namespace) - Optional String<br>Object reference namespace
 
-<a id="where-virtual-site-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-site-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="where-virtual-site-ref-tenant"></a>&#x2022; [`tenant`](#where-virtual-site-ref-tenant) - Optional String<br>Object reference tenant
 
-<a id="where-virtual-site-ref-uid"></a>&#x2022; [`uid`](#where-virtual-site-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="where-virtual-site-ref-uid"></a>&#x2022; [`uid`](#where-virtual-site-ref-uid) - Optional String<br>Object reference UID
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

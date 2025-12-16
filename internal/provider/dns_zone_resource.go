@@ -1370,7 +1370,7 @@ func (r *DNSZoneResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *DNSZoneResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dns_zoneSchemaVersion,
-		MarkdownDescription: "[Category: DNS] [Namespace: not_required] Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Domain name for the DNS Zone (e.g., example.com). Must be a valid DNS domain name.",

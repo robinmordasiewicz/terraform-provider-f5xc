@@ -1,5 +1,5 @@
 # Virtual K8S Resource Example
-# [Category: Kubernetes] [Namespace: required] Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+# Manages virtual_k8s will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic Virtual K8S configuration
 resource "f5xc_virtual_k8s" "example" {

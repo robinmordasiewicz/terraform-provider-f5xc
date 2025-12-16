@@ -160,7 +160,7 @@ func (r *CminstanceResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *CminstanceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             cminstanceSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages App type will create the configuration in namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Cminstance. Must be unique within the namespace.",

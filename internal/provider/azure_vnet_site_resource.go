@@ -3138,7 +3138,7 @@ func (r *AzureVNETSiteResource) Metadata(ctx context.Context, req resource.Metad
 func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             azure_vnet_siteSchemaVersion,
-		MarkdownDescription: "[Category: Sites] [Namespace: required] Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.",
+		MarkdownDescription: "Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Azure VNET Site. Must be unique within the namespace.",

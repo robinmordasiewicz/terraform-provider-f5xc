@@ -1,5 +1,5 @@
 # CDN Loadbalancer Resource Example
-# [Category: Load Balancing] [Namespace: required] Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
+# Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.
 
 # Basic CDN Loadbalancer configuration
 resource "f5xc_cdn_loadbalancer" "example" {

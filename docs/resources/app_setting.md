@@ -2,12 +2,12 @@
 page_title: "f5xc_app_setting Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  [Namespace: required] Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
+  Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 ---
 
 # f5xc_app_setting (Resource)
 
-[Namespace: required] Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
+Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [App Setting API docs](https://docs.cloud.f5.com/docs-v2/api/app-setting) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # App Setting Resource Example
-# [Namespace: required] Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
+# Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic App Setting configuration
 resource "f5xc_app_setting" "example" {
@@ -94,15 +94,15 @@ An [`app_type_settings`](#app-type-settings) block supports the following:
 
 An [`app_type_ref`](#app-type-settings-app-type-ref) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
-<a id="app-type-settings-app-type-ref-kind"></a>&#x2022; [`kind`](#app-type-settings-app-type-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="app-type-settings-app-type-ref-kind"></a>&#x2022; [`kind`](#app-type-settings-app-type-ref-kind) - Optional String<br>Object reference kind
 
-<a id="app-type-settings-app-type-ref-name"></a>&#x2022; [`name`](#app-type-settings-app-type-ref-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+<a id="app-type-settings-app-type-ref-name"></a>&#x2022; [`name`](#app-type-settings-app-type-ref-name) - Optional String<br>Object reference name
 
-<a id="namespace-49608f"></a>&#x2022; [`namespace`](#namespace-49608f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+<a id="namespace-49608f"></a>&#x2022; [`namespace`](#namespace-49608f) - Optional String<br>Object reference namespace
 
-<a id="app-type-settings-app-type-ref-tenant"></a>&#x2022; [`tenant`](#app-type-settings-app-type-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="app-type-settings-app-type-ref-tenant"></a>&#x2022; [`tenant`](#app-type-settings-app-type-ref-tenant) - Optional String<br>Object reference tenant
 
-<a id="app-type-settings-app-type-ref-uid"></a>&#x2022; [`uid`](#app-type-settings-app-type-ref-uid) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="app-type-settings-app-type-ref-uid"></a>&#x2022; [`uid`](#app-type-settings-app-type-ref-uid) - Optional String<br>Object reference UID
 
 #### App Type Settings Business Logic Markup Setting
 
@@ -120,11 +120,7 @@ A [`timeseries_analyses_setting`](#setting-7d0042) block (within [`app_type_sett
 
 #### App Type Settings Timeseries Analyses Setting Metric Selectors
 
-A [`metric_selectors`](#selectors-2cc4b7) block (within [`app_type_settings.timeseries_analyses_setting`](#setting-7d0042)) supports the following:
-
-<a id="metric-bc0de2"></a>&#x2022; [`metric`](#metric-bc0de2) - Optional List  Defaults to `NO_METRICS`<br>Possible values are `NO_METRICS`, `REQUEST_RATE`, `ERROR_RATE`, `LATENCY`, `THROUGHPUT`<br>[Enum: NO_METRICS|REQUEST_RATE|ERROR_RATE|LATENCY|THROUGHPUT] Metrics. Choose one or more metrics to be included in the detection logic
-
-<a id="source-60834f"></a>&#x2022; [`metrics_source`](#source-60834f) - Optional String<br>Possible values are `NONE`, `NODES`, `EDGES`, `VIRTUAL_HOSTS`<br>[Enum: NONE|NODES|EDGES|VIRTUAL_HOSTS] Metrics Source. Supported sources from which Metrics can be analyzed All edges in the service mesh graph. Metrics are analyzed separately between all source and destination service combinations
+<a id="deep-9504fc"></a>Deeply nested **Selectors** block collapsed for readability.
 
 #### App Type Settings User Behavior Analysis Setting
 
@@ -140,71 +136,23 @@ An [`user_behavior_analysis_setting`](#setting-2c7217) block (within [`app_type_
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection
 
-An [`enable_detection`](#detection-4127d2) block (within [`app_type_settings.user_behavior_analysis_setting`](#setting-2c7217)) supports the following:
-
-<a id="automatic-746f46"></a>&#x2022; [`bola_detection_automatic`](#automatic-746f46) - Optional Block<br>Enable this option
-
-<a id="period-033ee3"></a>&#x2022; [`cooling_off_period`](#period-033ee3) - Optional Number<br>Cooling off period. Malicious user detection assigns a threat level to each user based on their activity. Once a threat level is assigned, the system continues tracking activity from this user and if no further malicious activity is seen, it gradually reduces the threat assesment to lower levels. This field specifies the time period, in minutes, used by the system to decay a user's threat level from a high to medium or medium to low or low to none
-
-<a id="detection-7126e7"></a>&#x2022; [`exclude_bola_detection`](#detection-7126e7) - Optional Block<br>Enable this option
-
-<a id="activity-52c961"></a>&#x2022; [`exclude_bot_defense_activity`](#activity-52c961) - Optional Block<br>Enable this option
-
-<a id="activity-b468a9"></a>&#x2022; [`exclude_failed_login_activity`](#activity-b468a9) - Optional Block<br>Enable this option
-
-<a id="activity-7563be"></a>&#x2022; [`exclude_forbidden_activity`](#activity-7563be) - Optional Block<br>Enable this option
-
-<a id="reputation-222095"></a>&#x2022; [`exclude_ip_reputation`](#reputation-222095) - Optional Block<br>Enable this option
-
-<a id="activity-68b176"></a>&#x2022; [`exclude_non_existent_url_activity`](#activity-68b176) - Optional Block<br>Enable this option
-
-<a id="limit-15e936"></a>&#x2022; [`exclude_rate_limit`](#limit-15e936) - Optional Block<br>Enable this option
-
-<a id="activity-1deb5e"></a>&#x2022; [`exclude_waf_activity`](#activity-1deb5e) - Optional Block<br>Enable this option
-
-<a id="activity-9a50c3"></a>&#x2022; [`include_bot_defense_activity`](#activity-9a50c3) - Optional Block<br>Enable this option
-
-<a id="activity-c790de"></a>&#x2022; [`include_failed_login_activity`](#activity-c790de) - Optional Block<br>Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior<br>See [Include Failed Login Activity](#activity-c790de) below.
-
-<a id="activity-c4a4f1"></a>&#x2022; [`include_forbidden_activity`](#activity-c4a4f1) - Optional Block<br>Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior<br>See [Include Forbidden Activity](#activity-c4a4f1) below.
-
-<a id="reputation-0bd16b"></a>&#x2022; [`include_ip_reputation`](#reputation-0bd16b) - Optional Block<br>Enable this option
-
-<a id="automatic-bd091b"></a>&#x2022; [`include_non_existent_url_activity_automatic`](#automatic-bd091b) - Optional Block<br>Non-existent URL Automatic Activity Settings<br>See [Include Non Existent URL Activity Automatic](#automatic-bd091b) below.
-
-<a id="custom-4188a6"></a>&#x2022; [`include_non_existent_url_activity_custom`](#custom-4188a6) - Optional Block<br>Non-existent URL Custom Activity Setting<br>See [Include Non Existent URL Activity Custom](#custom-4188a6) below.
-
-<a id="limit-48e141"></a>&#x2022; [`include_rate_limit`](#limit-48e141) - Optional Block<br>Enable this option
-
-<a id="activity-6e5eaa"></a>&#x2022; [`include_waf_activity`](#activity-6e5eaa) - Optional Block<br>Enable this option
+<a id="deep-83e793"></a>Deeply nested **Detection** block collapsed for readability.
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection Include Failed Login Activity
 
-An [`include_failed_login_activity`](#activity-c790de) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#detection-4127d2)) supports the following:
-
-<a id="threshold-097f28"></a>&#x2022; [`login_failures_threshold`](#threshold-097f28) - Optional Number<br>Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious
+<a id="deep-f3a456"></a>Deeply nested **Activity** block collapsed for readability.
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection Include Forbidden Activity
 
-An [`include_forbidden_activity`](#activity-c4a4f1) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#detection-4127d2)) supports the following:
-
-<a id="threshold-e225f9"></a>&#x2022; [`forbidden_requests_threshold`](#threshold-e225f9) - Optional Number<br>Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious
+<a id="deep-1bf571"></a>Deeply nested **Activity** block collapsed for readability.
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Automatic
 
-An [`include_non_existent_url_activity_automatic`](#automatic-bd091b) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#detection-4127d2)) supports the following:
-
-<a id="high-bdf84f"></a>&#x2022; [`high`](#high-bdf84f) - Optional Block<br>Enable this option
-
-<a id="low-52df9e"></a>&#x2022; [`low`](#low-52df9e) - Optional Block<br>Enable this option
-
-<a id="medium-1bf0c9"></a>&#x2022; [`medium`](#medium-1bf0c9) - Optional Block<br>Enable this option
+<a id="deep-82c999"></a>Deeply nested **Automatic** block collapsed for readability.
 
 #### App Type Settings User Behavior Analysis Setting Enable Detection Include Non Existent URL Activity Custom
 
-An [`include_non_existent_url_activity_custom`](#custom-4188a6) block (within [`app_type_settings.user_behavior_analysis_setting.enable_detection`](#detection-4127d2)) supports the following:
-
-<a id="threshold-afbca8"></a>&#x2022; [`nonexistent_requests_threshold`](#threshold-afbca8) - Optional Number<br>Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious
+<a id="deep-96f372"></a>Deeply nested **Custom** block collapsed for readability.
 
 #### Timeouts
 
@@ -217,6 +165,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

@@ -105,7 +105,7 @@ func (r *IKEPhase2ProfileResource) Metadata(ctx context.Context, req resource.Me
 func (r *IKEPhase2ProfileResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             ike_phase2_profileSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a IKE Phase2 Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.",
+		MarkdownDescription: "Manages a IKE Phase2 Profile resource in F5 Distributed Cloud for ike phase2 profile configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the IKE Phase2 Profile. Must be unique within the namespace.",

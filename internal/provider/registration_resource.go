@@ -445,7 +445,7 @@ func (r *RegistrationResource) Metadata(ctx context.Context, req resource.Metada
 func (r *RegistrationResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             registrationSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages a Registration resource in F5 Distributed Cloud for vpm creates registration using this message, never used by users. configuration.",
+		MarkdownDescription: "Manages a Registration resource in F5 Distributed Cloud for vpm creates registration using this message, never used by users. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Registration. Must be unique within the namespace.",

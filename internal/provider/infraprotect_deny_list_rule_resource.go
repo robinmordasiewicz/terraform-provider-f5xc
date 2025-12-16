@@ -74,7 +74,7 @@ func (r *InfraprotectDenyListRuleResource) Metadata(ctx context.Context, req res
 func (r *InfraprotectDenyListRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             infraprotect_deny_list_ruleSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages DDoS transit Deny List Rule in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages DDoS transit Deny List Rule in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Infraprotect Deny List Rule. Must be unique within the namespace.",

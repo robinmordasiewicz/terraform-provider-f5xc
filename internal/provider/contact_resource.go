@@ -73,7 +73,7 @@ func (r *ContactResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *ContactResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             contactSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new customer's contact detail record with us, including address and phone number. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Contact. Must be unique within the namespace.",

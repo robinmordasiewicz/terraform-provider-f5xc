@@ -2,12 +2,12 @@
 page_title: "f5xc_cloud_connect Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  [Category: Networking] [Namespace: required] Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
+  Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 ---
 
 # f5xc_cloud_connect (Resource)
 
-[Category: Networking] [Namespace: required] Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
+Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 
 ~> **Note** Please refer to [Cloud Connect API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-connect) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Cloud Connect Resource Example
-# [Category: Networking] [Namespace: required] Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
+# Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 
 # Basic Cloud Connect configuration
 resource "f5xc_cloud_connect" "example" {
@@ -54,8 +54,6 @@ resource "f5xc_cloud_connect" "example" {
 
 <a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Cloud Connect. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Cloud Connect will be created
-
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -63,6 +61,8 @@ resource "f5xc_cloud_connect" "example" {
 <a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 
@@ -94,23 +94,11 @@ An [`aws_tgw_site`](#aws-tgw-site) block supports the following:
 
 #### AWS TGW Site Cred
 
-A [`cred`](#aws-tgw-site-cred) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
-
-<a id="aws-tgw-site-cred-name"></a>&#x2022; [`name`](#aws-tgw-site-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="aws-tgw-site-cred-namespace"></a>&#x2022; [`namespace`](#aws-tgw-site-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="aws-tgw-site-cred-tenant"></a>&#x2022; [`tenant`](#aws-tgw-site-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-ce1c3f"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### AWS TGW Site Site
 
-A [`site`](#aws-tgw-site-site) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
-
-<a id="aws-tgw-site-site-name"></a>&#x2022; [`name`](#aws-tgw-site-site-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="aws-tgw-site-site-namespace"></a>&#x2022; [`namespace`](#aws-tgw-site-site-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="aws-tgw-site-site-tenant"></a>&#x2022; [`tenant`](#aws-tgw-site-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0d6d17"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### AWS TGW Site VPC Attachments
 
@@ -134,31 +122,19 @@ A [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) block (within [`aws_tgw_s
 
 #### AWS TGW Site VPC Attachments VPC List Custom Routing
 
-A [`custom_routing`](#routing-287a5f) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
-
-<a id="tables-ad622a"></a>&#x2022; [`route_tables`](#tables-ad622a) - Optional Block<br>List of route tables. Route Tables<br>See [Route Tables](#tables-ad622a) below.
+<a id="deep-7afad1"></a>Deeply nested **Routing** block collapsed for readability.
 
 #### AWS TGW Site VPC Attachments VPC List Custom Routing Route Tables
 
-A [`route_tables`](#tables-ad622a) block (within [`aws_tgw_site.vpc_attachments.vpc_list.custom_routing`](#routing-287a5f)) supports the following:
-
-<a id="table-id-73e5e3"></a>&#x2022; [`route_table_id`](#table-id-73e5e3) - Optional String<br>Route table ID. Route table ID
-
-<a id="routes-3f9b25"></a>&#x2022; [`static_routes`](#routes-3f9b25) - Optional List<br>Static Routes. List of Static Routes
+<a id="deep-1de263"></a>Deeply nested **Tables** block collapsed for readability.
 
 #### AWS TGW Site VPC Attachments VPC List Default Route
 
-A [`default_route`](#route-44d7f5) block (within [`aws_tgw_site.vpc_attachments.vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list)) supports the following:
-
-<a id="tables-cc89f6"></a>&#x2022; [`all_route_tables`](#tables-cc89f6) - Optional Block<br>Enable this option
-
-<a id="tables-6ffd1a"></a>&#x2022; [`selective_route_tables`](#tables-6ffd1a) - Optional Block<br>AWS Route Table. AWS Route Table<br>See [Selective Route Tables](#tables-6ffd1a) below.
+<a id="deep-005059"></a>Deeply nested **Route** block collapsed for readability.
 
 #### AWS TGW Site VPC Attachments VPC List Default Route Selective Route Tables
 
-A [`selective_route_tables`](#tables-6ffd1a) block (within [`aws_tgw_site.vpc_attachments.vpc_list.default_route`](#route-44d7f5)) supports the following:
-
-<a id="table-id-4ea496"></a>&#x2022; [`route_table_id`](#table-id-4ea496) - Optional List<br>Route table ID. Route table ID
+<a id="deep-542618"></a>Deeply nested **Tables** block collapsed for readability.
 
 #### Azure VNET Site
 
@@ -170,13 +146,7 @@ An [`azure_vnet_site`](#azure-vnet-site) block supports the following:
 
 #### Azure VNET Site Site
 
-A [`site`](#azure-vnet-site-site) block (within [`azure_vnet_site`](#azure-vnet-site)) supports the following:
-
-<a id="azure-vnet-site-site-name"></a>&#x2022; [`name`](#azure-vnet-site-site-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="azure-vnet-site-site-namespace"></a>&#x2022; [`namespace`](#azure-vnet-site-site-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="azure-vnet-site-site-tenant"></a>&#x2022; [`tenant`](#azure-vnet-site-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-195dbf"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Azure VNET Site VNET Attachments
 
@@ -202,41 +172,23 @@ A [`vnet_list`](#list-5826e3) block (within [`azure_vnet_site.vnet_attachments`]
 
 #### Azure VNET Site VNET Attachments VNET List Custom Routing
 
-A [`custom_routing`](#routing-724341) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#list-5826e3)) supports the following:
-
-<a id="tables-722439"></a>&#x2022; [`route_tables`](#tables-722439) - Optional Block<br>List of route tables with static routes. Route Tables with static routes<br>See [Route Tables](#tables-722439) below.
+<a id="deep-685044"></a>Deeply nested **Routing** block collapsed for readability.
 
 #### Azure VNET Site VNET Attachments VNET List Custom Routing Route Tables
 
-A [`route_tables`](#tables-722439) block (within [`azure_vnet_site.vnet_attachments.vnet_list.custom_routing`](#routing-724341)) supports the following:
-
-<a id="table-id-64761a"></a>&#x2022; [`route_table_id`](#table-id-64761a) - Optional String<br>Route table ID. Route table ID in the format /`<resource-group-name>`/`<route-table-name>`
-
-<a id="routes-18e053"></a>&#x2022; [`static_routes`](#routes-18e053) - Optional List<br>Static Routes. List of Static Routes
+<a id="deep-995929"></a>Deeply nested **Tables** block collapsed for readability.
 
 #### Azure VNET Site VNET Attachments VNET List Default Route
 
-A [`default_route`](#route-fd5eea) block (within [`azure_vnet_site.vnet_attachments.vnet_list`](#list-5826e3)) supports the following:
-
-<a id="tables-19f37b"></a>&#x2022; [`all_route_tables`](#tables-19f37b) - Optional Block<br>Enable this option
-
-<a id="tables-97cee7"></a>&#x2022; [`selective_route_tables`](#tables-97cee7) - Optional Block<br>Azure Route Table. Azure Route Table<br>See [Selective Route Tables](#tables-97cee7) below.
+<a id="deep-7b34f4"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Azure VNET Site VNET Attachments VNET List Default Route Selective Route Tables
 
-A [`selective_route_tables`](#tables-97cee7) block (within [`azure_vnet_site.vnet_attachments.vnet_list.default_route`](#route-fd5eea)) supports the following:
-
-<a id="table-id-062f6e"></a>&#x2022; [`route_table_id`](#table-id-062f6e) - Optional List<br>Route table ID. Route table ID in the format /`<resource-group-name>`/`<route-table-name>`
+<a id="deep-859c42"></a>Deeply nested **Tables** block collapsed for readability.
 
 #### Segment
 
-A [`segment`](#segment) block supports the following:
-
-<a id="segment-name"></a>&#x2022; [`name`](#segment-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="segment-namespace"></a>&#x2022; [`namespace`](#segment-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="segment-tenant"></a>&#x2022; [`tenant`](#segment-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-fdd32b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Timeouts
 
@@ -249,6 +201,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_securemesh_site_v2 Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  [Category: Sites] [Namespace: required] Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+  Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 ---
 
 # f5xc_securemesh_site_v2 (Resource)
 
-[Category: Sites] [Namespace: required] Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 
 ~> **Note** Please refer to [Securemesh Site V2 API docs](https://docs.cloud.f5.com/docs-v2/api/views-securemesh-site-v2) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Securemesh Site V2 Resource Example
-# [Category: Sites] [Namespace: required] Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
+# Manages a Securemesh Site V2 resource in F5 Distributed Cloud for deploying secure mesh edge sites with enhanced security and networking features.
 
 # Basic Securemesh Site V2 configuration
 resource "f5xc_securemesh_site_v2" "example" {
@@ -166,13 +166,7 @@ An [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) blo
 
 #### Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced_firewall_policies`](#policies-0d92c3) block (within [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies)) supports the following:
-
-<a id="name-09fc53"></a>&#x2022; [`name`](#name-09fc53) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-102d99"></a>&#x2022; [`namespace`](#namespace-102d99) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-0eef96"></a>&#x2022; [`tenant`](#tenant-0eef96) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0d92c3"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Active Forward Proxy Policies
 
@@ -182,13 +176,7 @@ An [`active_forward_proxy_policies`](#active-forward-proxy-policies) block suppo
 
 #### Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward_proxy_policies`](#policies-42e2f7) block (within [`active_forward_proxy_policies`](#active-forward-proxy-policies)) supports the following:
-
-<a id="name-c2d06e"></a>&#x2022; [`name`](#name-c2d06e) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-63e125"></a>&#x2022; [`namespace`](#namespace-63e125) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e68ab4"></a>&#x2022; [`tenant`](#tenant-e68ab4) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-42e2f7"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Admin User Credentials
 
@@ -208,21 +196,11 @@ An [`admin_password`](#admin-user-credentials-admin-password) block (within [`ad
 
 #### Admin User Credentials Admin Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-710bcb) block (within [`admin_user_credentials.admin_password`](#admin-user-credentials-admin-password)) supports the following:
-
-<a id="provider-4ff543"></a>&#x2022; [`decryption_provider`](#provider-4ff543) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-1bcf08"></a>&#x2022; [`location`](#location-1bcf08) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-86514b"></a>&#x2022; [`store_provider`](#provider-86514b) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-6962e1"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Admin User Credentials Admin Password Clear Secret Info
 
-A [`clear_secret_info`](#info-32b90f) block (within [`admin_user_credentials.admin_password`](#admin-user-credentials-admin-password)) supports the following:
-
-<a id="ref-505a07"></a>&#x2022; [`provider_ref`](#ref-505a07) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-edf703"></a>&#x2022; [`url`](#url-edf703) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-463d43"></a>Deeply nested **Info** block collapsed for readability.
 
 #### AWS
 
@@ -292,159 +270,75 @@ An [`interface_list`](#list-6c6298) block (within [`aws.not_managed.node_list`](
 
 #### AWS Not Managed Node List Interface List Bond Interface
 
-A [`bond_interface`](#interface-f1858f) block (within [`aws.not_managed.node_list.interface_list`](#list-6c6298)) supports the following:
-
-<a id="backup-7ab25c"></a>&#x2022; [`active_backup`](#backup-7ab25c) - Optional Block<br>Enable this option
-
-<a id="devices-dbe3b1"></a>&#x2022; [`devices`](#devices-dbe3b1) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
-
-<a id="lacp-b19846"></a>&#x2022; [`lacp`](#lacp-b19846) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#lacp-b19846) below.
-
-<a id="interval-0eabf7"></a>&#x2022; [`link_polling_interval`](#interval-0eabf7) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
-
-<a id="delay-976f19"></a>&#x2022; [`link_up_delay`](#delay-976f19) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
-
-<a id="name-8d59e3"></a>&#x2022; [`name`](#name-8d59e3) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="deep-4224d9"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List Bond Interface Lacp
 
-A [`lacp`](#lacp-b19846) block (within [`aws.not_managed.node_list.interface_list.bond_interface`](#interface-f1858f)) supports the following:
-
-<a id="rate-fb46bd"></a>&#x2022; [`rate`](#rate-fb46bd) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="deep-5560e6"></a>Deeply nested **Lacp** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List Ethernet Interface
 
-An [`ethernet_interface`](#interface-f28fa7) block (within [`aws.not_managed.node_list.interface_list`](#list-6c6298)) supports the following:
-
-<a id="device-a542a0"></a>&#x2022; [`device`](#device-a542a0) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
-
-<a id="mac-1a9065"></a>&#x2022; [`mac`](#mac-1a9065) - Optional String<br>MAC Address
+<a id="deep-fc0694"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-cd50c5) block (within [`aws.not_managed.node_list.interface_list`](#list-6c6298)) supports the following:
-
-<a id="host-dcf093"></a>&#x2022; [`host`](#host-dcf093) - Optional Block<br>Enable this option
-
-<a id="router-be2801"></a>&#x2022; [`router`](#router-be2801) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-be2801) below.
+<a id="deep-72b9a7"></a>Deeply nested **Config** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List IPv6 Auto Config Router
 
-A [`router`](#router-be2801) block (within [`aws.not_managed.node_list.interface_list.ipv6_auto_config`](#config-cd50c5)) supports the following:
-
-<a id="config-0293a0"></a>&#x2022; [`dns_config`](#config-0293a0) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-0293a0) below.
-
-<a id="prefix-4464d9"></a>&#x2022; [`network_prefix`](#prefix-4464d9) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-33f86b"></a>&#x2022; [`stateful`](#stateful-33f86b) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-33f86b) below.
+<a id="deep-2b8f0a"></a>Deeply nested **Router** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-0293a0) block (within [`aws.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-be2801)) supports the following:
-
-<a id="list-f574d5"></a>&#x2022; [`configured_list`](#list-f574d5) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-f574d5) below.
-
-<a id="dns-57adca"></a>&#x2022; [`local_dns`](#dns-57adca) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-57adca) below.
+<a id="deep-ef4d0c"></a>Deeply nested **Config** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-f574d5) block (within [`aws.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-0293a0)) supports the following:
-
-<a id="list-7fdf30"></a>&#x2022; [`dns_list`](#list-7fdf30) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-3084ba"></a>Deeply nested **List** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-57adca) block (within [`aws.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-0293a0)) supports the following:
-
-<a id="address-e188f1"></a>&#x2022; [`configured_address`](#address-e188f1) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-d63b64"></a>&#x2022; [`first_address`](#address-d63b64) - Optional Block<br>Enable this option
-
-<a id="address-e7db9d"></a>&#x2022; [`last_address`](#address-e7db9d) - Optional Block<br>Enable this option
+<a id="deep-92f368"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-33f86b) block (within [`aws.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-be2801)) supports the following:
-
-<a id="end-e038ef"></a>&#x2022; [`automatic_from_end`](#end-e038ef) - Optional Block<br>Enable this option
-
-<a id="start-6299a9"></a>&#x2022; [`automatic_from_start`](#start-6299a9) - Optional Block<br>Enable this option
-
-<a id="networks-52c7b1"></a>&#x2022; [`dhcp_networks`](#networks-52c7b1) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-52c7b1) below.
-
-<a id="map-ef1a50"></a>&#x2022; [`fixed_ip_map`](#map-ef1a50) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-039be5"></a>&#x2022; [`interface_ip_map`](#map-039be5) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-039be5) below.
+<a id="deep-1075b3"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-52c7b1) block (within [`aws.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-33f86b)) supports the following:
-
-<a id="prefix-d628cd"></a>&#x2022; [`network_prefix`](#prefix-d628cd) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-a2b5da"></a>&#x2022; [`pool_settings`](#settings-a2b5da) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-9b972d"></a>&#x2022; [`pools`](#pools-9b972d) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-9b972d) below.
+<a id="deep-19736c"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-9b972d) block (within [`aws.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-52c7b1)) supports the following:
-
-<a id="end-ip-6a341f"></a>&#x2022; [`end_ip`](#end-ip-6a341f) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-68719c"></a>&#x2022; [`start_ip`](#start-ip-68719c) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-3590d4"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-039be5) block (within [`aws.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-33f86b)) supports the following:
-
-<a id="map-c029ca"></a>&#x2022; [`interface_ip_map`](#map-c029ca) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-b470b4"></a>Deeply nested **Map** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List Network Option
 
-A [`network_option`](#option-4d9fd7) block (within [`aws.not_managed.node_list.interface_list`](#list-6c6298)) supports the following:
-
-<a id="network-f20af5"></a>&#x2022; [`site_local_inside_network`](#network-f20af5) - Optional Block<br>Enable this option
-
-<a id="network-452f30"></a>&#x2022; [`site_local_network`](#network-452f30) - Optional Block<br>Enable this option
+<a id="deep-ccc2da"></a>Deeply nested **Option** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List Static IP
 
-A [`static_ip`](#static-ip-f224ff) block (within [`aws.not_managed.node_list.interface_list`](#list-6c6298)) supports the following:
-
-<a id="default-gw-31eb16"></a>&#x2022; [`default_gw`](#default-gw-31eb16) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-8ba61c"></a>&#x2022; [`ip_address`](#address-8ba61c) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-28441a"></a>Deeply nested **IP** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List Static IPv6 Address
 
-A [`static_ipv6_address`](#address-fddb84) block (within [`aws.not_managed.node_list.interface_list`](#list-6c6298)) supports the following:
-
-<a id="static-ip-606b21"></a>&#x2022; [`cluster_static_ip`](#static-ip-606b21) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-606b21) below.
-
-<a id="static-ip-899899"></a>&#x2022; [`node_static_ip`](#static-ip-899899) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-899899) below.
+<a id="deep-8f821d"></a>Deeply nested **Address** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-606b21) block (within [`aws.not_managed.node_list.interface_list.static_ipv6_address`](#address-fddb84)) supports the following:
-
-<a id="map-10a830"></a>&#x2022; [`interface_ip_map`](#map-10a830) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-2e1682"></a>Deeply nested **IP** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-899899) block (within [`aws.not_managed.node_list.interface_list.static_ipv6_address`](#address-fddb84)) supports the following:
-
-<a id="default-gw-12152c"></a>&#x2022; [`default_gw`](#default-gw-12152c) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-cc7f3d"></a>&#x2022; [`ip_address`](#address-cc7f3d) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-bbb483"></a>Deeply nested **IP** block collapsed for readability.
 
 #### AWS Not Managed Node List Interface List VLAN Interface
 
-A [`vlan_interface`](#interface-70af4e) block (within [`aws.not_managed.node_list.interface_list`](#list-6c6298)) supports the following:
-
-<a id="device-71edbe"></a>&#x2022; [`device`](#device-71edbe) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
-
-<a id="vlan-id-1c3c87"></a>&#x2022; [`vlan_id`](#vlan-id-1c3c87) - Optional Number<br>VLAN ID. Configure the VLAN tag for this interface
+<a id="deep-3f2db4"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Azure
 
@@ -514,159 +408,75 @@ An [`interface_list`](#list-f42e50) block (within [`azure.not_managed.node_list`
 
 #### Azure Not Managed Node List Interface List Bond Interface
 
-A [`bond_interface`](#interface-dd8ceb) block (within [`azure.not_managed.node_list.interface_list`](#list-f42e50)) supports the following:
-
-<a id="backup-822e76"></a>&#x2022; [`active_backup`](#backup-822e76) - Optional Block<br>Enable this option
-
-<a id="devices-237636"></a>&#x2022; [`devices`](#devices-237636) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
-
-<a id="lacp-5c3d45"></a>&#x2022; [`lacp`](#lacp-5c3d45) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#lacp-5c3d45) below.
-
-<a id="interval-5ddff0"></a>&#x2022; [`link_polling_interval`](#interval-5ddff0) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
-
-<a id="delay-4f5f9d"></a>&#x2022; [`link_up_delay`](#delay-4f5f9d) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
-
-<a id="name-2876f1"></a>&#x2022; [`name`](#name-2876f1) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="deep-4cb273"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List Bond Interface Lacp
 
-A [`lacp`](#lacp-5c3d45) block (within [`azure.not_managed.node_list.interface_list.bond_interface`](#interface-dd8ceb)) supports the following:
-
-<a id="rate-a4ae9d"></a>&#x2022; [`rate`](#rate-a4ae9d) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="deep-5db881"></a>Deeply nested **Lacp** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List Ethernet Interface
 
-An [`ethernet_interface`](#interface-20c4ad) block (within [`azure.not_managed.node_list.interface_list`](#list-f42e50)) supports the following:
-
-<a id="device-283d81"></a>&#x2022; [`device`](#device-283d81) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
-
-<a id="mac-e941a6"></a>&#x2022; [`mac`](#mac-e941a6) - Optional String<br>MAC Address
+<a id="deep-293b55"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-cc5378) block (within [`azure.not_managed.node_list.interface_list`](#list-f42e50)) supports the following:
-
-<a id="host-d42718"></a>&#x2022; [`host`](#host-d42718) - Optional Block<br>Enable this option
-
-<a id="router-a42a27"></a>&#x2022; [`router`](#router-a42a27) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-a42a27) below.
+<a id="deep-435f70"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List IPv6 Auto Config Router
 
-A [`router`](#router-a42a27) block (within [`azure.not_managed.node_list.interface_list.ipv6_auto_config`](#config-cc5378)) supports the following:
-
-<a id="config-40f92b"></a>&#x2022; [`dns_config`](#config-40f92b) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-40f92b) below.
-
-<a id="prefix-f75494"></a>&#x2022; [`network_prefix`](#prefix-f75494) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-eb610a"></a>&#x2022; [`stateful`](#stateful-eb610a) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-eb610a) below.
+<a id="deep-04f29f"></a>Deeply nested **Router** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-40f92b) block (within [`azure.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-a42a27)) supports the following:
-
-<a id="list-01d378"></a>&#x2022; [`configured_list`](#list-01d378) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-01d378) below.
-
-<a id="dns-c1d58b"></a>&#x2022; [`local_dns`](#dns-c1d58b) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-c1d58b) below.
+<a id="deep-5dc847"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-01d378) block (within [`azure.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-40f92b)) supports the following:
-
-<a id="list-872b19"></a>&#x2022; [`dns_list`](#list-872b19) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-8352e0"></a>Deeply nested **List** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-c1d58b) block (within [`azure.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-40f92b)) supports the following:
-
-<a id="address-be6235"></a>&#x2022; [`configured_address`](#address-be6235) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-566296"></a>&#x2022; [`first_address`](#address-566296) - Optional Block<br>Enable this option
-
-<a id="address-6db04f"></a>&#x2022; [`last_address`](#address-6db04f) - Optional Block<br>Enable this option
+<a id="deep-453621"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-eb610a) block (within [`azure.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-a42a27)) supports the following:
-
-<a id="end-6c763a"></a>&#x2022; [`automatic_from_end`](#end-6c763a) - Optional Block<br>Enable this option
-
-<a id="start-2a9e0a"></a>&#x2022; [`automatic_from_start`](#start-2a9e0a) - Optional Block<br>Enable this option
-
-<a id="networks-a9f3cc"></a>&#x2022; [`dhcp_networks`](#networks-a9f3cc) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-a9f3cc) below.
-
-<a id="map-098f24"></a>&#x2022; [`fixed_ip_map`](#map-098f24) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-a135fe"></a>&#x2022; [`interface_ip_map`](#map-a135fe) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-a135fe) below.
+<a id="deep-cd224b"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-a9f3cc) block (within [`azure.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-eb610a)) supports the following:
-
-<a id="prefix-80f279"></a>&#x2022; [`network_prefix`](#prefix-80f279) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-83a882"></a>&#x2022; [`pool_settings`](#settings-83a882) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-77fcce"></a>&#x2022; [`pools`](#pools-77fcce) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-77fcce) below.
+<a id="deep-31b166"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-77fcce) block (within [`azure.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-a9f3cc)) supports the following:
-
-<a id="end-ip-821cf8"></a>&#x2022; [`end_ip`](#end-ip-821cf8) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-ad4c01"></a>&#x2022; [`start_ip`](#start-ip-ad4c01) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-91a116"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-a135fe) block (within [`azure.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-eb610a)) supports the following:
-
-<a id="map-4c9c1c"></a>&#x2022; [`interface_ip_map`](#map-4c9c1c) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-6e23fb"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List Network Option
 
-A [`network_option`](#option-e15a34) block (within [`azure.not_managed.node_list.interface_list`](#list-f42e50)) supports the following:
-
-<a id="network-354c1c"></a>&#x2022; [`site_local_inside_network`](#network-354c1c) - Optional Block<br>Enable this option
-
-<a id="network-ea5419"></a>&#x2022; [`site_local_network`](#network-ea5419) - Optional Block<br>Enable this option
+<a id="deep-2a92f3"></a>Deeply nested **Option** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List Static IP
 
-A [`static_ip`](#static-ip-4b0611) block (within [`azure.not_managed.node_list.interface_list`](#list-f42e50)) supports the following:
-
-<a id="default-gw-b47d17"></a>&#x2022; [`default_gw`](#default-gw-b47d17) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-d8c45f"></a>&#x2022; [`ip_address`](#address-d8c45f) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-9df1d2"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List Static IPv6 Address
 
-A [`static_ipv6_address`](#address-e1203e) block (within [`azure.not_managed.node_list.interface_list`](#list-f42e50)) supports the following:
-
-<a id="static-ip-bf0771"></a>&#x2022; [`cluster_static_ip`](#static-ip-bf0771) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-bf0771) below.
-
-<a id="static-ip-ee83d9"></a>&#x2022; [`node_static_ip`](#static-ip-ee83d9) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-ee83d9) below.
+<a id="deep-7bc38a"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-bf0771) block (within [`azure.not_managed.node_list.interface_list.static_ipv6_address`](#address-e1203e)) supports the following:
-
-<a id="map-87772a"></a>&#x2022; [`interface_ip_map`](#map-87772a) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-32a2f7"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-ee83d9) block (within [`azure.not_managed.node_list.interface_list.static_ipv6_address`](#address-e1203e)) supports the following:
-
-<a id="default-gw-1c9178"></a>&#x2022; [`default_gw`](#default-gw-1c9178) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-1a6806"></a>&#x2022; [`ip_address`](#address-1a6806) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-a3e092"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Azure Not Managed Node List Interface List VLAN Interface
 
-A [`vlan_interface`](#interface-aa2f00) block (within [`azure.not_managed.node_list.interface_list`](#list-f42e50)) supports the following:
-
-<a id="device-40c186"></a>&#x2022; [`device`](#device-40c186) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
-
-<a id="vlan-id-6398aa"></a>&#x2022; [`vlan_id`](#vlan-id-6398aa) - Optional Number<br>VLAN ID. Configure the VLAN tag for this interface
+<a id="deep-63221f"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Baremetal
 
@@ -736,159 +546,75 @@ An [`interface_list`](#list-30e058) block (within [`baremetal.not_managed.node_l
 
 #### Baremetal Not Managed Node List Interface List Bond Interface
 
-A [`bond_interface`](#interface-b7e132) block (within [`baremetal.not_managed.node_list.interface_list`](#list-30e058)) supports the following:
-
-<a id="backup-0cb075"></a>&#x2022; [`active_backup`](#backup-0cb075) - Optional Block<br>Enable this option
-
-<a id="devices-1f610e"></a>&#x2022; [`devices`](#devices-1f610e) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
-
-<a id="lacp-73ac33"></a>&#x2022; [`lacp`](#lacp-73ac33) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#lacp-73ac33) below.
-
-<a id="interval-bd38aa"></a>&#x2022; [`link_polling_interval`](#interval-bd38aa) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
-
-<a id="delay-99934f"></a>&#x2022; [`link_up_delay`](#delay-99934f) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
-
-<a id="name-481676"></a>&#x2022; [`name`](#name-481676) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="deep-5827e6"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List Bond Interface Lacp
 
-A [`lacp`](#lacp-73ac33) block (within [`baremetal.not_managed.node_list.interface_list.bond_interface`](#interface-b7e132)) supports the following:
-
-<a id="rate-eb5bae"></a>&#x2022; [`rate`](#rate-eb5bae) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="deep-a0f77e"></a>Deeply nested **Lacp** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List Ethernet Interface
 
-An [`ethernet_interface`](#interface-3933d2) block (within [`baremetal.not_managed.node_list.interface_list`](#list-30e058)) supports the following:
-
-<a id="device-34cdc5"></a>&#x2022; [`device`](#device-34cdc5) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
-
-<a id="mac-6ecc6c"></a>&#x2022; [`mac`](#mac-6ecc6c) - Optional String<br>MAC Address
+<a id="deep-8e9a1f"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-88a239) block (within [`baremetal.not_managed.node_list.interface_list`](#list-30e058)) supports the following:
-
-<a id="host-a473b6"></a>&#x2022; [`host`](#host-a473b6) - Optional Block<br>Enable this option
-
-<a id="router-001012"></a>&#x2022; [`router`](#router-001012) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-001012) below.
+<a id="deep-0dfce3"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router
 
-A [`router`](#router-001012) block (within [`baremetal.not_managed.node_list.interface_list.ipv6_auto_config`](#config-88a239)) supports the following:
-
-<a id="config-85fa70"></a>&#x2022; [`dns_config`](#config-85fa70) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-85fa70) below.
-
-<a id="prefix-2baae0"></a>&#x2022; [`network_prefix`](#prefix-2baae0) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-a387d7"></a>&#x2022; [`stateful`](#stateful-a387d7) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-a387d7) below.
+<a id="deep-781eec"></a>Deeply nested **Router** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-85fa70) block (within [`baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-001012)) supports the following:
-
-<a id="list-19bfe8"></a>&#x2022; [`configured_list`](#list-19bfe8) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-19bfe8) below.
-
-<a id="dns-cd162f"></a>&#x2022; [`local_dns`](#dns-cd162f) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-cd162f) below.
+<a id="deep-0df42e"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-19bfe8) block (within [`baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-85fa70)) supports the following:
-
-<a id="list-208d63"></a>&#x2022; [`dns_list`](#list-208d63) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-0dc91f"></a>Deeply nested **List** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-cd162f) block (within [`baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-85fa70)) supports the following:
-
-<a id="address-25c3ed"></a>&#x2022; [`configured_address`](#address-25c3ed) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-dc3a6e"></a>&#x2022; [`first_address`](#address-dc3a6e) - Optional Block<br>Enable this option
-
-<a id="address-4d8eec"></a>&#x2022; [`last_address`](#address-4d8eec) - Optional Block<br>Enable this option
+<a id="deep-88b0ae"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-a387d7) block (within [`baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-001012)) supports the following:
-
-<a id="end-2a7967"></a>&#x2022; [`automatic_from_end`](#end-2a7967) - Optional Block<br>Enable this option
-
-<a id="start-e97265"></a>&#x2022; [`automatic_from_start`](#start-e97265) - Optional Block<br>Enable this option
-
-<a id="networks-82dbe3"></a>&#x2022; [`dhcp_networks`](#networks-82dbe3) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-82dbe3) below.
-
-<a id="map-3906c5"></a>&#x2022; [`fixed_ip_map`](#map-3906c5) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-45d9cc"></a>&#x2022; [`interface_ip_map`](#map-45d9cc) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-45d9cc) below.
+<a id="deep-93e220"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-82dbe3) block (within [`baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-a387d7)) supports the following:
-
-<a id="prefix-f2e0c0"></a>&#x2022; [`network_prefix`](#prefix-f2e0c0) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-ceb78a"></a>&#x2022; [`pool_settings`](#settings-ceb78a) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-c53d74"></a>&#x2022; [`pools`](#pools-c53d74) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-c53d74) below.
+<a id="deep-fee53d"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-c53d74) block (within [`baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-82dbe3)) supports the following:
-
-<a id="end-ip-ca86c7"></a>&#x2022; [`end_ip`](#end-ip-ca86c7) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-29002b"></a>&#x2022; [`start_ip`](#start-ip-29002b) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-8b3c2b"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-45d9cc) block (within [`baremetal.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-a387d7)) supports the following:
-
-<a id="map-07a90b"></a>&#x2022; [`interface_ip_map`](#map-07a90b) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-7e8e06"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List Network Option
 
-A [`network_option`](#option-ad2bbb) block (within [`baremetal.not_managed.node_list.interface_list`](#list-30e058)) supports the following:
-
-<a id="network-184f62"></a>&#x2022; [`site_local_inside_network`](#network-184f62) - Optional Block<br>Enable this option
-
-<a id="network-7d0747"></a>&#x2022; [`site_local_network`](#network-7d0747) - Optional Block<br>Enable this option
+<a id="deep-485083"></a>Deeply nested **Option** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List Static IP
 
-A [`static_ip`](#static-ip-9bad70) block (within [`baremetal.not_managed.node_list.interface_list`](#list-30e058)) supports the following:
-
-<a id="default-gw-00482f"></a>&#x2022; [`default_gw`](#default-gw-00482f) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-7f2450"></a>&#x2022; [`ip_address`](#address-7f2450) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-51a8ed"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List Static IPv6 Address
 
-A [`static_ipv6_address`](#address-411954) block (within [`baremetal.not_managed.node_list.interface_list`](#list-30e058)) supports the following:
-
-<a id="static-ip-1d123a"></a>&#x2022; [`cluster_static_ip`](#static-ip-1d123a) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-1d123a) below.
-
-<a id="static-ip-4c54c6"></a>&#x2022; [`node_static_ip`](#static-ip-4c54c6) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-4c54c6) below.
+<a id="deep-4c97e1"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-1d123a) block (within [`baremetal.not_managed.node_list.interface_list.static_ipv6_address`](#address-411954)) supports the following:
-
-<a id="map-2dfc06"></a>&#x2022; [`interface_ip_map`](#map-2dfc06) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-aca84b"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-4c54c6) block (within [`baremetal.not_managed.node_list.interface_list.static_ipv6_address`](#address-411954)) supports the following:
-
-<a id="default-gw-522bfe"></a>&#x2022; [`default_gw`](#default-gw-522bfe) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-75c028"></a>&#x2022; [`ip_address`](#address-75c028) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-a0f5cd"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Baremetal Not Managed Node List Interface List VLAN Interface
 
-A [`vlan_interface`](#interface-da3951) block (within [`baremetal.not_managed.node_list.interface_list`](#list-30e058)) supports the following:
-
-<a id="device-37e0cb"></a>&#x2022; [`device`](#device-37e0cb) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
-
-<a id="vlan-id-e4ea27"></a>&#x2022; [`vlan_id`](#vlan-id-e4ea27) - Optional Number<br>VLAN ID. Configure the VLAN tag for this interface
+<a id="deep-910d0a"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Blocked Services
 
@@ -958,23 +684,11 @@ A [`custom_proxy_bypass`](#custom-proxy-bypass) block supports the following:
 
 #### Dc Cluster Group SLI
 
-A [`dc_cluster_group_sli`](#dc-cluster-group-sli) block supports the following:
-
-<a id="dc-cluster-group-sli-name"></a>&#x2022; [`name`](#dc-cluster-group-sli-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="dc-cluster-group-sli-namespace"></a>&#x2022; [`namespace`](#dc-cluster-group-sli-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="dc-cluster-group-sli-tenant"></a>&#x2022; [`tenant`](#dc-cluster-group-sli-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-771424"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Dc Cluster Group Slo
 
-A [`dc_cluster_group_slo`](#dc-cluster-group-slo) block supports the following:
-
-<a id="dc-cluster-group-slo-name"></a>&#x2022; [`name`](#dc-cluster-group-slo-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="dc-cluster-group-slo-namespace"></a>&#x2022; [`namespace`](#dc-cluster-group-slo-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="dc-cluster-group-slo-tenant"></a>&#x2022; [`tenant`](#dc-cluster-group-slo-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-ba138b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### DNS NTP Config
 
@@ -1068,159 +782,75 @@ An [`interface_list`](#list-3a9b82) block (within [`equinix.not_managed.node_lis
 
 #### Equinix Not Managed Node List Interface List Bond Interface
 
-A [`bond_interface`](#interface-a1aaf8) block (within [`equinix.not_managed.node_list.interface_list`](#list-3a9b82)) supports the following:
-
-<a id="backup-374e51"></a>&#x2022; [`active_backup`](#backup-374e51) - Optional Block<br>Enable this option
-
-<a id="devices-42e696"></a>&#x2022; [`devices`](#devices-42e696) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
-
-<a id="lacp-db435c"></a>&#x2022; [`lacp`](#lacp-db435c) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#lacp-db435c) below.
-
-<a id="interval-ab6e16"></a>&#x2022; [`link_polling_interval`](#interval-ab6e16) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
-
-<a id="delay-978676"></a>&#x2022; [`link_up_delay`](#delay-978676) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
-
-<a id="name-fed960"></a>&#x2022; [`name`](#name-fed960) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="deep-b565ca"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List Bond Interface Lacp
 
-A [`lacp`](#lacp-db435c) block (within [`equinix.not_managed.node_list.interface_list.bond_interface`](#interface-a1aaf8)) supports the following:
-
-<a id="rate-7e06e1"></a>&#x2022; [`rate`](#rate-7e06e1) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="deep-08a8f4"></a>Deeply nested **Lacp** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List Ethernet Interface
 
-An [`ethernet_interface`](#interface-a2d3e0) block (within [`equinix.not_managed.node_list.interface_list`](#list-3a9b82)) supports the following:
-
-<a id="device-0dbb19"></a>&#x2022; [`device`](#device-0dbb19) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
-
-<a id="mac-385bb8"></a>&#x2022; [`mac`](#mac-385bb8) - Optional String<br>MAC Address
+<a id="deep-e260db"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-96da89) block (within [`equinix.not_managed.node_list.interface_list`](#list-3a9b82)) supports the following:
-
-<a id="host-dc3efc"></a>&#x2022; [`host`](#host-dc3efc) - Optional Block<br>Enable this option
-
-<a id="router-bb9a17"></a>&#x2022; [`router`](#router-bb9a17) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-bb9a17) below.
+<a id="deep-f79b98"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List IPv6 Auto Config Router
 
-A [`router`](#router-bb9a17) block (within [`equinix.not_managed.node_list.interface_list.ipv6_auto_config`](#config-96da89)) supports the following:
-
-<a id="config-95d240"></a>&#x2022; [`dns_config`](#config-95d240) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-95d240) below.
-
-<a id="prefix-075648"></a>&#x2022; [`network_prefix`](#prefix-075648) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-f90780"></a>&#x2022; [`stateful`](#stateful-f90780) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-f90780) below.
+<a id="deep-7e62f2"></a>Deeply nested **Router** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-95d240) block (within [`equinix.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-bb9a17)) supports the following:
-
-<a id="list-930b4d"></a>&#x2022; [`configured_list`](#list-930b4d) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-930b4d) below.
-
-<a id="dns-c48c19"></a>&#x2022; [`local_dns`](#dns-c48c19) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-c48c19) below.
+<a id="deep-19d109"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-930b4d) block (within [`equinix.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-95d240)) supports the following:
-
-<a id="list-e8ca69"></a>&#x2022; [`dns_list`](#list-e8ca69) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-7c11b9"></a>Deeply nested **List** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-c48c19) block (within [`equinix.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-95d240)) supports the following:
-
-<a id="address-232537"></a>&#x2022; [`configured_address`](#address-232537) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-db4514"></a>&#x2022; [`first_address`](#address-db4514) - Optional Block<br>Enable this option
-
-<a id="address-dc6f8b"></a>&#x2022; [`last_address`](#address-dc6f8b) - Optional Block<br>Enable this option
+<a id="deep-d0977a"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-f90780) block (within [`equinix.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-bb9a17)) supports the following:
-
-<a id="end-9c1527"></a>&#x2022; [`automatic_from_end`](#end-9c1527) - Optional Block<br>Enable this option
-
-<a id="start-d23155"></a>&#x2022; [`automatic_from_start`](#start-d23155) - Optional Block<br>Enable this option
-
-<a id="networks-e35f71"></a>&#x2022; [`dhcp_networks`](#networks-e35f71) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-e35f71) below.
-
-<a id="map-112976"></a>&#x2022; [`fixed_ip_map`](#map-112976) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-853c4f"></a>&#x2022; [`interface_ip_map`](#map-853c4f) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-853c4f) below.
+<a id="deep-c5835c"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-e35f71) block (within [`equinix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-f90780)) supports the following:
-
-<a id="prefix-05af37"></a>&#x2022; [`network_prefix`](#prefix-05af37) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-990748"></a>&#x2022; [`pool_settings`](#settings-990748) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-487268"></a>&#x2022; [`pools`](#pools-487268) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-487268) below.
+<a id="deep-de0480"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-487268) block (within [`equinix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-e35f71)) supports the following:
-
-<a id="end-ip-78d325"></a>&#x2022; [`end_ip`](#end-ip-78d325) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-b77e24"></a>&#x2022; [`start_ip`](#start-ip-b77e24) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-955ad2"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-853c4f) block (within [`equinix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-f90780)) supports the following:
-
-<a id="map-c0b7f5"></a>&#x2022; [`interface_ip_map`](#map-c0b7f5) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-27f6d9"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List Network Option
 
-A [`network_option`](#option-1659e3) block (within [`equinix.not_managed.node_list.interface_list`](#list-3a9b82)) supports the following:
-
-<a id="network-1267f8"></a>&#x2022; [`site_local_inside_network`](#network-1267f8) - Optional Block<br>Enable this option
-
-<a id="network-49c91d"></a>&#x2022; [`site_local_network`](#network-49c91d) - Optional Block<br>Enable this option
+<a id="deep-da1af1"></a>Deeply nested **Option** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List Static IP
 
-A [`static_ip`](#static-ip-bfc08c) block (within [`equinix.not_managed.node_list.interface_list`](#list-3a9b82)) supports the following:
-
-<a id="default-gw-eefcd5"></a>&#x2022; [`default_gw`](#default-gw-eefcd5) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-4fff14"></a>&#x2022; [`ip_address`](#address-4fff14) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-b26b58"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List Static IPv6 Address
 
-A [`static_ipv6_address`](#address-d74f42) block (within [`equinix.not_managed.node_list.interface_list`](#list-3a9b82)) supports the following:
-
-<a id="static-ip-ba4e65"></a>&#x2022; [`cluster_static_ip`](#static-ip-ba4e65) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-ba4e65) below.
-
-<a id="static-ip-8e073a"></a>&#x2022; [`node_static_ip`](#static-ip-8e073a) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-8e073a) below.
+<a id="deep-a07f1e"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-ba4e65) block (within [`equinix.not_managed.node_list.interface_list.static_ipv6_address`](#address-d74f42)) supports the following:
-
-<a id="map-248f64"></a>&#x2022; [`interface_ip_map`](#map-248f64) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-f0d7ec"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-8e073a) block (within [`equinix.not_managed.node_list.interface_list.static_ipv6_address`](#address-d74f42)) supports the following:
-
-<a id="default-gw-9fcb3c"></a>&#x2022; [`default_gw`](#default-gw-9fcb3c) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-69a79d"></a>&#x2022; [`ip_address`](#address-69a79d) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-79432c"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Equinix Not Managed Node List Interface List VLAN Interface
 
-A [`vlan_interface`](#interface-66fdd5) block (within [`equinix.not_managed.node_list.interface_list`](#list-3a9b82)) supports the following:
-
-<a id="device-51481b"></a>&#x2022; [`device`](#device-51481b) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
-
-<a id="vlan-id-4bfd3f"></a>&#x2022; [`vlan_id`](#vlan-id-4bfd3f) - Optional Number<br>VLAN ID. Configure the VLAN tag for this interface
+<a id="deep-94cba8"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### GCP
 
@@ -1290,159 +920,75 @@ An [`interface_list`](#list-2f49ff) block (within [`gcp.not_managed.node_list`](
 
 #### GCP Not Managed Node List Interface List Bond Interface
 
-A [`bond_interface`](#interface-54ab03) block (within [`gcp.not_managed.node_list.interface_list`](#list-2f49ff)) supports the following:
-
-<a id="backup-05c93a"></a>&#x2022; [`active_backup`](#backup-05c93a) - Optional Block<br>Enable this option
-
-<a id="devices-bc61ed"></a>&#x2022; [`devices`](#devices-bc61ed) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
-
-<a id="lacp-83a225"></a>&#x2022; [`lacp`](#lacp-83a225) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#lacp-83a225) below.
-
-<a id="interval-8baef0"></a>&#x2022; [`link_polling_interval`](#interval-8baef0) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
-
-<a id="delay-0ea638"></a>&#x2022; [`link_up_delay`](#delay-0ea638) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
-
-<a id="name-01e37c"></a>&#x2022; [`name`](#name-01e37c) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="deep-afd6e8"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List Bond Interface Lacp
 
-A [`lacp`](#lacp-83a225) block (within [`gcp.not_managed.node_list.interface_list.bond_interface`](#interface-54ab03)) supports the following:
-
-<a id="rate-f6c492"></a>&#x2022; [`rate`](#rate-f6c492) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="deep-6c8fc7"></a>Deeply nested **Lacp** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List Ethernet Interface
 
-An [`ethernet_interface`](#interface-fa1d2a) block (within [`gcp.not_managed.node_list.interface_list`](#list-2f49ff)) supports the following:
-
-<a id="device-b51ee9"></a>&#x2022; [`device`](#device-b51ee9) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
-
-<a id="mac-1167f8"></a>&#x2022; [`mac`](#mac-1167f8) - Optional String<br>MAC Address
+<a id="deep-6a0162"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-881893) block (within [`gcp.not_managed.node_list.interface_list`](#list-2f49ff)) supports the following:
-
-<a id="host-063dd0"></a>&#x2022; [`host`](#host-063dd0) - Optional Block<br>Enable this option
-
-<a id="router-b6e5d7"></a>&#x2022; [`router`](#router-b6e5d7) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-b6e5d7) below.
+<a id="deep-f3d749"></a>Deeply nested **Config** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List IPv6 Auto Config Router
 
-A [`router`](#router-b6e5d7) block (within [`gcp.not_managed.node_list.interface_list.ipv6_auto_config`](#config-881893)) supports the following:
-
-<a id="config-f884dc"></a>&#x2022; [`dns_config`](#config-f884dc) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-f884dc) below.
-
-<a id="prefix-82d62b"></a>&#x2022; [`network_prefix`](#prefix-82d62b) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-9033ab"></a>&#x2022; [`stateful`](#stateful-9033ab) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-9033ab) below.
+<a id="deep-21edde"></a>Deeply nested **Router** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-f884dc) block (within [`gcp.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-b6e5d7)) supports the following:
-
-<a id="list-ad15eb"></a>&#x2022; [`configured_list`](#list-ad15eb) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-ad15eb) below.
-
-<a id="dns-f8077b"></a>&#x2022; [`local_dns`](#dns-f8077b) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-f8077b) below.
+<a id="deep-484c91"></a>Deeply nested **Config** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-ad15eb) block (within [`gcp.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-f884dc)) supports the following:
-
-<a id="list-3346ed"></a>&#x2022; [`dns_list`](#list-3346ed) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-85dbbe"></a>Deeply nested **List** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-f8077b) block (within [`gcp.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-f884dc)) supports the following:
-
-<a id="address-f1ab1a"></a>&#x2022; [`configured_address`](#address-f1ab1a) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-fb5e43"></a>&#x2022; [`first_address`](#address-fb5e43) - Optional Block<br>Enable this option
-
-<a id="address-0fea8e"></a>&#x2022; [`last_address`](#address-0fea8e) - Optional Block<br>Enable this option
+<a id="deep-7cb154"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-9033ab) block (within [`gcp.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-b6e5d7)) supports the following:
-
-<a id="end-4640e6"></a>&#x2022; [`automatic_from_end`](#end-4640e6) - Optional Block<br>Enable this option
-
-<a id="start-0cc516"></a>&#x2022; [`automatic_from_start`](#start-0cc516) - Optional Block<br>Enable this option
-
-<a id="networks-1ec1e7"></a>&#x2022; [`dhcp_networks`](#networks-1ec1e7) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-1ec1e7) below.
-
-<a id="map-ae9104"></a>&#x2022; [`fixed_ip_map`](#map-ae9104) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-83383a"></a>&#x2022; [`interface_ip_map`](#map-83383a) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-83383a) below.
+<a id="deep-001e66"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-1ec1e7) block (within [`gcp.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-9033ab)) supports the following:
-
-<a id="prefix-ba360f"></a>&#x2022; [`network_prefix`](#prefix-ba360f) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-776b13"></a>&#x2022; [`pool_settings`](#settings-776b13) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-e66ba9"></a>&#x2022; [`pools`](#pools-e66ba9) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-e66ba9) below.
+<a id="deep-f92dfa"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-e66ba9) block (within [`gcp.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-1ec1e7)) supports the following:
-
-<a id="end-ip-aa1bf7"></a>&#x2022; [`end_ip`](#end-ip-aa1bf7) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-ba875f"></a>&#x2022; [`start_ip`](#start-ip-ba875f) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-5e3307"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-83383a) block (within [`gcp.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-9033ab)) supports the following:
-
-<a id="map-f06db1"></a>&#x2022; [`interface_ip_map`](#map-f06db1) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-bd61fc"></a>Deeply nested **Map** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List Network Option
 
-A [`network_option`](#option-ca04ce) block (within [`gcp.not_managed.node_list.interface_list`](#list-2f49ff)) supports the following:
-
-<a id="network-3e0812"></a>&#x2022; [`site_local_inside_network`](#network-3e0812) - Optional Block<br>Enable this option
-
-<a id="network-72a9d5"></a>&#x2022; [`site_local_network`](#network-72a9d5) - Optional Block<br>Enable this option
+<a id="deep-8d0ef6"></a>Deeply nested **Option** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List Static IP
 
-A [`static_ip`](#static-ip-b40b52) block (within [`gcp.not_managed.node_list.interface_list`](#list-2f49ff)) supports the following:
-
-<a id="default-gw-3e6c76"></a>&#x2022; [`default_gw`](#default-gw-3e6c76) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-97003a"></a>&#x2022; [`ip_address`](#address-97003a) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-3a7f7a"></a>Deeply nested **IP** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List Static IPv6 Address
 
-A [`static_ipv6_address`](#address-6a68da) block (within [`gcp.not_managed.node_list.interface_list`](#list-2f49ff)) supports the following:
-
-<a id="static-ip-a0fa9e"></a>&#x2022; [`cluster_static_ip`](#static-ip-a0fa9e) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-a0fa9e) below.
-
-<a id="static-ip-3e216f"></a>&#x2022; [`node_static_ip`](#static-ip-3e216f) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-3e216f) below.
+<a id="deep-b9548b"></a>Deeply nested **Address** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-a0fa9e) block (within [`gcp.not_managed.node_list.interface_list.static_ipv6_address`](#address-6a68da)) supports the following:
-
-<a id="map-c36249"></a>&#x2022; [`interface_ip_map`](#map-c36249) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-164e2f"></a>Deeply nested **IP** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-3e216f) block (within [`gcp.not_managed.node_list.interface_list.static_ipv6_address`](#address-6a68da)) supports the following:
-
-<a id="default-gw-a717fe"></a>&#x2022; [`default_gw`](#default-gw-a717fe) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-2fbacb"></a>&#x2022; [`ip_address`](#address-2fbacb) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-39ec3e"></a>Deeply nested **IP** block collapsed for readability.
 
 #### GCP Not Managed Node List Interface List VLAN Interface
 
-A [`vlan_interface`](#interface-bd3d44) block (within [`gcp.not_managed.node_list.interface_list`](#list-2f49ff)) supports the following:
-
-<a id="device-7dadd8"></a>&#x2022; [`device`](#device-7dadd8) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
-
-<a id="vlan-id-7dca6a"></a>&#x2022; [`vlan_id`](#vlan-id-7dca6a) - Optional Number<br>VLAN ID. Configure the VLAN tag for this interface
+<a id="deep-aef10c"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Kvm
 
@@ -1512,159 +1058,75 @@ An [`interface_list`](#list-92338f) block (within [`kvm.not_managed.node_list`](
 
 #### Kvm Not Managed Node List Interface List Bond Interface
 
-A [`bond_interface`](#interface-e24728) block (within [`kvm.not_managed.node_list.interface_list`](#list-92338f)) supports the following:
-
-<a id="backup-7c1d4f"></a>&#x2022; [`active_backup`](#backup-7c1d4f) - Optional Block<br>Enable this option
-
-<a id="devices-2df91b"></a>&#x2022; [`devices`](#devices-2df91b) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
-
-<a id="lacp-8f6418"></a>&#x2022; [`lacp`](#lacp-8f6418) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#lacp-8f6418) below.
-
-<a id="interval-2ec61a"></a>&#x2022; [`link_polling_interval`](#interval-2ec61a) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
-
-<a id="delay-bf997f"></a>&#x2022; [`link_up_delay`](#delay-bf997f) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
-
-<a id="name-e5508b"></a>&#x2022; [`name`](#name-e5508b) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="deep-fc631b"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List Bond Interface Lacp
 
-A [`lacp`](#lacp-8f6418) block (within [`kvm.not_managed.node_list.interface_list.bond_interface`](#interface-e24728)) supports the following:
-
-<a id="rate-cf2844"></a>&#x2022; [`rate`](#rate-cf2844) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="deep-1326df"></a>Deeply nested **Lacp** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List Ethernet Interface
 
-An [`ethernet_interface`](#interface-0aad1d) block (within [`kvm.not_managed.node_list.interface_list`](#list-92338f)) supports the following:
-
-<a id="device-1fbc2e"></a>&#x2022; [`device`](#device-1fbc2e) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
-
-<a id="mac-467898"></a>&#x2022; [`mac`](#mac-467898) - Optional String<br>MAC Address
+<a id="deep-6ad367"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-ab0775) block (within [`kvm.not_managed.node_list.interface_list`](#list-92338f)) supports the following:
-
-<a id="host-b4af37"></a>&#x2022; [`host`](#host-b4af37) - Optional Block<br>Enable this option
-
-<a id="router-bfad68"></a>&#x2022; [`router`](#router-bfad68) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-bfad68) below.
+<a id="deep-c39ea2"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List IPv6 Auto Config Router
 
-A [`router`](#router-bfad68) block (within [`kvm.not_managed.node_list.interface_list.ipv6_auto_config`](#config-ab0775)) supports the following:
-
-<a id="config-3c9e5a"></a>&#x2022; [`dns_config`](#config-3c9e5a) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-3c9e5a) below.
-
-<a id="prefix-ac7ab0"></a>&#x2022; [`network_prefix`](#prefix-ac7ab0) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-dda35c"></a>&#x2022; [`stateful`](#stateful-dda35c) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-dda35c) below.
+<a id="deep-ef2730"></a>Deeply nested **Router** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-3c9e5a) block (within [`kvm.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-bfad68)) supports the following:
-
-<a id="list-5d9a0d"></a>&#x2022; [`configured_list`](#list-5d9a0d) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-5d9a0d) below.
-
-<a id="dns-ba3736"></a>&#x2022; [`local_dns`](#dns-ba3736) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-ba3736) below.
+<a id="deep-1c527f"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-5d9a0d) block (within [`kvm.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-3c9e5a)) supports the following:
-
-<a id="list-ba2a64"></a>&#x2022; [`dns_list`](#list-ba2a64) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-83e89b"></a>Deeply nested **List** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-ba3736) block (within [`kvm.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-3c9e5a)) supports the following:
-
-<a id="address-5810ce"></a>&#x2022; [`configured_address`](#address-5810ce) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-aab3f1"></a>&#x2022; [`first_address`](#address-aab3f1) - Optional Block<br>Enable this option
-
-<a id="address-d92077"></a>&#x2022; [`last_address`](#address-d92077) - Optional Block<br>Enable this option
+<a id="deep-ca2600"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-dda35c) block (within [`kvm.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-bfad68)) supports the following:
-
-<a id="end-aef7b4"></a>&#x2022; [`automatic_from_end`](#end-aef7b4) - Optional Block<br>Enable this option
-
-<a id="start-89fc80"></a>&#x2022; [`automatic_from_start`](#start-89fc80) - Optional Block<br>Enable this option
-
-<a id="networks-c1951f"></a>&#x2022; [`dhcp_networks`](#networks-c1951f) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-c1951f) below.
-
-<a id="map-cd9703"></a>&#x2022; [`fixed_ip_map`](#map-cd9703) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-458ea7"></a>&#x2022; [`interface_ip_map`](#map-458ea7) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-458ea7) below.
+<a id="deep-0e9ec4"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-c1951f) block (within [`kvm.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-dda35c)) supports the following:
-
-<a id="prefix-346ef8"></a>&#x2022; [`network_prefix`](#prefix-346ef8) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-052e3b"></a>&#x2022; [`pool_settings`](#settings-052e3b) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-f3f11b"></a>&#x2022; [`pools`](#pools-f3f11b) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-f3f11b) below.
+<a id="deep-8029ba"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-f3f11b) block (within [`kvm.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-c1951f)) supports the following:
-
-<a id="end-ip-8e8f96"></a>&#x2022; [`end_ip`](#end-ip-8e8f96) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-8b29f8"></a>&#x2022; [`start_ip`](#start-ip-8b29f8) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-faf0d9"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-458ea7) block (within [`kvm.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-dda35c)) supports the following:
-
-<a id="map-303c7d"></a>&#x2022; [`interface_ip_map`](#map-303c7d) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-4a6bec"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List Network Option
 
-A [`network_option`](#option-437c33) block (within [`kvm.not_managed.node_list.interface_list`](#list-92338f)) supports the following:
-
-<a id="network-990e2e"></a>&#x2022; [`site_local_inside_network`](#network-990e2e) - Optional Block<br>Enable this option
-
-<a id="network-dd4f3c"></a>&#x2022; [`site_local_network`](#network-dd4f3c) - Optional Block<br>Enable this option
+<a id="deep-62e6b3"></a>Deeply nested **Option** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List Static IP
 
-A [`static_ip`](#static-ip-f20c45) block (within [`kvm.not_managed.node_list.interface_list`](#list-92338f)) supports the following:
-
-<a id="default-gw-72abe2"></a>&#x2022; [`default_gw`](#default-gw-72abe2) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-7a7548"></a>&#x2022; [`ip_address`](#address-7a7548) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-a6cf32"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List Static IPv6 Address
 
-A [`static_ipv6_address`](#address-41524b) block (within [`kvm.not_managed.node_list.interface_list`](#list-92338f)) supports the following:
-
-<a id="static-ip-f59aa6"></a>&#x2022; [`cluster_static_ip`](#static-ip-f59aa6) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-f59aa6) below.
-
-<a id="static-ip-7f0222"></a>&#x2022; [`node_static_ip`](#static-ip-7f0222) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-7f0222) below.
+<a id="deep-91a5c5"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-f59aa6) block (within [`kvm.not_managed.node_list.interface_list.static_ipv6_address`](#address-41524b)) supports the following:
-
-<a id="map-768f76"></a>&#x2022; [`interface_ip_map`](#map-768f76) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-b4aa6e"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-7f0222) block (within [`kvm.not_managed.node_list.interface_list.static_ipv6_address`](#address-41524b)) supports the following:
-
-<a id="default-gw-1ef18b"></a>&#x2022; [`default_gw`](#default-gw-1ef18b) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-7c9b5f"></a>&#x2022; [`ip_address`](#address-7c9b5f) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-abe515"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Kvm Not Managed Node List Interface List VLAN Interface
 
-A [`vlan_interface`](#interface-5ffabb) block (within [`kvm.not_managed.node_list.interface_list`](#list-92338f)) supports the following:
-
-<a id="device-46e00e"></a>&#x2022; [`device`](#device-46e00e) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
-
-<a id="vlan-id-762cf4"></a>&#x2022; [`vlan_id`](#vlan-id-762cf4) - Optional Number<br>VLAN ID. Configure the VLAN tag for this interface
+<a id="deep-964e06"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Load Balancing
 
@@ -1710,45 +1172,19 @@ A [`static_routes`](#local-vrf-sli-config-static-routes) block (within [`local_v
 
 #### Local Vrf SLI Config Static Routes Static Routes
 
-A [`static_routes`](#routes-159447) block (within [`local_vrf.sli_config.static_routes`](#local-vrf-sli-config-static-routes)) supports the following:
-
-<a id="attrs-1b61d8"></a>&#x2022; [`attrs`](#attrs-1b61d8) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
-
-<a id="gateway-4ea478"></a>&#x2022; [`default_gateway`](#gateway-4ea478) - Optional Block<br>Enable this option
-
-<a id="address-73622e"></a>&#x2022; [`ip_address`](#address-73622e) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
-
-<a id="prefixes-52b91d"></a>&#x2022; [`ip_prefixes`](#prefixes-52b91d) - Optional List<br>IP Prefixes. List of route prefixes that have common next hop and attributes
-
-<a id="interface-e983e7"></a>&#x2022; [`node_interface`](#interface-e983e7) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#interface-e983e7) below.
+<a id="deep-0b00a5"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Local Vrf SLI Config Static Routes Static Routes Node Interface
 
-A [`node_interface`](#interface-e983e7) block (within [`local_vrf.sli_config.static_routes.static_routes`](#routes-159447)) supports the following:
-
-<a id="list-a3027a"></a>&#x2022; [`list`](#list-a3027a) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#list-a3027a) below.
+<a id="deep-c36771"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Local Vrf SLI Config Static Routes Static Routes Node Interface List
 
-A [`list`](#list-a3027a) block (within [`local_vrf.sli_config.static_routes.static_routes.node_interface`](#interface-e983e7)) supports the following:
-
-<a id="interface-7e8c1d"></a>&#x2022; [`interface`](#interface-7e8c1d) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#interface-7e8c1d) below.
-
-<a id="node-b503e1"></a>&#x2022; [`node`](#node-b503e1) - Optional String<br>Node. Node name on this site
+<a id="deep-9295ad"></a>Deeply nested **List** block collapsed for readability.
 
 #### Local Vrf SLI Config Static Routes Static Routes Node Interface List Interface
 
-An [`interface`](#interface-7e8c1d) block (within [`local_vrf.sli_config.static_routes.static_routes.node_interface.list`](#list-a3027a)) supports the following:
-
-<a id="kind-346e2c"></a>&#x2022; [`kind`](#kind-346e2c) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-39caa7"></a>&#x2022; [`name`](#name-39caa7) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-0dbf48"></a>&#x2022; [`namespace`](#namespace-0dbf48) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1d1e63"></a>&#x2022; [`tenant`](#tenant-1d1e63) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-4a96bf"></a>&#x2022; [`uid`](#uid-4a96bf) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-3a649b"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Local Vrf SLI Config Static V6 Routes
 
@@ -1758,45 +1194,19 @@ A [`static_v6_routes`](#local-vrf-sli-config-static-v6-routes) block (within [`l
 
 #### Local Vrf SLI Config Static V6 Routes Static Routes
 
-A [`static_routes`](#routes-b75018) block (within [`local_vrf.sli_config.static_v6_routes`](#local-vrf-sli-config-static-v6-routes)) supports the following:
-
-<a id="attrs-ceb063"></a>&#x2022; [`attrs`](#attrs-ceb063) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
-
-<a id="gateway-daa391"></a>&#x2022; [`default_gateway`](#gateway-daa391) - Optional Block<br>Enable this option
-
-<a id="address-41bee3"></a>&#x2022; [`ip_address`](#address-41bee3) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
-
-<a id="prefixes-e72ac1"></a>&#x2022; [`ip_prefixes`](#prefixes-e72ac1) - Optional List<br>IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes
-
-<a id="interface-3a9e38"></a>&#x2022; [`node_interface`](#interface-3a9e38) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#interface-3a9e38) below.
+<a id="deep-26bfb4"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Local Vrf SLI Config Static V6 Routes Static Routes Node Interface
 
-A [`node_interface`](#interface-3a9e38) block (within [`local_vrf.sli_config.static_v6_routes.static_routes`](#routes-b75018)) supports the following:
-
-<a id="list-e6e084"></a>&#x2022; [`list`](#list-e6e084) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#list-e6e084) below.
+<a id="deep-989f5e"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Local Vrf SLI Config Static V6 Routes Static Routes Node Interface List
 
-A [`list`](#list-e6e084) block (within [`local_vrf.sli_config.static_v6_routes.static_routes.node_interface`](#interface-3a9e38)) supports the following:
-
-<a id="interface-7600e1"></a>&#x2022; [`interface`](#interface-7600e1) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#interface-7600e1) below.
-
-<a id="node-d3b8e7"></a>&#x2022; [`node`](#node-d3b8e7) - Optional String<br>Node. Node name on this site
+<a id="deep-94960c"></a>Deeply nested **List** block collapsed for readability.
 
 #### Local Vrf SLI Config Static V6 Routes Static Routes Node Interface List Interface
 
-An [`interface`](#interface-7600e1) block (within [`local_vrf.sli_config.static_v6_routes.static_routes.node_interface.list`](#list-e6e084)) supports the following:
-
-<a id="kind-73d9c9"></a>&#x2022; [`kind`](#kind-73d9c9) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-ee6581"></a>&#x2022; [`name`](#name-ee6581) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-c2c6bd"></a>&#x2022; [`namespace`](#namespace-c2c6bd) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-40c954"></a>&#x2022; [`tenant`](#tenant-40c954) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-b9d48e"></a>&#x2022; [`uid`](#uid-b9d48e) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-6ebb7a"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Local Vrf Slo Config
 
@@ -1824,45 +1234,19 @@ A [`static_routes`](#local-vrf-slo-config-static-routes) block (within [`local_v
 
 #### Local Vrf Slo Config Static Routes Static Routes
 
-A [`static_routes`](#routes-07ae6c) block (within [`local_vrf.slo_config.static_routes`](#local-vrf-slo-config-static-routes)) supports the following:
-
-<a id="attrs-df9b45"></a>&#x2022; [`attrs`](#attrs-df9b45) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
-
-<a id="gateway-4c0913"></a>&#x2022; [`default_gateway`](#gateway-4c0913) - Optional Block<br>Enable this option
-
-<a id="address-4677a5"></a>&#x2022; [`ip_address`](#address-4677a5) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
-
-<a id="prefixes-2b4180"></a>&#x2022; [`ip_prefixes`](#prefixes-2b4180) - Optional List<br>IP Prefixes. List of route prefixes that have common next hop and attributes
-
-<a id="interface-2b93a1"></a>&#x2022; [`node_interface`](#interface-2b93a1) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#interface-2b93a1) below.
+<a id="deep-c4ba70"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Local Vrf Slo Config Static Routes Static Routes Node Interface
 
-A [`node_interface`](#interface-2b93a1) block (within [`local_vrf.slo_config.static_routes.static_routes`](#routes-07ae6c)) supports the following:
-
-<a id="list-fc721b"></a>&#x2022; [`list`](#list-fc721b) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#list-fc721b) below.
+<a id="deep-9a77b8"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Local Vrf Slo Config Static Routes Static Routes Node Interface List
 
-A [`list`](#list-fc721b) block (within [`local_vrf.slo_config.static_routes.static_routes.node_interface`](#interface-2b93a1)) supports the following:
-
-<a id="interface-47bf0d"></a>&#x2022; [`interface`](#interface-47bf0d) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#interface-47bf0d) below.
-
-<a id="node-71fca9"></a>&#x2022; [`node`](#node-71fca9) - Optional String<br>Node. Node name on this site
+<a id="deep-778bc9"></a>Deeply nested **List** block collapsed for readability.
 
 #### Local Vrf Slo Config Static Routes Static Routes Node Interface List Interface
 
-An [`interface`](#interface-47bf0d) block (within [`local_vrf.slo_config.static_routes.static_routes.node_interface.list`](#list-fc721b)) supports the following:
-
-<a id="kind-8769a5"></a>&#x2022; [`kind`](#kind-8769a5) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-f751ed"></a>&#x2022; [`name`](#name-f751ed) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-907ae9"></a>&#x2022; [`namespace`](#namespace-907ae9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-b4f2a7"></a>&#x2022; [`tenant`](#tenant-b4f2a7) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-162846"></a>&#x2022; [`uid`](#uid-162846) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-8ea40a"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Local Vrf Slo Config Static V6 Routes
 
@@ -1872,55 +1256,23 @@ A [`static_v6_routes`](#local-vrf-slo-config-static-v6-routes) block (within [`l
 
 #### Local Vrf Slo Config Static V6 Routes Static Routes
 
-A [`static_routes`](#routes-5b5639) block (within [`local_vrf.slo_config.static_v6_routes`](#local-vrf-slo-config-static-v6-routes)) supports the following:
-
-<a id="attrs-3a7ef1"></a>&#x2022; [`attrs`](#attrs-3a7ef1) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
-
-<a id="gateway-66646c"></a>&#x2022; [`default_gateway`](#gateway-66646c) - Optional Block<br>Enable this option
-
-<a id="address-fbfbdb"></a>&#x2022; [`ip_address`](#address-fbfbdb) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
-
-<a id="prefixes-0101d9"></a>&#x2022; [`ip_prefixes`](#prefixes-0101d9) - Optional List<br>IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes
-
-<a id="interface-2e33ab"></a>&#x2022; [`node_interface`](#interface-2e33ab) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#interface-2e33ab) below.
+<a id="deep-69c74f"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Local Vrf Slo Config Static V6 Routes Static Routes Node Interface
 
-A [`node_interface`](#interface-2e33ab) block (within [`local_vrf.slo_config.static_v6_routes.static_routes`](#routes-5b5639)) supports the following:
-
-<a id="list-e36bdf"></a>&#x2022; [`list`](#list-e36bdf) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#list-e36bdf) below.
+<a id="deep-c59810"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Local Vrf Slo Config Static V6 Routes Static Routes Node Interface List
 
-A [`list`](#list-e36bdf) block (within [`local_vrf.slo_config.static_v6_routes.static_routes.node_interface`](#interface-2e33ab)) supports the following:
-
-<a id="interface-0bf2e7"></a>&#x2022; [`interface`](#interface-0bf2e7) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#interface-0bf2e7) below.
-
-<a id="node-ccc3c0"></a>&#x2022; [`node`](#node-ccc3c0) - Optional String<br>Node. Node name on this site
+<a id="deep-753f28"></a>Deeply nested **List** block collapsed for readability.
 
 #### Local Vrf Slo Config Static V6 Routes Static Routes Node Interface List Interface
 
-An [`interface`](#interface-0bf2e7) block (within [`local_vrf.slo_config.static_v6_routes.static_routes.node_interface.list`](#list-e36bdf)) supports the following:
-
-<a id="kind-511eb7"></a>&#x2022; [`kind`](#kind-511eb7) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-8827a8"></a>&#x2022; [`name`](#name-8827a8) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-cfc816"></a>&#x2022; [`namespace`](#namespace-cfc816) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1627fd"></a>&#x2022; [`tenant`](#tenant-1627fd) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-32fe44"></a>&#x2022; [`uid`](#uid-32fe44) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-86b9dc"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Log Receiver
 
-A [`log_receiver`](#log-receiver) block supports the following:
-
-<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0da9d9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Nutanix
 
@@ -1990,159 +1342,75 @@ An [`interface_list`](#list-b40ceb) block (within [`nutanix.not_managed.node_lis
 
 #### Nutanix Not Managed Node List Interface List Bond Interface
 
-A [`bond_interface`](#interface-2d0b01) block (within [`nutanix.not_managed.node_list.interface_list`](#list-b40ceb)) supports the following:
-
-<a id="backup-2fd31f"></a>&#x2022; [`active_backup`](#backup-2fd31f) - Optional Block<br>Enable this option
-
-<a id="devices-1cb804"></a>&#x2022; [`devices`](#devices-1cb804) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
-
-<a id="lacp-741ea7"></a>&#x2022; [`lacp`](#lacp-741ea7) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#lacp-741ea7) below.
-
-<a id="interval-784d64"></a>&#x2022; [`link_polling_interval`](#interval-784d64) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
-
-<a id="delay-baaa7b"></a>&#x2022; [`link_up_delay`](#delay-baaa7b) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
-
-<a id="name-7d23e7"></a>&#x2022; [`name`](#name-7d23e7) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="deep-a0d86e"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List Bond Interface Lacp
 
-A [`lacp`](#lacp-741ea7) block (within [`nutanix.not_managed.node_list.interface_list.bond_interface`](#interface-2d0b01)) supports the following:
-
-<a id="rate-8f7dde"></a>&#x2022; [`rate`](#rate-8f7dde) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="deep-452ac2"></a>Deeply nested **Lacp** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List Ethernet Interface
 
-An [`ethernet_interface`](#interface-d78243) block (within [`nutanix.not_managed.node_list.interface_list`](#list-b40ceb)) supports the following:
-
-<a id="device-7f6f22"></a>&#x2022; [`device`](#device-7f6f22) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
-
-<a id="mac-55f705"></a>&#x2022; [`mac`](#mac-55f705) - Optional String<br>MAC Address
+<a id="deep-c19cdf"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-08cb50) block (within [`nutanix.not_managed.node_list.interface_list`](#list-b40ceb)) supports the following:
-
-<a id="host-5dfa6f"></a>&#x2022; [`host`](#host-5dfa6f) - Optional Block<br>Enable this option
-
-<a id="router-5260e0"></a>&#x2022; [`router`](#router-5260e0) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-5260e0) below.
+<a id="deep-ae55a4"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router
 
-A [`router`](#router-5260e0) block (within [`nutanix.not_managed.node_list.interface_list.ipv6_auto_config`](#config-08cb50)) supports the following:
-
-<a id="config-a2d4df"></a>&#x2022; [`dns_config`](#config-a2d4df) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-a2d4df) below.
-
-<a id="prefix-0241dc"></a>&#x2022; [`network_prefix`](#prefix-0241dc) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-4031cd"></a>&#x2022; [`stateful`](#stateful-4031cd) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-4031cd) below.
+<a id="deep-1e40a4"></a>Deeply nested **Router** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-a2d4df) block (within [`nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-5260e0)) supports the following:
-
-<a id="list-589c3c"></a>&#x2022; [`configured_list`](#list-589c3c) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-589c3c) below.
-
-<a id="dns-f6c807"></a>&#x2022; [`local_dns`](#dns-f6c807) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-f6c807) below.
+<a id="deep-1a1f28"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-589c3c) block (within [`nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-a2d4df)) supports the following:
-
-<a id="list-70b1f8"></a>&#x2022; [`dns_list`](#list-70b1f8) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-51b635"></a>Deeply nested **List** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-f6c807) block (within [`nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-a2d4df)) supports the following:
-
-<a id="address-e5ad11"></a>&#x2022; [`configured_address`](#address-e5ad11) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-5ddfcc"></a>&#x2022; [`first_address`](#address-5ddfcc) - Optional Block<br>Enable this option
-
-<a id="address-022896"></a>&#x2022; [`last_address`](#address-022896) - Optional Block<br>Enable this option
+<a id="deep-d92def"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-4031cd) block (within [`nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-5260e0)) supports the following:
-
-<a id="end-1e5f06"></a>&#x2022; [`automatic_from_end`](#end-1e5f06) - Optional Block<br>Enable this option
-
-<a id="start-f542bf"></a>&#x2022; [`automatic_from_start`](#start-f542bf) - Optional Block<br>Enable this option
-
-<a id="networks-b1d395"></a>&#x2022; [`dhcp_networks`](#networks-b1d395) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-b1d395) below.
-
-<a id="map-c150da"></a>&#x2022; [`fixed_ip_map`](#map-c150da) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-20c456"></a>&#x2022; [`interface_ip_map`](#map-20c456) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-20c456) below.
+<a id="deep-be66c9"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-b1d395) block (within [`nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-4031cd)) supports the following:
-
-<a id="prefix-079eb8"></a>&#x2022; [`network_prefix`](#prefix-079eb8) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-f3299f"></a>&#x2022; [`pool_settings`](#settings-f3299f) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-d8bb16"></a>&#x2022; [`pools`](#pools-d8bb16) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-d8bb16) below.
+<a id="deep-5a9d54"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-d8bb16) block (within [`nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-b1d395)) supports the following:
-
-<a id="end-ip-9cf885"></a>&#x2022; [`end_ip`](#end-ip-9cf885) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-2727d3"></a>&#x2022; [`start_ip`](#start-ip-2727d3) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-7af73e"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-20c456) block (within [`nutanix.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-4031cd)) supports the following:
-
-<a id="map-5e3821"></a>&#x2022; [`interface_ip_map`](#map-5e3821) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-138aec"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List Network Option
 
-A [`network_option`](#option-40de75) block (within [`nutanix.not_managed.node_list.interface_list`](#list-b40ceb)) supports the following:
-
-<a id="network-769c90"></a>&#x2022; [`site_local_inside_network`](#network-769c90) - Optional Block<br>Enable this option
-
-<a id="network-786260"></a>&#x2022; [`site_local_network`](#network-786260) - Optional Block<br>Enable this option
+<a id="deep-bd2504"></a>Deeply nested **Option** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List Static IP
 
-A [`static_ip`](#static-ip-09302a) block (within [`nutanix.not_managed.node_list.interface_list`](#list-b40ceb)) supports the following:
-
-<a id="default-gw-540adf"></a>&#x2022; [`default_gw`](#default-gw-540adf) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-992a5b"></a>&#x2022; [`ip_address`](#address-992a5b) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-0fbd56"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List Static IPv6 Address
 
-A [`static_ipv6_address`](#address-2a34d1) block (within [`nutanix.not_managed.node_list.interface_list`](#list-b40ceb)) supports the following:
-
-<a id="static-ip-8127bf"></a>&#x2022; [`cluster_static_ip`](#static-ip-8127bf) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-8127bf) below.
-
-<a id="static-ip-8d46ed"></a>&#x2022; [`node_static_ip`](#static-ip-8d46ed) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-8d46ed) below.
+<a id="deep-822c9a"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-8127bf) block (within [`nutanix.not_managed.node_list.interface_list.static_ipv6_address`](#address-2a34d1)) supports the following:
-
-<a id="map-ff2c06"></a>&#x2022; [`interface_ip_map`](#map-ff2c06) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-7b95c4"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-8d46ed) block (within [`nutanix.not_managed.node_list.interface_list.static_ipv6_address`](#address-2a34d1)) supports the following:
-
-<a id="default-gw-c2d969"></a>&#x2022; [`default_gw`](#default-gw-c2d969) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-e9bc05"></a>&#x2022; [`ip_address`](#address-e9bc05) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-ab1035"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Nutanix Not Managed Node List Interface List VLAN Interface
 
-A [`vlan_interface`](#interface-e23d44) block (within [`nutanix.not_managed.node_list.interface_list`](#list-b40ceb)) supports the following:
-
-<a id="device-2b5312"></a>&#x2022; [`device`](#device-2b5312) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
-
-<a id="vlan-id-a9ace5"></a>&#x2022; [`vlan_id`](#vlan-id-a9ace5) - Optional Number<br>VLAN ID. Configure the VLAN tag for this interface
+<a id="deep-30c686"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Oci
 
@@ -2212,159 +1480,75 @@ An [`interface_list`](#list-af4877) block (within [`oci.not_managed.node_list`](
 
 #### Oci Not Managed Node List Interface List Bond Interface
 
-A [`bond_interface`](#interface-8f5f59) block (within [`oci.not_managed.node_list.interface_list`](#list-af4877)) supports the following:
-
-<a id="backup-60bd4b"></a>&#x2022; [`active_backup`](#backup-60bd4b) - Optional Block<br>Enable this option
-
-<a id="devices-30d248"></a>&#x2022; [`devices`](#devices-30d248) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
-
-<a id="lacp-a0ce93"></a>&#x2022; [`lacp`](#lacp-a0ce93) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#lacp-a0ce93) below.
-
-<a id="interval-bdbf5e"></a>&#x2022; [`link_polling_interval`](#interval-bdbf5e) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
-
-<a id="delay-cb8d06"></a>&#x2022; [`link_up_delay`](#delay-cb8d06) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
-
-<a id="name-0d99a8"></a>&#x2022; [`name`](#name-0d99a8) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="deep-446af8"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List Bond Interface Lacp
 
-A [`lacp`](#lacp-a0ce93) block (within [`oci.not_managed.node_list.interface_list.bond_interface`](#interface-8f5f59)) supports the following:
-
-<a id="rate-281b38"></a>&#x2022; [`rate`](#rate-281b38) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="deep-4ae1cd"></a>Deeply nested **Lacp** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List Ethernet Interface
 
-An [`ethernet_interface`](#interface-e66013) block (within [`oci.not_managed.node_list.interface_list`](#list-af4877)) supports the following:
-
-<a id="device-a47894"></a>&#x2022; [`device`](#device-a47894) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
-
-<a id="mac-0db553"></a>&#x2022; [`mac`](#mac-0db553) - Optional String<br>MAC Address
+<a id="deep-dc3621"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-5531bb) block (within [`oci.not_managed.node_list.interface_list`](#list-af4877)) supports the following:
-
-<a id="host-1551f4"></a>&#x2022; [`host`](#host-1551f4) - Optional Block<br>Enable this option
-
-<a id="router-271b1d"></a>&#x2022; [`router`](#router-271b1d) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-271b1d) below.
+<a id="deep-a7e52b"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List IPv6 Auto Config Router
 
-A [`router`](#router-271b1d) block (within [`oci.not_managed.node_list.interface_list.ipv6_auto_config`](#config-5531bb)) supports the following:
-
-<a id="config-6a6214"></a>&#x2022; [`dns_config`](#config-6a6214) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-6a6214) below.
-
-<a id="prefix-06c71e"></a>&#x2022; [`network_prefix`](#prefix-06c71e) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-b4832b"></a>&#x2022; [`stateful`](#stateful-b4832b) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-b4832b) below.
+<a id="deep-e27180"></a>Deeply nested **Router** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-6a6214) block (within [`oci.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-271b1d)) supports the following:
-
-<a id="list-e54a93"></a>&#x2022; [`configured_list`](#list-e54a93) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-e54a93) below.
-
-<a id="dns-8fb374"></a>&#x2022; [`local_dns`](#dns-8fb374) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-8fb374) below.
+<a id="deep-4067cc"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-e54a93) block (within [`oci.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-6a6214)) supports the following:
-
-<a id="list-399428"></a>&#x2022; [`dns_list`](#list-399428) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-fa8fac"></a>Deeply nested **List** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-8fb374) block (within [`oci.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-6a6214)) supports the following:
-
-<a id="address-210b17"></a>&#x2022; [`configured_address`](#address-210b17) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-eadb15"></a>&#x2022; [`first_address`](#address-eadb15) - Optional Block<br>Enable this option
-
-<a id="address-13bfc7"></a>&#x2022; [`last_address`](#address-13bfc7) - Optional Block<br>Enable this option
+<a id="deep-d366cc"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-b4832b) block (within [`oci.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-271b1d)) supports the following:
-
-<a id="end-359109"></a>&#x2022; [`automatic_from_end`](#end-359109) - Optional Block<br>Enable this option
-
-<a id="start-775c7c"></a>&#x2022; [`automatic_from_start`](#start-775c7c) - Optional Block<br>Enable this option
-
-<a id="networks-63d147"></a>&#x2022; [`dhcp_networks`](#networks-63d147) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-63d147) below.
-
-<a id="map-0214c4"></a>&#x2022; [`fixed_ip_map`](#map-0214c4) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-81e6c6"></a>&#x2022; [`interface_ip_map`](#map-81e6c6) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-81e6c6) below.
+<a id="deep-41029f"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-63d147) block (within [`oci.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-b4832b)) supports the following:
-
-<a id="prefix-904eb3"></a>&#x2022; [`network_prefix`](#prefix-904eb3) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-5022c3"></a>&#x2022; [`pool_settings`](#settings-5022c3) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-f97a7c"></a>&#x2022; [`pools`](#pools-f97a7c) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-f97a7c) below.
+<a id="deep-6d3c92"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-f97a7c) block (within [`oci.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-63d147)) supports the following:
-
-<a id="end-ip-38b37d"></a>&#x2022; [`end_ip`](#end-ip-38b37d) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-f1d4fe"></a>&#x2022; [`start_ip`](#start-ip-f1d4fe) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-a574c6"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-81e6c6) block (within [`oci.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-b4832b)) supports the following:
-
-<a id="map-7a03e5"></a>&#x2022; [`interface_ip_map`](#map-7a03e5) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-108398"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List Network Option
 
-A [`network_option`](#option-747ef7) block (within [`oci.not_managed.node_list.interface_list`](#list-af4877)) supports the following:
-
-<a id="network-6b683e"></a>&#x2022; [`site_local_inside_network`](#network-6b683e) - Optional Block<br>Enable this option
-
-<a id="network-aebd4e"></a>&#x2022; [`site_local_network`](#network-aebd4e) - Optional Block<br>Enable this option
+<a id="deep-4dc97a"></a>Deeply nested **Option** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List Static IP
 
-A [`static_ip`](#static-ip-bd24d4) block (within [`oci.not_managed.node_list.interface_list`](#list-af4877)) supports the following:
-
-<a id="default-gw-bd26b4"></a>&#x2022; [`default_gw`](#default-gw-bd26b4) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-c9f6f0"></a>&#x2022; [`ip_address`](#address-c9f6f0) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-d328a9"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List Static IPv6 Address
 
-A [`static_ipv6_address`](#address-eabfe8) block (within [`oci.not_managed.node_list.interface_list`](#list-af4877)) supports the following:
-
-<a id="static-ip-13c257"></a>&#x2022; [`cluster_static_ip`](#static-ip-13c257) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-13c257) below.
-
-<a id="static-ip-be1b63"></a>&#x2022; [`node_static_ip`](#static-ip-be1b63) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-be1b63) below.
+<a id="deep-b8c38e"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-13c257) block (within [`oci.not_managed.node_list.interface_list.static_ipv6_address`](#address-eabfe8)) supports the following:
-
-<a id="map-9ebfd1"></a>&#x2022; [`interface_ip_map`](#map-9ebfd1) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-6986c2"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-be1b63) block (within [`oci.not_managed.node_list.interface_list.static_ipv6_address`](#address-eabfe8)) supports the following:
-
-<a id="default-gw-f0a43a"></a>&#x2022; [`default_gw`](#default-gw-f0a43a) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-1b8181"></a>&#x2022; [`ip_address`](#address-1b8181) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-02be06"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Oci Not Managed Node List Interface List VLAN Interface
 
-A [`vlan_interface`](#interface-cb2c85) block (within [`oci.not_managed.node_list.interface_list`](#list-af4877)) supports the following:
-
-<a id="device-eeb178"></a>&#x2022; [`device`](#device-eeb178) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
-
-<a id="vlan-id-cfcc7d"></a>&#x2022; [`vlan_id`](#vlan-id-cfcc7d) - Optional Number<br>VLAN ID. Configure the VLAN tag for this interface
+<a id="deep-395474"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Offline Survivability Mode
 
@@ -2442,159 +1626,75 @@ An [`interface_list`](#list-08a137) block (within [`openstack.not_managed.node_l
 
 #### Openstack Not Managed Node List Interface List Bond Interface
 
-A [`bond_interface`](#interface-795887) block (within [`openstack.not_managed.node_list.interface_list`](#list-08a137)) supports the following:
-
-<a id="backup-cadb13"></a>&#x2022; [`active_backup`](#backup-cadb13) - Optional Block<br>Enable this option
-
-<a id="devices-478c39"></a>&#x2022; [`devices`](#devices-478c39) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
-
-<a id="lacp-3a6efb"></a>&#x2022; [`lacp`](#lacp-3a6efb) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#lacp-3a6efb) below.
-
-<a id="interval-6be001"></a>&#x2022; [`link_polling_interval`](#interval-6be001) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
-
-<a id="delay-5f6051"></a>&#x2022; [`link_up_delay`](#delay-5f6051) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
-
-<a id="name-3d643d"></a>&#x2022; [`name`](#name-3d643d) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="deep-63720a"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List Bond Interface Lacp
 
-A [`lacp`](#lacp-3a6efb) block (within [`openstack.not_managed.node_list.interface_list.bond_interface`](#interface-795887)) supports the following:
-
-<a id="rate-30715f"></a>&#x2022; [`rate`](#rate-30715f) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="deep-40e69b"></a>Deeply nested **Lacp** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List Ethernet Interface
 
-An [`ethernet_interface`](#interface-b6bf86) block (within [`openstack.not_managed.node_list.interface_list`](#list-08a137)) supports the following:
-
-<a id="device-93c445"></a>&#x2022; [`device`](#device-93c445) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
-
-<a id="mac-6dd202"></a>&#x2022; [`mac`](#mac-6dd202) - Optional String<br>MAC Address
+<a id="deep-ce3b3d"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-3546e4) block (within [`openstack.not_managed.node_list.interface_list`](#list-08a137)) supports the following:
-
-<a id="host-9315d7"></a>&#x2022; [`host`](#host-9315d7) - Optional Block<br>Enable this option
-
-<a id="router-3dc2e1"></a>&#x2022; [`router`](#router-3dc2e1) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-3dc2e1) below.
+<a id="deep-961f80"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List IPv6 Auto Config Router
 
-A [`router`](#router-3dc2e1) block (within [`openstack.not_managed.node_list.interface_list.ipv6_auto_config`](#config-3546e4)) supports the following:
-
-<a id="config-52b618"></a>&#x2022; [`dns_config`](#config-52b618) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-52b618) below.
-
-<a id="prefix-228ac9"></a>&#x2022; [`network_prefix`](#prefix-228ac9) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-b8bb59"></a>&#x2022; [`stateful`](#stateful-b8bb59) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-b8bb59) below.
+<a id="deep-ed028d"></a>Deeply nested **Router** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-52b618) block (within [`openstack.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-3dc2e1)) supports the following:
-
-<a id="list-c2a942"></a>&#x2022; [`configured_list`](#list-c2a942) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-c2a942) below.
-
-<a id="dns-3d78f1"></a>&#x2022; [`local_dns`](#dns-3d78f1) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-3d78f1) below.
+<a id="deep-28e629"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-c2a942) block (within [`openstack.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-52b618)) supports the following:
-
-<a id="list-a49ef4"></a>&#x2022; [`dns_list`](#list-a49ef4) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-914680"></a>Deeply nested **List** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-3d78f1) block (within [`openstack.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-52b618)) supports the following:
-
-<a id="address-a98de3"></a>&#x2022; [`configured_address`](#address-a98de3) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-76af6d"></a>&#x2022; [`first_address`](#address-76af6d) - Optional Block<br>Enable this option
-
-<a id="address-e958f6"></a>&#x2022; [`last_address`](#address-e958f6) - Optional Block<br>Enable this option
+<a id="deep-f991e0"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-b8bb59) block (within [`openstack.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-3dc2e1)) supports the following:
-
-<a id="end-7c82e4"></a>&#x2022; [`automatic_from_end`](#end-7c82e4) - Optional Block<br>Enable this option
-
-<a id="start-40d48e"></a>&#x2022; [`automatic_from_start`](#start-40d48e) - Optional Block<br>Enable this option
-
-<a id="networks-5f2d35"></a>&#x2022; [`dhcp_networks`](#networks-5f2d35) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-5f2d35) below.
-
-<a id="map-53d59f"></a>&#x2022; [`fixed_ip_map`](#map-53d59f) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-8330b3"></a>&#x2022; [`interface_ip_map`](#map-8330b3) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-8330b3) below.
+<a id="deep-3b5b14"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-5f2d35) block (within [`openstack.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-b8bb59)) supports the following:
-
-<a id="prefix-e06ca8"></a>&#x2022; [`network_prefix`](#prefix-e06ca8) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-67a0c2"></a>&#x2022; [`pool_settings`](#settings-67a0c2) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-7eb6ab"></a>&#x2022; [`pools`](#pools-7eb6ab) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-7eb6ab) below.
+<a id="deep-c5338f"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-7eb6ab) block (within [`openstack.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-5f2d35)) supports the following:
-
-<a id="end-ip-596871"></a>&#x2022; [`end_ip`](#end-ip-596871) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-ab1f1c"></a>&#x2022; [`start_ip`](#start-ip-ab1f1c) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-2f69f3"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-8330b3) block (within [`openstack.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-b8bb59)) supports the following:
-
-<a id="map-d9f0a9"></a>&#x2022; [`interface_ip_map`](#map-d9f0a9) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-4f6a88"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List Network Option
 
-A [`network_option`](#option-c423fd) block (within [`openstack.not_managed.node_list.interface_list`](#list-08a137)) supports the following:
-
-<a id="network-18a3fd"></a>&#x2022; [`site_local_inside_network`](#network-18a3fd) - Optional Block<br>Enable this option
-
-<a id="network-f18411"></a>&#x2022; [`site_local_network`](#network-f18411) - Optional Block<br>Enable this option
+<a id="deep-f60961"></a>Deeply nested **Option** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List Static IP
 
-A [`static_ip`](#static-ip-458635) block (within [`openstack.not_managed.node_list.interface_list`](#list-08a137)) supports the following:
-
-<a id="default-gw-94291e"></a>&#x2022; [`default_gw`](#default-gw-94291e) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-0e2489"></a>&#x2022; [`ip_address`](#address-0e2489) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-d09a62"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List Static IPv6 Address
 
-A [`static_ipv6_address`](#address-170d5f) block (within [`openstack.not_managed.node_list.interface_list`](#list-08a137)) supports the following:
-
-<a id="static-ip-add3be"></a>&#x2022; [`cluster_static_ip`](#static-ip-add3be) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-add3be) below.
-
-<a id="static-ip-b5fa71"></a>&#x2022; [`node_static_ip`](#static-ip-b5fa71) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-b5fa71) below.
+<a id="deep-dd6bdf"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-add3be) block (within [`openstack.not_managed.node_list.interface_list.static_ipv6_address`](#address-170d5f)) supports the following:
-
-<a id="map-dc8c80"></a>&#x2022; [`interface_ip_map`](#map-dc8c80) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-38b9de"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-b5fa71) block (within [`openstack.not_managed.node_list.interface_list.static_ipv6_address`](#address-170d5f)) supports the following:
-
-<a id="default-gw-c1f7c9"></a>&#x2022; [`default_gw`](#default-gw-c1f7c9) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-a3b112"></a>&#x2022; [`ip_address`](#address-a3b112) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-8da7bf"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Openstack Not Managed Node List Interface List VLAN Interface
 
-A [`vlan_interface`](#interface-1fd835) block (within [`openstack.not_managed.node_list.interface_list`](#list-08a137)) supports the following:
-
-<a id="device-f1584d"></a>&#x2022; [`device`](#device-f1584d) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
-
-<a id="vlan-id-61e473"></a>&#x2022; [`vlan_id`](#vlan-id-61e473) - Optional Number<br>VLAN ID. Configure the VLAN tag for this interface
+<a id="deep-68a558"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Performance Enhancement Mode
 
@@ -2640,13 +1740,7 @@ A [`site_mesh_group_on_slo`](#site-mesh-group-on-slo) block supports the followi
 
 #### Site Mesh Group On Slo Site Mesh Group
 
-A [`site_mesh_group`](#site-mesh-group-on-slo-site-mesh-group) block (within [`site_mesh_group_on_slo`](#site-mesh-group-on-slo)) supports the following:
-
-<a id="name-cba06b"></a>&#x2022; [`name`](#name-cba06b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-ab8237"></a>&#x2022; [`namespace`](#namespace-ab8237) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-3ee3de"></a>&#x2022; [`tenant`](#tenant-3ee3de) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-e180b6"></a>Deeply nested **Group** block collapsed for readability.
 
 #### Software Settings
 
@@ -2700,15 +1794,7 @@ A [`kubernetes_upgrade_drain`](#drain-bb0463) block (within [`upgrade_settings`]
 
 #### Upgrade Settings Kubernetes Upgrade Drain Enable Upgrade Drain
 
-An [`enable_upgrade_drain`](#drain-817909) block (within [`upgrade_settings.kubernetes_upgrade_drain`](#drain-bb0463)) supports the following:
-
-<a id="mode-6f8bfc"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-6f8bfc) - Optional Block<br>Enable this option
-
-<a id="count-d523cb"></a>&#x2022; [`drain_max_unavailable_node_count`](#count-d523cb) - Optional Number<br>Node Batch Size Count
-
-<a id="timeout-5e745b"></a>&#x2022; [`drain_node_timeout`](#timeout-5e745b) - Optional Number<br>Upgrade Wait Time. Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is recommended to use the default value)
-
-<a id="mode-9f564b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9f564b) - Optional Block<br>Enable this option
+<a id="deep-c91971"></a>Deeply nested **Drain** block collapsed for readability.
 
 #### Vmware
 
@@ -2778,159 +1864,158 @@ An [`interface_list`](#list-7c5ba9) block (within [`vmware.not_managed.node_list
 
 #### Vmware Not Managed Node List Interface List Bond Interface
 
-A [`bond_interface`](#interface-067b8c) block (within [`vmware.not_managed.node_list.interface_list`](#list-7c5ba9)) supports the following:
-
-<a id="backup-ce1005"></a>&#x2022; [`active_backup`](#backup-ce1005) - Optional Block<br>Enable this option
-
-<a id="devices-cf6257"></a>&#x2022; [`devices`](#devices-cf6257) - Optional List<br>Member Ethernet Devices. Ethernet devices that will make up this bond
-
-<a id="lacp-5f7f1b"></a>&#x2022; [`lacp`](#lacp-5f7f1b) - Optional Block<br>LACP parameters. LACP parameters for the bond device<br>See [Lacp](#lacp-5f7f1b) below.
-
-<a id="interval-d74825"></a>&#x2022; [`link_polling_interval`](#interval-d74825) - Optional Number<br>Link Polling Interval. Link polling interval in milliseconds
-
-<a id="delay-c49e2e"></a>&#x2022; [`link_up_delay`](#delay-c49e2e) - Optional Number<br>Link Up Delay. Milliseconds wait before link is declared up
-
-<a id="name-215588"></a>&#x2022; [`name`](#name-215588) - Optional String<br>Bond Device Name. Name for the Bond. Ex 'bond0'
+<a id="deep-633873"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List Bond Interface Lacp
 
-A [`lacp`](#lacp-5f7f1b) block (within [`vmware.not_managed.node_list.interface_list.bond_interface`](#interface-067b8c)) supports the following:
-
-<a id="rate-9754c2"></a>&#x2022; [`rate`](#rate-9754c2) - Optional Number<br>LACP Packet Interval. Interval in seconds to transmit LACP packets
+<a id="deep-7afe62"></a>Deeply nested **Lacp** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List Ethernet Interface
 
-An [`ethernet_interface`](#interface-d5d7ec) block (within [`vmware.not_managed.node_list.interface_list`](#list-7c5ba9)) supports the following:
-
-<a id="device-ade09d"></a>&#x2022; [`device`](#device-ade09d) - Optional String<br>Ethernet Device. Select an Ethernet device from the discovered interfaces to configure. Once configured, this interface will be part of this sites dataplane and can participate in the networking services configured on this site
-
-<a id="mac-4e3340"></a>&#x2022; [`mac`](#mac-4e3340) - Optional String<br>MAC Address
+<a id="deep-7dcc90"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-f79747) block (within [`vmware.not_managed.node_list.interface_list`](#list-7c5ba9)) supports the following:
-
-<a id="host-4ae8ac"></a>&#x2022; [`host`](#host-4ae8ac) - Optional Block<br>Enable this option
-
-<a id="router-2b592d"></a>&#x2022; [`router`](#router-2b592d) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-2b592d) below.
+<a id="deep-c33317"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List IPv6 Auto Config Router
 
-A [`router`](#router-2b592d) block (within [`vmware.not_managed.node_list.interface_list.ipv6_auto_config`](#config-f79747)) supports the following:
-
-<a id="config-74a056"></a>&#x2022; [`dns_config`](#config-74a056) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-74a056) below.
-
-<a id="prefix-6359d7"></a>&#x2022; [`network_prefix`](#prefix-6359d7) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-839e8f"></a>&#x2022; [`stateful`](#stateful-839e8f) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-839e8f) below.
+<a id="deep-ac39e9"></a>Deeply nested **Router** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-74a056) block (within [`vmware.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-2b592d)) supports the following:
-
-<a id="list-9bed80"></a>&#x2022; [`configured_list`](#list-9bed80) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-9bed80) below.
-
-<a id="dns-e985fa"></a>&#x2022; [`local_dns`](#dns-e985fa) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-e985fa) below.
+<a id="deep-06eab4"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-9bed80) block (within [`vmware.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-74a056)) supports the following:
-
-<a id="list-89983f"></a>&#x2022; [`dns_list`](#list-89983f) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-16e9fa"></a>Deeply nested **List** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-e985fa) block (within [`vmware.not_managed.node_list.interface_list.ipv6_auto_config.router.dns_config`](#config-74a056)) supports the following:
-
-<a id="address-5d078b"></a>&#x2022; [`configured_address`](#address-5d078b) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-f142bb"></a>&#x2022; [`first_address`](#address-f142bb) - Optional Block<br>Enable this option
-
-<a id="address-dddf59"></a>&#x2022; [`last_address`](#address-dddf59) - Optional Block<br>Enable this option
+<a id="deep-45525f"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-839e8f) block (within [`vmware.not_managed.node_list.interface_list.ipv6_auto_config.router`](#router-2b592d)) supports the following:
-
-<a id="end-968d8d"></a>&#x2022; [`automatic_from_end`](#end-968d8d) - Optional Block<br>Enable this option
-
-<a id="start-94881e"></a>&#x2022; [`automatic_from_start`](#start-94881e) - Optional Block<br>Enable this option
-
-<a id="networks-163c9e"></a>&#x2022; [`dhcp_networks`](#networks-163c9e) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-163c9e) below.
-
-<a id="map-9688be"></a>&#x2022; [`fixed_ip_map`](#map-9688be) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-a727c9"></a>&#x2022; [`interface_ip_map`](#map-a727c9) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-a727c9) below.
+<a id="deep-c19fa0"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-163c9e) block (within [`vmware.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-839e8f)) supports the following:
-
-<a id="prefix-2bd5e7"></a>&#x2022; [`network_prefix`](#prefix-2bd5e7) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-8b46bf"></a>&#x2022; [`pool_settings`](#settings-8b46bf) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-24b3bb"></a>&#x2022; [`pools`](#pools-24b3bb) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-24b3bb) below.
+<a id="deep-229092"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-24b3bb) block (within [`vmware.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-163c9e)) supports the following:
-
-<a id="end-ip-718e7d"></a>&#x2022; [`end_ip`](#end-ip-718e7d) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-b7e12f"></a>&#x2022; [`start_ip`](#start-ip-b7e12f) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-ed0fd6"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-a727c9) block (within [`vmware.not_managed.node_list.interface_list.ipv6_auto_config.router.stateful`](#stateful-839e8f)) supports the following:
-
-<a id="map-0ff561"></a>&#x2022; [`interface_ip_map`](#map-0ff561) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-949cb5"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List Network Option
 
-A [`network_option`](#option-e71ea9) block (within [`vmware.not_managed.node_list.interface_list`](#list-7c5ba9)) supports the following:
-
-<a id="network-c95f77"></a>&#x2022; [`site_local_inside_network`](#network-c95f77) - Optional Block<br>Enable this option
-
-<a id="network-7c7285"></a>&#x2022; [`site_local_network`](#network-7c7285) - Optional Block<br>Enable this option
+<a id="deep-995b74"></a>Deeply nested **Option** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List Static IP
 
-A [`static_ip`](#static-ip-7bbfdd) block (within [`vmware.not_managed.node_list.interface_list`](#list-7c5ba9)) supports the following:
-
-<a id="default-gw-8da59d"></a>&#x2022; [`default_gw`](#default-gw-8da59d) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-2af93c"></a>&#x2022; [`ip_address`](#address-2af93c) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-acfda1"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List Static IPv6 Address
 
-A [`static_ipv6_address`](#address-535454) block (within [`vmware.not_managed.node_list.interface_list`](#list-7c5ba9)) supports the following:
-
-<a id="static-ip-16c6d7"></a>&#x2022; [`cluster_static_ip`](#static-ip-16c6d7) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-16c6d7) below.
-
-<a id="static-ip-b1dca6"></a>&#x2022; [`node_static_ip`](#static-ip-b1dca6) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-b1dca6) below.
+<a id="deep-ddcd86"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-16c6d7) block (within [`vmware.not_managed.node_list.interface_list.static_ipv6_address`](#address-535454)) supports the following:
-
-<a id="map-a68ba0"></a>&#x2022; [`interface_ip_map`](#map-a68ba0) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-a76954"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-b1dca6) block (within [`vmware.not_managed.node_list.interface_list.static_ipv6_address`](#address-535454)) supports the following:
-
-<a id="default-gw-2f177f"></a>&#x2022; [`default_gw`](#default-gw-2f177f) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-a690a0"></a>&#x2022; [`ip_address`](#address-a690a0) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-e0fa74"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Vmware Not Managed Node List Interface List VLAN Interface
 
-A [`vlan_interface`](#interface-699e69) block (within [`vmware.not_managed.node_list.interface_list`](#list-7c5ba9)) supports the following:
+<a id="deep-a2b927"></a>Deeply nested **Interface** block collapsed for readability.
 
-<a id="device-8276fb"></a>&#x2022; [`device`](#device-8276fb) - Optional String<br>Parent Interface. Select a parent interface from the dropdown
+---
 
-<a id="vlan-id-c5b55c"></a>&#x2022; [`vlan_id`](#vlan-id-c5b55c) - Optional Number<br>VLAN ID. Configure the VLAN tag for this interface
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

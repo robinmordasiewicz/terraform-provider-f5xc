@@ -2,12 +2,12 @@
 page_title: "f5xc_service_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  [Category: Security] [Namespace: required] [DependsOn: namespace] Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+  Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_service_policy (Resource)
 
-[Category: Security] [Namespace: required] [DependsOn: namespace] Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [Service Policy API docs](https://docs.cloud.f5.com/docs-v2/api/service-policy) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Service Policy Resource Example
-# [Category: Security] [Namespace: required] [DependsOn: namespace] Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
+# Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Service Policy configuration
 resource "f5xc_service_policy" "example" {
@@ -111,7 +111,7 @@ An [`allow_list`](#allow-list) block supports the following:
 
 <a id="allow-list-prefix-list"></a>&#x2022; [`prefix_list`](#allow-list-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#allow-list-prefix-list) below.
 
-<a id="allow-list-tls-fingerprint-classes"></a>&#x2022; [`tls_fingerprint_classes`](#allow-list-tls-fingerprint-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
+<a id="allow-list-tls-fingerprint-classes"></a>&#x2022; [`tls_fingerprint_classes`](#allow-list-tls-fingerprint-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
 <a id="allow-list-tls-fingerprint-values"></a>&#x2022; [`tls_fingerprint_values`](#allow-list-tls-fingerprint-values) - Optional List<br>TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
 
@@ -123,23 +123,11 @@ An [`asn_list`](#allow-list-asn-list) block (within [`allow_list`](#allow-list))
 
 #### Allow List Asn Set
 
-An [`asn_set`](#allow-list-asn-set) block (within [`allow_list`](#allow-list)) supports the following:
-
-<a id="allow-list-asn-set-name"></a>&#x2022; [`name`](#allow-list-asn-set-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="allow-list-asn-set-namespace"></a>&#x2022; [`namespace`](#allow-list-asn-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="allow-list-asn-set-tenant"></a>&#x2022; [`tenant`](#allow-list-asn-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-a23f21"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Allow List IP Prefix Set
 
-An [`ip_prefix_set`](#allow-list-ip-prefix-set) block (within [`allow_list`](#allow-list)) supports the following:
-
-<a id="allow-list-ip-prefix-set-name"></a>&#x2022; [`name`](#allow-list-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="allow-list-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#allow-list-ip-prefix-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="allow-list-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#allow-list-ip-prefix-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-c28920"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Allow List Prefix List
 
@@ -167,7 +155,7 @@ A [`deny_list`](#deny-list) block supports the following:
 
 <a id="deny-list-prefix-list"></a>&#x2022; [`prefix_list`](#deny-list-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Prefix List](#deny-list-prefix-list) below.
 
-<a id="deny-list-tls-fingerprint-classes"></a>&#x2022; [`tls_fingerprint_classes`](#deny-list-tls-fingerprint-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
+<a id="deny-list-tls-fingerprint-classes"></a>&#x2022; [`tls_fingerprint_classes`](#deny-list-tls-fingerprint-classes) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS Fingerprint Classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
 <a id="deny-list-tls-fingerprint-values"></a>&#x2022; [`tls_fingerprint_values`](#deny-list-tls-fingerprint-values) - Optional List<br>TLS Fingerprint Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
 
@@ -179,23 +167,11 @@ An [`asn_list`](#deny-list-asn-list) block (within [`deny_list`](#deny-list)) su
 
 #### Deny List Asn Set
 
-An [`asn_set`](#deny-list-asn-set) block (within [`deny_list`](#deny-list)) supports the following:
-
-<a id="deny-list-asn-set-name"></a>&#x2022; [`name`](#deny-list-asn-set-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="deny-list-asn-set-namespace"></a>&#x2022; [`namespace`](#deny-list-asn-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="deny-list-asn-set-tenant"></a>&#x2022; [`tenant`](#deny-list-asn-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-39491c"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Deny List IP Prefix Set
 
-An [`ip_prefix_set`](#deny-list-ip-prefix-set) block (within [`deny_list`](#deny-list)) supports the following:
-
-<a id="deny-list-ip-prefix-set-name"></a>&#x2022; [`name`](#deny-list-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="deny-list-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#deny-list-ip-prefix-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="deny-list-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#deny-list-ip-prefix-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-9600e1"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Deny List Prefix List
 
@@ -325,7 +301,7 @@ An [`item`](#rule-list-rules-spec-arg-matchers-item) block (within [`rule_list.r
 
 <a id="values-8f2f21"></a>&#x2022; [`regex_values`](#values-8f2f21) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="transformers-0078cd"></a>&#x2022; [`transformers`](#transformers-0078cd) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-0078cd"></a>&#x2022; [`transformers`](#transformers-0078cd) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Asn List
 
@@ -341,17 +317,7 @@ An [`asn_matcher`](#rule-list-rules-spec-asn-matcher) block (within [`rule_list.
 
 #### Rule List Rules Spec Asn Matcher Asn Sets
 
-An [`asn_sets`](#sets-0b3475) block (within [`rule_list.rules.spec.asn_matcher`](#rule-list-rules-spec-asn-matcher)) supports the following:
-
-<a id="kind-5eb208"></a>&#x2022; [`kind`](#kind-5eb208) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-15beb2"></a>&#x2022; [`name`](#name-15beb2) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-92a7ae"></a>&#x2022; [`namespace`](#namespace-92a7ae) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-98502e"></a>&#x2022; [`tenant`](#tenant-98502e) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-648ca9"></a>&#x2022; [`uid`](#uid-648ca9) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-8752e9"></a>Deeply nested **Sets** block collapsed for readability.
 
 #### Rule List Rules Spec Body Matcher
 
@@ -361,7 +327,7 @@ A [`body_matcher`](#rule-list-rules-spec-body-matcher) block (within [`rule_list
 
 <a id="values-156f80"></a>&#x2022; [`regex_values`](#values-156f80) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="transformers-8d4f75"></a>&#x2022; [`transformers`](#transformers-8d4f75) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-8d4f75"></a>&#x2022; [`transformers`](#transformers-8d4f75) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Bot Action
 
@@ -379,7 +345,7 @@ A [`client_name_matcher`](#matcher-ded25d) block (within [`rule_list.rules.spec`
 
 <a id="values-4b3791"></a>&#x2022; [`regex_values`](#values-4b3791) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="transformers-fd5b88"></a>&#x2022; [`transformers`](#transformers-fd5b88) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-fd5b88"></a>&#x2022; [`transformers`](#transformers-fd5b88) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Client Selector
 
@@ -409,7 +375,7 @@ An [`item`](#item-ab8ab4) block (within [`rule_list.rules.spec.cookie_matchers`]
 
 <a id="values-8e4fe5"></a>&#x2022; [`regex_values`](#values-8e4fe5) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="transformers-c061db"></a>&#x2022; [`transformers`](#transformers-c061db) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-c061db"></a>&#x2022; [`transformers`](#transformers-c061db) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Domain Matcher
 
@@ -419,7 +385,7 @@ A [`domain_matcher`](#rule-list-rules-spec-domain-matcher) block (within [`rule_
 
 <a id="values-e318f7"></a>&#x2022; [`regex_values`](#values-e318f7) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="transformers-f69aff"></a>&#x2022; [`transformers`](#transformers-f69aff) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-f69aff"></a>&#x2022; [`transformers`](#transformers-f69aff) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Headers
 
@@ -443,7 +409,7 @@ An [`item`](#rule-list-rules-spec-headers-item) block (within [`rule_list.rules.
 
 <a id="values-0db8b4"></a>&#x2022; [`regex_values`](#values-0db8b4) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="transformers-a3008a"></a>&#x2022; [`transformers`](#transformers-a3008a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-a3008a"></a>&#x2022; [`transformers`](#transformers-a3008a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec HTTP Method
 
@@ -451,7 +417,7 @@ A [`http_method`](#rule-list-rules-spec-http-method) block (within [`rule_list.r
 
 <a id="matcher-ea16cd"></a>&#x2022; [`invert_matcher`](#matcher-ea16cd) - Optional Bool<br>Invert Method Matcher. Invert the match result
 
-<a id="methods-7419c4"></a>&#x2022; [`methods`](#methods-7419c4) - Optional List  Defaults to `ANY`<br>Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`<br>[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] Method List. List of methods values to match against
+<a id="methods-7419c4"></a>&#x2022; [`methods`](#methods-7419c4) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Method List. List of methods values to match against
 
 #### Rule List Rules Spec IP Matcher
 
@@ -463,17 +429,7 @@ An [`ip_matcher`](#rule-list-rules-spec-ip-matcher) block (within [`rule_list.ru
 
 #### Rule List Rules Spec IP Matcher Prefix Sets
 
-A [`prefix_sets`](#sets-e4318a) block (within [`rule_list.rules.spec.ip_matcher`](#rule-list-rules-spec-ip-matcher)) supports the following:
-
-<a id="kind-2cf0f9"></a>&#x2022; [`kind`](#kind-2cf0f9) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-5f1c1f"></a>&#x2022; [`name`](#name-5f1c1f) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-ff5432"></a>&#x2022; [`namespace`](#namespace-ff5432) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-362f28"></a>&#x2022; [`tenant`](#tenant-362f28) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-38c7d3"></a>&#x2022; [`uid`](#uid-38c7d3) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-916df9"></a>Deeply nested **Sets** block collapsed for readability.
 
 #### Rule List Rules Spec IP Prefix List
 
@@ -485,9 +441,7 @@ An [`ip_prefix_list`](#rule-list-rules-spec-ip-prefix-list) block (within [`rule
 
 #### Rule List Rules Spec IP Threat Category List
 
-An [`ip_threat_category_list`](#list-f2b1f3) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
-
-<a id="categories-ff2d46"></a>&#x2022; [`ip_threat_categories`](#categories-ff2d46) - Optional List  Defaults to `SPAM_SOURCES`<br>Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`<br>[Enum: SPAM_SOURCES|WINDOWS_EXPLOITS|WEB_ATTACKS|BOTNETS|SCANNERS|REPUTATION|PHISHING|PROXY|MOBILE_THREATS|TOR_PROXY|DENIAL_OF_SERVICE|NETWORK] List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions
+<a id="deep-990965"></a>Deeply nested **List** block collapsed for readability.
 
 #### Rule List Rules Spec Ja4 TLS Fingerprint
 
@@ -517,7 +471,7 @@ An [`item`](#rule-list-rules-spec-jwt-claims-item) block (within [`rule_list.rul
 
 <a id="values-abf135"></a>&#x2022; [`regex_values`](#values-abf135) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="transformers-365d8a"></a>&#x2022; [`transformers`](#transformers-365d8a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-365d8a"></a>&#x2022; [`transformers`](#transformers-365d8a) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Label Matcher
 
@@ -547,7 +501,7 @@ A [`path`](#rule-list-rules-spec-path) block (within [`rule_list.rules.spec`](#r
 
 <a id="rule-list-rules-spec-path-suffix-values"></a>&#x2022; [`suffix_values`](#rule-list-rules-spec-path-suffix-values) - Optional List<br>Suffix Values. A list of path suffix values to match the input HTTP path against
 
-<a id="rule-list-rules-spec-path-transformers"></a>&#x2022; [`transformers`](#rule-list-rules-spec-path-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="rule-list-rules-spec-path-transformers"></a>&#x2022; [`transformers`](#rule-list-rules-spec-path-transformers) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Port Matcher
 
@@ -579,7 +533,7 @@ An [`item`](#rule-list-rules-spec-query-params-item) block (within [`rule_list.r
 
 <a id="values-b50c1e"></a>&#x2022; [`regex_values`](#values-b50c1e) - Optional List<br>Regex Values. A list of regular expressions to match the input against
 
-<a id="transformers-499060"></a>&#x2022; [`transformers`](#transformers-499060) - Optional List  Defaults to `TRANSFORMER_NONE`<br>Possible values are `LOWER_CASE`, `UPPER_CASE`, `BASE64_DECODE`, `NORMALIZE_PATH`, `REMOVE_WHITESPACE`, `URL_DECODE`, `TRIM_LEFT`, `TRIM_RIGHT`, `TRIM`<br>[Enum: LOWER_CASE|UPPER_CASE|BASE64_DECODE|NORMALIZE_PATH|REMOVE_WHITESPACE|URL_DECODE|TRIM_LEFT|TRIM_RIGHT|TRIM] Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
+<a id="transformers-499060"></a>&#x2022; [`transformers`](#transformers-499060) - Optional List  Defaults to `TRANSFORMER_NONE`<br>See [Transformers](#common-transformers)<br> Transformers. An ordered list of transformers (starting from index 0) to be applied to the path before matching
 
 #### Rule List Rules Spec Request Constraints
 
@@ -653,41 +607,25 @@ A [`segment_policy`](#rule-list-rules-spec-segment-policy) block (within [`rule_
 
 #### Rule List Rules Spec Segment Policy Dst Segments
 
-A [`dst_segments`](#segments-478f34) block (within [`rule_list.rules.spec.segment_policy`](#rule-list-rules-spec-segment-policy)) supports the following:
-
-<a id="segments-c03bbe"></a>&#x2022; [`segments`](#segments-c03bbe) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#segments-c03bbe) below.
+<a id="deep-8c7969"></a>Deeply nested **Segments** block collapsed for readability.
 
 #### Rule List Rules Spec Segment Policy Dst Segments Segments
 
-A [`segments`](#segments-c03bbe) block (within [`rule_list.rules.spec.segment_policy.dst_segments`](#segments-478f34)) supports the following:
-
-<a id="name-218ae8"></a>&#x2022; [`name`](#name-218ae8) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-42b54f"></a>&#x2022; [`namespace`](#namespace-42b54f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-9e07d0"></a>&#x2022; [`tenant`](#tenant-9e07d0) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-8de087"></a>Deeply nested **Segments** block collapsed for readability.
 
 #### Rule List Rules Spec Segment Policy Src Segments
 
-A [`src_segments`](#segments-191ada) block (within [`rule_list.rules.spec.segment_policy`](#rule-list-rules-spec-segment-policy)) supports the following:
-
-<a id="segments-7a67c9"></a>&#x2022; [`segments`](#segments-7a67c9) - Optional Block<br>Segments. Select list of segments<br>See [Segments](#segments-7a67c9) below.
+<a id="deep-0d1630"></a>Deeply nested **Segments** block collapsed for readability.
 
 #### Rule List Rules Spec Segment Policy Src Segments Segments
 
-A [`segments`](#segments-7a67c9) block (within [`rule_list.rules.spec.segment_policy.src_segments`](#segments-191ada)) supports the following:
-
-<a id="name-bb44ac"></a>&#x2022; [`name`](#name-bb44ac) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e269e8"></a>&#x2022; [`namespace`](#namespace-e269e8) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-29af01"></a>&#x2022; [`tenant`](#tenant-29af01) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-935983"></a>Deeply nested **Segments** block collapsed for readability.
 
 #### Rule List Rules Spec TLS Fingerprint Matcher
 
 A [`tls_fingerprint_matcher`](#matcher-95ee34) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="classes-8d3695"></a>&#x2022; [`classes`](#classes-8d3695) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>Possible values are `TLS_FINGERPRINT_NONE`, `ANY_MALICIOUS_FINGERPRINT`, `ADWARE`, `ADWIND`, `DRIDEX`, `GOOTKIT`, `GOZI`, `JBIFROST`, `QUAKBOT`, `RANSOMWARE`, `TROLDESH`, `TOFSEE`, `TORRENTLOCKER`, `TRICKBOT`<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
+<a id="classes-8d3695"></a>&#x2022; [`classes`](#classes-8d3695) - Optional List  Defaults to `TLS_FINGERPRINT_NONE`<br>See [TLS Fingerprints](#common-tls-fingerprints)<br>[Enum: TLS_FINGERPRINT_NONE|ANY_MALICIOUS_FINGERPRINT|ADWARE|ADWIND|DRIDEX|GOOTKIT|GOZI|JBIFROST|QUAKBOT|RANSOMWARE|TROLDESH|TOFSEE|TORRENTLOCKER|TRICKBOT] TLS fingerprint classes. A list of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against
 
 <a id="values-e523b3"></a>&#x2022; [`exact_values`](#values-e523b3) - Optional List<br>Exact Values. A list of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against
 
@@ -713,51 +651,23 @@ A [`waf_action`](#rule-list-rules-spec-waf-action) block (within [`rule_list.rul
 
 #### Rule List Rules Spec WAF Action App Firewall Detection Control
 
-An [`app_firewall_detection_control`](#control-4fbf89) block (within [`rule_list.rules.spec.waf_action`](#rule-list-rules-spec-waf-action)) supports the following:
-
-<a id="contexts-37ecbb"></a>&#x2022; [`exclude_attack_type_contexts`](#contexts-37ecbb) - Optional Block<br>Attack Types. Attack Types to be excluded for the defined match criteria<br>See [Exclude Attack Type Contexts](#contexts-37ecbb) below.
-
-<a id="contexts-e1b02b"></a>&#x2022; [`exclude_bot_name_contexts`](#contexts-e1b02b) - Optional Block<br>Bot Names. Bot Names to be excluded for the defined match criteria<br>See [Exclude Bot Name Contexts](#contexts-e1b02b) below.
-
-<a id="contexts-2da85d"></a>&#x2022; [`exclude_signature_contexts`](#contexts-2da85d) - Optional Block<br>Signature IDs. Signature IDs to be excluded for the defined match criteria<br>See [Exclude Signature Contexts](#contexts-2da85d) below.
-
-<a id="contexts-716dd3"></a>&#x2022; [`exclude_violation_contexts`](#contexts-716dd3) - Optional Block<br>Violations. Violations to be excluded for the defined match criteria<br>See [Exclude Violation Contexts](#contexts-716dd3) below.
+<a id="deep-3d8491"></a>Deeply nested **Control** block collapsed for readability.
 
 #### Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Attack Type Contexts
 
-An [`exclude_attack_type_contexts`](#contexts-37ecbb) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#control-4fbf89)) supports the following:
-
-<a id="context-db3d53"></a>&#x2022; [`context`](#context-db3d53) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
-
-<a id="name-dcda5a"></a>&#x2022; [`context_name`](#name-dcda5a) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
-
-<a id="type-0b6341"></a>&#x2022; [`exclude_attack_type`](#type-0b6341) - Optional String  Defaults to `ATTACK_TYPE_NONE`<br>Possible values are `ATTACK_TYPE_NONE`, `ATTACK_TYPE_NON_BROWSER_CLIENT`, `ATTACK_TYPE_OTHER_APPLICATION_ATTACKS`, `ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE`, `ATTACK_TYPE_DETECTION_EVASION`, `ATTACK_TYPE_VULNERABILITY_SCAN`, `ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY`, `ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS`, `ATTACK_TYPE_BUFFER_OVERFLOW`, `ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION`, `ATTACK_TYPE_INFORMATION_LEAKAGE`, `ATTACK_TYPE_DIRECTORY_INDEXING`, `ATTACK_TYPE_PATH_TRAVERSAL`, `ATTACK_TYPE_XPATH_INJECTION`, `ATTACK_TYPE_LDAP_INJECTION`, `ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION`, `ATTACK_TYPE_COMMAND_EXECUTION`, `ATTACK_TYPE_SQL_INJECTION`, `ATTACK_TYPE_CROSS_SITE_SCRIPTING`, `ATTACK_TYPE_DENIAL_OF_SERVICE`, `ATTACK_TYPE_HTTP_PARSER_ATTACK`, `ATTACK_TYPE_SESSION_HIJACKING`, `ATTACK_TYPE_HTTP_RESPONSE_SPLITTING`, `ATTACK_TYPE_FORCEFUL_BROWSING`, `ATTACK_TYPE_REMOTE_FILE_INCLUDE`, `ATTACK_TYPE_MALICIOUS_FILE_UPLOAD`, `ATTACK_TYPE_GRAPHQL_PARSER_ATTACK`<br>[Enum: ATTACK_TYPE_NONE|ATTACK_TYPE_NON_BROWSER_CLIENT|ATTACK_TYPE_OTHER_APPLICATION_ATTACKS|ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE|ATTACK_TYPE_DETECTION_EVASION|ATTACK_TYPE_VULNERABILITY_SCAN|ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY|ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS|ATTACK_TYPE_BUFFER_OVERFLOW|ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION|ATTACK_TYPE_INFORMATION_LEAKAGE|ATTACK_TYPE_DIRECTORY_INDEXING|ATTACK_TYPE_PATH_TRAVERSAL|ATTACK_TYPE_XPATH_INJECTION|ATTACK_TYPE_LDAP_INJECTION|ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION|ATTACK_TYPE_COMMAND_EXECUTION|ATTACK_TYPE_SQL_INJECTION|ATTACK_TYPE_CROSS_SITE_SCRIPTING|ATTACK_TYPE_DENIAL_OF_SERVICE|ATTACK_TYPE_HTTP_PARSER_ATTACK|ATTACK_TYPE_SESSION_HIJACKING|ATTACK_TYPE_HTTP_RESPONSE_SPLITTING|ATTACK_TYPE_FORCEFUL_BROWSING|ATTACK_TYPE_REMOTE_FILE_INCLUDE|ATTACK_TYPE_MALICIOUS_FILE_UPLOAD|ATTACK_TYPE_GRAPHQL_PARSER_ATTACK] Attack Types. List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS ATTACK_TYPE_BUFFER_OVERFLOW ATTACK_TYPE_PREDICTABLE_RESOURCE_LOCATION ATTACK_TYPE_INFORMATION_LEAKAGE ATTACK_TYPE_DIRECTORY_INDEXING ATTACK_TYPE_PATH_TRAVERSAL ATTACK_TYPE_XPATH_INJECTION ATTACK_TYPE_LDAP_INJECTION ATTACK_TYPE_SERVER_SIDE_CODE_INJECTION ATTACK_TYPE_COMMAND_EXECUTION ATTACK_TYPE_SQL_INJECTION ATTACK_TYPE_CROSS_SITE_SCRIPTING ATTACK_TYPE_DENIAL_OF_SERVICE ATTACK_TYPE_HTTP_PARSER_ATTACK ATTACK_TYPE_SESSION_HIJACKING ATTACK_TYPE_HTTP_RESPONSE_SPLITTING ATTACK_TYPE_FORCEFUL_BROWSING ATTACK_TYPE_REMOTE_FILE_INCLUDE ATTACK_TYPE_MALICIOUS_FILE_UPLOAD ATTACK_TYPE_GRAPHQL_PARSER_ATTACK
+<a id="deep-fc8b09"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Bot Name Contexts
 
-An [`exclude_bot_name_contexts`](#contexts-e1b02b) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#control-4fbf89)) supports the following:
-
-<a id="name-b71242"></a>&#x2022; [`bot_name`](#name-b71242) - Optional String<br>Bot Name
+<a id="deep-02ea7a"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Signature Contexts
 
-An [`exclude_signature_contexts`](#contexts-2da85d) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#control-4fbf89)) supports the following:
-
-<a id="context-1d6f79"></a>&#x2022; [`context`](#context-1d6f79) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
-
-<a id="name-2c4afd"></a>&#x2022; [`context_name`](#name-2c4afd) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
-
-<a id="signature-id-c5ea27"></a>&#x2022; [`signature_id`](#signature-id-c5ea27) - Optional Number<br>SignatureID. The allowed values for signature ID are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context
+<a id="deep-f1d198"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### Rule List Rules Spec WAF Action App Firewall Detection Control Exclude Violation Contexts
 
-An [`exclude_violation_contexts`](#contexts-716dd3) block (within [`rule_list.rules.spec.waf_action.app_firewall_detection_control`](#control-4fbf89)) supports the following:
-
-<a id="context-c1896e"></a>&#x2022; [`context`](#context-c1896e) - Optional String  Defaults to `CONTEXT_ANY`<br>Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`<br>[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI
-
-<a id="name-4dc87b"></a>&#x2022; [`context_name`](#name-4dc87b) - Optional String<br>Context Name. Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*)
-
-<a id="violation-dfe3e0"></a>&#x2022; [`exclude_violation`](#violation-dfe3e0) - Optional String  Defaults to `VIOL_NONE`<br>Possible values are `VIOL_NONE`, `VIOL_FILETYPE`, `VIOL_METHOD`, `VIOL_MANDATORY_HEADER`, `VIOL_HTTP_RESPONSE_STATUS`, `VIOL_REQUEST_MAX_LENGTH`, `VIOL_FILE_UPLOAD`, `VIOL_FILE_UPLOAD_IN_BODY`, `VIOL_XML_MALFORMED`, `VIOL_JSON_MALFORMED`, `VIOL_ASM_COOKIE_MODIFIED`, `VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS`, `VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE`, `VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT`, `VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST`, `VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION`, `VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS`, `VIOL_EVASION_DIRECTORY_TRAVERSALS`, `VIOL_MALFORMED_REQUEST`, `VIOL_EVASION_MULTIPLE_DECODING`, `VIOL_DATA_GUARD`, `VIOL_EVASION_APACHE_WHITESPACE`, `VIOL_COOKIE_MODIFIED`, `VIOL_EVASION_IIS_UNICODE_CODEPOINTS`, `VIOL_EVASION_IIS_BACKSLASHES`, `VIOL_EVASION_PERCENT_U_DECODING`, `VIOL_EVASION_BARE_BYTE_DECODING`, `VIOL_EVASION_BAD_UNESCAPE`, `VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST`, `VIOL_ENCODING`, `VIOL_COOKIE_MALFORMED`, `VIOL_GRAPHQL_FORMAT`, `VIOL_GRAPHQL_MALFORMED`, `VIOL_GRAPHQL_INTROSPECTION_QUERY`<br>[Enum: VIOL_NONE|VIOL_FILETYPE|VIOL_METHOD|VIOL_MANDATORY_HEADER|VIOL_HTTP_RESPONSE_STATUS|VIOL_REQUEST_MAX_LENGTH|VIOL_FILE_UPLOAD|VIOL_FILE_UPLOAD_IN_BODY|VIOL_XML_MALFORMED|VIOL_JSON_MALFORMED|VIOL_ASM_COOKIE_MODIFIED|VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS|VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE|VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT|VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST|VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION|VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS|VIOL_EVASION_DIRECTORY_TRAVERSALS|VIOL_MALFORMED_REQUEST|VIOL_EVASION_MULTIPLE_DECODING|VIOL_DATA_GUARD|VIOL_EVASION_APACHE_WHITESPACE|VIOL_COOKIE_MODIFIED|VIOL_EVASION_IIS_UNICODE_CODEPOINTS|VIOL_EVASION_IIS_BACKSLASHES|VIOL_EVASION_PERCENT_U_DECODING|VIOL_EVASION_BARE_BYTE_DECODING|VIOL_EVASION_BAD_UNESCAPE|VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST|VIOL_ENCODING|VIOL_COOKIE_MALFORMED|VIOL_GRAPHQL_FORMAT|VIOL_GRAPHQL_MALFORMED|VIOL_GRAPHQL_INTROSPECTION_QUERY] App Firewall Violation Type. List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS VIOL_HTTP_PROTOCOL_BAD_HOST_HEADER_VALUE VIOL_HTTP_PROTOCOL_UNPARSABLE_REQUEST_CONTENT VIOL_HTTP_PROTOCOL_NULL_IN_REQUEST VIOL_HTTP_PROTOCOL_BAD_HTTP_VERSION VIOL_HTTP_PROTOCOL_CRLF_CHARACTERS_BEFORE_REQUEST_START VIOL_HTTP_PROTOCOL_NO_HOST_HEADER_IN_HTTP_1_1_REQUEST VIOL_HTTP_PROTOCOL_BAD_MULTIPART_PARAMETERS_PARSING VIOL_HTTP_PROTOCOL_SEVERAL_CONTENT_LENGTH_HEADERS VIOL_HTTP_PROTOCOL_CONTENT_LENGTH_SHOULD_BE_A_POSITIVE_NUMBER VIOL_EVASION_DIRECTORY_TRAVERSALS VIOL_MALFORMED_REQUEST VIOL_EVASION_MULTIPLE_DECODING VIOL_DATA_GUARD VIOL_EVASION_APACHE_WHITESPACE VIOL_COOKIE_MODIFIED VIOL_EVASION_IIS_UNICODE_CODEPOINTS VIOL_EVASION_IIS_BACKSLASHES VIOL_EVASION_PERCENT_U_DECODING VIOL_EVASION_BARE_BYTE_DECODING VIOL_EVASION_BAD_UNESCAPE VIOL_HTTP_PROTOCOL_BAD_MULTIPART_FORMDATA_REQUEST_PARSING VIOL_HTTP_PROTOCOL_BODY_IN_GET_OR_HEAD_REQUEST VIOL_HTTP_PROTOCOL_HIGH_ASCII_CHARACTERS_IN_HEADERS VIOL_ENCODING VIOL_COOKIE_MALFORMED VIOL_GRAPHQL_FORMAT VIOL_GRAPHQL_MALFORMED VIOL_GRAPHQL_INTROSPECTION_QUERY
+<a id="deep-5122ed"></a>Deeply nested **Contexts** block collapsed for readability.
 
 #### Server Name Matcher
 
@@ -784,6 +694,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

@@ -2,12 +2,12 @@
 page_title: "f5xc_aws_tgw_site Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  [Category: Sites] [Namespace: required] Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
+  Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 ---
 
 # f5xc_aws_tgw_site (Resource)
 
-[Category: Sites] [Namespace: required] Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
+Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 
 ~> **Note** Please refer to [AWS TGW Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-aws-tgw-site) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # AWS TGW Site Resource Example
-# [Category: Sites] [Namespace: required] Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
+# Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 
 # Basic AWS TGW Site configuration
 resource "f5xc_aws_tgw_site" "example" {
@@ -226,13 +226,7 @@ A [`clear_secret_info`](#info-fb7899) block (within [`aws_parameters.admin_passw
 
 #### AWS Parameters AWS Cred
 
-An [`aws_cred`](#aws-parameters-aws-cred) block (within [`aws_parameters`](#aws-parameters)) supports the following:
-
-<a id="aws-parameters-aws-cred-name"></a>&#x2022; [`name`](#aws-parameters-aws-cred-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="aws-parameters-aws-cred-namespace"></a>&#x2022; [`namespace`](#aws-parameters-aws-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="aws-parameters-aws-cred-tenant"></a>&#x2022; [`tenant`](#aws-parameters-aws-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-5aec29"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### AWS Parameters Az Nodes
 
@@ -258,9 +252,7 @@ An [`inside_subnet`](#aws-parameters-az-nodes-inside-subnet) block (within [`aws
 
 #### AWS Parameters Az Nodes Inside Subnet Subnet Param
 
-A [`subnet_param`](#param-0af112) block (within [`aws_parameters.az_nodes.inside_subnet`](#aws-parameters-az-nodes-inside-subnet)) supports the following:
-
-<a id="ipv4-795d19"></a>&#x2022; [`ipv4`](#ipv4-795d19) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-7b414b"></a>Deeply nested **Param** block collapsed for readability.
 
 #### AWS Parameters Az Nodes Outside Subnet
 
@@ -272,9 +264,7 @@ An [`outside_subnet`](#aws-parameters-az-nodes-outside-subnet) block (within [`a
 
 #### AWS Parameters Az Nodes Outside Subnet Subnet Param
 
-A [`subnet_param`](#param-8c7238) block (within [`aws_parameters.az_nodes.outside_subnet`](#aws-parameters-az-nodes-outside-subnet)) supports the following:
-
-<a id="ipv4-3815f8"></a>&#x2022; [`ipv4`](#ipv4-3815f8) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-4c5e7a"></a>Deeply nested **Param** block collapsed for readability.
 
 #### AWS Parameters Az Nodes Workload Subnet
 
@@ -286,9 +276,7 @@ A [`workload_subnet`](#aws-parameters-az-nodes-workload-subnet) block (within [`
 
 #### AWS Parameters Az Nodes Workload Subnet Subnet Param
 
-A [`subnet_param`](#param-6a7d7e) block (within [`aws_parameters.az_nodes.workload_subnet`](#aws-parameters-az-nodes-workload-subnet)) supports the following:
-
-<a id="ipv4-cb4b3f"></a>&#x2022; [`ipv4`](#ipv4-cb4b3f) - Optional String<br>IPv4 Subnet. IPv4 subnet prefix for this subnet
+<a id="deep-28ae55"></a>Deeply nested **Param** block collapsed for readability.
 
 #### AWS Parameters Custom Security Group
 
@@ -398,9 +386,7 @@ A [`hosted_vifs`](#direct-connect-enabled-hosted-vifs) block (within [`direct_co
 
 #### Direct Connect Enabled Hosted Vifs Site Registration Over Direct Connect
 
-A [`site_registration_over_direct_connect`](#connect-b8275e) block (within [`direct_connect_enabled.hosted_vifs`](#direct-connect-enabled-hosted-vifs)) supports the following:
-
-<a id="name-3786bf"></a>&#x2022; [`cloudlink_network_name`](#name-3786bf) - Optional String<br>Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support
+<a id="deep-3f196d"></a>Deeply nested **Connect** block collapsed for readability.
 
 #### Direct Connect Enabled Hosted Vifs Vif List
 
@@ -434,13 +420,7 @@ An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_dr
 
 #### Log Receiver
 
-A [`log_receiver`](#log-receiver) block supports the following:
-
-<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0da9d9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Offline Survivability Mode
 
@@ -486,13 +466,7 @@ A [`private_connectivity`](#private-connectivity) block supports the following:
 
 #### Private Connectivity Cloud Link
 
-A [`cloud_link`](#private-connectivity-cloud-link) block (within [`private_connectivity`](#private-connectivity)) supports the following:
-
-<a id="private-connectivity-cloud-link-name"></a>&#x2022; [`name`](#private-connectivity-cloud-link-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-73cbe6"></a>&#x2022; [`namespace`](#namespace-73cbe6) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="private-connectivity-cloud-link-tenant"></a>&#x2022; [`tenant`](#private-connectivity-cloud-link-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-14b419"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Sw
 
@@ -532,13 +506,7 @@ An [`active_east_west_service_policies`](#policies-01858e) block (within [`tgw_s
 
 #### TGW Security Active East West Service Policies Service Policies
 
-A [`service_policies`](#policies-1d3dba) block (within [`tgw_security.active_east_west_service_policies`](#policies-01858e)) supports the following:
-
-<a id="name-a28950"></a>&#x2022; [`name`](#name-a28950) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-14641d"></a>&#x2022; [`namespace`](#namespace-14641d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-08c36b"></a>&#x2022; [`tenant`](#tenant-08c36b) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-e699b1"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### TGW Security Active Enhanced Firewall Policies
 
@@ -548,13 +516,7 @@ An [`active_enhanced_firewall_policies`](#policies-bd7a9f) block (within [`tgw_s
 
 #### TGW Security Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced_firewall_policies`](#policies-cb81f7) block (within [`tgw_security.active_enhanced_firewall_policies`](#policies-bd7a9f)) supports the following:
-
-<a id="name-9e320d"></a>&#x2022; [`name`](#name-9e320d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-a1cacb"></a>&#x2022; [`namespace`](#namespace-a1cacb) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-71e2af"></a>&#x2022; [`tenant`](#tenant-71e2af) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-c5afa4"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### TGW Security Active Forward Proxy Policies
 
@@ -564,13 +526,7 @@ An [`active_forward_proxy_policies`](#policies-b83241) block (within [`tgw_secur
 
 #### TGW Security Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward_proxy_policies`](#policies-5ad557) block (within [`tgw_security.active_forward_proxy_policies`](#policies-b83241)) supports the following:
-
-<a id="name-d86e33"></a>&#x2022; [`name`](#name-d86e33) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-dde4f0"></a>&#x2022; [`namespace`](#namespace-dde4f0) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1212f5"></a>&#x2022; [`tenant`](#tenant-1212f5) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-9f1135"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### TGW Security Active Network Policies
 
@@ -580,13 +536,7 @@ An [`active_network_policies`](#tgw-security-active-network-policies) block (wit
 
 #### TGW Security Active Network Policies Network Policies
 
-A [`network_policies`](#policies-2df1c5) block (within [`tgw_security.active_network_policies`](#tgw-security-active-network-policies)) supports the following:
-
-<a id="name-df78b9"></a>&#x2022; [`name`](#name-df78b9) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f0dea9"></a>&#x2022; [`namespace`](#namespace-f0dea9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-50eb46"></a>&#x2022; [`tenant`](#tenant-50eb46) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-2df1c5"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Timeouts
 
@@ -666,29 +616,15 @@ An [`allowed_vip_port_sli`](#vn-config-allowed-vip-port-sli) block (within [`vn_
 
 #### Vn Config Allowed VIP Port SLI Custom Ports
 
-A [`custom_ports`](#ports-0633b5) block (within [`vn_config.allowed_vip_port_sli`](#vn-config-allowed-vip-port-sli)) supports the following:
-
-<a id="ranges-8218a7"></a>&#x2022; [`port_ranges`](#ranges-8218a7) - Optional String<br>Port Ranges. Port Ranges
+<a id="deep-10d15b"></a>Deeply nested **Ports** block collapsed for readability.
 
 #### Vn Config Dc Cluster Group Inside Vn
 
-A [`dc_cluster_group_inside_vn`](#vn-config-dc-cluster-group-inside-vn) block (within [`vn_config`](#vn-config)) supports the following:
-
-<a id="name-904397"></a>&#x2022; [`name`](#name-904397) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-e2263f"></a>&#x2022; [`namespace`](#namespace-e2263f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1e1451"></a>&#x2022; [`tenant`](#tenant-1e1451) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-cd3510"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Vn Config Dc Cluster Group Outside Vn
 
-A [`dc_cluster_group_outside_vn`](#vn-config-dc-cluster-group-outside-vn) block (within [`vn_config`](#vn-config)) supports the following:
-
-<a id="name-bf8427"></a>&#x2022; [`name`](#name-bf8427) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-476b3b"></a>&#x2022; [`namespace`](#namespace-476b3b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-d41039"></a>&#x2022; [`tenant`](#tenant-d41039) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-2960ef"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Vn Config Global Network List
 
@@ -698,43 +634,23 @@ A [`global_network_list`](#vn-config-global-network-list) block (within [`vn_con
 
 #### Vn Config Global Network List Global Network Connections
 
-A [`global_network_connections`](#connections-42b80a) block (within [`vn_config.global_network_list`](#vn-config-global-network-list)) supports the following:
-
-<a id="global-dr-0f9242"></a>&#x2022; [`sli_to_global_dr`](#global-dr-0f9242) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#global-dr-0f9242) below.
-
-<a id="global-dr-d5c3aa"></a>&#x2022; [`slo_to_global_dr`](#global-dr-d5c3aa) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#global-dr-d5c3aa) below.
+<a id="deep-7134ff"></a>Deeply nested **Connections** block collapsed for readability.
 
 #### Vn Config Global Network List Global Network Connections SLI To Global DR
 
-A [`sli_to_global_dr`](#global-dr-0f9242) block (within [`vn_config.global_network_list.global_network_connections`](#connections-42b80a)) supports the following:
-
-<a id="global-vn-f6782e"></a>&#x2022; [`global_vn`](#global-vn-f6782e) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-f6782e) below.
+<a id="deep-ae1ab0"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Vn Config Global Network List Global Network Connections SLI To Global DR Global Vn
 
-A [`global_vn`](#global-vn-f6782e) block (within [`vn_config.global_network_list.global_network_connections.sli_to_global_dr`](#global-dr-0f9242)) supports the following:
-
-<a id="name-ed6166"></a>&#x2022; [`name`](#name-ed6166) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-69a1f7"></a>&#x2022; [`namespace`](#namespace-69a1f7) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-39c070"></a>&#x2022; [`tenant`](#tenant-39c070) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-77e334"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Vn Config Global Network List Global Network Connections Slo To Global DR
 
-A [`slo_to_global_dr`](#global-dr-d5c3aa) block (within [`vn_config.global_network_list.global_network_connections`](#connections-42b80a)) supports the following:
-
-<a id="global-vn-9117d5"></a>&#x2022; [`global_vn`](#global-vn-9117d5) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-9117d5) below.
+<a id="deep-a4788e"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Vn Config Global Network List Global Network Connections Slo To Global DR Global Vn
 
-A [`global_vn`](#global-vn-9117d5) block (within [`vn_config.global_network_list.global_network_connections.slo_to_global_dr`](#global-dr-d5c3aa)) supports the following:
-
-<a id="name-2dbaed"></a>&#x2022; [`name`](#name-2dbaed) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-946e82"></a>&#x2022; [`namespace`](#namespace-946e82) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-1b0b9e"></a>&#x2022; [`tenant`](#tenant-1b0b9e) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-c04cc7"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Vn Config Inside Static Routes
 
@@ -744,91 +660,43 @@ An [`inside_static_routes`](#vn-config-inside-static-routes) block (within [`vn_
 
 #### Vn Config Inside Static Routes Static Route List
 
-A [`static_route_list`](#list-b26de9) block (within [`vn_config.inside_static_routes`](#vn-config-inside-static-routes)) supports the following:
-
-<a id="route-17d4b9"></a>&#x2022; [`custom_static_route`](#route-17d4b9) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#route-17d4b9) below.
-
-<a id="route-1eb01b"></a>&#x2022; [`simple_static_route`](#route-1eb01b) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="deep-734452"></a>Deeply nested **List** block collapsed for readability.
 
 #### Vn Config Inside Static Routes Static Route List Custom Static Route
 
-A [`custom_static_route`](#route-17d4b9) block (within [`vn_config.inside_static_routes.static_route_list`](#list-b26de9)) supports the following:
-
-<a id="attrs-61e396"></a>&#x2022; [`attrs`](#attrs-61e396) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route
-
-<a id="labels-09e6c0"></a>&#x2022; [`labels`](#labels-09e6c0) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
-
-<a id="nexthop-0e926d"></a>&#x2022; [`nexthop`](#nexthop-0e926d) - Optional Block<br>Nexthop. Identifies the next-hop for a route<br>See [Nexthop](#nexthop-0e926d) below.
-
-<a id="subnets-029071"></a>&#x2022; [`subnets`](#subnets-029071) - Optional Block<br>Subnets. List of route prefixes<br>See [Subnets](#subnets-029071) below.
+<a id="deep-d2962c"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#nexthop-0e926d) block (within [`vn_config.inside_static_routes.static_route_list.custom_static_route`](#route-17d4b9)) supports the following:
-
-<a id="interface-76cccf"></a>&#x2022; [`interface`](#interface-76cccf) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#interface-76cccf) below.
-
-<a id="address-7fc35b"></a>&#x2022; [`nexthop_address`](#address-7fc35b) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#address-7fc35b) below.
-
-<a id="type-fa3f4d"></a>&#x2022; [`type`](#type-fa3f4d) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="deep-ef04c7"></a>Deeply nested **Nexthop** block collapsed for readability.
 
 #### Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#interface-76cccf) block (within [`vn_config.inside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-0e926d)) supports the following:
-
-<a id="kind-afa56b"></a>&#x2022; [`kind`](#kind-afa56b) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-f76add"></a>&#x2022; [`name`](#name-f76add) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-1ea662"></a>&#x2022; [`namespace`](#namespace-1ea662) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-4fa1b8"></a>&#x2022; [`tenant`](#tenant-4fa1b8) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-74fe70"></a>&#x2022; [`uid`](#uid-74fe70) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-145348"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#address-7fc35b) block (within [`vn_config.inside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-0e926d)) supports the following:
-
-<a id="ipv4-f03b6a"></a>&#x2022; [`ipv4`](#ipv4-f03b6a) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipv4-f03b6a) below.
-
-<a id="ipv6-d98b23"></a>&#x2022; [`ipv6`](#ipv6-d98b23) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipv6-d98b23) below.
+<a id="deep-2543b9"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ipv4-f03b6a) block (within [`vn_config.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-7fc35b)) supports the following:
-
-<a id="addr-e85c3e"></a>&#x2022; [`addr`](#addr-e85c3e) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="deep-157069"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Vn Config Inside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ipv6-d98b23) block (within [`vn_config.inside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-7fc35b)) supports the following:
-
-<a id="addr-1893e0"></a>&#x2022; [`addr`](#addr-1893e0) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="deep-6415ea"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Vn Config Inside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#subnets-029071) block (within [`vn_config.inside_static_routes.static_route_list.custom_static_route`](#route-17d4b9)) supports the following:
-
-<a id="ipv4-3106eb"></a>&#x2022; [`ipv4`](#ipv4-3106eb) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ipv4-3106eb) below.
-
-<a id="ipv6-dc6076"></a>&#x2022; [`ipv6`](#ipv6-dc6076) - Optional Block<br>IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128<br>See [IPv6](#ipv6-dc6076) below.
+<a id="deep-10a2bb"></a>Deeply nested **Subnets** block collapsed for readability.
 
 #### Vn Config Inside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ipv4-3106eb) block (within [`vn_config.inside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-029071)) supports the following:
-
-<a id="plen-dd9308"></a>&#x2022; [`plen`](#plen-dd9308) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
-
-<a id="prefix-1de2b4"></a>&#x2022; [`prefix`](#prefix-1de2b4) - Optional String<br>Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation
+<a id="deep-11ace6"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Vn Config Inside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ipv6-dc6076) block (within [`vn_config.inside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-029071)) supports the following:
-
-<a id="plen-7c530d"></a>&#x2022; [`plen`](#plen-7c530d) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
-
-<a id="prefix-6d6100"></a>&#x2022; [`prefix`](#prefix-6d6100) - Optional String<br>Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'
+<a id="deep-6cd6b4"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Vn Config Outside Static Routes
 
@@ -838,91 +706,43 @@ An [`outside_static_routes`](#vn-config-outside-static-routes) block (within [`v
 
 #### Vn Config Outside Static Routes Static Route List
 
-A [`static_route_list`](#list-c062cd) block (within [`vn_config.outside_static_routes`](#vn-config-outside-static-routes)) supports the following:
-
-<a id="route-63224c"></a>&#x2022; [`custom_static_route`](#route-63224c) - Optional Block<br>Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them<br>See [Custom Static Route](#route-63224c) below.
-
-<a id="route-040cd2"></a>&#x2022; [`simple_static_route`](#route-040cd2) - Optional String<br>Simple Static Route. Use simple static route for prefix pointing to single interface in the network
+<a id="deep-7896c7"></a>Deeply nested **List** block collapsed for readability.
 
 #### Vn Config Outside Static Routes Static Route List Custom Static Route
 
-A [`custom_static_route`](#route-63224c) block (within [`vn_config.outside_static_routes.static_route_list`](#list-c062cd)) supports the following:
-
-<a id="attrs-7112dd"></a>&#x2022; [`attrs`](#attrs-7112dd) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route
-
-<a id="labels-5dc4fa"></a>&#x2022; [`labels`](#labels-5dc4fa) - Optional Block<br>Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy
-
-<a id="nexthop-52662b"></a>&#x2022; [`nexthop`](#nexthop-52662b) - Optional Block<br>Nexthop. Identifies the next-hop for a route<br>See [Nexthop](#nexthop-52662b) below.
-
-<a id="subnets-48c94b"></a>&#x2022; [`subnets`](#subnets-48c94b) - Optional Block<br>Subnets. List of route prefixes<br>See [Subnets](#subnets-48c94b) below.
+<a id="deep-b3edb9"></a>Deeply nested **Route** block collapsed for readability.
 
 #### Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop
 
-A [`nexthop`](#nexthop-52662b) block (within [`vn_config.outside_static_routes.static_route_list.custom_static_route`](#route-63224c)) supports the following:
-
-<a id="interface-676463"></a>&#x2022; [`interface`](#interface-676463) - Optional Block<br>Network Interface. Nexthop is network interface when type is 'Network-Interface'<br>See [Interface](#interface-676463) below.
-
-<a id="address-92540b"></a>&#x2022; [`nexthop_address`](#address-92540b) - Optional Block<br>IP Address. IP Address used to specify an IPv4 or IPv6 address<br>See [Nexthop Address](#address-92540b) below.
-
-<a id="type-d664a6"></a>&#x2022; [`type`](#type-d664a6) - Optional String  Defaults to `NEXT_HOP_DEFAULT_GATEWAY`<br>Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`<br>[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network
+<a id="deep-90748f"></a>Deeply nested **Nexthop** block collapsed for readability.
 
 #### Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Interface
 
-An [`interface`](#interface-676463) block (within [`vn_config.outside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-52662b)) supports the following:
-
-<a id="kind-0cedba"></a>&#x2022; [`kind`](#kind-0cedba) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-186efa"></a>&#x2022; [`name`](#name-186efa) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-61c3e8"></a>&#x2022; [`namespace`](#namespace-61c3e8) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-bb4044"></a>&#x2022; [`tenant`](#tenant-bb4044) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-626a7a"></a>&#x2022; [`uid`](#uid-626a7a) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-a7ad82"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address
 
-A [`nexthop_address`](#address-92540b) block (within [`vn_config.outside_static_routes.static_route_list.custom_static_route.nexthop`](#nexthop-52662b)) supports the following:
-
-<a id="ipv4-bdedbb"></a>&#x2022; [`ipv4`](#ipv4-bdedbb) - Optional Block<br>IPv4 Address. IPv4 Address in dot-decimal notation<br>See [IPv4](#ipv4-bdedbb) below.
-
-<a id="ipv6-b6542d"></a>&#x2022; [`ipv6`](#ipv6-b6542d) - Optional Block<br>IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'<br>See [IPv6](#ipv6-b6542d) below.
+<a id="deep-c72d9c"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv4
 
-An [`ipv4`](#ipv4-bdedbb) block (within [`vn_config.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-92540b)) supports the following:
-
-<a id="addr-ba8547"></a>&#x2022; [`addr`](#addr-ba8547) - Optional String<br>IPv4 Address. IPv4 Address in string form with dot-decimal notation
+<a id="deep-8dea05"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Vn Config Outside Static Routes Static Route List Custom Static Route Nexthop Nexthop Address IPv6
 
-An [`ipv6`](#ipv6-b6542d) block (within [`vn_config.outside_static_routes.static_route_list.custom_static_route.nexthop.nexthop_address`](#address-92540b)) supports the following:
-
-<a id="addr-619da3"></a>&#x2022; [`addr`](#addr-619da3) - Optional String<br>IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'
+<a id="deep-0afa02"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### Vn Config Outside Static Routes Static Route List Custom Static Route Subnets
 
-A [`subnets`](#subnets-48c94b) block (within [`vn_config.outside_static_routes.static_route_list.custom_static_route`](#route-63224c)) supports the following:
-
-<a id="ipv4-ee25aa"></a>&#x2022; [`ipv4`](#ipv4-ee25aa) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ipv4-ee25aa) below.
-
-<a id="ipv6-4f18d7"></a>&#x2022; [`ipv6`](#ipv6-4f18d7) - Optional Block<br>IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128<br>See [IPv6](#ipv6-4f18d7) below.
+<a id="deep-897dbe"></a>Deeply nested **Subnets** block collapsed for readability.
 
 #### Vn Config Outside Static Routes Static Route List Custom Static Route Subnets IPv4
 
-An [`ipv4`](#ipv4-ee25aa) block (within [`vn_config.outside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-48c94b)) supports the following:
-
-<a id="plen-225830"></a>&#x2022; [`plen`](#plen-225830) - Optional Number<br>Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32
-
-<a id="prefix-b8aa77"></a>&#x2022; [`prefix`](#prefix-b8aa77) - Optional String<br>Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation
+<a id="deep-80274b"></a>Deeply nested **IPv4** block collapsed for readability.
 
 #### Vn Config Outside Static Routes Static Route List Custom Static Route Subnets IPv6
 
-An [`ipv6`](#ipv6-4f18d7) block (within [`vn_config.outside_static_routes.static_route_list.custom_static_route.subnets`](#subnets-48c94b)) supports the following:
-
-<a id="plen-d61cae"></a>&#x2022; [`plen`](#plen-d61cae) - Optional Number<br>Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128
-
-<a id="prefix-8f8c70"></a>&#x2022; [`prefix`](#prefix-8f8c70) - Optional String<br>Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'
+<a id="deep-19a2f4"></a>Deeply nested **IPv6** block collapsed for readability.
 
 #### VPC Attachments
 
@@ -937,6 +757,89 @@ A [`vpc_list`](#vpc-attachments-vpc-list) block (within [`vpc_attachments`](#vpc
 <a id="vpc-attachments-vpc-list-labels"></a>&#x2022; [`labels`](#vpc-attachments-vpc-list-labels) - Optional Block<br>Labels. Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall
 
 <a id="vpc-attachments-vpc-list-vpc-id"></a>&#x2022; [`vpc_id`](#vpc-attachments-vpc-list-vpc-id) - Optional String<br>VPC ID. Information about existing VPC
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

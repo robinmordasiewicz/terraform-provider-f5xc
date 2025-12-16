@@ -246,7 +246,7 @@ func (r *EndpointResource) Metadata(ctx context.Context, req resource.MetadataRe
 func (r *EndpointResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             endpointSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages endpoint will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages endpoint will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Endpoint. Must be unique within the namespace.",

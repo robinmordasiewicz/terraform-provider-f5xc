@@ -1,5 +1,5 @@
 # Nfv Service Resource Example
-# [Namespace: required] Manages new NFV service with configured parameters in F5 Distributed Cloud.
+# Manages new NFV service with configured parameters in F5 Distributed Cloud.
 
 # Basic Nfv Service configuration
 resource "f5xc_nfv_service" "example" {

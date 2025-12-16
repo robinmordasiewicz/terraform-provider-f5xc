@@ -1,5 +1,5 @@
 # K8S Pod Security Policy Resource Example
-# [Category: Kubernetes] [Namespace: required] Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+# Manages k8s_pod_security_policy will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
 
 # Basic K8S Pod Security Policy configuration
 resource "f5xc_k8s_pod_security_policy" "example" {

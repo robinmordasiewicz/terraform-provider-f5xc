@@ -1,5 +1,5 @@
 # Tunnel Resource Example
-# [Namespace: required] Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+# Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic Tunnel configuration
 resource "f5xc_tunnel" "example" {

@@ -1,5 +1,5 @@
 # API Definition Resource Example
-# [Category: API Security] [Namespace: required] [DependsOn: namespace] Manages API Definition. in F5 Distributed Cloud.
+# Manages API Definition. in F5 Distributed Cloud.
 
 # Basic API Definition configuration
 resource "f5xc_api_definition" "example" {

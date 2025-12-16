@@ -1,5 +1,5 @@
 # DNS LB Pool Resource Example
-# [Category: DNS] [Namespace: required] Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
+# Manages DNS Load Balancer Pool in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS LB Pool configuration
 resource "f5xc_dns_lb_pool" "example" {

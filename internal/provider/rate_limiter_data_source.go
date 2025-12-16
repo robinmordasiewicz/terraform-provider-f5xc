@@ -42,7 +42,7 @@ func (d *RateLimiterDataSource) Metadata(ctx context.Context, req datasource.Met
 
 func (d *RateLimiterDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "[Category: Security] [Namespace: required] [DependsOn: namespace] Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

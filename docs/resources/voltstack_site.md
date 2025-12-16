@@ -2,12 +2,12 @@
 page_title: "f5xc_voltstack_site Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  [Category: Sites] [Namespace: required] Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+  Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 ---
 
 # f5xc_voltstack_site (Resource)
 
-[Category: Sites] [Namespace: required] Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
 ~> **Note** Please refer to [Voltstack Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-voltstack-site) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Voltstack Site Resource Example
-# [Category: Sites] [Namespace: required] Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
+# Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
 # Basic Voltstack Site configuration
 resource "f5xc_voltstack_site" "example" {
@@ -281,13 +281,7 @@ An [`active_enhanced_firewall_policies`](#policies-c4c984) block (within [`custo
 
 #### Custom Network Config Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-An [`enhanced_firewall_policies`](#policies-d28848) block (within [`custom_network_config.active_enhanced_firewall_policies`](#policies-c4c984)) supports the following:
-
-<a id="name-624bec"></a>&#x2022; [`name`](#name-624bec) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-aff78f"></a>&#x2022; [`namespace`](#namespace-aff78f) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-f032ee"></a>&#x2022; [`tenant`](#tenant-f032ee) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-d2a5f1"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Custom Network Config Active Forward Proxy Policies
 
@@ -297,13 +291,7 @@ An [`active_forward_proxy_policies`](#policies-fbbf75) block (within [`custom_ne
 
 #### Custom Network Config Active Forward Proxy Policies Forward Proxy Policies
 
-A [`forward_proxy_policies`](#policies-3c82d8) block (within [`custom_network_config.active_forward_proxy_policies`](#policies-fbbf75)) supports the following:
-
-<a id="name-9f15b9"></a>&#x2022; [`name`](#name-9f15b9) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-7a11c9"></a>&#x2022; [`namespace`](#namespace-7a11c9) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-71a492"></a>&#x2022; [`tenant`](#tenant-71a492) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-2a9750"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Custom Network Config Active Network Policies
 
@@ -313,13 +301,7 @@ An [`active_network_policies`](#policies-e8cb6b) block (within [`custom_network_
 
 #### Custom Network Config Active Network Policies Network Policies
 
-A [`network_policies`](#policies-461fea) block (within [`custom_network_config.active_network_policies`](#policies-e8cb6b)) supports the following:
-
-<a id="name-8d3a2f"></a>&#x2022; [`name`](#name-8d3a2f) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-729cde"></a>&#x2022; [`namespace`](#namespace-729cde) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-bf6185"></a>&#x2022; [`tenant`](#tenant-bf6185) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-6de48c"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Custom Network Config Global Network List
 
@@ -329,43 +311,23 @@ A [`global_network_list`](#list-452116) block (within [`custom_network_config`](
 
 #### Custom Network Config Global Network List Global Network Connections
 
-A [`global_network_connections`](#connections-1d58e6) block (within [`custom_network_config.global_network_list`](#list-452116)) supports the following:
-
-<a id="global-dr-1ce43d"></a>&#x2022; [`sli_to_global_dr`](#global-dr-1ce43d) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#global-dr-1ce43d) below.
-
-<a id="global-dr-b2e24b"></a>&#x2022; [`slo_to_global_dr`](#global-dr-b2e24b) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#global-dr-b2e24b) below.
+<a id="deep-be6603"></a>Deeply nested **Connections** block collapsed for readability.
 
 #### Custom Network Config Global Network List Global Network Connections SLI To Global DR
 
-A [`sli_to_global_dr`](#global-dr-1ce43d) block (within [`custom_network_config.global_network_list.global_network_connections`](#connections-1d58e6)) supports the following:
-
-<a id="global-vn-92baba"></a>&#x2022; [`global_vn`](#global-vn-92baba) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-92baba) below.
+<a id="deep-9b64ff"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Custom Network Config Global Network List Global Network Connections SLI To Global DR Global Vn
 
-A [`global_vn`](#global-vn-92baba) block (within [`custom_network_config.global_network_list.global_network_connections.sli_to_global_dr`](#global-dr-1ce43d)) supports the following:
-
-<a id="name-e2ebd7"></a>&#x2022; [`name`](#name-e2ebd7) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-9d7806"></a>&#x2022; [`namespace`](#namespace-9d7806) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ec6824"></a>&#x2022; [`tenant`](#tenant-ec6824) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-811bd6"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Custom Network Config Global Network List Global Network Connections Slo To Global DR
 
-A [`slo_to_global_dr`](#global-dr-b2e24b) block (within [`custom_network_config.global_network_list.global_network_connections`](#connections-1d58e6)) supports the following:
-
-<a id="global-vn-14c1f3"></a>&#x2022; [`global_vn`](#global-vn-14c1f3) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Global Vn](#global-vn-14c1f3) below.
+<a id="deep-32aa3f"></a>Deeply nested **DR** block collapsed for readability.
 
 #### Custom Network Config Global Network List Global Network Connections Slo To Global DR Global Vn
 
-A [`global_vn`](#global-vn-14c1f3) block (within [`custom_network_config.global_network_list.global_network_connections.slo_to_global_dr`](#global-dr-b2e24b)) supports the following:
-
-<a id="name-513269"></a>&#x2022; [`name`](#name-513269) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f05ae7"></a>&#x2022; [`namespace`](#namespace-f05ae7) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-6cb194"></a>&#x2022; [`tenant`](#tenant-6cb194) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-e7b054"></a>Deeply nested **Vn** block collapsed for readability.
 
 #### Custom Network Config Interface List
 
@@ -395,303 +357,111 @@ An [`interfaces`](#interfaces-e1b75d) block (within [`custom_network_config.inte
 
 #### Custom Network Config Interface List Interfaces Dedicated Interface
 
-A [`dedicated_interface`](#interface-5e9f68) block (within [`custom_network_config.interface_list.interfaces`](#interfaces-e1b75d)) supports the following:
-
-<a id="cluster-436281"></a>&#x2022; [`cluster`](#cluster-436281) - Optional Block<br>Enable this option
-
-<a id="device-802885"></a>&#x2022; [`device`](#device-802885) - Optional String<br>Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE
-
-<a id="primary-ef7ed0"></a>&#x2022; [`is_primary`](#primary-ef7ed0) - Optional Block<br>Enable this option
-
-<a id="monitor-ca5854"></a>&#x2022; [`monitor`](#monitor-ca5854) - Optional Block<br>Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface
-
-<a id="disabled-9c55e1"></a>&#x2022; [`monitor_disabled`](#disabled-9c55e1) - Optional Block<br>Enable this option
-
-<a id="mtu-9052e0"></a>&#x2022; [`mtu`](#mtu-9052e0) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
-
-<a id="node-efcfad"></a>&#x2022; [`node`](#node-efcfad) - Optional String<br>Specific Node. Configuration will apply to a device on the given node of the site
-
-<a id="primary-665cf6"></a>&#x2022; [`not_primary`](#primary-665cf6) - Optional Block<br>Enable this option
-
-<a id="priority-095fd3"></a>&#x2022; [`priority`](#priority-095fd3) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
+<a id="deep-e9e120"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Dedicated Management Interface
 
-A [`dedicated_management_interface`](#interface-a7c718) block (within [`custom_network_config.interface_list.interfaces`](#interfaces-e1b75d)) supports the following:
-
-<a id="cluster-cc7866"></a>&#x2022; [`cluster`](#cluster-cc7866) - Optional Block<br>Enable this option
-
-<a id="device-52578d"></a>&#x2022; [`device`](#device-52578d) - Optional String<br>Interface Device. Name of the device for which interface is configured
-
-<a id="mtu-6c0078"></a>&#x2022; [`mtu`](#mtu-6c0078) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
-
-<a id="node-ee28ff"></a>&#x2022; [`node`](#node-ee28ff) - Optional String<br>Specific Node. Configuration will apply to a device on the given node of the site
+<a id="deep-fe54f2"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface
 
-An [`ethernet_interface`](#interface-40e35f) block (within [`custom_network_config.interface_list.interfaces`](#interfaces-e1b75d)) supports the following:
-
-<a id="cluster-e93c1d"></a>&#x2022; [`cluster`](#cluster-e93c1d) - Optional Block<br>Enable this option
-
-<a id="device-d0a8a3"></a>&#x2022; [`device`](#device-d0a8a3) - Optional String<br>Ethernet Device. Interface configuration for the ethernet device
-
-<a id="client-bc1e31"></a>&#x2022; [`dhcp_client`](#client-bc1e31) - Optional Block<br>Enable this option
-
-<a id="server-708f5c"></a>&#x2022; [`dhcp_server`](#server-708f5c) - Optional Block<br>DHCPServerParametersType<br>See [DHCP Server](#server-708f5c) below.
-
-<a id="config-7aa593"></a>&#x2022; [`ipv6_auto_config`](#config-7aa593) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-7aa593) below.
-
-<a id="primary-2dfad3"></a>&#x2022; [`is_primary`](#primary-2dfad3) - Optional Block<br>Enable this option
-
-<a id="monitor-90080f"></a>&#x2022; [`monitor`](#monitor-90080f) - Optional Block<br>Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface
-
-<a id="disabled-4a3c3e"></a>&#x2022; [`monitor_disabled`](#disabled-4a3c3e) - Optional Block<br>Enable this option
-
-<a id="mtu-1a1a52"></a>&#x2022; [`mtu`](#mtu-1a1a52) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
-
-<a id="address-1b467e"></a>&#x2022; [`no_ipv6_address`](#address-1b467e) - Optional Block<br>Enable this option
-
-<a id="node-c8a85c"></a>&#x2022; [`node`](#node-c8a85c) - Optional String<br>Specific Node. Configuration will apply to a device on the given node
-
-<a id="primary-e4637a"></a>&#x2022; [`not_primary`](#primary-e4637a) - Optional Block<br>Enable this option
-
-<a id="priority-6e05a8"></a>&#x2022; [`priority`](#priority-6e05a8) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
-
-<a id="network-ca6818"></a>&#x2022; [`site_local_inside_network`](#network-ca6818) - Optional Block<br>Enable this option
-
-<a id="network-a73ac7"></a>&#x2022; [`site_local_network`](#network-a73ac7) - Optional Block<br>Enable this option
-
-<a id="static-ip-5070d8"></a>&#x2022; [`static_ip`](#static-ip-5070d8) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#static-ip-5070d8) below.
-
-<a id="address-e03fbb"></a>&#x2022; [`static_ipv6_address`](#address-e03fbb) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-e03fbb) below.
-
-<a id="network-667c39"></a>&#x2022; [`storage_network`](#network-667c39) - Optional Block<br>Enable this option
-
-<a id="untagged-ed4638"></a>&#x2022; [`untagged`](#untagged-ed4638) - Optional Block<br>Enable this option
-
-<a id="vlan-id-77f95a"></a>&#x2022; [`vlan_id`](#vlan-id-77f95a) - Optional Number<br>VLAN ID. Configure a VLAN tagged ethernet interface
+<a id="deep-155d07"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server
 
-A [`dhcp_server`](#server-708f5c) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface`](#interface-40e35f)) supports the following:
-
-<a id="end-37cedd"></a>&#x2022; [`automatic_from_end`](#end-37cedd) - Optional Block<br>Enable this option
-
-<a id="start-bd22b5"></a>&#x2022; [`automatic_from_start`](#start-bd22b5) - Optional Block<br>Enable this option
-
-<a id="networks-d76609"></a>&#x2022; [`dhcp_networks`](#networks-d76609) - Optional Block<br>DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses<br>See [DHCP Networks](#networks-d76609) below.
-
-<a id="map-8afba3"></a>&#x2022; [`fixed_ip_map`](#map-8afba3) - Optional Block<br>Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-0b5090"></a>&#x2022; [`interface_ip_map`](#map-0b5090) - Optional Block<br>Interface IPv4 Assignments. Specify static IPv4 addresses per node<br>See [Interface IP Map](#map-0b5090) below.
+<a id="deep-c00b69"></a>Deeply nested **Server** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server DHCP Networks
 
-A [`dhcp_networks`](#networks-d76609) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.dhcp_server`](#server-708f5c)) supports the following:
-
-<a id="address-f00b53"></a>&#x2022; [`dgw_address`](#address-f00b53) - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway
-
-<a id="address-b6c318"></a>&#x2022; [`dns_address`](#address-b6c318) - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server
-
-<a id="address-071586"></a>&#x2022; [`first_address`](#address-071586) - Optional Block<br>Enable this option
-
-<a id="address-fe3f46"></a>&#x2022; [`last_address`](#address-fe3f46) - Optional Block<br>Enable this option
-
-<a id="prefix-c6abca"></a>&#x2022; [`network_prefix`](#prefix-c6abca) - Optional String<br>Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24
-
-<a id="settings-23473c"></a>&#x2022; [`pool_settings`](#settings-23473c) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-63ec82"></a>&#x2022; [`pools`](#pools-63ec82) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-63ec82) below.
-
-<a id="dgw-3baafe"></a>&#x2022; [`same_as_dgw`](#dgw-3baafe) - Optional Block<br>Enable this option
+<a id="deep-bf31a8"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server DHCP Networks Pools
 
-A [`pools`](#pools-63ec82) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.dhcp_server.dhcp_networks`](#networks-d76609)) supports the following:
-
-<a id="end-ip-94cd56"></a>&#x2022; [`end_ip`](#end-ip-94cd56) - Optional String<br>Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200
-
-<a id="start-ip-ac7cb4"></a>&#x2022; [`start_ip`](#start-ip-ac7cb4) - Optional String<br>Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5
+<a id="deep-904e69"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface DHCP Server Interface IP Map
 
-An [`interface_ip_map`](#map-0b5090) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.dhcp_server`](#server-708f5c)) supports the following:
-
-<a id="map-dd31a5"></a>&#x2022; [`interface_ip_map`](#map-dd31a5) - Optional Block<br>Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node
+<a id="deep-ff4e59"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-7aa593) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface`](#interface-40e35f)) supports the following:
-
-<a id="host-d5ba83"></a>&#x2022; [`host`](#host-d5ba83) - Optional Block<br>Enable this option
-
-<a id="router-a6963c"></a>&#x2022; [`router`](#router-a6963c) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-a6963c) below.
+<a id="deep-606ad3"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router
 
-A [`router`](#router-a6963c) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config`](#config-7aa593)) supports the following:
-
-<a id="config-037271"></a>&#x2022; [`dns_config`](#config-037271) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-037271) below.
-
-<a id="prefix-3548e5"></a>&#x2022; [`network_prefix`](#prefix-3548e5) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-116682"></a>&#x2022; [`stateful`](#stateful-116682) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-116682) below.
+<a id="deep-b3aca4"></a>Deeply nested **Router** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-037271) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router`](#router-a6963c)) supports the following:
-
-<a id="list-c0116e"></a>&#x2022; [`configured_list`](#list-c0116e) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-c0116e) below.
-
-<a id="dns-05ebf1"></a>&#x2022; [`local_dns`](#dns-05ebf1) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-05ebf1) below.
+<a id="deep-305937"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-c0116e) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.dns_config`](#config-037271)) supports the following:
-
-<a id="list-619661"></a>&#x2022; [`dns_list`](#list-619661) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-de36d1"></a>Deeply nested **List** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-05ebf1) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.dns_config`](#config-037271)) supports the following:
-
-<a id="address-14b952"></a>&#x2022; [`configured_address`](#address-14b952) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-a3332b"></a>&#x2022; [`first_address`](#address-a3332b) - Optional Block<br>Enable this option
-
-<a id="address-b87aff"></a>&#x2022; [`last_address`](#address-b87aff) - Optional Block<br>Enable this option
+<a id="deep-33d01b"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-116682) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router`](#router-a6963c)) supports the following:
-
-<a id="end-d40179"></a>&#x2022; [`automatic_from_end`](#end-d40179) - Optional Block<br>Enable this option
-
-<a id="start-406059"></a>&#x2022; [`automatic_from_start`](#start-406059) - Optional Block<br>Enable this option
-
-<a id="networks-654d11"></a>&#x2022; [`dhcp_networks`](#networks-654d11) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-654d11) below.
-
-<a id="map-3fb1f7"></a>&#x2022; [`fixed_ip_map`](#map-3fb1f7) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-c30b96"></a>&#x2022; [`interface_ip_map`](#map-c30b96) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-c30b96) below.
+<a id="deep-52248e"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-654d11) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.stateful`](#stateful-116682)) supports the following:
-
-<a id="prefix-443ea7"></a>&#x2022; [`network_prefix`](#prefix-443ea7) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-010139"></a>&#x2022; [`pool_settings`](#settings-010139) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-96229f"></a>&#x2022; [`pools`](#pools-96229f) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-96229f) below.
+<a id="deep-e99cbf"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-96229f) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-654d11)) supports the following:
-
-<a id="end-ip-94c760"></a>&#x2022; [`end_ip`](#end-ip-94c760) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-020c36"></a>&#x2022; [`start_ip`](#start-ip-020c36) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-fd529f"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-c30b96) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.ipv6_auto_config.router.stateful`](#stateful-116682)) supports the following:
-
-<a id="map-d1f8c9"></a>&#x2022; [`interface_ip_map`](#map-d1f8c9) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-15168d"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface Static IP
 
-A [`static_ip`](#static-ip-5070d8) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface`](#interface-40e35f)) supports the following:
-
-<a id="static-ip-f33200"></a>&#x2022; [`cluster_static_ip`](#static-ip-f33200) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-f33200) below.
-
-<a id="static-ip-1d2ad5"></a>&#x2022; [`node_static_ip`](#static-ip-1d2ad5) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-1d2ad5) below.
+<a id="deep-0f1737"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface Static IP Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-f33200) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.static_ip`](#static-ip-5070d8)) supports the following:
-
-<a id="map-9a2bd5"></a>&#x2022; [`interface_ip_map`](#map-9a2bd5) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-34de63"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface Static IP Node Static IP
 
-A [`node_static_ip`](#static-ip-1d2ad5) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.static_ip`](#static-ip-5070d8)) supports the following:
-
-<a id="default-gw-3aba5b"></a>&#x2022; [`default_gw`](#default-gw-3aba5b) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-a00adf"></a>&#x2022; [`ip_address`](#address-a00adf) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-99b20e"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address
 
-A [`static_ipv6_address`](#address-e03fbb) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface`](#interface-40e35f)) supports the following:
-
-<a id="static-ip-46d326"></a>&#x2022; [`cluster_static_ip`](#static-ip-46d326) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-46d326) below.
-
-<a id="static-ip-3e9e31"></a>&#x2022; [`node_static_ip`](#static-ip-3e9e31) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-3e9e31) below.
+<a id="deep-7525c4"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-46d326) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.static_ipv6_address`](#address-e03fbb)) supports the following:
-
-<a id="map-4cd1b3"></a>&#x2022; [`interface_ip_map`](#map-4cd1b3) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-fbb4ee"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Ethernet Interface Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-3e9e31) block (within [`custom_network_config.interface_list.interfaces.ethernet_interface.static_ipv6_address`](#address-e03fbb)) supports the following:
-
-<a id="default-gw-00d6df"></a>&#x2022; [`default_gw`](#default-gw-00d6df) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-2cb1af"></a>&#x2022; [`ip_address`](#address-2cb1af) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-be6bf5"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Tunnel Interface
 
-A [`tunnel_interface`](#interface-b0b4f4) block (within [`custom_network_config.interface_list.interfaces`](#interfaces-e1b75d)) supports the following:
-
-<a id="mtu-039bb2"></a>&#x2022; [`mtu`](#mtu-039bb2) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
-
-<a id="node-a23d57"></a>&#x2022; [`node`](#node-a23d57) - Optional String<br>Specific Node. Configuration will apply to a given device on the given node
-
-<a id="priority-12bf57"></a>&#x2022; [`priority`](#priority-12bf57) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
-
-<a id="network-cec884"></a>&#x2022; [`site_local_inside_network`](#network-cec884) - Optional Block<br>Enable this option
-
-<a id="network-af012f"></a>&#x2022; [`site_local_network`](#network-af012f) - Optional Block<br>Enable this option
-
-<a id="static-ip-72aece"></a>&#x2022; [`static_ip`](#static-ip-72aece) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#static-ip-72aece) below.
-
-<a id="tunnel-09a8a9"></a>&#x2022; [`tunnel`](#tunnel-09a8a9) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Tunnel](#tunnel-09a8a9) below.
+<a id="deep-d573aa"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Tunnel Interface Static IP
 
-A [`static_ip`](#static-ip-72aece) block (within [`custom_network_config.interface_list.interfaces.tunnel_interface`](#interface-b0b4f4)) supports the following:
-
-<a id="static-ip-2791e9"></a>&#x2022; [`cluster_static_ip`](#static-ip-2791e9) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-2791e9) below.
-
-<a id="static-ip-3e9545"></a>&#x2022; [`node_static_ip`](#static-ip-3e9545) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-3e9545) below.
+<a id="deep-c65fba"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Tunnel Interface Static IP Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-2791e9) block (within [`custom_network_config.interface_list.interfaces.tunnel_interface.static_ip`](#static-ip-72aece)) supports the following:
-
-<a id="map-741cd6"></a>&#x2022; [`interface_ip_map`](#map-741cd6) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-c3cc88"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Tunnel Interface Static IP Node Static IP
 
-A [`node_static_ip`](#static-ip-3e9545) block (within [`custom_network_config.interface_list.interfaces.tunnel_interface.static_ip`](#static-ip-72aece)) supports the following:
-
-<a id="default-gw-89c792"></a>&#x2022; [`default_gw`](#default-gw-89c792) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-73fff7"></a>&#x2022; [`ip_address`](#address-73fff7) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-9cdddf"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Network Config Interface List Interfaces Tunnel Interface Tunnel
 
-A [`tunnel`](#tunnel-09a8a9) block (within [`custom_network_config.interface_list.interfaces.tunnel_interface`](#interface-b0b4f4)) supports the following:
-
-<a id="name-1cc821"></a>&#x2022; [`name`](#name-1cc821) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-9589b4"></a>&#x2022; [`namespace`](#namespace-9589b4) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-ade79e"></a>&#x2022; [`tenant`](#tenant-ade79e) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-b0269a"></a>Deeply nested **Tunnel** block collapsed for readability.
 
 #### Custom Network Config SLI Config
 
@@ -713,93 +483,39 @@ A [`static_routes`](#routes-766a73) block (within [`custom_network_config.sli_co
 
 #### Custom Network Config SLI Config Static Routes Static Routes
 
-A [`static_routes`](#routes-75c512) block (within [`custom_network_config.sli_config.static_routes`](#routes-766a73)) supports the following:
-
-<a id="attrs-ef92a5"></a>&#x2022; [`attrs`](#attrs-ef92a5) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
-
-<a id="gateway-24e6e5"></a>&#x2022; [`default_gateway`](#gateway-24e6e5) - Optional Block<br>Enable this option
-
-<a id="address-19b3f8"></a>&#x2022; [`ip_address`](#address-19b3f8) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
-
-<a id="prefixes-1cfe0e"></a>&#x2022; [`ip_prefixes`](#prefixes-1cfe0e) - Optional List<br>IP Prefixes. List of route prefixes that have common next hop and attributes
-
-<a id="interface-f046b3"></a>&#x2022; [`node_interface`](#interface-f046b3) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#interface-f046b3) below.
+<a id="deep-418fe7"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Custom Network Config SLI Config Static Routes Static Routes Node Interface
 
-A [`node_interface`](#interface-f046b3) block (within [`custom_network_config.sli_config.static_routes.static_routes`](#routes-75c512)) supports the following:
-
-<a id="list-38d66c"></a>&#x2022; [`list`](#list-38d66c) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#list-38d66c) below.
+<a id="deep-845177"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config SLI Config Static Routes Static Routes Node Interface List
 
-A [`list`](#list-38d66c) block (within [`custom_network_config.sli_config.static_routes.static_routes.node_interface`](#interface-f046b3)) supports the following:
-
-<a id="interface-8e37b4"></a>&#x2022; [`interface`](#interface-8e37b4) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#interface-8e37b4) below.
-
-<a id="node-d9a418"></a>&#x2022; [`node`](#node-d9a418) - Optional String<br>Node. Node name on this site
+<a id="deep-346157"></a>Deeply nested **List** block collapsed for readability.
 
 #### Custom Network Config SLI Config Static Routes Static Routes Node Interface List Interface
 
-An [`interface`](#interface-8e37b4) block (within [`custom_network_config.sli_config.static_routes.static_routes.node_interface.list`](#list-38d66c)) supports the following:
-
-<a id="kind-623a25"></a>&#x2022; [`kind`](#kind-623a25) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-52619d"></a>&#x2022; [`name`](#name-52619d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-29f395"></a>&#x2022; [`namespace`](#namespace-29f395) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-9b8885"></a>&#x2022; [`tenant`](#tenant-9b8885) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-37fee1"></a>&#x2022; [`uid`](#uid-37fee1) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-460da1"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config SLI Config Static V6 Routes
 
-A [`static_v6_routes`](#routes-3c3781) block (within [`custom_network_config.sli_config`](#custom-network-config-sli-config)) supports the following:
-
-<a id="routes-a9d56b"></a>&#x2022; [`static_routes`](#routes-a9d56b) - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#routes-a9d56b) below.
+<a id="deep-a62933"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Custom Network Config SLI Config Static V6 Routes Static Routes
 
-A [`static_routes`](#routes-a9d56b) block (within [`custom_network_config.sli_config.static_v6_routes`](#routes-3c3781)) supports the following:
-
-<a id="attrs-872d1e"></a>&#x2022; [`attrs`](#attrs-872d1e) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
-
-<a id="gateway-120546"></a>&#x2022; [`default_gateway`](#gateway-120546) - Optional Block<br>Enable this option
-
-<a id="address-3f5f42"></a>&#x2022; [`ip_address`](#address-3f5f42) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
-
-<a id="prefixes-4bb86e"></a>&#x2022; [`ip_prefixes`](#prefixes-4bb86e) - Optional List<br>IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes
-
-<a id="interface-05123d"></a>&#x2022; [`node_interface`](#interface-05123d) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#interface-05123d) below.
+<a id="deep-b94fe3"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface
 
-A [`node_interface`](#interface-05123d) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes`](#routes-a9d56b)) supports the following:
-
-<a id="list-9abd74"></a>&#x2022; [`list`](#list-9abd74) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#list-9abd74) below.
+<a id="deep-85506f"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface List
 
-A [`list`](#list-9abd74) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes.node_interface`](#interface-05123d)) supports the following:
-
-<a id="interface-a08aed"></a>&#x2022; [`interface`](#interface-a08aed) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#interface-a08aed) below.
-
-<a id="node-712c01"></a>&#x2022; [`node`](#node-712c01) - Optional String<br>Node. Node name on this site
+<a id="deep-0405fc"></a>Deeply nested **List** block collapsed for readability.
 
 #### Custom Network Config SLI Config Static V6 Routes Static Routes Node Interface List Interface
 
-An [`interface`](#interface-a08aed) block (within [`custom_network_config.sli_config.static_v6_routes.static_routes.node_interface.list`](#list-9abd74)) supports the following:
-
-<a id="kind-2fd0e8"></a>&#x2022; [`kind`](#kind-2fd0e8) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-63105d"></a>&#x2022; [`name`](#name-63105d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-65007b"></a>&#x2022; [`namespace`](#namespace-65007b) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-60df32"></a>&#x2022; [`tenant`](#tenant-60df32) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-78ff94"></a>&#x2022; [`uid`](#uid-78ff94) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-48ce07"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config Slo Config
 
@@ -821,13 +537,7 @@ A [`slo_config`](#custom-network-config-slo-config) block (within [`custom_netwo
 
 #### Custom Network Config Slo Config Dc Cluster Group
 
-A [`dc_cluster_group`](#group-4f2dd5) block (within [`custom_network_config.slo_config`](#custom-network-config-slo-config)) supports the following:
-
-<a id="name-836469"></a>&#x2022; [`name`](#name-836469) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f2a328"></a>&#x2022; [`namespace`](#namespace-f2a328) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-22eb05"></a>&#x2022; [`tenant`](#tenant-22eb05) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-e1ed68"></a>Deeply nested **Group** block collapsed for readability.
 
 #### Custom Network Config Slo Config Static Routes
 
@@ -837,93 +547,39 @@ A [`static_routes`](#routes-f61105) block (within [`custom_network_config.slo_co
 
 #### Custom Network Config Slo Config Static Routes Static Routes
 
-A [`static_routes`](#routes-5ecd87) block (within [`custom_network_config.slo_config.static_routes`](#routes-f61105)) supports the following:
-
-<a id="attrs-e54bc8"></a>&#x2022; [`attrs`](#attrs-e54bc8) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
-
-<a id="gateway-6d09e9"></a>&#x2022; [`default_gateway`](#gateway-6d09e9) - Optional Block<br>Enable this option
-
-<a id="address-1260b8"></a>&#x2022; [`ip_address`](#address-1260b8) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
-
-<a id="prefixes-ccce70"></a>&#x2022; [`ip_prefixes`](#prefixes-ccce70) - Optional List<br>IP Prefixes. List of route prefixes that have common next hop and attributes
-
-<a id="interface-cb1ebb"></a>&#x2022; [`node_interface`](#interface-cb1ebb) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#interface-cb1ebb) below.
+<a id="deep-f8a4c7"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Custom Network Config Slo Config Static Routes Static Routes Node Interface
 
-A [`node_interface`](#interface-cb1ebb) block (within [`custom_network_config.slo_config.static_routes.static_routes`](#routes-5ecd87)) supports the following:
-
-<a id="list-5e3b59"></a>&#x2022; [`list`](#list-5e3b59) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#list-5e3b59) below.
+<a id="deep-05f4a8"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config Slo Config Static Routes Static Routes Node Interface List
 
-A [`list`](#list-5e3b59) block (within [`custom_network_config.slo_config.static_routes.static_routes.node_interface`](#interface-cb1ebb)) supports the following:
-
-<a id="interface-5e9576"></a>&#x2022; [`interface`](#interface-5e9576) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#interface-5e9576) below.
-
-<a id="node-0f772c"></a>&#x2022; [`node`](#node-0f772c) - Optional String<br>Node. Node name on this site
+<a id="deep-2bd0bf"></a>Deeply nested **List** block collapsed for readability.
 
 #### Custom Network Config Slo Config Static Routes Static Routes Node Interface List Interface
 
-An [`interface`](#interface-5e9576) block (within [`custom_network_config.slo_config.static_routes.static_routes.node_interface.list`](#list-5e3b59)) supports the following:
-
-<a id="kind-366924"></a>&#x2022; [`kind`](#kind-366924) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-16390b"></a>&#x2022; [`name`](#name-16390b) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-9e80d1"></a>&#x2022; [`namespace`](#namespace-9e80d1) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-8000b0"></a>&#x2022; [`tenant`](#tenant-8000b0) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-324473"></a>&#x2022; [`uid`](#uid-324473) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-e969af"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config Slo Config Static V6 Routes
 
-A [`static_v6_routes`](#routes-c7512d) block (within [`custom_network_config.slo_config`](#custom-network-config-slo-config)) supports the following:
-
-<a id="routes-77d696"></a>&#x2022; [`static_routes`](#routes-77d696) - Optional Block<br>Static IPv6 Routes. List of IPv6 static routes<br>See [Static Routes](#routes-77d696) below.
+<a id="deep-b07bb8"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Custom Network Config Slo Config Static V6 Routes Static Routes
 
-A [`static_routes`](#routes-77d696) block (within [`custom_network_config.slo_config.static_v6_routes`](#routes-c7512d)) supports the following:
-
-<a id="attrs-7c24b5"></a>&#x2022; [`attrs`](#attrs-7c24b5) - Optional List  Defaults to `ROUTE_ATTR_NO_OP`<br>Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`<br>[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of attributes that control forwarding, dynamic routing and control plane (host) reachability
-
-<a id="gateway-ef4884"></a>&#x2022; [`default_gateway`](#gateway-ef4884) - Optional Block<br>Enable this option
-
-<a id="address-cd3411"></a>&#x2022; [`ip_address`](#address-cd3411) - Optional String<br>IP Address. Traffic matching the IP prefixes is sent to this IP Address
-
-<a id="prefixes-1da29c"></a>&#x2022; [`ip_prefixes`](#prefixes-1da29c) - Optional List<br>IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes
-
-<a id="interface-15c5a2"></a>&#x2022; [`node_interface`](#interface-15c5a2) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#interface-15c5a2) below.
+<a id="deep-0e185b"></a>Deeply nested **Routes** block collapsed for readability.
 
 #### Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface
 
-A [`node_interface`](#interface-15c5a2) block (within [`custom_network_config.slo_config.static_v6_routes.static_routes`](#routes-77d696)) supports the following:
-
-<a id="list-afdaaf"></a>&#x2022; [`list`](#list-afdaaf) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#list-afdaaf) below.
+<a id="deep-e2b2f3"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface List
 
-A [`list`](#list-afdaaf) block (within [`custom_network_config.slo_config.static_v6_routes.static_routes.node_interface`](#interface-15c5a2)) supports the following:
-
-<a id="interface-752e77"></a>&#x2022; [`interface`](#interface-752e77) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#interface-752e77) below.
-
-<a id="node-3d5bdc"></a>&#x2022; [`node`](#node-3d5bdc) - Optional String<br>Node. Node name on this site
+<a id="deep-cac034"></a>Deeply nested **List** block collapsed for readability.
 
 #### Custom Network Config Slo Config Static V6 Routes Static Routes Node Interface List Interface
 
-An [`interface`](#interface-752e77) block (within [`custom_network_config.slo_config.static_v6_routes.static_routes.node_interface.list`](#list-afdaaf)) supports the following:
-
-<a id="kind-2102df"></a>&#x2022; [`kind`](#kind-2102df) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-19e72d"></a>&#x2022; [`name`](#name-19e72d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-fb792d"></a>&#x2022; [`namespace`](#namespace-fb792d) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-0f27f2"></a>&#x2022; [`tenant`](#tenant-0f27f2) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-522654"></a>&#x2022; [`uid`](#uid-522654) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-5ea460"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Storage Config
 
@@ -967,31 +623,15 @@ A [`static_routes`](#routes-38e4c5) block (within [`custom_storage_config.static
 
 #### Custom Storage Config Static Routes Static Routes Node Interface
 
-A [`node_interface`](#interface-9c7667) block (within [`custom_storage_config.static_routes.static_routes`](#routes-38e4c5)) supports the following:
-
-<a id="list-d08831"></a>&#x2022; [`list`](#list-d08831) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#list-d08831) below.
+<a id="deep-cfdb02"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Storage Config Static Routes Static Routes Node Interface List
 
-A [`list`](#list-d08831) block (within [`custom_storage_config.static_routes.static_routes.node_interface`](#interface-9c7667)) supports the following:
-
-<a id="interface-6bb98d"></a>&#x2022; [`interface`](#interface-6bb98d) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#interface-6bb98d) below.
-
-<a id="node-a156da"></a>&#x2022; [`node`](#node-a156da) - Optional String<br>Node. Node name on this site
+<a id="deep-3d99d5"></a>Deeply nested **List** block collapsed for readability.
 
 #### Custom Storage Config Static Routes Static Routes Node Interface List Interface
 
-An [`interface`](#interface-6bb98d) block (within [`custom_storage_config.static_routes.static_routes.node_interface.list`](#list-d08831)) supports the following:
-
-<a id="kind-daef83"></a>&#x2022; [`kind`](#kind-daef83) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-fd2e4d"></a>&#x2022; [`name`](#name-fd2e4d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-a4e3e3"></a>&#x2022; [`namespace`](#namespace-a4e3e3) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-50869f"></a>&#x2022; [`tenant`](#tenant-50869f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-54eaba"></a>&#x2022; [`uid`](#uid-54eaba) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-18035b"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Storage Config Storage Class List
 
@@ -1001,89 +641,23 @@ A [`storage_class_list`](#list-268762) block (within [`custom_storage_config`](#
 
 #### Custom Storage Config Storage Class List Storage Classes
 
-A [`storage_classes`](#classes-b5444a) block (within [`custom_storage_config.storage_class_list`](#list-268762)) supports the following:
-
-<a id="parameters-ca466a"></a>&#x2022; [`advanced_storage_parameters`](#parameters-ca466a) - Optional Block<br>Advanced Parameters. Map of parameter name and string value
-
-<a id="expansion-17bdb9"></a>&#x2022; [`allow_volume_expansion`](#expansion-17bdb9) - Optional Bool<br>Allow Volume Expansion. Allow volume expansion
-
-<a id="storage-d7c70e"></a>&#x2022; [`custom_storage`](#storage-d7c70e) - Optional Block<br>Custom StorageClass. Custom Storage Class allows to insert Kubernetes storageclass definition which will be applied into given site<br>See [Custom Storage](#storage-d7c70e) below.
-
-<a id="class-6ee8ed"></a>&#x2022; [`default_storage_class`](#class-6ee8ed) - Optional Bool<br>Default Storage Class. Make this storage class default storage class for the K8S cluster
-
-<a id="spec-7db866"></a>&#x2022; [`description_spec`](#spec-7db866) - Optional String<br>Storage Class Description. Description for this storage class
-
-<a id="storage-df442c"></a>&#x2022; [`hpe_storage`](#storage-df442c) - Optional Block<br>HPE Storage. Storage class Device configuration for HPE Storage<br>See [Hpe Storage](#storage-df442c) below.
-
-<a id="trident-23dac6"></a>&#x2022; [`netapp_trident`](#trident-23dac6) - Optional Block<br>NetApp Trident Storage. Storage class Device configuration for NetApp Trident<br>See [Netapp Trident](#trident-23dac6) below.
-
-<a id="orchestrator-f833eb"></a>&#x2022; [`pure_service_orchestrator`](#orchestrator-f833eb) - Optional Block<br>Pure Storage Service Orchestrator. Storage class Device configuration for Pure Service Orchestrator<br>See [Pure Service Orchestrator](#orchestrator-f833eb) below.
-
-<a id="policy-892865"></a>&#x2022; [`reclaim_policy`](#policy-892865) - Optional String<br>Reclaim Policy. Reclaim Policy
-
-<a id="name-e57bab"></a>&#x2022; [`storage_class_name`](#name-e57bab) - Optional String<br>Storage Class Name. Name of the storage class as it will appear in K8S
-
-<a id="device-aebdea"></a>&#x2022; [`storage_device`](#device-aebdea) - Optional String<br>Storage Device. Storage device that this class will use. The Device name defined at previous step
+<a id="deep-fb5893"></a>Deeply nested **Classes** block collapsed for readability.
 
 #### Custom Storage Config Storage Class List Storage Classes Custom Storage
 
-A [`custom_storage`](#storage-d7c70e) block (within [`custom_storage_config.storage_class_list.storage_classes`](#classes-b5444a)) supports the following:
-
-<a id="yaml-f58bc4"></a>&#x2022; [`yaml`](#yaml-f58bc4) - Optional String<br>Storage Class YAML. K8S YAML for StorageClass
+<a id="deep-ad6ced"></a>Deeply nested **Storage** block collapsed for readability.
 
 #### Custom Storage Config Storage Class List Storage Classes Hpe Storage
 
-A [`hpe_storage`](#storage-df442c) block (within [`custom_storage_config.storage_class_list.storage_classes`](#classes-b5444a)) supports the following:
-
-<a id="mutations-0a8410"></a>&#x2022; [`allow_mutations`](#mutations-0a8410) - Optional String<br>allowMutations. mutation can override specified parameters
-
-<a id="overrides-edff7f"></a>&#x2022; [`allow_overrides`](#overrides-edff7f) - Optional String<br>allowOverrides. PVC can override specified parameters
-
-<a id="enabled-e6199e"></a>&#x2022; [`dedupe_enabled`](#enabled-e6199e) - Optional Bool<br>dedupeEnabled. Indicates that the volume should enable deduplication
-
-<a id="spec-c82b66"></a>&#x2022; [`description_spec`](#spec-c82b66) - Optional String<br>Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information
-
-<a id="delete-4e2a57"></a>&#x2022; [`destroy_on_delete`](#delete-4e2a57) - Optional Bool<br>destroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted
-
-<a id="encrypted-80fb35"></a>&#x2022; [`encrypted`](#encrypted-80fb35) - Optional Bool<br>encrypted. Indicates that the volume should be encrypted
-
-<a id="folder-a2de95"></a>&#x2022; [`folder`](#folder-a2de95) - Optional String<br>folder. The name of the folder in which to place the volume
-
-<a id="iops-c850b4"></a>&#x2022; [`limit_iops`](#iops-c850b4) - Optional String<br>limitIops. The IOPS limit of the volume
-
-<a id="mbps-dec8a3"></a>&#x2022; [`limit_mbps`](#mbps-dec8a3) - Optional String<br>limitMbps. The IOPS limit of the volume
-
-<a id="policy-e1fbfe"></a>&#x2022; [`performance_policy`](#policy-e1fbfe) - Optional String<br>performancePolicy. The name of the performance policy to assign to the volume
-
-<a id="pool-3db89a"></a>&#x2022; [`pool`](#pool-3db89a) - Optional String<br>pool. The name of the pool in which to place the volume
-
-<a id="template-09527b"></a>&#x2022; [`protection_template`](#template-09527b) - Optional String<br>protectionTemplate. The name of the performance policy to assign to the volume
-
-<a id="name-da8962"></a>&#x2022; [`secret_name`](#name-da8962) - Optional String<br>Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information
-
-<a id="namespace-1c2e4c"></a>&#x2022; [`secret_namespace`](#namespace-1c2e4c) - Optional String<br>Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides
-
-<a id="detach-049070"></a>&#x2022; [`sync_on_detach`](#detach-049070) - Optional Bool<br>syncOnDetach. Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node
-
-<a id="thick-4ef756"></a>&#x2022; [`thick`](#thick-4ef756) - Optional Bool<br>thick. Indicates that the volume should be thick provisioned
+<a id="deep-914a4a"></a>Deeply nested **Storage** block collapsed for readability.
 
 #### Custom Storage Config Storage Class List Storage Classes Netapp Trident
 
-A [`netapp_trident`](#trident-23dac6) block (within [`custom_storage_config.storage_class_list.storage_classes`](#classes-b5444a)) supports the following:
-
-<a id="selector-b252fb"></a>&#x2022; [`selector`](#selector-b252fb) - Optional Block<br>Selector. Using the Selector field, each StorageClass calls out which virtual pool(s) may be used to host a volume. The volume will have the aspects defined in the chosen virtual pool
-
-<a id="pools-5a9a45"></a>&#x2022; [`storage_pools`](#pools-5a9a45) - Optional String<br>Storage Pools. The storagePools parameter is used to further restrict the set of pools that match any specified attributes
+<a id="deep-828297"></a>Deeply nested **Trident** block collapsed for readability.
 
 #### Custom Storage Config Storage Class List Storage Classes Pure Service Orchestrator
 
-A [`pure_service_orchestrator`](#orchestrator-f833eb) block (within [`custom_storage_config.storage_class_list.storage_classes`](#classes-b5444a)) supports the following:
-
-<a id="backend-47f142"></a>&#x2022; [`backend`](#backend-47f142) - Optional String<br>Backend. Defines type of Pure storage backend block or file. The volume will have the aspects defined in the chosen virtual pool
-
-<a id="limit-5ac131"></a>&#x2022; [`bandwidth_limit`](#limit-5ac131) - Optional String<br>Bandwidth Limit. It must be between 1 MB/s and 512 GB/s. Enter the size as a number (bytes must be multiple of 512) or number with a single character unit symbol. Valid unit symbols are K, M, G, representing KiB, MiB, and GiB
-
-<a id="limit-239a56"></a>&#x2022; [`iops_limit`](#limit-239a56) - Optional Number<br>IOPS Limit. Enable IOPS limitation. It must be between 100 and 100 million. If value is 0, IOPS limit is not defined
+<a id="deep-095861"></a>Deeply nested **Orchestrator** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List
 
@@ -1093,633 +667,199 @@ A [`storage_device_list`](#list-650498) block (within [`custom_storage_config`](
 
 #### Custom Storage Config Storage Device List Storage Devices
 
-A [`storage_devices`](#devices-0c06af) block (within [`custom_storage_config.storage_device_list`](#list-650498)) supports the following:
-
-<a id="parameters-8ee715"></a>&#x2022; [`advanced_advanced_parameters`](#parameters-8ee715) - Optional Block<br>Advanced Parameters. Map of parameter name and string value
-
-<a id="storage-e57f7d"></a>&#x2022; [`custom_storage`](#storage-e57f7d) - Optional Block<br>Enable this option
-
-<a id="storage-e99559"></a>&#x2022; [`hpe_storage`](#storage-e99559) - Optional Block<br>HPE Storage. Device configuration for HPE Storage<br>See [Hpe Storage](#storage-e99559) below.
-
-<a id="trident-979b89"></a>&#x2022; [`netapp_trident`](#trident-979b89) - Optional Block<br>NetApp Trident. Device configuration for NetApp Trident Storage<br>See [Netapp Trident](#trident-979b89) below.
-
-<a id="orchestrator-2f7da0"></a>&#x2022; [`pure_service_orchestrator`](#orchestrator-2f7da0) - Optional Block<br>Pure Storage Service Orchestrator. Device configuration for Pure Storage Service Orchestrator<br>See [Pure Service Orchestrator](#orchestrator-2f7da0) below.
-
-<a id="device-bcf87a"></a>&#x2022; [`storage_device`](#device-bcf87a) - Optional String<br>Storage Device. Storage device and device unit
+<a id="deep-6bca13"></a>Deeply nested **Devices** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Hpe Storage
 
-A [`hpe_storage`](#storage-e99559) block (within [`custom_storage_config.storage_device_list.storage_devices`](#devices-0c06af)) supports the following:
-
-<a id="port-9b5e60"></a>&#x2022; [`api_server_port`](#port-9b5e60) - Optional Number<br>Storage server Port. Enter Storage Server Port
-
-<a id="password-b52a3f"></a>&#x2022; [`iscsi_chap_password`](#password-b52a3f) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [iSCSI Chap Password](#password-b52a3f) below.
-
-<a id="user-88c15c"></a>&#x2022; [`iscsi_chap_user`](#user-88c15c) - Optional String<br>iSCSI chapUser. chap Username to connect to the HPE storage
-
-<a id="password-fa8fb6"></a>&#x2022; [`password`](#password-fa8fb6) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password-fa8fb6) below.
-
-<a id="address-72ba57"></a>&#x2022; [`storage_server_ip_address`](#address-72ba57) - Optional String<br>Storage Server IP address. Enter storage server IP address
-
-<a id="name-39ad6e"></a>&#x2022; [`storage_server_name`](#name-39ad6e) - Optional String<br>Storage Server Name. Enter storage server Name
-
-<a id="username-238eba"></a>&#x2022; [`username`](#username-238eba) - Optional String<br>Username. Username to connect to the HPE storage management IP
+<a id="deep-b0a776"></a>Deeply nested **Storage** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Hpe Storage iSCSI Chap Password
 
-An [`iscsi_chap_password`](#password-b52a3f) block (within [`custom_storage_config.storage_device_list.storage_devices.hpe_storage`](#storage-e99559)) supports the following:
-
-<a id="info-a63803"></a>&#x2022; [`blindfold_secret_info`](#info-a63803) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-a63803) below.
-
-<a id="info-181c69"></a>&#x2022; [`clear_secret_info`](#info-181c69) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-181c69) below.
+<a id="deep-e1c299"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Hpe Storage iSCSI Chap Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-a63803) block (within [`custom_storage_config.storage_device_list.storage_devices.hpe_storage.iscsi_chap_password`](#password-b52a3f)) supports the following:
-
-<a id="provider-ad2d4a"></a>&#x2022; [`decryption_provider`](#provider-ad2d4a) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-09526a"></a>&#x2022; [`location`](#location-09526a) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-89ddf9"></a>&#x2022; [`store_provider`](#provider-89ddf9) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-f77edf"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Hpe Storage iSCSI Chap Password Clear Secret Info
 
-A [`clear_secret_info`](#info-181c69) block (within [`custom_storage_config.storage_device_list.storage_devices.hpe_storage.iscsi_chap_password`](#password-b52a3f)) supports the following:
-
-<a id="ref-9a2910"></a>&#x2022; [`provider_ref`](#ref-9a2910) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-1f12d3"></a>&#x2022; [`url`](#url-1f12d3) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-686dd8"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Hpe Storage Password
 
-A [`password`](#password-fa8fb6) block (within [`custom_storage_config.storage_device_list.storage_devices.hpe_storage`](#storage-e99559)) supports the following:
-
-<a id="info-ae23b6"></a>&#x2022; [`blindfold_secret_info`](#info-ae23b6) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-ae23b6) below.
-
-<a id="info-e6fbee"></a>&#x2022; [`clear_secret_info`](#info-e6fbee) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-e6fbee) below.
+<a id="deep-481595"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Hpe Storage Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-ae23b6) block (within [`custom_storage_config.storage_device_list.storage_devices.hpe_storage.password`](#password-fa8fb6)) supports the following:
-
-<a id="provider-8257ea"></a>&#x2022; [`decryption_provider`](#provider-8257ea) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-c073e0"></a>&#x2022; [`location`](#location-c073e0) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-ae7fc2"></a>&#x2022; [`store_provider`](#provider-ae7fc2) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-ee9e32"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Hpe Storage Password Clear Secret Info
 
-A [`clear_secret_info`](#info-e6fbee) block (within [`custom_storage_config.storage_device_list.storage_devices.hpe_storage.password`](#password-fa8fb6)) supports the following:
-
-<a id="ref-070f7c"></a>&#x2022; [`provider_ref`](#ref-070f7c) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-2f4d88"></a>&#x2022; [`url`](#url-2f4d88) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-760daf"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident
 
-A [`netapp_trident`](#trident-979b89) block (within [`custom_storage_config.storage_device_list.storage_devices`](#devices-0c06af)) supports the following:
-
-<a id="nas-ee38b4"></a>&#x2022; [`netapp_backend_ontap_nas`](#nas-ee38b4) - Optional Block<br>Storage Backend NetApp ONTAP NAS. Configuration of storage backend for NetApp ONTAP NAS<br>See [Netapp Backend Ontap Nas](#nas-ee38b4) below.
-
-<a id="san-00fbe7"></a>&#x2022; [`netapp_backend_ontap_san`](#san-00fbe7) - Optional Block<br>Storage Backend NetApp ONTAP SAN. Configuration of storage backend for NetApp ONTAP SAN<br>See [Netapp Backend Ontap San](#san-00fbe7) below.
+<a id="deep-8456dc"></a>Deeply nested **Trident** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas
 
-A [`netapp_backend_ontap_nas`](#nas-ee38b4) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident`](#trident-979b89)) supports the following:
-
-<a id="cidrs-af1113"></a>&#x2022; [`auto_export_cidrs`](#cidrs-af1113) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Auto Export Cidrs](#cidrs-af1113) below.
-
-<a id="policy-57dd22"></a>&#x2022; [`auto_export_policy`](#policy-57dd22) - Optional Bool<br>Auto Export Policy. Enable automatic export policy creation and updating
-
-<a id="name-53df7b"></a>&#x2022; [`backend_name`](#name-53df7b) - Optional String<br>Storage Backend Name. Configuration of Backend Name. Driver is name + '_' + dataLIF
-
-<a id="certificate-e405a6"></a>&#x2022; [`client_certificate`](#certificate-e405a6) - Optional String<br>Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth
-
-<a id="key-d50914"></a>&#x2022; [`client_private_key`](#key-d50914) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Private Key](#key-d50914) below.
-
-<a id="name-0aa785"></a>&#x2022; [`data_lif_dns_name`](#name-0aa785) - Optional String<br>Backend Data LIF Name. Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="lif-ip-a86216"></a>&#x2022; [`data_lif_ip`](#lif-ip-a86216) - Optional String<br>Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given IP address
-
-<a id="labels-acd755"></a>&#x2022; [`labels`](#labels-acd755) - Optional Block<br>Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection
-
-<a id="usage-4b5bdb"></a>&#x2022; [`limit_aggregate_usage`](#usage-4b5bdb) - Optional String<br>Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default
-
-<a id="size-6ec0fc"></a>&#x2022; [`limit_volume_size`](#size-6ec0fc) - Optional String<br>Limit Volume Size. Fail provisioning if requested volume size is above this value. Not enforced by default
-
-<a id="name-40ee01"></a>&#x2022; [`management_lif_dns_name`](#name-40ee01) - Optional String<br>Backend Management LIF Name. Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="lif-ip-e9ac96"></a>&#x2022; [`management_lif_ip`](#lif-ip-e9ac96) - Optional String<br>Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address
-
-<a id="options-fcd1b5"></a>&#x2022; [`nfs_mount_options`](#options-fcd1b5) - Optional String<br>NFS Mount Options. Comma-separated list of NFS mount options. Not enforced by default
-
-<a id="password-d5888a"></a>&#x2022; [`password`](#password-d5888a) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password-d5888a) below.
-
-<a id="region-744dc3"></a>&#x2022; [`region`](#region-744dc3) - Optional String<br>Backend Region. Virtual Pool Region
-
-<a id="storage-1f1d4a"></a>&#x2022; [`storage`](#storage-1f1d4a) - Optional Block<br>Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection<br>See [Storage](#storage-1f1d4a) below.
-
-<a id="name-ad4529"></a>&#x2022; [`storage_driver_name`](#name-ad4529) - Optional String<br>Storage Backend Driver. Configuration of Backend Name
-
-<a id="prefix-249cfa"></a>&#x2022; [`storage_prefix`](#prefix-249cfa) - Optional String<br>Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated
-
-<a id="svm-d2e6f6"></a>&#x2022; [`svm`](#svm-d2e6f6) - Optional String<br>Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified
-
-<a id="certificate-b14a97"></a>&#x2022; [`trusted_ca_certificate`](#certificate-b14a97) - Optional String<br>Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth
-
-<a id="username-ee5508"></a>&#x2022; [`username`](#username-ee5508) - Optional String<br>Username. Username to connect to the cluster/SVM
-
-<a id="defaults-44161c"></a>&#x2022; [`volume_defaults`](#defaults-44161c) - Optional Block<br>Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration<br>See [Volume Defaults](#defaults-44161c) below.
+<a id="deep-913b62"></a>Deeply nested **Nas** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Auto Export Cidrs
 
-An [`auto_export_cidrs`](#cidrs-af1113) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`](#nas-ee38b4)) supports the following:
-
-<a id="prefixes-758f72"></a>&#x2022; [`prefixes`](#prefixes-758f72) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="deep-93daf4"></a>Deeply nested **Cidrs** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key
 
-A [`client_private_key`](#key-d50914) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`](#nas-ee38b4)) supports the following:
-
-<a id="info-564dad"></a>&#x2022; [`blindfold_secret_info`](#info-564dad) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-564dad) below.
-
-<a id="info-158d5b"></a>&#x2022; [`clear_secret_info`](#info-158d5b) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-158d5b) below.
+<a id="deep-35e690"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-564dad) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.client_private_key`](#key-d50914)) supports the following:
-
-<a id="provider-ff5671"></a>&#x2022; [`decryption_provider`](#provider-ff5671) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-978c72"></a>&#x2022; [`location`](#location-978c72) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-1d8b9d"></a>&#x2022; [`store_provider`](#provider-1d8b9d) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-0e3cea"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Client Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-158d5b) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.client_private_key`](#key-d50914)) supports the following:
-
-<a id="ref-2a92a3"></a>&#x2022; [`provider_ref`](#ref-2a92a3) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-38d6af"></a>&#x2022; [`url`](#url-38d6af) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-cbaec1"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password
 
-A [`password`](#password-d5888a) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`](#nas-ee38b4)) supports the following:
-
-<a id="info-c0864a"></a>&#x2022; [`blindfold_secret_info`](#info-c0864a) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-c0864a) below.
-
-<a id="info-f0c477"></a>&#x2022; [`clear_secret_info`](#info-f0c477) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-f0c477) below.
+<a id="deep-5d8ec1"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-c0864a) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.password`](#password-d5888a)) supports the following:
-
-<a id="provider-30d653"></a>&#x2022; [`decryption_provider`](#provider-30d653) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-01cddc"></a>&#x2022; [`location`](#location-01cddc) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-e74b29"></a>&#x2022; [`store_provider`](#provider-e74b29) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-f73282"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Password Clear Secret Info
 
-A [`clear_secret_info`](#info-f0c477) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.password`](#password-d5888a)) supports the following:
-
-<a id="ref-994a9b"></a>&#x2022; [`provider_ref`](#ref-994a9b) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-0ae493"></a>&#x2022; [`url`](#url-0ae493) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-463ae9"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Storage
 
-A [`storage`](#storage-1f1d4a) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`](#nas-ee38b4)) supports the following:
-
-<a id="labels-a2c60d"></a>&#x2022; [`labels`](#labels-a2c60d) - Optional Block<br>Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection
-
-<a id="defaults-debf79"></a>&#x2022; [`volume_defaults`](#defaults-debf79) - Optional Block<br>Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration<br>See [Volume Defaults](#defaults-debf79) below.
-
-<a id="zone-24875d"></a>&#x2022; [`zone`](#zone-24875d) - Optional String<br>Virtual Pool Zone. Virtual Storage Pool zone definition
+<a id="deep-b48f38"></a>Deeply nested **Storage** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Storage Volume Defaults
 
-A [`volume_defaults`](#defaults-debf79) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas.storage`](#storage-1f1d4a)) supports the following:
-
-<a id="policy-8b4807"></a>&#x2022; [`adaptive_qos_policy`](#policy-8b4807) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
-
-<a id="encryption-2d64c8"></a>&#x2022; [`encryption`](#encryption-2d64c8) - Optional Bool<br>Enable Encryption. Enable NetApp volume encryption
-
-<a id="policy-2af745"></a>&#x2022; [`export_policy`](#policy-2af745) - Optional String<br>Export Policy. Export policy to use
-
-<a id="qos-5b1018"></a>&#x2022; [`no_qos`](#qos-5b1018) - Optional Block<br>Enable this option
-
-<a id="policy-148881"></a>&#x2022; [`qos_policy`](#policy-148881) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
-
-<a id="style-12479e"></a>&#x2022; [`security_style`](#style-12479e) - Optional String<br>Security Style. Security style for new volumes
-
-<a id="dir-9371a8"></a>&#x2022; [`snapshot_dir`](#dir-9371a8) - Optional Bool<br>Access to Snapshot Directory. Access to the .snapshot directory
-
-<a id="policy-0eddda"></a>&#x2022; [`snapshot_policy`](#policy-0eddda) - Optional String<br>Snapshot Policy. Snapshot policy to use
-
-<a id="reserve-12e93c"></a>&#x2022; [`snapshot_reserve`](#reserve-12e93c) - Optional String<br>Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''
-
-<a id="reserve-24ca35"></a>&#x2022; [`space_reserve`](#reserve-24ca35) - Optional String<br>Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)
-
-<a id="clone-4af119"></a>&#x2022; [`split_on_clone`](#clone-4af119) - Optional Bool<br>Split on Clone. Split a clone from its parent upon creation
-
-<a id="policy-72fb40"></a>&#x2022; [`tiering_policy`](#policy-72fb40) - Optional String<br>Tiering Policy. Tiering policy to use. 'none' is default
-
-<a id="permissions-4d4b9f"></a>&#x2022; [`unix_permissions`](#permissions-4d4b9f) - Optional Number<br>Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777
+<a id="deep-4bded4"></a>Deeply nested **Defaults** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap Nas Volume Defaults
 
-A [`volume_defaults`](#defaults-44161c) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_nas`](#nas-ee38b4)) supports the following:
-
-<a id="policy-5cf457"></a>&#x2022; [`adaptive_qos_policy`](#policy-5cf457) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
-
-<a id="encryption-4dfbbc"></a>&#x2022; [`encryption`](#encryption-4dfbbc) - Optional Bool<br>Enable Encryption. Enable NetApp volume encryption
-
-<a id="policy-0deaef"></a>&#x2022; [`export_policy`](#policy-0deaef) - Optional String<br>Export Policy. Export policy to use
-
-<a id="qos-c89839"></a>&#x2022; [`no_qos`](#qos-c89839) - Optional Block<br>Enable this option
-
-<a id="policy-a6b485"></a>&#x2022; [`qos_policy`](#policy-a6b485) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
-
-<a id="style-363b98"></a>&#x2022; [`security_style`](#style-363b98) - Optional String<br>Security Style. Security style for new volumes
-
-<a id="dir-e7c80e"></a>&#x2022; [`snapshot_dir`](#dir-e7c80e) - Optional Bool<br>Access to Snapshot Directory. Access to the .snapshot directory
-
-<a id="policy-30c93e"></a>&#x2022; [`snapshot_policy`](#policy-30c93e) - Optional String<br>Snapshot Policy. Snapshot policy to use
-
-<a id="reserve-8d8116"></a>&#x2022; [`snapshot_reserve`](#reserve-8d8116) - Optional String<br>Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''
-
-<a id="reserve-76626d"></a>&#x2022; [`space_reserve`](#reserve-76626d) - Optional String<br>Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)
-
-<a id="clone-ba0c1a"></a>&#x2022; [`split_on_clone`](#clone-ba0c1a) - Optional Bool<br>Split on Clone. Split a clone from its parent upon creation
-
-<a id="policy-a691f5"></a>&#x2022; [`tiering_policy`](#policy-a691f5) - Optional String<br>Tiering Policy. Tiering policy to use. 'none' is default
-
-<a id="permissions-d029cd"></a>&#x2022; [`unix_permissions`](#permissions-d029cd) - Optional Number<br>Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777
+<a id="deep-13fa20"></a>Deeply nested **Defaults** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San
 
-A [`netapp_backend_ontap_san`](#san-00fbe7) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident`](#trident-979b89)) supports the following:
-
-<a id="certificate-c977e7"></a>&#x2022; [`client_certificate`](#certificate-c977e7) - Optional String<br>Client Certificate. Please Enter Base64-encoded value of client certificate. Used for certificate-based auth
-
-<a id="key-21636a"></a>&#x2022; [`client_private_key`](#key-21636a) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Client Private Key](#key-21636a) below.
-
-<a id="name-04fb5c"></a>&#x2022; [`data_lif_dns_name`](#name-04fb5c) - Optional String<br>Backend Data LIF Name. Backend Data LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="lif-ip-4ae4bf"></a>&#x2022; [`data_lif_ip`](#lif-ip-4ae4bf) - Optional String<br>Backend Data LIF IP Address. Backend Data LIF IP Address is reachable at the given IP address
-
-<a id="name-ae3da6"></a>&#x2022; [`igroup_name`](#name-ae3da6) - Optional String<br>iGroup Name. Name of the igroup for SAN volumes to use
-
-<a id="labels-dea506"></a>&#x2022; [`labels`](#labels-dea506) - Optional Block<br>Backend Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection
-
-<a id="usage-943f2d"></a>&#x2022; [`limit_aggregate_usage`](#usage-943f2d) - Optional Number<br>Limit Aggregate Usage. Fail provisioning if usage is above this percentage. Not enforced by default
-
-<a id="size-373b3e"></a>&#x2022; [`limit_volume_size`](#size-373b3e) - Optional Number<br>Limit Volume Size. Fail provisioning if requested volume size in GBi is above this value. Not enforced by default
-
-<a id="name-1cf431"></a>&#x2022; [`management_lif_dns_name`](#name-1cf431) - Optional String<br>Backend Management LIF Name. Backend Management LIF IP Address's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="lif-ip-068761"></a>&#x2022; [`management_lif_ip`](#lif-ip-068761) - Optional String<br>Backend Management LIF IP Address. Backend Management LIF IP Address is reachable at the given IP address
-
-<a id="chap-df8335"></a>&#x2022; [`no_chap`](#chap-df8335) - Optional Block<br>Enable this option
-
-<a id="password-a3e536"></a>&#x2022; [`password`](#password-a3e536) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password-a3e536) below.
-
-<a id="region-449c58"></a>&#x2022; [`region`](#region-449c58) - Optional String<br>Backend Region. Virtual Pool Region
-
-<a id="storage-a670cc"></a>&#x2022; [`storage`](#storage-a670cc) - Optional Block<br>Virtual Storage Pools. List of Virtual Storage Pool definitions which are referred back by Storage Class label match selection<br>See [Storage](#storage-a670cc) below.
-
-<a id="name-db73d5"></a>&#x2022; [`storage_driver_name`](#name-db73d5) - Optional String<br>Storage Backend Driver. Configuration of Backend Name
-
-<a id="prefix-83eca9"></a>&#x2022; [`storage_prefix`](#prefix-83eca9) - Optional String<br>Storage Prefix. Prefix used when provisioning new volumes in the SVM. Once set this cannot be updated
-
-<a id="svm-69ccb8"></a>&#x2022; [`svm`](#svm-69ccb8) - Optional String<br>Backend SVM. Storage virtual machine to use. Derived if an SVM managementLIF is specified
-
-<a id="certificate-d339d4"></a>&#x2022; [`trusted_ca_certificate`](#certificate-d339d4) - Optional String<br>Trusted CA Certificate. Please Enter Base64-encoded value of trusted CA certificate. Optional. Used for certificate-based auth
-
-<a id="chap-8ecc57"></a>&#x2022; [`use_chap`](#chap-8ecc57) - Optional Block<br>Device NetApp Backend ONTAP SAN CHAP Configuration. Device NetApp Backend ONTAP SAN CHAP configuration options for enabled CHAP<br>See [Use Chap](#chap-8ecc57) below.
-
-<a id="username-19c71a"></a>&#x2022; [`username`](#username-19c71a) - Optional String<br>Username. Username to connect to the cluster/SVM
-
-<a id="defaults-41ed39"></a>&#x2022; [`volume_defaults`](#defaults-41ed39) - Optional Block<br>Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration<br>See [Volume Defaults](#defaults-41ed39) below.
+<a id="deep-fa3fa5"></a>Deeply nested **San** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key
 
-A [`client_private_key`](#key-21636a) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`](#san-00fbe7)) supports the following:
-
-<a id="info-0012c5"></a>&#x2022; [`blindfold_secret_info`](#info-0012c5) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-0012c5) below.
-
-<a id="info-b893ae"></a>&#x2022; [`clear_secret_info`](#info-b893ae) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b893ae) below.
+<a id="deep-59be77"></a>Deeply nested **Key** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-0012c5) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.client_private_key`](#key-21636a)) supports the following:
-
-<a id="provider-9af1be"></a>&#x2022; [`decryption_provider`](#provider-9af1be) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-3b05c5"></a>&#x2022; [`location`](#location-3b05c5) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-e476d8"></a>&#x2022; [`store_provider`](#provider-e476d8) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-62b559"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Client Private Key Clear Secret Info
 
-A [`clear_secret_info`](#info-b893ae) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.client_private_key`](#key-21636a)) supports the following:
-
-<a id="ref-4ed33e"></a>&#x2022; [`provider_ref`](#ref-4ed33e) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-f37cfb"></a>&#x2022; [`url`](#url-f37cfb) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-d4b4e5"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password
 
-A [`password`](#password-a3e536) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`](#san-00fbe7)) supports the following:
-
-<a id="info-989e02"></a>&#x2022; [`blindfold_secret_info`](#info-989e02) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-989e02) below.
-
-<a id="info-c9d3e6"></a>&#x2022; [`clear_secret_info`](#info-c9d3e6) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-c9d3e6) below.
+<a id="deep-25893c"></a>Deeply nested **Password** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-989e02) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.password`](#password-a3e536)) supports the following:
-
-<a id="provider-4dc60f"></a>&#x2022; [`decryption_provider`](#provider-4dc60f) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-e81953"></a>&#x2022; [`location`](#location-e81953) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-6c7ad0"></a>&#x2022; [`store_provider`](#provider-6c7ad0) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-d8c267"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Password Clear Secret Info
 
-A [`clear_secret_info`](#info-c9d3e6) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.password`](#password-a3e536)) supports the following:
-
-<a id="ref-c8f9a2"></a>&#x2022; [`provider_ref`](#ref-c8f9a2) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-7f1233"></a>&#x2022; [`url`](#url-7f1233) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-377c01"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Storage
 
-A [`storage`](#storage-a670cc) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`](#san-00fbe7)) supports the following:
-
-<a id="labels-6d4495"></a>&#x2022; [`labels`](#labels-6d4495) - Optional Block<br>Storage Pool Labels. List of labels for Storage Device used in NetApp ONTAP. It is used for storage class label match selection
-
-<a id="defaults-1b70e1"></a>&#x2022; [`volume_defaults`](#defaults-1b70e1) - Optional Block<br>Backend OnTap Volume Defaults. It controls how each volume is provisioned by default using these options in a special section of the configuration<br>See [Volume Defaults](#defaults-1b70e1) below.
-
-<a id="zone-09815a"></a>&#x2022; [`zone`](#zone-09815a) - Optional String<br>Virtual Pool Zone. Virtual Storage Pool zone definition
+<a id="deep-48cf4d"></a>Deeply nested **Storage** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Storage Volume Defaults
 
-A [`volume_defaults`](#defaults-1b70e1) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.storage`](#storage-a670cc)) supports the following:
-
-<a id="policy-48be7e"></a>&#x2022; [`adaptive_qos_policy`](#policy-48be7e) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
-
-<a id="encryption-ceadb7"></a>&#x2022; [`encryption`](#encryption-ceadb7) - Optional Bool<br>Enable Encryption. Enable NetApp volume encryption
-
-<a id="policy-6a73df"></a>&#x2022; [`export_policy`](#policy-6a73df) - Optional String<br>Export Policy. Export policy to use
-
-<a id="qos-66ba87"></a>&#x2022; [`no_qos`](#qos-66ba87) - Optional Block<br>Enable this option
-
-<a id="policy-cdd6ba"></a>&#x2022; [`qos_policy`](#policy-cdd6ba) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
-
-<a id="style-9cbac7"></a>&#x2022; [`security_style`](#style-9cbac7) - Optional String<br>Security Style. Security style for new volumes
-
-<a id="dir-e8e4eb"></a>&#x2022; [`snapshot_dir`](#dir-e8e4eb) - Optional Bool<br>Access to Snapshot Directory. Access to the .snapshot directory
-
-<a id="policy-f49a2f"></a>&#x2022; [`snapshot_policy`](#policy-f49a2f) - Optional String<br>Snapshot Policy. Snapshot policy to use
-
-<a id="reserve-c9f100"></a>&#x2022; [`snapshot_reserve`](#reserve-c9f100) - Optional String<br>Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''
-
-<a id="reserve-622793"></a>&#x2022; [`space_reserve`](#reserve-622793) - Optional String<br>Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)
-
-<a id="clone-52f374"></a>&#x2022; [`split_on_clone`](#clone-52f374) - Optional Bool<br>Split on Clone. Split a clone from its parent upon creation
-
-<a id="policy-3b7297"></a>&#x2022; [`tiering_policy`](#policy-3b7297) - Optional String<br>Tiering Policy. Tiering policy to use. 'none' is default
-
-<a id="permissions-ec7c50"></a>&#x2022; [`unix_permissions`](#permissions-ec7c50) - Optional Number<br>Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777
+<a id="deep-bf3c29"></a>Deeply nested **Defaults** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap
 
-An [`use_chap`](#chap-8ecc57) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`](#san-00fbe7)) supports the following:
-
-<a id="secret-9e90dd"></a>&#x2022; [`chap_initiator_secret`](#secret-9e90dd) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Chap Initiator Secret](#secret-9e90dd) below.
-
-<a id="secret-5c8f36"></a>&#x2022; [`chap_target_initiator_secret`](#secret-5c8f36) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Chap Target Initiator Secret](#secret-5c8f36) below.
-
-<a id="username-a4b55d"></a>&#x2022; [`chap_target_username`](#username-a4b55d) - Optional String<br>CHAP Target Username. Target username. Required if useCHAP=true
-
-<a id="username-edfd02"></a>&#x2022; [`chap_username`](#username-edfd02) - Optional String<br>CHAP Username. Inbound username. Required if useCHAP=true
+<a id="deep-d2c7fd"></a>Deeply nested **Chap** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret
 
-A [`chap_initiator_secret`](#secret-9e90dd) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap`](#chap-8ecc57)) supports the following:
-
-<a id="info-8c0f29"></a>&#x2022; [`blindfold_secret_info`](#info-8c0f29) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-8c0f29) below.
-
-<a id="info-6f1429"></a>&#x2022; [`clear_secret_info`](#info-6f1429) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-6f1429) below.
+<a id="deep-98f2c8"></a>Deeply nested **Secret** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-8c0f29) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret`](#secret-9e90dd)) supports the following:
-
-<a id="provider-bd4008"></a>&#x2022; [`decryption_provider`](#provider-bd4008) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-ad6ef2"></a>&#x2022; [`location`](#location-ad6ef2) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-5ad0fc"></a>&#x2022; [`store_provider`](#provider-5ad0fc) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-1d0179"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Initiator Secret Clear Secret Info
 
-A [`clear_secret_info`](#info-6f1429) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_initiator_secret`](#secret-9e90dd)) supports the following:
-
-<a id="ref-28ec3d"></a>&#x2022; [`provider_ref`](#ref-28ec3d) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-2bde81"></a>&#x2022; [`url`](#url-2bde81) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-88af7d"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret
 
-A [`chap_target_initiator_secret`](#secret-5c8f36) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap`](#chap-8ecc57)) supports the following:
-
-<a id="info-e86cf6"></a>&#x2022; [`blindfold_secret_info`](#info-e86cf6) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-e86cf6) below.
-
-<a id="info-b8fd2a"></a>&#x2022; [`clear_secret_info`](#info-b8fd2a) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-b8fd2a) below.
+<a id="deep-93dedc"></a>Deeply nested **Secret** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-e86cf6) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret`](#secret-5c8f36)) supports the following:
-
-<a id="provider-9caccd"></a>&#x2022; [`decryption_provider`](#provider-9caccd) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-e6732c"></a>&#x2022; [`location`](#location-e6732c) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-234d9b"></a>&#x2022; [`store_provider`](#provider-234d9b) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-507702"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Use Chap Chap Target Initiator Secret Clear Secret Info
 
-A [`clear_secret_info`](#info-b8fd2a) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san.use_chap.chap_target_initiator_secret`](#secret-5c8f36)) supports the following:
-
-<a id="ref-ef6816"></a>&#x2022; [`provider_ref`](#ref-ef6816) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-c7ec84"></a>&#x2022; [`url`](#url-c7ec84) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-695e52"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Netapp Trident Netapp Backend Ontap San Volume Defaults
 
-A [`volume_defaults`](#defaults-41ed39) block (within [`custom_storage_config.storage_device_list.storage_devices.netapp_trident.netapp_backend_ontap_san`](#san-00fbe7)) supports the following:
-
-<a id="policy-7a81ee"></a>&#x2022; [`adaptive_qos_policy`](#policy-7a81ee) - Optional String<br>Adaptive QOS Policy name. Enter Adaptive QOS Policy Name
-
-<a id="encryption-c21d96"></a>&#x2022; [`encryption`](#encryption-c21d96) - Optional Bool<br>Enable Encryption. Enable NetApp volume encryption
-
-<a id="policy-89293d"></a>&#x2022; [`export_policy`](#policy-89293d) - Optional String<br>Export Policy. Export policy to use
-
-<a id="qos-ff8e57"></a>&#x2022; [`no_qos`](#qos-ff8e57) - Optional Block<br>Enable this option
-
-<a id="policy-a6ab4b"></a>&#x2022; [`qos_policy`](#policy-a6ab4b) - Optional String<br>QOS Policy Name. Enter QOS Policy Name
-
-<a id="style-571bbf"></a>&#x2022; [`security_style`](#style-571bbf) - Optional String<br>Security Style. Security style for new volumes
-
-<a id="dir-2146dd"></a>&#x2022; [`snapshot_dir`](#dir-2146dd) - Optional Bool<br>Access to Snapshot Directory. Access to the .snapshot directory
-
-<a id="policy-d4844f"></a>&#x2022; [`snapshot_policy`](#policy-d4844f) - Optional String<br>Snapshot Policy. Snapshot policy to use
-
-<a id="reserve-747c38"></a>&#x2022; [`snapshot_reserve`](#reserve-747c38) - Optional String<br>Snapshot Reserved. Percentage of volume reserved for snapshots. '0' if snapshot policy is 'none', else ''
-
-<a id="reserve-a56086"></a>&#x2022; [`space_reserve`](#reserve-a56086) - Optional String<br>Space Reservation Mode. Space reservation mode; “none” (thin) or “volume” (thick)
-
-<a id="clone-c26136"></a>&#x2022; [`split_on_clone`](#clone-c26136) - Optional Bool<br>Split on Clone. Split a clone from its parent upon creation
-
-<a id="policy-ed80f4"></a>&#x2022; [`tiering_policy`](#policy-ed80f4) - Optional String<br>Tiering Policy. Tiering policy to use. 'none' is default
-
-<a id="permissions-fafcc1"></a>&#x2022; [`unix_permissions`](#permissions-fafcc1) - Optional Number<br>Unix Mode Permissions. Unix permission mode for new volumes. All allowed 777
+<a id="deep-c97e4f"></a>Deeply nested **Defaults** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator
 
-A [`pure_service_orchestrator`](#orchestrator-2f7da0) block (within [`custom_storage_config.storage_device_list.storage_devices`](#devices-0c06af)) supports the following:
-
-<a id="arrays-8d07f5"></a>&#x2022; [`arrays`](#arrays-8d07f5) - Optional Block<br>Arrays Configuration. Device configuration for PSO Arrays<br>See [Arrays](#arrays-8d07f5) below.
-
-<a id="cluster-id-deec96"></a>&#x2022; [`cluster_id`](#cluster-id-deec96) - Optional String<br>Cluster ID. clusterID is added as a prefix for all volumes created by this PSO installation. clusterID is also used to identify the volumes used by the datastore, pso-db. clusterID MUST BE UNIQUE for multiple K8S clusters running on top of the same storage arrays. characters allowed: alphanumeric and underscores
-
-<a id="topology-123509"></a>&#x2022; [`enable_storage_topology`](#topology-123509) - Optional Bool<br>Enable Storage Topology. This option is to enable/disable the csi topology feature for pso-csi
-
-<a id="topology-49b8dc"></a>&#x2022; [`enable_strict_topology`](#topology-49b8dc) - Optional Bool<br>Enable Strict Topology. This option is to enable/disable the strict csi topology feature for pso-csi
+<a id="deep-d4f69b"></a>Deeply nested **Orchestrator** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays
 
-An [`arrays`](#arrays-8d07f5) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator`](#orchestrator-2f7da0)) supports the following:
-
-<a id="array-c04527"></a>&#x2022; [`flash_array`](#array-c04527) - Optional Block<br>Flash Arrays. Specify what storage flash arrays should be managed the plugin<br>See [Flash Array](#array-c04527) below.
-
-<a id="blade-7c7dcb"></a>&#x2022; [`flash_blade`](#blade-7c7dcb) - Optional Block<br>Flash Blades. Specify what storage flash blades should be managed the plugin<br>See [Flash Blade](#blade-7c7dcb) below.
+<a id="deep-ed3060"></a>Deeply nested **Arrays** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array
 
-A [`flash_array`](#array-c04527) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator.arrays`](#arrays-8d07f5)) supports the following:
-
-<a id="opt-a3469b"></a>&#x2022; [`default_fs_opt`](#opt-a3469b) - Optional String<br>Default Filesystem Options. Block volume default mkfs options. Not recommended to change!
-
-<a id="type-18c7df"></a>&#x2022; [`default_fs_type`](#type-18c7df) - Optional String<br>Default Filesystem Type. Block volume default filesystem type. Not recommended to change!
-
-<a id="opts-f84ca9"></a>&#x2022; [`default_mount_opts`](#opts-f84ca9) - Optional List<br>Default Mount Options. Block volume default filesystem mount options. Not recommended to change!
-
-<a id="attachments-9c1979"></a>&#x2022; [`disable_preempt_attachments`](#attachments-9c1979) - Optional Bool<br>Disable Preempt Attachments. Enable/Disable attachment preemption!
-
-<a id="arrays-d89f23"></a>&#x2022; [`flash_arrays`](#arrays-d89f23) - Optional Block<br>Flash Arrays. For FlashArrays you must set the 'mgmt_endpoint' and 'api_token'<br>See [Flash Arrays](#arrays-d89f23) below.
-
-<a id="timeout-f04239"></a>&#x2022; [`iscsi_login_timeout`](#timeout-f04239) - Optional Number<br>iSCSI Login Timeout. iSCSI login timeout in seconds. Not recommended to change!
-
-<a id="type-142357"></a>&#x2022; [`san_type`](#type-142357) - Optional String<br>SAN Type. Block volume access protocol, either iSCSI or FC
+<a id="deep-570ae1"></a>Deeply nested **Array** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays
 
-A [`flash_arrays`](#arrays-d89f23) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array`](#array-c04527)) supports the following:
-
-<a id="token-1f3845"></a>&#x2022; [`api_token`](#token-1f3845) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Token](#token-1f3845) below.
-
-<a id="labels-f20fdf"></a>&#x2022; [`labels`](#labels-f20fdf) - Optional Block<br>Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner
-
-<a id="name-78301a"></a>&#x2022; [`mgmt_dns_name`](#name-78301a) - Optional String<br>Management Endpoint Name. Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="mgmt-ip-d54061"></a>&#x2022; [`mgmt_ip`](#mgmt-ip-d54061) - Optional String<br>Management Endpoint IP Address. Management Endpoint is reachable at the given IP address
+<a id="deep-e68969"></a>Deeply nested **Arrays** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token
 
-An [`api_token`](#token-1f3845) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array.flash_arrays`](#arrays-d89f23)) supports the following:
-
-<a id="info-5e53e3"></a>&#x2022; [`blindfold_secret_info`](#info-5e53e3) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-5e53e3) below.
-
-<a id="info-0b18f1"></a>&#x2022; [`clear_secret_info`](#info-0b18f1) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-0b18f1) below.
+<a id="deep-2d743a"></a>Deeply nested **Token** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-5e53e3) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array.flash_arrays.api_token`](#token-1f3845)) supports the following:
-
-<a id="provider-8f4669"></a>&#x2022; [`decryption_provider`](#provider-8f4669) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-130277"></a>&#x2022; [`location`](#location-130277) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-45b751"></a>&#x2022; [`store_provider`](#provider-45b751) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-72906c"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Array Flash Arrays API Token Clear Secret Info
 
-A [`clear_secret_info`](#info-0b18f1) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_array.flash_arrays.api_token`](#token-1f3845)) supports the following:
-
-<a id="ref-bd5e27"></a>&#x2022; [`provider_ref`](#ref-bd5e27) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-dfb7b1"></a>&#x2022; [`url`](#url-dfb7b1) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-723fac"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade
 
-A [`flash_blade`](#blade-7c7dcb) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator.arrays`](#arrays-8d07f5)) supports the following:
-
-<a id="directory-6ce60f"></a>&#x2022; [`enable_snapshot_directory`](#directory-6ce60f) - Optional Bool<br>Enable Snapshot Directory. Enable/Disable FlashBlade snapshots
-
-<a id="rules-faced2"></a>&#x2022; [`export_rules`](#rules-faced2) - Optional String<br>NFS Export Rules. NFS Export rules
-
-<a id="blades-737048"></a>&#x2022; [`flash_blades`](#blades-737048) - Optional Block<br>Flash Blades. For FlashBlades you must set the 'mgmt_endpoint', 'api_token' and nfs_endpoint<br>See [Flash Blades](#blades-737048) below.
+<a id="deep-c703d3"></a>Deeply nested **Blade** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades
 
-A [`flash_blades`](#blades-737048) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade`](#blade-7c7dcb)) supports the following:
-
-<a id="token-407c8d"></a>&#x2022; [`api_token`](#token-407c8d) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [API Token](#token-407c8d) below.
-
-<a id="lables-ef43d7"></a>&#x2022; [`lables`](#lables-ef43d7) - Optional Block<br>Labels. The labels are optional, and can be any key-value pair for use with the PSO 'fleet' provisioner
-
-<a id="name-d085d4"></a>&#x2022; [`mgmt_dns_name`](#name-d085d4) - Optional String<br>Management Endpoint Name. Management Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="mgmt-ip-cd5f12"></a>&#x2022; [`mgmt_ip`](#mgmt-ip-cd5f12) - Optional String<br>Management Endpoint IP Address. Management Endpoint is reachable at the given IP address
-
-<a id="name-2be4b1"></a>&#x2022; [`nfs_endpoint_dns_name`](#name-2be4b1) - Optional String<br>NFS DNS Name. Endpoint's IP address is discovered using DNS name resolution. The name given here is fully qualified domain name
-
-<a id="endpoint-ip-e1cbf0"></a>&#x2022; [`nfs_endpoint_ip`](#endpoint-ip-e1cbf0) - Optional String<br>NFS IP Address. Endpoint is reachable at the given IP address
+<a id="deep-4e62f3"></a>Deeply nested **Blades** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token
 
-An [`api_token`](#token-407c8d) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade.flash_blades`](#blades-737048)) supports the following:
-
-<a id="info-9eecd9"></a>&#x2022; [`blindfold_secret_info`](#info-9eecd9) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-9eecd9) below.
-
-<a id="info-acc144"></a>&#x2022; [`clear_secret_info`](#info-acc144) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-acc144) below.
+<a id="deep-b79ee7"></a>Deeply nested **Token** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token Blindfold Secret Info
 
-A [`blindfold_secret_info`](#info-9eecd9) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade.flash_blades.api_token`](#token-407c8d)) supports the following:
-
-<a id="provider-580986"></a>&#x2022; [`decryption_provider`](#provider-580986) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
-
-<a id="location-58545e"></a>&#x2022; [`location`](#location-58545e) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
-
-<a id="provider-a4ab3a"></a>&#x2022; [`store_provider`](#provider-a4ab3a) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="deep-87b319"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Device List Storage Devices Pure Service Orchestrator Arrays Flash Blade Flash Blades API Token Clear Secret Info
 
-A [`clear_secret_info`](#info-acc144) block (within [`custom_storage_config.storage_device_list.storage_devices.pure_service_orchestrator.arrays.flash_blade.flash_blades.api_token`](#token-407c8d)) supports the following:
-
-<a id="ref-993849"></a>&#x2022; [`provider_ref`](#ref-993849) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
-
-<a id="url-9e1111"></a>&#x2022; [`url`](#url-9e1111) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="deep-c49b2f"></a>Deeply nested **Info** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List
 
@@ -1729,229 +869,87 @@ A [`storage_interface_list`](#list-c6bbef) block (within [`custom_storage_config
 
 #### Custom Storage Config Storage Interface List Storage Interfaces
 
-A [`storage_interfaces`](#interfaces-b05461) block (within [`custom_storage_config.storage_interface_list`](#list-c6bbef)) supports the following:
-
-<a id="spec-608ea7"></a>&#x2022; [`description_spec`](#spec-608ea7) - Optional String<br>Interface Description. Description for this Interface
-
-<a id="labels-b36c67"></a>&#x2022; [`labels`](#labels-b36c67) - Optional Block<br>Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy
-
-<a id="interface-4a2586"></a>&#x2022; [`storage_interface`](#interface-4a2586) - Optional Block<br>Ethernet Interface. Ethernet Interface Configuration<br>See [Storage Interface](#interface-4a2586) below.
+<a id="deep-0ee258"></a>Deeply nested **Interfaces** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface
 
-A [`storage_interface`](#interface-4a2586) block (within [`custom_storage_config.storage_interface_list.storage_interfaces`](#interfaces-b05461)) supports the following:
-
-<a id="cluster-59eac5"></a>&#x2022; [`cluster`](#cluster-59eac5) - Optional Block<br>Enable this option
-
-<a id="device-810ff0"></a>&#x2022; [`device`](#device-810ff0) - Optional String<br>Ethernet Device. Interface configuration for the ethernet device
-
-<a id="client-4b0636"></a>&#x2022; [`dhcp_client`](#client-4b0636) - Optional Block<br>Enable this option
-
-<a id="server-48aa6b"></a>&#x2022; [`dhcp_server`](#server-48aa6b) - Optional Block<br>DHCPServerParametersType<br>See [DHCP Server](#server-48aa6b) below.
-
-<a id="config-318539"></a>&#x2022; [`ipv6_auto_config`](#config-318539) - Optional Block<br>IPV6AutoConfigType<br>See [IPv6 Auto Config](#config-318539) below.
-
-<a id="primary-785400"></a>&#x2022; [`is_primary`](#primary-785400) - Optional Block<br>Enable this option
-
-<a id="monitor-b33cb9"></a>&#x2022; [`monitor`](#monitor-b33cb9) - Optional Block<br>Link Quality Monitoring Configuration. Link Quality Monitoring configuration for a network interface
-
-<a id="disabled-e66ec9"></a>&#x2022; [`monitor_disabled`](#disabled-e66ec9) - Optional Block<br>Enable this option
-
-<a id="mtu-849be7"></a>&#x2022; [`mtu`](#mtu-849be7) - Optional Number<br>Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384
-
-<a id="address-c1d6ce"></a>&#x2022; [`no_ipv6_address`](#address-c1d6ce) - Optional Block<br>Enable this option
-
-<a id="node-5fb6ad"></a>&#x2022; [`node`](#node-5fb6ad) - Optional String<br>Specific Node. Configuration will apply to a device on the given node
-
-<a id="primary-9f6634"></a>&#x2022; [`not_primary`](#primary-9f6634) - Optional Block<br>Enable this option
-
-<a id="priority-4312f2"></a>&#x2022; [`priority`](#priority-4312f2) - Optional Number<br>Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority
-
-<a id="network-93a0a9"></a>&#x2022; [`site_local_inside_network`](#network-93a0a9) - Optional Block<br>Enable this option
-
-<a id="network-523dfb"></a>&#x2022; [`site_local_network`](#network-523dfb) - Optional Block<br>Enable this option
-
-<a id="static-ip-dc5883"></a>&#x2022; [`static_ip`](#static-ip-dc5883) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IP](#static-ip-dc5883) below.
-
-<a id="address-9e5d5b"></a>&#x2022; [`static_ipv6_address`](#address-9e5d5b) - Optional Block<br>Static IP Parameters. Configure Static IP parameters<br>See [Static IPv6 Address](#address-9e5d5b) below.
-
-<a id="network-e547b9"></a>&#x2022; [`storage_network`](#network-e547b9) - Optional Block<br>Enable this option
-
-<a id="untagged-c94d64"></a>&#x2022; [`untagged`](#untagged-c94d64) - Optional Block<br>Enable this option
-
-<a id="vlan-id-8fd2c0"></a>&#x2022; [`vlan_id`](#vlan-id-8fd2c0) - Optional Number<br>VLAN ID. Configure a VLAN tagged ethernet interface
+<a id="deep-83c56f"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface DHCP Server
 
-A [`dhcp_server`](#server-48aa6b) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface`](#interface-4a2586)) supports the following:
-
-<a id="end-1cec49"></a>&#x2022; [`automatic_from_end`](#end-1cec49) - Optional Block<br>Enable this option
-
-<a id="start-f789ae"></a>&#x2022; [`automatic_from_start`](#start-f789ae) - Optional Block<br>Enable this option
-
-<a id="networks-408ded"></a>&#x2022; [`dhcp_networks`](#networks-408ded) - Optional Block<br>DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses<br>See [DHCP Networks](#networks-408ded) below.
-
-<a id="map-4fbade"></a>&#x2022; [`fixed_ip_map`](#map-4fbade) - Optional Block<br>Fixed MAC Address to IPv4 Assignments. Assign fixed IPv4 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-a5891b"></a>&#x2022; [`interface_ip_map`](#map-a5891b) - Optional Block<br>Interface IPv4 Assignments. Specify static IPv4 addresses per node<br>See [Interface IP Map](#map-a5891b) below.
+<a id="deep-bab049"></a>Deeply nested **Server** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface DHCP Server DHCP Networks
 
-A [`dhcp_networks`](#networks-408ded) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.dhcp_server`](#server-48aa6b)) supports the following:
-
-<a id="address-a8681a"></a>&#x2022; [`dgw_address`](#address-a8681a) - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the default gateway
-
-<a id="address-711eca"></a>&#x2022; [`dns_address`](#address-711eca) - Optional String<br>Static IPv4 Configuration. Enter a IPv4 address from the network prefix to be used as the DNS server
-
-<a id="address-eb1830"></a>&#x2022; [`first_address`](#address-eb1830) - Optional Block<br>Enable this option
-
-<a id="address-112d80"></a>&#x2022; [`last_address`](#address-112d80) - Optional Block<br>Enable this option
-
-<a id="prefix-bfe30f"></a>&#x2022; [`network_prefix`](#prefix-bfe30f) - Optional String<br>Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24
-
-<a id="settings-cd2c88"></a>&#x2022; [`pool_settings`](#settings-cd2c88) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-6d5b0e"></a>&#x2022; [`pools`](#pools-6d5b0e) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-6d5b0e) below.
-
-<a id="dgw-6794d2"></a>&#x2022; [`same_as_dgw`](#dgw-6794d2) - Optional Block<br>Enable this option
+<a id="deep-7d9c8d"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface DHCP Server DHCP Networks Pools
 
-A [`pools`](#pools-6d5b0e) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.dhcp_server.dhcp_networks`](#networks-408ded)) supports the following:
-
-<a id="end-ip-13d7f0"></a>&#x2022; [`end_ip`](#end-ip-13d7f0) - Optional String<br>Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200
-
-<a id="start-ip-c730e8"></a>&#x2022; [`start_ip`](#start-ip-c730e8) - Optional String<br>Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5
+<a id="deep-edd3e1"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface DHCP Server Interface IP Map
 
-An [`interface_ip_map`](#map-a5891b) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.dhcp_server`](#server-48aa6b)) supports the following:
-
-<a id="map-bfe64e"></a>&#x2022; [`interface_ip_map`](#map-bfe64e) - Optional Block<br>Site:Node to IPv4 Address Mapping. Specify static IPv4 addresses per site:node
+<a id="deep-ef4fc8"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config
 
-An [`ipv6_auto_config`](#config-318539) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface`](#interface-4a2586)) supports the following:
-
-<a id="host-14ce55"></a>&#x2022; [`host`](#host-14ce55) - Optional Block<br>Enable this option
-
-<a id="router-1bf14a"></a>&#x2022; [`router`](#router-1bf14a) - Optional Block<br>IPV6AutoConfigRouterType<br>See [Router](#router-1bf14a) below.
+<a id="deep-43a989"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router
 
-A [`router`](#router-1bf14a) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.ipv6_auto_config`](#config-318539)) supports the following:
-
-<a id="config-f4006a"></a>&#x2022; [`dns_config`](#config-f4006a) - Optional Block<br>IPV6DnsConfig<br>See [DNS Config](#config-f4006a) below.
-
-<a id="prefix-8eeea7"></a>&#x2022; [`network_prefix`](#prefix-8eeea7) - Optional String<br>Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862
-
-<a id="stateful-3f0c4f"></a>&#x2022; [`stateful`](#stateful-3f0c4f) - Optional Block<br>DHCPIPV6 Stateful Server<br>See [Stateful](#stateful-3f0c4f) below.
+<a id="deep-72ed95"></a>Deeply nested **Router** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router DNS Config
 
-A [`dns_config`](#config-f4006a) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.ipv6_auto_config.router`](#router-1bf14a)) supports the following:
-
-<a id="list-26f12c"></a>&#x2022; [`configured_list`](#list-26f12c) - Optional Block<br>IPV6DnsList<br>See [Configured List](#list-26f12c) below.
-
-<a id="dns-105acc"></a>&#x2022; [`local_dns`](#dns-105acc) - Optional Block<br>IPV6LocalDnsAddress<br>See [Local DNS](#dns-105acc) below.
+<a id="deep-a1228e"></a>Deeply nested **Config** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router DNS Config Configured List
 
-A [`configured_list`](#list-26f12c) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.ipv6_auto_config.router.dns_config`](#config-f4006a)) supports the following:
-
-<a id="list-dca8c1"></a>&#x2022; [`dns_list`](#list-dca8c1) - Optional List<br>DNS List. List of IPv6 Addresses acting as DNS servers
+<a id="deep-22c8c1"></a>Deeply nested **List** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router DNS Config Local DNS
 
-A [`local_dns`](#dns-105acc) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.ipv6_auto_config.router.dns_config`](#config-f4006a)) supports the following:
-
-<a id="address-5dbad2"></a>&#x2022; [`configured_address`](#address-5dbad2) - Optional String<br>Configured Address. Configured address from the network prefix is chosen as DNS server
-
-<a id="address-2b5429"></a>&#x2022; [`first_address`](#address-2b5429) - Optional Block<br>Enable this option
-
-<a id="address-20391e"></a>&#x2022; [`last_address`](#address-20391e) - Optional Block<br>Enable this option
+<a id="deep-3ff88d"></a>Deeply nested **DNS** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router Stateful
 
-A [`stateful`](#stateful-3f0c4f) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.ipv6_auto_config.router`](#router-1bf14a)) supports the following:
-
-<a id="end-e1c89c"></a>&#x2022; [`automatic_from_end`](#end-e1c89c) - Optional Block<br>Enable this option
-
-<a id="start-66c4a7"></a>&#x2022; [`automatic_from_start`](#start-66c4a7) - Optional Block<br>Enable this option
-
-<a id="networks-fd67f8"></a>&#x2022; [`dhcp_networks`](#networks-fd67f8) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-fd67f8) below.
-
-<a id="map-e9f314"></a>&#x2022; [`fixed_ip_map`](#map-e9f314) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
-
-<a id="map-3da9a7"></a>&#x2022; [`interface_ip_map`](#map-3da9a7) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-3da9a7) below.
+<a id="deep-e193c4"></a>Deeply nested **Stateful** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router Stateful DHCP Networks
 
-A [`dhcp_networks`](#networks-fd67f8) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.ipv6_auto_config.router.stateful`](#stateful-3f0c4f)) supports the following:
-
-<a id="prefix-265048"></a>&#x2022; [`network_prefix`](#prefix-265048) - Optional String<br>Network Prefix. Network Prefix to be used for IPv6 address auto configuration
-
-<a id="settings-5bdc75"></a>&#x2022; [`pool_settings`](#settings-5bdc75) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
-
-<a id="pools-38579b"></a>&#x2022; [`pools`](#pools-38579b) - Optional Block<br>DHCP Pools. List of non overlapping IP address ranges<br>See [Pools](#pools-38579b) below.
+<a id="deep-0158d1"></a>Deeply nested **Networks** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router Stateful DHCP Networks Pools
 
-A [`pools`](#pools-38579b) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.ipv6_auto_config.router.stateful.dhcp_networks`](#networks-fd67f8)) supports the following:
-
-<a id="end-ip-011055"></a>&#x2022; [`end_ip`](#end-ip-011055) - Optional String<br>Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix
-
-<a id="start-ip-6262b4"></a>&#x2022; [`start_ip`](#start-ip-6262b4) - Optional String<br>Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5
+<a id="deep-2bf7bd"></a>Deeply nested **Pools** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface IPv6 Auto Config Router Stateful Interface IP Map
 
-An [`interface_ip_map`](#map-3da9a7) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.ipv6_auto_config.router.stateful`](#stateful-3f0c4f)) supports the following:
-
-<a id="map-4d7ea2"></a>&#x2022; [`interface_ip_map`](#map-4d7ea2) - Optional Block<br>Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address
+<a id="deep-f00699"></a>Deeply nested **Map** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IP
 
-A [`static_ip`](#static-ip-dc5883) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface`](#interface-4a2586)) supports the following:
-
-<a id="static-ip-9b5129"></a>&#x2022; [`cluster_static_ip`](#static-ip-9b5129) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-9b5129) below.
-
-<a id="static-ip-a071fb"></a>&#x2022; [`node_static_ip`](#static-ip-a071fb) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-a071fb) below.
+<a id="deep-59d17c"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IP Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-9b5129) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.static_ip`](#static-ip-dc5883)) supports the following:
-
-<a id="map-589443"></a>&#x2022; [`interface_ip_map`](#map-589443) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-9d5a7b"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IP Node Static IP
 
-A [`node_static_ip`](#static-ip-a071fb) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.static_ip`](#static-ip-dc5883)) supports the following:
-
-<a id="default-gw-6cd466"></a>&#x2022; [`default_gw`](#default-gw-6cd466) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-2731b2"></a>&#x2022; [`ip_address`](#address-2731b2) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-b3a972"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IPv6 Address
 
-A [`static_ipv6_address`](#address-9e5d5b) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface`](#interface-4a2586)) supports the following:
-
-<a id="static-ip-c1e18b"></a>&#x2022; [`cluster_static_ip`](#static-ip-c1e18b) - Optional Block<br>Cluster: Static IP Parameters. Configure Static IP parameters for cluster<br>See [Cluster Static IP](#static-ip-c1e18b) below.
-
-<a id="static-ip-d7a14c"></a>&#x2022; [`node_static_ip`](#static-ip-d7a14c) - Optional Block<br>Node: Static IP Parameters. Configure Static IP parameters for a node<br>See [Node Static IP](#static-ip-d7a14c) below.
+<a id="deep-593edb"></a>Deeply nested **Address** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IPv6 Address Cluster Static IP
 
-A [`cluster_static_ip`](#static-ip-c1e18b) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.static_ipv6_address`](#address-9e5d5b)) supports the following:
-
-<a id="map-44a65b"></a>&#x2022; [`interface_ip_map`](#map-44a65b) - Optional Block<br>Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address
+<a id="deep-72692a"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Custom Storage Config Storage Interface List Storage Interfaces Storage Interface Static IPv6 Address Node Static IP
 
-A [`node_static_ip`](#static-ip-d7a14c) block (within [`custom_storage_config.storage_interface_list.storage_interfaces.storage_interface.static_ipv6_address`](#address-9e5d5b)) supports the following:
-
-<a id="default-gw-e5c5f3"></a>&#x2022; [`default_gw`](#default-gw-e5c5f3) - Optional String<br>Default Gateway. IP address of the default gateway
-
-<a id="address-13faca"></a>&#x2022; [`ip_address`](#address-13faca) - Optional String<br>IP address/Prefix Length. IP address of the interface and prefix length
+<a id="deep-d9ee79"></a>Deeply nested **IP** block collapsed for readability.
 
 #### Enable Vgpu
 
@@ -1965,13 +963,7 @@ An [`enable_vgpu`](#enable-vgpu) block supports the following:
 
 #### K8S Cluster
 
-A [`k8s_cluster`](#k8s-cluster) block supports the following:
-
-<a id="k8s-cluster-name"></a>&#x2022; [`name`](#k8s-cluster-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="k8s-cluster-namespace"></a>&#x2022; [`namespace`](#k8s-cluster-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="k8s-cluster-tenant"></a>&#x2022; [`tenant`](#k8s-cluster-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-dcd22b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Kubernetes Upgrade Drain
 
@@ -2035,13 +1027,7 @@ A [`peers`](#local-control-plane-bgp-config-peers) block (within [`local_control
 
 #### Local Control Plane BGP Config Peers Bfd Enabled
 
-A [`bfd_enabled`](#enabled-26ad69) block (within [`local_control_plane.bgp_config.peers`](#local-control-plane-bgp-config-peers)) supports the following:
-
-<a id="multiplier-7b8f23"></a>&#x2022; [`multiplier`](#multiplier-7b8f23) - Optional Number<br>Multiplier. Specify Number of missed packets to bring session down'
-
-<a id="milliseconds-2f0967"></a>&#x2022; [`receive_interval_milliseconds`](#milliseconds-2f0967) - Optional Number<br>Minimum Receive Interval. BFD receive interval timer, in milliseconds
-
-<a id="milliseconds-eb8e23"></a>&#x2022; [`transmit_interval_milliseconds`](#milliseconds-eb8e23) - Optional Number<br>Transmit Interval. BFD transmit interval timer, in milliseconds
+<a id="deep-6cf71c"></a>Deeply nested **Enabled** block collapsed for readability.
 
 #### Local Control Plane BGP Config Peers External
 
@@ -2089,37 +1075,19 @@ An [`external`](#external-a31b05) block (within [`local_control_plane.bgp_config
 
 #### Local Control Plane BGP Config Peers External Family Inet
 
-A [`family_inet`](#inet-10a45f) block (within [`local_control_plane.bgp_config.peers.external`](#external-a31b05)) supports the following:
-
-<a id="disable-682cf9"></a>&#x2022; [`disable`](#disable-682cf9) - Optional Block<br>Enable this option
-
-<a id="enable-509a26"></a>&#x2022; [`enable`](#enable-509a26) - Optional Block<br>Enable this option
+<a id="deep-473e79"></a>Deeply nested **Inet** block collapsed for readability.
 
 #### Local Control Plane BGP Config Peers External Interface
 
-An [`interface`](#interface-5533f3) block (within [`local_control_plane.bgp_config.peers.external`](#external-a31b05)) supports the following:
-
-<a id="name-c34380"></a>&#x2022; [`name`](#name-c34380) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-825d44"></a>&#x2022; [`namespace`](#namespace-825d44) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-e093f3"></a>&#x2022; [`tenant`](#tenant-e093f3) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-4a48e0"></a>Deeply nested **Interface** block collapsed for readability.
 
 #### Local Control Plane BGP Config Peers External Interface List
 
-An [`interface_list`](#list-b600b7) block (within [`local_control_plane.bgp_config.peers.external`](#external-a31b05)) supports the following:
-
-<a id="interfaces-4b6dac"></a>&#x2022; [`interfaces`](#interfaces-4b6dac) - Optional Block<br>Interface List. List of network interfaces<br>See [Interfaces](#interfaces-4b6dac) below.
+<a id="deep-7c1f39"></a>Deeply nested **List** block collapsed for readability.
 
 #### Local Control Plane BGP Config Peers External Interface List Interfaces
 
-An [`interfaces`](#interfaces-4b6dac) block (within [`local_control_plane.bgp_config.peers.external.interface_list`](#list-b600b7)) supports the following:
-
-<a id="name-4b6be4"></a>&#x2022; [`name`](#name-4b6be4) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-d3e0b3"></a>&#x2022; [`namespace`](#namespace-d3e0b3) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-92b6ee"></a>&#x2022; [`tenant`](#tenant-92b6ee) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-911b92"></a>Deeply nested **Interfaces** block collapsed for readability.
 
 #### Local Control Plane BGP Config Peers Metadata
 
@@ -2131,53 +1099,23 @@ A [`metadata`](#metadata-fc2912) block (within [`local_control_plane.bgp_config.
 
 #### Local Control Plane BGP Config Peers Routing Policies
 
-A [`routing_policies`](#policies-2724a9) block (within [`local_control_plane.bgp_config.peers`](#local-control-plane-bgp-config-peers)) supports the following:
-
-<a id="policy-7d63f0"></a>&#x2022; [`route_policy`](#policy-7d63f0) - Optional Block<br>BGP Routing policy. Route policy to be applied<br>See [Route Policy](#policy-7d63f0) below.
+<a id="deep-1d19b8"></a>Deeply nested **Policies** block collapsed for readability.
 
 #### Local Control Plane BGP Config Peers Routing Policies Route Policy
 
-A [`route_policy`](#policy-7d63f0) block (within [`local_control_plane.bgp_config.peers.routing_policies`](#policies-2724a9)) supports the following:
-
-<a id="nodes-1892a0"></a>&#x2022; [`all_nodes`](#nodes-1892a0) - Optional Block<br>Enable this option
-
-<a id="inbound-a3bfd0"></a>&#x2022; [`inbound`](#inbound-a3bfd0) - Optional Block<br>Enable this option
-
-<a id="name-8e9d63"></a>&#x2022; [`node_name`](#name-8e9d63) - Optional Block<br>Nodes. List of nodes on which BGP routing policy has to be applied<br>See [Node Name](#name-8e9d63) below.
-
-<a id="refs-5be373"></a>&#x2022; [`object_refs`](#refs-5be373) - Optional Block<br>BGP routing policy. Select route policy to apply<br>See [Object Refs](#refs-5be373) below.
-
-<a id="outbound-98eaab"></a>&#x2022; [`outbound`](#outbound-98eaab) - Optional Block<br>Enable this option
+<a id="deep-9ca661"></a>Deeply nested **Policy** block collapsed for readability.
 
 #### Local Control Plane BGP Config Peers Routing Policies Route Policy Node Name
 
-A [`node_name`](#name-8e9d63) block (within [`local_control_plane.bgp_config.peers.routing_policies.route_policy`](#policy-7d63f0)) supports the following:
-
-<a id="node-edb042"></a>&#x2022; [`node`](#node-edb042) - Optional List<br>Node of choice. Select BGP Session on which policy will be applied
+<a id="deep-0b0d3c"></a>Deeply nested **Name** block collapsed for readability.
 
 #### Local Control Plane BGP Config Peers Routing Policies Route Policy Object Refs
 
-An [`object_refs`](#refs-5be373) block (within [`local_control_plane.bgp_config.peers.routing_policies.route_policy`](#policy-7d63f0)) supports the following:
-
-<a id="kind-6d1dc4"></a>&#x2022; [`kind`](#kind-6d1dc4) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-031c69"></a>&#x2022; [`name`](#name-031c69) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-b2655c"></a>&#x2022; [`namespace`](#namespace-b2655c) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-22a640"></a>&#x2022; [`tenant`](#tenant-22a640) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-32f24d"></a>&#x2022; [`uid`](#uid-32f24d) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-7aba18"></a>Deeply nested **Refs** block collapsed for readability.
 
 #### Log Receiver
 
-A [`log_receiver`](#log-receiver) block supports the following:
-
-<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-0da9d9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Master Node Configuration
 
@@ -2241,13 +1179,90 @@ A [`timeouts`](#timeouts) block supports the following:
 
 #### Usb Policy
 
-An [`usb_policy`](#usb-policy) block supports the following:
+<a id="objref-60a3be"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
-<a id="usb-policy-name"></a>&#x2022; [`name`](#usb-policy-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
+---
 
-<a id="usb-policy-namespace"></a>&#x2022; [`namespace`](#usb-policy-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
+## Common Types
 
-<a id="usb-policy-tenant"></a>&#x2022; [`tenant`](#usb-policy-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

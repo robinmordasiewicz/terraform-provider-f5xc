@@ -101,7 +101,7 @@ func (r *DataGroupResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             data_groupSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Data Group. Must be unique within the namespace.",

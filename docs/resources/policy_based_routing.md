@@ -2,12 +2,12 @@
 page_title: "f5xc_policy_based_routing Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  [Namespace: required] Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
+  Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 ---
 
 # f5xc_policy_based_routing (Resource)
 
-[Namespace: required] Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
+Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 
 ~> **Note** Please refer to [Policy Based Routing API docs](https://docs.cloud.f5.com/docs-v2/api/views-policy-based-routing) to learn more.
 
@@ -15,7 +15,7 @@ description: |-
 
 ```terraform
 # Policy Based Routing Resource Example
-# [Namespace: required] Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
+# Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
 
 # Basic Policy Based Routing configuration
 resource "f5xc_policy_based_routing" "example" {
@@ -112,93 +112,43 @@ A [`forward_proxy_pbr_rules`](#rules-67a5cc) block (within [`forward_proxy_pbr`]
 
 #### Forward Proxy Pbr Forward Proxy Pbr Rules Forwarding Class List
 
-A [`forwarding_class_list`](#list-a3b35a) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#rules-67a5cc)) supports the following:
-
-<a id="name-fe76e8"></a>&#x2022; [`name`](#name-fe76e8) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-af7869"></a>&#x2022; [`namespace`](#namespace-af7869) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-32c32b"></a>&#x2022; [`tenant`](#tenant-32c32b) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-959403"></a>Deeply nested **List** block collapsed for readability.
 
 #### Forward Proxy Pbr Forward Proxy Pbr Rules HTTP List
 
-A [`http_list`](#list-892bc2) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#rules-67a5cc)) supports the following:
-
-<a id="list-50e680"></a>&#x2022; [`http_list`](#list-50e680) - Optional Block<br>HTTP URLs. URLs for HTTP connections<br>See [HTTP List](#list-50e680) below.
+<a id="deep-6e45a7"></a>Deeply nested **List** block collapsed for readability.
 
 #### Forward Proxy Pbr Forward Proxy Pbr Rules HTTP List HTTP List
 
-A [`http_list`](#list-50e680) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules.http_list`](#list-892bc2)) supports the following:
-
-<a id="path-d4e9bd"></a>&#x2022; [`any_path`](#path-d4e9bd) - Optional Block<br>Enable this option
-
-<a id="value-bc8def"></a>&#x2022; [`exact_value`](#value-bc8def) - Optional String<br>Exact Values. Exact domain name
-
-<a id="value-fb88ed"></a>&#x2022; [`path_exact_value`](#value-fb88ed) - Optional String<br>Exact Path. Exact Path to match
-
-<a id="value-9dc363"></a>&#x2022; [`path_prefix_value`](#value-9dc363) - Optional String<br>Prefix of Path. Prefix of Path e.g '/abc/xyz' will match '/abc/xyz/.*'
-
-<a id="value-769955"></a>&#x2022; [`path_regex_value`](#value-769955) - Optional String<br>Regex of Path. Regular Expression value for the Path to match
-
-<a id="value-b2b3b4"></a>&#x2022; [`regex_value`](#value-b2b3b4) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
-
-<a id="value-abca78"></a>&#x2022; [`suffix_value`](#value-abca78) - Optional String<br>Suffix Values. Suffix of domain names e.g 'xyz.com' will match '*.xyz.com'
+<a id="deep-f6a812"></a>Deeply nested **List** block collapsed for readability.
 
 #### Forward Proxy Pbr Forward Proxy Pbr Rules IP Prefix Set
 
-An [`ip_prefix_set`](#set-b84ad7) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#rules-67a5cc)) supports the following:
-
-<a id="name-4e3e6d"></a>&#x2022; [`name`](#name-4e3e6d) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-6b4355"></a>&#x2022; [`namespace`](#namespace-6b4355) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-02a72b"></a>&#x2022; [`tenant`](#tenant-02a72b) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-362d64"></a>Deeply nested **Set** block collapsed for readability.
 
 #### Forward Proxy Pbr Forward Proxy Pbr Rules Label Selector
 
-A [`label_selector`](#selector-c5a5b4) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#rules-67a5cc)) supports the following:
-
-<a id="expressions-154d97"></a>&#x2022; [`expressions`](#expressions-154d97) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="deep-2f3feb"></a>Deeply nested **Selector** block collapsed for readability.
 
 #### Forward Proxy Pbr Forward Proxy Pbr Rules Metadata
 
-A [`metadata`](#metadata-4bce2b) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#rules-67a5cc)) supports the following:
-
-<a id="spec-521c82"></a>&#x2022; [`description_spec`](#spec-521c82) - Optional String<br>Description. Human readable description
-
-<a id="name-761134"></a>&#x2022; [`name`](#name-761134) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+<a id="deep-879217"></a>Deeply nested **Metadata** block collapsed for readability.
 
 #### Forward Proxy Pbr Forward Proxy Pbr Rules Prefix List
 
-A [`prefix_list`](#list-b2cc8b) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#rules-67a5cc)) supports the following:
-
-<a id="prefixes-1dee6a"></a>&#x2022; [`prefixes`](#prefixes-1dee6a) - Optional List<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint
+<a id="deep-27b3a7"></a>Deeply nested **List** block collapsed for readability.
 
 #### Forward Proxy Pbr Forward Proxy Pbr Rules TLS List
 
-A [`tls_list`](#list-cd1082) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules`](#rules-67a5cc)) supports the following:
-
-<a id="list-a47a3e"></a>&#x2022; [`tls_list`](#list-a47a3e) - Optional Block<br>TLS Domains. Domains in SNI for TLS connections<br>See [TLS List](#list-a47a3e) below.
+<a id="deep-da01da"></a>Deeply nested **List** block collapsed for readability.
 
 #### Forward Proxy Pbr Forward Proxy Pbr Rules TLS List TLS List
 
-A [`tls_list`](#list-a47a3e) block (within [`forward_proxy_pbr.forward_proxy_pbr_rules.tls_list`](#list-cd1082)) supports the following:
-
-<a id="value-9b9cab"></a>&#x2022; [`exact_value`](#value-9b9cab) - Optional String<br>Exact Value. Exact domain name
-
-<a id="value-668061"></a>&#x2022; [`regex_value`](#value-668061) - Optional String<br>Regex Values of Domains. Regular Expression value for the domain name
-
-<a id="value-ec6bab"></a>&#x2022; [`suffix_value`](#value-ec6bab) - Optional String<br>Suffix Value. Suffix of domain name e.g 'xyz.com' will match '*.xyz.com' and 'xyz.com'
+<a id="deep-872ea2"></a>Deeply nested **List** block collapsed for readability.
 
 #### Forwarding Class List
 
-A [`forwarding_class_list`](#forwarding-class-list) block supports the following:
-
-<a id="forwarding-class-list-name"></a>&#x2022; [`name`](#forwarding-class-list-name) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="forwarding-class-list-namespace"></a>&#x2022; [`namespace`](#forwarding-class-list-namespace) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="forwarding-class-list-tenant"></a>&#x2022; [`tenant`](#forwarding-class-list-tenant) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="objref-95dabb"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
 
 #### Network Pbr
 
@@ -252,33 +202,15 @@ An [`applications`](#applications-913ddd) block (within [`network_pbr.network_pb
 
 #### Network Pbr Network Pbr Rules Forwarding Class List
 
-A [`forwarding_class_list`](#list-b3bc91) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
-
-<a id="name-2dd910"></a>&#x2022; [`name`](#name-2dd910) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-0e4447"></a>&#x2022; [`namespace`](#namespace-0e4447) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-2eb45f"></a>&#x2022; [`tenant`](#tenant-2eb45f) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
+<a id="deep-1ae93a"></a>Deeply nested **List** block collapsed for readability.
 
 #### Network Pbr Network Pbr Rules IP Prefix Set
 
-An [`ip_prefix_set`](#set-4a1382) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
-
-<a id="ref-95f97a"></a>&#x2022; [`ref`](#ref-95f97a) - Optional Block<br>Reference. A list of references to ip_prefix_set objects<br>See [Ref](#ref-95f97a) below.
+<a id="deep-047bc9"></a>Deeply nested **Set** block collapsed for readability.
 
 #### Network Pbr Network Pbr Rules IP Prefix Set Ref
 
-A [`ref`](#ref-95f97a) block (within [`network_pbr.network_pbr_rules.ip_prefix_set`](#set-4a1382)) supports the following:
-
-<a id="kind-9b23b9"></a>&#x2022; [`kind`](#kind-9b23b9) - Optional String<br>Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="name-c79c25"></a>&#x2022; [`name`](#name-c79c25) - Optional String<br>Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name
-
-<a id="namespace-f12e68"></a>&#x2022; [`namespace`](#namespace-f12e68) - Optional String<br>Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace
-
-<a id="tenant-528fcc"></a>&#x2022; [`tenant`](#tenant-528fcc) - Optional String<br>Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant
-
-<a id="uid-9367ed"></a>&#x2022; [`uid`](#uid-9367ed) - Optional String<br>UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid
+<a id="deep-91066f"></a>Deeply nested **Ref** block collapsed for readability.
 
 #### Network Pbr Network Pbr Rules Metadata
 
@@ -296,11 +228,7 @@ A [`prefix_list`](#list-1fa06a) block (within [`network_pbr.network_pbr_rules`](
 
 #### Network Pbr Network Pbr Rules Protocol Port Range
 
-A [`protocol_port_range`](#range-c03943) block (within [`network_pbr.network_pbr_rules`](#network-pbr-network-pbr-rules)) supports the following:
-
-<a id="ranges-851a3b"></a>&#x2022; [`port_ranges`](#ranges-851a3b) - Optional List<br>List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192
-
-<a id="protocol-0bfac4"></a>&#x2022; [`protocol`](#protocol-0bfac4) - Optional String<br>Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and ICMP
+<a id="deep-45860e"></a>Deeply nested **Range** block collapsed for readability.
 
 #### Network Pbr Prefix List
 
@@ -319,6 +247,89 @@ A [`timeouts`](#timeouts) block supports the following:
 <a id="timeouts-read"></a>&#x2022; [`read`](#timeouts-read) - Optional String (Defaults to `5 minutes`)<br>Used when retrieving the resource
 
 <a id="timeouts-update"></a>&#x2022; [`update`](#timeouts-update) - Optional String (Defaults to `10 minutes`)<br>Used when updating the resource
+
+---
+
+## Common Types
+
+The following type definitions are used throughout this resource. See the full definition here rather than repeated inline.
+
+### Object Reference {#common-object-reference}
+
+Object references establish a direct reference from one configuration object to another in F5 Distributed Cloud. References use the format `tenant/namespace/name`.
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+| `name` | String | Name of the referenced object |
+| `namespace` | String | Namespace containing the referenced object |
+| `tenant` | String | Tenant of the referenced object (system-managed) |
+
+### Transformers {#common-transformers}
+
+Transformers apply transformations to input values before matching. Multiple transformers can be applied in order.
+
+| Value | Description |
+| ----- | ----------- |
+| `LOWER_CASE` | Convert to lowercase |
+| `UPPER_CASE` | Convert to uppercase |
+| `BASE64_DECODE` | Decode base64 content |
+| `NORMALIZE_PATH` | Normalize URL path |
+| `REMOVE_WHITESPACE` | Remove whitespace characters |
+| `URL_DECODE` | Decode URL-encoded characters |
+| `TRIM_LEFT` | Trim leading whitespace |
+| `TRIM_RIGHT` | Trim trailing whitespace |
+| `TRIM` | Trim both leading and trailing whitespace |
+
+### HTTP Methods {#common-http-methods}
+
+HTTP methods used for request matching.
+
+| Value | Description |
+| ----- | ----------- |
+| `ANY` | Match any HTTP method |
+| `GET` | HTTP GET request |
+| `HEAD` | HTTP HEAD request |
+| `POST` | HTTP POST request |
+| `PUT` | HTTP PUT request |
+| `DELETE` | HTTP DELETE request |
+| `CONNECT` | HTTP CONNECT request |
+| `OPTIONS` | HTTP OPTIONS request |
+| `TRACE` | HTTP TRACE request |
+| `PATCH` | HTTP PATCH request |
+| `COPY` | HTTP COPY request (WebDAV) |
+
+### TLS Fingerprints {#common-tls-fingerprints}
+
+TLS fingerprint categories for malicious client detection.
+
+| Value | Description |
+| ----- | ----------- |
+| `TLS_FINGERPRINT_NONE` | No fingerprint matching |
+| `ANY_MALICIOUS_FINGERPRINT` | Match any known malicious fingerprint |
+| `ADWARE` | Adware-associated fingerprints |
+| `DRIDEX` | Dridex malware fingerprints |
+| `GOOTKIT` | Gootkit malware fingerprints |
+| `RANSOMWARE` | Ransomware-associated fingerprints |
+| `TRICKBOT` | Trickbot malware fingerprints |
+
+### IP Threat Categories {#common-ip-threat-categories}
+
+IP address threat categories for security filtering.
+
+| Value | Description |
+| ----- | ----------- |
+| `SPAM_SOURCES` | Known spam sources |
+| `WINDOWS_EXPLOITS` | Windows exploit sources |
+| `WEB_ATTACKS` | Web attack sources |
+| `BOTNETS` | Known botnet IPs |
+| `SCANNERS` | Network scanner IPs |
+| `REPUTATION` | Poor reputation IPs |
+| `PHISHING` | Phishing-related IPs |
+| `PROXY` | Anonymous proxy IPs |
+| `MOBILE_THREATS` | Mobile threat sources |
+| `TOR_PROXY` | Tor exit nodes |
+| `DENIAL_OF_SERVICE` | DoS attack sources |
+| `NETWORK` | Known bad network ranges |
 
 ## Import
 

@@ -1562,7 +1562,7 @@ func (r *FleetResource) Metadata(ctx context.Context, req resource.MetadataReque
 func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             fleetSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Fleet. Must be unique within the namespace.",

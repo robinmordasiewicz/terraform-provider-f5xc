@@ -195,7 +195,7 @@ func (r *DataTypeResource) Metadata(ctx context.Context, req resource.MetadataRe
 func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             data_typeSchemaVersion,
-		MarkdownDescription: "[Namespace: required] Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Data Type. Must be unique within the namespace.",

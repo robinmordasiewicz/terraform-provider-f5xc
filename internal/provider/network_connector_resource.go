@@ -279,7 +279,7 @@ func (r *NetworkConnectorResource) Metadata(ctx context.Context, req resource.Me
 func (r *NetworkConnectorResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             network_connectorSchemaVersion,
-		MarkdownDescription: "[Category: Networking] [Namespace: required] Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.",
+		MarkdownDescription: "Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Network Connector. Must be unique within the namespace.",

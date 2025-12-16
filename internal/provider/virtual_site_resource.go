@@ -80,7 +80,7 @@ func (r *VirtualSiteResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *VirtualSiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             virtual_siteSchemaVersion,
-		MarkdownDescription: "[Category: Networking] [Namespace: not_required] Manages virtual site object in given namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages virtual site object in given namespace in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Virtual Site. Must be unique within the namespace.",

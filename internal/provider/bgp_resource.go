@@ -373,7 +373,7 @@ func (r *BGPResource) Metadata(ctx context.Context, req resource.MetadataRequest
 func (r *BGPResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             bgpSchemaVersion,
-		MarkdownDescription: "[Category: Networking] [Namespace: required] Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.",
+		MarkdownDescription: "Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the BGP. Must be unique within the namespace.",

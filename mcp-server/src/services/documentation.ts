@@ -6,7 +6,7 @@
 import { readFileSync, existsSync, readdirSync } from 'fs';
 import { join, dirname, basename, extname } from 'path';
 import { fileURLToPath } from 'url';
-import type { ResourceDoc, SearchResult } from '../types.js';
+import type { ResourceDoc, SearchResult, SubscriptionMetadata, SubscriptionTier } from '../types.js';
 
 // Get the package root directory
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +25,100 @@ function getDocsRoot(): string {
     return BUNDLED_DOCS;
   }
   return PROJECT_DOCS;
+}
+
+// Subscription metadata paths
+const BUNDLED_SUBSCRIPTION_METADATA = join(PACKAGE_ROOT, 'dist', 'subscription-tiers.json');
+const PROJECT_SUBSCRIPTION_METADATA = join(PROJECT_ROOT, 'tools', 'subscription-tiers.json');
+
+// Cache for subscription metadata
+let subscriptionMetadata: SubscriptionMetadata | null = null;
+
+/**
+ * Load subscription tier metadata
+ */
+function loadSubscriptionMetadata(): SubscriptionMetadata | null {
+  if (subscriptionMetadata !== null) {
+    return subscriptionMetadata;
+  }
+
+  // Try bundled first, then project path
+  const paths = [BUNDLED_SUBSCRIPTION_METADATA, PROJECT_SUBSCRIPTION_METADATA];
+
+  for (const metadataPath of paths) {
+    if (existsSync(metadataPath)) {
+      try {
+        const content = readFileSync(metadataPath, 'utf-8');
+        subscriptionMetadata = JSON.parse(content) as SubscriptionMetadata;
+        return subscriptionMetadata;
+      } catch (e) {
+        console.error(`Failed to load subscription metadata from ${metadataPath}:`, e);
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Find resource metadata with name transformations
+ */
+function findResourceMetadata(resourceName: string): { tier: SubscriptionTier; service: string; advancedFeatures?: string[] } | null {
+  const metadata = loadSubscriptionMetadata();
+  if (!metadata) {
+    return null;
+  }
+
+  // Try exact match first
+  if (metadata.resources[resourceName]) {
+    const res = metadata.resources[resourceName];
+    return {
+      tier: res.minimum_tier as SubscriptionTier,
+      service: res.service,
+      advancedFeatures: res.advanced_features,
+    };
+  }
+
+  // Try common name transformations
+  const nameVariants = [
+    resourceName.replace(/^f5xc_/, ''),
+    resourceName.replace(/_resource$/, ''),
+    resourceName.replace(/bot_defense_app_/, 'bot_'),
+    resourceName.replace(/bot_defense_/, ''),
+    `shape_${resourceName}`,
+    resourceName.replace(/^shape_/, ''),
+    resourceName.replace(/client_side_defense_/, ''),
+    resourceName.replace(/__/g, '_'),
+  ];
+
+  for (const variant of nameVariants) {
+    if (metadata.resources[variant]) {
+      const res = metadata.resources[variant];
+      return {
+        tier: res.minimum_tier as SubscriptionTier,
+        service: res.service,
+        advancedFeatures: res.advanced_features,
+      };
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Enrich a ResourceDoc with subscription tier information
+ */
+function enrichWithSubscriptionInfo(doc: ResourceDoc): ResourceDoc {
+  const resourceMeta = findResourceMetadata(doc.name);
+  if (resourceMeta) {
+    return {
+      ...doc,
+      subscriptionTier: resourceMeta.tier,
+      addonService: resourceMeta.service,
+      advancedFeatures: resourceMeta.advancedFeatures,
+    };
+  }
+  return doc;
 }
 
 // Documentation paths relative to docs root
@@ -54,27 +148,29 @@ export function loadAllDocumentation(): ResourceDoc[] {
 
   allDocs = [];
 
-  // Load resources
+  // Load resources (enriched with subscription tier info)
   if (existsSync(DOCS_PATHS.resources)) {
     const files = readdirSync(DOCS_PATHS.resources).filter(f => f.endsWith('.md'));
     for (const file of files) {
-      allDocs.push({
+      const doc: ResourceDoc = {
         name: basename(file, '.md'),
         path: join(DOCS_PATHS.resources, file),
         type: 'resource',
-      });
+      };
+      allDocs.push(enrichWithSubscriptionInfo(doc));
     }
   }
 
-  // Load data sources
+  // Load data sources (enriched with subscription tier info)
   if (existsSync(DOCS_PATHS.dataSources)) {
     const files = readdirSync(DOCS_PATHS.dataSources).filter(f => f.endsWith('.md'));
     for (const file of files) {
-      allDocs.push({
+      const doc: ResourceDoc = {
         name: basename(file, '.md'),
         path: join(DOCS_PATHS.dataSources, file),
         type: 'data-source',
-      });
+      };
+      allDocs.push(enrichWithSubscriptionInfo(doc));
     }
   }
 
@@ -269,4 +365,78 @@ export function getDocumentationSummary(): Record<string, number> {
   }
 
   return summary;
+}
+
+/**
+ * Get subscription tier information for a specific resource
+ */
+export function getResourceSubscriptionInfo(resourceName: string): {
+  tier: SubscriptionTier;
+  service: string;
+  advancedFeatures?: string[];
+  requiresAdvanced: boolean;
+} | null {
+  const meta = findResourceMetadata(resourceName);
+  if (!meta) {
+    return null;
+  }
+
+  return {
+    tier: meta.tier,
+    service: meta.service,
+    advancedFeatures: meta.advancedFeatures,
+    requiresAdvanced: meta.tier === 'ADVANCED' || Boolean(meta.advancedFeatures && meta.advancedFeatures.length > 0),
+  };
+}
+
+/**
+ * Get all resources that require Advanced subscription tier
+ */
+export function getAdvancedTierResources(): ResourceDoc[] {
+  const docs = loadAllDocumentation();
+  return docs.filter(doc => {
+    if (doc.type !== 'resource' && doc.type !== 'data-source') {
+      return false;
+    }
+    // Check if resource itself requires ADVANCED tier
+    if (doc.subscriptionTier === 'ADVANCED') {
+      return true;
+    }
+    // Check if resource has any features requiring ADVANCED tier
+    if (doc.advancedFeatures && doc.advancedFeatures.length > 0) {
+      return true;
+    }
+    return false;
+  });
+}
+
+/**
+ * Get subscription metadata summary
+ */
+export function getSubscriptionSummary(): {
+  totalResources: number;
+  advancedOnlyResources: number;
+  resourcesWithAdvancedFeatures: number;
+  advancedFeaturesList: string[];
+} {
+  const docs = loadAllDocumentation();
+  const resourceDocs = docs.filter(d => d.type === 'resource' || d.type === 'data-source');
+
+  const advancedOnly = resourceDocs.filter(d => d.subscriptionTier === 'ADVANCED');
+  const withAdvancedFeatures = resourceDocs.filter(d => d.advancedFeatures && d.advancedFeatures.length > 0);
+
+  // Collect all unique advanced features
+  const allFeatures = new Set<string>();
+  for (const doc of resourceDocs) {
+    if (doc.advancedFeatures) {
+      doc.advancedFeatures.forEach(f => allFeatures.add(f));
+    }
+  }
+
+  return {
+    totalResources: resourceDocs.length,
+    advancedOnlyResources: advancedOnly.length,
+    resourcesWithAdvancedFeatures: withAdvancedFeatures.length,
+    advancedFeaturesList: Array.from(allFeatures).sort(),
+  };
 }

@@ -71,6 +71,21 @@ for (const [key, source] of Object.entries(SOURCES)) {
 
 console.log(`\nBundled ${totalFiles} documentation files to dist/docs/`);
 
+// Copy subscription metadata if available
+const SUBSCRIPTION_METADATA_SRC = join(PROJECT_ROOT, 'tools', 'subscription-tiers.json');
+const SUBSCRIPTION_METADATA_DEST = join(MCP_ROOT, 'dist', 'subscription-tiers.json');
+
+if (existsSync(SUBSCRIPTION_METADATA_SRC)) {
+  try {
+    cpSync(SUBSCRIPTION_METADATA_SRC, SUBSCRIPTION_METADATA_DEST);
+    console.log('  [OK] subscription-tiers.json: Copied metadata file');
+  } catch (error) {
+    console.error(`  [ERROR] subscription-tiers.json: ${error.message}`);
+  }
+} else {
+  console.log('  [SKIP] subscription-tiers.json: Source not found (optional)');
+}
+
 /**
  * Count files in a directory recursively
  */

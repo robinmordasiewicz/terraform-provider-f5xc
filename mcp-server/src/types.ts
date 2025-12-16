@@ -7,6 +7,45 @@ export interface ResourceDoc {
   path: string;
   type: 'resource' | 'data-source' | 'function' | 'guide';
   content?: string;
+  // Subscription tier fields
+  subscriptionTier?: SubscriptionTier;
+  addonService?: string;
+  advancedFeatures?: string[];
+}
+
+/**
+ * F5 Distributed Cloud subscription tiers
+ * Note: Only Standard and Advanced tiers are currently available
+ * NO_TIER indicates the feature is included in all subscriptions
+ */
+export type SubscriptionTier = 'NO_TIER' | 'STANDARD' | 'ADVANCED';
+
+/**
+ * Service information from F5 XC catalog
+ */
+export interface ServiceInfo {
+  tier: SubscriptionTier;
+  display_name: string;
+  group_name?: string;
+}
+
+/**
+ * Resource metadata including subscription requirements
+ */
+export interface ResourceMetadata {
+  service: string;
+  minimum_tier: SubscriptionTier;
+  advanced_features?: string[];
+}
+
+/**
+ * Full subscription metadata structure
+ */
+export interface SubscriptionMetadata {
+  generated_at: string;
+  source: string;
+  services: Record<string, ServiceInfo>;
+  resources: Record<string, ResourceMetadata>;
 }
 
 export interface ApiSpec {

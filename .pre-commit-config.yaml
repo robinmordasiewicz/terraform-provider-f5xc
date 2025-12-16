@@ -171,6 +171,23 @@ repos:
         files: \.go$
         pass_filenames: false
 
+  # =============================================================================
+  # Subscription Tier Metadata Update (Optional)
+  # =============================================================================
+  # Updates subscription tier metadata from F5 XC Catalog API when generator changes
+  # Skips gracefully if F5XC credentials are not available
+  - repo: local
+    hooks:
+      - id: update-subscription-metadata
+        name: Update subscription tier metadata
+        entry: scripts/update-subscription-metadata.sh
+        language: system
+        files: ^tools/generate-subscription-metadata\.go$
+        pass_filenames: false
+        stages: [pre-commit]
+        # This hook is advisory - it won't fail if credentials are unavailable
+        # When credentials are set, it updates tools/subscription-tiers.json
+
 # =============================================================================
 # CI Configuration
 # =============================================================================

@@ -16,20 +16,31 @@ Choose the installation method that best fits your environment:
 
 | Method | Best For | Requirements |
 |--------|----------|--------------|
-| [VSCode MCP Gallery](#vscode-mcp-gallery) | VSCode users with Node.js | VSCode 1.99+, Node.js |
+| [VSCode MCP Gallery](#vscode-mcp-gallery) | VSCode users (easiest) | VSCode 1.99+ |
 | [npx (Recommended)](#from-npm) | Developers with Node.js | Node.js 18+ |
-| [MCPB Bundle](#mcpb-bundle-no-nodejs-required) | Corporate laptops | None |
+| [MCPB Bundle](#mcpb-bundle-no-nodejs-required) | Corporate laptops (no Node.js) | None |
 | [From Source](#from-source) | Contributors | Node.js 18+, npm |
 
 ### VSCode MCP Gallery
 
-The easiest way to install if you're using VSCode with GitHub Copilot:
+The easiest way to install for VSCode users. Choose from multiple options:
+
+**Option A: MCP Gallery Search (Recommended for VSCode 1.105+)**
+
+1. Open VSCode
+2. Open the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
+3. Type `@MCP` in the search box to filter MCP servers
+4. Search for `f5xc` or `F5 Distributed Cloud`
+5. Click **Install**
+
+**Option B: Command Palette**
 
 1. Open VSCode
 2. Press `Ctrl+Shift+P` / `Cmd+Shift+P` to open Command Palette
 3. Run `MCP: Add Server`
-4. Search for `f5xc` or `@robinmordasiewicz/f5xc-terraform-mcp`
-5. Click Install
+4. Select `npm package`
+5. Enter: `@robinmordasiewicz/f5xc-terraform-mcp`
+6. Choose scope: **Global** (all workspaces) or **Workspace** (this project only)
 
 ### From npm
 
@@ -45,13 +56,25 @@ npx @robinmordasiewicz/f5xc-terraform-mcp
 
 ### MCPB Bundle (No Node.js Required)
 
-For corporate environments where Node.js cannot be installed:
+For corporate environments where Node.js cannot be installed. The MCPB bundle is fully self-contained with all dependencies included.
+
+**For VSCode:**
 
 1. Download the latest `.mcpb` file from [GitHub Releases](https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases)
-2. Double-click the file to install, or drag it into Claude Desktop / VSCode
-3. The bundle includes everything needed - no external dependencies
+2. In VSCode, press `Ctrl+Shift+P` / `Cmd+Shift+P`
+3. Run `MCP: Add Server`
+4. Drag and drop the `.mcpb` file, or select it when prompted
+5. Run `MCP: List Servers` to verify installation
+
+**For Claude Desktop:**
+
+1. Download the latest `.mcpb` file from [GitHub Releases](https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases)
+2. Double-click the file to install, or drag it into Claude Desktop
+3. Restart Claude Desktop to activate
 
 **File**: `f5xc-terraform-mcp-X.Y.Z.mcpb`
+
+-> **Note:** MCPB bundles are automatically built and attached to each GitHub Release. No npm or Node.js installation is required.
 
 ### From Source
 
@@ -173,6 +196,18 @@ To make the MCP server available across all workspaces, add to your VS Code user
   }
 }
 ```
+
+**Verify VSCode Installation:**
+
+1. Press `Ctrl+Shift+P` / `Cmd+Shift+P`
+2. Run `MCP: List Servers`
+3. Look for `f5xc-terraform` with a green status indicator
+
+**Troubleshooting VSCode:**
+
+- **Server not appearing**: Restart VSCode after adding the server configuration
+- **Connection issues**: Check the Output panel (`View > Output`) and select "MCP" from the dropdown
+- **Node.js not found**: Use the [MCPB Bundle](#mcpb-bundle-no-nodejs-required) method instead
 
 ## Available Tools
 

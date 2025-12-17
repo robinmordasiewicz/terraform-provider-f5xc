@@ -13,6 +13,15 @@
         "type": "stdio"
       },
       "runtimeHint": "npx"
+    },
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases/download/v2.4.3/f5xc-terraform-mcp-2.4.3.mcpb",
+      "version": "2.4.3",
+      "transport": {
+        "type": "stdio"
+      },
+      "file_sha256": "pending"
     }
   ],
   "repository": {

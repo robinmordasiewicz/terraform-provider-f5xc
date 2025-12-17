@@ -145,14 +145,22 @@ jobs:
         run: |
           cd mcp-server
           VERSION="${{ needs.build-mcpb.outputs.version }}"
+          SHA256="${{ needs.build-mcpb.outputs.sha256 }}"
+          MCPB_URL="https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases/download/v${VERSION}/f5xc-terraform-mcp-${VERSION}.mcpb"
 
-          # Update version in server.json
+          # Update version in server.json (both npm and mcpb packages)
           node -e "
           const fs = require('fs');
           const serverJson = JSON.parse(fs.readFileSync('server.json', 'utf8'));
           serverJson.version = '$VERSION';
           if (serverJson.packages) {
-            serverJson.packages.forEach(p => p.version = '$VERSION');
+            serverJson.packages.forEach(p => {
+              p.version = '$VERSION';
+              if (p.registryType === 'mcpb') {
+                p.identifier = '$MCPB_URL';
+                p.file_sha256 = '$SHA256';
+              }
+            });
           }
           fs.writeFileSync('server.json', JSON.stringify(serverJson, null, 2) + '\n');
           "

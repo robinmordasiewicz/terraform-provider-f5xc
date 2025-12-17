@@ -89,9 +89,9 @@ Review the plan output, then type `yes` to confirm deployment.
 
 After deployment, Terraform outputs a CNAME target. Create a DNS record:
 
-| Type | Name | Value |
-|------|------|-------|
-| CNAME | app.example.com | ves-io-app-example-com.ac.vh.ves.io |
+| Type  | Name            | Value                                |
+| ----- | --------------- | ------------------------------------ |
+| CNAME | app.example.com | ves-io-app-example-com.ac.vh.ves.io  |
 
 ~> **Note:** DNS propagation may take up to 48 hours, though typically completes within minutes.
 
@@ -153,7 +153,7 @@ labels = {
 
 This guide creates the following resources:
 
-```
+```text
                     ┌─────────────────────────────────────────┐
                     │        F5 Distributed Cloud             │
                     │                                         │
@@ -185,14 +185,14 @@ This guide creates the following resources:
 
 ### Resources Created
 
-| Resource | Purpose |
-|----------|---------|
-| `f5xc_namespace` | Isolates resources (optional) |
-| `f5xc_healthcheck` | Monitors origin server health |
-| `f5xc_origin_pool` | Defines backend servers |
-| `f5xc_app_firewall` | WAF configuration |
-| `f5xc_rate_limiter` | Rate limiting policy |
-| `f5xc_http_loadbalancer` | Main load balancer |
+| Resource                 | Purpose                       |
+| ------------------------ | ----------------------------- |
+| `f5xc_namespace`         | Isolates resources (optional) |
+| `f5xc_healthcheck`       | Monitors origin server health |
+| `f5xc_origin_pool`       | Defines backend servers       |
+| `f5xc_app_firewall`      | WAF configuration             |
+| `f5xc_rate_limiter`      | Rate limiting policy          |
+| `f5xc_http_loadbalancer` | Main load balancer            |
 
 ## Troubleshooting
 

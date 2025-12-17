@@ -125,9 +125,9 @@ resource "f5xc_http_loadbalancer" "secure" {
 # Example: Encrypt multiple certificate files using for_each
 locals {
   certificates = {
-    "server"  = "${path.module}/certs/server.key"
-    "client"  = "${path.module}/certs/client.key"
-    "ca"      = "${path.module}/certs/ca.key"
+    "server" = "${path.module}/certs/server.key"
+    "client" = "${path.module}/certs/client.key"
+    "ca"     = "${path.module}/certs/ca.key"
   }
 }
 

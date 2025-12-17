@@ -699,6 +699,20 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
+      # IMPORTANT: Publish BEFORE creating PR to ensure no spurious PRs on failure
+      # If publish fails, the job stops and no PR is created
+      - name: Publish to MCP Registry
+        working-directory: mcp-server
+        run: mcp-publisher publish --file server.json
+
+      - name: Verify publication
+        run: |
+          SERVER_NAME=$(jq -r '.name' mcp-server/server.json)
+          echo "Verifying publication of: $SERVER_NAME"
+          sleep 3
+          curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}" | jq '.'
+
+      # Create PR only AFTER successful publish to prevent spurious PRs
       - name: Create Pull Request for server.json update
         if: steps.check.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v6
@@ -716,17 +730,6 @@ jobs:
             This PR updates the server.json with the correct MCPB download URL and hash.
           labels: automated,mcp
           delete-branch: true
-
-      - name: Publish to MCP Registry
-        working-directory: mcp-server
-        run: mcp-publisher publish --file server.json
-
-      - name: Verify publication
-        run: |
-          SERVER_NAME=$(jq -r '.name' mcp-server/server.json)
-          echo "Verifying publication of: $SERVER_NAME"
-          sleep 3
-          curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}" | jq '.'
 
   # ===========================================================================
   # Summary

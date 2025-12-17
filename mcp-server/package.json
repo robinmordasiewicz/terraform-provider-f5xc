@@ -34,7 +34,8 @@
     "terraform-provider",
     "ai",
     "claude",
-    "openapi"
+    "openapi",
+    "infrastructure-as-code"
   ],
   "author": "Robin Mordasiewicz",
   "license": "MIT",

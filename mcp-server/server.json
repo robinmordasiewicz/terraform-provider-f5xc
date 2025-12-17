@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.robinmordasiewicz/f5xc-terraform-mcp",
   "title": "F5 Distributed Cloud Terraform Provider",
-  "description": "MCP server providing AI assistants with access to F5 Distributed Cloud Terraform provider documentation, 270+ OpenAPI specifications, subscription tier information, and addon service activation workflows.",
+  "description": "F5 Distributed Cloud Terraform provider docs, 270+ OpenAPI specs, and subscription info for AI.",
   "version": "2.12.1",
   "packages": [
     {

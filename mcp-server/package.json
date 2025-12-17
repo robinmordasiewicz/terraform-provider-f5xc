@@ -36,7 +36,8 @@
     "claude",
     "openapi",
     "infrastructure-as-code",
-    "iac"
+    "iac",
+    "api-documentation"
   ],
   "author": "Robin Mordasiewicz",
   "license": "MIT",

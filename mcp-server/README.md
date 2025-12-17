@@ -74,7 +74,7 @@ For corporate environments where Node.js cannot be installed. The MCPB bundle is
 
 **File**: `f5xc-terraform-mcp-X.Y.Z.mcpb`
 
--> **Note:** MCPB bundles are automatically built and attached to each GitHub Release. No npm or Node.js installation is required.
+> **Note:** MCPB bundles are automatically built and attached to each GitHub Release. No npm or Node.js installation is required. The bundle includes a self-contained Node.js runtime.
 
 ### From Source
 

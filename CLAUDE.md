@@ -784,10 +784,14 @@ The following are **automatically generated** by the CI/CD pipeline:
 
 The following individual files are manually maintained within otherwise auto-generated directories:
 
-| File                                          | Purpose                                             |
-| --------------------------------------------- | --------------------------------------------------- |
-| `internal/provider/functions_registration.go` | Registers provider-defined functions with Terraform |
-| `templates/functions.md.tmpl`                 | Template for generating function documentation      |
+| File                                                            | Purpose                                                  |
+| --------------------------------------------------------------- | -------------------------------------------------------- |
+| `internal/provider/functions_registration.go`                   | Registers provider-defined functions with Terraform      |
+| `internal/provider/addon_service_data_source.go`                | Data source for querying addon service details           |
+| `internal/provider/addon_service_activation_status_data_source.go` | Data source for checking addon activation eligibility |
+| `templates/functions.md.tmpl`                                   | Template for generating function documentation           |
+| `examples/data-sources/addon_service/data-source.tf`            | Example for addon_service data source                    |
+| `examples/data-sources/addon_service_activation_status/data-source.tf` | Example for activation status data source         |
 
 ### Functions Automation Rules
 

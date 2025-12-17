@@ -1,0 +1,55 @@
+# F5 Distributed Cloud Provider - Addon Activation Example Variables
+# ===================================================================
+#
+# Copy this file to terraform.tfvars and modify the values as needed.
+#
+# USAGE:
+#   cp terraform.tfvars.example terraform.tfvars
+#   # Edit terraform.tfvars with your desired settings
+#   terraform init
+#   terraform apply
+
+# =============================================================================
+# ADDON ENABLEMENT
+# =============================================================================
+#
+# Set to true to check and potentially activate each addon service.
+# The addon will only be activated if:
+#   1. The addon is enabled below
+#   2. Your tenant has the required subscription tier (usually ADVANCED)
+#   3. The addon is not already activated
+#   4. The addon can be self-activated (not fully managed)
+
+# Bot Defense - Protect applications from automated attacks and bot traffic
+# Service Name: f5xc-bot-defense-standard
+# Tier Required: STANDARD
+enable_bot_defense = true
+
+# Client Side Defense - Protect against Magecart and formjacking attacks
+# Service Name: f5xc-client-side-defense-standard
+# Tier Required: STANDARD
+enable_client_side_defense = false
+
+# WAAP - Web Application and API Protection (includes API Discovery and Data Guard)
+# Service Name: f5xc-waap-standard
+# Tier Required: STANDARD
+enable_waap = false
+
+# =============================================================================
+# ACTIVATION SETTINGS
+# =============================================================================
+
+# Time to wait after activation before proceeding with other resources
+# This helps ensure the addon is fully active before dependent resources are created
+# Format: "30s" (seconds), "1m" (minutes), "1h" (hours)
+activation_wait_time = "30s"
+
+# =============================================================================
+# DEMO RESOURCES
+# =============================================================================
+
+# Set to true to create a demo namespace (useful for testing)
+create_demo_namespace = false
+
+# Name for the demo namespace (only used if create_demo_namespace = true)
+demo_namespace_name = "addon-demo"

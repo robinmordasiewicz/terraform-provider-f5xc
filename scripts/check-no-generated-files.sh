@@ -25,6 +25,17 @@ GENERATED_PATTERNS=(
     "^examples/data-sources/.*\.tf$"
 )
 
+# Manually maintained files that are EXCEPTIONS to the generated patterns
+# These data sources are not auto-generated from OpenAPI specs - they provide
+# utility functionality not available in the F5 specifications
+MANUALLY_MAINTAINED_FILES=(
+    "internal/provider/functions_registration.go"
+    "internal/provider/addon_service_data_source.go"
+    "internal/provider/addon_service_activation_status_data_source.go"
+    "examples/data-sources/addon_service/data-source.tf"
+    "examples/data-sources/addon_service_activation_status/data-source.tf"
+)
+
 # ANSI color codes
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
@@ -43,9 +54,24 @@ if [ -z "$STAGED_FILES" ]; then
     exit 0
 fi
 
+# Helper function to check if a file is manually maintained
+is_manually_maintained() {
+    local file="$1"
+    for maintained_file in "${MANUALLY_MAINTAINED_FILES[@]}"; do
+        if [ "$file" = "$maintained_file" ]; then
+            return 0  # true - file is manually maintained
+        fi
+    done
+    return 1  # false - file is not in the exception list
+}
+
 # Check each staged file against generated patterns
 VIOLATIONS=()
 for file in $STAGED_FILES; do
+    # Skip files that are manually maintained exceptions
+    if is_manually_maintained "$file"; then
+        continue
+    fi
     for pattern in "${GENERATED_PATTERNS[@]}"; do
         if echo "$file" | grep -qE "$pattern"; then
             VIOLATIONS+=("$file")

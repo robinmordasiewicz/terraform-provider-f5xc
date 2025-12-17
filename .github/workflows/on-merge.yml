@@ -567,18 +567,19 @@ jobs:
       gpg-passphrase: ${{ secrets.PASSPHRASE }}
 
   # ===========================================================================
-  # STEP 7: Publish to MCP Registry (after release is created)
+  # STEP 7: Publish to MCP Registry (after npm package is published)
   # ===========================================================================
   # This job publishes the MCP server to the official MCP Registry.
-  # It runs directly after tag-release instead of relying on release triggers,
-  # because releases created by GITHUB_TOKEN don't trigger other workflows.
+  # It must run AFTER sync-mcp-version because the MCP Registry validates
+  # that the referenced npm package exists before accepting publication.
   publish-mcp-registry:
     name: Publish MCP Registry
-    needs: [tag-release]
+    needs: [tag-release, sync-mcp-version]
     if: |
       always() &&
       needs.tag-release.result == 'success' &&
-      needs.tag-release.outputs.tag-created == 'true'
+      needs.tag-release.outputs.tag-created == 'true' &&
+      needs.sync-mcp-version.result == 'success'
     runs-on: ubuntu-latest
     permissions:
       contents: write

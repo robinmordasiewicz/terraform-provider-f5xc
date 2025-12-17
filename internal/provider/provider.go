@@ -368,8 +368,6 @@ func (p *F5XCProvider) DataSources(ctx context.Context) []func() datasource.Data
 		NewAPMDataSource,
 		NewAWSTGWSiteDataSource,
 		NewAWSVPCSiteDataSource,
-		NewAddonServiceDataSource,
-		NewAddonServiceActivationStatusDataSource,
 		NewAddonSubscriptionDataSource,
 		NewAddressAllocatorDataSource,
 		NewAdvertisePolicyDataSource,

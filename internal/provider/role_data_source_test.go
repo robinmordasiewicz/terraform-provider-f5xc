@@ -11,4 +11,3 @@ import (
 func TestAccRoleDataSource_basic(t *testing.T) {
 	t.Skip("Requires IAM permissions")
 }
-

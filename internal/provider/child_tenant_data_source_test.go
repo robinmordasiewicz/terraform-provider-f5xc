@@ -11,4 +11,3 @@ import (
 func TestAccChildTenantDataSource_basic(t *testing.T) {
 	t.Skip("Requires tenant management permissions")
 }
-

@@ -156,6 +156,105 @@ func findResourceMetadata(resourceName string) (*ResourceMetadata, bool) {
 	return nil, false
 }
 
+// matchesAdvancedFeature checks if a property name matches an advanced feature pattern
+// Patterns: enable_<feature>, disable_<feature>, <feature>, <feature>_settings, <feature>_policy
+func matchesAdvancedFeature(propertyName string, featureName string) bool {
+	prop := strings.ToLower(propertyName)
+	feat := strings.ToLower(featureName)
+
+	if prop == feat {
+		return true
+	}
+	if prop == "enable_"+feat {
+		return true
+	}
+	if prop == "disable_"+feat {
+		return true
+	}
+	if prop == feat+"_settings" {
+		return true
+	}
+	if prop == feat+"_policy" {
+		return true
+	}
+	if prop == feat+"_advanced" {
+		return true
+	}
+	if prop == "default_"+feat {
+		return true
+	}
+	if strings.Contains(prop, feat) {
+		return true
+	}
+
+	return false
+}
+
+// isAdvancedFeatureProperty returns true if the property requires an Advanced subscription
+func isAdvancedFeatureProperty(resourceName, propertyName string) bool {
+	resMeta, ok := findResourceMetadata(resourceName)
+	if !ok || len(resMeta.AdvancedFeatures) == 0 {
+		return false
+	}
+	for _, feature := range resMeta.AdvancedFeatures {
+		if matchesAdvancedFeature(propertyName, feature) {
+			return true
+		}
+	}
+	return false
+}
+
+const advancedIndicator = "**(Advanced subscription required)**"
+
+// appendSubscriptionIndicator adds the Advanced subscription indicator to a description
+// if the property matches an advanced feature. Idempotent - won't add if already present.
+func appendSubscriptionIndicator(resourceName, propertyName, description string) string {
+	if strings.Contains(description, "Advanced subscription required") {
+		return description // Already annotated
+	}
+	if !isAdvancedFeatureProperty(resourceName, propertyName) {
+		return description
+	}
+	desc := strings.TrimSpace(description)
+	desc = strings.TrimSuffix(desc, ".")
+	return desc + " " + advancedIndicator
+}
+
+// annotateAdvancedPropertiesInContent adds tier indicators to already-transformed documentation
+// This handles files that have already been transformed and need property-level annotations
+func annotateAdvancedPropertiesInContent(content, resourceName string) string {
+	resMeta, ok := findResourceMetadata(resourceName)
+	if !ok || len(resMeta.AdvancedFeatures) == 0 {
+		return content
+	}
+
+	for _, feature := range resMeta.AdvancedFeatures {
+		// Build property name patterns to match
+		patterns := []string{
+			"enable_" + feature,
+			"disable_" + feature,
+			feature,
+			feature + "_settings",
+			feature + "_policy",
+		}
+
+		for _, prop := range patterns {
+			// Match: `prop_name`](#anchor) ... <br>DESCRIPTION
+			// Pattern captures up to the description after <br>
+			regex := regexp.MustCompile(
+				fmt.Sprintf("(`%s`\\]\\(#[^)]+\\)[^<]*<br>[^<\n]+)", regexp.QuoteMeta(prop)))
+
+			content = regex.ReplaceAllStringFunc(content, func(match string) string {
+				if strings.Contains(match, "Advanced subscription required") {
+					return match // Already annotated
+				}
+				return match + " " + advancedIndicator
+			})
+		}
+	}
+	return content
+}
+
 // metadataFields defines the standard F5 XC metadata fields that should be grouped
 // under "Metadata Argument Reference" section, following Volterra provider conventions
 var metadataFields = map[string]bool{
@@ -764,6 +863,9 @@ func transformAnchorsOnly(filePath string, content string) error {
 	// Phase 2: Apply description deduplication to collapse ObjectRef blocks (Issue #287)
 	result = applyDescriptionDeduplication(result)
 
+	// Phase 3: Annotate individual advanced feature properties with tier indicators
+	result = annotateAdvancedPropertiesInContent(result, resourceName)
+
 	// Inject subscription tier note as FINAL step (after all escaping/URL processing)
 	if tierNote := getSubscriptionTierNote(resourceName); tierNote != "" {
 		if !strings.Contains(result, "Subscription Required") && !strings.Contains(result, "Some features of this resource") {
@@ -1311,6 +1413,8 @@ func transformDoc(filePath string) error {
 
 		// Add description on next line (if any)
 		if desc != "" {
+			// Annotate advanced feature properties with subscription tier indicator
+			desc = appendSubscriptionIndicator(resourceName, attr.name, desc)
 			result.WriteString("<br>" + desc)
 		}
 

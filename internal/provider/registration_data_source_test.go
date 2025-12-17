@@ -11,4 +11,3 @@ import (
 func TestAccRegistrationDataSource_basic(t *testing.T) {
 	t.Skip("Requires site registration permissions")
 }
-

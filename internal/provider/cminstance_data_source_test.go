@@ -11,4 +11,3 @@ import (
 func TestAccCminstanceDataSource_basic(t *testing.T) {
 	t.Skip("Requires CM instance management permissions")
 }
-

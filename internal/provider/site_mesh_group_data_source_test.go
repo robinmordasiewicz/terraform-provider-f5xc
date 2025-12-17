@@ -11,4 +11,3 @@ import (
 func TestAccSiteMeshGroupDataSource_basic(t *testing.T) {
 	t.Skip("API returns 500 errors")
 }
-

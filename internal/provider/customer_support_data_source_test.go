@@ -11,4 +11,3 @@ import (
 func TestAccCustomerSupportDataSource_basic(t *testing.T) {
 	t.Skip("Requires special support permissions")
 }
-

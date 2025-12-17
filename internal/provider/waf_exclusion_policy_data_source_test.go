@@ -11,4 +11,3 @@ import (
 func TestAccWafExclusionPolicyDataSource_basic(t *testing.T) {
 	t.Skip("No resource test exists - config unknown")
 }
-

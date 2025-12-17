@@ -11,4 +11,3 @@ import (
 func TestAccAddonSubscriptionDataSource_basic(t *testing.T) {
 	t.Skip("Requires special addon permissions")
 }
-

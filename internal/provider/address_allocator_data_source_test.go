@@ -11,4 +11,3 @@ import (
 func TestAccAddressAllocatorDataSource_basic(t *testing.T) {
 	t.Skip("API returns BAD_REQUEST - requires specific infrastructure")
 }
-

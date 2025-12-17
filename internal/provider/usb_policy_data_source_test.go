@@ -11,4 +11,3 @@ import (
 func TestAccUsbPolicyDataSource_basic(t *testing.T) {
 	t.Skip("Resource test fails - API returns BAD_REQUEST")
 }
-

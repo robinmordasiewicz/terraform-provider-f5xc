@@ -11,4 +11,3 @@ import (
 func TestAccForwardingClassDataSource_basic(t *testing.T) {
 	t.Skip("Requires tenant quota configuration")
 }
-

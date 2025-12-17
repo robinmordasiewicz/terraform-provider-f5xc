@@ -11,4 +11,3 @@ import (
 func TestAccBotDefenseAppInfrastructureDataSource_basic(t *testing.T) {
 	t.Skip("Requires Bot Defense subscription")
 }
-

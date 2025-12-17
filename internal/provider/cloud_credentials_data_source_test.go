@@ -11,4 +11,3 @@ import (
 func TestAccCloudCredentialsDataSource_basic(t *testing.T) {
 	t.Skip("Requires system-level namespace access")
 }
-

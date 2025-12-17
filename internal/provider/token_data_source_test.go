@@ -11,4 +11,3 @@ import (
 func TestAccTokenDataSource_basic(t *testing.T) {
 	t.Skip("Resource test has schema mismatch - needs fixing")
 }
-

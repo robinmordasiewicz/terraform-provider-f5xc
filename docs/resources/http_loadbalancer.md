@@ -227,8 +227,8 @@ resource "f5xc_http_loadbalancer" "example" {
 <a id="blocked-clients"></a>&#x2022; [`blocked_clients`](#blocked-clients) - Optional Block<br>Client Blocking Rules. Define rules to block IP Prefixes or AS numbers
 
 -> **One of the following:**
-&#x2022; <a id="bot-defense"></a>[`bot_defense`](#bot-defense) - Optional Block<br>Bot Defense. This defines various configuration options for Bot Defense Policy
-<br><br>&#x2022; <a id="bot-defense-advanced"></a>[`bot_defense_advanced`](#bot-defense-advanced) - Optional Block<br>Bot Defense Advanced. Bot Defense Advanced
+&#x2022; <a id="bot-defense"></a>[`bot_defense`](#bot-defense) - Optional Block<br>Bot Defense. This defines various configuration options for Bot Defense Policy \**(Advanced subscription required)**
+<br><br>&#x2022; <a id="bot-defense-advanced"></a>[`bot_defense_advanced`](#bot-defense-advanced) - Optional Block<br>Bot Defense Advanced. Bot Defense Advanced \**(Advanced subscription required)**
 
 -> **One of the following:**
 &#x2022; <a id="caching-policy"></a>[`caching_policy`](#caching-policy) - Optional Block<br>Caching Policies.Caching Policies for the CDN
@@ -265,16 +265,16 @@ resource "f5xc_http_loadbalancer" "example" {
 <a id="default-route-pools"></a>&#x2022; [`default_route_pools`](#default-route-pools) - Optional Block<br>Origin Pools. Origin Pools used when no route is specified (default route)
 
 -> **One of the following:**
-&#x2022; <a id="default-sensitive-data-policy"></a>[`default_sensitive_data_policy`](#default-sensitive-data-policy) - Optional Block<br>Enable this option
+&#x2022; <a id="default-sensitive-data-policy"></a>[`default_sensitive_data_policy`](#default-sensitive-data-policy) - Optional Block<br>Enable this option \**(Advanced subscription required)**
 
 <a id="disable-api-definition"></a>&#x2022; [`disable_api_definition`](#disable-api-definition) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-api-discovery"></a>[`disable_api_discovery`](#disable-api-discovery) - Optional Block<br>Enable this option
+&#x2022; <a id="disable-api-discovery"></a>[`disable_api_discovery`](#disable-api-discovery) - Optional Block<br>Enable this option \**(Advanced subscription required)**
 
 <a id="disable-api-testing"></a>&#x2022; [`disable_api_testing`](#disable-api-testing) - Optional Block<br>Enable this option
 
-<a id="disable-bot-defense"></a>&#x2022; [`disable_bot_defense`](#disable-bot-defense) - Optional Block<br>Enable this option
+<a id="disable-bot-defense"></a>&#x2022; [`disable_bot_defense`](#disable-bot-defense) - Optional Block<br>Enable this option \**(Advanced subscription required)**
 
 <a id="disable-caching"></a>&#x2022; [`disable_caching`](#disable-caching) - Optional Block<br>Enable this option
 
@@ -284,7 +284,7 @@ resource "f5xc_http_loadbalancer" "example" {
 &#x2022; <a id="disable-ip-reputation"></a>[`disable_ip_reputation`](#disable-ip-reputation) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-malicious-user-detection"></a>[`disable_malicious_user_detection`](#disable-malicious-user-detection) - Optional Block<br>Enable this option
+&#x2022; <a id="disable-malicious-user-detection"></a>[`disable_malicious_user_detection`](#disable-malicious-user-detection) - Optional Block<br>Enable this option \**(Advanced subscription required)**
 
 -> **One of the following:**
 &#x2022; <a id="disable-malware-protection"></a>[`disable_malware_protection`](#disable-malware-protection) - Optional Block<br>Enable this option
@@ -301,11 +301,11 @@ resource "f5xc_http_loadbalancer" "example" {
 
 <a id="domains"></a>&#x2022; [`domains`](#domains) - Optional List<br>Domains. A list of Domains (host/authority header) that will be matched to load balancer. Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: \*.foo.com. Not supported Domains: - Just a Wildcard: \* - A Wildcard and TLD with no root Domain: \*.com. - A Wildcard not matching a whole DNS label. e.g. \*.foo.com and \*.bar.foo.com are valid Wildcards however \*bar.foo.com, \*-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. \*.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on \*. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Loadbalancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system
 
-<a id="enable-api-discovery"></a>&#x2022; [`enable_api_discovery`](#enable-api-discovery) - Optional Block<br>API Discovery Setting. Specifies the settings used for API discovery
+<a id="enable-api-discovery"></a>&#x2022; [`enable_api_discovery`](#enable-api-discovery) - Optional Block<br>API Discovery Setting. Specifies the settings used for API discovery \**(Advanced subscription required)**
 
 <a id="enable-ip-reputation"></a>&#x2022; [`enable_ip_reputation`](#enable-ip-reputation) - Optional Block<br>IP Threat Category List. List of IP threat categories
 
-<a id="enable-malicious-user-detection"></a>&#x2022; [`enable_malicious_user_detection`](#enable-malicious-user-detection) - Optional Block<br>Enable this option
+<a id="enable-malicious-user-detection"></a>&#x2022; [`enable_malicious_user_detection`](#enable-malicious-user-detection) - Optional Block<br>Enable this option \**(Advanced subscription required)**
 
 <a id="enable-threat-mesh"></a>&#x2022; [`enable_threat_mesh`](#enable-threat-mesh) - Optional Block<br>Enable this option
 
@@ -349,7 +349,7 @@ resource "f5xc_http_loadbalancer" "example" {
 
 <a id="sensitive-data-disclosure-rules"></a>&#x2022; [`sensitive_data_disclosure_rules`](#sensitive-data-disclosure-rules) - Optional Block<br>Sensitive Data Exposure Rules. Sensitive Data Exposure Rules allows specifying rules to mask sensitive data fields in API responses
 
-<a id="sensitive-data-policy"></a>&#x2022; [`sensitive_data_policy`](#sensitive-data-policy) - Optional Block<br>Sensitive Data Discovery. Settings for data type policy
+<a id="sensitive-data-policy"></a>&#x2022; [`sensitive_data_policy`](#sensitive-data-policy) - Optional Block<br>Sensitive Data Discovery. Settings for data type policy \**(Advanced subscription required)**
 
 <a id="service-policies-from-namespace"></a>&#x2022; [`service_policies_from_namespace`](#service-policies-from-namespace) - Optional Block<br>Enable this option
 

@@ -156,36 +156,38 @@ jobs:
           node-version: '20'
 
       - name: Update server.json version
+        working-directory: mcp-server
         run: |
-          cd mcp-server
-          VERSION="${{ needs.build-mcpb.outputs.version }}"
-          SHA256="${{ needs.build-mcpb.outputs.sha256 }}"
-          MCPB_URL="https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases/download/v${VERSION}/f5xc-terraform-mcp-${VERSION}.mcpb"
-
-          # Update version in server.json (both npm and mcpb packages)
+          # Update version in server.json using GitHub Actions expressions directly
+          # (avoids bash variable expansion issues with ${VERSION})
           node -e "
           const fs = require('fs');
           const serverJson = JSON.parse(fs.readFileSync('server.json', 'utf8'));
-          serverJson.version = '$VERSION';
+          serverJson.version = '${{ needs.build-mcpb.outputs.version }}';
           if (serverJson.packages) {
             serverJson.packages.forEach(p => {
-              p.version = '$VERSION';
+              p.version = '${{ needs.build-mcpb.outputs.version }}';
               if (p.registryType === 'mcpb') {
-                p.identifier = '$MCPB_URL';
-                p.fileSha256 = '$SHA256';
+                p.identifier = 'https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases/download/v${{ needs.build-mcpb.outputs.version }}/f5xc-terraform-mcp-${{ needs.build-mcpb.outputs.version }}.mcpb';
+                p.fileSha256 = '${{ needs.build-mcpb.outputs.sha256 }}';
               }
             });
           }
           fs.writeFileSync('server.json', JSON.stringify(serverJson, null, 2) + '\n');
+          console.log('Updated server.json to version:', '${{ needs.build-mcpb.outputs.version }}');
           "
 
           # Update version in manifest.json
           node -e "
           const fs = require('fs');
           const manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
-          manifest.version = '$VERSION';
+          manifest.version = '${{ needs.build-mcpb.outputs.version }}';
           fs.writeFileSync('manifest.json', JSON.stringify(manifest, null, 2) + '\n');
           "
+
+          # Verify the update worked
+          echo "Updated server.json contents:"
+          cat server.json | head -30
 
       - name: Install mcp-publisher CLI
         run: |

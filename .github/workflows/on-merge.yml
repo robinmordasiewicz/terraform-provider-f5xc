@@ -445,6 +445,27 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Close stale auto-regenerate PRs
+        if: steps.check.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
+        run: |
+          # Find and close any open auto-regenerate PRs (they're superseded by this new regeneration)
+          echo "Checking for stale auto-regenerate PRs..."
+          STALE_PRS=$(gh pr list --state open --json number,headRefName --jq '.[] | select(.headRefName | startswith("auto-regenerate/")) | .number')
+
+          if [ -n "$STALE_PRS" ]; then
+            for PR in $STALE_PRS; do
+              echo "Closing stale auto-regenerate PR #$PR (superseded by commit ${{ github.sha }})"
+              gh pr close "$PR" --comment "Superseded by newer regeneration from commit ${{ github.sha }}" || true
+              # Also delete the stale branch
+              BRANCH=$(gh pr view "$PR" --json headRefName --jq '.headRefName')
+              git push origin --delete "$BRANCH" 2>/dev/null || true
+            done
+          else
+            echo "No stale auto-regenerate PRs found"
+          fi
+
       - name: Create branch and PR
         id: create-pr
         if: steps.check.outputs.has_changes == 'true'

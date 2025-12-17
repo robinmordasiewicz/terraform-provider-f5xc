@@ -1,12 +1,16 @@
-# Publish MCP Server to MCP Registry
+# Publish MCP Server to MCP Registry (Manual Only)
 #
-# This workflow publishes the F5XC Terraform MCP server to the official
-# MCP Registry (https://registry.modelcontextprotocol.io) and creates
-# MCPB bundles for Node.js-free installation.
+# This workflow is for MANUAL publishing to the MCP Registry.
+# Automated publishing is integrated into on-merge.yml (publish-mcp-registry job).
 #
-# Triggers:
-# - On release publish (after tag-release creates a new version)
-# - Manual workflow dispatch
+# NOTE: This workflow does NOT trigger on release events because releases
+# created by GITHUB_TOKEN don't trigger other workflows. The on-merge.yml
+# workflow handles this automatically after creating a release.
+#
+# Use this workflow for:
+# - Manual republishing after failures
+# - Testing MCP Registry integration
+# - Publishing without a new release
 #
 # The workflow:
 # 1. Builds the MCPB bundle (self-contained ZIP)
@@ -18,8 +22,6 @@
 name: Publish MCP Registry
 
 on:
-  release:
-    types: [published]
   workflow_dispatch:
     inputs:
       version:
@@ -103,7 +105,6 @@ jobs:
     name: Upload to Release
     needs: build-mcpb
     runs-on: ubuntu-latest
-    if: github.event_name == 'release'
     permissions:
       contents: write
 
@@ -115,12 +116,23 @@ jobs:
           path: ./mcpb
 
       - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            ./mcpb/*.mcpb
-            ./mcpb/*.sha256
-          fail_on_unmatched_files: false
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ needs.build-mcpb.outputs.version }}"
+          TAG="v$VERSION"
+
+          # Check if release exists
+          if gh release view "$TAG" --repo ${{ github.repository }} >/dev/null 2>&1; then
+            echo "Uploading to release $TAG"
+            gh release upload "$TAG" \
+              ./mcpb/*.mcpb \
+              ./mcpb/*.sha256 \
+              --repo ${{ github.repository }} \
+              --clobber || echo "Upload failed or files already exist"
+          else
+            echo "Release $TAG not found - skipping upload"
+          fi
 
   update-server-json:
     name: Update server.json
@@ -204,7 +216,6 @@ jobs:
     name: Publish to MCP Registry
     needs: [build-mcpb]
     runs-on: ubuntu-latest
-    if: github.event_name == 'release'
     permissions:
       id-token: write
       contents: read

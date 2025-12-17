@@ -567,11 +567,172 @@ jobs:
       gpg-passphrase: ${{ secrets.PASSPHRASE }}
 
   # ===========================================================================
+  # STEP 7: Publish to MCP Registry (after release is created)
+  # ===========================================================================
+  # This job publishes the MCP server to the official MCP Registry.
+  # It runs directly after tag-release instead of relying on release triggers,
+  # because releases created by GITHUB_TOKEN don't trigger other workflows.
+  publish-mcp-registry:
+    name: Publish MCP Registry
+    needs: [tag-release]
+    if: |
+      always() &&
+      needs.tag-release.result == 'success' &&
+      needs.tag-release.outputs.tag-created == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.AUTO_MERGE_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: mcp-server/package-lock.json
+
+      - name: Get version from tag
+        id: version
+        run: |
+          VERSION="${{ needs.tag-release.outputs.new-tag }}"
+          VERSION="${VERSION#v}"  # Remove 'v' prefix
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Using version: $VERSION"
+
+      - name: Install dependencies
+        working-directory: mcp-server
+        run: npm ci
+
+      - name: Build TypeScript
+        working-directory: mcp-server
+        run: npm run build
+
+      - name: Build MCPB Bundle
+        working-directory: mcp-server
+        run: |
+          ./scripts/build-mcpb.sh --version ${{ steps.version.outputs.version }}
+
+      - name: Calculate SHA-256
+        id: hash
+        working-directory: mcp-server
+        run: |
+          SHA256=$(cat build/f5xc-terraform-mcp-${{ steps.version.outputs.version }}.mcpb.sha256)
+          echo "sha256=$SHA256" >> $GITHUB_OUTPUT
+          echo "SHA-256: $SHA256"
+
+      - name: Upload MCPB to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          TAG="v$VERSION"
+
+          # Wait for release to be available (it was just created)
+          sleep 5
+
+          # Upload MCPB bundle and checksum to the release
+          gh release upload "$TAG" \
+            "mcp-server/build/f5xc-terraform-mcp-${VERSION}.mcpb" \
+            "mcp-server/build/f5xc-terraform-mcp-${VERSION}.mcpb.sha256" \
+            --clobber || echo "Upload failed or files already exist"
+
+      - name: Update server.json and manifest.json
+        working-directory: mcp-server
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          SHA256="${{ steps.hash.outputs.sha256 }}"
+          MCPB_URL="https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases/download/v${VERSION}/f5xc-terraform-mcp-${VERSION}.mcpb"
+
+          # Update version in server.json
+          node -e "
+          const fs = require('fs');
+          const serverJson = JSON.parse(fs.readFileSync('server.json', 'utf8'));
+          serverJson.version = '$VERSION';
+          if (serverJson.packages) {
+            serverJson.packages.forEach(p => {
+              p.version = '$VERSION';
+              if (p.registryType === 'mcpb') {
+                p.identifier = '$MCPB_URL';
+                p.file_sha256 = '$SHA256';
+              }
+            });
+          }
+          fs.writeFileSync('server.json', JSON.stringify(serverJson, null, 2) + '\n');
+          "
+
+          # Update version in manifest.json
+          node -e "
+          const fs = require('fs');
+          const manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
+          manifest.version = '$VERSION';
+          fs.writeFileSync('manifest.json', JSON.stringify(manifest, null, 2) + '\n');
+          "
+
+      - name: Check for changes
+        id: check
+        run: |
+          if git diff --quiet mcp-server/server.json mcp-server/manifest.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request for server.json update
+        if: steps.check.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.AUTO_MERGE_TOKEN }}
+          commit-message: "chore(mcp): update server.json to v${{ steps.version.outputs.version }}"
+          branch: chore/mcp-server-json-${{ steps.version.outputs.version }}
+          title: "chore(mcp): update server.json to v${{ steps.version.outputs.version }}"
+          body: |
+            Automated update of server.json for MCP Registry publication.
+
+            **Version**: ${{ steps.version.outputs.version }}
+            **SHA256**: `${{ steps.hash.outputs.sha256 }}`
+
+            This PR updates the server.json with the correct MCPB download URL and hash.
+          labels: automated,mcp
+          delete-branch: true
+
+      - name: Install mcp-publisher CLI
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz
+          sudo mv mcp-publisher /usr/local/bin/
+          mcp-publisher --version
+
+      - name: Authenticate via GitHub OIDC
+        run: mcp-publisher login github-oidc
+
+      - name: Validate server.json (dry run)
+        working-directory: mcp-server
+        run: mcp-publisher publish --dry-run --file server.json
+
+      - name: Publish to MCP Registry
+        working-directory: mcp-server
+        run: mcp-publisher publish --file server.json
+
+      - name: Verify publication
+        run: |
+          SERVER_NAME=$(jq -r '.name' mcp-server/server.json)
+          echo "Verifying publication of: $SERVER_NAME"
+          sleep 3
+          curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}" | jq '.'
+
+  # ===========================================================================
   # Summary
   # ===========================================================================
   summary:
     name: Workflow Summary
-    needs: [detect-changes, build-test, regenerate-provider, regenerate-docs, build-mcp-server, sync-mcp-version, create-regeneration-pr, tag-release]
+    needs: [detect-changes, build-test, regenerate-provider, regenerate-docs, build-mcp-server, sync-mcp-version, create-regeneration-pr, tag-release, publish-mcp-registry]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -597,6 +758,7 @@ jobs:
           echo "| MCP Version Synced | ${{ needs.sync-mcp-version.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Regeneration PR Created | ${{ needs.create-regeneration-pr.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Tagged/Released | ${{ needs.tag-release.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| MCP Registry Published | ${{ needs.publish-mcp-registry.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Delayed Tagging Logic" >> $GITHUB_STEP_SUMMARY
           echo "- Bot commits -> Tag immediately (regeneration complete)" >> $GITHUB_STEP_SUMMARY
@@ -607,3 +769,10 @@ jobs:
           echo "- Human commits with MCP/docs changes -> Build and publish to npm" >> $GITHUB_STEP_SUMMARY
           echo "- After ANY successful release -> Sync npm version to match GitHub release" >> $GITHUB_STEP_SUMMARY
           echo "- This guarantees npm and GitHub release ALWAYS have matching versions" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### MCP Registry Publication" >> $GITHUB_STEP_SUMMARY
+          echo "- After successful tag/release -> Build MCPB bundle" >> $GITHUB_STEP_SUMMARY
+          echo "- Upload MCPB to GitHub Release assets" >> $GITHUB_STEP_SUMMARY
+          echo "- Create PR for server.json version update" >> $GITHUB_STEP_SUMMARY
+          echo "- Publish to registry.modelcontextprotocol.io via OIDC" >> $GITHUB_STEP_SUMMARY
+          echo "- Enables VSCode @MCP search discovery" >> $GITHUB_STEP_SUMMARY

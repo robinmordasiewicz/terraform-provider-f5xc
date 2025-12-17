@@ -662,7 +662,7 @@ jobs:
               p.version = '$VERSION';
               if (p.registryType === 'mcpb') {
                 p.identifier = '$MCPB_URL';
-                p.file_sha256 = '$SHA256';
+                p.fileSha256 = '$SHA256';
               }
             });
           }

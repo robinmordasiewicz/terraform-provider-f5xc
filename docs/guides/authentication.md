@@ -12,11 +12,11 @@ This guide covers authentication configuration for the F5 Distributed Cloud Terr
 
 ## Quick Reference
 
-| Method | Complexity | Best For | Security |
-|--------|------------|----------|----------|
-| API Token | Simplest | Development, quick testing | Bearer token over TLS |
-| P12 Certificate | Moderate | Production, CI/CD | Mutual TLS (mTLS) |
-| PEM Certificate | Advanced | When tooling requires PEM format | Derived from P12, mTLS |
+| Method          | Complexity | Best For                         | Security               |
+| --------------- | ---------- | -------------------------------- | ---------------------- |
+| API Token       | Simplest   | Development, quick testing       | Bearer token over TLS  |
+| P12 Certificate | Moderate   | Production, CI/CD                | Mutual TLS (mTLS)      |
+| PEM Certificate | Advanced   | When tooling requires PEM format | Derived from P12, mTLS |
 
 ## Prerequisites
 
@@ -79,7 +79,7 @@ Service credentials are managed through IAM and recommended for production. They
 7. Select an expiry date
 8. Click **Download** to get the `.p12` file
 
-## Authentication Methods
+## Provider Configuration
 
 ### Method 1: API Token Authentication (Simplest)
 
@@ -170,15 +170,15 @@ provider "f5xc" {
 
 ## Environment Variable Reference
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `F5XC_API_URL` | F5XC tenant API URL | Yes |
-| `F5XC_API_TOKEN` | API token for bearer authentication | One of: token, P12, or PEM |
-| `F5XC_P12_FILE` | Path to P12 certificate file | With `F5XC_P12_PASSWORD` |
-| `F5XC_P12_PASSWORD` | Password for P12 file | With `F5XC_P12_FILE` |
-| `F5XC_CERT` | Path to PEM certificate file | With `F5XC_KEY` |
-| `F5XC_KEY` | Path to PEM private key file | With `F5XC_CERT` |
-| `F5XC_CACERT` | Path to CA certificate for server verification | No |
+| Variable            | Description                                    | Required                       |
+| ------------------- | ---------------------------------------------- | ------------------------------ |
+| `F5XC_API_URL`      | F5XC tenant API URL                            | Yes                            |
+| `F5XC_API_TOKEN`    | API token for bearer authentication            | One of: token, P12, or PEM     |
+| `F5XC_P12_FILE`     | Path to P12 certificate file                   | With `F5XC_P12_PASSWORD`       |
+| `F5XC_P12_PASSWORD` | Password for P12 file                          | With `F5XC_P12_FILE`           |
+| `F5XC_CERT`         | Path to PEM certificate file                   | With `F5XC_KEY`                |
+| `F5XC_KEY`          | Path to PEM private key file                   | With `F5XC_CERT`               |
+| `F5XC_CACERT`       | Path to CA certificate for server verification | No                             |
 
 **Adding to Shell Profile:**
 
@@ -241,10 +241,10 @@ jobs:
 
 **GitHub Secrets to configure:**
 
-| Secret Name | Value |
-|-------------|-------|
-| `F5XC_API_URL` | `https://your-tenant.console.ves.volterra.io` |
-| `F5XC_API_TOKEN` | Your API token value |
+| Secret Name        | Value                                          |
+| ------------------ | ---------------------------------------------- |
+| `F5XC_API_URL`     | `https://your-tenant.console.ves.volterra.io`  |
+| `F5XC_API_TOKEN`   | Your API token value                           |
 
 ### GitHub Actions with P12 Certificate
 
@@ -306,11 +306,11 @@ base64 -w 0 your-credentials.p12
 
 **GitHub Secrets to configure:**
 
-| Secret Name | Value |
-|-------------|-------|
-| `F5XC_API_URL` | `https://your-tenant.console.ves.volterra.io` |
-| `F5XC_P12_BASE64` | Base64-encoded P12 file contents |
-| `F5XC_P12_PASSWORD` | Password for the P12 file |
+| Secret Name         | Value                                          |
+| ------------------- | ---------------------------------------------- |
+| `F5XC_API_URL`      | `https://your-tenant.console.ves.volterra.io`  |
+| `F5XC_P12_BASE64`   | Base64-encoded P12 file contents               |
+| `F5XC_P12_PASSWORD` | Password for the P12 file                      |
 
 ## Security Best Practices
 
@@ -321,10 +321,10 @@ base64 -w 0 your-credentials.p12
 
 ### Choosing the Right Method
 
-| Use Case | Recommended Method | Reason |
-|----------|-------------------|--------|
-| Local development | API Token | Simplest setup |
-| CI/CD pipelines | P12 Certificate | mTLS security |
+| Use Case              | Recommended Method  | Reason                    |
+| --------------------- | ------------------- | ------------------------- |
+| Local development     | API Token           | Simplest setup            |
+| CI/CD pipelines       | P12 Certificate     | mTLS security             |
 | Production automation | Service Credentials | Role-based access control |
 
 ## Troubleshooting
@@ -366,8 +366,8 @@ export F5XC_API_TOKEN="token"  # Correct
 F5XC_API_TOKEN="token"         # Won't work
 ```
 
-2. Verify spelling is exact (case-sensitive)
-3. Check for hidden characters in values
+1. Verify spelling is exact (case-sensitive)
+2. Check for hidden characters in values
 
 ## Revoking Credentials
 

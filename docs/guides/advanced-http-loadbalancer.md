@@ -13,16 +13,16 @@ This guide extends the [basic HTTP Load Balancer guide](http-loadbalancer) with 
 
 By following this guide, you'll deploy an HTTP Load Balancer with **11 security controls**:
 
-| Security Layer | Feature | Protection |
-|----------------|---------|------------|
-| **Perimeter** | IP Reputation | Blocks known malicious IPs by threat category |
-| **Perimeter** | Threat Mesh | Global threat intelligence sharing |
-| **Bot Defense** | JavaScript Challenge | Client-side bot detection |
-| **Bot Defense** | Malicious User Detection | Behavioral analysis and risk scoring |
-| **Application** | Web Application Firewall | Blocks SQLi, XSS, and OWASP Top 10 |
-| **Application** | Bot Protection Settings | Signature-based bot classification |
-| **Rate Control** | Rate Limiting | Prevents abuse with configurable thresholds |
-| **Data Protection** | Data Guard | Masks sensitive data (CC, SSN) in responses |
+| Security Layer      | Feature                    | Protection                                     |
+| ------------------- | -------------------------- | ---------------------------------------------- |
+| **Perimeter**       | IP Reputation              | Blocks known malicious IPs by threat category  |
+| **Perimeter**       | Threat Mesh                | Global threat intelligence sharing             |
+| **Bot Defense**     | JavaScript Challenge       | Client-side bot detection                      |
+| **Bot Defense**     | Malicious User Detection   | Behavioral analysis and risk scoring           |
+| **Application**     | Web Application Firewall   | Blocks SQLi, XSS, and OWASP Top 10             |
+| **Application**     | Bot Protection Settings    | Signature-based bot classification             |
+| **Rate Control**    | Rate Limiting              | Prevents abuse with configurable thresholds    |
+| **Data Protection** | Data Guard                 | Masks sensitive data (CC, SSN) in responses    |
 
 ## Prerequisites
 
@@ -305,16 +305,16 @@ resource "f5xc_http_loadbalancer" "app" {
 
 The IP Reputation service maintains a continuously-updated database of known malicious IP addresses. When enabled, requests from IPs matching configured threat categories are automatically blocked.
 
-| Threat Category | Description |
-|-----------------|-------------|
-| `SPAM_SOURCES` | Known spam-sending IP addresses |
-| `WEB_ATTACKS` | IPs involved in web-based attacks |
-| `BOTNETS` | Command & control and infected hosts |
-| `SCANNERS` | Reconnaissance, probes, brute force |
-| `PHISHING` | Phishing and fraud operations |
-| `PROXY` | Anonymous proxy services |
-| `TOR_PROXY` | Tor exit nodes |
-| `DENIAL_OF_SERVICE` | DoS and DDoS sources |
+| Threat Category       | Description                          |
+| --------------------- | ------------------------------------ |
+| `SPAM_SOURCES`        | Known spam-sending IP addresses      |
+| `WEB_ATTACKS`         | IPs involved in web-based attacks    |
+| `BOTNETS`             | Command & control and infected hosts |
+| `SCANNERS`            | Reconnaissance, probes, brute force  |
+| `PHISHING`            | Phishing and fraud operations        |
+| `PROXY`               | Anonymous proxy services             |
+| `TOR_PROXY`           | Tor exit nodes                       |
+| `DENIAL_OF_SERVICE`   | DoS and DDoS sources                 |
 
 -> **Tip:** Start with all categories enabled, then selectively disable based on your application requirements. For example, disable `TOR_PROXY` if you need to support privacy-focused users.
 

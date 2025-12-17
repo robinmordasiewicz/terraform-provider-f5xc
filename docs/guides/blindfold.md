@@ -21,7 +21,7 @@ F5 Distributed Cloud Secret Management ("blindfold") provides client-side encryp
 
 ### How It Works
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                     Your Local Machine                              │
 │                                                                     │
@@ -64,13 +64,15 @@ Before you begin, ensure you have:
 
 Configure one of these authentication methods via environment variables:
 
-**Option 1: API Token (Recommended for development)**
+#### Option 1: API Token (Recommended for development)
+
 ```bash
 export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
 export F5XC_API_TOKEN="your-api-token"
 ```
 
-**Option 2: P12 Certificate (Recommended for production)**
+#### Option 2: P12 Certificate (Recommended for production)
+
 ```bash
 export F5XC_API_URL="https://your-tenant.console.ves.volterra.io"
 export F5XC_P12_FILE="/path/to/your-credentials.p12"
@@ -143,13 +145,14 @@ Encrypts base64-encoded plaintext:
 provider::f5xc::blindfold(plaintext, policy_name, namespace)
 ```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `plaintext` | string | Base64-encoded secret to encrypt |
-| `policy_name` | string | Name of the SecretPolicy |
-| `namespace` | string | Namespace containing the policy |
+| Parameter     | Type   | Description                      |
+| ------------- | ------ | -------------------------------- |
+| `plaintext`   | string | Base64-encoded secret to encrypt |
+| `policy_name` | string | Name of the SecretPolicy         |
+| `namespace`   | string | Namespace containing the policy  |
 
 **Example:**
+
 ```hcl
 location = provider::f5xc::blindfold(
   base64encode(var.my_secret),
@@ -166,13 +169,14 @@ Reads a file and encrypts its contents:
 provider::f5xc::blindfold_file(path, policy_name, namespace)
 ```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `path` | string | Path to the file to encrypt |
-| `policy_name` | string | Name of the SecretPolicy |
-| `namespace` | string | Namespace containing the policy |
+| Parameter     | Type   | Description                     |
+| ------------- | ------ | ------------------------------- |
+| `path`        | string | Path to the file to encrypt     |
+| `policy_name` | string | Name of the SecretPolicy        |
+| `namespace`   | string | Namespace containing the policy |
 
 **Example:**
+
 ```hcl
 location = provider::f5xc::blindfold_file(
   "${path.module}/certs/server.key",
@@ -361,9 +365,9 @@ locals {
 RSA-OAEP encryption has a maximum plaintext size based on the key size:
 
 | Key Size | Maximum Plaintext |
-|----------|-------------------|
-| 2048-bit | ~190 bytes |
-| 4096-bit | ~446 bytes |
+| -------- | ----------------- |
+| 2048-bit | ~190 bytes        |
+| 4096-bit | ~446 bytes        |
 
 ~> **Note:** If your secret exceeds the size limit, consider splitting it or using a different approach. The function will return a clear error message if the plaintext is too large.
 
@@ -371,7 +375,7 @@ RSA-OAEP encryption has a maximum plaintext size based on the key size:
 
 The blindfold functions return a sealed secret string with the `string:///` prefix followed by a base64-encoded JSON structure:
 
-```
+```text
 string:///eyJrZXlfdmVyc2lvbiI6InYxLjIuMyIsInBvbGljeV9pZCI6InNoYXJlZC92ZXMtaW8tYWxsb3ctdm9sdGVycmEiLCJ0ZW5hbnQiOiJ5b3VyLXRlbmFudCIsImRhdGEiOiJBQkNERUYxMjM0NTY3ODkwLi4uIn0=
 ```
 
@@ -387,6 +391,7 @@ When base64-decoded, the sealed JSON contains these fields:
 ```
 
 Field descriptions:
+
 - `key_version`: Public key version used for encryption
 - `policy_id`: Reference to the SecretPolicy (namespace/name format)
 - `tenant`: Your F5XC tenant identifier
@@ -405,6 +410,7 @@ Field descriptions:
 **Symptom:** Error message about missing authentication configuration.
 
 **Solution:**
+
 ```bash
 # Verify environment variables are set
 echo $F5XC_API_URL
@@ -422,6 +428,7 @@ export F5XC_API_TOKEN="your-api-token"
 **Solutions:**
 
 1. Use the built-in policy:
+
    ```hcl
    policy_name = "ves-io-allow-volterra"
    namespace   = "shared"
@@ -436,6 +443,7 @@ export F5XC_API_TOKEN="your-api-token"
 **Solutions:**
 
 1. Verify your secret size:
+
    ```bash
    wc -c < your-secret-file
    ```
@@ -451,6 +459,7 @@ export F5XC_API_TOKEN="your-api-token"
 **Solutions:**
 
 1. Use `${path.module}` for relative paths:
+
    ```hcl
    location = provider::f5xc::blindfold_file(
      "${path.module}/certs/server.key",  # Correct
@@ -465,6 +474,7 @@ export F5XC_API_TOKEN="your-api-token"
 **Symptom:** Error about invalid base64 encoding.
 
 **Solution:** Ensure you're base64-encoding your plaintext:
+
 ```hcl
 # Correct
 location = provider::f5xc::blindfold(

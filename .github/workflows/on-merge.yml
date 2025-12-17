@@ -591,6 +591,7 @@ jobs:
           ref: main
           fetch-depth: 0
           token: ${{ secrets.AUTO_MERGE_TOKEN }}
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

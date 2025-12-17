@@ -6,8 +6,12 @@
 # tools/subscription-tiers.json with the latest tier information from the
 # F5 XC Catalog API.
 #
-# The generated file is committed to the repository and changes trigger
-# documentation regeneration in CI/CD.
+# When run as a pre-commit hook:
+# - Fetches latest subscription tier data from F5 XC API (requires VPN)
+# - If data has changed, automatically adds the file to the current commit
+# - Skips gracefully if credentials are unavailable
+#
+# The generated file triggers documentation regeneration in CI/CD when changed.
 #
 # Required Environment Variables:
 #   F5XC_API_URL      - F5 XC API URL (e.g., https://console.ves.volterra.io)
@@ -130,7 +134,6 @@ main() {
             exit 1
         else
             echo -e "${GREEN}Updated subscription tier metadata${NC}"
-            echo "Changes detected - please commit tools/subscription-tiers.json"
 
             # Show summary of changes
             if command -v jq &> /dev/null; then
@@ -142,6 +145,12 @@ main() {
                 echo "  Services: ${services}"
                 echo "  Resources: ${resources}"
                 echo "  Advanced tier resources: ${advanced}"
+            fi
+
+            # Auto-add to current commit (for pre-commit hook integration)
+            if git rev-parse --git-dir > /dev/null 2>&1; then
+                git add "${METADATA_FILE}"
+                echo -e "${GREEN}Added ${METADATA_FILE} to commit${NC}"
             fi
             exit 0
         fi

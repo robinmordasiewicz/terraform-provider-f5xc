@@ -707,7 +707,20 @@ jobs:
       # If publish fails, the job stops and no PR is created
       - name: Publish to MCP Registry
         working-directory: mcp-server
-        run: mcp-publisher publish --file server.json
+        run: |
+          OUTPUT=$(mcp-publisher publish --file server.json 2>&1) || {
+            if echo "$OUTPUT" | grep -q "cannot publish duplicate version"; then
+              echo "⚠️ Version already exists in MCP Registry - treating as success"
+              echo "$OUTPUT"
+              exit 0
+            else
+              echo "❌ MCP Registry publish failed:"
+              echo "$OUTPUT"
+              exit 1
+            fi
+          }
+          echo "✅ Published to MCP Registry"
+          echo "$OUTPUT"
 
       - name: Verify publication
         run: |

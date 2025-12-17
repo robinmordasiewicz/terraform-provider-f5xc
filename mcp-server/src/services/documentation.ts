@@ -106,6 +106,132 @@ function findResourceMetadata(resourceName: string): { tier: SubscriptionTier; s
 }
 
 /**
+ * Check if a property name matches an advanced feature name using flexible pattern matching.
+ * Handles common naming patterns like enable_*, disable_*, *_settings, *_policy, etc.
+ *
+ * @param propertyName - The property name from Terraform schema (e.g., "enable_malicious_user_detection")
+ * @param featureName - The feature name from subscription metadata (e.g., "malicious_user_detection")
+ * @returns true if the property corresponds to the advanced feature
+ */
+function matchesAdvancedFeature(propertyName: string, featureName: string): boolean {
+  const prop = propertyName.toLowerCase();
+  const feat = featureName.toLowerCase();
+
+  // Exact match
+  if (prop === feat) {
+    return true;
+  }
+
+  // Common prefix patterns
+  if (prop === `enable_${feat}`) return true;
+  if (prop === `disable_${feat}`) return true;
+  if (prop === `default_${feat}`) return true;
+
+  // Common suffix patterns
+  if (prop === `${feat}_settings`) return true;
+  if (prop === `${feat}_policy`) return true;
+  if (prop === `${feat}_advanced`) return true;
+  if (prop === `${feat}_config`) return true;
+  if (prop === `${feat}_configuration`) return true;
+
+  // Substring match (feature name contained in property name)
+  if (prop.includes(feat)) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * Check if a specific property within a resource requires Advanced subscription tier.
+ *
+ * @param resourceName - The resource name (e.g., "http_loadbalancer")
+ * @param propertyName - The property name (e.g., "enable_malicious_user_detection")
+ * @returns true if the property requires Advanced subscription
+ */
+function isAdvancedFeatureProperty(resourceName: string, propertyName: string): boolean {
+  const resourceMeta = findResourceMetadata(resourceName);
+  if (!resourceMeta || !resourceMeta.advancedFeatures || resourceMeta.advancedFeatures.length === 0) {
+    return false;
+  }
+
+  for (const feature of resourceMeta.advancedFeatures) {
+    if (matchesAdvancedFeature(propertyName, feature)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * Get subscription tier information for a specific property within a resource.
+ *
+ * @param resourceName - The resource name (e.g., "http_loadbalancer")
+ * @param propertyName - The property name (e.g., "enable_malicious_user_detection")
+ * @returns Subscription info for the property, or null if resource not found
+ */
+export function getPropertySubscriptionInfo(resourceName: string, propertyName: string): {
+  resourceName: string;
+  propertyName: string;
+  requiresAdvanced: boolean;
+  matchedFeature?: string;
+  resourceTier: SubscriptionTier;
+  service: string;
+} | null {
+  const resourceMeta = findResourceMetadata(resourceName);
+  if (!resourceMeta) {
+    return null;
+  }
+
+  // Check if property matches any advanced feature
+  let matchedFeature: string | undefined;
+  if (resourceMeta.advancedFeatures) {
+    for (const feature of resourceMeta.advancedFeatures) {
+      if (matchesAdvancedFeature(propertyName, feature)) {
+        matchedFeature = feature;
+        break;
+      }
+    }
+  }
+
+  return {
+    resourceName,
+    propertyName,
+    requiresAdvanced: matchedFeature !== undefined,
+    matchedFeature,
+    resourceTier: resourceMeta.tier,
+    service: resourceMeta.service,
+  };
+}
+
+/**
+ * Get all properties of a resource that require Advanced subscription tier.
+ * Note: This returns the known advanced features; actual property names may vary.
+ *
+ * @param resourceName - The resource name (e.g., "http_loadbalancer")
+ * @returns List of advanced feature names, or null if resource not found
+ */
+export function getResourceAdvancedProperties(resourceName: string): {
+  resourceName: string;
+  resourceTier: SubscriptionTier;
+  service: string;
+  advancedFeatures: string[];
+} | null {
+  const resourceMeta = findResourceMetadata(resourceName);
+  if (!resourceMeta) {
+    return null;
+  }
+
+  return {
+    resourceName,
+    resourceTier: resourceMeta.tier,
+    service: resourceMeta.service,
+    advancedFeatures: resourceMeta.advancedFeatures || [],
+  };
+}
+
+/**
  * Enrich a ResourceDoc with subscription tier information
  */
 function enrichWithSubscriptionInfo(doc: ResourceDoc): ResourceDoc {

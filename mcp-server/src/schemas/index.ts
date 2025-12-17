@@ -143,6 +143,17 @@ export const GetSubscriptionInfoSchema = z.object({
   response_format: ResponseFormatSchema,
 }).strict();
 
+// Get property subscription info schema
+export const GetPropertySubscriptionInfoSchema = z.object({
+  resource: z.string()
+    .min(1, 'Resource name is required')
+    .describe('Resource name (e.g., "http_loadbalancer", "app_firewall")'),
+  property: z.string()
+    .optional()
+    .describe('Property name to check (e.g., "enable_malicious_user_detection"). If omitted, returns all advanced features for the resource.'),
+  response_format: ResponseFormatSchema,
+}).strict();
+
 // Export type inference helpers
 export type SearchDocsInput = z.infer<typeof SearchDocsSchema>;
 export type GetDocInput = z.infer<typeof GetDocSchema>;
@@ -154,3 +165,4 @@ export type GetSchemaDefInput = z.infer<typeof GetSchemaDefSchema>;
 export type ListDefinitionsInput = z.infer<typeof ListDefinitionsSchema>;
 export type GetSummaryInput = z.infer<typeof GetSummarySchema>;
 export type GetSubscriptionInfoInput = z.infer<typeof GetSubscriptionInfoSchema>;
+export type GetPropertySubscriptionInfoInput = z.infer<typeof GetPropertySubscriptionInfoSchema>;

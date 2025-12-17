@@ -27,6 +27,8 @@ import {
   getResourceSubscriptionInfo,
   getAdvancedTierResources,
   getSubscriptionSummary,
+  getPropertySubscriptionInfo,
+  getResourceAdvancedProperties,
 } from './services/documentation.js';
 import {
   searchApiSpecs,
@@ -48,6 +50,7 @@ import {
   ListDefinitionsSchema,
   GetSummarySchema,
   GetSubscriptionInfoSchema,
+  GetPropertySubscriptionInfoSchema,
   type SearchDocsInput,
   type GetDocInput,
   type ListDocsInput,
@@ -58,6 +61,7 @@ import {
   type ListDefinitionsInput,
   type GetSummaryInput,
   type GetSubscriptionInfoInput,
+  type GetPropertySubscriptionInfoInput,
 } from './schemas/index.js';
 
 // Constants
@@ -759,7 +763,8 @@ Returns:
       lines.push('- `f5xc_terraform_find_endpoints` - Find API endpoints');
       lines.push('- `f5xc_terraform_get_schema_definition` - Get schema definition');
       lines.push('- `f5xc_terraform_list_definitions` - List definitions in a spec');
-      lines.push('- `f5xc_terraform_get_subscription_info` - Check subscription tier requirements');
+      lines.push('- `f5xc_terraform_get_subscription_info` - Check resource subscription tier requirements');
+      lines.push('- `f5xc_terraform_get_property_subscription_info` - Check property-level subscription tier requirements');
 
       textContent = lines.join('\n');
     } else {
@@ -924,6 +929,156 @@ Examples:
         lines.push('## All Advanced Features');
         lines.push('');
         lines.push(summary.advancedFeaturesList.map(f => `\`${f}\``).join(', '));
+      }
+
+      textContent = lines.join('\n');
+    } else {
+      textContent = JSON.stringify(output, null, 2);
+    }
+
+    return {
+      content: [{ type: 'text', text: textContent }],
+      structuredContent: output,
+    };
+  }
+);
+
+// =============================================================================
+// PROPERTY SUBSCRIPTION TIER TOOL
+// =============================================================================
+
+server.registerTool(
+  'f5xc_terraform_get_property_subscription_info',
+  {
+    title: 'Get Property Subscription Tier Info',
+    description: `Get subscription tier requirements for a specific property within an F5XC resource.
+
+Checks if a specific property/attribute requires the Advanced subscription tier.
+This is useful for determining if a particular configuration option is available
+with your current subscription level.
+
+Args:
+  - resource (string): Resource name (e.g., "http_loadbalancer", "app_firewall")
+  - property (optional): Property name to check (e.g., "enable_malicious_user_detection")
+    If omitted, returns all advanced features for the resource
+  - response_format: 'markdown' or 'json'
+
+Returns:
+  - For specific property: Whether it requires Advanced subscription and matched feature
+  - For no property: List of all Advanced-only features for the resource
+
+Examples:
+  - resource="http_loadbalancer", property="enable_malicious_user_detection" -> Advanced required
+  - resource="http_loadbalancer", property="domains" -> Standard (no advanced requirement)
+  - resource="http_loadbalancer" -> Lists all advanced features for HTTP LB`,
+    inputSchema: GetPropertySubscriptionInfoSchema,
+    annotations: {
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+  },
+  async (params: GetPropertySubscriptionInfoInput) => {
+    // Query for specific property
+    if (params.property) {
+      const info = getPropertySubscriptionInfo(params.resource, params.property);
+
+      if (!info) {
+        return {
+          content: [{
+            type: 'text',
+            text: `No subscription information found for resource "${params.resource}". The resource may not exist or may not have tier metadata.`,
+          }],
+        };
+      }
+
+      const output = {
+        resource: info.resourceName,
+        property: info.propertyName,
+        requires_advanced: info.requiresAdvanced,
+        matched_feature: info.matchedFeature || null,
+        resource_tier: info.resourceTier,
+        service: info.service,
+      };
+
+      let textContent: string;
+      if (params.response_format === ResponseFormat.MARKDOWN) {
+        const lines = [
+          `# Property Subscription Info`,
+          '',
+          `**Resource**: \`${info.resourceName}\``,
+          `**Property**: \`${info.propertyName}\``,
+          '',
+          `**Requires Advanced Subscription**: ${info.requiresAdvanced ? '**Yes**' : 'No'}`,
+        ];
+
+        if (info.matchedFeature) {
+          lines.push(`**Matched Feature**: \`${info.matchedFeature}\``);
+          lines.push('');
+          lines.push('> ⚠️ This property requires an Advanced subscription to use.');
+        } else {
+          lines.push('');
+          lines.push('✓ This property is available with a Standard subscription.');
+        }
+
+        lines.push('');
+        lines.push(`**Resource Tier**: ${info.resourceTier}`);
+        lines.push(`**Service**: ${info.service}`);
+
+        textContent = lines.join('\n');
+      } else {
+        textContent = JSON.stringify(output, null, 2);
+      }
+
+      return {
+        content: [{ type: 'text', text: textContent }],
+        structuredContent: output,
+      };
+    }
+
+    // List all advanced features for the resource
+    const resourceInfo = getResourceAdvancedProperties(params.resource);
+
+    if (!resourceInfo) {
+      return {
+        content: [{
+          type: 'text',
+          text: `No subscription information found for resource "${params.resource}". The resource may not exist or may not have tier metadata.`,
+        }],
+      };
+    }
+
+    const output = {
+      resource: resourceInfo.resourceName,
+      resource_tier: resourceInfo.resourceTier,
+      service: resourceInfo.service,
+      advanced_features: resourceInfo.advancedFeatures,
+      has_advanced_features: resourceInfo.advancedFeatures.length > 0,
+    };
+
+    let textContent: string;
+    if (params.response_format === ResponseFormat.MARKDOWN) {
+      const lines = [
+        `# Advanced Features: ${resourceInfo.resourceName}`,
+        '',
+        `**Resource Tier**: ${resourceInfo.resourceTier}`,
+        `**Service**: ${resourceInfo.service}`,
+        '',
+      ];
+
+      if (resourceInfo.advancedFeatures.length > 0) {
+        lines.push('## Properties Requiring Advanced Subscription');
+        lines.push('');
+        lines.push('The following features/properties require an Advanced subscription:');
+        lines.push('');
+        for (const feature of resourceInfo.advancedFeatures) {
+          lines.push(`- \`${feature}\``);
+        }
+        lines.push('');
+        lines.push('> Note: Property names may vary (e.g., `enable_malicious_user_detection` for feature `malicious_user_detection`)');
+      } else {
+        lines.push('✓ All properties of this resource are available with a Standard subscription.');
       }
 
       textContent = lines.join('\n');

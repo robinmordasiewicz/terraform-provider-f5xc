@@ -40,6 +40,11 @@ import {
   getApiSpecsSummary,
 } from './services/api-specs.js';
 import {
+  listAddonServices,
+  checkAddonActivation,
+  getAddonWorkflow,
+} from './services/addons.js';
+import {
   SearchDocsSchema,
   GetDocSchema,
   ListDocsSchema,
@@ -51,6 +56,9 @@ import {
   GetSummarySchema,
   GetSubscriptionInfoSchema,
   GetPropertySubscriptionInfoSchema,
+  ListAddonServicesSchema,
+  CheckAddonActivationSchema,
+  GetAddonWorkflowSchema,
   type SearchDocsInput,
   type GetDocInput,
   type ListDocsInput,
@@ -62,6 +70,9 @@ import {
   type GetSummaryInput,
   type GetSubscriptionInfoInput,
   type GetPropertySubscriptionInfoInput,
+  type ListAddonServicesInput,
+  type CheckAddonActivationInput,
+  type GetAddonWorkflowInput,
 } from './schemas/index.js';
 
 // Constants
@@ -765,6 +776,9 @@ Returns:
       lines.push('- `f5xc_terraform_list_definitions` - List definitions in a spec');
       lines.push('- `f5xc_terraform_get_subscription_info` - Check resource subscription tier requirements');
       lines.push('- `f5xc_terraform_get_property_subscription_info` - Check property-level subscription tier requirements');
+      lines.push('- `f5xc_terraform_addon_list_services` - List all addon services with tier requirements');
+      lines.push('- `f5xc_terraform_addon_check_activation` - Check activation requirements for an addon');
+      lines.push('- `f5xc_terraform_addon_activation_workflow` - Get detailed activation workflow with Terraform config');
 
       textContent = lines.join('\n');
     } else {
@@ -1084,6 +1098,292 @@ Examples:
       textContent = lines.join('\n');
     } else {
       textContent = JSON.stringify(output, null, 2);
+    }
+
+    return {
+      content: [{ type: 'text', text: textContent }],
+      structuredContent: output,
+    };
+  }
+);
+
+// =============================================================================
+// ADDON SERVICE TOOLS
+// =============================================================================
+
+server.registerTool(
+  'f5xc_terraform_addon_list_services',
+  {
+    title: 'List F5XC Addon Services',
+    description: `List all available F5 Distributed Cloud addon services with their activation types and tier requirements.
+
+Addon services are additional features that can be activated for your F5XC tenant,
+such as Bot Defense, Client Side Defense, API Discovery, and more.
+
+Args:
+  - tier (optional): Filter by 'STANDARD', 'ADVANCED', or 'PREMIUM'
+  - activation_type (optional): Filter by 'self' (user-activated) or 'managed' (requires sales contact)
+  - response_format: 'markdown' or 'json'
+
+Returns:
+  List of addon services with name, tier requirement, activation type, and description.
+
+Examples:
+  - tier="ADVANCED" -> List all Advanced tier addon services
+  - activation_type="self" -> List all self-activatable services`,
+    inputSchema: ListAddonServicesSchema,
+    annotations: {
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+  },
+  async (params: ListAddonServicesInput) => {
+    const result = listAddonServices(params.tier, params.activation_type);
+
+    const output = {
+      total: result.total,
+      filters: {
+        tier: params.tier || 'all',
+        activation_type: params.activation_type || 'all',
+      },
+      services: result.services,
+    };
+
+    let textContent: string;
+    if (params.response_format === ResponseFormat.MARKDOWN) {
+      const lines = [
+        '# F5XC Addon Services',
+        '',
+        `Total: ${result.total} services`,
+        '',
+      ];
+
+      for (const service of result.services) {
+        lines.push(`## ${service.displayName} (\`${service.name}\`)`);
+        lines.push('');
+        lines.push(service.description);
+        lines.push('');
+        lines.push(`- **Tier**: ${service.tier}`);
+        lines.push(`- **Activation Type**: ${service.activationType}`);
+        lines.push(`- **Category**: ${service.category}`);
+        lines.push('');
+      }
+
+      textContent = lines.join('\n');
+    } else {
+      textContent = JSON.stringify(output, null, 2);
+    }
+
+    return {
+      content: [{ type: 'text', text: textContent }],
+      structuredContent: output,
+    };
+  }
+);
+
+server.registerTool(
+  'f5xc_terraform_addon_check_activation',
+  {
+    title: 'Check Addon Activation Requirements',
+    description: `Check activation requirements for a specific F5XC addon service.
+
+Provides information about whether an addon service can be activated,
+the required subscription tier, and step-by-step activation guidance.
+
+Args:
+  - addon_service (string): Name of the addon service (e.g., "bot_defense", "client_side_defense")
+  - response_format: 'markdown' or 'json'
+
+Returns:
+  - Activation status (can activate, requirements)
+  - Required subscription tier
+  - Activation type (self, partial, managed)
+  - Step-by-step activation process
+  - Terraform example configuration
+
+Examples:
+  - addon_service="bot_defense" -> Bot Defense activation requirements
+  - addon_service="api_discovery" -> API Discovery activation info`,
+    inputSchema: CheckAddonActivationSchema,
+    annotations: {
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+  },
+  async (params: CheckAddonActivationInput) => {
+    const result = checkAddonActivation(params.addon_service);
+
+    if (!result) {
+      return {
+        content: [{
+          type: 'text',
+          text: `Addon service "${params.addon_service}" not found. Use f5xc_terraform_addon_list_services to see available services.`,
+        }],
+      };
+    }
+
+    const output = {
+      addon_service: result.addonService,
+      display_name: result.displayName,
+      tier: result.tier,
+      activation_type: result.activationType,
+      can_activate: result.canActivate,
+      steps: result.steps,
+      terraform_example: result.terraformExample,
+    };
+
+    let textContent: string;
+    if (params.response_format === ResponseFormat.MARKDOWN) {
+      const lines = [
+        `# Activation Requirements: ${result.displayName}`,
+        '',
+        `**Addon Service**: \`${result.addonService}\``,
+        `**Required Tier**: ${result.tier}`,
+        `**Activation Type**: ${result.activationType}`,
+        `**Can Activate Directly**: ${result.canActivate ? 'Yes' : 'No (requires sales contact)'}`,
+        '',
+        '## Activation Steps',
+        '',
+      ];
+
+      result.steps.forEach((step, index) => {
+        lines.push(`${index + 1}. ${step}`);
+      });
+
+      lines.push('');
+      lines.push('## Terraform Configuration');
+      lines.push('');
+      lines.push('```hcl');
+      lines.push(result.terraformExample);
+      lines.push('```');
+
+      textContent = lines.join('\n');
+    } else {
+      textContent = JSON.stringify(output, null, 2);
+    }
+
+    return {
+      content: [{ type: 'text', text: textContent }],
+      structuredContent: output,
+    };
+  }
+);
+
+server.registerTool(
+  'f5xc_terraform_addon_activation_workflow',
+  {
+    title: 'Get Addon Activation Workflow',
+    description: `Get a detailed step-by-step activation workflow for an F5XC addon service.
+
+Provides comprehensive guidance for activating an addon service including:
+- Prerequisites and requirements
+- Step-by-step instructions with Terraform snippets
+- Complete Terraform configuration
+- Estimated activation time
+- Important notes and considerations
+
+Args:
+  - addon_service (string): Name of the addon service
+  - activation_type (optional): Override workflow type ('self', 'partial', 'managed')
+  - response_format: 'markdown' or 'json'
+
+Returns:
+  Complete activation workflow with Terraform configuration examples.
+
+Examples:
+  - addon_service="bot_defense" -> Self-activation workflow
+  - addon_service="bot_defense", activation_type="partial" -> Partial managed workflow`,
+    inputSchema: GetAddonWorkflowSchema,
+    annotations: {
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false,
+    },
+  },
+  async (params: GetAddonWorkflowInput) => {
+    const result = getAddonWorkflow(params.addon_service, params.activation_type);
+
+    if (!result) {
+      return {
+        content: [{
+          type: 'text',
+          text: `Addon service "${params.addon_service}" not found or invalid activation type. Use f5xc_terraform_addon_list_services to see available services.`,
+        }],
+      };
+    }
+
+    const output = {
+      addon_service: result.addonService,
+      activation_type: result.activationType,
+      description: result.description,
+      prerequisites: result.prerequisites,
+      steps: result.steps,
+      terraform_config: result.terraformConfig,
+      estimated_time: result.estimatedTime,
+      notes: result.notes,
+    };
+
+    let textContent: string;
+    if (params.response_format === ResponseFormat.MARKDOWN) {
+      const lines = [
+        `# Activation Workflow: ${result.addonService}`,
+        '',
+        result.description,
+        '',
+        `**Activation Type**: ${result.activationType}`,
+        `**Estimated Time**: ${result.estimatedTime}`,
+        '',
+        '## Prerequisites',
+        '',
+      ];
+
+      for (const prereq of result.prerequisites) {
+        lines.push(`- ${prereq}`);
+      }
+
+      lines.push('');
+      lines.push('## Step-by-Step Instructions');
+      lines.push('');
+
+      for (const step of result.steps) {
+        lines.push(`### Step ${step.step}: ${step.action}`);
+        lines.push('');
+        lines.push(step.description);
+        if (step.terraformSnippet) {
+          lines.push('');
+          lines.push('```hcl');
+          lines.push(step.terraformSnippet);
+          lines.push('```');
+        }
+        lines.push('');
+      }
+
+      lines.push('## Complete Terraform Configuration');
+      lines.push('');
+      lines.push('```hcl');
+      lines.push(result.terraformConfig);
+      lines.push('```');
+      lines.push('');
+      lines.push('## Notes');
+      lines.push('');
+
+      for (const note of result.notes) {
+        lines.push(`- ${note}`);
+      }
+
+      textContent = lines.join('\n');
+    } else {
+      textContent = JSON.stringify(output, null, 2);
+    }
+
+    // Truncate if too long
+    if (textContent.length > CHARACTER_LIMIT) {
+      textContent = textContent.slice(0, CHARACTER_LIMIT) + '\n\n... (truncated)';
     }
 
     return {

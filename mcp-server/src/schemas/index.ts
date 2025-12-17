@@ -154,6 +154,40 @@ export const GetPropertySubscriptionInfoSchema = z.object({
   response_format: ResponseFormatSchema,
 }).strict();
 
+// =============================================================================
+// ADDON SERVICE SCHEMAS
+// =============================================================================
+
+// List addon services schema
+export const ListAddonServicesSchema = z.object({
+  tier: z.enum(['STANDARD', 'ADVANCED', 'PREMIUM'])
+    .optional()
+    .describe('Filter by subscription tier required'),
+  activation_type: z.enum(['self', 'managed'])
+    .optional()
+    .describe('Filter by activation type (self = user can activate directly, managed = requires sales contact)'),
+  response_format: ResponseFormatSchema,
+}).strict();
+
+// Check addon activation schema
+export const CheckAddonActivationSchema = z.object({
+  addon_service: z.string()
+    .min(1, 'Addon service name is required')
+    .describe('Name of the addon service (e.g., "bot_defense", "client_side_defense", "api_discovery")'),
+  response_format: ResponseFormatSchema,
+}).strict();
+
+// Get addon workflow schema
+export const GetAddonWorkflowSchema = z.object({
+  addon_service: z.string()
+    .min(1, 'Addon service name is required')
+    .describe('Name of the addon service (e.g., "bot_defense", "client_side_defense")'),
+  activation_type: z.enum(['self', 'partial', 'managed'])
+    .optional()
+    .describe('Override activation type for workflow (auto-detected if not specified)'),
+  response_format: ResponseFormatSchema,
+}).strict();
+
 // Export type inference helpers
 export type SearchDocsInput = z.infer<typeof SearchDocsSchema>;
 export type GetDocInput = z.infer<typeof GetDocSchema>;
@@ -166,3 +200,6 @@ export type ListDefinitionsInput = z.infer<typeof ListDefinitionsSchema>;
 export type GetSummaryInput = z.infer<typeof GetSummarySchema>;
 export type GetSubscriptionInfoInput = z.infer<typeof GetSubscriptionInfoSchema>;
 export type GetPropertySubscriptionInfoInput = z.infer<typeof GetPropertySubscriptionInfoSchema>;
+export type ListAddonServicesInput = z.infer<typeof ListAddonServicesSchema>;
+export type CheckAddonActivationInput = z.infer<typeof CheckAddonActivationSchema>;
+export type GetAddonWorkflowInput = z.infer<typeof GetAddonWorkflowSchema>;

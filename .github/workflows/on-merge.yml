@@ -677,6 +677,19 @@ jobs:
           fs.writeFileSync('manifest.json', JSON.stringify(manifest, null, 2) + '\n');
           "
 
+      - name: Install mcp-publisher CLI
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz
+          sudo mv mcp-publisher /usr/local/bin/
+          mcp-publisher --version
+
+      - name: Authenticate via GitHub OIDC
+        run: mcp-publisher login github-oidc
+
+      - name: Validate server.json (dry run)
+        working-directory: mcp-server
+        run: mcp-publisher publish --dry-run --file server.json
+
       - name: Check for changes
         id: check
         run: |
@@ -703,19 +716,6 @@ jobs:
             This PR updates the server.json with the correct MCPB download URL and hash.
           labels: automated,mcp
           delete-branch: true
-
-      - name: Install mcp-publisher CLI
-        run: |
-          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz
-          sudo mv mcp-publisher /usr/local/bin/
-          mcp-publisher --version
-
-      - name: Authenticate via GitHub OIDC
-        run: mcp-publisher login github-oidc
-
-      - name: Validate server.json (dry run)
-        working-directory: mcp-server
-        run: mcp-publisher publish --dry-run --file server.json
 
       - name: Publish to MCP Registry
         working-directory: mcp-server

@@ -141,6 +141,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      id-token: write
 
     steps:
       - name: Checkout
@@ -185,6 +186,19 @@ jobs:
           manifest.version = '$VERSION';
           fs.writeFileSync('manifest.json', JSON.stringify(manifest, null, 2) + '\n');
           "
+
+      - name: Install mcp-publisher CLI
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz
+          sudo mv mcp-publisher /usr/local/bin/
+          mcp-publisher --version
+
+      - name: Authenticate via GitHub OIDC
+        run: mcp-publisher login github-oidc
+
+      - name: Validate server.json (dry run)
+        working-directory: mcp-server
+        run: mcp-publisher publish --dry-run --file server.json
 
       - name: Check for changes
         id: check

@@ -36,6 +36,60 @@ repos:
 
       - id: check-toml
 
+  # =============================================================================
+  # JSON/YAML Schema Validation - validate against official schemas
+  # Catches structural errors BEFORE they reach CI/CD
+  # =============================================================================
+  - repo: https://github.com/python-jsonschema/check-jsonschema
+    rev: 0.34.0
+    hooks:
+      # GitHub Workflows (built-in hook validates against SchemaStore)
+      - id: check-github-workflows
+        args: ["--verbose"]
+
+      # Docker Compose (built-in hook validates against SchemaStore)
+      - id: check-compose-spec
+        files: docker-compose\.yml$
+
+      # GoReleaser config
+      - id: check-jsonschema
+        name: Validate GoReleaser config
+        files: ^\.goreleaser\.yml$
+        types: [yaml]
+        args: ["--schemafile", "https://goreleaser.com/static/schema.json"]
+
+      # GolangCI-lint config
+      - id: check-jsonschema
+        name: Validate GolangCI-lint config
+        files: ^\.golangci\.yml$
+        types: [yaml]
+        args: ["--schemafile", "https://golangci-lint.run/jsonschema/golangci.jsonschema.json"]
+
+      # Pre-commit config (self-validation)
+      - id: check-jsonschema
+        name: Validate pre-commit config
+        files: ^\.pre-commit-config\.yaml$
+        types: [yaml]
+        args: ["--schemafile", "https://www.schemastore.org/pre-commit-config.json"]
+
+      # TypeScript config
+      - id: check-jsonschema
+        name: Validate TypeScript config
+        files: tsconfig\.json$
+        types: [json]
+        args: ["--schemafile", "https://www.schemastore.org/tsconfig.json"]
+
+      # MCP Server manifest (validates against embedded $schema)
+      - id: check-metaschema
+        name: Validate MCP server.json against its $schema
+        files: ^mcp-server/server\.json$
+
+  # =============================================================================
+  # General file checks - security and safety (continued)
+  # =============================================================================
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
       # Security and safety checks
       - id: check-added-large-files
         args: [--maxkb=1000]

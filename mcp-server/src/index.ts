@@ -15,8 +15,14 @@
  * @see https://www.npmjs.com/package/@robinmordasiewicz/f5xc-terraform-mcp
  */
 
+import { createRequire } from 'module';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+
+// Read version from package.json at runtime
+const require = createRequire(import.meta.url);
+const packageJson = require('../package.json');
+const VERSION = packageJson.version;
 
 import { ResponseFormat } from './types.js';
 import {
@@ -81,7 +87,7 @@ const CHARACTER_LIMIT = 50000; // Maximum response size
 // Create MCP server instance
 const server = new McpServer({
   name: 'f5xc-terraform-mcp',
-  version: '1.0.0',
+  version: VERSION,
 });
 
 // =============================================================================

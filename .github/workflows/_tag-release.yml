@@ -145,7 +145,10 @@ jobs:
     name: Create Release
     needs: tag
     if: needs.tag.outputs.created == 'true' && inputs.create-release
-    uses: hashicorp/ghaction-terraform-provider-release/.github/workflows/community.yml@v5
+    # Using our fork with updated action versions to fix cache 400 errors
+    # Original: hashicorp/ghaction-terraform-provider-release/.github/workflows/community.yml@v5
+    # Fork updates: checkout@v6.0.1, setup-go@v6.1.0, goreleaser@v6.4.0
+    uses: robinmordasiewicz/ghaction-terraform-provider-release/.github/workflows/community.yml@v6
     secrets:
       gpg-private-key: ${{ secrets.gpg-private-key }}
       gpg-private-key-passphrase: ${{ secrets.gpg-passphrase }}

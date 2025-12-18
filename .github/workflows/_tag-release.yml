@@ -94,6 +94,18 @@ jobs:
           echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
           echo "Next version: $NEW_TAG"
 
+      - name: Version Diagnostics
+        run: |
+          echo "=== VERSION DIAGNOSTICS (tag-release) ==="
+          echo "Workflow run ID: ${{ github.run_id }}"
+          echo "Triggered by SHA: ${{ github.sha }}"
+          echo "Current HEAD SHA: $(git rev-parse HEAD)"
+          echo "Latest git tag: ${{ steps.get_tag.outputs.latest_tag }}"
+          echo "Calculated next version: ${{ steps.version.outputs.new_tag }}"
+          echo "Version bump type: ${{ steps.version.outputs.bump }}"
+          echo "Tag exists check: $(git rev-parse ${{ steps.version.outputs.new_tag }} 2>/dev/null && echo 'YES - ALREADY EXISTS' || echo 'NO - WILL CREATE')"
+          echo "============================================"
+
       - name: Check if tag exists
         id: check
         run: |

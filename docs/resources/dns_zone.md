@@ -2,12 +2,12 @@
 page_title: "f5xc_dns_zone Resource - terraform-provider-f5xc"
 subcategory: "DNS"
 description: |-
-  Manages a DNS Zone resource in F5 Distributed Cloud.
+  Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 ---
 
 # f5xc_dns_zone (Resource)
 
-Manages a DNS Zone resource in F5 Distributed Cloud.
+Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 ~> **Note** Please refer to [DNS Zone API docs](https://docs.cloud.f5.com/docs-v2/api/dns-zone) to learn more.
 
@@ -15,7 +15,7 @@ Manages a DNS Zone resource in F5 Distributed Cloud.
 
 ```terraform
 # DNS Zone Resource Example
-# Manages a DNS Zone resource in F5 Distributed Cloud.
+# Manages DNS Zone in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
 # Basic DNS Zone configuration
 resource "f5xc_dns_zone" "example" {
@@ -69,18 +69,9 @@ resource "f5xc_dns_zone" "example" {
 
 ### Spec Argument Reference
 
-<a id="allow-http-lb-managed-records"></a>&#x2022; [`allow_http_lb_managed_records`](#allow-http-lb-managed-records) - Optional Bool<br>Option to allow user-created HTTP, TCP, and CDN load balancer related resource records to be automatically managed in a protected RRset
-
-<a id="default-rr-set-group"></a>&#x2022; [`default_rr_set_group`](#default-rr-set-group) - Optional Block<br>Add and manage DNS resource record sets part of Default set group<br>See [Default Rr Set Group](#default-rr-set-group) below for details.
-
 -> **One of the following:**
-&#x2022; <a id="default-soa-parameters"></a>[`default_soa_parameters`](#default-soa-parameters) - Optional Block<br>Enable this option
-
-<a id="dnssec-mode"></a>&#x2022; [`dnssec_mode`](#dnssec-mode) - Optional Block<br>Disable<br>See [Dnssec Mode](#dnssec-mode) below for details.
-
-<a id="rr-set-group"></a>&#x2022; [`rr_set_group`](#rr-set-group) - Optional Block<br>Create and manage set groups, and resource record sets within them, x-ves-io-managed set is managed by F5<br>See [Rr Set Group](#rr-set-group) below for details.
-
-<a id="soa-parameters"></a>&#x2022; [`soa_parameters`](#soa-parameters) - Optional Block<br>SOARecordParameterConfig
+&#x2022; <a id="primary"></a>[`primary`](#primary) - Optional Block<br>PrimaryDNSCreateSpecType<br>See [Primary](#primary) below for details.
+<br><br>&#x2022; <a id="secondary"></a>[`secondary`](#secondary) - Optional Block<br>SecondaryDNSCreateSpecType
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
@@ -92,735 +83,607 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### Default Rr Set Group
+#### Primary
 
-A [`default_rr_set_group`](#default-rr-set-group) block supports the following:
+A [`primary`](#primary) block supports the following:
 
-<a id="default-rr-set-group-a-record"></a>&#x2022; [`a_record`](#default-rr-set-group-a-record) - Optional Block<br>DNSAResourceRecord. A Records<br>See [A Record](#default-rr-set-group-a-record) below.
+<a id="primary-allow-http-lb-managed-records"></a>&#x2022; [`allow_http_lb_managed_records`](#primary-allow-http-lb-managed-records) - Optional Bool<br>Option to allow user-created HTTP, TCP, and CDN load balancer related resource records to be automatically managed in a protected RRset
 
-<a id="default-rr-set-group-aaaa-record"></a>&#x2022; [`aaaa_record`](#default-rr-set-group-aaaa-record) - Optional Block<br>DNSAAAAResourceRecord. RecordSet for AAAA Records<br>See [Aaaa Record](#default-rr-set-group-aaaa-record) below.
+<a id="primary-default-rr-set-group"></a>&#x2022; [`default_rr_set_group`](#primary-default-rr-set-group) - Optional Block<br>Add and manage DNS resource record sets part of Default set group<br>See [Default Rr Set Group](#primary-default-rr-set-group) below.
 
-<a id="default-rr-set-group-afsdb-record"></a>&#x2022; [`afsdb_record`](#default-rr-set-group-afsdb-record) - Optional Block<br>DNS AFSDB Record. DNS AFSDB Record<br>See [Afsdb Record](#default-rr-set-group-afsdb-record) below.
+<a id="primary-default-soa-parameters"></a>&#x2022; [`default_soa_parameters`](#primary-default-soa-parameters) - Optional Block<br>Enable this option
 
-<a id="default-rr-set-group-alias-record"></a>&#x2022; [`alias_record`](#default-rr-set-group-alias-record) - Optional Block<br>DNSAliasResourceRecord<br>See [Alias Record](#default-rr-set-group-alias-record) below.
+<a id="primary-dnssec-mode"></a>&#x2022; [`dnssec_mode`](#primary-dnssec-mode) - Optional Block<br>Disable<br>See [Dnssec Mode](#primary-dnssec-mode) below.
 
-<a id="default-rr-set-group-caa-record"></a>&#x2022; [`caa_record`](#default-rr-set-group-caa-record) - Optional Block<br>DNSCAAResourceRecord<br>See [Caa Record](#default-rr-set-group-caa-record) below.
+<a id="primary-rr-set-group"></a>&#x2022; [`rr_set_group`](#primary-rr-set-group) - Optional Block<br>Create and manage set groups, and resource record sets within them, x-ves-io-managed set is managed by F5<br>See [Rr Set Group](#primary-rr-set-group) below.
 
-<a id="default-rr-set-group-cds-record"></a>&#x2022; [`cds_record`](#default-rr-set-group-cds-record) - Optional Block<br>DNS CDS Record. DNS CDS Record<br>See [Cds Record](#default-rr-set-group-cds-record) below.
+<a id="primary-soa-parameters"></a>&#x2022; [`soa_parameters`](#primary-soa-parameters) - Optional Block<br>SOARecordParameterConfig<br>See [Soa Parameters](#primary-soa-parameters) below.
 
-<a id="default-rr-set-group-cert-record"></a>&#x2022; [`cert_record`](#default-rr-set-group-cert-record) - Optional Block<br>DNS CERT Record. DNS CERT Record<br>See [Cert Record](#default-rr-set-group-cert-record) below.
+#### Primary Default Rr Set Group
 
-<a id="default-rr-set-group-cname-record"></a>&#x2022; [`cname_record`](#default-rr-set-group-cname-record) - Optional Block<br>DNSCNAMEResourceRecord<br>See [Cname Record](#default-rr-set-group-cname-record) below.
+A [`default_rr_set_group`](#primary-default-rr-set-group) block (within [`primary`](#primary)) supports the following:
 
-<a id="default-rr-set-group-description-spec"></a>&#x2022; [`description_spec`](#default-rr-set-group-description-spec) - Optional String<br>Comment
+<a id="primary-default-rr-set-group-a-record"></a>&#x2022; [`a_record`](#primary-default-rr-set-group-a-record) - Optional Block<br>DNSAResourceRecord. A Records<br>See [A Record](#primary-default-rr-set-group-a-record) below.
 
-<a id="default-rr-set-group-ds-record"></a>&#x2022; [`ds_record`](#default-rr-set-group-ds-record) - Optional Block<br>DNS DS Record. DNS DS Record<br>See [Ds Record](#default-rr-set-group-ds-record) below.
+<a id="record-6a4ef0"></a>&#x2022; [`aaaa_record`](#record-6a4ef0) - Optional Block<br>DNSAAAAResourceRecord. RecordSet for AAAA Records<br>See [Aaaa Record](#record-6a4ef0) below.
 
-<a id="default-rr-set-group-eui48-record"></a>&#x2022; [`eui48_record`](#default-rr-set-group-eui48-record) - Optional Block<br>DNS EUI48 Record. DNS EUI48 Record<br>See [Eui48 Record](#default-rr-set-group-eui48-record) below.
+<a id="record-026644"></a>&#x2022; [`afsdb_record`](#record-026644) - Optional Block<br>DNS AFSDB Record. DNS AFSDB Record<br>See [Afsdb Record](#record-026644) below.
 
-<a id="default-rr-set-group-eui64-record"></a>&#x2022; [`eui64_record`](#default-rr-set-group-eui64-record) - Optional Block<br>DNS EUI64 Record. DNS EUI64 Record<br>See [Eui64 Record](#default-rr-set-group-eui64-record) below.
+<a id="record-6e32d8"></a>&#x2022; [`alias_record`](#record-6e32d8) - Optional Block<br>DNSAliasResourceRecord<br>See [Alias Record](#record-6e32d8) below.
 
-<a id="default-rr-set-group-lb-record"></a>&#x2022; [`lb_record`](#default-rr-set-group-lb-record) - Optional Block<br>DNS Load Balancer Record. DNS Load Balancer Record<br>See [LB Record](#default-rr-set-group-lb-record) below.
+<a id="primary-default-rr-set-group-caa-record"></a>&#x2022; [`caa_record`](#primary-default-rr-set-group-caa-record) - Optional Block<br>DNSCAAResourceRecord<br>See [Caa Record](#primary-default-rr-set-group-caa-record) below.
 
-<a id="default-rr-set-group-loc-record"></a>&#x2022; [`loc_record`](#default-rr-set-group-loc-record) - Optional Block<br>DNS LOC Record. DNS LOC Record<br>See [Loc Record](#default-rr-set-group-loc-record) below.
+<a id="primary-default-rr-set-group-cds-record"></a>&#x2022; [`cds_record`](#primary-default-rr-set-group-cds-record) - Optional Block<br>DNS CDS Record. DNS CDS Record<br>See [Cds Record](#primary-default-rr-set-group-cds-record) below.
 
-<a id="default-rr-set-group-mx-record"></a>&#x2022; [`mx_record`](#default-rr-set-group-mx-record) - Optional Block<br>DNSMXResourceRecord<br>See [Mx Record](#default-rr-set-group-mx-record) below.
+<a id="record-3ef094"></a>&#x2022; [`cert_record`](#record-3ef094) - Optional Block<br>DNS CERT Record. DNS CERT Record<br>See [Cert Record](#record-3ef094) below.
 
-<a id="default-rr-set-group-naptr-record"></a>&#x2022; [`naptr_record`](#default-rr-set-group-naptr-record) - Optional Block<br>DNS NAPTR Record. DNS NAPTR Record<br>See [Naptr Record](#default-rr-set-group-naptr-record) below.
+<a id="record-8b5bff"></a>&#x2022; [`cname_record`](#record-8b5bff) - Optional Block<br>DNSCNAMEResourceRecord<br>See [Cname Record](#record-8b5bff) below.
 
-<a id="default-rr-set-group-ns-record"></a>&#x2022; [`ns_record`](#default-rr-set-group-ns-record) - Optional Block<br>DNSNSResourceRecord<br>See [Ns Record](#default-rr-set-group-ns-record) below.
+<a id="spec-4eb13e"></a>&#x2022; [`description_spec`](#spec-4eb13e) - Optional String<br>Comment
 
-<a id="default-rr-set-group-ptr-record"></a>&#x2022; [`ptr_record`](#default-rr-set-group-ptr-record) - Optional Block<br>DNSPTRResourceRecord<br>See [Ptr Record](#default-rr-set-group-ptr-record) below.
+<a id="primary-default-rr-set-group-ds-record"></a>&#x2022; [`ds_record`](#primary-default-rr-set-group-ds-record) - Optional Block<br>DNS DS Record. DNS DS Record<br>See [Ds Record](#primary-default-rr-set-group-ds-record) below.
 
-<a id="default-rr-set-group-srv-record"></a>&#x2022; [`srv_record`](#default-rr-set-group-srv-record) - Optional Block<br>DNSSRVResourceRecord<br>See [Srv Record](#default-rr-set-group-srv-record) below.
+<a id="record-d72d9f"></a>&#x2022; [`eui48_record`](#record-d72d9f) - Optional Block<br>DNS EUI48 Record. DNS EUI48 Record<br>See [Eui48 Record](#record-d72d9f) below.
 
-<a id="default-rr-set-group-sshfp-record"></a>&#x2022; [`sshfp_record`](#default-rr-set-group-sshfp-record) - Optional Block<br>DNS SSHFP Record. DNS SSHFP Record<br>See [Sshfp Record](#default-rr-set-group-sshfp-record) below.
+<a id="record-d3d028"></a>&#x2022; [`eui64_record`](#record-d3d028) - Optional Block<br>DNS EUI64 Record. DNS EUI64 Record<br>See [Eui64 Record](#record-d3d028) below.
 
-<a id="default-rr-set-group-tlsa-record"></a>&#x2022; [`tlsa_record`](#default-rr-set-group-tlsa-record) - Optional Block<br>DNS TLSA Record. DNS TLSA Record<br>See [Tlsa Record](#default-rr-set-group-tlsa-record) below.
+<a id="primary-default-rr-set-group-lb-record"></a>&#x2022; [`lb_record`](#primary-default-rr-set-group-lb-record) - Optional Block<br>DNS Load Balancer Record. DNS Load Balancer Record<br>See [LB Record](#primary-default-rr-set-group-lb-record) below.
 
-<a id="default-rr-set-group-ttl"></a>&#x2022; [`ttl`](#default-rr-set-group-ttl) - Optional Number<br>Time to live
+<a id="primary-default-rr-set-group-loc-record"></a>&#x2022; [`loc_record`](#primary-default-rr-set-group-loc-record) - Optional Block<br>DNS LOC Record. DNS LOC Record<br>See [Loc Record](#primary-default-rr-set-group-loc-record) below.
 
-<a id="default-rr-set-group-txt-record"></a>&#x2022; [`txt_record`](#default-rr-set-group-txt-record) - Optional Block<br>DNSTXTResourceRecord<br>See [Txt Record](#default-rr-set-group-txt-record) below.
+<a id="primary-default-rr-set-group-mx-record"></a>&#x2022; [`mx_record`](#primary-default-rr-set-group-mx-record) - Optional Block<br>DNSMXResourceRecord<br>See [Mx Record](#primary-default-rr-set-group-mx-record) below.
 
-#### Default Rr Set Group A Record
+<a id="record-16470e"></a>&#x2022; [`naptr_record`](#record-16470e) - Optional Block<br>DNS NAPTR Record. DNS NAPTR Record<br>See [Naptr Record](#record-16470e) below.
 
-An [`a_record`](#default-rr-set-group-a-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="primary-default-rr-set-group-ns-record"></a>&#x2022; [`ns_record`](#primary-default-rr-set-group-ns-record) - Optional Block<br>DNSNSResourceRecord<br>See [Ns Record](#primary-default-rr-set-group-ns-record) below.
 
-<a id="default-rr-set-group-a-record-name"></a>&#x2022; [`name`](#default-rr-set-group-a-record-name) - Optional String<br>Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain
+<a id="primary-default-rr-set-group-ptr-record"></a>&#x2022; [`ptr_record`](#primary-default-rr-set-group-ptr-record) - Optional Block<br>DNSPTRResourceRecord<br>See [Ptr Record](#primary-default-rr-set-group-ptr-record) below.
 
-<a id="default-rr-set-group-a-record-values"></a>&#x2022; [`values`](#default-rr-set-group-a-record-values) - Optional List<br>IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1
+<a id="primary-default-rr-set-group-srv-record"></a>&#x2022; [`srv_record`](#primary-default-rr-set-group-srv-record) - Optional Block<br>DNSSRVResourceRecord<br>See [Srv Record](#primary-default-rr-set-group-srv-record) below.
 
-#### Default Rr Set Group Aaaa Record
+<a id="record-cc1927"></a>&#x2022; [`sshfp_record`](#record-cc1927) - Optional Block<br>DNS SSHFP Record. DNS SSHFP Record<br>See [Sshfp Record](#record-cc1927) below.
 
-An [`aaaa_record`](#default-rr-set-group-aaaa-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="record-db5883"></a>&#x2022; [`tlsa_record`](#record-db5883) - Optional Block<br>DNS TLSA Record. DNS TLSA Record<br>See [Tlsa Record](#record-db5883) below.
 
-<a id="default-rr-set-group-aaaa-record-name"></a>&#x2022; [`name`](#default-rr-set-group-aaaa-record-name) - Optional String<br>Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain
+<a id="primary-default-rr-set-group-ttl"></a>&#x2022; [`ttl`](#primary-default-rr-set-group-ttl) - Optional Number<br>Time to live
 
-<a id="default-rr-set-group-aaaa-record-values"></a>&#x2022; [`values`](#default-rr-set-group-aaaa-record-values) - Optional List<br>IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
+<a id="primary-default-rr-set-group-txt-record"></a>&#x2022; [`txt_record`](#primary-default-rr-set-group-txt-record) - Optional Block<br>DNSTXTResourceRecord<br>See [Txt Record](#primary-default-rr-set-group-txt-record) below.
 
-#### Default Rr Set Group Afsdb Record
+#### Primary Default Rr Set Group A Record
 
-An [`afsdb_record`](#default-rr-set-group-afsdb-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+An [`a_record`](#primary-default-rr-set-group-a-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="default-rr-set-group-afsdb-record-name"></a>&#x2022; [`name`](#default-rr-set-group-afsdb-record-name) - Optional String<br>Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain
+<a id="name-59b7b8"></a>&#x2022; [`name`](#name-59b7b8) - Optional String<br>Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="values-d4738d"></a>&#x2022; [`values`](#values-d4738d) - Optional Block<br>AFSDB Value<br>See [Values](#values-d4738d) below.
+<a id="values-6ab550"></a>&#x2022; [`values`](#values-6ab550) - Optional List<br>IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1
 
-#### Default Rr Set Group Afsdb Record Values
+#### Primary Default Rr Set Group Aaaa Record
 
-A [`values`](#values-d4738d) block (within [`default_rr_set_group.afsdb_record`](#default-rr-set-group-afsdb-record)) supports the following:
+An [`aaaa_record`](#record-6a4ef0) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="hostname-1c113a"></a>&#x2022; [`hostname`](#hostname-1c113a) - Optional String<br>Hostname. Server name of the AFS cell database server or the DCE name server
+<a id="name-c55d66"></a>&#x2022; [`name`](#name-c55d66) - Optional String<br>Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="subtype-765d32"></a>&#x2022; [`subtype`](#subtype-765d32) - Optional String<br>Possible values are `NONE`, `AFSVolumeLocationServer`, `DCEAuthenticationServer`<br>[Enum: NONE|AFSVolumeLocationServer|DCEAuthenticationServer] AFSDB Record Subtype. AFS Volume Location Server or DCE Authentication Server. - NONE: NONE - AFSVolumeLocationServer: AFS Volume Location Server - DCEAuthenticationServer: DCE Authentication Server
+<a id="values-6b9908"></a>&#x2022; [`values`](#values-6b9908) - Optional List<br>IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
 
-#### Default Rr Set Group Alias Record
+#### Primary Default Rr Set Group Afsdb Record
 
-An [`alias_record`](#default-rr-set-group-alias-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+An [`afsdb_record`](#record-026644) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="default-rr-set-group-alias-record-value"></a>&#x2022; [`value`](#default-rr-set-group-alias-record-value) - Optional String<br>Domain. A valid domain name, for example: example.com
+<a id="name-996289"></a>&#x2022; [`name`](#name-996289) - Optional String<br>Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain
 
-#### Default Rr Set Group Caa Record
+<a id="values-776b5a"></a>&#x2022; [`values`](#values-776b5a) - Optional Block<br>AFSDB Value<br>See [Values](#values-776b5a) below.
 
-A [`caa_record`](#default-rr-set-group-caa-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+#### Primary Default Rr Set Group Afsdb Record Values
 
-<a id="default-rr-set-group-caa-record-name"></a>&#x2022; [`name`](#default-rr-set-group-caa-record-name) - Optional String<br>Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain
+<a id="deep-7224a6"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="default-rr-set-group-caa-record-values"></a>&#x2022; [`values`](#default-rr-set-group-caa-record-values) - Optional Block<br>CAA Record Value<br>See [Values](#default-rr-set-group-caa-record-values) below.
+#### Primary Default Rr Set Group Alias Record
 
-#### Default Rr Set Group Caa Record Values
+An [`alias_record`](#record-6e32d8) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-A [`values`](#default-rr-set-group-caa-record-values) block (within [`default_rr_set_group.caa_record`](#default-rr-set-group-caa-record)) supports the following:
+<a id="value-da5681"></a>&#x2022; [`value`](#value-da5681) - Optional String<br>Domain. A valid domain name, for example: example.com
 
-<a id="flags-ad260d"></a>&#x2022; [`flags`](#flags-ad260d) - Optional Number<br>Flags. This flag should be an integer between 0 and 255
+#### Primary Default Rr Set Group Caa Record
 
-<a id="tag-de582a"></a>&#x2022; [`tag`](#tag-de582a) - Optional String<br>Tag. 'issuewild', 'iodef']
+A [`caa_record`](#primary-default-rr-set-group-caa-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="value-1656d7"></a>&#x2022; [`value`](#value-1656d7) - Optional String<br>Value
+<a id="name-5c8e96"></a>&#x2022; [`name`](#name-5c8e96) - Optional String<br>Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain
 
-#### Default Rr Set Group Cds Record
+<a id="values-41ba0e"></a>&#x2022; [`values`](#values-41ba0e) - Optional Block<br>CAA Record Value<br>See [Values](#values-41ba0e) below.
 
-A [`cds_record`](#default-rr-set-group-cds-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+#### Primary Default Rr Set Group Caa Record Values
 
-<a id="default-rr-set-group-cds-record-name"></a>&#x2022; [`name`](#default-rr-set-group-cds-record-name) - Optional String<br>Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain
+<a id="deep-31a8bf"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="default-rr-set-group-cds-record-values"></a>&#x2022; [`values`](#default-rr-set-group-cds-record-values) - Optional Block<br>DS Value<br>See [Values](#default-rr-set-group-cds-record-values) below.
+#### Primary Default Rr Set Group Cds Record
 
-#### Default Rr Set Group Cds Record Values
+A [`cds_record`](#primary-default-rr-set-group-cds-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-A [`values`](#default-rr-set-group-cds-record-values) block (within [`default_rr_set_group.cds_record`](#default-rr-set-group-cds-record)) supports the following:
+<a id="name-54ff93"></a>&#x2022; [`name`](#name-54ff93) - Optional String<br>Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="algorithm-624522"></a>&#x2022; [`ds_key_algorithm`](#algorithm-624522) - Optional String<br>Possible values are `UNSPECIFIED`, `RSASHA1`, `RSASHA1NSEC3SHA1`, `RSASHA256`, `RSASHA512`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`<br>[Enum: UNSPECIFIED|RSASHA1|RSASHA1NSEC3SHA1|RSASHA256|RSASHA512|ECDSAP256SHA256|ECDSAP384SHA384|ED25519|ED448] DS Key algorithm. DS key value must be compatible with the specified algorithm. - UNSPECIFIED: UNSPECIFIED - RSASHA1: RSASHA1 - RSASHA1NSEC3SHA1: RSASHA1-NSEC3-SHA1 - RSASHA256: RSASHA256 - RSASHA512: RSASHA512 - ECDSAP256SHA256: ECDSAP256SHA256 - ECDSAP384SHA384: ECDSAP384SHA384 - ED25519: ED25519 - ED448: ED448
+<a id="values-970128"></a>&#x2022; [`values`](#values-970128) - Optional Block<br>DS Value<br>See [Values](#values-970128) below.
 
-<a id="tag-2943ea"></a>&#x2022; [`key_tag`](#tag-2943ea) - Optional Number<br>Key Tag. A short numeric value which can help quickly identify the referenced DNSKEY-record
+#### Primary Default Rr Set Group Cds Record Values
 
-<a id="digest-964478"></a>&#x2022; [`sha1_digest`](#digest-964478) - Optional Block<br>SHA1 Digest<br>See [Sha1 Digest](#digest-964478) below.
+<a id="deep-6b61a3"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="digest-7aaae9"></a>&#x2022; [`sha256_digest`](#digest-7aaae9) - Optional Block<br>SHA256 Digest<br>See [Sha256 Digest](#digest-7aaae9) below.
+#### Primary Default Rr Set Group Cds Record Values Sha1 Digest
 
-<a id="digest-919dc3"></a>&#x2022; [`sha384_digest`](#digest-919dc3) - Optional Block<br>SHA384 Digest<br>See [Sha384 Digest](#digest-919dc3) below.
+<a id="deep-336942"></a>Deeply nested **Digest** block collapsed for readability.
 
-#### Default Rr Set Group Cds Record Values Sha1 Digest
+#### Primary Default Rr Set Group Cds Record Values Sha256 Digest
 
-<a id="deep-96bb60"></a>Deeply nested **Digest** block collapsed for readability.
+<a id="deep-2d3a7f"></a>Deeply nested **Digest** block collapsed for readability.
 
-#### Default Rr Set Group Cds Record Values Sha256 Digest
+#### Primary Default Rr Set Group Cds Record Values Sha384 Digest
 
-<a id="deep-2b04a0"></a>Deeply nested **Digest** block collapsed for readability.
+<a id="deep-107b34"></a>Deeply nested **Digest** block collapsed for readability.
 
-#### Default Rr Set Group Cds Record Values Sha384 Digest
+#### Primary Default Rr Set Group Cert Record
 
-<a id="deep-bfbdef"></a>Deeply nested **Digest** block collapsed for readability.
+A [`cert_record`](#record-3ef094) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-#### Default Rr Set Group Cert Record
+<a id="name-f59c0d"></a>&#x2022; [`name`](#name-f59c0d) - Optional String<br>Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain
 
-A [`cert_record`](#default-rr-set-group-cert-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="values-753772"></a>&#x2022; [`values`](#values-753772) - Optional Block<br>CERT Value<br>See [Values](#values-753772) below.
 
-<a id="default-rr-set-group-cert-record-name"></a>&#x2022; [`name`](#default-rr-set-group-cert-record-name) - Optional String<br>Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain
+#### Primary Default Rr Set Group Cert Record Values
 
-<a id="default-rr-set-group-cert-record-values"></a>&#x2022; [`values`](#default-rr-set-group-cert-record-values) - Optional Block<br>CERT Value<br>See [Values](#default-rr-set-group-cert-record-values) below.
+<a id="deep-4cedd5"></a>Deeply nested **Values** block collapsed for readability.
 
-#### Default Rr Set Group Cert Record Values
+#### Primary Default Rr Set Group Cname Record
 
-A [`values`](#default-rr-set-group-cert-record-values) block (within [`default_rr_set_group.cert_record`](#default-rr-set-group-cert-record)) supports the following:
+A [`cname_record`](#record-8b5bff) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="algorithm-434ac8"></a>&#x2022; [`algorithm`](#algorithm-434ac8) - Optional String  Defaults to `RESERVEDALGORITHM`<br>Possible values are `RESERVEDALGORITHM`, `RSAMD5`, `DH`, `DSASHA1`, `ECC`, `RSASHA1ALGORITHM`, `INDIRECT`, `PRIVATEDNS`, `PRIVATEOID`<br>[Enum: RESERVEDALGORITHM|RSAMD5|DH|DSASHA1|ECC|RSASHA1ALGORITHM|INDIRECT|PRIVATEDNS|PRIVATEOID] CERT Algorithm. CERT algorithm value must be compatible with the specified algorithm. - RESERVEDALGORITHM: RESERVEDALGORITHM - RSAMD5: RSAMD5 - DH: DH - DSASHA1: DSASHA1 - ECC: ECC - RSASHA1ALGORITHM: RSA-SHA1 - INDIRECT: INDIRECT - PRIVATEDNS: PRIVATEDNS - PRIVATEOID: PRIVATEOID
+<a id="name-73c139"></a>&#x2022; [`name`](#name-73c139) - Optional String<br>Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="tag-d3fb3e"></a>&#x2022; [`cert_key_tag`](#tag-d3fb3e) - Optional Number<br>Key Tag
+<a id="value-8158f9"></a>&#x2022; [`value`](#value-8158f9) - Optional String<br>Domain
 
-<a id="type-ade4c5"></a>&#x2022; [`cert_type`](#type-ade4c5) - Optional String  Defaults to `INVALIDCERTTYPE`<br>Possible values are `INVALIDCERTTYPE`, `PKIX`, `SPKI`, `PGP`, `IPKIX`, `ISPKI`, `IPGP`, `ACPKIX`, `IACPKIX`, `URI_`, `OID`<br>[Enum: INVALIDCERTTYPE|PKIX|SPKI|PGP|IPKIX|ISPKI|IPGP|ACPKIX|IACPKIX|URI_|OID] CERT Type. CERT type value must be compatible with the specified types. - INVALIDCERTTYPE: INVALIDCERTTYPE - PKIX: PKIX - SPKI: SPKI - PGP: PGP - IPKIX: IPKIX - ISPKI: ISPKI - IPGP: IPGP - ACPKIX: ACPKIX - IACPKIX: IACPKIX - URI_: URI - OID: OID
+#### Primary Default Rr Set Group Ds Record
 
-<a id="certificate-a4077e"></a>&#x2022; [`certificate`](#certificate-a4077e) - Optional String<br>Certificate. Certificate in base 64 format
+A [`ds_record`](#primary-default-rr-set-group-ds-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-#### Default Rr Set Group Cname Record
+<a id="name-4472e4"></a>&#x2022; [`name`](#name-4472e4) - Optional String<br>Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain
 
-A [`cname_record`](#default-rr-set-group-cname-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="values-6934cb"></a>&#x2022; [`values`](#values-6934cb) - Optional Block<br>DS Value<br>See [Values](#values-6934cb) below.
 
-<a id="default-rr-set-group-cname-record-name"></a>&#x2022; [`name`](#default-rr-set-group-cname-record-name) - Optional String<br>Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain
+#### Primary Default Rr Set Group Ds Record Values
 
-<a id="default-rr-set-group-cname-record-value"></a>&#x2022; [`value`](#default-rr-set-group-cname-record-value) - Optional String<br>Domain
+<a id="deep-235ea7"></a>Deeply nested **Values** block collapsed for readability.
 
-#### Default Rr Set Group Ds Record
+#### Primary Default Rr Set Group Ds Record Values Sha1 Digest
 
-A [`ds_record`](#default-rr-set-group-ds-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="deep-093891"></a>Deeply nested **Digest** block collapsed for readability.
 
-<a id="default-rr-set-group-ds-record-name"></a>&#x2022; [`name`](#default-rr-set-group-ds-record-name) - Optional String<br>Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain
+#### Primary Default Rr Set Group Ds Record Values Sha256 Digest
 
-<a id="default-rr-set-group-ds-record-values"></a>&#x2022; [`values`](#default-rr-set-group-ds-record-values) - Optional Block<br>DS Value<br>See [Values](#default-rr-set-group-ds-record-values) below.
+<a id="deep-b950dc"></a>Deeply nested **Digest** block collapsed for readability.
 
-#### Default Rr Set Group Ds Record Values
+#### Primary Default Rr Set Group Ds Record Values Sha384 Digest
 
-A [`values`](#default-rr-set-group-ds-record-values) block (within [`default_rr_set_group.ds_record`](#default-rr-set-group-ds-record)) supports the following:
+<a id="deep-6d3795"></a>Deeply nested **Digest** block collapsed for readability.
 
-<a id="algorithm-dc5c64"></a>&#x2022; [`ds_key_algorithm`](#algorithm-dc5c64) - Optional String<br>Possible values are `UNSPECIFIED`, `RSASHA1`, `RSASHA1NSEC3SHA1`, `RSASHA256`, `RSASHA512`, `ECDSAP256SHA256`, `ECDSAP384SHA384`, `ED25519`, `ED448`<br>[Enum: UNSPECIFIED|RSASHA1|RSASHA1NSEC3SHA1|RSASHA256|RSASHA512|ECDSAP256SHA256|ECDSAP384SHA384|ED25519|ED448] DS Key algorithm. DS key value must be compatible with the specified algorithm. - UNSPECIFIED: UNSPECIFIED - RSASHA1: RSASHA1 - RSASHA1NSEC3SHA1: RSASHA1-NSEC3-SHA1 - RSASHA256: RSASHA256 - RSASHA512: RSASHA512 - ECDSAP256SHA256: ECDSAP256SHA256 - ECDSAP384SHA384: ECDSAP384SHA384 - ED25519: ED25519 - ED448: ED448
+#### Primary Default Rr Set Group Eui48 Record
 
-<a id="tag-261974"></a>&#x2022; [`key_tag`](#tag-261974) - Optional Number<br>Key Tag. A short numeric value which can help quickly identify the referenced DNSKEY-record
+An [`eui48_record`](#record-d72d9f) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="digest-7754a2"></a>&#x2022; [`sha1_digest`](#digest-7754a2) - Optional Block<br>SHA1 Digest<br>See [Sha1 Digest](#digest-7754a2) below.
+<a id="name-fcad11"></a>&#x2022; [`name`](#name-fcad11) - Optional String<br>Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="digest-1f2d6c"></a>&#x2022; [`sha256_digest`](#digest-1f2d6c) - Optional Block<br>SHA256 Digest<br>See [Sha256 Digest](#digest-1f2d6c) below.
+<a id="value-9c7097"></a>&#x2022; [`value`](#value-9c7097) - Optional String<br>EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab
 
-<a id="digest-5c5e04"></a>&#x2022; [`sha384_digest`](#digest-5c5e04) - Optional Block<br>SHA384 Digest<br>See [Sha384 Digest](#digest-5c5e04) below.
+#### Primary Default Rr Set Group Eui64 Record
 
-#### Default Rr Set Group Ds Record Values Sha1 Digest
+An [`eui64_record`](#record-d3d028) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="deep-99a04a"></a>Deeply nested **Digest** block collapsed for readability.
+<a id="name-148f42"></a>&#x2022; [`name`](#name-148f42) - Optional String<br>Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain
 
-#### Default Rr Set Group Ds Record Values Sha256 Digest
+<a id="value-9f20fd"></a>&#x2022; [`value`](#value-9f20fd) - Optional String<br>EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef
 
-<a id="deep-782d9d"></a>Deeply nested **Digest** block collapsed for readability.
+#### Primary Default Rr Set Group LB Record
 
-#### Default Rr Set Group Ds Record Values Sha384 Digest
+A [`lb_record`](#primary-default-rr-set-group-lb-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="deep-965376"></a>Deeply nested **Digest** block collapsed for readability.
+<a id="name-423e27"></a>&#x2022; [`name`](#name-423e27) - Optional String<br>Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain
 
-#### Default Rr Set Group Eui48 Record
+<a id="value-4b593b"></a>&#x2022; [`value`](#value-4b593b) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Value](#value-4b593b) below.
 
-An [`eui48_record`](#default-rr-set-group-eui48-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+#### Primary Default Rr Set Group LB Record Value
 
-<a id="default-rr-set-group-eui48-record-name"></a>&#x2022; [`name`](#default-rr-set-group-eui48-record-name) - Optional String<br>Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain
+<a id="deep-b51e9f"></a>Deeply nested **Value** block collapsed for readability.
 
-<a id="default-rr-set-group-eui48-record-value"></a>&#x2022; [`value`](#default-rr-set-group-eui48-record-value) - Optional String<br>EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab
+#### Primary Default Rr Set Group Loc Record
 
-#### Default Rr Set Group Eui64 Record
+A [`loc_record`](#primary-default-rr-set-group-loc-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-An [`eui64_record`](#default-rr-set-group-eui64-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="name-568c6c"></a>&#x2022; [`name`](#name-568c6c) - Optional String<br>Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="default-rr-set-group-eui64-record-name"></a>&#x2022; [`name`](#default-rr-set-group-eui64-record-name) - Optional String<br>Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain
+<a id="values-17d6e4"></a>&#x2022; [`values`](#values-17d6e4) - Optional Block<br>LOC Value<br>See [Values](#values-17d6e4) below.
 
-<a id="default-rr-set-group-eui64-record-value"></a>&#x2022; [`value`](#default-rr-set-group-eui64-record-value) - Optional String<br>EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef
+#### Primary Default Rr Set Group Loc Record Values
 
-#### Default Rr Set Group LB Record
+<a id="deep-6917cb"></a>Deeply nested **Values** block collapsed for readability.
 
-A [`lb_record`](#default-rr-set-group-lb-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+#### Primary Default Rr Set Group Mx Record
 
-<a id="default-rr-set-group-lb-record-name"></a>&#x2022; [`name`](#default-rr-set-group-lb-record-name) - Optional String<br>Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain
+A [`mx_record`](#primary-default-rr-set-group-mx-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="default-rr-set-group-lb-record-value"></a>&#x2022; [`value`](#default-rr-set-group-lb-record-value) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Value](#default-rr-set-group-lb-record-value) below.
+<a id="name-0ee04c"></a>&#x2022; [`name`](#name-0ee04c) - Optional String<br>Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain
 
-#### Default Rr Set Group LB Record Value
+<a id="values-032997"></a>&#x2022; [`values`](#values-032997) - Optional Block<br>MX Record Value<br>See [Values](#values-032997) below.
 
-<a id="objref-de36cb"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+#### Primary Default Rr Set Group Mx Record Values
 
-#### Default Rr Set Group Loc Record
+<a id="deep-877222"></a>Deeply nested **Values** block collapsed for readability.
 
-A [`loc_record`](#default-rr-set-group-loc-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+#### Primary Default Rr Set Group Naptr Record
 
-<a id="default-rr-set-group-loc-record-name"></a>&#x2022; [`name`](#default-rr-set-group-loc-record-name) - Optional String<br>Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain
+A [`naptr_record`](#record-16470e) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="default-rr-set-group-loc-record-values"></a>&#x2022; [`values`](#default-rr-set-group-loc-record-values) - Optional Block<br>LOC Value<br>See [Values](#default-rr-set-group-loc-record-values) below.
+<a id="name-9ba043"></a>&#x2022; [`name`](#name-9ba043) - Optional String<br>Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain
 
-#### Default Rr Set Group Loc Record Values
+<a id="values-8f9cd5"></a>&#x2022; [`values`](#values-8f9cd5) - Optional Block<br>NAPTR Value<br>See [Values](#values-8f9cd5) below.
 
-A [`values`](#default-rr-set-group-loc-record-values) block (within [`default_rr_set_group.loc_record`](#default-rr-set-group-loc-record)) supports the following:
+#### Primary Default Rr Set Group Naptr Record Values
 
-<a id="altitude-484de1"></a>&#x2022; [`altitude`](#altitude-484de1) - Optional Number<br>Altitude. Altitude in meters
+<a id="deep-26168f"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="precision-31a476"></a>&#x2022; [`horizontal_precision`](#precision-31a476) - Optional Number<br>Horizontal Precision. Horizontal Precision in meters
+#### Primary Default Rr Set Group Ns Record
 
-<a id="degree-2f0810"></a>&#x2022; [`latitude_degree`](#degree-2f0810) - Optional Number<br>Latitude degree. Latitude degree, an integer between 0 and 90, including 0 and 90
+A [`ns_record`](#primary-default-rr-set-group-ns-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="hemisphere-ebe95c"></a>&#x2022; [`latitude_hemisphere`](#hemisphere-ebe95c) - Optional String  Defaults to `N`<br>Possible values are `N`, `S`<br>[Enum: N|S] Latitude hemisphere. Latitude hemisphere can only be N or S - N: North Hemisphere - S: South Hemisphere
+<a id="name-816a8e"></a>&#x2022; [`name`](#name-816a8e) - Optional String<br>Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="minute-a97e3c"></a>&#x2022; [`latitude_minute`](#minute-a97e3c) - Optional Number<br>Latitude minute. Latitude minute, an integer between 0 and 59, including 0 and 59
+<a id="values-0b1572"></a>&#x2022; [`values`](#values-0b1572) - Optional List<br>Name Servers
 
-<a id="second-63c417"></a>&#x2022; [`latitude_second`](#second-63c417) - Optional Number<br>Latitude second. Latitude second, an decimal between 0 and 59.999, including 0 and 59.999
+#### Primary Default Rr Set Group Ptr Record
 
-<a id="diameter-9dee35"></a>&#x2022; [`location_diameter`](#diameter-9dee35) - Optional Number<br>Size. Diameter of a sphere enclosing the described entity, in meters
+A [`ptr_record`](#primary-default-rr-set-group-ptr-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="degree-7bc51a"></a>&#x2022; [`longitude_degree`](#degree-7bc51a) - Optional Number<br>Longitude degree. Longitude degree, an integer between 0 and 180, including 0 and 180
+<a id="name-87ab5a"></a>&#x2022; [`name`](#name-87ab5a) - Optional String<br>Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="hemisphere-b9439c"></a>&#x2022; [`longitude_hemisphere`](#hemisphere-b9439c) - Optional String  Defaults to `E`<br>Possible values are `E`, `W`<br>[Enum: E|W] Longitude hemisphere. Longitude hemisphere can only be E or W - E: East Hemisphere - W: West Hemisphere
+<a id="values-987974"></a>&#x2022; [`values`](#values-987974) - Optional List<br>Domain Name
 
-<a id="minute-2c4e81"></a>&#x2022; [`longitude_minute`](#minute-2c4e81) - Optional Number<br>Longitude minute. Longitude minute, an integer between 0 and 59, including 0 and 59
+#### Primary Default Rr Set Group Srv Record
 
-<a id="second-f7cc4f"></a>&#x2022; [`longitude_second`](#second-f7cc4f) - Optional Number<br>Longitude second. Longitude second, an decimal between 0 and 59.999, including 0 and 59.999
+A [`srv_record`](#primary-default-rr-set-group-srv-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="precision-fc1799"></a>&#x2022; [`vertical_precision`](#precision-fc1799) - Optional Number<br>Vertical Precision. Vertical Precision in meters
+<a id="name-d7e083"></a>&#x2022; [`name`](#name-d7e083) - Optional String<br>Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain
 
-#### Default Rr Set Group Mx Record
+<a id="values-41fcb0"></a>&#x2022; [`values`](#values-41fcb0) - Optional Block<br>SRV Value<br>See [Values](#values-41fcb0) below.
 
-A [`mx_record`](#default-rr-set-group-mx-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+#### Primary Default Rr Set Group Srv Record Values
 
-<a id="default-rr-set-group-mx-record-name"></a>&#x2022; [`name`](#default-rr-set-group-mx-record-name) - Optional String<br>Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain
+<a id="deep-6da59a"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="default-rr-set-group-mx-record-values"></a>&#x2022; [`values`](#default-rr-set-group-mx-record-values) - Optional Block<br>MX Record Value<br>See [Values](#default-rr-set-group-mx-record-values) below.
+#### Primary Default Rr Set Group Sshfp Record
 
-#### Default Rr Set Group Mx Record Values
+A [`sshfp_record`](#record-cc1927) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-A [`values`](#default-rr-set-group-mx-record-values) block (within [`default_rr_set_group.mx_record`](#default-rr-set-group-mx-record)) supports the following:
+<a id="name-dba42e"></a>&#x2022; [`name`](#name-dba42e) - Optional String<br>Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="domain-a4ae87"></a>&#x2022; [`domain`](#domain-a4ae87) - Optional String<br>Domain. Mail exchanger domain name, please provide the full hostname, for example: mail.example.com
+<a id="values-eea3f2"></a>&#x2022; [`values`](#values-eea3f2) - Optional Block<br>SSHFP Value<br>See [Values](#values-eea3f2) below.
 
-<a id="priority-4f0778"></a>&#x2022; [`priority`](#priority-4f0778) - Optional Number<br>Priority. Mail exchanger priority code
+#### Primary Default Rr Set Group Sshfp Record Values
 
-#### Default Rr Set Group Naptr Record
+<a id="deep-240021"></a>Deeply nested **Values** block collapsed for readability.
 
-A [`naptr_record`](#default-rr-set-group-naptr-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+#### Primary Default Rr Set Group Sshfp Record Values Sha1 Fingerprint
 
-<a id="default-rr-set-group-naptr-record-name"></a>&#x2022; [`name`](#default-rr-set-group-naptr-record-name) - Optional String<br>Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain
+<a id="deep-080f3e"></a>Deeply nested **Fingerprint** block collapsed for readability.
 
-<a id="values-fde7c6"></a>&#x2022; [`values`](#values-fde7c6) - Optional Block<br>NAPTR Value<br>See [Values](#values-fde7c6) below.
+#### Primary Default Rr Set Group Sshfp Record Values Sha256 Fingerprint
 
-#### Default Rr Set Group Naptr Record Values
+<a id="deep-95a797"></a>Deeply nested **Fingerprint** block collapsed for readability.
 
-A [`values`](#values-fde7c6) block (within [`default_rr_set_group.naptr_record`](#default-rr-set-group-naptr-record)) supports the following:
+#### Primary Default Rr Set Group Tlsa Record
 
-<a id="flags-904a84"></a>&#x2022; [`flags`](#flags-904a84) - Optional String<br>Flags. Flag to control aspects of the rewriting and interpretation of the fields in the record. At this time only four flags, S/A/U/P, are defined
+A [`tlsa_record`](#record-db5883) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-<a id="order-5ee848"></a>&#x2022; [`order`](#order-5ee848) - Optional Number<br>Order. Order in which the NAPTR records must be processed. A lower number indicates a higher preference
+<a id="name-687010"></a>&#x2022; [`name`](#name-687010) - Optional String<br>Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="preference-37bf8e"></a>&#x2022; [`preference`](#preference-37bf8e) - Optional Number<br>Preference. Preference when records have the same order. A lower number indicates a higher preference
+<a id="values-49e48c"></a>&#x2022; [`values`](#values-49e48c) - Optional Block<br>TLSA Value<br>See [Values](#values-49e48c) below.
 
-<a id="regexp-230554"></a>&#x2022; [`regexp`](#regexp-230554) - Optional String<br>Regular Expression. Regular expression to construct the next domain name to lookup
+#### Primary Default Rr Set Group Tlsa Record Values
 
-<a id="replacement-e3a567"></a>&#x2022; [`replacement`](#replacement-e3a567) - Optional String<br>Replacement. The next NAME to query for NAPTR, SRV, or address records depending on the value of the flags field
+<a id="deep-1962b2"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="service-7fd00b"></a>&#x2022; [`service`](#service-7fd00b) - Optional String<br>Protocol Resolution Service. Specifies the service(s) available down this rewrite path
+#### Primary Default Rr Set Group Txt Record
 
-#### Default Rr Set Group Ns Record
+A [`txt_record`](#primary-default-rr-set-group-txt-record) block (within [`primary.default_rr_set_group`](#primary-default-rr-set-group)) supports the following:
 
-A [`ns_record`](#default-rr-set-group-ns-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="name-ea3275"></a>&#x2022; [`name`](#name-ea3275) - Optional String<br>Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain
 
-<a id="default-rr-set-group-ns-record-name"></a>&#x2022; [`name`](#default-rr-set-group-ns-record-name) - Optional String<br>Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain
+<a id="values-49770a"></a>&#x2022; [`values`](#values-49770a) - Optional List<br>Text
 
-<a id="default-rr-set-group-ns-record-values"></a>&#x2022; [`values`](#default-rr-set-group-ns-record-values) - Optional List<br>Name Servers
+#### Primary Dnssec Mode
 
-#### Default Rr Set Group Ptr Record
+A [`dnssec_mode`](#primary-dnssec-mode) block (within [`primary`](#primary)) supports the following:
 
-A [`ptr_record`](#default-rr-set-group-ptr-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="primary-dnssec-mode-disable"></a>&#x2022; [`disable`](#primary-dnssec-mode-disable) - Optional Block<br>Enable this option
 
-<a id="default-rr-set-group-ptr-record-name"></a>&#x2022; [`name`](#default-rr-set-group-ptr-record-name) - Optional String<br>Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain
+<a id="primary-dnssec-mode-enable"></a>&#x2022; [`enable`](#primary-dnssec-mode-enable) - Optional Block<br>Enable. DNSSEC enable
 
-<a id="default-rr-set-group-ptr-record-values"></a>&#x2022; [`values`](#default-rr-set-group-ptr-record-values) - Optional List<br>Domain Name
+#### Primary Rr Set Group
 
-#### Default Rr Set Group Srv Record
+A [`rr_set_group`](#primary-rr-set-group) block (within [`primary`](#primary)) supports the following:
 
-A [`srv_record`](#default-rr-set-group-srv-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="primary-rr-set-group-metadata"></a>&#x2022; [`metadata`](#primary-rr-set-group-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#primary-rr-set-group-metadata) below.
 
-<a id="default-rr-set-group-srv-record-name"></a>&#x2022; [`name`](#default-rr-set-group-srv-record-name) - Optional String<br>Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain
+<a id="primary-rr-set-group-rr-set"></a>&#x2022; [`rr_set`](#primary-rr-set-group-rr-set) - Optional Block<br>Resource Record Sets. Collection of DNS resource record sets<br>See [Rr Set](#primary-rr-set-group-rr-set) below.
 
-<a id="default-rr-set-group-srv-record-values"></a>&#x2022; [`values`](#default-rr-set-group-srv-record-values) - Optional Block<br>SRV Value<br>See [Values](#default-rr-set-group-srv-record-values) below.
+#### Primary Rr Set Group Metadata
 
-#### Default Rr Set Group Srv Record Values
+A [`metadata`](#primary-rr-set-group-metadata) block (within [`primary.rr_set_group`](#primary-rr-set-group)) supports the following:
 
-A [`values`](#default-rr-set-group-srv-record-values) block (within [`default_rr_set_group.srv_record`](#default-rr-set-group-srv-record)) supports the following:
+<a id="spec-383031"></a>&#x2022; [`description_spec`](#spec-383031) - Optional String<br>Description. Human readable description
 
-<a id="port-7a5759"></a>&#x2022; [`port`](#port-7a5759) - Optional Number<br>Port. Port on which the service can be found
+<a id="primary-rr-set-group-metadata-name"></a>&#x2022; [`name`](#primary-rr-set-group-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
 
-<a id="priority-7eede1"></a>&#x2022; [`priority`](#priority-7eede1) - Optional Number<br>Priority. Priority of the target. A lower number indicates a higher preference
+#### Primary Rr Set Group Rr Set
 
-<a id="target-34fc01"></a>&#x2022; [`target`](#target-34fc01) - Optional String<br>Target. Hostname of the machine providing the service
+A [`rr_set`](#primary-rr-set-group-rr-set) block (within [`primary.rr_set_group`](#primary-rr-set-group)) supports the following:
 
-<a id="weight-1944e8"></a>&#x2022; [`weight`](#weight-1944e8) - Optional Number<br>Weight. Weight of the target. A higher number indicates a higher preference
+<a id="primary-rr-set-group-rr-set-a-record"></a>&#x2022; [`a_record`](#primary-rr-set-group-rr-set-a-record) - Optional Block<br>DNSAResourceRecord. A Records<br>See [A Record](#primary-rr-set-group-rr-set-a-record) below.
 
-#### Default Rr Set Group Sshfp Record
+<a id="primary-rr-set-group-rr-set-aaaa-record"></a>&#x2022; [`aaaa_record`](#primary-rr-set-group-rr-set-aaaa-record) - Optional Block<br>DNSAAAAResourceRecord. RecordSet for AAAA Records<br>See [Aaaa Record](#primary-rr-set-group-rr-set-aaaa-record) below.
 
-A [`sshfp_record`](#default-rr-set-group-sshfp-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="record-5fff7a"></a>&#x2022; [`afsdb_record`](#record-5fff7a) - Optional Block<br>DNS AFSDB Record. DNS AFSDB Record<br>See [Afsdb Record](#record-5fff7a) below.
 
-<a id="default-rr-set-group-sshfp-record-name"></a>&#x2022; [`name`](#default-rr-set-group-sshfp-record-name) - Optional String<br>Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain
+<a id="record-62faa8"></a>&#x2022; [`alias_record`](#record-62faa8) - Optional Block<br>DNSAliasResourceRecord<br>See [Alias Record](#record-62faa8) below.
 
-<a id="values-b57c43"></a>&#x2022; [`values`](#values-b57c43) - Optional Block<br>SSHFP Value<br>See [Values](#values-b57c43) below.
+<a id="primary-rr-set-group-rr-set-caa-record"></a>&#x2022; [`caa_record`](#primary-rr-set-group-rr-set-caa-record) - Optional Block<br>DNSCAAResourceRecord<br>See [Caa Record](#primary-rr-set-group-rr-set-caa-record) below.
 
-#### Default Rr Set Group Sshfp Record Values
+<a id="primary-rr-set-group-rr-set-cds-record"></a>&#x2022; [`cds_record`](#primary-rr-set-group-rr-set-cds-record) - Optional Block<br>DNS CDS Record. DNS CDS Record<br>See [Cds Record](#primary-rr-set-group-rr-set-cds-record) below.
 
-A [`values`](#values-b57c43) block (within [`default_rr_set_group.sshfp_record`](#default-rr-set-group-sshfp-record)) supports the following:
+<a id="primary-rr-set-group-rr-set-cert-record"></a>&#x2022; [`cert_record`](#primary-rr-set-group-rr-set-cert-record) - Optional Block<br>DNS CERT Record. DNS CERT Record<br>See [Cert Record](#primary-rr-set-group-rr-set-cert-record) below.
 
-<a id="algorithm-b713b4"></a>&#x2022; [`algorithm`](#algorithm-b713b4) - Optional String  Defaults to `UNSPECIFIEDALGORITHM`<br>Possible values are `UNSPECIFIEDALGORITHM`, `RSA`, `DSA`, `ECDSA`, `Ed25519`, `Ed448`<br>[Enum: UNSPECIFIEDALGORITHM|RSA|DSA|ECDSA|Ed25519|Ed448] SSHFP Algorithm. SSHFP algorithm value must be compatible with the specified algorithm. - UNSPECIFIEDALGORITHM: UNSPECIFIEDALGORITHM - RSA: RSA - DSA: DSA - ECDSA: ECDSA - Ed25519: Ed25519 - Ed448: Ed448
+<a id="record-c00906"></a>&#x2022; [`cname_record`](#record-c00906) - Optional Block<br>DNSCNAMEResourceRecord<br>See [Cname Record](#record-c00906) below.
 
-<a id="fingerprint-ba34ae"></a>&#x2022; [`sha1_fingerprint`](#fingerprint-ba34ae) - Optional Block<br>SHA1 Fingerprint<br>See [Sha1 Fingerprint](#fingerprint-ba34ae) below.
+<a id="spec-fe6497"></a>&#x2022; [`description_spec`](#spec-fe6497) - Optional String<br>Comment
 
-<a id="fingerprint-c92c2b"></a>&#x2022; [`sha256_fingerprint`](#fingerprint-c92c2b) - Optional Block<br>SHA256 Fingerprint<br>See [Sha256 Fingerprint](#fingerprint-c92c2b) below.
+<a id="primary-rr-set-group-rr-set-ds-record"></a>&#x2022; [`ds_record`](#primary-rr-set-group-rr-set-ds-record) - Optional Block<br>DNS DS Record. DNS DS Record<br>See [Ds Record](#primary-rr-set-group-rr-set-ds-record) below.
 
-#### Default Rr Set Group Sshfp Record Values Sha1 Fingerprint
+<a id="record-9b288e"></a>&#x2022; [`eui48_record`](#record-9b288e) - Optional Block<br>DNS EUI48 Record. DNS EUI48 Record<br>See [Eui48 Record](#record-9b288e) below.
 
-<a id="deep-f9dcc7"></a>Deeply nested **Fingerprint** block collapsed for readability.
+<a id="record-4ddc4d"></a>&#x2022; [`eui64_record`](#record-4ddc4d) - Optional Block<br>DNS EUI64 Record. DNS EUI64 Record<br>See [Eui64 Record](#record-4ddc4d) below.
 
-#### Default Rr Set Group Sshfp Record Values Sha256 Fingerprint
+<a id="primary-rr-set-group-rr-set-lb-record"></a>&#x2022; [`lb_record`](#primary-rr-set-group-rr-set-lb-record) - Optional Block<br>DNS Load Balancer Record. DNS Load Balancer Record<br>See [LB Record](#primary-rr-set-group-rr-set-lb-record) below.
 
-<a id="deep-28c457"></a>Deeply nested **Fingerprint** block collapsed for readability.
+<a id="primary-rr-set-group-rr-set-loc-record"></a>&#x2022; [`loc_record`](#primary-rr-set-group-rr-set-loc-record) - Optional Block<br>DNS LOC Record. DNS LOC Record<br>See [Loc Record](#primary-rr-set-group-rr-set-loc-record) below.
 
-#### Default Rr Set Group Tlsa Record
+<a id="primary-rr-set-group-rr-set-mx-record"></a>&#x2022; [`mx_record`](#primary-rr-set-group-rr-set-mx-record) - Optional Block<br>DNSMXResourceRecord<br>See [Mx Record](#primary-rr-set-group-rr-set-mx-record) below.
 
-A [`tlsa_record`](#default-rr-set-group-tlsa-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+<a id="record-8d4520"></a>&#x2022; [`naptr_record`](#record-8d4520) - Optional Block<br>DNS NAPTR Record. DNS NAPTR Record<br>See [Naptr Record](#record-8d4520) below.
 
-<a id="default-rr-set-group-tlsa-record-name"></a>&#x2022; [`name`](#default-rr-set-group-tlsa-record-name) - Optional String<br>Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain
+<a id="primary-rr-set-group-rr-set-ns-record"></a>&#x2022; [`ns_record`](#primary-rr-set-group-rr-set-ns-record) - Optional Block<br>DNSNSResourceRecord<br>See [Ns Record](#primary-rr-set-group-rr-set-ns-record) below.
 
-<a id="default-rr-set-group-tlsa-record-values"></a>&#x2022; [`values`](#default-rr-set-group-tlsa-record-values) - Optional Block<br>TLSA Value<br>See [Values](#default-rr-set-group-tlsa-record-values) below.
+<a id="primary-rr-set-group-rr-set-ptr-record"></a>&#x2022; [`ptr_record`](#primary-rr-set-group-rr-set-ptr-record) - Optional Block<br>DNSPTRResourceRecord<br>See [Ptr Record](#primary-rr-set-group-rr-set-ptr-record) below.
 
-#### Default Rr Set Group Tlsa Record Values
+<a id="primary-rr-set-group-rr-set-srv-record"></a>&#x2022; [`srv_record`](#primary-rr-set-group-rr-set-srv-record) - Optional Block<br>DNSSRVResourceRecord<br>See [Srv Record](#primary-rr-set-group-rr-set-srv-record) below.
 
-A [`values`](#default-rr-set-group-tlsa-record-values) block (within [`default_rr_set_group.tlsa_record`](#default-rr-set-group-tlsa-record)) supports the following:
+<a id="record-736138"></a>&#x2022; [`sshfp_record`](#record-736138) - Optional Block<br>DNS SSHFP Record. DNS SSHFP Record<br>See [Sshfp Record](#record-736138) below.
 
-<a id="data-d30e06"></a>&#x2022; [`certificate_association_data`](#data-d30e06) - Optional String<br>Certificate Association Data. The actual data to be matched given the settings of the other fields
+<a id="primary-rr-set-group-rr-set-tlsa-record"></a>&#x2022; [`tlsa_record`](#primary-rr-set-group-rr-set-tlsa-record) - Optional Block<br>DNS TLSA Record. DNS TLSA Record<br>See [Tlsa Record](#primary-rr-set-group-rr-set-tlsa-record) below.
 
-<a id="usage-3b6749"></a>&#x2022; [`certificate_usage`](#usage-3b6749) - Optional String  Defaults to `CertificateAuthorityConstraint`<br>Possible values are `CertificateAuthorityConstraint`, `ServiceCertificateConstraint`, `TrustAnchorAssertion`, `DomainIssuedCertificate`<br>[Enum: CertificateAuthorityConstraint|ServiceCertificateConstraint|TrustAnchorAssertion|DomainIssuedCertificate] TLSA Record Certificate Usage. - CertificateAuthorityConstraint: Certificate Authority Constraint - ServiceCertificateConstraint: Service Certificate Constraint - TrustAnchorAssertion: Trust Anchor Assertion - DomainIssuedCertificate: Domain Issued Certificate
+<a id="primary-rr-set-group-rr-set-ttl"></a>&#x2022; [`ttl`](#primary-rr-set-group-rr-set-ttl) - Optional Number<br>Time to live
 
-<a id="type-7843b2"></a>&#x2022; [`matching_type`](#type-7843b2) - Optional String  Defaults to `NoHash`<br>Possible values are `NoHash`, `SHA256`, `SHA512`<br>[Enum: NoHash|SHA256|SHA512] TLSA Record Matching Type. - NoHash: No Hash - SHA256: SHA-256 - SHA512: SHA-512
+<a id="primary-rr-set-group-rr-set-txt-record"></a>&#x2022; [`txt_record`](#primary-rr-set-group-rr-set-txt-record) - Optional Block<br>DNSTXTResourceRecord<br>See [Txt Record](#primary-rr-set-group-rr-set-txt-record) below.
 
-<a id="selector-a3557d"></a>&#x2022; [`selector`](#selector-a3557d) - Optional String  Defaults to `FullCertificate`<br>Possible values are `FullCertificate`, `UseSubjectPublicKey`<br>[Enum: FullCertificate|UseSubjectPublicKey] TLSA Record Selector. - FullCertificate: Full Certificate - UseSubjectPublicKey: Use Subject Public Key
+#### Primary Rr Set Group Rr Set A Record
 
-#### Default Rr Set Group Txt Record
+<a id="deep-533e88"></a>Deeply nested **Record** block collapsed for readability.
 
-A [`txt_record`](#default-rr-set-group-txt-record) block (within [`default_rr_set_group`](#default-rr-set-group)) supports the following:
+#### Primary Rr Set Group Rr Set Aaaa Record
 
-<a id="default-rr-set-group-txt-record-name"></a>&#x2022; [`name`](#default-rr-set-group-txt-record-name) - Optional String<br>Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain
+<a id="deep-42bc39"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="default-rr-set-group-txt-record-values"></a>&#x2022; [`values`](#default-rr-set-group-txt-record-values) - Optional List<br>Text
+#### Primary Rr Set Group Rr Set Afsdb Record
 
-#### Dnssec Mode
+<a id="deep-477f8d"></a>Deeply nested **Record** block collapsed for readability.
 
-A [`dnssec_mode`](#dnssec-mode) block supports the following:
+#### Primary Rr Set Group Rr Set Afsdb Record Values
 
-<a id="dnssec-mode-disable"></a>&#x2022; [`disable`](#dnssec-mode-disable) - Optional Block<br>Enable this option
+<a id="deep-7e2a54"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="dnssec-mode-enable"></a>&#x2022; [`enable`](#dnssec-mode-enable) - Optional Block<br>Enable. DNSSEC enable
+#### Primary Rr Set Group Rr Set Alias Record
 
-#### Rr Set Group
+<a id="deep-482a6d"></a>Deeply nested **Record** block collapsed for readability.
 
-A [`rr_set_group`](#rr-set-group) block supports the following:
+#### Primary Rr Set Group Rr Set Caa Record
 
-<a id="rr-set-group-metadata"></a>&#x2022; [`metadata`](#rr-set-group-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rr-set-group-metadata) below.
+<a id="deep-66ae76"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="rr-set-group-rr-set"></a>&#x2022; [`rr_set`](#rr-set-group-rr-set) - Optional Block<br>Resource Record Sets. Collection of DNS resource record sets<br>See [Rr Set](#rr-set-group-rr-set) below.
+#### Primary Rr Set Group Rr Set Caa Record Values
 
-#### Rr Set Group Metadata
+<a id="deep-c100ec"></a>Deeply nested **Values** block collapsed for readability.
 
-A [`metadata`](#rr-set-group-metadata) block (within [`rr_set_group`](#rr-set-group)) supports the following:
+#### Primary Rr Set Group Rr Set Cds Record
 
-<a id="rr-set-group-metadata-description-spec"></a>&#x2022; [`description_spec`](#rr-set-group-metadata-description-spec) - Optional String<br>Description. Human readable description
+<a id="deep-89f1fe"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="rr-set-group-metadata-name"></a>&#x2022; [`name`](#rr-set-group-metadata-name) - Optional String<br>Name. This is the name of the message. The value of name has to follow DNS-1035 format
+#### Primary Rr Set Group Rr Set Cds Record Values
 
-#### Rr Set Group Rr Set
+<a id="deep-ca260e"></a>Deeply nested **Values** block collapsed for readability.
 
-A [`rr_set`](#rr-set-group-rr-set) block (within [`rr_set_group`](#rr-set-group)) supports the following:
+#### Primary Rr Set Group Rr Set Cds Record Values Sha1 Digest
 
-<a id="rr-set-group-rr-set-a-record"></a>&#x2022; [`a_record`](#rr-set-group-rr-set-a-record) - Optional Block<br>DNSAResourceRecord. A Records<br>See [A Record](#rr-set-group-rr-set-a-record) below.
+<a id="deep-8ef0c5"></a>Deeply nested **Digest** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-aaaa-record"></a>&#x2022; [`aaaa_record`](#rr-set-group-rr-set-aaaa-record) - Optional Block<br>DNSAAAAResourceRecord. RecordSet for AAAA Records<br>See [Aaaa Record](#rr-set-group-rr-set-aaaa-record) below.
+#### Primary Rr Set Group Rr Set Cds Record Values Sha256 Digest
 
-<a id="rr-set-group-rr-set-afsdb-record"></a>&#x2022; [`afsdb_record`](#rr-set-group-rr-set-afsdb-record) - Optional Block<br>DNS AFSDB Record. DNS AFSDB Record<br>See [Afsdb Record](#rr-set-group-rr-set-afsdb-record) below.
+<a id="deep-affe0f"></a>Deeply nested **Digest** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-alias-record"></a>&#x2022; [`alias_record`](#rr-set-group-rr-set-alias-record) - Optional Block<br>DNSAliasResourceRecord<br>See [Alias Record](#rr-set-group-rr-set-alias-record) below.
+#### Primary Rr Set Group Rr Set Cds Record Values Sha384 Digest
 
-<a id="rr-set-group-rr-set-caa-record"></a>&#x2022; [`caa_record`](#rr-set-group-rr-set-caa-record) - Optional Block<br>DNSCAAResourceRecord<br>See [Caa Record](#rr-set-group-rr-set-caa-record) below.
+<a id="deep-023fe9"></a>Deeply nested **Digest** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-cds-record"></a>&#x2022; [`cds_record`](#rr-set-group-rr-set-cds-record) - Optional Block<br>DNS CDS Record. DNS CDS Record<br>See [Cds Record](#rr-set-group-rr-set-cds-record) below.
+#### Primary Rr Set Group Rr Set Cert Record
 
-<a id="rr-set-group-rr-set-cert-record"></a>&#x2022; [`cert_record`](#rr-set-group-rr-set-cert-record) - Optional Block<br>DNS CERT Record. DNS CERT Record<br>See [Cert Record](#rr-set-group-rr-set-cert-record) below.
+<a id="deep-91c89f"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-cname-record"></a>&#x2022; [`cname_record`](#rr-set-group-rr-set-cname-record) - Optional Block<br>DNSCNAMEResourceRecord<br>See [Cname Record](#rr-set-group-rr-set-cname-record) below.
+#### Primary Rr Set Group Rr Set Cert Record Values
 
-<a id="rr-set-group-rr-set-description-spec"></a>&#x2022; [`description_spec`](#rr-set-group-rr-set-description-spec) - Optional String<br>Comment
+<a id="deep-d23a7c"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-ds-record"></a>&#x2022; [`ds_record`](#rr-set-group-rr-set-ds-record) - Optional Block<br>DNS DS Record. DNS DS Record<br>See [Ds Record](#rr-set-group-rr-set-ds-record) below.
+#### Primary Rr Set Group Rr Set Cname Record
 
-<a id="rr-set-group-rr-set-eui48-record"></a>&#x2022; [`eui48_record`](#rr-set-group-rr-set-eui48-record) - Optional Block<br>DNS EUI48 Record. DNS EUI48 Record<br>See [Eui48 Record](#rr-set-group-rr-set-eui48-record) below.
+<a id="deep-ebf6fd"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-eui64-record"></a>&#x2022; [`eui64_record`](#rr-set-group-rr-set-eui64-record) - Optional Block<br>DNS EUI64 Record. DNS EUI64 Record<br>See [Eui64 Record](#rr-set-group-rr-set-eui64-record) below.
+#### Primary Rr Set Group Rr Set Ds Record
 
-<a id="rr-set-group-rr-set-lb-record"></a>&#x2022; [`lb_record`](#rr-set-group-rr-set-lb-record) - Optional Block<br>DNS Load Balancer Record. DNS Load Balancer Record<br>See [LB Record](#rr-set-group-rr-set-lb-record) below.
+<a id="deep-56b2e6"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-loc-record"></a>&#x2022; [`loc_record`](#rr-set-group-rr-set-loc-record) - Optional Block<br>DNS LOC Record. DNS LOC Record<br>See [Loc Record](#rr-set-group-rr-set-loc-record) below.
+#### Primary Rr Set Group Rr Set Ds Record Values
 
-<a id="rr-set-group-rr-set-mx-record"></a>&#x2022; [`mx_record`](#rr-set-group-rr-set-mx-record) - Optional Block<br>DNSMXResourceRecord<br>See [Mx Record](#rr-set-group-rr-set-mx-record) below.
+<a id="deep-cc2512"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-naptr-record"></a>&#x2022; [`naptr_record`](#rr-set-group-rr-set-naptr-record) - Optional Block<br>DNS NAPTR Record. DNS NAPTR Record<br>See [Naptr Record](#rr-set-group-rr-set-naptr-record) below.
+#### Primary Rr Set Group Rr Set Ds Record Values Sha1 Digest
 
-<a id="rr-set-group-rr-set-ns-record"></a>&#x2022; [`ns_record`](#rr-set-group-rr-set-ns-record) - Optional Block<br>DNSNSResourceRecord<br>See [Ns Record](#rr-set-group-rr-set-ns-record) below.
+<a id="deep-58123e"></a>Deeply nested **Digest** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-ptr-record"></a>&#x2022; [`ptr_record`](#rr-set-group-rr-set-ptr-record) - Optional Block<br>DNSPTRResourceRecord<br>See [Ptr Record](#rr-set-group-rr-set-ptr-record) below.
+#### Primary Rr Set Group Rr Set Ds Record Values Sha256 Digest
 
-<a id="rr-set-group-rr-set-srv-record"></a>&#x2022; [`srv_record`](#rr-set-group-rr-set-srv-record) - Optional Block<br>DNSSRVResourceRecord<br>See [Srv Record](#rr-set-group-rr-set-srv-record) below.
+<a id="deep-551194"></a>Deeply nested **Digest** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-sshfp-record"></a>&#x2022; [`sshfp_record`](#rr-set-group-rr-set-sshfp-record) - Optional Block<br>DNS SSHFP Record. DNS SSHFP Record<br>See [Sshfp Record](#rr-set-group-rr-set-sshfp-record) below.
+#### Primary Rr Set Group Rr Set Ds Record Values Sha384 Digest
 
-<a id="rr-set-group-rr-set-tlsa-record"></a>&#x2022; [`tlsa_record`](#rr-set-group-rr-set-tlsa-record) - Optional Block<br>DNS TLSA Record. DNS TLSA Record<br>See [Tlsa Record](#rr-set-group-rr-set-tlsa-record) below.
+<a id="deep-7a7126"></a>Deeply nested **Digest** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-ttl"></a>&#x2022; [`ttl`](#rr-set-group-rr-set-ttl) - Optional Number<br>Time to live
+#### Primary Rr Set Group Rr Set Eui48 Record
 
-<a id="rr-set-group-rr-set-txt-record"></a>&#x2022; [`txt_record`](#rr-set-group-rr-set-txt-record) - Optional Block<br>DNSTXTResourceRecord<br>See [Txt Record](#rr-set-group-rr-set-txt-record) below.
+<a id="deep-407753"></a>Deeply nested **Record** block collapsed for readability.
 
-#### Rr Set Group Rr Set A Record
+#### Primary Rr Set Group Rr Set Eui64 Record
 
-An [`a_record`](#rr-set-group-rr-set-a-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+<a id="deep-b94961"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-a-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-a-record-name) - Optional String<br>Record Name (Excluding Domain name). A Record name, please provide only the specific subdomain or record name without the base domain
+#### Primary Rr Set Group Rr Set LB Record
 
-<a id="rr-set-group-rr-set-a-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-a-record-values) - Optional List<br>IPv4 Addresses. A valid IPv4 address, for example: 1.1.1.1
+<a id="deep-6258c5"></a>Deeply nested **Record** block collapsed for readability.
 
-#### Rr Set Group Rr Set Aaaa Record
+#### Primary Rr Set Group Rr Set LB Record Value
 
-An [`aaaa_record`](#rr-set-group-rr-set-aaaa-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+<a id="deep-96233f"></a>Deeply nested **Value** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-aaaa-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-aaaa-record-name) - Optional String<br>Record Name (Excluding Domain name). AAAA Record name, please provide only the specific subdomain or record name without the base domain
+#### Primary Rr Set Group Rr Set Loc Record
 
-<a id="rr-set-group-rr-set-aaaa-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-aaaa-record-values) - Optional List<br>IPv6 Addresses. A valid IPv6 address, for example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
+<a id="deep-fdb347"></a>Deeply nested **Record** block collapsed for readability.
 
-#### Rr Set Group Rr Set Afsdb Record
+#### Primary Rr Set Group Rr Set Loc Record Values
 
-An [`afsdb_record`](#rr-set-group-rr-set-afsdb-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+<a id="deep-706e2d"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-afsdb-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-afsdb-record-name) - Optional String<br>Record Name (Excluding Domain name). AFSDB Record name, please provide only the specific subdomain or record name without the base domain
+#### Primary Rr Set Group Rr Set Mx Record
 
-<a id="rr-set-group-rr-set-afsdb-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-afsdb-record-values) - Optional Block<br>AFSDB Value<br>See [Values](#rr-set-group-rr-set-afsdb-record-values) below.
+<a id="deep-7baabe"></a>Deeply nested **Record** block collapsed for readability.
 
-#### Rr Set Group Rr Set Afsdb Record Values
+#### Primary Rr Set Group Rr Set Mx Record Values
 
-<a id="deep-0c9df7"></a>Deeply nested **Values** block collapsed for readability.
+<a id="deep-cc2223"></a>Deeply nested **Values** block collapsed for readability.
 
-#### Rr Set Group Rr Set Alias Record
+#### Primary Rr Set Group Rr Set Naptr Record
 
-An [`alias_record`](#rr-set-group-rr-set-alias-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+<a id="deep-4722da"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-alias-record-value"></a>&#x2022; [`value`](#rr-set-group-rr-set-alias-record-value) - Optional String<br>Domain. A valid domain name, for example: example.com
+#### Primary Rr Set Group Rr Set Naptr Record Values
 
-#### Rr Set Group Rr Set Caa Record
+<a id="deep-978399"></a>Deeply nested **Values** block collapsed for readability.
 
-A [`caa_record`](#rr-set-group-rr-set-caa-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+#### Primary Rr Set Group Rr Set Ns Record
 
-<a id="rr-set-group-rr-set-caa-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-caa-record-name) - Optional String<br>Record Name (Excluding Domain name). CAA Record name, please provide only the specific subdomain or record name without the base domain
+<a id="deep-d1e54f"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-caa-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-caa-record-values) - Optional Block<br>CAA Record Value<br>See [Values](#rr-set-group-rr-set-caa-record-values) below.
+#### Primary Rr Set Group Rr Set Ptr Record
 
-#### Rr Set Group Rr Set Caa Record Values
+<a id="deep-22ef4c"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="deep-023199"></a>Deeply nested **Values** block collapsed for readability.
+#### Primary Rr Set Group Rr Set Srv Record
 
-#### Rr Set Group Rr Set Cds Record
+<a id="deep-fd89f4"></a>Deeply nested **Record** block collapsed for readability.
 
-A [`cds_record`](#rr-set-group-rr-set-cds-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+#### Primary Rr Set Group Rr Set Srv Record Values
 
-<a id="rr-set-group-rr-set-cds-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-cds-record-name) - Optional String<br>Record Name (Excluding Domain name). CDS Record name, please provide only the specific subdomain or record name without the base domain
+<a id="deep-468bb2"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-cds-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-cds-record-values) - Optional Block<br>DS Value<br>See [Values](#rr-set-group-rr-set-cds-record-values) below.
+#### Primary Rr Set Group Rr Set Sshfp Record
 
-#### Rr Set Group Rr Set Cds Record Values
+<a id="deep-902aa9"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="deep-7ca8d1"></a>Deeply nested **Values** block collapsed for readability.
+#### Primary Rr Set Group Rr Set Sshfp Record Values
 
-#### Rr Set Group Rr Set Cds Record Values Sha1 Digest
+<a id="deep-8adb01"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="deep-017276"></a>Deeply nested **Digest** block collapsed for readability.
+#### Primary Rr Set Group Rr Set Sshfp Record Values Sha1 Fingerprint
 
-#### Rr Set Group Rr Set Cds Record Values Sha256 Digest
+<a id="deep-2e2d00"></a>Deeply nested **Fingerprint** block collapsed for readability.
 
-<a id="deep-299d6c"></a>Deeply nested **Digest** block collapsed for readability.
+#### Primary Rr Set Group Rr Set Sshfp Record Values Sha256 Fingerprint
 
-#### Rr Set Group Rr Set Cds Record Values Sha384 Digest
+<a id="deep-af6d05"></a>Deeply nested **Fingerprint** block collapsed for readability.
 
-<a id="deep-ff4ac0"></a>Deeply nested **Digest** block collapsed for readability.
+#### Primary Rr Set Group Rr Set Tlsa Record
 
-#### Rr Set Group Rr Set Cert Record
+<a id="deep-5be176"></a>Deeply nested **Record** block collapsed for readability.
 
-A [`cert_record`](#rr-set-group-rr-set-cert-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+#### Primary Rr Set Group Rr Set Tlsa Record Values
 
-<a id="rr-set-group-rr-set-cert-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-cert-record-name) - Optional String<br>Record Name (Excluding Domain name). CERT Record name, please provide only the specific subdomain or record name without the base domain
+<a id="deep-a25b62"></a>Deeply nested **Values** block collapsed for readability.
 
-<a id="rr-set-group-rr-set-cert-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-cert-record-values) - Optional Block<br>CERT Value<br>See [Values](#rr-set-group-rr-set-cert-record-values) below.
+#### Primary Rr Set Group Rr Set Txt Record
 
-#### Rr Set Group Rr Set Cert Record Values
+<a id="deep-6399bb"></a>Deeply nested **Record** block collapsed for readability.
 
-<a id="deep-3a3e6d"></a>Deeply nested **Values** block collapsed for readability.
+#### Primary Soa Parameters
 
-#### Rr Set Group Rr Set Cname Record
+A [`soa_parameters`](#primary-soa-parameters) block (within [`primary`](#primary)) supports the following:
 
-A [`cname_record`](#rr-set-group-rr-set-cname-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+<a id="primary-soa-parameters-expire"></a>&#x2022; [`expire`](#primary-soa-parameters-expire) - Optional Number<br>Expire. expire value indicates when secondary nameservers should stop answering request for this zone if primary does not respond
 
-<a id="rr-set-group-rr-set-cname-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-cname-record-name) - Optional String<br>Record Name (Excluding Domain name). CName Record name, please provide only the specific subdomain or record name without the base domain
+<a id="primary-soa-parameters-negative-ttl"></a>&#x2022; [`negative_ttl`](#primary-soa-parameters-negative-ttl) - Optional Number<br>Negative TTL. negative TTL value indicates how long to cache non-existent resource record for this zone
 
-<a id="rr-set-group-rr-set-cname-record-value"></a>&#x2022; [`value`](#rr-set-group-rr-set-cname-record-value) - Optional String<br>Domain
+<a id="primary-soa-parameters-refresh"></a>&#x2022; [`refresh`](#primary-soa-parameters-refresh) - Optional Number<br>Refresh interval. refresh value indicates when secondary nameservers should query for the SOA record to detect zone changes
 
-#### Rr Set Group Rr Set Ds Record
+<a id="primary-soa-parameters-retry"></a>&#x2022; [`retry`](#primary-soa-parameters-retry) - Optional Number<br>Retry Interval. retry value indicates when secondary nameservers should retry to request the serial number if primary does not respond
 
-A [`ds_record`](#rr-set-group-rr-set-ds-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+<a id="primary-soa-parameters-ttl"></a>&#x2022; [`ttl`](#primary-soa-parameters-ttl) - Optional Number<br>TTL. SOA record time to live (in seconds)
 
-<a id="rr-set-group-rr-set-ds-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-ds-record-name) - Optional String<br>Record Name (Excluding Domain name). DS Record name, please provide only the specific subdomain or record name without the base domain
+#### Secondary
 
-<a id="rr-set-group-rr-set-ds-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-ds-record-values) - Optional Block<br>DS Value<br>See [Values](#rr-set-group-rr-set-ds-record-values) below.
+A [`secondary`](#secondary) block supports the following:
 
-#### Rr Set Group Rr Set Ds Record Values
+<a id="secondary-primary-servers"></a>&#x2022; [`primary_servers`](#secondary-primary-servers) - Optional List<br>DNS Primary Server IP
 
-<a id="deep-bed7a2"></a>Deeply nested **Values** block collapsed for readability.
+<a id="secondary-tsig-key-algorithm"></a>&#x2022; [`tsig_key_algorithm`](#secondary-tsig-key-algorithm) - Optional String  Defaults to `UNDEFINED`<br>Possible values are `HMAC_MD5`, `UNDEFINED`, `HMAC_SHA1`, `HMAC_SHA224`, `HMAC_SHA256`, `HMAC_SHA384`, `HMAC_SHA512`<br>[Enum: HMAC_MD5|UNDEFINED|HMAC_SHA1|HMAC_SHA224|HMAC_SHA256|HMAC_SHA384|HMAC_SHA512] TSIG Key Algorithm. TSIG key value must be compatible with the specified algorithm - UNDEFINED: UNDEFINED - HMAC_MD5: HMAC_MD5 - HMAC_SHA1: HMAC_SHA1 - HMAC_SHA224: HMAC_SHA224 - HMAC_SHA256: HMAC_SHA256 - HMAC_SHA384: HMAC_SHA384 - HMAC_SHA512: HMAC_SHA512
 
-#### Rr Set Group Rr Set Ds Record Values Sha1 Digest
+<a id="secondary-tsig-key-name"></a>&#x2022; [`tsig_key_name`](#secondary-tsig-key-name) - Optional String<br>TSIG Key Name. TSIG key name as used in TSIG protocol extension
 
-<a id="deep-7eab7e"></a>Deeply nested **Digest** block collapsed for readability.
+<a id="secondary-tsig-key-value"></a>&#x2022; [`tsig_key_value`](#secondary-tsig-key-value) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Tsig Key Value](#secondary-tsig-key-value) below.
 
-#### Rr Set Group Rr Set Ds Record Values Sha256 Digest
+#### Secondary Tsig Key Value
 
-<a id="deep-a03c85"></a>Deeply nested **Digest** block collapsed for readability.
+A [`tsig_key_value`](#secondary-tsig-key-value) block (within [`secondary`](#secondary)) supports the following:
 
-#### Rr Set Group Rr Set Ds Record Values Sha384 Digest
+<a id="info-dc8549"></a>&#x2022; [`blindfold_secret_info`](#info-dc8549) - Optional Block<br>Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management<br>See [Blindfold Secret Info](#info-dc8549) below.
 
-<a id="deep-63852e"></a>Deeply nested **Digest** block collapsed for readability.
+<a id="info-712cd8"></a>&#x2022; [`clear_secret_info`](#info-712cd8) - Optional Block<br>In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted<br>See [Clear Secret Info](#info-712cd8) below.
 
-#### Rr Set Group Rr Set Eui48 Record
+#### Secondary Tsig Key Value Blindfold Secret Info
 
-An [`eui48_record`](#rr-set-group-rr-set-eui48-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+A [`blindfold_secret_info`](#info-dc8549) block (within [`secondary.tsig_key_value`](#secondary-tsig-key-value)) supports the following:
 
-<a id="rr-set-group-rr-set-eui48-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-eui48-record-name) - Optional String<br>Record Name (Excluding Domain name). EUI48 Record name, please provide only the specific subdomain or record name without the base domain
+<a id="provider-9d03fe"></a>&#x2022; [`decryption_provider`](#provider-9d03fe) - Optional String<br>Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service
 
-<a id="rr-set-group-rr-set-eui48-record-value"></a>&#x2022; [`value`](#rr-set-group-rr-set-eui48-record-value) - Optional String<br>EUI48 Identifier. A valid eui48 identifier, for example: 01-23-45-67-89-ab
+<a id="location-ef4bdb"></a>&#x2022; [`location`](#location-ef4bdb) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-#### Rr Set Group Rr Set Eui64 Record
+<a id="provider-be11a9"></a>&#x2022; [`store_provider`](#provider-be11a9) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-An [`eui64_record`](#rr-set-group-rr-set-eui64-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
+#### Secondary Tsig Key Value Clear Secret Info
 
-<a id="rr-set-group-rr-set-eui64-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-eui64-record-name) - Optional String<br>Record Name (Excluding Domain name). EUI64 Record name, please provide only the specific subdomain or record name without the base domain
+A [`clear_secret_info`](#info-712cd8) block (within [`secondary.tsig_key_value`](#secondary-tsig-key-value)) supports the following:
 
-<a id="rr-set-group-rr-set-eui64-record-value"></a>&#x2022; [`value`](#rr-set-group-rr-set-eui64-record-value) - Optional String<br>EUI64 Identifier. A valid EUI64 identifier, for example: 01-23-45-67-89-ab-cd-ef
+<a id="ref-f21028"></a>&#x2022; [`provider_ref`](#ref-f21028) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-#### Rr Set Group Rr Set LB Record
-
-A [`lb_record`](#rr-set-group-rr-set-lb-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
-
-<a id="rr-set-group-rr-set-lb-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-lb-record-name) - Optional String<br>Record Name (Excluding Domain name). Load Balancer record name (except for SRV DNS Load balancer record) should be a simple record name and not a subdomain of a subdomain
-
-<a id="rr-set-group-rr-set-lb-record-value"></a>&#x2022; [`value`](#rr-set-group-rr-set-lb-record-value) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Value](#rr-set-group-rr-set-lb-record-value) below.
-
-#### Rr Set Group Rr Set LB Record Value
-
-<a id="deep-452d60"></a>Deeply nested **Value** block collapsed for readability.
-
-#### Rr Set Group Rr Set Loc Record
-
-A [`loc_record`](#rr-set-group-rr-set-loc-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
-
-<a id="rr-set-group-rr-set-loc-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-loc-record-name) - Optional String<br>Record Name (Excluding Domain name). LOC Record name, please provide only the specific subdomain or record name without the base domain
-
-<a id="rr-set-group-rr-set-loc-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-loc-record-values) - Optional Block<br>LOC Value<br>See [Values](#rr-set-group-rr-set-loc-record-values) below.
-
-#### Rr Set Group Rr Set Loc Record Values
-
-<a id="deep-ca2134"></a>Deeply nested **Values** block collapsed for readability.
-
-#### Rr Set Group Rr Set Mx Record
-
-A [`mx_record`](#rr-set-group-rr-set-mx-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
-
-<a id="rr-set-group-rr-set-mx-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-mx-record-name) - Optional String<br>Record Name (Excluding Domain name). MX Record name, please provide only the specific subdomain or record name without the base domain
-
-<a id="rr-set-group-rr-set-mx-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-mx-record-values) - Optional Block<br>MX Record Value<br>See [Values](#rr-set-group-rr-set-mx-record-values) below.
-
-#### Rr Set Group Rr Set Mx Record Values
-
-<a id="deep-00fb0c"></a>Deeply nested **Values** block collapsed for readability.
-
-#### Rr Set Group Rr Set Naptr Record
-
-A [`naptr_record`](#rr-set-group-rr-set-naptr-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
-
-<a id="rr-set-group-rr-set-naptr-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-naptr-record-name) - Optional String<br>Record Name (Excluding Domain name). NAPTR Record name, please provide only the specific subdomain or record name without the base domain
-
-<a id="rr-set-group-rr-set-naptr-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-naptr-record-values) - Optional Block<br>NAPTR Value<br>See [Values](#rr-set-group-rr-set-naptr-record-values) below.
-
-#### Rr Set Group Rr Set Naptr Record Values
-
-<a id="deep-1dbf22"></a>Deeply nested **Values** block collapsed for readability.
-
-#### Rr Set Group Rr Set Ns Record
-
-A [`ns_record`](#rr-set-group-rr-set-ns-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
-
-<a id="rr-set-group-rr-set-ns-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-ns-record-name) - Optional String<br>Record Name (Excluding Domain name). NS Record name, please provide only the specific subdomain or record name without the base domain
-
-<a id="rr-set-group-rr-set-ns-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-ns-record-values) - Optional List<br>Name Servers
-
-#### Rr Set Group Rr Set Ptr Record
-
-A [`ptr_record`](#rr-set-group-rr-set-ptr-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
-
-<a id="rr-set-group-rr-set-ptr-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-ptr-record-name) - Optional String<br>Record Name (Excluding Domain name). PTR Record name, please provide only the specific subdomain or record name without the base domain
-
-<a id="rr-set-group-rr-set-ptr-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-ptr-record-values) - Optional List<br>Domain Name
-
-#### Rr Set Group Rr Set Srv Record
-
-A [`srv_record`](#rr-set-group-rr-set-srv-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
-
-<a id="rr-set-group-rr-set-srv-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-srv-record-name) - Optional String<br>Record Name (Excluding Domain name). SRV Record name, please provide only the specific subdomain or record name without the base domain
-
-<a id="rr-set-group-rr-set-srv-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-srv-record-values) - Optional Block<br>SRV Value<br>See [Values](#rr-set-group-rr-set-srv-record-values) below.
-
-#### Rr Set Group Rr Set Srv Record Values
-
-<a id="deep-d33071"></a>Deeply nested **Values** block collapsed for readability.
-
-#### Rr Set Group Rr Set Sshfp Record
-
-A [`sshfp_record`](#rr-set-group-rr-set-sshfp-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
-
-<a id="rr-set-group-rr-set-sshfp-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-sshfp-record-name) - Optional String<br>Record Name (Excluding Domain name). SSHFP Record name, please provide only the specific subdomain or record name without the base domain
-
-<a id="rr-set-group-rr-set-sshfp-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-sshfp-record-values) - Optional Block<br>SSHFP Value<br>See [Values](#rr-set-group-rr-set-sshfp-record-values) below.
-
-#### Rr Set Group Rr Set Sshfp Record Values
-
-<a id="deep-7499bb"></a>Deeply nested **Values** block collapsed for readability.
-
-#### Rr Set Group Rr Set Sshfp Record Values Sha1 Fingerprint
-
-<a id="deep-f54546"></a>Deeply nested **Fingerprint** block collapsed for readability.
-
-#### Rr Set Group Rr Set Sshfp Record Values Sha256 Fingerprint
-
-<a id="deep-4412a8"></a>Deeply nested **Fingerprint** block collapsed for readability.
-
-#### Rr Set Group Rr Set Tlsa Record
-
-A [`tlsa_record`](#rr-set-group-rr-set-tlsa-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
-
-<a id="rr-set-group-rr-set-tlsa-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-tlsa-record-name) - Optional String<br>Record Name (Excluding Domain name). TLSA Record name, please provide only the specific subdomain or record name without the base domain
-
-<a id="rr-set-group-rr-set-tlsa-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-tlsa-record-values) - Optional Block<br>TLSA Value<br>See [Values](#rr-set-group-rr-set-tlsa-record-values) below.
-
-#### Rr Set Group Rr Set Tlsa Record Values
-
-<a id="deep-c8a865"></a>Deeply nested **Values** block collapsed for readability.
-
-#### Rr Set Group Rr Set Txt Record
-
-A [`txt_record`](#rr-set-group-rr-set-txt-record) block (within [`rr_set_group.rr_set`](#rr-set-group-rr-set)) supports the following:
-
-<a id="rr-set-group-rr-set-txt-record-name"></a>&#x2022; [`name`](#rr-set-group-rr-set-txt-record-name) - Optional String<br>Record Name (Excluding Domain name). TXT Record name, please provide only the specific subdomain or record name without the base domain
-
-<a id="rr-set-group-rr-set-txt-record-values"></a>&#x2022; [`values`](#rr-set-group-rr-set-txt-record-values) - Optional List<br>Text
-
-#### Soa Parameters
-
-A [`soa_parameters`](#soa-parameters) block supports the following:
-
-<a id="soa-parameters-expire"></a>&#x2022; [`expire`](#soa-parameters-expire) - Optional Number<br>Expire. expire value indicates when secondary nameservers should stop answering request for this zone if primary does not respond
-
-<a id="soa-parameters-negative-ttl"></a>&#x2022; [`negative_ttl`](#soa-parameters-negative-ttl) - Optional Number<br>Negative TTL. negative TTL value indicates how long to cache non-existent resource record for this zone
-
-<a id="soa-parameters-refresh"></a>&#x2022; [`refresh`](#soa-parameters-refresh) - Optional Number<br>Refresh interval. refresh value indicates when secondary nameservers should query for the SOA record to detect zone changes
-
-<a id="soa-parameters-retry"></a>&#x2022; [`retry`](#soa-parameters-retry) - Optional Number<br>Retry Interval. retry value indicates when secondary nameservers should retry to request the serial number if primary does not respond
-
-<a id="soa-parameters-ttl"></a>&#x2022; [`ttl`](#soa-parameters-ttl) - Optional Number<br>TTL. SOA record time to live (in seconds)
+<a id="url-f87f89"></a>&#x2022; [`url`](#url-f87f89) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
 
 #### Timeouts
 

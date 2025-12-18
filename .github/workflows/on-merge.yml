@@ -717,8 +717,9 @@ jobs:
           REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
           echo "Registry response:"
           echo "$REGISTRY_RESPONSE" | jq '.'
-          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '.servers[0].version // "NOT FOUND"')
-          echo "Registry version: $REGISTRY_VERSION"
+          # Find the latest version by filtering for isLatest == true
+          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '[.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true)] | .[0].server.version // "NOT FOUND"')
+          echo "Registry latest version: $REGISTRY_VERSION"
           echo "=============================================="
 
       - name: Validate MCP Registry publish is needed
@@ -728,11 +729,15 @@ jobs:
           SERVER_NAME=$(jq -r '.name' mcp-server/server.json)
 
           # Query MCP Registry API for existing versions
+          # IMPORTANT: The API returns ALL versions. Filter for isLatest == true to find current version.
+          # Path is .servers[].server.version, NOT .servers[].version
           REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
-          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '.servers[0].version // "0.0.0"')
+          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '[.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true)] | .[0].server.version // "0.0.0"')
 
           echo "Target version: $VERSION"
-          echo "Registry version: $REGISTRY_VERSION"
+          echo "Registry latest version: $REGISTRY_VERSION"
+          echo "All versions in registry:"
+          echo "$REGISTRY_RESPONSE" | jq -r '.servers[].server.version'
 
           if [ "$VERSION" = "$REGISTRY_VERSION" ]; then
             echo "::notice::Version $VERSION already exists in MCP Registry - SKIPPING publish"
@@ -742,6 +747,46 @@ jobs:
             echo "Version $VERSION will be published to MCP Registry"
             echo "should-publish=true" >> $GITHUB_OUTPUT
           fi
+
+      # Debug: Show manifest file contents before publish attempt
+      - name: Pre-publish diagnostics
+        if: steps.mcp-check.outputs.should-publish == 'true'
+        run: |
+          echo "=============================================="
+          echo "PRE-PUBLISH DIAGNOSTICS"
+          echo "=============================================="
+          echo ""
+          echo "=== server.json contents (will be published) ==="
+          cat mcp-server/server.json | jq '.'
+          echo ""
+          echo "=== Key fields from server.json ==="
+          echo "Name: $(jq -r '.name' mcp-server/server.json)"
+          echo "Version: $(jq -r '.version' mcp-server/server.json)"
+          echo "NPM package: $(jq -r '.packages[] | select(.registryType == "npm") | .identifier' mcp-server/server.json)"
+          echo "NPM version: $(jq -r '.packages[] | select(.registryType == "npm") | .version' mcp-server/server.json)"
+          echo "MCPB URL: $(jq -r '.packages[] | select(.registryType == "mcpb") | .identifier' mcp-server/server.json)"
+          echo "MCPB SHA256: $(jq -r '.packages[] | select(.registryType == "mcpb") | .fileSha256' mcp-server/server.json)"
+          echo ""
+          echo "=== manifest.json contents ==="
+          cat mcp-server/manifest.json | jq '.'
+          echo ""
+          echo "=== Version consistency check ==="
+          SERVER_VERSION=$(jq -r '.version' mcp-server/server.json)
+          MANIFEST_VERSION=$(jq -r '.version' mcp-server/manifest.json)
+          NPM_PKG_VERSION=$(jq -r '.packages[] | select(.registryType == "npm") | .version' mcp-server/server.json)
+          MCPB_PKG_VERSION=$(jq -r '.packages[] | select(.registryType == "mcpb") | .version' mcp-server/server.json)
+
+          echo "server.json version: $SERVER_VERSION"
+          echo "manifest.json version: $MANIFEST_VERSION"
+          echo "server.json npm package version: $NPM_PKG_VERSION"
+          echo "server.json mcpb package version: $MCPB_PKG_VERSION"
+
+          if [ "$SERVER_VERSION" = "$MANIFEST_VERSION" ] && [ "$SERVER_VERSION" = "$NPM_PKG_VERSION" ] && [ "$SERVER_VERSION" = "$MCPB_PKG_VERSION" ]; then
+            echo "✅ All versions are consistent: $SERVER_VERSION"
+          else
+            echo "::warning::Version mismatch detected in manifest files!"
+          fi
+          echo "=============================================="
 
       # IMPORTANT: Publish BEFORE creating PR to ensure no spurious PRs on failure
       # If publish fails, the job stops and no PR is created
@@ -765,14 +810,23 @@ jobs:
           fi
 
           REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
-          echo "Registry state:"
-          echo "$REGISTRY_RESPONSE" | jq '.'
+          echo "Registry state (all versions):"
+          echo "$REGISTRY_RESPONSE" | jq '.servers[].server.version'
 
-          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '.servers[0].version // "NOT FOUND"')
+          # Find the latest version by filtering for isLatest == true
+          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '[.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true)] | .[0].server.version // "NOT FOUND"')
+          echo "Registry latest version: $REGISTRY_VERSION"
+
           if [ "$REGISTRY_VERSION" = "$VERSION" ]; then
-            echo "✅ Version $VERSION is correctly registered in MCP Registry"
+            echo "✅ Version $VERSION is correctly registered as latest in MCP Registry"
           else
-            echo "::warning::Version mismatch - expected $VERSION, found $REGISTRY_VERSION"
+            # Check if version exists but is not marked as latest
+            VERSION_EXISTS=$(echo "$REGISTRY_RESPONSE" | jq -r --arg v "$VERSION" '[.servers[] | select(.server.version == $v)] | length')
+            if [ "$VERSION_EXISTS" -gt 0 ]; then
+              echo "::warning::Version $VERSION exists in registry but is NOT marked as latest (latest is $REGISTRY_VERSION)"
+            else
+              echo "::error::Version $VERSION NOT FOUND in registry. Latest is $REGISTRY_VERSION"
+            fi
           fi
 
       # Create PR only AFTER successful publish to prevent spurious PRs

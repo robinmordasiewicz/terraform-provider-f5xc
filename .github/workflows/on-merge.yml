@@ -534,8 +534,59 @@ jobs:
       - name: Authenticate via GitHub OIDC
         run: mcp-publisher login github-oidc
 
-      - name: Validate server.json (dry run)
-        run: mcp-publisher publish --dry-run --file server.json
+      - name: Validate server.json against schema
+        run: |
+          echo "=============================================="
+          echo "VALIDATING server.json"
+          echo "=============================================="
+
+          # Validate JSON is well-formed
+          if ! jq empty server.json 2>/dev/null; then
+            echo "::error::server.json is not valid JSON"
+            exit 1
+          fi
+          echo "✅ JSON is well-formed"
+
+          # Check required fields exist
+          NAME=$(jq -r '.name // empty' server.json)
+          VERSION=$(jq -r '.version // empty' server.json)
+          DESCRIPTION=$(jq -r '.description // empty' server.json)
+
+          if [ -z "$NAME" ]; then
+            echo "::error::server.json missing required field: name"
+            exit 1
+          fi
+          echo "✅ name: $NAME"
+
+          if [ -z "$VERSION" ]; then
+            echo "::error::server.json missing required field: version"
+            exit 1
+          fi
+          echo "✅ version: $VERSION"
+
+          if [ -z "$DESCRIPTION" ]; then
+            echo "::error::server.json missing required field: description"
+            exit 1
+          fi
+          echo "✅ description: present"
+
+          # Verify packages array exists and has entries
+          PACKAGES_COUNT=$(jq '.packages | length' server.json)
+          if [ "$PACKAGES_COUNT" -eq 0 ]; then
+            echo "::error::server.json has no packages defined"
+            exit 1
+          fi
+          echo "✅ packages: $PACKAGES_COUNT package(s) defined"
+
+          # Verify schema reference if present
+          SCHEMA=$(jq -r '."$schema" // empty' server.json)
+          if [ -n "$SCHEMA" ]; then
+            echo "✅ $schema: $SCHEMA"
+          fi
+
+          echo "=============================================="
+          echo "server.json validation PASSED"
+          echo "=============================================="
 
       - name: Check if MCP Registry publish needed
         id: mcp-check

@@ -200,22 +200,7 @@ You should see `f5xc-terraform` listed with a `✓ Connected` status.
 
 VS Code 1.99+ supports MCP servers through GitHub Copilot. Choose the installation method that best fits your environment:
 
-#### Option 1: VSCode MCP Gallery (Easiest)
-
-1. Open the Extensions view (`Ctrl+Shift+X` / `Cmd+Shift+X`)
-2. Type `@MCP` in the search box to filter MCP servers
-3. Search for `f5xc` or `F5 Distributed Cloud`
-4. Click **Install**
-
-#### Option 2: Command Palette
-
-1. Press `Ctrl+Shift+P` / `Cmd+Shift+P`
-2. Run `MCP: Add Server`
-3. Select `npm package`
-4. Enter: `@robinmordasiewicz/f5xc-terraform-mcp`
-5. Choose scope: **Global** (all workspaces) or **Workspace** (this project)
-
-#### Option 3: Workspace Configuration
+#### Option 1: Workspace Configuration (Recommended)
 
 Create a `.vscode/mcp.json` file in your workspace:
 
@@ -230,14 +215,23 @@ Create a `.vscode/mcp.json` file in your workspace:
 }
 ```
 
-#### Option 4: Corporate Environments (No Node.js Required)
+#### Option 2: Corporate Environments (No Node.js Required)
 
 For environments where npm/Node.js cannot be installed:
 
 1. Download the latest `.mcpb` bundle from [GitHub Releases](https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases)
-2. In VSCode, press `Ctrl+Shift+P` / `Cmd+Shift+P`
-3. Run `MCP: Add Server`
-4. Drag and drop the `.mcpb` file, or select it when prompted
+2. Place the file in a known location (e.g., `~/.mcp/f5xc-terraform-mcp.mcpb`)
+3. Create a `.vscode/mcp.json` file:
+
+```json
+{
+  "servers": {
+    "f5xc-terraform": {
+      "command": "/path/to/f5xc-terraform-mcp.mcpb"
+    }
+  }
+}
+```
 
 #### Verify Installation
 

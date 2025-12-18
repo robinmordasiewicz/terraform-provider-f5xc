@@ -37,7 +37,7 @@ jobs:
       created: ${{ steps.create.outputs.created }}
     steps:
       - name: Checkout latest main
-        uses: actions/checkout@v6
+        uses: actions/checkout@v5
         with:
           # Fetch the LATEST main HEAD, not github.sha
           # This ensures we tag the commit that includes regeneration
@@ -145,7 +145,7 @@ jobs:
     name: Create Release
     needs: tag
     if: needs.tag.outputs.created == 'true' && inputs.create-release
-    uses: hashicorp/ghaction-terraform-provider-release/.github/workflows/community.yml@v4
+    uses: hashicorp/ghaction-terraform-provider-release/.github/workflows/community.yml@v5
     secrets:
       gpg-private-key: ${{ secrets.gpg-private-key }}
       gpg-private-key-passphrase: ${{ secrets.gpg-passphrase }}

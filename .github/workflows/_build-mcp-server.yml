@@ -90,8 +90,8 @@ jobs:
           echo "=== NPM PUBLISH DIAGNOSTICS (build-mcp-server) ==="
           echo "Workflow run ID: ${{ github.run_id }}"
           echo "Publish input: ${{ inputs.publish }}"
-          echo "Has changes: ${{ steps.check.outputs.has_changes }}"
-          echo "Will attempt publish: ${{ steps.check.outputs.has_changes == 'true' && 'YES' || 'NO - no changes detected' }}"
+          echo "Has changes (for info only): ${{ steps.check.outputs.has_changes }}"
+          echo "Will attempt publish: ${{ inputs.publish == true && 'YES' || 'NO - publish not requested' }}"
           echo "package.json version: $(node -p "require('./package.json').version")"
           cd ..
           echo "Git tag version: $(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || echo 'NO TAGS')"
@@ -100,7 +100,10 @@ jobs:
           echo "=================================================="
 
       - name: Publish to npm
-        if: inputs.publish && steps.check.outputs.has_changes == 'true'
+        # Publish whenever requested - version existence check handles idempotency
+        # Previously required mcp-server/ or docs/ changes, but this broke MCP Registry
+        # which needs npm package to exist for ANY version bump
+        if: inputs.publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm-token }}
         run: |

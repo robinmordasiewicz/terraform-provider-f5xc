@@ -6,6 +6,8 @@
  * - Terraform provider documentation (resources, data sources, functions, guides)
  * - F5 Distributed Cloud OpenAPI specifications (270+ specs)
  * - Search and query capabilities for both documentation and API specs
+ * - Subscription tier information for resources and properties
+ * - Addon service activation workflows
  *
  * Version Synchronization:
  * The npm package version is automatically synced with GitHub releases via CI/CD.

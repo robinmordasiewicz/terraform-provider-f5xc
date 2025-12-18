@@ -298,7 +298,6 @@ jobs:
     uses: ./.github/workflows/_build-mcp-server.yml
     with:
       publish: true
-      force-publish: true  # Sync version regardless of file changes in commit
     secrets:
       npm-token: ${{ secrets.NPM_TOKEN }}
 
@@ -703,31 +702,78 @@ jobs:
             echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
+      - name: MCP Registry Diagnostics
+        run: |
+          echo "=== MCP REGISTRY DIAGNOSTICS (on-merge) ==="
+          echo "Workflow run ID: ${{ github.run_id }}"
+          echo "Tag-release output new-tag: ${{ needs.tag-release.outputs.new-tag }}"
+          echo "Version from step: ${{ steps.version.outputs.version }}"
+          echo "server.json version: $(jq -r '.version' mcp-server/server.json)"
+          echo "npm package version: $(npm view @robinmordasiewicz/f5xc-terraform-mcp version 2>/dev/null || echo 'NOT FOUND')"
+          echo ""
+          echo "Querying MCP Registry for current state..."
+          SERVER_NAME=$(jq -r '.name' mcp-server/server.json)
+          echo "Server name: $SERVER_NAME"
+          REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
+          echo "Registry response:"
+          echo "$REGISTRY_RESPONSE" | jq '.'
+          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '.servers[0].version // "NOT FOUND"')
+          echo "Registry version: $REGISTRY_VERSION"
+          echo "=============================================="
+
+      - name: Validate MCP Registry publish is needed
+        id: mcp-check
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          SERVER_NAME=$(jq -r '.name' mcp-server/server.json)
+
+          # Query MCP Registry API for existing versions
+          REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
+          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '.servers[0].version // "0.0.0"')
+
+          echo "Target version: $VERSION"
+          echo "Registry version: $REGISTRY_VERSION"
+
+          if [ "$VERSION" = "$REGISTRY_VERSION" ]; then
+            echo "::notice::Version $VERSION already exists in MCP Registry - SKIPPING publish"
+            echo "should-publish=false" >> $GITHUB_OUTPUT
+            echo "reason=already-registered" >> $GITHUB_OUTPUT
+          else
+            echo "Version $VERSION will be published to MCP Registry"
+            echo "should-publish=true" >> $GITHUB_OUTPUT
+          fi
+
       # IMPORTANT: Publish BEFORE creating PR to ensure no spurious PRs on failure
       # If publish fails, the job stops and no PR is created
       - name: Publish to MCP Registry
+        if: steps.mcp-check.outputs.should-publish == 'true'
         working-directory: mcp-server
-        run: |
-          OUTPUT=$(mcp-publisher publish --file server.json 2>&1) || {
-            if echo "$OUTPUT" | grep -q "cannot publish duplicate version"; then
-              echo "⚠️ Version already exists in MCP Registry - treating as success"
-              echo "$OUTPUT"
-              exit 0
-            else
-              echo "❌ MCP Registry publish failed:"
-              echo "$OUTPUT"
-              exit 1
-            fi
-          }
-          echo "✅ Published to MCP Registry"
-          echo "$OUTPUT"
+        run: mcp-publisher publish --file server.json
 
       - name: Verify publication
         run: |
           SERVER_NAME=$(jq -r '.name' mcp-server/server.json)
-          echo "Verifying publication of: $SERVER_NAME"
-          sleep 3
-          curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}" | jq '.'
+          VERSION="${{ steps.version.outputs.version }}"
+          SKIPPED="${{ steps.mcp-check.outputs.should-publish == 'false' }}"
+
+          if [ "$SKIPPED" = "true" ]; then
+            echo "::notice::Publish was SKIPPED (version $VERSION already exists)"
+            echo "Verifying existing registration..."
+          else
+            echo "Verifying publication of: $SERVER_NAME@$VERSION"
+            sleep 3
+          fi
+
+          REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
+          echo "Registry state:"
+          echo "$REGISTRY_RESPONSE" | jq '.'
+
+          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '.servers[0].version // "NOT FOUND"')
+          if [ "$REGISTRY_VERSION" = "$VERSION" ]; then
+            echo "✅ Version $VERSION is correctly registered in MCP Registry"
+          else
+            echo "::warning::Version mismatch - expected $VERSION, found $REGISTRY_VERSION"
+          fi
 
       # Create PR only AFTER successful publish to prevent spurious PRs
       - name: Create Pull Request for server.json update

@@ -10,11 +10,6 @@ on:
         required: false
         default: false
         type: boolean
-      force-publish:
-        description: 'Force publish even without detected changes (for version sync)'
-        required: false
-        default: false
-        type: boolean
     outputs:
       changed:
         description: 'Whether the MCP server had changes'
@@ -89,8 +84,23 @@ jobs:
             echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: NPM Publish Diagnostics
+        if: inputs.publish
+        run: |
+          echo "=== NPM PUBLISH DIAGNOSTICS (build-mcp-server) ==="
+          echo "Workflow run ID: ${{ github.run_id }}"
+          echo "Publish input: ${{ inputs.publish }}"
+          echo "Has changes: ${{ steps.check.outputs.has_changes }}"
+          echo "Will attempt publish: ${{ steps.check.outputs.has_changes == 'true' && 'YES' || 'NO - no changes detected' }}"
+          echo "package.json version: $(node -p "require('./package.json').version")"
+          cd ..
+          echo "Git tag version: $(git describe --tags --abbrev=0 2>/dev/null | sed 's/^v//' || echo 'NO TAGS')"
+          cd mcp-server
+          echo "npm registry version: $(npm view @robinmordasiewicz/f5xc-terraform-mcp version 2>/dev/null || echo 'NOT FOUND')"
+          echo "=================================================="
+
       - name: Publish to npm
-        if: inputs.publish && (inputs.force-publish || steps.check.outputs.has_changes == 'true')
+        if: inputs.publish && steps.check.outputs.has_changes == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.npm-token }}
         run: |

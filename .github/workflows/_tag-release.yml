@@ -1,6 +1,9 @@
 # Reusable workflow for version tagging and release
 # Called by: on-merge.yml
 #
+# Uses forked release action with updated dependencies for better cache performance.
+# Fork: robinmordasiewicz/ghaction-terraform-provider-release@v6
+#
 # NOTE: This workflow fetches the LATEST main HEAD to ensure tags include
 # any regeneration commits that were pushed by the on-merge workflow.
 name: Tag and Release

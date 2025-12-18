@@ -105,9 +105,10 @@ fs.writeFileSync('manifest.json', JSON.stringify(manifest, null, 2));
 "
 
 # Create the .mcpb bundle (ZIP file)
+# IMPORTANT: manifest.json must be at the root of the archive for Claude Desktop drag-and-drop
 echo -e "${YELLOW}Creating MCPB bundle...${NC}"
-cd "$BUILD_DIR"
-zip -r "f5xc-terraform-mcp-${VERSION}.mcpb" "f5xc-terraform-mcp" -x "*.DS_Store" -x "*__MACOSX*"
+cd "$BUNDLE_DIR"
+zip -r "$OUTPUT_FILE" . -x "*.DS_Store" -x "*__MACOSX*"
 
 # Calculate SHA-256 hash
 echo -e "${YELLOW}Calculating SHA-256 hash...${NC}"

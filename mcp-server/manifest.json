@@ -1,26 +1,31 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/mcpb/manifest.schema.json",
+  "manifest_version": "0.3",
   "name": "f5xc-terraform-mcp",
-  "displayName": "F5 Distributed Cloud Terraform Provider",
-  "description": "MCP server providing AI assistants with access to F5 Distributed Cloud Terraform provider documentation, 270+ OpenAPI specifications, subscription tier information, and addon service activation workflows.",
+  "display_name": "F5 Distributed Cloud Terraform Provider",
   "version": "2.14.10",
+  "description": "MCP server providing AI assistants with access to F5 Distributed Cloud Terraform provider documentation, 270+ OpenAPI specifications, subscription tier information, and addon service activation workflows.",
   "author": {
     "name": "Robin Mordasiewicz",
     "url": "https://github.com/robinmordasiewicz"
   },
   "license": "MPL-2.0",
-  "repository": "https://github.com/robinmordasiewicz/terraform-provider-f5xc",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robinmordasiewicz/terraform-provider-f5xc"
+  },
+  "homepage": "https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest",
   "server": {
     "type": "node",
-    "entry": "dist/index.js",
-    "runtime": {
-      "minVersion": "18.0.0"
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"]
     }
   },
-  "capabilities": {
-    "tools": true,
-    "resources": false,
-    "prompts": false
+  "compatibility": {
+    "runtime": {
+      "node": ">=18.0.0"
+    }
   },
   "tools": [
     {
@@ -47,14 +52,6 @@
       "name": "f5xc_terraform_get_summary",
       "description": "Get a summary of all available F5XC documentation and API specifications"
     }
-  ],
-  "categories": [
-    "infrastructure",
-    "terraform",
-    "f5",
-    "cloud",
-    "security",
-    "networking"
   ],
   "keywords": [
     "f5xc",

@@ -41,7 +41,7 @@ repos:
   # Catches structural errors BEFORE they reach CI/CD
   # =============================================================================
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.34.0
+    rev: 0.36.0
     hooks:
       # GitHub Workflows (built-in hook validates against SchemaStore)
       - id: check-github-workflows

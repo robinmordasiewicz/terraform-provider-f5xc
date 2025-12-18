@@ -793,6 +793,11 @@ jobs:
             This PR updates the server.json with the correct MCPB download URL and hash.
           labels: automated,mcp
           delete-branch: true
+          # IMPORTANT: Only include specific MCP server files
+          # This prevents mcp-publisher tool artifacts from being committed
+          add-paths: |
+            mcp-server/server.json
+            mcp-server/manifest.json
 
   # ===========================================================================
   # Summary

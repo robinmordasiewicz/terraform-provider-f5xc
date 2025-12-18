@@ -24,60 +24,28 @@
   },
   "tools": [
     {
-      "name": "f5xc_terraform_search_docs",
-      "description": "Search F5XC Terraform provider documentation across resources, data sources, functions, and guides"
+      "name": "f5xc_terraform_discover",
+      "description": "Discover available F5XC Terraform tools with optional schema details for lazy loading"
     },
     {
-      "name": "f5xc_terraform_get_doc",
-      "description": "Get complete documentation for a specific F5XC Terraform resource or data source"
+      "name": "f5xc_terraform_docs",
+      "description": "Search, get, or list F5XC Terraform documentation (operations: search, get, list)"
     },
     {
-      "name": "f5xc_terraform_list_docs",
-      "description": "List all available F5XC Terraform provider documentation items"
+      "name": "f5xc_terraform_api",
+      "description": "Query 270+ F5XC OpenAPI specs (operations: search, get, find_endpoints, get_definition, list_definitions)"
     },
     {
-      "name": "f5xc_terraform_search_api_specs",
-      "description": "Search across 270+ F5XC OpenAPI specifications for API endpoints and schemas"
+      "name": "f5xc_terraform_subscription",
+      "description": "Check F5XC resource subscription tiers (operations: resource, property)"
     },
     {
-      "name": "f5xc_terraform_get_api_spec",
-      "description": "Get a specific F5XC OpenAPI specification with endpoints and schemas"
-    },
-    {
-      "name": "f5xc_terraform_find_endpoints",
-      "description": "Find API endpoints across all F5XC OpenAPI specifications"
-    },
-    {
-      "name": "f5xc_terraform_get_schema_definition",
-      "description": "Get a specific schema definition from an F5XC OpenAPI spec"
-    },
-    {
-      "name": "f5xc_terraform_list_definitions",
-      "description": "List all schema definitions in an F5XC OpenAPI specification"
+      "name": "f5xc_terraform_addon",
+      "description": "List, check activation, and get workflows for F5XC addon services (operations: list, check, workflow)"
     },
     {
       "name": "f5xc_terraform_get_summary",
       "description": "Get a summary of all available F5XC documentation and API specifications"
-    },
-    {
-      "name": "f5xc_terraform_get_subscription_info",
-      "description": "Get subscription tier requirements for F5XC Terraform resources"
-    },
-    {
-      "name": "f5xc_terraform_get_property_subscription_info",
-      "description": "Get property-level subscription tier indicators for resource attributes"
-    },
-    {
-      "name": "f5xc_terraform_addon_list_services",
-      "description": "List available F5XC addon services with their activation requirements"
-    },
-    {
-      "name": "f5xc_terraform_addon_check_activation",
-      "description": "Check if a specific F5XC addon service is activated for the tenant"
-    },
-    {
-      "name": "f5xc_terraform_addon_activation_workflow",
-      "description": "Get the activation workflow and Terraform code for an F5XC addon service"
     }
   ],
   "categories": [

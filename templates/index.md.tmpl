@@ -217,11 +217,14 @@ Create a `.vscode/mcp.json` file in your workspace:
 
 #### Option 2: Corporate Environments (No Node.js Required)
 
-For environments where npm/Node.js cannot be installed:
+For environments where npm/Node.js cannot be installed, use the standalone binary bundle:
+
+-> **Note:** The `.mcpb` file is a standalone executable, NOT a VSCode extension. Do not try to install it through VSCode's extension manager. Configure it via `mcp.json` as shown below.
 
 1. Download the latest `.mcpb` bundle from [GitHub Releases](https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases)
-2. Place the file in a known location (e.g., `~/.mcp/f5xc-terraform-mcp.mcpb`)
-3. Create a `.vscode/mcp.json` file:
+2. Make it executable: `chmod +x f5xc-terraform-mcp-*.mcpb`
+3. Place the file in a known location (e.g., `~/.mcp/f5xc-terraform-mcp.mcpb`)
+4. Create a `.vscode/mcp.json` file:
 
 ```json
 {

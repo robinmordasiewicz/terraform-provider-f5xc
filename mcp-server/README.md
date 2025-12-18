@@ -19,6 +19,8 @@ f5xc-terraform-mcp
 
 Download the standalone `.mcpb` binary - no Node.js or Docker required:
 
+> **Note:** The `.mcpb` file is a standalone executable, NOT a VSCode extension. Do not try to install it through VSCode's extension manager. Configure it via `mcp.json` as shown in the Configuration section below.
+
 1. Download from [GitHub Releases](https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases/latest) - look for `f5xc-terraform-mcp-X.X.X.mcpb`
 
 2. Make executable and run:

@@ -68,7 +68,7 @@ jobs:
       needs-regeneration: ${{ steps.should-process.outputs.needs_regeneration }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v5
         with:
           fetch-depth: 2
 
@@ -299,7 +299,7 @@ jobs:
         working-directory: mcp-server
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v5
         with:
           ref: main
           fetch-depth: 0
@@ -307,7 +307,7 @@ jobs:
           persist-credentials: false
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
@@ -715,7 +715,7 @@ jobs:
 
       - name: Create Pull Request for server.json update
         if: steps.check-changes.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.AUTO_MERGE_TOKEN }}
           commit-message: "chore(mcp): update server.json to v${{ steps.version.outputs.version }}"
@@ -775,7 +775,7 @@ jobs:
       pr-number: ${{ steps.create-pr.outputs.pr_number }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           token: ${{ secrets.AUTO_MERGE_TOKEN }}

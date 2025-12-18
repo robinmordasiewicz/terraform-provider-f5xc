@@ -67,3 +67,6 @@ tmp/
 terraform.tfvars
 *-secret.txt
 *-credentials.json
+
+# MCP Registry authentication tokens (created by mcp-publisher CLI)
+.mcpregistry_*

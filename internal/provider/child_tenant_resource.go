@@ -159,11 +159,10 @@ func (r *ChildTenantResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace for the Child Tenant. For this resource type, namespace should be empty or omitted.",
-				Optional:            true,
-				Computed:            true,
+				MarkdownDescription: "Namespace where the Child Tenant will be created.",
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+					stringplanmodifier.RequiresReplace(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -564,8 +563,6 @@ func (r *ChildTenantResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
-	// For resources without namespace in API path, namespace is computed from API response
-	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
@@ -1339,17 +1336,19 @@ func (r *ChildTenantResource) Delete(ctx context.Context, req resource.DeleteReq
 }
 
 func (r *ChildTenantResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: name (no namespace for this resource type)
-	name := req.ID
-	if name == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			"Expected import ID to be the resource name, got empty string",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
+	namespace := parts[0]
+	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

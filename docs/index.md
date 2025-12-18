@@ -278,3 +278,5 @@ For complete MCP server documentation including all available tools and advanced
 ## Resources and Data Sources
 
 Browse the documentation sidebar for the complete list of resources and data sources organized by category.
+
+<!-- Template version: 1.0.1 - MCP token optimization (#592) -->

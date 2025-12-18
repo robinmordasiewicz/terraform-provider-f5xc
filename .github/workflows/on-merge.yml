@@ -260,46 +260,447 @@ jobs:
     uses: ./.github/workflows/_generate-docs.yml
 
   # ===========================================================================
-  # STEP 5: Build MCP Server (when docs, specs, or MCP source changes)
+  # STEP 5: UNIFIED MCP BUILD/PUBLISH (npm + MCP Registry + GitHub Release)
   # ===========================================================================
-  build-mcp-server:
-    name: Build MCP Server
-    needs: [detect-changes, build-test, regenerate-docs]
-    # Build MCP server when:
-    # 1. MCP server source changed, OR
-    # 2. Documentation was regenerated, OR
-    # 3. OpenAPI specs changed (MCP server serves these)
-    if: |
-      always() &&
-      needs.detect-changes.outputs.should-process == 'true' &&
-      needs.detect-changes.outputs.is-bot-commit != 'true' &&
-      needs.build-test.result == 'success' &&
-      (needs.detect-changes.outputs.mcp-changed == 'true' ||
-       needs.detect-changes.outputs.docs-changed == 'true' ||
-       needs.detect-changes.outputs.specs-changed == 'true' ||
-       needs.regenerate-docs.outputs.changed == 'true')
-    uses: ./.github/workflows/_build-mcp-server.yml
-    with:
-      publish: true
-    secrets:
-      npm-token: ${{ secrets.NPM_TOKEN }}
-
-  # ===========================================================================
-  # STEP 5b: Sync MCP Server version after any release (ensures npm matches GitHub)
-  # ===========================================================================
-  sync-mcp-version:
-    name: Sync MCP Server Version
+  # DESIGN: Single unified job for ALL MCP operations after tag-release
+  # This replaces the fragmented build-mcp-server + sync-mcp-version approach
+  #
+  # ALWAYS runs on every tag release - NO conditional skipping based on file changes
+  # This ensures npm package and GitHub release ALWAYS have matching versions
+  #
+  # Flow:
+  # 1. Build MCP server TypeScript
+  # 2. Sync version from git tag
+  # 3. Publish to npm (with version existence check for idempotency)
+  # 4. Build MCPB bundle
+  # 5. Upload MCPB to GitHub Release
+  # 6. Update server.json and manifest.json
+  # 7. Publish to MCP Registry (with version existence check)
+  # 8. Verify publication
+  # 9. Create PR for server.json update
+  mcp-unified:
+    name: MCP Unified Build/Publish
     needs: [detect-changes, tag-release]
-    # Run after ANY successful tag/release to ensure npm version matches
-    # This guarantees npm package and GitHub release always have the same version
     if: |
       always() &&
-      needs.tag-release.result == 'success'
-    uses: ./.github/workflows/_build-mcp-server.yml
-    with:
-      publish: true
-    secrets:
-      npm-token: ${{ secrets.NPM_TOKEN }}
+      needs.tag-release.result == 'success' &&
+      needs.tag-release.outputs.tag-created == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    outputs:
+      npm-published: ${{ steps.npm-publish.outputs.published }}
+      npm-version: ${{ steps.version.outputs.version }}
+      mcp-published: ${{ steps.mcp-publish.outputs.published }}
+    defaults:
+      run:
+        working-directory: mcp-server
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+          token: ${{ secrets.AUTO_MERGE_TOKEN }}
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'npm'
+          cache-dependency-path: mcp-server/package-lock.json
+
+      # ===========================================
+      # PHASE 1: Version Diagnostics
+      # ===========================================
+      - name: Get version from tag
+        id: version
+        run: |
+          VERSION="${{ needs.tag-release.outputs.new-tag }}"
+          VERSION="${VERSION#v}"  # Remove 'v' prefix
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo ""
+          echo "=============================================="
+          echo "VERSION DIAGNOSTICS - START"
+          echo "=============================================="
+          echo "Tag from tag-release: ${{ needs.tag-release.outputs.new-tag }}"
+          echo "Extracted version: $VERSION"
+          echo "=============================================="
+
+      - name: Pre-build diagnostics
+        run: |
+          echo "=============================================="
+          echo "PRE-BUILD DIAGNOSTICS"
+          echo "=============================================="
+          echo ""
+          echo "=== Current package.json state ==="
+          echo "package.json version: $(node -p "require('./package.json').version")"
+          echo "package.json name: $(node -p "require('./package.json').name")"
+          echo ""
+          echo "=== Git state ==="
+          cd ..
+          echo "Latest git tag: $(git describe --tags --abbrev=0 2>/dev/null || echo 'NONE')"
+          echo "Current commit: $(git rev-parse --short HEAD)"
+          echo ""
+          echo "=== npm registry state ==="
+          NPM_VERSION=$(npm view @robinmordasiewicz/f5xc-terraform-mcp version 2>/dev/null || echo 'NOT FOUND')
+          echo "npm registry version: $NPM_VERSION"
+          echo ""
+          echo "=== MCP Registry state ==="
+          SERVER_NAME="io.github.robinmordasiewicz/f5xc-terraform-mcp"
+          REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
+          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '[.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true)] | .[0].server.version // "NOT FOUND"')
+          echo "MCP Registry latest version: $REGISTRY_VERSION"
+          echo ""
+          echo "=== Version comparison ==="
+          echo "Target version: ${{ steps.version.outputs.version }}"
+          echo "npm version: $NPM_VERSION"
+          echo "MCP Registry version: $REGISTRY_VERSION"
+          echo "=============================================="
+
+      # ===========================================
+      # PHASE 2: Build MCP Server
+      # ===========================================
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Sync version with provider
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          echo "Syncing package.json to version: $VERSION"
+          npm version "$VERSION" --no-git-tag-version --allow-same-version
+          echo ""
+          echo "Updated package.json version: $(node -p "require('./package.json').version")"
+
+      # ===========================================
+      # PHASE 3: Publish to npm
+      # ===========================================
+      - name: Check if npm publish needed
+        id: npm-check
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          NPM_VERSION=$(npm view @robinmordasiewicz/f5xc-terraform-mcp version 2>/dev/null || echo "0.0.0")
+
+          echo "=============================================="
+          echo "NPM PUBLISH CHECK"
+          echo "=============================================="
+          echo "Local version: $VERSION"
+          echo "npm registry version: $NPM_VERSION"
+
+          if [ "$VERSION" = "$NPM_VERSION" ]; then
+            echo ""
+            echo "::notice::Version $VERSION already exists on npm - SKIPPING npm publish"
+            echo "should-publish=false" >> $GITHUB_OUTPUT
+          else
+            echo ""
+            echo "Version $VERSION will be published to npm"
+            echo "should-publish=true" >> $GITHUB_OUTPUT
+          fi
+          echo "=============================================="
+
+      - name: Publish to npm
+        id: npm-publish
+        if: steps.npm-check.outputs.should-publish == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          echo "Publishing @robinmordasiewicz/f5xc-terraform-mcp@$VERSION to npm..."
+          npm publish --access public
+          echo "published=true" >> $GITHUB_OUTPUT
+          echo ""
+          echo "✅ Successfully published to npm"
+
+      - name: Set npm publish status (skipped)
+        if: steps.npm-check.outputs.should-publish != 'true'
+        run: |
+          echo "published=false" >> $GITHUB_OUTPUT
+
+      - name: Wait for npm propagation
+        if: steps.npm-check.outputs.should-publish == 'true'
+        run: |
+          echo "Waiting for npm package propagation..."
+          sleep 10
+
+          # Verify npm package is available
+          VERSION="${{ steps.version.outputs.version }}"
+          NPM_CHECK=$(npm view "@robinmordasiewicz/f5xc-terraform-mcp@$VERSION" version 2>/dev/null || echo "NOT FOUND")
+          if [ "$NPM_CHECK" = "$VERSION" ]; then
+            echo "✅ npm package $VERSION is available"
+          else
+            echo "::warning::npm package $VERSION not yet visible (got: $NPM_CHECK)"
+            sleep 10
+          fi
+
+      # ===========================================
+      # PHASE 4: Build MCPB Bundle
+      # ===========================================
+      - name: Build MCPB Bundle
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          echo "Building MCPB bundle for version $VERSION..."
+          ./scripts/build-mcpb.sh --version "$VERSION"
+
+      - name: Calculate SHA-256
+        id: hash
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          SHA256=$(cat "build/f5xc-terraform-mcp-${VERSION}.mcpb.sha256")
+          echo "sha256=$SHA256" >> $GITHUB_OUTPUT
+          echo "MCPB SHA-256: $SHA256"
+
+      # ===========================================
+      # PHASE 5: Upload to GitHub Release
+      # ===========================================
+      - name: Upload MCPB to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          TAG="v$VERSION"
+
+          echo "Uploading MCPB bundle to GitHub Release $TAG..."
+
+          # Wait for release to be fully available
+          sleep 5
+
+          cd ..
+          gh release upload "$TAG" \
+            "mcp-server/build/f5xc-terraform-mcp-${VERSION}.mcpb" \
+            "mcp-server/build/f5xc-terraform-mcp-${VERSION}.mcpb.sha256" \
+            --clobber || echo "::warning::Upload failed or files already exist"
+
+          echo "✅ MCPB bundle uploaded to GitHub Release"
+
+      # ===========================================
+      # PHASE 6: Update server.json and manifest.json
+      # ===========================================
+      - name: Update server.json and manifest.json
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          SHA256="${{ steps.hash.outputs.sha256 }}"
+
+          echo "Updating server.json to version $VERSION..."
+
+          node -e "
+          const fs = require('fs');
+          const serverJson = JSON.parse(fs.readFileSync('server.json', 'utf8'));
+          serverJson.version = '$VERSION';
+          if (serverJson.packages) {
+            serverJson.packages.forEach(p => {
+              p.version = '$VERSION';
+              if (p.registryType === 'mcpb') {
+                p.identifier = 'https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases/download/v$VERSION/f5xc-terraform-mcp-$VERSION.mcpb';
+                p.fileSha256 = '$SHA256';
+              }
+            });
+          }
+          fs.writeFileSync('server.json', JSON.stringify(serverJson, null, 2) + '\n');
+          console.log('Updated server.json to version:', '$VERSION');
+          "
+
+          echo "Updating manifest.json to version $VERSION..."
+          node -e "
+          const fs = require('fs');
+          const manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
+          manifest.version = '$VERSION';
+          fs.writeFileSync('manifest.json', JSON.stringify(manifest, null, 2) + '\n');
+          "
+
+          echo ""
+          echo "Updated versions:"
+          echo "  server.json: $(jq -r '.version' server.json)"
+          echo "  manifest.json: $(jq -r '.version' manifest.json)"
+
+      # ===========================================
+      # PHASE 7: Publish to MCP Registry
+      # ===========================================
+      - name: Install mcp-publisher CLI
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz
+          sudo mv mcp-publisher /usr/local/bin/
+          mcp-publisher --version
+
+      - name: Authenticate via GitHub OIDC
+        run: mcp-publisher login github-oidc
+
+      - name: Validate server.json (dry run)
+        run: mcp-publisher publish --dry-run --file server.json
+
+      - name: Check if MCP Registry publish needed
+        id: mcp-check
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          SERVER_NAME=$(jq -r '.name' server.json)
+
+          echo "=============================================="
+          echo "MCP REGISTRY PUBLISH CHECK"
+          echo "=============================================="
+
+          REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
+          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '[.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true)] | .[0].server.version // "0.0.0"')
+
+          echo "Target version: $VERSION"
+          echo "Registry latest version: $REGISTRY_VERSION"
+          echo ""
+          echo "All versions in registry:"
+          echo "$REGISTRY_RESPONSE" | jq -r '.servers[].server.version' || echo "(none)"
+
+          if [ "$VERSION" = "$REGISTRY_VERSION" ]; then
+            echo ""
+            echo "::notice::Version $VERSION already exists in MCP Registry - SKIPPING publish"
+            echo "should-publish=false" >> $GITHUB_OUTPUT
+          else
+            echo ""
+            echo "Version $VERSION will be published to MCP Registry"
+            echo "should-publish=true" >> $GITHUB_OUTPUT
+          fi
+          echo "=============================================="
+
+      - name: Pre-publish diagnostics
+        if: steps.mcp-check.outputs.should-publish == 'true'
+        run: |
+          echo "=============================================="
+          echo "PRE-PUBLISH DIAGNOSTICS"
+          echo "=============================================="
+          echo ""
+          echo "=== server.json contents ==="
+          cat server.json | jq '.'
+          echo ""
+          echo "=== Version consistency check ==="
+          SERVER_VERSION=$(jq -r '.version' server.json)
+          MANIFEST_VERSION=$(jq -r '.version' manifest.json)
+          NPM_PKG_VERSION=$(jq -r '.packages[] | select(.registryType == "npm") | .version' server.json)
+          MCPB_PKG_VERSION=$(jq -r '.packages[] | select(.registryType == "mcpb") | .version' server.json)
+
+          echo "server.json version: $SERVER_VERSION"
+          echo "manifest.json version: $MANIFEST_VERSION"
+          echo "npm package version in server.json: $NPM_PKG_VERSION"
+          echo "mcpb package version in server.json: $MCPB_PKG_VERSION"
+
+          if [ "$SERVER_VERSION" = "$MANIFEST_VERSION" ] && [ "$SERVER_VERSION" = "$NPM_PKG_VERSION" ] && [ "$SERVER_VERSION" = "$MCPB_PKG_VERSION" ]; then
+            echo "✅ All versions are consistent: $SERVER_VERSION"
+          else
+            echo "::warning::Version mismatch detected!"
+          fi
+          echo "=============================================="
+
+      - name: Publish to MCP Registry
+        id: mcp-publish
+        if: steps.mcp-check.outputs.should-publish == 'true'
+        run: |
+          echo "Publishing to MCP Registry..."
+          mcp-publisher publish --file server.json
+          echo "published=true" >> $GITHUB_OUTPUT
+          echo "✅ Successfully published to MCP Registry"
+
+      - name: Set MCP publish status (skipped)
+        if: steps.mcp-check.outputs.should-publish != 'true'
+        run: |
+          echo "published=false" >> $GITHUB_OUTPUT
+
+      # ===========================================
+      # PHASE 8: Verify and Create PR
+      # ===========================================
+      - name: Verify publication
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          SERVER_NAME=$(jq -r '.name' server.json)
+
+          echo "=============================================="
+          echo "PUBLICATION VERIFICATION"
+          echo "=============================================="
+
+          # Check npm
+          echo ""
+          echo "=== npm verification ==="
+          NPM_VERSION=$(npm view "@robinmordasiewicz/f5xc-terraform-mcp@$VERSION" version 2>/dev/null || echo "NOT FOUND")
+          if [ "$NPM_VERSION" = "$VERSION" ]; then
+            echo "✅ npm: Version $VERSION is published"
+          else
+            echo "::warning::npm: Version $VERSION not found (got: $NPM_VERSION)"
+          fi
+
+          # Check MCP Registry
+          echo ""
+          echo "=== MCP Registry verification ==="
+          sleep 3
+          REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
+          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '[.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true)] | .[0].server.version // "NOT FOUND"')
+
+          if [ "$REGISTRY_VERSION" = "$VERSION" ]; then
+            echo "✅ MCP Registry: Version $VERSION is latest"
+          else
+            VERSION_EXISTS=$(echo "$REGISTRY_RESPONSE" | jq -r --arg v "$VERSION" '[.servers[] | select(.server.version == $v)] | length')
+            if [ "$VERSION_EXISTS" -gt 0 ]; then
+              echo "::warning::MCP Registry: Version $VERSION exists but is NOT latest (latest: $REGISTRY_VERSION)"
+            else
+              echo "::error::MCP Registry: Version $VERSION NOT found (latest: $REGISTRY_VERSION)"
+            fi
+          fi
+
+          echo "=============================================="
+
+      - name: Check for file changes
+        id: check-changes
+        run: |
+          cd ..
+          git add -A
+          if git diff --cached --quiet mcp-server/server.json mcp-server/manifest.json; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request for server.json update
+        if: steps.check-changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.AUTO_MERGE_TOKEN }}
+          commit-message: "chore(mcp): update server.json to v${{ steps.version.outputs.version }}"
+          branch: chore/mcp-server-json-${{ steps.version.outputs.version }}
+          title: "chore(mcp): update server.json to v${{ steps.version.outputs.version }}"
+          body: |
+            ## Summary
+            Automated update of server.json for MCP Registry publication.
+
+            ## Version
+            **Version**: ${{ steps.version.outputs.version }}
+            **SHA256**: `${{ steps.hash.outputs.sha256 }}`
+
+            ## Publication Status
+            - npm: ${{ steps.npm-check.outputs.should-publish == 'true' && 'Published' || 'Skipped (already exists)' }}
+            - MCP Registry: ${{ steps.mcp-check.outputs.should-publish == 'true' && 'Published' || 'Skipped (already exists)' }}
+
+            🤖 Generated with [Claude Code](https://claude.com/claude-code)
+          labels: automated,mcp
+          delete-branch: true
+          add-paths: |
+            mcp-server/server.json
+            mcp-server/manifest.json
+
+      - name: Post-publish summary
+        run: |
+          echo ""
+          echo "=============================================="
+          echo "MCP UNIFIED BUILD/PUBLISH COMPLETE"
+          echo "=============================================="
+          echo ""
+          echo "Version: ${{ steps.version.outputs.version }}"
+          echo "npm published: ${{ steps.npm-check.outputs.should-publish }}"
+          echo "MCP Registry published: ${{ steps.mcp-check.outputs.should-publish }}"
+          echo "MCPB SHA256: ${{ steps.hash.outputs.sha256 }}"
+          echo "=============================================="
 
   # ===========================================================================
   # STEP 6: Create PR for regenerated content (human commits only)
@@ -567,298 +968,11 @@ jobs:
       gpg-passphrase: ${{ secrets.PASSPHRASE }}
 
   # ===========================================================================
-  # STEP 7: Publish to MCP Registry (after npm package is published)
-  # ===========================================================================
-  # This job publishes the MCP server to the official MCP Registry.
-  # It must run AFTER sync-mcp-version because the MCP Registry validates
-  # that the referenced npm package exists before accepting publication.
-  publish-mcp-registry:
-    name: Publish MCP Registry
-    needs: [tag-release, sync-mcp-version]
-    if: |
-      always() &&
-      needs.tag-release.result == 'success' &&
-      needs.tag-release.outputs.tag-created == 'true' &&
-      needs.sync-mcp-version.result == 'success'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      id-token: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          ref: main
-          fetch-depth: 0
-          token: ${{ secrets.AUTO_MERGE_TOKEN }}
-          persist-credentials: false
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: mcp-server/package-lock.json
-
-      - name: Get version from tag
-        id: version
-        run: |
-          VERSION="${{ needs.tag-release.outputs.new-tag }}"
-          VERSION="${VERSION#v}"  # Remove 'v' prefix
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Using version: $VERSION"
-
-      - name: Install dependencies
-        working-directory: mcp-server
-        run: npm ci
-
-      - name: Build TypeScript
-        working-directory: mcp-server
-        run: npm run build
-
-      - name: Build MCPB Bundle
-        working-directory: mcp-server
-        run: |
-          ./scripts/build-mcpb.sh --version ${{ steps.version.outputs.version }}
-
-      - name: Calculate SHA-256
-        id: hash
-        working-directory: mcp-server
-        run: |
-          SHA256=$(cat build/f5xc-terraform-mcp-${{ steps.version.outputs.version }}.mcpb.sha256)
-          echo "sha256=$SHA256" >> $GITHUB_OUTPUT
-          echo "SHA-256: $SHA256"
-
-      - name: Upload MCPB to GitHub Release
-        env:
-          GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
-        run: |
-          VERSION="${{ steps.version.outputs.version }}"
-          TAG="v$VERSION"
-
-          # Wait for release to be available (it was just created)
-          sleep 5
-
-          # Upload MCPB bundle and checksum to the release
-          gh release upload "$TAG" \
-            "mcp-server/build/f5xc-terraform-mcp-${VERSION}.mcpb" \
-            "mcp-server/build/f5xc-terraform-mcp-${VERSION}.mcpb.sha256" \
-            --clobber || echo "Upload failed or files already exist"
-
-      - name: Update server.json and manifest.json
-        working-directory: mcp-server
-        run: |
-          # Update version in server.json using GitHub Actions expressions directly
-          # (avoids bash variable expansion issues with ${VERSION})
-          node -e "
-          const fs = require('fs');
-          const serverJson = JSON.parse(fs.readFileSync('server.json', 'utf8'));
-          serverJson.version = '${{ steps.version.outputs.version }}';
-          if (serverJson.packages) {
-            serverJson.packages.forEach(p => {
-              p.version = '${{ steps.version.outputs.version }}';
-              if (p.registryType === 'mcpb') {
-                p.identifier = 'https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases/download/v${{ steps.version.outputs.version }}/f5xc-terraform-mcp-${{ steps.version.outputs.version }}.mcpb';
-                p.fileSha256 = '${{ steps.hash.outputs.sha256 }}';
-              }
-            });
-          }
-          fs.writeFileSync('server.json', JSON.stringify(serverJson, null, 2) + '\n');
-          console.log('Updated server.json to version:', '${{ steps.version.outputs.version }}');
-          "
-
-          # Update version in manifest.json
-          node -e "
-          const fs = require('fs');
-          const manifest = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
-          manifest.version = '${{ steps.version.outputs.version }}';
-          fs.writeFileSync('manifest.json', JSON.stringify(manifest, null, 2) + '\n');
-          "
-
-          # Verify the update worked
-          echo "Updated server.json contents:"
-          cat server.json | head -30
-
-      - name: Install mcp-publisher CLI
-        run: |
-          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz
-          sudo mv mcp-publisher /usr/local/bin/
-          mcp-publisher --version
-
-      - name: Authenticate via GitHub OIDC
-        run: mcp-publisher login github-oidc
-
-      - name: Validate server.json (dry run)
-        working-directory: mcp-server
-        run: mcp-publisher publish --dry-run --file server.json
-
-      - name: Check for changes
-        id: check
-        run: |
-          if git diff --quiet mcp-server/server.json mcp-server/manifest.json; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
-
-      - name: MCP Registry Diagnostics
-        run: |
-          echo "=== MCP REGISTRY DIAGNOSTICS (on-merge) ==="
-          echo "Workflow run ID: ${{ github.run_id }}"
-          echo "Tag-release output new-tag: ${{ needs.tag-release.outputs.new-tag }}"
-          echo "Version from step: ${{ steps.version.outputs.version }}"
-          echo "server.json version: $(jq -r '.version' mcp-server/server.json)"
-          echo "npm package version: $(npm view @robinmordasiewicz/f5xc-terraform-mcp version 2>/dev/null || echo 'NOT FOUND')"
-          echo ""
-          echo "Querying MCP Registry for current state..."
-          SERVER_NAME=$(jq -r '.name' mcp-server/server.json)
-          echo "Server name: $SERVER_NAME"
-          REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
-          echo "Registry response:"
-          echo "$REGISTRY_RESPONSE" | jq '.'
-          # Find the latest version by filtering for isLatest == true
-          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '[.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true)] | .[0].server.version // "NOT FOUND"')
-          echo "Registry latest version: $REGISTRY_VERSION"
-          echo "=============================================="
-
-      - name: Validate MCP Registry publish is needed
-        id: mcp-check
-        run: |
-          VERSION="${{ steps.version.outputs.version }}"
-          SERVER_NAME=$(jq -r '.name' mcp-server/server.json)
-
-          # Query MCP Registry API for existing versions
-          # IMPORTANT: The API returns ALL versions. Filter for isLatest == true to find current version.
-          # Path is .servers[].server.version, NOT .servers[].version
-          REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
-          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '[.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true)] | .[0].server.version // "0.0.0"')
-
-          echo "Target version: $VERSION"
-          echo "Registry latest version: $REGISTRY_VERSION"
-          echo "All versions in registry:"
-          echo "$REGISTRY_RESPONSE" | jq -r '.servers[].server.version'
-
-          if [ "$VERSION" = "$REGISTRY_VERSION" ]; then
-            echo "::notice::Version $VERSION already exists in MCP Registry - SKIPPING publish"
-            echo "should-publish=false" >> $GITHUB_OUTPUT
-            echo "reason=already-registered" >> $GITHUB_OUTPUT
-          else
-            echo "Version $VERSION will be published to MCP Registry"
-            echo "should-publish=true" >> $GITHUB_OUTPUT
-          fi
-
-      # Debug: Show manifest file contents before publish attempt
-      - name: Pre-publish diagnostics
-        if: steps.mcp-check.outputs.should-publish == 'true'
-        run: |
-          echo "=============================================="
-          echo "PRE-PUBLISH DIAGNOSTICS"
-          echo "=============================================="
-          echo ""
-          echo "=== server.json contents (will be published) ==="
-          cat mcp-server/server.json | jq '.'
-          echo ""
-          echo "=== Key fields from server.json ==="
-          echo "Name: $(jq -r '.name' mcp-server/server.json)"
-          echo "Version: $(jq -r '.version' mcp-server/server.json)"
-          echo "NPM package: $(jq -r '.packages[] | select(.registryType == "npm") | .identifier' mcp-server/server.json)"
-          echo "NPM version: $(jq -r '.packages[] | select(.registryType == "npm") | .version' mcp-server/server.json)"
-          echo "MCPB URL: $(jq -r '.packages[] | select(.registryType == "mcpb") | .identifier' mcp-server/server.json)"
-          echo "MCPB SHA256: $(jq -r '.packages[] | select(.registryType == "mcpb") | .fileSha256' mcp-server/server.json)"
-          echo ""
-          echo "=== manifest.json contents ==="
-          cat mcp-server/manifest.json | jq '.'
-          echo ""
-          echo "=== Version consistency check ==="
-          SERVER_VERSION=$(jq -r '.version' mcp-server/server.json)
-          MANIFEST_VERSION=$(jq -r '.version' mcp-server/manifest.json)
-          NPM_PKG_VERSION=$(jq -r '.packages[] | select(.registryType == "npm") | .version' mcp-server/server.json)
-          MCPB_PKG_VERSION=$(jq -r '.packages[] | select(.registryType == "mcpb") | .version' mcp-server/server.json)
-
-          echo "server.json version: $SERVER_VERSION"
-          echo "manifest.json version: $MANIFEST_VERSION"
-          echo "server.json npm package version: $NPM_PKG_VERSION"
-          echo "server.json mcpb package version: $MCPB_PKG_VERSION"
-
-          if [ "$SERVER_VERSION" = "$MANIFEST_VERSION" ] && [ "$SERVER_VERSION" = "$NPM_PKG_VERSION" ] && [ "$SERVER_VERSION" = "$MCPB_PKG_VERSION" ]; then
-            echo "✅ All versions are consistent: $SERVER_VERSION"
-          else
-            echo "::warning::Version mismatch detected in manifest files!"
-          fi
-          echo "=============================================="
-
-      # IMPORTANT: Publish BEFORE creating PR to ensure no spurious PRs on failure
-      # If publish fails, the job stops and no PR is created
-      - name: Publish to MCP Registry
-        if: steps.mcp-check.outputs.should-publish == 'true'
-        working-directory: mcp-server
-        run: mcp-publisher publish --file server.json
-
-      - name: Verify publication
-        run: |
-          SERVER_NAME=$(jq -r '.name' mcp-server/server.json)
-          VERSION="${{ steps.version.outputs.version }}"
-          SKIPPED="${{ steps.mcp-check.outputs.should-publish == 'false' }}"
-
-          if [ "$SKIPPED" = "true" ]; then
-            echo "::notice::Publish was SKIPPED (version $VERSION already exists)"
-            echo "Verifying existing registration..."
-          else
-            echo "Verifying publication of: $SERVER_NAME@$VERSION"
-            sleep 3
-          fi
-
-          REGISTRY_RESPONSE=$(curl -s "https://registry.modelcontextprotocol.io/v0/servers?search=${SERVER_NAME}")
-          echo "Registry state (all versions):"
-          echo "$REGISTRY_RESPONSE" | jq '.servers[].server.version'
-
-          # Find the latest version by filtering for isLatest == true
-          REGISTRY_VERSION=$(echo "$REGISTRY_RESPONSE" | jq -r '[.servers[] | select(._meta["io.modelcontextprotocol.registry/official"].isLatest == true)] | .[0].server.version // "NOT FOUND"')
-          echo "Registry latest version: $REGISTRY_VERSION"
-
-          if [ "$REGISTRY_VERSION" = "$VERSION" ]; then
-            echo "✅ Version $VERSION is correctly registered as latest in MCP Registry"
-          else
-            # Check if version exists but is not marked as latest
-            VERSION_EXISTS=$(echo "$REGISTRY_RESPONSE" | jq -r --arg v "$VERSION" '[.servers[] | select(.server.version == $v)] | length')
-            if [ "$VERSION_EXISTS" -gt 0 ]; then
-              echo "::warning::Version $VERSION exists in registry but is NOT marked as latest (latest is $REGISTRY_VERSION)"
-            else
-              echo "::error::Version $VERSION NOT FOUND in registry. Latest is $REGISTRY_VERSION"
-            fi
-          fi
-
-      # Create PR only AFTER successful publish to prevent spurious PRs
-      - name: Create Pull Request for server.json update
-        if: steps.check.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.AUTO_MERGE_TOKEN }}
-          commit-message: "chore(mcp): update server.json to v${{ steps.version.outputs.version }}"
-          branch: chore/mcp-server-json-${{ steps.version.outputs.version }}
-          title: "chore(mcp): update server.json to v${{ steps.version.outputs.version }}"
-          body: |
-            Automated update of server.json for MCP Registry publication.
-
-            **Version**: ${{ steps.version.outputs.version }}
-            **SHA256**: `${{ steps.hash.outputs.sha256 }}`
-
-            This PR updates the server.json with the correct MCPB download URL and hash.
-          labels: automated,mcp
-          delete-branch: true
-          # IMPORTANT: Only include specific MCP server files
-          # This prevents mcp-publisher tool artifacts from being committed
-          add-paths: |
-            mcp-server/server.json
-            mcp-server/manifest.json
-
-  # ===========================================================================
   # Summary
   # ===========================================================================
   summary:
     name: Workflow Summary
-    needs: [detect-changes, build-test, regenerate-provider, regenerate-docs, build-mcp-server, sync-mcp-version, create-regeneration-pr, tag-release, publish-mcp-registry]
+    needs: [detect-changes, build-test, regenerate-provider, regenerate-docs, mcp-unified, create-regeneration-pr, tag-release]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -880,25 +994,23 @@ jobs:
           echo "| Build/Test | ${{ needs.build-test.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Provider Regenerated | ${{ needs.regenerate-provider.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Docs Regenerated | ${{ needs.regenerate-docs.result }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| MCP Server Built | ${{ needs.build-mcp-server.result }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| MCP Version Synced | ${{ needs.sync-mcp-version.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Regeneration PR Created | ${{ needs.create-regeneration-pr.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Tagged/Released | ${{ needs.tag-release.result }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| MCP Registry Published | ${{ needs.publish-mcp-registry.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| MCP Unified Build/Publish | ${{ needs.mcp-unified.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Delayed Tagging Logic" >> $GITHUB_STEP_SUMMARY
           echo "- Bot commits -> Tag immediately (regeneration complete)" >> $GITHUB_STEP_SUMMARY
           echo "- Human commits without regeneration -> Tag immediately" >> $GITHUB_STEP_SUMMARY
           echo "- Human commits with regeneration PR -> Wait for PR merge to tag" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### MCP Server Version Sync" >> $GITHUB_STEP_SUMMARY
-          echo "- Human commits with MCP/docs changes -> Build and publish to npm" >> $GITHUB_STEP_SUMMARY
-          echo "- After ANY successful release -> Sync npm version to match GitHub release" >> $GITHUB_STEP_SUMMARY
-          echo "- This guarantees npm and GitHub release ALWAYS have matching versions" >> $GITHUB_STEP_SUMMARY
+          echo "### MCP Unified Build/Publish (SINGLE JOB)" >> $GITHUB_STEP_SUMMARY
+          echo "After EVERY successful tag release, this single job runs:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Build MCP server TypeScript" >> $GITHUB_STEP_SUMMARY
+          echo "2. Sync version from git tag" >> $GITHUB_STEP_SUMMARY
+          echo "3. Publish to npm (with idempotency check)" >> $GITHUB_STEP_SUMMARY
+          echo "4. Build MCPB bundle" >> $GITHUB_STEP_SUMMARY
+          echo "5. Upload MCPB to GitHub Release" >> $GITHUB_STEP_SUMMARY
+          echo "6. Publish to MCP Registry (with idempotency check)" >> $GITHUB_STEP_SUMMARY
+          echo "7. Create PR for server.json update" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### MCP Registry Publication" >> $GITHUB_STEP_SUMMARY
-          echo "- After successful tag/release -> Build MCPB bundle" >> $GITHUB_STEP_SUMMARY
-          echo "- Upload MCPB to GitHub Release assets" >> $GITHUB_STEP_SUMMARY
-          echo "- Create PR for server.json version update" >> $GITHUB_STEP_SUMMARY
-          echo "- Publish to registry.modelcontextprotocol.io via OIDC" >> $GITHUB_STEP_SUMMARY
-          echo "- Enables VSCode @MCP search discovery" >> $GITHUB_STEP_SUMMARY
+          echo "This unified approach ensures ALL versions stay in sync." >> $GITHUB_STEP_SUMMARY

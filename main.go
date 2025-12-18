@@ -8,6 +8,7 @@
 // improving clarity by grouping related properties with a single explanatory note.
 //
 // Version tagging and releases are automated via CI/CD using semantic versioning.
+// Release workflow uses forked action with updated dependencies for improved cache performance.
 // MCP server documentation is available at https://github.com/robinmordasiewicz/terraform-provider-f5xc/tree/main/mcp-server
 
 package main

@@ -20,6 +20,7 @@ import (
 
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/defaults"
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/openapi"
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/resource"
 )
 
@@ -51,6 +52,249 @@ type ResourceMetadata struct {
 // Global subscription metadata store
 var subscriptionMetadata *SubscriptionMetadata
 
+// =============================================================================
+// V2 Spec Metadata Cache - For x-f5xc-* extensions from enriched API specs
+// =============================================================================
+
+// V2ResourceMetadata holds metadata from v2 spec x-f5xc-* extensions.
+type V2ResourceMetadata struct {
+	RequiresTier     string // x-f5xc-requires-tier: Standard, Advanced
+	Complexity       string // x-f5xc-complexity: simple, moderate, advanced
+	IsPreview        bool   // x-f5xc-is-preview
+	DescriptionShort string // x-f5xc-description-short
+	DescriptionMed   string // x-f5xc-description-medium
+	Category         string // x-f5xc-category
+}
+
+// v2MetadataCache stores metadata from v2 spec x-f5xc-* extensions.
+// Maps: resourceName -> V2ResourceMetadata
+var v2MetadataCache = make(map[string]V2ResourceMetadata)
+
+// loadV2SpecMetadata loads metadata from v2 OpenAPI specs.
+func loadV2SpecMetadata() {
+	specDir := "docs/specifications/api"
+
+	specVersion := openapi.GetSpecVersion(specDir)
+	if specVersion == openapi.SpecVersionUnknown {
+		fmt.Printf("Note: No OpenAPI specs found in %s for v2 metadata loading\n", specDir)
+		return
+	}
+
+	var count int
+	switch specVersion {
+	case openapi.SpecVersionV2:
+		count = loadV2MetadataFromDomains(specDir)
+	case openapi.SpecVersionV1:
+		count = loadV2MetadataFromV1Specs(specDir)
+	}
+
+	if count > 0 {
+		fmt.Printf("Loaded V2 metadata for %d resources\n", count)
+	}
+}
+
+// loadV2MetadataFromDomains loads metadata from v2 domain-organized specs.
+func loadV2MetadataFromDomains(specDir string) int {
+	domainFiles, err := openapi.FindDomainSpecFiles(specDir)
+	if err != nil {
+		return 0
+	}
+
+	count := 0
+	for _, domainFile := range domainFiles {
+		n := loadV2MetadataFromFile(domainFile)
+		count += n
+	}
+	return count
+}
+
+// loadV2MetadataFromV1Specs loads metadata from v1 individual spec files.
+func loadV2MetadataFromV1Specs(specDir string) int {
+	specFiles, err := openapi.FindSpecFiles(specDir)
+	if err != nil {
+		return 0
+	}
+
+	count := 0
+	for _, specFile := range specFiles {
+		n := loadV2MetadataFromFile(specFile)
+		count += n
+	}
+	return count
+}
+
+// loadV2MetadataFromFile loads metadata from a single spec file.
+func loadV2MetadataFromFile(specFile string) int {
+	data, err := os.ReadFile(specFile)
+	if err != nil {
+		return 0
+	}
+
+	var spec map[string]interface{}
+	if err := json.Unmarshal(data, &spec); err != nil {
+		return 0
+	}
+
+	// Try to get resource name from filename
+	info, err := openapi.ParseSpecFilename(specFile)
+	if err != nil {
+		// For v2 domain files, use the domain name
+		base := filepath.Base(specFile)
+		if strings.HasSuffix(base, ".json") {
+			domainName := strings.TrimSuffix(base, ".json")
+			return extractV2MetadataFromDomainSpec(spec, domainName)
+		}
+		return 0
+	}
+
+	// v1 spec: extract metadata for this specific resource
+	return extractV2MetadataFromSpec(spec, info.ResourceName)
+}
+
+// extractV2MetadataFromSpec extracts x-f5xc-* metadata from a v1 spec file.
+func extractV2MetadataFromSpec(spec map[string]interface{}, resourceName string) int {
+	// Check for domain-level extensions
+	meta := V2ResourceMetadata{}
+	foundMeta := false
+
+	if tier, ok := spec["x-f5xc-requires-tier"].(string); ok && tier != "" {
+		meta.RequiresTier = tier
+		foundMeta = true
+	}
+	if complexity, ok := spec["x-f5xc-complexity"].(string); ok && complexity != "" {
+		meta.Complexity = complexity
+		foundMeta = true
+	}
+	if preview, ok := spec["x-f5xc-is-preview"].(bool); ok && preview {
+		meta.IsPreview = preview
+		foundMeta = true
+	}
+	if cat, ok := spec["x-f5xc-category"].(string); ok && cat != "" {
+		meta.Category = cat
+		foundMeta = true
+	}
+
+	// Check info section for descriptions
+	if info, ok := spec["info"].(map[string]interface{}); ok {
+		if desc, ok := info["x-f5xc-description-short"].(string); ok && desc != "" {
+			meta.DescriptionShort = desc
+			foundMeta = true
+		}
+		if desc, ok := info["x-f5xc-description-medium"].(string); ok && desc != "" {
+			meta.DescriptionMed = desc
+			foundMeta = true
+		}
+	}
+
+	if foundMeta {
+		v2MetadataCache[resourceName] = meta
+		return 1
+	}
+	return 0
+}
+
+// extractV2MetadataFromDomainSpec extracts metadata from a v2 domain spec.
+func extractV2MetadataFromDomainSpec(spec map[string]interface{}, domainName string) int {
+	// Get domain-level metadata
+	domainMeta := V2ResourceMetadata{}
+
+	if tier, ok := spec["x-f5xc-requires-tier"].(string); ok && tier != "" {
+		domainMeta.RequiresTier = tier
+	}
+	if complexity, ok := spec["x-f5xc-complexity"].(string); ok && complexity != "" {
+		domainMeta.Complexity = complexity
+	}
+	if preview, ok := spec["x-f5xc-is-preview"].(bool); ok {
+		domainMeta.IsPreview = preview
+	}
+	if cat, ok := spec["x-f5xc-category"].(string); ok && cat != "" {
+		domainMeta.Category = cat
+	}
+
+	if info, ok := spec["info"].(map[string]interface{}); ok {
+		if desc, ok := info["x-f5xc-description-short"].(string); ok && desc != "" {
+			domainMeta.DescriptionShort = desc
+		}
+		if desc, ok := info["x-f5xc-description-medium"].(string); ok && desc != "" {
+			domainMeta.DescriptionMed = desc
+		}
+	}
+
+	// Store domain-level metadata
+	count := 0
+	if domainMeta.RequiresTier != "" || domainMeta.Category != "" {
+		v2MetadataCache[domainName] = domainMeta
+		count++
+	}
+
+	// Also extract from individual schemas
+	if components, ok := spec["components"].(map[string]interface{}); ok {
+		if schemas, ok := components["schemas"].(map[string]interface{}); ok {
+			for schemaName, schemaVal := range schemas {
+				if schema, ok := schemaVal.(map[string]interface{}); ok {
+					schemaMeta := domainMeta // Start with domain defaults
+
+					// Override with schema-specific values
+					if tier, ok := schema["x-f5xc-requires-tier"].(string); ok && tier != "" {
+						schemaMeta.RequiresTier = tier
+					}
+					if complexity, ok := schema["x-f5xc-complexity"].(string); ok && complexity != "" {
+						schemaMeta.Complexity = complexity
+					}
+					if cat, ok := schema["x-f5xc-category"].(string); ok && cat != "" {
+						schemaMeta.Category = cat
+					}
+					if desc, ok := schema["x-f5xc-description-short"].(string); ok && desc != "" {
+						schemaMeta.DescriptionShort = desc
+					}
+					if desc, ok := schema["x-f5xc-description-medium"].(string); ok && desc != "" {
+						schemaMeta.DescriptionMed = desc
+					}
+
+					// Store if we have meaningful metadata
+					if schemaMeta.RequiresTier != "" || schemaMeta.Category != "" {
+						// Convert schema name to resource name (simplified)
+						resourceName := strings.ToLower(schemaName)
+						resourceName = strings.ReplaceAll(resourceName, ".", "_")
+						v2MetadataCache[resourceName] = schemaMeta
+						count++
+					}
+				}
+			}
+		}
+	}
+
+	return count
+}
+
+// getV2ResourceMetadata retrieves v2 metadata for a resource if available.
+func getV2ResourceMetadata(resourceName string) (V2ResourceMetadata, bool) {
+	meta, ok := v2MetadataCache[resourceName]
+	return meta, ok
+}
+
+// getV2SubscriptionTierNote returns a subscription note based on v2 spec x-f5xc-requires-tier.
+// Returns empty string if not found or if tier is Standard.
+func getV2SubscriptionTierNote(resourceName string) string {
+	meta, ok := getV2ResourceMetadata(resourceName)
+	if !ok {
+		return ""
+	}
+
+	tier := strings.ToUpper(meta.RequiresTier)
+	if tier == "ADVANCED" {
+		return "~> **Subscription Required:** This resource requires an F5 Distributed Cloud " +
+			"**Advanced** subscription. [Compare subscription tiers](https://www.f5.com/products/get-f5/compare)."
+	}
+
+	// Add preview note if applicable
+	if meta.IsPreview {
+		return "~> **Preview Feature:** This resource is in preview and may change without notice."
+	}
+
+	return ""
+}
+
 // loadSubscriptionMetadata loads the subscription tier metadata from tools/subscription-tiers.json
 func loadSubscriptionMetadata() {
 	metadataPath := "tools/subscription-tiers.json"
@@ -74,7 +318,16 @@ func loadSubscriptionMetadata() {
 // getSubscriptionTierNote returns a Terraform Registry-compatible note for resources requiring
 // Advanced subscription tier or having Advanced-only features. Returns empty string for
 // Standard/NO_TIER resources without Advanced features.
+// Uses a two-tier approach:
+// 1. Check v2 spec x-f5xc-requires-tier first (from enriched API specs)
+// 2. Fall back to subscription-tiers.json metadata
 func getSubscriptionTierNote(resourceName string) string {
+	// Tier 1: Check v2 spec x-f5xc-requires-tier (preferred, from enriched API specs)
+	if note := getV2SubscriptionTierNote(resourceName); note != "" {
+		return note
+	}
+
+	// Tier 2: Fall back to subscription-tiers.json metadata
 	if subscriptionMetadata == nil {
 		return ""
 	}
@@ -375,7 +628,10 @@ func main() {
 		fmt.Printf("Loaded API defaults for %d resources\n", len(resources))
 	}
 
-	// Load subscription tier metadata for documentation notes
+	// Load v2 spec metadata for enriched x-f5xc-* extensions
+	loadV2SpecMetadata()
+
+	// Load subscription tier metadata for documentation notes (fallback for v2 metadata)
 	loadSubscriptionMetadata()
 
 	docsDir := "docs/resources"

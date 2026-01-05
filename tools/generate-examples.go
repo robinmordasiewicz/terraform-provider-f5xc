@@ -7,6 +7,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"os"
 	"os/exec"
@@ -18,6 +19,7 @@ import (
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/defaults"
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/namespace"
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/openapi"
 )
 
 // Global defaults store for API-discovered default values
@@ -77,6 +79,15 @@ func main() {
 	} else {
 		resources := apiDefaultsStore.ListResources()
 		fmt.Printf("Loaded API defaults for %d resources\n", len(resources))
+	}
+
+	// Load v2 examples from OpenAPI specs (x-f5xc-example and x-ves-example)
+	specDir := "docs/specifications/api"
+	if err := loadV2Examples(specDir); err != nil {
+		fmt.Printf("Note: V2 examples not loaded (%v) - using hardcoded examples only\n", err)
+	} else {
+		fmt.Printf("Loaded V2 examples: %d resources with %d field examples\n",
+			openapi.V2ExampleCount(), openapi.V2ExampleFieldCount())
 	}
 
 	files, err := filepath.Glob(filepath.Join(providerDir, "*_resource.go"))
@@ -1611,4 +1622,189 @@ func getKeys(m map[string]bool) []string {
 	}
 	sort.Strings(keys)
 	return keys
+}
+
+// =============================================================================
+// V2 Example Loading - For x-f5xc-example and x-ves-example from OpenAPI specs
+// =============================================================================
+
+// loadV2Examples loads examples from OpenAPI spec files into the example cache.
+// Supports both v1 (individual spec files) and v2 (domain-organized) formats.
+func loadV2Examples(specDir string) error {
+	if _, err := os.Stat(specDir); os.IsNotExist(err) {
+		return fmt.Errorf("spec directory not found: %s", specDir)
+	}
+
+	specVersion := openapi.GetSpecVersion(specDir)
+
+	switch specVersion {
+	case openapi.SpecVersionV2:
+		return loadV2ExamplesFromDomains(specDir)
+	case openapi.SpecVersionV1:
+		return loadV2ExamplesFromV1Specs(specDir)
+	default:
+		return fmt.Errorf("unknown spec version in %s", specDir)
+	}
+}
+
+// loadV2ExamplesFromDomains loads examples from v2 domain-organized specs.
+func loadV2ExamplesFromDomains(specDir string) error {
+	domainFiles, err := openapi.FindDomainSpecFiles(specDir)
+	if err != nil {
+		return fmt.Errorf("finding domain files: %w", err)
+	}
+
+	for _, domainFile := range domainFiles {
+		if err := loadExamplesFromSpecFile(domainFile); err != nil {
+			// Log but don't fail on individual file errors
+			fmt.Printf("Warning: Error loading examples from %s: %v\n", domainFile, err)
+		}
+	}
+
+	return nil
+}
+
+// loadV2ExamplesFromV1Specs loads examples from v1 individual spec files.
+func loadV2ExamplesFromV1Specs(specDir string) error {
+	specFiles, err := openapi.FindSpecFiles(specDir)
+	if err != nil {
+		return fmt.Errorf("finding spec files: %w", err)
+	}
+
+	for _, specFile := range specFiles {
+		if err := loadExamplesFromSpecFile(specFile); err != nil {
+			// Log but don't fail on individual file errors
+			fmt.Printf("Warning: Error loading examples from %s: %v\n", specFile, err)
+		}
+	}
+
+	return nil
+}
+
+// loadExamplesFromSpecFile parses a single OpenAPI spec file and extracts examples.
+func loadExamplesFromSpecFile(specFile string) error {
+	data, err := os.ReadFile(specFile)
+	if err != nil {
+		return fmt.Errorf("reading spec file: %w", err)
+	}
+
+	// Parse as generic JSON to access schemas
+	var spec map[string]interface{}
+	if err := json.Unmarshal(data, &spec); err != nil {
+		return fmt.Errorf("parsing JSON: %w", err)
+	}
+
+	// Extract resource name from filename
+	resourceName := extractResourceNameFromSpec(specFile, spec)
+	if resourceName == "" {
+		return nil // Skip files that don't map to resources
+	}
+
+	// Extract examples from components/schemas
+	components, ok := spec["components"].(map[string]interface{})
+	if !ok {
+		return nil
+	}
+
+	schemas, ok := components["schemas"].(map[string]interface{})
+	if !ok {
+		return nil
+	}
+
+	// Process each schema
+	for schemaName, schemaVal := range schemas {
+		schemaMap, ok := schemaVal.(map[string]interface{})
+		if !ok {
+			continue
+		}
+
+		// Extract examples from this schema
+		extractExamplesFromSchema(resourceName, schemaName, schemaMap, "")
+	}
+
+	return nil
+}
+
+// extractResourceNameFromSpec extracts the resource name from a spec file.
+func extractResourceNameFromSpec(specFile string, spec map[string]interface{}) string {
+	// Try parsing the filename
+	info, err := openapi.ParseSpecFilename(specFile)
+	if err == nil && info.ResourceName != "" {
+		return info.ResourceName
+	}
+
+	// For v2 domain files, try to get from info.title or filename
+	base := filepath.Base(specFile)
+	if strings.HasSuffix(base, ".json") {
+		return strings.TrimSuffix(base, ".json")
+	}
+
+	return ""
+}
+
+// extractExamplesFromSchema recursively extracts x-f5xc-example and x-ves-example values.
+func extractExamplesFromSchema(resourceName, schemaName string, schema map[string]interface{}, prefix string) {
+	// Check for x-f5xc-example
+	if example, ok := schema["x-f5xc-example"].(string); ok && example != "" {
+		fieldPath := prefix
+		if fieldPath == "" {
+			fieldPath = schemaName
+		}
+		// Normalize example values using naming conventions
+		normalizedExample := naming.NormalizeExampleNames(example)
+		openapi.SetV2Example(resourceName, fieldPath, normalizedExample)
+	}
+
+	// Check for x-ves-example
+	if example, ok := schema["x-ves-example"].(string); ok && example != "" {
+		fieldPath := prefix
+		if fieldPath == "" {
+			fieldPath = schemaName
+		}
+		// Normalize example values using naming conventions
+		normalizedExample := naming.NormalizeExampleNames(example)
+		openapi.SetVesExample(resourceName, fieldPath, normalizedExample)
+	}
+
+	// Process properties recursively
+	if properties, ok := schema["properties"].(map[string]interface{}); ok {
+		for propName, propVal := range properties {
+			propSchema, ok := propVal.(map[string]interface{})
+			if !ok {
+				continue
+			}
+
+			childPrefix := propName
+			if prefix != "" {
+				childPrefix = prefix + "." + propName
+			}
+
+			extractExamplesFromSchema(resourceName, schemaName, propSchema, childPrefix)
+		}
+	}
+
+	// Process array items
+	if items, ok := schema["items"].(map[string]interface{}); ok {
+		extractExamplesFromSchema(resourceName, schemaName, items, prefix)
+	}
+}
+
+// getV2ExampleForField returns the best available example for a resource field.
+// Priority: x-f5xc-example > x-ves-example > API defaults > hardcoded fallback.
+// Returns the example value and source, or empty strings if not found.
+func getV2ExampleForField(resourceName, fieldPath string) (string, string) {
+	// Priority 1 & 2: Check v2/ves example caches
+	if example, source := openapi.GetBestExample(resourceName, fieldPath); example != "" {
+		return example, source
+	}
+
+	// Priority 3: Check API-discovered defaults
+	if apiDefaultsStore != nil && apiDefaultsStore.IsLoaded() {
+		if val, ok := apiDefaultsStore.GetDefaultByTerraformPath(resourceName, fieldPath); ok {
+			return defaults.FormatDefaultValue(val), "api"
+		}
+	}
+
+	// Priority 4: No example found
+	return "", ""
 }

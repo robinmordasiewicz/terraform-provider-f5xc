@@ -32,6 +32,7 @@ import (
 
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/namespace"
+	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/openapi"
 )
 
 // Configuration
@@ -66,11 +67,24 @@ type SchemaDefinition struct {
 	Items                *SchemaDefinition           `json:"items"`
 	Ref                  string                      `json:"$ref"`
 	Required             []string                    `json:"required"`
-	XDisplayName         string                      `json:"x-displayname"`
-	XVesExample          string                      `json:"x-ves-example"`
-	XVesValidationRules  map[string]string           `json:"x-ves-validation-rules"`
-	XVesProtoMessage     string                      `json:"x-ves-proto-message"`
 	AdditionalProperties interface{}                 `json:"additionalProperties"`
+
+	// Original F5 vendor extensions (x-ves-*) - technical metadata from upstream
+	XDisplayName        string            `json:"x-displayname"`
+	XVesExample         string            `json:"x-ves-example"`
+	XVesValidationRules map[string]string `json:"x-ves-validation-rules"`
+	XVesProtoMessage    string            `json:"x-ves-proto-message"`
+
+	// Enrichment extensions (x-f5xc-*) - added by f5xc-api-enriched repository
+	XF5XCCategory         string   `json:"x-f5xc-category"`
+	XF5XCRequiresTier     string   `json:"x-f5xc-requires-tier"`
+	XF5XCComplexity       string   `json:"x-f5xc-complexity"`
+	XF5XCExample          string   `json:"x-f5xc-example"`
+	XF5XCDescriptionShort string   `json:"x-f5xc-description-short"`
+	XF5XCDescriptionMed   string   `json:"x-f5xc-description-medium"`
+	XF5XCUseCases         []string `json:"x-f5xc-use-cases"`
+	XF5XCRelatedDomains   []string `json:"x-f5xc-related-domains"`
+	XF5XCIsPreview        bool     `json:"x-f5xc-is-preview"`
 }
 
 type TerraformAttribute struct {
@@ -157,35 +171,24 @@ func main() {
 	}
 	fmt.Println()
 
-	// Find all spec files
-	pattern := filepath.Join(specDir, "docs-cloud-f5-com.*.ves-swagger.json")
-	specFiles, err := filepath.Glob(pattern)
-	if err != nil {
-		fmt.Printf("❌ Error finding spec files: %v\n", err)
+	// Detect spec version (v1 or v2)
+	specVersion := openapi.GetSpecVersion(specDir)
+	fmt.Printf("🔍 Detected spec version: %s\n\n", specVersion)
+
+	var results []GenerationResult
+	var successCount, failCount int
+
+	switch specVersion {
+	case openapi.SpecVersionV2:
+		results, successCount, failCount = processV2Specs(specDir)
+	case openapi.SpecVersionV1:
+		results, successCount, failCount = processV1Specs(specDir)
+	default:
+		fmt.Printf("❌ Unknown spec format in directory: %s\n", specDir)
+		fmt.Println("💡 Expected either:")
+		fmt.Println("   - v1: docs-cloud-f5-com.*.ves-swagger.json files")
+		fmt.Println("   - v2: index.json + domains/*.json structure")
 		os.Exit(1)
-	}
-
-	if len(specFiles) == 0 {
-		fmt.Printf("❌ No spec files found matching pattern: %s\n", pattern)
-		fmt.Println("💡 Tip: Download specs from docs.cloud.f5.com or set F5XC_SPEC_DIR")
-		os.Exit(1)
-	}
-
-	fmt.Printf("📄 Found %d OpenAPI specification files\n\n", len(specFiles))
-
-	// Process each spec file
-	results := []GenerationResult{}
-	successCount := 0
-	failCount := 0
-
-	for _, specFile := range specFiles {
-		result := processSpecFile(specFile)
-		results = append(results, result)
-		if result.Success {
-			successCount++
-		} else if result.Error != "" {
-			failCount++
-		}
 	}
 
 	// Generate combined client types file
@@ -217,6 +220,229 @@ func main() {
 	}
 
 	fmt.Println("\n🎉 Batch generation complete!")
+}
+
+// processV1Specs processes v1 format specs (individual docs-cloud-f5-com.*.ves-swagger.json files)
+func processV1Specs(specDir string) ([]GenerationResult, int, int) {
+	// Find all spec files
+	pattern := filepath.Join(specDir, "docs-cloud-f5-com.*.ves-swagger.json")
+	specFiles, err := filepath.Glob(pattern)
+	if err != nil {
+		fmt.Printf("❌ Error finding spec files: %v\n", err)
+		os.Exit(1)
+	}
+
+	if len(specFiles) == 0 {
+		fmt.Printf("❌ No spec files found matching pattern: %s\n", pattern)
+		fmt.Println("💡 Tip: Download specs from docs.cloud.f5.com or set F5XC_SPEC_DIR")
+		os.Exit(1)
+	}
+
+	fmt.Printf("📄 Found %d OpenAPI specification files (v1 format)\n\n", len(specFiles))
+
+	// Process each spec file
+	results := []GenerationResult{}
+	successCount := 0
+	failCount := 0
+
+	for _, specFile := range specFiles {
+		result := processSpecFile(specFile)
+		results = append(results, result)
+		if result.Success {
+			successCount++
+		} else if result.Error != "" {
+			failCount++
+		}
+	}
+
+	return results, successCount, failCount
+}
+
+// processV2Specs processes v2 format specs (domain-organized files from f5xc-api-enriched)
+func processV2Specs(specDir string) ([]GenerationResult, int, int) {
+	// Parse the index.json to get domain information
+	index, err := openapi.ParseIndexFromDir(specDir)
+	if err != nil {
+		fmt.Printf("❌ Error parsing index.json: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("📋 Spec version: %s\n", index.Version)
+	fmt.Printf("📋 Generated at: %s\n", index.GeneratedAt)
+	fmt.Printf("📄 Found %d domain specifications (v2 format)\n\n", len(index.Specifications))
+
+	// Find all domain spec files
+	domainFiles, err := openapi.FindDomainSpecFiles(specDir)
+	if err != nil {
+		fmt.Printf("❌ Error finding domain spec files: %v\n", err)
+		os.Exit(1)
+	}
+
+	results := []GenerationResult{}
+	successCount := 0
+	failCount := 0
+
+	// Build a map of domain metadata from index for quick lookup
+	domainMetadata := make(map[string]openapi.DomainMetadata)
+	for _, dm := range index.Specifications {
+		domainMetadata[dm.Name] = dm
+	}
+
+	// Process each domain file
+	for _, domainFile := range domainFiles {
+		domainName := strings.TrimSuffix(filepath.Base(domainFile), ".json")
+		fmt.Printf("🔄 Processing domain: %s\n", domainName)
+
+		// Get domain metadata from index
+		dm, hasMeta := domainMetadata[domainName]
+		if hasMeta && verbose {
+			fmt.Printf("   Category: %s, Tier: %s\n", dm.Category, dm.RequiresTier)
+		}
+
+		// Extract resources from the domain spec
+		domainInfo, err := openapi.ExtractResourcesFromDomain(domainFile)
+		if err != nil {
+			fmt.Printf("   ⚠️  Error parsing domain: %v\n", err)
+			results = append(results, GenerationResult{
+				ResourceName: domainName,
+				Success:      false,
+				Error:        err.Error(),
+			})
+			failCount++
+			continue
+		}
+
+		if len(domainInfo.Resources) == 0 {
+			fmt.Printf("   ⏭️  No resources found in domain\n")
+			continue
+		}
+
+		fmt.Printf("   📦 Found %d resources\n", len(domainInfo.Resources))
+
+		// Process each resource in the domain
+		for _, resource := range domainInfo.Resources {
+			// Create a virtual spec file path for compatibility with existing processing
+			// The v2 domain spec contains all resources, so we process each individually
+			result := processV2Resource(domainFile, resource, domainInfo)
+			results = append(results, result)
+			if result.Success {
+				successCount++
+			} else if result.Error != "" {
+				failCount++
+			}
+		}
+	}
+
+	return results, successCount, failCount
+}
+
+// processV2Resource processes a single resource from a v2 domain spec
+func processV2Resource(domainFile string, resource openapi.ExtractedResource, domainInfo *openapi.DomainSpecInfo) GenerationResult {
+	if verbose {
+		fmt.Printf("      Processing resource: %s (category: %s, tier: %s)\n",
+			resource.Name, resource.Category, resource.RequiresTier)
+	}
+
+	// For now, we'll use the same processSpecFile logic but with the domain file
+	// This creates compatibility - the spec contains all schemas we need
+	// We just need to focus on extracting the right schema for this resource
+
+	// Use the existing processing with the domain file
+	// The schema extraction will find the right Object schema based on resource name
+	result := processSpecFileForResource(domainFile, resource.Name, resource.Category, resource.RequiresTier)
+
+	return result
+}
+
+// processSpecFileForResource processes a spec file targeting a specific resource
+// This is used for v2 specs where multiple resources exist in one domain file
+func processSpecFileForResource(specFile string, resourceName string, category string, requiresTier string) GenerationResult {
+	// Parse the spec file
+	spec, err := parseOpenAPISpec(specFile)
+	if err != nil {
+		return GenerationResult{ResourceName: resourceName, Success: false, Error: err.Error()}
+	}
+
+	// Cache all schemas from the spec
+	for name, schema := range spec.Components.Schemas {
+		schemaCache[name] = schema
+	}
+
+	// Try to extract the resource schema
+	schema, schemaName := extractResourceSchemaByName(spec, resourceName)
+	if schema == nil {
+		return GenerationResult{ResourceName: resourceName, Success: false, Error: ""}
+	}
+
+	// Extract API path from spec (or construct from resource name)
+	apiPath := extractAPIPathForResource(spec, resourceName)
+	if apiPath == "" {
+		apiPath = fmt.Sprintf("/api/config/namespaces/{namespace}/%ss", resourceName)
+	}
+
+	// Generate the resource file using existing logic
+	return generateResourceFromSchema(resourceName, schemaName, schema, apiPath, specFile, category, requiresTier)
+}
+
+// extractResourceSchemaByName extracts a specific resource schema by name from a spec
+func extractResourceSchemaByName(spec *OpenAPI3Spec, resourceName string) (*SchemaDefinition, string) {
+	// Common schema naming patterns for resources
+	patterns := []string{
+		fmt.Sprintf("ves.io.schema.%s.Object", resourceName),
+		fmt.Sprintf("%sType", toTitleCase(resourceName)),
+		resourceName,
+	}
+
+	for _, pattern := range patterns {
+		if schema, ok := spec.Components.Schemas[pattern]; ok {
+			return &schema, pattern
+		}
+	}
+
+	// Try case-insensitive match
+	lowerName := strings.ToLower(resourceName)
+	for name, schema := range spec.Components.Schemas {
+		if strings.Contains(strings.ToLower(name), lowerName) && strings.HasSuffix(name, ".Object") {
+			return &schema, name
+		}
+	}
+
+	return nil, ""
+}
+
+// extractAPIPathForResource extracts the API path for a specific resource from a spec
+func extractAPIPathForResource(spec *OpenAPI3Spec, resourceName string) string {
+	plural := resourceName + "s"
+	// Handle special pluralization
+	if strings.HasSuffix(resourceName, "y") {
+		plural = strings.TrimSuffix(resourceName, "y") + "ies"
+	}
+
+	for path := range spec.Paths {
+		if strings.Contains(path, "/"+plural) {
+			return path
+		}
+	}
+	return ""
+}
+
+// generateResourceFromSchema generates a resource file from an extracted schema
+// This is factored out from processSpecFile to support both v1 and v2 processing
+func generateResourceFromSchema(resourceName string, schemaName string, schema *SchemaDefinition, apiPath string, specFile string, category string, requiresTier string) GenerationResult {
+	// This will be a simplified implementation that delegates to the existing generation logic
+	// For now, fall back to the standard processSpecFile behavior
+	// TODO: Enhance this to fully support v2 metadata (category, requiresTier)
+
+	if verbose {
+		fmt.Printf("      Generating: %s (schema: %s)\n", resourceName, schemaName)
+		if category != "" {
+			fmt.Printf("      Category: %s, Tier: %s\n", category, requiresTier)
+		}
+	}
+
+	// Use the existing processing for now
+	// The v2 metadata will be used by the category resolution system (Phase 2.2)
+	return processSpecFile(specFile)
 }
 
 func processSpecFile(specFile string) GenerationResult {

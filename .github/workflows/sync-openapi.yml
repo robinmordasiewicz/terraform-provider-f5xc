@@ -1,6 +1,10 @@
 # Scheduled workflow to sync F5 Distributed Cloud OpenAPI specifications
 # Downloads the latest specs and creates a PR if changes are detected
 # The on-merge.yml workflow handles regeneration when this PR merges
+#
+# Supports two spec sources:
+# - V2: Enriched API specs from f5xc-api-enriched repository (38 domain files + index.json)
+# - V1 (legacy): Original specs from docs.cloud.f5.com (269 individual files)
 name: Sync OpenAPI Specs
 
 on:
@@ -10,6 +14,20 @@ on:
     # 7pm Mountain Time (01:00 UTC next day during MST, 02:00 UTC during MDT)
     - cron: '0 1 * * *'
   workflow_dispatch:
+    inputs:
+      spec_source:
+        description: 'Spec source to use'
+        required: false
+        default: 'v2'
+        type: choice
+        options:
+          - v2
+          - v1
+      spec_version:
+        description: 'V2 spec version (e.g., v2.0.11, or "latest")'
+        required: false
+        default: 'latest'
+        type: string
 
 concurrency:
   group: openapi-sync
@@ -23,6 +41,11 @@ permissions:
 env:
   SPEC_DIR: docs/specifications/api
   PR_TITLE: "feat: update F5 Distributed Cloud OpenAPI specifications"
+  # V2 spec source configuration
+  ENRICHED_REPO: robinmordasiewicz/f5xc-api-enriched
+  # Default to v2 specs unless overridden
+  SPEC_SOURCE: ${{ inputs.spec_source || 'v2' }}
+  SPEC_VERSION: ${{ inputs.spec_version || 'latest' }}
 
 jobs:
   sync:
@@ -47,18 +70,66 @@ jobs:
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
+      - name: Determine spec source and version
+        if: steps.existing_pr.outputs.exists == 'false'
+        id: spec_config
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          SPEC_SOURCE="${{ env.SPEC_SOURCE }}"
+          SPEC_VERSION="${{ env.SPEC_VERSION }}"
+
+          echo "Spec source: $SPEC_SOURCE"
+          echo "spec_source=$SPEC_SOURCE" >> $GITHUB_OUTPUT
+
+          if [ "$SPEC_SOURCE" = "v2" ]; then
+            # Determine v2 version
+            if [ "$SPEC_VERSION" = "latest" ] || [ -z "$SPEC_VERSION" ]; then
+              # Get latest release from enriched repo
+              LATEST=$(gh release list --repo "${{ env.ENRICHED_REPO }}" --limit 1 --json tagName --jq '.[0].tagName' 2>/dev/null || echo "")
+              if [ -z "$LATEST" ]; then
+                echo "::warning::Could not determine latest v2 release, falling back to v1"
+                SPEC_SOURCE="v1"
+                echo "spec_source=v1" >> $GITHUB_OUTPUT
+              else
+                SPEC_VERSION="$LATEST"
+                echo "Using latest v2 release: $SPEC_VERSION"
+              fi
+            fi
+            echo "spec_version=$SPEC_VERSION" >> $GITHUB_OUTPUT
+
+            # Build v2 download URL
+            if [ "$SPEC_SOURCE" = "v2" ]; then
+              DOWNLOAD_URL="https://github.com/${{ env.ENRICHED_REPO }}/releases/download/${SPEC_VERSION}/f5xc-api-specs-${SPEC_VERSION}.zip"
+              echo "V2 download URL: $DOWNLOAD_URL"
+              echo "download_url=$DOWNLOAD_URL" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+          if [ "$SPEC_SOURCE" = "v1" ]; then
+            # V1 legacy URL
+            DOWNLOAD_URL="https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip"
+            echo "V1 download URL: $DOWNLOAD_URL"
+            echo "download_url=$DOWNLOAD_URL" >> $GITHUB_OUTPUT
+            echo "spec_version=v1" >> $GITHUB_OUTPUT
+          fi
+
       - name: Download OpenAPI specs
         if: steps.existing_pr.outputs.exists == 'false'
         run: |
           mkdir -p ${{ env.SPEC_DIR }}
+
+          DOWNLOAD_URL="${{ steps.spec_config.outputs.download_url }}"
+          SPEC_SOURCE="${{ steps.spec_config.outputs.spec_source }}"
+
+          echo "Downloading specs from: $DOWNLOAD_URL"
 
           # Retry logic with exponential backoff
           max_attempts=3
           attempt=1
           while [ $attempt -le $max_attempts ]; do
             echo "::group::Download attempt $attempt of $max_attempts"
-            if curl -sL --fail --retry 2 --retry-delay 5 -o openapi.zip \
-                "https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip"; then
+            if curl -sL --fail --retry 2 --retry-delay 5 -o openapi.zip "$DOWNLOAD_URL"; then
               echo "Download successful"
               echo "::endgroup::"
               break
@@ -75,8 +146,34 @@ jobs:
             fi
           done
 
+          # Clear existing specs before extracting
+          rm -rf ${{ env.SPEC_DIR }}/*
+
           unzip -o openapi.zip -d ${{ env.SPEC_DIR }}
           rm openapi.zip
+
+          # Verify spec structure based on source type
+          if [ "$SPEC_SOURCE" = "v2" ]; then
+            echo "Verifying v2 spec structure..."
+            if [ ! -f "${{ env.SPEC_DIR }}/index.json" ]; then
+              echo "::error::V2 spec structure invalid: index.json not found"
+              exit 1
+            fi
+            if [ ! -d "${{ env.SPEC_DIR }}/domains" ]; then
+              echo "::error::V2 spec structure invalid: domains/ directory not found"
+              exit 1
+            fi
+            DOMAIN_COUNT=$(ls -1 ${{ env.SPEC_DIR }}/domains/*.json 2>/dev/null | wc -l)
+            echo "V2 structure verified: index.json + $DOMAIN_COUNT domain files"
+          else
+            echo "Verifying v1 spec structure..."
+            SPEC_COUNT=$(ls -1 ${{ env.SPEC_DIR }}/docs-cloud-f5-com.*.ves-swagger.json 2>/dev/null | wc -l)
+            if [ "$SPEC_COUNT" -eq "0" ]; then
+              echo "::error::V1 spec structure invalid: no *.ves-swagger.json files found"
+              exit 1
+            fi
+            echo "V1 structure verified: $SPEC_COUNT spec files"
+          fi
 
       - name: Check for changes
         if: steps.existing_pr.outputs.exists == 'false'
@@ -129,15 +226,28 @@ jobs:
       - name: Create branch and commit
         if: steps.changes.outputs.changed == 'true'
         run: |
+          SPEC_SOURCE="${{ steps.spec_config.outputs.spec_source }}"
+          SPEC_VERSION="${{ steps.spec_config.outputs.spec_version }}"
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b openapi-update-${{ steps.date.outputs.date }}
           git add -A
+
+          if [ "$SPEC_SOURCE" = "v2" ]; then
+            SOURCE_URL="https://github.com/${{ env.ENRICHED_REPO }}/releases/tag/${SPEC_VERSION}"
+            SPEC_INFO="V2 Enriched Specs (${SPEC_VERSION})"
+          else
+            SOURCE_URL="https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip"
+            SPEC_INFO="V1 Legacy Specs"
+          fi
+
           git commit -m "${{ env.PR_TITLE }}
 
           Automated sync from F5 Distributed Cloud OpenAPI specifications.
 
-          Source: https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
+          Spec Format: ${SPEC_INFO}
+          Source: ${SOURCE_URL}
           Date: ${{ steps.date.outputs.date }}
 
           When this PR merges, the on-merge workflow will:
@@ -210,15 +320,44 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.AUTO_MERGE_TOKEN }}
         run: |
+          SPEC_SOURCE="${{ steps.spec_config.outputs.spec_source }}"
+          SPEC_VERSION="${{ steps.spec_config.outputs.spec_version }}"
+
+          if [ "$SPEC_SOURCE" = "v2" ]; then
+            SOURCE_URL="https://github.com/${{ env.ENRICHED_REPO }}/releases/tag/${SPEC_VERSION}"
+            SPEC_INFO="V2 Enriched Specs"
+            V2_NOTE="
+          ## V2 Enriched Specs
+
+          This update uses enriched API specifications with:
+          - \`x-f5xc-category\`: Official resource categorization
+          - \`x-f5xc-requires-tier\`: Subscription tier requirements
+          - \`x-f5xc-example\`: Enhanced example values
+          - \`x-f5xc-description-*\`: Improved descriptions"
+          else
+            SOURCE_URL="https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip"
+            SPEC_INFO="V1 Legacy Specs"
+            V2_NOTE=""
+          fi
+
+          # Add v2-migration label if using v2 specs
+          LABELS="automated,openapi-update"
+          if [ "$SPEC_SOURCE" = "v2" ]; then
+            LABELS="$LABELS,v2-migration"
+          fi
+
           PR_URL=$(gh pr create \
             --title "${{ env.PR_TITLE }}" \
             --body "## Summary
 
           This PR updates the F5 Distributed Cloud OpenAPI specifications.
 
-          **Source:** https://docs.cloud.f5.com/docs-v2/downloads/f5-distributed-cloud-open-api.zip
+          **Spec Format:** ${SPEC_INFO}
+          **Version:** ${SPEC_VERSION}
+          **Source:** ${SOURCE_URL}
           **Date:** ${{ steps.date.outputs.date }}
           **Tracking Issue:** #${{ steps.issue.outputs.result }}
+          ${V2_NOTE}
 
           ## What happens when this merges?
 
@@ -238,7 +377,7 @@ jobs:
           🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
           Closes #${{ steps.issue.outputs.result }}" \
-            --label "automated,openapi-update")
+            --label "$LABELS")
 
           PR_NUM=$(echo "$PR_URL" | grep -oE '[0-9]+$')
           echo "number=$PR_NUM" >> $GITHUB_OUTPUT

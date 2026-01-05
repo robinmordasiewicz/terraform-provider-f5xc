@@ -407,3 +407,138 @@ jobs:
             exit 1
           fi
           echo "MCP server build validated successfully"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # V2 Migration Validation - Compares v1 vs v2 schema generation
+  # Only runs on PRs with 'v2-migration' label
+  # ═══════════════════════════════════════════════════════════════════════════
+  migration-validation:
+    name: V2 Migration Validation
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'pull_request' &&
+      contains(github.event.pull_request.labels.*.name, 'v2-migration')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+
+      - name: Capture baseline schemas
+        id: baseline
+        run: |
+          echo "::group::Capturing baseline schema state"
+
+          # Create baseline directory
+          mkdir -p /tmp/baseline-schemas
+
+          # Copy current generated resources as baseline
+          cp internal/provider/*_resource.go /tmp/baseline-schemas/ || {
+            echo "No resource files found in internal/provider/"
+            exit 1
+          }
+
+          BASELINE_COUNT=$(ls -1 /tmp/baseline-schemas/*_resource.go 2>/dev/null | wc -l)
+          echo "Captured $BASELINE_COUNT baseline resources"
+          echo "baseline_count=$BASELINE_COUNT" >> $GITHUB_OUTPUT
+
+          echo "::endgroup::"
+
+      - name: Generate with v2 specs
+        id: generate
+        run: |
+          echo "::group::Regenerating with current specs"
+
+          # Create candidate directory
+          mkdir -p /tmp/candidate-schemas
+
+          # Check if v2 specs exist
+          if [ -f "docs/specifications/api/index.json" ]; then
+            echo "V2 specs detected (index.json present)"
+            SPEC_VERSION="v2"
+          else
+            echo "V1 specs detected (no index.json)"
+            SPEC_VERSION="v1"
+          fi
+          echo "spec_version=$SPEC_VERSION" >> $GITHUB_OUTPUT
+
+          # Run generator (this will use whichever spec version is available)
+          if ! go run tools/generate-all-schemas.go; then
+            echo "::error::Schema generation failed"
+            exit 1
+          fi
+
+          # Copy generated resources as candidate
+          cp internal/provider/*_resource.go /tmp/candidate-schemas/ || {
+            echo "::warning::No resource files generated"
+          }
+
+          CANDIDATE_COUNT=$(ls -1 /tmp/candidate-schemas/*_resource.go 2>/dev/null | wc -l)
+          echo "Generated $CANDIDATE_COUNT candidate resources"
+          echo "candidate_count=$CANDIDATE_COUNT" >> $GITHUB_OUTPUT
+
+          echo "::endgroup::"
+
+      - name: Compare schemas
+        id: compare
+        run: |
+          echo "::group::Comparing baseline vs candidate schemas"
+
+          # Run comparison tool
+          go run tools/compare-schemas/main.go \
+            --baseline /tmp/baseline-schemas \
+            --candidate /tmp/candidate-schemas \
+            --output /tmp
+
+          COMPARE_EXIT=$?
+
+          # Check for breaking changes (exit code 2)
+          if [ $COMPARE_EXIT -eq 2 ]; then
+            echo "has_breaking=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_breaking=false" >> $GITHUB_OUTPUT
+          fi
+
+          echo "::endgroup::"
+
+      - name: Upload comparison report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: schema-comparison-report
+          path: |
+            /tmp/comparison-report.md
+            /tmp/comparison-report.json
+          retention-days: 30
+
+      - name: Report results
+        run: |
+          echo "=== V2 Migration Validation Results ==="
+          echo ""
+
+          if [ -f "/tmp/comparison-report.md" ]; then
+            cat /tmp/comparison-report.md
+          fi
+
+          echo ""
+          echo "=== Summary ==="
+          echo "Baseline: ${{ steps.baseline.outputs.baseline_count }} resources"
+          echo "Candidate: ${{ steps.generate.outputs.candidate_count }} resources"
+          echo "Spec Version: ${{ steps.generate.outputs.spec_version }}"
+
+          if [ "${{ steps.compare.outputs.has_breaking }}" = "true" ]; then
+            echo ""
+            echo "::error::BREAKING CHANGES DETECTED"
+            echo "Review the comparison report above and address breaking changes"
+            echo "before merging this v2-migration PR."
+            exit 1
+          fi
+
+          echo ""
+          echo "No breaking changes detected - migration validation passed"

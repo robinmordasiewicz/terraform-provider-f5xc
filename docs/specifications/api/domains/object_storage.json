@@ -1,0 +1,3441 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Object Storage",
+    "description": "Blob management for application component delivery across namespaces. Time-limited download links with cryptographic signing protect asset retrieval. Version-controlled packages organized by operating system type support artifact discovery. Query filtering by name, type, and release number enables programmatic access to integrator libraries and protection modules for mobile deployments.",
+    "version": "2.0.12",
+    "contact": {
+      "name": "F5 Distributed Cloud",
+      "url": "https://docs.cloud.f5.com"
+    },
+    "license": {
+      "name": "Proprietary",
+      "url": "https://www.f5.com/company/policies/eula"
+    },
+    "summary": "Versioned library distribution for mobile app integrators. Presigned URLs enable secure downloads with OS-specific builds for iOS and Android.",
+    "x-f5xc-cli-domain": "object_storage",
+    "x-f5xc-best-practices": {
+      "common_errors": [
+        {
+          "code": 400,
+          "message": "Invalid request body",
+          "resolution": "Validate JSON structure and required fields before submission",
+          "prevention": "Use schema validation from OpenAPI spec"
+        },
+        {
+          "code": 401,
+          "message": "Authentication failed",
+          "resolution": "Verify API token is valid and not expired",
+          "prevention": "Use environment variables for token management"
+        },
+        {
+          "code": 403,
+          "message": "Permission denied",
+          "resolution": "Check user role and namespace permissions",
+          "prevention": "Verify RBAC policies before operations"
+        },
+        {
+          "code": 404,
+          "message": "Resource not found",
+          "resolution": "Verify resource name and namespace exist",
+          "prevention": "List resources before attempting operations"
+        },
+        {
+          "code": 409,
+          "message": "Resource already exists",
+          "resolution": "Use unique name or delete existing resource",
+          "prevention": "Check existence before creation"
+        },
+        {
+          "code": 429,
+          "message": "Rate limit exceeded",
+          "resolution": "Implement exponential backoff and retry logic",
+          "prevention": "Batch operations and add delays between requests"
+        }
+      ],
+      "security_notes": [
+        "Always use HTTPS for all API communications",
+        "Store API tokens securely, never in source code",
+        "Rotate API tokens regularly following security policies"
+      ],
+      "performance_tips": [
+        "Use pagination for large result sets",
+        "Batch related operations when possible",
+        "Cache read-only responses appropriately"
+      ]
+    }
+  },
+  "servers": [
+    {
+      "url": "https://{tenant}.{console_url}/api/v1/{domain_prefix}/{environment}/{region}/namespaces/{namespace}",
+      "description": "F5 Distributed Cloud Console",
+      "variables": {
+        "tenant": {
+          "default": "example-corp",
+          "description": "F5 Distributed Cloud tenant identifier (e.g., my-company, acme-inc)"
+        },
+        "console_url": {
+          "default": "console.ves.volterra.io",
+          "description": "Console URL base (e.g., console.ves.volterra.io for production, staging.volterra.us for staging)",
+          "enum": [
+            "console.ves.volterra.io",
+            "staging.volterra.us"
+          ]
+        },
+        "environment": {
+          "default": "production",
+          "description": "Environment designation (production, staging, development)",
+          "enum": [
+            "production",
+            "staging",
+            "development"
+          ]
+        },
+        "domain_prefix": {
+          "default": "api",
+          "description": "Domain naming prefix for consistent naming conventions"
+        },
+        "region": {
+          "default": "us-east-1",
+          "description": "Geographic region for API deployment (e.g., us-east-1, eu-west-1)"
+        },
+        "namespace": {
+          "default": "default",
+          "description": "Kubernetes-style namespace for environment separation (e.g., 'default', 'production', 'staging')"
+        }
+      }
+    }
+  ],
+  "security": [
+    {
+      "ApiToken": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Other",
+      "description": "Miscellaneous operations"
+    }
+  ],
+  "paths": {
+    "/api/object_store/namespaces/{namespace}/stored_objects/mobile-app-shield": {
+      "get": {
+        "summary": "GET List Of Mobile App Shields.",
+        "description": "ListMobileAppShields is an API to list all mobile app shields available for download.",
+        "operationId": "ves.io.schema.stored_object.MobileAppShieldCustomAPI.ListMobileAppShields",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stored_objectListObjectsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nx-required\nNamespace of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "system"
+          },
+          {
+            "name": "object_type",
+            "description": "Optional query parameter. Type of the stored_object.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Object Type.",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "swagger"
+          },
+          {
+            "name": "name",
+            "description": "Optional query parameter. Name of the stored_object.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "example-file, shared/example-file, example-ns/example-file"
+          },
+          {
+            "name": "query_type",
+            "description": "Optional query parameter. The type of search query needs to be performed. Could be EXACT_MATCH or PREFIX_MATCH.\nEXACT_MATCH returns the objects with exact match on the name filed, while PREFIX_MATCH returns the list of object matching the 'name' prefix. Default is EXACT_MATCH.\n\n- EXACT_MATCH: EXACT_MATCH\n\nReturns list of objects with exact match on the name filed.\n- PREFIX_MATCH: PREFIX_MATCH\n\nReturns the list of object matching the 'name' prefix.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "PREFIX MATCH.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "EXACT_MATCH",
+                "PREFIX_MATCH"
+              ],
+              "default": "EXACT_MATCH"
+            }
+          },
+          {
+            "name": "latest_version_only",
+            "description": "Optional query parameter. If passed, returns only latest version of the objects.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Latest Versions Only.",
+            "schema": {
+              "type": "boolean",
+              "format": "boolean"
+            }
+          }
+        ],
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-stored_object-mobileappshieldcustomapi-listmobileappshields"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.stored_object.MobileAppShieldCustomAPI.ListMobileAppShields",
+        "tags": [
+          "Other"
+        ],
+        "x-ves-required-fields": [
+          "path.namespace"
+        ],
+        "x-ves-danger-level": "low",
+        "x-ves-operation-metadata": {
+          "purpose": "List all mobile-app-shields",
+          "required_fields": [
+            "path.namespace"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": []
+          },
+          "side_effects": {},
+          "danger_level": "low",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "moderate",
+            "resource_usage": "moderate"
+          }
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 200,
+          "p95_ms": 800,
+          "p99_ms": 2000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Stored Object.",
+      "x-ves-proto-service": "ves.io.schema.stored_object.MobileAppShieldCustomAPI",
+      "x-ves-proto-service-type": "CUSTOM_PUBLIC"
+    },
+    "/api/object_store/namespaces/{namespace}/stored_objects/mobile-app-shield/{name}/{version}": {
+      "get": {
+        "summary": "GET Mobile App Shield.",
+        "description": "GetMobileAppShield is an API to download particular version of mobile app shield.",
+        "operationId": "ves.io.schema.stored_object.MobileAppShieldCustomAPI.GetMobileAppShield",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stored_objectGetObjectResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nx-required\nNamespace of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "system"
+          },
+          {
+            "name": "name",
+            "description": "Name\nx-required\nName of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "volt-api-specs"
+          },
+          {
+            "name": "version",
+            "description": "Version\nVersion of the stored_object in \"v{n}-{YY}-{MM}-{DD}\" formatted string, where n is version number and YY/MM/DD is year, month and date.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Version",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "v0-21-09-13"
+          },
+          {
+            "name": "object_type",
+            "description": "X-required\nType of the stored_object.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Object Type.",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "swagger"
+          }
+        ],
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-stored_object-mobileappshieldcustomapi-getmobileappshield"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.stored_object.MobileAppShieldCustomAPI.GetMobileAppShield",
+        "tags": [
+          "Other"
+        ],
+        "x-ves-required-fields": [
+          "path.name",
+          "path.namespace",
+          "path.version"
+        ],
+        "x-ves-danger-level": "low",
+        "x-ves-operation-metadata": {
+          "purpose": "Retrieve specific mobile-app-shield",
+          "required_fields": [
+            "path.name",
+            "path.namespace",
+            "path.version"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": []
+          },
+          "side_effects": {},
+          "danger_level": "low",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "low",
+            "resource_usage": "low"
+          }
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 200,
+          "p95_ms": 800,
+          "p99_ms": 2000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Stored Object.",
+      "x-ves-proto-service": "ves.io.schema.stored_object.MobileAppShieldCustomAPI",
+      "x-ves-proto-service-type": "CUSTOM_PUBLIC"
+    },
+    "/api/object_store/namespaces/{namespace}/stored_objects/mobile-integrator": {
+      "get": {
+        "summary": "GET List Of Mobile Integrators.",
+        "description": "ListMobileIntegrators is an API to list all mobile integrators available for download.",
+        "operationId": "ves.io.schema.stored_object.MobileIntegratorCustomAPI.ListMobileIntegrators",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stored_objectListObjectsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nx-required\nNamespace of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "system"
+          },
+          {
+            "name": "object_type",
+            "description": "Optional query parameter. Type of the stored_object.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Object Type.",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "swagger"
+          },
+          {
+            "name": "name",
+            "description": "Optional query parameter. Name of the stored_object.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "example-file, shared/example-file, example-ns/example-file"
+          },
+          {
+            "name": "query_type",
+            "description": "Optional query parameter. The type of search query needs to be performed. Could be EXACT_MATCH or PREFIX_MATCH.\nEXACT_MATCH returns the objects with exact match on the name filed, while PREFIX_MATCH returns the list of object matching the 'name' prefix. Default is EXACT_MATCH.\n\n- EXACT_MATCH: EXACT_MATCH\n\nReturns list of objects with exact match on the name filed.\n- PREFIX_MATCH: PREFIX_MATCH\n\nReturns the list of object matching the 'name' prefix.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "PREFIX MATCH.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "EXACT_MATCH",
+                "PREFIX_MATCH"
+              ],
+              "default": "EXACT_MATCH"
+            }
+          },
+          {
+            "name": "latest_version_only",
+            "description": "Optional query parameter. If passed, returns only latest version of the objects.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Latest Versions Only.",
+            "schema": {
+              "type": "boolean",
+              "format": "boolean"
+            }
+          }
+        ],
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-stored_object-mobileintegratorcustomapi-listmobileintegrators"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.stored_object.MobileIntegratorCustomAPI.ListMobileIntegrators",
+        "tags": [
+          "Other"
+        ],
+        "x-ves-required-fields": [
+          "path.namespace"
+        ],
+        "x-ves-danger-level": "low",
+        "x-ves-operation-metadata": {
+          "purpose": "List all mobile-integrators",
+          "required_fields": [
+            "path.namespace"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": []
+          },
+          "side_effects": {},
+          "danger_level": "low",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "moderate",
+            "resource_usage": "moderate"
+          }
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 200,
+          "p95_ms": 800,
+          "p99_ms": 2000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Stored Object.",
+      "x-ves-proto-service": "ves.io.schema.stored_object.MobileIntegratorCustomAPI",
+      "x-ves-proto-service-type": "CUSTOM_PUBLIC"
+    },
+    "/api/object_store/namespaces/{namespace}/stored_objects/mobile-integrator/{name}/{version}": {
+      "get": {
+        "summary": "GET Mobile Integrator.",
+        "description": "GetMobileIntegrator is an API to download particular version of Integrator.",
+        "operationId": "ves.io.schema.stored_object.MobileIntegratorCustomAPI.GetMobileIntegrator",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stored_objectGetObjectResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nx-required\nNamespace of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "system"
+          },
+          {
+            "name": "name",
+            "description": "Name\nx-required\nName of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "volt-api-specs"
+          },
+          {
+            "name": "version",
+            "description": "Version\nVersion of the stored_object in \"v{n}-{YY}-{MM}-{DD}\" formatted string, where n is version number and YY/MM/DD is year, month and date.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Version",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "v0-21-09-13"
+          },
+          {
+            "name": "object_type",
+            "description": "X-required\nType of the stored_object.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Object Type.",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "swagger"
+          }
+        ],
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-stored_object-mobileintegratorcustomapi-getmobileintegrator"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.stored_object.MobileIntegratorCustomAPI.GetMobileIntegrator",
+        "tags": [
+          "Other"
+        ],
+        "x-ves-required-fields": [
+          "path.name",
+          "path.namespace",
+          "path.version"
+        ],
+        "x-ves-danger-level": "low",
+        "x-ves-operation-metadata": {
+          "purpose": "Retrieve specific mobile-integrator",
+          "required_fields": [
+            "path.name",
+            "path.namespace",
+            "path.version"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": []
+          },
+          "side_effects": {},
+          "danger_level": "low",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "low",
+            "resource_usage": "low"
+          }
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 200,
+          "p95_ms": 800,
+          "p99_ms": 2000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Stored Object.",
+      "x-ves-proto-service": "ves.io.schema.stored_object.MobileIntegratorCustomAPI",
+      "x-ves-proto-service-type": "CUSTOM_PUBLIC"
+    },
+    "/api/object_store/namespaces/{namespace}/stored_objects/{object_type}": {
+      "get": {
+        "summary": "GET List Of Stored Objects.",
+        "description": "ListObjects is an API to list objects in object store.",
+        "operationId": "ves.io.schema.stored_object.CustomAPI.ListObjects",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stored_objectListObjectsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nx-required\nNamespace of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "system"
+          },
+          {
+            "name": "object_type",
+            "description": "Object_type\nOptional query parameter. Type of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Object Type.",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "swagger"
+          },
+          {
+            "name": "name",
+            "description": "Optional query parameter. Name of the stored_object.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "example-file, shared/example-file, example-ns/example-file"
+          },
+          {
+            "name": "query_type",
+            "description": "Optional query parameter. The type of search query needs to be performed. Could be EXACT_MATCH or PREFIX_MATCH.\nEXACT_MATCH returns the objects with exact match on the name filed, while PREFIX_MATCH returns the list of object matching the 'name' prefix. Default is EXACT_MATCH.\n\n- EXACT_MATCH: EXACT_MATCH\n\nReturns list of objects with exact match on the name filed.\n- PREFIX_MATCH: PREFIX_MATCH\n\nReturns the list of object matching the 'name' prefix.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "PREFIX MATCH.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "EXACT_MATCH",
+                "PREFIX_MATCH"
+              ],
+              "default": "EXACT_MATCH"
+            }
+          },
+          {
+            "name": "latest_version_only",
+            "description": "Optional query parameter. If passed, returns only latest version of the objects.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Latest Versions Only.",
+            "schema": {
+              "type": "boolean",
+              "format": "boolean"
+            }
+          }
+        ],
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-stored_object-customapi-listobjects"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.stored_object.CustomAPI.ListObjects",
+        "tags": [
+          "Other"
+        ],
+        "x-ves-required-fields": [
+          "path.namespace",
+          "path.object_type"
+        ],
+        "x-ves-danger-level": "low",
+        "x-ves-operation-metadata": {
+          "purpose": "List all stored-objects",
+          "required_fields": [
+            "path.namespace",
+            "path.object_type"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": []
+          },
+          "side_effects": {},
+          "danger_level": "low",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "low",
+            "resource_usage": "low"
+          }
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 200,
+          "p95_ms": 800,
+          "p99_ms": 2000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Stored Object.",
+      "x-ves-proto-service": "ves.io.schema.stored_object.CustomAPI",
+      "x-ves-proto-service-type": "CUSTOM_PUBLIC"
+    },
+    "/api/object_store/namespaces/{namespace}/stored_objects/{object_type}/{name}": {
+      "delete": {
+        "summary": "DELETE Stored Object(s)",
+        "description": "DeleteObjects is an API to DELETE object(s) in object store.",
+        "operationId": "ves.io.schema.stored_object.CustomAPI.DeleteObject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stored_objectDeleteObjectResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nx-required\nNamespace of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "system"
+          },
+          {
+            "name": "object_type",
+            "description": "Object_type\nx-required\nType of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Object Type.",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "swagger"
+          },
+          {
+            "name": "name",
+            "description": "Name\nx-required\nName of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "volt-api-specs"
+          },
+          {
+            "name": "version",
+            "description": "Version of the stored_object in \"v{n}-{YY}-{MM}-{DD}\" formatted string, where n is version number and YY/MM/DD is year, month and date.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Version",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "v1-21-01-12"
+          },
+          {
+            "name": "force_delete",
+            "description": "Optional query parameter. If provided will DELETE all the versions of the specified object.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Force DELETE.",
+            "schema": {
+              "type": "boolean",
+              "format": "boolean"
+            },
+            "x-f5xc-example": "value"
+          }
+        ],
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-stored_object-customapi-deleteobject"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.stored_object.CustomAPI.DeleteObject",
+        "tags": [
+          "Other"
+        ],
+        "x-ves-required-fields": [
+          "path.name",
+          "path.namespace",
+          "path.object_type"
+        ],
+        "x-ves-danger-level": "high",
+        "x-ves-confirmation-required": true,
+        "x-ves-side-effects": {
+          "deletes": [
+            "stored-object",
+            "contained_resources"
+          ]
+        },
+        "x-ves-operation-metadata": {
+          "purpose": "Delete stored-object",
+          "required_fields": [
+            "path.name",
+            "path.namespace",
+            "path.object_type"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": [
+              "Resource removed from system",
+              "Associated resources may be affected"
+            ]
+          },
+          "side_effects": {
+            "deletes": [
+              "stored-object",
+              "contained_resources"
+            ]
+          },
+          "danger_level": "high",
+          "confirmation_required": true,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "high",
+            "resource_usage": "moderate"
+          }
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 500,
+          "p95_ms": 1500,
+          "p99_ms": 4000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "put": {
+        "summary": "Create Stored Object.",
+        "description": "CreateObject is an API to upload an object to generic object store. Objects are immutable, a new version is created when the content is updated.",
+        "operationId": "ves.io.schema.stored_object.CustomAPI.CreateObject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stored_objectCreateObjectResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nx-required\nNamespace in which object is to be created.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "system"
+          },
+          {
+            "name": "object_type",
+            "description": "Object_type\nx-required\nType of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Object Type.",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "swagger"
+          },
+          {
+            "name": "name",
+            "description": "Name\nx-required\nName of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "volt-api-specs"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/stored_objectCreateObjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-stored_object-customapi-createobject"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.stored_object.CustomAPI.CreateObject",
+        "tags": [
+          "Other"
+        ],
+        "x-ves-required-fields": [
+          "path.name",
+          "path.namespace",
+          "path.object_type"
+        ],
+        "x-ves-danger-level": "medium",
+        "x-ves-side-effects": {
+          "modifies": [
+            "stored-object"
+          ]
+        },
+        "x-ves-operation-metadata": {
+          "purpose": "Replace existing stored-object",
+          "required_fields": [
+            "path.name",
+            "path.namespace",
+            "path.object_type"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": [
+              "Resource updated with new values"
+            ]
+          },
+          "side_effects": {
+            "modifies": [
+              "stored-object"
+            ]
+          },
+          "danger_level": "medium",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "low",
+            "resource_usage": "low"
+          }
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 800,
+          "p95_ms": 2500,
+          "p99_ms": 6000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Stored Object.",
+      "x-ves-proto-service": "ves.io.schema.stored_object.CustomAPI",
+      "x-ves-proto-service-type": "CUSTOM_PUBLIC"
+    },
+    "/api/object_store/namespaces/{namespace}/stored_objects/{object_type}/{name}/{version}": {
+      "get": {
+        "summary": "GET Stored Object.",
+        "description": "GetObject is an API to download an object from object store.",
+        "operationId": "ves.io.schema.stored_object.CustomAPI.GetObject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stored_objectGetObjectResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nx-required\nNamespace of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "system"
+          },
+          {
+            "name": "object_type",
+            "description": "Object_type\nx-required\nType of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Object Type.",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "swagger"
+          },
+          {
+            "name": "name",
+            "description": "Name\nx-required\nName of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "volt-api-specs"
+          },
+          {
+            "name": "version",
+            "description": "Version\nVersion of the stored_object in \"v{n}-{YY}-{MM}-{DD}\" formatted string, where n is version number and YY/MM/DD is year, month and date.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Version",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "v0-21-09-13"
+          }
+        ],
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-stored_object-customapi-getobject"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.stored_object.CustomAPI.GetObject",
+        "tags": [
+          "Other"
+        ],
+        "x-ves-required-fields": [
+          "path.name",
+          "path.namespace",
+          "path.object_type",
+          "path.version"
+        ],
+        "x-ves-danger-level": "low",
+        "x-ves-operation-metadata": {
+          "purpose": "Retrieve specific stored-object",
+          "required_fields": [
+            "path.name",
+            "path.namespace",
+            "path.object_type",
+            "path.version"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": []
+          },
+          "side_effects": {},
+          "danger_level": "low",
+          "confirmation_required": false,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "low",
+            "resource_usage": "low"
+          }
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 200,
+          "p95_ms": 800,
+          "p99_ms": 2000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "delete": {
+        "summary": "DELETE Stored Object(s)",
+        "description": "DeleteObjects is an API to DELETE object(s) in object store.",
+        "operationId": "docs_cloud_f5_com_0222_public_ves_io_schema_stored_object_ves_swagger_ves.io.schema.stored_object.CustomAPI.DeleteObject",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/stored_objectDeleteObjectResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returned when operation is not authorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returned when there is no permission to access resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returned when resource is not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returned when operation on resource is conflicting with current value.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Returned when operation has been rejected as it is happening too frequently.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Returned when server encountered an error in processing API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Returned when service is unavailable temporarily.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "Returned when server timed out processing request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "namespace",
+            "description": "Namespace\nx-required\nNamespace of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Namespace",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "system"
+          },
+          {
+            "name": "object_type",
+            "description": "Object_type\nx-required\nType of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Object Type.",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "swagger"
+          },
+          {
+            "name": "name",
+            "description": "Name\nx-required\nName of the stored_object.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Name",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "volt-api-specs"
+          },
+          {
+            "name": "version",
+            "description": "Version\nVersion of the stored_object in \"v{n}-{YY}-{MM}-{DD}\" formatted string, where n is version number and YY/MM/DD is year, month and date.",
+            "in": "path",
+            "required": true,
+            "x-displayname": "Version",
+            "schema": {
+              "type": "string"
+            },
+            "x-f5xc-example": "v1-21-01-12"
+          },
+          {
+            "name": "force_delete",
+            "description": "Optional query parameter. If provided will DELETE all the versions of the specified object.",
+            "in": "query",
+            "required": false,
+            "x-displayname": "Force DELETE.",
+            "schema": {
+              "type": "boolean",
+              "format": "boolean"
+            },
+            "x-f5xc-example": "value"
+          }
+        ],
+        "externalDocs": {
+          "description": "Examples of this operation.",
+          "url": "https://docs.cloud.f5.com/docs-v2/platform/reference/api-ref/ves-io-schema-stored_object-customapi-deleteobject"
+        },
+        "x-ves-proto-rpc": "ves.io.schema.stored_object.CustomAPI.DeleteObject",
+        "tags": [
+          "Other"
+        ],
+        "x-ves-required-fields": [
+          "path.name",
+          "path.namespace",
+          "path.object_type",
+          "path.version"
+        ],
+        "x-ves-danger-level": "high",
+        "x-ves-confirmation-required": true,
+        "x-ves-side-effects": {
+          "deletes": [
+            "stored-object",
+            "contained_resources"
+          ]
+        },
+        "x-ves-operation-metadata": {
+          "purpose": "Delete stored-object",
+          "required_fields": [
+            "path.name",
+            "path.namespace",
+            "path.object_type",
+            "path.version"
+          ],
+          "optional_fields": [],
+          "field_docs": {},
+          "conditions": {
+            "prerequisites": [
+              "Active namespace"
+            ],
+            "postconditions": [
+              "Resource removed from system",
+              "Associated resources may be affected"
+            ]
+          },
+          "side_effects": {
+            "deletes": [
+              "stored-object",
+              "contained_resources"
+            ]
+          },
+          "danger_level": "high",
+          "confirmation_required": true,
+          "common_errors": [
+            {
+              "code": 401,
+              "message": "Authentication required",
+              "solution": "Provide valid API credentials"
+            },
+            {
+              "code": 403,
+              "message": "Permission denied",
+              "solution": "Check access permissions for this operation"
+            },
+            {
+              "code": 404,
+              "message": "Resource not found",
+              "solution": "Verify resource name, namespace, and path"
+            },
+            {
+              "code": 409,
+              "message": "Resource already exists",
+              "solution": "Use different name or update existing resource"
+            },
+            {
+              "code": 429,
+              "message": "Rate limit exceeded",
+              "solution": "Wait before retrying the operation"
+            },
+            {
+              "code": 500,
+              "message": "Server error",
+              "solution": "Retry operation or contact support"
+            }
+          ],
+          "performance_impact": {
+            "latency": "high",
+            "resource_usage": "moderate"
+          }
+        },
+        "x-f5xc-discovered-response-time": {
+          "p50_ms": 500,
+          "p95_ms": 1500,
+          "p99_ms": 4000,
+          "sample_count": 0,
+          "source": "estimate"
+        }
+      },
+      "x-displayname": "Stored Object.",
+      "x-ves-proto-service": "ves.io.schema.stored_object.CustomAPI",
+      "x-ves-proto-service-type": "CUSTOM_PUBLIC"
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiToken": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "API Token authentication. Format: 'APIToken <your-token>'"
+      }
+    },
+    "schemas": {
+      "schemaEmpty": {
+        "type": "object",
+        "description": "This can be used for messages where no values are needed.",
+        "title": "Empty",
+        "x-displayname": "Empty",
+        "x-ves-proto-message": "ves.io.schema.Empty",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaEmpty",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaEmpty\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_empties\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "schemaHttpMethod": {
+        "type": "string",
+        "description": "Specifies the HTTP method used to access a resource.\n\nAny HTTP Method.",
+        "title": "HttpMethod.",
+        "enum": [
+          "ANY",
+          "GET",
+          "HEAD",
+          "POST",
+          "PUT",
+          "DELETE",
+          "CONNECT",
+          "OPTIONS",
+          "TRACE",
+          "PATCH",
+          "COPY"
+        ],
+        "default": "ANY",
+        "x-displayname": "HTTP Method.",
+        "x-ves-proto-enum": "ves.io.schema.HttpMethod",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for schemaHttpMethod",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for schemaHttpMethod\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/schema_http_methods\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "other"
+      },
+      "stored_objectCreateObjectRequest": {
+        "type": "object",
+        "description": "Request message for CreateObject API.",
+        "title": "CreateObjectRequest.",
+        "x-displayname": "Create Object Request.",
+        "x-ves-oneof-field-contents": "[\"bytes_value\",\"string_value\"]",
+        "x-ves-oneof-field-object_attributes": "[\"mobile_app_shield\",\"mobile_integrator\",\"mobile_sdk\",\"no_attributes\"]",
+        "x-ves-proto-message": "ves.io.schema.stored_object.CreateObjectRequest",
+        "properties": {
+          "bytes_value": {
+            "type": "string",
+            "description": "Exclusive with [string_value]\nBinary object contents. Should be encoded in base64 scheme.",
+            "title": "Bytes_value.",
+            "format": "byte",
+            "maximum": 5242880,
+            "x-displayname": "Byte Value.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.bytes.max_len": "5242880"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.bytes.max_len": "5242880"
+            },
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "content_format": {
+            "type": "string",
+            "description": "The optional content format associated with object.",
+            "title": "Content_format.",
+            "x-displayname": "Content Format.",
+            "x-ves-example": "JSON, YAML.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.in": "[\\\"\\\", \\\"json\\\", \\\"yaml\\\", \\\"txt\\\", \\\"bin\\\"]"
+            },
+            "x-f5xc-example": "json, yaml",
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.in": "[\\\"\\\", \\\"json\\\", \\\"yaml\\\", \\\"txt\\\", \\\"bin\\\"]"
+            },
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "description": {
+            "type": "string",
+            "description": "The optional description associated with object.",
+            "title": "Description.",
+            "maxLength": 0,
+            "x-displayname": "Description.",
+            "x-ves-example": "Value",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "512"
+            },
+            "x-f5xc-example": "value",
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "512"
+            },
+            "minLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 512,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161368+00:00"
+          },
+          "mobile_app_shield": {
+            "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes"
+          },
+          "mobile_integrator": {
+            "$ref": "#/components/schemas/stored_objectMobileIntegratorAttributes"
+          },
+          "mobile_sdk": {
+            "$ref": "#/components/schemas/stored_objectMobileSDKAttributes"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the stored_object.\nRequired: YES.",
+            "title": "Name",
+            "minLength": 1,
+            "maxLength": 16,
+            "x-displayname": "Name",
+            "x-ves-example": "Volt-API-specs.",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true",
+              "ves.io.schema.rules.string.max_len": "512",
+              "ves.io.schema.rules.string.min_len": "1",
+              "ves.io.schema.rules.string.ves_object_name": "true"
+            },
+            "x-f5xc-example": "volt-api-specs",
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true",
+              "ves.io.schema.rules.string.max_len": "512",
+              "ves.io.schema.rules.string.min_len": "1",
+              "ves.io.schema.rules.string.ves_object_name": "true"
+            },
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 512,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161378+00:00"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Namespace in which object is to be created\nRequired: YES.",
+            "title": "Namespace",
+            "x-displayname": "Namespace",
+            "x-ves-example": "System",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-f5xc-example": "system",
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "minLength": 0,
+            "maxLength": 6,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161383+00:00"
+          },
+          "no_attributes": {
+            "$ref": "#/components/schemas/schemaEmpty"
+          },
+          "object_type": {
+            "type": "string",
+            "description": "Type of the stored_object\nRequired: YES.",
+            "title": "Object_type.",
+            "x-displayname": "Object Type.",
+            "x-ves-example": "Swagger",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true",
+              "ves.io.schema.rules.string.in": "[\\\"swagger\\\", \\\"generic\\\", \\\"big-object\\\", \\\"mobile-sdk\\\", \\\"mobile-integrator\\\", \\\"mobile-app-shield\\\"]"
+            },
+            "x-f5xc-example": "swagger",
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true",
+              "ves.io.schema.rules.string.in": "[\\\"swagger\\\", \\\"generic\\\", \\\"big-object\\\", \\\"mobile-sdk\\\", \\\"mobile-integrator\\\", \\\"mobile-app-shield\\\"]"
+            },
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "string_value": {
+            "type": "string",
+            "description": "Exclusive with [bytes_value]\nString formatted contents.",
+            "title": "Contents",
+            "maxLength": 5242880,
+            "x-displayname": "String Value.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "5242880"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "5242880"
+            },
+            "minLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectCreateObjectRequest",
+          "required_fields": [
+            "bytes_value",
+            "content_format",
+            "description",
+            "mobile_app_shield",
+            "mobile_integrator",
+            "mobile_sdk",
+            "name",
+            "namespace",
+            "no_attributes",
+            "object_type",
+            "string_value"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectCreateObjectRequest\nmetadata:\n  name: example\n  namespace: default\nspec:\n  bytes_value: value\n  content_format: value\n  description: value\n  mobile_app_shield: value\n  mobile_integrator: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"bytes_value\": \"value\",\n    \"content_format\": \"value\",\n    \"description\": \"value\",\n    \"mobile_app_shield\": \"value\",\n    \"mobile_integrator\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_objects\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectCreateObjectResponse": {
+        "type": "object",
+        "description": "Response message for CreateObject API.",
+        "title": "CreateObjectResponse.",
+        "x-displayname": "Create Object Response.",
+        "x-ves-oneof-field-additional_info": "[\"no_additional_info\",\"presigned_url\"]",
+        "x-ves-proto-message": "ves.io.schema.stored_object.CreateObjectResponse",
+        "properties": {
+          "metadata": {
+            "$ref": "#/components/schemas/stored_objectStoredObjectDescriptor"
+          },
+          "no_additional_info": {
+            "$ref": "#/components/schemas/schemaEmpty"
+          },
+          "presigned_url": {
+            "$ref": "#/components/schemas/stored_objectPreSignedUrl"
+          },
+          "status": {
+            "$ref": "#/components/schemas/stored_objectStoredObjectResponseStatus"
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectCreateObjectResponse",
+          "required_fields": [
+            "metadata",
+            "no_additional_info",
+            "presigned_url",
+            "status"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectCreateObjectResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  no_additional_info: value\n  presigned_url: value\n  status: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"no_additional_info\": \"value\",\n    \"presigned_url\": \"value\",\n    \"status\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_objects\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectDeleteObjectResponse": {
+        "type": "object",
+        "description": "Response for DeleteObjects API.",
+        "title": "DeleteObjectResponse.",
+        "x-displayname": "DELETE Objects Response.",
+        "x-ves-proto-message": "ves.io.schema.stored_object.DeleteObjectResponse",
+        "properties": {
+          "deleted_objects": {
+            "type": "array",
+            "description": "Names of Deleted Object.",
+            "title": "Deleted_objects.",
+            "items": {
+              "type": "string"
+            },
+            "x-displayname": "Deleted Object Names.",
+            "x-ves-example": "Value",
+            "x-f5xc-example": "value",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectDeleteObjectResponse",
+          "required_fields": [
+            "deleted_objects"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectDeleteObjectResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  deleted_objects: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"deleted_objects\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_objects\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectGetObjectResponse": {
+        "type": "object",
+        "description": "Response message for GetObject API.",
+        "title": "GetObjectResponse.",
+        "x-displayname": "GET Object Response.",
+        "x-ves-oneof-field-contents": "[\"bytes_value\",\"presigned_url\",\"string_value\"]",
+        "x-ves-proto-message": "ves.io.schema.stored_object.GetObjectResponse",
+        "properties": {
+          "bytes_value": {
+            "type": "string",
+            "description": "Exclusive with [presigned_url string_value]\nBinary object contents. This will be a base64 encoded string. The client should decode it to see the actual contents of the object.",
+            "title": "Bytes_value.",
+            "format": "byte",
+            "maximum": 5242880,
+            "x-displayname": "Byte Value.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.bytes.max_len": "5242880"
+            },
+            "x-f5xc-example": "\"\"",
+            "x-validation-rules": {
+              "ves.io.schema.rules.bytes.max_len": "5242880"
+            },
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "content_format": {
+            "type": "string",
+            "description": "The optional content format associated with object.",
+            "title": "Content_format.",
+            "x-displayname": "Content Format.",
+            "x-ves-example": "JSON, YAML.",
+            "x-f5xc-example": "json, yaml",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/stored_objectStoredObjectDescriptor"
+          },
+          "presigned_url": {
+            "$ref": "#/components/schemas/stored_objectPreSignedUrl"
+          },
+          "string_value": {
+            "type": "string",
+            "description": "Exclusive with [bytes_value presigned_url]\nString formatted contents.",
+            "title": "Contents",
+            "maxLength": 5242880,
+            "x-displayname": "Contents",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "5242880"
+            },
+            "x-f5xc-example": "\"\"",
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "5242880"
+            },
+            "minLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectGetObjectResponse",
+          "required_fields": [
+            "bytes_value",
+            "content_format",
+            "metadata",
+            "presigned_url",
+            "string_value"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectGetObjectResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  bytes_value: value\n  content_format: value\n  presigned_url: value\n  string_value: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"bytes_value\": \"value\",\n    \"content_format\": \"value\",\n    \"presigned_url\": \"value\",\n    \"string_value\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_objects\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectListItemDescriptor": {
+        "type": "object",
+        "description": "A descriptor for list response item.",
+        "title": "ListItemDescriptor.",
+        "x-displayname": "List Item Descriptor.",
+        "x-ves-oneof-field-object_attributes": "[\"mobile_app_shield\",\"mobile_integrator\",\"mobile_sdk\",\"no_attributes\"]",
+        "x-ves-proto-message": "ves.io.schema.stored_object.ListItemDescriptor",
+        "properties": {
+          "mobile_app_shield": {
+            "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes"
+          },
+          "mobile_integrator": {
+            "$ref": "#/components/schemas/stored_objectMobileIntegratorAttributes"
+          },
+          "mobile_sdk": {
+            "$ref": "#/components/schemas/stored_objectMobileSDKAttributes"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the stored object.",
+            "title": "Name",
+            "x-displayname": "Object Name.",
+            "x-f5xc-example": "example-resource",
+            "minLength": 0,
+            "maxLength": 16,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161411+00:00"
+          },
+          "no_attributes": {
+            "$ref": "#/components/schemas/schemaEmpty"
+          },
+          "tenant": {
+            "type": "string",
+            "description": "Tenant to which this object belongs.",
+            "title": "Tenant",
+            "x-displayname": "Tenant",
+            "x-ves-example": "Example-corp.",
+            "x-f5xc-example": "example-corp",
+            "minLength": 0,
+            "maxLength": 18,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only",
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161416+00:00"
+          },
+          "versions": {
+            "type": "array",
+            "description": "Available versions for the stored object.",
+            "title": "Versions",
+            "items": {
+              "$ref": "#/components/schemas/stored_objectVersionDescriptor"
+            },
+            "x-displayname": "Versions",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectListItemDescriptor",
+          "required_fields": [
+            "mobile_app_shield",
+            "mobile_integrator",
+            "mobile_sdk",
+            "name",
+            "no_attributes",
+            "tenant",
+            "versions"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectListItemDescriptor\nmetadata:\n  name: example\n  namespace: default\nspec:\n  mobile_app_shield: value\n  mobile_integrator: value\n  mobile_sdk: value\n  name: value\n  no_attributes: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"mobile_app_shield\": \"value\",\n    \"mobile_integrator\": \"value\",\n    \"mobile_sdk\": \"value\",\n    \"name\": \"value\",\n    \"no_attributes\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_list_item_descriptors\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectListObjectsResponse": {
+        "type": "object",
+        "description": "Response for GetListOfObjects API.",
+        "title": "ListObjectsResponse.",
+        "x-displayname": "List Objects Response.",
+        "x-ves-proto-message": "ves.io.schema.stored_object.ListObjectsResponse",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Stored object names and available versions for each object.",
+            "title": "List of store object descriptors.",
+            "items": {
+              "$ref": "#/components/schemas/stored_objectListItemDescriptor"
+            },
+            "x-displayname": "Stored Object Descriptors.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectListObjectsResponse",
+          "required_fields": [
+            "items"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectListObjectsResponse\nmetadata:\n  name: example\n  namespace: default\nspec:\n  items: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"items\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_list_objects_responses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectMobileAppShieldAttributes": {
+        "type": "object",
+        "description": "Describes attributes specific to object type - mobile-app-shield.",
+        "title": "MobileAppShieldAttributes.",
+        "x-displayname": "Mobile-app-shield attributes.",
+        "x-ves-proto-message": "ves.io.schema.stored_object.MobileAppShieldAttributes",
+        "properties": {
+          "os_type": {
+            "$ref": "#/components/schemas/stored_objectOSType"
+          },
+          "release_version": {
+            "type": "string",
+            "description": "Version of mobile app shield release.",
+            "title": "Release_version.",
+            "maxLength": 32,
+            "x-displayname": "Mobile app shield release version.",
+            "x-ves-example": "V.4.2.1",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "32",
+              "ves.io.schema.rules.string.not_empty": "true"
+            },
+            "x-f5xc-example": "v.4.2.1",
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "32",
+              "ves.io.schema.rules.string.not_empty": "true"
+            },
+            "minLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectMobileAppShieldAttributes",
+          "required_fields": [
+            "os_type",
+            "release_version"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectMobileAppShieldAttributes\nmetadata:\n  name: example\n  namespace: default\nspec:\n  os_type: value\n  release_version: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"os_type\": \"value\",\n    \"release_version\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_mobile_app_shield_attributeses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectMobileIntegratorAttributes": {
+        "type": "object",
+        "description": "Describes attributes specific to object type - mobile-integrator.",
+        "title": "MobileIntegratorAttributes.",
+        "x-displayname": "Mobile-integrator attributes.",
+        "x-ves-proto-message": "ves.io.schema.stored_object.MobileIntegratorAttributes",
+        "properties": {
+          "os_type": {
+            "$ref": "#/components/schemas/stored_objectOSType"
+          },
+          "release_version": {
+            "type": "string",
+            "description": "Version of mobile integrator release.",
+            "title": "Release_version.",
+            "maxLength": 32,
+            "x-displayname": "Mobile integrator release version.",
+            "x-ves-example": "V.4.2.1",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "32",
+              "ves.io.schema.rules.string.not_empty": "true"
+            },
+            "x-f5xc-example": "v.4.2.1",
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "32",
+              "ves.io.schema.rules.string.not_empty": "true"
+            },
+            "minLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectMobileIntegratorAttributes",
+          "required_fields": [
+            "os_type",
+            "release_version"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectMobileIntegratorAttributes\nmetadata:\n  name: example\n  namespace: default\nspec:\n  os_type: value\n  release_version: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"os_type\": \"value\",\n    \"release_version\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_mobile_integrator_attributeses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectMobileSDKAttributes": {
+        "type": "object",
+        "description": "Describes attributes specific to object type - mobile-SDK.",
+        "title": "MobileSDKAttributes.",
+        "x-displayname": "Mobile-SDK attributes.",
+        "x-ves-proto-message": "ves.io.schema.stored_object.MobileSDKAttributes",
+        "properties": {
+          "os_type": {
+            "$ref": "#/components/schemas/stored_objectOSType"
+          },
+          "release_version": {
+            "type": "string",
+            "description": "Version of mobile SDK release.",
+            "title": "Release_version.",
+            "x-displayname": "Mobile SDK release version.",
+            "x-ves-example": "V.4.2.1",
+            "x-f5xc-example": "v.4.2.1",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectMobileSDKAttributes",
+          "required_fields": [
+            "os_type",
+            "release_version"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectMobileSDKAttributes\nmetadata:\n  name: example\n  namespace: default\nspec:\n  os_type: value\n  release_version: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"os_type\": \"value\",\n    \"release_version\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_mobile_s_d_k_attributeses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectOSType": {
+        "type": "string",
+        "description": "Defines a selection for operating system type. Its either ANDROID or IOS\n\n- ANDROID: ANDROID\n\n- IOS: IOS.",
+        "title": "OSType",
+        "enum": [
+          "ANDROID",
+          "IOS"
+        ],
+        "default": "ANDROID",
+        "x-displayname": "Operating System type.",
+        "x-ves-proto-enum": "ves.io.schema.stored_object.OSType",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectOSType",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectOSType\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_o_s_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectPreSignedUrl": {
+        "type": "object",
+        "description": "Pre signed URL.",
+        "title": "PreSignedUrl.",
+        "x-displayname": "Pre Signed URL.",
+        "x-ves-oneof-field-storage_provider_choice": "[\"aws\"]",
+        "x-ves-proto-message": "ves.io.schema.stored_object.PreSignedUrl",
+        "properties": {
+          "aws": {
+            "$ref": "#/components/schemas/stored_objectPresignedUrlData"
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectPreSignedUrl",
+          "required_fields": [
+            "aws"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectPreSignedUrl\nmetadata:\n  name: example\n  namespace: default\nspec:\n  aws: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"aws\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_pre_signed_urls\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectPresignedUrlData": {
+        "type": "object",
+        "description": "Pre signed URL data.",
+        "title": "PresignedUrlData.",
+        "x-displayname": "Pre Signed URL Data.",
+        "x-ves-proto-message": "ves.io.schema.stored_object.PresignedUrlData",
+        "properties": {
+          "method": {
+            "$ref": "#/components/schemas/schemaHttpMethod"
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL to upload or download the resource.",
+            "title": "URL",
+            "x-displayname": "URL",
+            "x-f5xc-example": "https://example.com",
+            "format": "uri",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectPresignedUrlData",
+          "required_fields": [
+            "method",
+            "url"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectPresignedUrlData\nmetadata:\n  name: example\n  namespace: default\nspec:\n  method: value\n  url: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"method\": \"value\",\n    \"url\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_presigned_url_datas\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectQueryType": {
+        "type": "string",
+        "description": "X-displayName: \"Query Type\"\nThe type of search query needs to be performed. Could be EXACT_MATCH or PREFIX_MATCH.\nEXACT_MATCH returns the objects with exact match on the name filed, while PREFIX_MATCH returns the list of object having the 'name' as prefix. Default is EXACT_MATCH.\n\n- EXACT_MATCH: EXACT_MATCH\n\nx-displayName: \"EXACT MATCH\"\nReturns list of objects with exact match on the name filed.\n- PREFIX_MATCH: PREFIX_MATCH\n\nx-displayName: \"PREFIX MATCH\"\nReturns the list of object matching the 'name' prefix.",
+        "title": "QueryType",
+        "enum": [
+          "EXACT_MATCH",
+          "PREFIX_MATCH"
+        ],
+        "default": "EXACT_MATCH",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectQueryType",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectQueryType\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_query_types\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectStoredObjectDescriptor": {
+        "type": "object",
+        "description": "Response for GET, Create APIs.",
+        "title": "StoredObjectDescriptor.",
+        "x-displayname": "Object Metadata Response.",
+        "x-ves-oneof-field-object_attributes": "[\"mobile_app_shield\",\"mobile_integrator\",\"mobile_sdk\",\"no_attributes\"]",
+        "x-ves-proto-message": "ves.io.schema.stored_object.StoredObjectDescriptor",
+        "properties": {
+          "creation_timestamp": {
+            "type": "string",
+            "description": "Creation date & time for the object\n\nRequired: YES.",
+            "title": "Creation_timestamp.",
+            "format": "date-time",
+            "x-displayname": "Creation Timestamp.",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional field, the Description for the object.",
+            "title": "Description.",
+            "maxLength": 0,
+            "x-displayname": "Description.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "512"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "512"
+            },
+            "minLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 512,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161442+00:00"
+          },
+          "mobile_app_shield": {
+            "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes"
+          },
+          "mobile_integrator": {
+            "$ref": "#/components/schemas/stored_objectMobileIntegratorAttributes"
+          },
+          "mobile_sdk": {
+            "$ref": "#/components/schemas/stored_objectMobileSDKAttributes"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the stored object\n\nRequired: YES.",
+            "title": "Name",
+            "x-displayname": "Name",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-f5xc-example": "example-resource",
+            "minLength": 0,
+            "maxLength": 16,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161450+00:00"
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Namespace of the stored object\n\nRequired: YES.",
+            "title": "Namespace",
+            "x-displayname": "Namespace",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "minLength": 0,
+            "maxLength": 6,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161454+00:00"
+          },
+          "no_attributes": {
+            "$ref": "#/components/schemas/schemaEmpty"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL of the stored object\n\nRequired: YES.",
+            "title": "URL",
+            "x-displayname": "URL",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-f5xc-example": "https://example.com",
+            "format": "uri",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the stored object\n\nRequired: YES.",
+            "title": "Version",
+            "x-displayname": "Version",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "minLength": 0,
+            "maxLength": 1,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161461+00:00"
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectStoredObjectDescriptor",
+          "required_fields": [
+            "creation_timestamp",
+            "description",
+            "mobile_app_shield",
+            "mobile_integrator",
+            "mobile_sdk",
+            "name",
+            "namespace",
+            "no_attributes",
+            "url",
+            "version"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectStoredObjectDescriptor\nmetadata:\n  name: example\n  namespace: default\nspec:\n  creation_timestamp: value\n  description: value\n  mobile_app_shield: value\n  mobile_integrator: value\n  mobile_sdk: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"creation_timestamp\": \"value\",\n    \"description\": \"value\",\n    \"mobile_app_shield\": \"value\",\n    \"mobile_integrator\": \"value\",\n    \"mobile_sdk\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_stored_object_descriptors\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectStoredObjectResponseStatus": {
+        "type": "string",
+        "description": "The stored object status represents status of create object response if object got created, updated or already exists.",
+        "title": "StoredObjectResponseStatus.",
+        "enum": [
+          "STORED_OBJECT_STATUS_NONE",
+          "STORED_OBJECT_STATUS_CREATED",
+          "STORED_OBJECT_STATUS_UPDATED",
+          "STORED_OBJECT_STATUS_ALREADY_EXISTS"
+        ],
+        "default": "STORED_OBJECT_STATUS_NONE",
+        "x-displayname": "",
+        "x-ves-proto-enum": "ves.io.schema.stored_object.StoredObjectResponseStatus",
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectStoredObjectResponseStatus",
+          "required_fields": [],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectStoredObjectResponseStatus\nmetadata:\n  name: example\n  namespace: default",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_stored_object_response_statuses\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      },
+      "stored_objectVersionDescriptor": {
+        "type": "object",
+        "description": "Descriptor for store object version.",
+        "title": "VersionDescriptor.",
+        "x-displayname": "Version Descriptor.",
+        "x-ves-proto-message": "ves.io.schema.stored_object.VersionDescriptor",
+        "properties": {
+          "creation_timestamp": {
+            "type": "string",
+            "description": "Creation date & time for the object\n\nRequired: YES.",
+            "title": "Creation_timestamp.",
+            "format": "date-time",
+            "x-displayname": "Creation Timestamp.",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-field-mutability": "read-only"
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional field, the Description for the object.",
+            "title": "Description.",
+            "maxLength": 0,
+            "x-displayname": "Description.",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "512"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.string.max_len": "512"
+            },
+            "minLength": 0,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 512,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161467+00:00"
+          },
+          "latest_version": {
+            "type": "boolean",
+            "description": "A tag representing if this is the latest version for the object.",
+            "title": "Latest_version.",
+            "format": "boolean",
+            "x-displayname": "Latest Version.",
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "url": {
+            "type": "string",
+            "description": "URL of the stored object\n\nRequired: YES.",
+            "title": "URL",
+            "x-displayname": "URL",
+            "x-ves-required": "true",
+            "x-ves-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-validation-rules": {
+              "ves.io.schema.rules.message.required": "true"
+            },
+            "x-f5xc-example": "https://example.com",
+            "format": "uri",
+            "minLength": 0,
+            "maxLength": 1024,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            }
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the stored object.",
+            "title": "Version",
+            "x-displayname": "Version",
+            "minLength": 0,
+            "maxLength": 1,
+            "x-f5xc-required-for": {
+              "minimum_config": false,
+              "create": false,
+              "update": false,
+              "read": false
+            },
+            "x-original-maxLength": 1024,
+            "x-reconciled-from-discovery": true,
+            "x-reconciled-at": "2026-01-05T17:59:41.161474+00:00"
+          }
+        },
+        "x-f5xc-minimum-configuration": {
+          "description": "Minimum configuration for stored_objectVersionDescriptor",
+          "required_fields": [
+            "creation_timestamp",
+            "description",
+            "latest_version",
+            "url",
+            "version"
+          ],
+          "mutually_exclusive_groups": [],
+          "example_yaml": "# Minimal example for stored_objectVersionDescriptor\nmetadata:\n  name: example\n  namespace: default\nspec:\n  creation_timestamp: value\n  description: value\n  latest_version: value\n  url: value\n  version: value",
+          "example_json": "{\n  \"metadata\": {\n    \"name\": \"example\",\n    \"namespace\": \"default\"\n  },\n  \"spec\": {\n    \"creation_timestamp\": \"value\",\n    \"description\": \"value\",\n    \"latest_version\": \"value\",\n    \"url\": \"value\",\n    \"version\": \"value\"\n  }\n}",
+          "example_curl": "curl -X POST \"$F5XC_API_URL/api/config/namespaces/default/stored_object_version_descriptors\" \\\n  -H \"Authorization: APIToken $F5XC_API_TOKEN\" \\\n  -H \"Content-Type: application/json\" \\\n  -d @example.json"
+        },
+        "x-f5xc-cli-domain": "object_storage"
+      }
+    },
+    "responses": {},
+    "parameters": {},
+    "requestBodies": {}
+  }
+}

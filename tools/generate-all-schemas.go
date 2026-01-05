@@ -281,6 +281,11 @@ func processV2Specs(specDir string) ([]GenerationResult, int, int) {
 	results := []GenerationResult{}
 	successCount := 0
 	failCount := 0
+	skipCount := 0
+
+	// Track processed resources to avoid duplicates across domain files
+	// Some resources (like service_policy) appear in multiple domain specs
+	processedResources := make(map[string]bool)
 
 	// Build a map of domain metadata from index for quick lookup
 	domainMetadata := make(map[string]openapi.DomainMetadata)
@@ -321,6 +326,16 @@ func processV2Specs(specDir string) ([]GenerationResult, int, int) {
 
 		// Process each resource in the domain
 		for _, resource := range domainInfo.Resources {
+			// Skip duplicate resources that appear in multiple domain specs
+			if processedResources[resource.Name] {
+				if verbose {
+					fmt.Printf("      ⏭️  Skipping duplicate: %s (already processed)\n", resource.Name)
+				}
+				skipCount++
+				continue
+			}
+			processedResources[resource.Name] = true
+
 			// Create a virtual spec file path for compatibility with existing processing
 			// The v2 domain spec contains all resources, so we process each individually
 			result := processV2Resource(domainFile, resource, domainInfo)
@@ -331,6 +346,11 @@ func processV2Specs(specDir string) ([]GenerationResult, int, int) {
 				failCount++
 			}
 		}
+	}
+
+	// Log duplicates if any were skipped
+	if skipCount > 0 {
+		fmt.Printf("\n⏭️  Skipped %d duplicate resources across domain files\n", skipCount)
 	}
 
 	return results, successCount, failCount

@@ -197,7 +197,10 @@ func ConfigCompose(configs ...string) string {
 	return sb.String()
 }
 
-// ProviderConfig returns the provider configuration for tests
+// ProviderConfig returns the provider configuration for tests.
+// Note: The terraform-plugin-testing framework with ProtoV6ProviderFactories
+// handles provider registration automatically. No required_providers block
+// is needed - the framework injects the provider via reattach configuration.
 func ProviderConfig() string {
 	return `
 provider "f5xc" {

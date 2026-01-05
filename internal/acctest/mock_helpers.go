@@ -111,7 +111,9 @@ func (m *MockTestConfig) ProtoV6ProviderFactories() map[string]func() (tfprotov6
 	}
 }
 
-// MockProviderConfig returns a provider configuration block that uses the mock server
+// MockProviderConfig returns a provider configuration block that uses the mock server.
+// Note: The terraform-plugin-testing framework with ProtoV6ProviderFactories
+// handles provider registration automatically.
 func (m *MockTestConfig) MockProviderConfig() string {
 	return fmt.Sprintf(`
 provider "f5xc" {

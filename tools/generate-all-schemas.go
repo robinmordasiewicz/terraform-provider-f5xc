@@ -386,23 +386,46 @@ func processSpecFileForResource(specFile string, resourceName string, category s
 
 // extractResourceSchemaByName extracts a specific resource schema by name from a spec
 func extractResourceSchemaByName(spec *OpenAPI3Spec, resourceName string) (*SchemaDefinition, string) {
-	// Common schema naming patterns for resources
-	patterns := []string{
+	// V2 schema naming patterns (e.g., app_firewallCreateSpecType)
+	// The resource name is used as a prefix with CreateSpecType or GetSpecType suffix
+	v2Patterns := []string{
+		fmt.Sprintf("%sCreateSpecType", resourceName),
+		fmt.Sprintf("%sGetSpecType", resourceName),
+		fmt.Sprintf("%sReplaceSpecType", resourceName),
+	}
+
+	// V1 schema naming patterns
+	v1Patterns := []string{
 		fmt.Sprintf("ves.io.schema.%s.Object", resourceName),
 		fmt.Sprintf("%sType", toTitleCase(resourceName)),
 		resourceName,
 	}
 
-	for _, pattern := range patterns {
+	// Try v2 patterns first (for v2 domain specs)
+	for _, pattern := range v2Patterns {
 		if schema, ok := spec.Components.Schemas[pattern]; ok {
 			return &schema, pattern
 		}
 	}
 
-	// Try case-insensitive match
+	// Then try v1 patterns (for v1 individual specs)
+	for _, pattern := range v1Patterns {
+		if schema, ok := spec.Components.Schemas[pattern]; ok {
+			return &schema, pattern
+		}
+	}
+
+	// Try case-insensitive match for v1 .Object suffix
 	lowerName := strings.ToLower(resourceName)
 	for name, schema := range spec.Components.Schemas {
 		if strings.Contains(strings.ToLower(name), lowerName) && strings.HasSuffix(name, ".Object") {
+			return &schema, name
+		}
+	}
+
+	// Try case-insensitive match for v2 CreateSpecType suffix
+	for name, schema := range spec.Components.Schemas {
+		if strings.Contains(strings.ToLower(name), lowerName) && strings.HasSuffix(name, "CreateSpecType") {
 			return &schema, name
 		}
 	}
@@ -429,10 +452,6 @@ func extractAPIPathForResource(spec *OpenAPI3Spec, resourceName string) string {
 // generateResourceFromSchema generates a resource file from an extracted schema
 // This is factored out from processSpecFile to support both v1 and v2 processing
 func generateResourceFromSchema(resourceName string, schemaName string, schema *SchemaDefinition, apiPath string, specFile string, category string, requiresTier string) GenerationResult {
-	// This will be a simplified implementation that delegates to the existing generation logic
-	// For now, fall back to the standard processSpecFile behavior
-	// TODO: Enhance this to fully support v2 metadata (category, requiresTier)
-
 	if verbose {
 		fmt.Printf("      Generating: %s (schema: %s)\n", resourceName, schemaName)
 		if category != "" {
@@ -440,9 +459,67 @@ func generateResourceFromSchema(resourceName string, schemaName string, schema *
 		}
 	}
 
-	// Use the existing processing for now
-	// The v2 metadata will be used by the category resolution system (Phase 2.2)
-	return processSpecFile(specFile)
+	// Skip internal/utility schemas
+	skipPatterns := []string{
+		"object", "status", "spec", "metadata", "types", "common",
+		"refs", "crudapi", "public", "private", "api", "empty",
+	}
+	for _, skip := range skipPatterns {
+		if resourceName == skip {
+			return GenerationResult{ResourceName: resourceName, Success: false}
+		}
+	}
+
+	// Parse spec to get full schema information
+	spec, err := parseOpenAPISpec(specFile)
+	if err != nil {
+		return GenerationResult{ResourceName: resourceName, Success: false, Error: err.Error()}
+	}
+
+	// Extract resource schema using the resource name we have
+	resource, err := extractResourceSchema(spec, resourceName)
+	if err != nil {
+		if verbose {
+			fmt.Printf("  ⏭️  Skipping %s: %v\n", resourceName, err)
+		}
+		return GenerationResult{ResourceName: resourceName, Success: false}
+	}
+
+	// Count attributes and blocks
+	attrCount := 0
+	blockCount := 0
+	for _, attr := range resource.Attributes {
+		if attr.IsBlock {
+			blockCount++
+		} else {
+			attrCount++
+		}
+	}
+
+	if !dryRun {
+		// Generate resource file
+		if err := generateResourceFile(resource); err != nil {
+			return GenerationResult{ResourceName: resourceName, Success: false, Error: err.Error()}
+		}
+
+		// Generate client types
+		if err := generateClientTypes(resource); err != nil {
+			return GenerationResult{ResourceName: resourceName, Success: false, Error: err.Error()}
+		}
+
+		// Generate data source
+		if err := generateDataSource(resource); err != nil {
+			return GenerationResult{ResourceName: resourceName, Success: false, Error: err.Error()}
+		}
+	}
+
+	fmt.Printf("✅ %s: %d attrs, %d blocks\n", resourceName, attrCount, blockCount)
+	return GenerationResult{
+		ResourceName: resourceName,
+		Success:      true,
+		AttrCount:    attrCount,
+		BlockCount:   blockCount,
+	}
 }
 
 func processSpecFile(specFile string) GenerationResult {

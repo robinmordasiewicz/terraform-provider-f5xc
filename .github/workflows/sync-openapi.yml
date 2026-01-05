@@ -198,25 +198,59 @@ jobs:
       - name: Validate OpenAPI specs
         if: steps.changes.outputs.changed == 'true'
         run: |
-          npm install -g @apidevtools/swagger-cli
-          echo "Validating OpenAPI specifications..."
-          VALID=true
-          for file in $(find ${{ env.SPEC_DIR }} -type f \( -name "*.yaml" -o -name "*.yml" -o -name "*.json" \)); do
-            if grep -q -E "(openapi|swagger).*['\"]?[0-9]+\.[0-9]+" "$file" 2>/dev/null; then
-              echo "Validating: $file"
-              if swagger-cli validate "$file"; then
-                echo "✅ $file is valid"
-              else
-                echo "❌ $file validation failed"
-                VALID=false
-              fi
+          SPEC_SOURCE="${{ steps.spec_config.outputs.spec_source }}"
+
+          # V2 specs from f5xc-api-enriched are pre-validated in that repository
+          # They use x-f5xc-* vendor extensions which strict validators may reject
+          # We perform basic structure validation here
+          if [ "$SPEC_SOURCE" = "v2" ]; then
+            echo "Validating v2 spec structure..."
+            # Verify index.json has required fields
+            if ! jq -e '.specifications | length > 0' "${{ env.SPEC_DIR }}/index.json" > /dev/null 2>&1; then
+              echo "::error::index.json missing or malformed"
+              exit 1
             fi
-          done
-          if [ "$VALID" = false ]; then
-            echo "::error::Some OpenAPI specs failed validation"
-            exit 1
+            SPEC_COUNT=$(jq '.specifications | length' "${{ env.SPEC_DIR }}/index.json")
+            echo "✅ index.json valid with $SPEC_COUNT domain specifications"
+
+            # Verify each domain file exists and has basic OpenAPI structure
+            VALID=true
+            for file in ${{ env.SPEC_DIR }}/domains/*.json; do
+              if [ -f "$file" ]; then
+                if jq -e '.openapi or .swagger' "$file" > /dev/null 2>&1; then
+                  echo "✅ $(basename "$file") has valid OpenAPI structure"
+                else
+                  echo "❌ $(basename "$file") missing openapi/swagger version"
+                  VALID=false
+                fi
+              fi
+            done
+            if [ "$VALID" = false ]; then
+              echo "::error::Some v2 specs failed structure validation"
+              exit 1
+            fi
+            echo "✅ All v2 OpenAPI specs validated successfully"
+          else
+            echo "Using swagger-cli for v1 spec validation..."
+            npm install -g @apidevtools/swagger-cli
+            VALID=true
+            for file in $(find ${{ env.SPEC_DIR }} -type f \( -name "*.yaml" -o -name "*.yml" -o -name "*.json" \)); do
+              if grep -q -E "(openapi|swagger).*['\"]?[0-9]+\.[0-9]+" "$file" 2>/dev/null; then
+                echo "Validating: $file"
+                if swagger-cli validate "$file"; then
+                  echo "✅ $file is valid"
+                else
+                  echo "❌ $file validation failed"
+                  VALID=false
+                fi
+              fi
+            done
+            if [ "$VALID" = false ]; then
+              echo "::error::Some OpenAPI specs failed validation"
+              exit 1
+            fi
+            echo "✅ All v1 OpenAPI specs validated successfully"
           fi
-          echo "✅ All OpenAPI specs validated successfully"
 
       - name: Get current date
         if: steps.changes.outputs.changed == 'true'

@@ -991,3 +991,72 @@ The CI/CD workflow will automatically:
 | Content type      | Prose, tutorials, step-by-step         | API reference, schema                 |
 | Author            | Manually written                       | Auto-generated from schema            |
 | Examples          | Complete modules in `examples/guides/` | Single files in `examples/resources/` |
+
+---
+
+## Part 7: F5XC API v2 Migration (v3.0.0)
+
+### Migration Overview
+
+Starting with provider version **v3.0.0**, this provider uses F5XC API v2 specifications from the centralized enriched API repository instead of the original v1 specifications.
+
+### Spec Format Changes
+
+| Aspect            | v1 (Legacy)                                | v2 (Current)                                              |
+| ----------------- | ------------------------------------------ | --------------------------------------------------------- |
+| **Source**        | `docs.cloud.f5.com/.../open-api.zip`       | `github.com/robinmordasiewicz/f5xc-api-enriched/releases` |
+| **Files**         | 269 individual `*.ves-swagger.json`        | 38 domain files + `index.json`                            |
+| **Pattern**       | `docs-cloud-f5-com.*.ves-swagger.json`     | `domains/*.json`                                          |
+| **Categories**    | Pattern-based (43 overrides, 40+ patterns) | `x-f5xc-category` extension                               |
+| **Schema naming** | `ves.io.schema.{resource}.Object`          | `{resource}CreateSpecType`                                |
+
+### V2 Domain Categories
+
+Resources are now organized into 7 domain categories:
+
+| Category           | Domains | Example Resources                              |
+| ------------------ | ------- | ---------------------------------------------- |
+| **Security**       | 12      | waf, ddos, blindfold, certificates             |
+| **Networking**     | 5       | dns, cdn, network, rate_limiting               |
+| **Infrastructure** | 6       | sites, service_mesh, cloud_infrastructure      |
+| **Platform**       | 9       | tenant_and_identity, authentication, billing   |
+| **Operations**     | 5       | observability, statistics, support             |
+| **AI**             | 1       | ai_services (preview)                          |
+
+### Extension Usage
+
+The provider now processes both extension families:
+
+| Extension Family | Source      | Purpose                                               |
+| ---------------- | ----------- | ----------------------------------------------------- |
+| `x-f5xc-*`       | Enrichment  | category, requires-tier, complexity, descriptions     |
+| `x-ves-*`        | Original F5 | oneof-field, proto-message, validation-rules          |
+
+Both are complementary - `x-f5xc-*` provides enriched metadata while `x-ves-*` provides original F5 technical annotations.
+
+### Generator Changes
+
+The schema generator (`tools/generate-all-schemas.go`) now:
+
+1. **Auto-detects spec version** based on directory structure
+2. **Processes v2 domain files** containing multiple resources each
+3. **Deduplicates resources** that appear in multiple domain specs
+4. **Extracts schemas** using v2 patterns (`{resource}CreateSpecType`)
+
+### Sync Workflow
+
+The `sync-openapi.yml` workflow now:
+
+- Downloads from GitHub releases (enriched API repository)
+- Validates v2 structure (`index.json` + `domains/` directory)
+- Pins to specific release versions for reproducibility
+
+### Impact on Users
+
+**No breaking changes for Terraform configurations.** The v3.0.0 major version bump indicates:
+
+1. **Upstream spec source change** - fundamentally different API specification source
+2. **Internal architecture change** - domain-based organization
+3. **Enhanced metadata** - new `x-f5xc-*` extensions enable richer documentation
+
+Users can continue using their existing Terraform configurations without modification.

@@ -137,7 +137,7 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 				Delete: true,
 			}),
 			"ipv4_prefixes": schema.ListNestedBlock{
-				MarkdownDescription: "IPv4 Prefixes. list of IPv4 prefixes with description.",
+				MarkdownDescription: "IPv4 Prefixes. List of IPv4 prefixes with description.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"description_spec": schema.StringAttribute{
@@ -145,7 +145,7 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 							Optional:            true,
 						},
 						"ipv4_prefix": schema.StringAttribute{
-							MarkdownDescription: "IPv4 Prefix.",
+							MarkdownDescription: "IPv4 Prefix. .",
 							Optional:            true,
 						},
 					},

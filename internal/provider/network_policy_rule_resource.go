@@ -144,7 +144,7 @@ func (r *NetworkPolicyRuleResource) Metadata(ctx context.Context, req resource.M
 func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             network_policy_ruleSchemaVersion,
-		MarkdownDescription: "Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Network Policy Rule. Must be unique within the namespace.",
@@ -185,7 +185,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				ElementType:         types.StringType,
 			},
 			"ports": schema.ListAttribute{
-				MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
+				MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -205,7 +205,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"protocol": schema.StringAttribute{
-				MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp",
+				MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and icmp.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -221,7 +221,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				Delete: true,
 			}),
 			"advanced_action": schema.SingleNestedBlock{
-				MarkdownDescription: "Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction",
+				MarkdownDescription: "Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional OPTIONS along with RuleAction and PBRRuleAction.",
 				Attributes: map[string]schema.Attribute{
 					"action": schema.StringAttribute{
 						MarkdownDescription: "[Enum: NOLOG|LOG] Log Action. Choice to choose logging or no logging This works together with option selected via NetworkPolicyRuleAction or any other action specified Don't sample the traffic hitting the rule Sample the traffic hitting the rule. Possible values are `NOLOG`, `LOG`. Defaults to `NOLOG`.",
@@ -238,7 +238,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"kind": schema.StringAttribute{
-									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+									MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -246,15 +246,15 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -262,7 +262,7 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"uid": schema.StringAttribute{
-									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+									MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -278,27 +278,27 @@ func (r *NetworkPolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name.",
 				Attributes: map[string]schema.Attribute{
 					"keys": schema.ListAttribute{
-						MarkdownDescription: "Keys. The list of label key names that have to match",
+						MarkdownDescription: "Keys. The list of label key names that have to match.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
 				},
 			},
 			"prefix": schema.SingleNestedBlock{
-				MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes",
+				MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes.",
 				Attributes: map[string]schema.Attribute{
 					"prefix": schema.ListAttribute{
-						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
+						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
 				},
 			},
 			"prefix_selector": schema.SingleNestedBlock{
-				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+						MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},

@@ -996,7 +996,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"health_check_port": schema.Int64Attribute{
-				MarkdownDescription: "[OneOf: health_check_port, same_as_endpoint_port] Health check port. Port used for performing health check",
+				MarkdownDescription: "[OneOf: health_check_port, same_as_endpoint_port] Health check port. Port used for performing health check.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -1012,7 +1012,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"port": schema.Int64Attribute{
-				MarkdownDescription: "Port. Endpoint service is available on this port",
+				MarkdownDescription: "Port. Endpoint service is available on this port.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -1028,7 +1028,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Delete: true,
 			}),
 			"advanced_options": schema.SingleNestedBlock{
-				MarkdownDescription: "Origin Pool Advanced Options. Configure Advanced options for origin pool",
+				MarkdownDescription: "Origin Pool Advanced OPTIONS. Configure Advanced OPTIONS for origin pool.",
 				Attributes: map[string]schema.Attribute{
 					"connection_timeout": schema.Int64Attribute{
 						MarkdownDescription: "Connection Timeout. The timeout for new network connections to endpoints in the cluster. This is specified in milliseconds. The  seconds. Defaults to `2`.",
@@ -1094,18 +1094,18 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Enable this option",
 					},
 					"enable_subsets": schema.SingleNestedBlock{
-						MarkdownDescription: "Origin Pool Subset Options. Configure subset options for origin pool",
+						MarkdownDescription: "Origin Pool Subset OPTIONS. Configure subset OPTIONS for origin pool.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"any_endpoint": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 							"default_subset": schema.SingleNestedBlock{
-								MarkdownDescription: "Origin Pool Default Subset. Default Subset definition",
+								MarkdownDescription: "Origin Pool Default Subset. Default Subset definition.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"default_subset": schema.SingleNestedBlock{
-										MarkdownDescription: "Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists.",
+										MarkdownDescription: "Default Subset for Origin Pool. List of key-value pairs that define default subset. Which gets used when route specifies no metadata or no subset matching the metadata exists.",
 									},
 								},
 							},
@@ -1127,11 +1127,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"http1_config": schema.SingleNestedBlock{
-						MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections",
+						MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for upstream connections.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"header_transformation": schema.SingleNestedBlock{
-								MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+								MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"default_header_transformation": schema.SingleNestedBlock{
@@ -1151,10 +1151,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"http2_options": schema.SingleNestedBlock{
-						MarkdownDescription: "Http2 Protocol Options. Http2 Protocol options for upstream connections",
+						MarkdownDescription: "Http2 Protocol OPTIONS. Http2 Protocol OPTIONS for upstream connections.",
 						Attributes: map[string]schema.Attribute{
 							"enabled": schema.BoolAttribute{
-								MarkdownDescription: "HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections",
+								MarkdownDescription: "HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections.",
 								Optional:            true,
 							},
 						},
@@ -1163,10 +1163,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Enable this option",
 					},
 					"outlier_detection": schema.SingleNestedBlock{
-						MarkdownDescription: "Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host immediately. Otherwise, it checks to make sure the number of ejected hosts is below the allowed threshold (specified via max_ejection_percent setting). If the number of ejected hosts is above the threshold, the host is not ejected. 3. The endpoint is ejected for some number of milliseconds. Ejection means that the endpoint is marked unhealthy and will not be used during load balancing. The number of milliseconds is equal to the base_ejection_time value multiplied by the number of times the host has been ejected. 4. An ejected endpoint will automatically be brought back into service after the ejection time has been satisfied",
+						MarkdownDescription: "Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host immediately. Otherwise, it checks to make sure the number of ejected hosts is below the allowed threshold (specified via max_ejection_percent setting). If the number of ejected hosts is above the threshold, the host is not ejected. 3. The endpoint is ejected for some number of milliseconds. Ejection means that the endpoint is marked unhealthy and will not be used during load balancing. The number of milliseconds is equal to the base_ejection_time value multiplied by the number of times the host has been ejected. 4. An ejected endpoint will automatically be brought back into service after the ejection time has been satisfied.",
 						Attributes: map[string]schema.Attribute{
 							"base_ejection_time": schema.Int64Attribute{
-								MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Specified in milliseconds. Defaults to `30000ms`.",
+								MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to GET ejected for longer periods if they continue to fail. Specified in milliseconds. Defaults to `30000ms`.",
 								Optional:            true,
 							},
 							"consecutive_5xx": schema.Int64Attribute{
@@ -1174,7 +1174,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 								Optional:            true,
 							},
 							"consecutive_gateway_failure": schema.Int64Attribute{
-								MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to `5`.",
+								MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). Consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to `5`.",
 								Optional:            true,
 							},
 							"interval": schema.Int64Attribute{
@@ -1199,19 +1199,19 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "[OneOf: automatic_port, lb_port, port] Enable this option",
 			},
 			"healthcheck": schema.ListNestedBlock{
-				MarkdownDescription: "Health Check object. Reference to healthcheck configuration objects",
+				MarkdownDescription: "Health Check object. Reference to healthcheck configuration objects.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -1228,7 +1228,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "[OneOf: no_tls, use_tls; Default: no_tls] Enable this option",
 			},
 			"origin_servers": schema.ListNestedBlock{
-				MarkdownDescription: "Origin Servers. List of origin servers in this pool",
+				MarkdownDescription: "Origin Servers. List of origin servers in this pool .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
@@ -1242,10 +1242,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"consul_service": schema.SingleNestedBlock{
-							MarkdownDescription: "Consul Service Name on given Sites. Specify origin server with Hashi Corp Consul service name and site information",
+							MarkdownDescription: "Consul Service Name on given Sites. Specify origin server with Hashi Corp Consul service name and site information.",
 							Attributes: map[string]schema.Attribute{
 								"service_name": schema.StringAttribute{
-									MarkdownDescription: "Service Name. Consul service name of this origin server will be listed, including cluster-id. The format is servicename:cluster-id.",
+									MarkdownDescription: "Service Name. Consul service name of this origin server will be listed, including cluster-ID. The format is servicename:cluster-ID.",
 									Optional:            true,
 								},
 							},
@@ -1257,22 +1257,22 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Enable this option",
 								},
 								"site_locator": schema.SingleNestedBlock{
-									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
+									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1282,18 +1282,18 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"virtual_site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1305,17 +1305,17 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"snat_pool": schema.SingleNestedBlock{
-									MarkdownDescription: "Snat Pool. Snat Pool configuration",
+									MarkdownDescription: "SNAT Pool. SNAT Pool configuration.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Enable this option",
 										},
 										"snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
-													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
@@ -1326,22 +1326,22 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"custom_endpoint_object": schema.SingleNestedBlock{
-							MarkdownDescription: "Custom Endpoint Object for Origin Server. Specify origin server with a reference to endpoint object",
+							MarkdownDescription: "Custom Endpoint Object for Origin Server. Specify origin server with a reference to endpoint object.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"endpoint": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1353,14 +1353,14 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"k8s_service": schema.SingleNestedBlock{
-							MarkdownDescription: "K8s Service Name on given Sites. Specify origin server with K8s service name and site information",
+							MarkdownDescription: "K8s Service Name on given Sites. Specify origin server with K8s service name and site information.",
 							Attributes: map[string]schema.Attribute{
 								"protocol": schema.StringAttribute{
 									MarkdownDescription: "[Enum: PROTOCOL_TCP|PROTOCOL_UDP] Protocol Type. Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP. Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`. Defaults to `PROTOCOL_TCP`.",
 									Optional:            true,
 								},
 								"service_name": schema.StringAttribute{
-									MarkdownDescription: "Service Name. K8s service name of the origin server will be listed, including the namespace and cluster-id. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-id. If the servicename is 'frontend', namespace is 'speedtest' and cluster-id is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-id are optional.",
+									MarkdownDescription: "Service Name. K8s service name of the origin server will be listed, including the namespace and cluster-ID. For vK8s services, you need to enter a string with the format servicename.namespace:cluster-ID. If the servicename is 'frontend', namespace is 'speedtest' and cluster-ID is 'prod', then you will enter 'frontend.speedtest:prod'. Both namespace and cluster-ID are optional.",
 									Optional:            true,
 								},
 							},
@@ -1372,22 +1372,22 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Enable this option",
 								},
 								"site_locator": schema.SingleNestedBlock{
-									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
+									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1397,18 +1397,18 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"virtual_site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1420,17 +1420,17 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"snat_pool": schema.SingleNestedBlock{
-									MarkdownDescription: "Snat Pool. Snat Pool configuration",
+									MarkdownDescription: "SNAT Pool. SNAT Pool configuration.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Enable this option",
 										},
 										"snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
-													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
@@ -1447,10 +1447,10 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							MarkdownDescription: "Origin Server Labels. Add Labels for this origin server, these labels can be used to form subset.",
 						},
 						"private_ip": schema.SingleNestedBlock{
-							MarkdownDescription: "IP address on given Sites. Specify origin server with private or public IP address and site information",
+							MarkdownDescription: "IP address on given Sites. Specify origin server with private or public IP address and site information.",
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
-									MarkdownDescription: "IP. Private IPV4 address",
+									MarkdownDescription: "IP. Private IPv4 address.",
 									Optional:            true,
 								},
 							},
@@ -1462,18 +1462,18 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Enable this option",
 								},
 								"segment": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1483,22 +1483,22 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"site_locator": schema.SingleNestedBlock{
-									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
+									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1508,18 +1508,18 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"virtual_site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1531,17 +1531,17 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"snat_pool": schema.SingleNestedBlock{
-									MarkdownDescription: "Snat Pool. Snat Pool configuration",
+									MarkdownDescription: "SNAT Pool. SNAT Pool configuration.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Enable this option",
 										},
 										"snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
-													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
@@ -1552,14 +1552,14 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"private_name": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS Name on given Sites. Specify origin server with private or public DNS name and site information",
+							MarkdownDescription: "DNS Name on given Sites. Specify origin server with private or public DNS name and site information.",
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
-									MarkdownDescription: "DNS Name. DNS Name",
+									MarkdownDescription: "DNS Name. DNS Name .",
 									Optional:            true,
 								},
 								"refresh_interval": schema.Int64Attribute{
-									MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767",
+									MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/HTML/rfc8767.",
 									Optional:            true,
 								},
 							},
@@ -1571,18 +1571,18 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Enable this option",
 								},
 								"segment": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1592,22 +1592,22 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"site_locator": schema.SingleNestedBlock{
-									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object",
+									MarkdownDescription: "Site or Virtual Site. This message defines a reference to a site or virtual site object.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1617,18 +1617,18 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											},
 										},
 										"virtual_site": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -1640,17 +1640,17 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 									},
 								},
 								"snat_pool": schema.SingleNestedBlock{
-									MarkdownDescription: "Snat Pool. Snat Pool configuration",
+									MarkdownDescription: "SNAT Pool. SNAT Pool configuration.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"no_snat_pool": schema.SingleNestedBlock{
 											MarkdownDescription: "Enable this option",
 										},
 										"snat_pool": schema.SingleNestedBlock{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 											Attributes: map[string]schema.Attribute{
 												"prefixes": schema.ListAttribute{
-													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+													MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
@@ -1661,49 +1661,49 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"public_ip": schema.SingleNestedBlock{
-							MarkdownDescription: "Public IP. Specify origin server with public IP address",
+							MarkdownDescription: "Public IP. Specify origin server with public IP address.",
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
-									MarkdownDescription: "Public IPV4. Public IPV4 address",
+									MarkdownDescription: "Public IPv4. Public IPv4 address.",
 									Optional:            true,
 								},
 							},
 						},
 						"public_name": schema.SingleNestedBlock{
-							MarkdownDescription: "Public DNS Name. Specify origin server with public DNS name",
+							MarkdownDescription: "Public DNS Name. Specify origin server with public DNS name.",
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
-									MarkdownDescription: "DNS Name. DNS Name",
+									MarkdownDescription: "DNS Name. DNS Name .",
 									Optional:            true,
 								},
 								"refresh_interval": schema.Int64Attribute{
-									MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/html/rfc8767",
+									MarkdownDescription: "DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per https://datatracker.ietf.org/doc/HTML/rfc8767.",
 									Optional:            true,
 								},
 							},
 						},
 						"vn_private_ip": schema.SingleNestedBlock{
-							MarkdownDescription: "IP address Virtual Network. Specify origin server with IP on Virtual Network",
+							MarkdownDescription: "IP address Virtual Network. Specify origin server with IP on Virtual Network.",
 							Attributes: map[string]schema.Attribute{
 								"ip": schema.StringAttribute{
-									MarkdownDescription: "IPV4. IPV4 address",
+									MarkdownDescription: "IPv4. IPv4 address.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"virtual_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1715,27 +1715,27 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"vn_private_name": schema.SingleNestedBlock{
-							MarkdownDescription: "DNS Name on Virtual Network. Specify origin server with DNS name on Virtual Network",
+							MarkdownDescription: "DNS Name on Virtual Network. Specify origin server with DNS name on Virtual Network.",
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
-									MarkdownDescription: "DNS Name. DNS Name",
+									MarkdownDescription: "DNS Name. DNS Name .",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"private_network": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1765,7 +1765,7 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"use_tls": schema.SingleNestedBlock{
-				MarkdownDescription: "TLS Parameters for Origin Servers. Upstream TLS Parameters",
+				MarkdownDescription: "TLS Parameters for Origin Servers. Upstream TLS Parameters.",
 				Attributes: map[string]schema.Attribute{
 					"max_session_keys": schema.Int64Attribute{
 						MarkdownDescription: "Max Session Keys Cached. Number of session keys that are cached.",
@@ -1793,11 +1793,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Enable this option",
 					},
 					"tls_config": schema.SingleNestedBlock{
-						MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+						MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"custom_security": schema.SingleNestedBlock{
-								MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+								MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 								Attributes: map[string]schema.Attribute{
 									"cipher_suites": schema.ListAttribute{
 										MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -1829,11 +1829,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Enable this option",
 					},
 					"use_mtls": schema.SingleNestedBlock{
-						MarkdownDescription: "mTLS Certificate. mTLS Client Certificate",
+						MarkdownDescription: "MTLS Certificate. MTLS Client Certificate.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "mTLS Client Certificate. mTLS Client Certificate",
+								MarkdownDescription: "MTLS Client Certificate. MTLS Client Certificate .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
@@ -1841,13 +1841,13 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Description. Description for the certificate.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_hash_algorithms": schema.SingleNestedBlock{
-											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -1860,22 +1860,22 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
-											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 															Optional:            true,
 														},
 														"location": schema.StringAttribute{
-															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
-															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 													},
@@ -1884,11 +1884,11 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
-															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 														"url": schema.StringAttribute{
-															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 															Optional:            true,
 														},
 													},
@@ -1904,18 +1904,18 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"use_mtls_obj": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -1925,27 +1925,27 @@ func (r *OriginPoolResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"use_server_verification": schema.SingleNestedBlock{
-						MarkdownDescription: "TLS Validation Context for Origin Servers. Upstream TLS Validation Context",
+						MarkdownDescription: "TLS Validation Context for Origin Servers. Upstream TLS Validation Context.",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
-								MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate",
+								MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Origin Pool for verification of server's certificate.",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"trusted_ca": schema.SingleNestedBlock{
-								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{

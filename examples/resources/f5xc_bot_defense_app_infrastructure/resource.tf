@@ -20,11 +20,11 @@ resource "f5xc_bot_defense_app_infrastructure" "example" {
   cloud_hosted {
     # Configure cloud_hosted settings
   }
-  # Egress. Egress
+  # Egress. Egress .
   egress {
     # Configure egress settings
   }
-  # Ingress. Ingress
+  # Ingress. Ingress .
   ingress {
     # Configure ingress settings
   }

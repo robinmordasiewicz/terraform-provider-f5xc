@@ -9,7 +9,7 @@ description: |-
 
 Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 
-~> **Note** Please refer to [AWS TGW Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-aws-tgw-site) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -109,7 +109,7 @@ resource "f5xc_aws_tgw_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
+<br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will GET disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
 
 <a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Site Coordinates. Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
@@ -132,7 +132,7 @@ resource "f5xc_aws_tgw_site" "example" {
 
 <a id="os"></a>&#x2022; [`os`](#os) - Optional Block<br>Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions<br>See [OS](#os) below for details.
 
-<a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
+<a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
 
 <a id="sw"></a>&#x2022; [`sw`](#sw) - Optional Block<br>F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions
 
@@ -166,7 +166,7 @@ An [`aws_parameters`](#aws-parameters) block supports the following:
 
 <a id="aws-parameters-az-nodes"></a>&#x2022; [`az_nodes`](#aws-parameters-az-nodes) - Optional Block<br>Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently<br>See [Az Nodes](#aws-parameters-az-nodes) below.
 
-<a id="aws-parameters-custom-security-group"></a>&#x2022; [`custom_security_group`](#aws-parameters-custom-security-group) - Optional Block<br>Security Group IDS. Enter pre created security groups for slo(Site Local Outside) and SLI(Site Local Inside) interface. Supported only for sites deployed on existing VPC<br>See [Custom Security Group](#aws-parameters-custom-security-group) below.
+<a id="aws-parameters-custom-security-group"></a>&#x2022; [`custom_security_group`](#aws-parameters-custom-security-group) - Optional Block<br>Security Group IDs. Enter pre created security groups for slo(Site Local Outside) and SLI(Site Local Inside) interface. Supported only for sites deployed on existing VPC<br>See [Custom Security Group](#aws-parameters-custom-security-group) below.
 
 <a id="aws-parameters-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#aws-parameters-disable-internet-vip) - Optional Block<br>Enable this option
 
@@ -214,19 +214,25 @@ A [`blindfold_secret_info`](#info-d7b5d3) block (within [`aws_parameters.admin_p
 
 <a id="location-66ddf7"></a>&#x2022; [`location`](#location-66ddf7) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-a4fa33"></a>&#x2022; [`store_provider`](#provider-a4fa33) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-a4fa33"></a>&#x2022; [`store_provider`](#provider-a4fa33) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### AWS Parameters Admin Password Clear Secret Info
 
 A [`clear_secret_info`](#info-fb7899) block (within [`aws_parameters.admin_password`](#aws-parameters-admin-password)) supports the following:
 
-<a id="ref-3acced"></a>&#x2022; [`provider_ref`](#ref-3acced) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-3acced"></a>&#x2022; [`provider_ref`](#ref-3acced) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="url-af0d7f"></a>&#x2022; [`url`](#url-af0d7f) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-af0d7f"></a>&#x2022; [`url`](#url-af0d7f) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### AWS Parameters AWS Cred
 
-<a id="objref-5aec29"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`aws_cred`](#aws-parameters-aws-cred) block (within [`aws_parameters`](#aws-parameters)) supports the following:
+
+<a id="aws-parameters-aws-cred-name"></a>&#x2022; [`name`](#aws-parameters-aws-cred-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="aws-parameters-aws-cred-namespace"></a>&#x2022; [`namespace`](#aws-parameters-aws-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="aws-parameters-aws-cred-tenant"></a>&#x2022; [`tenant`](#aws-parameters-aws-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### AWS Parameters Az Nodes
 
@@ -340,7 +346,7 @@ A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_s
 
 <a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
 
-<a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 <a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
 
@@ -352,7 +358,7 @@ A [`coordinates`](#coordinates) block supports the following:
 
 <a id="coordinates-latitude"></a>&#x2022; [`latitude`](#coordinates-latitude) - Optional Number<br>Latitude. Latitude of the site location
 
-<a id="coordinates-longitude"></a>&#x2022; [`longitude`](#coordinates-longitude) - Optional Number<br>Longitude. longitude of site location
+<a id="coordinates-longitude"></a>&#x2022; [`longitude`](#coordinates-longitude) - Optional Number<br>Longitude. Longitude of site location
 
 #### Custom DNS
 
@@ -420,7 +426,13 @@ An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_dr
 
 #### Log Receiver
 
-<a id="objref-0da9d9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`log_receiver`](#log-receiver) block supports the following:
+
+<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Offline Survivability Mode
 
@@ -442,7 +454,7 @@ An [`os`](#os) block supports the following:
 
 A [`performance_enhancement_mode`](#performance-enhancement-mode) block supports the following:
 
-<a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance.L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
+<a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
 
 <a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Enable this option
 
@@ -466,7 +478,13 @@ A [`private_connectivity`](#private-connectivity) block supports the following:
 
 #### Private Connectivity Cloud Link
 
-<a id="objref-14b419"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`cloud_link`](#private-connectivity-cloud-link) block (within [`private_connectivity`](#private-connectivity)) supports the following:
+
+<a id="private-connectivity-cloud-link-name"></a>&#x2022; [`name`](#private-connectivity-cloud-link-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-73cbe6"></a>&#x2022; [`namespace`](#namespace-73cbe6) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="private-connectivity-cloud-link-tenant"></a>&#x2022; [`tenant`](#private-connectivity-cloud-link-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Sw
 
@@ -474,7 +492,7 @@ A [`sw`](#sw) block supports the following:
 
 <a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
 
-<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
+<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
 
 #### TGW Security
 
@@ -482,7 +500,7 @@ A [`tgw_security`](#tgw-security) block supports the following:
 
 <a id="policies-01858e"></a>&#x2022; [`active_east_west_service_policies`](#policies-01858e) - Optional Block<br>Active Service Policies. Active service policies for the east-west proxy<br>See [Active East West Service Policies](#policies-01858e) below.
 
-<a id="policies-bd7a9f"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-bd7a9f) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-bd7a9f) below.
+<a id="policies-bd7a9f"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-bd7a9f) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-bd7a9f) below.
 
 <a id="policies-b83241"></a>&#x2022; [`active_forward_proxy_policies`](#policies-b83241) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#policies-b83241) below.
 
@@ -536,7 +554,13 @@ An [`active_network_policies`](#tgw-security-active-network-policies) block (wit
 
 #### TGW Security Active Network Policies Network Policies
 
-<a id="objref-2df1c5"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`network_policies`](#policies-2df1c5) block (within [`tgw_security.active_network_policies`](#tgw-security-active-network-policies)) supports the following:
+
+<a id="name-df78b9"></a>&#x2022; [`name`](#name-df78b9) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-f0dea9"></a>&#x2022; [`namespace`](#namespace-f0dea9) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-50eb46"></a>&#x2022; [`tenant`](#tenant-50eb46) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 
@@ -620,11 +644,23 @@ An [`allowed_vip_port_sli`](#vn-config-allowed-vip-port-sli) block (within [`vn_
 
 #### Vn Config Dc Cluster Group Inside Vn
 
-<a id="objref-cd3510"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`dc_cluster_group_inside_vn`](#vn-config-dc-cluster-group-inside-vn) block (within [`vn_config`](#vn-config)) supports the following:
+
+<a id="name-904397"></a>&#x2022; [`name`](#name-904397) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-e2263f"></a>&#x2022; [`namespace`](#namespace-e2263f) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-1e1451"></a>&#x2022; [`tenant`](#tenant-1e1451) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Vn Config Dc Cluster Group Outside Vn
 
-<a id="objref-2960ef"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`dc_cluster_group_outside_vn`](#vn-config-dc-cluster-group-outside-vn) block (within [`vn_config`](#vn-config)) supports the following:
+
+<a id="name-bf8427"></a>&#x2022; [`name`](#name-bf8427) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-476b3b"></a>&#x2022; [`namespace`](#namespace-476b3b) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-d41039"></a>&#x2022; [`tenant`](#tenant-d41039) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Vn Config Global Network List
 

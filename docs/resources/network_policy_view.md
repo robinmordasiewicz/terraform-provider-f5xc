@@ -2,20 +2,20 @@
 page_title: "f5xc_network_policy_view Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
+  Manages a Network Policy View resource in F5 Distributed Cloud for network policy view specification. configuration.
 ---
 
 # f5xc_network_policy_view (Resource)
 
-Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
+Manages a Network Policy View resource in F5 Distributed Cloud for network policy view specification. configuration.
 
-~> **Note** Please refer to [Network Policy View API docs](https://docs.cloud.f5.com/docs-v2/api/views-network-policy-view) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Network Policy View Resource Example
-# Manages a Network Policy View resource in F5 Distributed Cloud for network policy view configuration.
+# Manages a Network Policy View resource in F5 Distributed Cloud for network policy view specification. configuration.
 
 # Basic Network Policy View configuration
 resource "f5xc_network_policy_view" "example" {
@@ -88,7 +88,7 @@ An [`egress_rules`](#egress-rules) block supports the following:
 
 <a id="egress-rules-action"></a>&#x2022; [`action`](#egress-rules-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match
 
-<a id="egress-rules-adv-action"></a>&#x2022; [`adv_action`](#egress-rules-adv-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Adv Action](#egress-rules-adv-action) below.
+<a id="egress-rules-adv-action"></a>&#x2022; [`adv_action`](#egress-rules-adv-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional OPTIONS along with RuleAction and PBRRuleAction<br>See [Adv Action](#egress-rules-adv-action) below.
 
 <a id="egress-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#egress-rules-all-tcp-traffic) - Optional Block<br>Enable this option
 
@@ -106,7 +106,7 @@ An [`egress_rules`](#egress-rules) block supports the following:
 
 <a id="egress-rules-label-matcher"></a>&#x2022; [`label_matcher`](#egress-rules-label-matcher) - Optional Block<br>Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#egress-rules-label-matcher) below.
 
-<a id="egress-rules-label-selector"></a>&#x2022; [`label_selector`](#egress-rules-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#egress-rules-label-selector) below.
+<a id="egress-rules-label-selector"></a>&#x2022; [`label_selector`](#egress-rules-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#egress-rules-label-selector) below.
 
 <a id="egress-rules-metadata"></a>&#x2022; [`metadata`](#egress-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#egress-rules-metadata) below.
 
@@ -138,15 +138,15 @@ An [`ip_prefix_set`](#egress-rules-ip-prefix-set) block (within [`egress_rules`]
 
 A [`ref`](#egress-rules-ip-prefix-set-ref) block (within [`egress_rules.ip_prefix_set`](#egress-rules-ip-prefix-set)) supports the following:
 
-<a id="egress-rules-ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#egress-rules-ip-prefix-set-ref-kind) - Optional String<br>Object reference kind
+<a id="egress-rules-ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#egress-rules-ip-prefix-set-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="egress-rules-ip-prefix-set-ref-name"></a>&#x2022; [`name`](#egress-rules-ip-prefix-set-ref-name) - Optional String<br>Object reference name
+<a id="egress-rules-ip-prefix-set-ref-name"></a>&#x2022; [`name`](#egress-rules-ip-prefix-set-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-600e0f"></a>&#x2022; [`namespace`](#namespace-600e0f) - Optional String<br>Object reference namespace
+<a id="namespace-600e0f"></a>&#x2022; [`namespace`](#namespace-600e0f) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="egress-rules-ip-prefix-set-ref-tenant"></a>&#x2022; [`tenant`](#egress-rules-ip-prefix-set-ref-tenant) - Optional String<br>Object reference tenant
+<a id="egress-rules-ip-prefix-set-ref-tenant"></a>&#x2022; [`tenant`](#egress-rules-ip-prefix-set-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="egress-rules-ip-prefix-set-ref-uid"></a>&#x2022; [`uid`](#egress-rules-ip-prefix-set-ref-uid) - Optional String<br>Object reference UID
+<a id="egress-rules-ip-prefix-set-ref-uid"></a>&#x2022; [`uid`](#egress-rules-ip-prefix-set-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Egress Rules Label Matcher
 
@@ -158,7 +158,7 @@ A [`label_matcher`](#egress-rules-label-matcher) block (within [`egress_rules`](
 
 A [`label_selector`](#egress-rules-label-selector) block (within [`egress_rules`](#egress-rules)) supports the following:
 
-<a id="egress-rules-label-selector-expressions"></a>&#x2022; [`expressions`](#egress-rules-label-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="egress-rules-label-selector-expressions"></a>&#x2022; [`expressions`](#egress-rules-label-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Egress Rules Metadata
 
@@ -190,7 +190,7 @@ An [`endpoint`](#endpoint) block supports the following:
 
 <a id="endpoint-inside-endpoints"></a>&#x2022; [`inside_endpoints`](#endpoint-inside-endpoints) - Optional Block<br>Enable this option
 
-<a id="endpoint-label-selector"></a>&#x2022; [`label_selector`](#endpoint-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#endpoint-label-selector) below.
+<a id="endpoint-label-selector"></a>&#x2022; [`label_selector`](#endpoint-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#endpoint-label-selector) below.
 
 <a id="endpoint-outside-endpoints"></a>&#x2022; [`outside_endpoints`](#endpoint-outside-endpoints) - Optional Block<br>Enable this option
 
@@ -200,7 +200,7 @@ An [`endpoint`](#endpoint) block supports the following:
 
 A [`label_selector`](#endpoint-label-selector) block (within [`endpoint`](#endpoint)) supports the following:
 
-<a id="endpoint-label-selector-expressions"></a>&#x2022; [`expressions`](#endpoint-label-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="endpoint-label-selector-expressions"></a>&#x2022; [`expressions`](#endpoint-label-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Endpoint Prefix List
 
@@ -214,7 +214,7 @@ An [`ingress_rules`](#ingress-rules) block supports the following:
 
 <a id="ingress-rules-action"></a>&#x2022; [`action`](#ingress-rules-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match
 
-<a id="ingress-rules-adv-action"></a>&#x2022; [`adv_action`](#ingress-rules-adv-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Adv Action](#ingress-rules-adv-action) below.
+<a id="ingress-rules-adv-action"></a>&#x2022; [`adv_action`](#ingress-rules-adv-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional OPTIONS along with RuleAction and PBRRuleAction<br>See [Adv Action](#ingress-rules-adv-action) below.
 
 <a id="ingress-rules-all-tcp-traffic"></a>&#x2022; [`all_tcp_traffic`](#ingress-rules-all-tcp-traffic) - Optional Block<br>Enable this option
 
@@ -232,7 +232,7 @@ An [`ingress_rules`](#ingress-rules) block supports the following:
 
 <a id="ingress-rules-label-matcher"></a>&#x2022; [`label_matcher`](#ingress-rules-label-matcher) - Optional Block<br>Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#ingress-rules-label-matcher) below.
 
-<a id="ingress-rules-label-selector"></a>&#x2022; [`label_selector`](#ingress-rules-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#ingress-rules-label-selector) below.
+<a id="ingress-rules-label-selector"></a>&#x2022; [`label_selector`](#ingress-rules-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#ingress-rules-label-selector) below.
 
 <a id="ingress-rules-metadata"></a>&#x2022; [`metadata`](#ingress-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#ingress-rules-metadata) below.
 
@@ -264,15 +264,15 @@ An [`ip_prefix_set`](#ingress-rules-ip-prefix-set) block (within [`ingress_rules
 
 A [`ref`](#ingress-rules-ip-prefix-set-ref) block (within [`ingress_rules.ip_prefix_set`](#ingress-rules-ip-prefix-set)) supports the following:
 
-<a id="ingress-rules-ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#ingress-rules-ip-prefix-set-ref-kind) - Optional String<br>Object reference kind
+<a id="ingress-rules-ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#ingress-rules-ip-prefix-set-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="ingress-rules-ip-prefix-set-ref-name"></a>&#x2022; [`name`](#ingress-rules-ip-prefix-set-ref-name) - Optional String<br>Object reference name
+<a id="ingress-rules-ip-prefix-set-ref-name"></a>&#x2022; [`name`](#ingress-rules-ip-prefix-set-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-3e666e"></a>&#x2022; [`namespace`](#namespace-3e666e) - Optional String<br>Object reference namespace
+<a id="namespace-3e666e"></a>&#x2022; [`namespace`](#namespace-3e666e) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="ingress-rules-ip-prefix-set-ref-tenant"></a>&#x2022; [`tenant`](#ingress-rules-ip-prefix-set-ref-tenant) - Optional String<br>Object reference tenant
+<a id="ingress-rules-ip-prefix-set-ref-tenant"></a>&#x2022; [`tenant`](#ingress-rules-ip-prefix-set-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="ingress-rules-ip-prefix-set-ref-uid"></a>&#x2022; [`uid`](#ingress-rules-ip-prefix-set-ref-uid) - Optional String<br>Object reference UID
+<a id="ingress-rules-ip-prefix-set-ref-uid"></a>&#x2022; [`uid`](#ingress-rules-ip-prefix-set-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Ingress Rules Label Matcher
 
@@ -284,7 +284,7 @@ A [`label_matcher`](#ingress-rules-label-matcher) block (within [`ingress_rules`
 
 A [`label_selector`](#ingress-rules-label-selector) block (within [`ingress_rules`](#ingress-rules)) supports the following:
 
-<a id="expressions-ec199c"></a>&#x2022; [`expressions`](#expressions-ec199c) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="expressions-ec199c"></a>&#x2022; [`expressions`](#expressions-ec199c) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Ingress Rules Metadata
 

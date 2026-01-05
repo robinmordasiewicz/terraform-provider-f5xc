@@ -9,7 +9,7 @@ description: |-
 
 Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Rate Limiter API docs](https://docs.cloud.f5.com/docs-v2/api/rate-limiter) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -135,15 +135,15 @@ A [`timeouts`](#timeouts) block supports the following:
 
 An [`user_identification`](#user-identification) block supports the following:
 
-<a id="user-identification-kind"></a>&#x2022; [`kind`](#user-identification-kind) - Optional String<br>Object reference kind
+<a id="user-identification-kind"></a>&#x2022; [`kind`](#user-identification-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="user-identification-name"></a>&#x2022; [`name`](#user-identification-name) - Optional String<br>Object reference name
+<a id="user-identification-name"></a>&#x2022; [`name`](#user-identification-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="user-identification-namespace"></a>&#x2022; [`namespace`](#user-identification-namespace) - Optional String<br>Object reference namespace
+<a id="user-identification-namespace"></a>&#x2022; [`namespace`](#user-identification-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="user-identification-tenant"></a>&#x2022; [`tenant`](#user-identification-tenant) - Optional String<br>Object reference tenant
+<a id="user-identification-tenant"></a>&#x2022; [`tenant`](#user-identification-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="user-identification-uid"></a>&#x2022; [`uid`](#user-identification-uid) - Optional String<br>Object reference UID
+<a id="user-identification-uid"></a>&#x2022; [`uid`](#user-identification-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 ---
 

@@ -2,20 +2,20 @@
 page_title: "f5xc_cdn_cache_rule Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+  Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer specification. configuration.
 ---
 
 # f5xc_cdn_cache_rule (Resource)
 
-Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer specification. configuration.
 
-~> **Note** Please refer to [CDN Cache Rule API docs](https://docs.cloud.f5.com/docs-v2/api/cdn-cache-rule) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # CDN Cache Rule Resource Example
-# Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+# Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer specification. configuration.
 
 # Basic CDN Cache Rule configuration
 resource "f5xc_cdn_cache_rule" "example" {
@@ -32,7 +32,7 @@ resource "f5xc_cdn_cache_rule" "example" {
   }
 
   # Resource-specific configuration
-  # Cache Rule. This defines a CDN Cache Rule
+  # Cache Rule. This defines a CDN Cache Rule.
   cache_rules {
     # Configure cache_rules settings
   }
@@ -40,7 +40,7 @@ resource "f5xc_cdn_cache_rule" "example" {
   cache_bypass {
     # Configure cache_bypass settings
   }
-  # Cache Action Options. List of options for Cache Action
+  # Cache Action OPTIONS. List of OPTIONS for Cache Action.
   eligible_for_cache {
     # Configure eligible_for_cache settings
   }
@@ -84,7 +84,7 @@ A [`cache_rules`](#cache-rules) block supports the following:
 
 <a id="cache-rules-cache-bypass"></a>&#x2022; [`cache_bypass`](#cache-rules-cache-bypass) - Optional Block<br>Enable this option
 
-<a id="cache-rules-eligible-for-cache"></a>&#x2022; [`eligible_for_cache`](#cache-rules-eligible-for-cache) - Optional Block<br>Cache Action Options. List of options for Cache Action<br>See [Eligible For Cache](#cache-rules-eligible-for-cache) below.
+<a id="cache-rules-eligible-for-cache"></a>&#x2022; [`eligible_for_cache`](#cache-rules-eligible-for-cache) - Optional Block<br>Cache Action OPTIONS. List of OPTIONS for Cache Action<br>See [Eligible For Cache](#cache-rules-eligible-for-cache) below.
 
 <a id="cache-rules-rule-expression-list"></a>&#x2022; [`rule_expression_list`](#cache-rules-rule-expression-list) - Optional Block<br>Expressions. Expressions are evaluated in the order in which they are specified. The evaluation stops when the first rule match occurs<br>See [Rule Expression List](#cache-rules-rule-expression-list) below.
 

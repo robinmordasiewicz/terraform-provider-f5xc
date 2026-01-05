@@ -9,7 +9,7 @@ description: |-
 
 Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Secret Management Access API docs](https://docs.cloud.f5.com/docs-v2/api/secret-management-access) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

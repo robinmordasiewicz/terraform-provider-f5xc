@@ -9,7 +9,7 @@ description: |-
 
 Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Irule API docs](https://docs.cloud.f5.com/docs-v2/api/bigcne-irule) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -54,7 +54,7 @@ resource "f5xc_irule" "example" {
 
 <a id="description-spec"></a>&#x2022; [`description_spec`](#description-spec) - Optional String<br>Description for iRule. Specify Description for iRule
 
-<a id="irule"></a>&#x2022; [`irule`](#irule) - Optional String<br>irule.`www.internal.example.f5.com'`)} DNS::drop} irule content
+<a id="irule"></a>&#x2022; [`irule`](#irule) - Optional String<br>Irule. `www.internal.example.f5.com'`)} DNS::drop} irule content
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 

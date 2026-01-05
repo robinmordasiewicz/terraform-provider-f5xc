@@ -9,7 +9,7 @@ description: |-
 
 Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Malicious User Mitigation API docs](https://docs.cloud.f5.com/docs-v2/api/malicious-user-mitigation) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

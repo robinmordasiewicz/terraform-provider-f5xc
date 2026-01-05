@@ -9,7 +9,7 @@ description: |-
 
 Manages a Authentication resource in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Authentication API docs](https://docs.cloud.f5.com/docs-v2/api/authentication) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -86,13 +86,13 @@ A [`cookie_params`](#cookie-params) block supports the following:
 
 <a id="cookie-params-auth-hmac"></a>&#x2022; [`auth_hmac`](#cookie-params-auth-hmac) - Optional Block<br>HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid<br>See [Auth HMAC](#cookie-params-auth-hmac) below.
 
-<a id="cookie-params-cookie-expiry"></a>&#x2022; [`cookie_expiry`](#cookie-params-cookie-expiry) - Optional Number<br>Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds
+<a id="cookie-params-cookie-expiry"></a>&#x2022; [`cookie_expiry`](#cookie-params-cookie-expiry) - Optional Number<br>Cookie Expiry duration. Specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds
 
 <a id="cookie-params-cookie-refresh-interval"></a>&#x2022; [`cookie_refresh_interval`](#cookie-params-cookie-refresh-interval) - Optional Number<br>Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce RE-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, RE-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds
 
 <a id="cookie-params-kms-key-hmac"></a>&#x2022; [`kms_key_hmac`](#cookie-params-kms-key-hmac) - Optional Block<br>KMS Key Reference. Reference to KMS Key Object
 
-<a id="cookie-params-session-expiry"></a>&#x2022; [`session_expiry`](#cookie-params-session-expiry) - Optional Number<br>Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours)
+<a id="cookie-params-session-expiry"></a>&#x2022; [`session_expiry`](#cookie-params-session-expiry) - Optional Number<br>Session Expiry duration. Specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours)
 
 #### Cookie Params Auth HMAC
 
@@ -166,15 +166,15 @@ A [`blindfold_secret_info`](#info-672642) block (within [`oidc_auth.client_secre
 
 <a id="location-102885"></a>&#x2022; [`location`](#location-102885) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-3da802"></a>&#x2022; [`store_provider`](#provider-3da802) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-3da802"></a>&#x2022; [`store_provider`](#provider-3da802) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### OIDC Auth Client Secret Clear Secret Info
 
 A [`clear_secret_info`](#info-b8137a) block (within [`oidc_auth.client_secret`](#oidc-auth-client-secret)) supports the following:
 
-<a id="ref-4470bf"></a>&#x2022; [`provider_ref`](#ref-4470bf) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-4470bf"></a>&#x2022; [`provider_ref`](#ref-4470bf) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="url-6086d3"></a>&#x2022; [`url`](#url-6086d3) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-6086d3"></a>&#x2022; [`url`](#url-6086d3) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### OIDC Auth OIDC Auth Params
 

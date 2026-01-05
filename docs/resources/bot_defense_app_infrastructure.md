@@ -9,7 +9,7 @@ description: |-
 
 Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Bot Defense App Infrastructure API docs](https://docs.cloud.f5.com/docs-v2/api/views-bot-defense-app-infrastructure) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -36,11 +36,11 @@ resource "f5xc_bot_defense_app_infrastructure" "example" {
   cloud_hosted {
     # Configure cloud_hosted settings
   }
-  # Egress. Egress
+  # Egress. Egress .
   egress {
     # Configure egress settings
   }
-  # Ingress. Ingress
+  # Ingress. Ingress .
   ingress {
     # Configure ingress settings
   }

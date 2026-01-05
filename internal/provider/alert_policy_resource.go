@@ -251,7 +251,7 @@ func (r *AlertPolicyResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             alert_policySchemaVersion,
-		MarkdownDescription: "Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.",
+		MarkdownDescription: "Manages new Alert Policy Object. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Alert Policy. Must be unique within the namespace.",
@@ -307,7 +307,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 				Delete: true,
 			}),
 			"notification_parameters": schema.SingleNestedBlock{
-				MarkdownDescription: "Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers",
+				MarkdownDescription: "Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers.",
 				Attributes: map[string]schema.Attribute{
 					"group_interval": schema.StringAttribute{
 						MarkdownDescription: "Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'",
@@ -324,10 +324,10 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 				Blocks: map[string]schema.Block{
 					"custom": schema.SingleNestedBlock{
-						MarkdownDescription: "Custom Group By. Specify list of custom labels to group/aggregate the alerts",
+						MarkdownDescription: "Custom Group By. Specify list of custom labels to group/aggregate the alerts.",
 						Attributes: map[string]schema.Attribute{
 							"labels": schema.ListAttribute{
-								MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts",
+								MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts.",
 								Optional:            true,
 								ElementType:         types.StringType,
 							},
@@ -345,11 +345,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"receivers": schema.ListNestedBlock{
-				MarkdownDescription: "Alert Receivers. list of Alert Receivers where the alerts will be sent",
+				MarkdownDescription: "Alert Receivers. List of Alert Receivers where the alerts will be sent .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -357,15 +357,15 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -373,7 +373,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -392,7 +392,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							Optional:            true,
 						},
 						"alertname_regex": schema.StringAttribute{
-							MarkdownDescription: "Matching RegEx of Alertname. Regular Expression match for the alertname",
+							MarkdownDescription: "Matching RegEx of Alertname. Regular Expression match for the alertname.",
 							Optional:            true,
 						},
 					},
@@ -401,21 +401,21 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Enable this option",
 						},
 						"custom": schema.SingleNestedBlock{
-							MarkdownDescription: "Custom Matcher. A set of matchers an alert has to fulfill to match the route",
+							MarkdownDescription: "Custom Matcher. A set of matchers an alert has to fulfill to match the route.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"alertlabel": schema.SingleNestedBlock{
-									MarkdownDescription: "AlertLabel. AlertLabel to configure the alert policy rule",
+									MarkdownDescription: "AlertLabel. AlertLabel to configure the alert policy rule.",
 								},
 								"alertname": schema.SingleNestedBlock{
 									MarkdownDescription: "Label Matcher.",
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
-											MarkdownDescription: "Exact Match. Equality match value for the label",
+											MarkdownDescription: "Exact Match. Equality match value for the label.",
 											Optional:            true,
 										},
 										"regex_match": schema.StringAttribute{
-											MarkdownDescription: "RegEx Match. Regular expression match value for the label",
+											MarkdownDescription: "RegEx Match. Regular expression match value for the label.",
 											Optional:            true,
 										},
 									},
@@ -424,11 +424,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Label Matcher.",
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
-											MarkdownDescription: "Exact Match. Equality match value for the label",
+											MarkdownDescription: "Exact Match. Equality match value for the label.",
 											Optional:            true,
 										},
 										"regex_match": schema.StringAttribute{
-											MarkdownDescription: "RegEx Match. Regular expression match value for the label",
+											MarkdownDescription: "RegEx Match. Regular expression match value for the label.",
 											Optional:            true,
 										},
 									},
@@ -437,11 +437,11 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 									MarkdownDescription: "Label Matcher.",
 									Attributes: map[string]schema.Attribute{
 										"exact_match": schema.StringAttribute{
-											MarkdownDescription: "Exact Match. Equality match value for the label",
+											MarkdownDescription: "Exact Match. Equality match value for the label.",
 											Optional:            true,
 										},
 										"regex_match": schema.StringAttribute{
-											MarkdownDescription: "RegEx Match. Regular expression match value for the label",
+											MarkdownDescription: "RegEx Match. Regular expression match value for the label.",
 											Optional:            true,
 										},
 									},
@@ -452,7 +452,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Enable this option",
 						},
 						"group": schema.SingleNestedBlock{
-							MarkdownDescription: "Group Matcher. Select one or more known group names to match the incoming alert",
+							MarkdownDescription: "Group Matcher. Select one or more known group names to match the incoming alert.",
 							Attributes: map[string]schema.Attribute{
 								"groups": schema.ListAttribute{
 									MarkdownDescription: "[Enum: INFRASTRUCTURE|IAAS_CAAS|VIRTUAL_HOST|VOLT_SHARE|UAM|SECURITY|TIMESERIES_ANOMALY|SHAPE_SECURITY|SECURITY_CSD|CDN|SYNTHETIC_MONITORS|TLS|SECURITY_BOT_DEFENSE|CLOUD_LINK|DNS|ROUTED_DDOS] Groups. Name of groups to match the alert. Possible values are `INFRASTRUCTURE`, `IAAS_CAAS`, `VIRTUAL_HOST`, `VOLT_SHARE`, `UAM`, `SECURITY`, `TIMESERIES_ANOMALY`, `SHAPE_SECURITY`, `SECURITY_CSD`, `CDN`, `SYNTHETIC_MONITORS`, `TLS`, `SECURITY_BOT_DEFENSE`, `CLOUD_LINK`, `DNS`, `ROUTED_DDOS`. Defaults to `INFRASTRUCTURE`.",
@@ -462,7 +462,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"notification_parameters": schema.SingleNestedBlock{
-							MarkdownDescription: "Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers",
+							MarkdownDescription: "Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers.",
 							Attributes: map[string]schema.Attribute{
 								"group_interval": schema.StringAttribute{
 									MarkdownDescription: "Notify Interval for a Group. Group Interval is used to specify how long to wait before sending a notification about new alerts that are added to the group for which an initial notification has already been sent. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days If not specified, group_interval defaults to '1m'",
@@ -479,10 +479,10 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 							Blocks: map[string]schema.Block{
 								"custom": schema.SingleNestedBlock{
-									MarkdownDescription: "Custom Group By. Specify list of custom labels to group/aggregate the alerts",
+									MarkdownDescription: "Custom Group By. Specify list of custom labels to group/aggregate the alerts.",
 									Attributes: map[string]schema.Attribute{
 										"labels": schema.ListAttribute{
-											MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts",
+											MarkdownDescription: "Labels. Name of labels to group/aggregate the alerts.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -503,7 +503,7 @@ func (r *AlertPolicyResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Enable this option",
 						},
 						"severity": schema.SingleNestedBlock{
-							MarkdownDescription: "Severity Matcher. Select one or more severity levels to match the incoming alert",
+							MarkdownDescription: "Severity Matcher. Select one or more severity levels to match the incoming alert.",
 							Attributes: map[string]schema.Attribute{
 								"severities": schema.ListAttribute{
 									MarkdownDescription: "[Enum: MINOR|MAJOR|CRITICAL] Severities. List of severity levels. Possible values are `MINOR`, `MAJOR`, `CRITICAL`. Defaults to `MINOR`.",

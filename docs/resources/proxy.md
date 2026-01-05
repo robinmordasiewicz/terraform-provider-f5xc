@@ -2,20 +2,20 @@
 page_title: "f5xc_proxy Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+  Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create specification. configuration.
 ---
 
 # f5xc_proxy (Resource)
 
-Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create specification. configuration.
 
-~> **Note** Please refer to [Proxy API docs](https://docs.cloud.f5.com/docs-v2/api/views-proxy) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Proxy Resource Example
-# Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+# Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create specification. configuration.
 
 # Basic Proxy configuration
 resource "f5xc_proxy" "example" {
@@ -97,7 +97,13 @@ An [`active_forward_proxy_policies`](#active-forward-proxy-policies) block suppo
 
 #### Active Forward Proxy Policies Forward Proxy Policies
 
-<a id="objref-42e2f7"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`forward_proxy_policies`](#policies-42e2f7) block (within [`active_forward_proxy_policies`](#active-forward-proxy-policies)) supports the following:
+
+<a id="name-c2d06e"></a>&#x2022; [`name`](#name-c2d06e) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-63e125"></a>&#x2022; [`namespace`](#namespace-63e125) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-e68ab4"></a>&#x2022; [`tenant`](#tenant-e68ab4) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Dynamic Proxy
 
@@ -105,7 +111,7 @@ A [`dynamic_proxy`](#dynamic-proxy) block supports the following:
 
 <a id="dynamic-proxy-disable-dns-masquerade"></a>&#x2022; [`disable_dns_masquerade`](#dynamic-proxy-disable-dns-masquerade) - Optional Block<br>Enable this option
 
-<a id="dynamic-proxy-domains"></a>&#x2022; [`domains`](#dynamic-proxy-domains) - Optional List<br>Domains. A list of Domains to be proxied. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: \*.foo.com. Not supported Domains: - Just a Wildcard: \* - A Wildcard and TLD with no root Domain: \*.com. - A Wildcard not matching a whole DNS label. e.g. \*.foo.com and \*.bar.foo.com are valid Wildcards however \*bar.foo.com, \*-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. \*.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on \*. Also a Domain must be unique across all virtual hosts within an advertise policy
+<a id="dynamic-proxy-domains"></a>&#x2022; [`domains`](#dynamic-proxy-domains) - Optional List<br>Domains. A list of Domains to be proxied. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.example.com.` 2. Domains starting with a Wildcard: \*.example.com. Not supported Domains: - Just a Wildcard: \* - A Wildcard and TLD with no root Domain: \*.com. - A Wildcard not matching a whole DNS label. E.g. \*.example.com and \*.bar.example.com are valid Wildcards however \*bar.example.com, \*-bar.example.com, and bar*.example.com are all invalid. Additional notes: A Wildcard will not match empty string. E.g. \*.example.com will match bar.example.com and baz-bar.example.com but not .example.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on \*. Also a Domain must be unique across all virtual hosts within an advertise policy
 
 <a id="dynamic-proxy-enable-dns-masquerade"></a>&#x2022; [`enable_dns_masquerade`](#dynamic-proxy-enable-dns-masquerade) - Optional Block<br>Enable this option
 
@@ -119,7 +125,7 @@ A [`dynamic_proxy`](#dynamic-proxy) block supports the following:
 
 A [`http_proxy`](#dynamic-proxy-http-proxy) block (within [`dynamic_proxy`](#dynamic-proxy)) supports the following:
 
-<a id="dynamic-proxy-http-proxy-more-option"></a>&#x2022; [`more_option`](#dynamic-proxy-http-proxy-more-option) - Optional Block<br>Advanced Options. This defines various options to define a route<br>See [More Option](#dynamic-proxy-http-proxy-more-option) below.
+<a id="dynamic-proxy-http-proxy-more-option"></a>&#x2022; [`more_option`](#dynamic-proxy-http-proxy-more-option) - Optional Block<br>Advanced OPTIONS. This defines various OPTIONS to define a route<br>See [More Option](#dynamic-proxy-http-proxy-more-option) below.
 
 #### Dynamic Proxy HTTP Proxy More Option
 
@@ -233,7 +239,7 @@ A [`more_option`](#dynamic-proxy-http-proxy-more-option) block (within [`dynamic
 
 A [`https_proxy`](#dynamic-proxy-https-proxy) block (within [`dynamic_proxy`](#dynamic-proxy)) supports the following:
 
-<a id="dynamic-proxy-https-proxy-more-option"></a>&#x2022; [`more_option`](#dynamic-proxy-https-proxy-more-option) - Optional Block<br>Advanced Options. This defines various options to define a route<br>See [More Option](#dynamic-proxy-https-proxy-more-option) below.
+<a id="dynamic-proxy-https-proxy-more-option"></a>&#x2022; [`more_option`](#dynamic-proxy-https-proxy-more-option) - Optional Block<br>Advanced OPTIONS. This defines various OPTIONS to define a route<br>See [More Option](#dynamic-proxy-https-proxy-more-option) below.
 
 <a id="dynamic-proxy-https-proxy-tls-params"></a>&#x2022; [`tls_params`](#dynamic-proxy-https-proxy-tls-params) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [TLS Params](#dynamic-proxy-https-proxy-tls-params) below.
 
@@ -351,9 +357,9 @@ A [`tls_params`](#dynamic-proxy-https-proxy-tls-params) block (within [`dynamic_
 
 <a id="mtls-1872dc"></a>&#x2022; [`no_mtls`](#mtls-1872dc) - Optional Block<br>Enable this option
 
-<a id="certificates-6f0e81"></a>&#x2022; [`tls_certificates`](#certificates-6f0e81) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-6f0e81) below.
+<a id="certificates-6f0e81"></a>&#x2022; [`tls_certificates`](#certificates-6f0e81) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-6f0e81) below.
 
-<a id="config-116b33"></a>&#x2022; [`tls_config`](#config-116b33) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-116b33) below.
+<a id="config-116b33"></a>&#x2022; [`tls_config`](#config-116b33) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-116b33) below.
 
 <a id="mtls-7179b9"></a>&#x2022; [`use_mtls`](#mtls-7179b9) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-7179b9) below.
 
@@ -413,7 +419,7 @@ A [`http_proxy`](#http-proxy) block supports the following:
 
 <a id="http-proxy-enable-http"></a>&#x2022; [`enable_http`](#http-proxy-enable-http) - Optional Block<br>Enable this option
 
-<a id="http-proxy-more-option"></a>&#x2022; [`more_option`](#http-proxy-more-option) - Optional Block<br>Advanced Options. This defines various options to define a route<br>See [More Option](#http-proxy-more-option) below.
+<a id="http-proxy-more-option"></a>&#x2022; [`more_option`](#http-proxy-more-option) - Optional Block<br>Advanced OPTIONS. This defines various OPTIONS to define a route<br>See [More Option](#http-proxy-more-option) below.
 
 #### HTTP Proxy More Option
 
@@ -469,7 +475,7 @@ A [`compression_params`](#params-c32856) block (within [`http_proxy.more_option`
 
 <a id="header-2ffee9"></a>&#x2022; [`disable_on_etag_header`](#header-2ffee9) - Optional Bool<br>Disable On Etag Header. If true, disables compression when the response contains an etag header. When it is false, weak etags will be preserved and the ones that require strong validation will be removed
 
-<a id="header-925ccf"></a>&#x2022; [`remove_accept_encoding_header`](#header-925ccf) - Optional Bool<br>Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not get compressed before reaching the filter
+<a id="header-925ccf"></a>&#x2022; [`remove_accept_encoding_header`](#header-925ccf) - Optional Bool<br>Remove Accept-Encoding Header. If true, removes accept-encoding from the request headers before dispatching it to the upstream so that responses do not GET compressed before reaching the filter
 
 #### HTTP Proxy More Option Request Cookies To Add
 
@@ -559,19 +565,25 @@ A [`site`](#site-virtual-sites-advertise-where-site) block (within [`site_virtua
 
 <a id="site-ip-4eb476"></a>&#x2022; [`ip`](#site-ip-4eb476) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
-<a id="network-647eba"></a>&#x2022; [`network`](#network-647eba) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
+<a id="network-647eba"></a>&#x2022; [`network`](#network-647eba) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
 <a id="site-91e167"></a>&#x2022; [`site`](#site-91e167) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-91e167) below.
 
 #### Site Virtual Sites Advertise Where Site Site
 
-<a id="objref-91e167"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#site-91e167) block (within [`site_virtual_sites.advertise_where.site`](#site-virtual-sites-advertise-where-site)) supports the following:
+
+<a id="name-e8af64"></a>&#x2022; [`name`](#name-e8af64) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-81a6ad"></a>&#x2022; [`namespace`](#namespace-81a6ad) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-d56172"></a>&#x2022; [`tenant`](#tenant-d56172) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Site Virtual Sites Advertise Where Virtual Site
 
 A [`virtual_site`](#site-7107b1) block (within [`site_virtual_sites.advertise_where`](#site-virtual-sites-advertise-where)) supports the following:
 
-<a id="network-31ecf8"></a>&#x2022; [`network`](#network-31ecf8) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
+<a id="network-31ecf8"></a>&#x2022; [`network`](#network-31ecf8) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
 <a id="site-ba773e"></a>&#x2022; [`virtual_site`](#site-ba773e) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-ba773e) below.
 

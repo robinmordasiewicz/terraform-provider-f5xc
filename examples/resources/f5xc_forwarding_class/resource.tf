@@ -1,5 +1,5 @@
 # Forwarding Class Resource Example
-# Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace configuration.
+# Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace. configuration.
 
 # Basic Forwarding Class configuration
 resource "f5xc_forwarding_class" "example" {

@@ -1290,7 +1290,7 @@ func (r *NfvServiceResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             nfv_serviceSchemaVersion,
-		MarkdownDescription: "Manages new NFV service with configured parameters in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new NFV service with configured parameters. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Nfv Service. Must be unique within the namespace.",
@@ -1352,10 +1352,10 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				MarkdownDescription: "[OneOf: disable_ssh_access, enabled_ssh_access; Default: disable_ssh_access] Enable this option",
 			},
 			"enabled_ssh_access": schema.SingleNestedBlock{
-				MarkdownDescription: "SSH based management. SSH based configuration",
+				MarkdownDescription: "SSH based management. SSH based configuration.",
 				Attributes: map[string]schema.Attribute{
 					"domain_suffix": schema.StringAttribute{
-						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form the hostname for ssh node management",
+						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form the hostname for SSH node management .",
 						Optional:            true,
 					},
 				},
@@ -1370,15 +1370,15 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Enable this option",
 					},
 					"node_ssh_ports": schema.ListNestedBlock{
-						MarkdownDescription: "Management Node SSH Port. Enter TCP port and node name per node",
+						MarkdownDescription: "Management Node SSH Port. Enter TCP port and node name per node .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"node_name": schema.StringAttribute{
-									MarkdownDescription: "Node Name. Node name will be used to match a particular node with the desired TCP port",
+									MarkdownDescription: "Node Name. Node name will be used to match a particular node with the desired TCP port .",
 									Optional:            true,
 								},
 								"ssh_port": schema.Int64Attribute{
-									MarkdownDescription: "SSH Port. Enter TCP port per node",
+									MarkdownDescription: "SSH Port. Enter TCP port per node .",
 									Optional:            true,
 								},
 							},
@@ -1387,10 +1387,10 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"f5_big_ip_aws_service": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: f5_big_ip_aws_service, palo_alto_fw_service] Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS",
+				MarkdownDescription: "[OneOf: f5_big_ip_aws_service, palo_alto_fw_service] Virtual BIG-IP AWS. Virtual BIG-IP specification for AWS.",
 				Attributes: map[string]schema.Attribute{
 					"admin_username": schema.StringAttribute{
-						MarkdownDescription: "Admin Username. Admin Username for BIG-IP",
+						MarkdownDescription: "Admin Username. Admin Username for BIG-IP .",
 						Optional:            true,
 					},
 					"ssh_key": schema.StringAttribute{
@@ -1400,22 +1400,22 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 				Blocks: map[string]schema.Block{
 					"admin_password": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -1424,11 +1424,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -1436,22 +1436,22 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"aws_tgw_site_params": schema.SingleNestedBlock{
-						MarkdownDescription: "BIG-IP AWS TGW Site. BIG-IP AWS TGW site specification",
+						MarkdownDescription: "BIG-IP AWS TGW Site. BIG-IP AWS TGW site specification.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"aws_tgw_site": schema.SingleNestedBlock{
-								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -1463,10 +1463,10 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"endpoint_service": schema.SingleNestedBlock{
-						MarkdownDescription: "Endpoint Service. Endpoint Service is a type of NFV service where the packets are destined to NFV and service modifies the destination with a new destination address",
+						MarkdownDescription: "Endpoint Service. Endpoint Service is a type of NFV service where the packets are destined to NFV and service modifies the destination with a new destination address.",
 						Attributes: map[string]schema.Attribute{
 							"configured_vip": schema.StringAttribute{
-								MarkdownDescription: "Configured VIP. Enter IP address for the default VIP",
+								MarkdownDescription: "Configured VIP. Enter IP address for the default VIP.",
 								Optional:            true,
 							},
 						},
@@ -1481,20 +1481,20 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								MarkdownDescription: "Enable this option",
 							},
 							"custom_tcp_ports": schema.SingleNestedBlock{
-								MarkdownDescription: "Port Range List. List of port ranges",
+								MarkdownDescription: "Port Range List. List of port ranges.",
 								Attributes: map[string]schema.Attribute{
 									"ports": schema.ListAttribute{
-										MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
+										MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 .",
 										Optional:            true,
 										ElementType:         types.StringType,
 									},
 								},
 							},
 							"custom_udp_ports": schema.SingleNestedBlock{
-								MarkdownDescription: "Port Range List. List of port ranges",
+								MarkdownDescription: "Port Range List. List of port ranges.",
 								Attributes: map[string]schema.Attribute{
 									"ports": schema.ListAttribute{
-										MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
+										MarkdownDescription: "Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 .",
 										Optional:            true,
 										ElementType:         types.StringType,
 									},
@@ -1521,7 +1521,7 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"market_place_image": schema.SingleNestedBlock{
-						MarkdownDescription: "BIG-IP AWS Pay as You Go Image. BIG-IP AWS Pay as You Go Image Selection",
+						MarkdownDescription: "BIG-IP AWS Pay as You Go Image. BIG-IP AWS Pay as You Go Image Selection.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"awafpay_g200_mbps": schema.SingleNestedBlock{
@@ -1533,19 +1533,19 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"nodes": schema.ListNestedBlock{
-						MarkdownDescription: "Service Nodes. Specify how and where the service nodes are spawned",
+						MarkdownDescription: "Service Nodes. Specify how and where the service nodes are spawned .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"aws_az_name": schema.StringAttribute{
-									MarkdownDescription: "AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site",
+									MarkdownDescription: "AWS AZ Name. The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site .",
 									Optional:            true,
 								},
 								"node_name": schema.StringAttribute{
-									MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service",
+									MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service .",
 									Optional:            true,
 								},
 								"tunnel_prefix": schema.StringAttribute{
-									MarkdownDescription: "Tunnel IP Prefix. Enter IP prefix for the tunnel, it has to be /30",
+									MarkdownDescription: "Tunnel IP Prefix. Enter IP prefix for the tunnel, it has to be /30.",
 									Optional:            true,
 								},
 							},
@@ -1554,19 +1554,19 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 									MarkdownDescription: "Enable this option",
 								},
 								"mgmt_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet",
+									MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
 									Attributes: map[string]schema.Attribute{
 										"existing_subnet_id": schema.StringAttribute{
-											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID",
+											MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 													Optional:            true,
 												},
 											},
@@ -1585,35 +1585,35 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"https_management": schema.SingleNestedBlock{
-				MarkdownDescription: "HTTPS based management. HTTPS based configuration",
+				MarkdownDescription: "HTTPS based management. HTTPS based configuration.",
 				Attributes: map[string]schema.Attribute{
 					"domain_suffix": schema.StringAttribute{
-						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form URL to access node management",
+						MarkdownDescription: "Domain Suffix. Domain suffix will be used along with node name to form URL to access node management .",
 						Optional:            true,
 					},
 					"https_port": schema.Int64Attribute{
-						MarkdownDescription: "HTTPS Port. Enter TCP port number",
+						MarkdownDescription: "HTTPS Port. Enter TCP port number.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"advertise_on_internet": schema.SingleNestedBlock{
-						MarkdownDescription: "Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available",
+						MarkdownDescription: "Advertise Public. This defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"public_ip": schema.SingleNestedBlock{
-								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -1628,14 +1628,14 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Enable this option",
 					},
 					"advertise_on_sli_vip": schema.SingleNestedBlock{
-						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
+						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
@@ -1643,13 +1643,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Description. Description for the certificate.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_hash_algorithms": schema.SingleNestedBlock{
-											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -1662,22 +1662,22 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
-											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 															Optional:            true,
 														},
 														"location": schema.StringAttribute{
-															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
-															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 													},
@@ -1686,11 +1686,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
-															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 														"url": schema.StringAttribute{
-															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 															Optional:            true,
 														},
 													},
@@ -1704,11 +1704,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"tls_config": schema.SingleNestedBlock{
-								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+								MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -1737,31 +1737,31 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"use_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+								MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -1774,18 +1774,18 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -1798,10 +1798,10 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
-										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
-												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},
@@ -1812,14 +1812,14 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"advertise_on_slo_internet_vip": schema.SingleNestedBlock{
-						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
+						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
@@ -1827,13 +1827,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Description. Description for the certificate.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_hash_algorithms": schema.SingleNestedBlock{
-											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -1846,22 +1846,22 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
-											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 															Optional:            true,
 														},
 														"location": schema.StringAttribute{
-															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
-															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 													},
@@ -1870,11 +1870,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
-															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 														"url": schema.StringAttribute{
-															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 															Optional:            true,
 														},
 													},
@@ -1888,11 +1888,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"tls_config": schema.SingleNestedBlock{
-								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+								MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -1921,31 +1921,31 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"use_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+								MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -1958,18 +1958,18 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -1982,10 +1982,10 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
-										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
-												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},
@@ -1996,14 +1996,14 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"advertise_on_slo_sli": schema.SingleNestedBlock{
-						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
+						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
@@ -2011,13 +2011,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Description. Description for the certificate.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_hash_algorithms": schema.SingleNestedBlock{
-											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -2030,22 +2030,22 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
-											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 															Optional:            true,
 														},
 														"location": schema.StringAttribute{
-															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
-															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 													},
@@ -2054,11 +2054,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
-															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 														"url": schema.StringAttribute{
-															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 															Optional:            true,
 														},
 													},
@@ -2072,11 +2072,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"tls_config": schema.SingleNestedBlock{
-								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+								MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -2105,31 +2105,31 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"use_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+								MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -2142,18 +2142,18 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -2166,10 +2166,10 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
-										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
-												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},
@@ -2180,14 +2180,14 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"advertise_on_slo_vip": schema.SingleNestedBlock{
-						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
+						MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"no_mtls": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
+								MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
@@ -2195,13 +2195,13 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Description. Description for the certificate.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_hash_algorithms": schema.SingleNestedBlock{
-											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -2214,22 +2214,22 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
-											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 															Optional:            true,
 														},
 														"location": schema.StringAttribute{
-															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
-															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 													},
@@ -2238,11 +2238,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
-															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 														"url": schema.StringAttribute{
-															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 															Optional:            true,
 														},
 													},
@@ -2256,11 +2256,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"tls_config": schema.SingleNestedBlock{
-								MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+								MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"custom_security": schema.SingleNestedBlock{
-										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+										MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 										Attributes: map[string]schema.Attribute{
 											"cipher_suites": schema.ListAttribute{
 												MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -2289,31 +2289,31 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"use_mtls": schema.SingleNestedBlock{
-								MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+								MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 								Attributes: map[string]schema.Attribute{
 									"client_certificate_optional": schema.BoolAttribute{
 										MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"crl": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -2326,18 +2326,18 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Enable this option",
 									},
 									"trusted_ca": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -2350,10 +2350,10 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Enable this option",
 									},
 									"xfcc_options": schema.SingleNestedBlock{
-										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+										MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 										Attributes: map[string]schema.Attribute{
 											"xfcc_header_elements": schema.ListAttribute{
-												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+												MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 												Optional:            true,
 												ElementType:         types.StringType,
 											},
@@ -2369,48 +2369,48 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"palo_alto_fw_service": schema.SingleNestedBlock{
-				MarkdownDescription: "Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration",
+				MarkdownDescription: "Palo Alto Networks VM-Series Firewall. Palo Alto Networks VM-Series next-generation firewall configuration.",
 				Attributes: map[string]schema.Attribute{
 					"instance_type": schema.StringAttribute{
 						MarkdownDescription: "[Enum: PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE] Palo Alto Networks VM-Series Instance Typ. - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE: m4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE: m4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE: m4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE: m5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE: m5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE: m5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE: m5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE: m5.12xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE: m5n.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE: m5n.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE: m5n.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE: m5n.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE: c4.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE: c4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE: c4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE: c4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE: c4.8xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE: c5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE: c5.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE: c5.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE: c5.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE: c5.9xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE: c5.18xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE: c5n.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE: c5n.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE: c5n.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE: c5n.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE: c5n.9xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE: c5n.18xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE: r5.2xlarge. Possible values are `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE`. Defaults to `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`.",
 						Optional:            true,
 					},
 					"ssh_key": schema.StringAttribute{
-						MarkdownDescription: "Setup Authorized Public SSH key. Setup Authorized Public SSH key. User will be able to ssh to the vmseries nodes using its corresponding ssh private key.",
+						MarkdownDescription: "Setup Authorized Public SSH key. Setup Authorized Public SSH key. User will be able to SSH to the vmseries nodes using its corresponding SSH private key.",
 						Optional:            true,
 					},
 					"version": schema.StringAttribute{
-						MarkdownDescription: "PAN VM-Series version. PAN-OS version",
+						MarkdownDescription: "PAN VM-Series version. PAN-OS version.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"auto_setup": schema.SingleNestedBlock{
-						MarkdownDescription: "PAN VM Series Firewall Auto Setup. For auto-setup, ssh public and pvt keys are needed. Using the given config user, ssh and api access will be configured",
+						MarkdownDescription: "PAN VM Series Firewall Auto Setup. For auto-setup, SSH public and pvt keys are needed. Using the given config user, SSH and API access will be configured.",
 						Attributes: map[string]schema.Attribute{
 							"admin_username": schema.StringAttribute{
-								MarkdownDescription: "Firewall Admin Username. Firewall Admin Username",
+								MarkdownDescription: "Firewall Admin Username. Firewall Admin Username .",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"admin_password": schema.SingleNestedBlock{
-								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
-										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 												Optional:            true,
 											},
 											"location": schema.StringAttribute{
-												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+												MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
-												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 										},
@@ -2419,11 +2419,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
-												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 											"url": schema.StringAttribute{
-												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 												Optional:            true,
 											},
 										},
@@ -2431,31 +2431,31 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 								},
 							},
 							"manual_ssh_keys": schema.SingleNestedBlock{
-								MarkdownDescription: "SSH key. SSH Key includes both public and private key",
+								MarkdownDescription: "SSH key. SSH Key includes both public and private key.",
 								Attributes: map[string]schema.Attribute{
 									"public_key": schema.StringAttribute{
-										MarkdownDescription: "Public SSH key. Authorized Public SSH key which will be programmed on the node",
+										MarkdownDescription: "Public SSH key. Authorized Public SSH key which will be programmed on the node .",
 										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"private_key": schema.SingleNestedBlock{
-										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
-												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 														Optional:            true,
 													},
 													"location": schema.StringAttribute{
-														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
-														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 												},
@@ -2464,11 +2464,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
-														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 													"url": schema.StringAttribute{
-														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 														Optional:            true,
 													},
 												},
@@ -2480,18 +2480,18 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"aws_tgw_site": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -2510,39 +2510,39 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						MarkdownDescription: "Enable this option",
 					},
 					"panorama_server": schema.SingleNestedBlock{
-						MarkdownDescription: "Panorama Server Type. Panorama Server Type",
+						MarkdownDescription: "Panorama Server Type. Panorama Server Type.",
 						Attributes: map[string]schema.Attribute{
 							"device_group_name": schema.StringAttribute{
-								MarkdownDescription: "Device Group Name. Device Group Name",
+								MarkdownDescription: "Device Group Name. Device Group Name.",
 								Optional:            true,
 							},
 							"server": schema.StringAttribute{
-								MarkdownDescription: "Server Ipv4 Address. Panorama Server Address to which the firewall should connect to",
+								MarkdownDescription: "Server IPv4 Address. Panorama Server Address to which the firewall should connect to .",
 								Optional:            true,
 							},
 							"template_stack_name": schema.StringAttribute{
-								MarkdownDescription: "template stack name. Template Stack Name",
+								MarkdownDescription: "Template stack name. Template Stack Name.",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"authorization_key": schema.SingleNestedBlock{
-								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
-										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 												Optional:            true,
 											},
 											"location": schema.StringAttribute{
-												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+												MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
-												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 										},
@@ -2551,11 +2551,11 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
-												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 											"url": schema.StringAttribute{
-												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 												Optional:            true,
 											},
 										},
@@ -2565,37 +2565,37 @@ func (r *NfvServiceResource) Schema(ctx context.Context, req resource.SchemaRequ
 						},
 					},
 					"service_nodes": schema.SingleNestedBlock{
-						MarkdownDescription: "Palo Alto Networks Vm-Series AZ Nodes.",
+						MarkdownDescription: "Palo Alto Networks VM-Series AZ Nodes.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"nodes": schema.ListNestedBlock{
-								MarkdownDescription: "Palo Alto Networks AZ Nodes.",
+								MarkdownDescription: "Palo Alto Networks AZ Nodes. .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"aws_az_name": schema.StringAttribute{
-											MarkdownDescription: "AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region. It is recommended that AZ is one of the AZ for sites",
+											MarkdownDescription: "AWS AZ Name. AWS availability zone, must be consistent with the selected AWS region. It is recommended that AZ is one of the AZ for sites .",
 											Optional:            true,
 										},
 										"node_name": schema.StringAttribute{
-											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service",
+											MarkdownDescription: "Node Name. Node Name will be used to assign as hostname to the service .",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"mgmt_subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "AWS Subnet. Parameters for AWS subnet",
+											MarkdownDescription: "AWS Subnet. Parameters for AWS subnet.",
 											Attributes: map[string]schema.Attribute{
 												"existing_subnet_id": schema.StringAttribute{
-													MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID",
+													MarkdownDescription: "Existing Subnet ID. Information about existing subnet ID.",
 													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"subnet_param": schema.SingleNestedBlock{
-													MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+													MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 													Attributes: map[string]schema.Attribute{
 														"ipv4": schema.StringAttribute{
-															MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+															MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 															Optional:            true,
 														},
 													},

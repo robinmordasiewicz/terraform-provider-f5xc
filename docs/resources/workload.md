@@ -2,20 +2,20 @@
 page_title: "f5xc_workload Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages a Workload resource in F5 Distributed Cloud for workload configuration.
+  Manages a Workload resource in F5 Distributed Cloud for workload. configuration.
 ---
 
 # f5xc_workload (Resource)
 
-Manages a Workload resource in F5 Distributed Cloud for workload configuration.
+Manages a Workload resource in F5 Distributed Cloud for workload. configuration.
 
-~> **Note** Please refer to [Workload API docs](https://docs.cloud.f5.com/docs-v2/api/views-workload) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Workload Resource Example
-# Manages a Workload resource in F5 Distributed Cloud for workload configuration.
+# Manages a Workload resource in F5 Distributed Cloud for workload. configuration.
 
 # Basic Workload configuration
 resource "f5xc_workload" "example" {
@@ -95,7 +95,7 @@ A [`job`](#job) block supports the following:
 
 <a id="job-containers"></a>&#x2022; [`containers`](#job-containers) - Optional Block<br>Containers. Containers to use for the job<br>See [Containers](#job-containers) below.
 
-<a id="job-deploy-options"></a>&#x2022; [`deploy_options`](#job-deploy-options) - Optional Block<br>Deploy Options. Deploy Options are used to configure the workload deployment options<br>See [Deploy Options](#job-deploy-options) below.
+<a id="job-deploy-options"></a>&#x2022; [`deploy_options`](#job-deploy-options) - Optional Block<br>Deploy OPTIONS. Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#job-deploy-options) below.
 
 <a id="job-num-replicas"></a>&#x2022; [`num_replicas`](#job-num-replicas) - Optional Number<br>Number of Replicas. Number of replicas of the batch job to spawn per site
 
@@ -171,7 +171,13 @@ A [`containers`](#job-containers) block (within [`job`](#job)) supports the foll
 
 #### Job Containers Custom Flavor
 
-<a id="objref-f1fc5a"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`custom_flavor`](#job-containers-custom-flavor) block (within [`job.containers`](#job-containers)) supports the following:
+
+<a id="job-containers-custom-flavor-name"></a>&#x2022; [`name`](#job-containers-custom-flavor-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="job-containers-custom-flavor-namespace"></a>&#x2022; [`namespace`](#job-containers-custom-flavor-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="job-containers-custom-flavor-tenant"></a>&#x2022; [`tenant`](#job-containers-custom-flavor-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Job Containers Image
 
@@ -179,7 +185,7 @@ An [`image`](#job-containers-image) block (within [`job.containers`](#job-contai
 
 <a id="job-containers-image-container-registry"></a>&#x2022; [`container_registry`](#job-containers-image-container-registry) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#job-containers-image-container-registry) below.
 
-<a id="job-containers-image-name"></a>&#x2022; [`name`](#job-containers-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
+<a id="job-containers-image-name"></a>&#x2022; [`name`](#job-containers-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
 
 <a id="job-containers-image-public"></a>&#x2022; [`public`](#job-containers-image-public) - Optional Block<br>Enable this option
 
@@ -187,7 +193,13 @@ An [`image`](#job-containers-image) block (within [`job.containers`](#job-contai
 
 #### Job Containers Image Container Registry
 
-<a id="objref-0b7904"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`container_registry`](#job-containers-image-container-registry) block (within [`job.containers.image`](#job-containers-image)) supports the following:
+
+<a id="name-d8aa8e"></a>&#x2022; [`name`](#name-d8aa8e) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-0744ae"></a>&#x2022; [`namespace`](#namespace-0744ae) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-a2bf58"></a>&#x2022; [`tenant`](#tenant-a2bf58) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Job Containers Liveness Check
 
@@ -317,7 +329,13 @@ A [`deploy_ce_sites`](#job-deploy-options-deploy-ce-sites) block (within [`job.d
 
 #### Job Deploy Options Deploy CE Sites Site
 
-<a id="objref-a7b63e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#job-deploy-options-deploy-ce-sites-site) block (within [`job.deploy_options.deploy_ce_sites`](#job-deploy-options-deploy-ce-sites)) supports the following:
+
+<a id="name-e258db"></a>&#x2022; [`name`](#name-e258db) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-064f53"></a>&#x2022; [`namespace`](#namespace-064f53) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-d6cc86"></a>&#x2022; [`tenant`](#tenant-d6cc86) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Job Deploy Options Deploy CE Virtual Sites
 
@@ -337,7 +355,13 @@ A [`deploy_re_sites`](#job-deploy-options-deploy-re-sites) block (within [`job.d
 
 #### Job Deploy Options Deploy RE Sites Site
 
-<a id="objref-b9bbc4"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#job-deploy-options-deploy-re-sites-site) block (within [`job.deploy_options.deploy_re_sites`](#job-deploy-options-deploy-re-sites)) supports the following:
+
+<a id="name-03e074"></a>&#x2022; [`name`](#name-03e074) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-f7dfa3"></a>&#x2022; [`namespace`](#namespace-f7dfa3) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-2ce318"></a>&#x2022; [`tenant`](#tenant-2ce318) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Job Deploy Options Deploy RE Virtual Sites
 
@@ -431,13 +455,13 @@ A [`storage`](#job-volumes-persistent-volume-storage) block (within [`job.volume
 
 A [`service`](#service) block supports the following:
 
-<a id="service-advertise-options"></a>&#x2022; [`advertise_options`](#service-advertise-options) - Optional Block<br>Advertise Options. Advertise options are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#service-advertise-options) below.
+<a id="service-advertise-options"></a>&#x2022; [`advertise_options`](#service-advertise-options) - Optional Block<br>Advertise OPTIONS. Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#service-advertise-options) below.
 
 <a id="service-configuration"></a>&#x2022; [`configuration`](#service-configuration) - Optional Block<br>Configuration Parameters. Configuration parameters of the workload<br>See [Configuration](#service-configuration) below.
 
 <a id="service-containers"></a>&#x2022; [`containers`](#service-containers) - Optional Block<br>Containers. Containers to use for service<br>See [Containers](#service-containers) below.
 
-<a id="service-deploy-options"></a>&#x2022; [`deploy_options`](#service-deploy-options) - Optional Block<br>Deploy Options. Deploy Options are used to configure the workload deployment options<br>See [Deploy Options](#service-deploy-options) below.
+<a id="service-deploy-options"></a>&#x2022; [`deploy_options`](#service-deploy-options) - Optional Block<br>Deploy OPTIONS. Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#service-deploy-options) below.
 
 <a id="service-num-replicas"></a>&#x2022; [`num_replicas`](#service-num-replicas) - Optional Number<br>Number of Replicas. Number of replicas of service to spawn per site
 
@@ -473,7 +497,7 @@ An [`advertise_where`](#where-07a5a8) block (within [`service.advertise_options.
 
 <a id="site-754a5a"></a>&#x2022; [`virtual_site`](#site-754a5a) - Optional Block<br>Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised<br>See [Virtual Site](#site-754a5a) below.
 
-<a id="service-1a83c0"></a>&#x2022; [`vk8s_service`](#service-1a83c0) - Optional Block<br>vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network<br>See [Vk8s Service](#service-1a83c0) below.
+<a id="service-1a83c0"></a>&#x2022; [`vk8s_service`](#service-1a83c0) - Optional Block<br>VK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network<br>See [Vk8s Service](#service-1a83c0) below.
 
 #### Service Advertise Options Advertise Custom Advertise Where Site
 
@@ -1339,7 +1363,13 @@ A [`containers`](#service-containers) block (within [`service`](#service)) suppo
 
 #### Service Containers Custom Flavor
 
-<a id="objref-72eb4e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`custom_flavor`](#service-containers-custom-flavor) block (within [`service.containers`](#service-containers)) supports the following:
+
+<a id="service-containers-custom-flavor-name"></a>&#x2022; [`name`](#service-containers-custom-flavor-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-d5d342"></a>&#x2022; [`namespace`](#namespace-d5d342) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="service-containers-custom-flavor-tenant"></a>&#x2022; [`tenant`](#service-containers-custom-flavor-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Service Containers Image
 
@@ -1347,7 +1377,7 @@ An [`image`](#service-containers-image) block (within [`service.containers`](#se
 
 <a id="registry-ad1f41"></a>&#x2022; [`container_registry`](#registry-ad1f41) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-ad1f41) below.
 
-<a id="service-containers-image-name"></a>&#x2022; [`name`](#service-containers-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
+<a id="service-containers-image-name"></a>&#x2022; [`name`](#service-containers-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
 
 <a id="service-containers-image-public"></a>&#x2022; [`public`](#service-containers-image-public) - Optional Block<br>Enable this option
 
@@ -1355,7 +1385,13 @@ An [`image`](#service-containers-image) block (within [`service.containers`](#se
 
 #### Service Containers Image Container Registry
 
-<a id="objref-ad1f41"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`container_registry`](#registry-ad1f41) block (within [`service.containers.image`](#service-containers-image)) supports the following:
+
+<a id="name-b1a7e7"></a>&#x2022; [`name`](#name-b1a7e7) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-993dc9"></a>&#x2022; [`namespace`](#namespace-993dc9) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-882aa5"></a>&#x2022; [`tenant`](#tenant-882aa5) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Service Containers Liveness Check
 
@@ -1485,7 +1521,13 @@ A [`deploy_ce_sites`](#service-deploy-options-deploy-ce-sites) block (within [`s
 
 #### Service Deploy Options Deploy CE Sites Site
 
-<a id="objref-8d4fa5"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#site-8d4fa5) block (within [`service.deploy_options.deploy_ce_sites`](#service-deploy-options-deploy-ce-sites)) supports the following:
+
+<a id="name-48099d"></a>&#x2022; [`name`](#name-48099d) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-23fa32"></a>&#x2022; [`namespace`](#namespace-23fa32) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-75f6c4"></a>&#x2022; [`tenant`](#tenant-75f6c4) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Service Deploy Options Deploy CE Virtual Sites
 
@@ -1505,7 +1547,13 @@ A [`deploy_re_sites`](#service-deploy-options-deploy-re-sites) block (within [`s
 
 #### Service Deploy Options Deploy RE Sites Site
 
-<a id="objref-e7bf20"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#site-e7bf20) block (within [`service.deploy_options.deploy_re_sites`](#service-deploy-options-deploy-re-sites)) supports the following:
+
+<a id="name-1ebeb9"></a>&#x2022; [`name`](#name-1ebeb9) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-b4b743"></a>&#x2022; [`namespace`](#namespace-b4b743) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-68f3c1"></a>&#x2022; [`tenant`](#tenant-68f3c1) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Service Deploy Options Deploy RE Virtual Sites
 
@@ -1611,7 +1659,7 @@ A [`simple_service`](#simple-service) block supports the following:
 
 <a id="simple-service-scale-to-zero"></a>&#x2022; [`scale_to_zero`](#simple-service-scale-to-zero) - Optional Bool<br>Scale Down to Zero. Scale down replicas of the service to zero
 
-<a id="simple-service-simple-advertise"></a>&#x2022; [`simple_advertise`](#simple-service-simple-advertise) - Optional Block<br>Advertise Options For Simple Service. Advertise options for Simple Service<br>See [Simple Advertise](#simple-service-simple-advertise) below.
+<a id="simple-service-simple-advertise"></a>&#x2022; [`simple_advertise`](#simple-service-simple-advertise) - Optional Block<br>Advertise OPTIONS For Simple Service. Advertise OPTIONS for Simple Service<br>See [Simple Advertise](#simple-service-simple-advertise) below.
 
 #### Simple Service Configuration
 
@@ -1683,7 +1731,13 @@ A [`container`](#simple-service-container) block (within [`simple_service`](#sim
 
 #### Simple Service Container Custom Flavor
 
-<a id="objref-665e3a"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`custom_flavor`](#simple-service-container-custom-flavor) block (within [`simple_service.container`](#simple-service-container)) supports the following:
+
+<a id="name-256e2d"></a>&#x2022; [`name`](#name-256e2d) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-3dbb57"></a>&#x2022; [`namespace`](#namespace-3dbb57) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-bf6176"></a>&#x2022; [`tenant`](#tenant-bf6176) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Simple Service Container Image
 
@@ -1691,7 +1745,7 @@ An [`image`](#simple-service-container-image) block (within [`simple_service.con
 
 <a id="registry-f7f6d1"></a>&#x2022; [`container_registry`](#registry-f7f6d1) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-f7f6d1) below.
 
-<a id="simple-service-container-image-name"></a>&#x2022; [`name`](#simple-service-container-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
+<a id="simple-service-container-image-name"></a>&#x2022; [`name`](#simple-service-container-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
 
 <a id="simple-service-container-image-public"></a>&#x2022; [`public`](#simple-service-container-image-public) - Optional Block<br>Enable this option
 
@@ -1699,7 +1753,13 @@ An [`image`](#simple-service-container-image) block (within [`simple_service.con
 
 #### Simple Service Container Image Container Registry
 
-<a id="objref-f7f6d1"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`container_registry`](#registry-f7f6d1) block (within [`simple_service.container.image`](#simple-service-container-image)) supports the following:
+
+<a id="name-d862eb"></a>&#x2022; [`name`](#name-d862eb) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-3251f2"></a>&#x2022; [`namespace`](#namespace-3251f2) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-86a541"></a>&#x2022; [`tenant`](#tenant-86a541) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Simple Service Container Liveness Check
 
@@ -1823,7 +1883,7 @@ A [`storage`](#storage-8c6930) block (within [`simple_service.enabled.persistent
 
 A [`simple_advertise`](#simple-service-simple-advertise) block (within [`simple_service`](#simple-service)) supports the following:
 
-<a id="simple-service-simple-advertise-domains"></a>&#x2022; [`domains`](#simple-service-simple-advertise-domains) - Optional List<br>Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.foo.com.` 2. Domains starting with a Wildcard: \*.foo.com. Not supported Domains: - Just a Wildcard: \* - A Wildcard and TLD with no root Domain: \*.com. - A Wildcard not matching a whole DNS label. e.g. \*.foo.com and \*.bar.foo.com are valid Wildcards however \*bar.foo.com, \*-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. \*.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on \*. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Load Balancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system
+<a id="simple-service-simple-advertise-domains"></a>&#x2022; [`domains`](#simple-service-simple-advertise-domains) - Optional List<br>Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.example.com.` 2. Domains starting with a Wildcard: \*.example.com. Not supported Domains: - Just a Wildcard: \* - A Wildcard and TLD with no root Domain: \*.com. - A Wildcard not matching a whole DNS label. E.g. \*.example.com and \*.bar.example.com are valid Wildcards however \*bar.example.com, \*-bar.example.com, and bar*.example.com are all invalid. Additional notes: A Wildcard will not match empty string. E.g. \*.example.com will match bar.example.com and baz-bar.example.com but not .example.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on \*. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Load Balancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system
 
 <a id="port-b7cc36"></a>&#x2022; [`service_port`](#port-b7cc36) - Optional Number<br>Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80
 
@@ -1831,13 +1891,13 @@ A [`simple_advertise`](#simple-service-simple-advertise) block (within [`simple_
 
 A [`stateful_service`](#stateful-service) block supports the following:
 
-<a id="stateful-service-advertise-options"></a>&#x2022; [`advertise_options`](#stateful-service-advertise-options) - Optional Block<br>Advertise Options. Advertise options are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#stateful-service-advertise-options) below.
+<a id="stateful-service-advertise-options"></a>&#x2022; [`advertise_options`](#stateful-service-advertise-options) - Optional Block<br>Advertise OPTIONS. Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers<br>See [Advertise Options](#stateful-service-advertise-options) below.
 
 <a id="stateful-service-configuration"></a>&#x2022; [`configuration`](#stateful-service-configuration) - Optional Block<br>Configuration Parameters. Configuration parameters of the workload<br>See [Configuration](#stateful-service-configuration) below.
 
 <a id="stateful-service-containers"></a>&#x2022; [`containers`](#stateful-service-containers) - Optional Block<br>Containers. Containers to use for service<br>See [Containers](#stateful-service-containers) below.
 
-<a id="stateful-service-deploy-options"></a>&#x2022; [`deploy_options`](#stateful-service-deploy-options) - Optional Block<br>Deploy Options. Deploy Options are used to configure the workload deployment options<br>See [Deploy Options](#stateful-service-deploy-options) below.
+<a id="stateful-service-deploy-options"></a>&#x2022; [`deploy_options`](#stateful-service-deploy-options) - Optional Block<br>Deploy OPTIONS. Deploy OPTIONS are used to configure the workload deployment OPTIONS<br>See [Deploy Options](#stateful-service-deploy-options) below.
 
 <a id="stateful-service-num-replicas"></a>&#x2022; [`num_replicas`](#stateful-service-num-replicas) - Optional Number<br>Number of Replicas. Number of replicas of service to spawn per site
 
@@ -2723,7 +2783,13 @@ A [`containers`](#stateful-service-containers) block (within [`stateful_service`
 
 #### Stateful Service Containers Custom Flavor
 
-<a id="objref-0d2be0"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`custom_flavor`](#flavor-0d2be0) block (within [`stateful_service.containers`](#stateful-service-containers)) supports the following:
+
+<a id="name-37698d"></a>&#x2022; [`name`](#name-37698d) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-db9524"></a>&#x2022; [`namespace`](#namespace-db9524) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-a8296a"></a>&#x2022; [`tenant`](#tenant-a8296a) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Stateful Service Containers Image
 
@@ -2731,7 +2797,7 @@ An [`image`](#stateful-service-containers-image) block (within [`stateful_servic
 
 <a id="registry-78045a"></a>&#x2022; [`container_registry`](#registry-78045a) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Container Registry](#registry-78045a) below.
 
-<a id="stateful-service-containers-image-name"></a>&#x2022; [`name`](#stateful-service-containers-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
+<a id="stateful-service-containers-image-name"></a>&#x2022; [`name`](#stateful-service-containers-image-name) - Optional String<br>Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed
 
 <a id="public-27eb7d"></a>&#x2022; [`public`](#public-27eb7d) - Optional Block<br>Enable this option
 
@@ -2739,7 +2805,13 @@ An [`image`](#stateful-service-containers-image) block (within [`stateful_servic
 
 #### Stateful Service Containers Image Container Registry
 
-<a id="objref-78045a"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`container_registry`](#registry-78045a) block (within [`stateful_service.containers.image`](#stateful-service-containers-image)) supports the following:
+
+<a id="name-4d4804"></a>&#x2022; [`name`](#name-4d4804) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-f6725d"></a>&#x2022; [`namespace`](#namespace-f6725d) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-1ee737"></a>&#x2022; [`tenant`](#tenant-1ee737) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Stateful Service Containers Liveness Check
 

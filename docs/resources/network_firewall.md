@@ -2,20 +2,20 @@
 page_title: "f5xc_network_firewall Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+  Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace. configuration.
 ---
 
 # f5xc_network_firewall (Resource)
 
-Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace. configuration.
 
-~> **Note** Please refer to [Network Firewall API docs](https://docs.cloud.f5.com/docs-v2/api/network-firewall) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Network Firewall Resource Example
-# Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+# Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace. configuration.
 
 # Basic Network Firewall configuration
 resource "f5xc_network_firewall" "example" {
@@ -67,7 +67,7 @@ resource "f5xc_network_firewall" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="active-enhanced-firewall-policies"></a>[`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
+&#x2022; <a id="active-enhanced-firewall-policies"></a>[`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#active-enhanced-firewall-policies) below for details.
 <br><br>&#x2022; <a id="active-network-policies"></a>[`active_network_policies`](#active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#active-network-policies) below for details.
 
 -> **One of the following:**
@@ -100,7 +100,13 @@ An [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies) blo
 
 #### Active Enhanced Firewall Policies Enhanced Firewall Policies
 
-<a id="objref-0d92c3"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`enhanced_firewall_policies`](#policies-0d92c3) block (within [`active_enhanced_firewall_policies`](#active-enhanced-firewall-policies)) supports the following:
+
+<a id="name-09fc53"></a>&#x2022; [`name`](#name-09fc53) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-102d99"></a>&#x2022; [`namespace`](#namespace-102d99) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-0eef96"></a>&#x2022; [`tenant`](#tenant-0eef96) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Active Fast Acls
 
@@ -110,7 +116,13 @@ An [`active_fast_acls`](#active-fast-acls) block supports the following:
 
 #### Active Fast Acls Fast Acls
 
-<a id="objref-d793c7"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`fast_acls`](#active-fast-acls-fast-acls) block (within [`active_fast_acls`](#active-fast-acls)) supports the following:
+
+<a id="active-fast-acls-fast-acls-name"></a>&#x2022; [`name`](#active-fast-acls-fast-acls-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="active-fast-acls-fast-acls-namespace"></a>&#x2022; [`namespace`](#active-fast-acls-fast-acls-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="active-fast-acls-fast-acls-tenant"></a>&#x2022; [`tenant`](#active-fast-acls-fast-acls-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Active Forward Proxy Policies
 
@@ -120,7 +132,13 @@ An [`active_forward_proxy_policies`](#active-forward-proxy-policies) block suppo
 
 #### Active Forward Proxy Policies Forward Proxy Policies
 
-<a id="objref-42e2f7"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`forward_proxy_policies`](#policies-42e2f7) block (within [`active_forward_proxy_policies`](#active-forward-proxy-policies)) supports the following:
+
+<a id="name-c2d06e"></a>&#x2022; [`name`](#name-c2d06e) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-63e125"></a>&#x2022; [`namespace`](#namespace-63e125) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-e68ab4"></a>&#x2022; [`tenant`](#tenant-e68ab4) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Active Network Policies
 
@@ -130,7 +148,13 @@ An [`active_network_policies`](#active-network-policies) block supports the foll
 
 #### Active Network Policies Network Policies
 
-<a id="objref-502cd4"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`network_policies`](#policies-502cd4) block (within [`active_network_policies`](#active-network-policies)) supports the following:
+
+<a id="name-ad293f"></a>&#x2022; [`name`](#name-ad293f) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-3f338a"></a>&#x2022; [`namespace`](#namespace-3f338a) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-6ccfde"></a>&#x2022; [`tenant`](#tenant-6ccfde) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

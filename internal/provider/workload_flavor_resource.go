@@ -67,7 +67,7 @@ func (r *WorkloadFlavorResource) Metadata(ctx context.Context, req resource.Meta
 func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             workload_flavorSchemaVersion,
-		MarkdownDescription: "Manages workload_flavor in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages workload_flavor. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Workload Flavor. Must be unique within the namespace.",
@@ -131,7 +131,7 @@ func (r *WorkloadFlavorResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"vcpus": schema.Int64Attribute{
-				MarkdownDescription: "vCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core.",
+				MarkdownDescription: "VCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{

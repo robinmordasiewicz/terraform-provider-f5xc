@@ -9,7 +9,7 @@ description: |-
 
 Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.
 
-~> **Note** Please refer to [Cloud Connect API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-connect) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -54,6 +54,8 @@ resource "f5xc_cloud_connect" "example" {
 
 <a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Cloud Connect. Must be unique within the namespace
 
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Cloud Connect will be created
+
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -61,8 +63,6 @@ resource "f5xc_cloud_connect" "example" {
 <a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
-
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 
@@ -94,11 +94,23 @@ An [`aws_tgw_site`](#aws-tgw-site) block supports the following:
 
 #### AWS TGW Site Cred
 
-<a id="objref-ce1c3f"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`cred`](#aws-tgw-site-cred) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
+
+<a id="aws-tgw-site-cred-name"></a>&#x2022; [`name`](#aws-tgw-site-cred-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="aws-tgw-site-cred-namespace"></a>&#x2022; [`namespace`](#aws-tgw-site-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="aws-tgw-site-cred-tenant"></a>&#x2022; [`tenant`](#aws-tgw-site-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### AWS TGW Site Site
 
-<a id="objref-0d6d17"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#aws-tgw-site-site) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
+
+<a id="aws-tgw-site-site-name"></a>&#x2022; [`name`](#aws-tgw-site-site-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="aws-tgw-site-site-namespace"></a>&#x2022; [`namespace`](#aws-tgw-site-site-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="aws-tgw-site-site-tenant"></a>&#x2022; [`tenant`](#aws-tgw-site-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### AWS TGW Site VPC Attachments
 
@@ -146,7 +158,13 @@ An [`azure_vnet_site`](#azure-vnet-site) block supports the following:
 
 #### Azure VNET Site Site
 
-<a id="objref-195dbf"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#azure-vnet-site-site) block (within [`azure_vnet_site`](#azure-vnet-site)) supports the following:
+
+<a id="azure-vnet-site-site-name"></a>&#x2022; [`name`](#azure-vnet-site-site-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="azure-vnet-site-site-namespace"></a>&#x2022; [`namespace`](#azure-vnet-site-site-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="azure-vnet-site-site-tenant"></a>&#x2022; [`tenant`](#azure-vnet-site-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Azure VNET Site VNET Attachments
 
@@ -188,7 +206,13 @@ A [`vnet_list`](#list-5826e3) block (within [`azure_vnet_site.vnet_attachments`]
 
 #### Segment
 
-<a id="objref-fdd32b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`segment`](#segment) block supports the following:
+
+<a id="segment-name"></a>&#x2022; [`name`](#segment-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="segment-namespace"></a>&#x2022; [`namespace`](#segment-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="segment-tenant"></a>&#x2022; [`tenant`](#segment-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

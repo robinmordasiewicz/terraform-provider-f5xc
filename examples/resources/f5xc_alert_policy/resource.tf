@@ -1,5 +1,5 @@
 # Alert Policy Resource Example
-# Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.
+# Manages new Alert Policy Object. in F5 Distributed Cloud.
 
 # Basic Alert Policy configuration
 resource "f5xc_alert_policy" "example" {

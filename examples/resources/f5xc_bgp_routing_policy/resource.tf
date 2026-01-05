@@ -1,5 +1,5 @@
 # BGP Routing Policy Resource Example
-# Manages a BGP Routing Policy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers configuration.
+# Manages a BGP Routing Policy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers. configuration.
 
 # Basic BGP Routing Policy configuration
 resource "f5xc_bgp_routing_policy" "example" {

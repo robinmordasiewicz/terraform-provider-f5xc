@@ -220,7 +220,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							Optional:            true,
 						},
 						"period_multiplier": schema.Int64Attribute{
-							MarkdownDescription: "Periods. This setting, combined with Per Period units, provides a duration",
+							MarkdownDescription: "Periods. This setting, combined with Per Period units, provides a duration.",
 							Optional:            true,
 						},
 						"total_number": schema.Int64Attribute{
@@ -238,7 +238,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"hours": schema.SingleNestedBlock{
-									MarkdownDescription: "Hours. Input Duration Hours",
+									MarkdownDescription: "Hours. Input Duration Hours.",
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											MarkdownDescription: "Duration.",
@@ -247,7 +247,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 									},
 								},
 								"minutes": schema.SingleNestedBlock{
-									MarkdownDescription: "Minutes. Input Duration Minutes",
+									MarkdownDescription: "Minutes. Input Duration Minutes.",
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											MarkdownDescription: "Duration.",
@@ -256,7 +256,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 									},
 								},
 								"seconds": schema.SingleNestedBlock{
-									MarkdownDescription: "Seconds. Input Duration Seconds",
+									MarkdownDescription: "Seconds. Input Duration Seconds.",
 									Attributes: map[string]schema.Attribute{
 										"duration": schema.Int64Attribute{
 											MarkdownDescription: "Duration.",
@@ -270,10 +270,10 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							MarkdownDescription: "Enable this option",
 						},
 						"leaky_bucket": schema.SingleNestedBlock{
-							MarkdownDescription: "Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5",
+							MarkdownDescription: "Leaky Bucket Rate Limiter. Leaky-Bucket is the default rate limiter algorithm for F5.",
 						},
 						"token_bucket": schema.SingleNestedBlock{
-							MarkdownDescription: "Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits",
+							MarkdownDescription: "Token Bucket Rate Limiter. Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits.",
 						},
 					},
 				},
@@ -283,7 +283,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -291,15 +291,15 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -307,7 +307,7 @@ func (r *RateLimiterResource) Schema(ctx context.Context, req resource.SchemaReq
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{

@@ -2,20 +2,20 @@
 page_title: "f5xc_alert_receiver Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
+  Manages new Alert Receiver object. in F5 Distributed Cloud.
 ---
 
 # f5xc_alert_receiver (Resource)
 
-Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
+Manages new Alert Receiver object. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Alert Receiver API docs](https://docs.cloud.f5.com/docs-v2/api/alert-receiver) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Alert Receiver Resource Example
-# Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.
+# Manages new Alert Receiver object. in F5 Distributed Cloud.
 
 # Basic Alert Receiver configuration
 resource "f5xc_alert_receiver" "example" {
@@ -106,15 +106,15 @@ A [`blindfold_secret_info`](#opsgenie-api-key-blindfold-secret-info) block (with
 
 <a id="location-8a2de8"></a>&#x2022; [`location`](#location-8a2de8) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-135329"></a>&#x2022; [`store_provider`](#provider-135329) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-135329"></a>&#x2022; [`store_provider`](#provider-135329) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Opsgenie API Key Clear Secret Info
 
 A [`clear_secret_info`](#opsgenie-api-key-clear-secret-info) block (within [`opsgenie.api_key`](#opsgenie-api-key)) supports the following:
 
-<a id="ref-3e8ac3"></a>&#x2022; [`provider_ref`](#ref-3e8ac3) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-3e8ac3"></a>&#x2022; [`provider_ref`](#ref-3e8ac3) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="opsgenie-api-key-clear-secret-info-url"></a>&#x2022; [`url`](#opsgenie-api-key-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="opsgenie-api-key-clear-secret-info-url"></a>&#x2022; [`url`](#opsgenie-api-key-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### Pagerduty
 
@@ -140,15 +140,15 @@ A [`blindfold_secret_info`](#info-338522) block (within [`pagerduty.routing_key`
 
 <a id="location-6bc59d"></a>&#x2022; [`location`](#location-6bc59d) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-273f68"></a>&#x2022; [`store_provider`](#provider-273f68) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-273f68"></a>&#x2022; [`store_provider`](#provider-273f68) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Pagerduty Routing Key Clear Secret Info
 
 A [`clear_secret_info`](#pagerduty-routing-key-clear-secret-info) block (within [`pagerduty.routing_key`](#pagerduty-routing-key)) supports the following:
 
-<a id="ref-67e62e"></a>&#x2022; [`provider_ref`](#ref-67e62e) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-67e62e"></a>&#x2022; [`provider_ref`](#ref-67e62e) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="url-13757a"></a>&#x2022; [`url`](#url-13757a) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-13757a"></a>&#x2022; [`url`](#url-13757a) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### Slack
 
@@ -174,15 +174,15 @@ A [`blindfold_secret_info`](#slack-url-blindfold-secret-info) block (within [`sl
 
 <a id="location-d25688"></a>&#x2022; [`location`](#location-d25688) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-14e49e"></a>&#x2022; [`store_provider`](#provider-14e49e) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-14e49e"></a>&#x2022; [`store_provider`](#provider-14e49e) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Slack URL Clear Secret Info
 
 A [`clear_secret_info`](#slack-url-clear-secret-info) block (within [`slack.url`](#slack-url)) supports the following:
 
-<a id="ref-008757"></a>&#x2022; [`provider_ref`](#ref-008757) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-008757"></a>&#x2022; [`provider_ref`](#ref-008757) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="slack-url-clear-secret-info-url"></a>&#x2022; [`url`](#slack-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="slack-url-clear-secret-info-url"></a>&#x2022; [`url`](#slack-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### Sms
 
@@ -330,15 +330,15 @@ A [`blindfold_secret_info`](#webhook-url-blindfold-secret-info) block (within [`
 
 <a id="location-3da6df"></a>&#x2022; [`location`](#location-3da6df) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-dc4a55"></a>&#x2022; [`store_provider`](#provider-dc4a55) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-dc4a55"></a>&#x2022; [`store_provider`](#provider-dc4a55) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Webhook URL Clear Secret Info
 
 A [`clear_secret_info`](#webhook-url-clear-secret-info) block (within [`webhook.url`](#webhook-url)) supports the following:
 
-<a id="ref-16bc23"></a>&#x2022; [`provider_ref`](#ref-16bc23) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-16bc23"></a>&#x2022; [`provider_ref`](#ref-16bc23) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="webhook-url-clear-secret-info-url"></a>&#x2022; [`url`](#webhook-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="webhook-url-clear-secret-info-url"></a>&#x2022; [`url`](#webhook-url-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 ---
 

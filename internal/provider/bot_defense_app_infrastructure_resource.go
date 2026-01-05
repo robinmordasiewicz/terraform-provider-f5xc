@@ -228,10 +228,10 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				Delete: true,
 			}),
 			"cloud_hosted": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: cloud_hosted, data_center_hosted] F5 Hosted. Infra F5 Hosted",
+				MarkdownDescription: "[OneOf: cloud_hosted, data_center_hosted] F5 Hosted. Infra F5 Hosted.",
 				Attributes: map[string]schema.Attribute{
 					"infra_host_name": schema.StringAttribute{
-						MarkdownDescription: "Infra Host Name. Infra Host Name",
+						MarkdownDescription: "Infra Host Name. Infra Host Name .",
 						Optional:            true,
 					},
 					"region": schema.StringAttribute{
@@ -241,11 +241,11 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				},
 				Blocks: map[string]schema.Block{
 					"egress": schema.ListNestedBlock{
-						MarkdownDescription: "Egress. Egress",
+						MarkdownDescription: "Egress. Egress .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "IP Address. Egress IP address",
+									MarkdownDescription: "IP Address. Egress IP address .",
 									Optional:            true,
 								},
 								"location": schema.StringAttribute{
@@ -256,15 +256,15 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 						},
 					},
 					"ingress": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress. Ingress",
+						MarkdownDescription: "Ingress. Ingress .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"host_name": schema.StringAttribute{
-									MarkdownDescription: "Ingress value. Ingress Host Name",
+									MarkdownDescription: "Ingress value. Ingress Host Name.",
 									Optional:            true,
 								},
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "Ingress value. Ingress IP Address",
+									MarkdownDescription: "Ingress value. Ingress IP Address.",
 									Optional:            true,
 								},
 								"location": schema.StringAttribute{
@@ -277,10 +277,10 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				},
 			},
 			"data_center_hosted": schema.SingleNestedBlock{
-				MarkdownDescription: "F5 Hosted. Infra F5 Hosted",
+				MarkdownDescription: "F5 Hosted. Infra F5 Hosted.",
 				Attributes: map[string]schema.Attribute{
 					"infra_host_name": schema.StringAttribute{
-						MarkdownDescription: "Infra Host Name. Infra Host Name",
+						MarkdownDescription: "Infra Host Name. Infra Host Name .",
 						Optional:            true,
 					},
 					"region": schema.StringAttribute{
@@ -290,11 +290,11 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 				},
 				Blocks: map[string]schema.Block{
 					"egress": schema.ListNestedBlock{
-						MarkdownDescription: "Egress. Egress",
+						MarkdownDescription: "Egress. Egress .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "IP Address. Egress IP address",
+									MarkdownDescription: "IP Address. Egress IP address .",
 									Optional:            true,
 								},
 								"location": schema.StringAttribute{
@@ -305,15 +305,15 @@ func (r *BotDefenseAppInfrastructureResource) Schema(ctx context.Context, req re
 						},
 					},
 					"ingress": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress. Ingress",
+						MarkdownDescription: "Ingress. Ingress .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"host_name": schema.StringAttribute{
-									MarkdownDescription: "Ingress value. Ingress Host Name",
+									MarkdownDescription: "Ingress value. Ingress Host Name.",
 									Optional:            true,
 								},
 								"ip_address": schema.StringAttribute{
-									MarkdownDescription: "Ingress value. Ingress IP Address",
+									MarkdownDescription: "Ingress value. Ingress IP Address.",
 									Optional:            true,
 								},
 								"location": schema.StringAttribute{

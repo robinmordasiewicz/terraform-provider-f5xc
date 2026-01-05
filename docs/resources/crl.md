@@ -2,20 +2,20 @@
 page_title: "f5xc_crl Resource - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
-  Manages a CRL resource in F5 Distributed Cloud for api to create crl configuration.
+  Manages a CRL resource in F5 Distributed Cloud for api to create crl object. configuration.
 ---
 
 # f5xc_crl (Resource)
 
-Manages a CRL resource in F5 Distributed Cloud for api to create crl configuration.
+Manages a CRL resource in F5 Distributed Cloud for api to create crl object. configuration.
 
-~> **Note** Please refer to [CRL API docs](https://docs.cloud.f5.com/docs-v2/api/operate-crl) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # CRL Resource Example
-# Manages a CRL resource in F5 Distributed Cloud for api to create crl configuration.
+# Manages a CRL resource in F5 Distributed Cloud for api to create crl object. configuration.
 
 # Basic CRL configuration
 resource "f5xc_crl" "example" {

@@ -389,7 +389,7 @@ func (r *PolicyBasedRoutingResource) Metadata(ctx context.Context, req resource.
 func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             policy_based_routingSchemaVersion,
-		MarkdownDescription: "Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.",
+		MarkdownDescription: "Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create specification. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Policy Based Routing. Must be unique within the namespace.",
@@ -445,7 +445,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 				Delete: true,
 			}),
 			"forward_proxy_pbr": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: forward_proxy_pbr, network_pbr] L3/L4 routing rule. Network(L3/L4) routing policy rule",
+				MarkdownDescription: "[OneOf: forward_proxy_pbr, network_pbr] L3/L4 routing rule. Network(L3/L4) routing policy rule.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"forward_proxy_pbr_rules": schema.ListNestedBlock{
@@ -464,15 +464,15 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -487,11 +487,11 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"http_list": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
+											MarkdownDescription: "HTTP URLs. URLs for HTTP connections.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
-														MarkdownDescription: "Exact Values. Exact domain name",
+														MarkdownDescription: "Exact Values. Exact domain name.",
 														Optional:            true,
 													},
 													"path_exact_value": schema.StringAttribute{
@@ -503,11 +503,11 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 														Optional:            true,
 													},
 													"path_regex_value": schema.StringAttribute{
-														MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
+														MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match.",
 														Optional:            true,
 													},
 													"regex_value": schema.StringAttribute{
-														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
 														Optional:            true,
 													},
 													"suffix_value": schema.StringAttribute{
@@ -525,18 +525,18 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"ip_prefix_set": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -546,10 +546,10 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"label_selector": schema.SingleNestedBlock{
-									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
-											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+											MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -569,10 +569,10 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -583,7 +583,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"tls_list": schema.ListNestedBlock{
-											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
+											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
@@ -591,7 +591,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 														Optional:            true,
 													},
 													"regex_value": schema.StringAttribute{
-														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
 														Optional:            true,
 													},
 													"suffix_value": schema.StringAttribute{
@@ -613,15 +613,15 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -632,28 +632,28 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"network_pbr": schema.SingleNestedBlock{
-				MarkdownDescription: "Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule",
+				MarkdownDescription: "Network (L2/L3) routing Policy. Network(L3/L4) routing policy rule.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"any": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
 					},
 					"label_selector": schema.SingleNestedBlock{
-						MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+						MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
 						Attributes: map[string]schema.Attribute{
 							"expressions": schema.ListAttribute{
-								MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+								MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
 								Optional:            true,
 								ElementType:         types.StringType,
 							},
 						},
 					},
 					"network_pbr_rules": schema.ListNestedBlock{
-						MarkdownDescription: "L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule",
+						MarkdownDescription: "L3/L4 Destination Routing Rules. Network(L3/L4) routing policy rule.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"dns_name": schema.StringAttribute{
-									MarkdownDescription: "DNS Name to IP. Resolve hostname to get the IP",
+									MarkdownDescription: "DNS Name to IP. Resolve hostname to GET the IP.",
 									Optional:            true,
 								},
 							},
@@ -671,7 +671,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									MarkdownDescription: "Enable this option",
 								},
 								"applications": schema.SingleNestedBlock{
-									MarkdownDescription: "Applications. Application protocols like HTTP, SNMP",
+									MarkdownDescription: "Applications. Application protocols like HTTP, SNMP.",
 									Attributes: map[string]schema.Attribute{
 										"applications": schema.ListAttribute{
 											MarkdownDescription: "[Enum: APPLICATION_HTTP|APPLICATION_HTTPS|APPLICATION_SNMP|APPLICATION_DNS] Application Protocols. Application protocols like HTTP, SNMP. Possible values are `APPLICATION_HTTP`, `APPLICATION_HTTPS`, `APPLICATION_SNMP`, `APPLICATION_DNS`. Defaults to `APPLICATION_HTTP`.",
@@ -685,15 +685,15 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -712,7 +712,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"kind": schema.StringAttribute{
-														MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+														MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -720,15 +720,15 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 														},
 													},
 													"name": schema.StringAttribute{
-														MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+														MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 														Optional:            true,
 													},
 													"namespace": schema.StringAttribute{
-														MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+														MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 														Optional:            true,
 													},
 													"tenant": schema.StringAttribute{
-														MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+														MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -736,7 +736,7 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 														},
 													},
 													"uid": schema.StringAttribute{
-														MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+														MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 														Optional:            true,
 														Computed:            true,
 														PlanModifiers: []planmodifier.String{
@@ -762,25 +762,25 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 									},
 								},
 								"protocol_port_range": schema.SingleNestedBlock{
-									MarkdownDescription: "Protocol and Port. Protocol and Port ranges",
+									MarkdownDescription: "Protocol and Port. Protocol and Port ranges.",
 									Attributes: map[string]schema.Attribute{
 										"port_ranges": schema.ListAttribute{
-											MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192",
+											MarkdownDescription: "List of Port Ranges. List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 										"protocol": schema.StringAttribute{
-											MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are tcp, udp, and icmp",
+											MarkdownDescription: "Protocol. Protocol in IP packet to be used as match criteria Values are TCP, UDP, and icmp.",
 											Optional:            true,
 										},
 									},
@@ -789,10 +789,10 @@ func (r *PolicyBasedRoutingResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"prefix_list": schema.SingleNestedBlock{
-						MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+						MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"prefixes": schema.ListAttribute{
-								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+								MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 								Optional:            true,
 								ElementType:         types.StringType,
 							},

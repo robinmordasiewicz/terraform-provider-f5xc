@@ -359,7 +359,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				},
 			},
 			"custom_header_value": schema.StringAttribute{
-				MarkdownDescription: "Custom Header. Add x-f5-api-testing-identifier header value to prevent security flags on API testing traffic",
+				MarkdownDescription: "Custom Header. Add x-F5-API-testing-identifier header value to prevent security flags on API testing traffic.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -375,11 +375,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Delete: true,
 			}),
 			"domains": schema.ListNestedBlock{
-				MarkdownDescription: "Testing Environments. Add and configure testing domains and credentials",
+				MarkdownDescription: "Testing Environments. Add and configure testing domains and credentials .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"allow_destructive_methods": schema.BoolAttribute{
-							MarkdownDescription: "Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data",
+							MarkdownDescription: "Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or DELETE data.",
 							Optional:            true,
 						},
 						"domain": schema.StringAttribute{
@@ -393,7 +393,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"credential_name": schema.StringAttribute{
-										MarkdownDescription: "Name. Enter a unique name for the credentials used in API testing",
+										MarkdownDescription: "Name. Enter a unique name for the credentials used in API testing .",
 										Optional:            true,
 									},
 								},
@@ -402,7 +402,7 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										MarkdownDescription: "Enable this option",
 									},
 									"api_key": schema.SingleNestedBlock{
-										MarkdownDescription: "Api Key.",
+										MarkdownDescription: "API Key.",
 										Attributes: map[string]schema.Attribute{
 											"key": schema.StringAttribute{
 												MarkdownDescription: "Key.",
@@ -411,22 +411,22 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										Blocks: map[string]schema.Block{
 											"value": schema.SingleNestedBlock{
-												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
 																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																Optional:            true,
 															},
 															"location": schema.StringAttribute{
-																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
-																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 														},
@@ -435,11 +435,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 														MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
-																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 															"url": schema.StringAttribute{
-																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																Optional:            true,
 															},
 														},
@@ -458,22 +458,22 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 										Blocks: map[string]schema.Block{
 											"password": schema.SingleNestedBlock{
-												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
 																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																Optional:            true,
 															},
 															"location": schema.StringAttribute{
-																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
-																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 														},
@@ -482,11 +482,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 														MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
-																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 															"url": schema.StringAttribute{
-																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																Optional:            true,
 															},
 														},
@@ -500,22 +500,22 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"token": schema.SingleNestedBlock{
-												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
 																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																Optional:            true,
 															},
 															"location": schema.StringAttribute{
-																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
-																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 														},
@@ -524,11 +524,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 														MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
-																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 															"url": schema.StringAttribute{
-																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																Optional:            true,
 															},
 														},
@@ -549,28 +549,28 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 												Optional:            true,
 											},
 											"token_response_key": schema.StringAttribute{
-												MarkdownDescription: "Token Response Key.",
+												MarkdownDescription: "Token Response Key. .",
 												Optional:            true,
 											},
 										},
 										Blocks: map[string]schema.Block{
 											"json_payload": schema.SingleNestedBlock{
-												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+												MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"blindfold_secret_info": schema.SingleNestedBlock{
-														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+														MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 														Attributes: map[string]schema.Attribute{
 															"decryption_provider": schema.StringAttribute{
 																MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																Optional:            true,
 															},
 															"location": schema.StringAttribute{
-																MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																Optional:            true,
 															},
 															"store_provider": schema.StringAttribute{
-																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 														},
@@ -579,11 +579,11 @@ func (r *APITestingResource) Schema(ctx context.Context, req resource.SchemaRequ
 														MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 														Attributes: map[string]schema.Attribute{
 															"provider_ref": schema.StringAttribute{
-																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																Optional:            true,
 															},
 															"url": schema.StringAttribute{
-																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																Optional:            true,
 															},
 														},

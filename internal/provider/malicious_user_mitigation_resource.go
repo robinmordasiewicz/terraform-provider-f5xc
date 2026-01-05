@@ -179,12 +179,12 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
-						MarkdownDescription: "Rules. Define the threat levels and the corresponding mitigation actions to be taken",
+						MarkdownDescription: "Rules. Define the threat levels and the corresponding mitigation actions to be taken .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"mitigation_action": schema.SingleNestedBlock{
-									MarkdownDescription: "Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user",
+									MarkdownDescription: "Malicious User Mitigation Action. Supported actions that can be taken to mitigate malicious activity from a user.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"block_temporarily": schema.SingleNestedBlock{
@@ -199,7 +199,7 @@ func (r *MaliciousUserMitigationResource) Schema(ctx context.Context, req resour
 									},
 								},
 								"threat_level": schema.SingleNestedBlock{
-									MarkdownDescription: "Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation",
+									MarkdownDescription: "Malicious User Threat Level. Threat level estimated for each user based on the user's activity and reputation.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"high": schema.SingleNestedBlock{

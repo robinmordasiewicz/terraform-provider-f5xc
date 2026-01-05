@@ -2,14 +2,14 @@
 page_title: "f5xc_segment Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Segment resource in F5 Distributed Cloud for segment configuration.
+  Manages a Segment resource in F5 Distributed Cloud for segment. configuration.
 ---
 
 # f5xc_segment (Data Source)
 
-Manages a Segment resource in F5 Distributed Cloud for segment configuration.
+Manages a Segment resource in F5 Distributed Cloud for segment. configuration.
 
-~> **Note** Please refer to [Segment API docs](https://docs.cloud.f5.com/docs-v2/api/segment) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

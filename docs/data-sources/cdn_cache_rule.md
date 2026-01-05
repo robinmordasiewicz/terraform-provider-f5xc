@@ -2,14 +2,14 @@
 page_title: "f5xc_cdn_cache_rule Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+  Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer specification. configuration.
 ---
 
 # f5xc_cdn_cache_rule (Data Source)
 
-Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer configuration.
+Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer specification. configuration.
 
-~> **Note** Please refer to [CDN Cache Rule API docs](https://docs.cloud.f5.com/docs-v2/api/cdn-cache-rule) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

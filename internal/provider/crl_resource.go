@@ -84,7 +84,7 @@ func (r *CRLResource) Metadata(ctx context.Context, req resource.MetadataRequest
 func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             crlSchemaVersion,
-		MarkdownDescription: "Manages a CRL resource in F5 Distributed Cloud for api to create crl configuration.",
+		MarkdownDescription: "Manages a CRL resource in F5 Distributed Cloud for api to create crl object. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the CRL. Must be unique within the namespace.",
@@ -140,7 +140,7 @@ func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				},
 			},
 			"server_address": schema.StringAttribute{
-				MarkdownDescription: "CRL Server address. CRL server address or hostname",
+				MarkdownDescription: "CRL Server address. CRL server address or hostname .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -148,7 +148,7 @@ func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				},
 			},
 			"server_port": schema.Int64Attribute{
-				MarkdownDescription: "CRL Server Port. Set CRL Server port number",
+				MarkdownDescription: "CRL Server Port. Set CRL Server port number.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -156,7 +156,7 @@ func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				},
 			},
 			"timeout": schema.Int64Attribute{
-				MarkdownDescription: "CRL download timeout. CRL download wait time, in seconds",
+				MarkdownDescription: "CRL download timeout. CRL download wait time, in seconds.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -175,7 +175,7 @@ func (r *CRLResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 				MarkdownDescription: "HTTPAccessInfo.",
 				Attributes: map[string]schema.Attribute{
 					"path": schema.StringAttribute{
-						MarkdownDescription: "CRL File path. CRL file location",
+						MarkdownDescription: "CRL File path. CRL file location.",
 						Optional:            true,
 					},
 				},

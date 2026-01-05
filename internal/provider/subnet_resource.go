@@ -206,18 +206,18 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"layer2_intf_ref": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -235,7 +235,7 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				MarkdownDescription: "Enable this option",
 			},
 			"site_subnet_params": schema.ListNestedBlock{
-				MarkdownDescription: "Site Subnet Parameters. Configure subnet parameters per site",
+				MarkdownDescription: "Site Subnet Parameters. Configure subnet parameters per site .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
@@ -243,18 +243,18 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 							MarkdownDescription: "Enable this option",
 						},
 						"site": schema.SingleNestedBlock{
-							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -267,15 +267,15 @@ func (r *SubnetResource) Schema(ctx context.Context, req resource.SchemaRequest,
 							MarkdownDescription: "Enable this option",
 						},
 						"subnet_dhcp_server_params": schema.SingleNestedBlock{
-							MarkdownDescription: "Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet.",
+							MarkdownDescription: "Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.dhcpserverparameterstype as all features in network_interface.dhcpserverparameterstype may not be supported in a subnet.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"dhcp_networks": schema.ListNestedBlock{
-									MarkdownDescription: "Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses",
+									MarkdownDescription: "Subnet DHCP Networks. List of networks from which DHCP server can allocate IP addresses.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"network_prefix": schema.StringAttribute{
-												MarkdownDescription: "Network Prefix. Network prefix for subnet",
+												MarkdownDescription: "Network Prefix. Network prefix for subnet.",
 												Optional:            true,
 											},
 										},

@@ -9,7 +9,7 @@ description: |-
 
 Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [App API Group API docs](https://docs.cloud.f5.com/docs-v2/api/views-app-api-group) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -67,7 +67,7 @@ resource "f5xc_app_api_group" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="bigip-virtual-server"></a>[`bigip_virtual_server`](#bigip-virtual-server) - Optional Block<br>API Group Scope BIGIP Virtual Server. Set the scope of the API Group to a specific BIGIP Virtual Server<br>See [Bigip Virtual Server](#bigip-virtual-server) below for details.
+&#x2022; <a id="bigip-virtual-server"></a>[`bigip_virtual_server`](#bigip-virtual-server) - Optional Block<br>API Group Scope BIG-IP Virtual Server. Set the scope of the API Group to a specific BIG-IP Virtual Server<br>See [Bigip Virtual Server](#bigip-virtual-server) below for details.
 <br><br>&#x2022; <a id="cdn-loadbalancer"></a>[`cdn_loadbalancer`](#cdn-loadbalancer) - Optional Block<br>API Group Scope CDN Loadbalancer. Set the scope of the API Group to a specific CDN Loadbalancer<br>See [CDN Loadbalancer](#cdn-loadbalancer) below for details.
 <br><br>&#x2022; <a id="http-loadbalancer"></a>[`http_loadbalancer`](#http-loadbalancer) - Optional Block<br>API Group Scope HTTP Loadbalancer. Set the scope of the API Group to a specific HTTP Loadbalancer<br>See [HTTP Loadbalancer](#http-loadbalancer) below for details.
 
@@ -91,7 +91,13 @@ A [`bigip_virtual_server`](#bigip-virtual-server) block supports the following:
 
 #### Bigip Virtual Server Bigip Virtual Server
 
-<a id="objref-575600"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`bigip_virtual_server`](#server-575600) block (within [`bigip_virtual_server`](#bigip-virtual-server)) supports the following:
+
+<a id="name-9fb983"></a>&#x2022; [`name`](#name-9fb983) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-4ecc61"></a>&#x2022; [`namespace`](#namespace-4ecc61) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-c4d0e6"></a>&#x2022; [`tenant`](#tenant-c4d0e6) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### CDN Loadbalancer
 
@@ -101,7 +107,13 @@ A [`cdn_loadbalancer`](#cdn-loadbalancer) block supports the following:
 
 #### CDN Loadbalancer CDN Loadbalancer
 
-<a id="objref-06a3ba"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`cdn_loadbalancer`](#cdn-loadbalancer-cdn-loadbalancer) block (within [`cdn_loadbalancer`](#cdn-loadbalancer)) supports the following:
+
+<a id="cdn-loadbalancer-cdn-loadbalancer-name"></a>&#x2022; [`name`](#cdn-loadbalancer-cdn-loadbalancer-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-8ae5bf"></a>&#x2022; [`namespace`](#namespace-8ae5bf) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-ea0b41"></a>&#x2022; [`tenant`](#tenant-ea0b41) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Elements
 
@@ -119,7 +131,13 @@ A [`http_loadbalancer`](#http-loadbalancer) block supports the following:
 
 #### HTTP Loadbalancer HTTP Loadbalancer
 
-<a id="objref-b83ede"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`http_loadbalancer`](#http-loadbalancer-http-loadbalancer) block (within [`http_loadbalancer`](#http-loadbalancer)) supports the following:
+
+<a id="name-9dca0b"></a>&#x2022; [`name`](#name-9dca0b) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-c94608"></a>&#x2022; [`namespace`](#namespace-c94608) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-fa3b49"></a>&#x2022; [`tenant`](#tenant-fa3b49) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

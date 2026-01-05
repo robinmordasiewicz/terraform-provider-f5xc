@@ -2,14 +2,14 @@
 page_title: "f5xc_proxy Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+  Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create specification. configuration.
 ---
 
 # f5xc_proxy (Data Source)
 
-Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create configuration.
+Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create specification. configuration.
 
-~> **Note** Please refer to [Proxy API docs](https://docs.cloud.f5.com/docs-v2/api/views-proxy) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

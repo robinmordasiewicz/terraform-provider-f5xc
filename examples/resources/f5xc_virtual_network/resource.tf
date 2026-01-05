@@ -1,5 +1,5 @@
 # Virtual Network Resource Example
-# Manages virtual network in given namespace in F5 Distributed Cloud.
+# Manages virtual network in given namespace. in F5 Distributed Cloud.
 
 # Basic Virtual Network configuration
 resource "f5xc_virtual_network" "example" {

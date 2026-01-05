@@ -827,7 +827,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"invert_matcher": schema.BoolAttribute{
-							MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+							MarkdownDescription: "Invert Matcher. Invert Match of the expression defined.",
 							Optional:            true,
 						},
 						"name": schema.StringAttribute{
@@ -884,7 +884,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"kind": schema.StringAttribute{
-									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+									MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -892,15 +892,15 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -908,7 +908,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"uid": schema.StringAttribute{
-									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+									MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -968,10 +968,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"client_selector": schema.SingleNestedBlock{
-				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+						MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
@@ -982,7 +982,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"invert_matcher": schema.BoolAttribute{
-							MarkdownDescription: "Invert Matcher. Invert Match of the expression defined",
+							MarkdownDescription: "Invert Matcher. Invert Match of the expression defined.",
 							Optional:            true,
 						},
 						"name": schema.StringAttribute{
@@ -1079,7 +1079,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"http_method": schema.SingleNestedBlock{
-				MarkdownDescription: "HTTP Method Matcher. A http method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true.",
+				MarkdownDescription: "HTTP Method Matcher. A HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true.",
 				Attributes: map[string]schema.Attribute{
 					"invert_matcher": schema.BoolAttribute{
 						MarkdownDescription: "Invert Method Matcher. Invert the match result.",
@@ -1093,7 +1093,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"ip_matcher": schema.SingleNestedBlock{
-				MarkdownDescription: "IP Prefix Matcher. Match any ip prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
+				MarkdownDescription: "IP Prefix Matcher. Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
 				Attributes: map[string]schema.Attribute{
 					"invert_matcher": schema.BoolAttribute{
 						MarkdownDescription: "Invert IP Matcher. Invert the match result.",
@@ -1106,7 +1106,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"kind": schema.StringAttribute{
-									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+									MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -1114,15 +1114,15 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -1130,7 +1130,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 									},
 								},
 								"uid": schema.StringAttribute{
-									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+									MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -1157,10 +1157,10 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"ip_threat_category_list": schema.SingleNestedBlock{
-				MarkdownDescription: "IP Threat Category List Type. List of ip threat categories",
+				MarkdownDescription: "IP Threat Category List Type. List of IP threat categories.",
 				Attributes: map[string]schema.Attribute{
 					"ip_threat_categories": schema.ListAttribute{
-						MarkdownDescription: "[Enum: SPAM_SOURCES|WINDOWS_EXPLOITS|WEB_ATTACKS|BOTNETS|SCANNERS|REPUTATION|PHISHING|PROXY|MOBILE_THREATS|TOR_PROXY|DENIAL_OF_SERVICE|NETWORK] List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions. Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
+						MarkdownDescription: "[Enum: SPAM_SOURCES|WINDOWS_EXPLOITS|WEB_ATTACKS|BOTNETS|SCANNERS|REPUTATION|PHISHING|PROXY|MOBILE_THREATS|TOR_PROXY|DENIAL_OF_SERVICE|NETWORK] List of IP Threat Categories to choose. The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions . Possible values are `SPAM_SOURCES`, `WINDOWS_EXPLOITS`, `WEB_ATTACKS`, `BOTNETS`, `SCANNERS`, `REPUTATION`, `PHISHING`, `PROXY`, `MOBILE_THREATS`, `TOR_PROXY`, `DENIAL_OF_SERVICE`, `NETWORK`. Defaults to `SPAM_SOURCES`.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
@@ -1170,7 +1170,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "[OneOf: ja4_tls_fingerprint, tls_fingerprint_matcher] JA4 TLS Fingerprint Matcher. An extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length.",
 				Attributes: map[string]schema.Attribute{
 					"exact_values": schema.ListAttribute{
-						MarkdownDescription: "Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against",
+						MarkdownDescription: "Exact Values. A list of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
@@ -1223,7 +1223,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name.",
 				Attributes: map[string]schema.Attribute{
 					"keys": schema.ListAttribute{
-						MarkdownDescription: "Keys. The list of label key names that have to match",
+						MarkdownDescription: "Keys. The list of label key names that have to match.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
@@ -1431,30 +1431,30 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"segment_policy": schema.SingleNestedBlock{
-				MarkdownDescription: "Configure Segments. Configure source and destination segment for policy",
+				MarkdownDescription: "Configure Segments. Configure source and destination segment for policy.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"dst_any": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
 					},
 					"dst_segments": schema.SingleNestedBlock{
-						MarkdownDescription: "Segment List. List of references to Segments",
+						MarkdownDescription: "Segment List. List of references to Segments.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"segments": schema.ListNestedBlock{
-								MarkdownDescription: "Segments. Select list of segments",
+								MarkdownDescription: "Segments. Select list of segments .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1473,23 +1473,23 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Enable this option",
 					},
 					"src_segments": schema.SingleNestedBlock{
-						MarkdownDescription: "Segment List. List of references to Segments",
+						MarkdownDescription: "Segment List. List of references to Segments.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"segments": schema.ListNestedBlock{
-								MarkdownDescription: "Segments. Select list of segments",
+								MarkdownDescription: "Segments. Select list of segments .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1532,11 +1532,11 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"exclude_attack_type_contexts": schema.ListNestedBlock{
-								MarkdownDescription: "Attack Types. Attack Types to be excluded for the defined match criteria",
+								MarkdownDescription: "Attack Types. Attack Types to be excluded for the defined match criteria.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"context": schema.StringAttribute{
-											MarkdownDescription: "[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
+											MarkdownDescription: "[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context OPTIONS. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
 											Optional:            true,
 										},
 										"context_name": schema.StringAttribute{
@@ -1551,7 +1551,7 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"exclude_bot_name_contexts": schema.ListNestedBlock{
-								MarkdownDescription: "Bot Names. Bot Names to be excluded for the defined match criteria",
+								MarkdownDescription: "Bot Names. Bot Names to be excluded for the defined match criteria.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"bot_name": schema.StringAttribute{
@@ -1562,11 +1562,11 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 								},
 							},
 							"exclude_signature_contexts": schema.ListNestedBlock{
-								MarkdownDescription: "Signature IDs. Signature IDs to be excluded for the defined match criteria",
+								MarkdownDescription: "Signature IDs. Signature IDs to be excluded for the defined match criteria.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"context": schema.StringAttribute{
-											MarkdownDescription: "[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
+											MarkdownDescription: "[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context OPTIONS. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
 											Optional:            true,
 										},
 										"context_name": schema.StringAttribute{
@@ -1574,18 +1574,18 @@ func (r *ServicePolicyRuleResource) Schema(ctx context.Context, req resource.Sch
 											Optional:            true,
 										},
 										"signature_id": schema.Int64Attribute{
-											MarkdownDescription: "SignatureID. The allowed values for signature id are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context.",
+											MarkdownDescription: "SignatureID. The allowed values for signature ID are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context.",
 											Optional:            true,
 										},
 									},
 								},
 							},
 							"exclude_violation_contexts": schema.ListNestedBlock{
-								MarkdownDescription: "Violations. Violations to be excluded for the defined match criteria",
+								MarkdownDescription: "Violations. Violations to be excluded for the defined match criteria.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"context": schema.StringAttribute{
-											MarkdownDescription: "[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context Options. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
+											MarkdownDescription: "[Enum: CONTEXT_ANY|CONTEXT_BODY|CONTEXT_REQUEST|CONTEXT_RESPONSE|CONTEXT_PARAMETER|CONTEXT_HEADER|CONTEXT_COOKIE|CONTEXT_URL|CONTEXT_URI] WAF Exclusion Context OPTIONS. The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE: CONTEXT_RESPONSE - CONTEXT_PARAMETER: CONTEXT_PARAMETER Detection will be excluded for the parameters. The parameter name is required in the Context name field. If the field is left empty, the detection will be excluded for all parameters. - CONTEXT_HEADER: CONTEXT_HEADER Detection will be excluded for the headers. The header name is required in the Context name field. If the field is left empty, the detection will be excluded for all headers. - CONTEXT_COOKIE: CONTEXT_COOKIE Detection will be excluded for the cookies. The cookie name is required in the Context name field. If the field is left empty, the detection will be excluded for all cookies. - CONTEXT_URL: CONTEXT_URL Detection will be excluded for the request URL. - CONTEXT_URI: CONTEXT_URI. Possible values are `CONTEXT_ANY`, `CONTEXT_BODY`, `CONTEXT_REQUEST`, `CONTEXT_RESPONSE`, `CONTEXT_PARAMETER`, `CONTEXT_HEADER`, `CONTEXT_COOKIE`, `CONTEXT_URL`, `CONTEXT_URI`. Defaults to `CONTEXT_ANY`.",
 											Optional:            true,
 										},
 										"context_name": schema.StringAttribute{

@@ -16,7 +16,7 @@ resource "f5xc_protocol_inspection" "example" {
   }
 
   # Resource-specific configuration
-  # Enable/Disable Compliance Checks.Enable Disable Complianc...
+  # Enable/Disable Compliance Checks. Enable Disable Complian...
   enable_disable_compliance_checks {
     # Configure enable_disable_compliance_checks settings
   }

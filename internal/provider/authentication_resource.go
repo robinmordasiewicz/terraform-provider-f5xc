@@ -304,18 +304,18 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 				Delete: true,
 			}),
 			"cookie_params": schema.SingleNestedBlock{
-				MarkdownDescription: "Cookie Parameters. Specifies different cookie related config parameters for authentication",
+				MarkdownDescription: "Cookie Parameters. Specifies different cookie related config parameters for authentication.",
 				Attributes: map[string]schema.Attribute{
 					"cookie_expiry": schema.Int64Attribute{
-						MarkdownDescription: "Cookie Expiry duration. specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds",
+						MarkdownDescription: "Cookie Expiry duration. Specifies in seconds max duration of the allocated cookie. This maps to “Max-Age” attribute in the session cookie. This will act as an expiry duration on the client side after which client will not be setting the cookie as part of the request. Default cookie expiry is 3600 seconds.",
 						Optional:            true,
 					},
 					"cookie_refresh_interval": schema.Int64Attribute{
-						MarkdownDescription: "Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce re-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, re-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds",
+						MarkdownDescription: "Cookie Refresh Interval. Specifies in seconds refresh interval for session cookie. This is used to keep the active user active and reduce RE-login. When an incoming cookie's session expiry is still valid, and time to expire falls behind this interval, RE-issue a cookie with new expiry and with the same original session expiry. Default refresh interval is 3000 seconds.",
 						Optional:            true,
 					},
 					"session_expiry": schema.Int64Attribute{
-						MarkdownDescription: "Session Expiry duration. specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours).",
+						MarkdownDescription: "Session Expiry duration. Specifies in seconds max lifetime of an authenticated session after which the user will be forced to login again. Default session expiry is 86400 seconds(24 hours).",
 						Optional:            true,
 					},
 				},
@@ -324,32 +324,32 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 						MarkdownDescription: "HMAC Key Pair. HMAC primary and secondary keys to be used for hashing the Cookie. Each key also have an associated expiry timestamp, beyond which key is invalid.",
 						Attributes: map[string]schema.Attribute{
 							"prim_key_expiry": schema.StringAttribute{
-								MarkdownDescription: "HMAC Primary Key Expiry. Primary HMAC Key Expiry time",
+								MarkdownDescription: "HMAC Primary Key Expiry. Primary HMAC Key Expiry time .",
 								Optional:            true,
 							},
 							"sec_key_expiry": schema.StringAttribute{
-								MarkdownDescription: "HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time",
+								MarkdownDescription: "HMAC Secondary Key Expiry. Secondary HMAC Key Expiry time .",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"prim_key": schema.SingleNestedBlock{
-								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
-										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 												Optional:            true,
 											},
 											"location": schema.StringAttribute{
-												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+												MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
-												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 										},
@@ -358,11 +358,11 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
-												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 											"url": schema.StringAttribute{
-												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 												Optional:            true,
 											},
 										},
@@ -370,22 +370,22 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 								},
 							},
 							"sec_key": schema.SingleNestedBlock{
-								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
-										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 												Optional:            true,
 											},
 											"location": schema.StringAttribute{
-												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+												MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
-												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 										},
@@ -394,11 +394,11 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
-												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 											"url": schema.StringAttribute{
-												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 												Optional:            true,
 											},
 										},
@@ -408,7 +408,7 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 						},
 					},
 					"kms_key_hmac": schema.SingleNestedBlock{
-						MarkdownDescription: "KMS Key Reference. Reference to KMS Key Object",
+						MarkdownDescription: "KMS Key Reference. Reference to KMS Key Object.",
 					},
 				},
 			},
@@ -416,32 +416,32 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "OIDCAuthType.",
 				Attributes: map[string]schema.Attribute{
 					"oidc_client_id": schema.StringAttribute{
-						MarkdownDescription: "OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server",
+						MarkdownDescription: "OIDC Client ID. Client ID used while sending the Authorization Request to OIDC server .",
 						Optional:            true,
 					},
 					"oidc_well_known_config_url": schema.StringAttribute{
-						MarkdownDescription: "Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints",
+						MarkdownDescription: "Well-known Configuration URL. An OIDC well-known configuration URL that will be used to fetch authentication related endpoints.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"client_secret": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -450,11 +450,11 @@ func (r *AuthenticationResource) Schema(ctx context.Context, req resource.Schema
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},

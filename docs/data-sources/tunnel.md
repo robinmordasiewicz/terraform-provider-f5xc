@@ -9,7 +9,7 @@ description: |-
 
 Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Tunnel API docs](https://docs.cloud.f5.com/docs-v2/api/tunnel) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

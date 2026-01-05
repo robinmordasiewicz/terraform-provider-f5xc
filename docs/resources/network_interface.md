@@ -9,7 +9,7 @@ description: |-
 
 Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.
 
-~> **Note** Please refer to [Network Interface API docs](https://docs.cloud.f5.com/docs-v2/api/network-interface) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -187,7 +187,7 @@ A [`dhcp_networks`](#networks-684a1f) block (within [`ethernet_interface.dhcp_se
 
 <a id="address-d4b422"></a>&#x2022; [`last_address`](#address-d4b422) - Optional Block<br>Enable this option
 
-<a id="prefix-e81d96"></a>&#x2022; [`network_prefix`](#prefix-e81d96) - Optional String<br>Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24
+<a id="prefix-e81d96"></a>&#x2022; [`network_prefix`](#prefix-e81d96) - Optional String<br>Network Prefix. Set the network prefix for the site. Ex: 10.1.1.0/24
 
 <a id="settings-b06877"></a>&#x2022; [`pool_settings`](#settings-b06877) - Optional String  Defaults to `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>Possible values are `INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`, `EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS`<br>[Enum: INCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS|EXCLUDE_IP_ADDRESSES_FROM_DHCP_POOLS] Interface Network Type. Identifies the how to pick the network for Interface. Address ranges in DHCP pool list are used for IP Address allocation Address ranges in DHCP pool list are excluded from IP Address allocation
 
@@ -249,7 +249,7 @@ A [`stateful`](#stateful-79d901) block (within [`ethernet_interface.ipv6_auto_co
 
 <a id="networks-d6f901"></a>&#x2022; [`dhcp_networks`](#networks-d6f901) - Optional Block<br>DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses<br>See [DHCP Networks](#networks-d6f901) below.
 
-<a id="map-d04c19"></a>&#x2022; [`fixed_ip_map`](#map-d04c19) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: Mac address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
+<a id="map-d04c19"></a>&#x2022; [`fixed_ip_map`](#map-d04c19) - Optional Block<br>Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: MAC address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client
 
 <a id="map-f0bf9b"></a>&#x2022; [`interface_ip_map`](#map-f0bf9b) - Optional Block<br>Interface IPv6 Assignments. Map of Interface IPv6 assignments per node<br>See [Interface IP Map](#map-f0bf9b) below.
 
@@ -391,7 +391,13 @@ A [`node_static_ip`](#static-ip-b510ab) block (within [`tunnel_interface.static_
 
 #### Tunnel Interface Tunnel
 
-<a id="objref-42545e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`tunnel`](#tunnel-interface-tunnel) block (within [`tunnel_interface`](#tunnel-interface)) supports the following:
+
+<a id="tunnel-interface-tunnel-name"></a>&#x2022; [`name`](#tunnel-interface-tunnel-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="tunnel-interface-tunnel-namespace"></a>&#x2022; [`namespace`](#tunnel-interface-tunnel-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tunnel-interface-tunnel-tenant"></a>&#x2022; [`tenant`](#tunnel-interface-tunnel-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 ---
 

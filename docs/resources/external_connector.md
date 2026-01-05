@@ -2,20 +2,20 @@
 page_title: "f5xc_external_connector Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
+  Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration specification. configuration.
 ---
 
 # f5xc_external_connector (Resource)
 
-Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
+Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration specification. configuration.
 
-~> **Note** Please refer to [External Connector API docs](https://docs.cloud.f5.com/docs-v2/api/views-external-connector) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # External Connector Resource Example
-# Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
+# Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration specification. configuration.
 
 # Basic External Connector configuration
 resource "f5xc_external_connector" "example" {
@@ -36,7 +36,7 @@ resource "f5xc_external_connector" "example" {
   ce_site_reference {
     # Configure ce_site_reference settings
   }
-  # IPSec. External Connector with IPSec tunnel
+  # IPsec. External Connector with IPsec tunnel.
   ipsec {
     # Configure ipsec settings
   }
@@ -68,7 +68,7 @@ resource "f5xc_external_connector" "example" {
 
 <a id="ce-site-reference"></a>&#x2022; [`ce_site_reference`](#ce-site-reference) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [CE Site Reference](#ce-site-reference) below for details.
 
-<a id="ipsec"></a>&#x2022; [`ipsec`](#ipsec) - Optional Block<br>IPSec. External Connector with IPSec tunnel<br>See [Ipsec](#ipsec) below for details.
+<a id="ipsec"></a>&#x2022; [`ipsec`](#ipsec) - Optional Block<br>IPsec. External Connector with IPsec tunnel<br>See [Ipsec](#ipsec) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -82,15 +82,21 @@ In addition to all arguments above, the following attributes are exported:
 
 #### CE Site Reference
 
-<a id="objref-1dcf51"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`ce_site_reference`](#ce-site-reference) block supports the following:
+
+<a id="ce-site-reference-name"></a>&#x2022; [`name`](#ce-site-reference-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="ce-site-reference-namespace"></a>&#x2022; [`namespace`](#ce-site-reference-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="ce-site-reference-tenant"></a>&#x2022; [`tenant`](#ce-site-reference-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Ipsec
 
 An [`ipsec`](#ipsec) block supports the following:
 
-<a id="ipsec-ike-parameters"></a>&#x2022; [`ike_parameters`](#ipsec-ike-parameters) - Optional Block<br>IKE Parameters. IKE configuration parameters required for IPSec Connection type<br>See [IKE Parameters](#ipsec-ike-parameters) below.
+<a id="ipsec-ike-parameters"></a>&#x2022; [`ike_parameters`](#ipsec-ike-parameters) - Optional Block<br>IKE Parameters. IKE configuration parameters required for IPsec Connection type<br>See [IKE Parameters](#ipsec-ike-parameters) below.
 
-<a id="ipsec-ipsec-tunnel-parameters"></a>&#x2022; [`ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters) - Optional Block<br>Configure IPSec Tunnel Parameters. In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment<br>See [Ipsec Tunnel Parameters](#ipsec-ipsec-tunnel-parameters) below.
+<a id="ipsec-ipsec-tunnel-parameters"></a>&#x2022; [`ipsec_tunnel_parameters`](#ipsec-ipsec-tunnel-parameters) - Optional Block<br>Configure IPsec Tunnel Parameters. In this section, we will configure the tunnel parameters, source, destination, IP addresses, and segment<br>See [Ipsec Tunnel Parameters](#ipsec-ipsec-tunnel-parameters) below.
 
 #### Ipsec IKE Parameters
 
@@ -124,11 +130,23 @@ A [`dpd_keep_alive_timer`](#timer-0d12ec) block (within [`ipsec.ike_parameters`]
 
 #### Ipsec IKE Parameters IKE Phase1 Profile
 
-<a id="objref-efe17e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`ike_phase1_profile`](#ipsec-ike-parameters-ike-phase1-profile) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
+
+<a id="name-0a829b"></a>&#x2022; [`name`](#name-0a829b) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-82c294"></a>&#x2022; [`namespace`](#namespace-82c294) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-6d0cb2"></a>&#x2022; [`tenant`](#tenant-6d0cb2) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Ipsec IKE Parameters IKE Phase2 Profile
 
-<a id="objref-c5820d"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`ike_phase2_profile`](#ipsec-ike-parameters-ike-phase2-profile) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
+
+<a id="name-73184f"></a>&#x2022; [`name`](#name-73184f) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-2427e8"></a>&#x2022; [`namespace`](#namespace-2427e8) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-58d877"></a>&#x2022; [`tenant`](#tenant-58d877) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Ipsec IKE Parameters Rm IP Address
 
@@ -184,15 +202,15 @@ A [`segment`](#ipsec-ipsec-tunnel-parameters-segment) block (within [`ipsec.ipse
 
 A [`refs`](#refs-349f3e) block (within [`ipsec.ipsec_tunnel_parameters.segment`](#ipsec-ipsec-tunnel-parameters-segment)) supports the following:
 
-<a id="kind-035e6e"></a>&#x2022; [`kind`](#kind-035e6e) - Optional String<br>Object reference kind
+<a id="kind-035e6e"></a>&#x2022; [`kind`](#kind-035e6e) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-cfde45"></a>&#x2022; [`name`](#name-cfde45) - Optional String<br>Object reference name
+<a id="name-cfde45"></a>&#x2022; [`name`](#name-cfde45) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-b2c80c"></a>&#x2022; [`namespace`](#namespace-b2c80c) - Optional String<br>Object reference namespace
+<a id="namespace-b2c80c"></a>&#x2022; [`namespace`](#namespace-b2c80c) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-f2a3ef"></a>&#x2022; [`tenant`](#tenant-f2a3ef) - Optional String<br>Object reference tenant
+<a id="tenant-f2a3ef"></a>&#x2022; [`tenant`](#tenant-f2a3ef) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-c4bbc4"></a>&#x2022; [`uid`](#uid-c4bbc4) - Optional String<br>Object reference UID
+<a id="uid-c4bbc4"></a>&#x2022; [`uid`](#uid-c4bbc4) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Ipsec Ipsec Tunnel Parameters Tunnel Eps
 
@@ -200,11 +218,11 @@ A [`tunnel_eps`](#eps-33e1fb) block (within [`ipsec.ipsec_tunnel_parameters`](#i
 
 <a id="interface-ea47ac"></a>&#x2022; [`interface`](#interface-ea47ac) - Optional String<br>Interface. For the chosen node, specify the interface that will be the tunnel source
 
-<a id="tunnel-ip-fefab5"></a>&#x2022; [`local_tunnel_ip`](#tunnel-ip-fefab5) - Optional String<br>Local Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the local tunnel IP Address i.e. the IP address of the tunnel on the CE node itself and a subnet prefix length
+<a id="tunnel-ip-fefab5"></a>&#x2022; [`local_tunnel_ip`](#tunnel-ip-fefab5) - Optional String<br>Local Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the local tunnel IP Address i.e. The IP address of the tunnel on the CE node itself and a subnet prefix length
 
 <a id="node-96f624"></a>&#x2022; [`node`](#node-96f624) - Optional String<br>Node. A CE site is composed of multiple nodes. Choose a node that will be part of this external connection
 
-<a id="tunnel-ip-253faa"></a>&#x2022; [`remote_tunnel_ip`](#tunnel-ip-253faa) - Optional String<br>Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e. the IP address of the tunnel on the remote gateway and a subnet prefix length
+<a id="tunnel-ip-253faa"></a>&#x2022; [`remote_tunnel_ip`](#tunnel-ip-253faa) - Optional String<br>Remote Tunnel IP Address/Prefix Length. For a particular tunnel on a node, specify the remote tunnel IP Address i.e. The IP address of the tunnel on the remote gateway and a subnet prefix length
 
 #### Timeouts
 

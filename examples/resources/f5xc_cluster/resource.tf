@@ -1,5 +1,5 @@
 # Cluster Resource Example
-# Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+# Manages cluster will create the object in the storage backend for namespace metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Cluster configuration
 resource "f5xc_cluster" "example" {

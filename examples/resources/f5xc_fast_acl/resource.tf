@@ -1,5 +1,5 @@
 # Fast ACL Resource Example
-# Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.
+# Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.
 
 # Basic Fast ACL configuration
 resource "f5xc_fast_acl" "example" {
@@ -16,16 +16,16 @@ resource "f5xc_fast_acl" "example" {
   }
 
   # Resource-specific configuration
-  # Object reference. This type establishes a direct referenc...
-  protocol_policer {
-    # Configure protocol_policer settings
+  # Action. FastAclRuleAction specifies possible action to be...
+  action {
+    # Configure action settings
   }
-  # [OneOf: re_acl, site_acl] Fast ACL for RE. Fast ACL defin...
-  re_acl {
-    # Configure re_acl settings
+  # Policer Reference. Reference to policer object.
+  policer_action {
+    # Configure policer_action settings
   }
-  # Enable this option
-  all_public_vips {
-    # Configure all_public_vips settings
+  # Reference. A policer direct reference.
+  ref {
+    # Configure ref settings
   }
 }

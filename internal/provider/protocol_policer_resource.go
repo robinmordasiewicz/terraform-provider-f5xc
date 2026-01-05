@@ -135,7 +135,7 @@ func (r *ProtocolPolicerResource) Metadata(ctx context.Context, req resource.Met
 func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             protocol_policerSchemaVersion,
-		MarkdownDescription: "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Protocol Policer. Must be unique within the namespace.",
@@ -191,16 +191,16 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 				Delete: true,
 			}),
 			"protocol_policer": schema.ListNestedBlock{
-				MarkdownDescription: "Protocol Policer. List of L4 protocol match condition and associated traffic rate limits",
+				MarkdownDescription: "Protocol Policer. List of L4 protocol match condition and associated traffic rate limits.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"policer": schema.ListNestedBlock{
-							MarkdownDescription: "Policer. Reference to policer object to apply traffic rate limits",
+							MarkdownDescription: "Policer. Reference to policer object to apply traffic rate limits .",
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"kind": schema.StringAttribute{
-										MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+										MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -208,15 +208,15 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -224,7 +224,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 										},
 									},
 									"uid": schema.StringAttribute{
-										MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+										MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -235,14 +235,14 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 							},
 						},
 						"protocol": schema.SingleNestedBlock{
-							MarkdownDescription: "Protocol Type. Protocol and protocol specific flags to be matched in packet",
+							MarkdownDescription: "Protocol Type. Protocol and protocol specific flags to be matched in packet.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"dns": schema.SingleNestedBlock{
-									MarkdownDescription: "DNS Packets. Match all DNS packets inclusing UDP and TCP",
+									MarkdownDescription: "DNS Packets. Match all DNS packets inclusing UDP and TCP.",
 								},
 								"icmp": schema.SingleNestedBlock{
-									MarkdownDescription: "ICMP Packet Type. ICMP message type to match in packet",
+									MarkdownDescription: "ICMP Packet Type. ICMP message type to match in packet.",
 									Attributes: map[string]schema.Attribute{
 										"type": schema.ListAttribute{
 											MarkdownDescription: "[Enum: ECHO_REPLY|ECHO_REQUEST|ALL_ICMP_MSG] ICMP type. ICMP message type to be matched in packet. Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`. Defaults to `ECHO_REPLY`.",
@@ -252,7 +252,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 									},
 								},
 								"tcp": schema.SingleNestedBlock{
-									MarkdownDescription: "TCP Packet Type. Specification of TCP flag to be matched in a TCP packet",
+									MarkdownDescription: "TCP Packet Type. Specification of TCP flag to be matched in a TCP packet.",
 									Attributes: map[string]schema.Attribute{
 										"flags": schema.ListAttribute{
 											MarkdownDescription: "[Enum: FIN|SYN|RST|PSH|ACK|URG|ALL_TCP_FLAGS|KEEPALIVE] TCP flags. TCP flag to be matched in a TCP packet. Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`. Defaults to `FIN`.",
@@ -262,7 +262,7 @@ func (r *ProtocolPolicerResource) Schema(ctx context.Context, req resource.Schem
 									},
 								},
 								"udp": schema.SingleNestedBlock{
-									MarkdownDescription: "UDP Packets. Match all UDP packets",
+									MarkdownDescription: "UDP Packets. Match all UDP packets.",
 								},
 							},
 						},

@@ -1,5 +1,5 @@
 # WAF Exclusion Policy Resource Example
-# Manages WAF exclusion policy in F5 Distributed Cloud.
+# Manages WAF exclusion policy. in F5 Distributed Cloud.
 
 # Basic WAF Exclusion Policy configuration
 resource "f5xc_waf_exclusion_policy" "example" {

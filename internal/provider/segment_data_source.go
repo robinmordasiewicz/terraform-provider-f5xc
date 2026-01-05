@@ -42,7 +42,7 @@ func (d *SegmentDataSource) Metadata(ctx context.Context, req datasource.Metadat
 
 func (d *SegmentDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a Segment resource in F5 Distributed Cloud for segment configuration.",
+		MarkdownDescription: "Manages a Segment resource in F5 Distributed Cloud for segment. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

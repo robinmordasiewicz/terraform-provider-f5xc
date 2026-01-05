@@ -2,20 +2,20 @@
 page_title: "f5xc_cluster Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+  Manages cluster will create the object in the storage backend for namespace metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_cluster (Resource)
 
-Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+Manages cluster will create the object in the storage backend for namespace metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Cluster API docs](https://docs.cloud.f5.com/docs-v2/api/cluster) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Cluster Resource Example
-# Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.
+# Manages cluster will create the object in the storage backend for namespace metadata.namespace. in F5 Distributed Cloud.
 
 # Basic Cluster configuration
 resource "f5xc_cluster" "example" {
@@ -68,8 +68,8 @@ resource "f5xc_cluster" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="auto-http-config"></a>[`auto_http_config`](#auto-http-config) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="http1-config"></a>[`http1_config`](#http1-config) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections<br>See [Http1 Config](#http1-config) below for details.
-<br><br>&#x2022; <a id="http2-options"></a>[`http2_options`](#http2-options) - Optional Block<br>Http2 Protocol Options. Http2 Protocol options for upstream connections<br>See [Http2 Options](#http2-options) below for details.
+<br><br>&#x2022; <a id="http1-config"></a>[`http1_config`](#http1-config) - Optional Block<br>HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for upstream connections<br>See [Http1 Config](#http1-config) below for details.
+<br><br>&#x2022; <a id="http2-options"></a>[`http2_options`](#http2-options) - Optional Block<br>Http2 Protocol OPTIONS. Http2 Protocol OPTIONS for upstream connections<br>See [Http2 Options](#http2-options) below for details.
 
 <a id="circuit-breaker"></a>&#x2022; [`circuit_breaker`](#circuit-breaker) - Optional Block<br>Circuit Breaker. CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly<br>See [Circuit Breaker](#circuit-breaker) below for details.
 
@@ -83,7 +83,7 @@ resource "f5xc_cluster" "example" {
 
 <a id="endpoint-selection"></a>&#x2022; [`endpoint_selection`](#endpoint-selection) - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>[Enum: DISTRIBUTED|LOCAL_ONLY|LOCAL_PREFERRED] Endpoint Selection Policy. Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for load balancing. If local endpoints are not present remote endpoints will be considered
 
-<a id="endpoint-subsets"></a>&#x2022; [`endpoint_subsets`](#endpoint-subsets) - Optional Block<br>Endpoint Subsets. Cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer. endpoint_subsets is list of subsets for this cluster. Each entry in this list has definition for a subset (which is collection of keys) During routing, the route’s metadata match configuration is used to find a specific subset. If there is a subset with the exact keys and values specified by the route, the subset is used for load balancing. Otherwise, the fallback policy is used. The cluster’s subset configuration must, therefore, contain a definition that has the same keys as a given route in order for subset load balancing to occur. RouteConfig routes: - match: - headers: [] path: path: /1.log query_params: [] routeDestination: destinations: - cluster: - kind: cluster.Object uid: 00000000-0000-0000-0001-000000000005 endpointSubsets: site: india EndpointConfig metadata: labels: deployment: debug site: india name: end-1 uid: end-1 ClusterConfig gcSpec: defaultSubset: stage: production fallbackPolicy: DEFAULT_SUBSET endpointSubsets: - keys: - site - keys: - stage - app Assume the below endpoints are defined and associated with the cluster. Endpoint Labels -------- ------ ep1 stage: production, site: india ep2 stage: deployment, site: us ep3 stage: production, app: hr ep4 site: india The following table describes some routes and the result of their application to the cluster. The subset definition for cluster is assumed to be same as given above in the ClusterConfig section RouteMatch Criteria Subset Reason ------------------- ------ ------ site: india ep1, ep4 Subset of endpoints selected site: us ep2 Subset of endpoints selected app: hr ep1, ep3 Fallback: No subset selector for 'app' alone stage: production, app: hr ep3 Subset of endpoints selected other: x ep1, ep3 Fallback: No subset selector for “other” (none) ep1, ep3 Fallback: No subset requested<br>See [Endpoint Subsets](#endpoint-subsets) below for details.
+<a id="endpoint-subsets"></a>&#x2022; [`endpoint_subsets`](#endpoint-subsets) - Optional Block<br>Endpoint Subsets. Cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer. Endpoint_subsets is list of subsets for this cluster. Each entry in this list has definition for a subset (which is collection of keys) During routing, the route’s metadata match configuration is used to find a specific subset. If there is a subset with the exact keys and values specified by the route, the subset is used for load balancing. Otherwise, the fallback policy is used. The cluster’s subset configuration must, therefore, contain a definition that has the same keys as a given route in order for subset load balancing to occur. RouteConfig routes: - match: - headers: [] path: path: /1.log query_params: [] routeDestination: destinations: - cluster: - kind: cluster.object uid: 00000000-0000-0000-0001-000000000005 endpointSubsets: site: india EndpointConfig metadata: labels: deployment: debug site: india name: end-1 uid: end-1 ClusterConfig gcSpec: defaultSubset: stage: production fallbackPolicy: DEFAULT_SUBSET endpointSubsets: - keys: - site - keys: - stage - app Assume the below endpoints are defined and associated with the cluster. Endpoint Labels -------- ------ ep1 stage: production, site: india ep2 stage: deployment, site: us ep3 stage: production, app: hr ep4 site: india The following table describes some routes and the result of their application to the cluster. The subset definition for cluster is assumed to be same as given above in the ClusterConfig section RouteMatch Criteria Subset Reason ------------------- ------ ------ site: india ep1, ep4 Subset of endpoints selected site: us ep2 Subset of endpoints selected app: hr ep1, ep3 Fallback: No subset selector for 'app' alone stage: production, app: hr ep3 Subset of endpoints selected other: x ep1, ep3 Fallback: No subset selector for “other” (none) ep1, ep3 Fallback: No subset requested<br>See [Endpoint Subsets](#endpoint-subsets) below for details.
 
 <a id="endpoints"></a>&#x2022; [`endpoints`](#endpoints) - Optional Block<br>Endpoints. List of references to all endpoint objects that belong to this cluster<br>See [Endpoints](#endpoints) below for details.
 
@@ -142,35 +142,35 @@ An [`endpoint_subsets`](#endpoint-subsets) block supports the following:
 
 An [`endpoints`](#endpoints) block supports the following:
 
-<a id="endpoints-kind"></a>&#x2022; [`kind`](#endpoints-kind) - Optional String<br>Object reference kind
+<a id="endpoints-kind"></a>&#x2022; [`kind`](#endpoints-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="endpoints-name"></a>&#x2022; [`name`](#endpoints-name) - Optional String<br>Object reference name
+<a id="endpoints-name"></a>&#x2022; [`name`](#endpoints-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="endpoints-namespace"></a>&#x2022; [`namespace`](#endpoints-namespace) - Optional String<br>Object reference namespace
+<a id="endpoints-namespace"></a>&#x2022; [`namespace`](#endpoints-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="endpoints-tenant"></a>&#x2022; [`tenant`](#endpoints-tenant) - Optional String<br>Object reference tenant
+<a id="endpoints-tenant"></a>&#x2022; [`tenant`](#endpoints-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="endpoints-uid"></a>&#x2022; [`uid`](#endpoints-uid) - Optional String<br>Object reference UID
+<a id="endpoints-uid"></a>&#x2022; [`uid`](#endpoints-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Health Checks
 
 A [`health_checks`](#health-checks) block supports the following:
 
-<a id="health-checks-kind"></a>&#x2022; [`kind`](#health-checks-kind) - Optional String<br>Object reference kind
+<a id="health-checks-kind"></a>&#x2022; [`kind`](#health-checks-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="health-checks-name"></a>&#x2022; [`name`](#health-checks-name) - Optional String<br>Object reference name
+<a id="health-checks-name"></a>&#x2022; [`name`](#health-checks-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="health-checks-namespace"></a>&#x2022; [`namespace`](#health-checks-namespace) - Optional String<br>Object reference namespace
+<a id="health-checks-namespace"></a>&#x2022; [`namespace`](#health-checks-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="health-checks-tenant"></a>&#x2022; [`tenant`](#health-checks-tenant) - Optional String<br>Object reference tenant
+<a id="health-checks-tenant"></a>&#x2022; [`tenant`](#health-checks-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="health-checks-uid"></a>&#x2022; [`uid`](#health-checks-uid) - Optional String<br>Object reference UID
+<a id="health-checks-uid"></a>&#x2022; [`uid`](#health-checks-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Http1 Config
 
 A [`http1_config`](#http1-config) block supports the following:
 
-<a id="http1-config-header-transformation"></a>&#x2022; [`header_transformation`](#http1-config-header-transformation) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#http1-config-header-transformation) below.
+<a id="http1-config-header-transformation"></a>&#x2022; [`header_transformation`](#http1-config-header-transformation) - Optional Block<br>Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers<br>See [Header Transformation](#http1-config-header-transformation) below.
 
 #### Http1 Config Header Transformation
 
@@ -194,11 +194,11 @@ A [`http2_options`](#http2-options) block supports the following:
 
 An [`outlier_detection`](#outlier-detection) block supports the following:
 
-<a id="outlier-detection-base-ejection-time"></a>&#x2022; [`base_ejection_time`](#outlier-detection-base-ejection-time) - Optional Number  Defaults to `30000ms`  Specified in milliseconds<br>Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail
+<a id="outlier-detection-base-ejection-time"></a>&#x2022; [`base_ejection_time`](#outlier-detection-base-ejection-time) - Optional Number  Defaults to `30000ms`  Specified in milliseconds<br>Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to GET ejected for longer periods if they continue to fail
 
 <a id="outlier-detection-consecutive-5xx"></a>&#x2022; [`consecutive_5xx`](#outlier-detection-consecutive-5xx) - Optional Number  Defaults to `5`<br>Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs
 
-<a id="failure-45be04"></a>&#x2022; [`consecutive_gateway_failure`](#failure-45be04) - Optional Number  Defaults to `5`<br>Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs
+<a id="failure-45be04"></a>&#x2022; [`consecutive_gateway_failure`](#failure-45be04) - Optional Number  Defaults to `5`<br>Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). Consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs
 
 <a id="outlier-detection-interval"></a>&#x2022; [`interval`](#outlier-detection-interval) - Optional Number  Defaults to `10000ms`  Specified in milliseconds<br>Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service
 
@@ -254,15 +254,15 @@ A [`cert_params`](#tls-parameters-cert-params) block (within [`tls_parameters`](
 
 A [`certificates`](#tls-parameters-cert-params-certificates) block (within [`tls_parameters.cert_params`](#tls-parameters-cert-params)) supports the following:
 
-<a id="kind-8b8a07"></a>&#x2022; [`kind`](#kind-8b8a07) - Optional String<br>Object reference kind
+<a id="kind-8b8a07"></a>&#x2022; [`kind`](#kind-8b8a07) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-d17505"></a>&#x2022; [`name`](#name-d17505) - Optional String<br>Object reference name
+<a id="name-d17505"></a>&#x2022; [`name`](#name-d17505) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-d38fb9"></a>&#x2022; [`namespace`](#namespace-d38fb9) - Optional String<br>Object reference namespace
+<a id="namespace-d38fb9"></a>&#x2022; [`namespace`](#namespace-d38fb9) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-34f974"></a>&#x2022; [`tenant`](#tenant-34f974) - Optional String<br>Object reference tenant
+<a id="tenant-34f974"></a>&#x2022; [`tenant`](#tenant-34f974) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-29a359"></a>&#x2022; [`uid`](#uid-29a359) - Optional String<br>Object reference UID
+<a id="uid-29a359"></a>&#x2022; [`uid`](#uid-29a359) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### TLS Parameters Cert Params Validation Params
 

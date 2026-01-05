@@ -85,7 +85,7 @@ func (r *AddressAllocatorResource) Metadata(ctx context.Context, req resource.Me
 func (r *AddressAllocatorResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             address_allocatorSchemaVersion,
-		MarkdownDescription: "Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages Address Allocator will create an address allocator object in 'system' namespace of the user. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Address Allocator. Must be unique within the namespace.",

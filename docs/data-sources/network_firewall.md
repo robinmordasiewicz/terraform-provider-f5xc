@@ -2,14 +2,14 @@
 page_title: "f5xc_network_firewall Data Source - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+  Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace. configuration.
 ---
 
 # f5xc_network_firewall (Data Source)
 
-Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.
+Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace. configuration.
 
-~> **Note** Please refer to [Network Firewall API docs](https://docs.cloud.f5.com/docs-v2/api/network-firewall) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

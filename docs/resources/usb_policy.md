@@ -2,20 +2,20 @@
 page_title: "f5xc_usb_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.
+  Manages new USB policy object. in F5 Distributed Cloud.
 ---
 
 # f5xc_usb_policy (Resource)
 
-Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.
+Manages new USB policy object. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Usb Policy API docs](https://docs.cloud.f5.com/docs-v2/api/usb-policy) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Usb Policy Resource Example
-# Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.
+# Manages new USB policy object. in F5 Distributed Cloud.
 
 # Basic Usb Policy configuration
 resource "f5xc_usb_policy" "example" {
@@ -32,7 +32,7 @@ resource "f5xc_usb_policy" "example" {
   }
 
   # Resource-specific configuration
-  # Allowed USB devices. List of allowed USB devices
+  # Allowed USB devices. List of allowed USB devices .
   allowed_devices {
     # Configure allowed_devices settings
   }
@@ -80,7 +80,7 @@ An [`allowed_devices`](#allowed-devices) block supports the following:
 
 <a id="allowed-devices-b-device-sub-class"></a>&#x2022; [`b_device_sub_class`](#allowed-devices-b-device-sub-class) - Optional String<br>Subclass. The sub-class (within the class) of this device
 
-<a id="allowed-devices-i-serial"></a>&#x2022; [`i_serial`](#allowed-devices-i-serial) - Optional String<br>iSerialNumber. Index of Serial Number String Descriptor
+<a id="allowed-devices-i-serial"></a>&#x2022; [`i_serial`](#allowed-devices-i-serial) - Optional String<br>ISerialNumber. Index of Serial Number String Descriptor
 
 <a id="allowed-devices-id-product"></a>&#x2022; [`id_product`](#allowed-devices-id-product) - Optional String<br>Product ID. Product ID (Assigned by Manufacturer) in hex
 

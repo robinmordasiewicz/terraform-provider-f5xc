@@ -42,7 +42,7 @@ func (d *CloudElasticIPDataSource) Metadata(ctx context.Context, req datasource.
 
 func (d *CloudElasticIPDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

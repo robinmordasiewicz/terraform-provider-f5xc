@@ -42,7 +42,7 @@ func (d *NetworkPolicyRuleDataSource) Metadata(ctx context.Context, req datasour
 
 func (d *NetworkPolicyRuleDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

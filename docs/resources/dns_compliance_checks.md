@@ -9,7 +9,7 @@ description: |-
 
 Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [DNS Compliance Checks API docs](https://docs.cloud.f5.com/docs-v2/api/dns-compliance-checks) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

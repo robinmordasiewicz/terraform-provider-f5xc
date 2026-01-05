@@ -2,20 +2,20 @@
 page_title: "f5xc_rate_limiter_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
+  Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create specification. configuration.
 ---
 
 # f5xc_rate_limiter_policy (Resource)
 
-Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
+Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create specification. configuration.
 
-~> **Note** Please refer to [Rate Limiter Policy API docs](https://docs.cloud.f5.com/docs-v2/api/views-rate-limiter-policy) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Rate Limiter Policy Resource Example
-# Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create configuration.
+# Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create specification. configuration.
 
 # Basic Rate Limiter Policy configuration
 resource "f5xc_rate_limiter_policy" "example" {
@@ -66,7 +66,7 @@ resource "f5xc_rate_limiter_policy" "example" {
 &#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="server-name"></a>[`server_name`](#server-name) - Optional String<br>Server Name. The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request
 <br><br>&#x2022; <a id="server-name-matcher"></a>[`server_name_matcher`](#server-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Server Name Matcher](#server-name-matcher) below for details.
-<br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Server Selector](#server-selector) below for details.
+<br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Server Selector](#server-selector) below for details.
 
 <a id="rules"></a>&#x2022; [`rules`](#rules) - Optional Block<br>Rules. A list of RateLimiterRules that are evaluated sequentially till a matching rule is identified<br>See [Rules](#rules) below for details.
 
@@ -146,15 +146,15 @@ An [`asn_matcher`](#rules-spec-asn-matcher) block (within [`rules.spec`](#rules-
 
 An [`asn_sets`](#rules-spec-asn-matcher-asn-sets) block (within [`rules.spec.asn_matcher`](#rules-spec-asn-matcher)) supports the following:
 
-<a id="rules-spec-asn-matcher-asn-sets-kind"></a>&#x2022; [`kind`](#rules-spec-asn-matcher-asn-sets-kind) - Optional String<br>Object reference kind
+<a id="rules-spec-asn-matcher-asn-sets-kind"></a>&#x2022; [`kind`](#rules-spec-asn-matcher-asn-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="rules-spec-asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#rules-spec-asn-matcher-asn-sets-name) - Optional String<br>Object reference name
+<a id="rules-spec-asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#rules-spec-asn-matcher-asn-sets-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-3ce633"></a>&#x2022; [`namespace`](#namespace-3ce633) - Optional String<br>Object reference namespace
+<a id="namespace-3ce633"></a>&#x2022; [`namespace`](#namespace-3ce633) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="rules-spec-asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#rules-spec-asn-matcher-asn-sets-tenant) - Optional String<br>Object reference tenant
+<a id="rules-spec-asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#rules-spec-asn-matcher-asn-sets-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="rules-spec-asn-matcher-asn-sets-uid"></a>&#x2022; [`uid`](#rules-spec-asn-matcher-asn-sets-uid) - Optional String<br>Object reference UID
+<a id="rules-spec-asn-matcher-asn-sets-uid"></a>&#x2022; [`uid`](#rules-spec-asn-matcher-asn-sets-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Rules Spec Country List
 
@@ -166,7 +166,13 @@ A [`country_list`](#rules-spec-country-list) block (within [`rules.spec`](#rules
 
 #### Rules Spec Custom Rate Limiter
 
-<a id="objref-ab0d1b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`custom_rate_limiter`](#rules-spec-custom-rate-limiter) block (within [`rules.spec`](#rules-spec)) supports the following:
+
+<a id="rules-spec-custom-rate-limiter-name"></a>&#x2022; [`name`](#rules-spec-custom-rate-limiter-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-339376"></a>&#x2022; [`namespace`](#namespace-339376) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="rules-spec-custom-rate-limiter-tenant"></a>&#x2022; [`tenant`](#rules-spec-custom-rate-limiter-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Rules Spec Domain Matcher
 
@@ -220,15 +226,15 @@ An [`ip_matcher`](#rules-spec-ip-matcher) block (within [`rules.spec`](#rules-sp
 
 A [`prefix_sets`](#rules-spec-ip-matcher-prefix-sets) block (within [`rules.spec.ip_matcher`](#rules-spec-ip-matcher)) supports the following:
 
-<a id="rules-spec-ip-matcher-prefix-sets-kind"></a>&#x2022; [`kind`](#rules-spec-ip-matcher-prefix-sets-kind) - Optional String<br>Object reference kind
+<a id="rules-spec-ip-matcher-prefix-sets-kind"></a>&#x2022; [`kind`](#rules-spec-ip-matcher-prefix-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="rules-spec-ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#rules-spec-ip-matcher-prefix-sets-name) - Optional String<br>Object reference name
+<a id="rules-spec-ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#rules-spec-ip-matcher-prefix-sets-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-5d9a15"></a>&#x2022; [`namespace`](#namespace-5d9a15) - Optional String<br>Object reference namespace
+<a id="namespace-5d9a15"></a>&#x2022; [`namespace`](#namespace-5d9a15) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-68e36f"></a>&#x2022; [`tenant`](#tenant-68e36f) - Optional String<br>Object reference tenant
+<a id="tenant-68e36f"></a>&#x2022; [`tenant`](#tenant-68e36f) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="rules-spec-ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#rules-spec-ip-matcher-prefix-sets-uid) - Optional String<br>Object reference UID
+<a id="rules-spec-ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#rules-spec-ip-matcher-prefix-sets-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Rules Spec IP Prefix List
 
@@ -266,7 +272,7 @@ A [`server_name_matcher`](#server-name-matcher) block supports the following:
 
 A [`server_selector`](#server-selector) block supports the following:
 
-<a id="server-selector-expressions"></a>&#x2022; [`expressions`](#server-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="server-selector-expressions"></a>&#x2022; [`expressions`](#server-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Timeouts
 

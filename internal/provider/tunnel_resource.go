@@ -332,7 +332,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				},
 			},
 			"tunnel_type": schema.StringAttribute{
-				MarkdownDescription: "[Enum: IPSEC_PSK|GRE] Tunnel Type. Supported tunnel types are IPSec IPSEC tunnel type with PSK GRE tunnel type. Possible values are `IPSEC_PSK`, `GRE`. Defaults to `IPSEC_PSK`.",
+				MarkdownDescription: "[Enum: IPSEC_PSK|GRE] Tunnel Type. Supported tunnel types are IPsec IPsec tunnel type with PSK GRE tunnel type. Possible values are `IPSEC_PSK`, `GRE`. Defaults to `IPSEC_PSK`.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -348,19 +348,19 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				Delete: true,
 			}),
 			"local_ip": schema.SingleNestedBlock{
-				MarkdownDescription: "Local IP Address Selector. Defines the options to select local ip address and virtual network for tunnel object Options available are - 1. Local Interface - Network Interface from which IP address and network will be selected 2. IP Address - IP address and network can be configured explicitly",
+				MarkdownDescription: "Local IP Address Selector. Defines the OPTIONS to select local IP address and virtual network for tunnel object OPTIONS available are - 1. Local Interface - Network Interface from which IP address and network will be selected 2. IP Address - IP address and network can be configured explicitly.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"intf": schema.SingleNestedBlock{
-						MarkdownDescription: "Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet",
+						MarkdownDescription: "Interface Type. Provides the local interface to pick up source IP and network for transporting encapsulated packet.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"local_intf": schema.ListNestedBlock{
-								MarkdownDescription: "Local Interface. Local interface to be used for filling in source information of IP and network for transport",
+								MarkdownDescription: "Local Interface. Local interface to be used for filling in source information of IP and network for transport.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
-											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+											MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -368,15 +368,15 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 											},
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -384,7 +384,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 											},
 										},
 										"uid": schema.StringAttribute{
-											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+											MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -397,21 +397,21 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 						},
 					},
 					"ip_address": schema.SingleNestedBlock{
-						MarkdownDescription: "Local IP Address Type. Provides the configuration to pick up source IP and network for transporting encapsulated packet",
+						MarkdownDescription: "Local IP Address Type. Provides the configuration to pick up source IP and network for transporting encapsulated packet.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"auto": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 							"ip_address": schema.SingleNestedBlock{
-								MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+								MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"ipv4": schema.SingleNestedBlock{
-										MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+										MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 										Attributes: map[string]schema.Attribute{
 											"addr": schema.StringAttribute{
-												MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+												MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
 												Optional:            true,
 											},
 										},
@@ -428,7 +428,7 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 								},
 							},
 							"virtual_network_type": schema.SingleNestedBlock{
-								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system",
+								MarkdownDescription: "Virtual Network Type. Different types of virtual networks understood by the system.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"public": schema.SingleNestedBlock{
@@ -447,30 +447,30 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				},
 			},
 			"params": schema.SingleNestedBlock{
-				MarkdownDescription: "Tunnel Parameters. Tunnel configuration parameters for supported encapsulation 1. IPSec is supported with PSK for which PSK can be configured",
+				MarkdownDescription: "Tunnel Parameters. Tunnel configuration parameters for supported encapsulation 1. IPsec is supported with PSK for which PSK can be configured.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"ipsec": schema.SingleNestedBlock{
-						MarkdownDescription: "IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE",
+						MarkdownDescription: "IPsec tunnel parameters. Configuration for IPsec encapsulation are: 1. PSK - pre shared key to be used by IKE.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"ipsec_psk": schema.SingleNestedBlock{
-								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
-										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 												Optional:            true,
 											},
 											"location": schema.StringAttribute{
-												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+												MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
-												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 										},
@@ -479,11 +479,11 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
-												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 											"url": schema.StringAttribute{
-												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 												Optional:            true,
 											},
 										},
@@ -495,27 +495,27 @@ func (r *TunnelResource) Schema(ctx context.Context, req resource.SchemaRequest,
 				},
 			},
 			"remote_ip": schema.SingleNestedBlock{
-				MarkdownDescription: "Remote IP Address Selector. Defines the options to select remote ip address for tunnel object Options available are - 1. IP Address - Specifies the remote IP to which tunnel has to be connected 2. Remote endpoint - Is a map of IP address on per ver node basis",
+				MarkdownDescription: "Remote IP Address Selector. Defines the OPTIONS to select remote IP address for tunnel object OPTIONS available are - 1. IP Address - Specifies the remote IP to which tunnel has to be connected 2. Remote endpoint - Is a map of IP address on per ver node basis.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"endpoints": schema.SingleNestedBlock{
-						MarkdownDescription: "Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel",
+						MarkdownDescription: "Remote Endpoint Type. Provides a map of ver node name to remote node attributes Ver node should use these attributes to configure as remote tunnel.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"endpoints": schema.SingleNestedBlock{
-								MarkdownDescription: "Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes",
+								MarkdownDescription: "Remote Endpoints. Map of remote attributes to which tunnel will be established on per site node basis Every node can have a different attributes and IP address to connect to Key is ver node name and value is Remote node attributes.",
 							},
 						},
 					},
 					"ip": schema.SingleNestedBlock{
-						MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+						MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"ipv4": schema.SingleNestedBlock{
-								MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+								MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 								Attributes: map[string]schema.Attribute{
 									"addr": schema.StringAttribute{
-										MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+										MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
 										Optional:            true,
 									},
 								},

@@ -144,7 +144,7 @@ func (r *SiteMeshGroupResource) Metadata(ctx context.Context, req resource.Metad
 func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             site_mesh_groupSchemaVersion,
-		MarkdownDescription: "Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages Site Mesh Group in system namespace of user. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Site Mesh Group. Must be unique within the namespace.",
@@ -206,7 +206,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Enable this option",
 			},
 			"full_mesh": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: full_mesh, hub_mesh, spoke_mesh] Full Mesh. Details of Full Mesh Group Type",
+				MarkdownDescription: "[OneOf: full_mesh, hub_mesh, spoke_mesh] Full Mesh. Details of Full Mesh Group Type.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
@@ -218,7 +218,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"hub_mesh": schema.SingleNestedBlock{
-				MarkdownDescription: "Hub Full Mesh. Details of Hub Full Mesh Group Type",
+				MarkdownDescription: "Hub Full Mesh. Details of Hub Full Mesh Group Type.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
@@ -230,7 +230,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"spoke_mesh": schema.SingleNestedBlock{
-				MarkdownDescription: "Spoke. Details of Spoke Mesh Group Type",
+				MarkdownDescription: "Spoke. Details of Spoke Mesh Group Type.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
@@ -240,18 +240,18 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"hub_mesh_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -267,7 +267,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -275,15 +275,15 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -291,7 +291,7 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{

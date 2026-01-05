@@ -2,20 +2,20 @@
 page_title: "f5xc_route Resource - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+  Manages route object in a given namespace. Route object is list of route rules. Each rule has match condition to match incoming requests and actions to take on matching requests. Virtual host object has reference to route object. in F5 Distributed Cloud.
 ---
 
 # f5xc_route (Resource)
 
-Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+Manages route object in a given namespace. Route object is list of route rules. Each rule has match condition to match incoming requests and actions to take on matching requests. Virtual host object has reference to route object. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Route API docs](https://docs.cloud.f5.com/docs-v2/api/operate-route) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Route Resource Example
-# Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+# Manages route object in a given namespace. Route object is list of route rules. Each rule has match condition to match incoming requests and actions to take on matching requests. Virtual host object has reference to route object. in F5 Distributed Cloud.
 
 # Basic Route configuration
 resource "f5xc_route" "example" {
@@ -88,13 +88,13 @@ A [`routes`](#routes) block supports the following:
 
 <a id="routes-bot-defense-javascript-injection"></a>&#x2022; [`bot_defense_javascript_injection`](#routes-bot-defense-javascript-injection) - Optional Block<br>Bot Defense Javascript Injection Configuration for inline deployments. Bot Defense Javascript Injection Configuration for inline bot defense deployments<br>See [Bot Defense Javascript Injection](#routes-bot-defense-javascript-injection) below.
 
-<a id="routes-disable-location-add"></a>&#x2022; [`disable_location_add`](#routes-disable-location-add) - Optional Bool<br>Disable Location Addition. disables append of x-volterra-location = `<RE-site-name>` at route level, if it is configured at virtual-host level. This configuration is ignored on CE sites
+<a id="routes-disable-location-add"></a>&#x2022; [`disable_location_add`](#routes-disable-location-add) - Optional Bool<br>Disable Location Addition. Disables append of x-F5 Distributed Cloud-location = `<RE-site-name>` at route level, if it is configured at virtual-host level. This configuration is ignored on CE sites
 
 <a id="injection-2c38a2"></a>&#x2022; [`inherited_bot_defense_javascript_injection`](#injection-2c38a2) - Optional Block<br>Enable this option
 
 <a id="routes-inherited-waf-exclusion"></a>&#x2022; [`inherited_waf_exclusion`](#routes-inherited-waf-exclusion) - Optional Block<br>Enable this option
 
-<a id="routes-match"></a>&#x2022; [`match`](#routes-match) - Optional Block<br>Match. route match condition<br>See [Match](#routes-match) below.
+<a id="routes-match"></a>&#x2022; [`match`](#routes-match) - Optional Block<br>Match. Route match condition<br>See [Match](#routes-match) below.
 
 <a id="routes-request-cookies-to-add"></a>&#x2022; [`request_cookies_to_add`](#routes-request-cookies-to-add) - Optional Block<br>Add Cookies in Cookie Header. Cookies are key-value pairs to be added to HTTP request being routed towards upstream<br>See [Request Cookies To Add](#routes-request-cookies-to-add) below.
 
@@ -116,7 +116,7 @@ A [`routes`](#routes) block supports the following:
 
 <a id="routes-route-direct-response"></a>&#x2022; [`route_direct_response`](#routes-route-direct-response) - Optional Block<br>Direct Response. Send this direct response in case of route match action is direct response<br>See [Route Direct Response](#routes-route-direct-response) below.
 
-<a id="routes-route-redirect"></a>&#x2022; [`route_redirect`](#routes-route-redirect) - Optional Block<br>Redirect. route redirect parameters when match action is redirect<br>See [Route Redirect](#routes-route-redirect) below.
+<a id="routes-route-redirect"></a>&#x2022; [`route_redirect`](#routes-route-redirect) - Optional Block<br>Redirect. Route redirect parameters when match action is redirect<br>See [Route Redirect](#routes-route-redirect) below.
 
 <a id="routes-service-policy"></a>&#x2022; [`service_policy`](#routes-service-policy) - Optional Block<br>Service Policy Configuration. ServicePolicy configuration details at route level<br>See [Service Policy](#routes-service-policy) below.
 
@@ -128,7 +128,7 @@ A [`routes`](#routes) block supports the following:
 
 A [`bot_defense_javascript_injection`](#routes-bot-defense-javascript-injection) block (within [`routes`](#routes)) supports the following:
 
-<a id="location-95316f"></a>&#x2022; [`javascript_location`](#location-95316f) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>[Enum: AFTER_HEAD|AFTER_TITLE_END|BEFORE_SCRIPT] JavaScript Location. All inside networks. Insert JavaScript after `<head>` tag Insert JavaScript after `</title>` tag. Insert JavaScript before first `<script>` tag
+<a id="location-95316f"></a>&#x2022; [`javascript_location`](#location-95316f) - Optional String  Defaults to `AFTER_HEAD`<br>Possible values are `AFTER_HEAD`, `AFTER_TITLE_END`, `BEFORE_SCRIPT`<br>[Enum: AFTER_HEAD|AFTER_TITLE_END|BEFORE_SCRIPT] JavaScript Location. All inside networks. Insert JavaScript after `<HEAD>` tag Insert JavaScript after `</title>` tag. Insert JavaScript before first &lt;script> tag
 
 <a id="tags-60ccf3"></a>&#x2022; [`javascript_tags`](#tags-60ccf3) - Optional Block<br>JavaScript Tags. Select Add item to configure your javascript tag. If adding both Bot Adv and Fraud, the Bot Javascript should be added first<br>See [Javascript Tags](#tags-60ccf3) below.
 
@@ -188,9 +188,9 @@ A [`path`](#routes-match-path) block (within [`routes.match`](#routes-match)) su
 
 <a id="routes-match-path-path"></a>&#x2022; [`path`](#routes-match-path-path) - Optional String<br>Exact. Exact path value to match
 
-<a id="routes-match-path-prefix"></a>&#x2022; [`prefix`](#routes-match-path-prefix) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
+<a id="routes-match-path-prefix"></a>&#x2022; [`prefix`](#routes-match-path-prefix) - Optional String<br>Prefix. Path prefix to match (e.g. The value / will match on all paths)
 
-<a id="routes-match-path-regex"></a>&#x2022; [`regex`](#routes-match-path-regex) - Optional String<br>Regex. Regular expression of path match (e.g. the value .* will match on all paths)
+<a id="routes-match-path-regex"></a>&#x2022; [`regex`](#routes-match-path-regex) - Optional String<br>Regex. Regular expression of path match (e.g. The value .* will match on all paths)
 
 #### Routes Match Query Params
 
@@ -360,11 +360,11 @@ A [`route_destination`](#routes-route-destination) block (within [`routes`](#rou
 
 <a id="routes-route-destination-buffer-policy"></a>&#x2022; [`buffer_policy`](#routes-route-destination-buffer-policy) - Optional Block<br>Buffer Configuration. Some upstream applications are not capable of handling streamed data. This config enables buffering the entire request before sending to upstream application. We can specify the maximum buffer size and buffer interval with this config. Buffering can be enabled and disabled at VirtualHost and Route levels Route level buffer configuration takes precedence<br>See [Buffer Policy](#routes-route-destination-buffer-policy) below.
 
-<a id="routes-route-destination-cors-policy"></a>&#x2022; [`cors_policy`](#routes-route-destination-cors-policy) - Optional Block<br>CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Referrer: `HTTP://foo.example/examples/access-control/simpleXSInvocation.HTML` Origin: `HTTP://foo.example` HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 00:23:53 GMT Server: Apache/2.0.61 Access-Control-Allow-Origin: \* Keep-Alive: timeout=2, max=100 Connection: Keep-Alive Transfer-Encoding: chunked Content-Type: application/XML An example for cross origin HTTP OPTIONS request with Access-Control-Request-* header OPTIONS /resources/post-here/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Origin: `HTTP://foo.example` Access-Control-Request-Method: POST Access-Control-Request-Headers: X-PINGOTHER, Content-Type HTTP/1.1 204 No Content Date: Mon, 01 Dec 2008 01:15:39 GMT Server: Apache/2.0.61 (Unix) Access-Control-Allow-Origin: `HTTP://foo.example` Access-Control-Allow-Methods: POST, GET, OPTIONS Access-Control-Allow-Headers: X-PINGOTHER, Content-Type Access-Control-Max-Age: 86400 Vary: Accept-Encoding, Origin Keep-Alive: timeout=2, max=100 Connection: Keep-Alive<br>See [CORS Policy](#routes-route-destination-cors-policy) below.
+<a id="routes-route-destination-cors-policy"></a>&#x2022; [`cors_policy`](#routes-route-destination-cors-policy) - Optional Block<br>CORS Policy. Cross-Origin Resource Sharing requests configuration specified at Virtual-host or Route level. Route level configuration takes precedence. An example of an Cross origin HTTP request GET /resources/public-data/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel MAC OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Referrer: `HTTP://foo.example/examples/access-control/simplexsinvocation.HTML` Origin: `HTTP://foo.example` HTTP/1.1 200 OK Date: Mon, 01 Dec 2008 00:23:53 GMT Server: Apache/2.0.61 Access-Control-Allow-Origin: \* Keep-Alive: timeout=2, max=100 Connection: Keep-Alive Transfer-Encoding: chunked Content-Type: application/XML An example for cross origin HTTP OPTIONS request with Access-Control-Request-* header OPTIONS /resources/POST-here/ HTTP/1.1 Host: bar.other User-Agent: Mozilla/5.0 (Macintosh; U; Intel MAC OS X 10.5; en-US; rv:1.9.1b3pre) Gecko/20081130 Minefield/3.1b3pre Accept: text/HTML,application/xhtml+XML,application/XML;q=0.9,*/*;q=0.8 Accept-Language: en-us,en;q=0.5 Accept-Encoding: gzip,deflate Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Connection: keep-alive Origin: `HTTP://foo.example` Access-Control-Request-Method: POST Access-Control-Request-Headers: X-PINGOTHER, Content-Type HTTP/1.1 204 No Content Date: Mon, 01 Dec 2008 01:15:39 GMT Server: Apache/2.0.61 (Unix) Access-Control-Allow-Origin: `HTTP://foo.example` Access-Control-Allow-Methods: POST, GET, OPTIONS Access-Control-Allow-Headers: X-PINGOTHER, Content-Type Access-Control-Max-Age: 86400 Vary: Accept-Encoding, Origin Keep-Alive: timeout=2, max=100 Connection: Keep-Alive<br>See [CORS Policy](#routes-route-destination-cors-policy) below.
 
-<a id="routes-route-destination-csrf-policy"></a>&#x2022; [`csrf_policy`](#routes-route-destination-csrf-policy) - Optional Block<br>CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.The policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and compare their values. If the source origin is missing or origins do not match the request is rejected. The exception to this being if the source-origin has been added to they policy as valid. Because CSRF attacks specifically target state-changing requests, the policy only acts on the HTTP requests that have state-changing method (PUT,POST, etc.)<br>See [CSRF Policy](#routes-route-destination-csrf-policy) below.
+<a id="routes-route-destination-csrf-policy"></a>&#x2022; [`csrf_policy`](#routes-route-destination-csrf-policy) - Optional Block<br>CSRF Policy. To mitigate CSRF attack , the policy checks where a request is coming from to determine if the request's origin is the same as its detination.the policy relies on two pieces of information used in determining if a request originated from the same host. 1. The origin that caused the user agent to issue the request (source origin). 2. The origin that the request is going to (target origin). When the policy evaluating a request, it ensures both pieces of information are present and compare their values. If the source origin is missing or origins do not match the request is rejected. The exception to this being if the source-origin has been added to they policy as valid. Because CSRF attacks specifically target state-changing requests, the policy only acts on the HTTP requests that have state-changing method (PUT,POST, etc.)<br>See [CSRF Policy](#routes-route-destination-csrf-policy) below.
 
-<a id="routes-route-destination-destinations"></a>&#x2022; [`destinations`](#routes-route-destination-destinations) - Optional Block<br>Destination Origin pools (clusters). When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 weight: 50 This indicates that out of every 100 requests, 50 goes to cluster-3, 30 to cluster-2 and 20 to cluster-1 When single destination is configured, weight is ignored. All the requests are sent to the cluster specified in the destination<br>See [Destinations](#routes-route-destination-destinations) below.
+<a id="routes-route-destination-destinations"></a>&#x2022; [`destinations`](#routes-route-destination-destinations) - Optional Block<br>Destination Origin pools (clusters). When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: F5 xc.vega.cfg.adc.cluster.object uid: cluster-1 weight: 20 - cluster: - kind: F5 xc.vega.cfg.adc.cluster.object uid: cluster-2 weight: 30 - cluster: - kind: F5 xc.vega.cfg.adc.cluster.object uid: cluster-3 weight: 50 This indicates that out of every 100 requests, 50 goes to cluster-3, 30 to cluster-2 and 20 to cluster-1 When single destination is configured, weight is ignored. All the requests are sent to the cluster specified in the destination<br>See [Destinations](#routes-route-destination-destinations) below.
 
 <a id="cluster-098c21"></a>&#x2022; [`do_not_retract_cluster`](#cluster-098c21) - Optional Block<br>Enable this option
 
@@ -376,7 +376,7 @@ A [`route_destination`](#routes-route-destination) block (within [`routes`](#rou
 
 <a id="routes-route-destination-mirror-policy"></a>&#x2022; [`mirror_policy`](#routes-route-destination-mirror-policy) - Optional Block<br>Mirror Policy. MirrorPolicy is used for shadowing traffic from one cluster to another. The approach used is 'fire and forget', meaning it will not wait for the shadow cluster to respond before returning the response from the primary cluster. All normal statistics are collected for the shadow cluster making this feature useful for testing and troubleshooting<br>See [Mirror Policy](#routes-route-destination-mirror-policy) below.
 
-<a id="routes-route-destination-prefix-rewrite"></a>&#x2022; [`prefix_rewrite`](#routes-route-destination-prefix-rewrite) - Optional String<br>Prefix Rewrite. prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value. When using regex path matching, the entire path (not including the query string) will be swapped with this value. This option allows application URLs to be rooted at a different path from those exposed at the reverse proxy layer. Example : gcSpec: routes: - match: - headers: [] path: prefix : /register/ query_params: [] - headers: [] path: prefix: /register query_params: [] routeDestination: prefixRewrite: '/' destinations: - cluster: - kind: cluster.Object uid: cluster-1 Having above entries in the config, requests to /register will be stripped to /, while requests to /register/public will be stripped to /public
+<a id="routes-route-destination-prefix-rewrite"></a>&#x2022; [`prefix_rewrite`](#routes-route-destination-prefix-rewrite) - Optional String<br>Prefix Rewrite. prefix_rewrite indicates that during forwarding, the matched prefix (or path) should be swapped with its value. When using regex path matching, the entire path (not including the query string) will be swapped with this value. This option allows application URLs to be rooted at a different path from those exposed at the reverse proxy layer. Example : gcSpec: routes: - match: - headers: [] path: prefix : /register/ query_params: [] - headers: [] path: prefix: /register query_params: [] routeDestination: prefixRewrite: '/' destinations: - cluster: - kind: cluster.object uid: cluster-1 Having above entries in the config, requests to /register will be stripped to /, while requests to /register/public will be stripped to /public
 
 <a id="routes-route-destination-priority"></a>&#x2022; [`priority`](#routes-route-destination-priority) - Optional String  Defaults to `DEFAULT`<br>Possible values are `DEFAULT`, `HIGH`<br>[Enum: DEFAULT|HIGH] Routing Priority. Priority routing for each request. Different connection pools are used based on the priority selected for the request. Also, circuit-breaker configuration at destination cluster is chosen based on selected priority. Default routing mechanism High-Priority routing mechanism
 
@@ -446,27 +446,27 @@ A [`destinations`](#routes-route-destination-destinations) block (within [`route
 
 <a id="priority-830655"></a>&#x2022; [`priority`](#priority-830655) - Optional Number<br>Priority. Priority of this cluster, valid only with multiple destinations are configured. Value of 0 will make the cluster as lowest priority upstream cluster Priority of 1 means highest priority and is considered active. When active cluster is not available, lower priority clusters are made active as per the increasing priority
 
-<a id="weight-2acc2c"></a>&#x2022; [`weight`](#weight-2acc2c) - Optional Number<br>Weight. When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-1 weight: 20 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-2 weight: 30 - cluster: - kind: ves.io.vega.cfg.adc.cluster.Object uid: cluster-3 weight: 10 This indicates that out of every 60 requests, 10 goes to cluster-3, 30 to cluster-2 and 20 to cluster-1 When single destination is configured, weight is ignored. All the requests are sent to the cluster specified in the destination
+<a id="weight-2acc2c"></a>&#x2022; [`weight`](#weight-2acc2c) - Optional Number<br>Weight. When requests have to distributed among multiple upstream clusters, multiple destinations are configured, each having its own cluster and weight. Traffic is distributed among clusters based on the weight configured. destinations: - cluster: - kind: F5 xc.vega.cfg.adc.cluster.object uid: cluster-1 weight: 20 - cluster: - kind: F5 xc.vega.cfg.adc.cluster.object uid: cluster-2 weight: 30 - cluster: - kind: F5 xc.vega.cfg.adc.cluster.object uid: cluster-3 weight: 10 This indicates that out of every 60 requests, 10 goes to cluster-3, 30 to cluster-2 and 20 to cluster-1 When single destination is configured, weight is ignored. All the requests are sent to the cluster specified in the destination
 
 #### Routes Route Destination Destinations Cluster
 
 A [`cluster`](#cluster-d8ac1b) block (within [`routes.route_destination.destinations`](#routes-route-destination-destinations)) supports the following:
 
-<a id="kind-24578a"></a>&#x2022; [`kind`](#kind-24578a) - Optional String<br>Object reference kind
+<a id="kind-24578a"></a>&#x2022; [`kind`](#kind-24578a) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-638083"></a>&#x2022; [`name`](#name-638083) - Optional String<br>Object reference name
+<a id="name-638083"></a>&#x2022; [`name`](#name-638083) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-effaa4"></a>&#x2022; [`namespace`](#namespace-effaa4) - Optional String<br>Object reference namespace
+<a id="namespace-effaa4"></a>&#x2022; [`namespace`](#namespace-effaa4) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-4f2bb0"></a>&#x2022; [`tenant`](#tenant-4f2bb0) - Optional String<br>Object reference tenant
+<a id="tenant-4f2bb0"></a>&#x2022; [`tenant`](#tenant-4f2bb0) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-a2437e"></a>&#x2022; [`uid`](#uid-a2437e) - Optional String<br>Object reference UID
+<a id="uid-a2437e"></a>&#x2022; [`uid`](#uid-a2437e) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Routes Route Destination Hash Policy
 
 A [`hash_policy`](#routes-route-destination-hash-policy) block (within [`routes.route_destination`](#routes-route-destination)) supports the following:
 
-<a id="cookie-fa8e38"></a>&#x2022; [`cookie`](#cookie-fa8e38) - Optional Block<br>Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests get sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously<br>See [Cookie](#cookie-fa8e38) below.
+<a id="cookie-fa8e38"></a>&#x2022; [`cookie`](#cookie-fa8e38) - Optional Block<br>Hashing using Cookie. Two types of cookie affinity: 1. Passive. Takes a cookie that's present in the cookies header and hashes on its value. 2. Generated. Generates and sets a cookie with an expiration (TTL) on the first request from the client in its response to the client, based on the endpoint the request gets sent to. The client then presents this on the next and all subsequent requests. The hash of this is sufficient to ensure these requests GET sent to the same endpoint. The cookie is generated by hashing the source and destination ports and addresses so that multiple independent HTTP2 streams on the same connection will independently receive the same cookie, even if they arrive simultaneously<br>See [Cookie](#cookie-fa8e38) below.
 
 <a id="name-5f3d35"></a>&#x2022; [`header_name`](#name-5f3d35) - Optional String<br>Header Name. The name or key of the request header that will be used to obtain the hash key
 
@@ -506,29 +506,29 @@ A [`mirror_policy`](#routes-route-destination-mirror-policy) block (within [`rou
 
 <a id="cluster-1c80ee"></a>&#x2022; [`cluster`](#cluster-1c80ee) - Optional Block<br>Mirror Destination Cluster. Specifies the cluster to which the requests will be mirrored. The cluster object referred here must be present<br>See [Cluster](#cluster-1c80ee) below.
 
-<a id="percent-e76235"></a>&#x2022; [`percent`](#percent-e76235) - Optional Block<br>Fractional Percent. Fraction used where sampling percentages are needed. example sampled requests<br>See [Percent](#percent-e76235) below.
+<a id="percent-e76235"></a>&#x2022; [`percent`](#percent-e76235) - Optional Block<br>Fractional Percent. Fraction used where sampling percentages are needed. Example sampled requests<br>See [Percent](#percent-e76235) below.
 
 #### Routes Route Destination Mirror Policy Cluster
 
 A [`cluster`](#cluster-1c80ee) block (within [`routes.route_destination.mirror_policy`](#routes-route-destination-mirror-policy)) supports the following:
 
-<a id="kind-5f5f46"></a>&#x2022; [`kind`](#kind-5f5f46) - Optional String<br>Object reference kind
+<a id="kind-5f5f46"></a>&#x2022; [`kind`](#kind-5f5f46) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-99bc18"></a>&#x2022; [`name`](#name-99bc18) - Optional String<br>Object reference name
+<a id="name-99bc18"></a>&#x2022; [`name`](#name-99bc18) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-d5b69a"></a>&#x2022; [`namespace`](#namespace-d5b69a) - Optional String<br>Object reference namespace
+<a id="namespace-d5b69a"></a>&#x2022; [`namespace`](#namespace-d5b69a) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-5fcce8"></a>&#x2022; [`tenant`](#tenant-5fcce8) - Optional String<br>Object reference tenant
+<a id="tenant-5fcce8"></a>&#x2022; [`tenant`](#tenant-5fcce8) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-417dc0"></a>&#x2022; [`uid`](#uid-417dc0) - Optional String<br>Object reference UID
+<a id="uid-417dc0"></a>&#x2022; [`uid`](#uid-417dc0) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Routes Route Destination Mirror Policy Percent
 
 A [`percent`](#percent-e76235) block (within [`routes.route_destination.mirror_policy`](#routes-route-destination-mirror-policy)) supports the following:
 
-<a id="denominator-94e819"></a>&#x2022; [`denominator`](#denominator-94e819) - Optional String  Defaults to `HUNDRED`<br>Possible values are `HUNDRED`, `TEN_THOUSAND`, `MILLION`<br>[Enum: HUNDRED|TEN_THOUSAND|MILLION] Denominator. Denominator used in fraction where sampling percentages are needed. example sampled requests Use hundred as denominator Use ten thousand as denominator Use million as denominator
+<a id="denominator-94e819"></a>&#x2022; [`denominator`](#denominator-94e819) - Optional String  Defaults to `HUNDRED`<br>Possible values are `HUNDRED`, `TEN_THOUSAND`, `MILLION`<br>[Enum: HUNDRED|TEN_THOUSAND|MILLION] Denominator. Denominator used in fraction where sampling percentages are needed. Example sampled requests Use hundred as denominator Use ten thousand as denominator Use million as denominator
 
-<a id="numerator-9f6259"></a>&#x2022; [`numerator`](#numerator-9f6259) - Optional Number<br>Numerator. sampled parts per denominator. If denominator was 10000, then value of 5 will be 5 in 10000
+<a id="numerator-9f6259"></a>&#x2022; [`numerator`](#numerator-9f6259) - Optional Number<br>Numerator. Sampled parts per denominator. If denominator was 10000, then value of 5 will be 5 in 10000
 
 #### Routes Route Destination Query Params
 
@@ -588,19 +588,19 @@ A [`route_direct_response`](#routes-route-direct-response) block (within [`route
 
 <a id="encoded-023a3e"></a>&#x2022; [`response_body_encoded`](#encoded-023a3e) - Optional String<br>Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '`<p>` Access Denied `</p>`'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==
 
-<a id="code-e27cc8"></a>&#x2022; [`response_code`](#code-e27cc8) - Optional Number<br>Response Code. response code to send
+<a id="code-e27cc8"></a>&#x2022; [`response_code`](#code-e27cc8) - Optional Number<br>Response Code. Response code to send
 
 #### Routes Route Redirect
 
 A [`route_redirect`](#routes-route-redirect) block (within [`routes`](#routes)) supports the following:
 
-<a id="routes-route-redirect-host-redirect"></a>&#x2022; [`host_redirect`](#routes-route-redirect-host-redirect) - Optional String<br>Host. swap host part of incoming URL in redirect URL
+<a id="routes-route-redirect-host-redirect"></a>&#x2022; [`host_redirect`](#routes-route-redirect-host-redirect) - Optional String<br>Host. Swap host part of incoming URL in redirect URL
 
 <a id="routes-route-redirect-path-redirect"></a>&#x2022; [`path_redirect`](#routes-route-redirect-path-redirect) - Optional String<br>Path. swap path part of incoming URL in redirect URL
 
 <a id="routes-route-redirect-prefix-rewrite"></a>&#x2022; [`prefix_rewrite`](#routes-route-redirect-prefix-rewrite) - Optional String<br>Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request
 
-<a id="routes-route-redirect-proto-redirect"></a>&#x2022; [`proto_redirect`](#routes-route-redirect-proto-redirect) - Optional String<br>Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done
+<a id="routes-route-redirect-proto-redirect"></a>&#x2022; [`proto_redirect`](#routes-route-redirect-proto-redirect) - Optional String<br>Protocol. Swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done
 
 <a id="routes-route-redirect-remove-all-params"></a>&#x2022; [`remove_all_params`](#routes-route-redirect-remove-all-params) - Optional Block<br>Enable this option
 
@@ -618,7 +618,13 @@ A [`service_policy`](#routes-service-policy) block (within [`routes`](#routes)) 
 
 #### Routes WAF Exclusion Policy
 
-<a id="objref-a18e05"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`waf_exclusion_policy`](#routes-waf-exclusion-policy) block (within [`routes`](#routes)) supports the following:
+
+<a id="routes-waf-exclusion-policy-name"></a>&#x2022; [`name`](#routes-waf-exclusion-policy-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="routes-waf-exclusion-policy-namespace"></a>&#x2022; [`namespace`](#routes-waf-exclusion-policy-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="routes-waf-exclusion-policy-tenant"></a>&#x2022; [`tenant`](#routes-waf-exclusion-policy-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Routes WAF Type
 
@@ -640,15 +646,15 @@ An [`app_firewall`](#routes-waf-type-app-firewall) block (within [`routes.waf_ty
 
 An [`app_firewall`](#firewall-9775b3) block (within [`routes.waf_type.app_firewall`](#routes-waf-type-app-firewall)) supports the following:
 
-<a id="kind-13aebd"></a>&#x2022; [`kind`](#kind-13aebd) - Optional String<br>Object reference kind
+<a id="kind-13aebd"></a>&#x2022; [`kind`](#kind-13aebd) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-028577"></a>&#x2022; [`name`](#name-028577) - Optional String<br>Object reference name
+<a id="name-028577"></a>&#x2022; [`name`](#name-028577) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-38fd49"></a>&#x2022; [`namespace`](#namespace-38fd49) - Optional String<br>Object reference namespace
+<a id="namespace-38fd49"></a>&#x2022; [`namespace`](#namespace-38fd49) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-853650"></a>&#x2022; [`tenant`](#tenant-853650) - Optional String<br>Object reference tenant
+<a id="tenant-853650"></a>&#x2022; [`tenant`](#tenant-853650) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-f378e6"></a>&#x2022; [`uid`](#uid-f378e6) - Optional String<br>Object reference UID
+<a id="uid-f378e6"></a>&#x2022; [`uid`](#uid-f378e6) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Timeouts
 

@@ -8124,7 +8124,7 @@ func (r *WorkloadResource) Metadata(ctx context.Context, req resource.MetadataRe
 func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             workloadSchemaVersion,
-		MarkdownDescription: "Manages a Workload resource in F5 Distributed Cloud for workload configuration.",
+		MarkdownDescription: "Manages a Workload resource in F5 Distributed Cloud for workload. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Workload. Must be unique within the namespace.",
@@ -8183,22 +8183,22 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "[OneOf: job, service, simple_service, stateful_service] Job Type. Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc.",
 				Attributes: map[string]schema.Attribute{
 					"num_replicas": schema.Int64Attribute{
-						MarkdownDescription: "Number of Replicas. Number of replicas of the batch job to spawn per site",
+						MarkdownDescription: "Number of Replicas. Number of replicas of the batch job to spawn per site.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"configuration": schema.SingleNestedBlock{
-						MarkdownDescription: "Configuration Parameters. Configuration parameters of the workload",
+						MarkdownDescription: "Configuration Parameters. Configuration parameters of the workload.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload",
+								MarkdownDescription: "Parameters. Parameters for the workload.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"env_var": schema.SingleNestedBlock{
-											MarkdownDescription: "Environment Variable. Environment Variable",
+											MarkdownDescription: "Environment Variable. Environment Variable.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of Environment Variable.",
@@ -8211,24 +8211,24 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											},
 										},
 										"file": schema.SingleNestedBlock{
-											MarkdownDescription: "Configuration File. Configuration File for the workload",
+											MarkdownDescription: "Configuration File. Configuration File for the workload.",
 											Attributes: map[string]schema.Attribute{
 												"data": schema.StringAttribute{
 													MarkdownDescription: "Data. File data",
 													Optional:            true,
 												},
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. Name of the file",
+													MarkdownDescription: "Name. Name of the file .",
 													Optional:            true,
 												},
 												"volume_name": schema.StringAttribute{
-													MarkdownDescription: "Volume Name. Name of the Volume",
+													MarkdownDescription: "Volume Name. Name of the Volume .",
 													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"mount": schema.SingleNestedBlock{
-													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 													Attributes: map[string]schema.Attribute{
 														"mode": schema.StringAttribute{
 															MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -8252,16 +8252,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"containers": schema.ListNestedBlock{
-						MarkdownDescription: "Containers. Containers to use for the job",
+						MarkdownDescription: "Containers. Containers to use for the job .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"args": schema.ListAttribute{
-									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD",
+									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD.",
 									Optional:            true,
 									ElementType:         types.StringType,
 								},
 								"command": schema.ListAttribute{
-									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT",
+									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT.",
 									Optional:            true,
 									ElementType:         types.StringType,
 								},
@@ -8270,28 +8270,28 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional:            true,
 								},
 								"init_container": schema.BoolAttribute{
-									MarkdownDescription: "Initialization Container. Specialized container that runs before application container and runs to completion",
+									MarkdownDescription: "Initialization Container. Specialized container that runs before application container and runs to completion.",
 									Optional:            true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the container",
+									MarkdownDescription: "Name. Name of the container .",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"custom_flavor": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -8304,10 +8304,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Enable this option",
 								},
 								"image": schema.SingleNestedBlock{
-									MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any",
+									MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
+											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
 											Optional:            true,
 										},
 										"pull_policy": schema.StringAttribute{
@@ -8317,18 +8317,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 									Blocks: map[string]schema.Block{
 										"container_registry": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -8343,14 +8343,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"liveness_check": schema.SingleNestedBlock{
-									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
+									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic.",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
 											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional:            true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated.",
 											Optional:            true,
 										},
 										"interval": schema.Int64Attribute{
@@ -8397,11 +8397,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -8409,18 +8409,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											},
 										},
 										"tcp_health_check": schema.SingleNestedBlock{
-											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection",
+											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"port": schema.SingleNestedBlock{
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -8430,14 +8430,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"readiness_check": schema.SingleNestedBlock{
-									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
+									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic.",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
 											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional:            true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated.",
 											Optional:            true,
 										},
 										"interval": schema.Int64Attribute{
@@ -8484,11 +8484,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -8496,18 +8496,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											},
 										},
 										"tcp_health_check": schema.SingleNestedBlock{
-											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection",
+											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"port": schema.SingleNestedBlock{
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -8520,7 +8520,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"deploy_options": schema.SingleNestedBlock{
-						MarkdownDescription: "Deploy Options. Deploy Options are used to configure the workload deployment options",
+						MarkdownDescription: "Deploy OPTIONS. Deploy OPTIONS are used to configure the workload deployment OPTIONS.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"all_res": schema.SingleNestedBlock{
@@ -8530,23 +8530,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								MarkdownDescription: "Enable this option",
 							},
 							"deploy_ce_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Customer Sites. This defines a way to deploy a workload on specific Customer sites",
+								MarkdownDescription: "Customer Sites. This defines a way to deploy a workload on specific Customer sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed",
+										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -8559,23 +8559,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"deploy_ce_virtual_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites",
+								MarkdownDescription: "Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed",
+										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -8588,23 +8588,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"deploy_re_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites",
+								MarkdownDescription: "Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed",
+										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -8617,23 +8617,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"deploy_re_virtual_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites",
+								MarkdownDescription: "Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed",
+										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -8648,17 +8648,17 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Volumes. Volumes for the job",
+						MarkdownDescription: "Volumes. Volumes for the job.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume",
+									MarkdownDescription: "Name. Name of the volume.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"empty_dir": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload",
+									MarkdownDescription: "Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload.",
 									Attributes: map[string]schema.Attribute{
 										"size_limit": schema.Int64Attribute{
 											MarkdownDescription: "Size Limit (in GiB).",
@@ -8667,7 +8667,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 									Blocks: map[string]schema.Block{
 										"mount": schema.SingleNestedBlock{
-											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
 													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -8686,16 +8686,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"host_path": schema.SingleNestedBlock{
-									MarkdownDescription: "HostPath Volume. Volume containing a host mapped path into the workload",
+									MarkdownDescription: "HostPath Volume. Volume containing a host mapped path into the workload.",
 									Attributes: map[string]schema.Attribute{
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Path. Path of the directory on the host",
+											MarkdownDescription: "Path. Path of the directory on the host .",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"mount": schema.SingleNestedBlock{
-											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
 													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -8714,11 +8714,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"persistent_volume": schema.SingleNestedBlock{
-									MarkdownDescription: "Persistent Storage Volume. Volume containing the Persistent Storage for the workload",
+									MarkdownDescription: "Persistent Storage Volume. Volume containing the Persistent Storage for the workload.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"mount": schema.SingleNestedBlock{
-											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
 													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -8742,11 +8742,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													Optional:            true,
 												},
 												"class_name": schema.StringAttribute{
-													MarkdownDescription: "Class Name. Use the specified class name",
+													MarkdownDescription: "Class Name. Use the specified class name.",
 													Optional:            true,
 												},
 												"storage_size": schema.Int64Attribute{
-													MarkdownDescription: "Size (in GiB). Size in GiB of the persistent storage",
+													MarkdownDescription: "Size (in GiB). Size in GiB of the persistent storage .",
 													Optional:            true,
 												},
 											},
@@ -8767,50 +8767,50 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "ServiceType. Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers, traditional SQL databases, etc.",
 				Attributes: map[string]schema.Attribute{
 					"num_replicas": schema.Int64Attribute{
-						MarkdownDescription: "Number of Replicas. Number of replicas of service to spawn per site",
+						MarkdownDescription: "Number of Replicas. Number of replicas of service to spawn per site.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"advertise_options": schema.SingleNestedBlock{
-						MarkdownDescription: "Advertise Options. Advertise options are used to configure how and where to advertise the workload using load balancers",
+						MarkdownDescription: "Advertise OPTIONS. Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"advertise_custom": schema.SingleNestedBlock{
-								MarkdownDescription: "Advertise on specific sites. Advertise this workload via loadbalancer on specific sites",
+								MarkdownDescription: "Advertise on specific sites. Advertise this workload via loadbalancer on specific sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"advertise_where": schema.ListNestedBlock{
-										MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available",
+										MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"site": schema.SingleNestedBlock{
-													MarkdownDescription: "Site. This defines a reference to a CE site along with network type and an optional ip address where a load balancer could be advertised",
+													MarkdownDescription: "Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised.",
 													Attributes: map[string]schema.Attribute{
 														"ip": schema.StringAttribute{
-															MarkdownDescription: "IP Address. Use given IP address as VIP on the site",
+															MarkdownDescription: "IP Address. Use given IP address as VIP on the site.",
 															Optional:            true,
 														},
 														"network": schema.StringAttribute{
-															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
+															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"site": schema.SingleNestedBlock{
-															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 															Attributes: map[string]schema.Attribute{
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																	Optional:            true,
 																},
 																"namespace": schema.StringAttribute{
-																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																	Optional:            true,
 																},
 																"tenant": schema.StringAttribute{
-																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -8822,27 +8822,27 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													},
 												},
 												"virtual_site": schema.SingleNestedBlock{
-													MarkdownDescription: "Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised",
+													MarkdownDescription: "Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised.",
 													Attributes: map[string]schema.Attribute{
 														"network": schema.StringAttribute{
-															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
+															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"virtual_site": schema.SingleNestedBlock{
-															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 															Attributes: map[string]schema.Attribute{
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																	Optional:            true,
 																},
 																"namespace": schema.StringAttribute{
-																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																	Optional:            true,
 																},
 																"tenant": schema.StringAttribute{
-																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -8854,22 +8854,22 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													},
 												},
 												"vk8s_service": schema.SingleNestedBlock{
-													MarkdownDescription: "vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network",
+													MarkdownDescription: "VK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"site": schema.SingleNestedBlock{
-															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 															Attributes: map[string]schema.Attribute{
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																	Optional:            true,
 																},
 																"namespace": schema.StringAttribute{
-																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																	Optional:            true,
 																},
 																"tenant": schema.StringAttribute{
-																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -8879,18 +8879,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"virtual_site": schema.SingleNestedBlock{
-															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 															Attributes: map[string]schema.Attribute{
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																	Optional:            true,
 																},
 																"namespace": schema.StringAttribute{
-																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																	Optional:            true,
 																},
 																"tenant": schema.StringAttribute{
-																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -8905,25 +8905,25 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"ports": schema.ListNestedBlock{
-										MarkdownDescription: "Ports. Ports to advertise",
+										MarkdownDescription: "Ports. Ports to advertise .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"http_loadbalancer": schema.SingleNestedBlock{
-													MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer",
+													MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer.",
 													Attributes: map[string]schema.Attribute{
 														"domains": schema.ListAttribute{
-															MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER",
+															MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.example.com``. 2. Prefix domain wildcards: ``*.example.com`` or ``*.bar.example.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. E.g. ``*.example.com`` will match ``bar.example.com`` and ``baz-bar.example.com`` but not ``.example.com``. The longest wildcards match first. Wildcards must match a whole DNS label. E.g. ``*.example.com`` and *.bar.example.com are valid, however ``*bar.example.com`` or ``*-bar.example.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER .",
 															Optional:            true,
 															ElementType:         types.StringType,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"default_route": schema.SingleNestedBlock{
-															MarkdownDescription: "Default Route. Default route matching all APIs",
+															MarkdownDescription: "Default Route. Default route matching all APIs.",
 															Attributes: map[string]schema.Attribute{
 																"host_rewrite": schema.StringAttribute{
-																	MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																	MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																	Optional:            true,
 																},
 															},
@@ -8937,7 +8937,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"http": schema.SingleNestedBlock{
-															MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy",
+															MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy.",
 															Attributes: map[string]schema.Attribute{
 																"dns_volterra_managed": schema.BoolAttribute{
 																	MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal.",
@@ -8954,10 +8954,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"https": schema.SingleNestedBlock{
-															MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates",
+															MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 															Attributes: map[string]schema.Attribute{
 																"add_hsts": schema.BoolAttribute{
-																	MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																	MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																	Optional:            true,
 																},
 																"append_server_name": schema.StringAttribute{
@@ -8969,7 +8969,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"http_redirect": schema.BoolAttribute{
-																	MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																	MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																	Optional:            true,
 																},
 																"port": schema.Int64Attribute{
@@ -8987,7 +8987,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 															Blocks: map[string]schema.Block{
 																"coalescing_options": schema.SingleNestedBlock{
-																	MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																	MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"default_coalescing": schema.SingleNestedBlock{
@@ -9011,15 +9011,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Enable this option",
 																},
 																"http_protocol_options": schema.SingleNestedBlock{
-																	MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																	MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																			MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																			MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"header_transformation": schema.SingleNestedBlock{
-																					MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																					MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"default_header_transformation": schema.SingleNestedBlock{
@@ -9053,7 +9053,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Enable this option",
 																},
 																"tls_cert_params": schema.SingleNestedBlock{
-																	MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates",
+																	MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"certificates": schema.ListNestedBlock{
@@ -9061,15 +9061,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			NestedObject: schema.NestedBlockObject{
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
-																						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																						Optional:            true,
 																					},
 																					"namespace": schema.StringAttribute{
-																						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																						Optional:            true,
 																					},
 																					"tenant": schema.StringAttribute{
-																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
 																						PlanModifiers: []planmodifier.String{
@@ -9083,11 +9083,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"tls_config": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																			MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"custom_security": schema.SingleNestedBlock{
-																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																					Attributes: map[string]schema.Attribute{
 																						"cipher_suites": schema.ListAttribute{
 																							MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -9116,31 +9116,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"use_mtls": schema.SingleNestedBlock{
-																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																			Attributes: map[string]schema.Attribute{
 																				"client_certificate_optional": schema.BoolAttribute{
 																					MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																					Optional:            true,
 																				},
 																				"trusted_ca_url": schema.StringAttribute{
-																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																					Optional:            true,
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
 																				"crl": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -9153,18 +9153,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"trusted_ca": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -9177,10 +9177,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"xfcc_options": schema.SingleNestedBlock{
-																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -9191,14 +9191,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"tls_parameters": schema.SingleNestedBlock{
-																	MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
+																	MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"no_mtls": schema.SingleNestedBlock{
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"tls_certificates": schema.ListNestedBlock{
-																			MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
+																			MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 																			NestedObject: schema.NestedBlockObject{
 																				Attributes: map[string]schema.Attribute{
 																					"certificate_url": schema.StringAttribute{
@@ -9206,13 +9206,13 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						Optional:            true,
 																					},
 																					"description_spec": schema.StringAttribute{
-																						MarkdownDescription: "Description. Description for the certificate",
+																						MarkdownDescription: "Description. Description for the certificate.",
 																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
 																					"custom_hash_algorithms": schema.SingleNestedBlock{
-																						MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+																						MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 																						Attributes: map[string]schema.Attribute{
 																							"hash_algorithms": schema.ListAttribute{
 																								MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -9225,22 +9225,22 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Enable this option",
 																					},
 																					"private_key": schema.SingleNestedBlock{
-																						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 																						Attributes:          map[string]schema.Attribute{},
 																						Blocks: map[string]schema.Block{
 																							"blindfold_secret_info": schema.SingleNestedBlock{
-																								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																								Attributes: map[string]schema.Attribute{
 																									"decryption_provider": schema.StringAttribute{
 																										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																										Optional:            true,
 																									},
 																									"location": schema.StringAttribute{
-																										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																										Optional:            true,
 																									},
 																									"store_provider": schema.StringAttribute{
-																										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																										Optional:            true,
 																									},
 																								},
@@ -9249,11 +9249,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																								Attributes: map[string]schema.Attribute{
 																									"provider_ref": schema.StringAttribute{
-																										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																										Optional:            true,
 																									},
 																									"url": schema.StringAttribute{
-																										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																										Optional:            true,
 																									},
 																								},
@@ -9267,11 +9267,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"tls_config": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																			MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"custom_security": schema.SingleNestedBlock{
-																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																					Attributes: map[string]schema.Attribute{
 																						"cipher_suites": schema.ListAttribute{
 																							MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -9300,31 +9300,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"use_mtls": schema.SingleNestedBlock{
-																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																			Attributes: map[string]schema.Attribute{
 																				"client_certificate_optional": schema.BoolAttribute{
 																					MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																					Optional:            true,
 																				},
 																				"trusted_ca_url": schema.StringAttribute{
-																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																					Optional:            true,
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
 																				"crl": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -9337,18 +9337,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"trusted_ca": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -9361,10 +9361,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"xfcc_options": schema.SingleNestedBlock{
-																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -9377,10 +9377,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"https_auto_cert": schema.SingleNestedBlock{
-															MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates",
+															MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 															Attributes: map[string]schema.Attribute{
 																"add_hsts": schema.BoolAttribute{
-																	MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																	MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																	Optional:            true,
 																},
 																"append_server_name": schema.StringAttribute{
@@ -9392,7 +9392,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"http_redirect": schema.BoolAttribute{
-																	MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																	MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																	Optional:            true,
 																},
 																"port": schema.Int64Attribute{
@@ -9410,7 +9410,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 															Blocks: map[string]schema.Block{
 																"coalescing_options": schema.SingleNestedBlock{
-																	MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																	MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"default_coalescing": schema.SingleNestedBlock{
@@ -9434,15 +9434,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Enable this option",
 																},
 																"http_protocol_options": schema.SingleNestedBlock{
-																	MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																	MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																			MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																			MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"header_transformation": schema.SingleNestedBlock{
-																					MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																					MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"default_header_transformation": schema.SingleNestedBlock{
@@ -9479,11 +9479,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Enable this option",
 																},
 																"tls_config": schema.SingleNestedBlock{
-																	MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																	MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"custom_security": schema.SingleNestedBlock{
-																			MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																			MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																			Attributes: map[string]schema.Attribute{
 																				"cipher_suites": schema.ListAttribute{
 																					MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -9512,31 +9512,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"use_mtls": schema.SingleNestedBlock{
-																	MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																	MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																	Attributes: map[string]schema.Attribute{
 																		"client_certificate_optional": schema.BoolAttribute{
 																			MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																			Optional:            true,
 																		},
 																		"trusted_ca_url": schema.StringAttribute{
-																			MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																			MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																			Optional:            true,
 																		},
 																	},
 																	Blocks: map[string]schema.Block{
 																		"crl": schema.SingleNestedBlock{
-																			MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																			MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																			Attributes: map[string]schema.Attribute{
 																				"name": schema.StringAttribute{
-																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -9549,18 +9549,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"trusted_ca": schema.SingleNestedBlock{
-																			MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																			MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																			Attributes: map[string]schema.Attribute{
 																				"name": schema.StringAttribute{
-																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -9573,10 +9573,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"xfcc_options": schema.SingleNestedBlock{
-																			MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																			MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																			Attributes: map[string]schema.Attribute{
 																				"xfcc_header_elements": schema.ListAttribute{
-																					MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																					MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																					Optional:            true,
 																					ElementType:         types.StringType,
 																				},
@@ -9587,11 +9587,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"specific_routes": schema.SingleNestedBlock{
-															MarkdownDescription: "Route Type. This defines various options to define a route",
+															MarkdownDescription: "Route Type. This defines various OPTIONS to define a route.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"routes": schema.ListNestedBlock{
-																	MarkdownDescription: "Routes. Routes for this loadbalancer",
+																	MarkdownDescription: "Routes. Routes for this loadbalancer.",
 																	NestedObject: schema.NestedBlockObject{
 																		Attributes: map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
@@ -9600,18 +9600,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"route_ref": schema.SingleNestedBlock{
-																						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																						Attributes: map[string]schema.Attribute{
 																							"name": schema.StringAttribute{
-																								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																								Optional:            true,
 																							},
 																							"namespace": schema.StringAttribute{
-																								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																								Optional:            true,
 																							},
 																							"tenant": schema.StringAttribute{
-																								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																								Optional:            true,
 																								Computed:            true,
 																								PlanModifiers: []planmodifier.String{
@@ -9623,7 +9623,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				},
 																			},
 																			"direct_response_route": schema.SingleNestedBlock{
-																				MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
+																				MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic.",
 																				Attributes: map[string]schema.Attribute{
 																					"http_method": schema.StringAttribute{
 																						MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -9632,41 +9632,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				},
 																				Blocks: map[string]schema.Block{
 																					"headers": schema.ListNestedBlock{
-																						MarkdownDescription: "Headers. List of (key, value) headers",
+																						MarkdownDescription: "Headers. List of (key, value) headers.",
 																						NestedObject: schema.NestedBlockObject{
 																							Attributes: map[string]schema.Attribute{
 																								"exact": schema.StringAttribute{
-																									MarkdownDescription: "Exact. Header value to match exactly",
+																									MarkdownDescription: "Exact. Header value to match exactly.",
 																									Optional:            true,
 																								},
 																								"invert_match": schema.BoolAttribute{
-																									MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																									MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																									Optional:            true,
 																								},
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. Name of the header",
+																									MarkdownDescription: "Name. Name of the header .",
 																									Optional:            true,
 																								},
 																								"presence": schema.BoolAttribute{
-																									MarkdownDescription: "Presence. If true, check for presence of header",
+																									MarkdownDescription: "Presence. If true, check for presence of header.",
 																									Optional:            true,
 																								},
 																								"regex": schema.StringAttribute{
-																									MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																									MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																									Optional:            true,
 																								},
 																							},
 																						},
 																					},
 																					"incoming_port": schema.SingleNestedBlock{
-																						MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																						MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																						Attributes: map[string]schema.Attribute{
 																							"port": schema.Int64Attribute{
-																								MarkdownDescription: "Port. Exact Port to match",
+																								MarkdownDescription: "Port. Exact Port to match.",
 																								Optional:            true,
 																							},
 																							"port_ranges": schema.StringAttribute{
-																								MarkdownDescription: "Port range. Port range to match",
+																								MarkdownDescription: "Port range. Port range to match.",
 																								Optional:            true,
 																							},
 																						},
@@ -9677,31 +9677,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																					},
 																					"path": schema.SingleNestedBlock{
-																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																						Attributes: map[string]schema.Attribute{
 																							"path": schema.StringAttribute{
-																								MarkdownDescription: "Exact. Exact path value to match",
+																								MarkdownDescription: "Exact. Exact path value to match.",
 																								Optional:            true,
 																							},
 																							"prefix": schema.StringAttribute{
-																								MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																								MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																								Optional:            true,
 																							},
 																							"regex": schema.StringAttribute{
-																								MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																								MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																								Optional:            true,
 																							},
 																						},
 																					},
 																					"route_direct_response": schema.SingleNestedBlock{
-																						MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response",
+																						MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response.",
 																						Attributes: map[string]schema.Attribute{
 																							"response_body_encoded": schema.StringAttribute{
-																								MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g. '<p> Access Denied </p>'. Base64 encoded string url for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==",
+																								MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==.",
 																								Optional:            true,
 																							},
 																							"response_code": schema.Int64Attribute{
-																								MarkdownDescription: "Response Code. response code to send",
+																								MarkdownDescription: "Response Code. Response code to send.",
 																								Optional:            true,
 																							},
 																						},
@@ -9709,7 +9709,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				},
 																			},
 																			"redirect_route": schema.SingleNestedBlock{
-																				MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
+																				MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL.",
 																				Attributes: map[string]schema.Attribute{
 																					"http_method": schema.StringAttribute{
 																						MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -9718,41 +9718,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				},
 																				Blocks: map[string]schema.Block{
 																					"headers": schema.ListNestedBlock{
-																						MarkdownDescription: "Headers. List of (key, value) headers",
+																						MarkdownDescription: "Headers. List of (key, value) headers.",
 																						NestedObject: schema.NestedBlockObject{
 																							Attributes: map[string]schema.Attribute{
 																								"exact": schema.StringAttribute{
-																									MarkdownDescription: "Exact. Header value to match exactly",
+																									MarkdownDescription: "Exact. Header value to match exactly.",
 																									Optional:            true,
 																								},
 																								"invert_match": schema.BoolAttribute{
-																									MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																									MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																									Optional:            true,
 																								},
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. Name of the header",
+																									MarkdownDescription: "Name. Name of the header .",
 																									Optional:            true,
 																								},
 																								"presence": schema.BoolAttribute{
-																									MarkdownDescription: "Presence. If true, check for presence of header",
+																									MarkdownDescription: "Presence. If true, check for presence of header.",
 																									Optional:            true,
 																								},
 																								"regex": schema.StringAttribute{
-																									MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																									MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																									Optional:            true,
 																								},
 																							},
 																						},
 																					},
 																					"incoming_port": schema.SingleNestedBlock{
-																						MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																						MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																						Attributes: map[string]schema.Attribute{
 																							"port": schema.Int64Attribute{
-																								MarkdownDescription: "Port. Exact Port to match",
+																								MarkdownDescription: "Port. Exact Port to match.",
 																								Optional:            true,
 																							},
 																							"port_ranges": schema.StringAttribute{
-																								MarkdownDescription: "Port range. Port range to match",
+																								MarkdownDescription: "Port range. Port range to match.",
 																								Optional:            true,
 																							},
 																						},
@@ -9763,39 +9763,39 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																					},
 																					"path": schema.SingleNestedBlock{
-																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																						Attributes: map[string]schema.Attribute{
 																							"path": schema.StringAttribute{
-																								MarkdownDescription: "Exact. Exact path value to match",
+																								MarkdownDescription: "Exact. Exact path value to match.",
 																								Optional:            true,
 																							},
 																							"prefix": schema.StringAttribute{
-																								MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																								MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																								Optional:            true,
 																							},
 																							"regex": schema.StringAttribute{
-																								MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																								MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																								Optional:            true,
 																							},
 																						},
 																					},
 																					"route_redirect": schema.SingleNestedBlock{
-																						MarkdownDescription: "Redirect. route redirect parameters when match action is redirect.",
+																						MarkdownDescription: "Redirect. Route redirect parameters when match action is redirect.",
 																						Attributes: map[string]schema.Attribute{
 																							"host_redirect": schema.StringAttribute{
-																								MarkdownDescription: "Host. swap host part of incoming URL in redirect URL",
+																								MarkdownDescription: "Host. Swap host part of incoming URL in redirect URL.",
 																								Optional:            true,
 																							},
 																							"path_redirect": schema.StringAttribute{
-																								MarkdownDescription: "Path. swap path part of incoming URL in redirect URL",
+																								MarkdownDescription: "Path. swap path part of incoming URL in redirect URL.",
 																								Optional:            true,
 																							},
 																							"prefix_rewrite": schema.StringAttribute{
-																								MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request",
+																								MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request.",
 																								Optional:            true,
 																							},
 																							"proto_redirect": schema.StringAttribute{
-																								MarkdownDescription: "Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either http or https When incoming-proto option is specified, swapping of protocol is not done.",
+																								MarkdownDescription: "Protocol. Swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done.",
 																								Optional:            true,
 																							},
 																							"replace_params": schema.StringAttribute{
@@ -9819,10 +9819,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				},
 																			},
 																			"simple_route": schema.SingleNestedBlock{
-																				MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside",
+																				MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside.",
 																				Attributes: map[string]schema.Attribute{
 																					"host_rewrite": schema.StringAttribute{
-																						MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																						MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																						Optional:            true,
 																					},
 																					"http_method": schema.StringAttribute{
@@ -9838,18 +9838,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Enable this option",
 																					},
 																					"path": schema.SingleNestedBlock{
-																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																						Attributes: map[string]schema.Attribute{
 																							"path": schema.StringAttribute{
-																								MarkdownDescription: "Exact. Exact path value to match",
+																								MarkdownDescription: "Exact. Exact path value to match.",
 																								Optional:            true,
 																							},
 																							"prefix": schema.StringAttribute{
-																								MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																								MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																								Optional:            true,
 																							},
 																							"regex": schema.StringAttribute{
-																								MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																								MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																								Optional:            true,
 																							},
 																						},
@@ -9864,19 +9864,19 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													},
 												},
 												"port": schema.SingleNestedBlock{
-													MarkdownDescription: "Port. Port of the workload",
+													MarkdownDescription: "Port. Port of the workload.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. Name of the Port",
+															MarkdownDescription: "Name. Name of the Port .",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"info": schema.SingleNestedBlock{
-															MarkdownDescription: "Port Information. Port information",
+															MarkdownDescription: "Port Information. Port information.",
 															Attributes: map[string]schema.Attribute{
 																"port": schema.Int64Attribute{
-																	MarkdownDescription: "Port. Port the workload can be reached on",
+																	MarkdownDescription: "Port. Port the workload can be reached on .",
 																	Optional:            true,
 																},
 																"protocol": schema.StringAttribute{
@@ -9884,7 +9884,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"target_port": schema.Int64Attribute{
-																	MarkdownDescription: "Different than Port. Port the workload is listening on",
+																	MarkdownDescription: "Different than Port. Port the workload is listening on.",
 																	Optional:            true,
 																},
 															},
@@ -9897,15 +9897,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													},
 												},
 												"tcp_loadbalancer": schema.SingleNestedBlock{
-													MarkdownDescription: "TCP Load Balancer. TCP loadbalancer",
+													MarkdownDescription: "TCP Load Balancer. TCP loadbalancer.",
 													Attributes: map[string]schema.Attribute{
 														"domains": schema.ListAttribute{
-															MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER",
+															MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER.",
 															Optional:            true,
 															ElementType:         types.StringType,
 														},
 														"with_sni": schema.BoolAttribute{
-															MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI",
+															MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI.",
 															Optional:            true,
 														},
 													},
@@ -9916,28 +9916,28 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"advertise_in_cluster": schema.SingleNestedBlock{
-								MarkdownDescription: "Advertise In Cluster. Advertise the workload locally in-cluster",
+								MarkdownDescription: "Advertise In Cluster. Advertise the workload locally in-cluster.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"multi_ports": schema.SingleNestedBlock{
-										MarkdownDescription: "Multiple Ports. Multiple ports",
+										MarkdownDescription: "Multiple Ports. Multiple ports.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"ports": schema.ListNestedBlock{
-												MarkdownDescription: "Ports. Ports to advertise",
+												MarkdownDescription: "Ports. Ports to advertise .",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. Name of the Port",
+															MarkdownDescription: "Name. Name of the Port .",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"info": schema.SingleNestedBlock{
-															MarkdownDescription: "Port Information. Port information",
+															MarkdownDescription: "Port Information. Port information.",
 															Attributes: map[string]schema.Attribute{
 																"port": schema.Int64Attribute{
-																	MarkdownDescription: "Port. Port the workload can be reached on",
+																	MarkdownDescription: "Port. Port the workload can be reached on .",
 																	Optional:            true,
 																},
 																"protocol": schema.StringAttribute{
@@ -9945,7 +9945,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"target_port": schema.Int64Attribute{
-																	MarkdownDescription: "Different than Port. Port the workload is listening on",
+																	MarkdownDescription: "Different than Port. Port the workload is listening on.",
 																	Optional:            true,
 																},
 															},
@@ -9961,14 +9961,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"port": schema.SingleNestedBlock{
-										MarkdownDescription: "Port. Single port",
+										MarkdownDescription: "Port. Single port.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"info": schema.SingleNestedBlock{
-												MarkdownDescription: "Port Information. Port information",
+												MarkdownDescription: "Port Information. Port information.",
 												Attributes: map[string]schema.Attribute{
 													"port": schema.Int64Attribute{
-														MarkdownDescription: "Port. Port the workload can be reached on",
+														MarkdownDescription: "Port. Port the workload can be reached on .",
 														Optional:            true,
 													},
 													"protocol": schema.StringAttribute{
@@ -9976,7 +9976,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														Optional:            true,
 													},
 													"target_port": schema.Int64Attribute{
-														MarkdownDescription: "Different than Port. Port the workload is listening on",
+														MarkdownDescription: "Different than Port. Port the workload is listening on.",
 														Optional:            true,
 													},
 												},
@@ -9991,33 +9991,33 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"advertise_on_public": schema.SingleNestedBlock{
-								MarkdownDescription: "Advertise On Internet. Advertise this workload via loadbalancer on Internet with default VIP",
+								MarkdownDescription: "Advertise On Internet. Advertise this workload via loadbalancer on Internet with default VIP.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"multi_ports": schema.SingleNestedBlock{
-										MarkdownDescription: "Advertise Multiple Ports. Advertise multiple ports",
+										MarkdownDescription: "Advertise Multiple Ports. Advertise multiple ports.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"ports": schema.ListNestedBlock{
-												MarkdownDescription: "Ports. Ports to advertise",
+												MarkdownDescription: "Ports. Ports to advertise .",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"http_loadbalancer": schema.SingleNestedBlock{
-															MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer",
+															MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer.",
 															Attributes: map[string]schema.Attribute{
 																"domains": schema.ListAttribute{
-																	MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER",
+																	MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.example.com``. 2. Prefix domain wildcards: ``*.example.com`` or ``*.bar.example.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. E.g. ``*.example.com`` will match ``bar.example.com`` and ``baz-bar.example.com`` but not ``.example.com``. The longest wildcards match first. Wildcards must match a whole DNS label. E.g. ``*.example.com`` and *.bar.example.com are valid, however ``*bar.example.com`` or ``*-bar.example.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER .",
 																	Optional:            true,
 																	ElementType:         types.StringType,
 																},
 															},
 															Blocks: map[string]schema.Block{
 																"default_route": schema.SingleNestedBlock{
-																	MarkdownDescription: "Default Route. Default route matching all APIs",
+																	MarkdownDescription: "Default Route. Default route matching all APIs.",
 																	Attributes: map[string]schema.Attribute{
 																		"host_rewrite": schema.StringAttribute{
-																			MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																			MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																			Optional:            true,
 																		},
 																	},
@@ -10031,7 +10031,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"http": schema.SingleNestedBlock{
-																	MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy",
+																	MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy.",
 																	Attributes: map[string]schema.Attribute{
 																		"dns_volterra_managed": schema.BoolAttribute{
 																			MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal.",
@@ -10048,10 +10048,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"https": schema.SingleNestedBlock{
-																	MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates",
+																	MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 																	Attributes: map[string]schema.Attribute{
 																		"add_hsts": schema.BoolAttribute{
-																			MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																			MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																			Optional:            true,
 																		},
 																		"append_server_name": schema.StringAttribute{
@@ -10063,7 +10063,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional:            true,
 																		},
 																		"http_redirect": schema.BoolAttribute{
-																			MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																			MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																			Optional:            true,
 																		},
 																		"port": schema.Int64Attribute{
@@ -10081,7 +10081,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																	Blocks: map[string]schema.Block{
 																		"coalescing_options": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																			MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"default_coalescing": schema.SingleNestedBlock{
@@ -10105,15 +10105,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"http_protocol_options": schema.SingleNestedBlock{
-																			MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																			MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																					MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																					MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"header_transformation": schema.SingleNestedBlock{
-																							MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																							MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																							Attributes:          map[string]schema.Attribute{},
 																							Blocks: map[string]schema.Block{
 																								"default_header_transformation": schema.SingleNestedBlock{
@@ -10147,7 +10147,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"tls_cert_params": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates",
+																			MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"certificates": schema.ListNestedBlock{
@@ -10155,15 +10155,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					NestedObject: schema.NestedBlockObject{
 																						Attributes: map[string]schema.Attribute{
 																							"name": schema.StringAttribute{
-																								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																								Optional:            true,
 																							},
 																							"namespace": schema.StringAttribute{
-																								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																								Optional:            true,
 																							},
 																							"tenant": schema.StringAttribute{
-																								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																								Optional:            true,
 																								Computed:            true,
 																								PlanModifiers: []planmodifier.String{
@@ -10177,11 +10177,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"tls_config": schema.SingleNestedBlock{
-																					MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																					MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"custom_security": schema.SingleNestedBlock{
-																							MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																							MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																							Attributes: map[string]schema.Attribute{
 																								"cipher_suites": schema.ListAttribute{
 																									MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -10210,31 +10210,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					},
 																				},
 																				"use_mtls": schema.SingleNestedBlock{
-																					MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																					MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																					Attributes: map[string]schema.Attribute{
 																						"client_certificate_optional": schema.BoolAttribute{
 																							MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																							Optional:            true,
 																						},
 																						"trusted_ca_url": schema.StringAttribute{
-																							MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																							MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
 																						"crl": schema.SingleNestedBlock{
-																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																							Attributes: map[string]schema.Attribute{
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																									Optional:            true,
 																								},
 																								"namespace": schema.StringAttribute{
-																									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																									Optional:            true,
 																								},
 																								"tenant": schema.StringAttribute{
-																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
 																									PlanModifiers: []planmodifier.String{
@@ -10247,18 +10247,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Enable this option",
 																						},
 																						"trusted_ca": schema.SingleNestedBlock{
-																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																							Attributes: map[string]schema.Attribute{
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																									Optional:            true,
 																								},
 																								"namespace": schema.StringAttribute{
-																									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																									Optional:            true,
 																								},
 																								"tenant": schema.StringAttribute{
-																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
 																									PlanModifiers: []planmodifier.String{
@@ -10271,10 +10271,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Enable this option",
 																						},
 																						"xfcc_options": schema.SingleNestedBlock{
-																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																							Attributes: map[string]schema.Attribute{
 																								"xfcc_header_elements": schema.ListAttribute{
-																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																									Optional:            true,
 																									ElementType:         types.StringType,
 																								},
@@ -10285,14 +10285,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"tls_parameters": schema.SingleNestedBlock{
-																			MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
+																			MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"no_mtls": schema.SingleNestedBlock{
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"tls_certificates": schema.ListNestedBlock{
-																					MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
+																					MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 																					NestedObject: schema.NestedBlockObject{
 																						Attributes: map[string]schema.Attribute{
 																							"certificate_url": schema.StringAttribute{
@@ -10300,13 +10300,13 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								Optional:            true,
 																							},
 																							"description_spec": schema.StringAttribute{
-																								MarkdownDescription: "Description. Description for the certificate",
+																								MarkdownDescription: "Description. Description for the certificate.",
 																								Optional:            true,
 																							},
 																						},
 																						Blocks: map[string]schema.Block{
 																							"custom_hash_algorithms": schema.SingleNestedBlock{
-																								MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+																								MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 																								Attributes: map[string]schema.Attribute{
 																									"hash_algorithms": schema.ListAttribute{
 																										MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -10319,22 +10319,22 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Enable this option",
 																							},
 																							"private_key": schema.SingleNestedBlock{
-																								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 																								Attributes:          map[string]schema.Attribute{},
 																								Blocks: map[string]schema.Block{
 																									"blindfold_secret_info": schema.SingleNestedBlock{
-																										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																										Attributes: map[string]schema.Attribute{
 																											"decryption_provider": schema.StringAttribute{
 																												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																												Optional:            true,
 																											},
 																											"location": schema.StringAttribute{
-																												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																												MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																												Optional:            true,
 																											},
 																											"store_provider": schema.StringAttribute{
-																												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																												Optional:            true,
 																											},
 																										},
@@ -10343,11 +10343,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																										Attributes: map[string]schema.Attribute{
 																											"provider_ref": schema.StringAttribute{
-																												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																												Optional:            true,
 																											},
 																											"url": schema.StringAttribute{
-																												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																												Optional:            true,
 																											},
 																										},
@@ -10361,11 +10361,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					},
 																				},
 																				"tls_config": schema.SingleNestedBlock{
-																					MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																					MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"custom_security": schema.SingleNestedBlock{
-																							MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																							MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																							Attributes: map[string]schema.Attribute{
 																								"cipher_suites": schema.ListAttribute{
 																									MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -10394,31 +10394,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					},
 																				},
 																				"use_mtls": schema.SingleNestedBlock{
-																					MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																					MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																					Attributes: map[string]schema.Attribute{
 																						"client_certificate_optional": schema.BoolAttribute{
 																							MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																							Optional:            true,
 																						},
 																						"trusted_ca_url": schema.StringAttribute{
-																							MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																							MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
 																						"crl": schema.SingleNestedBlock{
-																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																							Attributes: map[string]schema.Attribute{
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																									Optional:            true,
 																								},
 																								"namespace": schema.StringAttribute{
-																									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																									Optional:            true,
 																								},
 																								"tenant": schema.StringAttribute{
-																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
 																									PlanModifiers: []planmodifier.String{
@@ -10431,18 +10431,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Enable this option",
 																						},
 																						"trusted_ca": schema.SingleNestedBlock{
-																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																							Attributes: map[string]schema.Attribute{
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																									Optional:            true,
 																								},
 																								"namespace": schema.StringAttribute{
-																									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																									Optional:            true,
 																								},
 																								"tenant": schema.StringAttribute{
-																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
 																									PlanModifiers: []planmodifier.String{
@@ -10455,10 +10455,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Enable this option",
 																						},
 																						"xfcc_options": schema.SingleNestedBlock{
-																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																							Attributes: map[string]schema.Attribute{
 																								"xfcc_header_elements": schema.ListAttribute{
-																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																									Optional:            true,
 																									ElementType:         types.StringType,
 																								},
@@ -10471,10 +10471,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"https_auto_cert": schema.SingleNestedBlock{
-																	MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates",
+																	MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 																	Attributes: map[string]schema.Attribute{
 																		"add_hsts": schema.BoolAttribute{
-																			MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																			MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																			Optional:            true,
 																		},
 																		"append_server_name": schema.StringAttribute{
@@ -10486,7 +10486,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional:            true,
 																		},
 																		"http_redirect": schema.BoolAttribute{
-																			MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																			MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																			Optional:            true,
 																		},
 																		"port": schema.Int64Attribute{
@@ -10504,7 +10504,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																	Blocks: map[string]schema.Block{
 																		"coalescing_options": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																			MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"default_coalescing": schema.SingleNestedBlock{
@@ -10528,15 +10528,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"http_protocol_options": schema.SingleNestedBlock{
-																			MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																			MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																					MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																					MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"header_transformation": schema.SingleNestedBlock{
-																							MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																							MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																							Attributes:          map[string]schema.Attribute{},
 																							Blocks: map[string]schema.Block{
 																								"default_header_transformation": schema.SingleNestedBlock{
@@ -10573,11 +10573,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"tls_config": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																			MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"custom_security": schema.SingleNestedBlock{
-																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																					Attributes: map[string]schema.Attribute{
 																						"cipher_suites": schema.ListAttribute{
 																							MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -10606,31 +10606,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"use_mtls": schema.SingleNestedBlock{
-																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																			Attributes: map[string]schema.Attribute{
 																				"client_certificate_optional": schema.BoolAttribute{
 																					MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																					Optional:            true,
 																				},
 																				"trusted_ca_url": schema.StringAttribute{
-																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																					Optional:            true,
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
 																				"crl": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -10643,18 +10643,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"trusted_ca": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -10667,10 +10667,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"xfcc_options": schema.SingleNestedBlock{
-																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -10681,11 +10681,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"specific_routes": schema.SingleNestedBlock{
-																	MarkdownDescription: "Route Type. This defines various options to define a route",
+																	MarkdownDescription: "Route Type. This defines various OPTIONS to define a route.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"routes": schema.ListNestedBlock{
-																			MarkdownDescription: "Routes. Routes for this loadbalancer",
+																			MarkdownDescription: "Routes. Routes for this loadbalancer.",
 																			NestedObject: schema.NestedBlockObject{
 																				Attributes: map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
@@ -10694,18 +10694,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						Attributes:          map[string]schema.Attribute{},
 																						Blocks: map[string]schema.Block{
 																							"route_ref": schema.SingleNestedBlock{
-																								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																								Attributes: map[string]schema.Attribute{
 																									"name": schema.StringAttribute{
-																										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																										Optional:            true,
 																									},
 																									"namespace": schema.StringAttribute{
-																										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																										Optional:            true,
 																									},
 																									"tenant": schema.StringAttribute{
-																										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																										Optional:            true,
 																										Computed:            true,
 																										PlanModifiers: []planmodifier.String{
@@ -10717,7 +10717,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																					},
 																					"direct_response_route": schema.SingleNestedBlock{
-																						MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
+																						MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic.",
 																						Attributes: map[string]schema.Attribute{
 																							"http_method": schema.StringAttribute{
 																								MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -10726,41 +10726,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																						Blocks: map[string]schema.Block{
 																							"headers": schema.ListNestedBlock{
-																								MarkdownDescription: "Headers. List of (key, value) headers",
+																								MarkdownDescription: "Headers. List of (key, value) headers.",
 																								NestedObject: schema.NestedBlockObject{
 																									Attributes: map[string]schema.Attribute{
 																										"exact": schema.StringAttribute{
-																											MarkdownDescription: "Exact. Header value to match exactly",
+																											MarkdownDescription: "Exact. Header value to match exactly.",
 																											Optional:            true,
 																										},
 																										"invert_match": schema.BoolAttribute{
-																											MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																											MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																											Optional:            true,
 																										},
 																										"name": schema.StringAttribute{
-																											MarkdownDescription: "Name. Name of the header",
+																											MarkdownDescription: "Name. Name of the header .",
 																											Optional:            true,
 																										},
 																										"presence": schema.BoolAttribute{
-																											MarkdownDescription: "Presence. If true, check for presence of header",
+																											MarkdownDescription: "Presence. If true, check for presence of header.",
 																											Optional:            true,
 																										},
 																										"regex": schema.StringAttribute{
-																											MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																											MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																											Optional:            true,
 																										},
 																									},
 																								},
 																							},
 																							"incoming_port": schema.SingleNestedBlock{
-																								MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																								MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																								Attributes: map[string]schema.Attribute{
 																									"port": schema.Int64Attribute{
-																										MarkdownDescription: "Port. Exact Port to match",
+																										MarkdownDescription: "Port. Exact Port to match.",
 																										Optional:            true,
 																									},
 																									"port_ranges": schema.StringAttribute{
-																										MarkdownDescription: "Port range. Port range to match",
+																										MarkdownDescription: "Port range. Port range to match.",
 																										Optional:            true,
 																									},
 																								},
@@ -10771,31 +10771,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								},
 																							},
 																							"path": schema.SingleNestedBlock{
-																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																								Attributes: map[string]schema.Attribute{
 																									"path": schema.StringAttribute{
-																										MarkdownDescription: "Exact. Exact path value to match",
+																										MarkdownDescription: "Exact. Exact path value to match.",
 																										Optional:            true,
 																									},
 																									"prefix": schema.StringAttribute{
-																										MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																										MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																										Optional:            true,
 																									},
 																									"regex": schema.StringAttribute{
-																										MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																										MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																										Optional:            true,
 																									},
 																								},
 																							},
 																							"route_direct_response": schema.SingleNestedBlock{
-																								MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response",
+																								MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response.",
 																								Attributes: map[string]schema.Attribute{
 																									"response_body_encoded": schema.StringAttribute{
-																										MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g. '<p> Access Denied </p>'. Base64 encoded string url for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==",
+																										MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==.",
 																										Optional:            true,
 																									},
 																									"response_code": schema.Int64Attribute{
-																										MarkdownDescription: "Response Code. response code to send",
+																										MarkdownDescription: "Response Code. Response code to send.",
 																										Optional:            true,
 																									},
 																								},
@@ -10803,7 +10803,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																					},
 																					"redirect_route": schema.SingleNestedBlock{
-																						MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
+																						MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL.",
 																						Attributes: map[string]schema.Attribute{
 																							"http_method": schema.StringAttribute{
 																								MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -10812,41 +10812,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																						Blocks: map[string]schema.Block{
 																							"headers": schema.ListNestedBlock{
-																								MarkdownDescription: "Headers. List of (key, value) headers",
+																								MarkdownDescription: "Headers. List of (key, value) headers.",
 																								NestedObject: schema.NestedBlockObject{
 																									Attributes: map[string]schema.Attribute{
 																										"exact": schema.StringAttribute{
-																											MarkdownDescription: "Exact. Header value to match exactly",
+																											MarkdownDescription: "Exact. Header value to match exactly.",
 																											Optional:            true,
 																										},
 																										"invert_match": schema.BoolAttribute{
-																											MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																											MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																											Optional:            true,
 																										},
 																										"name": schema.StringAttribute{
-																											MarkdownDescription: "Name. Name of the header",
+																											MarkdownDescription: "Name. Name of the header .",
 																											Optional:            true,
 																										},
 																										"presence": schema.BoolAttribute{
-																											MarkdownDescription: "Presence. If true, check for presence of header",
+																											MarkdownDescription: "Presence. If true, check for presence of header.",
 																											Optional:            true,
 																										},
 																										"regex": schema.StringAttribute{
-																											MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																											MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																											Optional:            true,
 																										},
 																									},
 																								},
 																							},
 																							"incoming_port": schema.SingleNestedBlock{
-																								MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																								MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																								Attributes: map[string]schema.Attribute{
 																									"port": schema.Int64Attribute{
-																										MarkdownDescription: "Port. Exact Port to match",
+																										MarkdownDescription: "Port. Exact Port to match.",
 																										Optional:            true,
 																									},
 																									"port_ranges": schema.StringAttribute{
-																										MarkdownDescription: "Port range. Port range to match",
+																										MarkdownDescription: "Port range. Port range to match.",
 																										Optional:            true,
 																									},
 																								},
@@ -10857,39 +10857,39 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								},
 																							},
 																							"path": schema.SingleNestedBlock{
-																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																								Attributes: map[string]schema.Attribute{
 																									"path": schema.StringAttribute{
-																										MarkdownDescription: "Exact. Exact path value to match",
+																										MarkdownDescription: "Exact. Exact path value to match.",
 																										Optional:            true,
 																									},
 																									"prefix": schema.StringAttribute{
-																										MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																										MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																										Optional:            true,
 																									},
 																									"regex": schema.StringAttribute{
-																										MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																										MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																										Optional:            true,
 																									},
 																								},
 																							},
 																							"route_redirect": schema.SingleNestedBlock{
-																								MarkdownDescription: "Redirect. route redirect parameters when match action is redirect.",
+																								MarkdownDescription: "Redirect. Route redirect parameters when match action is redirect.",
 																								Attributes: map[string]schema.Attribute{
 																									"host_redirect": schema.StringAttribute{
-																										MarkdownDescription: "Host. swap host part of incoming URL in redirect URL",
+																										MarkdownDescription: "Host. Swap host part of incoming URL in redirect URL.",
 																										Optional:            true,
 																									},
 																									"path_redirect": schema.StringAttribute{
-																										MarkdownDescription: "Path. swap path part of incoming URL in redirect URL",
+																										MarkdownDescription: "Path. swap path part of incoming URL in redirect URL.",
 																										Optional:            true,
 																									},
 																									"prefix_rewrite": schema.StringAttribute{
-																										MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request",
+																										MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request.",
 																										Optional:            true,
 																									},
 																									"proto_redirect": schema.StringAttribute{
-																										MarkdownDescription: "Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either http or https When incoming-proto option is specified, swapping of protocol is not done.",
+																										MarkdownDescription: "Protocol. Swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done.",
 																										Optional:            true,
 																									},
 																									"replace_params": schema.StringAttribute{
@@ -10913,10 +10913,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																					},
 																					"simple_route": schema.SingleNestedBlock{
-																						MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside",
+																						MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside.",
 																						Attributes: map[string]schema.Attribute{
 																							"host_rewrite": schema.StringAttribute{
-																								MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																								MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																								Optional:            true,
 																							},
 																							"http_method": schema.StringAttribute{
@@ -10932,18 +10932,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Enable this option",
 																							},
 																							"path": schema.SingleNestedBlock{
-																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																								Attributes: map[string]schema.Attribute{
 																									"path": schema.StringAttribute{
-																										MarkdownDescription: "Exact. Exact path value to match",
+																										MarkdownDescription: "Exact. Exact path value to match.",
 																										Optional:            true,
 																									},
 																									"prefix": schema.StringAttribute{
-																										MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																										MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																										Optional:            true,
 																									},
 																									"regex": schema.StringAttribute{
-																										MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																										MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																										Optional:            true,
 																									},
 																								},
@@ -10958,19 +10958,19 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"port": schema.SingleNestedBlock{
-															MarkdownDescription: "Port. Port of the workload",
+															MarkdownDescription: "Port. Port of the workload.",
 															Attributes: map[string]schema.Attribute{
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. Name of the Port",
+																	MarkdownDescription: "Name. Name of the Port .",
 																	Optional:            true,
 																},
 															},
 															Blocks: map[string]schema.Block{
 																"info": schema.SingleNestedBlock{
-																	MarkdownDescription: "Port Information. Port information",
+																	MarkdownDescription: "Port Information. Port information.",
 																	Attributes: map[string]schema.Attribute{
 																		"port": schema.Int64Attribute{
-																			MarkdownDescription: "Port. Port the workload can be reached on",
+																			MarkdownDescription: "Port. Port the workload can be reached on .",
 																			Optional:            true,
 																		},
 																		"protocol": schema.StringAttribute{
@@ -10978,7 +10978,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional:            true,
 																		},
 																		"target_port": schema.Int64Attribute{
-																			MarkdownDescription: "Different than Port. Port the workload is listening on",
+																			MarkdownDescription: "Different than Port. Port the workload is listening on.",
 																			Optional:            true,
 																		},
 																	},
@@ -10991,15 +10991,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"tcp_loadbalancer": schema.SingleNestedBlock{
-															MarkdownDescription: "TCP Load Balancer. TCP loadbalancer",
+															MarkdownDescription: "TCP Load Balancer. TCP loadbalancer.",
 															Attributes: map[string]schema.Attribute{
 																"domains": schema.ListAttribute{
-																	MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER",
+																	MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER.",
 																	Optional:            true,
 																	ElementType:         types.StringType,
 																},
 																"with_sni": schema.BoolAttribute{
-																	MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI",
+																	MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI.",
 																	Optional:            true,
 																},
 															},
@@ -11010,24 +11010,24 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"port": schema.SingleNestedBlock{
-										MarkdownDescription: "Advertise Port. Advertise single port",
+										MarkdownDescription: "Advertise Port. Advertise single port.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"http_loadbalancer": schema.SingleNestedBlock{
-												MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer",
+												MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer.",
 												Attributes: map[string]schema.Attribute{
 													"domains": schema.ListAttribute{
-														MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER",
+														MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.example.com``. 2. Prefix domain wildcards: ``*.example.com`` or ``*.bar.example.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. E.g. ``*.example.com`` will match ``bar.example.com`` and ``baz-bar.example.com`` but not ``.example.com``. The longest wildcards match first. Wildcards must match a whole DNS label. E.g. ``*.example.com`` and *.bar.example.com are valid, however ``*bar.example.com`` or ``*-bar.example.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER .",
 														Optional:            true,
 														ElementType:         types.StringType,
 													},
 												},
 												Blocks: map[string]schema.Block{
 													"default_route": schema.SingleNestedBlock{
-														MarkdownDescription: "Default Route. Default route matching all APIs",
+														MarkdownDescription: "Default Route. Default route matching all APIs.",
 														Attributes: map[string]schema.Attribute{
 															"host_rewrite": schema.StringAttribute{
-																MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																Optional:            true,
 															},
 														},
@@ -11041,7 +11041,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 													},
 													"http": schema.SingleNestedBlock{
-														MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy",
+														MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy.",
 														Attributes: map[string]schema.Attribute{
 															"dns_volterra_managed": schema.BoolAttribute{
 																MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal.",
@@ -11058,10 +11058,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 													},
 													"https": schema.SingleNestedBlock{
-														MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates",
+														MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 														Attributes: map[string]schema.Attribute{
 															"add_hsts": schema.BoolAttribute{
-																MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																Optional:            true,
 															},
 															"append_server_name": schema.StringAttribute{
@@ -11073,7 +11073,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional:            true,
 															},
 															"http_redirect": schema.BoolAttribute{
-																MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																Optional:            true,
 															},
 															"port": schema.Int64Attribute{
@@ -11091,7 +11091,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 														Blocks: map[string]schema.Block{
 															"coalescing_options": schema.SingleNestedBlock{
-																MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"default_coalescing": schema.SingleNestedBlock{
@@ -11115,15 +11115,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																MarkdownDescription: "Enable this option",
 															},
 															"http_protocol_options": schema.SingleNestedBlock{
-																MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																		MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																		MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"header_transformation": schema.SingleNestedBlock{
-																				MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																				MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"default_header_transformation": schema.SingleNestedBlock{
@@ -11157,7 +11157,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																MarkdownDescription: "Enable this option",
 															},
 															"tls_cert_params": schema.SingleNestedBlock{
-																MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates",
+																MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates.",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"certificates": schema.ListNestedBlock{
@@ -11165,15 +11165,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		NestedObject: schema.NestedBlockObject{
 																			Attributes: map[string]schema.Attribute{
 																				"name": schema.StringAttribute{
-																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -11187,11 +11187,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		MarkdownDescription: "Enable this option",
 																	},
 																	"tls_config": schema.SingleNestedBlock{
-																		MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																		MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"custom_security": schema.SingleNestedBlock{
-																				MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																				MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																				Attributes: map[string]schema.Attribute{
 																					"cipher_suites": schema.ListAttribute{
 																						MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -11220,31 +11220,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		},
 																	},
 																	"use_mtls": schema.SingleNestedBlock{
-																		MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																		MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																		Attributes: map[string]schema.Attribute{
 																			"client_certificate_optional": schema.BoolAttribute{
 																				MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																				Optional:            true,
 																			},
 																			"trusted_ca_url": schema.StringAttribute{
-																				MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																				MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																				Optional:            true,
 																			},
 																		},
 																		Blocks: map[string]schema.Block{
 																			"crl": schema.SingleNestedBlock{
-																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
-																						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																						Optional:            true,
 																					},
 																					"namespace": schema.StringAttribute{
-																						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																						Optional:            true,
 																					},
 																					"tenant": schema.StringAttribute{
-																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
 																						PlanModifiers: []planmodifier.String{
@@ -11257,18 +11257,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Enable this option",
 																			},
 																			"trusted_ca": schema.SingleNestedBlock{
-																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
-																						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																						Optional:            true,
 																					},
 																					"namespace": schema.StringAttribute{
-																						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																						Optional:            true,
 																					},
 																					"tenant": schema.StringAttribute{
-																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
 																						PlanModifiers: []planmodifier.String{
@@ -11281,10 +11281,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Enable this option",
 																			},
 																			"xfcc_options": schema.SingleNestedBlock{
-																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																				Attributes: map[string]schema.Attribute{
 																					"xfcc_header_elements": schema.ListAttribute{
-																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																						Optional:            true,
 																						ElementType:         types.StringType,
 																					},
@@ -11295,14 +11295,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																},
 															},
 															"tls_parameters": schema.SingleNestedBlock{
-																MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
+																MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"no_mtls": schema.SingleNestedBlock{
 																		MarkdownDescription: "Enable this option",
 																	},
 																	"tls_certificates": schema.ListNestedBlock{
-																		MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
+																		MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 																		NestedObject: schema.NestedBlockObject{
 																			Attributes: map[string]schema.Attribute{
 																				"certificate_url": schema.StringAttribute{
@@ -11310,13 +11310,13 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					Optional:            true,
 																				},
 																				"description_spec": schema.StringAttribute{
-																					MarkdownDescription: "Description. Description for the certificate",
+																					MarkdownDescription: "Description. Description for the certificate.",
 																					Optional:            true,
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
 																				"custom_hash_algorithms": schema.SingleNestedBlock{
-																					MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+																					MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 																					Attributes: map[string]schema.Attribute{
 																						"hash_algorithms": schema.ListAttribute{
 																							MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -11329,22 +11329,22 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"private_key": schema.SingleNestedBlock{
-																					MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																					MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"blindfold_secret_info": schema.SingleNestedBlock{
-																							MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																							MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																							Attributes: map[string]schema.Attribute{
 																								"decryption_provider": schema.StringAttribute{
 																									MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																									Optional:            true,
 																								},
 																								"location": schema.StringAttribute{
-																									MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																									MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																									Optional:            true,
 																								},
 																								"store_provider": schema.StringAttribute{
-																									MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																									MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																									Optional:            true,
 																								},
 																							},
@@ -11353,11 +11353,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																							Attributes: map[string]schema.Attribute{
 																								"provider_ref": schema.StringAttribute{
-																									MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																									MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																									Optional:            true,
 																								},
 																								"url": schema.StringAttribute{
-																									MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																									MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																									Optional:            true,
 																								},
 																							},
@@ -11371,11 +11371,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		},
 																	},
 																	"tls_config": schema.SingleNestedBlock{
-																		MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																		MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"custom_security": schema.SingleNestedBlock{
-																				MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																				MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																				Attributes: map[string]schema.Attribute{
 																					"cipher_suites": schema.ListAttribute{
 																						MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -11404,31 +11404,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		},
 																	},
 																	"use_mtls": schema.SingleNestedBlock{
-																		MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																		MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																		Attributes: map[string]schema.Attribute{
 																			"client_certificate_optional": schema.BoolAttribute{
 																				MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																				Optional:            true,
 																			},
 																			"trusted_ca_url": schema.StringAttribute{
-																				MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																				MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																				Optional:            true,
 																			},
 																		},
 																		Blocks: map[string]schema.Block{
 																			"crl": schema.SingleNestedBlock{
-																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
-																						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																						Optional:            true,
 																					},
 																					"namespace": schema.StringAttribute{
-																						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																						Optional:            true,
 																					},
 																					"tenant": schema.StringAttribute{
-																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
 																						PlanModifiers: []planmodifier.String{
@@ -11441,18 +11441,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Enable this option",
 																			},
 																			"trusted_ca": schema.SingleNestedBlock{
-																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
-																						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																						Optional:            true,
 																					},
 																					"namespace": schema.StringAttribute{
-																						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																						Optional:            true,
 																					},
 																					"tenant": schema.StringAttribute{
-																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
 																						PlanModifiers: []planmodifier.String{
@@ -11465,10 +11465,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Enable this option",
 																			},
 																			"xfcc_options": schema.SingleNestedBlock{
-																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																				Attributes: map[string]schema.Attribute{
 																					"xfcc_header_elements": schema.ListAttribute{
-																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																						Optional:            true,
 																						ElementType:         types.StringType,
 																					},
@@ -11481,10 +11481,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 													},
 													"https_auto_cert": schema.SingleNestedBlock{
-														MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates",
+														MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 														Attributes: map[string]schema.Attribute{
 															"add_hsts": schema.BoolAttribute{
-																MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																Optional:            true,
 															},
 															"append_server_name": schema.StringAttribute{
@@ -11496,7 +11496,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional:            true,
 															},
 															"http_redirect": schema.BoolAttribute{
-																MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																Optional:            true,
 															},
 															"port": schema.Int64Attribute{
@@ -11514,7 +11514,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 														Blocks: map[string]schema.Block{
 															"coalescing_options": schema.SingleNestedBlock{
-																MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"default_coalescing": schema.SingleNestedBlock{
@@ -11538,15 +11538,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																MarkdownDescription: "Enable this option",
 															},
 															"http_protocol_options": schema.SingleNestedBlock{
-																MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																		MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																		MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"header_transformation": schema.SingleNestedBlock{
-																				MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																				MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"default_header_transformation": schema.SingleNestedBlock{
@@ -11583,11 +11583,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																MarkdownDescription: "Enable this option",
 															},
 															"tls_config": schema.SingleNestedBlock{
-																MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"custom_security": schema.SingleNestedBlock{
-																		MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																		MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																		Attributes: map[string]schema.Attribute{
 																			"cipher_suites": schema.ListAttribute{
 																				MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -11616,31 +11616,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																},
 															},
 															"use_mtls": schema.SingleNestedBlock{
-																MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																Attributes: map[string]schema.Attribute{
 																	"client_certificate_optional": schema.BoolAttribute{
 																		MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																		Optional:            true,
 																	},
 																	"trusted_ca_url": schema.StringAttribute{
-																		MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																		MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"crl": schema.SingleNestedBlock{
-																		MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																		MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																		Attributes: map[string]schema.Attribute{
 																			"name": schema.StringAttribute{
-																				MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																				MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																				Optional:            true,
 																			},
 																			"namespace": schema.StringAttribute{
-																				MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																				MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																				Optional:            true,
 																			},
 																			"tenant": schema.StringAttribute{
-																				MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																				MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																				Optional:            true,
 																				Computed:            true,
 																				PlanModifiers: []planmodifier.String{
@@ -11653,18 +11653,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		MarkdownDescription: "Enable this option",
 																	},
 																	"trusted_ca": schema.SingleNestedBlock{
-																		MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																		MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																		Attributes: map[string]schema.Attribute{
 																			"name": schema.StringAttribute{
-																				MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																				MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																				Optional:            true,
 																			},
 																			"namespace": schema.StringAttribute{
-																				MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																				MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																				Optional:            true,
 																			},
 																			"tenant": schema.StringAttribute{
-																				MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																				MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																				Optional:            true,
 																				Computed:            true,
 																				PlanModifiers: []planmodifier.String{
@@ -11677,10 +11677,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		MarkdownDescription: "Enable this option",
 																	},
 																	"xfcc_options": schema.SingleNestedBlock{
-																		MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																		MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																		Attributes: map[string]schema.Attribute{
 																			"xfcc_header_elements": schema.ListAttribute{
-																				MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																				MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																				Optional:            true,
 																				ElementType:         types.StringType,
 																			},
@@ -11691,11 +11691,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 													},
 													"specific_routes": schema.SingleNestedBlock{
-														MarkdownDescription: "Route Type. This defines various options to define a route",
+														MarkdownDescription: "Route Type. This defines various OPTIONS to define a route.",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"routes": schema.ListNestedBlock{
-																MarkdownDescription: "Routes. Routes for this loadbalancer",
+																MarkdownDescription: "Routes. Routes for this loadbalancer.",
 																NestedObject: schema.NestedBlockObject{
 																	Attributes: map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
@@ -11704,18 +11704,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"route_ref": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -11727,7 +11727,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"direct_response_route": schema.SingleNestedBlock{
-																			MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
+																			MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic.",
 																			Attributes: map[string]schema.Attribute{
 																				"http_method": schema.StringAttribute{
 																					MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -11736,41 +11736,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																			Blocks: map[string]schema.Block{
 																				"headers": schema.ListNestedBlock{
-																					MarkdownDescription: "Headers. List of (key, value) headers",
+																					MarkdownDescription: "Headers. List of (key, value) headers.",
 																					NestedObject: schema.NestedBlockObject{
 																						Attributes: map[string]schema.Attribute{
 																							"exact": schema.StringAttribute{
-																								MarkdownDescription: "Exact. Header value to match exactly",
+																								MarkdownDescription: "Exact. Header value to match exactly.",
 																								Optional:            true,
 																							},
 																							"invert_match": schema.BoolAttribute{
-																								MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																								MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																								Optional:            true,
 																							},
 																							"name": schema.StringAttribute{
-																								MarkdownDescription: "Name. Name of the header",
+																								MarkdownDescription: "Name. Name of the header .",
 																								Optional:            true,
 																							},
 																							"presence": schema.BoolAttribute{
-																								MarkdownDescription: "Presence. If true, check for presence of header",
+																								MarkdownDescription: "Presence. If true, check for presence of header.",
 																								Optional:            true,
 																							},
 																							"regex": schema.StringAttribute{
-																								MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																								MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																								Optional:            true,
 																							},
 																						},
 																					},
 																				},
 																				"incoming_port": schema.SingleNestedBlock{
-																					MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																					MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																					Attributes: map[string]schema.Attribute{
 																						"port": schema.Int64Attribute{
-																							MarkdownDescription: "Port. Exact Port to match",
+																							MarkdownDescription: "Port. Exact Port to match.",
 																							Optional:            true,
 																						},
 																						"port_ranges": schema.StringAttribute{
-																							MarkdownDescription: "Port range. Port range to match",
+																							MarkdownDescription: "Port range. Port range to match.",
 																							Optional:            true,
 																						},
 																					},
@@ -11781,31 +11781,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					},
 																				},
 																				"path": schema.SingleNestedBlock{
-																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																					Attributes: map[string]schema.Attribute{
 																						"path": schema.StringAttribute{
-																							MarkdownDescription: "Exact. Exact path value to match",
+																							MarkdownDescription: "Exact. Exact path value to match.",
 																							Optional:            true,
 																						},
 																						"prefix": schema.StringAttribute{
-																							MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																							MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																							Optional:            true,
 																						},
 																						"regex": schema.StringAttribute{
-																							MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																							MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																							Optional:            true,
 																						},
 																					},
 																				},
 																				"route_direct_response": schema.SingleNestedBlock{
-																					MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response",
+																					MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response.",
 																					Attributes: map[string]schema.Attribute{
 																						"response_body_encoded": schema.StringAttribute{
-																							MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g. '<p> Access Denied </p>'. Base64 encoded string url for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==",
+																							MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==.",
 																							Optional:            true,
 																						},
 																						"response_code": schema.Int64Attribute{
-																							MarkdownDescription: "Response Code. response code to send",
+																							MarkdownDescription: "Response Code. Response code to send.",
 																							Optional:            true,
 																						},
 																					},
@@ -11813,7 +11813,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"redirect_route": schema.SingleNestedBlock{
-																			MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
+																			MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL.",
 																			Attributes: map[string]schema.Attribute{
 																				"http_method": schema.StringAttribute{
 																					MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -11822,41 +11822,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																			Blocks: map[string]schema.Block{
 																				"headers": schema.ListNestedBlock{
-																					MarkdownDescription: "Headers. List of (key, value) headers",
+																					MarkdownDescription: "Headers. List of (key, value) headers.",
 																					NestedObject: schema.NestedBlockObject{
 																						Attributes: map[string]schema.Attribute{
 																							"exact": schema.StringAttribute{
-																								MarkdownDescription: "Exact. Header value to match exactly",
+																								MarkdownDescription: "Exact. Header value to match exactly.",
 																								Optional:            true,
 																							},
 																							"invert_match": schema.BoolAttribute{
-																								MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																								MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																								Optional:            true,
 																							},
 																							"name": schema.StringAttribute{
-																								MarkdownDescription: "Name. Name of the header",
+																								MarkdownDescription: "Name. Name of the header .",
 																								Optional:            true,
 																							},
 																							"presence": schema.BoolAttribute{
-																								MarkdownDescription: "Presence. If true, check for presence of header",
+																								MarkdownDescription: "Presence. If true, check for presence of header.",
 																								Optional:            true,
 																							},
 																							"regex": schema.StringAttribute{
-																								MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																								MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																								Optional:            true,
 																							},
 																						},
 																					},
 																				},
 																				"incoming_port": schema.SingleNestedBlock{
-																					MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																					MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																					Attributes: map[string]schema.Attribute{
 																						"port": schema.Int64Attribute{
-																							MarkdownDescription: "Port. Exact Port to match",
+																							MarkdownDescription: "Port. Exact Port to match.",
 																							Optional:            true,
 																						},
 																						"port_ranges": schema.StringAttribute{
-																							MarkdownDescription: "Port range. Port range to match",
+																							MarkdownDescription: "Port range. Port range to match.",
 																							Optional:            true,
 																						},
 																					},
@@ -11867,39 +11867,39 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					},
 																				},
 																				"path": schema.SingleNestedBlock{
-																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																					Attributes: map[string]schema.Attribute{
 																						"path": schema.StringAttribute{
-																							MarkdownDescription: "Exact. Exact path value to match",
+																							MarkdownDescription: "Exact. Exact path value to match.",
 																							Optional:            true,
 																						},
 																						"prefix": schema.StringAttribute{
-																							MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																							MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																							Optional:            true,
 																						},
 																						"regex": schema.StringAttribute{
-																							MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																							MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																							Optional:            true,
 																						},
 																					},
 																				},
 																				"route_redirect": schema.SingleNestedBlock{
-																					MarkdownDescription: "Redirect. route redirect parameters when match action is redirect.",
+																					MarkdownDescription: "Redirect. Route redirect parameters when match action is redirect.",
 																					Attributes: map[string]schema.Attribute{
 																						"host_redirect": schema.StringAttribute{
-																							MarkdownDescription: "Host. swap host part of incoming URL in redirect URL",
+																							MarkdownDescription: "Host. Swap host part of incoming URL in redirect URL.",
 																							Optional:            true,
 																						},
 																						"path_redirect": schema.StringAttribute{
-																							MarkdownDescription: "Path. swap path part of incoming URL in redirect URL",
+																							MarkdownDescription: "Path. swap path part of incoming URL in redirect URL.",
 																							Optional:            true,
 																						},
 																						"prefix_rewrite": schema.StringAttribute{
-																							MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request",
+																							MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request.",
 																							Optional:            true,
 																						},
 																						"proto_redirect": schema.StringAttribute{
-																							MarkdownDescription: "Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either http or https When incoming-proto option is specified, swapping of protocol is not done.",
+																							MarkdownDescription: "Protocol. Swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done.",
 																							Optional:            true,
 																						},
 																						"replace_params": schema.StringAttribute{
@@ -11923,10 +11923,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"simple_route": schema.SingleNestedBlock{
-																			MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside",
+																			MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside.",
 																			Attributes: map[string]schema.Attribute{
 																				"host_rewrite": schema.StringAttribute{
-																					MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																					MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																					Optional:            true,
 																				},
 																				"http_method": schema.StringAttribute{
@@ -11942,18 +11942,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"path": schema.SingleNestedBlock{
-																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																					Attributes: map[string]schema.Attribute{
 																						"path": schema.StringAttribute{
-																							MarkdownDescription: "Exact. Exact path value to match",
+																							MarkdownDescription: "Exact. Exact path value to match.",
 																							Optional:            true,
 																						},
 																						"prefix": schema.StringAttribute{
-																							MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																							MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																							Optional:            true,
 																						},
 																						"regex": schema.StringAttribute{
-																							MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																							MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																							Optional:            true,
 																						},
 																					},
@@ -11968,14 +11968,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 												},
 											},
 											"port": schema.SingleNestedBlock{
-												MarkdownDescription: "Port. Single port",
+												MarkdownDescription: "Port. Single port.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"info": schema.SingleNestedBlock{
-														MarkdownDescription: "Port Information. Port information",
+														MarkdownDescription: "Port Information. Port information.",
 														Attributes: map[string]schema.Attribute{
 															"port": schema.Int64Attribute{
-																MarkdownDescription: "Port. Port the workload can be reached on",
+																MarkdownDescription: "Port. Port the workload can be reached on .",
 																Optional:            true,
 															},
 															"protocol": schema.StringAttribute{
@@ -11983,7 +11983,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional:            true,
 															},
 															"target_port": schema.Int64Attribute{
-																MarkdownDescription: "Different than Port. Port the workload is listening on",
+																MarkdownDescription: "Different than Port. Port the workload is listening on.",
 																Optional:            true,
 															},
 														},
@@ -11996,15 +11996,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 												},
 											},
 											"tcp_loadbalancer": schema.SingleNestedBlock{
-												MarkdownDescription: "TCP Load Balancer. TCP loadbalancer",
+												MarkdownDescription: "TCP Load Balancer. TCP loadbalancer.",
 												Attributes: map[string]schema.Attribute{
 													"domains": schema.ListAttribute{
-														MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER",
+														MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER.",
 														Optional:            true,
 														ElementType:         types.StringType,
 													},
 													"with_sni": schema.BoolAttribute{
-														MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI",
+														MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI.",
 														Optional:            true,
 													},
 												},
@@ -12019,16 +12019,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"configuration": schema.SingleNestedBlock{
-						MarkdownDescription: "Configuration Parameters. Configuration parameters of the workload",
+						MarkdownDescription: "Configuration Parameters. Configuration parameters of the workload.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload",
+								MarkdownDescription: "Parameters. Parameters for the workload.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"env_var": schema.SingleNestedBlock{
-											MarkdownDescription: "Environment Variable. Environment Variable",
+											MarkdownDescription: "Environment Variable. Environment Variable.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of Environment Variable.",
@@ -12041,24 +12041,24 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											},
 										},
 										"file": schema.SingleNestedBlock{
-											MarkdownDescription: "Configuration File. Configuration File for the workload",
+											MarkdownDescription: "Configuration File. Configuration File for the workload.",
 											Attributes: map[string]schema.Attribute{
 												"data": schema.StringAttribute{
 													MarkdownDescription: "Data. File data",
 													Optional:            true,
 												},
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. Name of the file",
+													MarkdownDescription: "Name. Name of the file .",
 													Optional:            true,
 												},
 												"volume_name": schema.StringAttribute{
-													MarkdownDescription: "Volume Name. Name of the Volume",
+													MarkdownDescription: "Volume Name. Name of the Volume .",
 													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"mount": schema.SingleNestedBlock{
-													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 													Attributes: map[string]schema.Attribute{
 														"mode": schema.StringAttribute{
 															MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -12082,16 +12082,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"containers": schema.ListNestedBlock{
-						MarkdownDescription: "Containers. Containers to use for service",
+						MarkdownDescription: "Containers. Containers to use for service .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"args": schema.ListAttribute{
-									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD",
+									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD.",
 									Optional:            true,
 									ElementType:         types.StringType,
 								},
 								"command": schema.ListAttribute{
-									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT",
+									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT.",
 									Optional:            true,
 									ElementType:         types.StringType,
 								},
@@ -12100,28 +12100,28 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional:            true,
 								},
 								"init_container": schema.BoolAttribute{
-									MarkdownDescription: "Initialization Container. Specialized container that runs before application container and runs to completion",
+									MarkdownDescription: "Initialization Container. Specialized container that runs before application container and runs to completion.",
 									Optional:            true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the container",
+									MarkdownDescription: "Name. Name of the container .",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"custom_flavor": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -12134,10 +12134,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Enable this option",
 								},
 								"image": schema.SingleNestedBlock{
-									MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any",
+									MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
+											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
 											Optional:            true,
 										},
 										"pull_policy": schema.StringAttribute{
@@ -12147,18 +12147,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 									Blocks: map[string]schema.Block{
 										"container_registry": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -12173,14 +12173,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"liveness_check": schema.SingleNestedBlock{
-									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
+									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic.",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
 											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional:            true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated.",
 											Optional:            true,
 										},
 										"interval": schema.Int64Attribute{
@@ -12227,11 +12227,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -12239,18 +12239,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											},
 										},
 										"tcp_health_check": schema.SingleNestedBlock{
-											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection",
+											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"port": schema.SingleNestedBlock{
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -12260,14 +12260,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"readiness_check": schema.SingleNestedBlock{
-									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
+									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic.",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
 											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional:            true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated.",
 											Optional:            true,
 										},
 										"interval": schema.Int64Attribute{
@@ -12314,11 +12314,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -12326,18 +12326,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											},
 										},
 										"tcp_health_check": schema.SingleNestedBlock{
-											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection",
+											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"port": schema.SingleNestedBlock{
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -12350,7 +12350,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"deploy_options": schema.SingleNestedBlock{
-						MarkdownDescription: "Deploy Options. Deploy Options are used to configure the workload deployment options",
+						MarkdownDescription: "Deploy OPTIONS. Deploy OPTIONS are used to configure the workload deployment OPTIONS.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"all_res": schema.SingleNestedBlock{
@@ -12360,23 +12360,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								MarkdownDescription: "Enable this option",
 							},
 							"deploy_ce_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Customer Sites. This defines a way to deploy a workload on specific Customer sites",
+								MarkdownDescription: "Customer Sites. This defines a way to deploy a workload on specific Customer sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed",
+										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -12389,23 +12389,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"deploy_ce_virtual_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites",
+								MarkdownDescription: "Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed",
+										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -12418,23 +12418,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"deploy_re_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites",
+								MarkdownDescription: "Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed",
+										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -12447,23 +12447,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"deploy_re_virtual_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites",
+								MarkdownDescription: "Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed",
+										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -12481,17 +12481,17 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Enable this option",
 					},
 					"volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Volumes. Volumes for the service",
+						MarkdownDescription: "Volumes. Volumes for the service.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume",
+									MarkdownDescription: "Name. Name of the volume.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"empty_dir": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload",
+									MarkdownDescription: "Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload.",
 									Attributes: map[string]schema.Attribute{
 										"size_limit": schema.Int64Attribute{
 											MarkdownDescription: "Size Limit (in GiB).",
@@ -12500,7 +12500,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 									Blocks: map[string]schema.Block{
 										"mount": schema.SingleNestedBlock{
-											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
 													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -12519,16 +12519,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"host_path": schema.SingleNestedBlock{
-									MarkdownDescription: "HostPath Volume. Volume containing a host mapped path into the workload",
+									MarkdownDescription: "HostPath Volume. Volume containing a host mapped path into the workload.",
 									Attributes: map[string]schema.Attribute{
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Path. Path of the directory on the host",
+											MarkdownDescription: "Path. Path of the directory on the host .",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"mount": schema.SingleNestedBlock{
-											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
 													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -12547,11 +12547,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"persistent_volume": schema.SingleNestedBlock{
-									MarkdownDescription: "Persistent Storage Volume. Volume containing the Persistent Storage for the workload",
+									MarkdownDescription: "Persistent Storage Volume. Volume containing the Persistent Storage for the workload.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"mount": schema.SingleNestedBlock{
-											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
 													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -12575,11 +12575,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													Optional:            true,
 												},
 												"class_name": schema.StringAttribute{
-													MarkdownDescription: "Class Name. Use the specified class name",
+													MarkdownDescription: "Class Name. Use the specified class name.",
 													Optional:            true,
 												},
 												"storage_size": schema.Int64Attribute{
-													MarkdownDescription: "Size (in GiB). Size in GiB of the persistent storage",
+													MarkdownDescription: "Size (in GiB). Size in GiB of the persistent storage .",
 													Optional:            true,
 												},
 											},
@@ -12597,25 +12597,25 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 				},
 			},
 			"simple_service": schema.SingleNestedBlock{
-				MarkdownDescription: "SimpleServiceType. SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP",
+				MarkdownDescription: "SimpleServiceType. SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP.",
 				Attributes: map[string]schema.Attribute{
 					"scale_to_zero": schema.BoolAttribute{
-						MarkdownDescription: "Scale Down to Zero. Scale down replicas of the service to zero",
+						MarkdownDescription: "Scale Down to Zero. Scale down replicas of the service to zero.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"configuration": schema.SingleNestedBlock{
-						MarkdownDescription: "Configuration Parameters. Configuration parameters of the workload",
+						MarkdownDescription: "Configuration Parameters. Configuration parameters of the workload.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload",
+								MarkdownDescription: "Parameters. Parameters for the workload.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"env_var": schema.SingleNestedBlock{
-											MarkdownDescription: "Environment Variable. Environment Variable",
+											MarkdownDescription: "Environment Variable. Environment Variable.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of Environment Variable.",
@@ -12628,24 +12628,24 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											},
 										},
 										"file": schema.SingleNestedBlock{
-											MarkdownDescription: "Configuration File. Configuration File for the workload",
+											MarkdownDescription: "Configuration File. Configuration File for the workload.",
 											Attributes: map[string]schema.Attribute{
 												"data": schema.StringAttribute{
 													MarkdownDescription: "Data. File data",
 													Optional:            true,
 												},
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. Name of the file",
+													MarkdownDescription: "Name. Name of the file .",
 													Optional:            true,
 												},
 												"volume_name": schema.StringAttribute{
-													MarkdownDescription: "Volume Name. Name of the Volume",
+													MarkdownDescription: "Volume Name. Name of the Volume .",
 													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"mount": schema.SingleNestedBlock{
-													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 													Attributes: map[string]schema.Attribute{
 														"mode": schema.StringAttribute{
 															MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -12669,15 +12669,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"container": schema.SingleNestedBlock{
-						MarkdownDescription: "Container Configuration. ContainerType configures the container information",
+						MarkdownDescription: "Container Configuration. ContainerType configures the container information.",
 						Attributes: map[string]schema.Attribute{
 							"args": schema.ListAttribute{
-								MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD",
+								MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD.",
 								Optional:            true,
 								ElementType:         types.StringType,
 							},
 							"command": schema.ListAttribute{
-								MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT",
+								MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT.",
 								Optional:            true,
 								ElementType:         types.StringType,
 							},
@@ -12686,28 +12686,28 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								Optional:            true,
 							},
 							"init_container": schema.BoolAttribute{
-								MarkdownDescription: "Initialization Container. Specialized container that runs before application container and runs to completion",
+								MarkdownDescription: "Initialization Container. Specialized container that runs before application container and runs to completion.",
 								Optional:            true,
 							},
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. Name of the container",
+								MarkdownDescription: "Name. Name of the container .",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"custom_flavor": schema.SingleNestedBlock{
-								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -12720,10 +12720,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								MarkdownDescription: "Enable this option",
 							},
 							"image": schema.SingleNestedBlock{
-								MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any",
+								MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
+										MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
 										Optional:            true,
 									},
 									"pull_policy": schema.StringAttribute{
@@ -12733,18 +12733,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 								Blocks: map[string]schema.Block{
 									"container_registry": schema.SingleNestedBlock{
-										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+										MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 										Attributes: map[string]schema.Attribute{
 											"name": schema.StringAttribute{
-												MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+												MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 												Optional:            true,
 											},
 											"namespace": schema.StringAttribute{
-												MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+												MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 												Optional:            true,
 											},
 											"tenant": schema.StringAttribute{
-												MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+												MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 												Optional:            true,
 												Computed:            true,
 												PlanModifiers: []planmodifier.String{
@@ -12759,14 +12759,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"liveness_check": schema.SingleNestedBlock{
-								MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
+								MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic.",
 								Attributes: map[string]schema.Attribute{
 									"healthy_threshold": schema.Int64Attribute{
 										MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 										Optional:            true,
 									},
 									"initial_delay": schema.Int64Attribute{
-										MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
+										MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated.",
 										Optional:            true,
 									},
 									"interval": schema.Int64Attribute{
@@ -12813,11 +12813,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 												MarkdownDescription: "Port. Port",
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
-														MarkdownDescription: "Port Name. Port Name",
+														MarkdownDescription: "Port Name. Port Name.",
 														Optional:            true,
 													},
 													"num": schema.Int64Attribute{
-														MarkdownDescription: "Port Number. Port number",
+														MarkdownDescription: "Port Number. Port number.",
 														Optional:            true,
 													},
 												},
@@ -12825,18 +12825,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"tcp_health_check": schema.SingleNestedBlock{
-										MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection",
+										MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"port": schema.SingleNestedBlock{
 												MarkdownDescription: "Port. Port",
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
-														MarkdownDescription: "Port Name. Port Name",
+														MarkdownDescription: "Port Name. Port Name.",
 														Optional:            true,
 													},
 													"num": schema.Int64Attribute{
-														MarkdownDescription: "Port Number. Port number",
+														MarkdownDescription: "Port Number. Port number.",
 														Optional:            true,
 													},
 												},
@@ -12846,14 +12846,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"readiness_check": schema.SingleNestedBlock{
-								MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
+								MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic.",
 								Attributes: map[string]schema.Attribute{
 									"healthy_threshold": schema.Int64Attribute{
 										MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 										Optional:            true,
 									},
 									"initial_delay": schema.Int64Attribute{
-										MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
+										MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated.",
 										Optional:            true,
 									},
 									"interval": schema.Int64Attribute{
@@ -12900,11 +12900,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 												MarkdownDescription: "Port. Port",
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
-														MarkdownDescription: "Port Name. Port Name",
+														MarkdownDescription: "Port Name. Port Name.",
 														Optional:            true,
 													},
 													"num": schema.Int64Attribute{
-														MarkdownDescription: "Port Number. Port number",
+														MarkdownDescription: "Port Number. Port number.",
 														Optional:            true,
 													},
 												},
@@ -12912,18 +12912,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"tcp_health_check": schema.SingleNestedBlock{
-										MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection",
+										MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"port": schema.SingleNestedBlock{
 												MarkdownDescription: "Port. Port",
 												Attributes: map[string]schema.Attribute{
 													"name": schema.StringAttribute{
-														MarkdownDescription: "Port Name. Port Name",
+														MarkdownDescription: "Port Name. Port Name.",
 														Optional:            true,
 													},
 													"num": schema.Int64Attribute{
-														MarkdownDescription: "Port Number. Port number",
+														MarkdownDescription: "Port Number. Port number.",
 														Optional:            true,
 													},
 												},
@@ -12941,20 +12941,20 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Enable this option",
 					},
 					"enabled": schema.SingleNestedBlock{
-						MarkdownDescription: "Persistent Storage Volume. Persistent storage volume configuration for the workload",
+						MarkdownDescription: "Persistent Storage Volume. Persistent storage volume configuration for the workload.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. Name of the volume",
+								MarkdownDescription: "Name. Name of the volume .",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"persistent_volume": schema.SingleNestedBlock{
-								MarkdownDescription: "Persistent Storage Volume. Volume containing the Persistent Storage for the workload",
+								MarkdownDescription: "Persistent Storage Volume. Volume containing the Persistent Storage for the workload.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"mount": schema.SingleNestedBlock{
-										MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+										MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 										Attributes: map[string]schema.Attribute{
 											"mode": schema.StringAttribute{
 												MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -12978,11 +12978,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 												Optional:            true,
 											},
 											"class_name": schema.StringAttribute{
-												MarkdownDescription: "Class Name. Use the specified class name",
+												MarkdownDescription: "Class Name. Use the specified class name.",
 												Optional:            true,
 											},
 											"storage_size": schema.Int64Attribute{
-												MarkdownDescription: "Size (in GiB). Size in GiB of the persistent storage",
+												MarkdownDescription: "Size (in GiB). Size in GiB of the persistent storage .",
 												Optional:            true,
 											},
 										},
@@ -12997,15 +12997,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"simple_advertise": schema.SingleNestedBlock{
-						MarkdownDescription: "Advertise Options For Simple Service. Advertise options for Simple Service",
+						MarkdownDescription: "Advertise OPTIONS For Simple Service. Advertise OPTIONS for Simple Service.",
 						Attributes: map[string]schema.Attribute{
 							"domains": schema.ListAttribute{
-								MarkdownDescription: "Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: www.foo.com. 2. Domains starting with a Wildcard: *.foo.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. e.g. *.foo.com and *.bar.foo.com are valid Wildcards however *bar.foo.com, *-bar.foo.com, and bar*.foo.com are all invalid. Additional notes: A Wildcard will not match empty string. e.g. *.foo.com will match bar.foo.com and baz-bar.foo.com but not .foo.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Load Balancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system.",
+								MarkdownDescription: "Domains. A list of Domains (host/authority header) that will be matched to Load Balancer. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: www.example.com. 2. Domains starting with a Wildcard: *.example.com. Not supported Domains: - Just a Wildcard: * - A Wildcard and TLD with no root Domain: *.com. - A Wildcard not matching a whole DNS label. E.g. *.example.com and *.bar.example.com are valid Wildcards however *bar.example.com, *-bar.example.com, and bar*.example.com are all invalid. Additional notes: A Wildcard will not match empty string. E.g. *.example.com will match bar.example.com and baz-bar.example.com but not .example.com. The longest Wildcards match first. Only a single virtual host in the entire route configuration can match on *. Also a Domain must be unique across all virtual hosts within an advertise policy. Domains are also used for SNI matching if the Load Balancer type is HTTPS. Domains also indicate the list of names for which DNS resolution will be automatically resolved to IP addresses by the system.",
 								Optional:            true,
 								ElementType:         types.StringType,
 							},
 							"service_port": schema.Int64Attribute{
-								MarkdownDescription: "Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80",
+								MarkdownDescription: "Service Port. Service port to advertise on Internet via HTTP loadbalancer using port 80 .",
 								Optional:            true,
 							},
 						},
@@ -13016,50 +13016,50 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 				MarkdownDescription: "StatefulServiceType. StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc.",
 				Attributes: map[string]schema.Attribute{
 					"num_replicas": schema.Int64Attribute{
-						MarkdownDescription: "Number of Replicas. Number of replicas of service to spawn per site",
+						MarkdownDescription: "Number of Replicas. Number of replicas of service to spawn per site.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"advertise_options": schema.SingleNestedBlock{
-						MarkdownDescription: "Advertise Options. Advertise options are used to configure how and where to advertise the workload using load balancers",
+						MarkdownDescription: "Advertise OPTIONS. Advertise OPTIONS are used to configure how and where to advertise the workload using load balancers.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"advertise_custom": schema.SingleNestedBlock{
-								MarkdownDescription: "Advertise on specific sites. Advertise this workload via loadbalancer on specific sites",
+								MarkdownDescription: "Advertise on specific sites. Advertise this workload via loadbalancer on specific sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"advertise_where": schema.ListNestedBlock{
-										MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available",
+										MarkdownDescription: "List of Sites to Advertise. Where should this load balancer be available .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"site": schema.SingleNestedBlock{
-													MarkdownDescription: "Site. This defines a reference to a CE site along with network type and an optional ip address where a load balancer could be advertised",
+													MarkdownDescription: "Site. This defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised.",
 													Attributes: map[string]schema.Attribute{
 														"ip": schema.StringAttribute{
-															MarkdownDescription: "IP Address. Use given IP address as VIP on the site",
+															MarkdownDescription: "IP Address. Use given IP address as VIP on the site.",
 															Optional:            true,
 														},
 														"network": schema.StringAttribute{
-															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
+															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"site": schema.SingleNestedBlock{
-															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 															Attributes: map[string]schema.Attribute{
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																	Optional:            true,
 																},
 																"namespace": schema.StringAttribute{
-																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																	Optional:            true,
 																},
 																"tenant": schema.StringAttribute{
-																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -13071,27 +13071,27 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													},
 												},
 												"virtual_site": schema.SingleNestedBlock{
-													MarkdownDescription: "Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised",
+													MarkdownDescription: "Virtual Site. This defines a reference to a customer site virtual site along with network type where a load balancer could be advertised.",
 													Attributes: map[string]schema.Attribute{
 														"network": schema.StringAttribute{
-															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
+															MarkdownDescription: "[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network. Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`. Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"virtual_site": schema.SingleNestedBlock{
-															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 															Attributes: map[string]schema.Attribute{
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																	Optional:            true,
 																},
 																"namespace": schema.StringAttribute{
-																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																	Optional:            true,
 																},
 																"tenant": schema.StringAttribute{
-																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -13103,22 +13103,22 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													},
 												},
 												"vk8s_service": schema.SingleNestedBlock{
-													MarkdownDescription: "vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network",
+													MarkdownDescription: "VK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"site": schema.SingleNestedBlock{
-															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 															Attributes: map[string]schema.Attribute{
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																	Optional:            true,
 																},
 																"namespace": schema.StringAttribute{
-																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																	Optional:            true,
 																},
 																"tenant": schema.StringAttribute{
-																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -13128,18 +13128,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"virtual_site": schema.SingleNestedBlock{
-															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+															MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 															Attributes: map[string]schema.Attribute{
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																	Optional:            true,
 																},
 																"namespace": schema.StringAttribute{
-																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																	Optional:            true,
 																},
 																"tenant": schema.StringAttribute{
-																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -13154,25 +13154,25 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"ports": schema.ListNestedBlock{
-										MarkdownDescription: "Ports. Ports to advertise",
+										MarkdownDescription: "Ports. Ports to advertise .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"http_loadbalancer": schema.SingleNestedBlock{
-													MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer",
+													MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer.",
 													Attributes: map[string]schema.Attribute{
 														"domains": schema.ListAttribute{
-															MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER",
+															MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.example.com``. 2. Prefix domain wildcards: ``*.example.com`` or ``*.bar.example.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. E.g. ``*.example.com`` will match ``bar.example.com`` and ``baz-bar.example.com`` but not ``.example.com``. The longest wildcards match first. Wildcards must match a whole DNS label. E.g. ``*.example.com`` and *.bar.example.com are valid, however ``*bar.example.com`` or ``*-bar.example.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER .",
 															Optional:            true,
 															ElementType:         types.StringType,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"default_route": schema.SingleNestedBlock{
-															MarkdownDescription: "Default Route. Default route matching all APIs",
+															MarkdownDescription: "Default Route. Default route matching all APIs.",
 															Attributes: map[string]schema.Attribute{
 																"host_rewrite": schema.StringAttribute{
-																	MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																	MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																	Optional:            true,
 																},
 															},
@@ -13186,7 +13186,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"http": schema.SingleNestedBlock{
-															MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy",
+															MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy.",
 															Attributes: map[string]schema.Attribute{
 																"dns_volterra_managed": schema.BoolAttribute{
 																	MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal.",
@@ -13203,10 +13203,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"https": schema.SingleNestedBlock{
-															MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates",
+															MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 															Attributes: map[string]schema.Attribute{
 																"add_hsts": schema.BoolAttribute{
-																	MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																	MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																	Optional:            true,
 																},
 																"append_server_name": schema.StringAttribute{
@@ -13218,7 +13218,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"http_redirect": schema.BoolAttribute{
-																	MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																	MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																	Optional:            true,
 																},
 																"port": schema.Int64Attribute{
@@ -13236,7 +13236,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 															Blocks: map[string]schema.Block{
 																"coalescing_options": schema.SingleNestedBlock{
-																	MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																	MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"default_coalescing": schema.SingleNestedBlock{
@@ -13260,15 +13260,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Enable this option",
 																},
 																"http_protocol_options": schema.SingleNestedBlock{
-																	MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																	MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																			MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																			MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"header_transformation": schema.SingleNestedBlock{
-																					MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																					MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"default_header_transformation": schema.SingleNestedBlock{
@@ -13302,7 +13302,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Enable this option",
 																},
 																"tls_cert_params": schema.SingleNestedBlock{
-																	MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates",
+																	MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"certificates": schema.ListNestedBlock{
@@ -13310,15 +13310,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			NestedObject: schema.NestedBlockObject{
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
-																						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																						Optional:            true,
 																					},
 																					"namespace": schema.StringAttribute{
-																						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																						Optional:            true,
 																					},
 																					"tenant": schema.StringAttribute{
-																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
 																						PlanModifiers: []planmodifier.String{
@@ -13332,11 +13332,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"tls_config": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																			MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"custom_security": schema.SingleNestedBlock{
-																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																					Attributes: map[string]schema.Attribute{
 																						"cipher_suites": schema.ListAttribute{
 																							MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -13365,31 +13365,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"use_mtls": schema.SingleNestedBlock{
-																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																			Attributes: map[string]schema.Attribute{
 																				"client_certificate_optional": schema.BoolAttribute{
 																					MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																					Optional:            true,
 																				},
 																				"trusted_ca_url": schema.StringAttribute{
-																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																					Optional:            true,
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
 																				"crl": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -13402,18 +13402,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"trusted_ca": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -13426,10 +13426,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"xfcc_options": schema.SingleNestedBlock{
-																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -13440,14 +13440,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"tls_parameters": schema.SingleNestedBlock{
-																	MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
+																	MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"no_mtls": schema.SingleNestedBlock{
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"tls_certificates": schema.ListNestedBlock{
-																			MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
+																			MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 																			NestedObject: schema.NestedBlockObject{
 																				Attributes: map[string]schema.Attribute{
 																					"certificate_url": schema.StringAttribute{
@@ -13455,13 +13455,13 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						Optional:            true,
 																					},
 																					"description_spec": schema.StringAttribute{
-																						MarkdownDescription: "Description. Description for the certificate",
+																						MarkdownDescription: "Description. Description for the certificate.",
 																						Optional:            true,
 																					},
 																				},
 																				Blocks: map[string]schema.Block{
 																					"custom_hash_algorithms": schema.SingleNestedBlock{
-																						MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+																						MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 																						Attributes: map[string]schema.Attribute{
 																							"hash_algorithms": schema.ListAttribute{
 																								MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -13474,22 +13474,22 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Enable this option",
 																					},
 																					"private_key": schema.SingleNestedBlock{
-																						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 																						Attributes:          map[string]schema.Attribute{},
 																						Blocks: map[string]schema.Block{
 																							"blindfold_secret_info": schema.SingleNestedBlock{
-																								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																								Attributes: map[string]schema.Attribute{
 																									"decryption_provider": schema.StringAttribute{
 																										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																										Optional:            true,
 																									},
 																									"location": schema.StringAttribute{
-																										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																										Optional:            true,
 																									},
 																									"store_provider": schema.StringAttribute{
-																										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																										Optional:            true,
 																									},
 																								},
@@ -13498,11 +13498,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																								Attributes: map[string]schema.Attribute{
 																									"provider_ref": schema.StringAttribute{
-																										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																										Optional:            true,
 																									},
 																									"url": schema.StringAttribute{
-																										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																										Optional:            true,
 																									},
 																								},
@@ -13516,11 +13516,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"tls_config": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																			MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"custom_security": schema.SingleNestedBlock{
-																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																					Attributes: map[string]schema.Attribute{
 																						"cipher_suites": schema.ListAttribute{
 																							MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -13549,31 +13549,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"use_mtls": schema.SingleNestedBlock{
-																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																			Attributes: map[string]schema.Attribute{
 																				"client_certificate_optional": schema.BoolAttribute{
 																					MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																					Optional:            true,
 																				},
 																				"trusted_ca_url": schema.StringAttribute{
-																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																					Optional:            true,
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
 																				"crl": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -13586,18 +13586,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"trusted_ca": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -13610,10 +13610,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"xfcc_options": schema.SingleNestedBlock{
-																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -13626,10 +13626,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"https_auto_cert": schema.SingleNestedBlock{
-															MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates",
+															MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 															Attributes: map[string]schema.Attribute{
 																"add_hsts": schema.BoolAttribute{
-																	MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																	MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																	Optional:            true,
 																},
 																"append_server_name": schema.StringAttribute{
@@ -13641,7 +13641,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"http_redirect": schema.BoolAttribute{
-																	MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																	MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																	Optional:            true,
 																},
 																"port": schema.Int64Attribute{
@@ -13659,7 +13659,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 															Blocks: map[string]schema.Block{
 																"coalescing_options": schema.SingleNestedBlock{
-																	MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																	MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"default_coalescing": schema.SingleNestedBlock{
@@ -13683,15 +13683,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Enable this option",
 																},
 																"http_protocol_options": schema.SingleNestedBlock{
-																	MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																	MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																			MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																			MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"header_transformation": schema.SingleNestedBlock{
-																					MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																					MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"default_header_transformation": schema.SingleNestedBlock{
@@ -13728,11 +13728,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	MarkdownDescription: "Enable this option",
 																},
 																"tls_config": schema.SingleNestedBlock{
-																	MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																	MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"custom_security": schema.SingleNestedBlock{
-																			MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																			MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																			Attributes: map[string]schema.Attribute{
 																				"cipher_suites": schema.ListAttribute{
 																					MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -13761,31 +13761,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"use_mtls": schema.SingleNestedBlock{
-																	MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																	MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																	Attributes: map[string]schema.Attribute{
 																		"client_certificate_optional": schema.BoolAttribute{
 																			MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																			Optional:            true,
 																		},
 																		"trusted_ca_url": schema.StringAttribute{
-																			MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																			MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																			Optional:            true,
 																		},
 																	},
 																	Blocks: map[string]schema.Block{
 																		"crl": schema.SingleNestedBlock{
-																			MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																			MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																			Attributes: map[string]schema.Attribute{
 																				"name": schema.StringAttribute{
-																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -13798,18 +13798,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"trusted_ca": schema.SingleNestedBlock{
-																			MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																			MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																			Attributes: map[string]schema.Attribute{
 																				"name": schema.StringAttribute{
-																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -13822,10 +13822,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"xfcc_options": schema.SingleNestedBlock{
-																			MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																			MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																			Attributes: map[string]schema.Attribute{
 																				"xfcc_header_elements": schema.ListAttribute{
-																					MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																					MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																					Optional:            true,
 																					ElementType:         types.StringType,
 																				},
@@ -13836,11 +13836,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"specific_routes": schema.SingleNestedBlock{
-															MarkdownDescription: "Route Type. This defines various options to define a route",
+															MarkdownDescription: "Route Type. This defines various OPTIONS to define a route.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"routes": schema.ListNestedBlock{
-																	MarkdownDescription: "Routes. Routes for this loadbalancer",
+																	MarkdownDescription: "Routes. Routes for this loadbalancer.",
 																	NestedObject: schema.NestedBlockObject{
 																		Attributes: map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
@@ -13849,18 +13849,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"route_ref": schema.SingleNestedBlock{
-																						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																						Attributes: map[string]schema.Attribute{
 																							"name": schema.StringAttribute{
-																								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																								Optional:            true,
 																							},
 																							"namespace": schema.StringAttribute{
-																								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																								Optional:            true,
 																							},
 																							"tenant": schema.StringAttribute{
-																								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																								Optional:            true,
 																								Computed:            true,
 																								PlanModifiers: []planmodifier.String{
@@ -13872,7 +13872,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				},
 																			},
 																			"direct_response_route": schema.SingleNestedBlock{
-																				MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
+																				MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic.",
 																				Attributes: map[string]schema.Attribute{
 																					"http_method": schema.StringAttribute{
 																						MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -13881,41 +13881,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				},
 																				Blocks: map[string]schema.Block{
 																					"headers": schema.ListNestedBlock{
-																						MarkdownDescription: "Headers. List of (key, value) headers",
+																						MarkdownDescription: "Headers. List of (key, value) headers.",
 																						NestedObject: schema.NestedBlockObject{
 																							Attributes: map[string]schema.Attribute{
 																								"exact": schema.StringAttribute{
-																									MarkdownDescription: "Exact. Header value to match exactly",
+																									MarkdownDescription: "Exact. Header value to match exactly.",
 																									Optional:            true,
 																								},
 																								"invert_match": schema.BoolAttribute{
-																									MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																									MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																									Optional:            true,
 																								},
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. Name of the header",
+																									MarkdownDescription: "Name. Name of the header .",
 																									Optional:            true,
 																								},
 																								"presence": schema.BoolAttribute{
-																									MarkdownDescription: "Presence. If true, check for presence of header",
+																									MarkdownDescription: "Presence. If true, check for presence of header.",
 																									Optional:            true,
 																								},
 																								"regex": schema.StringAttribute{
-																									MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																									MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																									Optional:            true,
 																								},
 																							},
 																						},
 																					},
 																					"incoming_port": schema.SingleNestedBlock{
-																						MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																						MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																						Attributes: map[string]schema.Attribute{
 																							"port": schema.Int64Attribute{
-																								MarkdownDescription: "Port. Exact Port to match",
+																								MarkdownDescription: "Port. Exact Port to match.",
 																								Optional:            true,
 																							},
 																							"port_ranges": schema.StringAttribute{
-																								MarkdownDescription: "Port range. Port range to match",
+																								MarkdownDescription: "Port range. Port range to match.",
 																								Optional:            true,
 																							},
 																						},
@@ -13926,31 +13926,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																					},
 																					"path": schema.SingleNestedBlock{
-																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																						Attributes: map[string]schema.Attribute{
 																							"path": schema.StringAttribute{
-																								MarkdownDescription: "Exact. Exact path value to match",
+																								MarkdownDescription: "Exact. Exact path value to match.",
 																								Optional:            true,
 																							},
 																							"prefix": schema.StringAttribute{
-																								MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																								MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																								Optional:            true,
 																							},
 																							"regex": schema.StringAttribute{
-																								MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																								MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																								Optional:            true,
 																							},
 																						},
 																					},
 																					"route_direct_response": schema.SingleNestedBlock{
-																						MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response",
+																						MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response.",
 																						Attributes: map[string]schema.Attribute{
 																							"response_body_encoded": schema.StringAttribute{
-																								MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g. '<p> Access Denied </p>'. Base64 encoded string url for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==",
+																								MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==.",
 																								Optional:            true,
 																							},
 																							"response_code": schema.Int64Attribute{
-																								MarkdownDescription: "Response Code. response code to send",
+																								MarkdownDescription: "Response Code. Response code to send.",
 																								Optional:            true,
 																							},
 																						},
@@ -13958,7 +13958,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				},
 																			},
 																			"redirect_route": schema.SingleNestedBlock{
-																				MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
+																				MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL.",
 																				Attributes: map[string]schema.Attribute{
 																					"http_method": schema.StringAttribute{
 																						MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -13967,41 +13967,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				},
 																				Blocks: map[string]schema.Block{
 																					"headers": schema.ListNestedBlock{
-																						MarkdownDescription: "Headers. List of (key, value) headers",
+																						MarkdownDescription: "Headers. List of (key, value) headers.",
 																						NestedObject: schema.NestedBlockObject{
 																							Attributes: map[string]schema.Attribute{
 																								"exact": schema.StringAttribute{
-																									MarkdownDescription: "Exact. Header value to match exactly",
+																									MarkdownDescription: "Exact. Header value to match exactly.",
 																									Optional:            true,
 																								},
 																								"invert_match": schema.BoolAttribute{
-																									MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																									MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																									Optional:            true,
 																								},
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. Name of the header",
+																									MarkdownDescription: "Name. Name of the header .",
 																									Optional:            true,
 																								},
 																								"presence": schema.BoolAttribute{
-																									MarkdownDescription: "Presence. If true, check for presence of header",
+																									MarkdownDescription: "Presence. If true, check for presence of header.",
 																									Optional:            true,
 																								},
 																								"regex": schema.StringAttribute{
-																									MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																									MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																									Optional:            true,
 																								},
 																							},
 																						},
 																					},
 																					"incoming_port": schema.SingleNestedBlock{
-																						MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																						MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																						Attributes: map[string]schema.Attribute{
 																							"port": schema.Int64Attribute{
-																								MarkdownDescription: "Port. Exact Port to match",
+																								MarkdownDescription: "Port. Exact Port to match.",
 																								Optional:            true,
 																							},
 																							"port_ranges": schema.StringAttribute{
-																								MarkdownDescription: "Port range. Port range to match",
+																								MarkdownDescription: "Port range. Port range to match.",
 																								Optional:            true,
 																							},
 																						},
@@ -14012,39 +14012,39 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																					},
 																					"path": schema.SingleNestedBlock{
-																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																						Attributes: map[string]schema.Attribute{
 																							"path": schema.StringAttribute{
-																								MarkdownDescription: "Exact. Exact path value to match",
+																								MarkdownDescription: "Exact. Exact path value to match.",
 																								Optional:            true,
 																							},
 																							"prefix": schema.StringAttribute{
-																								MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																								MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																								Optional:            true,
 																							},
 																							"regex": schema.StringAttribute{
-																								MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																								MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																								Optional:            true,
 																							},
 																						},
 																					},
 																					"route_redirect": schema.SingleNestedBlock{
-																						MarkdownDescription: "Redirect. route redirect parameters when match action is redirect.",
+																						MarkdownDescription: "Redirect. Route redirect parameters when match action is redirect.",
 																						Attributes: map[string]schema.Attribute{
 																							"host_redirect": schema.StringAttribute{
-																								MarkdownDescription: "Host. swap host part of incoming URL in redirect URL",
+																								MarkdownDescription: "Host. Swap host part of incoming URL in redirect URL.",
 																								Optional:            true,
 																							},
 																							"path_redirect": schema.StringAttribute{
-																								MarkdownDescription: "Path. swap path part of incoming URL in redirect URL",
+																								MarkdownDescription: "Path. swap path part of incoming URL in redirect URL.",
 																								Optional:            true,
 																							},
 																							"prefix_rewrite": schema.StringAttribute{
-																								MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request",
+																								MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request.",
 																								Optional:            true,
 																							},
 																							"proto_redirect": schema.StringAttribute{
-																								MarkdownDescription: "Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either http or https When incoming-proto option is specified, swapping of protocol is not done.",
+																								MarkdownDescription: "Protocol. Swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done.",
 																								Optional:            true,
 																							},
 																							"replace_params": schema.StringAttribute{
@@ -14068,10 +14068,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				},
 																			},
 																			"simple_route": schema.SingleNestedBlock{
-																				MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside",
+																				MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside.",
 																				Attributes: map[string]schema.Attribute{
 																					"host_rewrite": schema.StringAttribute{
-																						MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																						MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																						Optional:            true,
 																					},
 																					"http_method": schema.StringAttribute{
@@ -14087,18 +14087,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						MarkdownDescription: "Enable this option",
 																					},
 																					"path": schema.SingleNestedBlock{
-																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																						MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																						Attributes: map[string]schema.Attribute{
 																							"path": schema.StringAttribute{
-																								MarkdownDescription: "Exact. Exact path value to match",
+																								MarkdownDescription: "Exact. Exact path value to match.",
 																								Optional:            true,
 																							},
 																							"prefix": schema.StringAttribute{
-																								MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																								MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																								Optional:            true,
 																							},
 																							"regex": schema.StringAttribute{
-																								MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																								MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																								Optional:            true,
 																							},
 																						},
@@ -14113,19 +14113,19 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													},
 												},
 												"port": schema.SingleNestedBlock{
-													MarkdownDescription: "Port. Port of the workload",
+													MarkdownDescription: "Port. Port of the workload.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. Name of the Port",
+															MarkdownDescription: "Name. Name of the Port .",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"info": schema.SingleNestedBlock{
-															MarkdownDescription: "Port Information. Port information",
+															MarkdownDescription: "Port Information. Port information.",
 															Attributes: map[string]schema.Attribute{
 																"port": schema.Int64Attribute{
-																	MarkdownDescription: "Port. Port the workload can be reached on",
+																	MarkdownDescription: "Port. Port the workload can be reached on .",
 																	Optional:            true,
 																},
 																"protocol": schema.StringAttribute{
@@ -14133,7 +14133,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"target_port": schema.Int64Attribute{
-																	MarkdownDescription: "Different than Port. Port the workload is listening on",
+																	MarkdownDescription: "Different than Port. Port the workload is listening on.",
 																	Optional:            true,
 																},
 															},
@@ -14146,15 +14146,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													},
 												},
 												"tcp_loadbalancer": schema.SingleNestedBlock{
-													MarkdownDescription: "TCP Load Balancer. TCP loadbalancer",
+													MarkdownDescription: "TCP Load Balancer. TCP loadbalancer.",
 													Attributes: map[string]schema.Attribute{
 														"domains": schema.ListAttribute{
-															MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER",
+															MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER.",
 															Optional:            true,
 															ElementType:         types.StringType,
 														},
 														"with_sni": schema.BoolAttribute{
-															MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI",
+															MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI.",
 															Optional:            true,
 														},
 													},
@@ -14165,28 +14165,28 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"advertise_in_cluster": schema.SingleNestedBlock{
-								MarkdownDescription: "Advertise In Cluster. Advertise the workload locally in-cluster",
+								MarkdownDescription: "Advertise In Cluster. Advertise the workload locally in-cluster.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"multi_ports": schema.SingleNestedBlock{
-										MarkdownDescription: "Multiple Ports. Multiple ports",
+										MarkdownDescription: "Multiple Ports. Multiple ports.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"ports": schema.ListNestedBlock{
-												MarkdownDescription: "Ports. Ports to advertise",
+												MarkdownDescription: "Ports. Ports to advertise .",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. Name of the Port",
+															MarkdownDescription: "Name. Name of the Port .",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"info": schema.SingleNestedBlock{
-															MarkdownDescription: "Port Information. Port information",
+															MarkdownDescription: "Port Information. Port information.",
 															Attributes: map[string]schema.Attribute{
 																"port": schema.Int64Attribute{
-																	MarkdownDescription: "Port. Port the workload can be reached on",
+																	MarkdownDescription: "Port. Port the workload can be reached on .",
 																	Optional:            true,
 																},
 																"protocol": schema.StringAttribute{
@@ -14194,7 +14194,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	Optional:            true,
 																},
 																"target_port": schema.Int64Attribute{
-																	MarkdownDescription: "Different than Port. Port the workload is listening on",
+																	MarkdownDescription: "Different than Port. Port the workload is listening on.",
 																	Optional:            true,
 																},
 															},
@@ -14210,14 +14210,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"port": schema.SingleNestedBlock{
-										MarkdownDescription: "Port. Single port",
+										MarkdownDescription: "Port. Single port.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"info": schema.SingleNestedBlock{
-												MarkdownDescription: "Port Information. Port information",
+												MarkdownDescription: "Port Information. Port information.",
 												Attributes: map[string]schema.Attribute{
 													"port": schema.Int64Attribute{
-														MarkdownDescription: "Port. Port the workload can be reached on",
+														MarkdownDescription: "Port. Port the workload can be reached on .",
 														Optional:            true,
 													},
 													"protocol": schema.StringAttribute{
@@ -14225,7 +14225,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														Optional:            true,
 													},
 													"target_port": schema.Int64Attribute{
-														MarkdownDescription: "Different than Port. Port the workload is listening on",
+														MarkdownDescription: "Different than Port. Port the workload is listening on.",
 														Optional:            true,
 													},
 												},
@@ -14240,33 +14240,33 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"advertise_on_public": schema.SingleNestedBlock{
-								MarkdownDescription: "Advertise On Internet. Advertise this workload via loadbalancer on Internet with default VIP",
+								MarkdownDescription: "Advertise On Internet. Advertise this workload via loadbalancer on Internet with default VIP.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"multi_ports": schema.SingleNestedBlock{
-										MarkdownDescription: "Advertise Multiple Ports. Advertise multiple ports",
+										MarkdownDescription: "Advertise Multiple Ports. Advertise multiple ports.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"ports": schema.ListNestedBlock{
-												MarkdownDescription: "Ports. Ports to advertise",
+												MarkdownDescription: "Ports. Ports to advertise .",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"http_loadbalancer": schema.SingleNestedBlock{
-															MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer",
+															MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer.",
 															Attributes: map[string]schema.Attribute{
 																"domains": schema.ListAttribute{
-																	MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER",
+																	MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.example.com``. 2. Prefix domain wildcards: ``*.example.com`` or ``*.bar.example.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. E.g. ``*.example.com`` will match ``bar.example.com`` and ``baz-bar.example.com`` but not ``.example.com``. The longest wildcards match first. Wildcards must match a whole DNS label. E.g. ``*.example.com`` and *.bar.example.com are valid, however ``*bar.example.com`` or ``*-bar.example.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER .",
 																	Optional:            true,
 																	ElementType:         types.StringType,
 																},
 															},
 															Blocks: map[string]schema.Block{
 																"default_route": schema.SingleNestedBlock{
-																	MarkdownDescription: "Default Route. Default route matching all APIs",
+																	MarkdownDescription: "Default Route. Default route matching all APIs.",
 																	Attributes: map[string]schema.Attribute{
 																		"host_rewrite": schema.StringAttribute{
-																			MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																			MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																			Optional:            true,
 																		},
 																	},
@@ -14280,7 +14280,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"http": schema.SingleNestedBlock{
-																	MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy",
+																	MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy.",
 																	Attributes: map[string]schema.Attribute{
 																		"dns_volterra_managed": schema.BoolAttribute{
 																			MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal.",
@@ -14297,10 +14297,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"https": schema.SingleNestedBlock{
-																	MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates",
+																	MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 																	Attributes: map[string]schema.Attribute{
 																		"add_hsts": schema.BoolAttribute{
-																			MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																			MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																			Optional:            true,
 																		},
 																		"append_server_name": schema.StringAttribute{
@@ -14312,7 +14312,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional:            true,
 																		},
 																		"http_redirect": schema.BoolAttribute{
-																			MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																			MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																			Optional:            true,
 																		},
 																		"port": schema.Int64Attribute{
@@ -14330,7 +14330,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																	Blocks: map[string]schema.Block{
 																		"coalescing_options": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																			MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"default_coalescing": schema.SingleNestedBlock{
@@ -14354,15 +14354,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"http_protocol_options": schema.SingleNestedBlock{
-																			MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																			MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																					MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																					MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"header_transformation": schema.SingleNestedBlock{
-																							MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																							MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																							Attributes:          map[string]schema.Attribute{},
 																							Blocks: map[string]schema.Block{
 																								"default_header_transformation": schema.SingleNestedBlock{
@@ -14396,7 +14396,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"tls_cert_params": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates",
+																			MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"certificates": schema.ListNestedBlock{
@@ -14404,15 +14404,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					NestedObject: schema.NestedBlockObject{
 																						Attributes: map[string]schema.Attribute{
 																							"name": schema.StringAttribute{
-																								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																								Optional:            true,
 																							},
 																							"namespace": schema.StringAttribute{
-																								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																								Optional:            true,
 																							},
 																							"tenant": schema.StringAttribute{
-																								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																								Optional:            true,
 																								Computed:            true,
 																								PlanModifiers: []planmodifier.String{
@@ -14426,11 +14426,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"tls_config": schema.SingleNestedBlock{
-																					MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																					MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"custom_security": schema.SingleNestedBlock{
-																							MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																							MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																							Attributes: map[string]schema.Attribute{
 																								"cipher_suites": schema.ListAttribute{
 																									MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -14459,31 +14459,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					},
 																				},
 																				"use_mtls": schema.SingleNestedBlock{
-																					MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																					MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																					Attributes: map[string]schema.Attribute{
 																						"client_certificate_optional": schema.BoolAttribute{
 																							MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																							Optional:            true,
 																						},
 																						"trusted_ca_url": schema.StringAttribute{
-																							MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																							MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
 																						"crl": schema.SingleNestedBlock{
-																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																							Attributes: map[string]schema.Attribute{
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																									Optional:            true,
 																								},
 																								"namespace": schema.StringAttribute{
-																									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																									Optional:            true,
 																								},
 																								"tenant": schema.StringAttribute{
-																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
 																									PlanModifiers: []planmodifier.String{
@@ -14496,18 +14496,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Enable this option",
 																						},
 																						"trusted_ca": schema.SingleNestedBlock{
-																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																							Attributes: map[string]schema.Attribute{
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																									Optional:            true,
 																								},
 																								"namespace": schema.StringAttribute{
-																									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																									Optional:            true,
 																								},
 																								"tenant": schema.StringAttribute{
-																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
 																									PlanModifiers: []planmodifier.String{
@@ -14520,10 +14520,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Enable this option",
 																						},
 																						"xfcc_options": schema.SingleNestedBlock{
-																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																							Attributes: map[string]schema.Attribute{
 																								"xfcc_header_elements": schema.ListAttribute{
-																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																									Optional:            true,
 																									ElementType:         types.StringType,
 																								},
@@ -14534,14 +14534,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"tls_parameters": schema.SingleNestedBlock{
-																			MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
+																			MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"no_mtls": schema.SingleNestedBlock{
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"tls_certificates": schema.ListNestedBlock{
-																					MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
+																					MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 																					NestedObject: schema.NestedBlockObject{
 																						Attributes: map[string]schema.Attribute{
 																							"certificate_url": schema.StringAttribute{
@@ -14549,13 +14549,13 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								Optional:            true,
 																							},
 																							"description_spec": schema.StringAttribute{
-																								MarkdownDescription: "Description. Description for the certificate",
+																								MarkdownDescription: "Description. Description for the certificate.",
 																								Optional:            true,
 																							},
 																						},
 																						Blocks: map[string]schema.Block{
 																							"custom_hash_algorithms": schema.SingleNestedBlock{
-																								MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+																								MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 																								Attributes: map[string]schema.Attribute{
 																									"hash_algorithms": schema.ListAttribute{
 																										MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -14568,22 +14568,22 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Enable this option",
 																							},
 																							"private_key": schema.SingleNestedBlock{
-																								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 																								Attributes:          map[string]schema.Attribute{},
 																								Blocks: map[string]schema.Block{
 																									"blindfold_secret_info": schema.SingleNestedBlock{
-																										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																										Attributes: map[string]schema.Attribute{
 																											"decryption_provider": schema.StringAttribute{
 																												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																												Optional:            true,
 																											},
 																											"location": schema.StringAttribute{
-																												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																												MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																												Optional:            true,
 																											},
 																											"store_provider": schema.StringAttribute{
-																												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																												Optional:            true,
 																											},
 																										},
@@ -14592,11 +14592,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																										Attributes: map[string]schema.Attribute{
 																											"provider_ref": schema.StringAttribute{
-																												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																												Optional:            true,
 																											},
 																											"url": schema.StringAttribute{
-																												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																												Optional:            true,
 																											},
 																										},
@@ -14610,11 +14610,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					},
 																				},
 																				"tls_config": schema.SingleNestedBlock{
-																					MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																					MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"custom_security": schema.SingleNestedBlock{
-																							MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																							MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																							Attributes: map[string]schema.Attribute{
 																								"cipher_suites": schema.ListAttribute{
 																									MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -14643,31 +14643,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					},
 																				},
 																				"use_mtls": schema.SingleNestedBlock{
-																					MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																					MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																					Attributes: map[string]schema.Attribute{
 																						"client_certificate_optional": schema.BoolAttribute{
 																							MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																							Optional:            true,
 																						},
 																						"trusted_ca_url": schema.StringAttribute{
-																							MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																							MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																							Optional:            true,
 																						},
 																					},
 																					Blocks: map[string]schema.Block{
 																						"crl": schema.SingleNestedBlock{
-																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																							Attributes: map[string]schema.Attribute{
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																									Optional:            true,
 																								},
 																								"namespace": schema.StringAttribute{
-																									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																									Optional:            true,
 																								},
 																								"tenant": schema.StringAttribute{
-																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
 																									PlanModifiers: []planmodifier.String{
@@ -14680,18 +14680,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Enable this option",
 																						},
 																						"trusted_ca": schema.SingleNestedBlock{
-																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																							Attributes: map[string]schema.Attribute{
 																								"name": schema.StringAttribute{
-																									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																									Optional:            true,
 																								},
 																								"namespace": schema.StringAttribute{
-																									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																									Optional:            true,
 																								},
 																								"tenant": schema.StringAttribute{
-																									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																									Optional:            true,
 																									Computed:            true,
 																									PlanModifiers: []planmodifier.String{
@@ -14704,10 +14704,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "Enable this option",
 																						},
 																						"xfcc_options": schema.SingleNestedBlock{
-																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																							MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																							Attributes: map[string]schema.Attribute{
 																								"xfcc_header_elements": schema.ListAttribute{
-																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																									MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																									Optional:            true,
 																									ElementType:         types.StringType,
 																								},
@@ -14720,10 +14720,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"https_auto_cert": schema.SingleNestedBlock{
-																	MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates",
+																	MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 																	Attributes: map[string]schema.Attribute{
 																		"add_hsts": schema.BoolAttribute{
-																			MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																			MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																			Optional:            true,
 																		},
 																		"append_server_name": schema.StringAttribute{
@@ -14735,7 +14735,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional:            true,
 																		},
 																		"http_redirect": schema.BoolAttribute{
-																			MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																			MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																			Optional:            true,
 																		},
 																		"port": schema.Int64Attribute{
@@ -14753,7 +14753,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																	Blocks: map[string]schema.Block{
 																		"coalescing_options": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																			MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"default_coalescing": schema.SingleNestedBlock{
@@ -14777,15 +14777,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"http_protocol_options": schema.SingleNestedBlock{
-																			MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																			MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																					MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																					MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"header_transformation": schema.SingleNestedBlock{
-																							MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																							MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																							Attributes:          map[string]schema.Attribute{},
 																							Blocks: map[string]schema.Block{
 																								"default_header_transformation": schema.SingleNestedBlock{
@@ -14822,11 +14822,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"tls_config": schema.SingleNestedBlock{
-																			MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																			MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"custom_security": schema.SingleNestedBlock{
-																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																					MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																					Attributes: map[string]schema.Attribute{
 																						"cipher_suites": schema.ListAttribute{
 																							MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -14855,31 +14855,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"use_mtls": schema.SingleNestedBlock{
-																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																			MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																			Attributes: map[string]schema.Attribute{
 																				"client_certificate_optional": schema.BoolAttribute{
 																					MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																					Optional:            true,
 																				},
 																				"trusted_ca_url": schema.StringAttribute{
-																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																					MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																					Optional:            true,
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
 																				"crl": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -14892,18 +14892,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"trusted_ca": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -14916,10 +14916,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"xfcc_options": schema.SingleNestedBlock{
-																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																					MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																					Attributes: map[string]schema.Attribute{
 																						"xfcc_header_elements": schema.ListAttribute{
-																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																							MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																							Optional:            true,
 																							ElementType:         types.StringType,
 																						},
@@ -14930,11 +14930,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																	},
 																},
 																"specific_routes": schema.SingleNestedBlock{
-																	MarkdownDescription: "Route Type. This defines various options to define a route",
+																	MarkdownDescription: "Route Type. This defines various OPTIONS to define a route.",
 																	Attributes:          map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
 																		"routes": schema.ListNestedBlock{
-																			MarkdownDescription: "Routes. Routes for this loadbalancer",
+																			MarkdownDescription: "Routes. Routes for this loadbalancer.",
 																			NestedObject: schema.NestedBlockObject{
 																				Attributes: map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
@@ -14943,18 +14943,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						Attributes:          map[string]schema.Attribute{},
 																						Blocks: map[string]schema.Block{
 																							"route_ref": schema.SingleNestedBlock{
-																								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																								Attributes: map[string]schema.Attribute{
 																									"name": schema.StringAttribute{
-																										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																										Optional:            true,
 																									},
 																									"namespace": schema.StringAttribute{
-																										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																										Optional:            true,
 																									},
 																									"tenant": schema.StringAttribute{
-																										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																										Optional:            true,
 																										Computed:            true,
 																										PlanModifiers: []planmodifier.String{
@@ -14966,7 +14966,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																					},
 																					"direct_response_route": schema.SingleNestedBlock{
-																						MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
+																						MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic.",
 																						Attributes: map[string]schema.Attribute{
 																							"http_method": schema.StringAttribute{
 																								MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -14975,41 +14975,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																						Blocks: map[string]schema.Block{
 																							"headers": schema.ListNestedBlock{
-																								MarkdownDescription: "Headers. List of (key, value) headers",
+																								MarkdownDescription: "Headers. List of (key, value) headers.",
 																								NestedObject: schema.NestedBlockObject{
 																									Attributes: map[string]schema.Attribute{
 																										"exact": schema.StringAttribute{
-																											MarkdownDescription: "Exact. Header value to match exactly",
+																											MarkdownDescription: "Exact. Header value to match exactly.",
 																											Optional:            true,
 																										},
 																										"invert_match": schema.BoolAttribute{
-																											MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																											MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																											Optional:            true,
 																										},
 																										"name": schema.StringAttribute{
-																											MarkdownDescription: "Name. Name of the header",
+																											MarkdownDescription: "Name. Name of the header .",
 																											Optional:            true,
 																										},
 																										"presence": schema.BoolAttribute{
-																											MarkdownDescription: "Presence. If true, check for presence of header",
+																											MarkdownDescription: "Presence. If true, check for presence of header.",
 																											Optional:            true,
 																										},
 																										"regex": schema.StringAttribute{
-																											MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																											MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																											Optional:            true,
 																										},
 																									},
 																								},
 																							},
 																							"incoming_port": schema.SingleNestedBlock{
-																								MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																								MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																								Attributes: map[string]schema.Attribute{
 																									"port": schema.Int64Attribute{
-																										MarkdownDescription: "Port. Exact Port to match",
+																										MarkdownDescription: "Port. Exact Port to match.",
 																										Optional:            true,
 																									},
 																									"port_ranges": schema.StringAttribute{
-																										MarkdownDescription: "Port range. Port range to match",
+																										MarkdownDescription: "Port range. Port range to match.",
 																										Optional:            true,
 																									},
 																								},
@@ -15020,31 +15020,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								},
 																							},
 																							"path": schema.SingleNestedBlock{
-																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																								Attributes: map[string]schema.Attribute{
 																									"path": schema.StringAttribute{
-																										MarkdownDescription: "Exact. Exact path value to match",
+																										MarkdownDescription: "Exact. Exact path value to match.",
 																										Optional:            true,
 																									},
 																									"prefix": schema.StringAttribute{
-																										MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																										MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																										Optional:            true,
 																									},
 																									"regex": schema.StringAttribute{
-																										MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																										MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																										Optional:            true,
 																									},
 																								},
 																							},
 																							"route_direct_response": schema.SingleNestedBlock{
-																								MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response",
+																								MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response.",
 																								Attributes: map[string]schema.Attribute{
 																									"response_body_encoded": schema.StringAttribute{
-																										MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g. '<p> Access Denied </p>'. Base64 encoded string url for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==",
+																										MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==.",
 																										Optional:            true,
 																									},
 																									"response_code": schema.Int64Attribute{
-																										MarkdownDescription: "Response Code. response code to send",
+																										MarkdownDescription: "Response Code. Response code to send.",
 																										Optional:            true,
 																									},
 																								},
@@ -15052,7 +15052,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																					},
 																					"redirect_route": schema.SingleNestedBlock{
-																						MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
+																						MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL.",
 																						Attributes: map[string]schema.Attribute{
 																							"http_method": schema.StringAttribute{
 																								MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -15061,41 +15061,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																						Blocks: map[string]schema.Block{
 																							"headers": schema.ListNestedBlock{
-																								MarkdownDescription: "Headers. List of (key, value) headers",
+																								MarkdownDescription: "Headers. List of (key, value) headers.",
 																								NestedObject: schema.NestedBlockObject{
 																									Attributes: map[string]schema.Attribute{
 																										"exact": schema.StringAttribute{
-																											MarkdownDescription: "Exact. Header value to match exactly",
+																											MarkdownDescription: "Exact. Header value to match exactly.",
 																											Optional:            true,
 																										},
 																										"invert_match": schema.BoolAttribute{
-																											MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																											MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																											Optional:            true,
 																										},
 																										"name": schema.StringAttribute{
-																											MarkdownDescription: "Name. Name of the header",
+																											MarkdownDescription: "Name. Name of the header .",
 																											Optional:            true,
 																										},
 																										"presence": schema.BoolAttribute{
-																											MarkdownDescription: "Presence. If true, check for presence of header",
+																											MarkdownDescription: "Presence. If true, check for presence of header.",
 																											Optional:            true,
 																										},
 																										"regex": schema.StringAttribute{
-																											MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																											MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																											Optional:            true,
 																										},
 																									},
 																								},
 																							},
 																							"incoming_port": schema.SingleNestedBlock{
-																								MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																								MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																								Attributes: map[string]schema.Attribute{
 																									"port": schema.Int64Attribute{
-																										MarkdownDescription: "Port. Exact Port to match",
+																										MarkdownDescription: "Port. Exact Port to match.",
 																										Optional:            true,
 																									},
 																									"port_ranges": schema.StringAttribute{
-																										MarkdownDescription: "Port range. Port range to match",
+																										MarkdownDescription: "Port range. Port range to match.",
 																										Optional:            true,
 																									},
 																								},
@@ -15106,39 +15106,39 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								},
 																							},
 																							"path": schema.SingleNestedBlock{
-																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																								Attributes: map[string]schema.Attribute{
 																									"path": schema.StringAttribute{
-																										MarkdownDescription: "Exact. Exact path value to match",
+																										MarkdownDescription: "Exact. Exact path value to match.",
 																										Optional:            true,
 																									},
 																									"prefix": schema.StringAttribute{
-																										MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																										MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																										Optional:            true,
 																									},
 																									"regex": schema.StringAttribute{
-																										MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																										MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																										Optional:            true,
 																									},
 																								},
 																							},
 																							"route_redirect": schema.SingleNestedBlock{
-																								MarkdownDescription: "Redirect. route redirect parameters when match action is redirect.",
+																								MarkdownDescription: "Redirect. Route redirect parameters when match action is redirect.",
 																								Attributes: map[string]schema.Attribute{
 																									"host_redirect": schema.StringAttribute{
-																										MarkdownDescription: "Host. swap host part of incoming URL in redirect URL",
+																										MarkdownDescription: "Host. Swap host part of incoming URL in redirect URL.",
 																										Optional:            true,
 																									},
 																									"path_redirect": schema.StringAttribute{
-																										MarkdownDescription: "Path. swap path part of incoming URL in redirect URL",
+																										MarkdownDescription: "Path. swap path part of incoming URL in redirect URL.",
 																										Optional:            true,
 																									},
 																									"prefix_rewrite": schema.StringAttribute{
-																										MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request",
+																										MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request.",
 																										Optional:            true,
 																									},
 																									"proto_redirect": schema.StringAttribute{
-																										MarkdownDescription: "Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either http or https When incoming-proto option is specified, swapping of protocol is not done.",
+																										MarkdownDescription: "Protocol. Swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done.",
 																										Optional:            true,
 																									},
 																									"replace_params": schema.StringAttribute{
@@ -15162,10 +15162,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																						},
 																					},
 																					"simple_route": schema.SingleNestedBlock{
-																						MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside",
+																						MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside.",
 																						Attributes: map[string]schema.Attribute{
 																							"host_rewrite": schema.StringAttribute{
-																								MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																								MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																								Optional:            true,
 																							},
 																							"http_method": schema.StringAttribute{
@@ -15181,18 +15181,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																								MarkdownDescription: "Enable this option",
 																							},
 																							"path": schema.SingleNestedBlock{
-																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																								MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																								Attributes: map[string]schema.Attribute{
 																									"path": schema.StringAttribute{
-																										MarkdownDescription: "Exact. Exact path value to match",
+																										MarkdownDescription: "Exact. Exact path value to match.",
 																										Optional:            true,
 																									},
 																									"prefix": schema.StringAttribute{
-																										MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																										MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																										Optional:            true,
 																									},
 																									"regex": schema.StringAttribute{
-																										MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																										MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																										Optional:            true,
 																									},
 																								},
@@ -15207,19 +15207,19 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"port": schema.SingleNestedBlock{
-															MarkdownDescription: "Port. Port of the workload",
+															MarkdownDescription: "Port. Port of the workload.",
 															Attributes: map[string]schema.Attribute{
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. Name of the Port",
+																	MarkdownDescription: "Name. Name of the Port .",
 																	Optional:            true,
 																},
 															},
 															Blocks: map[string]schema.Block{
 																"info": schema.SingleNestedBlock{
-																	MarkdownDescription: "Port Information. Port information",
+																	MarkdownDescription: "Port Information. Port information.",
 																	Attributes: map[string]schema.Attribute{
 																		"port": schema.Int64Attribute{
-																			MarkdownDescription: "Port. Port the workload can be reached on",
+																			MarkdownDescription: "Port. Port the workload can be reached on .",
 																			Optional:            true,
 																		},
 																		"protocol": schema.StringAttribute{
@@ -15227,7 +15227,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Optional:            true,
 																		},
 																		"target_port": schema.Int64Attribute{
-																			MarkdownDescription: "Different than Port. Port the workload is listening on",
+																			MarkdownDescription: "Different than Port. Port the workload is listening on.",
 																			Optional:            true,
 																		},
 																	},
@@ -15240,15 +15240,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 															},
 														},
 														"tcp_loadbalancer": schema.SingleNestedBlock{
-															MarkdownDescription: "TCP Load Balancer. TCP loadbalancer",
+															MarkdownDescription: "TCP Load Balancer. TCP loadbalancer.",
 															Attributes: map[string]schema.Attribute{
 																"domains": schema.ListAttribute{
-																	MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER",
+																	MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER.",
 																	Optional:            true,
 																	ElementType:         types.StringType,
 																},
 																"with_sni": schema.BoolAttribute{
-																	MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI",
+																	MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI.",
 																	Optional:            true,
 																},
 															},
@@ -15259,24 +15259,24 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 										},
 									},
 									"port": schema.SingleNestedBlock{
-										MarkdownDescription: "Advertise Port. Advertise single port",
+										MarkdownDescription: "Advertise Port. Advertise single port.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"http_loadbalancer": schema.SingleNestedBlock{
-												MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer",
+												MarkdownDescription: "HTTP/HTTPS Load Balancer. HTTP/HTTPS Load balancer.",
 												Attributes: map[string]schema.Attribute{
 													"domains": schema.ListAttribute{
-														MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.foo.com``. 2. Prefix domain wildcards: ``*.foo.com`` or ``*.bar.foo.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. e.g. ``*.foo.com`` will match ``bar.foo.com`` and ``baz-bar.foo.com`` but not ``.foo.com``. The longest wildcards match first. Wildcards must match a whole DNS label. e.g. ``*.foo.com`` and *.bar.foo.com are valid, however ``*bar.foo.com`` or ``*-bar.foo.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER",
+														MarkdownDescription: "Domains. A list of domains (host/authority header) that will be matched to loadbalancer. Wildcard hosts are supported in the suffix or prefix form Domain search order: 1. Exact domain names: ``www.example.com``. 2. Prefix domain wildcards: ``*.example.com`` or ``*.bar.example.com``. 3. Special wildcard ``*`` matching any domain. Wildcard will not match empty string. E.g. ``*.example.com`` will match ``bar.example.com`` and ``baz-bar.example.com`` but not ``.example.com``. The longest wildcards match first. Wildcards must match a whole DNS label. E.g. ``*.example.com`` and *.bar.example.com are valid, however ``*bar.example.com`` or ``*-bar.example.com`` is invalid Domains are also used for SNI matching if the loadbalancer type is HTTPS Domains also indicate the list of names for which DNS resolution will be done by VER .",
 														Optional:            true,
 														ElementType:         types.StringType,
 													},
 												},
 												Blocks: map[string]schema.Block{
 													"default_route": schema.SingleNestedBlock{
-														MarkdownDescription: "Default Route. Default route matching all APIs",
+														MarkdownDescription: "Default Route. Default route matching all APIs.",
 														Attributes: map[string]schema.Attribute{
 															"host_rewrite": schema.StringAttribute{
-																MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																Optional:            true,
 															},
 														},
@@ -15290,7 +15290,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 													},
 													"http": schema.SingleNestedBlock{
-														MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy",
+														MarkdownDescription: "HTTP Choice. Choice for selecting HTTP proxy.",
 														Attributes: map[string]schema.Attribute{
 															"dns_volterra_managed": schema.BoolAttribute{
 																MarkdownDescription: "Automatically Manage DNS Records. DNS records for domains will be managed automatically by F5 Distributed Cloud. As a prerequisite, the domain must be delegated to F5 Distributed Cloud using Delegated domain feature or a DNS CNAME record should be created in your DNS provider's portal.",
@@ -15307,10 +15307,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 													},
 													"https": schema.SingleNestedBlock{
-														MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates",
+														MarkdownDescription: "BYOC HTTPS Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 														Attributes: map[string]schema.Attribute{
 															"add_hsts": schema.BoolAttribute{
-																MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																Optional:            true,
 															},
 															"append_server_name": schema.StringAttribute{
@@ -15322,7 +15322,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional:            true,
 															},
 															"http_redirect": schema.BoolAttribute{
-																MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																Optional:            true,
 															},
 															"port": schema.Int64Attribute{
@@ -15340,7 +15340,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 														Blocks: map[string]schema.Block{
 															"coalescing_options": schema.SingleNestedBlock{
-																MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"default_coalescing": schema.SingleNestedBlock{
@@ -15364,15 +15364,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																MarkdownDescription: "Enable this option",
 															},
 															"http_protocol_options": schema.SingleNestedBlock{
-																MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																		MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																		MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"header_transformation": schema.SingleNestedBlock{
-																				MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																				MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"default_header_transformation": schema.SingleNestedBlock{
@@ -15406,7 +15406,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																MarkdownDescription: "Enable this option",
 															},
 															"tls_cert_params": schema.SingleNestedBlock{
-																MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates",
+																MarkdownDescription: "TLS Parameters. Select TLS Parameters and Certificates.",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"certificates": schema.ListNestedBlock{
@@ -15414,15 +15414,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		NestedObject: schema.NestedBlockObject{
 																			Attributes: map[string]schema.Attribute{
 																				"name": schema.StringAttribute{
-																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -15436,11 +15436,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		MarkdownDescription: "Enable this option",
 																	},
 																	"tls_config": schema.SingleNestedBlock{
-																		MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																		MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"custom_security": schema.SingleNestedBlock{
-																				MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																				MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																				Attributes: map[string]schema.Attribute{
 																					"cipher_suites": schema.ListAttribute{
 																						MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -15469,31 +15469,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		},
 																	},
 																	"use_mtls": schema.SingleNestedBlock{
-																		MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																		MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																		Attributes: map[string]schema.Attribute{
 																			"client_certificate_optional": schema.BoolAttribute{
 																				MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																				Optional:            true,
 																			},
 																			"trusted_ca_url": schema.StringAttribute{
-																				MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																				MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																				Optional:            true,
 																			},
 																		},
 																		Blocks: map[string]schema.Block{
 																			"crl": schema.SingleNestedBlock{
-																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
-																						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																						Optional:            true,
 																					},
 																					"namespace": schema.StringAttribute{
-																						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																						Optional:            true,
 																					},
 																					"tenant": schema.StringAttribute{
-																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
 																						PlanModifiers: []planmodifier.String{
@@ -15506,18 +15506,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Enable this option",
 																			},
 																			"trusted_ca": schema.SingleNestedBlock{
-																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
-																						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																						Optional:            true,
 																					},
 																					"namespace": schema.StringAttribute{
-																						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																						Optional:            true,
 																					},
 																					"tenant": schema.StringAttribute{
-																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
 																						PlanModifiers: []planmodifier.String{
@@ -15530,10 +15530,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Enable this option",
 																			},
 																			"xfcc_options": schema.SingleNestedBlock{
-																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																				Attributes: map[string]schema.Attribute{
 																					"xfcc_header_elements": schema.ListAttribute{
-																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																						Optional:            true,
 																						ElementType:         types.StringType,
 																					},
@@ -15544,14 +15544,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																},
 															},
 															"tls_parameters": schema.SingleNestedBlock{
-																MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters",
+																MarkdownDescription: "Inline TLS Parameters. Inline TLS parameters.",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"no_mtls": schema.SingleNestedBlock{
 																		MarkdownDescription: "Enable this option",
 																	},
 																	"tls_certificates": schema.ListNestedBlock{
-																		MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and *.domain.com - but use different signature algorithms",
+																		MarkdownDescription: "TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms .",
 																		NestedObject: schema.NestedBlockObject{
 																			Attributes: map[string]schema.Attribute{
 																				"certificate_url": schema.StringAttribute{
@@ -15559,13 +15559,13 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					Optional:            true,
 																				},
 																				"description_spec": schema.StringAttribute{
-																					MarkdownDescription: "Description. Description for the certificate",
+																					MarkdownDescription: "Description. Description for the certificate.",
 																					Optional:            true,
 																				},
 																			},
 																			Blocks: map[string]schema.Block{
 																				"custom_hash_algorithms": schema.SingleNestedBlock{
-																					MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+																					MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 																					Attributes: map[string]schema.Attribute{
 																						"hash_algorithms": schema.ListAttribute{
 																							MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -15578,22 +15578,22 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"private_key": schema.SingleNestedBlock{
-																					MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+																					MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 																					Attributes:          map[string]schema.Attribute{},
 																					Blocks: map[string]schema.Block{
 																						"blindfold_secret_info": schema.SingleNestedBlock{
-																							MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																							MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																							Attributes: map[string]schema.Attribute{
 																								"decryption_provider": schema.StringAttribute{
 																									MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																									Optional:            true,
 																								},
 																								"location": schema.StringAttribute{
-																									MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																									MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																									Optional:            true,
 																								},
 																								"store_provider": schema.StringAttribute{
-																									MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																									MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																									Optional:            true,
 																								},
 																							},
@@ -15602,11 +15602,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																							MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																							Attributes: map[string]schema.Attribute{
 																								"provider_ref": schema.StringAttribute{
-																									MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																									MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																									Optional:            true,
 																								},
 																								"url": schema.StringAttribute{
-																									MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																									MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																									Optional:            true,
 																								},
 																							},
@@ -15620,11 +15620,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		},
 																	},
 																	"tls_config": schema.SingleNestedBlock{
-																		MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																		MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"custom_security": schema.SingleNestedBlock{
-																				MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																				MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																				Attributes: map[string]schema.Attribute{
 																					"cipher_suites": schema.ListAttribute{
 																						MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -15653,31 +15653,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		},
 																	},
 																	"use_mtls": schema.SingleNestedBlock{
-																		MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																		MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																		Attributes: map[string]schema.Attribute{
 																			"client_certificate_optional": schema.BoolAttribute{
 																				MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																				Optional:            true,
 																			},
 																			"trusted_ca_url": schema.StringAttribute{
-																				MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																				MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																				Optional:            true,
 																			},
 																		},
 																		Blocks: map[string]schema.Block{
 																			"crl": schema.SingleNestedBlock{
-																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
-																						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																						Optional:            true,
 																					},
 																					"namespace": schema.StringAttribute{
-																						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																						Optional:            true,
 																					},
 																					"tenant": schema.StringAttribute{
-																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
 																						PlanModifiers: []planmodifier.String{
@@ -15690,18 +15690,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Enable this option",
 																			},
 																			"trusted_ca": schema.SingleNestedBlock{
-																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																				Attributes: map[string]schema.Attribute{
 																					"name": schema.StringAttribute{
-																						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																						Optional:            true,
 																					},
 																					"namespace": schema.StringAttribute{
-																						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																						Optional:            true,
 																					},
 																					"tenant": schema.StringAttribute{
-																						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																						Optional:            true,
 																						Computed:            true,
 																						PlanModifiers: []planmodifier.String{
@@ -15714,10 +15714,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																				MarkdownDescription: "Enable this option",
 																			},
 																			"xfcc_options": schema.SingleNestedBlock{
-																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																				MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																				Attributes: map[string]schema.Attribute{
 																					"xfcc_header_elements": schema.ListAttribute{
-																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																						MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																						Optional:            true,
 																						ElementType:         types.StringType,
 																					},
@@ -15730,10 +15730,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 													},
 													"https_auto_cert": schema.SingleNestedBlock{
-														MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates",
+														MarkdownDescription: "HTTPS with Auto Certs Choice. Choice for selecting HTTP proxy with bring your own certificates.",
 														Attributes: map[string]schema.Attribute{
 															"add_hsts": schema.BoolAttribute{
-																MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header",
+																MarkdownDescription: "Add HSTS Header. Add HTTP Strict-Transport-Security response header.",
 																Optional:            true,
 															},
 															"append_server_name": schema.StringAttribute{
@@ -15745,7 +15745,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional:            true,
 															},
 															"http_redirect": schema.BoolAttribute{
-																MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS",
+																MarkdownDescription: "HTTP Redirect to HTTPS. Redirect HTTP traffic to HTTPS.",
 																Optional:            true,
 															},
 															"port": schema.Int64Attribute{
@@ -15763,7 +15763,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 														Blocks: map[string]schema.Block{
 															"coalescing_options": schema.SingleNestedBlock{
-																MarkdownDescription: "TLS Coalescing Options. TLS connection coalescing configuration (not compatible with mTLS)",
+																MarkdownDescription: "TLS Coalescing OPTIONS. TLS connection coalescing configuration (not compatible with mTLS)",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"default_coalescing": schema.SingleNestedBlock{
@@ -15787,15 +15787,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																MarkdownDescription: "Enable this option",
 															},
 															"http_protocol_options": schema.SingleNestedBlock{
-																MarkdownDescription: "HTTP Protocol Configuration Options. HTTP protocol configuration options for downstream connections",
+																MarkdownDescription: "HTTP Protocol Configuration OPTIONS. HTTP protocol configuration OPTIONS for downstream connections.",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"http_protocol_enable_v1_only": schema.SingleNestedBlock{
-																		MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for downstream connections",
+																		MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for downstream connections.",
 																		Attributes:          map[string]schema.Attribute{},
 																		Blocks: map[string]schema.Block{
 																			"header_transformation": schema.SingleNestedBlock{
-																				MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+																				MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 																				Attributes:          map[string]schema.Attribute{},
 																				Blocks: map[string]schema.Block{
 																					"default_header_transformation": schema.SingleNestedBlock{
@@ -15832,11 +15832,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																MarkdownDescription: "Enable this option",
 															},
 															"tls_config": schema.SingleNestedBlock{
-																MarkdownDescription: "TLS Config. This defines various options to configure TLS configuration parameters",
+																MarkdownDescription: "TLS Config. This defines various OPTIONS to configure TLS configuration parameters.",
 																Attributes:          map[string]schema.Attribute{},
 																Blocks: map[string]schema.Block{
 																	"custom_security": schema.SingleNestedBlock{
-																		MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers",
+																		MarkdownDescription: "Custom Ciphers. This defines TLS protocol config including min/max versions and allowed ciphers.",
 																		Attributes: map[string]schema.Attribute{
 																			"cipher_suites": schema.ListAttribute{
 																				MarkdownDescription: "Cipher Suites. The TLS listener will only support the specified cipher list.",
@@ -15865,31 +15865,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																},
 															},
 															"use_mtls": schema.SingleNestedBlock{
-																MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections",
+																MarkdownDescription: "Clients TLS validation context. Validation context for downstream client TLS connections.",
 																Attributes: map[string]schema.Attribute{
 																	"client_certificate_optional": schema.BoolAttribute{
 																		MarkdownDescription: "Client Certificate Optional. Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated. If the client does not provide a certificate, the connection will be accepted.",
 																		Optional:            true,
 																	},
 																	"trusted_ca_url": schema.StringAttribute{
-																		MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer",
+																		MarkdownDescription: "Inline Root CA Certificate (legacy). Upload a Root CA Certificate specifically for this Load Balancer.",
 																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"crl": schema.SingleNestedBlock{
-																		MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																		MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																		Attributes: map[string]schema.Attribute{
 																			"name": schema.StringAttribute{
-																				MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																				MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																				Optional:            true,
 																			},
 																			"namespace": schema.StringAttribute{
-																				MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																				MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																				Optional:            true,
 																			},
 																			"tenant": schema.StringAttribute{
-																				MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																				MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																				Optional:            true,
 																				Computed:            true,
 																				PlanModifiers: []planmodifier.String{
@@ -15902,18 +15902,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		MarkdownDescription: "Enable this option",
 																	},
 																	"trusted_ca": schema.SingleNestedBlock{
-																		MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																		MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																		Attributes: map[string]schema.Attribute{
 																			"name": schema.StringAttribute{
-																				MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																				MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																				Optional:            true,
 																			},
 																			"namespace": schema.StringAttribute{
-																				MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																				MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																				Optional:            true,
 																			},
 																			"tenant": schema.StringAttribute{
-																				MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																				MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																				Optional:            true,
 																				Computed:            true,
 																				PlanModifiers: []planmodifier.String{
@@ -15926,10 +15926,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																		MarkdownDescription: "Enable this option",
 																	},
 																	"xfcc_options": schema.SingleNestedBlock{
-																		MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests",
+																		MarkdownDescription: "XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests.",
 																		Attributes: map[string]schema.Attribute{
 																			"xfcc_header_elements": schema.ListAttribute{
-																				MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests. Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
+																				MarkdownDescription: "[Enum: XFCC_NONE|XFCC_CERT|XFCC_CHAIN|XFCC_SUBJECT|XFCC_URI|XFCC_DNS] XFCC Header Elements. X-Forwarded-Client-Cert header elements to be added to requests . Possible values are `XFCC_NONE`, `XFCC_CERT`, `XFCC_CHAIN`, `XFCC_SUBJECT`, `XFCC_URI`, `XFCC_DNS`. Defaults to `XFCC_NONE`.",
 																				Optional:            true,
 																				ElementType:         types.StringType,
 																			},
@@ -15940,11 +15940,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 														},
 													},
 													"specific_routes": schema.SingleNestedBlock{
-														MarkdownDescription: "Route Type. This defines various options to define a route",
+														MarkdownDescription: "Route Type. This defines various OPTIONS to define a route.",
 														Attributes:          map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"routes": schema.ListNestedBlock{
-																MarkdownDescription: "Routes. Routes for this loadbalancer",
+																MarkdownDescription: "Routes. Routes for this loadbalancer.",
 																NestedObject: schema.NestedBlockObject{
 																	Attributes: map[string]schema.Attribute{},
 																	Blocks: map[string]schema.Block{
@@ -15953,18 +15953,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"route_ref": schema.SingleNestedBlock{
-																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+																					MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 																					Attributes: map[string]schema.Attribute{
 																						"name": schema.StringAttribute{
-																							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																							Optional:            true,
 																						},
 																						"namespace": schema.StringAttribute{
-																							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																							Optional:            true,
 																						},
 																						"tenant": schema.StringAttribute{
-																							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																							Optional:            true,
 																							Computed:            true,
 																							PlanModifiers: []planmodifier.String{
@@ -15976,7 +15976,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"direct_response_route": schema.SingleNestedBlock{
-																			MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic",
+																			MarkdownDescription: "Direct Response Route. A direct response route matches on path, incoming header, incoming port and/or HTTP method and responds directly to the matching traffic.",
 																			Attributes: map[string]schema.Attribute{
 																				"http_method": schema.StringAttribute{
 																					MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -15985,41 +15985,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																			Blocks: map[string]schema.Block{
 																				"headers": schema.ListNestedBlock{
-																					MarkdownDescription: "Headers. List of (key, value) headers",
+																					MarkdownDescription: "Headers. List of (key, value) headers.",
 																					NestedObject: schema.NestedBlockObject{
 																						Attributes: map[string]schema.Attribute{
 																							"exact": schema.StringAttribute{
-																								MarkdownDescription: "Exact. Header value to match exactly",
+																								MarkdownDescription: "Exact. Header value to match exactly.",
 																								Optional:            true,
 																							},
 																							"invert_match": schema.BoolAttribute{
-																								MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																								MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																								Optional:            true,
 																							},
 																							"name": schema.StringAttribute{
-																								MarkdownDescription: "Name. Name of the header",
+																								MarkdownDescription: "Name. Name of the header .",
 																								Optional:            true,
 																							},
 																							"presence": schema.BoolAttribute{
-																								MarkdownDescription: "Presence. If true, check for presence of header",
+																								MarkdownDescription: "Presence. If true, check for presence of header.",
 																								Optional:            true,
 																							},
 																							"regex": schema.StringAttribute{
-																								MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																								MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																								Optional:            true,
 																							},
 																						},
 																					},
 																				},
 																				"incoming_port": schema.SingleNestedBlock{
-																					MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																					MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																					Attributes: map[string]schema.Attribute{
 																						"port": schema.Int64Attribute{
-																							MarkdownDescription: "Port. Exact Port to match",
+																							MarkdownDescription: "Port. Exact Port to match.",
 																							Optional:            true,
 																						},
 																						"port_ranges": schema.StringAttribute{
-																							MarkdownDescription: "Port range. Port range to match",
+																							MarkdownDescription: "Port range. Port range to match.",
 																							Optional:            true,
 																						},
 																					},
@@ -16030,31 +16030,31 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					},
 																				},
 																				"path": schema.SingleNestedBlock{
-																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																					Attributes: map[string]schema.Attribute{
 																						"path": schema.StringAttribute{
-																							MarkdownDescription: "Exact. Exact path value to match",
+																							MarkdownDescription: "Exact. Exact path value to match.",
 																							Optional:            true,
 																						},
 																						"prefix": schema.StringAttribute{
-																							MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																							MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																							Optional:            true,
 																						},
 																						"regex": schema.StringAttribute{
-																							MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																							MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																							Optional:            true,
 																						},
 																					},
 																				},
 																				"route_direct_response": schema.SingleNestedBlock{
-																					MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response",
+																					MarkdownDescription: "Direct Response. Send this direct response in case of route match action is direct response.",
 																					Attributes: map[string]schema.Attribute{
 																						"response_body_encoded": schema.StringAttribute{
-																							MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or html. E.g. '<p> Access Denied </p>'. Base64 encoded string url for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==",
+																							MarkdownDescription: "Response Body. Response body to send. Currently supported URL schemes is string:/// for which message should be encoded in Base64 format. The message can be either plain text or HTML. E.g. '<p> Access Denied </p>'. Base64 encoded string URL for this is string:///PHA+IEFjY2VzcyBEZW5pZWQgPC9wPg==.",
 																							Optional:            true,
 																						},
 																						"response_code": schema.Int64Attribute{
-																							MarkdownDescription: "Response Code. response code to send",
+																							MarkdownDescription: "Response Code. Response code to send.",
 																							Optional:            true,
 																						},
 																					},
@@ -16062,7 +16062,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"redirect_route": schema.SingleNestedBlock{
-																			MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL",
+																			MarkdownDescription: "Redirect Route. A redirect route matches on path, incoming header, incoming port and/or HTTP method and redirects the matching traffic to a different URL.",
 																			Attributes: map[string]schema.Attribute{
 																				"http_method": schema.StringAttribute{
 																					MarkdownDescription: "[Enum: ANY|GET|HEAD|POST|PUT|DELETE|CONNECT|OPTIONS|TRACE|PATCH|COPY] HTTP Method. Specifies the HTTP method used to access a resource. Any HTTP Method. Possible values are `ANY`, `GET`, `HEAD`, `POST`, `PUT`, `DELETE`, `CONNECT`, `OPTIONS`, `TRACE`, `PATCH`, `COPY`. Defaults to `ANY`.",
@@ -16071,41 +16071,41 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																			Blocks: map[string]schema.Block{
 																				"headers": schema.ListNestedBlock{
-																					MarkdownDescription: "Headers. List of (key, value) headers",
+																					MarkdownDescription: "Headers. List of (key, value) headers.",
 																					NestedObject: schema.NestedBlockObject{
 																						Attributes: map[string]schema.Attribute{
 																							"exact": schema.StringAttribute{
-																								MarkdownDescription: "Exact. Header value to match exactly",
+																								MarkdownDescription: "Exact. Header value to match exactly.",
 																								Optional:            true,
 																							},
 																							"invert_match": schema.BoolAttribute{
-																								MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value",
+																								MarkdownDescription: "NOT of match. Invert the result of the match to detect missing header or non-matching value.",
 																								Optional:            true,
 																							},
 																							"name": schema.StringAttribute{
-																								MarkdownDescription: "Name. Name of the header",
+																								MarkdownDescription: "Name. Name of the header .",
 																								Optional:            true,
 																							},
 																							"presence": schema.BoolAttribute{
-																								MarkdownDescription: "Presence. If true, check for presence of header",
+																								MarkdownDescription: "Presence. If true, check for presence of header.",
 																								Optional:            true,
 																							},
 																							"regex": schema.StringAttribute{
-																								MarkdownDescription: "Regex. Regex match of the header value in re2 format",
+																								MarkdownDescription: "Regex. Regex match of the header value in re2 format.",
 																								Optional:            true,
 																							},
 																						},
 																					},
 																				},
 																				"incoming_port": schema.SingleNestedBlock{
-																					MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port",
+																					MarkdownDescription: "Port to Match. Port match of the request can be a range or a specific port.",
 																					Attributes: map[string]schema.Attribute{
 																						"port": schema.Int64Attribute{
-																							MarkdownDescription: "Port. Exact Port to match",
+																							MarkdownDescription: "Port. Exact Port to match.",
 																							Optional:            true,
 																						},
 																						"port_ranges": schema.StringAttribute{
-																							MarkdownDescription: "Port range. Port range to match",
+																							MarkdownDescription: "Port range. Port range to match.",
 																							Optional:            true,
 																						},
 																					},
@@ -16116,39 +16116,39 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					},
 																				},
 																				"path": schema.SingleNestedBlock{
-																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																					Attributes: map[string]schema.Attribute{
 																						"path": schema.StringAttribute{
-																							MarkdownDescription: "Exact. Exact path value to match",
+																							MarkdownDescription: "Exact. Exact path value to match.",
 																							Optional:            true,
 																						},
 																						"prefix": schema.StringAttribute{
-																							MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																							MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																							Optional:            true,
 																						},
 																						"regex": schema.StringAttribute{
-																							MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																							MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																							Optional:            true,
 																						},
 																					},
 																				},
 																				"route_redirect": schema.SingleNestedBlock{
-																					MarkdownDescription: "Redirect. route redirect parameters when match action is redirect.",
+																					MarkdownDescription: "Redirect. Route redirect parameters when match action is redirect.",
 																					Attributes: map[string]schema.Attribute{
 																						"host_redirect": schema.StringAttribute{
-																							MarkdownDescription: "Host. swap host part of incoming URL in redirect URL",
+																							MarkdownDescription: "Host. Swap host part of incoming URL in redirect URL.",
 																							Optional:            true,
 																						},
 																						"path_redirect": schema.StringAttribute{
-																							MarkdownDescription: "Path. swap path part of incoming URL in redirect URL",
+																							MarkdownDescription: "Path. swap path part of incoming URL in redirect URL.",
 																							Optional:            true,
 																						},
 																						"prefix_rewrite": schema.StringAttribute{
-																							MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request",
+																							MarkdownDescription: "Prefix Rewrite. In Redirect response, the matched prefix (or path) should be swapped with this value. This option allows redirect URLs be dynamically created based on the request.",
 																							Optional:            true,
 																						},
 																						"proto_redirect": schema.StringAttribute{
-																							MarkdownDescription: "Protocol. swap protocol part of incoming URL in redirect URL The protocol can be swapped with either http or https When incoming-proto option is specified, swapping of protocol is not done.",
+																							MarkdownDescription: "Protocol. Swap protocol part of incoming URL in redirect URL The protocol can be swapped with either HTTP or HTTPS When incoming-proto option is specified, swapping of protocol is not done.",
 																							Optional:            true,
 																						},
 																						"replace_params": schema.StringAttribute{
@@ -16172,10 +16172,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																			},
 																		},
 																		"simple_route": schema.SingleNestedBlock{
-																			MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside",
+																			MarkdownDescription: "Simple Route. A simple route matches on path and/or HTTP method and forwards the matching traffic to the default origin pool specified outside.",
 																			Attributes: map[string]schema.Attribute{
 																				"host_rewrite": schema.StringAttribute{
-																					MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value",
+																					MarkdownDescription: "Host Rewrite Value. Host header will be swapped with this value.",
 																					Optional:            true,
 																				},
 																				"http_method": schema.StringAttribute{
@@ -16191,18 +16191,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																					MarkdownDescription: "Enable this option",
 																				},
 																				"path": schema.SingleNestedBlock{
-																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match",
+																					MarkdownDescription: "Path to Match. Path match of the URI can be either be, Prefix match or exact match or regular expression match.",
 																					Attributes: map[string]schema.Attribute{
 																						"path": schema.StringAttribute{
-																							MarkdownDescription: "Exact. Exact path value to match",
+																							MarkdownDescription: "Exact. Exact path value to match.",
 																							Optional:            true,
 																						},
 																						"prefix": schema.StringAttribute{
-																							MarkdownDescription: "Prefix. Path prefix to match (e.g. the value / will match on all paths)",
+																							MarkdownDescription: "Prefix. Path prefix to match (e.g. The value / will match on all paths)",
 																							Optional:            true,
 																						},
 																						"regex": schema.StringAttribute{
-																							MarkdownDescription: "Regex. Regular expression of path match (e.g. the value .* will match on all paths)",
+																							MarkdownDescription: "Regex. Regular expression of path match (e.g. The value .* will match on all paths)",
 																							Optional:            true,
 																						},
 																					},
@@ -16217,14 +16217,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 												},
 											},
 											"port": schema.SingleNestedBlock{
-												MarkdownDescription: "Port. Single port",
+												MarkdownDescription: "Port. Single port.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"info": schema.SingleNestedBlock{
-														MarkdownDescription: "Port Information. Port information",
+														MarkdownDescription: "Port Information. Port information.",
 														Attributes: map[string]schema.Attribute{
 															"port": schema.Int64Attribute{
-																MarkdownDescription: "Port. Port the workload can be reached on",
+																MarkdownDescription: "Port. Port the workload can be reached on .",
 																Optional:            true,
 															},
 															"protocol": schema.StringAttribute{
@@ -16232,7 +16232,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 																Optional:            true,
 															},
 															"target_port": schema.Int64Attribute{
-																MarkdownDescription: "Different than Port. Port the workload is listening on",
+																MarkdownDescription: "Different than Port. Port the workload is listening on.",
 																Optional:            true,
 															},
 														},
@@ -16245,15 +16245,15 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 												},
 											},
 											"tcp_loadbalancer": schema.SingleNestedBlock{
-												MarkdownDescription: "TCP Load Balancer. TCP loadbalancer",
+												MarkdownDescription: "TCP Load Balancer. TCP loadbalancer.",
 												Attributes: map[string]schema.Attribute{
 													"domains": schema.ListAttribute{
-														MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER",
+														MarkdownDescription: "Domains. A list of additional domains (host/authority header) that will be matched to this loadbalancer. Domains are also used for SNI matching if the `with_sni` is true Domains also indicate the list of names for which DNS resolution will be done by VER.",
 														Optional:            true,
 														ElementType:         types.StringType,
 													},
 													"with_sni": schema.BoolAttribute{
-														MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI",
+														MarkdownDescription: "With SNI. Set to true to enable TCP loadbalancer with SNI.",
 														Optional:            true,
 													},
 												},
@@ -16268,16 +16268,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"configuration": schema.SingleNestedBlock{
-						MarkdownDescription: "Configuration Parameters. Configuration parameters of the workload",
+						MarkdownDescription: "Configuration Parameters. Configuration parameters of the workload.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"parameters": schema.ListNestedBlock{
-								MarkdownDescription: "Parameters. Parameters for the workload",
+								MarkdownDescription: "Parameters. Parameters for the workload.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"env_var": schema.SingleNestedBlock{
-											MarkdownDescription: "Environment Variable. Environment Variable",
+											MarkdownDescription: "Environment Variable. Environment Variable.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
 													MarkdownDescription: "Name. Name of Environment Variable.",
@@ -16290,24 +16290,24 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											},
 										},
 										"file": schema.SingleNestedBlock{
-											MarkdownDescription: "Configuration File. Configuration File for the workload",
+											MarkdownDescription: "Configuration File. Configuration File for the workload.",
 											Attributes: map[string]schema.Attribute{
 												"data": schema.StringAttribute{
 													MarkdownDescription: "Data. File data",
 													Optional:            true,
 												},
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. Name of the file",
+													MarkdownDescription: "Name. Name of the file .",
 													Optional:            true,
 												},
 												"volume_name": schema.StringAttribute{
-													MarkdownDescription: "Volume Name. Name of the Volume",
+													MarkdownDescription: "Volume Name. Name of the Volume .",
 													Optional:            true,
 												},
 											},
 											Blocks: map[string]schema.Block{
 												"mount": schema.SingleNestedBlock{
-													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+													MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 													Attributes: map[string]schema.Attribute{
 														"mode": schema.StringAttribute{
 															MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -16331,16 +16331,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"containers": schema.ListNestedBlock{
-						MarkdownDescription: "Containers. Containers to use for service",
+						MarkdownDescription: "Containers. Containers to use for service .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"args": schema.ListAttribute{
-									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD",
+									MarkdownDescription: "Arguments. Arguments to the entrypoint. Overrides the docker image's CMD.",
 									Optional:            true,
 									ElementType:         types.StringType,
 								},
 								"command": schema.ListAttribute{
-									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT",
+									MarkdownDescription: "Command. Command to execute. Overrides the docker image's ENTRYPOINT.",
 									Optional:            true,
 									ElementType:         types.StringType,
 								},
@@ -16349,28 +16349,28 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									Optional:            true,
 								},
 								"init_container": schema.BoolAttribute{
-									MarkdownDescription: "Initialization Container. Specialized container that runs before application container and runs to completion",
+									MarkdownDescription: "Initialization Container. Specialized container that runs before application container and runs to completion.",
 									Optional:            true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the container",
+									MarkdownDescription: "Name. Name of the container .",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"custom_flavor": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -16383,10 +16383,10 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									MarkdownDescription: "Enable this option",
 								},
 								"image": schema.SingleNestedBlock{
-									MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any",
+									MarkdownDescription: "Image Configuration. ImageType configures the image to use, how to pull the image, and the associated secrets to use if any.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.io/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
+											MarkdownDescription: "Image Name. Name is a container image which are usually given a name such as alpine, ubuntu, or quay.I/O/etcd:0.13. The format is registry/image:tag or registry/image@image-digest. If registry is not specified, the Docker public registry is assumed. If tag is not specified, latest is assumed.",
 											Optional:            true,
 										},
 										"pull_policy": schema.StringAttribute{
@@ -16396,18 +16396,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 									Blocks: map[string]schema.Block{
 										"container_registry": schema.SingleNestedBlock{
-											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+											MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -16422,14 +16422,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"liveness_check": schema.SingleNestedBlock{
-									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
+									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic.",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
 											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional:            true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated.",
 											Optional:            true,
 										},
 										"interval": schema.Int64Attribute{
@@ -16476,11 +16476,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -16488,18 +16488,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											},
 										},
 										"tcp_health_check": schema.SingleNestedBlock{
-											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection",
+											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"port": schema.SingleNestedBlock{
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -16509,14 +16509,14 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"readiness_check": schema.SingleNestedBlock{
-									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic",
+									MarkdownDescription: "Health Check. HealthCheckType describes a health check to be performed against a container to determine whether it has started up or is alive or ready to receive traffic.",
 									Attributes: map[string]schema.Attribute{
 										"healthy_threshold": schema.Int64Attribute{
 											MarkdownDescription: "Healthy Threshold. Number of consecutive successful responses after having failed before declaring healthy. In other words, this is the number of healthy health checks required before marking healthy. Note that during startup and liveliness, only a single successful health check is required to mark a container healthy.",
 											Optional:            true,
 										},
 										"initial_delay": schema.Int64Attribute{
-											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated",
+											MarkdownDescription: "Initial Delay. Number of seconds after the container has started before health checks are initiated.",
 											Optional:            true,
 										},
 										"interval": schema.Int64Attribute{
@@ -16563,11 +16563,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -16575,18 +16575,18 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 											},
 										},
 										"tcp_health_check": schema.SingleNestedBlock{
-											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection",
+											MarkdownDescription: "TCP Health Check. TCPHealthCheckType describes a health check based on opening a TCP connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"port": schema.SingleNestedBlock{
 													MarkdownDescription: "Port. Port",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Port Name. Port Name",
+															MarkdownDescription: "Port Name. Port Name.",
 															Optional:            true,
 														},
 														"num": schema.Int64Attribute{
-															MarkdownDescription: "Port Number. Port number",
+															MarkdownDescription: "Port Number. Port number.",
 															Optional:            true,
 														},
 													},
@@ -16599,7 +16599,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"deploy_options": schema.SingleNestedBlock{
-						MarkdownDescription: "Deploy Options. Deploy Options are used to configure the workload deployment options",
+						MarkdownDescription: "Deploy OPTIONS. Deploy OPTIONS are used to configure the workload deployment OPTIONS.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"all_res": schema.SingleNestedBlock{
@@ -16609,23 +16609,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								MarkdownDescription: "Enable this option",
 							},
 							"deploy_ce_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Customer Sites. This defines a way to deploy a workload on specific Customer sites",
+								MarkdownDescription: "Customer Sites. This defines a way to deploy a workload on specific Customer sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed",
+										MarkdownDescription: "List of Customer Sites to Deploy. Which customer sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -16638,23 +16638,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"deploy_ce_virtual_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites",
+								MarkdownDescription: "Customer Virtual Sites. This defines a way to deploy a workload on specific Customer virtual sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed",
+										MarkdownDescription: "List of Customer Virtual Sites to Deploy. Which customer virtual sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -16667,23 +16667,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"deploy_re_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites",
+								MarkdownDescription: "Regional Edge Sites. This defines a way to deploy a workload on specific Regional Edge sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed",
+										MarkdownDescription: "List of Regional Edge Sites to Deploy. Which regional edge sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -16696,23 +16696,23 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 								},
 							},
 							"deploy_re_virtual_sites": schema.SingleNestedBlock{
-								MarkdownDescription: "Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites",
+								MarkdownDescription: "Regional Edge Virtual Sites. This defines a way to deploy a workload on specific Regional Edge virtual sites.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"virtual_site": schema.ListNestedBlock{
-										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed",
+										MarkdownDescription: "List of Regional Edge Virtual Sites to Deploy. Which regional edge virtual sites should this workload be deployed .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -16727,21 +16727,21 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						},
 					},
 					"persistent_volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Persistent Storage Configuration. Persistent storage configuration for the service",
+						MarkdownDescription: "Persistent Storage Configuration. Persistent storage configuration for the service .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume",
+									MarkdownDescription: "Name. Name of the volume .",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"persistent_volume": schema.SingleNestedBlock{
-									MarkdownDescription: "Persistent Storage Volume. Volume containing the Persistent Storage for the workload",
+									MarkdownDescription: "Persistent Storage Volume. Volume containing the Persistent Storage for the workload.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"mount": schema.SingleNestedBlock{
-											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
 													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -16765,11 +16765,11 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 													Optional:            true,
 												},
 												"class_name": schema.StringAttribute{
-													MarkdownDescription: "Class Name. Use the specified class name",
+													MarkdownDescription: "Class Name. Use the specified class name.",
 													Optional:            true,
 												},
 												"storage_size": schema.Int64Attribute{
-													MarkdownDescription: "Size (in GiB). Size in GiB of the persistent storage",
+													MarkdownDescription: "Size (in GiB). Size in GiB of the persistent storage .",
 													Optional:            true,
 												},
 											},
@@ -16788,17 +16788,17 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 						MarkdownDescription: "Enable this option",
 					},
 					"volumes": schema.ListNestedBlock{
-						MarkdownDescription: "Ephemeral Volumes. Ephemeral volumes for the service",
+						MarkdownDescription: "Ephemeral Volumes. Ephemeral volumes for the service.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. Name of the volume",
+									MarkdownDescription: "Name. Name of the volume.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"empty_dir": schema.SingleNestedBlock{
-									MarkdownDescription: "Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload",
+									MarkdownDescription: "Empty Directory Volume. Volume containing a temporary directory whose lifetime is the same as a replica of a workload.",
 									Attributes: map[string]schema.Attribute{
 										"size_limit": schema.Int64Attribute{
 											MarkdownDescription: "Size Limit (in GiB).",
@@ -16807,7 +16807,7 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 									Blocks: map[string]schema.Block{
 										"mount": schema.SingleNestedBlock{
-											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
 													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",
@@ -16826,16 +16826,16 @@ func (r *WorkloadResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"host_path": schema.SingleNestedBlock{
-									MarkdownDescription: "HostPath Volume. Volume containing a host mapped path into the workload",
+									MarkdownDescription: "HostPath Volume. Volume containing a host mapped path into the workload.",
 									Attributes: map[string]schema.Attribute{
 										"path": schema.StringAttribute{
-											MarkdownDescription: "Path. Path of the directory on the host",
+											MarkdownDescription: "Path. Path of the directory on the host .",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"mount": schema.SingleNestedBlock{
-											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload",
+											MarkdownDescription: "Volume Mount. Volume mount describes how volume is mounted inside a workload.",
 											Attributes: map[string]schema.Attribute{
 												"mode": schema.StringAttribute{
 													MarkdownDescription: "[Enum: VOLUME_MOUNT_READ_ONLY|VOLUME_MOUNT_READ_WRITE] Mode. Mode in which the volume should be mounted to the workload - VOLUME_MOUNT_READ_ONLY: ReadOnly Mount the volume in read-only mode - VOLUME_MOUNT_READ_WRITE: Read Write Mount the volume in read-write mode. Possible values are `VOLUME_MOUNT_READ_ONLY`, `VOLUME_MOUNT_READ_WRITE`. Defaults to `VOLUME_MOUNT_READ_ONLY`.",

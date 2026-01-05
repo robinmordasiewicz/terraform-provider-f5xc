@@ -3194,7 +3194,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"alternate_region": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: alternate_region, azure_region] Alternate Azure Region Name. Name of the azure region which does not support availability zones.",
+				MarkdownDescription: "[OneOf: alternate_region, azure_region] Alternate Azure Region Name. Name of the Azure region which does not support availability zones.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -3202,7 +3202,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"azure_region": schema.StringAttribute{
-				MarkdownDescription: "Recommended Azure Region Name. Name of the azure region which supports availability zones.",
+				MarkdownDescription: "Recommended Azure Region Name. Name of the Azure region which supports availability zones.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -3210,7 +3210,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"disk_size": schema.Int64Attribute{
-				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB",
+				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -3218,7 +3218,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"machine_type": schema.StringAttribute{
-				MarkdownDescription: "Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced options.",
+				MarkdownDescription: "Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced OPTIONS.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -3226,7 +3226,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"nodes_per_az": schema.Int64Attribute{
-				MarkdownDescription: "Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21",
+				MarkdownDescription: "Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -3234,7 +3234,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"resource_group": schema.StringAttribute{
-				MarkdownDescription: "Resource Group. Azure resource group for resources that will be created",
+				MarkdownDescription: "Resource Group. Azure resource group for resources that will be created .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -3250,7 +3250,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"total_nodes": schema.Int64Attribute{
-				MarkdownDescription: "Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site",
+				MarkdownDescription: "Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -3266,22 +3266,22 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				Delete: true,
 			}),
 			"admin_password": schema.SingleNestedBlock{
-				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blindfold_secret_info": schema.SingleNestedBlock{
-						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 						Attributes: map[string]schema.Attribute{
 							"decryption_provider": schema.StringAttribute{
 								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 								Optional:            true,
 							},
 							"location": schema.StringAttribute{
-								MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+								MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 								Optional:            true,
 							},
 							"store_provider": schema.StringAttribute{
-								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 								Optional:            true,
 							},
 						},
@@ -3290,11 +3290,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 						Attributes: map[string]schema.Attribute{
 							"provider_ref": schema.StringAttribute{
-								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 								Optional:            true,
 							},
 							"url": schema.StringAttribute{
-								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 								Optional:            true,
 							},
 						},
@@ -3302,18 +3302,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"azure_cred": schema.SingleNestedBlock{
-				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -3326,7 +3326,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option",
 			},
 			"blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.",
+				MarkdownDescription: "Disable Node Local Services. Disable node local services on this site. Note: The chosen services will GET disabled on all nodes in the site.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
@@ -3334,7 +3334,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
-									MarkdownDescription: "[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
+									MarkdownDescription: "[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
 									Optional:            true,
 								},
 							},
@@ -3354,27 +3354,27 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"coordinates": schema.SingleNestedBlock{
-				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location",
+				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location.",
 				Attributes: map[string]schema.Attribute{
 					"latitude": schema.Int64Attribute{
-						MarkdownDescription: "Latitude. Latitude of the site location",
+						MarkdownDescription: "Latitude. Latitude of the site location.",
 						Optional:            true,
 					},
 					"longitude": schema.Int64Attribute{
-						MarkdownDescription: "Longitude. longitude of site location",
+						MarkdownDescription: "Longitude. Longitude of site location.",
 						Optional:            true,
 					},
 				},
 			},
 			"custom_dns": schema.SingleNestedBlock{
-				MarkdownDescription: "Custom DNS. Custom DNS is the configured for specify CE site",
+				MarkdownDescription: "Custom DNS. Custom DNS is the configured for specify CE site.",
 				Attributes: map[string]schema.Attribute{
 					"inside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network",
+						MarkdownDescription: "DNS Server for Inside Network. Optional DNS server IP to be used for name resolution in inside network.",
 						Optional:            true,
 					},
 					"outside_nameserver": schema.StringAttribute{
-						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network",
+						MarkdownDescription: "DNS Server for Outside Network. Optional DNS server IP to be used for name resolution in outside network.",
 						Optional:            true,
 					},
 				},
@@ -3383,7 +3383,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Enable this option",
 			},
 			"ingress_egress_gw": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: ingress_egress_gw, ingress_egress_gw_ar, ingress_gw, ingress_gw_ar, voltstack_cluster, voltstack_cluster_ar] Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site",
+				MarkdownDescription: "[OneOf: ingress_egress_gw, ingress_egress_gw_ar, ingress_gw, ingress_gw_ar, voltstack_cluster, voltstack_cluster_ar] Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site.",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
@@ -3392,7 +3392,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
@@ -3404,23 +3404,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
+						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
+								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -3433,23 +3433,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
+						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
+								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -3466,19 +3466,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
+								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -3495,24 +3495,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"azure_az": schema.StringAttribute{
-									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input",
+									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input .",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"inside_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 											Attributes: map[string]schema.Attribute{
 												"subnet_name": schema.StringAttribute{
 													MarkdownDescription: "Subnet Name. Name of existing subnet.",
 													Optional:            true,
 												},
 												"subnet_resource_grp": schema.StringAttribute{
-													MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+													MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 													Optional:            true,
 												},
 											},
@@ -3523,10 +3523,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 										},
 										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 													Optional:            true,
 												},
 											},
@@ -3534,18 +3534,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 									},
 								},
 								"outside_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 											Attributes: map[string]schema.Attribute{
 												"subnet_name": schema.StringAttribute{
 													MarkdownDescription: "Subnet Name. Name of existing subnet.",
 													Optional:            true,
 												},
 												"subnet_resource_grp": schema.StringAttribute{
-													MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+													MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 													Optional:            true,
 												},
 											},
@@ -3556,10 +3556,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 										},
 										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 													Optional:            true,
 												},
 											},
@@ -3570,18 +3570,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"dc_cluster_group_inside_vn": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -3591,18 +3591,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"dc_cluster_group_outside_vn": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -3615,31 +3615,31 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Global Network Connection List. List of global network connections",
+						MarkdownDescription: "Global Network Connection List. List of global network connections.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections",
+								MarkdownDescription: "Global Network Connections. Global network connections .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											MarkdownDescription: "Global Network. Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -3651,22 +3651,22 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											MarkdownDescription: "Global Network. Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -3683,17 +3683,17 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"hub": schema.SingleNestedBlock{
-						MarkdownDescription: "Hub VNet type. Hub VNet type",
+						MarkdownDescription: "Hub VNet type. Hub VNet type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"express_route_disabled": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 							"express_route_enabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Express Route Configuration. Express Route Configuration",
+								MarkdownDescription: "Express Route Configuration. Express Route Configuration.",
 								Attributes: map[string]schema.Attribute{
 									"custom_asn": schema.Int64Attribute{
-										MarkdownDescription: "Custom ASN. Set custom ASN for F5XC Site",
+										MarkdownDescription: "Custom ASN. Set custom ASN for F5XC Site.",
 										Optional:            true,
 									},
 								},
@@ -3705,11 +3705,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										MarkdownDescription: "Enable this option",
 									},
 									"connections": schema.ListNestedBlock{
-										MarkdownDescription: "Connections. Add the ExpressRoute Circuit Connections to this site",
+										MarkdownDescription: "Connections. Add the ExpressRoute Circuit Connections to this site .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"circuit_id": schema.StringAttribute{
-													MarkdownDescription: "Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site",
+													MarkdownDescription: "Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site.",
 													Optional:            true,
 												},
 												"weight": schema.Int64Attribute{
@@ -3732,31 +3732,31 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"other_subscription": schema.SingleNestedBlock{
-													MarkdownDescription: "Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription",
+													MarkdownDescription: "Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription.",
 													Attributes: map[string]schema.Attribute{
 														"circuit_id": schema.StringAttribute{
-															MarkdownDescription: "Circuit ID. Circuit ID",
+															MarkdownDescription: "Circuit ID. Circuit ID.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"authorized_key": schema.SingleNestedBlock{
-															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
-																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
-																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																			MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
-																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																			Optional:            true,
 																		},
 																	},
@@ -3765,11 +3765,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
-																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
-																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																			Optional:            true,
 																		},
 																	},
@@ -3785,7 +3785,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										MarkdownDescription: "Enable this option",
 									},
 									"gateway_subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
@@ -3795,7 +3795,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
 												Attributes: map[string]schema.Attribute{
 													"subnet_resource_grp": schema.StringAttribute{
-														MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+														MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 														Optional:            true,
 													},
 												},
@@ -3806,10 +3806,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 											},
 											"subnet_param": schema.SingleNestedBlock{
-												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 												Attributes: map[string]schema.Attribute{
 													"ipv4": schema.StringAttribute{
-														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 														Optional:            true,
 													},
 												},
@@ -3817,7 +3817,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"route_server_subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
@@ -3827,7 +3827,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
 												Attributes: map[string]schema.Attribute{
 													"subnet_resource_grp": schema.StringAttribute{
-														MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+														MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 														Optional:            true,
 													},
 												},
@@ -3838,10 +3838,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 											},
 											"subnet_param": schema.SingleNestedBlock{
-												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 												Attributes: map[string]schema.Attribute{
 													"ipv4": schema.StringAttribute{
-														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 														Optional:            true,
 													},
 												},
@@ -3875,7 +3875,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 							},
 							"spoke_vnets": schema.ListNestedBlock{
-								MarkdownDescription: "Spoke VNet Peering (Legacy). Spoke VNet Peering",
+								MarkdownDescription: "Spoke VNet Peering (Legacy). Spoke VNet Peering.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
@@ -3883,20 +3883,20 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											MarkdownDescription: "Enable this option",
 										},
 										"labels": schema.SingleNestedBlock{
-											MarkdownDescription: "Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace",
+											MarkdownDescription: "Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace.",
 										},
 										"manual": schema.SingleNestedBlock{
 											MarkdownDescription: "Enable this option",
 										},
 										"vnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Existing Vnet Type. Resource group and name of existing Azure Vnet",
+											MarkdownDescription: "Azure Existing VNet Type. Resource group and name of existing Azure VNet.",
 											Attributes: map[string]schema.Attribute{
 												"resource_group": schema.StringAttribute{
-													MarkdownDescription: "Existing Vnet Resource Group. Resource group of existing Vnet",
+													MarkdownDescription: "Existing VNet Resource Group. Resource group of existing VNet .",
 													Optional:            true,
 												},
 												"vnet_name": schema.StringAttribute{
-													MarkdownDescription: "Existing Vnet Name. Name of existing Vnet",
+													MarkdownDescription: "Existing VNet Name. Name of existing VNet .",
 													Optional:            true,
 												},
 											},
@@ -3915,21 +3915,21 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"inside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Static Route List Type. List of static routes",
+						MarkdownDescription: "Static Route List Type. List of static routes.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes",
+								MarkdownDescription: "List of Static Routes. List of Static routes .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them",
+											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
@@ -3939,10 +3939,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy",
+													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
 												},
 												"nexthop": schema.SingleNestedBlock{
-													MarkdownDescription: "Nexthop. Identifies the next-hop for a route",
+													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
@@ -3955,7 +3955,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -3963,15 +3963,15 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -3979,7 +3979,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -3990,14 +3990,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
 																			Optional:            true,
 																		},
 																	},
@@ -4016,28 +4016,28 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"subnets": schema.ListNestedBlock{
-													MarkdownDescription: "Subnets. List of route prefixes",
+													MarkdownDescription: "Subnets. List of route prefixes .",
 													NestedObject: schema.NestedBlockObject{
 														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
+																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
+																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
+																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 																		Optional:            true,
 																	},
 																},
 															},
 															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128",
+																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
+																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
@@ -4078,21 +4078,21 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Static Route List Type. List of static routes",
+						MarkdownDescription: "Static Route List Type. List of static routes.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes",
+								MarkdownDescription: "List of Static Routes. List of Static routes .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them",
+											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
@@ -4102,10 +4102,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy",
+													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
 												},
 												"nexthop": schema.SingleNestedBlock{
-													MarkdownDescription: "Nexthop. Identifies the next-hop for a route",
+													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
@@ -4118,7 +4118,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -4126,15 +4126,15 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -4142,7 +4142,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -4153,14 +4153,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
 																			Optional:            true,
 																		},
 																	},
@@ -4179,28 +4179,28 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"subnets": schema.ListNestedBlock{
-													MarkdownDescription: "Subnets. List of route prefixes",
+													MarkdownDescription: "Subnets. List of route prefixes .",
 													NestedObject: schema.NestedBlockObject{
 														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
+																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
+																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
+																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 																		Optional:            true,
 																	},
 																},
 															},
 															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128",
+																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
+																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
@@ -4220,11 +4220,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
+								MarkdownDescription: "L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
@@ -4249,7 +4249,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"ingress_egress_gw_ar": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones",
+				MarkdownDescription: "Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones.",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
@@ -4258,7 +4258,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
@@ -4270,23 +4270,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
+						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
+								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -4299,23 +4299,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
+						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
+								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -4332,19 +4332,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
+								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -4357,18 +4357,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"dc_cluster_group_inside_vn": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -4378,18 +4378,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"dc_cluster_group_outside_vn": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -4402,31 +4402,31 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Global Network Connection List. List of global network connections",
+						MarkdownDescription: "Global Network Connection List. List of global network connections.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections",
+								MarkdownDescription: "Global Network Connections. Global network connections .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											MarkdownDescription: "Global Network. Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -4438,22 +4438,22 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											MarkdownDescription: "Global Network. Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -4470,17 +4470,17 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"hub": schema.SingleNestedBlock{
-						MarkdownDescription: "Hub VNet type. Hub VNet type",
+						MarkdownDescription: "Hub VNet type. Hub VNet type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"express_route_disabled": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
 							},
 							"express_route_enabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Express Route Configuration. Express Route Configuration",
+								MarkdownDescription: "Express Route Configuration. Express Route Configuration.",
 								Attributes: map[string]schema.Attribute{
 									"custom_asn": schema.Int64Attribute{
-										MarkdownDescription: "Custom ASN. Set custom ASN for F5XC Site",
+										MarkdownDescription: "Custom ASN. Set custom ASN for F5XC Site.",
 										Optional:            true,
 									},
 								},
@@ -4492,11 +4492,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										MarkdownDescription: "Enable this option",
 									},
 									"connections": schema.ListNestedBlock{
-										MarkdownDescription: "Connections. Add the ExpressRoute Circuit Connections to this site",
+										MarkdownDescription: "Connections. Add the ExpressRoute Circuit Connections to this site .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"circuit_id": schema.StringAttribute{
-													MarkdownDescription: "Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site",
+													MarkdownDescription: "Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site.",
 													Optional:            true,
 												},
 												"weight": schema.Int64Attribute{
@@ -4519,31 +4519,31 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"other_subscription": schema.SingleNestedBlock{
-													MarkdownDescription: "Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription",
+													MarkdownDescription: "Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription.",
 													Attributes: map[string]schema.Attribute{
 														"circuit_id": schema.StringAttribute{
-															MarkdownDescription: "Circuit ID. Circuit ID",
+															MarkdownDescription: "Circuit ID. Circuit ID.",
 															Optional:            true,
 														},
 													},
 													Blocks: map[string]schema.Block{
 														"authorized_key": schema.SingleNestedBlock{
-															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"blindfold_secret_info": schema.SingleNestedBlock{
-																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 																	Attributes: map[string]schema.Attribute{
 																		"decryption_provider": schema.StringAttribute{
 																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 																			Optional:            true,
 																		},
 																		"location": schema.StringAttribute{
-																			MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+																			MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 																			Optional:            true,
 																		},
 																		"store_provider": schema.StringAttribute{
-																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																			Optional:            true,
 																		},
 																	},
@@ -4552,11 +4552,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 																	Attributes: map[string]schema.Attribute{
 																		"provider_ref": schema.StringAttribute{
-																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 																			Optional:            true,
 																		},
 																		"url": schema.StringAttribute{
-																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 																			Optional:            true,
 																		},
 																	},
@@ -4572,7 +4572,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										MarkdownDescription: "Enable this option",
 									},
 									"gateway_subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
@@ -4582,7 +4582,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
 												Attributes: map[string]schema.Attribute{
 													"subnet_resource_grp": schema.StringAttribute{
-														MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+														MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 														Optional:            true,
 													},
 												},
@@ -4593,10 +4593,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 											},
 											"subnet_param": schema.SingleNestedBlock{
-												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 												Attributes: map[string]schema.Attribute{
 													"ipv4": schema.StringAttribute{
-														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 														Optional:            true,
 													},
 												},
@@ -4604,7 +4604,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"route_server_subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"auto": schema.SingleNestedBlock{
@@ -4614,7 +4614,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
 												Attributes: map[string]schema.Attribute{
 													"subnet_resource_grp": schema.StringAttribute{
-														MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+														MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 														Optional:            true,
 													},
 												},
@@ -4625,10 +4625,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 											},
 											"subnet_param": schema.SingleNestedBlock{
-												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 												Attributes: map[string]schema.Attribute{
 													"ipv4": schema.StringAttribute{
-														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 														Optional:            true,
 													},
 												},
@@ -4662,7 +4662,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 							},
 							"spoke_vnets": schema.ListNestedBlock{
-								MarkdownDescription: "Spoke VNet Peering (Legacy). Spoke VNet Peering",
+								MarkdownDescription: "Spoke VNet Peering (Legacy). Spoke VNet Peering.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
@@ -4670,20 +4670,20 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											MarkdownDescription: "Enable this option",
 										},
 										"labels": schema.SingleNestedBlock{
-											MarkdownDescription: "Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace",
+											MarkdownDescription: "Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace.",
 										},
 										"manual": schema.SingleNestedBlock{
 											MarkdownDescription: "Enable this option",
 										},
 										"vnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Existing Vnet Type. Resource group and name of existing Azure Vnet",
+											MarkdownDescription: "Azure Existing VNet Type. Resource group and name of existing Azure VNet.",
 											Attributes: map[string]schema.Attribute{
 												"resource_group": schema.StringAttribute{
-													MarkdownDescription: "Existing Vnet Resource Group. Resource group of existing Vnet",
+													MarkdownDescription: "Existing VNet Resource Group. Resource group of existing VNet .",
 													Optional:            true,
 												},
 												"vnet_name": schema.StringAttribute{
-													MarkdownDescription: "Existing Vnet Name. Name of existing Vnet",
+													MarkdownDescription: "Existing VNet Name. Name of existing VNet .",
 													Optional:            true,
 												},
 											},
@@ -4702,21 +4702,21 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"inside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Static Route List Type. List of static routes",
+						MarkdownDescription: "Static Route List Type. List of static routes.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes",
+								MarkdownDescription: "List of Static Routes. List of Static routes .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them",
+											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
@@ -4726,10 +4726,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy",
+													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
 												},
 												"nexthop": schema.SingleNestedBlock{
-													MarkdownDescription: "Nexthop. Identifies the next-hop for a route",
+													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
@@ -4742,7 +4742,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -4750,15 +4750,15 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -4766,7 +4766,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -4777,14 +4777,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
 																			Optional:            true,
 																		},
 																	},
@@ -4803,28 +4803,28 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"subnets": schema.ListNestedBlock{
-													MarkdownDescription: "Subnets. List of route prefixes",
+													MarkdownDescription: "Subnets. List of route prefixes .",
 													NestedObject: schema.NestedBlockObject{
 														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
+																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
+																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
+																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 																		Optional:            true,
 																	},
 																},
 															},
 															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128",
+																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
+																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
@@ -4862,10 +4862,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"node": schema.SingleNestedBlock{
-						MarkdownDescription: "Two Interface Node. Parameters for creating two interface Node in one AZ",
+						MarkdownDescription: "Two Interface Node. Parameters for creating two interface Node in one AZ.",
 						Attributes: map[string]schema.Attribute{
 							"fault_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set",
+								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set.",
 								Optional:            true,
 							},
 							"node_number": schema.Int64Attribute{
@@ -4873,24 +4873,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								Optional:            true,
 							},
 							"update_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set",
+								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set.",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"inside_subnet": schema.SingleNestedBlock{
-								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 										Attributes: map[string]schema.Attribute{
 											"subnet_name": schema.StringAttribute{
 												MarkdownDescription: "Subnet Name. Name of existing subnet.",
 												Optional:            true,
 											},
 											"subnet_resource_grp": schema.StringAttribute{
-												MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+												MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 												Optional:            true,
 											},
 										},
@@ -4901,10 +4901,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"subnet_param": schema.SingleNestedBlock{
-										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 										Attributes: map[string]schema.Attribute{
 											"ipv4": schema.StringAttribute{
-												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 												Optional:            true,
 											},
 										},
@@ -4912,18 +4912,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 							},
 							"outside_subnet": schema.SingleNestedBlock{
-								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 										Attributes: map[string]schema.Attribute{
 											"subnet_name": schema.StringAttribute{
 												MarkdownDescription: "Subnet Name. Name of existing subnet.",
 												Optional:            true,
 											},
 											"subnet_resource_grp": schema.StringAttribute{
-												MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+												MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 												Optional:            true,
 											},
 										},
@@ -4934,10 +4934,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"subnet_param": schema.SingleNestedBlock{
-										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 										Attributes: map[string]schema.Attribute{
 											"ipv4": schema.StringAttribute{
-												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 												Optional:            true,
 											},
 										},
@@ -4950,21 +4950,21 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Static Route List Type. List of static routes",
+						MarkdownDescription: "Static Route List Type. List of static routes.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes",
+								MarkdownDescription: "List of Static Routes. List of Static routes .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them",
+											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
@@ -4974,10 +4974,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy",
+													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
 												},
 												"nexthop": schema.SingleNestedBlock{
-													MarkdownDescription: "Nexthop. Identifies the next-hop for a route",
+													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
@@ -4990,7 +4990,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -4998,15 +4998,15 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -5014,7 +5014,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -5025,14 +5025,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
 																			Optional:            true,
 																		},
 																	},
@@ -5051,28 +5051,28 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"subnets": schema.ListNestedBlock{
-													MarkdownDescription: "Subnets. List of route prefixes",
+													MarkdownDescription: "Subnets. List of route prefixes .",
 													NestedObject: schema.NestedBlockObject{
 														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
+																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
+																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
+																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 																		Optional:            true,
 																	},
 																},
 															},
 															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128",
+																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
+																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
@@ -5092,11 +5092,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
+								MarkdownDescription: "L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
@@ -5121,7 +5121,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"ingress_gw": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region",
+				MarkdownDescription: "Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region.",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
@@ -5130,7 +5130,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
@@ -5146,24 +5146,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"azure_az": schema.StringAttribute{
-									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input",
+									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input .",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"local_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 											Attributes: map[string]schema.Attribute{
 												"subnet_name": schema.StringAttribute{
 													MarkdownDescription: "Subnet Name. Name of existing subnet.",
 													Optional:            true,
 												},
 												"subnet_resource_grp": schema.StringAttribute{
-													MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+													MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 													Optional:            true,
 												},
 											},
@@ -5174,10 +5174,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 										},
 										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 													Optional:            true,
 												},
 											},
@@ -5188,11 +5188,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
+								MarkdownDescription: "L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
@@ -5211,7 +5211,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"ingress_gw_ar": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site",
+				MarkdownDescription: "Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site.",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
@@ -5220,7 +5220,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
@@ -5232,10 +5232,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"node": schema.SingleNestedBlock{
-						MarkdownDescription: "Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region",
+						MarkdownDescription: "Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region.",
 						Attributes: map[string]schema.Attribute{
 							"fault_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set",
+								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set.",
 								Optional:            true,
 							},
 							"node_number": schema.Int64Attribute{
@@ -5243,24 +5243,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								Optional:            true,
 							},
 							"update_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set",
+								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set.",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"local_subnet": schema.SingleNestedBlock{
-								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 										Attributes: map[string]schema.Attribute{
 											"subnet_name": schema.StringAttribute{
 												MarkdownDescription: "Subnet Name. Name of existing subnet.",
 												Optional:            true,
 											},
 											"subnet_resource_grp": schema.StringAttribute{
-												MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+												MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 												Optional:            true,
 											},
 										},
@@ -5271,10 +5271,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"subnet_param": schema.SingleNestedBlock{
-										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 										Attributes: map[string]schema.Attribute{
 											"ipv4": schema.StringAttribute{
-												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 												Optional:            true,
 											},
 										},
@@ -5284,11 +5284,11 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+						MarkdownDescription: "Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
+								MarkdownDescription: "L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"jumbo": schema.SingleNestedBlock{
@@ -5337,18 +5337,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"log_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -5393,7 +5393,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 				Attributes: map[string]schema.Attribute{
 					"volterra_software_version": schema.StringAttribute{
-						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002.",
+						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. Crt-20210329-1002.",
 						Optional:            true,
 					},
 				},
@@ -5407,18 +5407,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "Azure Tags. Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console.",
 			},
 			"vnet": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Vnet choice. This defines choice about Azure Vnet for a view",
+				MarkdownDescription: "Azure VNet choice. This defines choice about Azure VNet for a view.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"existing_vnet": schema.SingleNestedBlock{
-						MarkdownDescription: "Azure Existing Vnet Type. Resource group and name of existing Azure Vnet",
+						MarkdownDescription: "Azure Existing VNet Type. Resource group and name of existing Azure VNet.",
 						Attributes: map[string]schema.Attribute{
 							"resource_group": schema.StringAttribute{
-								MarkdownDescription: "Existing Vnet Resource Group. Resource group of existing Vnet",
+								MarkdownDescription: "Existing VNet Resource Group. Resource group of existing VNet .",
 								Optional:            true,
 							},
 							"vnet_name": schema.StringAttribute{
-								MarkdownDescription: "Existing Vnet Name. Name of existing Vnet",
+								MarkdownDescription: "Existing VNet Name. Name of existing VNet .",
 								Optional:            true,
 							},
 						},
@@ -5432,14 +5432,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"new_vnet": schema.SingleNestedBlock{
-						MarkdownDescription: "Azure Vnet Parameters. Parameters to create a new Azure Vnet",
+						MarkdownDescription: "Azure VNet Parameters. Parameters to create a new Azure VNet.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Choose Vnet Name. Specify the Vnet Name",
+								MarkdownDescription: "Choose VNet Name. Specify the VNet Name.",
 								Optional:            true,
 							},
 							"primary_ipv4": schema.StringAttribute{
-								MarkdownDescription: "IPv4 CIDR block. IPv4 CIDR block for this Vnet. It has to be private address space.",
+								MarkdownDescription: "IPv4 CIDR block. IPv4 CIDR block for this VNet. It has to be private address space.",
 								Optional:            true,
 							},
 						},
@@ -5452,7 +5452,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"voltstack_cluster": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes",
+				MarkdownDescription: "Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes.",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
@@ -5461,7 +5461,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
@@ -5473,23 +5473,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
+						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
+								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -5502,23 +5502,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
+						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
+								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -5535,19 +5535,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
+								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -5564,24 +5564,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"azure_az": schema.StringAttribute{
-									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input",
+									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input .",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"local_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 											Attributes: map[string]schema.Attribute{
 												"subnet_name": schema.StringAttribute{
 													MarkdownDescription: "Subnet Name. Name of existing subnet.",
 													Optional:            true,
 												},
 												"subnet_resource_grp": schema.StringAttribute{
-													MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+													MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 													Optional:            true,
 												},
 											},
@@ -5592,10 +5592,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 										},
 										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 											Attributes: map[string]schema.Attribute{
 												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 													Optional:            true,
 												},
 											},
@@ -5606,18 +5606,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -5633,31 +5633,31 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Global Network Connection List. List of global network connections",
+						MarkdownDescription: "Global Network Connection List. List of global network connections.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections",
+								MarkdownDescription: "Global Network Connections. Global network connections .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											MarkdownDescription: "Global Network. Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -5669,22 +5669,22 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											MarkdownDescription: "Global Network. Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -5701,18 +5701,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"k8s_cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -5740,21 +5740,21 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Static Route List Type. List of static routes",
+						MarkdownDescription: "Static Route List Type. List of static routes.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes",
+								MarkdownDescription: "List of Static Routes. List of Static routes .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them",
+											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
@@ -5764,10 +5764,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy",
+													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
 												},
 												"nexthop": schema.SingleNestedBlock{
-													MarkdownDescription: "Nexthop. Identifies the next-hop for a route",
+													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
@@ -5780,7 +5780,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -5788,15 +5788,15 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -5804,7 +5804,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -5815,14 +5815,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
 																			Optional:            true,
 																		},
 																	},
@@ -5841,28 +5841,28 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"subnets": schema.ListNestedBlock{
-													MarkdownDescription: "Subnets. List of route prefixes",
+													MarkdownDescription: "Subnets. List of route prefixes .",
 													NestedObject: schema.NestedBlockObject{
 														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
+																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
+																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
+																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 																		Optional:            true,
 																	},
 																},
 															},
 															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128",
+																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
+																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
@@ -5888,15 +5888,15 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"storage_class_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in kubernetes for this site",
+						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in Kubernetes for this site.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"storage_classes": schema.ListNestedBlock{
-								MarkdownDescription: "List of Storage Classes. List of custom storage classes",
+								MarkdownDescription: "List of Storage Classes. List of custom storage classes.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"default_storage_class": schema.BoolAttribute{
-											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster",
+											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster.",
 											Optional:            true,
 										},
 										"storage_class_name": schema.StringAttribute{
@@ -5911,7 +5911,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"voltstack_cluster_ar": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes",
+				MarkdownDescription: "Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes.",
 				Attributes: map[string]schema.Attribute{
 					"azure_certified_hw": schema.StringAttribute{
 						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
@@ -5920,7 +5920,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 				Blocks: map[string]schema.Block{
 					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type.Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen",
+						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"disable": schema.SingleNestedBlock{
@@ -5932,23 +5932,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
+						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
+								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -5961,23 +5961,23 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
+						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
+								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -5994,19 +5994,19 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
+								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -6019,18 +6019,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -6046,31 +6046,31 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Global Network Connection List. List of global network connections",
+						MarkdownDescription: "Global Network Connection List. List of global network connections.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections",
+								MarkdownDescription: "Global Network Connections. Global network connections .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											MarkdownDescription: "Global Network. Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -6082,22 +6082,22 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											MarkdownDescription: "Global Network. Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -6114,18 +6114,18 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"k8s_cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -6153,10 +6153,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"node": schema.SingleNestedBlock{
-						MarkdownDescription: "Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region",
+						MarkdownDescription: "Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region.",
 						Attributes: map[string]schema.Attribute{
 							"fault_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set",
+								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set.",
 								Optional:            true,
 							},
 							"node_number": schema.Int64Attribute{
@@ -6164,24 +6164,24 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 								Optional:            true,
 							},
 							"update_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set",
+								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set.",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"local_subnet": schema.SingleNestedBlock{
-								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet",
+										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
 										Attributes: map[string]schema.Attribute{
 											"subnet_name": schema.StringAttribute{
 												MarkdownDescription: "Subnet Name. Name of existing subnet.",
 												Optional:            true,
 											},
 											"subnet_resource_grp": schema.StringAttribute{
-												MarkdownDescription: "Resource Group Name. Specify name of Resource Group",
+												MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
 												Optional:            true,
 											},
 										},
@@ -6192,10 +6192,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 										},
 									},
 									"subnet_param": schema.SingleNestedBlock{
-										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet",
+										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
 										Attributes: map[string]schema.Attribute{
 											"ipv4": schema.StringAttribute{
-												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet",
+												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
 												Optional:            true,
 											},
 										},
@@ -6205,21 +6205,21 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Static Route List Type. List of static routes",
+						MarkdownDescription: "Static Route List Type. List of static routes.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes",
+								MarkdownDescription: "List of Static Routes. List of Static routes .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network",
+											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them",
+											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
 													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
@@ -6229,10 +6229,10 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy",
+													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
 												},
 												"nexthop": schema.SingleNestedBlock{
-													MarkdownDescription: "Nexthop. Identifies the next-hop for a route",
+													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
 													Attributes: map[string]schema.Attribute{
 														"type": schema.StringAttribute{
 															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
@@ -6245,7 +6245,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -6253,15 +6253,15 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																		Optional:            true,
 																	},
 																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																		Optional:            true,
 																	},
 																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -6269,7 +6269,7 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 																		},
 																	},
 																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																		Optional:            true,
 																		Computed:            true,
 																		PlanModifiers: []planmodifier.String{
@@ -6280,14 +6280,14 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 															},
 														},
 														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address",
+															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"ipv4": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation",
+																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
 																	Attributes: map[string]schema.Attribute{
 																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation",
+																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
 																			Optional:            true,
 																		},
 																	},
@@ -6306,28 +6306,28 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"subnets": schema.ListNestedBlock{
-													MarkdownDescription: "Subnets. List of route prefixes",
+													MarkdownDescription: "Subnets. List of route prefixes .",
 													NestedObject: schema.NestedBlockObject{
 														Attributes: map[string]schema.Attribute{},
 														Blocks: map[string]schema.Block{
 															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32",
+																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32",
+																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation",
+																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
 																		Optional:            true,
 																	},
 																},
 															},
 															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128",
+																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
 																Attributes: map[string]schema.Attribute{
 																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128",
+																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
 																		Optional:            true,
 																	},
 																	"prefix": schema.StringAttribute{
@@ -6353,15 +6353,15 @@ func (r *AzureVNETSiteResource) Schema(ctx context.Context, req resource.SchemaR
 						MarkdownDescription: "Enable this option",
 					},
 					"storage_class_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in kubernetes for this site",
+						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in Kubernetes for this site.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"storage_classes": schema.ListNestedBlock{
-								MarkdownDescription: "List of Storage Classes. List of custom storage classes",
+								MarkdownDescription: "List of Storage Classes. List of custom storage classes.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"default_storage_class": schema.BoolAttribute{
-											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster",
+											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster.",
 											Optional:            true,
 										},
 										"storage_class_name": schema.StringAttribute{

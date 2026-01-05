@@ -9,7 +9,7 @@ description: |-
 
 Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
-~> **Note** Please refer to [Origin Pool API docs](https://docs.cloud.f5.com/docs-v2/api/views-origin-pool) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

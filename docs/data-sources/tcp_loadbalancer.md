@@ -9,7 +9,7 @@ description: |-
 
 Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.
 
-~> **Note** Please refer to [TCP Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-tcp-loadbalancer) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

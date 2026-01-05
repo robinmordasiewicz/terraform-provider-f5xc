@@ -2,20 +2,20 @@
 page_title: "f5xc_apm Resource - terraform-provider-f5xc"
 subcategory: "Monitoring"
 description: |-
-  Manages new APM as a service with configured parameters in F5 Distributed Cloud.
+  Manages new APM as a service with configured parameters. in F5 Distributed Cloud.
 ---
 
 # f5xc_apm (Resource)
 
-Manages new APM as a service with configured parameters in F5 Distributed Cloud.
+Manages new APM as a service with configured parameters. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [APM API docs](https://docs.cloud.f5.com/docs-v2/api/bigip-apm) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # APM Resource Example
-# Manages new APM as a service with configured parameters in F5 Distributed Cloud.
+# Manages new APM as a service with configured parameters. in F5 Distributed Cloud.
 
 # Basic APM configuration
 resource "f5xc_apm" "example" {
@@ -252,7 +252,13 @@ An [`advertise_on_internet`](#https-management-advertise-on-internet) block (wit
 
 #### HTTPS Management Advertise On Internet Public IP
 
-<a id="objref-e501cc"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`public_ip`](#public-ip-e501cc) block (within [`https_management.advertise_on_internet`](#https-management-advertise-on-internet)) supports the following:
+
+<a id="name-c549a1"></a>&#x2022; [`name`](#name-c549a1) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-8fcb5e"></a>&#x2022; [`namespace`](#namespace-8fcb5e) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-5cb820"></a>&#x2022; [`tenant`](#tenant-5cb820) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### HTTPS Management Advertise On SLI VIP
 
@@ -260,9 +266,9 @@ An [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) block (withi
 
 <a id="mtls-1bd8e3"></a>&#x2022; [`no_mtls`](#mtls-1bd8e3) - Optional Block<br>Enable this option
 
-<a id="certificates-5355d7"></a>&#x2022; [`tls_certificates`](#certificates-5355d7) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-5355d7) below.
+<a id="certificates-5355d7"></a>&#x2022; [`tls_certificates`](#certificates-5355d7) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-5355d7) below.
 
-<a id="config-9f094b"></a>&#x2022; [`tls_config`](#config-9f094b) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-9f094b) below.
+<a id="config-9f094b"></a>&#x2022; [`tls_config`](#config-9f094b) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-9f094b) below.
 
 <a id="mtls-c1dce4"></a>&#x2022; [`use_mtls`](#mtls-c1dce4) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-c1dce4) below.
 
@@ -316,9 +322,9 @@ An [`advertise_on_slo_internet_vip`](#vip-6dd6e5) block (within [`https_manageme
 
 <a id="mtls-65c4ed"></a>&#x2022; [`no_mtls`](#mtls-65c4ed) - Optional Block<br>Enable this option
 
-<a id="certificates-748bff"></a>&#x2022; [`tls_certificates`](#certificates-748bff) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-748bff) below.
+<a id="certificates-748bff"></a>&#x2022; [`tls_certificates`](#certificates-748bff) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-748bff) below.
 
-<a id="config-3dcb79"></a>&#x2022; [`tls_config`](#config-3dcb79) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-3dcb79) below.
+<a id="config-3dcb79"></a>&#x2022; [`tls_config`](#config-3dcb79) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-3dcb79) below.
 
 <a id="mtls-2fcd89"></a>&#x2022; [`use_mtls`](#mtls-2fcd89) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-2fcd89) below.
 
@@ -372,9 +378,9 @@ An [`advertise_on_slo_sli`](#https-management-advertise-on-slo-sli) block (withi
 
 <a id="mtls-e2f684"></a>&#x2022; [`no_mtls`](#mtls-e2f684) - Optional Block<br>Enable this option
 
-<a id="certificates-b923c1"></a>&#x2022; [`tls_certificates`](#certificates-b923c1) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-b923c1) below.
+<a id="certificates-b923c1"></a>&#x2022; [`tls_certificates`](#certificates-b923c1) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-b923c1) below.
 
-<a id="config-2cd93f"></a>&#x2022; [`tls_config`](#config-2cd93f) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-2cd93f) below.
+<a id="config-2cd93f"></a>&#x2022; [`tls_config`](#config-2cd93f) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-2cd93f) below.
 
 <a id="mtls-b8036a"></a>&#x2022; [`use_mtls`](#mtls-b8036a) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-b8036a) below.
 
@@ -428,9 +434,9 @@ An [`advertise_on_slo_vip`](#https-management-advertise-on-slo-vip) block (withi
 
 <a id="mtls-476751"></a>&#x2022; [`no_mtls`](#mtls-476751) - Optional Block<br>Enable this option
 
-<a id="certificates-49cf23"></a>&#x2022; [`tls_certificates`](#certificates-49cf23) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. for example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-49cf23) below.
+<a id="certificates-49cf23"></a>&#x2022; [`tls_certificates`](#certificates-49cf23) - Optional Block<br>TLS Certificates. Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-49cf23) below.
 
-<a id="config-eb7c38"></a>&#x2022; [`tls_config`](#config-eb7c38) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#config-eb7c38) below.
+<a id="config-eb7c38"></a>&#x2022; [`tls_config`](#config-eb7c38) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#config-eb7c38) below.
 
 <a id="mtls-85e7e5"></a>&#x2022; [`use_mtls`](#mtls-85e7e5) - Optional Block<br>Clients TLS validation context. Validation context for downstream client TLS connections<br>See [Use mTLS](#mtls-85e7e5) below.
 

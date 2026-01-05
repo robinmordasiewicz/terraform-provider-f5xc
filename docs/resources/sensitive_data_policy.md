@@ -9,7 +9,7 @@ description: |-
 
 Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Sensitive Data Policy API docs](https://docs.cloud.f5.com/docs-v2/api/sensitive-data-policy) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -86,7 +86,13 @@ A [`custom_data_types`](#custom-data-types) block supports the following:
 
 #### Custom Data Types Custom Data Type Ref
 
-<a id="objref-e0a00e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`custom_data_type_ref`](#custom-data-types-custom-data-type-ref) block (within [`custom_data_types`](#custom-data-types)) supports the following:
+
+<a id="name-20e921"></a>&#x2022; [`name`](#name-20e921) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-9d0119"></a>&#x2022; [`namespace`](#namespace-9d0119) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-60fc77"></a>&#x2022; [`tenant`](#tenant-60fc77) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

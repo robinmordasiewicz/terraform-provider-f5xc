@@ -9,7 +9,7 @@ description: |-
 
 Manages API Definition. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [API Definition API docs](https://docs.cloud.f5.com/docs-v2/api/views-api-definition) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

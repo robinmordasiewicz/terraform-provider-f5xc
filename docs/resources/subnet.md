@@ -9,7 +9,7 @@ description: |-
 
 Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
 
-~> **Note** Please refer to [Subnet API docs](https://docs.cloud.f5.com/docs-v2/api/subnet) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -91,7 +91,13 @@ A [`connect_to_layer2`](#connect-to-layer2) block supports the following:
 
 #### Connect To Layer2 Layer2 Intf Ref
 
-<a id="objref-6ea749"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`layer2_intf_ref`](#connect-to-layer2-layer2-intf-ref) block (within [`connect_to_layer2`](#connect-to-layer2)) supports the following:
+
+<a id="connect-to-layer2-layer2-intf-ref-name"></a>&#x2022; [`name`](#connect-to-layer2-layer2-intf-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-afda4a"></a>&#x2022; [`namespace`](#namespace-afda4a) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-0fab0d"></a>&#x2022; [`tenant`](#tenant-0fab0d) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Site Subnet Params
 
@@ -103,11 +109,17 @@ A [`site_subnet_params`](#site-subnet-params) block supports the following:
 
 <a id="site-subnet-params-static-ip"></a>&#x2022; [`static_ip`](#site-subnet-params-static-ip) - Optional Block<br>Enable this option
 
-<a id="params-2a5102"></a>&#x2022; [`subnet_dhcp_server_params`](#params-2a5102) - Optional Block<br>Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.DHCPServerParametersType as all features in network_interface.DHCPServerParametersType may not be supported in a subnet<br>See [Subnet DHCP Server Params](#params-2a5102) below.
+<a id="params-2a5102"></a>&#x2022; [`subnet_dhcp_server_params`](#params-2a5102) - Optional Block<br>Subnet DHCP parameters. Subnet DHCP parameters will be a subset of network_interface.dhcpserverparameterstype as all features in network_interface.dhcpserverparameterstype may not be supported in a subnet<br>See [Subnet DHCP Server Params](#params-2a5102) below.
 
 #### Site Subnet Params Site
 
-<a id="objref-fdf6de"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#site-subnet-params-site) block (within [`site_subnet_params`](#site-subnet-params)) supports the following:
+
+<a id="site-subnet-params-site-name"></a>&#x2022; [`name`](#site-subnet-params-site-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="site-subnet-params-site-namespace"></a>&#x2022; [`namespace`](#site-subnet-params-site-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="site-subnet-params-site-tenant"></a>&#x2022; [`tenant`](#site-subnet-params-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Site Subnet Params Subnet DHCP Server Params
 

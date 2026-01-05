@@ -9,7 +9,7 @@ description: |-
 
 Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Service Policy Rule API docs](https://docs.cloud.f5.com/docs-v2/api/service-policy-rule) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -77,7 +77,7 @@ resource "f5xc_service_policy_rule" "example" {
 &#x2022; <a id="any-client"></a>[`any_client`](#any-client) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="client-name"></a>[`client_name`](#client-name) - Optional String<br>Client Name. The expected name of the client invoking the request API. The predicate evaluates to true if any of the actual names is the same as the expected client name
 <br><br>&#x2022; <a id="client-name-matcher"></a>[`client_name_matcher`](#client-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#client-name-matcher) below for details.
-<br><br>&#x2022; <a id="client-selector"></a>[`client_selector`](#client-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#client-selector) below for details.
+<br><br>&#x2022; <a id="client-selector"></a>[`client_selector`](#client-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#client-selector) below for details.
 <br><br>&#x2022; <a id="ip-threat-category-list"></a>[`ip_threat_category_list`](#ip-threat-category-list) - Optional Block<br>IP Threat Category List Type. List of IP threat categories<br>See [IP Threat Category List](#ip-threat-category-list) below for details.
 
 -> **One of the following:**
@@ -183,15 +183,15 @@ An [`asn_matcher`](#asn-matcher) block supports the following:
 
 An [`asn_sets`](#asn-matcher-asn-sets) block (within [`asn_matcher`](#asn-matcher)) supports the following:
 
-<a id="asn-matcher-asn-sets-kind"></a>&#x2022; [`kind`](#asn-matcher-asn-sets-kind) - Optional String<br>Object reference kind
+<a id="asn-matcher-asn-sets-kind"></a>&#x2022; [`kind`](#asn-matcher-asn-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#asn-matcher-asn-sets-name) - Optional String<br>Object reference name
+<a id="asn-matcher-asn-sets-name"></a>&#x2022; [`name`](#asn-matcher-asn-sets-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="asn-matcher-asn-sets-namespace"></a>&#x2022; [`namespace`](#asn-matcher-asn-sets-namespace) - Optional String<br>Object reference namespace
+<a id="asn-matcher-asn-sets-namespace"></a>&#x2022; [`namespace`](#asn-matcher-asn-sets-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#asn-matcher-asn-sets-tenant) - Optional String<br>Object reference tenant
+<a id="asn-matcher-asn-sets-tenant"></a>&#x2022; [`tenant`](#asn-matcher-asn-sets-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="asn-matcher-asn-sets-uid"></a>&#x2022; [`uid`](#asn-matcher-asn-sets-uid) - Optional String<br>Object reference UID
+<a id="asn-matcher-asn-sets-uid"></a>&#x2022; [`uid`](#asn-matcher-asn-sets-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Body Matcher
 
@@ -223,7 +223,7 @@ A [`client_name_matcher`](#client-name-matcher) block supports the following:
 
 A [`client_selector`](#client-selector) block supports the following:
 
-<a id="client-selector-expressions"></a>&#x2022; [`expressions`](#client-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="client-selector-expressions"></a>&#x2022; [`expressions`](#client-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Cookie Matchers
 
@@ -301,15 +301,15 @@ An [`ip_matcher`](#ip-matcher) block supports the following:
 
 A [`prefix_sets`](#ip-matcher-prefix-sets) block (within [`ip_matcher`](#ip-matcher)) supports the following:
 
-<a id="ip-matcher-prefix-sets-kind"></a>&#x2022; [`kind`](#ip-matcher-prefix-sets-kind) - Optional String<br>Object reference kind
+<a id="ip-matcher-prefix-sets-kind"></a>&#x2022; [`kind`](#ip-matcher-prefix-sets-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#ip-matcher-prefix-sets-name) - Optional String<br>Object reference name
+<a id="ip-matcher-prefix-sets-name"></a>&#x2022; [`name`](#ip-matcher-prefix-sets-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="ip-matcher-prefix-sets-namespace"></a>&#x2022; [`namespace`](#ip-matcher-prefix-sets-namespace) - Optional String<br>Object reference namespace
+<a id="ip-matcher-prefix-sets-namespace"></a>&#x2022; [`namespace`](#ip-matcher-prefix-sets-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="ip-matcher-prefix-sets-tenant"></a>&#x2022; [`tenant`](#ip-matcher-prefix-sets-tenant) - Optional String<br>Object reference tenant
+<a id="ip-matcher-prefix-sets-tenant"></a>&#x2022; [`tenant`](#ip-matcher-prefix-sets-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#ip-matcher-prefix-sets-uid) - Optional String<br>Object reference UID
+<a id="ip-matcher-prefix-sets-uid"></a>&#x2022; [`uid`](#ip-matcher-prefix-sets-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### IP Prefix List
 
@@ -495,7 +495,13 @@ A [`dst_segments`](#segment-policy-dst-segments) block (within [`segment_policy`
 
 #### Segment Policy Dst Segments Segments
 
-<a id="objref-cd9d3a"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`segments`](#segment-policy-dst-segments-segments) block (within [`segment_policy.dst_segments`](#segment-policy-dst-segments)) supports the following:
+
+<a id="name-f84b81"></a>&#x2022; [`name`](#name-f84b81) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-6bd8a4"></a>&#x2022; [`namespace`](#namespace-6bd8a4) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-0605a6"></a>&#x2022; [`tenant`](#tenant-0605a6) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Segment Policy Src Segments
 
@@ -505,7 +511,13 @@ A [`src_segments`](#segment-policy-src-segments) block (within [`segment_policy`
 
 #### Segment Policy Src Segments Segments
 
-<a id="objref-d7517f"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`segments`](#segment-policy-src-segments-segments) block (within [`segment_policy.src_segments`](#segment-policy-src-segments)) supports the following:
+
+<a id="name-cd8043"></a>&#x2022; [`name`](#name-cd8043) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-692ca8"></a>&#x2022; [`namespace`](#namespace-692ca8) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-b9608a"></a>&#x2022; [`tenant`](#tenant-b9608a) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

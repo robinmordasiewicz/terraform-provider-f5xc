@@ -89,7 +89,7 @@ func (r *UsbPolicyResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *UsbPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             usb_policySchemaVersion,
-		MarkdownDescription: "Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.",
+		MarkdownDescription: "Manages new USB policy object. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Usb Policy. Must be unique within the namespace.",
@@ -145,31 +145,31 @@ func (r *UsbPolicyResource) Schema(ctx context.Context, req resource.SchemaReque
 				Delete: true,
 			}),
 			"allowed_devices": schema.ListNestedBlock{
-				MarkdownDescription: "Allowed USB devices. List of allowed USB devices",
+				MarkdownDescription: "Allowed USB devices. List of allowed USB devices .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"b_device_class": schema.StringAttribute{
-							MarkdownDescription: "Class. The class of this device",
+							MarkdownDescription: "Class. The class of this device.",
 							Optional:            true,
 						},
 						"b_device_protocol": schema.StringAttribute{
-							MarkdownDescription: "Protocol. The protocol (within the sub-class) of this device",
+							MarkdownDescription: "Protocol. The protocol (within the sub-class) of this device.",
 							Optional:            true,
 						},
 						"b_device_sub_class": schema.StringAttribute{
-							MarkdownDescription: "Subclass. The sub-class (within the class) of this device",
+							MarkdownDescription: "Subclass. The sub-class (within the class) of this device.",
 							Optional:            true,
 						},
 						"i_serial": schema.StringAttribute{
-							MarkdownDescription: "iSerialNumber. Index of Serial Number String Descriptor",
+							MarkdownDescription: "ISerialNumber. Index of Serial Number String Descriptor.",
 							Optional:            true,
 						},
 						"id_product": schema.StringAttribute{
-							MarkdownDescription: "Product ID. Product ID (Assigned by Manufacturer) in hex",
+							MarkdownDescription: "Product ID. Product ID (Assigned by Manufacturer) in hex.",
 							Optional:            true,
 						},
 						"id_vendor": schema.StringAttribute{
-							MarkdownDescription: "Vendor ID. Vendor ID (Assigned by USB Org) in hex",
+							MarkdownDescription: "Vendor ID. Vendor ID (Assigned by USB Org) in hex.",
 							Optional:            true,
 						},
 					},

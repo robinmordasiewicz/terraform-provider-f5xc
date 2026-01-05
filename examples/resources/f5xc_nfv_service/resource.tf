@@ -1,5 +1,5 @@
 # Nfv Service Resource Example
-# Manages new NFV service with configured parameters in F5 Distributed Cloud.
+# Manages new NFV service with configured parameters. in F5 Distributed Cloud.
 
 # Basic Nfv Service configuration
 resource "f5xc_nfv_service" "example" {
@@ -24,7 +24,7 @@ resource "f5xc_nfv_service" "example" {
   disable_ssh_access {
     # Configure disable_ssh_access settings
   }
-  # SSH based management. SSH based configuration
+  # SSH based management. SSH based configuration.
   enabled_ssh_access {
     # Configure enabled_ssh_access settings
   }

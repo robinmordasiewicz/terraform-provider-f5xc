@@ -9,7 +9,7 @@ description: |-
 
 Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.
 
-~> **Note** Please refer to [Healthcheck API docs](https://docs.cloud.f5.com/docs-v2/api/healthcheck) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

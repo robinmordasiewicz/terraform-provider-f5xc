@@ -9,7 +9,7 @@ description: |-
 
 Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Rate Limiter API docs](https://docs.cloud.f5.com/docs-v2/api/rate-limiter) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

@@ -9,7 +9,7 @@ description: |-
 
 Manages a AWS VPC Site resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.
 
-~> **Note** Please refer to [AWS VPC Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-aws-vpc-site) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

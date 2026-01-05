@@ -2,20 +2,20 @@
 page_title: "f5xc_address_allocator Resource - terraform-provider-f5xc"
 subcategory: "Cloud Resources"
 description: |-
-  Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
+  Manages Address Allocator will create an address allocator object in 'system' namespace of the user. in F5 Distributed Cloud.
 ---
 
 # f5xc_address_allocator (Resource)
 
-Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
+Manages Address Allocator will create an address allocator object in 'system' namespace of the user. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Address Allocator API docs](https://docs.cloud.f5.com/docs-v2/api/address-allocator) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Address Allocator Resource Example
-# Manages Address Allocator will create an address allocator object in 'system' namespace of the user in F5 Distributed Cloud.
+# Manages Address Allocator will create an address allocator object in 'system' namespace of the user. in F5 Distributed Cloud.
 
 # Basic Address Allocator configuration
 resource "f5xc_address_allocator" "example" {

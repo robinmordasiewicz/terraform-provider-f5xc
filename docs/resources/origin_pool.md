@@ -9,7 +9,7 @@ description: |-
 
 Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.
 
-~> **Note** Please refer to [Origin Pool API docs](https://docs.cloud.f5.com/docs-v2/api/views-origin-pool) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -121,7 +121,7 @@ resource "f5xc_origin_pool" "example" {
 
 ### Spec Argument Reference
 
-<a id="advanced-options"></a>&#x2022; [`advanced_options`](#advanced-options) - Optional Block  Defaults to `null`<br>Origin Pool Advanced Options. Configure Advanced options for origin pool<br>See [Advanced Options](#advanced-options) below for details.
+<a id="advanced-options"></a>&#x2022; [`advanced_options`](#advanced-options) - Optional Block  Defaults to `null`<br>Origin Pool Advanced OPTIONS. Configure Advanced OPTIONS for origin pool<br>See [Advanced Options](#advanced-options) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="automatic-port"></a>[`automatic_port`](#automatic-port) - Optional Block<br>Enable this option
@@ -181,11 +181,11 @@ An [`advanced_options`](#advanced-options) block supports the following:
 
 <a id="persistance-62e70d"></a>&#x2022; [`enable_lb_source_ip_persistance`](#persistance-62e70d) - Optional Block<br>Enable this option
 
-<a id="advanced-options-enable-subsets"></a>&#x2022; [`enable_subsets`](#advanced-options-enable-subsets) - Optional Block<br>Origin Pool Subset Options. Configure subset options for origin pool<br>See [Enable Subsets](#advanced-options-enable-subsets) below.
+<a id="advanced-options-enable-subsets"></a>&#x2022; [`enable_subsets`](#advanced-options-enable-subsets) - Optional Block<br>Origin Pool Subset OPTIONS. Configure subset OPTIONS for origin pool<br>See [Enable Subsets](#advanced-options-enable-subsets) below.
 
-<a id="advanced-options-http1-config"></a>&#x2022; [`http1_config`](#advanced-options-http1-config) - Optional Block<br>HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections<br>See [Http1 Config](#advanced-options-http1-config) below.
+<a id="advanced-options-http1-config"></a>&#x2022; [`http1_config`](#advanced-options-http1-config) - Optional Block<br>HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for upstream connections<br>See [Http1 Config](#advanced-options-http1-config) below.
 
-<a id="advanced-options-http2-options"></a>&#x2022; [`http2_options`](#advanced-options-http2-options) - Optional Block<br>Http2 Protocol Options. Http2 Protocol options for upstream connections<br>See [Http2 Options](#advanced-options-http2-options) below.
+<a id="advanced-options-http2-options"></a>&#x2022; [`http2_options`](#advanced-options-http2-options) - Optional Block<br>Http2 Protocol OPTIONS. Http2 Protocol OPTIONS for upstream connections<br>See [Http2 Options](#advanced-options-http2-options) below.
 
 <a id="advanced-options-http-idle-timeout"></a>&#x2022; [`http_idle_timeout`](#advanced-options-http-idle-timeout) - Optional Number  Defaults to `5`  Specified in milliseconds<br>HTTP Idle Timeout. The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed. Note that request based timeouts mean that HTTP/2 PINGs will not keep the connection alive.  The minutes
 
@@ -229,7 +229,7 @@ An [`enable_subsets`](#advanced-options-enable-subsets) block (within [`advanced
 
 A [`default_subset`](#subset-276c69) block (within [`advanced_options.enable_subsets`](#advanced-options-enable-subsets)) supports the following:
 
-<a id="subset-4951d9"></a>&#x2022; [`default_subset`](#subset-4951d9) - Optional Block<br>Default Subset for Origin Pool. List of key-value pairs that define default subset. which gets used when route specifies no metadata or no subset matching the metadata exists
+<a id="subset-4951d9"></a>&#x2022; [`default_subset`](#subset-4951d9) - Optional Block<br>Default Subset for Origin Pool. List of key-value pairs that define default subset. Which gets used when route specifies no metadata or no subset matching the metadata exists
 
 #### Advanced Options Enable Subsets Endpoint Subsets
 
@@ -241,7 +241,7 @@ An [`endpoint_subsets`](#subsets-25c75e) block (within [`advanced_options.enable
 
 A [`http1_config`](#advanced-options-http1-config) block (within [`advanced_options`](#advanced-options)) supports the following:
 
-<a id="transformation-1e4851"></a>&#x2022; [`header_transformation`](#transformation-1e4851) - Optional Block<br>Header Transformation. Header Transformation options for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-1e4851) below.
+<a id="transformation-1e4851"></a>&#x2022; [`header_transformation`](#transformation-1e4851) - Optional Block<br>Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers<br>See [Header Transformation](#transformation-1e4851) below.
 
 #### Advanced Options Http1 Config Header Transformation
 
@@ -265,11 +265,11 @@ A [`http2_options`](#advanced-options-http2-options) block (within [`advanced_op
 
 An [`outlier_detection`](#advanced-options-outlier-detection) block (within [`advanced_options`](#advanced-options)) supports the following:
 
-<a id="time-3534e9"></a>&#x2022; [`base_ejection_time`](#time-3534e9) - Optional Number  Defaults to `30000ms`  Specified in milliseconds<br>Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail
+<a id="time-3534e9"></a>&#x2022; [`base_ejection_time`](#time-3534e9) - Optional Number  Defaults to `30000ms`  Specified in milliseconds<br>Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to GET ejected for longer periods if they continue to fail
 
 <a id="5xx-ff28ef"></a>&#x2022; [`consecutive_5xx`](#5xx-ff28ef) - Optional Number  Defaults to `5`<br>Consecutive 5xx Count. If an upstream endpoint returns some number of consecutive 5xx, it will be ejected. Note that in this case a 5xx means an actual 5xx respond code, or an event that would cause the HTTP router to return one on the upstream’s behalf(reset, connection failure, etc.) consecutive_5xx indicates the number of consecutive 5xx responses required before a consecutive 5xx ejection occurs
 
-<a id="failure-fbd9bf"></a>&#x2022; [`consecutive_gateway_failure`](#failure-fbd9bf) - Optional Number  Defaults to `5`<br>Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs
+<a id="failure-fbd9bf"></a>&#x2022; [`consecutive_gateway_failure`](#failure-fbd9bf) - Optional Number  Defaults to `5`<br>Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). Consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs
 
 <a id="interval-5cb76c"></a>&#x2022; [`interval`](#interval-5cb76c) - Optional Number  Defaults to `10000ms`  Specified in milliseconds<br>Interval. The time interval between ejection analysis sweeps. This can result in both new ejections as well as endpoints being returned to service
 
@@ -277,7 +277,13 @@ An [`outlier_detection`](#advanced-options-outlier-detection) block (within [`ad
 
 #### Healthcheck
 
-<a id="objref-37c72e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`healthcheck`](#healthcheck) block supports the following:
+
+<a id="healthcheck-name"></a>&#x2022; [`name`](#healthcheck-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="healthcheck-namespace"></a>&#x2022; [`namespace`](#healthcheck-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="healthcheck-tenant"></a>&#x2022; [`tenant`](#healthcheck-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers
 
@@ -323,7 +329,7 @@ A [`consul_service`](#origin-servers-consul-service) block (within [`origin_serv
 
 <a id="locator-0ecb39"></a>&#x2022; [`site_locator`](#locator-0ecb39) - Optional Block<br>Site or Virtual Site. This message defines a reference to a site or virtual site object<br>See [Site Locator](#locator-0ecb39) below.
 
-<a id="origin-servers-consul-service-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-consul-service-snat-pool) - Optional Block<br>Snat Pool. Snat Pool configuration<br>See [Snat Pool](#origin-servers-consul-service-snat-pool) below.
+<a id="origin-servers-consul-service-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-consul-service-snat-pool) - Optional Block<br>SNAT Pool. SNAT Pool configuration<br>See [Snat Pool](#origin-servers-consul-service-snat-pool) below.
 
 #### Origin Servers Consul Service Site Locator
 
@@ -335,7 +341,13 @@ A [`site_locator`](#locator-0ecb39) block (within [`origin_servers.consul_servic
 
 #### Origin Servers Consul Service Site Locator Site
 
-<a id="objref-a096eb"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#site-a096eb) block (within [`origin_servers.consul_service.site_locator`](#locator-0ecb39)) supports the following:
+
+<a id="name-8a907a"></a>&#x2022; [`name`](#name-8a907a) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-933dcd"></a>&#x2022; [`namespace`](#namespace-933dcd) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-c92ea9"></a>&#x2022; [`tenant`](#tenant-c92ea9) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Consul Service Site Locator Virtual Site
 
@@ -361,7 +373,13 @@ A [`custom_endpoint_object`](#origin-servers-custom-endpoint-object) block (with
 
 #### Origin Servers Custom Endpoint Object Endpoint
 
-<a id="objref-6a2e33"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`endpoint`](#endpoint-6a2e33) block (within [`origin_servers.custom_endpoint_object`](#origin-servers-custom-endpoint-object)) supports the following:
+
+<a id="name-33e632"></a>&#x2022; [`name`](#name-33e632) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-ea699e"></a>&#x2022; [`namespace`](#namespace-ea699e) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-45ea6c"></a>&#x2022; [`tenant`](#tenant-45ea6c) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers K8S Service
 
@@ -377,7 +395,7 @@ A [`k8s_service`](#origin-servers-k8s-service) block (within [`origin_servers`](
 
 <a id="origin-servers-k8s-service-site-locator"></a>&#x2022; [`site_locator`](#origin-servers-k8s-service-site-locator) - Optional Block<br>Site or Virtual Site. This message defines a reference to a site or virtual site object<br>See [Site Locator](#origin-servers-k8s-service-site-locator) below.
 
-<a id="origin-servers-k8s-service-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-k8s-service-snat-pool) - Optional Block<br>Snat Pool. Snat Pool configuration<br>See [Snat Pool](#origin-servers-k8s-service-snat-pool) below.
+<a id="origin-servers-k8s-service-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-k8s-service-snat-pool) - Optional Block<br>SNAT Pool. SNAT Pool configuration<br>See [Snat Pool](#origin-servers-k8s-service-snat-pool) below.
 
 <a id="networks-d41308"></a>&#x2022; [`vk8s_networks`](#networks-d41308) - Optional Block<br>Enable this option
 
@@ -391,7 +409,13 @@ A [`site_locator`](#origin-servers-k8s-service-site-locator) block (within [`ori
 
 #### Origin Servers K8S Service Site Locator Site
 
-<a id="objref-e35217"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#site-e35217) block (within [`origin_servers.k8s_service.site_locator`](#origin-servers-k8s-service-site-locator)) supports the following:
+
+<a id="name-b0bc0e"></a>&#x2022; [`name`](#name-b0bc0e) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-bc6979"></a>&#x2022; [`namespace`](#namespace-bc6979) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-097ea8"></a>&#x2022; [`tenant`](#tenant-097ea8) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers K8S Service Site Locator Virtual Site
 
@@ -423,11 +447,17 @@ A [`private_ip`](#origin-servers-private-ip) block (within [`origin_servers`](#o
 
 <a id="origin-servers-private-ip-site-locator"></a>&#x2022; [`site_locator`](#origin-servers-private-ip-site-locator) - Optional Block<br>Site or Virtual Site. This message defines a reference to a site or virtual site object<br>See [Site Locator](#origin-servers-private-ip-site-locator) below.
 
-<a id="origin-servers-private-ip-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-private-ip-snat-pool) - Optional Block<br>Snat Pool. Snat Pool configuration<br>See [Snat Pool](#origin-servers-private-ip-snat-pool) below.
+<a id="origin-servers-private-ip-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-private-ip-snat-pool) - Optional Block<br>SNAT Pool. SNAT Pool configuration<br>See [Snat Pool](#origin-servers-private-ip-snat-pool) below.
 
 #### Origin Servers Private IP Segment
 
-<a id="objref-f7f087"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`segment`](#origin-servers-private-ip-segment) block (within [`origin_servers.private_ip`](#origin-servers-private-ip)) supports the following:
+
+<a id="origin-servers-private-ip-segment-name"></a>&#x2022; [`name`](#origin-servers-private-ip-segment-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-a2f7e0"></a>&#x2022; [`namespace`](#namespace-a2f7e0) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-4d8d8b"></a>&#x2022; [`tenant`](#tenant-4d8d8b) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Private IP Site Locator
 
@@ -439,7 +469,13 @@ A [`site_locator`](#origin-servers-private-ip-site-locator) block (within [`orig
 
 #### Origin Servers Private IP Site Locator Site
 
-<a id="objref-9000e8"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#site-9000e8) block (within [`origin_servers.private_ip.site_locator`](#origin-servers-private-ip-site-locator)) supports the following:
+
+<a id="name-dc4f48"></a>&#x2022; [`name`](#name-dc4f48) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-43a893"></a>&#x2022; [`namespace`](#namespace-43a893) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-ae5087"></a>&#x2022; [`tenant`](#tenant-ae5087) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Private IP Site Locator Virtual Site
 
@@ -467,17 +503,23 @@ A [`private_name`](#origin-servers-private-name) block (within [`origin_servers`
 
 <a id="network-a1ed83"></a>&#x2022; [`outside_network`](#network-a1ed83) - Optional Block<br>Enable this option
 
-<a id="interval-4bd915"></a>&#x2022; [`refresh_interval`](#interval-4bd915) - Optional Number<br>DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767`
+<a id="interval-4bd915"></a>&#x2022; [`refresh_interval`](#interval-4bd915) - Optional Number<br>DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767.`
 
 <a id="origin-servers-private-name-segment"></a>&#x2022; [`segment`](#origin-servers-private-name-segment) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Segment](#origin-servers-private-name-segment) below.
 
 <a id="locator-0c95f1"></a>&#x2022; [`site_locator`](#locator-0c95f1) - Optional Block<br>Site or Virtual Site. This message defines a reference to a site or virtual site object<br>See [Site Locator](#locator-0c95f1) below.
 
-<a id="origin-servers-private-name-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-private-name-snat-pool) - Optional Block<br>Snat Pool. Snat Pool configuration<br>See [Snat Pool](#origin-servers-private-name-snat-pool) below.
+<a id="origin-servers-private-name-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-private-name-snat-pool) - Optional Block<br>SNAT Pool. SNAT Pool configuration<br>See [Snat Pool](#origin-servers-private-name-snat-pool) below.
 
 #### Origin Servers Private Name Segment
 
-<a id="objref-4ad322"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`segment`](#origin-servers-private-name-segment) block (within [`origin_servers.private_name`](#origin-servers-private-name)) supports the following:
+
+<a id="name-6839c1"></a>&#x2022; [`name`](#name-6839c1) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-217e43"></a>&#x2022; [`namespace`](#namespace-217e43) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-522e3c"></a>&#x2022; [`tenant`](#tenant-522e3c) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Private Name Site Locator
 
@@ -489,7 +531,13 @@ A [`site_locator`](#locator-0c95f1) block (within [`origin_servers.private_name`
 
 #### Origin Servers Private Name Site Locator Site
 
-<a id="objref-771c33"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#site-771c33) block (within [`origin_servers.private_name.site_locator`](#locator-0c95f1)) supports the following:
+
+<a id="name-5e7e2b"></a>&#x2022; [`name`](#name-5e7e2b) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-a2ea97"></a>&#x2022; [`namespace`](#namespace-a2ea97) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-33ad25"></a>&#x2022; [`tenant`](#tenant-33ad25) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Private Name Site Locator Virtual Site
 
@@ -519,7 +567,7 @@ A [`public_name`](#origin-servers-public-name) block (within [`origin_servers`](
 
 <a id="origin-servers-public-name-dns-name"></a>&#x2022; [`dns_name`](#origin-servers-public-name-dns-name) - Optional String<br>DNS Name. DNS Name
 
-<a id="interval-b4ce5c"></a>&#x2022; [`refresh_interval`](#interval-b4ce5c) - Optional Number<br>DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767`
+<a id="interval-b4ce5c"></a>&#x2022; [`refresh_interval`](#interval-b4ce5c) - Optional Number<br>DNS Refresh Interval. Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767.`
 
 #### Origin Servers Vn Private IP
 
@@ -531,7 +579,13 @@ A [`vn_private_ip`](#origin-servers-vn-private-ip) block (within [`origin_server
 
 #### Origin Servers Vn Private IP Virtual Network
 
-<a id="objref-e703ab"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`virtual_network`](#network-e703ab) block (within [`origin_servers.vn_private_ip`](#origin-servers-vn-private-ip)) supports the following:
+
+<a id="name-6c5e61"></a>&#x2022; [`name`](#name-6c5e61) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-fd2396"></a>&#x2022; [`namespace`](#namespace-fd2396) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-550f0b"></a>&#x2022; [`tenant`](#tenant-550f0b) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Servers Vn Private Name
 
@@ -543,7 +597,13 @@ A [`vn_private_name`](#origin-servers-vn-private-name) block (within [`origin_se
 
 #### Origin Servers Vn Private Name Private Network
 
-<a id="objref-ff3b00"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`private_network`](#network-ff3b00) block (within [`origin_servers.vn_private_name`](#origin-servers-vn-private-name)) supports the following:
+
+<a id="name-6e42c8"></a>&#x2022; [`name`](#name-6e42c8) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-145fbd"></a>&#x2022; [`namespace`](#namespace-145fbd) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-e702ea"></a>&#x2022; [`tenant`](#tenant-e702ea) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 
@@ -583,7 +643,7 @@ An [`use_tls`](#use-tls) block supports the following:
 
 <a id="use-tls-sni"></a>&#x2022; [`sni`](#use-tls-sni) - Optional String<br>SNI Value. SNI value to be used
 
-<a id="use-tls-tls-config"></a>&#x2022; [`tls_config`](#use-tls-tls-config) - Optional Block<br>TLS Config. This defines various options to configure TLS configuration parameters<br>See [TLS Config](#use-tls-tls-config) below.
+<a id="use-tls-tls-config"></a>&#x2022; [`tls_config`](#use-tls-tls-config) - Optional Block<br>TLS Config. This defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#use-tls-tls-config) below.
 
 <a id="use-tls-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#use-tls-use-host-header-as-sni) - Optional Block<br>Enable this option
 
@@ -657,7 +717,13 @@ A [`tls_certificates`](#use-tls-use-mtls-tls-certificates) block (within [`use_t
 
 #### Use TLS Use mTLS Obj
 
-<a id="objref-6cfffd"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`use_mtls_obj`](#use-tls-use-mtls-obj) block (within [`use_tls`](#use-tls)) supports the following:
+
+<a id="use-tls-use-mtls-obj-name"></a>&#x2022; [`name`](#use-tls-use-mtls-obj-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="use-tls-use-mtls-obj-namespace"></a>&#x2022; [`namespace`](#use-tls-use-mtls-obj-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="use-tls-use-mtls-obj-tenant"></a>&#x2022; [`tenant`](#use-tls-use-mtls-obj-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Use TLS Use Server Verification
 
@@ -669,7 +735,13 @@ An [`use_server_verification`](#use-tls-use-server-verification) block (within [
 
 #### Use TLS Use Server Verification Trusted CA
 
-<a id="objref-965dea"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`trusted_ca`](#trusted-ca-965dea) block (within [`use_tls.use_server_verification`](#use-tls-use-server-verification)) supports the following:
+
+<a id="name-3590a2"></a>&#x2022; [`name`](#name-3590a2) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-ac41ae"></a>&#x2022; [`namespace`](#namespace-ac41ae) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-892ff9"></a>&#x2022; [`tenant`](#tenant-892ff9) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 ---
 

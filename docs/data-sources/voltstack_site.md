@@ -9,7 +9,7 @@ description: |-
 
 Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
-~> **Note** Please refer to [Voltstack Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-voltstack-site) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

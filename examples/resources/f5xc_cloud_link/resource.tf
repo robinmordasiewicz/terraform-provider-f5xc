@@ -1,5 +1,5 @@
 # Cloud Link Resource Example
-# Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+# Manages new CloudLink with configured parameters. in F5 Distributed Cloud.
 
 # Basic Cloud Link configuration
 resource "f5xc_cloud_link" "example" {
@@ -24,7 +24,7 @@ resource "f5xc_cloud_link" "example" {
   aws_cred {
     # Configure aws_cred settings
   }
-  # Bring Your Own Connections. List of Bring You Own Connection
+  # Bring Your Own Connections. List of Bring You Own Connect...
   byoc {
     # Configure byoc settings
   }

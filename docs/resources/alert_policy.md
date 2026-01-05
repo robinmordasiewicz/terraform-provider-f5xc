@@ -2,20 +2,20 @@
 page_title: "f5xc_alert_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.
+  Manages new Alert Policy Object. in F5 Distributed Cloud.
 ---
 
 # f5xc_alert_policy (Resource)
 
-Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.
+Manages new Alert Policy Object. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Alert Policy API docs](https://docs.cloud.f5.com/docs-v2/api/alert-policy) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Alert Policy Resource Example
-# Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.
+# Manages new Alert Policy Object. in F5 Distributed Cloud.
 
 # Basic Alert Policy configuration
 resource "f5xc_alert_policy" "example" {
@@ -74,7 +74,7 @@ resource "f5xc_alert_policy" "example" {
 
 <a id="notification-parameters"></a>&#x2022; [`notification_parameters`](#notification-parameters) - Optional Block  Defaults to `null`<br>Notification Parameters. Set of notification parameters to decide how and when the alert notifications should be sent to the receivers<br>See [Notification Parameters](#notification-parameters) below for details.
 
-<a id="receivers"></a>&#x2022; [`receivers`](#receivers) - Optional Block<br>Alert Receivers. list of Alert Receivers where the alerts will be sent<br>See [Receivers](#receivers) below for details.
+<a id="receivers"></a>&#x2022; [`receivers`](#receivers) - Optional Block<br>Alert Receivers. List of Alert Receivers where the alerts will be sent<br>See [Receivers](#receivers) below for details.
 
 <a id="routes"></a>&#x2022; [`routes`](#routes) - Optional Block<br>Policy Rules. Set of routes to match the incoming alert. The routes are evaluated in the specified order and terminates on the first match<br>See [Routes](#routes) below for details.
 
@@ -116,15 +116,15 @@ A [`custom`](#notification-parameters-custom) block (within [`notification_param
 
 A [`receivers`](#receivers) block supports the following:
 
-<a id="receivers-kind"></a>&#x2022; [`kind`](#receivers-kind) - Optional String<br>Object reference kind
+<a id="receivers-kind"></a>&#x2022; [`kind`](#receivers-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="receivers-name"></a>&#x2022; [`name`](#receivers-name) - Optional String<br>Object reference name
+<a id="receivers-name"></a>&#x2022; [`name`](#receivers-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="receivers-namespace"></a>&#x2022; [`namespace`](#receivers-namespace) - Optional String<br>Object reference namespace
+<a id="receivers-namespace"></a>&#x2022; [`namespace`](#receivers-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="receivers-tenant"></a>&#x2022; [`tenant`](#receivers-tenant) - Optional String<br>Object reference tenant
+<a id="receivers-tenant"></a>&#x2022; [`tenant`](#receivers-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="receivers-uid"></a>&#x2022; [`uid`](#receivers-uid) - Optional String<br>Object reference UID
+<a id="receivers-uid"></a>&#x2022; [`uid`](#receivers-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Routes
 

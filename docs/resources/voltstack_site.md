@@ -9,7 +9,7 @@ description: |-
 
 Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.
 
-~> **Note** Please refer to [Voltstack Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-voltstack-site) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -84,7 +84,7 @@ resource "f5xc_voltstack_site" "example" {
 <br><br>&#x2022; <a id="usb-policy"></a>[`usb_policy`](#usb-policy) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
 -> **One of the following:**
-&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
+&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will GET disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="bond-device-list"></a>[`bond_device_list`](#bond-device-list) - Optional Block<br>Bond Devices List. List of bond devices for this fleet<br>See [Bond Device List](#bond-device-list) below for details.
@@ -115,7 +115,7 @@ resource "f5xc_voltstack_site" "example" {
 -> **One of the following:**
 &#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Enable this option
 
-<a id="enable-vgpu"></a>&#x2022; [`enable_vgpu`](#enable-vgpu) - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU
+<a id="enable-vgpu"></a>&#x2022; [`enable_vgpu`](#enable-vgpu) - Optional Block<br>VGPU Configuration. Licensing configuration for NVIDIA vGPU
 
 <a id="enable-vm"></a>&#x2022; [`enable_vm`](#enable-vm) - Optional Block<br>VM Configuration. VMs support configuration
 
@@ -173,7 +173,7 @@ A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_s
 
 <a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
 
-<a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 <a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
 
@@ -213,7 +213,7 @@ A [`coordinates`](#coordinates) block supports the following:
 
 <a id="coordinates-latitude"></a>&#x2022; [`latitude`](#coordinates-latitude) - Optional Number<br>Latitude. Latitude of the site location
 
-<a id="coordinates-longitude"></a>&#x2022; [`longitude`](#coordinates-longitude) - Optional Number<br>Longitude. longitude of site location
+<a id="coordinates-longitude"></a>&#x2022; [`longitude`](#coordinates-longitude) - Optional Number<br>Longitude. Longitude of site location
 
 #### Custom DNS
 
@@ -227,7 +227,7 @@ A [`custom_dns`](#custom-dns) block supports the following:
 
 A [`custom_network_config`](#custom-network-config) block supports the following:
 
-<a id="policies-c4c984"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-c4c984) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-c4c984) below.
+<a id="policies-c4c984"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-c4c984) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-c4c984) below.
 
 <a id="policies-fbbf75"></a>&#x2022; [`active_forward_proxy_policies`](#policies-fbbf75) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#policies-fbbf75) below.
 
@@ -259,7 +259,7 @@ A [`custom_network_config`](#custom-network-config) block supports the following
 
 <a id="custom-network-config-outside-vip"></a>&#x2022; [`outside_vip`](#custom-network-config-outside-vip) - Optional String<br>Common V4 VIP. Optional common virtual V4 IP across all nodes to be used as automatic VIP for site local network
 
-<a id="tunnel-ip-7f6123"></a>&#x2022; [`site_to_site_tunnel_ip`](#tunnel-ip-7f6123) - Optional String<br>Site Mesh Group Connection Via Virtual IP. Site Mesh Group Connection Via Virtual IP. This option will use the Virtual IP provided for creating ipsec between two sites which are part of the site mesh group
+<a id="tunnel-ip-7f6123"></a>&#x2022; [`site_to_site_tunnel_ip`](#tunnel-ip-7f6123) - Optional String<br>Site Mesh Group Connection Via Virtual IP. Site Mesh Group Connection Via Virtual IP. This option will use the Virtual IP provided for creating IPsec between two sites which are part of the site mesh group
 
 <a id="custom-network-config-sli-config"></a>&#x2022; [`sli_config`](#custom-network-config-sli-config) - Optional Block<br>Site Local Inside Network Configuration. Site local inside network configuration<br>See [SLI Config](#custom-network-config-sli-config) below.
 
@@ -269,7 +269,7 @@ A [`custom_network_config`](#custom-network-config) block supports the following
 
 <a id="pvt-ip-892ce0"></a>&#x2022; [`sm_connection_pvt_ip`](#pvt-ip-892ce0) - Optional Block<br>Enable this option
 
-<a id="timeout-1607a1"></a>&#x2022; [`tunnel_dead_timeout`](#timeout-1607a1) - Optional Number<br>Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
+<a id="timeout-1607a1"></a>&#x2022; [`tunnel_dead_timeout`](#timeout-1607a1) - Optional Number<br>Tunnel Dead Timeout (msec). Time interval, in millisec, within which any IPsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
 
 <a id="custom-network-config-vip-vrrp-mode"></a>&#x2022; [`vip_vrrp_mode`](#custom-network-config-vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>[Enum: VIP_VRRP_INVALID|VIP_VRRP_ENABLE|VIP_VRRP_DISABLE] VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode
 
@@ -595,9 +595,9 @@ A [`custom_storage_config`](#custom-storage-config) block supports the following
 
 <a id="custom-storage-config-static-routes"></a>&#x2022; [`static_routes`](#custom-storage-config-static-routes) - Optional Block<br>Static Routes List. List of static routes<br>See [Static Routes](#custom-storage-config-static-routes) below.
 
-<a id="list-268762"></a>&#x2022; [`storage_class_list`](#list-268762) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet<br>See [Storage Class List](#list-268762) below.
+<a id="list-268762"></a>&#x2022; [`storage_class_list`](#list-268762) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in Kubernetes for this fleet<br>See [Storage Class List](#list-268762) below.
 
-<a id="list-650498"></a>&#x2022; [`storage_device_list`](#list-650498) - Optional Block<br>Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet<br>See [Storage Device List](#list-650498) below.
+<a id="list-650498"></a>&#x2022; [`storage_device_list`](#list-650498) - Optional Block<br>Custom Storage Device List. Add additional custom storage classes in Kubernetes for this fleet<br>See [Storage Device List](#list-650498) below.
 
 <a id="list-c6bbef"></a>&#x2022; [`storage_interface_list`](#list-c6bbef) - Optional Block<br>List of Interface. Configure storage interfaces for this App Stack site<br>See [Storage Interface List](#list-c6bbef) below.
 
@@ -963,7 +963,13 @@ An [`enable_vgpu`](#enable-vgpu) block supports the following:
 
 #### K8S Cluster
 
-<a id="objref-dcd22b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`k8s_cluster`](#k8s-cluster) block supports the following:
+
+<a id="k8s-cluster-name"></a>&#x2022; [`name`](#k8s-cluster-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="k8s-cluster-namespace"></a>&#x2022; [`namespace`](#k8s-cluster-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="k8s-cluster-tenant"></a>&#x2022; [`tenant`](#k8s-cluster-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Kubernetes Upgrade Drain
 
@@ -1115,7 +1121,13 @@ A [`metadata`](#metadata-fc2912) block (within [`local_control_plane.bgp_config.
 
 #### Log Receiver
 
-<a id="objref-0da9d9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`log_receiver`](#log-receiver) block supports the following:
+
+<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Master Node Configuration
 
@@ -1163,7 +1175,7 @@ A [`sw`](#sw) block supports the following:
 
 <a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
 
-<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
+<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
 
 #### Timeouts
 
@@ -1179,7 +1191,13 @@ A [`timeouts`](#timeouts) block supports the following:
 
 #### Usb Policy
 
-<a id="objref-60a3be"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`usb_policy`](#usb-policy) block supports the following:
+
+<a id="usb-policy-name"></a>&#x2022; [`name`](#usb-policy-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="usb-policy-namespace"></a>&#x2022; [`namespace`](#usb-policy-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="usb-policy-tenant"></a>&#x2022; [`tenant`](#usb-policy-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 ---
 

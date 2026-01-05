@@ -2,20 +2,20 @@
 page_title: "f5xc_cloud_link Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+  Manages new CloudLink with configured parameters. in F5 Distributed Cloud.
 ---
 
 # f5xc_cloud_link (Resource)
 
-Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+Manages new CloudLink with configured parameters. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Cloud Link API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-link) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Cloud Link Resource Example
-# Manages new CloudLink with configured parameters in F5 Distributed Cloud.
+# Manages new CloudLink with configured parameters. in F5 Distributed Cloud.
 
 # Basic Cloud Link configuration
 resource "f5xc_cloud_link" "example" {
@@ -40,7 +40,7 @@ resource "f5xc_cloud_link" "example" {
   aws_cred {
     # Configure aws_cred settings
   }
-  # Bring Your Own Connections. List of Bring You Own Connection
+  # Bring Your Own Connections. List of Bring You Own Connect...
   byoc {
     # Configure byoc settings
   }
@@ -92,11 +92,17 @@ An [`aws`](#aws) block supports the following:
 
 <a id="aws-byoc"></a>&#x2022; [`byoc`](#aws-byoc) - Optional Block<br>Bring Your Own Connections. List of Bring You Own Connection<br>See [Byoc](#aws-byoc) below.
 
-<a id="aws-custom-asn"></a>&#x2022; [`custom_asn`](#aws-custom-asn) - Optional Number<br>Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway 4200000000-4294967294
+<a id="aws-custom-asn"></a>&#x2022; [`custom_asn`](#aws-custom-asn) - Optional Number<br>Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway
 
 #### AWS AWS Cred
 
-<a id="objref-a57c45"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`aws_cred`](#aws-aws-cred) block (within [`aws`](#aws)) supports the following:
+
+<a id="aws-aws-cred-name"></a>&#x2022; [`name`](#aws-aws-cred-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="aws-aws-cred-namespace"></a>&#x2022; [`namespace`](#aws-aws-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="aws-aws-cred-tenant"></a>&#x2022; [`tenant`](#aws-aws-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### AWS Byoc
 
@@ -206,7 +212,13 @@ A [`metadata`](#gcp-byoc-connections-metadata) block (within [`gcp.byoc.connecti
 
 #### GCP GCP Cred
 
-<a id="objref-d99b19"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`gcp_cred`](#gcp-gcp-cred) block (within [`gcp`](#gcp)) supports the following:
+
+<a id="gcp-gcp-cred-name"></a>&#x2022; [`name`](#gcp-gcp-cred-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="gcp-gcp-cred-namespace"></a>&#x2022; [`namespace`](#gcp-gcp-cred-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="gcp-gcp-cred-tenant"></a>&#x2022; [`tenant`](#gcp-gcp-cred-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

@@ -474,7 +474,7 @@ func (r *ForwardProxyPolicyResource) Metadata(ctx context.Context, req resource.
 func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             forward_proxy_policySchemaVersion,
-		MarkdownDescription: "Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.",
+		MarkdownDescription: "Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy specification. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Forward Proxy Policy. Must be unique within the namespace.",
@@ -546,7 +546,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Enable this option",
 					},
 					"dest_list": schema.ListNestedBlock{
-						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI",
+						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ipv6_prefixes": schema.ListAttribute{
@@ -567,11 +567,11 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"http_list": schema.ListNestedBlock{
-						MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
+						MarkdownDescription: "HTTP URLs. URLs for HTTP connections.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Values. Exact domain name",
+									MarkdownDescription: "Exact Values. Exact domain name.",
 									Optional:            true,
 								},
 								"path_exact_value": schema.StringAttribute{
@@ -583,11 +583,11 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Optional:            true,
 								},
 								"path_regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
+									MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match.",
 									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
 									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
@@ -603,7 +603,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"tls_list": schema.ListNestedBlock{
-						MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
+						MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
@@ -611,7 +611,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
 									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
@@ -640,7 +640,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						MarkdownDescription: "Enable this option",
 					},
 					"dest_list": schema.ListNestedBlock{
-						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI",
+						MarkdownDescription: "L4 Destination List. L4 destinations for non-HTTP and non-TLS connections and TLS connections without SNI.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"ipv6_prefixes": schema.ListAttribute{
@@ -661,11 +661,11 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"http_list": schema.ListNestedBlock{
-						MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
+						MarkdownDescription: "HTTP URLs. URLs for HTTP connections.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
-									MarkdownDescription: "Exact Values. Exact domain name",
+									MarkdownDescription: "Exact Values. Exact domain name.",
 									Optional:            true,
 								},
 								"path_exact_value": schema.StringAttribute{
@@ -677,11 +677,11 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Optional:            true,
 								},
 								"path_regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
+									MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match.",
 									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
 									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
@@ -697,7 +697,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 						},
 					},
 					"tls_list": schema.ListNestedBlock{
-						MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
+						MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections.",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"exact_value": schema.StringAttribute{
@@ -705,7 +705,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Optional:            true,
 								},
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+									MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
 									Optional:            true,
 								},
 								"suffix_value": schema.StringAttribute{
@@ -721,18 +721,18 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				MarkdownDescription: "Enable this option",
 			},
 			"network_connector": schema.SingleNestedBlock{
-				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -742,21 +742,21 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 				},
 			},
 			"proxy_label_selector": schema.SingleNestedBlock{
-				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+				MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
 				Attributes: map[string]schema.Attribute{
 					"expressions": schema.ListAttribute{
-						MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+						MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
 				},
 			},
 			"rule_list": schema.SingleNestedBlock{
-				MarkdownDescription: "Custom Rule List. List of custom rules",
+				MarkdownDescription: "Custom Rule List. List of custom rules.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"rules": schema.ListNestedBlock{
-						MarkdownDescription: "Custom Rule List. List of custom rules",
+						MarkdownDescription: "Custom Rule List. List of custom rules .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"action": schema.StringAttribute{
@@ -782,18 +782,18 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"dst_asn_set": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -803,18 +803,18 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"dst_ip_prefix_set": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -824,20 +824,20 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"dst_label_selector": schema.SingleNestedBlock{
-									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
-											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+											MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
 									},
 								},
 								"dst_prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -848,11 +848,11 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"http_list": schema.ListNestedBlock{
-											MarkdownDescription: "HTTP URLs. URLs for HTTP connections",
+											MarkdownDescription: "HTTP URLs. URLs for HTTP connections.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
-														MarkdownDescription: "Exact Values. Exact domain name",
+														MarkdownDescription: "Exact Values. Exact domain name.",
 														Optional:            true,
 													},
 													"path_exact_value": schema.StringAttribute{
@@ -864,11 +864,11 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 														Optional:            true,
 													},
 													"path_regex_value": schema.StringAttribute{
-														MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match",
+														MarkdownDescription: "Regex of Path. Regular Expression value for the Path to match.",
 														Optional:            true,
 													},
 													"regex_value": schema.StringAttribute{
-														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
 														Optional:            true,
 													},
 													"suffix_value": schema.StringAttribute{
@@ -886,18 +886,18 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"ip_prefix_set": schema.SingleNestedBlock{
-									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+									MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -907,10 +907,10 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"label_selector": schema.SingleNestedBlock{
-									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE",
+									MarkdownDescription: "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string <selector-syntax> ::= <requirement> | <requirement> ',' <selector-syntax> <requirement> ::= [!] KEY [ <set-based-restriction> | <exact-match-restriction> ] <set-based-restriction> ::= '' | <inclusion-exclusion> <value-set> <inclusion-exclusion> ::= <inclusion> | <exclusion> <exclusion> ::= 'notin' <inclusion> ::= 'in' <value-set> ::= '(' <values> ')' <values> ::= VALUE | VALUE ',' <values> <exact-match-restriction> ::= ['='|'=='|'!='] VALUE.",
 									Attributes: map[string]schema.Attribute{
 										"expressions": schema.ListAttribute{
-											MarkdownDescription: "Selector Expression. expressions contains the kubernetes style label expression for selections.",
+											MarkdownDescription: "Selector Expression. Expressions contains the Kubernetes style label expression for selections.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -947,10 +947,10 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"prefix_list": schema.SingleNestedBlock{
-									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+									MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 									Attributes: map[string]schema.Attribute{
 										"prefixes": schema.ListAttribute{
-											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint",
+											MarkdownDescription: "IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},
@@ -961,7 +961,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									Attributes:          map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"tls_list": schema.ListNestedBlock{
-											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections",
+											MarkdownDescription: "TLS Domains. Domains in SNI for TLS connections.",
 											NestedObject: schema.NestedBlockObject{
 												Attributes: map[string]schema.Attribute{
 													"exact_value": schema.StringAttribute{
@@ -969,7 +969,7 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 														Optional:            true,
 													},
 													"regex_value": schema.StringAttribute{
-														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name",
+														MarkdownDescription: "Regex Values of Domains. Regular Expression value for the domain name.",
 														Optional:            true,
 													},
 													"suffix_value": schema.StringAttribute{
@@ -982,10 +982,10 @@ func (r *ForwardProxyPolicyResource) Schema(ctx context.Context, req resource.Sc
 									},
 								},
 								"url_category_list": schema.SingleNestedBlock{
-									MarkdownDescription: "URL Category List Type. List of url categories",
+									MarkdownDescription: "URL Category List Type. List of URL categories.",
 									Attributes: map[string]schema.Attribute{
 										"url_categories": schema.ListAttribute{
-											MarkdownDescription: "[Enum: UNCATEGORIZED|REAL_ESTATE|COMPUTER_AND_INTERNET_SECURITY|FINANCIAL_SERVICES|BUSINESS_AND_ECONOMY|COMPUTER_AND_INTERNET_INFO|AUCTIONS|SHOPPING|CULT_AND_OCCULT|TRAVEL|ABUSED_DRUGS|ADULT_AND_PORNOGRAPHY|HOME_AND_GARDEN|MILITARY|SOCIAL_NETWORKING|DEAD_SITES|INDIVIDUAL_STOCK_ADVICE_AND_TOOLS|TRAINING_AND_TOOLS|DATING|SEX_EDUCATION|RELIGION|ENTERTAINMENT_AND_ARTS|PERSONAL_SITES_AND_BLOGS|LEGAL|LOCAL_INFORMATION|STREAMING_MEDIA|JOB_SEARCH|GAMBLING|TRANSLATION|REFERENCE_AND_RESEARCH|SHAREWARE_AND_FREEWARE|PEER_TO_PEER|MARIJUANA|HACKING|GAMES|PHILOSOPHY_AND_POLITICAL_ADVOCACY|WEAPONS|PAY_TO_SURF|HUNTING_AND_FISHING|SOCIETY|EDUCATIONAL_INSTITUTIONS|ONLINE_GREETING_CARDS|SPORTS|SWIMSUITS_AND_INTIMATE_APPAREL|QUESTIONABLE|KIDS|HATE_AND_RACISM|PERSONAL_STORAGE|VIOLENCE|KEYLOGGERS_AND_MONITORING|SEARCH_ENGINES|INTERNET_PORTALS|WEB_ADVERTISEMENTS|CHEATING|GROSS|WEB_BASED_EMAIL|MALWARE_SITES|PHISHING_AND_OTHER_FRAUDS|PROXY_AVOIDANCE_AND_ANONYMIZERS|SPYWARE_AND_ADWARE|MUSIC|GOVERNMENT|NUDITY|NEWS_AND_MEDIA|ILLEGAL|CONTENT_DELIVERY_NETWORKS|INTERNET_COMMUNICATIONS|BOT_NETS|ABORTION|HEALTH_AND_MEDICINE|CONFIRMED_SPAM_SOURCES|SPAM_URLS|UNCONFIRMED_SPAM_SOURCES|OPEN_HTTP_PROXIES|DYNAMICALLY_GENERATED_CONTENT|PARKED_DOMAINS|ALCOHOL_AND_TOBACCO|PRIVATE_IP_ADDRESSES|IMAGE_AND_VIDEO_SEARCH|FASHION_AND_BEAUTY|RECREATION_AND_HOBBIES|MOTOR_VEHICLES|WEB_HOSTING] URL Categories. List of url categories to be selected. Possible values are `UNCATEGORIZED`, `REAL_ESTATE`, `COMPUTER_AND_INTERNET_SECURITY`, `FINANCIAL_SERVICES`, `BUSINESS_AND_ECONOMY`, `COMPUTER_AND_INTERNET_INFO`, `AUCTIONS`, `SHOPPING`, `CULT_AND_OCCULT`, `TRAVEL`, `ABUSED_DRUGS`, `ADULT_AND_PORNOGRAPHY`, `HOME_AND_GARDEN`, `MILITARY`, `SOCIAL_NETWORKING`, `DEAD_SITES`, `INDIVIDUAL_STOCK_ADVICE_AND_TOOLS`, `TRAINING_AND_TOOLS`, `DATING`, `SEX_EDUCATION`, `RELIGION`, `ENTERTAINMENT_AND_ARTS`, `PERSONAL_SITES_AND_BLOGS`, `LEGAL`, `LOCAL_INFORMATION`, `STREAMING_MEDIA`, `JOB_SEARCH`, `GAMBLING`, `TRANSLATION`, `REFERENCE_AND_RESEARCH`, `SHAREWARE_AND_FREEWARE`, `PEER_TO_PEER`, `MARIJUANA`, `HACKING`, `GAMES`, `PHILOSOPHY_AND_POLITICAL_ADVOCACY`, `WEAPONS`, `PAY_TO_SURF`, `HUNTING_AND_FISHING`, `SOCIETY`, `EDUCATIONAL_INSTITUTIONS`, `ONLINE_GREETING_CARDS`, `SPORTS`, `SWIMSUITS_AND_INTIMATE_APPAREL`, `QUESTIONABLE`, `KIDS`, `HATE_AND_RACISM`, `PERSONAL_STORAGE`, `VIOLENCE`, `KEYLOGGERS_AND_MONITORING`, `SEARCH_ENGINES`, `INTERNET_PORTALS`, `WEB_ADVERTISEMENTS`, `CHEATING`, `GROSS`, `WEB_BASED_EMAIL`, `MALWARE_SITES`, `PHISHING_AND_OTHER_FRAUDS`, `PROXY_AVOIDANCE_AND_ANONYMIZERS`, `SPYWARE_AND_ADWARE`, `MUSIC`, `GOVERNMENT`, `NUDITY`, `NEWS_AND_MEDIA`, `ILLEGAL`, `CONTENT_DELIVERY_NETWORKS`, `INTERNET_COMMUNICATIONS`, `BOT_NETS`, `ABORTION`, `HEALTH_AND_MEDICINE`, `CONFIRMED_SPAM_SOURCES`, `SPAM_URLS`, `UNCONFIRMED_SPAM_SOURCES`, `OPEN_HTTP_PROXIES`, `DYNAMICALLY_GENERATED_CONTENT`, `PARKED_DOMAINS`, `ALCOHOL_AND_TOBACCO`, `PRIVATE_IP_ADDRESSES`, `IMAGE_AND_VIDEO_SEARCH`, `FASHION_AND_BEAUTY`, `RECREATION_AND_HOBBIES`, `MOTOR_VEHICLES`, `WEB_HOSTING`. Defaults to `UNCATEGORIZED`.",
+											MarkdownDescription: "[Enum: UNCATEGORIZED|REAL_ESTATE|COMPUTER_AND_INTERNET_SECURITY|FINANCIAL_SERVICES|BUSINESS_AND_ECONOMY|COMPUTER_AND_INTERNET_INFO|AUCTIONS|SHOPPING|CULT_AND_OCCULT|TRAVEL|ABUSED_DRUGS|ADULT_AND_PORNOGRAPHY|HOME_AND_GARDEN|MILITARY|SOCIAL_NETWORKING|DEAD_SITES|INDIVIDUAL_STOCK_ADVICE_AND_TOOLS|TRAINING_AND_TOOLS|DATING|SEX_EDUCATION|RELIGION|ENTERTAINMENT_AND_ARTS|PERSONAL_SITES_AND_BLOGS|LEGAL|LOCAL_INFORMATION|STREAMING_MEDIA|JOB_SEARCH|GAMBLING|TRANSLATION|REFERENCE_AND_RESEARCH|SHAREWARE_AND_FREEWARE|PEER_TO_PEER|MARIJUANA|HACKING|GAMES|PHILOSOPHY_AND_POLITICAL_ADVOCACY|WEAPONS|PAY_TO_SURF|HUNTING_AND_FISHING|SOCIETY|EDUCATIONAL_INSTITUTIONS|ONLINE_GREETING_CARDS|SPORTS|SWIMSUITS_AND_INTIMATE_APPAREL|QUESTIONABLE|KIDS|HATE_AND_RACISM|PERSONAL_STORAGE|VIOLENCE|KEYLOGGERS_AND_MONITORING|SEARCH_ENGINES|INTERNET_PORTALS|WEB_ADVERTISEMENTS|CHEATING|GROSS|WEB_BASED_EMAIL|MALWARE_SITES|PHISHING_AND_OTHER_FRAUDS|PROXY_AVOIDANCE_AND_ANONYMIZERS|SPYWARE_AND_ADWARE|MUSIC|GOVERNMENT|NUDITY|NEWS_AND_MEDIA|ILLEGAL|CONTENT_DELIVERY_NETWORKS|INTERNET_COMMUNICATIONS|BOT_NETS|ABORTION|HEALTH_AND_MEDICINE|CONFIRMED_SPAM_SOURCES|SPAM_URLS|UNCONFIRMED_SPAM_SOURCES|OPEN_HTTP_PROXIES|DYNAMICALLY_GENERATED_CONTENT|PARKED_DOMAINS|ALCOHOL_AND_TOBACCO|PRIVATE_IP_ADDRESSES|IMAGE_AND_VIDEO_SEARCH|FASHION_AND_BEAUTY|RECREATION_AND_HOBBIES|MOTOR_VEHICLES|WEB_HOSTING] URL Categories. List of URL categories to be selected . Possible values are `UNCATEGORIZED`, `REAL_ESTATE`, `COMPUTER_AND_INTERNET_SECURITY`, `FINANCIAL_SERVICES`, `BUSINESS_AND_ECONOMY`, `COMPUTER_AND_INTERNET_INFO`, `AUCTIONS`, `SHOPPING`, `CULT_AND_OCCULT`, `TRAVEL`, `ABUSED_DRUGS`, `ADULT_AND_PORNOGRAPHY`, `HOME_AND_GARDEN`, `MILITARY`, `SOCIAL_NETWORKING`, `DEAD_SITES`, `INDIVIDUAL_STOCK_ADVICE_AND_TOOLS`, `TRAINING_AND_TOOLS`, `DATING`, `SEX_EDUCATION`, `RELIGION`, `ENTERTAINMENT_AND_ARTS`, `PERSONAL_SITES_AND_BLOGS`, `LEGAL`, `LOCAL_INFORMATION`, `STREAMING_MEDIA`, `JOB_SEARCH`, `GAMBLING`, `TRANSLATION`, `REFERENCE_AND_RESEARCH`, `SHAREWARE_AND_FREEWARE`, `PEER_TO_PEER`, `MARIJUANA`, `HACKING`, `GAMES`, `PHILOSOPHY_AND_POLITICAL_ADVOCACY`, `WEAPONS`, `PAY_TO_SURF`, `HUNTING_AND_FISHING`, `SOCIETY`, `EDUCATIONAL_INSTITUTIONS`, `ONLINE_GREETING_CARDS`, `SPORTS`, `SWIMSUITS_AND_INTIMATE_APPAREL`, `QUESTIONABLE`, `KIDS`, `HATE_AND_RACISM`, `PERSONAL_STORAGE`, `VIOLENCE`, `KEYLOGGERS_AND_MONITORING`, `SEARCH_ENGINES`, `INTERNET_PORTALS`, `WEB_ADVERTISEMENTS`, `CHEATING`, `GROSS`, `WEB_BASED_EMAIL`, `MALWARE_SITES`, `PHISHING_AND_OTHER_FRAUDS`, `PROXY_AVOIDANCE_AND_ANONYMIZERS`, `SPYWARE_AND_ADWARE`, `MUSIC`, `GOVERNMENT`, `NUDITY`, `NEWS_AND_MEDIA`, `ILLEGAL`, `CONTENT_DELIVERY_NETWORKS`, `INTERNET_COMMUNICATIONS`, `BOT_NETS`, `ABORTION`, `HEALTH_AND_MEDICINE`, `CONFIRMED_SPAM_SOURCES`, `SPAM_URLS`, `UNCONFIRMED_SPAM_SOURCES`, `OPEN_HTTP_PROXIES`, `DYNAMICALLY_GENERATED_CONTENT`, `PARKED_DOMAINS`, `ALCOHOL_AND_TOBACCO`, `PRIVATE_IP_ADDRESSES`, `IMAGE_AND_VIDEO_SEARCH`, `FASHION_AND_BEAUTY`, `RECREATION_AND_HOBBIES`, `MOTOR_VEHICLES`, `WEB_HOSTING`. Defaults to `UNCATEGORIZED`.",
 											Optional:            true,
 											ElementType:         types.StringType,
 										},

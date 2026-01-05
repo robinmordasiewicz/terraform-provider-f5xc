@@ -9,7 +9,7 @@ description: |-
 
 Manages a UDP Load Balancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.
 
-~> **Note** Please refer to [UDP Loadbalancer API docs](https://docs.cloud.f5.com/docs-v2/api/views-udp-loadbalancer) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -136,7 +136,7 @@ An [`advertise_where`](#advertise-custom-advertise-where) block (within [`advert
 
 <a id="vip-870b0b"></a>&#x2022; [`virtual_site_with_vip`](#vip-870b0b) - Optional Block<br>Virtual Site with Specified VIP. This defines a reference to a customer site virtual site along with network type and IP where a load balancer could be advertised<br>See [Virtual Site With VIP](#vip-870b0b) below.
 
-<a id="service-1fdc7a"></a>&#x2022; [`vk8s_service`](#service-1fdc7a) - Optional Block<br>vK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network<br>See [Vk8s Service](#service-1fdc7a) below.
+<a id="service-1fdc7a"></a>&#x2022; [`vk8s_service`](#service-1fdc7a) - Optional Block<br>VK8s Services on RE. This defines a reference to a RE site or virtual site where a load balancer could be advertised in the vK8s service network<br>See [Vk8s Service](#service-1fdc7a) below.
 
 #### Advertise Custom Advertise Where Advertise On Public
 
@@ -154,13 +154,19 @@ A [`site`](#advertise-custom-advertise-where-site) block (within [`advertise_cus
 
 <a id="site-ip-78faa1"></a>&#x2022; [`ip`](#site-ip-78faa1) - Optional String<br>IP Address. Use given IP address as VIP on the site
 
-<a id="network-5811a4"></a>&#x2022; [`network`](#network-5811a4) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
+<a id="network-5811a4"></a>&#x2022; [`network`](#network-5811a4) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
 <a id="site-7ecf1d"></a>&#x2022; [`site`](#site-7ecf1d) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Site](#site-7ecf1d) below.
 
 #### Advertise Custom Advertise Where Site Site
 
-<a id="objref-7ecf1d"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#site-7ecf1d) block (within [`advertise_custom.advertise_where.site`](#advertise-custom-advertise-where-site)) supports the following:
+
+<a id="name-201d26"></a>&#x2022; [`name`](#name-201d26) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-c3f40d"></a>&#x2022; [`namespace`](#namespace-c3f40d) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-8a632a"></a>&#x2022; [`tenant`](#tenant-8a632a) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Advertise Custom Advertise Where Virtual Network
 
@@ -184,7 +190,7 @@ A [`virtual_network`](#network-a20be3) block (within [`advertise_custom.advertis
 
 A [`virtual_site`](#site-5d39fd) block (within [`advertise_custom.advertise_where`](#advertise-custom-advertise-where)) supports the following:
 
-<a id="network-15aca4"></a>&#x2022; [`network`](#network-15aca4) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. vK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
+<a id="network-15aca4"></a>&#x2022; [`network`](#network-15aca4) - Optional String  Defaults to `SITE_NETWORK_INSIDE_AND_OUTSIDE`<br>Possible values are `SITE_NETWORK_INSIDE_AND_OUTSIDE`, `SITE_NETWORK_INSIDE`, `SITE_NETWORK_OUTSIDE`, `SITE_NETWORK_SERVICE`, `SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP`, `SITE_NETWORK_IP_FABRIC`<br>[Enum: SITE_NETWORK_INSIDE_AND_OUTSIDE|SITE_NETWORK_INSIDE|SITE_NETWORK_OUTSIDE|SITE_NETWORK_SERVICE|SITE_NETWORK_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_INSIDE_AND_OUTSIDE_WITH_INTERNET_VIP|SITE_NETWORK_IP_FABRIC] Site Network. This defines network types to be used on site All inside and outside networks. All inside and outside networks with internet VIP support. All inside networks. All outside networks. All outside networks with internet VIP support. VK8s service network. - SITE_NETWORK_IP_FABRIC: VER IP Fabric network for the site This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network
 
 <a id="site-04fd53"></a>&#x2022; [`virtual_site`](#site-04fd53) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Virtual Site](#site-04fd53) below.
 
@@ -210,7 +216,13 @@ A [`vk8s_service`](#service-1fdc7a) block (within [`advertise_custom.advertise_w
 
 #### Advertise Custom Advertise Where Vk8s Service Site
 
-<a id="objref-ec8d32"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`site`](#site-ec8d32) block (within [`advertise_custom.advertise_where.vk8s_service`](#service-1fdc7a)) supports the following:
+
+<a id="name-950776"></a>&#x2022; [`name`](#name-950776) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-1faf25"></a>&#x2022; [`namespace`](#namespace-1faf25) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-98cf6a"></a>&#x2022; [`tenant`](#tenant-98cf6a) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Advertise Custom Advertise Where Vk8s Service Virtual Site
 
@@ -224,7 +236,13 @@ An [`advertise_on_public`](#advertise-on-public) block supports the following:
 
 #### Advertise On Public Public IP
 
-<a id="objref-5f3bb5"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`public_ip`](#advertise-on-public-public-ip) block (within [`advertise_on_public`](#advertise-on-public)) supports the following:
+
+<a id="advertise-on-public-public-ip-name"></a>&#x2022; [`name`](#advertise-on-public-public-ip-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="advertise-on-public-public-ip-namespace"></a>&#x2022; [`namespace`](#advertise-on-public-public-ip-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="advertise-on-public-public-ip-tenant"></a>&#x2022; [`tenant`](#advertise-on-public-public-ip-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Pools Weights
 
@@ -242,11 +260,23 @@ An [`origin_pools_weights`](#origin-pools-weights) block supports the following:
 
 #### Origin Pools Weights Cluster
 
-<a id="objref-b05bd6"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`cluster`](#origin-pools-weights-cluster) block (within [`origin_pools_weights`](#origin-pools-weights)) supports the following:
+
+<a id="origin-pools-weights-cluster-name"></a>&#x2022; [`name`](#origin-pools-weights-cluster-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="origin-pools-weights-cluster-namespace"></a>&#x2022; [`namespace`](#origin-pools-weights-cluster-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="origin-pools-weights-cluster-tenant"></a>&#x2022; [`tenant`](#origin-pools-weights-cluster-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Origin Pools Weights Pool
 
-<a id="objref-e7b2da"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`pool`](#origin-pools-weights-pool) block (within [`origin_pools_weights`](#origin-pools-weights)) supports the following:
+
+<a id="origin-pools-weights-pool-name"></a>&#x2022; [`name`](#origin-pools-weights-pool-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="origin-pools-weights-pool-namespace"></a>&#x2022; [`namespace`](#origin-pools-weights-pool-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="origin-pools-weights-pool-tenant"></a>&#x2022; [`tenant`](#origin-pools-weights-pool-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

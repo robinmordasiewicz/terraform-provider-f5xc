@@ -1,5 +1,5 @@
 # External Connector Resource Example
-# Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration configuration.
+# Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration specification. configuration.
 
 # Basic External Connector configuration
 resource "f5xc_external_connector" "example" {
@@ -20,7 +20,7 @@ resource "f5xc_external_connector" "example" {
   ce_site_reference {
     # Configure ce_site_reference settings
   }
-  # IPSec. External Connector with IPSec tunnel
+  # IPsec. External Connector with IPsec tunnel.
   ipsec {
     # Configure ipsec settings
   }

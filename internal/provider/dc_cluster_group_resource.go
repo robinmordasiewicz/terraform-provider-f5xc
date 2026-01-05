@@ -81,7 +81,7 @@ func (r *DcClusterGroupResource) Metadata(ctx context.Context, req resource.Meta
 func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             dc_cluster_groupSchemaVersion,
-		MarkdownDescription: "Manages DC Cluster group in given namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages DC Cluster group in given namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Dc Cluster Group. Must be unique within the namespace.",
@@ -137,7 +137,7 @@ func (r *DcClusterGroupResource) Schema(ctx context.Context, req resource.Schema
 				Delete: true,
 			}),
 			"type": schema.SingleNestedBlock{
-				MarkdownDescription: "DC Cluster Group Mesh Type. Details of DC Cluster Group Mesh Type",
+				MarkdownDescription: "DC Cluster Group Mesh Type. Details of DC Cluster Group Mesh Type.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{

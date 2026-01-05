@@ -2,20 +2,20 @@
 page_title: "f5xc_protocol_policer Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
+  Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.
 ---
 
 # f5xc_protocol_policer (Resource)
 
-Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
+Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Protocol Policer API docs](https://docs.cloud.f5.com/docs-v2/api/protocol-policer) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Protocol Policer Resource Example
-# Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits in F5 Distributed Cloud.
+# Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.
 
 # Basic Protocol Policer configuration
 resource "f5xc_protocol_policer" "example" {
@@ -90,15 +90,15 @@ A [`protocol_policer`](#protocol-policer) block supports the following:
 
 A [`policer`](#protocol-policer-policer) block (within [`protocol_policer`](#protocol-policer)) supports the following:
 
-<a id="protocol-policer-policer-kind"></a>&#x2022; [`kind`](#protocol-policer-policer-kind) - Optional String<br>Object reference kind
+<a id="protocol-policer-policer-kind"></a>&#x2022; [`kind`](#protocol-policer-policer-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="protocol-policer-policer-name"></a>&#x2022; [`name`](#protocol-policer-policer-name) - Optional String<br>Object reference name
+<a id="protocol-policer-policer-name"></a>&#x2022; [`name`](#protocol-policer-policer-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="protocol-policer-policer-namespace"></a>&#x2022; [`namespace`](#protocol-policer-policer-namespace) - Optional String<br>Object reference namespace
+<a id="protocol-policer-policer-namespace"></a>&#x2022; [`namespace`](#protocol-policer-policer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="protocol-policer-policer-tenant"></a>&#x2022; [`tenant`](#protocol-policer-policer-tenant) - Optional String<br>Object reference tenant
+<a id="protocol-policer-policer-tenant"></a>&#x2022; [`tenant`](#protocol-policer-policer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="protocol-policer-policer-uid"></a>&#x2022; [`uid`](#protocol-policer-policer-uid) - Optional String<br>Object reference UID
+<a id="protocol-policer-policer-uid"></a>&#x2022; [`uid`](#protocol-policer-policer-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Protocol Policer Protocol
 

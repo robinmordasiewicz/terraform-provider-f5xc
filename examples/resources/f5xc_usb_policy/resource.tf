@@ -1,5 +1,5 @@
 # Usb Policy Resource Example
-# Manages a Usb Policy resource in F5 Distributed Cloud for creates a new usb policy configuration.
+# Manages new USB policy object. in F5 Distributed Cloud.
 
 # Basic Usb Policy configuration
 resource "f5xc_usb_policy" "example" {
@@ -16,7 +16,7 @@ resource "f5xc_usb_policy" "example" {
   }
 
   # Resource-specific configuration
-  # Allowed USB devices. List of allowed USB devices
+  # Allowed USB devices. List of allowed USB devices .
   allowed_devices {
     # Configure allowed_devices settings
   }

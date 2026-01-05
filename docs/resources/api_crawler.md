@@ -9,7 +9,7 @@ description: |-
 
 Manages a API Crawler resource in F5 Distributed Cloud.
 
-~> **Note** Please refer to [API Crawler API docs](https://docs.cloud.f5.com/docs-v2/api/api-sec-api-crawler) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -32,7 +32,7 @@ resource "f5xc_api_crawler" "example" {
   }
 
   # Resource-specific configuration
-  # API Crawler. API Crawler Configuration
+  # API Crawler. API Crawler Configuration .
   domains {
     # Configure domains settings
   }
@@ -110,15 +110,15 @@ A [`blindfold_secret_info`](#info-e14daf) block (within [`domains.simple_login.p
 
 <a id="location-cdab6e"></a>&#x2022; [`location`](#location-cdab6e) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-8d2611"></a>&#x2022; [`store_provider`](#provider-8d2611) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-8d2611"></a>&#x2022; [`store_provider`](#provider-8d2611) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Domains Simple Login Password Clear Secret Info
 
 A [`clear_secret_info`](#info-ec3463) block (within [`domains.simple_login.password`](#domains-simple-login-password)) supports the following:
 
-<a id="ref-32ac85"></a>&#x2022; [`provider_ref`](#ref-32ac85) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-32ac85"></a>&#x2022; [`provider_ref`](#ref-32ac85) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="url-e5dfac"></a>&#x2022; [`url`](#url-e5dfac) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-e5dfac"></a>&#x2022; [`url`](#url-e5dfac) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### Timeouts
 

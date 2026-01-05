@@ -194,7 +194,7 @@ func (r *FastACLRuleResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             fast_acl_ruleSchemaVersion,
-		MarkdownDescription: "Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Fast ACL Rule. Must be unique within the namespace.",
@@ -250,7 +250,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 				Delete: true,
 			}),
 			"action": schema.SingleNestedBlock{
-				MarkdownDescription: "Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic",
+				MarkdownDescription: "Action. FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic.",
 				Attributes: map[string]schema.Attribute{
 					"simple_action": schema.StringAttribute{
 						MarkdownDescription: "[Enum: DENY|ALLOW] Simple Action. FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic. Possible values are `DENY`, `ALLOW`. Defaults to `DENY`.",
@@ -259,15 +259,15 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 				Blocks: map[string]schema.Block{
 					"policer_action": schema.SingleNestedBlock{
-						MarkdownDescription: "Policer Reference. Reference to policer object",
+						MarkdownDescription: "Policer Reference. Reference to policer object.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Reference. A policer direct reference",
+								MarkdownDescription: "Reference. A policer direct reference.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
-											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+											MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -275,15 +275,15 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 											},
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -291,7 +291,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 											},
 										},
 										"uid": schema.StringAttribute{
-											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+											MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -304,15 +304,15 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 						},
 					},
 					"protocol_policer_action": schema.SingleNestedBlock{
-						MarkdownDescription: "Protocol Policer Reference. Reference to policer object",
+						MarkdownDescription: "Protocol Policer Reference. Reference to policer object.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"ref": schema.ListNestedBlock{
-								MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object",
+								MarkdownDescription: "Protocol policer Reference. Reference to protocol policer object.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
-											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+											MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -320,15 +320,15 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 											},
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -336,7 +336,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 											},
 										},
 										"uid": schema.StringAttribute{
-											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+											MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -359,7 +359,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"kind": schema.StringAttribute{
-									MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+									MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -367,15 +367,15 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 									},
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -383,7 +383,7 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 									},
 								},
 								"uid": schema.StringAttribute{
-									MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+									MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{
@@ -396,11 +396,11 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"port": schema.ListNestedBlock{
-				MarkdownDescription: "Source Ports. L4 port numbers to match",
+				MarkdownDescription: "Source Ports. L4 port numbers to match .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"user_defined": schema.Int64Attribute{
-							MarkdownDescription: "User defined port. Matches the user defined port",
+							MarkdownDescription: "User defined port. Matches the user defined port.",
 							Optional:            true,
 						},
 					},
@@ -415,10 +415,10 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"prefix": schema.SingleNestedBlock{
-				MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes",
+				MarkdownDescription: "IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes.",
 				Attributes: map[string]schema.Attribute{
 					"prefix": schema.ListAttribute{
-						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length",
+						MarkdownDescription: "Prefix. IP Address prefix in string format. String must contain both prefix and prefix-length.",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},

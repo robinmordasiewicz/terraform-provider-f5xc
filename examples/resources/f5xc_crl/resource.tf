@@ -1,5 +1,5 @@
 # CRL Resource Example
-# Manages a CRL resource in F5 Distributed Cloud for api to create crl configuration.
+# Manages a CRL resource in F5 Distributed Cloud for api to create crl object. configuration.
 
 # Basic CRL configuration
 resource "f5xc_crl" "example" {

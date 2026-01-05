@@ -9,7 +9,7 @@ description: |-
 
 Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.
 
-~> **Note** Please refer to [Container Registry API docs](https://docs.cloud.f5.com/docs-v2/api/container-registry) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -100,15 +100,15 @@ A [`blindfold_secret_info`](#password-blindfold-secret-info) block (within [`pas
 
 <a id="password-blindfold-secret-info-location"></a>&#x2022; [`location`](#password-blindfold-secret-info-location) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-0e4651"></a>&#x2022; [`store_provider`](#provider-0e4651) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-0e4651"></a>&#x2022; [`store_provider`](#provider-0e4651) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Password Clear Secret Info
 
 A [`clear_secret_info`](#password-clear-secret-info) block (within [`password`](#password)) supports the following:
 
-<a id="password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="password-clear-secret-info-provider-ref"></a>&#x2022; [`provider_ref`](#password-clear-secret-info-provider-ref) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="password-clear-secret-info-url"></a>&#x2022; [`url`](#password-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="password-clear-secret-info-url"></a>&#x2022; [`url`](#password-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### Timeouts
 

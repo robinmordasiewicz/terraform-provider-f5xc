@@ -112,7 +112,7 @@ func (r *DNSComplianceChecksResource) Schema(ctx context.Context, req resource.S
 				ElementType:         types.StringType,
 			},
 			"domain_denylist": schema.ListAttribute{
-				MarkdownDescription: "Domain Deny list. List of domains to be denied by configuration object",
+				MarkdownDescription: "Domain Deny list. List of domains to be denied by configuration object .",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},

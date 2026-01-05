@@ -2,20 +2,20 @@
 page_title: "f5xc_dc_cluster_group Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages DC Cluster group in given namespace in F5 Distributed Cloud.
+  Manages DC Cluster group in given namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_dc_cluster_group (Resource)
 
-Manages DC Cluster group in given namespace in F5 Distributed Cloud.
+Manages DC Cluster group in given namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Dc Cluster Group API docs](https://docs.cloud.f5.com/docs-v2/api/dc-cluster-group) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Dc Cluster Group Resource Example
-# Manages DC Cluster group in given namespace in F5 Distributed Cloud.
+# Manages DC Cluster group in given namespace. in F5 Distributed Cloud.
 
 # Basic Dc Cluster Group configuration
 resource "f5xc_dc_cluster_group" "example" {

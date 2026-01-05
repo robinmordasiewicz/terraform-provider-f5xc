@@ -1,5 +1,5 @@
 # Cloud Credentials Resource Example
-# Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+# Manages a Cloud Credentials resource in F5 Distributed Cloud for api to create cloud_credentials object. configuration.
 
 # Basic Cloud Credentials configuration
 resource "f5xc_cloud_credentials" "example" {

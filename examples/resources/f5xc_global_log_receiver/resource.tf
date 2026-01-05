@@ -1,5 +1,5 @@
 # Global Log Receiver Resource Example
-# Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.
+# Manages new Global Log Receiver object. in F5 Distributed Cloud.
 
 # Basic Global Log Receiver configuration
 resource "f5xc_global_log_receiver" "example" {

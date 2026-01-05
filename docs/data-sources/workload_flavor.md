@@ -2,14 +2,14 @@
 page_title: "f5xc_workload_flavor Data Source - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages workload_flavor in F5 Distributed Cloud.
+  Manages workload_flavor. in F5 Distributed Cloud.
 ---
 
 # f5xc_workload_flavor (Data Source)
 
-Manages workload_flavor in F5 Distributed Cloud.
+Manages workload_flavor. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Workload Flavor API docs](https://docs.cloud.f5.com/docs-v2/api/workload-flavor) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

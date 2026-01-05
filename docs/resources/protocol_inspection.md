@@ -9,7 +9,7 @@ description: |-
 
 Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Protocol Inspection API docs](https://docs.cloud.f5.com/docs-v2/api/protocol-inspection) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -32,7 +32,7 @@ resource "f5xc_protocol_inspection" "example" {
   }
 
   # Resource-specific configuration
-  # Enable/Disable Compliance Checks.Enable Disable Complianc...
+  # Enable/Disable Compliance Checks. Enable Disable Complian...
   enable_disable_compliance_checks {
     # Configure enable_disable_compliance_checks settings
   }
@@ -68,9 +68,9 @@ resource "f5xc_protocol_inspection" "example" {
 
 <a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `ALLOW`<br>Possible values are `ALLOW`, `DENY`, `DROP`<br>[Enum: ALLOW|DENY|DROP] Action. Action after inspection - ALLOW: Allow Allow traffic - DENY: Deny Throw RST error for TCP and ICMP error for UDP - DROP: DROP Silently drop traffic
 
-<a id="enable-disable-compliance-checks"></a>&#x2022; [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) - Optional Block<br>Enable/Disable Compliance Checks.Enable Disable Compliance Checks Choice<br>See [Enable Disable Compliance Checks](#enable-disable-compliance-checks) below for details.
+<a id="enable-disable-compliance-checks"></a>&#x2022; [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) - Optional Block<br>Enable/Disable Compliance Checks. Enable Disable Compliance Checks Choice<br>See [Enable Disable Compliance Checks](#enable-disable-compliance-checks) below for details.
 
-<a id="enable-disable-signatures"></a>&#x2022; [`enable_disable_signatures`](#enable-disable-signatures) - Optional Block<br>Enable/Disable Signatures Choice.Enable Disable Signature Choice<br>See [Enable Disable Signatures](#enable-disable-signatures) below for details.
+<a id="enable-disable-signatures"></a>&#x2022; [`enable_disable_signatures`](#enable-disable-signatures) - Optional Block<br>Enable/Disable Signatures Choice. Enable Disable Signature Choice<br>See [Enable Disable Signatures](#enable-disable-signatures) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -92,7 +92,13 @@ An [`enable_disable_compliance_checks`](#enable-disable-compliance-checks) block
 
 #### Enable Disable Compliance Checks Enable Compliance Checks
 
-<a id="objref-68d3e1"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`enable_compliance_checks`](#checks-68d3e1) block (within [`enable_disable_compliance_checks`](#enable-disable-compliance-checks)) supports the following:
+
+<a id="name-8e6d21"></a>&#x2022; [`name`](#name-8e6d21) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-93e0ee"></a>&#x2022; [`namespace`](#namespace-93e0ee) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-67ac8b"></a>&#x2022; [`tenant`](#tenant-67ac8b) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Enable Disable Signatures
 

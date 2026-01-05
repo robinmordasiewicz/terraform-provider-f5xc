@@ -2,20 +2,20 @@
 page_title: "f5xc_forward_proxy_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
+  Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy specification. configuration.
 ---
 
 # f5xc_forward_proxy_policy (Resource)
 
-Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
+Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy specification. configuration.
 
-~> **Note** Please refer to [Forward Proxy Policy API docs](https://docs.cloud.f5.com/docs-v2/api/views-forward-proxy-policy) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Forward Proxy Policy Resource Example
-# Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy configuration.
+# Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy specification. configuration.
 
 # Basic Forward Proxy Policy configuration
 resource "f5xc_forward_proxy_policy" "example" {
@@ -84,7 +84,7 @@ resource "f5xc_forward_proxy_policy" "example" {
 &#x2022; <a id="any-proxy"></a>[`any_proxy`](#any-proxy) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="drp-http-connect"></a>[`drp_http_connect`](#drp-http-connect) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="network-connector"></a>[`network_connector`](#network-connector) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Network Connector](#network-connector) below for details.
-<br><br>&#x2022; <a id="proxy-label-selector"></a>[`proxy_label_selector`](#proxy-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Proxy Label Selector](#proxy-label-selector) below for details.
+<br><br>&#x2022; <a id="proxy-label-selector"></a>[`proxy_label_selector`](#proxy-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Proxy Label Selector](#proxy-label-selector) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -206,13 +206,19 @@ A [`tls_list`](#deny-list-tls-list) block (within [`deny_list`](#deny-list)) sup
 
 #### Network Connector
 
-<a id="objref-c6dbb2"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`network_connector`](#network-connector) block supports the following:
+
+<a id="network-connector-name"></a>&#x2022; [`name`](#network-connector-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="network-connector-namespace"></a>&#x2022; [`namespace`](#network-connector-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="network-connector-tenant"></a>&#x2022; [`tenant`](#network-connector-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Proxy Label Selector
 
 A [`proxy_label_selector`](#proxy-label-selector) block supports the following:
 
-<a id="proxy-label-selector-expressions"></a>&#x2022; [`expressions`](#proxy-label-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="proxy-label-selector-expressions"></a>&#x2022; [`expressions`](#proxy-label-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Rule List
 
@@ -236,7 +242,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-dst-ip-prefix-set"></a>&#x2022; [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dst IP Prefix Set](#rule-list-rules-dst-ip-prefix-set) below.
 
-<a id="rule-list-rules-dst-label-selector"></a>&#x2022; [`dst_label_selector`](#rule-list-rules-dst-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Dst Label Selector](#rule-list-rules-dst-label-selector) below.
+<a id="rule-list-rules-dst-label-selector"></a>&#x2022; [`dst_label_selector`](#rule-list-rules-dst-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Dst Label Selector](#rule-list-rules-dst-label-selector) below.
 
 <a id="rule-list-rules-dst-prefix-list"></a>&#x2022; [`dst_prefix_list`](#rule-list-rules-dst-prefix-list) - Optional Block<br>IPv4 Prefix List. List of IPv4 prefixes that represent an endpoint<br>See [Dst Prefix List](#rule-list-rules-dst-prefix-list) below.
 
@@ -244,7 +250,7 @@ A [`rules`](#rule-list-rules) block (within [`rule_list`](#rule-list)) supports 
 
 <a id="rule-list-rules-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) - Optional Block<br>Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [IP Prefix Set](#rule-list-rules-ip-prefix-set) below.
 
-<a id="rule-list-rules-label-selector"></a>&#x2022; [`label_selector`](#rule-list-rules-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#rule-list-rules-label-selector) below.
+<a id="rule-list-rules-label-selector"></a>&#x2022; [`label_selector`](#rule-list-rules-label-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Label Selector](#rule-list-rules-label-selector) below.
 
 <a id="rule-list-rules-metadata"></a>&#x2022; [`metadata`](#rule-list-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#rule-list-rules-metadata) below.
 
@@ -266,17 +272,29 @@ A [`dst_asn_list`](#rule-list-rules-dst-asn-list) block (within [`rule_list.rule
 
 #### Rule List Rules Dst Asn Set
 
-<a id="objref-0f930a"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`dst_asn_set`](#rule-list-rules-dst-asn-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
+
+<a id="rule-list-rules-dst-asn-set-name"></a>&#x2022; [`name`](#rule-list-rules-dst-asn-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="rule-list-rules-dst-asn-set-namespace"></a>&#x2022; [`namespace`](#rule-list-rules-dst-asn-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="rule-list-rules-dst-asn-set-tenant"></a>&#x2022; [`tenant`](#rule-list-rules-dst-asn-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Rule List Rules Dst IP Prefix Set
 
-<a id="objref-9d2299"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`dst_ip_prefix_set`](#rule-list-rules-dst-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
+
+<a id="rule-list-rules-dst-ip-prefix-set-name"></a>&#x2022; [`name`](#rule-list-rules-dst-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-098663"></a>&#x2022; [`namespace`](#namespace-098663) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-047089"></a>&#x2022; [`tenant`](#tenant-047089) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Rule List Rules Dst Label Selector
 
 A [`dst_label_selector`](#rule-list-rules-dst-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="expressions-229662"></a>&#x2022; [`expressions`](#expressions-229662) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="expressions-229662"></a>&#x2022; [`expressions`](#expressions-229662) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Rule List Rules Dst Prefix List
 
@@ -310,13 +328,19 @@ A [`http_list`](#rule-list-rules-http-list-http-list) block (within [`rule_list.
 
 #### Rule List Rules IP Prefix Set
 
-<a id="objref-d85b6e"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`ip_prefix_set`](#rule-list-rules-ip-prefix-set) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
+
+<a id="rule-list-rules-ip-prefix-set-name"></a>&#x2022; [`name`](#rule-list-rules-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="rule-list-rules-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#rule-list-rules-ip-prefix-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="rule-list-rules-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#rule-list-rules-ip-prefix-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Rule List Rules Label Selector
 
 A [`label_selector`](#rule-list-rules-label-selector) block (within [`rule_list.rules`](#rule-list-rules)) supports the following:
 
-<a id="expressions-8dfad5"></a>&#x2022; [`expressions`](#expressions-8dfad5) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="expressions-8dfad5"></a>&#x2022; [`expressions`](#expressions-8dfad5) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Rule List Rules Metadata
 

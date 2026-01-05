@@ -136,7 +136,7 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 				Optional:            true,
 			},
 			"disabled_predefined_data_types": schema.ListAttribute{
-				MarkdownDescription: "Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery",
+				MarkdownDescription: "Disabled Built-In Sensitive Data Types. Select which pre-configured data types to disable, disabled data types will not be shown as sensitive in the API discovery.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -161,23 +161,23 @@ func (r *SensitiveDataPolicyResource) Schema(ctx context.Context, req resource.S
 				Delete: true,
 			}),
 			"custom_data_types": schema.ListNestedBlock{
-				MarkdownDescription: "Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery",
+				MarkdownDescription: "Defined Custom Sensitive Data Types. Select your custom data types to be monitored in the API discovery.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"custom_data_type_ref": schema.SingleNestedBlock{
-							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+							MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 							Attributes: map[string]schema.Attribute{
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+									MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 									Optional:            true,
 								},
 								"namespace": schema.StringAttribute{
-									MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+									MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 									Optional:            true,
 								},
 								"tenant": schema.StringAttribute{
-									MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+									MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 									Optional:            true,
 									Computed:            true,
 									PlanModifiers: []planmodifier.String{

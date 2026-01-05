@@ -89,7 +89,7 @@ func (r *CloudElasticIPResource) Metadata(ctx context.Context, req resource.Meta
 func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             cloud_elastic_ipSchemaVersion,
-		MarkdownDescription: "Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Cloud Elastic IP. Must be unique within the namespace.",
@@ -137,7 +137,7 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"item_count": schema.Int64Attribute{
-				MarkdownDescription: "Elastic IP Count Per Node. number of Elastic Ips / Public Ips associated with this object per Node",
+				MarkdownDescription: "Elastic IP Count Per Node. Number of Elastic Ips / Public Ips associated with this object per Node.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -153,11 +153,11 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 				Delete: true,
 			}),
 			"site_ref": schema.ListNestedBlock{
-				MarkdownDescription: "Site Reference. Site to which this cloud elastic ip object is attached",
+				MarkdownDescription: "Site Reference. Site to which this cloud elastic IP object is attached .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -165,15 +165,15 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -181,7 +181,7 @@ func (r *CloudElasticIPResource) Schema(ctx context.Context, req resource.Schema
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{

@@ -2,20 +2,20 @@
 page_title: "f5xc_filter_set Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
+  Manages specification. in F5 Distributed Cloud.
 ---
 
 # f5xc_filter_set (Resource)
 
-Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
+Manages specification. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Filter Set API docs](https://docs.cloud.f5.com/docs-v2/api/filter-set) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Filter Set Resource Example
-# Manages a Filter Set resource in F5 Distributed Cloud for create configuration.
+# Manages specification. in F5 Distributed Cloud.
 
 # Basic Filter Set configuration
 resource "f5xc_filter_set" "example" {
@@ -32,15 +32,15 @@ resource "f5xc_filter_set" "example" {
   }
 
   # Resource-specific configuration
-  # Filter Fields. list of fields and their values selected b...
+  # Filter Fields. List of fields and their values selected b...
   filter_fields {
     # Configure filter_fields settings
   }
-  # Filter Date/Time Range Field. either an absolute time ran...
+  # Filter Date/Time Range Field. Either an absolute time ran...
   date_field {
     # Configure date_field settings
   }
-  # Date Range. Date range is for selecting a date range
+  # Date Range. Date range is for selecting a date range.
   absolute {
     # Configure absolute settings
   }
@@ -66,9 +66,9 @@ resource "f5xc_filter_set" "example" {
 
 ### Spec Argument Reference
 
-<a id="context-key"></a>&#x2022; [`context_key`](#context-key) - Optional String<br>Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable
+<a id="context-key"></a>&#x2022; [`context_key`](#context-key) - Optional String<br>Context Key. Indexable context key that identifies a page or page type for which the FilterSet is applicable
 
-<a id="filter-fields"></a>&#x2022; [`filter_fields`](#filter-fields) - Optional Block<br>Filter Fields. list of fields and their values selected by the user<br>See [Filter Fields](#filter-fields) below for details.
+<a id="filter-fields"></a>&#x2022; [`filter_fields`](#filter-fields) - Optional Block<br>Filter Fields. List of fields and their values selected by the user<br>See [Filter Fields](#filter-fields) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -84,9 +84,9 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`filter_fields`](#filter-fields) block supports the following:
 
-<a id="filter-fields-date-field"></a>&#x2022; [`date_field`](#filter-fields-date-field) - Optional Block<br>Filter Date/Time Range Field. either an absolute time range or a relative time interval<br>See [Date Field](#filter-fields-date-field) below.
+<a id="filter-fields-date-field"></a>&#x2022; [`date_field`](#filter-fields-date-field) - Optional Block<br>Filter Date/Time Range Field. Either an absolute time range or a relative time interval<br>See [Date Field](#filter-fields-date-field) below.
 
-<a id="filter-fields-field-id"></a>&#x2022; [`field_id`](#filter-fields-field-id) - Optional String<br>Field ID. an identifier for the field that maps to some UI filter component
+<a id="filter-fields-field-id"></a>&#x2022; [`field_id`](#filter-fields-field-id) - Optional String<br>Field ID. An identifier for the field that maps to some UI filter component
 
 <a id="filter-fields-filter-expression-field"></a>&#x2022; [`filter_expression_field`](#filter-fields-filter-expression-field) - Optional Block<br>Filter Expression Field<br>See [Filter Expression Field](#filter-fields-filter-expression-field) below.
 
@@ -112,7 +112,7 @@ An [`absolute`](#filter-fields-date-field-absolute) block (within [`filter_field
 
 A [`filter_expression_field`](#filter-fields-filter-expression-field) block (within [`filter_fields`](#filter-fields)) supports the following:
 
-<a id="expression-7b0f3e"></a>&#x2022; [`expression`](#expression-7b0f3e) - Optional String<br>Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
+<a id="expression-7b0f3e"></a>&#x2022; [`expression`](#expression-7b0f3e) - Optional String<br>Expression Value. Expression is a Kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values
 
 #### Filter Fields String Field
 

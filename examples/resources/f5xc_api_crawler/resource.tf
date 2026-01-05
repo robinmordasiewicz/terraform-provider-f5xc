@@ -16,7 +16,7 @@ resource "f5xc_api_crawler" "example" {
   }
 
   # Resource-specific configuration
-  # API Crawler. API Crawler Configuration
+  # API Crawler. API Crawler Configuration .
   domains {
     # Configure domains settings
   }

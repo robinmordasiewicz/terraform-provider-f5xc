@@ -2,20 +2,20 @@
 page_title: "f5xc_cloud_elastic_ip Resource - terraform-provider-f5xc"
 subcategory: "Cloud Resources"
 description: |-
-  Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
+  Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site. in F5 Distributed Cloud.
 ---
 
 # f5xc_cloud_elastic_ip (Resource)
 
-Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
+Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Cloud Elastic IP API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-elastic-ip) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Cloud Elastic IP Resource Example
-# Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
+# Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site. in F5 Distributed Cloud.
 
 # Basic Cloud Elastic IP configuration
 resource "f5xc_cloud_elastic_ip" "example" {
@@ -32,7 +32,7 @@ resource "f5xc_cloud_elastic_ip" "example" {
   }
 
   # Resource-specific configuration
-  # Site Reference. Site to which this cloud elastic ip objec...
+  # Site Reference. Site to which this cloud elastic IP objec...
   site_ref {
     # Configure site_ref settings
   }
@@ -58,7 +58,7 @@ resource "f5xc_cloud_elastic_ip" "example" {
 
 ### Spec Argument Reference
 
-<a id="item-count"></a>&#x2022; [`item_count`](#item-count) - Optional Number<br>Elastic IP Count Per Node. number of Elastic Ips / Public Ips associated with this object per Node
+<a id="item-count"></a>&#x2022; [`item_count`](#item-count) - Optional Number<br>Elastic IP Count Per Node. Number of Elastic Ips / Public Ips associated with this object per Node
 
 <a id="site-ref"></a>&#x2022; [`site_ref`](#site-ref) - Optional Block<br>Site Reference. Site to which this cloud elastic IP object is attached<br>See [Site Ref](#site-ref) below for details.
 
@@ -76,15 +76,15 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`site_ref`](#site-ref) block supports the following:
 
-<a id="site-ref-kind"></a>&#x2022; [`kind`](#site-ref-kind) - Optional String<br>Object reference kind
+<a id="site-ref-kind"></a>&#x2022; [`kind`](#site-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="site-ref-name"></a>&#x2022; [`name`](#site-ref-name) - Optional String<br>Object reference name
+<a id="site-ref-name"></a>&#x2022; [`name`](#site-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="site-ref-namespace"></a>&#x2022; [`namespace`](#site-ref-namespace) - Optional String<br>Object reference namespace
+<a id="site-ref-namespace"></a>&#x2022; [`namespace`](#site-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="site-ref-tenant"></a>&#x2022; [`tenant`](#site-ref-tenant) - Optional String<br>Object reference tenant
+<a id="site-ref-tenant"></a>&#x2022; [`tenant`](#site-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="site-ref-uid"></a>&#x2022; [`uid`](#site-ref-uid) - Optional String<br>Object reference UID
+<a id="site-ref-uid"></a>&#x2022; [`uid`](#site-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Timeouts
 

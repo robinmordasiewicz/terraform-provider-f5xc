@@ -9,7 +9,7 @@ description: |-
 
 Manages a Securemesh Site resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.
 
-~> **Note** Please refer to [Securemesh Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-securemesh-site) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -76,7 +76,7 @@ resource "f5xc_securemesh_site" "example" {
 <a id="address"></a>&#x2022; [`address`](#address) - Optional String<br>Geographical Address. Site's geographical address that can be used to determine its latitude and longitude
 
 -> **One of the following:**
-&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
+&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable Node Local Services. Disable node local services on this site. Note: The chosen services will GET disabled on all nodes in the site<br>See [Blocked Services](#blocked-services) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="bond-device-list"></a>[`bond_device_list`](#bond-device-list) - Optional Block<br>Bond Devices List. List of bond devices for this fleet<br>See [Bond Device List](#bond-device-list) below for details.
@@ -104,7 +104,7 @@ resource "f5xc_securemesh_site" "example" {
 
 <a id="os"></a>&#x2022; [`os`](#os) - Optional Block<br>Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions
 
-<a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default
+<a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default
 
 <a id="sw"></a>&#x2022; [`sw`](#sw) - Optional Block<br>F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions
 
@@ -134,7 +134,7 @@ A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_s
 
 <a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
 
-<a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 <a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
 
@@ -174,13 +174,13 @@ A [`coordinates`](#coordinates) block supports the following:
 
 <a id="coordinates-latitude"></a>&#x2022; [`latitude`](#coordinates-latitude) - Optional Number<br>Latitude. Latitude of the site location
 
-<a id="coordinates-longitude"></a>&#x2022; [`longitude`](#coordinates-longitude) - Optional Number<br>Longitude. longitude of site location
+<a id="coordinates-longitude"></a>&#x2022; [`longitude`](#coordinates-longitude) - Optional Number<br>Longitude. Longitude of site location
 
 #### Custom Network Config
 
 A [`custom_network_config`](#custom-network-config) block supports the following:
 
-<a id="policies-c4c984"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-c4c984) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-c4c984) below.
+<a id="policies-c4c984"></a>&#x2022; [`active_enhanced_firewall_policies`](#policies-c4c984) - Optional Block<br>Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion<br>See [Active Enhanced Firewall Policies](#policies-c4c984) below.
 
 <a id="policies-fbbf75"></a>&#x2022; [`active_forward_proxy_policies`](#policies-fbbf75) - Optional Block<br>Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active<br>See [Active Forward Proxy Policies](#policies-fbbf75) below.
 
@@ -212,7 +212,7 @@ A [`custom_network_config`](#custom-network-config) block supports the following
 
 <a id="pvt-ip-892ce0"></a>&#x2022; [`sm_connection_pvt_ip`](#pvt-ip-892ce0) - Optional Block<br>Enable this option
 
-<a id="timeout-1607a1"></a>&#x2022; [`tunnel_dead_timeout`](#timeout-1607a1) - Optional Number<br>Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
+<a id="timeout-1607a1"></a>&#x2022; [`tunnel_dead_timeout`](#timeout-1607a1) - Optional Number<br>Tunnel Dead Timeout (msec). Time interval, in millisec, within which any IPsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used
 
 <a id="custom-network-config-vip-vrrp-mode"></a>&#x2022; [`vip_vrrp_mode`](#custom-network-config-vip-vrrp-mode) - Optional String  Defaults to `VIP_VRRP_INVALID`<br>Possible values are `VIP_VRRP_INVALID`, `VIP_VRRP_ENABLE`, `VIP_VRRP_DISABLE`<br>[Enum: VIP_VRRP_INVALID|VIP_VRRP_ENABLE|VIP_VRRP_DISABLE] VRRP Virtual-IP. VRRP advertisement mode for VIP Invalid VRRP mode
 
@@ -542,7 +542,13 @@ An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_dr
 
 #### Log Receiver
 
-<a id="objref-0da9d9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`log_receiver`](#log-receiver) block supports the following:
+
+<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Master Node Configuration
 
@@ -572,7 +578,7 @@ An [`os`](#os) block supports the following:
 
 A [`performance_enhancement_mode`](#performance-enhancement-mode) block supports the following:
 
-<a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance.L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
+<a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
 
 <a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Enable this option
 
@@ -590,7 +596,7 @@ A [`sw`](#sw) block supports the following:
 
 <a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
 
-<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002
+<a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>F5XC Software Version. Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
 
 #### Timeouts
 

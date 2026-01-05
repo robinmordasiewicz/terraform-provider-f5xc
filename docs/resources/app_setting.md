@@ -2,20 +2,20 @@
 page_title: "f5xc_app_setting Resource - terraform-provider-f5xc"
 subcategory: "Applications"
 description: |-
-  Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
+  Manages App setting configuration in namespace metadata.namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_app_setting (Resource)
 
-Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
+Manages App setting configuration in namespace metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [App Setting API docs](https://docs.cloud.f5.com/docs-v2/api/app-setting) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # App Setting Resource Example
-# Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.
+# Manages App setting configuration in namespace metadata.namespace. in F5 Distributed Cloud.
 
 # Basic App Setting configuration
 resource "f5xc_app_setting" "example" {
@@ -94,15 +94,15 @@ An [`app_type_settings`](#app-type-settings) block supports the following:
 
 An [`app_type_ref`](#app-type-settings-app-type-ref) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
-<a id="app-type-settings-app-type-ref-kind"></a>&#x2022; [`kind`](#app-type-settings-app-type-ref-kind) - Optional String<br>Object reference kind
+<a id="app-type-settings-app-type-ref-kind"></a>&#x2022; [`kind`](#app-type-settings-app-type-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="app-type-settings-app-type-ref-name"></a>&#x2022; [`name`](#app-type-settings-app-type-ref-name) - Optional String<br>Object reference name
+<a id="app-type-settings-app-type-ref-name"></a>&#x2022; [`name`](#app-type-settings-app-type-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-49608f"></a>&#x2022; [`namespace`](#namespace-49608f) - Optional String<br>Object reference namespace
+<a id="namespace-49608f"></a>&#x2022; [`namespace`](#namespace-49608f) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="app-type-settings-app-type-ref-tenant"></a>&#x2022; [`tenant`](#app-type-settings-app-type-ref-tenant) - Optional String<br>Object reference tenant
+<a id="app-type-settings-app-type-ref-tenant"></a>&#x2022; [`tenant`](#app-type-settings-app-type-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="app-type-settings-app-type-ref-uid"></a>&#x2022; [`uid`](#app-type-settings-app-type-ref-uid) - Optional String<br>Object reference UID
+<a id="app-type-settings-app-type-ref-uid"></a>&#x2022; [`uid`](#app-type-settings-app-type-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### App Type Settings Business Logic Markup Setting
 
@@ -116,7 +116,7 @@ A [`business_logic_markup_setting`](#setting-ebbad6) block (within [`app_type_se
 
 A [`timeseries_analyses_setting`](#setting-7d0042) block (within [`app_type_settings`](#app-type-settings)) supports the following:
 
-<a id="selectors-2cc4b7"></a>&#x2022; [`metric_selectors`](#selectors-2cc4b7) - Optional Block<br>Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic<br>See [Metric Selectors](#selectors-2cc4b7) below.
+<a id="selectors-2cc4b7"></a>&#x2022; [`metric_selectors`](#selectors-2cc4b7) - Optional Block<br>Metric Selectors. Define the metric selection criteria, i.e. The metrics source and the actual metrics that should be included in the detection logic<br>See [Metric Selectors](#selectors-2cc4b7) below.
 
 #### App Type Settings Timeseries Analyses Setting Metric Selectors
 

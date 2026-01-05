@@ -2,20 +2,20 @@
 page_title: "f5xc_network_connector Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+  Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace. configuration.
 ---
 
 # f5xc_network_connector (Resource)
 
-Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace. configuration.
 
-~> **Note** Please refer to [Network Connector API docs](https://docs.cloud.f5.com/docs-v2/api/network-connector) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Network Connector Resource Example
-# Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace configuration.
+# Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace. configuration.
 
 # Basic Network Connector configuration
 resource "f5xc_network_connector" "example" {
@@ -67,11 +67,11 @@ resource "f5xc_network_connector" "example" {
 -> **One of the following:**
 &#x2022; <a id="disable-forward-proxy"></a>[`disable_forward_proxy`](#disable-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="enable-forward-proxy"></a>&#x2022; [`enable_forward_proxy`](#enable-forward-proxy) - Optional Block<br>Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
+<a id="enable-forward-proxy"></a>&#x2022; [`enable_forward_proxy`](#enable-forward-proxy) - Optional Block<br>Forward Proxy Configuration. Fine tune forward proxy behavior Few configurations allowed are White listed ports and IP prefixes: Forward proxy does application protocol detection and server name(SNI) detection by peeking into the traffic on the incoming downstream connection. Few protocols doesn't have client sending the first data. In such cases, protocol and SNI detection fails. This configuration allows, skipping protocol and SNI detection for whitelisted IP-prefix-list and ports connection_timeout: The timeout for new network connections to upstream server. Max_connect_attempts: Maximum number of attempts made to make new network connection to upstream server<br>See [Enable Forward Proxy](#enable-forward-proxy) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="sli-to-global-dr"></a>[`sli_to_global_dr`](#sli-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [SLI To Global DR](#sli-to-global-dr) below for details.
-<br><br>&#x2022; <a id="sli-to-slo-snat"></a>[`sli_to_slo_snat`](#sli-to-slo-snat) - Optional Block<br>SNAT Configuration. description<br>See [SLI To Slo Snat](#sli-to-slo-snat) below for details.
+<br><br>&#x2022; <a id="sli-to-slo-snat"></a>[`sli_to_slo_snat`](#sli-to-slo-snat) - Optional Block<br>SNAT Configuration. X-example: '' description<br>See [SLI To Slo Snat](#sli-to-slo-snat) below for details.
 <br><br>&#x2022; <a id="slo-to-global-dr"></a>[`slo_to_global_dr`](#slo-to-global-dr) - Optional Block<br>Global Network. Global network reference for direct connection<br>See [Slo To Global DR](#slo-to-global-dr) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
@@ -170,7 +170,13 @@ A [`sli_to_global_dr`](#sli-to-global-dr) block supports the following:
 
 #### SLI To Global DR Global Vn
 
-<a id="objref-d5c083"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`global_vn`](#sli-to-global-dr-global-vn) block (within [`sli_to_global_dr`](#sli-to-global-dr)) supports the following:
+
+<a id="sli-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#sli-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="sli-to-global-dr-global-vn-namespace"></a>&#x2022; [`namespace`](#sli-to-global-dr-global-vn-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="sli-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#sli-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### SLI To Slo Snat
 
@@ -188,7 +194,13 @@ A [`slo_to_global_dr`](#slo-to-global-dr) block supports the following:
 
 #### Slo To Global DR Global Vn
 
-<a id="objref-df6523"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`global_vn`](#slo-to-global-dr-global-vn) block (within [`slo_to_global_dr`](#slo-to-global-dr)) supports the following:
+
+<a id="slo-to-global-dr-global-vn-name"></a>&#x2022; [`name`](#slo-to-global-dr-global-vn-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="slo-to-global-dr-global-vn-namespace"></a>&#x2022; [`namespace`](#slo-to-global-dr-global-vn-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="slo-to-global-dr-global-vn-tenant"></a>&#x2022; [`tenant`](#slo-to-global-dr-global-vn-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 

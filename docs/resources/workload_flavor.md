@@ -2,20 +2,20 @@
 page_title: "f5xc_workload_flavor Resource - terraform-provider-f5xc"
 subcategory: "Kubernetes"
 description: |-
-  Manages workload_flavor in F5 Distributed Cloud.
+  Manages workload_flavor. in F5 Distributed Cloud.
 ---
 
 # f5xc_workload_flavor (Resource)
 
-Manages workload_flavor in F5 Distributed Cloud.
+Manages workload_flavor. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Workload Flavor API docs](https://docs.cloud.f5.com/docs-v2/api/workload-flavor) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Workload Flavor Resource Example
-# Manages workload_flavor in F5 Distributed Cloud.
+# Manages workload_flavor. in F5 Distributed Cloud.
 
 # Basic Workload Flavor configuration
 resource "f5xc_workload_flavor" "example" {
@@ -58,7 +58,7 @@ resource "f5xc_workload_flavor" "example" {
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="vcpus"></a>&#x2022; [`vcpus`](#vcpus) - Optional Number<br>vCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core
+<a id="vcpus"></a>&#x2022; [`vcpus`](#vcpus) - Optional Number<br>VCPUs. Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core
 
 ### Attributes Reference
 

@@ -272,19 +272,19 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 				Delete: true,
 			}),
 			"rules": schema.ListNestedBlock{
-				MarkdownDescription: "Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response",
+				MarkdownDescription: "Data Type Rules. Configure key/value or regex match rules to enable the platform to detect this custom data type in the API request or response .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"key_pattern": schema.SingleNestedBlock{
-							MarkdownDescription: "Rule Pattern Type. test",
+							MarkdownDescription: "Rule Pattern Type. Test",
 							Attributes: map[string]schema.Attribute{
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Value. Search for values matching this regular expression",
+									MarkdownDescription: "Regex Value. Search for values matching this regular expression.",
 									Optional:            true,
 								},
 								"substring_value": schema.StringAttribute{
-									MarkdownDescription: "Substring Search. Search for values that include this substring",
+									MarkdownDescription: "Substring Search. Search for values that include this substring.",
 									Optional:            true,
 								},
 							},
@@ -306,14 +306,14 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"key_pattern": schema.SingleNestedBlock{
-									MarkdownDescription: "Rule Pattern Type. test",
+									MarkdownDescription: "Rule Pattern Type. Test",
 									Attributes: map[string]schema.Attribute{
 										"regex_value": schema.StringAttribute{
-											MarkdownDescription: "Regex Value. Search for values matching this regular expression",
+											MarkdownDescription: "Regex Value. Search for values matching this regular expression.",
 											Optional:            true,
 										},
 										"substring_value": schema.StringAttribute{
-											MarkdownDescription: "Substring Search. Search for values that include this substring",
+											MarkdownDescription: "Substring Search. Search for values that include this substring.",
 											Optional:            true,
 										},
 									},
@@ -331,14 +331,14 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 									},
 								},
 								"value_pattern": schema.SingleNestedBlock{
-									MarkdownDescription: "Rule Pattern Type. test",
+									MarkdownDescription: "Rule Pattern Type. Test",
 									Attributes: map[string]schema.Attribute{
 										"regex_value": schema.StringAttribute{
-											MarkdownDescription: "Regex Value. Search for values matching this regular expression",
+											MarkdownDescription: "Regex Value. Search for values matching this regular expression.",
 											Optional:            true,
 										},
 										"substring_value": schema.StringAttribute{
-											MarkdownDescription: "Substring Search. Search for values that include this substring",
+											MarkdownDescription: "Substring Search. Search for values that include this substring.",
 											Optional:            true,
 										},
 									},
@@ -358,14 +358,14 @@ func (r *DataTypeResource) Schema(ctx context.Context, req resource.SchemaReques
 							},
 						},
 						"value_pattern": schema.SingleNestedBlock{
-							MarkdownDescription: "Rule Pattern Type. test",
+							MarkdownDescription: "Rule Pattern Type. Test",
 							Attributes: map[string]schema.Attribute{
 								"regex_value": schema.StringAttribute{
-									MarkdownDescription: "Regex Value. Search for values matching this regular expression",
+									MarkdownDescription: "Regex Value. Search for values matching this regular expression.",
 									Optional:            true,
 								},
 								"substring_value": schema.StringAttribute{
-									MarkdownDescription: "Substring Search. Search for values that include this substring",
+									MarkdownDescription: "Substring Search. Search for values that include this substring.",
 									Optional:            true,
 								},
 							},

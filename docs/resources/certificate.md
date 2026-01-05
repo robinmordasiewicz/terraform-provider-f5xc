@@ -2,20 +2,20 @@
 page_title: "f5xc_certificate Resource - terraform-provider-f5xc"
 subcategory: "Certificates"
 description: |-
-  Manages a Certificate resource in F5 Distributed Cloud for certificate configuration.
+  Manages a Certificate resource in F5 Distributed Cloud for certificate. configuration.
 ---
 
 # f5xc_certificate (Resource)
 
-Manages a Certificate resource in F5 Distributed Cloud for certificate configuration.
+Manages a Certificate resource in F5 Distributed Cloud for certificate. configuration.
 
-~> **Note** Please refer to [Certificate API docs](https://docs.cloud.f5.com/docs-v2/api/certificate) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Certificate Resource Example
-# Manages a Certificate resource in F5 Distributed Cloud for certificate configuration.
+# Manages a Certificate resource in F5 Distributed Cloud for certificate. configuration.
 
 # Basic Certificate configuration
 resource "f5xc_certificate" "example" {
@@ -84,7 +84,13 @@ In addition to all arguments above, the following attributes are exported:
 
 #### Certificate Chain
 
-<a id="objref-902f07"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`certificate_chain`](#certificate-chain) block supports the following:
+
+<a id="certificate-chain-name"></a>&#x2022; [`name`](#certificate-chain-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="certificate-chain-namespace"></a>&#x2022; [`namespace`](#certificate-chain-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="certificate-chain-tenant"></a>&#x2022; [`tenant`](#certificate-chain-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Custom Hash Algorithms
 
@@ -108,15 +114,15 @@ A [`blindfold_secret_info`](#private-key-blindfold-secret-info) block (within [`
 
 <a id="location-208dea"></a>&#x2022; [`location`](#location-208dea) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-1e06e0"></a>&#x2022; [`store_provider`](#provider-1e06e0) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-1e06e0"></a>&#x2022; [`store_provider`](#provider-1e06e0) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Private Key Clear Secret Info
 
 A [`clear_secret_info`](#private-key-clear-secret-info) block (within [`private_key`](#private-key)) supports the following:
 
-<a id="ref-e799a7"></a>&#x2022; [`provider_ref`](#ref-e799a7) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-e799a7"></a>&#x2022; [`provider_ref`](#ref-e799a7) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="private-key-clear-secret-info-url"></a>&#x2022; [`url`](#private-key-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="private-key-clear-secret-info-url"></a>&#x2022; [`url`](#private-key-clear-secret-info-url) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### Timeouts
 

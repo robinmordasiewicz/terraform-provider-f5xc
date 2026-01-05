@@ -502,7 +502,7 @@ func (r *AlertReceiverResource) Metadata(ctx context.Context, req resource.Metad
 func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             alert_receiverSchemaVersion,
-		MarkdownDescription: "Manages a Alert Receiver resource in F5 Distributed Cloud for alert notification endpoints.",
+		MarkdownDescription: "Manages new Alert Receiver object. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Alert Receiver. Must be unique within the namespace.",
@@ -561,37 +561,37 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				MarkdownDescription: "[OneOf: email, opsgenie, pagerduty, slack, sms, webhook] Email Configuration.",
 				Attributes: map[string]schema.Attribute{
 					"email": schema.StringAttribute{
-						MarkdownDescription: "Email. Email id of the user",
+						MarkdownDescription: "Email. Email ID of the user.",
 						Optional:            true,
 					},
 				},
 			},
 			"opsgenie": schema.SingleNestedBlock{
-				MarkdownDescription: "OpsGenie Config. OpsGenie configuration to send alert notifications",
+				MarkdownDescription: "OpsGenie Config. OpsGenie configuration to send alert notifications.",
 				Attributes: map[string]schema.Attribute{
 					"url": schema.StringAttribute{
-						MarkdownDescription: "API URL. URL to send API requests to",
+						MarkdownDescription: "API URL. URL to send API requests to .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"api_key": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -600,11 +600,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -614,31 +614,31 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"pagerduty": schema.SingleNestedBlock{
-				MarkdownDescription: "PagerDuty Config. PagerDuty configuration to send alert notifications",
+				MarkdownDescription: "PagerDuty Config. PagerDuty configuration to send alert notifications.",
 				Attributes: map[string]schema.Attribute{
 					"url": schema.StringAttribute{
-						MarkdownDescription: "Pager Duty URL. URL to send API requests to",
+						MarkdownDescription: "Pager Duty URL. URL to send API requests to .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"routing_key": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -647,11 +647,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -661,31 +661,31 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"slack": schema.SingleNestedBlock{
-				MarkdownDescription: "Slack Config. Slack configuration to send alert notifications",
+				MarkdownDescription: "Slack Config. Slack configuration to send alert notifications.",
 				Attributes: map[string]schema.Attribute{
 					"channel": schema.StringAttribute{
-						MarkdownDescription: "Channel. Channel or user to send notifications to",
+						MarkdownDescription: "Channel. Channel or user to send notifications to .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"url": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -694,11 +694,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -717,11 +717,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"webhook": schema.SingleNestedBlock{
-				MarkdownDescription: "Webhook Config. Webhook configuration to send alert notifications",
+				MarkdownDescription: "Webhook Config. Webhook configuration to send alert notifications.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"http_config": schema.SingleNestedBlock{
-						MarkdownDescription: "HTTP Configuration. Configuration for HTTP endpoint",
+						MarkdownDescription: "HTTP Configuration. Configuration for HTTP endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"enable_http2": schema.BoolAttribute{
 								MarkdownDescription: "Enable HTTP2. Configure to use HTTP2 protocol.",
@@ -734,26 +734,26 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 						Blocks: map[string]schema.Block{
 							"auth_token": schema.SingleNestedBlock{
-								MarkdownDescription: "Access Token. Authentication Token for access",
+								MarkdownDescription: "Access Token. Authentication Token for access.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"token": schema.SingleNestedBlock{
-										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
-												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 														Optional:            true,
 													},
 													"location": schema.StringAttribute{
-														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
-														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 												},
@@ -762,11 +762,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
-														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 													"url": schema.StringAttribute{
-														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 														Optional:            true,
 													},
 												},
@@ -779,28 +779,28 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "Basic Authorization Credentials. Authorization parameters to access HTPP alert Receiver Endpoint.",
 								Attributes: map[string]schema.Attribute{
 									"user_name": schema.StringAttribute{
-										MarkdownDescription: "User Name. HTTP Basic Auth User Name",
+										MarkdownDescription: "User Name. HTTP Basic Auth User Name .",
 										Optional:            true,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"password": schema.SingleNestedBlock{
-										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
-												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 														Optional:            true,
 													},
 													"location": schema.StringAttribute{
-														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
-														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 												},
@@ -809,11 +809,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
-														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 													"url": schema.StringAttribute{
-														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 														Optional:            true,
 													},
 												},
@@ -823,15 +823,15 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								},
 							},
 							"client_cert_obj": schema.SingleNestedBlock{
-								MarkdownDescription: "Client Certificate Object. Configuration for client certificate",
+								MarkdownDescription: "Client Certificate Object. Configuration for client certificate.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"use_tls_obj": schema.ListNestedBlock{
-										MarkdownDescription: "Certificate Object. Reference to client certificate object",
+										MarkdownDescription: "Certificate Object. Reference to client certificate object.",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"kind": schema.StringAttribute{
-													MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+													MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -839,15 +839,15 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"name": schema.StringAttribute{
-													MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+													MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 													Optional:            true,
 												},
 												"namespace": schema.StringAttribute{
-													MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+													MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 													Optional:            true,
 												},
 												"tenant": schema.StringAttribute{
-													MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+													MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -855,7 +855,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"uid": schema.StringAttribute{
-													MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+													MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 													Optional:            true,
 													Computed:            true,
 													PlanModifiers: []planmodifier.String{
@@ -894,19 +894,19 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 										MarkdownDescription: "Enable this option",
 									},
 									"use_server_verification": schema.SingleNestedBlock{
-										MarkdownDescription: "TLS Validation Context for Servers. Upstream TLS Validation Context",
+										MarkdownDescription: "TLS Validation Context for Servers. Upstream TLS Validation Context.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"ca_cert_obj": schema.SingleNestedBlock{
-												MarkdownDescription: "CA Certificate Object. Configuration for CA certificate",
+												MarkdownDescription: "CA Certificate Object. Configuration for CA certificate.",
 												Attributes:          map[string]schema.Attribute{},
 												Blocks: map[string]schema.Block{
 													"trusted_ca": schema.ListNestedBlock{
-														MarkdownDescription: "Certificate Object. Reference to client certificate object",
+														MarkdownDescription: "Certificate Object. Reference to client certificate object.",
 														NestedObject: schema.NestedBlockObject{
 															Attributes: map[string]schema.Attribute{
 																"kind": schema.StringAttribute{
-																	MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																	MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -914,15 +914,15 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 																	},
 																},
 																"name": schema.StringAttribute{
-																	MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																	MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																	Optional:            true,
 																},
 																"namespace": schema.StringAttribute{
-																	MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																	MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																	Optional:            true,
 																},
 																"tenant": schema.StringAttribute{
-																	MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																	MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -930,7 +930,7 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 																	},
 																},
 																"uid": schema.StringAttribute{
-																	MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																	MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																	Optional:            true,
 																	Computed:            true,
 																	PlanModifiers: []planmodifier.String{
@@ -952,22 +952,22 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"url": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -976,11 +976,11 @@ func (r *AlertReceiverResource) Schema(ctx context.Context, req resource.SchemaR
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},

@@ -179,7 +179,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 							Optional:            true,
 						},
 						"path": schema.StringAttribute{
-							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification",
+							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification .",
 							Optional:            true,
 						},
 					},
@@ -194,7 +194,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 							Optional:            true,
 						},
 						"path": schema.StringAttribute{
-							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification",
+							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification .",
 							Optional:            true,
 						},
 					},
@@ -212,7 +212,7 @@ func (r *APIDefinitionResource) Schema(ctx context.Context, req resource.SchemaR
 							Optional:            true,
 						},
 						"path": schema.StringAttribute{
-							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification",
+							MarkdownDescription: "Path. An endpoint path, as specified in OpenAPI, including parameters. The path should comply with RFC 3986 and may have parameters according to OpenAPI specification .",
 							Optional:            true,
 						},
 					},

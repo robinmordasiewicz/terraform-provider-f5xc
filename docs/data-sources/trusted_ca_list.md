@@ -9,7 +9,7 @@ description: |-
 
 Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certificate authority list management.
 
-~> **Note** Please refer to [Trusted CA List API docs](https://docs.cloud.f5.com/docs-v2/api/trusted-ca-list) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

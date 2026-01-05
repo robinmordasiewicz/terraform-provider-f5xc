@@ -1,5 +1,5 @@
 # Cloud Elastic IP Resource Example
-# Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site in F5 Distributed Cloud.
+# Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site. in F5 Distributed Cloud.
 
 # Basic Cloud Elastic IP configuration
 resource "f5xc_cloud_elastic_ip" "example" {
@@ -16,7 +16,7 @@ resource "f5xc_cloud_elastic_ip" "example" {
   }
 
   # Resource-specific configuration
-  # Site Reference. Site to which this cloud elastic ip objec...
+  # Site Reference. Site to which this cloud elastic IP objec...
   site_ref {
     # Configure site_ref settings
   }

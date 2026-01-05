@@ -1227,7 +1227,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				ElementType:         types.StringType,
 			},
 			"worker_nodes": schema.ListAttribute{
-				MarkdownDescription: "Worker Nodes. Names of worker nodes",
+				MarkdownDescription: "Worker Nodes. Names of worker nodes.",
 				Optional:            true,
 				ElementType:         types.StringType,
 			},
@@ -1263,7 +1263,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				Delete: true,
 			}),
 			"blocked_services": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: blocked_services, default_blocked_services; Default: default_blocked_services] Disable Node Local Services. Disable node local services on this site. Note: The chosen services will get disabled on all nodes in the site.",
+				MarkdownDescription: "[OneOf: blocked_services, default_blocked_services; Default: default_blocked_services] Disable Node Local Services. Disable node local services on this site. Note: The chosen services will GET disabled on all nodes in the site.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"blocked_sevice": schema.ListNestedBlock{
@@ -1271,7 +1271,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"network_type": schema.StringAttribute{
-									MarkdownDescription: "[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
+									MarkdownDescription: "[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user. Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`. Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`.",
 									Optional:            true,
 								},
 							},
@@ -1291,28 +1291,28 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"bond_device_list": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: bond_device_list, no_bond_devices; Default: no_bond_devices] Bond Devices List. List of bond devices for this fleet",
+				MarkdownDescription: "[OneOf: bond_device_list, no_bond_devices; Default: no_bond_devices] Bond Devices List. List of bond devices for this fleet.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"bond_devices": schema.ListNestedBlock{
-						MarkdownDescription: "Bond Devices. List of bond devices",
+						MarkdownDescription: "Bond Devices. List of bond devices .",
 						NestedObject: schema.NestedBlockObject{
 							Attributes: map[string]schema.Attribute{
 								"devices": schema.ListAttribute{
-									MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond",
+									MarkdownDescription: "Member Ethernet Devices. Ethernet devices that will make up this bond .",
 									Optional:            true,
 									ElementType:         types.StringType,
 								},
 								"link_polling_interval": schema.Int64Attribute{
-									MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds",
+									MarkdownDescription: "Link Polling Interval. Link polling interval in milliseconds .",
 									Optional:            true,
 								},
 								"link_up_delay": schema.Int64Attribute{
-									MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up",
+									MarkdownDescription: "Link Up Delay. Milliseconds wait before link is declared up .",
 									Optional:            true,
 								},
 								"name": schema.StringAttribute{
-									MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0'",
+									MarkdownDescription: "Bond Device Name. Name for the Bond. Ex 'bond0' .",
 									Optional:            true,
 								},
 							},
@@ -1321,10 +1321,10 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 									MarkdownDescription: "Enable this option",
 								},
 								"lacp": schema.SingleNestedBlock{
-									MarkdownDescription: "LACP parameters. LACP parameters for the bond device",
+									MarkdownDescription: "LACP parameters. LACP parameters for the bond device.",
 									Attributes: map[string]schema.Attribute{
 										"rate": schema.Int64Attribute{
-											MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets",
+											MarkdownDescription: "LACP Packet Interval. Interval in seconds to transmit LACP packets.",
 											Optional:            true,
 										},
 									},
@@ -1335,14 +1335,14 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"coordinates": schema.SingleNestedBlock{
-				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location",
+				MarkdownDescription: "Site Coordinates. Coordinates of the site which provides the site physical location.",
 				Attributes: map[string]schema.Attribute{
 					"latitude": schema.Int64Attribute{
-						MarkdownDescription: "Latitude. Latitude of the site location",
+						MarkdownDescription: "Latitude. Latitude of the site location.",
 						Optional:            true,
 					},
 					"longitude": schema.Int64Attribute{
-						MarkdownDescription: "Longitude. longitude of site location",
+						MarkdownDescription: "Longitude. Longitude of site location.",
 						Optional:            true,
 					},
 				},
@@ -1351,7 +1351,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "[OneOf: custom_network_config, default_network_config; Default: default_network_config] SmsNetworkConfiguration.",
 				Attributes: map[string]schema.Attribute{
 					"tunnel_dead_timeout": schema.Int64Attribute{
-						MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any ipsec / ssl connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
+						MarkdownDescription: "Tunnel Dead Timeout (msec). Time interval, in millisec, within which any IPsec / SSL connection from the site going down is detected. When not set (== 0), a default value of 10000 msec will be used.",
 						Optional:            true,
 					},
 					"vip_vrrp_mode": schema.StringAttribute{
@@ -1361,23 +1361,23 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				},
 				Blocks: map[string]schema.Block{
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all options available under firewall policies with an additional option for service insertion.",
+						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active",
+								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1390,23 +1390,23 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						},
 					},
 					"active_forward_proxy_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active",
+						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active",
+								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1423,19 +1423,19 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall",
+								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -1460,31 +1460,31 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						MarkdownDescription: "Enable this option",
 					},
 					"global_network_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Global Network Connection List. List of global network connections",
+						MarkdownDescription: "Global Network Connection List. List of global network connections.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections",
+								MarkdownDescription: "Global Network Connections. Global network connections .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{},
 									Blocks: map[string]schema.Block{
 										"sli_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											MarkdownDescription: "Global Network. Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -1496,22 +1496,22 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 										},
 										"slo_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection",
+											MarkdownDescription: "Global Network. Global network reference for direct connection.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 													Attributes: map[string]schema.Attribute{
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -1528,15 +1528,15 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						},
 					},
 					"interface_list": schema.SingleNestedBlock{
-						MarkdownDescription: "List of Interface. Configure network interfaces for this Secure Mesh site",
+						MarkdownDescription: "List of Interface. Configure network interfaces for this Secure Mesh site.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"interfaces": schema.ListNestedBlock{
-								MarkdownDescription: "List of Interface. Configure network interfaces for this Secure Mesh site",
+								MarkdownDescription: "List of Interface. Configure network interfaces for this Secure Mesh site .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"description_spec": schema.StringAttribute{
-											MarkdownDescription: "Interface Description. Description for this Interface",
+											MarkdownDescription: "Interface Description. Description for this Interface.",
 											Optional:            true,
 										},
 									},
@@ -1548,14 +1548,14 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											MarkdownDescription: "Enable this option",
 										},
 										"dedicated_interface": schema.SingleNestedBlock{
-											MarkdownDescription: "Dedicated Interface. Dedicated Interface Configuration",
+											MarkdownDescription: "Dedicated Interface. Dedicated Interface Configuration.",
 											Attributes: map[string]schema.Attribute{
 												"device": schema.StringAttribute{
 													MarkdownDescription: "Interface Device. Name of the device for which interface is configured. Use wwan0 for 4G/LTE.",
 													Optional:            true,
 												},
 												"mtu": schema.Int64Attribute{
-													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384.",
 													Optional:            true,
 												},
 												"node": schema.StringAttribute{
@@ -1563,7 +1563,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													Optional:            true,
 												},
 												"priority": schema.Int64Attribute{
-													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
+													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority.",
 													Optional:            true,
 												},
 											},
@@ -1586,14 +1586,14 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 										},
 										"dedicated_management_interface": schema.SingleNestedBlock{
-											MarkdownDescription: "Dedicated Management Interface. Dedicated Interface Configuration",
+											MarkdownDescription: "Dedicated Management Interface. Dedicated Interface Configuration.",
 											Attributes: map[string]schema.Attribute{
 												"device": schema.StringAttribute{
-													MarkdownDescription: "Interface Device. Name of the device for which interface is configured",
+													MarkdownDescription: "Interface Device. Name of the device for which interface is configured .",
 													Optional:            true,
 												},
 												"mtu": schema.Int64Attribute{
-													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384.",
 													Optional:            true,
 												},
 												"node": schema.StringAttribute{
@@ -1608,14 +1608,14 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 										},
 										"ethernet_interface": schema.SingleNestedBlock{
-											MarkdownDescription: "Ethernet Interface. Ethernet Interface Configuration",
+											MarkdownDescription: "Ethernet Interface. Ethernet Interface Configuration.",
 											Attributes: map[string]schema.Attribute{
 												"device": schema.StringAttribute{
-													MarkdownDescription: "Ethernet Device. Interface configuration for the ethernet device",
+													MarkdownDescription: "Ethernet Device. Interface configuration for the ethernet device .",
 													Optional:            true,
 												},
 												"mtu": schema.Int64Attribute{
-													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, mtu must be between 512 and 16384",
+													MarkdownDescription: "Maximum Packet Size (MTU). Maximum packet size (Maximum Transfer Unit) of the interface When configured, MTU must be between 512 and 16384.",
 													Optional:            true,
 												},
 												"node": schema.StringAttribute{
@@ -1623,11 +1623,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													Optional:            true,
 												},
 												"priority": schema.Int64Attribute{
-													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority",
+													MarkdownDescription: "Priority. Priority of the network interface when multiple network interfaces are present in outside network Greater the value, higher the priority.",
 													Optional:            true,
 												},
 												"vlan_id": schema.Int64Attribute{
-													MarkdownDescription: "VLAN Id. Configure a VLAN tagged ethernet interface",
+													MarkdownDescription: "VLAN ID. Configure a VLAN tagged ethernet interface.",
 													Optional:            true,
 												},
 											},
@@ -1649,7 +1649,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 															MarkdownDescription: "Enable this option",
 														},
 														"dhcp_networks": schema.ListNestedBlock{
-															MarkdownDescription: "DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses",
+															MarkdownDescription: "DHCP Networks. List of networks from which DHCP Server can allocate IPv4 Addresses .",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"dgw_address": schema.StringAttribute{
@@ -1661,7 +1661,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																		Optional:            true,
 																	},
 																	"network_prefix": schema.StringAttribute{
-																		MarkdownDescription: "Network Prefix. Set the network prefix for the site. ex: 10.1.1.0/24",
+																		MarkdownDescription: "Network Prefix. Set the network prefix for the site. Ex: 10.1.1.0/24.",
 																		Optional:            true,
 																	},
 																	"pool_settings": schema.StringAttribute{
@@ -1677,15 +1677,15 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																		MarkdownDescription: "Enable this option",
 																	},
 																	"pools": schema.ListNestedBlock{
-																		MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																		MarkdownDescription: "DHCP Pools. List of non overlapping IP address ranges.",
 																		NestedObject: schema.NestedBlockObject{
 																			Attributes: map[string]schema.Attribute{
 																				"end_ip": schema.StringAttribute{
-																					MarkdownDescription: "Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200",
+																					MarkdownDescription: "Ending IP. Ending IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.200 with prefix length of 24, end offset is 0.0.0.200.",
 																					Optional:            true,
 																				},
 																				"start_ip": schema.StringAttribute{
-																					MarkdownDescription: "Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5",
+																					MarkdownDescription: "Starting IP. Starting IP of the pool range. In case of address allocator, offset is derived based on network prefix. 10.1.1.5 with prefix length of 24, start offset is 0.0.0.5.",
 																					Optional:            true,
 																				},
 																			},
@@ -1722,7 +1722,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 															MarkdownDescription: "IPV6AutoConfigRouterType.",
 															Attributes: map[string]schema.Attribute{
 																"network_prefix": schema.StringAttribute{
-																	MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862",
+																	MarkdownDescription: "Network Prefix. Nework prefix that is used as Prefix information Allowed only /64 prefix length as per RFC 4862.",
 																	Optional:            true,
 																},
 															},
@@ -1735,7 +1735,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																			MarkdownDescription: "IPV6DnsList.",
 																			Attributes: map[string]schema.Attribute{
 																				"dns_list": schema.ListAttribute{
-																					MarkdownDescription: "Dns List. List of IPV6 Addresses acting as Dns servers",
+																					MarkdownDescription: "DNS List. List of IPv6 Addresses acting as DNS servers .",
 																					Optional:            true,
 																					ElementType:         types.StringType,
 																				},
@@ -1745,7 +1745,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																			MarkdownDescription: "IPV6LocalDnsAddress.",
 																			Attributes: map[string]schema.Attribute{
 																				"configured_address": schema.StringAttribute{
-																					MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as dns server",
+																					MarkdownDescription: "Configured Address. Configured address from the network prefix is chosen as DNS server.",
 																					Optional:            true,
 																				},
 																			},
@@ -1771,11 +1771,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																			MarkdownDescription: "Enable this option",
 																		},
 																		"dhcp_networks": schema.ListNestedBlock{
-																			MarkdownDescription: "DHCP IPV6 Networks. List of networks from which DHCP server can allocate ip addresses",
+																			MarkdownDescription: "DHCP IPv6 Networks. List of networks from which DHCP server can allocate IP addresses .",
 																			NestedObject: schema.NestedBlockObject{
 																				Attributes: map[string]schema.Attribute{
 																					"network_prefix": schema.StringAttribute{
-																						MarkdownDescription: "Network Prefix. Network Prefix to be used for IPV6 address auto configuration",
+																						MarkdownDescription: "Network Prefix. Network Prefix to be used for IPv6 address auto configuration.",
 																						Optional:            true,
 																					},
 																					"pool_settings": schema.StringAttribute{
@@ -1785,15 +1785,15 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																				},
 																				Blocks: map[string]schema.Block{
 																					"pools": schema.ListNestedBlock{
-																						MarkdownDescription: "DHCP Pools. List of non overlapping ip address ranges.",
+																						MarkdownDescription: "DHCP Pools. List of non overlapping IP address ranges.",
 																						NestedObject: schema.NestedBlockObject{
 																							Attributes: map[string]schema.Attribute{
 																								"end_ip": schema.StringAttribute{
-																									MarkdownDescription: "Ending IPV6. Ending IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
+																									MarkdownDescription: "Ending IPv6. Ending IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix.",
 																									Optional:            true,
 																								},
 																								"start_ip": schema.StringAttribute{
-																									MarkdownDescription: "Starting IPV6. Starting IPV6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5",
+																									MarkdownDescription: "Starting IPv6. Starting IPv6 address of the pool range. In case of address allocator, offset is derived based on network prefix. 2001::1 with prefix length of 64, start offset is 5.",
 																									Optional:            true,
 																								},
 																							},
@@ -1803,14 +1803,14 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																			},
 																		},
 																		"fixed_ip_map": schema.SingleNestedBlock{
-																			MarkdownDescription: "Fixed MAC Address to IPV6 Assignments. Fixed MAC address to ipv6 assignments, Key: Mac address, Value: IPV6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
+																			MarkdownDescription: "Fixed MAC Address to IPv6 Assignments. Fixed MAC address to IPv6 assignments, Key: MAC address, Value: IPv6 Address Assign fixed IPv6 addresses based on the MAC Address of the DHCP Client.",
 																		},
 																		"interface_ip_map": schema.SingleNestedBlock{
-																			MarkdownDescription: "Interface IPV6 Assignments. Map of Interface IPV6 assignments per node",
+																			MarkdownDescription: "Interface IPv6 Assignments. Map of Interface IPv6 assignments per node.",
 																			Attributes:          map[string]schema.Attribute{},
 																			Blocks: map[string]schema.Block{
 																				"interface_ip_map": schema.SingleNestedBlock{
-																					MarkdownDescription: "Site:Node to IPV6 Mapping. Map of Site:Node to IPV6 address.",
+																					MarkdownDescription: "Site:Node to IPv6 Mapping. Map of Site:Node to IPv6 address.",
 																				},
 																			},
 																		},
@@ -1842,27 +1842,27 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													MarkdownDescription: "Enable this option",
 												},
 												"static_ip": schema.SingleNestedBlock{
-													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"cluster_static_ip": schema.SingleNestedBlock{
-															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"interface_ip_map": schema.SingleNestedBlock{
-																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address.",
 																},
 															},
 														},
 														"node_static_ip": schema.SingleNestedBlock{
-															MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+															MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node.",
 															Attributes: map[string]schema.Attribute{
 																"default_gw": schema.StringAttribute{
 																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
 																	Optional:            true,
 																},
 																"ip_address": schema.StringAttribute{
-																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length .",
 																	Optional:            true,
 																},
 															},
@@ -1870,27 +1870,27 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													},
 												},
 												"static_ipv6_address": schema.SingleNestedBlock{
-													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters",
+													MarkdownDescription: "Static IP Parameters. Configure Static IP parameters.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"cluster_static_ip": schema.SingleNestedBlock{
-															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster",
+															MarkdownDescription: "Cluster: Static IP Parameters. Configure Static IP parameters for cluster.",
 															Attributes:          map[string]schema.Attribute{},
 															Blocks: map[string]schema.Block{
 																"interface_ip_map": schema.SingleNestedBlock{
-																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static ip configuration value, Key:Node, Value:IP Address",
+																	MarkdownDescription: "Node to IP Mapping. Map of Node to Static IP configuration value, Key:Node, Value:IP Address.",
 																},
 															},
 														},
 														"node_static_ip": schema.SingleNestedBlock{
-															MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node",
+															MarkdownDescription: "Node: Static IP Parameters. Configure Static IP parameters for a node.",
 															Attributes: map[string]schema.Attribute{
 																"default_gw": schema.StringAttribute{
 																	MarkdownDescription: "Default Gateway. IP address of the default gateway.",
 																	Optional:            true,
 																},
 																"ip_address": schema.StringAttribute{
-																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length",
+																	MarkdownDescription: "IP address/Prefix Length. IP address of the interface and prefix length .",
 																	Optional:            true,
 																},
 															},
@@ -1906,7 +1906,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 											},
 										},
 										"labels": schema.SingleNestedBlock{
-											MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy",
+											MarkdownDescription: "Interface Labels. Add Labels for this Interface, these labels can be used in firewall policy.",
 										},
 									},
 								},
@@ -1923,10 +1923,10 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						MarkdownDescription: "Enable this option",
 					},
 					"sli_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Site Local Network Configuration. Site local network configuration",
+						MarkdownDescription: "Site Local Network Configuration. Site local network configuration.",
 						Attributes: map[string]schema.Attribute{
 							"nameserver": schema.StringAttribute{
-								MarkdownDescription: "DNS V4 Server. Optional DNS V4 server IP to be used for name resolution",
+								MarkdownDescription: "DNS V4 Server. Optional DNS V4 server IP to be used for name resolution.",
 								Optional:            true,
 							},
 							"vip": schema.StringAttribute{
@@ -1936,18 +1936,18 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						},
 						Blocks: map[string]schema.Block{
 							"dc_cluster_group": schema.SingleNestedBlock{
-								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -1957,7 +1957,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 								},
 							},
 							"labels": schema.SingleNestedBlock{
-								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy",
+								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy.",
 							},
 							"no_dc_cluster_group": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
@@ -1969,11 +1969,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 								MarkdownDescription: "Enable this option",
 							},
 							"static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Static Routes List. List of static routes",
+								MarkdownDescription: "Static Routes List. List of static routes.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static Routes. List of static routes",
+										MarkdownDescription: "Static Routes. List of static routes .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
@@ -1982,11 +1982,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
-													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													MarkdownDescription: "IP Address. Traffic matching the IP prefixes is sent to this IP Address.",
 													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
-													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
+													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes .",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
@@ -1996,25 +1996,25 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
-													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
-															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface.",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
-																		MarkdownDescription: "Node. Node name on this site",
+																		MarkdownDescription: "Node. Node name on this site.",
 																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"interface": schema.ListNestedBlock{
-																		MarkdownDescription: "Interface. Interface reference on this node",
+																		MarkdownDescription: "Interface. Interface reference on this node.",
 																		NestedObject: schema.NestedBlockObject{
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
-																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2022,15 +2022,15 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																					},
 																				},
 																				"name": schema.StringAttribute{
-																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2038,7 +2038,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																					},
 																				},
 																				"uid": schema.StringAttribute{
-																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2059,11 +2059,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 								},
 							},
 							"static_v6_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Static IPv6 Routes List. List of IPv6 static routes",
+								MarkdownDescription: "Static IPv6 Routes List. List of IPv6 static routes.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
+										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
@@ -2072,11 +2072,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
-													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													MarkdownDescription: "IP Address. Traffic matching the IP prefixes is sent to this IP Address.",
 													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
-													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes",
+													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes .",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
@@ -2086,25 +2086,25 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
-													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
-															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface.",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
-																		MarkdownDescription: "Node. Node name on this site",
+																		MarkdownDescription: "Node. Node name on this site.",
 																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"interface": schema.ListNestedBlock{
-																		MarkdownDescription: "Interface. Interface reference on this node",
+																		MarkdownDescription: "Interface. Interface reference on this node.",
 																		NestedObject: schema.NestedBlockObject{
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
-																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2112,15 +2112,15 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																					},
 																				},
 																				"name": schema.StringAttribute{
-																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2128,7 +2128,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																					},
 																				},
 																				"uid": schema.StringAttribute{
-																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2151,10 +2151,10 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						},
 					},
 					"slo_config": schema.SingleNestedBlock{
-						MarkdownDescription: "Site Local Network Configuration. Site local network configuration",
+						MarkdownDescription: "Site Local Network Configuration. Site local network configuration.",
 						Attributes: map[string]schema.Attribute{
 							"nameserver": schema.StringAttribute{
-								MarkdownDescription: "DNS V4 Server. Optional DNS V4 server IP to be used for name resolution",
+								MarkdownDescription: "DNS V4 Server. Optional DNS V4 server IP to be used for name resolution.",
 								Optional:            true,
 							},
 							"vip": schema.StringAttribute{
@@ -2164,18 +2164,18 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 						},
 						Blocks: map[string]schema.Block{
 							"dc_cluster_group": schema.SingleNestedBlock{
-								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+								MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 								Attributes: map[string]schema.Attribute{
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -2185,7 +2185,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 								},
 							},
 							"labels": schema.SingleNestedBlock{
-								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy",
+								MarkdownDescription: "Network Labels. Add Labels for this network, these labels can be used in firewall policy.",
 							},
 							"no_dc_cluster_group": schema.SingleNestedBlock{
 								MarkdownDescription: "Enable this option",
@@ -2197,11 +2197,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 								MarkdownDescription: "Enable this option",
 							},
 							"static_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Static Routes List. List of static routes",
+								MarkdownDescription: "Static Routes List. List of static routes.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static Routes. List of static routes",
+										MarkdownDescription: "Static Routes. List of static routes .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
@@ -2210,11 +2210,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
-													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													MarkdownDescription: "IP Address. Traffic matching the IP prefixes is sent to this IP Address.",
 													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
-													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes",
+													MarkdownDescription: "IP Prefixes. List of route prefixes that have common next hop and attributes .",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
@@ -2224,25 +2224,25 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
-													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
-															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface.",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
-																		MarkdownDescription: "Node. Node name on this site",
+																		MarkdownDescription: "Node. Node name on this site.",
 																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"interface": schema.ListNestedBlock{
-																		MarkdownDescription: "Interface. Interface reference on this node",
+																		MarkdownDescription: "Interface. Interface reference on this node.",
 																		NestedObject: schema.NestedBlockObject{
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
-																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2250,15 +2250,15 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																					},
 																				},
 																				"name": schema.StringAttribute{
-																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2266,7 +2266,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																					},
 																				},
 																				"uid": schema.StringAttribute{
-																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2287,11 +2287,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 								},
 							},
 							"static_v6_routes": schema.SingleNestedBlock{
-								MarkdownDescription: "Static IPv6 Routes List. List of IPv6 static routes",
+								MarkdownDescription: "Static IPv6 Routes List. List of IPv6 static routes.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"static_routes": schema.ListNestedBlock{
-										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes",
+										MarkdownDescription: "Static IPv6 Routes. List of IPv6 static routes .",
 										NestedObject: schema.NestedBlockObject{
 											Attributes: map[string]schema.Attribute{
 												"attrs": schema.ListAttribute{
@@ -2300,11 +2300,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													ElementType:         types.StringType,
 												},
 												"ip_address": schema.StringAttribute{
-													MarkdownDescription: "IP Address. Traffic matching the ip prefixes is sent to this IP Address",
+													MarkdownDescription: "IP Address. Traffic matching the IP prefixes is sent to this IP Address.",
 													Optional:            true,
 												},
 												"ip_prefixes": schema.ListAttribute{
-													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes",
+													MarkdownDescription: "IPv6 Prefixes. List of IPv6 route prefixes that have common next hop and attributes .",
 													Optional:            true,
 													ElementType:         types.StringType,
 												},
@@ -2314,25 +2314,25 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 													MarkdownDescription: "Enable this option",
 												},
 												"node_interface": schema.SingleNestedBlock{
-													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces",
+													MarkdownDescription: "NodeInterfaceType. On multinode site, this type holds the information about per node interfaces.",
 													Attributes:          map[string]schema.Attribute{},
 													Blocks: map[string]schema.Block{
 														"list": schema.ListNestedBlock{
-															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface",
+															MarkdownDescription: "Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface.",
 															NestedObject: schema.NestedBlockObject{
 																Attributes: map[string]schema.Attribute{
 																	"node": schema.StringAttribute{
-																		MarkdownDescription: "Node. Node name on this site",
+																		MarkdownDescription: "Node. Node name on this site.",
 																		Optional:            true,
 																	},
 																},
 																Blocks: map[string]schema.Block{
 																	"interface": schema.ListNestedBlock{
-																		MarkdownDescription: "Interface. Interface reference on this node",
+																		MarkdownDescription: "Interface. Interface reference on this node.",
 																		NestedObject: schema.NestedBlockObject{
 																			Attributes: map[string]schema.Attribute{
 																				"kind": schema.StringAttribute{
-																					MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+																					MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2340,15 +2340,15 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																					},
 																				},
 																				"name": schema.StringAttribute{
-																					MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+																					MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 																					Optional:            true,
 																				},
 																				"namespace": schema.StringAttribute{
-																					MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+																					MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 																					Optional:            true,
 																				},
 																				"tenant": schema.StringAttribute{
-																					MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+																					MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2356,7 +2356,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 																					},
 																				},
 																				"uid": schema.StringAttribute{
-																					MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+																					MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 																					Optional:            true,
 																					Computed:            true,
 																					PlanModifiers: []planmodifier.String{
@@ -2423,18 +2423,18 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"log_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+				MarkdownDescription: "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 				Attributes: map[string]schema.Attribute{
 					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 						Optional:            true,
 					},
 					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 						Optional:            true,
 						Computed:            true,
 						PlanModifiers: []planmodifier.String{
@@ -2447,15 +2447,15 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "Enable this option",
 			},
 			"master_node_configuration": schema.ListNestedBlock{
-				MarkdownDescription: "Master Nodes. Configuration of master nodes",
+				MarkdownDescription: "Master Nodes. Configuration of master nodes .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. Names of master node",
+							MarkdownDescription: "Name. Names of master node .",
 							Optional:            true,
 						},
 						"public_ip": schema.StringAttribute{
-							MarkdownDescription: "Public IP. IP Address of the master node. This ip will be used when other sites connect via Site Mesh Group",
+							MarkdownDescription: "Public IP. IP Address of the master node. This IP will be used when other sites connect via Site Mesh Group.",
 							Optional:            true,
 						},
 					},
@@ -2491,11 +2491,11 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				},
 			},
 			"performance_enhancement_mode": schema.SingleNestedBlock{
-				MarkdownDescription: "Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
+				MarkdownDescription: "Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-						MarkdownDescription: "L3 Mode Enhanced Performance.L3 enhanced performance mode options",
+						MarkdownDescription: "L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"jumbo": schema.SingleNestedBlock{
@@ -2515,7 +2515,7 @@ func (r *SecuremeshSiteResource) Schema(ctx context.Context, req resource.Schema
 				MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 				Attributes: map[string]schema.Attribute{
 					"volterra_software_version": schema.StringAttribute{
-						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. crt-20210329-1002.",
+						MarkdownDescription: "F5XC Software Version. Specify a F5XC Software Version to be used e.g. Crt-20210329-1002.",
 						Optional:            true,
 					},
 				},

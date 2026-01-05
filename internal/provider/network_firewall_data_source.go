@@ -42,7 +42,7 @@ func (d *NetworkFirewallDataSource) Metadata(ctx context.Context, req datasource
 
 func (d *NetworkFirewallDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace configuration.",
+		MarkdownDescription: "Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

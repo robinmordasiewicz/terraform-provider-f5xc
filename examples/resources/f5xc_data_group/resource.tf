@@ -24,7 +24,7 @@ resource "f5xc_data_group" "example" {
   records {
     # Configure records settings
   }
-  # Integer record List. Data group with integer record List
+  # Integer record List. Data group with integer record List.
   integer_records {
     # Configure integer_records settings
   }

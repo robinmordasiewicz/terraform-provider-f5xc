@@ -1,5 +1,5 @@
 # Route Resource Example
-# Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+# Manages route object in a given namespace. Route object is list of route rules. Each rule has match condition to match incoming requests and actions to take on matching requests. Virtual host object has reference to route object. in F5 Distributed Cloud.
 
 # Basic Route configuration
 resource "f5xc_route" "example" {

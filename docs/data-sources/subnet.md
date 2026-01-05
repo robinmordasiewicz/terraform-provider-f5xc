@@ -9,7 +9,7 @@ description: |-
 
 Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.
 
-~> **Note** Please refer to [Subnet API docs](https://docs.cloud.f5.com/docs-v2/api/subnet) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

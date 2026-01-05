@@ -1401,7 +1401,7 @@ func (r *GlobalLogReceiverResource) Metadata(ctx context.Context, req resource.M
 func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             global_log_receiverSchemaVersion,
-		MarkdownDescription: "Manages a Global Log Receiver resource in F5 Distributed Cloud for global log aggregation settings.",
+		MarkdownDescription: "Manages new Global Log Receiver object. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Global Log Receiver. Must be unique within the namespace.",
@@ -1460,35 +1460,35 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "[OneOf: audit_logs, dns_logs, request_logs, security_events] Enable this option",
 			},
 			"aws_cloud_watch_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver] AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver",
+				MarkdownDescription: "[OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver] AWS Cloudwatch Logs Configuration. AWS Cloudwatch Logs Configuration for Global Log Receiver.",
 				Attributes: map[string]schema.Attribute{
 					"aws_region": schema.StringAttribute{
-						MarkdownDescription: "AWS Region. AWS Region Name",
+						MarkdownDescription: "AWS Region. AWS Region Name .",
 						Optional:            true,
 					},
 					"group_name": schema.StringAttribute{
-						MarkdownDescription: "Group Name. The group name of the target Cloudwatch Logs stream",
+						MarkdownDescription: "Group Name. The group name of the target Cloudwatch Logs stream .",
 						Optional:            true,
 					},
 					"stream_name": schema.StringAttribute{
-						MarkdownDescription: "Stream Name. The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time",
+						MarkdownDescription: "Stream Name. The stream name of the target Cloudwatch Logs stream. Note that there can only be one writer to a log stream at a time .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"aws_cred": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -1498,18 +1498,18 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"batch": schema.SingleNestedBlock{
-						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
+						MarkdownDescription: "Batch OPTIONS. Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds.",
 								Optional:            true,
 							},
 						},
@@ -1526,7 +1526,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"compression": schema.SingleNestedBlock{
-						MarkdownDescription: "Compression Type. Compression Type",
+						MarkdownDescription: "Compression Type. Compression Type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
@@ -1543,35 +1543,35 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"azure_event_hubs_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver",
+				MarkdownDescription: "Azure Event Hubs Configuration. Azure Event Hubs Configuration for Global Log Receiver.",
 				Attributes: map[string]schema.Attribute{
 					"instance": schema.StringAttribute{
-						MarkdownDescription: "Event Hubs Instance. Event Hubs Instance name into which logs should be stored",
+						MarkdownDescription: "Event Hubs Instance. Event Hubs Instance name into which logs should be stored .",
 						Optional:            true,
 					},
 					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Event Hubs Namespace. Event Hubs Namespace is namespace with instance into which logs should be stored",
+						MarkdownDescription: "Event Hubs Namespace. Event Hubs Namespace is namespace with instance into which logs should be stored .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"connection_string": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -1580,11 +1580,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -1594,27 +1594,27 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"azure_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver",
+				MarkdownDescription: "Azure Blob Configuration. Azure Blob Configuration for Global Log Receiver.",
 				Attributes: map[string]schema.Attribute{
 					"container_name": schema.StringAttribute{
-						MarkdownDescription: "Container Name. Container Name is the name of the container into which logs should be stored",
+						MarkdownDescription: "Container Name. Container Name is the name of the container into which logs should be stored .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"batch": schema.SingleNestedBlock{
-						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
+						MarkdownDescription: "Batch OPTIONS. Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds.",
 								Optional:            true,
 							},
 						},
@@ -1631,7 +1631,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"compression": schema.SingleNestedBlock{
-						MarkdownDescription: "Compression Type. Compression Type",
+						MarkdownDescription: "Compression Type. Compression Type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
@@ -1646,22 +1646,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"connection_string": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -1670,11 +1670,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -1682,7 +1682,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"filename_options": schema.SingleNestedBlock{
-						MarkdownDescription: "Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file",
+						MarkdownDescription: "Filename OPTIONS. Filename OPTIONS allow customization of filename and folder paths used by a destination endpoint bucket or file.",
 						Attributes: map[string]schema.Attribute{
 							"custom_folder": schema.StringAttribute{
 								MarkdownDescription: "Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i`",
@@ -1701,31 +1701,31 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"datadog_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "Datadog Configuration. Configuration for Datadog endpoint",
+				MarkdownDescription: "Datadog Configuration. Configuration for Datadog endpoint.",
 				Attributes: map[string]schema.Attribute{
 					"endpoint": schema.StringAttribute{
-						MarkdownDescription: "Datadog Endpoint. Datadog Endpoint, example: `example.com:9000`",
+						MarkdownDescription: "Datadog Endpoint. Datadog Endpoint,.",
 						Optional:            true,
 					},
 					"site": schema.StringAttribute{
-						MarkdownDescription: "Datadog Site. Datadog Site, example: `datadoghq.com`",
+						MarkdownDescription: "Datadog Site. Datadog Site,.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"batch": schema.SingleNestedBlock{
-						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
+						MarkdownDescription: "Batch OPTIONS. Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds.",
 								Optional:            true,
 							},
 						},
@@ -1742,7 +1742,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"compression": schema.SingleNestedBlock{
-						MarkdownDescription: "Compression Type. Compression Type",
+						MarkdownDescription: "Compression Type. Compression Type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
@@ -1757,22 +1757,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"datadog_api_key": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -1781,11 +1781,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -1796,7 +1796,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Enable this option",
 					},
 					"use_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
+						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
@@ -1820,7 +1820,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
-								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
+								MarkdownDescription: "MTLS Client Config. MTLS Client config allows configuration of mTLS client OPTIONS.",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
@@ -1829,22 +1829,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
-										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
-												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 														Optional:            true,
 													},
 													"location": schema.StringAttribute{
-														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
-														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 												},
@@ -1853,11 +1853,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
-														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 													"url": schema.StringAttribute{
-														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 														Optional:            true,
 													},
 												},
@@ -1877,27 +1877,27 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Enable this option",
 			},
 			"gcp_bucket_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver",
+				MarkdownDescription: "GCP BucketConfiguration. GCP Bucket Configuration for Global Log Receiver.",
 				Attributes: map[string]schema.Attribute{
 					"bucket": schema.StringAttribute{
-						MarkdownDescription: "GCP Bucket Name. GCP Bucket Name",
+						MarkdownDescription: "GCP Bucket Name. GCP Bucket Name .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"batch": schema.SingleNestedBlock{
-						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
+						MarkdownDescription: "Batch OPTIONS. Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds.",
 								Optional:            true,
 							},
 						},
@@ -1914,7 +1914,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"compression": schema.SingleNestedBlock{
-						MarkdownDescription: "Compression Type. Compression Type",
+						MarkdownDescription: "Compression Type. Compression Type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
@@ -1929,7 +1929,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"filename_options": schema.SingleNestedBlock{
-						MarkdownDescription: "Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file",
+						MarkdownDescription: "Filename OPTIONS. Filename OPTIONS allow customization of filename and folder paths used by a destination endpoint bucket or file.",
 						Attributes: map[string]schema.Attribute{
 							"custom_folder": schema.StringAttribute{
 								MarkdownDescription: "Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i`",
@@ -1946,18 +1946,18 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"gcp_cred": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -1969,10 +1969,10 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"http_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "HTTP Configuration. Configuration for HTTP endpoint",
+				MarkdownDescription: "HTTP Configuration. Configuration for HTTP endpoint.",
 				Attributes: map[string]schema.Attribute{
 					"uri": schema.StringAttribute{
-						MarkdownDescription: "HTTP Uri. HTTP Uri is the Uri of the HTTP endpoint to send logs to, example: `http://example.com:9000/logs`",
+						MarkdownDescription: "HTTP URI. HTTP URI is the URI of the HTTP endpoint to send logs to, .",
 						Optional:            true,
 					},
 				},
@@ -1981,28 +1981,28 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Basic Authentication Credentials. Authentication parameters to access HTPP Log Receiver Endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"user_name": schema.StringAttribute{
-								MarkdownDescription: "User Name. HTTP Basic Auth User Name",
+								MarkdownDescription: "User Name. HTTP Basic Auth User Name.",
 								Optional:            true,
 							},
 						},
 						Blocks: map[string]schema.Block{
 							"password": schema.SingleNestedBlock{
-								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
-										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 												Optional:            true,
 											},
 											"location": schema.StringAttribute{
-												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+												MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
-												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 										},
@@ -2011,11 +2011,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
-												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 											"url": schema.StringAttribute{
-												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 												Optional:            true,
 											},
 										},
@@ -2028,26 +2028,26 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Enable this option",
 					},
 					"auth_token": schema.SingleNestedBlock{
-						MarkdownDescription: "Access Token. Authentication Token for access",
+						MarkdownDescription: "Access Token. Authentication Token for access.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"token": schema.SingleNestedBlock{
-								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+								MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 								Attributes:          map[string]schema.Attribute{},
 								Blocks: map[string]schema.Block{
 									"blindfold_secret_info": schema.SingleNestedBlock{
-										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+										MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 										Attributes: map[string]schema.Attribute{
 											"decryption_provider": schema.StringAttribute{
 												MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 												Optional:            true,
 											},
 											"location": schema.StringAttribute{
-												MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+												MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 												Optional:            true,
 											},
 											"store_provider": schema.StringAttribute{
-												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 										},
@@ -2056,11 +2056,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 										MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 										Attributes: map[string]schema.Attribute{
 											"provider_ref": schema.StringAttribute{
-												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+												MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 												Optional:            true,
 											},
 											"url": schema.StringAttribute{
-												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+												MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 												Optional:            true,
 											},
 										},
@@ -2070,18 +2070,18 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"batch": schema.SingleNestedBlock{
-						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
+						MarkdownDescription: "Batch OPTIONS. Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds.",
 								Optional:            true,
 							},
 						},
@@ -2098,7 +2098,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"compression": schema.SingleNestedBlock{
-						MarkdownDescription: "Compression Type. Compression Type",
+						MarkdownDescription: "Compression Type. Compression Type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
@@ -2116,7 +2116,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Enable this option",
 					},
 					"use_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
+						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
@@ -2140,7 +2140,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
-								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
+								MarkdownDescription: "MTLS Client Config. MTLS Client config allows configuration of mTLS client OPTIONS.",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
@@ -2149,22 +2149,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
-										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
-												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 														Optional:            true,
 													},
 													"location": schema.StringAttribute{
-														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
-														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 												},
@@ -2173,11 +2173,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
-														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 													"url": schema.StringAttribute{
-														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 														Optional:            true,
 													},
 												},
@@ -2194,32 +2194,32 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"kafka_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "Kafka Configuration. Kafka Configuration for Global Log Receiver",
+				MarkdownDescription: "Kafka Configuration. Kafka Configuration for Global Log Receiver.",
 				Attributes: map[string]schema.Attribute{
 					"bootstrap_servers": schema.ListAttribute{
-						MarkdownDescription: "Kafka Bootstrap Servers List. List of host:port pairs of the Kafka brokers",
+						MarkdownDescription: "Kafka Bootstrap Servers List. List of host:port pairs of the Kafka brokers .",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
 					"kafka_topic": schema.StringAttribute{
-						MarkdownDescription: "Kafka Topic. The Kafka topic name to write events to",
+						MarkdownDescription: "Kafka Topic. The Kafka topic name to write events to .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"batch": schema.SingleNestedBlock{
-						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
+						MarkdownDescription: "Batch OPTIONS. Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds.",
 								Optional:            true,
 							},
 						},
@@ -2236,7 +2236,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"compression": schema.SingleNestedBlock{
-						MarkdownDescription: "Compression Type. Compression Type",
+						MarkdownDescription: "Compression Type. Compression Type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
@@ -2254,7 +2254,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Enable this option",
 					},
 					"use_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
+						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
@@ -2278,7 +2278,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
-								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
+								MarkdownDescription: "MTLS Client Config. MTLS Client config allows configuration of mTLS client OPTIONS.",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
@@ -2287,22 +2287,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
-										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
-												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 														Optional:            true,
 													},
 													"location": schema.StringAttribute{
-														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
-														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 												},
@@ -2311,11 +2311,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
-														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 													"url": schema.StringAttribute{
-														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 														Optional:            true,
 													},
 												},
@@ -2332,26 +2332,26 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"new_relic_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "NewRelic Configuration. Configuration for NewRelic endpoint",
+				MarkdownDescription: "NewRelic Configuration. Configuration for NewRelic endpoint.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"api_key": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -2360,11 +2360,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -2386,37 +2386,37 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Enable this option",
 			},
 			"ns_list": schema.SingleNestedBlock{
-				MarkdownDescription: "Namespace List. Namespace List",
+				MarkdownDescription: "Namespace List. Namespace List.",
 				Attributes: map[string]schema.Attribute{
 					"namespaces": schema.ListAttribute{
-						MarkdownDescription: "namespaces. List of namespaces to stream logs for",
+						MarkdownDescription: "Namespaces. List of namespaces to stream logs for .",
 						Optional:            true,
 						ElementType:         types.StringType,
 					},
 				},
 			},
 			"qradar_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "IBM QRadar Configuration. Configuration for IBM QRadar endpoint",
+				MarkdownDescription: "IBM QRadar Configuration. Configuration for IBM QRadar endpoint.",
 				Attributes: map[string]schema.Attribute{
 					"uri": schema.StringAttribute{
-						MarkdownDescription: "Log Source Collector URL. Log Source Collector URL is the URL of the IBM QRadar Log Source Collector to send logs to, example: `http://example.com:9000`",
+						MarkdownDescription: "Log Source Collector URL. Log Source Collector URL is the URL of the IBM QRadar Log Source Collector to send logs to, .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"batch": schema.SingleNestedBlock{
-						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
+						MarkdownDescription: "Batch OPTIONS. Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds.",
 								Optional:            true,
 							},
 						},
@@ -2433,7 +2433,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"compression": schema.SingleNestedBlock{
-						MarkdownDescription: "Compression Type. Compression Type",
+						MarkdownDescription: "Compression Type. Compression Type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
@@ -2451,7 +2451,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Enable this option",
 					},
 					"use_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
+						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
@@ -2475,7 +2475,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
-								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
+								MarkdownDescription: "MTLS Client Config. MTLS Client config allows configuration of mTLS client OPTIONS.",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
@@ -2484,22 +2484,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
-										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
-												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 														Optional:            true,
 													},
 													"location": schema.StringAttribute{
-														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
-														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 												},
@@ -2508,11 +2508,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
-														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 													"url": schema.StringAttribute{
-														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 														Optional:            true,
 													},
 												},
@@ -2532,31 +2532,31 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Enable this option",
 			},
 			"s3_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "S3 Configuration. S3 Configuration for Global Log Receiver",
+				MarkdownDescription: "S3 Configuration. S3 Configuration for Global Log Receiver.",
 				Attributes: map[string]schema.Attribute{
 					"aws_region": schema.StringAttribute{
-						MarkdownDescription: "AWS Region. AWS Region Name",
+						MarkdownDescription: "AWS Region. AWS Region Name .",
 						Optional:            true,
 					},
 					"bucket": schema.StringAttribute{
-						MarkdownDescription: "S3 Bucket Name. S3 Bucket Name",
+						MarkdownDescription: "S3 Bucket Name. S3 Bucket Name .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"aws_cred": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -2566,18 +2566,18 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"batch": schema.SingleNestedBlock{
-						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
+						MarkdownDescription: "Batch OPTIONS. Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds.",
 								Optional:            true,
 							},
 						},
@@ -2594,7 +2594,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"compression": schema.SingleNestedBlock{
-						MarkdownDescription: "Compression Type. Compression Type",
+						MarkdownDescription: "Compression Type. Compression Type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
@@ -2609,7 +2609,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"filename_options": schema.SingleNestedBlock{
-						MarkdownDescription: "Filename Options. Filename Options allow customization of filename and folder paths used by a destination endpoint bucket or file",
+						MarkdownDescription: "Filename OPTIONS. Filename OPTIONS allow customization of filename and folder paths used by a destination endpoint bucket or file.",
 						Attributes: map[string]schema.Attribute{
 							"custom_folder": schema.StringAttribute{
 								MarkdownDescription: "Custom Folder. Use your own folder name as the name of the folder in the endpoint bucket or file The folder name must match `/^[a-z_][a-z0-9\\-\\._]*$/i`",
@@ -2631,27 +2631,27 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				MarkdownDescription: "Enable this option",
 			},
 			"splunk_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint",
+				MarkdownDescription: "Splunk HEC Logs Configuration. Configuration for Splunk HEC Logs endpoint.",
 				Attributes: map[string]schema.Attribute{
 					"endpoint": schema.StringAttribute{
-						MarkdownDescription: "Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, example: `https://http-input-hec.splunkcloud.com` (Note: must not contain `/services/collector`)",
+						MarkdownDescription: "Splunk HEC Logs Endpoint. Splunk HEC Logs Endpoint, (Note: must not contain `/services/collector`) .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"batch": schema.SingleNestedBlock{
-						MarkdownDescription: "Batch Options. Batch Options allow tuning for how batches of logs are sent to an endpoint",
+						MarkdownDescription: "Batch OPTIONS. Batch OPTIONS allow tuning for how batches of logs are sent to an endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"max_bytes": schema.Int64Attribute{
-								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes",
+								MarkdownDescription: "Max Bytes. Send batch to endpoint after the batch is equal to or larger than this many bytes.",
 								Optional:            true,
 							},
 							"max_events": schema.Int64Attribute{
-								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch",
+								MarkdownDescription: "Max Events. Send batch to endpoint after this many log messages are in the batch.",
 								Optional:            true,
 							},
 							"timeout_seconds": schema.StringAttribute{
-								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds",
+								MarkdownDescription: "Timeout Seconds. Send batch to the endpoint after this many seconds.",
 								Optional:            true,
 							},
 						},
@@ -2668,7 +2668,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"compression": schema.SingleNestedBlock{
-						MarkdownDescription: "Compression Type. Compression Type",
+						MarkdownDescription: "Compression Type. Compression Type.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"compression_default": schema.SingleNestedBlock{
@@ -2686,22 +2686,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						MarkdownDescription: "Enable this option",
 					},
 					"splunk_hec_token": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -2710,11 +2710,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -2722,7 +2722,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"use_tls": schema.SingleNestedBlock{
-						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint",
+						MarkdownDescription: "TLS Parameters Endpoint. TLS Parameters for client connection to the endpoint.",
 						Attributes: map[string]schema.Attribute{
 							"trusted_ca_url": schema.StringAttribute{
 								MarkdownDescription: "Server CA Certificates. The URL or value for trusted Server CA certificate or certificate chain Certificates in PEM format including the PEM headers.",
@@ -2746,7 +2746,7 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Enable this option",
 							},
 							"mtls_enable": schema.SingleNestedBlock{
-								MarkdownDescription: "mTLS Client Config. mTLS Client config allows configuration of mtls client options",
+								MarkdownDescription: "MTLS Client Config. MTLS Client config allows configuration of mTLS client OPTIONS.",
 								Attributes: map[string]schema.Attribute{
 									"certificate": schema.StringAttribute{
 										MarkdownDescription: "Client Certificate. Client certificate is PEM-encoded certificate or certificate-chain.",
@@ -2755,22 +2755,22 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								},
 								Blocks: map[string]schema.Block{
 									"key_url": schema.SingleNestedBlock{
-										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+										MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"blindfold_secret_info": schema.SingleNestedBlock{
-												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+												MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 												Attributes: map[string]schema.Attribute{
 													"decryption_provider": schema.StringAttribute{
 														MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 														Optional:            true,
 													},
 													"location": schema.StringAttribute{
-														MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+														MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 														Optional:            true,
 													},
 													"store_provider": schema.StringAttribute{
-														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 												},
@@ -2779,11 +2779,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 												MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 												Attributes: map[string]schema.Attribute{
 													"provider_ref": schema.StringAttribute{
-														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+														MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 														Optional:            true,
 													},
 													"url": schema.StringAttribute{
-														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+														MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 														Optional:            true,
 													},
 												},
@@ -2800,26 +2800,26 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 				},
 			},
 			"sumo_logic_receiver": schema.SingleNestedBlock{
-				MarkdownDescription: "SumoLogic Configuration. Configuration for SumoLogic endpoint",
+				MarkdownDescription: "SumoLogic Configuration. Configuration for SumoLogic endpoint.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"url": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -2828,11 +2828,11 @@ func (r *GlobalLogReceiverResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},

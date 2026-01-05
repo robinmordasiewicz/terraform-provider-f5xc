@@ -2,20 +2,20 @@
 page_title: "f5xc_virtual_network Resource - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages virtual network in given namespace in F5 Distributed Cloud.
+  Manages virtual network in given namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_virtual_network (Resource)
 
-Manages virtual network in given namespace in F5 Distributed Cloud.
+Manages virtual network in given namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Virtual Network API docs](https://docs.cloud.f5.com/docs-v2/api/virtual-network) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Virtual Network Resource Example
-# Manages virtual network in given namespace in F5 Distributed Cloud.
+# Manages virtual network in given namespace. in F5 Distributed Cloud.
 
 # Basic Virtual Network configuration
 resource "f5xc_virtual_network" "example" {
@@ -69,7 +69,7 @@ resource "f5xc_virtual_network" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="global-network"></a>[`global_network`](#global-network) - Optional Block<br>Enable this option
-<br><br>&#x2022; <a id="legacy-type"></a>[`legacy_type`](#legacy-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<br><br>&#x2022; <a id="legacy-type"></a>[`legacy_type`](#legacy-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 <br><br>&#x2022; <a id="site-local-inside-network"></a>[`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="site-local-network"></a>[`site_local_network`](#site-local-network) - Optional Block<br>Enable this option
 
@@ -97,35 +97,35 @@ A [`static_routes`](#static-routes) block supports the following:
 
 <a id="static-routes-ip-prefixes"></a>&#x2022; [`ip_prefixes`](#static-routes-ip-prefixes) - Optional List<br>IP Prefixes. List of route prefixes that have common next hop and attributes
 
-<a id="static-routes-node-interface"></a>&#x2022; [`node_interface`](#static-routes-node-interface) - Optional Block<br>NodeInterfaceType. On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#static-routes-node-interface) below.
+<a id="static-routes-node-interface"></a>&#x2022; [`node_interface`](#static-routes-node-interface) - Optional Block<br>X-displayName: 'NodeInterfaceType' On multinode site, this type holds the information about per node interfaces<br>See [Node Interface](#static-routes-node-interface) below.
 
 #### Static Routes Node Interface
 
 A [`node_interface`](#static-routes-node-interface) block (within [`static_routes`](#static-routes)) supports the following:
 
-<a id="static-routes-node-interface-list"></a>&#x2022; [`list`](#static-routes-node-interface-list) - Optional Block<br>Node Interface Info. On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#static-routes-node-interface-list) below.
+<a id="static-routes-node-interface-list"></a>&#x2022; [`list`](#static-routes-node-interface-list) - Optional Block<br>X-displayName: 'Node Interface Info' On a multinode site, this list holds the nodes and corresponding networking_interface<br>See [List](#static-routes-node-interface-list) below.
 
 #### Static Routes Node Interface List
 
 A [`list`](#static-routes-node-interface-list) block (within [`static_routes.node_interface`](#static-routes-node-interface)) supports the following:
 
-<a id="interface-94c51c"></a>&#x2022; [`interface`](#interface-94c51c) - Optional Block<br>Interface. Interface reference on this node<br>See [Interface](#interface-94c51c) below.
+<a id="interface-94c51c"></a>&#x2022; [`interface`](#interface-94c51c) - Optional Block<br>X-displayName: 'Interface' Interface reference on this node<br>See [Interface](#interface-94c51c) below.
 
-<a id="static-routes-node-interface-list-node"></a>&#x2022; [`node`](#static-routes-node-interface-list-node) - Optional String<br>Node. Node name on this site
+<a id="static-routes-node-interface-list-node"></a>&#x2022; [`node`](#static-routes-node-interface-list-node) - Optional String<br>X-displayName: 'Node' Node name on this site
 
 #### Static Routes Node Interface List Interface
 
 An [`interface`](#interface-94c51c) block (within [`static_routes.node_interface.list`](#static-routes-node-interface-list)) supports the following:
 
-<a id="kind-86bbe9"></a>&#x2022; [`kind`](#kind-86bbe9) - Optional String<br>Object reference kind
+<a id="kind-86bbe9"></a>&#x2022; [`kind`](#kind-86bbe9) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-3e9abe"></a>&#x2022; [`name`](#name-3e9abe) - Optional String<br>Object reference name
+<a id="name-3e9abe"></a>&#x2022; [`name`](#name-3e9abe) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-1e21c2"></a>&#x2022; [`namespace`](#namespace-1e21c2) - Optional String<br>Object reference namespace
+<a id="namespace-1e21c2"></a>&#x2022; [`namespace`](#namespace-1e21c2) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-530222"></a>&#x2022; [`tenant`](#tenant-530222) - Optional String<br>Object reference tenant
+<a id="tenant-530222"></a>&#x2022; [`tenant`](#tenant-530222) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-feb6f3"></a>&#x2022; [`uid`](#uid-feb6f3) - Optional String<br>Object reference UID
+<a id="uid-feb6f3"></a>&#x2022; [`uid`](#uid-feb6f3) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Timeouts
 

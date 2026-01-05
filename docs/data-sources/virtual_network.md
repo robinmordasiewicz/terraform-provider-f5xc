@@ -2,14 +2,14 @@
 page_title: "f5xc_virtual_network Data Source - terraform-provider-f5xc"
 subcategory: "Networking"
 description: |-
-  Manages virtual network in given namespace in F5 Distributed Cloud.
+  Manages virtual network in given namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_virtual_network (Data Source)
 
-Manages virtual network in given namespace in F5 Distributed Cloud.
+Manages virtual network in given namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Virtual Network API docs](https://docs.cloud.f5.com/docs-v2/api/virtual-network) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

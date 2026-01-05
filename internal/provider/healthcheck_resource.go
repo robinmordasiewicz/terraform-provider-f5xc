@@ -191,7 +191,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"unhealthy_threshold": schema.Int64Attribute{
-				MarkdownDescription: "Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for http health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately.",
+				MarkdownDescription: "Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for HTTP health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.Int64{
@@ -207,7 +207,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				Delete: true,
 			}),
 			"http_health_check": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: http_health_check, tcp_health_check, udp_icmp_health_check] HTTP Health Check. Healthy if 'get' method on URL 'http(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request.",
+				MarkdownDescription: "[OneOf: http_health_check, tcp_health_check, udp_icmp_health_check] HTTP Health Check. Healthy if 'GET' method on URL 'HTTP(s)://<host>/<path>' with optional '<header>' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request.",
 				Attributes: map[string]schema.Attribute{
 					"expected_status_codes": schema.ListAttribute{
 						MarkdownDescription: "Expected Status Codes. Specifies a list of HTTP response status codes considered healthy. To treat default HTTP expected status code 200 as healthy, user has to configure it explicitly. This is a list of strings, each of which is single HTTP status code or a range with start and end values separated by '-'.",
@@ -228,7 +228,7 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 						ElementType:         types.StringType,
 					},
 					"use_http2": schema.BoolAttribute{
-						MarkdownDescription: "Use HTTP2. If set, health checks will be made using http/2.",
+						MarkdownDescription: "Use HTTP2. If set, health checks will be made using HTTP/2.",
 						Optional:            true,
 					},
 				},
@@ -245,11 +245,11 @@ func (r *HealthcheckResource) Schema(ctx context.Context, req resource.SchemaReq
 				MarkdownDescription: "TCP Health Check. Healthy if TCP connection is successful and response payload matches <expected_response>",
 				Attributes: map[string]schema.Attribute{
 					"expected_response": schema.StringAttribute{
-						MarkdownDescription: "Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
+						MarkdownDescription: "Expected Response. Raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
 						Optional:            true,
 					},
 					"send_payload": schema.StringAttribute{
-						MarkdownDescription: "Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
+						MarkdownDescription: "Send Payload. Raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload.",
 						Optional:            true,
 					},
 				},

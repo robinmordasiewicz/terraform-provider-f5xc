@@ -241,7 +241,7 @@ func (r *AppSettingResource) Metadata(ctx context.Context, req resource.Metadata
 func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             app_settingSchemaVersion,
-		MarkdownDescription: "Manages App setting configuration in namespace metadata.namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages App setting configuration in namespace metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the App Setting. Must be unique within the namespace.",
@@ -297,16 +297,16 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 				Delete: true,
 			}),
 			"app_type_settings": schema.ListNestedBlock{
-				MarkdownDescription: "Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace",
+				MarkdownDescription: "Customize AppType For This Namespace. List of settings to enable for each AppType, given instance of AppType Exist in this Namespace .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{},
 					Blocks: map[string]schema.Block{
 						"app_type_ref": schema.ListNestedBlock{
-							MarkdownDescription: "AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data",
+							MarkdownDescription: "AppType. The AppType of App instance in current Namespace. Associating an AppType reference, will enable analysis on this instance's generated data .",
 							NestedObject: schema.NestedBlockObject{
 								Attributes: map[string]schema.Attribute{
 									"kind": schema.StringAttribute{
-										MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+										MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -314,15 +314,15 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"name": schema.StringAttribute{
-										MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+										MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 										Optional:            true,
 									},
 									"namespace": schema.StringAttribute{
-										MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+										MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 										Optional:            true,
 									},
 									"tenant": schema.StringAttribute{
-										MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+										MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -330,7 +330,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 										},
 									},
 									"uid": schema.StringAttribute{
-										MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+										MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 										Optional:            true,
 										Computed:            true,
 										PlanModifiers: []planmodifier.String{
@@ -341,7 +341,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"business_logic_markup_setting": schema.SingleNestedBlock{
-							MarkdownDescription: "API Discovery. Settings specifying how API Discovery will be performed",
+							MarkdownDescription: "API Discovery. Settings specifying how API Discovery will be performed.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"disable": schema.SingleNestedBlock{
@@ -353,11 +353,11 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"timeseries_analyses_setting": schema.SingleNestedBlock{
-							MarkdownDescription: "DDoS Settings. Configuration for DDoS Detection",
+							MarkdownDescription: "DDoS Settings. Configuration for DDoS Detection.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"metric_selectors": schema.ListNestedBlock{
-									MarkdownDescription: "Metric Selectors. Define the metric selection criteria, i.e. the metrics source and the actual metrics that should be included in the detection logic",
+									MarkdownDescription: "Metric Selectors. Define the metric selection criteria, i.e. The metrics source and the actual metrics that should be included in the detection logic.",
 									NestedObject: schema.NestedBlockObject{
 										Attributes: map[string]schema.Attribute{
 											"metric": schema.ListAttribute{
@@ -375,7 +375,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 							},
 						},
 						"user_behavior_analysis_setting": schema.SingleNestedBlock{
-							MarkdownDescription: "User Behavior Analysis Setting. Configuration for user behavior analysis",
+							MarkdownDescription: "User Behavior Analysis Setting. Configuration for user behavior analysis.",
 							Attributes:          map[string]schema.Attribute{},
 							Blocks: map[string]schema.Block{
 								"disable_detection": schema.SingleNestedBlock{
@@ -424,19 +424,19 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Enable this option",
 										},
 										"include_failed_login_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior",
+											MarkdownDescription: "Failed Login Activity Setting. When enabled, the system monitors persistent failed login attempts from a user. A failed login is detected if a request results in a response code of 401. These settings specify how to use failed login activity to determine suspicious behavior.",
 											Attributes: map[string]schema.Attribute{
 												"login_failures_threshold": schema.Int64Attribute{
-													MarkdownDescription: "Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious",
+													MarkdownDescription: "Login Failures Threshold. The number of failed logins beyond which the system will flag this user as malicious .",
 													Optional:            true,
 												},
 											},
 										},
 										"include_forbidden_activity": schema.SingleNestedBlock{
-											MarkdownDescription: "Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior",
+											MarkdownDescription: "Forbidden Activity Setting. When L7 policy rules are set up to disallow certain types of requests, the system monitors persistent attempts from a user to send requests which result in policy denies. These settings specify how to use disallowed request activity from a user to determine suspicious behavior.",
 											Attributes: map[string]schema.Attribute{
 												"forbidden_requests_threshold": schema.Int64Attribute{
-													MarkdownDescription: "Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious",
+													MarkdownDescription: "Forbidden Requests Threshold. The number of forbidden requests beyond which the system will flag this user as malicious .",
 													Optional:            true,
 												},
 											},
@@ -463,7 +463,7 @@ func (r *AppSettingResource) Schema(ctx context.Context, req resource.SchemaRequ
 											MarkdownDescription: "Non-existent URL Custom Activity Setting.",
 											Attributes: map[string]schema.Attribute{
 												"nonexistent_requests_threshold": schema.Int64Attribute{
-													MarkdownDescription: "Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious",
+													MarkdownDescription: "Non-existent URL Custom Threshold (percentage). The percentage of non-existent requests beyond which the system will flag this user as malicious .",
 													Optional:            true,
 												},
 											},

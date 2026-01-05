@@ -2,20 +2,20 @@
 page_title: "f5xc_site_mesh_group Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
+  Manages Site Mesh Group in system namespace of user. in F5 Distributed Cloud.
 ---
 
 # f5xc_site_mesh_group (Resource)
 
-Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
+Manages Site Mesh Group in system namespace of user. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Site Mesh Group API docs](https://docs.cloud.f5.com/docs-v2/api/site-mesh-group) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Site Mesh Group Resource Example
-# Manages Site Mesh Group in system namespace of user in F5 Distributed Cloud.
+# Manages Site Mesh Group in system namespace of user. in F5 Distributed Cloud.
 
 # Basic Site Mesh Group configuration
 resource "f5xc_site_mesh_group" "example" {
@@ -119,7 +119,13 @@ A [`spoke_mesh`](#spoke-mesh) block supports the following:
 
 #### Spoke Mesh Hub Mesh Group
 
-<a id="objref-80b0a3"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`hub_mesh_group`](#spoke-mesh-hub-mesh-group) block (within [`spoke_mesh`](#spoke-mesh)) supports the following:
+
+<a id="spoke-mesh-hub-mesh-group-name"></a>&#x2022; [`name`](#spoke-mesh-hub-mesh-group-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="spoke-mesh-hub-mesh-group-namespace"></a>&#x2022; [`namespace`](#spoke-mesh-hub-mesh-group-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="spoke-mesh-hub-mesh-group-tenant"></a>&#x2022; [`tenant`](#spoke-mesh-hub-mesh-group-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Timeouts
 
@@ -137,15 +143,15 @@ A [`timeouts`](#timeouts) block supports the following:
 
 A [`virtual_site`](#virtual-site) block supports the following:
 
-<a id="virtual-site-kind"></a>&#x2022; [`kind`](#virtual-site-kind) - Optional String<br>Object reference kind
+<a id="virtual-site-kind"></a>&#x2022; [`kind`](#virtual-site-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="virtual-site-name"></a>&#x2022; [`name`](#virtual-site-name) - Optional String<br>Object reference name
+<a id="virtual-site-name"></a>&#x2022; [`name`](#virtual-site-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="virtual-site-namespace"></a>&#x2022; [`namespace`](#virtual-site-namespace) - Optional String<br>Object reference namespace
+<a id="virtual-site-namespace"></a>&#x2022; [`namespace`](#virtual-site-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="virtual-site-tenant"></a>&#x2022; [`tenant`](#virtual-site-tenant) - Optional String<br>Object reference tenant
+<a id="virtual-site-tenant"></a>&#x2022; [`tenant`](#virtual-site-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="virtual-site-uid"></a>&#x2022; [`uid`](#virtual-site-uid) - Optional String<br>Object reference UID
+<a id="virtual-site-uid"></a>&#x2022; [`uid`](#virtual-site-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 ---
 

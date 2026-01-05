@@ -130,7 +130,7 @@ func (r *FilterSetResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             filter_setSchemaVersion,
-		MarkdownDescription: "Manages a Filter Set resource in F5 Distributed Cloud for create configuration.",
+		MarkdownDescription: "Manages specification. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Filter Set. Must be unique within the namespace.",
@@ -178,7 +178,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"context_key": schema.StringAttribute{
-				MarkdownDescription: "Context Key. indexable context key that identifies a page or page type for which the FilterSet is applicable",
+				MarkdownDescription: "Context Key. Indexable context key that identifies a page or page type for which the FilterSet is applicable .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -194,33 +194,33 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 				Delete: true,
 			}),
 			"filter_fields": schema.ListNestedBlock{
-				MarkdownDescription: "Filter Fields. list of fields and their values selected by the user",
+				MarkdownDescription: "Filter Fields. List of fields and their values selected by the user .",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"field_id": schema.StringAttribute{
-							MarkdownDescription: "Field ID. an identifier for the field that maps to some UI filter component",
+							MarkdownDescription: "Field ID. An identifier for the field that maps to some UI filter component .",
 							Optional:            true,
 						},
 					},
 					Blocks: map[string]schema.Block{
 						"date_field": schema.SingleNestedBlock{
-							MarkdownDescription: "Filter Date/Time Range Field. either an absolute time range or a relative time interval",
+							MarkdownDescription: "Filter Date/Time Range Field. Either an absolute time range or a relative time interval.",
 							Attributes: map[string]schema.Attribute{
 								"relative": schema.StringAttribute{
-									MarkdownDescription: "Relative. relative time duration",
+									MarkdownDescription: "Relative. relative time duration.",
 									Optional:            true,
 								},
 							},
 							Blocks: map[string]schema.Block{
 								"absolute": schema.SingleNestedBlock{
-									MarkdownDescription: "Date Range. Date range is for selecting a date range",
+									MarkdownDescription: "Date Range. Date range is for selecting a date range.",
 									Attributes: map[string]schema.Attribute{
 										"end_date": schema.StringAttribute{
-											MarkdownDescription: "End Date. Contains end date",
+											MarkdownDescription: "End Date. Contains end date .",
 											Optional:            true,
 										},
 										"start_date": schema.StringAttribute{
-											MarkdownDescription: "Start Date. Contains start date",
+											MarkdownDescription: "Start Date. Contains start date .",
 											Optional:            true,
 										},
 									},
@@ -231,7 +231,7 @@ func (r *FilterSetResource) Schema(ctx context.Context, req resource.SchemaReque
 							MarkdownDescription: "Filter Expression Field.",
 							Attributes: map[string]schema.Attribute{
 								"expression": schema.StringAttribute{
-									MarkdownDescription: "Expression Value. expression is a kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values",
+									MarkdownDescription: "Expression Value. Expression is a Kubernetes style label expression for selections, but differs in that it allows special characters in the keys and values .",
 									Optional:            true,
 								},
 							},

@@ -454,7 +454,7 @@ func (r *ClusterResource) Metadata(ctx context.Context, req resource.MetadataReq
 func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             clusterSchemaVersion,
-		MarkdownDescription: "Manages cluster will create the object in the storage backend for namespace metadata.namespace in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages cluster will create the object in the storage backend for namespace metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Cluster. Must be unique within the namespace.",
@@ -592,7 +592,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "[OneOf: disable_proxy_protocol, proxy_protocol_v1, proxy_protocol_v2; Default: disable_proxy_protocol] Enable this option",
 			},
 			"endpoint_subsets": schema.ListNestedBlock{
-				MarkdownDescription: "Endpoint Subsets. Cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer. endpoint_subsets is list of subsets for this cluster. Each entry in this list has definition for a subset (which is collection of keys) During routing, the route’s metadata match configuration is used to find a specific subset. If there is a subset with the exact keys and values specified by the route, the subset is used for load balancing. Otherwise, the fallback policy is used. The cluster’s subset configuration must, therefore, contain a definition that has the same keys as a given route in order for subset load balancing to occur. RouteConfig routes: - match: - headers: [] path: path: /1.log query_params: [] routeDestination: destinations: - cluster: - kind: cluster.Object uid: 00000000-0000-0000-0001-000000000005 endpointSubsets: site: india EndpointConfig metadata: labels: deployment: debug site: india name: end-1 uid: end-1 ClusterConfig gcSpec: defaultSubset: stage: production fallbackPolicy: DEFAULT_SUBSET endpointSubsets: - keys: - site - keys: - stage - app Assume the below endpoints are defined and associated with the cluster. Endpoint Labels -------- ------ ep1 stage: production, site: india ep2 stage: deployment, site: us ep3 stage: production, app: hr ep4 site: india The following table describes some routes and the result of their application to the cluster. The subset definition for cluster is assumed to be same as given above in the ClusterConfig section RouteMatch Criteria Subset Reason ------------------- ------ ------ site: india ep1, ep4 Subset of endpoints selected site: us ep2 Subset of endpoints selected app: hr ep1, ep3 Fallback: No subset selector for 'app' alone stage: production, app: hr ep3 Subset of endpoints selected other: x ep1, ep3 Fallback: No subset selector for “other” (none) ep1, ep3 Fallback: No subset requested",
+				MarkdownDescription: "Endpoint Subsets. Cluster may be configured to divide its endpoints into subsets based on metadata attached to the endpoints. Routes may then specify the metadata that a endpoint must match in order to be selected by the load balancer. Endpoint_subsets is list of subsets for this cluster. Each entry in this list has definition for a subset (which is collection of keys) During routing, the route’s metadata match configuration is used to find a specific subset. If there is a subset with the exact keys and values specified by the route, the subset is used for load balancing. Otherwise, the fallback policy is used. The cluster’s subset configuration must, therefore, contain a definition that has the same keys as a given route in order for subset load balancing to occur. RouteConfig routes: - match: - headers: [] path: path: /1.log query_params: [] routeDestination: destinations: - cluster: - kind: cluster.object uid: 00000000-0000-0000-0001-000000000005 endpointSubsets: site: india EndpointConfig metadata: labels: deployment: debug site: india name: end-1 uid: end-1 ClusterConfig gcSpec: defaultSubset: stage: production fallbackPolicy: DEFAULT_SUBSET endpointSubsets: - keys: - site - keys: - stage - app Assume the below endpoints are defined and associated with the cluster. Endpoint Labels -------- ------ ep1 stage: production, site: india ep2 stage: deployment, site: us ep3 stage: production, app: hr ep4 site: india The following table describes some routes and the result of their application to the cluster. The subset definition for cluster is assumed to be same as given above in the ClusterConfig section RouteMatch Criteria Subset Reason ------------------- ------ ------ site: india ep1, ep4 Subset of endpoints selected site: us ep2 Subset of endpoints selected app: hr ep1, ep3 Fallback: No subset selector for 'app' alone stage: production, app: hr ep3 Subset of endpoints selected other: x ep1, ep3 Fallback: No subset selector for “other” (none) ep1, ep3 Fallback: No subset requested.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"keys": schema.ListAttribute{
@@ -608,7 +608,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -616,15 +616,15 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -632,7 +632,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -647,7 +647,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"kind": schema.StringAttribute{
-							MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+							MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -655,15 +655,15 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 							},
 						},
 						"name": schema.StringAttribute{
-							MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+							MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 							Optional:            true,
 						},
 						"namespace": schema.StringAttribute{
-							MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+							MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 							Optional:            true,
 						},
 						"tenant": schema.StringAttribute{
-							MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+							MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -671,7 +671,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 							},
 						},
 						"uid": schema.StringAttribute{
-							MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+							MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 							Optional:            true,
 							Computed:            true,
 							PlanModifiers: []planmodifier.String{
@@ -682,11 +682,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"http1_config": schema.SingleNestedBlock{
-				MarkdownDescription: "HTTP/1.1 Protocol Options. HTTP/1.1 Protocol options for upstream connections",
+				MarkdownDescription: "HTTP/1.1 Protocol OPTIONS. HTTP/1.1 Protocol OPTIONS for upstream connections.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"header_transformation": schema.SingleNestedBlock{
-						MarkdownDescription: "Header Transformation. Header Transformation options for HTTP/1.1 request/response headers",
+						MarkdownDescription: "Header Transformation. Header Transformation OPTIONS for HTTP/1.1 request/response headers.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"default_header_transformation": schema.SingleNestedBlock{
@@ -706,10 +706,10 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 			},
 			"http2_options": schema.SingleNestedBlock{
-				MarkdownDescription: "Http2 Protocol Options. Http2 Protocol options for upstream connections",
+				MarkdownDescription: "Http2 Protocol OPTIONS. Http2 Protocol OPTIONS for upstream connections.",
 				Attributes: map[string]schema.Attribute{
 					"enabled": schema.BoolAttribute{
-						MarkdownDescription: "HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections",
+						MarkdownDescription: "HTTP2 Enabled. Enable/disable HTTP2 Protocol for upstream connections.",
 						Optional:            true,
 					},
 				},
@@ -718,10 +718,10 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "[OneOf: no_panic_threshold, panic_threshold; Default: no_panic_threshold] Enable this option",
 			},
 			"outlier_detection": schema.SingleNestedBlock{
-				MarkdownDescription: "Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host immediately. Otherwise, it checks to make sure the number of ejected hosts is below the allowed threshold (specified via max_ejection_percent setting). If the number of ejected hosts is above the threshold, the host is not ejected. 3. The endpoint is ejected for some number of milliseconds. Ejection means that the endpoint is marked unhealthy and will not be used during load balancing. The number of milliseconds is equal to the base_ejection_time value multiplied by the number of times the host has been ejected. 4. An ejected endpoint will automatically be brought back into service after the ejection time has been satisfied",
+				MarkdownDescription: "Outlier Detection. Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1. A endpoint is determined to be an outlier (based on configured number of consecutive_5xx or consecutive_gateway_failures) . 2. If no endpoints have been ejected, loadbalancer will eject the host immediately. Otherwise, it checks to make sure the number of ejected hosts is below the allowed threshold (specified via max_ejection_percent setting). If the number of ejected hosts is above the threshold, the host is not ejected. 3. The endpoint is ejected for some number of milliseconds. Ejection means that the endpoint is marked unhealthy and will not be used during load balancing. The number of milliseconds is equal to the base_ejection_time value multiplied by the number of times the host has been ejected. 4. An ejected endpoint will automatically be brought back into service after the ejection time has been satisfied.",
 				Attributes: map[string]schema.Attribute{
 					"base_ejection_time": schema.Int64Attribute{
-						MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to get ejected for longer periods if they continue to fail. Specified in milliseconds. Defaults to `30000ms`.",
+						MarkdownDescription: "Base Ejection Time. The base time that a host is ejected for. The real time is equal to the base time multiplied by the number of times the host has been ejected. This causes hosts to GET ejected for longer periods if they continue to fail. Specified in milliseconds. Defaults to `30000ms`.",
 						Optional:            true,
 					},
 					"consecutive_5xx": schema.Int64Attribute{
@@ -729,7 +729,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						Optional:            true,
 					},
 					"consecutive_gateway_failure": schema.Int64Attribute{
-						MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to `5`.",
+						MarkdownDescription: "Consecutive Gateway Failure. If an upstream endpoint returns some number of consecutive “gateway errors” (502, 503 or 504 status code), it will be ejected. Note that this includes events that would cause the HTTP router to return one of these status codes on the upstream’s behalf (reset, connection failure, etc.). Consecutive_gateway_failure indicates the number of consecutive gateway failures before a consecutive gateway failure ejection occurs. Defaults to `5`.",
 						Optional:            true,
 					},
 					"interval": schema.Int64Attribute{
@@ -749,7 +749,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				MarkdownDescription: "Enable this option",
 			},
 			"tls_parameters": schema.SingleNestedBlock{
-				MarkdownDescription: "Upstream TLS Parameters. TLS configuration for upstream connections",
+				MarkdownDescription: "Upstream TLS Parameters. TLS configuration for upstream connections.",
 				Attributes: map[string]schema.Attribute{
 					"max_session_keys": schema.Int64Attribute{
 						MarkdownDescription: "Max Session Keys Cached. Number of session keys that are cached.",
@@ -762,7 +762,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 				},
 				Blocks: map[string]schema.Block{
 					"cert_params": schema.SingleNestedBlock{
-						MarkdownDescription: "Upstream Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store",
+						MarkdownDescription: "Upstream Certificate Parameters. Certificate Parameters for authentication, TLS ciphers, and trust store.",
 						Attributes: map[string]schema.Attribute{
 							"cipher_suites": schema.ListAttribute{
 								MarkdownDescription: "Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used.",
@@ -780,11 +780,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 						Blocks: map[string]schema.Block{
 							"certificates": schema.ListNestedBlock{
-								MarkdownDescription: "Client Certificate. Client TLS Certificate required for mTLS authentication",
+								MarkdownDescription: "Client Certificate. Client TLS Certificate required for mTLS authentication .",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"kind": schema.StringAttribute{
-											MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+											MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -792,15 +792,15 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 											},
 										},
 										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 											Optional:            true,
 										},
 										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 											Optional:            true,
 										},
 										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -808,7 +808,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 											},
 										},
 										"uid": schema.StringAttribute{
-											MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+											MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 											Optional:            true,
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
@@ -819,33 +819,33 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 								},
 							},
 							"validation_params": schema.SingleNestedBlock{
-								MarkdownDescription: "TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification",
+								MarkdownDescription: "TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification.",
 								Attributes: map[string]schema.Attribute{
 									"skip_hostname_verification": schema.BoolAttribute{
-										MarkdownDescription: "Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname",
+										MarkdownDescription: "Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname.",
 										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate.",
 										Optional:            true,
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
-										MarkdownDescription: "List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate",
+										MarkdownDescription: "List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate.",
 										Optional:            true,
 										ElementType:         types.StringType,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"trusted_ca": schema.SingleNestedBlock{
-										MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
+										MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"trusted_ca_list": schema.ListNestedBlock{
-												MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
+												MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate.",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{
 														"kind": schema.StringAttribute{
-															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+															MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -853,15 +853,15 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 															},
 														},
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -869,7 +869,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 															},
 														},
 														"uid": schema.StringAttribute{
-															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+															MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -886,7 +886,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 					},
 					"common_params": schema.SingleNestedBlock{
-						MarkdownDescription: "TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store",
+						MarkdownDescription: "TLS Parameters. Information of different aspects for TLS authentication related to ciphers, certificates and trust store.",
 						Attributes: map[string]schema.Attribute{
 							"cipher_suites": schema.ListAttribute{
 								MarkdownDescription: "Cipher Suites. The following list specifies the supported cipher suite TLS_AES_128_GCM_SHA256 TLS_AES_256_GCM_SHA384 TLS_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_128_CBC_SHA TLS_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_CBC_SHA TLS_RSA_WITH_AES_256_GCM_SHA384 If not specified, the default list: TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 will be used.",
@@ -904,7 +904,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 						Blocks: map[string]schema.Block{
 							"tls_certificates": schema.ListNestedBlock{
-								MarkdownDescription: "TLS Certificates. Set of TLS certificates",
+								MarkdownDescription: "TLS Certificates. Set of TLS certificates.",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"certificate_url": schema.StringAttribute{
@@ -912,13 +912,13 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 											Optional:            true,
 										},
 										"description_spec": schema.StringAttribute{
-											MarkdownDescription: "Description. Description for the certificate",
+											MarkdownDescription: "Description. Description for the certificate.",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"custom_hash_algorithms": schema.SingleNestedBlock{
-											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used",
+											MarkdownDescription: "Hash Algorithms. Specifies the hash algorithms to be used.",
 											Attributes: map[string]schema.Attribute{
 												"hash_algorithms": schema.ListAttribute{
 													MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
@@ -931,22 +931,22 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 											MarkdownDescription: "Enable this option",
 										},
 										"private_key": schema.SingleNestedBlock{
-											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 															Optional:            true,
 														},
 														"location": schema.StringAttribute{
-															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
-															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 													},
@@ -955,11 +955,11 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
-															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 														"url": schema.StringAttribute{
-															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 															Optional:            true,
 														},
 													},
@@ -973,33 +973,33 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 								},
 							},
 							"validation_params": schema.SingleNestedBlock{
-								MarkdownDescription: "TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification",
+								MarkdownDescription: "TLS Certificate Validation Parameters. This includes URL for a trust store, whether SAN verification is required and list of Subject Alt Names for verification.",
 								Attributes: map[string]schema.Attribute{
 									"skip_hostname_verification": schema.BoolAttribute{
-										MarkdownDescription: "Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname",
+										MarkdownDescription: "Skip verification of hostname. When True, skip verification of hostname i.e. CN/Subject Alt Name of certificate is not matched to the connecting hostname.",
 										Optional:            true,
 									},
 									"trusted_ca_url": schema.StringAttribute{
-										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate",
+										MarkdownDescription: "Inline Root CA Certificate (legacy). Inline Root CA Certificate.",
 										Optional:            true,
 									},
 									"verify_subject_alt_names": schema.ListAttribute{
-										MarkdownDescription: "List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate",
+										MarkdownDescription: "List of SANs for matching. List of acceptable Subject Alt Names/CN in the peer's certificate. When skip_hostname_verification is false and verify_subject_alt_names is empty, the hostname of the peer will be used for matching against SAN/CN of peer's certificate.",
 										Optional:            true,
 										ElementType:         types.StringType,
 									},
 								},
 								Blocks: map[string]schema.Block{
 									"trusted_ca": schema.SingleNestedBlock{
-										MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
+										MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate.",
 										Attributes:          map[string]schema.Attribute{},
 										Blocks: map[string]schema.Block{
 											"trusted_ca_list": schema.ListNestedBlock{
-												MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate",
+												MarkdownDescription: "Root CA Certificate Reference. Reference to Root CA Certificate.",
 												NestedObject: schema.NestedBlockObject{
 													Attributes: map[string]schema.Attribute{
 														"kind": schema.StringAttribute{
-															MarkdownDescription: "Kind. When a configuration object(e.g. virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
+															MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -1007,15 +1007,15 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 															},
 														},
 														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 															Optional:            true,
 														},
 														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 															Optional:            true,
 														},
 														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{
@@ -1023,7 +1023,7 @@ func (r *ClusterResource) Schema(ctx context.Context, req resource.SchemaRequest
 															},
 														},
 														"uid": schema.StringAttribute{
-															MarkdownDescription: "UID. When a configuration object(e.g. virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. route's) uid.",
+															MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
 															Optional:            true,
 															Computed:            true,
 															PlanModifiers: []planmodifier.String{

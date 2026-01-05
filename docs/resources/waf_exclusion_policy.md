@@ -2,20 +2,20 @@
 page_title: "f5xc_waf_exclusion_policy Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages WAF exclusion policy in F5 Distributed Cloud.
+  Manages WAF exclusion policy. in F5 Distributed Cloud.
 ---
 
 # f5xc_waf_exclusion_policy (Resource)
 
-Manages WAF exclusion policy in F5 Distributed Cloud.
+Manages WAF exclusion policy. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [WAF Exclusion Policy API docs](https://docs.cloud.f5.com/docs-v2/api/waf-exclusion-policy) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # WAF Exclusion Policy Resource Example
-# Manages WAF exclusion policy in F5 Distributed Cloud.
+# Manages WAF exclusion policy. in F5 Distributed Cloud.
 
 # Basic WAF Exclusion Policy configuration
 resource "f5xc_waf_exclusion_policy" "example" {
@@ -106,9 +106,9 @@ A [`waf_exclusion_rules`](#waf-exclusion-rules) block supports the following:
 
 <a id="waf-exclusion-rules-metadata"></a>&#x2022; [`metadata`](#waf-exclusion-rules-metadata) - Optional Block<br>Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs<br>See [Metadata](#waf-exclusion-rules-metadata) below.
 
-<a id="waf-exclusion-rules-methods"></a>&#x2022; [`methods`](#waf-exclusion-rules-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Methods. methods to be matched
+<a id="waf-exclusion-rules-methods"></a>&#x2022; [`methods`](#waf-exclusion-rules-methods) - Optional List  Defaults to `ANY`<br>See [HTTP Methods](#common-http-methods)<br> Methods. Methods to be matched
 
-<a id="waf-exclusion-rules-path-prefix"></a>&#x2022; [`path_prefix`](#waf-exclusion-rules-path-prefix) - Optional String<br>Prefix. Path prefix to match (e.g. the value / will match on all paths)
+<a id="waf-exclusion-rules-path-prefix"></a>&#x2022; [`path_prefix`](#waf-exclusion-rules-path-prefix) - Optional String<br>Prefix. Path prefix to match (e.g. The value / will match on all paths)
 
 <a id="waf-exclusion-rules-path-regex"></a>&#x2022; [`path_regex`](#waf-exclusion-rules-path-regex) - Optional String<br>Path Regex. Define the regex for the path. For example, the regex ^/.*$ will match on all paths
 

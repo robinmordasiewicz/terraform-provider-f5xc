@@ -113,7 +113,7 @@ func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"description_spec": schema.StringAttribute{
-				MarkdownDescription: "Description for iRule. Specify Description for iRule",
+				MarkdownDescription: "Description for iRule. Specify Description for iRule .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -121,7 +121,7 @@ func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"irule": schema.StringAttribute{
-				MarkdownDescription: "irule.www.internal.example.f5.com')} DNS::drop} irule content",
+				MarkdownDescription: "Irule. www.internal.example.f5.com')} DNS::drop} irule content .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{

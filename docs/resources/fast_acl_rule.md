@@ -2,20 +2,20 @@
 page_title: "f5xc_fast_acl_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages new Fast ACL rule, fast_acl_rule has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+  Manages new Fast ACL rule, fast_acl_rule has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.
 ---
 
 # f5xc_fast_acl_rule (Resource)
 
-Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Fast ACL Rule API docs](https://docs.cloud.f5.com/docs-v2/api/fast-acl-rule) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Fast ACL Rule Resource Example
-# Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply in F5 Distributed Cloud.
+# Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.
 
 # Basic Fast ACL Rule configuration
 resource "f5xc_fast_acl_rule" "example" {
@@ -36,11 +36,11 @@ resource "f5xc_fast_acl_rule" "example" {
   action {
     # Configure action settings
   }
-  # Policer Reference. Reference to policer object
+  # Policer Reference. Reference to policer object.
   policer_action {
     # Configure policer_action settings
   }
-  # Reference. A policer direct reference
+  # Reference. A policer direct reference.
   ref {
     # Configure ref settings
   }
@@ -104,15 +104,15 @@ A [`policer_action`](#action-policer-action) block (within [`action`](#action)) 
 
 A [`ref`](#action-policer-action-ref) block (within [`action.policer_action`](#action-policer-action)) supports the following:
 
-<a id="action-policer-action-ref-kind"></a>&#x2022; [`kind`](#action-policer-action-ref-kind) - Optional String<br>Object reference kind
+<a id="action-policer-action-ref-kind"></a>&#x2022; [`kind`](#action-policer-action-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="action-policer-action-ref-name"></a>&#x2022; [`name`](#action-policer-action-ref-name) - Optional String<br>Object reference name
+<a id="action-policer-action-ref-name"></a>&#x2022; [`name`](#action-policer-action-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="action-policer-action-ref-namespace"></a>&#x2022; [`namespace`](#action-policer-action-ref-namespace) - Optional String<br>Object reference namespace
+<a id="action-policer-action-ref-namespace"></a>&#x2022; [`namespace`](#action-policer-action-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="action-policer-action-ref-tenant"></a>&#x2022; [`tenant`](#action-policer-action-ref-tenant) - Optional String<br>Object reference tenant
+<a id="action-policer-action-ref-tenant"></a>&#x2022; [`tenant`](#action-policer-action-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="action-policer-action-ref-uid"></a>&#x2022; [`uid`](#action-policer-action-ref-uid) - Optional String<br>Object reference UID
+<a id="action-policer-action-ref-uid"></a>&#x2022; [`uid`](#action-policer-action-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Action Protocol Policer Action
 
@@ -124,15 +124,15 @@ A [`protocol_policer_action`](#action-protocol-policer-action) block (within [`a
 
 A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol_policer_action`](#action-protocol-policer-action)) supports the following:
 
-<a id="action-protocol-policer-action-ref-kind"></a>&#x2022; [`kind`](#action-protocol-policer-action-ref-kind) - Optional String<br>Object reference kind
+<a id="action-protocol-policer-action-ref-kind"></a>&#x2022; [`kind`](#action-protocol-policer-action-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="action-protocol-policer-action-ref-name"></a>&#x2022; [`name`](#action-protocol-policer-action-ref-name) - Optional String<br>Object reference name
+<a id="action-protocol-policer-action-ref-name"></a>&#x2022; [`name`](#action-protocol-policer-action-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-b31006"></a>&#x2022; [`namespace`](#namespace-b31006) - Optional String<br>Object reference namespace
+<a id="namespace-b31006"></a>&#x2022; [`namespace`](#namespace-b31006) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-2622a3"></a>&#x2022; [`tenant`](#tenant-2622a3) - Optional String<br>Object reference tenant
+<a id="tenant-2622a3"></a>&#x2022; [`tenant`](#tenant-2622a3) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="action-protocol-policer-action-ref-uid"></a>&#x2022; [`uid`](#action-protocol-policer-action-ref-uid) - Optional String<br>Object reference UID
+<a id="action-protocol-policer-action-ref-uid"></a>&#x2022; [`uid`](#action-protocol-policer-action-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### IP Prefix Set
 
@@ -144,15 +144,15 @@ An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
 A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) supports the following:
 
-<a id="ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#ip-prefix-set-ref-kind) - Optional String<br>Object reference kind
+<a id="ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#ip-prefix-set-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="ip-prefix-set-ref-name"></a>&#x2022; [`name`](#ip-prefix-set-ref-name) - Optional String<br>Object reference name
+<a id="ip-prefix-set-ref-name"></a>&#x2022; [`name`](#ip-prefix-set-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="ip-prefix-set-ref-namespace"></a>&#x2022; [`namespace`](#ip-prefix-set-ref-namespace) - Optional String<br>Object reference namespace
+<a id="ip-prefix-set-ref-namespace"></a>&#x2022; [`namespace`](#ip-prefix-set-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="ip-prefix-set-ref-tenant"></a>&#x2022; [`tenant`](#ip-prefix-set-ref-tenant) - Optional String<br>Object reference tenant
+<a id="ip-prefix-set-ref-tenant"></a>&#x2022; [`tenant`](#ip-prefix-set-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="ip-prefix-set-ref-uid"></a>&#x2022; [`uid`](#ip-prefix-set-ref-uid) - Optional String<br>Object reference UID
+<a id="ip-prefix-set-ref-uid"></a>&#x2022; [`uid`](#ip-prefix-set-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Port
 

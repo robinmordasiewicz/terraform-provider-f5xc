@@ -42,7 +42,7 @@ func (d *AlertPolicyDataSource) Metadata(ctx context.Context, req datasource.Met
 
 func (d *AlertPolicyDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages a Alert Policy resource in F5 Distributed Cloud for alerting rules and notification policies.",
+		MarkdownDescription: "Manages new Alert Policy Object. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

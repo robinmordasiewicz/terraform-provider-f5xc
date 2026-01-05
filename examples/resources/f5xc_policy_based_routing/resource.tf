@@ -1,5 +1,5 @@
 # Policy Based Routing Resource Example
-# Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create configuration.
+# Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create specification. configuration.
 
 # Basic Policy Based Routing configuration
 resource "f5xc_policy_based_routing" "example" {

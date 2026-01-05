@@ -20,7 +20,7 @@ resource "f5xc_secret_management_access" "example" {
   access_info {
     # Configure access_info settings
   }
-  # Rest Authentication Parameters. Authentication parameters...
+  # REST Authentication Parameters. Authentication parameters...
   rest_auth_info {
     # Configure rest_auth_info settings
   }

@@ -9,7 +9,7 @@ description: |-
 
 Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Data Group API docs](https://docs.cloud.f5.com/docs-v2/api/bigcne-data-group) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -40,7 +40,7 @@ resource "f5xc_data_group" "example" {
   records {
     # Configure records settings
   }
-  # Integer record List. Data group with integer record List
+  # Integer record List. Data group with integer record List.
   integer_records {
     # Configure integer_records settings
   }

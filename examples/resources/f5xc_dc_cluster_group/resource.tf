@@ -1,5 +1,5 @@
 # Dc Cluster Group Resource Example
-# Manages DC Cluster group in given namespace in F5 Distributed Cloud.
+# Manages DC Cluster group in given namespace. in F5 Distributed Cloud.
 
 # Basic Dc Cluster Group configuration
 resource "f5xc_dc_cluster_group" "example" {

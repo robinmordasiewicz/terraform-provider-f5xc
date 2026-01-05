@@ -9,7 +9,7 @@ description: |-
 
 Manages a Authentication resource in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Authentication API docs](https://docs.cloud.f5.com/docs-v2/api/authentication) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

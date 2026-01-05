@@ -157,7 +157,7 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 				Delete: true,
 			}),
 			"address_records": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: address_records, integer_records, string_records] Address Record. Data group with address record List",
+				MarkdownDescription: "[OneOf: address_records, integer_records, string_records] Address Record. Data group with address record List.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"records": schema.SingleNestedBlock{
@@ -166,7 +166,7 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"integer_records": schema.SingleNestedBlock{
-				MarkdownDescription: "Integer record List. Data group with integer record List",
+				MarkdownDescription: "Integer record List. Data group with integer record List.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"records": schema.SingleNestedBlock{
@@ -175,7 +175,7 @@ func (r *DataGroupResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"string_records": schema.SingleNestedBlock{
-				MarkdownDescription: "String record List. Data group with strings record List",
+				MarkdownDescription: "String record List. Data group with strings record List.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"records": schema.SingleNestedBlock{

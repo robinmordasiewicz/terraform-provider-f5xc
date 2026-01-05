@@ -2,14 +2,14 @@
 page_title: "f5xc_route Data Source - terraform-provider-f5xc"
 subcategory: "Load Balancing"
 description: |-
-  Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+  Manages route object in a given namespace. Route object is list of route rules. Each rule has match condition to match incoming requests and actions to take on matching requests. Virtual host object has reference to route object. in F5 Distributed Cloud.
 ---
 
 # f5xc_route (Data Source)
 
-Manages a Route resource in F5 Distributed Cloud for defining traffic routing rules for load balancers.
+Manages route object in a given namespace. Route object is list of route rules. Each rule has match condition to match incoming requests and actions to take on matching requests. Virtual host object has reference to route object. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Route API docs](https://docs.cloud.f5.com/docs-v2/api/operate-route) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

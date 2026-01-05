@@ -278,7 +278,7 @@ func (r *CloudLinkResource) Metadata(ctx context.Context, req resource.MetadataR
 func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             cloud_linkSchemaVersion,
-		MarkdownDescription: "Manages new CloudLink with configured parameters in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages new CloudLink with configured parameters. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Cloud Link. Must be unique within the namespace.",
@@ -334,27 +334,27 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 				Delete: true,
 			}),
 			"aws": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: aws, gcp] Amazon Web Services(AWS) CloudLink Provider. CloudLink for AWS Cloud Provider",
+				MarkdownDescription: "[OneOf: aws, gcp] Amazon Web Services(AWS) CloudLink Provider. CloudLink for AWS Cloud Provider.",
 				Attributes: map[string]schema.Attribute{
 					"custom_asn": schema.Int64Attribute{
-						MarkdownDescription: "Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway 4200000000-4294967294",
+						MarkdownDescription: "Custom ASN. F5XC will use custom ASN to create a Direct Connect Gateway.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"aws_cred": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{
@@ -364,7 +364,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 					},
 					"byoc": schema.SingleNestedBlock{
-						MarkdownDescription: "Bring Your Own Connections. List of Bring You Own Connection",
+						MarkdownDescription: "Bring Your Own Connections. List of Bring You Own Connection.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"connections": schema.ListNestedBlock{
@@ -376,15 +376,15 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											Optional:            true,
 										},
 										"connection_id": schema.StringAttribute{
-											MarkdownDescription: "Direct Connect Connection Id. Id of the existing AWS Direct Connect Connection",
+											MarkdownDescription: "Direct Connect Connection ID. ID of the existing AWS Direct Connect Connection .",
 											Optional:            true,
 										},
 										"region": schema.StringAttribute{
-											MarkdownDescription: "Region. Region where the connection is setup",
+											MarkdownDescription: "Region. Region where the connection is setup .",
 											Optional:            true,
 										},
 										"user_assigned_name": schema.StringAttribute{
-											MarkdownDescription: "User Assigned. User is managing the AWS resource name",
+											MarkdownDescription: "User Assigned. User is managing the AWS resource name.",
 											Optional:            true,
 										},
 										"virtual_interface_type": schema.StringAttribute{
@@ -392,28 +392,28 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											Optional:            true,
 										},
 										"vlan": schema.Int64Attribute{
-											MarkdownDescription: "Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection",
+											MarkdownDescription: "Virtual Local Area Network (VLAN). Virtual Local Area Network number for the new virtual interface to be configured on the AWS. This tag is required for any traffic traversing the AWS Direct Connect connection .",
 											Optional:            true,
 										},
 									},
 									Blocks: map[string]schema.Block{
 										"auth_key": schema.SingleNestedBlock{
-											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+											MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"blindfold_secret_info": schema.SingleNestedBlock{
-													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+													MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 													Attributes: map[string]schema.Attribute{
 														"decryption_provider": schema.StringAttribute{
 															MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 															Optional:            true,
 														},
 														"location": schema.StringAttribute{
-															MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+															MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 															Optional:            true,
 														},
 														"store_provider": schema.StringAttribute{
-															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 													},
@@ -422,11 +422,11 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 													MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 													Attributes: map[string]schema.Attribute{
 														"provider_ref": schema.StringAttribute{
-															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+															MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 															Optional:            true,
 														},
 														"url": schema.StringAttribute{
-															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+															MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 															Optional:            true,
 														},
 													},
@@ -434,14 +434,14 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											},
 										},
 										"ipv4": schema.SingleNestedBlock{
-											MarkdownDescription: "IPv4 Peering. Configure BGP IPv4 peering for endpoints",
+											MarkdownDescription: "IPv4 Peering. Configure BGP IPv4 peering for endpoints.",
 											Attributes: map[string]schema.Attribute{
 												"aws_router_peer_address": schema.StringAttribute{
-													MarkdownDescription: "AWS Router IP/Prefix. The BGP peer IP configured on the AWS endpoint",
+													MarkdownDescription: "AWS Router IP/Prefix. The BGP peer IP configured on the AWS endpoint .",
 													Optional:            true,
 												},
 												"router_peer_address": schema.StringAttribute{
-													MarkdownDescription: "Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint",
+													MarkdownDescription: "Customer Router IP/Prefix. The BGP peer IP configured on your (customer) endpoint .",
 													Optional:            true,
 												},
 											},
@@ -463,7 +463,7 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 											MarkdownDescription: "Enable this option",
 										},
 										"tags": schema.SingleNestedBlock{
-											MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags",
+											MarkdownDescription: "AWS Tags. AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags.",
 										},
 									},
 								},
@@ -485,11 +485,11 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 				},
 			},
 			"gcp": schema.SingleNestedBlock{
-				MarkdownDescription: "Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider",
+				MarkdownDescription: "Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"byoc": schema.SingleNestedBlock{
-						MarkdownDescription: "GCP Bring Your Own Connections. List of GCP Bring You Own Connections",
+						MarkdownDescription: "GCP Bring Your Own Connections. List of GCP Bring You Own Connections.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"connections": schema.ListNestedBlock{
@@ -497,15 +497,15 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"interconnect_attachment_name": schema.StringAttribute{
-											MarkdownDescription: "Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment",
+											MarkdownDescription: "Interconnect Attachment Name. Name of already-existing GCP Cloud Interconnect Attachment .",
 											Optional:            true,
 										},
 										"project": schema.StringAttribute{
-											MarkdownDescription: "Specified Project. Specify a GCP Project for the interconnect attachment",
+											MarkdownDescription: "Specified Project. Specify a GCP Project for the interconnect attachment.",
 											Optional:            true,
 										},
 										"region": schema.StringAttribute{
-											MarkdownDescription: "Region. GCP Region in which the GCP Cloud Interconnect attachment is configured",
+											MarkdownDescription: "Region. GCP Region in which the GCP Cloud Interconnect attachment is configured .",
 											Optional:            true,
 										},
 									},
@@ -532,18 +532,18 @@ func (r *CloudLinkResource) Schema(ctx context.Context, req resource.SchemaReque
 						},
 					},
 					"gcp_cred": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name",
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
 						Attributes: map[string]schema.Attribute{
 							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. route's) name.",
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
 								Optional:            true,
 							},
 							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. route's) namespace.",
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
 								Optional:            true,
 							},
 							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. route's) tenant.",
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
 								Optional:            true,
 								Computed:            true,
 								PlanModifiers: []planmodifier.String{

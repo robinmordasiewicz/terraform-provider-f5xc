@@ -9,7 +9,7 @@ description: |-
 
 Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.
 
-~> **Note** Please refer to [AWS TGW Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-aws-tgw-site) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

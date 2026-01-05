@@ -9,7 +9,7 @@ description: |-
 
 Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Data Type API docs](https://docs.cloud.f5.com/docs-v2/api/data-type) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -36,7 +36,7 @@ resource "f5xc_data_type" "example" {
   rules {
     # Configure rules settings
   }
-  # Rule Pattern Type. test
+  # Rule Pattern Type. Test
   key_pattern {
     # Configure key_pattern settings
   }
@@ -88,11 +88,11 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`rules`](#rules) block supports the following:
 
-<a id="rules-key-pattern"></a>&#x2022; [`key_pattern`](#rules-key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-pattern) below.
+<a id="rules-key-pattern"></a>&#x2022; [`key_pattern`](#rules-key-pattern) - Optional Block<br>Rule Pattern Type. Test<br>See [Key Pattern](#rules-key-pattern) below.
 
 <a id="rules-key-value-pattern"></a>&#x2022; [`key_value_pattern`](#rules-key-value-pattern) - Optional Block<br>Key & Value Pattern. Search for specific key & value patterns in the specified sections<br>See [Key Value Pattern](#rules-key-value-pattern) below.
 
-<a id="rules-value-pattern"></a>&#x2022; [`value_pattern`](#rules-value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-value-pattern) below.
+<a id="rules-value-pattern"></a>&#x2022; [`value_pattern`](#rules-value-pattern) - Optional Block<br>Rule Pattern Type. Test<br>See [Value Pattern](#rules-value-pattern) below.
 
 #### Rules Key Pattern
 
@@ -114,9 +114,9 @@ An [`exact_values`](#rules-key-pattern-exact-values) block (within [`rules.key_p
 
 A [`key_value_pattern`](#rules-key-value-pattern) block (within [`rules`](#rules)) supports the following:
 
-<a id="rules-key-value-pattern-key-pattern"></a>&#x2022; [`key_pattern`](#rules-key-value-pattern-key-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
+<a id="rules-key-value-pattern-key-pattern"></a>&#x2022; [`key_pattern`](#rules-key-value-pattern-key-pattern) - Optional Block<br>Rule Pattern Type. Test<br>See [Key Pattern](#rules-key-value-pattern-key-pattern) below.
 
-<a id="rules-key-value-pattern-value-pattern"></a>&#x2022; [`value_pattern`](#rules-key-value-pattern-value-pattern) - Optional Block<br>Rule Pattern Type. test<br>See [Value Pattern](#rules-key-value-pattern-value-pattern) below.
+<a id="rules-key-value-pattern-value-pattern"></a>&#x2022; [`value_pattern`](#rules-key-value-pattern-value-pattern) - Optional Block<br>Rule Pattern Type. Test<br>See [Value Pattern](#rules-key-value-pattern-value-pattern) below.
 
 #### Rules Key Value Pattern Key Pattern
 

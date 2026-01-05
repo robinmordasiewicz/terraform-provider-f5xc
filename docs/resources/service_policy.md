@@ -9,7 +9,7 @@ description: |-
 
 Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Service Policy API docs](https://docs.cloud.f5.com/docs-v2/api/service-policy) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -79,7 +79,7 @@ resource "f5xc_service_policy" "example" {
 &#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="server-name"></a>[`server_name`](#server-name) - Optional String<br>Server Name. The expected name of the server to which the request API is directed. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host to which the request is directed. If the request is directed to a virtual K8S service, the actual names also contain the name of that service. The predicate evaluates to true if any of the actual names is the same as the expected server name
 <br><br>&#x2022; <a id="server-name-matcher"></a>[`server_name_matcher`](#server-name-matcher) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions
-<br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE
+<br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
@@ -123,11 +123,23 @@ An [`asn_list`](#allow-list-asn-list) block (within [`allow_list`](#allow-list))
 
 #### Allow List Asn Set
 
-<a id="objref-a23f21"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`asn_set`](#allow-list-asn-set) block (within [`allow_list`](#allow-list)) supports the following:
+
+<a id="allow-list-asn-set-name"></a>&#x2022; [`name`](#allow-list-asn-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="allow-list-asn-set-namespace"></a>&#x2022; [`namespace`](#allow-list-asn-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="allow-list-asn-set-tenant"></a>&#x2022; [`tenant`](#allow-list-asn-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Allow List IP Prefix Set
 
-<a id="objref-c28920"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`ip_prefix_set`](#allow-list-ip-prefix-set) block (within [`allow_list`](#allow-list)) supports the following:
+
+<a id="allow-list-ip-prefix-set-name"></a>&#x2022; [`name`](#allow-list-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="allow-list-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#allow-list-ip-prefix-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="allow-list-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#allow-list-ip-prefix-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Allow List Prefix List
 
@@ -167,11 +179,23 @@ An [`asn_list`](#deny-list-asn-list) block (within [`deny_list`](#deny-list)) su
 
 #### Deny List Asn Set
 
-<a id="objref-39491c"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`asn_set`](#deny-list-asn-set) block (within [`deny_list`](#deny-list)) supports the following:
+
+<a id="deny-list-asn-set-name"></a>&#x2022; [`name`](#deny-list-asn-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="deny-list-asn-set-namespace"></a>&#x2022; [`namespace`](#deny-list-asn-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="deny-list-asn-set-tenant"></a>&#x2022; [`tenant`](#deny-list-asn-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Deny List IP Prefix Set
 
-<a id="objref-9600e1"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`ip_prefix_set`](#deny-list-ip-prefix-set) block (within [`deny_list`](#deny-list)) supports the following:
+
+<a id="deny-list-ip-prefix-set-name"></a>&#x2022; [`name`](#deny-list-ip-prefix-set-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="deny-list-ip-prefix-set-namespace"></a>&#x2022; [`namespace`](#deny-list-ip-prefix-set-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="deny-list-ip-prefix-set-tenant"></a>&#x2022; [`tenant`](#deny-list-ip-prefix-set-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Deny List Prefix List
 
@@ -229,7 +253,7 @@ A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-r
 
 <a id="matcher-ded25d"></a>&#x2022; [`client_name_matcher`](#matcher-ded25d) - Optional Block<br>Matcher. A matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Client Name Matcher](#matcher-ded25d) below.
 
-<a id="rule-list-rules-spec-client-selector"></a>&#x2022; [`client_selector`](#rule-list-rules-spec-client-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#rule-list-rules-spec-client-selector) below.
+<a id="rule-list-rules-spec-client-selector"></a>&#x2022; [`client_selector`](#rule-list-rules-spec-client-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Client Selector](#rule-list-rules-spec-client-selector) below.
 
 <a id="rule-list-rules-spec-cookie-matchers"></a>&#x2022; [`cookie_matchers`](#rule-list-rules-spec-cookie-matchers) - Optional Block<br>Cookie Matchers. A list of predicates for all cookies that need to be matched. The criteria for matching each cookie is described in individual instances of CookieMatcherType. The actual cookie values are extracted from the request API as a list of strings for each cookie name. Note that all specified cookie matcher predicates must evaluate to true<br>See [Cookie Matchers](#rule-list-rules-spec-cookie-matchers) below.
 
@@ -263,7 +287,7 @@ A [`spec`](#rule-list-rules-spec) block (within [`rule_list.rules`](#rule-list-r
 
 <a id="constraints-a447da"></a>&#x2022; [`request_constraints`](#constraints-a447da) - Optional Block<br>Request Constraints<br>See [Request Constraints](#constraints-a447da) below.
 
-<a id="rule-list-rules-spec-segment-policy"></a>&#x2022; [`segment_policy`](#rule-list-rules-spec-segment-policy) - Optional Block<br>Configure Segments. Configure source and destination segment for policy<br>See [Segment Policy](#rule-list-rules-spec-segment-policy) below.
+<a id="rule-list-rules-spec-segment-policy"></a>&#x2022; [`segment_policy`](#rule-list-rules-spec-segment-policy) - Optional Block<br>X-displayName: 'Configure Segments' Configure source and destination segment for policy<br>See [Segment Policy](#rule-list-rules-spec-segment-policy) below.
 
 <a id="matcher-95ee34"></a>&#x2022; [`tls_fingerprint_matcher`](#matcher-95ee34) - Optional Block<br>TLS Fingerprint Matcher. A TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied and the input fingerprint is not one of the excluded values<br>See [TLS Fingerprint Matcher](#matcher-95ee34) below.
 
@@ -351,7 +375,7 @@ A [`client_name_matcher`](#matcher-ded25d) block (within [`rule_list.rules.spec`
 
 A [`client_selector`](#rule-list-rules-spec-client-selector) block (within [`rule_list.rules.spec`](#rule-list-rules-spec)) supports the following:
 
-<a id="expressions-248d45"></a>&#x2022; [`expressions`](#expressions-248d45) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="expressions-248d45"></a>&#x2022; [`expressions`](#expressions-248d45) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Rule List Rules Spec Cookie Matchers
 
@@ -597,13 +621,13 @@ A [`segment_policy`](#rule-list-rules-spec-segment-policy) block (within [`rule_
 
 <a id="any-9c58b4"></a>&#x2022; [`dst_any`](#any-9c58b4) - Optional Block<br>Enable this option
 
-<a id="segments-478f34"></a>&#x2022; [`dst_segments`](#segments-478f34) - Optional Block<br>Segment List. List of references to Segments<br>See [Dst Segments](#segments-478f34) below.
+<a id="segments-478f34"></a>&#x2022; [`dst_segments`](#segments-478f34) - Optional Block<br>X-displayName: 'Segment List' List of references to Segments<br>See [Dst Segments](#segments-478f34) below.
 
 <a id="segment-431a3a"></a>&#x2022; [`intra_segment`](#segment-431a3a) - Optional Block<br>Enable this option
 
 <a id="any-f3d551"></a>&#x2022; [`src_any`](#any-f3d551) - Optional Block<br>Enable this option
 
-<a id="segments-191ada"></a>&#x2022; [`src_segments`](#segments-191ada) - Optional Block<br>Segment List. List of references to Segments<br>See [Src Segments](#segments-191ada) below.
+<a id="segments-191ada"></a>&#x2022; [`src_segments`](#segments-191ada) - Optional Block<br>X-displayName: 'Segment List' List of references to Segments<br>See [Src Segments](#segments-191ada) below.
 
 #### Rule List Rules Spec Segment Policy Dst Segments
 
@@ -681,7 +705,7 @@ A [`server_name_matcher`](#server-name-matcher) block supports the following:
 
 A [`server_selector`](#server-selector) block supports the following:
 
-<a id="server-selector-expressions"></a>&#x2022; [`expressions`](#server-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="server-selector-expressions"></a>&#x2022; [`expressions`](#server-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Timeouts
 

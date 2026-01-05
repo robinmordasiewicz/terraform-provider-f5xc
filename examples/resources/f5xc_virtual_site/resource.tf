@@ -1,5 +1,5 @@
 # Virtual Site Resource Example
-# Manages virtual site object in given namespace in F5 Distributed Cloud.
+# Manages virtual site object in given namespace. in F5 Distributed Cloud.
 
 # Basic Virtual Site configuration
 resource "f5xc_virtual_site" "example" {

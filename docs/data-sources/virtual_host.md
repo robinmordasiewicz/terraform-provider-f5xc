@@ -9,7 +9,7 @@ description: |-
 
 Manages virtual host in a given namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Virtual Host API docs](https://docs.cloud.f5.com/docs-v2/api/virtual-host) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

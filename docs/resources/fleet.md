@@ -2,20 +2,20 @@
 page_title: "f5xc_fleet Resource - terraform-provider-f5xc"
 subcategory: "Sites"
 description: |-
-  Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
+  Manages fleet will create a fleet object in 'system' namespace of the user. in F5 Distributed Cloud.
 ---
 
 # f5xc_fleet (Resource)
 
-Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
+Manages fleet will create a fleet object in 'system' namespace of the user. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Fleet API docs](https://docs.cloud.f5.com/docs-v2/api/fleet) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Fleet Resource Example
-# Manages fleet will create a fleet object in 'system' namespace of the user in F5 Distributed Cloud.
+# Manages fleet will create a fleet object in 'system' namespace of the user. in F5 Distributed Cloud.
 
 # Basic Fleet configuration
 resource "f5xc_fleet" "example" {
@@ -102,11 +102,11 @@ resource "f5xc_fleet" "example" {
 
 <a id="enable-default-fleet-config-download"></a>&#x2022; [`enable_default_fleet_config_download`](#enable-default-fleet-config-download) - Optional Bool<br>Enable Default Fleet Config Download. Enable default fleet config, It must be set for storage config and GPU config
 
-<a id="enable-vgpu"></a>&#x2022; [`enable_vgpu`](#enable-vgpu) - Optional Block<br>vGPU Configuration. Licensing configuration for NVIDIA vGPU<br>See [Enable Vgpu](#enable-vgpu) below for details.
+<a id="enable-vgpu"></a>&#x2022; [`enable_vgpu`](#enable-vgpu) - Optional Block<br>VGPU Configuration. Licensing configuration for NVIDIA vGPU<br>See [Enable Vgpu](#enable-vgpu) below for details.
 
 <a id="enable-vm"></a>&#x2022; [`enable_vm`](#enable-vm) - Optional Block<br>VM Configuration. VMs support configuration
 
-<a id="fleet-label"></a>&#x2022; [`fleet_label`](#fleet-label) - Optional String<br>Fleet Label Value. fleet_label value is used to create known_label 'ves.io/fleet=`<fleet_label>`' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name `<fleet_label>` is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'ves.io/fleet=sfo' in tenant for the fleet
+<a id="fleet-label"></a>&#x2022; [`fleet_label`](#fleet-label) - Optional String<br>Fleet Label Value. Fleet_label value is used to create known_label 'F5 XC/fleet=`<fleet_label>`' The known_label is created in the 'shared' namespace for the tenant. A virtual_site object with name `<fleet_label>` is also created in 'shared' namespace for tenant. The virtual_site object will select all sites configured with the known_label above fleet_label with 'sfo' will create a known_label 'F5 XC/fleet=sfo' in tenant for the fleet
 
 <a id="inside-virtual-network"></a>&#x2022; [`inside_virtual_network`](#inside-virtual-network) - Optional Block<br>Site Local Inside Virtual Network. Default inside (site local) virtual network for the fleet<br>See [Inside Virtual Network](#inside-virtual-network) below for details.
 
@@ -139,13 +139,13 @@ resource "f5xc_fleet" "example" {
 
 <a id="outside-virtual-network"></a>&#x2022; [`outside_virtual_network`](#outside-virtual-network) - Optional Block<br>Outside (Site Local) Virtual Network. Default outside (site local) virtual network for the fleet<br>See [Outside Virtual Network](#outside-virtual-network) below for details.
 
-<a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode.Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
+<a id="performance-enhancement-mode"></a>&#x2022; [`performance_enhancement_mode`](#performance-enhancement-mode) - Optional Block<br>Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default<br>See [Performance Enhancement Mode](#performance-enhancement-mode) below for details.
 
 <a id="sriov-interfaces"></a>&#x2022; [`sriov_interfaces`](#sriov-interfaces) - Optional Block<br>Custom SR-IOV interfaces Configuration List. List of all custom SR-IOV interfaces configuration<br>See [Sriov Interfaces](#sriov-interfaces) below for details.
 
-<a id="storage-class-list"></a>&#x2022; [`storage_class_list`](#storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in kubernetes for this fleet<br>See [Storage Class List](#storage-class-list) below for details.
+<a id="storage-class-list"></a>&#x2022; [`storage_class_list`](#storage-class-list) - Optional Block<br>Custom Storage Class List. Add additional custom storage classes in Kubernetes for this fleet<br>See [Storage Class List](#storage-class-list) below for details.
 
-<a id="storage-device-list"></a>&#x2022; [`storage_device_list`](#storage-device-list) - Optional Block<br>Custom Storage Device List. Add additional custom storage classes in kubernetes for this fleet
+<a id="storage-device-list"></a>&#x2022; [`storage_device_list`](#storage-device-list) - Optional Block<br>Custom Storage Device List. Add additional custom storage classes in Kubernetes for this fleet
 
 <a id="storage-interface-list"></a>&#x2022; [`storage_interface_list`](#storage-interface-list) - Optional Block<br>List of Interfaces. Add all interfaces belonging to this fleet
 
@@ -169,7 +169,7 @@ A [`blocked_services`](#blocked-services) block supports the following:
 
 <a id="blocked-services-dns"></a>&#x2022; [`dns`](#blocked-services-dns) - Optional Block<br>Enable this option
 
-<a id="blocked-services-network-type"></a>&#x2022; [`network_type`](#blocked-services-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. for volterra fabric Constraints: It is currently only supported as internally created by the system. vK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on volterra RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
+<a id="blocked-services-network-type"></a>&#x2022; [`network_type`](#blocked-services-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Virtual Network Type. Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created automatically and present on all sites Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE is a private network inside site. It is a secure network and is not connected to public network. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on CE sites. This network is created during provisioning of site User defined per-site virtual network. Scope of this virtual network is limited to the site. This is not yet supported Virtual-network of type VIRTUAL_NETWORK_PUBLIC directly conects to the public internet. Virtual-network of this type is local to every site. Two virtual networks of this type on different sites are neither related nor connected. Constraints: There can be atmost one virtual network of this type in a given site. This network type is supported on RE sites only It is an internally created by the system. They must not be created by user Virtual Neworks with global scope across different sites in F5XC domain. An example global virtual-network called 'AIN Network' is created for every tenant. For F5 Distributed Cloud fabric Constraints: It is currently only supported as internally created by the system. VK8s service network for a given tenant. Used to advertise a virtual host only to vk8s pods for that tenant Constraints: It is an internally created by the system. Must not be created by user VER internal network for the site. It can only be used for virtual hosts with SMA_PROXY type proxy Constraints: It is an internally created by the system. Must not be created by user Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE represents both VIRTUAL_NETWORK_SITE_LOCAL and VIRTUAL_NETWORK_SITE_LOCAL_INSIDE Constraints: This network type is only meaningful in an advertise policy When virtual-network of type VIRTUAL_NETWORK_IP_AUTO is selected for an endpoint, VER will try to determine the network based on the provided IP address Constraints: This network type is only meaningful in an endpoint VoltADN Private Network is used on F5 Distributed Cloud RE(s) to connect to customer private networks This network is created by opening a support ticket This network is per site srv6 network VER IP Fabric network for the site. This Virtual network type is used for exposing virtual host on IP Fabric network on the VER site or for endpoint in IP Fabric network Constraints: It is an internally created by the system. Must not be created by user Network internally created for a segment Constraints: It is an internally created by the system. Must not be created by user
 
 <a id="blocked-services-ssh"></a>&#x2022; [`ssh`](#blocked-services-ssh) - Optional Block<br>Enable this option
 
@@ -205,11 +205,23 @@ A [`lacp`](#bond-device-list-bond-devices-lacp) block (within [`bond_device_list
 
 #### Dc Cluster Group
 
-<a id="objref-2b048b"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`dc_cluster_group`](#dc-cluster-group) block supports the following:
+
+<a id="dc-cluster-group-name"></a>&#x2022; [`name`](#dc-cluster-group-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="dc-cluster-group-namespace"></a>&#x2022; [`namespace`](#dc-cluster-group-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="dc-cluster-group-tenant"></a>&#x2022; [`tenant`](#dc-cluster-group-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Dc Cluster Group Inside
 
-<a id="objref-278dba"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`dc_cluster_group_inside`](#dc-cluster-group-inside) block supports the following:
+
+<a id="dc-cluster-group-inside-name"></a>&#x2022; [`name`](#dc-cluster-group-inside-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="dc-cluster-group-inside-namespace"></a>&#x2022; [`namespace`](#dc-cluster-group-inside-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="dc-cluster-group-inside-tenant"></a>&#x2022; [`tenant`](#dc-cluster-group-inside-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Device List
 
@@ -221,11 +233,11 @@ A [`device_list`](#device-list) block supports the following:
 
 A [`devices`](#device-list-devices) block (within [`device_list`](#device-list)) supports the following:
 
-<a id="device-list-devices-name"></a>&#x2022; [`name`](#device-list-devices-name) - Optional String<br>Device Name. Name of the device including the unit number (e.g. eth0 or disk1). The name must match name of device in host-OS of node
+<a id="device-list-devices-name"></a>&#x2022; [`name`](#device-list-devices-name) - Optional String<br>Device Name. Name of the device including the unit number (e.g. Eth0 or disk1). The name must match name of device in host-OS of node
 
 <a id="device-list-devices-network-device"></a>&#x2022; [`network_device`](#device-list-devices-network-device) - Optional Block<br>Network Device Type. Represents physical network interface. The 'interface' reference points to a Network Interface object. Attributes such as Labels, MTU from Network Interface must be applied to the device. Device mapping to nodes A fleet can have many devices and nodes in VER customer edge site can have many interfaces. An interface in node inherits configuration from a device by matching, - device_name in Network Interface for the device - device name for physical-interface in the node<br>See [Network Device](#device-list-devices-network-device) below.
 
-<a id="device-list-devices-owner"></a>&#x2022; [`owner`](#device-list-devices-owner) - Optional String  Defaults to `DEVICE_OWNER_INVALID`<br>Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`<br>[Enum: DEVICE_OWNER_INVALID|DEVICE_OWNER_VER|DEVICE_OWNER_VK8S_WORK_LOAD|DEVICE_OWNER_HOST] Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM
+<a id="device-list-devices-owner"></a>&#x2022; [`owner`](#device-list-devices-owner) - Optional String  Defaults to `DEVICE_OWNER_INVALID`<br>Possible values are `DEVICE_OWNER_INVALID`, `DEVICE_OWNER_VER`, `DEVICE_OWNER_VK8S_WORK_LOAD`, `DEVICE_OWNER_HOST`<br>[Enum: DEVICE_OWNER_INVALID|DEVICE_OWNER_VER|DEVICE_OWNER_VK8S_WORK_LOAD|DEVICE_OWNER_HOST] Device Owner Type. Defines ownership for a device. Device owner is invalid Device is owned by VER pod. Usually it will be network interface device or accelerator like crypto engine. Device is available to be owned by vK8s workload on the site, like camera GPU etc. Device is not available to be owned by vK8s or VER. Can be exposed via some other service. Like TPM
 
 #### Device List Devices Network Device
 
@@ -239,15 +251,15 @@ A [`network_device`](#device-list-devices-network-device) block (within [`device
 
 An [`interface`](#interface-d1eaa7) block (within [`device_list.devices.network_device`](#device-list-devices-network-device)) supports the following:
 
-<a id="kind-34238d"></a>&#x2022; [`kind`](#kind-34238d) - Optional String<br>Object reference kind
+<a id="kind-34238d"></a>&#x2022; [`kind`](#kind-34238d) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-c2b49b"></a>&#x2022; [`name`](#name-c2b49b) - Optional String<br>Object reference name
+<a id="name-c2b49b"></a>&#x2022; [`name`](#name-c2b49b) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-32a7dc"></a>&#x2022; [`namespace`](#namespace-32a7dc) - Optional String<br>Object reference namespace
+<a id="namespace-32a7dc"></a>&#x2022; [`namespace`](#namespace-32a7dc) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-701ffb"></a>&#x2022; [`tenant`](#tenant-701ffb) - Optional String<br>Object reference tenant
+<a id="tenant-701ffb"></a>&#x2022; [`tenant`](#tenant-701ffb) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-ea614b"></a>&#x2022; [`uid`](#uid-ea614b) - Optional String<br>Object reference UID
+<a id="uid-ea614b"></a>&#x2022; [`uid`](#uid-ea614b) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Enable Vgpu
 
@@ -263,15 +275,15 @@ An [`enable_vgpu`](#enable-vgpu) block supports the following:
 
 An [`inside_virtual_network`](#inside-virtual-network) block supports the following:
 
-<a id="inside-virtual-network-kind"></a>&#x2022; [`kind`](#inside-virtual-network-kind) - Optional String<br>Object reference kind
+<a id="inside-virtual-network-kind"></a>&#x2022; [`kind`](#inside-virtual-network-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="inside-virtual-network-name"></a>&#x2022; [`name`](#inside-virtual-network-name) - Optional String<br>Object reference name
+<a id="inside-virtual-network-name"></a>&#x2022; [`name`](#inside-virtual-network-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="inside-virtual-network-namespace"></a>&#x2022; [`namespace`](#inside-virtual-network-namespace) - Optional String<br>Object reference namespace
+<a id="inside-virtual-network-namespace"></a>&#x2022; [`namespace`](#inside-virtual-network-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="inside-virtual-network-tenant"></a>&#x2022; [`tenant`](#inside-virtual-network-tenant) - Optional String<br>Object reference tenant
+<a id="inside-virtual-network-tenant"></a>&#x2022; [`tenant`](#inside-virtual-network-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="inside-virtual-network-uid"></a>&#x2022; [`uid`](#inside-virtual-network-uid) - Optional String<br>Object reference UID
+<a id="inside-virtual-network-uid"></a>&#x2022; [`uid`](#inside-virtual-network-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Interface List
 
@@ -281,7 +293,13 @@ An [`interface_list`](#interface-list) block supports the following:
 
 #### Interface List Interfaces
 
-<a id="objref-0ef821"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`interfaces`](#interface-list-interfaces) block (within [`interface_list`](#interface-list)) supports the following:
+
+<a id="interface-list-interfaces-name"></a>&#x2022; [`name`](#interface-list-interfaces-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="interface-list-interfaces-namespace"></a>&#x2022; [`namespace`](#interface-list-interfaces-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="interface-list-interfaces-tenant"></a>&#x2022; [`tenant`](#interface-list-interfaces-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Kubernetes Upgrade Drain
 
@@ -305,55 +323,61 @@ An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_dr
 
 #### Log Receiver
 
-<a id="objref-0da9d9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+A [`log_receiver`](#log-receiver) block supports the following:
+
+<a id="log-receiver-name"></a>&#x2022; [`name`](#log-receiver-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="log-receiver-namespace"></a>&#x2022; [`namespace`](#log-receiver-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="log-receiver-tenant"></a>&#x2022; [`tenant`](#log-receiver-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Network Connectors
 
 A [`network_connectors`](#network-connectors) block supports the following:
 
-<a id="network-connectors-kind"></a>&#x2022; [`kind`](#network-connectors-kind) - Optional String<br>Object reference kind
+<a id="network-connectors-kind"></a>&#x2022; [`kind`](#network-connectors-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="network-connectors-name"></a>&#x2022; [`name`](#network-connectors-name) - Optional String<br>Object reference name
+<a id="network-connectors-name"></a>&#x2022; [`name`](#network-connectors-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="network-connectors-namespace"></a>&#x2022; [`namespace`](#network-connectors-namespace) - Optional String<br>Object reference namespace
+<a id="network-connectors-namespace"></a>&#x2022; [`namespace`](#network-connectors-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="network-connectors-tenant"></a>&#x2022; [`tenant`](#network-connectors-tenant) - Optional String<br>Object reference tenant
+<a id="network-connectors-tenant"></a>&#x2022; [`tenant`](#network-connectors-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="network-connectors-uid"></a>&#x2022; [`uid`](#network-connectors-uid) - Optional String<br>Object reference UID
+<a id="network-connectors-uid"></a>&#x2022; [`uid`](#network-connectors-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Network Firewall
 
 A [`network_firewall`](#network-firewall) block supports the following:
 
-<a id="network-firewall-kind"></a>&#x2022; [`kind`](#network-firewall-kind) - Optional String<br>Object reference kind
+<a id="network-firewall-kind"></a>&#x2022; [`kind`](#network-firewall-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="network-firewall-name"></a>&#x2022; [`name`](#network-firewall-name) - Optional String<br>Object reference name
+<a id="network-firewall-name"></a>&#x2022; [`name`](#network-firewall-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="network-firewall-namespace"></a>&#x2022; [`namespace`](#network-firewall-namespace) - Optional String<br>Object reference namespace
+<a id="network-firewall-namespace"></a>&#x2022; [`namespace`](#network-firewall-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="network-firewall-tenant"></a>&#x2022; [`tenant`](#network-firewall-tenant) - Optional String<br>Object reference tenant
+<a id="network-firewall-tenant"></a>&#x2022; [`tenant`](#network-firewall-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="network-firewall-uid"></a>&#x2022; [`uid`](#network-firewall-uid) - Optional String<br>Object reference UID
+<a id="network-firewall-uid"></a>&#x2022; [`uid`](#network-firewall-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Outside Virtual Network
 
 An [`outside_virtual_network`](#outside-virtual-network) block supports the following:
 
-<a id="outside-virtual-network-kind"></a>&#x2022; [`kind`](#outside-virtual-network-kind) - Optional String<br>Object reference kind
+<a id="outside-virtual-network-kind"></a>&#x2022; [`kind`](#outside-virtual-network-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="outside-virtual-network-name"></a>&#x2022; [`name`](#outside-virtual-network-name) - Optional String<br>Object reference name
+<a id="outside-virtual-network-name"></a>&#x2022; [`name`](#outside-virtual-network-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="outside-virtual-network-namespace"></a>&#x2022; [`namespace`](#outside-virtual-network-namespace) - Optional String<br>Object reference namespace
+<a id="outside-virtual-network-namespace"></a>&#x2022; [`namespace`](#outside-virtual-network-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="outside-virtual-network-tenant"></a>&#x2022; [`tenant`](#outside-virtual-network-tenant) - Optional String<br>Object reference tenant
+<a id="outside-virtual-network-tenant"></a>&#x2022; [`tenant`](#outside-virtual-network-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="outside-virtual-network-uid"></a>&#x2022; [`uid`](#outside-virtual-network-uid) - Optional String<br>Object reference UID
+<a id="outside-virtual-network-uid"></a>&#x2022; [`uid`](#outside-virtual-network-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Performance Enhancement Mode
 
 A [`performance_enhancement_mode`](#performance-enhancement-mode) block supports the following:
 
-<a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance.L3 enhanced performance mode options<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
+<a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
 
 <a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Enable this option
 
@@ -423,37 +447,37 @@ A [`custom_storage`](#storage-b9f36b) block (within [`storage_class_list.storage
 
 A [`hpe_storage`](#storage-ad5a58) block (within [`storage_class_list.storage_classes`](#storage-class-list-storage-classes)) supports the following:
 
-<a id="mutations-a2580f"></a>&#x2022; [`allow_mutations`](#mutations-a2580f) - Optional String<br>allowMutations. mutation can override specified parameters
+<a id="mutations-a2580f"></a>&#x2022; [`allow_mutations`](#mutations-a2580f) - Optional String<br>AllowMutations. Mutation can override specified parameters
 
-<a id="overrides-6eed7c"></a>&#x2022; [`allow_overrides`](#overrides-6eed7c) - Optional String<br>allowOverrides. PVC can override specified parameters
+<a id="overrides-6eed7c"></a>&#x2022; [`allow_overrides`](#overrides-6eed7c) - Optional String<br>AllowOverrides. PVC can override specified parameters
 
-<a id="enabled-94356b"></a>&#x2022; [`dedupe_enabled`](#enabled-94356b) - Optional Bool<br>dedupeEnabled. Indicates that the volume should enable deduplication
+<a id="enabled-94356b"></a>&#x2022; [`dedupe_enabled`](#enabled-94356b) - Optional Bool<br>DedupeEnabled. Indicates that the volume should enable deduplication
 
 <a id="spec-3b65c2"></a>&#x2022; [`description_spec`](#spec-3b65c2) - Optional String<br>Description. The SecretName parameter is used to identify name of secret to identify backend storage's auth information
 
-<a id="delete-9d4aca"></a>&#x2022; [`destroy_on_delete`](#delete-9d4aca) - Optional Bool<br>destroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted
+<a id="delete-9d4aca"></a>&#x2022; [`destroy_on_delete`](#delete-9d4aca) - Optional Bool<br>DestroyOnDelete. Indicates the backing Nimble volume (including snapshots) should be destroyed when the PVC is deleted
 
-<a id="encrypted-21ab06"></a>&#x2022; [`encrypted`](#encrypted-21ab06) - Optional Bool<br>encrypted. Indicates that the volume should be encrypted
+<a id="encrypted-21ab06"></a>&#x2022; [`encrypted`](#encrypted-21ab06) - Optional Bool<br>Encrypted. Indicates that the volume should be encrypted
 
-<a id="folder-278c93"></a>&#x2022; [`folder`](#folder-278c93) - Optional String<br>folder. The name of the folder in which to place the volume
+<a id="folder-278c93"></a>&#x2022; [`folder`](#folder-278c93) - Optional String<br>Folder. The name of the folder in which to place the volume
 
-<a id="iops-534432"></a>&#x2022; [`limit_iops`](#iops-534432) - Optional String<br>limitIops. The IOPS limit of the volume
+<a id="iops-534432"></a>&#x2022; [`limit_iops`](#iops-534432) - Optional String<br>LimitIops. The IOPS limit of the volume
 
-<a id="mbps-d10140"></a>&#x2022; [`limit_mbps`](#mbps-d10140) - Optional String<br>limitMbps. The IOPS limit of the volume
+<a id="mbps-d10140"></a>&#x2022; [`limit_mbps`](#mbps-d10140) - Optional String<br>LimitMbps. The IOPS limit of the volume
 
-<a id="policy-8cdbac"></a>&#x2022; [`performance_policy`](#policy-8cdbac) - Optional String<br>performancePolicy. The name of the performance policy to assign to the volume
+<a id="policy-8cdbac"></a>&#x2022; [`performance_policy`](#policy-8cdbac) - Optional String<br>PerformancePolicy. The name of the performance policy to assign to the volume
 
-<a id="pool-c41c2c"></a>&#x2022; [`pool`](#pool-c41c2c) - Optional String<br>pool. The name of the pool in which to place the volume
+<a id="pool-c41c2c"></a>&#x2022; [`pool`](#pool-c41c2c) - Optional String<br>Pool. The name of the pool in which to place the volume
 
-<a id="template-473734"></a>&#x2022; [`protection_template`](#template-473734) - Optional String<br>protectionTemplate. The name of the performance policy to assign to the volume
+<a id="template-473734"></a>&#x2022; [`protection_template`](#template-473734) - Optional String<br>ProtectionTemplate. The name of the performance policy to assign to the volume
 
 <a id="name-9820a2"></a>&#x2022; [`secret_name`](#name-9820a2) - Optional String<br>Secret Name. The SecretName parameter is used to identify name of secret to identify backend storage's auth information
 
 <a id="namespace-df6cab"></a>&#x2022; [`secret_namespace`](#namespace-df6cab) - Optional String<br>Secret Namespace. The SecretNamespace parameter is used to identify name of namespace where secret resides
 
-<a id="detach-e3f9c6"></a>&#x2022; [`sync_on_detach`](#detach-e3f9c6) - Optional Bool<br>syncOnDetach. Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node
+<a id="detach-e3f9c6"></a>&#x2022; [`sync_on_detach`](#detach-e3f9c6) - Optional Bool<br>SyncOnDetach. Indicates that a snapshot of the volume should be synced to the replication partner each time it is detached from a node
 
-<a id="thick-b33e15"></a>&#x2022; [`thick`](#thick-b33e15) - Optional Bool<br>thick. Indicates that the volume should be thick provisioned
+<a id="thick-b33e15"></a>&#x2022; [`thick`](#thick-b33e15) - Optional Bool<br>Thick. Indicates that the volume should be thick provisioned
 
 #### Storage Class List Storage Classes Netapp Trident
 
@@ -497,7 +521,7 @@ A [`hpe_storage`](#storage-af052c) block (within [`storage_device_list.storage_d
 
 <a id="password-eb169c"></a>&#x2022; [`iscsi_chap_password`](#password-eb169c) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [iSCSI Chap Password](#password-eb169c) below.
 
-<a id="user-8cda26"></a>&#x2022; [`iscsi_chap_user`](#user-8cda26) - Optional String<br>iSCSI chapUser. chap Username to connect to the HPE storage
+<a id="user-8cda26"></a>&#x2022; [`iscsi_chap_user`](#user-8cda26) - Optional String<br>iSCSI chapUser. Chap Username to connect to the HPE storage
 
 <a id="password-a4b1a7"></a>&#x2022; [`password`](#password-a4b1a7) - Optional Block<br>Secret. SecretType is used in an object to indicate a sensitive/confidential field<br>See [Password](#password-a4b1a7) below.
 
@@ -707,7 +731,13 @@ A [`storage_interface_list`](#storage-interface-list) block supports the followi
 
 #### Storage Interface List Interfaces
 
-<a id="objref-50d4b9"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`interfaces`](#storage-interface-list-interfaces) block (within [`storage_interface_list`](#storage-interface-list)) supports the following:
+
+<a id="storage-interface-list-interfaces-name"></a>&#x2022; [`name`](#storage-interface-list-interfaces-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="namespace-421392"></a>&#x2022; [`namespace`](#namespace-421392) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="tenant-a0360a"></a>&#x2022; [`tenant`](#tenant-a0360a) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 #### Storage Static Routes
 
@@ -741,15 +771,15 @@ A [`nexthop`](#nexthop-e399f9) block (within [`storage_static_routes.storage_rou
 
 An [`interface`](#interface-4faa73) block (within [`storage_static_routes.storage_routes.nexthop`](#nexthop-e399f9)) supports the following:
 
-<a id="kind-6e410a"></a>&#x2022; [`kind`](#kind-6e410a) - Optional String<br>Object reference kind
+<a id="kind-6e410a"></a>&#x2022; [`kind`](#kind-6e410a) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="name-e622a1"></a>&#x2022; [`name`](#name-e622a1) - Optional String<br>Object reference name
+<a id="name-e622a1"></a>&#x2022; [`name`](#name-e622a1) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="namespace-42a184"></a>&#x2022; [`namespace`](#namespace-42a184) - Optional String<br>Object reference namespace
+<a id="namespace-42a184"></a>&#x2022; [`namespace`](#namespace-42a184) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="tenant-1f9ea3"></a>&#x2022; [`tenant`](#tenant-1f9ea3) - Optional String<br>Object reference tenant
+<a id="tenant-1f9ea3"></a>&#x2022; [`tenant`](#tenant-1f9ea3) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="uid-d2cf5c"></a>&#x2022; [`uid`](#uid-d2cf5c) - Optional String<br>Object reference UID
+<a id="uid-d2cf5c"></a>&#x2022; [`uid`](#uid-d2cf5c) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Storage Static Routes Storage Routes Nexthop Nexthop Address
 
@@ -769,7 +799,7 @@ A [`subnets`](#subnets-a6e9f3) block (within [`storage_static_routes.storage_rou
 
 <a id="ipv4-54e4aa"></a>&#x2022; [`ipv4`](#ipv4-54e4aa) - Optional Block<br>IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32<br>See [IPv4](#ipv4-54e4aa) below.
 
-<a id="ipv6-1e9f5b"></a>&#x2022; [`ipv6`](#ipv6-1e9f5b) - Optional Block<br>IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. prefix-legnth must be <= 128<br>See [IPv6](#ipv6-1e9f5b) below.
+<a id="ipv6-1e9f5b"></a>&#x2022; [`ipv6`](#ipv6-1e9f5b) - Optional Block<br>IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128<br>See [IPv6](#ipv6-1e9f5b) below.
 
 #### Storage Static Routes Storage Routes Subnets IPv4
 
@@ -801,7 +831,13 @@ A [`timeouts`](#timeouts) block supports the following:
 
 #### Usb Policy
 
-<a id="objref-60a3be"></a>Uses standard [Object Reference](#common-object-reference) fields (name, namespace, tenant).
+An [`usb_policy`](#usb-policy) block supports the following:
+
+<a id="usb-policy-name"></a>&#x2022; [`name`](#usb-policy-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+
+<a id="usb-policy-namespace"></a>&#x2022; [`namespace`](#usb-policy-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+
+<a id="usb-policy-tenant"></a>&#x2022; [`tenant`](#usb-policy-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
 ---
 

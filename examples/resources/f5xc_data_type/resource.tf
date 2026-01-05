@@ -20,7 +20,7 @@ resource "f5xc_data_type" "example" {
   rules {
     # Configure rules settings
   }
-  # Rule Pattern Type. test
+  # Rule Pattern Type. Test
   key_pattern {
     # Configure key_pattern settings
   }

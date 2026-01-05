@@ -9,7 +9,7 @@ description: |-
 
 Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.
 
-~> **Note** Please refer to [Healthcheck API docs](https://docs.cloud.f5.com/docs-v2/api/healthcheck) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -78,7 +78,7 @@ resource "f5xc_healthcheck" "example" {
 <a id="healthy-threshold"></a>&#x2022; [`healthy_threshold`](#healthy-threshold) - Optional Number<br>Healthy Threshold. Number of successful responses before declaring healthy. In other words, this is the number of healthy health checks required before a host is marked healthy. Note that during startup, only a single successful health check is required to mark a host healthy
 
 -> **One of the following:**
-&#x2022; <a id="http-health-check"></a>[`http_health_check`](#http-health-check) - Optional Block<br>HTTP Health Check. Healthy if 'get' method on URL 'HTTP(s)://`<host>`/`<path>`' with optional '`<header>`' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request<br>See [HTTP Health Check](#http-health-check) below for details.
+&#x2022; <a id="http-health-check"></a>[`http_health_check`](#http-health-check) - Optional Block<br>HTTP Health Check. Healthy if 'GET' method on URL 'HTTP(s)://`<host>`/`<path>`' with optional '`<header>`' returns success. 'host' is not used for DNS resolution. It is used as HTTP Header in the request<br>See [HTTP Health Check](#http-health-check) below for details.
 <br><br>&#x2022; <a id="tcp-health-check"></a>[`tcp_health_check`](#tcp-health-check) - Optional Block<br>TCP Health Check. Healthy if TCP connection is successful and response payload matches `<expected_response>`<br>See [TCP Health Check](#tcp-health-check) below for details.
 <br><br>&#x2022; <a id="udp-icmp-health-check"></a>[`udp_icmp_health_check`](#udp-icmp-health-check) - Optional Block<br>Enable this option
 
@@ -122,9 +122,9 @@ A [`http_health_check`](#http-health-check) block supports the following:
 
 A [`tcp_health_check`](#tcp-health-check) block supports the following:
 
-<a id="tcp-health-check-expected-response"></a>&#x2022; [`expected_response`](#tcp-health-check-expected-response) - Optional String<br>Expected Response. raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload
+<a id="tcp-health-check-expected-response"></a>&#x2022; [`expected_response`](#tcp-health-check-expected-response) - Optional String<br>Expected Response. Raw bytes expected in the request. Describes the encoding of the payload bytes in the payload. Hex encoded payload
 
-<a id="tcp-health-check-send-payload"></a>&#x2022; [`send_payload`](#tcp-health-check-send-payload) - Optional String<br>Send Payload. raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload
+<a id="tcp-health-check-send-payload"></a>&#x2022; [`send_payload`](#tcp-health-check-send-payload) - Optional String<br>Send Payload. Raw bytes sent in the request. Empty payloads imply a connect-only health check. Describes the encoding of the payload bytes in the payload. Hex encoded payload
 
 #### Timeouts
 

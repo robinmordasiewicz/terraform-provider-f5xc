@@ -9,7 +9,7 @@ description: |-
 
 Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Tunnel API docs](https://docs.cloud.f5.com/docs-v2/api/tunnel) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -70,15 +70,15 @@ resource "f5xc_tunnel" "example" {
 
 ### Spec Argument Reference
 
-<a id="local-ip"></a>&#x2022; [`local_ip`](#local-ip) - Optional Block<br>Local IP Address Selector. Defines the options to select local IP address and virtual network for tunnel object Options available are - 1. Local Interface - Network Interface from which IP address and network will be selected 2. IP Address - IP address and network can be configured explicitly<br>See [Local IP](#local-ip) below for details.
+<a id="local-ip"></a>&#x2022; [`local_ip`](#local-ip) - Optional Block<br>Local IP Address Selector. Defines the OPTIONS to select local IP address and virtual network for tunnel object OPTIONS available are - 1. Local Interface - Network Interface from which IP address and network will be selected 2. IP Address - IP address and network can be configured explicitly<br>See [Local IP](#local-ip) below for details.
 
-<a id="params"></a>&#x2022; [`params`](#params) - Optional Block<br>Tunnel Parameters. Tunnel configuration parameters for supported encapsulation 1. IPSec is supported with PSK for which PSK can be configured<br>See [Params](#params) below for details.
+<a id="params"></a>&#x2022; [`params`](#params) - Optional Block<br>Tunnel Parameters. Tunnel configuration parameters for supported encapsulation 1. IPsec is supported with PSK for which PSK can be configured<br>See [Params](#params) below for details.
 
-<a id="remote-ip"></a>&#x2022; [`remote_ip`](#remote-ip) - Optional Block<br>Remote IP Address Selector. Defines the options to select remote IP address for tunnel object Options available are - 1. IP Address - Specifies the remote IP to which tunnel has to be connected 2. Remote endpoint - Is a map of IP address on per ver node basis<br>See [Remote IP](#remote-ip) below for details.
+<a id="remote-ip"></a>&#x2022; [`remote_ip`](#remote-ip) - Optional Block<br>Remote IP Address Selector. Defines the OPTIONS to select remote IP address for tunnel object OPTIONS available are - 1. IP Address - Specifies the remote IP to which tunnel has to be connected 2. Remote endpoint - Is a map of IP address on per ver node basis<br>See [Remote IP](#remote-ip) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
-<a id="tunnel-type"></a>&#x2022; [`tunnel_type`](#tunnel-type) - Optional String  Defaults to `IPSEC_PSK`<br>Possible values are `IPSEC_PSK`, `GRE`<br>[Enum: IPSEC_PSK|GRE] Tunnel Type. Supported tunnel types are IPSec IPSEC tunnel type with PSK GRE tunnel type
+<a id="tunnel-type"></a>&#x2022; [`tunnel_type`](#tunnel-type) - Optional String  Defaults to `IPSEC_PSK`<br>Possible values are `IPSEC_PSK`, `GRE`<br>[Enum: IPSEC_PSK|GRE] Tunnel Type. Supported tunnel types are IPsec IPsec tunnel type with PSK GRE tunnel type
 
 ### Attributes Reference
 
@@ -106,15 +106,15 @@ An [`intf`](#local-ip-intf) block (within [`local_ip`](#local-ip)) supports the 
 
 A [`local_intf`](#local-ip-intf-local-intf) block (within [`local_ip.intf`](#local-ip-intf)) supports the following:
 
-<a id="local-ip-intf-local-intf-kind"></a>&#x2022; [`kind`](#local-ip-intf-local-intf-kind) - Optional String<br>Object reference kind
+<a id="local-ip-intf-local-intf-kind"></a>&#x2022; [`kind`](#local-ip-intf-local-intf-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="local-ip-intf-local-intf-name"></a>&#x2022; [`name`](#local-ip-intf-local-intf-name) - Optional String<br>Object reference name
+<a id="local-ip-intf-local-intf-name"></a>&#x2022; [`name`](#local-ip-intf-local-intf-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="local-ip-intf-local-intf-namespace"></a>&#x2022; [`namespace`](#local-ip-intf-local-intf-namespace) - Optional String<br>Object reference namespace
+<a id="local-ip-intf-local-intf-namespace"></a>&#x2022; [`namespace`](#local-ip-intf-local-intf-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="local-ip-intf-local-intf-tenant"></a>&#x2022; [`tenant`](#local-ip-intf-local-intf-tenant) - Optional String<br>Object reference tenant
+<a id="local-ip-intf-local-intf-tenant"></a>&#x2022; [`tenant`](#local-ip-intf-local-intf-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="local-ip-intf-local-intf-uid"></a>&#x2022; [`uid`](#local-ip-intf-local-intf-uid) - Optional String<br>Object reference UID
+<a id="local-ip-intf-local-intf-uid"></a>&#x2022; [`uid`](#local-ip-intf-local-intf-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Local IP IP Address
 
@@ -160,7 +160,7 @@ A [`virtual_network_type`](#type-516223) block (within [`local_ip.ip_address`](#
 
 A [`params`](#params) block supports the following:
 
-<a id="params-ipsec"></a>&#x2022; [`ipsec`](#params-ipsec) - Optional Block<br>IPSEC tunnel parameters. Configuration for IPSec encapsulation are: 1. PSK - pre shared key to be used by IKE<br>See [Ipsec](#params-ipsec) below.
+<a id="params-ipsec"></a>&#x2022; [`ipsec`](#params-ipsec) - Optional Block<br>IPsec tunnel parameters. Configuration for IPsec encapsulation are: 1. PSK - pre shared key to be used by IKE<br>See [Ipsec](#params-ipsec) below.
 
 #### Params Ipsec
 
@@ -184,15 +184,15 @@ A [`blindfold_secret_info`](#info-5ffa9e) block (within [`params.ipsec.ipsec_psk
 
 <a id="location-b07027"></a>&#x2022; [`location`](#location-b07027) - Optional String<br>Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location
 
-<a id="provider-dd4d40"></a>&#x2022; [`store_provider`](#provider-dd4d40) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="provider-dd4d40"></a>&#x2022; [`store_provider`](#provider-dd4d40) - Optional String<br>Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
 #### Params Ipsec Ipsec Psk Clear Secret Info
 
 A [`clear_secret_info`](#info-8a167c) block (within [`params.ipsec.ipsec_psk`](#params-ipsec-ipsec-psk)) supports the following:
 
-<a id="ref-e757e5"></a>&#x2022; [`provider_ref`](#ref-e757e5) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the URL scheme is not string:///
+<a id="ref-e757e5"></a>&#x2022; [`provider_ref`](#ref-e757e5) - Optional String<br>Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///
 
-<a id="url-4ac735"></a>&#x2022; [`url`](#url-4ac735) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding
+<a id="url-4ac735"></a>&#x2022; [`url`](#url-4ac735) - Optional String<br>URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding
 
 #### Remote IP
 

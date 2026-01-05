@@ -303,7 +303,7 @@ func (r *CloudCredentialsResource) Metadata(ctx context.Context, req resource.Me
 func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             cloud_credentialsSchemaVersion,
-		MarkdownDescription: "Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.",
+		MarkdownDescription: "Manages a Cloud Credentials resource in F5 Distributed Cloud for api to create cloud_credentials object. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Cloud Credentials. Must be unique within the namespace.",
@@ -359,10 +359,10 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				Delete: true,
 			}),
 			"aws_assume_role": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: aws_assume_role, aws_secret_key, azure_client_secret, azure_pfx_certificate, gcp_cred_file] AWS Assume Role to Handle Delegated Access. AWS Assume Role to Handle Delegated Access",
+				MarkdownDescription: "[OneOf: aws_assume_role, aws_secret_key, azure_client_secret, azure_pfx_certificate, gcp_cred_file] AWS Assume Role to Handle Delegated Access. AWS Assume Role to Handle Delegated Access.",
 				Attributes: map[string]schema.Attribute{
 					"custom_external_id": schema.StringAttribute{
-						MarkdownDescription: "External ID is Custom ID. External ID is Custom ID",
+						MarkdownDescription: "External ID is Custom ID. External ID is Custom ID.",
 						Optional:            true,
 					},
 					"duration_seconds": schema.Int64Attribute{
@@ -370,11 +370,11 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 						Optional:            true,
 					},
 					"role_arn": schema.StringAttribute{
-						MarkdownDescription: "IAM Role ARN. IAM Role ARN to assume the role",
+						MarkdownDescription: "IAM Role ARN. IAM Role ARN to assume the role .",
 						Optional:            true,
 					},
 					"session_name": schema.StringAttribute{
-						MarkdownDescription: "Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console",
+						MarkdownDescription: "Role Session Name. Use the role session name to uniquely identify a session, which will be used for deploy, monitor from F5XC console .",
 						Optional:            true,
 					},
 				},
@@ -386,36 +386,36 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Enable this option",
 					},
 					"session_tags": schema.SingleNestedBlock{
-						MarkdownDescription: "Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role",
+						MarkdownDescription: "Role Session Tags. Session tags are key-value pair attributes that you pass when you assume an IAM role.",
 					},
 				},
 			},
 			"aws_secret_key": schema.SingleNestedBlock{
-				MarkdownDescription: "AWS Programmatic Access Credentials. AWS Programmatic Access Credentials type",
+				MarkdownDescription: "AWS Programmatic Access Credentials. AWS Programmatic Access Credentials type.",
 				Attributes: map[string]schema.Attribute{
 					"access_key": schema.StringAttribute{
-						MarkdownDescription: "Access Key ID. Access key ID for your AWS account",
+						MarkdownDescription: "Access Key ID. Access key ID for your AWS account .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"secret_key": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -424,11 +424,11 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -438,39 +438,39 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"azure_client_secret": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Client Secret. Azure Credentials Client Secret type",
+				MarkdownDescription: "Azure Client Secret. Azure Credentials Client Secret type.",
 				Attributes: map[string]schema.Attribute{
 					"client_id": schema.StringAttribute{
-						MarkdownDescription: "Client ID. Client ID for your Azure service principal",
+						MarkdownDescription: "Client ID. Client ID for your Azure service principal .",
 						Optional:            true,
 					},
 					"subscription_id": schema.StringAttribute{
-						MarkdownDescription: "Subscription ID. Subscription ID for your Azure service principal",
+						MarkdownDescription: "Subscription ID. Subscription ID for your Azure service principal .",
 						Optional:            true,
 					},
 					"tenant_id": schema.StringAttribute{
-						MarkdownDescription: "Tenant ID. Tenant ID for your Azure service principal",
+						MarkdownDescription: "Tenant ID. Tenant ID for your Azure service principal .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"client_secret": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -479,11 +479,11 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -493,43 +493,43 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"azure_pfx_certificate": schema.SingleNestedBlock{
-				MarkdownDescription: "Client Certificate. Azure Credentials Client Certificate type",
+				MarkdownDescription: "Client Certificate. Azure Credentials Client Certificate type.",
 				Attributes: map[string]schema.Attribute{
 					"certificate_url": schema.StringAttribute{
-						MarkdownDescription: "URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///<Base64 of certificate> format. Here <Base64 of certificate> is base64 of '.pfx' or '.p12' binary file",
+						MarkdownDescription: "URL for Client Certificate. URL for Client Certificate in '.pfx' or '.p12' whose certificate is linked to service principal object Certificate URL can contain client certificate in string:///<Base64 of certificate> format. Here <Base64 of certificate> is base64 of '.pfx' or '.p12' binary file .",
 						Optional:            true,
 					},
 					"client_id": schema.StringAttribute{
-						MarkdownDescription: "Client ID. Client ID for your Azure service principal",
+						MarkdownDescription: "Client ID. Client ID for your Azure service principal .",
 						Optional:            true,
 					},
 					"subscription_id": schema.StringAttribute{
-						MarkdownDescription: "Subscription ID. Subscription ID for your Azure service principal",
+						MarkdownDescription: "Subscription ID. Subscription ID for your Azure service principal .",
 						Optional:            true,
 					},
 					"tenant_id": schema.StringAttribute{
-						MarkdownDescription: "Tenant ID. Tenant ID for your Azure service principal",
+						MarkdownDescription: "Tenant ID. Tenant ID for your Azure service principal .",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
 					"password": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -538,11 +538,11 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},
@@ -552,26 +552,26 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 				},
 			},
 			"gcp_cred_file": schema.SingleNestedBlock{
-				MarkdownDescription: "GCP Credentials. GCP Credentials type",
+				MarkdownDescription: "GCP Credentials. GCP Credentials type.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"credential_file": schema.SingleNestedBlock{
-						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field",
+						MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"blindfold_secret_info": schema.SingleNestedBlock{
-								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management",
+								MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
 								Attributes: map[string]schema.Attribute{
 									"decryption_provider": schema.StringAttribute{
 										MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
 										Optional:            true,
 									},
 									"location": schema.StringAttribute{
-										MarkdownDescription: "Location. Location is the uri_ref. It could be in url format for string:/// Or it could be a path if the store provider is an http/https location",
+										MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
 										Optional:            true,
 									},
 									"store_provider": schema.StringAttribute{
-										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 								},
@@ -580,11 +580,11 @@ func (r *CloudCredentialsResource) Schema(ctx context.Context, req resource.Sche
 								MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
 								Attributes: map[string]schema.Attribute{
 									"provider_ref": schema.StringAttribute{
-										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to get encrypted bytes This field needs to be provided only if the url scheme is not string:///",
+										MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
 										Optional:            true,
 									},
 									"url": schema.StringAttribute{
-										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will get Secret bytes after Base64 decoding.",
+										MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
 										Optional:            true,
 									},
 								},

@@ -81,7 +81,7 @@ func (r *APIDiscoveryResource) Metadata(ctx context.Context, req resource.Metada
 func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             api_discoverySchemaVersion,
-		MarkdownDescription: "Manages api discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages API discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the API Discovery. Must be unique within the namespace.",
@@ -137,7 +137,7 @@ func (r *APIDiscoveryResource) Schema(ctx context.Context, req resource.SchemaRe
 				Delete: true,
 			}),
 			"custom_auth_types": schema.ListNestedBlock{
-				MarkdownDescription: "Custom Authentication Types. Select your custom authentication types to be detected in the API discovery",
+				MarkdownDescription: "Custom Authentication Types. Select your custom authentication types to be detected in the API discovery.",
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"parameter_name": schema.StringAttribute{

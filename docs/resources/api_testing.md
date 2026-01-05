@@ -9,7 +9,7 @@ description: |-
 
 Manages a API Testing resource in F5 Distributed Cloud.
 
-~> **Note** Please refer to [API Testing API docs](https://docs.cloud.f5.com/docs-v2/api/api-sec-api-testing) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
@@ -66,7 +66,7 @@ resource "f5xc_api_testing" "example" {
 
 ### Spec Argument Reference
 
-<a id="custom-header-value"></a>&#x2022; [`custom_header_value`](#custom-header-value) - Optional String<br>Custom Header. Add x-f5-API-testing-identifier header value to prevent security flags on API testing traffic
+<a id="custom-header-value"></a>&#x2022; [`custom_header_value`](#custom-header-value) - Optional String<br>Custom Header. Add x-F5-API-testing-identifier header value to prevent security flags on API testing traffic
 
 <a id="domains"></a>&#x2022; [`domains`](#domains) - Optional Block<br>Testing Environments. Add and configure testing domains and credentials<br>See [Domains](#domains) below for details.
 
@@ -89,7 +89,7 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`domains`](#domains) block supports the following:
 
-<a id="domains-allow-destructive-methods"></a>&#x2022; [`allow_destructive_methods`](#domains-allow-destructive-methods) - Optional Bool<br>Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or delete data
+<a id="domains-allow-destructive-methods"></a>&#x2022; [`allow_destructive_methods`](#domains-allow-destructive-methods) - Optional Bool<br>Run API tests for destructive methods (e.g., DELETE, PUT). Enable to allow API test to execute destructive methods. Be cautious as these can alter or DELETE data
 
 <a id="domains-credentials"></a>&#x2022; [`credentials`](#domains-credentials) - Optional Block<br>Credentials. Add credentials for API testing to use in the selected environment<br>See [Credentials](#domains-credentials) below.
 

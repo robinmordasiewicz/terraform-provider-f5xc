@@ -9,7 +9,7 @@ description: |-
 
 Manages a GCP VPC Site resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.
 
-~> **Note** Please refer to [GCP VPC Site API docs](https://docs.cloud.f5.com/docs-v2/api/views-gcp-vpc-site) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

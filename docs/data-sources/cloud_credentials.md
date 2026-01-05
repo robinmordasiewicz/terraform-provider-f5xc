@@ -2,14 +2,14 @@
 page_title: "f5xc_cloud_credentials Data Source - terraform-provider-f5xc"
 subcategory: "Authentication"
 description: |-
-  Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+  Manages a Cloud Credentials resource in F5 Distributed Cloud for api to create cloud_credentials object. configuration.
 ---
 
 # f5xc_cloud_credentials (Data Source)
 
-Manages a Cloud Credentials resource in F5 Distributed Cloud for cloud provider credential management for site deployment.
+Manages a Cloud Credentials resource in F5 Distributed Cloud for api to create cloud_credentials object. configuration.
 
-~> **Note** Please refer to [Cloud Credentials API docs](https://docs.cloud.f5.com/docs-v2/api/cloud-credentials) to learn more.
+~> **Note** For more information about this data source, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 

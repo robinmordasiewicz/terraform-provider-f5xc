@@ -2,20 +2,20 @@
 page_title: "f5xc_network_policy_rule Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
+  Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.
 ---
 
 # f5xc_network_policy_rule (Resource)
 
-Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
+Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.
 
-~> **Note** Please refer to [Network Policy Rule API docs](https://docs.cloud.f5.com/docs-v2/api/network-policy-rule) to learn more.
+~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
 ## Example Usage
 
 ```terraform
 # Network Policy Rule Resource Example
-# Manages network policy rule with configured parameters in specified namespace in F5 Distributed Cloud.
+# Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.
 
 # Basic Network Policy Rule configuration
 resource "f5xc_network_policy_rule" "example" {
@@ -68,12 +68,12 @@ resource "f5xc_network_policy_rule" "example" {
 
 <a id="action"></a>&#x2022; [`action`](#action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] Network Policy Rule Action. Network policy rule action configures the action to be taken on rule match Apply deny action on rule match Apply allow action on rule match
 
-<a id="advanced-action"></a>&#x2022; [`advanced_action`](#advanced-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional options along with RuleAction and PBRRuleAction<br>See [Advanced Action](#advanced-action) below for details.
+<a id="advanced-action"></a>&#x2022; [`advanced_action`](#advanced-action) - Optional Block<br>Network Policy Rule Advanced Action. Network Policy Rule Advanced Action provides additional OPTIONS along with RuleAction and PBRRuleAction<br>See [Advanced Action](#advanced-action) below for details.
 
 -> **One of the following:**
 &#x2022; <a id="ip-prefix-set"></a>[`ip_prefix_set`](#ip-prefix-set) - Optional Block<br>IP Prefix Set Reference. A list of references to ip_prefix_set objects<br>See [IP Prefix Set](#ip-prefix-set) below for details.
 <br><br>&#x2022; <a id="prefix"></a>[`prefix`](#prefix) - Optional Block<br>IP Prefix List. List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Prefix](#prefix) below for details.
-<br><br>&#x2022; <a id="prefix-selector"></a>[`prefix_selector`](#prefix-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Prefix Selector](#prefix-selector) below for details.
+<br><br>&#x2022; <a id="prefix-selector"></a>[`prefix_selector`](#prefix-selector) - Optional Block<br>Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string `<selector-syntax>` ::= `<requirement>` | `<requirement>` ',' `<selector-syntax>` `<requirement>` ::= [!] KEY [ `<set-based-restriction>` | `<exact-match-restriction>` ] `<set-based-restriction>` ::= '' | `<inclusion-exclusion>` `<value-set>` `<inclusion-exclusion>` ::= `<inclusion>` | `<exclusion>` `<exclusion>` ::= 'notin' `<inclusion>` ::= 'in' `<value-set>` ::= '(' `<values>` ')' `<values>` ::= VALUE | VALUE ',' `<values>` `<exact-match-restriction>` ::= ['='|'=='|'!='] VALUE<br>See [Prefix Selector](#prefix-selector) below for details.
 
 <a id="label-matcher"></a>&#x2022; [`label_matcher`](#label-matcher) - Optional Block<br>Label Matcher. A label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name<br>See [Label Matcher](#label-matcher) below for details.
 
@@ -107,15 +107,15 @@ An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
 
 A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) supports the following:
 
-<a id="ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#ip-prefix-set-ref-kind) - Optional String<br>Object reference kind
+<a id="ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#ip-prefix-set-ref-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
 
-<a id="ip-prefix-set-ref-name"></a>&#x2022; [`name`](#ip-prefix-set-ref-name) - Optional String<br>Object reference name
+<a id="ip-prefix-set-ref-name"></a>&#x2022; [`name`](#ip-prefix-set-ref-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="ip-prefix-set-ref-namespace"></a>&#x2022; [`namespace`](#ip-prefix-set-ref-namespace) - Optional String<br>Object reference namespace
+<a id="ip-prefix-set-ref-namespace"></a>&#x2022; [`namespace`](#ip-prefix-set-ref-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="ip-prefix-set-ref-tenant"></a>&#x2022; [`tenant`](#ip-prefix-set-ref-tenant) - Optional String<br>Object reference tenant
+<a id="ip-prefix-set-ref-tenant"></a>&#x2022; [`tenant`](#ip-prefix-set-ref-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-<a id="ip-prefix-set-ref-uid"></a>&#x2022; [`uid`](#ip-prefix-set-ref-uid) - Optional String<br>Object reference UID
+<a id="ip-prefix-set-ref-uid"></a>&#x2022; [`uid`](#ip-prefix-set-ref-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
 
 #### Label Matcher
 
@@ -133,7 +133,7 @@ A [`prefix`](#prefix) block supports the following:
 
 A [`prefix_selector`](#prefix-selector) block supports the following:
 
-<a id="prefix-selector-expressions"></a>&#x2022; [`expressions`](#prefix-selector-expressions) - Optional List<br>Selector Expression. expressions contains the kubernetes style label expression for selections
+<a id="prefix-selector-expressions"></a>&#x2022; [`expressions`](#prefix-selector-expressions) - Optional List<br>Selector Expression. Expressions contains the Kubernetes style label expression for selections
 
 #### Timeouts
 

@@ -24,11 +24,6 @@
       ]
     }
   },
-  "compatibility": {
-    "runtime": {
-      "node": ">=18.0.0"
-    }
-  },
   "tools": [
     {
       "name": "f5xc_terraform_discover",

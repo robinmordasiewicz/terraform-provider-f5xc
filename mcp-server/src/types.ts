@@ -112,6 +112,9 @@ export interface Response {
 export interface SchemaDefinition {
   type?: string;
   description?: string;
+  'x-f5xc-description-short'?: string;  // Concise description (80-150 chars)
+  'x-f5xc-description-medium'?: string; // Medium-length description
+  'x-displayname'?: string;             // Display name extension
   properties?: Record<string, SchemaDefinition>;
   items?: SchemaDefinition;
   required?: string[];

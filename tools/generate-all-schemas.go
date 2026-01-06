@@ -1075,10 +1075,20 @@ func convertToTerraformAttributeWithDepth(name string, schema SchemaDefinition, 
 		JsonName:    name, // Original OpenAPI property name for JSON marshaling
 	}
 
-	// Build description
-	description := schema.Description
-	if schema.XDisplayName != "" {
-		description = schema.XDisplayName + ". " + description
+	// Build description - prefer enrichment extensions over raw spec descriptions
+	// Priority: 1) x-f5xc-description-short (concise, 80-150 chars)
+	//           2) x-f5xc-description-medium (moderate detail)
+	//           3) description + x-displayname (full spec description)
+	var description string
+	if schema.XF5XCDescriptionShort != "" {
+		description = schema.XF5XCDescriptionShort
+	} else if schema.XF5XCDescriptionMed != "" {
+		description = schema.XF5XCDescriptionMed
+	} else {
+		description = schema.Description
+		if schema.XDisplayName != "" {
+			description = schema.XDisplayName + ". " + description
+		}
 	}
 	attr.Description = cleanDescription(description, fieldPath)
 	if attr.Description == "" {

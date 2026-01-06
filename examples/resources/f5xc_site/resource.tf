@@ -1,5 +1,5 @@
 # Site Resource Example
-# Manages a Site resource in F5 Distributed Cloud for gcp vpc site specification. configuration.
+# Manages virtual site object in given namespace. in F5 Distributed Cloud.
 
 # Basic Site configuration
 resource "f5xc_site" "example" {
@@ -16,16 +16,8 @@ resource "f5xc_site" "example" {
   }
 
   # Resource-specific configuration
-  # Secret. SecretType is used in an object to indicate a sen...
-  admin_password {
-    # Configure admin_password settings
-  }
-  # Blindfold Secret. BlindfoldSecretInfoType specifies infor...
-  blindfold_secret_info {
-    # Configure blindfold_secret_info settings
-  }
-  # In-Clear Secret. ClearSecretInfoType specifies informatio...
-  clear_secret_info {
-    # Configure clear_secret_info settings
+  # Label Selector. This type can be used to establish a 'sel...
+  site_selector {
+    # Configure site_selector settings
   }
 }

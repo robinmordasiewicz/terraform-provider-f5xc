@@ -2,12 +2,12 @@
 page_title: "f5xc_policer Resource - terraform-provider-f5xc"
 subcategory: "Service Mesh"
 description: |-
-  Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.
+  Manages new policer with traffic rate limits. in F5 Distributed Cloud.
 ---
 
 # f5xc_policer (Resource)
 
-Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.
+Manages new policer with traffic rate limits. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -15,7 +15,7 @@ Manages protocol_policer object, protocol_policer object contains list of L4 pro
 
 ```terraform
 # Policer Resource Example
-# Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.
+# Manages new policer with traffic rate limits. in F5 Distributed Cloud.
 
 # Basic Policer configuration
 resource "f5xc_policer" "example" {
@@ -57,7 +57,13 @@ resource "f5xc_policer" "example" {
 
 ### Spec Argument Reference
 
-<a id="protocol-policer"></a>&#x2022; [`protocol_policer`](#protocol-policer) - Optional Block<br>Protocol Policer. List of L4 protocol match condition and associated traffic rate limits<br>See [Protocol Policer](#protocol-policer) below for details.
+<a id="burst-size"></a>&#x2022; [`burst_size`](#burst-size) - Optional Number<br>Burst Size(pps). The maximum size permitted for bursts of data. E.g. 10000 pps burst
+
+<a id="committed-information-rate"></a>&#x2022; [`committed_information_rate`](#committed-information-rate) - Optional Number<br>Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps
+
+<a id="policer-mode"></a>&#x2022; [`policer_mode`](#policer-mode) - Optional String  Defaults to `POLICER_MODE_NOT_SHARED`<br>Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`<br>[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer
+
+<a id="policer-type"></a>&#x2022; [`policer_type`](#policer-type) - Optional String  Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`<br>[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -68,52 +74,6 @@ In addition to all arguments above, the following attributes are exported:
 <a id="id"></a>&#x2022; [`id`](#id) - Optional String<br>Unique identifier for the resource
 
 ---
-
-#### Protocol Policer
-
-A [`protocol_policer`](#protocol-policer) block supports the following:
-
-<a id="protocol-policer-policer"></a>&#x2022; [`policer`](#protocol-policer-policer) - Optional Block<br>Policer. Reference to policer object to apply traffic rate limits<br>See [Policer](#protocol-policer-policer) below.
-
-<a id="protocol-policer-protocol"></a>&#x2022; [`protocol`](#protocol-policer-protocol) - Optional Block<br>Protocol Type. Protocol and protocol specific flags to be matched in packet<br>See [Protocol](#protocol-policer-protocol) below.
-
-#### Protocol Policer Policer
-
-A [`policer`](#protocol-policer-policer) block (within [`protocol_policer`](#protocol-policer)) supports the following:
-
-<a id="protocol-policer-policer-kind"></a>&#x2022; [`kind`](#protocol-policer-policer-kind) - Optional String<br>Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
-
-<a id="protocol-policer-policer-name"></a>&#x2022; [`name`](#protocol-policer-policer-name) - Optional String<br>Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
-
-<a id="protocol-policer-policer-namespace"></a>&#x2022; [`namespace`](#protocol-policer-policer-namespace) - Optional String<br>Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
-
-<a id="protocol-policer-policer-tenant"></a>&#x2022; [`tenant`](#protocol-policer-policer-tenant) - Optional String<br>Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
-
-<a id="protocol-policer-policer-uid"></a>&#x2022; [`uid`](#protocol-policer-policer-uid) - Optional String<br>UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
-
-#### Protocol Policer Protocol
-
-A [`protocol`](#protocol-policer-protocol) block (within [`protocol_policer`](#protocol-policer)) supports the following:
-
-<a id="protocol-policer-protocol-dns"></a>&#x2022; [`dns`](#protocol-policer-protocol-dns) - Optional Block<br>DNS Packets. Match all DNS packets inclusing UDP and TCP
-
-<a id="protocol-policer-protocol-icmp"></a>&#x2022; [`icmp`](#protocol-policer-protocol-icmp) - Optional Block<br>ICMP Packet Type. ICMP message type to match in packet<br>See [ICMP](#protocol-policer-protocol-icmp) below.
-
-<a id="protocol-policer-protocol-tcp"></a>&#x2022; [`tcp`](#protocol-policer-protocol-tcp) - Optional Block<br>TCP Packet Type. Specification of TCP flag to be matched in a TCP packet<br>See [TCP](#protocol-policer-protocol-tcp) below.
-
-<a id="protocol-policer-protocol-udp"></a>&#x2022; [`udp`](#protocol-policer-protocol-udp) - Optional Block<br>UDP Packets. Match all UDP packets
-
-#### Protocol Policer Protocol ICMP
-
-An [`icmp`](#protocol-policer-protocol-icmp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
-
-<a id="protocol-policer-protocol-icmp-type"></a>&#x2022; [`type`](#protocol-policer-protocol-icmp-type) - Optional List  Defaults to `ECHO_REPLY`<br>Possible values are `ECHO_REPLY`, `ECHO_REQUEST`, `ALL_ICMP_MSG`<br>[Enum: ECHO_REPLY|ECHO_REQUEST|ALL_ICMP_MSG] ICMP type. ICMP message type to be matched in packet
-
-#### Protocol Policer Protocol TCP
-
-A [`tcp`](#protocol-policer-protocol-tcp) block (within [`protocol_policer.protocol`](#protocol-policer-protocol)) supports the following:
-
-<a id="protocol-policer-protocol-tcp-flags"></a>&#x2022; [`flags`](#protocol-policer-protocol-tcp-flags) - Optional List  Defaults to `FIN`<br>Possible values are `FIN`, `SYN`, `RST`, `PSH`, `ACK`, `URG`, `ALL_TCP_FLAGS`, `KEEPALIVE`<br>[Enum: FIN|SYN|RST|PSH|ACK|URG|ALL_TCP_FLAGS|KEEPALIVE] TCP flags. TCP flag to be matched in a TCP packet
 
 #### Timeouts
 

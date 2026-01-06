@@ -46,16 +46,17 @@ type IruleResource struct {
 }
 
 type IruleResourceModel struct {
-	Name            types.String   `tfsdk:"name"`
-	Namespace       types.String   `tfsdk:"namespace"`
-	Annotations     types.Map      `tfsdk:"annotations"`
-	Description     types.String   `tfsdk:"description"`
-	Disable         types.Bool     `tfsdk:"disable"`
-	Labels          types.Map      `tfsdk:"labels"`
-	ID              types.String   `tfsdk:"id"`
-	DescriptionSpec types.String   `tfsdk:"description_spec"`
-	Irule           types.String   `tfsdk:"irule"`
-	Timeouts        timeouts.Value `tfsdk:"timeouts"`
+	Name        types.String   `tfsdk:"name"`
+	Namespace   types.String   `tfsdk:"namespace"`
+	Annotations types.Map      `tfsdk:"annotations"`
+	Description types.String   `tfsdk:"description"`
+	Disable     types.Bool     `tfsdk:"disable"`
+	Labels      types.Map      `tfsdk:"labels"`
+	ID          types.String   `tfsdk:"id"`
+	Code        types.String   `tfsdk:"code"`
+	IruleName   types.String   `tfsdk:"irule_name"`
+	Source      types.String   `tfsdk:"source"`
+	Timeouts    timeouts.Value `tfsdk:"timeouts"`
 }
 
 func (r *IruleResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -65,7 +66,7 @@ func (r *IruleResource) Metadata(ctx context.Context, req resource.MetadataReque
 func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             iruleSchemaVersion,
-		MarkdownDescription: "Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Irule. Must be unique within the namespace.",
@@ -112,16 +113,24 @@ func (r *IruleResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"description_spec": schema.StringAttribute{
-				MarkdownDescription: "Description for iRule. Specify Description for iRule .",
+			"code": schema.StringAttribute{
+				MarkdownDescription: "IRule code. IRule code content, this content will be base64 encoded for preserving formating.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"irule": schema.StringAttribute{
-				MarkdownDescription: "Irule. www.internal.example.f5.com')} DNS::drop} irule content .",
+			"irule_name": schema.StringAttribute{
+				MarkdownDescription: "IRule name. IRule name.",
+				Optional:            true,
+				Computed:            true,
+				PlanModifiers: []planmodifier.String{
+					stringplanmodifier.UseStateForUnknown(),
+				},
+			},
+			"source": schema.StringAttribute{
+				MarkdownDescription: "IRule source. IRule generation/updation source.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -284,11 +293,14 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.DescriptionSpec.IsNull() && !data.DescriptionSpec.IsUnknown() {
-		createReq.Spec["description"] = data.DescriptionSpec.ValueString()
+	if !data.Code.IsNull() && !data.Code.IsUnknown() {
+		createReq.Spec["code"] = data.Code.ValueString()
 	}
-	if !data.Irule.IsNull() && !data.Irule.IsUnknown() {
-		createReq.Spec["irule"] = data.Irule.ValueString()
+	if !data.IruleName.IsNull() && !data.IruleName.IsUnknown() {
+		createReq.Spec["irule_name"] = data.IruleName.ValueString()
+	}
+	if !data.Source.IsNull() && !data.Source.IsUnknown() {
+		createReq.Spec["source"] = data.Source.ValueString()
 	}
 
 	apiResource, err := r.client.CreateIrule(ctx, createReq)
@@ -303,15 +315,20 @@ func (r *IruleResource) Create(ctx context.Context, req resource.CreateRequest, 
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
-	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
-		data.DescriptionSpec = types.StringValue(v)
+	if v, ok := apiResource.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
 	} else {
-		data.DescriptionSpec = types.StringNull()
+		data.Code = types.StringNull()
 	}
-	if v, ok := apiResource.Spec["irule"].(string); ok && v != "" {
-		data.Irule = types.StringValue(v)
+	if v, ok := apiResource.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
 	} else {
-		data.Irule = types.StringNull()
+		data.IruleName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	} else {
+		data.Source = types.StringNull()
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -412,15 +429,20 @@ func (r *IruleResource) Read(ctx context.Context, req resource.ReadRequest, resp
 		"psd_is_nil": psd == nil,
 		"managed":    psd.Metadata.Custom["managed"],
 	})
-	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
-		data.DescriptionSpec = types.StringValue(v)
+	if v, ok := apiResource.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
 	} else {
-		data.DescriptionSpec = types.StringNull()
+		data.Code = types.StringNull()
 	}
-	if v, ok := apiResource.Spec["irule"].(string); ok && v != "" {
-		data.Irule = types.StringValue(v)
+	if v, ok := apiResource.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
 	} else {
-		data.Irule = types.StringNull()
+		data.IruleName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	} else {
+		data.Source = types.StringNull()
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -482,11 +504,14 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 
 	// Marshal spec fields from Terraform state to API struct
-	if !data.DescriptionSpec.IsNull() && !data.DescriptionSpec.IsUnknown() {
-		apiResource.Spec["description"] = data.DescriptionSpec.ValueString()
+	if !data.Code.IsNull() && !data.Code.IsUnknown() {
+		apiResource.Spec["code"] = data.Code.ValueString()
 	}
-	if !data.Irule.IsNull() && !data.Irule.IsUnknown() {
-		apiResource.Spec["irule"] = data.Irule.ValueString()
+	if !data.IruleName.IsNull() && !data.IruleName.IsUnknown() {
+		apiResource.Spec["irule_name"] = data.IruleName.ValueString()
+	}
+	if !data.Source.IsNull() && !data.Source.IsUnknown() {
+		apiResource.Spec["source"] = data.Source.ValueString()
 	}
 
 	_, err := r.client.UpdateIrule(ctx, apiResource)
@@ -507,18 +532,25 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	}
 
 	// Set computed fields from API response
-	if v, ok := fetched.Spec["description"].(string); ok && v != "" {
-		data.DescriptionSpec = types.StringValue(v)
-	} else if data.DescriptionSpec.IsUnknown() {
+	if v, ok := fetched.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
+	} else if data.Code.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
-		data.DescriptionSpec = types.StringNull()
+		data.Code = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["irule"].(string); ok && v != "" {
-		data.Irule = types.StringValue(v)
-	} else if data.Irule.IsUnknown() {
+	if v, ok := fetched.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
+	} else if data.IruleName.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
-		data.Irule = types.StringNull()
+		data.IruleName = types.StringNull()
+	}
+	// If plan had a value, preserve it
+	if v, ok := fetched.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	} else if data.Source.IsUnknown() {
+		// API didn't return value and plan was unknown - set to null
+		data.Source = types.StringNull()
 	}
 	// If plan had a value, preserve it
 
@@ -526,15 +558,20 @@ func (r *IruleResource) Update(ctx context.Context, req resource.UpdateRequest, 
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
-	if v, ok := apiResource.Spec["description"].(string); ok && v != "" {
-		data.DescriptionSpec = types.StringValue(v)
+	if v, ok := apiResource.Spec["code"].(string); ok && v != "" {
+		data.Code = types.StringValue(v)
 	} else {
-		data.DescriptionSpec = types.StringNull()
+		data.Code = types.StringNull()
 	}
-	if v, ok := apiResource.Spec["irule"].(string); ok && v != "" {
-		data.Irule = types.StringValue(v)
+	if v, ok := apiResource.Spec["irule_name"].(string); ok && v != "" {
+		data.IruleName = types.StringValue(v)
 	} else {
-		data.Irule = types.StringNull()
+		data.IruleName = types.StringNull()
+	}
+	if v, ok := apiResource.Spec["source"].(string); ok && v != "" {
+		data.Source = types.StringValue(v)
+	} else {
+		data.Source = types.StringNull()
 	}
 
 	psd := privatestate.NewPrivateStateData()

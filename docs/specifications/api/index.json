@@ -1,6 +1,6 @@
 {
-  "version": "2.0.12",
-  "timestamp": "2026-01-05T17:59:59.204260+00:00",
+  "version": "2.0.13",
+  "timestamp": "2026-01-05T18:30:17.632192+00:00",
   "specifications": [
     {
       "domain": "admin_console_and_ui",
@@ -644,7 +644,21 @@
           },
           "relationship_hints": []
         }
-      ]
+      ],
+      "x-f5xc-examples": {
+        "cdn_loadbalancer": {
+          "minimal": {
+            "description": "Basic CDN distribution",
+            "use_case": "Simple content delivery",
+            "yaml": "metadata:\n  name: cdn-basic\n  namespace: default\nspec:\n  domains:\n    - cdn.example.com\n  origin_pool:\n    - pool:\n        name: origin-pool\n        namespace: default\n"
+          },
+          "production": {
+            "description": "Production CDN with caching and compression",
+            "use_case": "Production content delivery with optimization",
+            "yaml": "metadata:\n  name: cdn-prod\n  namespace: production\nspec:\n  domains:\n    - cdn.example.com\n    - assets.example.com\n  https_auto_cert:\n    add_hsts: true\n  origin_pool:\n    - pool:\n        name: origin-pool\n        namespace: production\n  cache_settings:\n    default_cache_action: CACHE\n    cache_ttl_default: 86400\n  compression_settings:\n    content_types:\n      - text/html\n      - text/css\n      - application/javascript\n    enable_gzip: true\n"
+          }
+        }
+      }
     },
     {
       "domain": "ce_management",
@@ -1279,6 +1293,20 @@
           }
         ],
         "icon": "🌐"
+      },
+      "x-f5xc-examples": {
+        "dns_zone": {
+          "minimal": {
+            "description": "Basic DNS zone with primary nameserver",
+            "use_case": "Simple DNS hosting",
+            "yaml": "metadata:\n  name: example-zone\n  namespace: default\nspec:\n  primary:\n    default_rr_set_group:\n      - ttl: 300\n        a_record:\n          name: www\n          values:\n            - 192.168.1.100\n"
+          },
+          "production": {
+            "description": "Production DNS zone with SOA and multiple records",
+            "use_case": "Production DNS with full configuration",
+            "yaml": "metadata:\n  name: prod-zone\n  namespace: production\nspec:\n  domain: example.com\n  primary:\n    soa_parameters:\n      refresh: 3600\n      retry: 600\n      expire: 604800\n      negative_ttl: 300\n    default_rr_set_group:\n      - ttl: 300\n        a_record:\n          name: www\n          values:\n            - 192.168.1.100\n            - 192.168.1.101\n      - ttl: 300\n        cname_record:\n          name: api\n          value: www.example.com\n      - ttl: 86400\n        mx_record:\n          name: \"\"\n          values:\n            - domain: mail.example.com\n              priority: 10\n"
+          }
+        }
       }
     },
     {
@@ -2738,6 +2766,54 @@
           }
         ],
         "icon": "⚖️"
+      },
+      "x-f5xc-examples": {
+        "http_loadbalancer": {
+          "minimal": {
+            "description": "Basic HTTP load balancer for quick testing",
+            "use_case": "Development environments, quick validation",
+            "yaml": "metadata:\n  name: my-lb\n  namespace: default\nspec:\n  domains:\n    - example.com\n  http:\n    port: 80\n  default_route_pools:\n    - pool:\n        name: my-origin-pool\n        namespace: default\n"
+          },
+          "production": {
+            "description": "Production-ready HTTP load balancer with TLS and WAF",
+            "use_case": "Production deployments with security controls",
+            "yaml": "metadata:\n  name: prod-lb\n  namespace: production\nspec:\n  domains:\n    - api.example.com\n  https_auto_cert:\n    http_redirect: true\n    add_hsts: true\n    tls_config:\n      min_version: TLS12\n  app_firewall:\n    name: default-waf\n    namespace: shared\n  default_route_pools:\n    - pool:\n        name: prod-origin-pool\n        namespace: production\n      weight: 100\n  rate_limiter:\n    total_number: 1000\n    unit: MINUTE\n"
+          },
+          "advanced": {
+            "description": "Multi-origin load balancer with routing rules and rate limiting",
+            "use_case": "Complex routing scenarios, API gateways",
+            "yaml": "metadata:\n  name: api-gateway\n  namespace: production\nspec:\n  domains:\n    - api.example.com\n    - api-v2.example.com\n  https_auto_cert:\n    http_redirect: true\n    add_hsts: true\n  app_firewall:\n    name: strict-waf\n    namespace: shared\n  routes:\n    - match:\n        path:\n          prefix: /api/v1\n      route_destination:\n        destinations:\n          - cluster:\n              name: v1-backend\n            weight: 100\n    - match:\n        path:\n          prefix: /api/v2\n      route_destination:\n        destinations:\n          - cluster:\n              name: v2-backend\n            weight: 100\n  default_route_pools:\n    - pool:\n        name: default-backend\n        namespace: production\n  rate_limiter:\n    total_number: 5000\n    unit: MINUTE\n  cors_policy:\n    allow_origins:\n      - exact: https://app.example.com\n    allow_methods:\n      - GET\n      - POST\n      - PUT\n      - DELETE\n"
+          }
+        },
+        "origin_pool": {
+          "minimal": {
+            "description": "Basic origin pool with single backend",
+            "use_case": "Simple backend configuration",
+            "yaml": "metadata:\n  name: backend-pool\n  namespace: default\nspec:\n  origin_servers:\n    - public_ip:\n        ip: 192.168.1.100\n  port: 8080\n  loadbalancer_algorithm: ROUND_ROBIN\n"
+          },
+          "production": {
+            "description": "Production origin pool with health checks",
+            "use_case": "Production deployments with monitoring",
+            "yaml": "metadata:\n  name: prod-backend\n  namespace: production\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: backend1.example.com\n    - public_name:\n        dns_name: backend2.example.com\n  port: 443\n  use_tls:\n    use_host_header_as_sni: {}\n    tls_config:\n      min_version: TLS12\n  healthcheck:\n    - name: http-health\n      namespace: production\n  loadbalancer_algorithm: LEAST_ACTIVE\n  endpoint_selection: LOCAL_PREFERRED\n"
+          },
+          "advanced": {
+            "description": "Multi-region origin pool with advanced routing",
+            "use_case": "Global deployments, failover scenarios",
+            "yaml": "metadata:\n  name: global-backend\n  namespace: production\nspec:\n  origin_servers:\n    - public_name:\n        dns_name: us-backend.example.com\n      labels:\n        region: us-east\n    - public_name:\n        dns_name: eu-backend.example.com\n      labels:\n        region: eu-west\n  port: 443\n  use_tls:\n    use_host_header_as_sni: {}\n    tls_config:\n      min_version: TLS12\n  healthcheck:\n    - name: tcp-health\n      namespace: production\n  loadbalancer_algorithm: ROUND_ROBIN\n  endpoint_selection: LOCAL_PREFERRED\n  advanced_options:\n    connection_timeout: 30000\n    idle_timeout: 60000\n    max_connections: 10000\n"
+          }
+        },
+        "healthcheck": {
+          "minimal": {
+            "description": "Basic HTTP health check",
+            "use_case": "Simple health monitoring",
+            "yaml": "metadata:\n  name: http-health\n  namespace: default\nspec:\n  http_health_check:\n    path: /health\n  timeout: 3\n  interval: 15\n  unhealthy_threshold: 3\n  healthy_threshold: 2\n"
+          },
+          "production": {
+            "description": "Production health check with custom headers",
+            "use_case": "Production monitoring with authentication",
+            "yaml": "metadata:\n  name: prod-health\n  namespace: production\nspec:\n  http_health_check:\n    path: /api/health\n    headers:\n      x-health-check: \"true\"\n    expected_status_codes:\n      - 200\n      - 204\n  timeout: 5\n  interval: 10\n  unhealthy_threshold: 2\n  healthy_threshold: 3\n"
+          }
+        }
       }
     },
     {
@@ -2873,7 +2949,26 @@
           },
           "relationship_hints": []
         }
-      ]
+      ],
+      "x-f5xc-examples": {
+        "app_firewall": {
+          "minimal": {
+            "description": "Basic WAF policy with default detection",
+            "use_case": "Quick WAF protection setup",
+            "yaml": "metadata:\n  name: basic-waf\n  namespace: default\nspec:\n  blocking: {}\n  detection_settings:\n    signature_selection_setting:\n      default_attack_type_settings: {}\n      high_medium_accuracy_signatures: {}\n"
+          },
+          "production": {
+            "description": "Production WAF with signature detection and bot defense",
+            "use_case": "Production security with comprehensive protection",
+            "yaml": "metadata:\n  name: prod-waf\n  namespace: production\nspec:\n  blocking: {}\n  detection_settings:\n    signature_selection_setting:\n      default_attack_type_settings: {}\n      high_medium_low_accuracy_signatures: {}\n    enable_suppression: true\n    enable_threat_campaigns: true\n  bot_defense_setting:\n    policy:\n      protected_app_endpoints:\n        - metadata:\n            name: login\n          http_methods:\n            - POST\n          protocol: HTTPS\n          path:\n            prefix: /api/login\n      js_insert_all_pages:\n        javascript_location: AFTER_HEAD\n  allow_all_response_codes: false\n  default_anonymization: true\n"
+          },
+          "advanced": {
+            "description": "Advanced WAF with custom rules and data guard",
+            "use_case": "High-security environments with custom policies",
+            "yaml": "metadata:\n  name: advanced-waf\n  namespace: security\nspec:\n  blocking: {}\n  detection_settings:\n    signature_selection_setting:\n      attack_type_settings:\n        - attack_type: ATTACK_TYPE_COMMAND_EXECUTION\n          disabled: false\n        - attack_type: ATTACK_TYPE_SQL_INJECTION\n          disabled: false\n        - attack_type: ATTACK_TYPE_CROSS_SITE_SCRIPTING\n          disabled: false\n      high_medium_low_accuracy_signatures: {}\n    enable_suppression: true\n    enable_threat_campaigns: true\n    violation_settings:\n      disabled_violation_types:\n        - violation_type: VIOL_FILETYPE\n  bot_defense_setting:\n    policy:\n      protected_app_endpoints:\n        - metadata:\n            name: api-endpoint\n          http_methods:\n            - POST\n            - PUT\n          protocol: HTTPS\n          path:\n            prefix: /api/\n      js_insert_all_pages:\n        javascript_location: AFTER_HEAD\n  data_guard_rules:\n    - name: mask-credit-cards\n      path:\n        prefix: /\n      target_parameters:\n        - parameter_name:\n            exact_value: credit_card\n      apply_data_guard: {}\n"
+          }
+        }
+      }
     }
   ],
   "x-f5xc-critical-resources": [

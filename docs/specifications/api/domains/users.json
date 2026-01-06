@@ -3,7 +3,7 @@
   "info": {
     "title": "Users",
     "description": "Token lifecycle governs automated site onboarding through cloud-init integration with configurable validity periods. Explicit category keys establish permitted classification hierarchies enforced across deployments. Inferred attributes attach automatically based on object characteristics and placement context. Namespace-scoped operations handle credential generation, revocation, and state transitions for streamlined provisioning workflows.",
-    "version": "2.0.12",
+    "version": "2.0.13",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -3366,7 +3366,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:07.538238+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:25.855212+00:00"
           },
           "key": {
             "type": "string",
@@ -3385,7 +3385,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:07.538244+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:25.855219+00:00"
           },
           "value": {
             "type": "string",
@@ -3404,7 +3404,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:07.538249+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:25.855224+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -3494,7 +3494,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.697729+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.036769+00:00"
           },
           "key": {
             "type": "string",
@@ -3513,7 +3513,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.697735+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.036776+00:00"
           },
           "namespace": {
             "type": "string",
@@ -3532,7 +3532,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.697741+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.036781+00:00"
           },
           "value": {
             "type": "string",
@@ -3557,7 +3557,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.697745+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.036786+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -3622,7 +3622,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.697753+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.036793+00:00"
           },
           "namespace": {
             "type": "string",
@@ -3641,7 +3641,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.697757+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.036798+00:00"
           },
           "value": {
             "type": "string",
@@ -3666,7 +3666,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.697761+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.036803+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -3758,7 +3758,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.697768+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.036810+00:00"
           },
           "key": {
             "type": "string",
@@ -3777,7 +3777,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.697772+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.036814+00:00"
           },
           "value": {
             "type": "string",
@@ -3796,7 +3796,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.697776+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.036818+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -3858,7 +3858,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.881788+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.218902+00:00"
           },
           "key": {
             "type": "string",
@@ -3877,7 +3877,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.881795+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.218909+00:00"
           },
           "namespace": {
             "type": "string",
@@ -3896,7 +3896,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.881800+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.218914+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -3960,7 +3960,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.881808+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.218922+00:00"
           },
           "namespace": {
             "type": "string",
@@ -3979,7 +3979,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.881812+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.218926+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4070,7 +4070,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.881819+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.218933+00:00"
           },
           "key": {
             "type": "string",
@@ -4089,7 +4089,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:12.881823+00:00"
+            "x-reconciled-at": "2026-01-05T18:29:31.218937+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4155,7 +4155,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403833+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.621926+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4224,7 +4224,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403843+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.621938+00:00"
           },
           "service_name": {
             "type": "string",
@@ -4263,7 +4263,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403850+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.621945+00:00"
           },
           "type": {
             "type": "string",
@@ -4400,7 +4400,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403861+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.621957+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4509,7 +4509,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403872+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.621967+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4562,7 +4562,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403879+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.621975+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4581,7 +4581,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403883+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.621979+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4657,7 +4657,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403890+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.621985+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4712,7 +4712,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403897+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.621993+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4731,7 +4731,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403901+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.621997+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4807,7 +4807,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403907+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622003+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4862,7 +4862,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403914+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622010+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4881,7 +4881,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403919+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622014+00:00"
           },
           "uid": {
             "type": "string",
@@ -4903,7 +4903,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403926+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622019+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4949,7 +4949,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403932+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622025+00:00"
           },
           "name": {
             "type": "string",
@@ -4968,7 +4968,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403936+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622029+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4987,7 +4987,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403941+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622060+00:00"
           },
           "tenant": {
             "type": "string",
@@ -5008,7 +5008,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403945+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622066+00:00"
           },
           "uid": {
             "type": "string",
@@ -5030,7 +5030,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403950+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622073+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5105,7 +5105,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403958+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622081+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -5158,7 +5158,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403966+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622090+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5177,7 +5177,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403970+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622094+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5291,7 +5291,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403982+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622108+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -5403,7 +5403,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403992+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622118+00:00"
           },
           "status": {
             "type": "string",
@@ -5422,7 +5422,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.403996+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622122+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5600,7 +5600,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404014+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622143+00:00"
           },
           "uid": {
             "type": "string",
@@ -5621,7 +5621,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404019+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622148+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5828,7 +5828,7 @@
             "maxLength": 6,
             "minLength": 6,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404040+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622169+00:00"
           },
           "object_index": {
             "type": "integer",
@@ -5901,7 +5901,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404050+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622179+00:00"
           },
           "trace_info": {
             "type": "string",
@@ -5939,7 +5939,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404056+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622186+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -6025,7 +6025,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404064+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622194+00:00"
           },
           "name": {
             "type": "string",
@@ -6044,7 +6044,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404068+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622199+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6063,7 +6063,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404073+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622203+00:00"
           },
           "uid": {
             "type": "string",
@@ -6084,7 +6084,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404077+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622208+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -6229,7 +6229,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404090+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622221+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6248,7 +6248,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404095+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622226+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -6287,7 +6287,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404100+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622231+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -6383,7 +6383,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404114+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622245+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -6564,7 +6564,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404129+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622260+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -6614,7 +6614,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404138+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622270+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6633,7 +6633,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404143+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622274+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -6674,7 +6674,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404150+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622281+00:00"
           },
           "uid": {
             "type": "string",
@@ -6695,7 +6695,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404155+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622286+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -6901,7 +6901,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404184+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622302+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6920,7 +6920,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-05T17:59:46.404189+00:00"
+            "x-reconciled-at": "2026-01-05T18:30:04.622306+00:00"
           },
           "state": {
             "$ref": "#/components/schemas/tokenState"

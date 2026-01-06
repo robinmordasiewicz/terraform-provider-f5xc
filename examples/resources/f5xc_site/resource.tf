@@ -1,5 +1,5 @@
 # Site Resource Example
-# Manages a Site resource in F5 Distributed Cloud for gcp vpc site specification. configuration.
+# Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.
 
 # Basic Site configuration
 resource "f5xc_site" "example" {
@@ -16,16 +16,16 @@ resource "f5xc_site" "example" {
   }
 
   # Resource-specific configuration
-  # Secret. SecretType is used in an object to indicate a sen...
-  admin_password {
-    # Configure admin_password settings
+  # [OneOf: active_enhanced_firewall_policies, no_network_pol...
+  active_enhanced_firewall_policies {
+    # Configure active_enhanced_firewall_policies settings
   }
-  # Blindfold Secret. BlindfoldSecretInfoType specifies infor...
-  blindfold_secret_info {
-    # Configure blindfold_secret_info settings
+  # Enhanced Firewall Policy. Ordered List of Enhanced Firewa...
+  enhanced_firewall_policies {
+    # Configure enhanced_firewall_policies settings
   }
-  # In-Clear Secret. ClearSecretInfoType specifies informatio...
-  clear_secret_info {
-    # Configure clear_secret_info settings
+  # [OneOf: active_forward_proxy_policies, no_forward_proxy; ...
+  active_forward_proxy_policies {
+    # Configure active_forward_proxy_policies settings
   }
 }

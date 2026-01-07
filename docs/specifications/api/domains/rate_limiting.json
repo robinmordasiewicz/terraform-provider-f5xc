@@ -3,7 +3,7 @@
   "info": {
     "title": "Rate Limiting",
     "description": "Threshold-based request blocking using sliding window calculations. Burst smoothing algorithms maintain sustained throughput without exceeding defined maximums. Per-connection controls apply granular restrictions by protocol type. Automatic block actions trigger when request counts surpass configured limits within specified intervals.",
-    "version": "2.0.15",
+    "version": "2.0.16",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -3622,6 +3622,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.uint32.gte": "1"
             },
+            "x-f5xc-description-short": "The maximum size permitted for bursts of data. E.g. 10000 pps burst Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -3649,6 +3650,8 @@
               "ves.io.schema.rules.uint32.gte": "1",
               "ves.io.schema.rules.uint32.lte": "10000000"
             },
+            "x-f5xc-description-short": "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions.",
+            "x-f5xc-description-medium": "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -3665,6 +3668,7 @@
             "$ref": "#/components/schemas/policerPolicerType"
           }
         },
+        "x-f5xc-description-short": "Create a new policer with traffic rate limits.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policerCreateSpecType",
           "required_fields": [
@@ -3693,6 +3697,7 @@
             "title": "Fail_if_referred.",
             "format": "boolean",
             "x-displayname": "Fail-If-Referred.",
+            "x-f5xc-description-short": "Fail the DELETE operation if this object is being referred by other objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3717,7 +3722,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843058+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552182+00:00"
           },
           "namespace": {
             "type": "string",
@@ -3726,6 +3731,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "Namespace in which the configuration object is present.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -3736,7 +3742,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843064+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552188+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -3771,6 +3777,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Deleted Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3786,6 +3793,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Disabled Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3804,6 +3812,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Referring Objects.",
+            "x-f5xc-description-short": "The set of objects that are referring to this object in their spec.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3825,6 +3834,8 @@
               "$ref": "#/components/schemas/policerStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-example": "active",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3834,7 +3845,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843080+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552204+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -3874,6 +3885,8 @@
           "GET_RSP_FORMAT_BROKEN_REFERENCES"
         ],
         "default": "GET_RSP_FORMAT_DEFAULT",
+        "x-f5xc-description-short": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT...",
+        "x-f5xc-description-medium": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\" Default format of returned resource - GET_RSP_FORMAT_FOR_CREATE: x-displayName: \"Create request Format\" Response should be...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policerGetResponseFormatCode",
           "required_fields": [],
@@ -3908,6 +3921,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.uint32.gte": "1"
             },
+            "x-f5xc-description-short": "The maximum size permitted for bursts of data. E.g. 10000 pps burst Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -3935,6 +3949,8 @@
               "ves.io.schema.rules.uint32.gte": "1",
               "ves.io.schema.rules.uint32.lte": "10000000"
             },
+            "x-f5xc-description-short": "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions.",
+            "x-f5xc-description-medium": "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -3981,6 +3997,7 @@
               "$ref": "#/components/schemas/schemaErrorType"
             },
             "x-displayname": "Errors",
+            "x-f5xc-description-short": "Errors(if any) while listing items from collection.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3996,6 +4013,8 @@
               "$ref": "#/components/schemas/policerListResponseItem"
             },
             "x-displayname": "Items",
+            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
+            "x-f5xc-description-short": "Items represents the collection in response.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4029,6 +4048,8 @@
             "description": "The set of annotations present on this policer.",
             "title": "Annotations.",
             "x-displayname": "Annotations.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of annotations present on this policer.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4051,7 +4072,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843098+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552223+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -4059,6 +4080,8 @@
             "title": "Disabled",
             "format": "boolean",
             "x-displayname": "Disabled",
+            "x-f5xc-example": "True",
+            "x-f5xc-description-short": "Value of true indicates policer is administratively disabled.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4074,6 +4097,8 @@
             "description": "The set of labels present on this policer.",
             "title": "Labels",
             "x-displayname": "Labels",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of labels present on this policer.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4101,7 +4126,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843108+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552233+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4120,7 +4145,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843112+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552237+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -4133,6 +4158,7 @@
               "$ref": "#/components/schemas/policerStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4161,7 +4187,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843120+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552245+00:00"
           },
           "uid": {
             "type": "string",
@@ -4182,9 +4208,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843126+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552250+00:00"
           }
         },
+        "x-f5xc-description-short": "By default a summary of policer is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
+        "x-f5xc-description-medium": "By default a summary of policer is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policerListResponseItem",
           "required_fields": [
@@ -4220,6 +4248,8 @@
         "default": "POLICER_MODE_NOT_SHARED",
         "x-displayname": "Policer Mode.",
         "x-ves-proto-enum": "ves.io.schema.policer.PolicerMode",
+        "x-f5xc-description-short": "- POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A...",
+        "x-f5xc-description-medium": "- POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policerPolicerMode",
           "required_fields": [],
@@ -4240,6 +4270,7 @@
         "default": "POLICER_SINGLE_RATE_TWO_COLOR",
         "x-displayname": "Policer Type.",
         "x-ves-proto-enum": "ves.io.schema.policer.PolicerType",
+        "x-f5xc-description-short": "Specifies the type of Policer Basic Single-Rate Two-Color Policer.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policerPolicerType",
           "required_fields": [],
@@ -4314,6 +4345,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.uint32.gte": "1"
             },
+            "x-f5xc-description-short": "The maximum size permitted for bursts of data. E.g. 10000 pps burst Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -4341,6 +4373,8 @@
               "ves.io.schema.rules.uint32.gte": "1",
               "ves.io.schema.rules.uint32.lte": "10000000"
             },
+            "x-f5xc-description-short": "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions.",
+            "x-f5xc-description-medium": "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -4357,6 +4391,7 @@
             "$ref": "#/components/schemas/policerPolicerType"
           }
         },
+        "x-f5xc-description-short": "Replace a given policer with changed traffic rate limits.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policerReplaceSpecType",
           "required_fields": [
@@ -4388,6 +4423,7 @@
               "$ref": "#/components/schemas/schemaConditionType"
             },
             "x-displayname": "Conditions.",
+            "x-f5xc-description-short": "Conditions reported by various component of the system.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4414,6 +4450,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Most recently observed status of object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policerStatusObject",
           "required_fields": [
@@ -4460,9 +4497,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843146+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552272+00:00"
           }
         },
+        "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
+        "x-f5xc-description-medium": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message. Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type. Example 1: Pack and unpack a...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protobufAny",
           "required_fields": [
@@ -4488,6 +4527,8 @@
             "description": "Hostname of the instance of the site that sent the status.",
             "title": "Hostname",
             "x-displayname": "Hostname",
+            "x-f5xc-example": "api.example.com",
+            "x-f5xc-description-short": "Hostname of the instance of the site that sent the status.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -4519,6 +4560,8 @@
             "x-displayname": "Reason",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "X-reason: \"Insufficient memory in data plane\" A human readable string explaining the reason for reaching this condition.",
+            "x-f5xc-description-medium": "X-reason: \"Insufficient memory in data plane\" A human readable string explaining the reason for reaching this condition.",
             "minLength": 0,
             "maxLength": 43,
             "x-f5xc-required-for": {
@@ -4529,13 +4572,14 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843154+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552292+00:00"
           },
           "service_name": {
             "type": "string",
             "description": "Name of the service that sent the status.",
             "title": "Service name.",
             "x-displayname": "Service Name.",
+            "x-f5xc-description-short": "Name of the service that sent the status.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -4570,7 +4614,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843160+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552298+00:00"
           },
           "type": {
             "type": "string",
@@ -4585,6 +4629,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.in": "[\\\"Validation\\\",\\\"Operational\\\"]"
             },
+            "x-f5xc-description-short": "Type of the condition \"Validation\" represents validation user given configuration object \"Operational\" represents operational status of a given...",
+            "x-f5xc-description-medium": "Type of the condition \"Validation\" represents validation user given configuration object \"Operational\" represents operational status of a given configuration object.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -4595,6 +4641,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Conditions are used in the object status to describe the current state of the object, e.g.",
+        "x-f5xc-description-medium": "Conditions are used in the object status to describe the current state of the object, e.g. Ready, Succeeded, etc.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaConditionType",
           "required_fields": [
@@ -4630,6 +4678,8 @@
         "default": "EOK",
         "x-displayname": "Error Code.",
         "x-ves-proto-enum": "ves.io.schema.ErrorCode",
+        "x-f5xc-description-short": "Union of all possible error-codes from system - EOK: No error - EPERMS: Permissions error - EBADINPUT: Input is not correct - ENOTFOUND: Not found...",
+        "x-f5xc-description-medium": "Union of all possible error-codes from system - EOK: No error - EPERMS: Permissions error - EBADINPUT: Input is not correct - ENOTFOUND: Not found - EEXISTS: Already exists - EUNKNOWN: Unknown/catchall error - ESERIALIZE: Error in serializing/de-serializing - EINTERNAL: Server error - EPARTIAL...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaErrorCode",
           "required_fields": [],
@@ -4670,6 +4720,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Information about a error in API operation.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaErrorType",
           "required_fields": [
@@ -4697,6 +4748,7 @@
             "title": "Name",
             "x-displayname": "Name",
             "x-f5xc-example": "example-resource",
+            "x-f5xc-description-short": "Name of the service that is responsible for initializing this object.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -4707,9 +4759,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843170+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552310+00:00"
           }
         },
+        "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaInitializerType",
           "required_fields": [
@@ -4737,6 +4790,8 @@
               "$ref": "#/components/schemas/schemaInitializerType"
             },
             "x-displayname": "Pending",
+            "x-f5xc-description-short": "Pending is a list of initializers that must execute in order before this object is initialized.",
+            "x-f5xc-description-medium": "Pending is a list of initializers that must execute in order before this object is initialized. When the last pending initializer is removed, and no failing result is set, the initializers struct will be set to nil and the object is considered as initialized and visible to all clients.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4748,6 +4803,7 @@
             "$ref": "#/components/schemas/schemaStatusType"
           }
         },
+        "x-f5xc-description-short": "Initializers tracks the progress of initialization of a configuration object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaInitializersType",
           "required_fields": [
@@ -4786,6 +4842,8 @@
               "ves.io.schema.rules.map.values.string.max_len": "1024",
               "ves.io.schema.rules.map.values.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
+            "x-f5xc-description-medium": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4807,6 +4865,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_bytes": "1200"
             },
+            "x-f5xc-description-short": "Human readable description for the object.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -4816,7 +4875,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843180+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552320+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4825,6 +4884,7 @@
             "format": "boolean",
             "x-displayname": "Disable",
             "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Value of true will administratively disable the object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4838,6 +4898,8 @@
             "title": "Labels",
             "x-displayname": "Labels",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user. Values specified here will be used by selector expression.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4859,6 +4921,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-description-short": "Name of configuration object. It has to be unique within the namespace.",
+            "x-f5xc-description-medium": "Name of configuration object. It has to be unique within the namespace. It can only be specified during create API and cannot be changed during replace API.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -4869,7 +4933,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843187+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552328+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4878,6 +4942,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Staging",
             "x-f5xc-example": "staging",
+            "x-f5xc-description-short": "Defines the workspace within which each the configuration object is to be created.",
+            "x-f5xc-description-medium": "Defines the workspace within which each the configuration object is to be created. Must be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\".",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -4888,9 +4954,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843191+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552332+00:00"
           }
         },
+        "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaObjectCreateMetaType",
           "required_fields": [
@@ -4934,6 +5001,8 @@
               "ves.io.schema.rules.map.values.string.max_len": "1024",
               "ves.io.schema.rules.map.values.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
+            "x-f5xc-description-medium": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4955,6 +5024,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_bytes": "1200"
             },
+            "x-f5xc-description-short": "Human readable description for the object.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -4964,7 +5034,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843197+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552339+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -4974,6 +5044,7 @@
             "x-displayname": "Disable",
             "x-ves-example": "True",
             "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Value of true will administratively disable the object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4988,6 +5059,8 @@
             "x-displayname": "Labels",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user. Values specified here will be used by selector expression.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5009,6 +5082,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-description-short": "Name of configuration object. It has to be unique within the namespace.",
+            "x-f5xc-description-medium": "Name of configuration object. It has to be unique within the namespace. It can only be specified during create API and cannot be changed during replace API.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -5019,7 +5094,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843204+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552346+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5028,6 +5103,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Staging",
             "x-f5xc-example": "staging",
+            "x-f5xc-description-short": "Defines the workspace within which each the configuration object is to be created.",
+            "x-f5xc-description-medium": "Defines the workspace within which each the configuration object is to be created. Must be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\".",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -5038,9 +5115,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843208+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552350+00:00"
           }
         },
+        "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaObjectGetMetaType",
           "required_fields": [
@@ -5072,6 +5150,8 @@
             "x-displayname": "Kind",
             "x-ves-example": "Virtual_site.",
             "x-f5xc-example": "virtual_site",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. \"route\")",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. \"route\").",
             "minLength": 0,
             "maxLength": 14,
             "x-f5xc-required-for": {
@@ -5083,7 +5163,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843212+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552355+00:00"
           },
           "name": {
             "type": "string",
@@ -5092,6 +5172,8 @@
             "x-displayname": "Name",
             "x-ves-example": "Contactus-route.",
             "x-f5xc-example": "contactus-route",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -5102,7 +5184,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843216+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552359+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5111,6 +5193,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -5121,7 +5205,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843220+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552362+00:00"
           },
           "tenant": {
             "type": "string",
@@ -5130,6 +5214,8 @@
             "x-displayname": "Tenant",
             "x-ves-example": "Example-corp.",
             "x-f5xc-example": "example-corp",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
             "minLength": 0,
             "maxLength": 18,
             "x-f5xc-required-for": {
@@ -5142,7 +5228,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843224+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552366+00:00"
           },
           "uid": {
             "type": "string",
@@ -5151,6 +5237,8 @@
             "x-displayname": "UID",
             "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
             "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
             "minLength": 0,
             "maxLength": 36,
             "x-f5xc-required-for": {
@@ -5164,9 +5252,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843229+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552372+00:00"
           }
         },
+        "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
+        "x-f5xc-description-medium": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name for public API and Uid for private API This type of reference is called direct because the relation is explicit and concrete (as opposed to selector...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaObjectRefType",
           "required_fields": [
@@ -5209,6 +5299,8 @@
               "ves.io.schema.rules.map.values.string.max_len": "1024",
               "ves.io.schema.rules.map.values.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
+            "x-f5xc-description-medium": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5230,6 +5322,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_bytes": "1200"
             },
+            "x-f5xc-description-short": "Human readable description for the object.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5239,7 +5332,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843236+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552379+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -5248,6 +5341,7 @@
             "format": "boolean",
             "x-displayname": "Disable",
             "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Value of true will administratively disable the object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5262,6 +5356,8 @@
             "x-displayname": "Labels",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user. Values specified here will be used by selector expression.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5282,6 +5378,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-description-short": "Name of configuration object. It has to be unique within the namespace.",
+            "x-f5xc-description-medium": "Name of configuration object. It has to be unique within the namespace. It can only be specified during create API and cannot be changed during replace API.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -5292,7 +5390,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843242+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552386+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5301,6 +5399,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Staging",
             "x-f5xc-example": "staging",
+            "x-f5xc-description-short": "Defines the workspace within which each the configuration object is to be created.",
+            "x-f5xc-description-medium": "Defines the workspace within which each the configuration object is to be created. Must be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\".",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -5311,9 +5411,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843246+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552390+00:00"
           }
         },
+        "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaObjectReplaceMetaType",
           "required_fields": [
@@ -5344,6 +5445,8 @@
             "title": "Creation_timestamp.",
             "format": "date-time",
             "x-displayname": "Creation Timestamp.",
+            "x-f5xc-description-short": "Creation_timestamp is when the status object was created. It is used to find/tie-break for latest status object from same origin.",
+            "x-f5xc-description-medium": "Creation_timestamp is when the status object was created. It is used to find/tie-break for latest status object from same origin.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5361,6 +5464,8 @@
             "x-displayname": "Creator Class.",
             "x-ves-example": "ver.re1.int.ves.I/O.",
             "x-f5xc-example": "ver.re1.int.F5 XC",
+            "x-f5xc-description-short": "Class of creator which created this StatusObject. This will be service's DNS FQDN.",
+            "x-f5xc-description-medium": "Class of creator which created this StatusObject. This will be service's DNS FQDN. This will be set by the system based on client certificate information.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5378,6 +5483,8 @@
             "x-displayname": "Creator ID.",
             "x-ves-example": "Ver-instance-1.",
             "x-f5xc-example": "ver-instance-1",
+            "x-f5xc-description-short": "ID of creator which created this StatusObject. This will be a concrete identifier for service (e.g.",
+            "x-f5xc-description-medium": "ID of creator which created this StatusObject. This will be a concrete identifier for service (e.g. Identifying the environment also). This will be set by the system based on client certificate information.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5396,6 +5503,8 @@
             "description": "Status_id is a field used by the generator to distinguish (if necessary) between two status\nobjects for the same config object from the same site and same service and potentially same\ndaemon(creator-ID)",
             "title": "Status_id",
             "x-displayname": "Status ID",
+            "x-f5xc-description-short": "Status_id is a field used by the generator to distinguish (if necessary) between two status objects for the same config object from the same site...",
+            "x-f5xc-description-medium": "Status_id is a field used by the generator to distinguish (if necessary) between two status objects for the same config object from the same site and same service and potentially same daemon(creator-ID).",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5413,6 +5522,7 @@
             "x-displayname": "UID",
             "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
             "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "Uid is the unique in time and space value for a StatusObject.",
             "minLength": 0,
             "maxLength": 36,
             "x-f5xc-required-for": {
@@ -5425,13 +5535,14 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843259+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552402+00:00"
           },
           "vtrp_id": {
             "type": "string",
             "description": "Origin of this status exchanged by VTRP.",
             "title": "Vtrp_id",
             "x-displayname": "VTRP ID",
+            "x-f5xc-description-short": "Origin of this status exchanged by VTRP.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5448,6 +5559,7 @@
             "title": "Vtrp_stale.",
             "format": "boolean",
             "x-displayname": "VTRP Stale.",
+            "x-f5xc-description-short": "Indicate whether mars deems this object to be stale via graceful restart timer information.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5456,6 +5568,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "StatusMetaType is metadata that all status must have.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaStatusMetaType",
           "required_fields": [
@@ -5486,6 +5599,8 @@
         "default": "STATUS_DO_NOT_PUBLISH",
         "x-displayname": "Status Publish Type.",
         "x-ves-proto-enum": "ves.io.schema.StatusPublishType",
+        "x-f5xc-description-short": "StatusPublishType is all possible publish operations on a StatusObject - STATUS_DO_NOT_PUBLISH: Do Not Publish Do not propagate this status to user.",
+        "x-f5xc-description-medium": "StatusPublishType is all possible publish operations on a StatusObject - STATUS_DO_NOT_PUBLISH: Do Not Publish Do not propagate this status to user. This could be because status is only informational - STATUS_PUBLISH: Publish Propagate this status up to user as it might be actionable.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaStatusPublishType",
           "required_fields": [],
@@ -5511,6 +5626,7 @@
             "x-displayname": "Code",
             "x-ves-example": "0",
             "x-f5xc-example": "0",
+            "x-f5xc-description-short": "Suggested HTTP return code for this status, 0 if not set.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -5527,6 +5643,8 @@
             "x-displayname": "Reason",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Human-readable description of why this operation is in the \"Failure\" status. If this value is empty there is no information available.",
+            "x-f5xc-description-medium": "Human-readable description of why this operation is in the \"Failure\" status. If this value is empty there is no information available.",
             "minLength": 0,
             "maxLength": 43,
             "x-f5xc-required-for": {
@@ -5537,7 +5655,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843268+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552411+00:00"
           },
           "status": {
             "type": "string",
@@ -5546,6 +5664,7 @@
             "x-displayname": "Status",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Status of the operation. One of: \"Success\" or \"Failure\".",
             "minLength": 0,
             "maxLength": 17,
             "x-f5xc-required-for": {
@@ -5556,9 +5675,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843273+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552415+00:00"
           }
         },
+        "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaStatusType",
           "required_fields": [
@@ -5586,6 +5706,8 @@
             "title": "Creation_timestamp.",
             "format": "date-time",
             "x-displayname": "Creation Timestamp.",
+            "x-f5xc-description-short": "CreationTimestamp is a timestamp representing the server time when this object was created.",
+            "x-f5xc-description-medium": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5603,6 +5725,7 @@
             "x-displayname": "Creator Class.",
             "x-ves-example": "Prism",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Value identifying the class of the user or service which created this configuration object.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5620,6 +5743,7 @@
             "x-displayname": "Creator ID.",
             "x-ves-example": "Admin@example-corp.com.",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Value identifying the exact user or service that created this configuration object.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5657,6 +5781,8 @@
             "x-displayname": "Finalizers.",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Must be empty before the object is deleted from the registry.",
+            "x-f5xc-description-medium": "Must be empty before the object is deleted from the registry. Each entry is an identifier for the responsible component that will remove the entry from the list. If the deletionTimestamp of the object is non-nil, entries in this list can only be removed.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5674,6 +5800,8 @@
             "x-displayname": "Labels",
             "x-ves-example": "'VES.I/O/soft-deleted': 'true'",
             "x-f5xc-example": "'F5 XC/soft-deleted''true'",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the operator or software.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the operator or software. Values here can be interpreted by software(backend or frontend) to enable certain behavior e.g. Things marked as soft-deleted(restorable).",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5687,6 +5815,8 @@
             "title": "Modification_timestamp.",
             "format": "date-time",
             "x-displayname": "Modification Timestamp.",
+            "x-f5xc-description-short": "ModificationTimestamp is a timestamp representing the server time when this object was last modified.",
+            "x-f5xc-description-medium": "ModificationTimestamp is a timestamp representing the server time when this object was last modified.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5705,6 +5835,8 @@
             "x-displayname": "Object Index.",
             "x-ves-example": "0",
             "x-f5xc-example": "0",
+            "x-f5xc-description-short": "Unique index for the object. Some objects need a unique integer index to be allocated for each object type.",
+            "x-f5xc-description-medium": "Unique index for the object. Some objects need a unique integer index to be allocated for each object type. This field will be populated for all objects that need it and will be zero otherwise.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -5725,6 +5857,8 @@
             "x-displayname": "Tenant",
             "x-ves-example": "Example-corp.",
             "x-f5xc-example": "example-corp",
+            "x-f5xc-description-short": "Tenant to which this configuration object belongs to. The value for this is found from presented credentials.",
+            "x-f5xc-description-medium": "Tenant to which this configuration object belongs to. The value for this is found from presented credentials.",
             "minLength": 0,
             "maxLength": 18,
             "x-f5xc-required-for": {
@@ -5736,7 +5870,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843291+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552434+00:00"
           },
           "uid": {
             "type": "string",
@@ -5745,6 +5879,8 @@
             "x-displayname": "UID",
             "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
             "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "Uid is the unique in time and space value for this object.",
+            "x-f5xc-description-medium": "Uid is the unique in time and space value for this object. It is generated by the server on successful creation of an object and is not allowed to change on Replace API. The value of is taken from uid field of ObjectMetaType, if provided.",
             "minLength": 0,
             "maxLength": 36,
             "x-f5xc-required-for": {
@@ -5757,9 +5893,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843296+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552439+00:00"
           }
         },
+        "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
+        "x-f5xc-description-medium": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaSystemObjectGetMetaType",
           "required_fields": [
@@ -5807,7 +5945,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843301+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552444+00:00"
           },
           "name": {
             "type": "string",
@@ -5816,6 +5954,8 @@
             "x-displayname": "Name",
             "x-ves-example": "Contactus-route.",
             "x-f5xc-example": "contactus-route",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -5826,7 +5966,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843305+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552448+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5835,6 +5975,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -5845,7 +5987,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843309+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552452+00:00"
           },
           "uid": {
             "type": "string",
@@ -5866,9 +6008,10 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:00.843315+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:01.552457+00:00"
           }
         },
+        "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaViewRefType",
           "required_fields": [
@@ -5963,6 +6106,7 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of L4 protocol match condition and associated traffic rate limits.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5971,6 +6115,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Create a protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits.",
+        "x-f5xc-description-medium": "Create a protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerCreateSpecType",
           "required_fields": [
@@ -5996,6 +6142,7 @@
             "title": "Fail_if_referred.",
             "format": "boolean",
             "x-displayname": "Fail-If-Referred.",
+            "x-f5xc-description-short": "Fail the DELETE operation if this object is being referred by other objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6020,7 +6167,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:02.107878+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:03.144768+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6029,6 +6176,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "Namespace in which the configuration object is present.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -6039,7 +6187,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:02.107883+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:03.144773+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -6062,6 +6210,7 @@
         "title": "DNS packets.",
         "x-displayname": "DNS Packets.",
         "x-ves-proto-message": "ves.io.schema.protocol_policer.DnsType",
+        "x-f5xc-description-short": "Match all DNS packets inclusing UDP and TCP.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerDnsType",
           "required_fields": [],
@@ -6090,6 +6239,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Deleted Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6105,6 +6255,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Disabled Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6123,6 +6274,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Referring Objects.",
+            "x-f5xc-description-short": "The set of objects that are referring to this object in their spec.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6144,6 +6296,8 @@
               "$ref": "#/components/schemas/protocol_policerStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-example": "active",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6153,7 +6307,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:02.107898+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:03.144789+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -6193,6 +6347,8 @@
           "GET_RSP_FORMAT_BROKEN_REFERENCES"
         ],
         "default": "GET_RSP_FORMAT_DEFAULT",
+        "x-f5xc-description-short": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT...",
+        "x-f5xc-description-medium": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\" Default format of returned resource - GET_RSP_FORMAT_FOR_CREATE: x-displayName: \"Create request Format\" Response should be...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerGetResponseFormatCode",
           "required_fields": [],
@@ -6227,6 +6383,7 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of L4 protocol match condition and associated traffic rate limits.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6235,6 +6392,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "GET specification of a protocol_policer object with L4 protocol match condition and corresponding traffic rate limits.",
+        "x-f5xc-description-medium": "GET specification of a protocol_policer object with L4 protocol match condition and corresponding traffic rate limits.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerGetSpecType",
           "required_fields": [
@@ -6259,6 +6418,8 @@
         "default": "ECHO_REPLY",
         "x-displayname": "ICMP Message Types.",
         "x-ves-proto-enum": "ves.io.schema.protocol_policer.IcmpMsgType",
+        "x-f5xc-description-short": "ICMP echo request packet which is sent by originator of Ping packet ICMP echo reply packet which is sent in responce to ICMP echo request packet...",
+        "x-f5xc-description-medium": "ICMP echo request packet which is sent by originator of Ping packet ICMP echo reply packet which is sent in responce to ICMP echo request packet All ICMP packet types including TTL exceeded, destination unreachable and source quench etc.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerIcmpMsgType",
           "required_fields": [],
@@ -6284,6 +6445,7 @@
               "$ref": "#/components/schemas/protocol_policerIcmpMsgType"
             },
             "x-displayname": "ICMP type",
+            "x-f5xc-description-short": "ICMP message type to be matched in packet.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6319,6 +6481,7 @@
               "$ref": "#/components/schemas/schemaErrorType"
             },
             "x-displayname": "Errors",
+            "x-f5xc-description-short": "Errors(if any) while listing items from collection.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6334,6 +6497,8 @@
               "$ref": "#/components/schemas/protocol_policerListResponseItem"
             },
             "x-displayname": "Items",
+            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
+            "x-f5xc-description-short": "Items represents the collection in response.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6367,6 +6532,8 @@
             "description": "The set of annotations present on this protocol_policer.",
             "title": "Annotations.",
             "x-displayname": "Annotations.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of annotations present on this protocol_policer.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6379,6 +6546,7 @@
             "description": "The description set for this protocol_policer.",
             "title": "Description.",
             "x-displayname": "Description.",
+            "x-f5xc-description-short": "The description set for this protocol_policer.",
             "minLength": 0,
             "maxLength": 0,
             "x-f5xc-required-for": {
@@ -6389,7 +6557,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:02.107914+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:03.144805+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -6397,6 +6565,8 @@
             "title": "Disabled",
             "format": "boolean",
             "x-displayname": "Disabled",
+            "x-f5xc-example": "True",
+            "x-f5xc-description-short": "Value of true indicates protocol_policer is administratively disabled.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6412,6 +6582,8 @@
             "description": "The set of labels present on this protocol_policer.",
             "title": "Labels",
             "x-displayname": "Labels",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of labels present on this protocol_policer.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6439,7 +6611,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:02.107924+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:03.144815+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6458,7 +6630,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:02.107929+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:03.144819+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -6471,6 +6643,7 @@
               "$ref": "#/components/schemas/protocol_policerStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6499,7 +6672,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:02.107936+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:03.144826+00:00"
           },
           "uid": {
             "type": "string",
@@ -6508,6 +6681,7 @@
             "x-displayname": "UID",
             "x-ves-example": "D27938ba-967e-40a7-9709-57b8627f9f75.",
             "x-f5xc-example": "d27938ba-967e-40a7-9709-57b8627f9f75",
+            "x-f5xc-description-short": "The unique uid of this protocol_policer.",
             "minLength": 0,
             "maxLength": 36,
             "x-f5xc-required-for": {
@@ -6520,9 +6694,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:02.107942+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:03.144832+00:00"
           }
         },
+        "x-f5xc-description-short": "By default a summary of protocol_policer is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
+        "x-f5xc-description-medium": "By default a summary of protocol_policer is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerListResponseItem",
           "required_fields": [
@@ -6575,6 +6751,7 @@
               "ves.io.schema.rules.repeated.max_items": "1",
               "ves.io.schema.rules.repeated.min_items": "1"
             },
+            "x-f5xc-description-short": "Reference to policer object to apply traffic rate limits Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6586,6 +6763,8 @@
             "$ref": "#/components/schemas/protocol_policerProtocolType"
           }
         },
+        "x-f5xc-description-short": "Protocol policer has set or network protocol fields and flags to be match on a layer 4 packet and corresponding rate limit to be applied, this...",
+        "x-f5xc-description-medium": "Protocol policer has set or network protocol fields and flags to be match on a layer 4 packet and corresponding rate limit to be applied, this would be useful in specifying * Ratelimiting TCP sessions accepted from in a given duration * Ratelimiting various ICMP message type packets *...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerProtocolPolicerType",
           "required_fields": [
@@ -6620,6 +6799,7 @@
             "$ref": "#/components/schemas/protocol_policerUdpType"
           }
         },
+        "x-f5xc-description-short": "Protocol and protocol specific flags to be matched in packet.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerProtocolType",
           "required_fields": [
@@ -6699,6 +6879,7 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of L4 protocol match condition and associated traffic rate limits.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6707,6 +6888,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Replace a protocol_policer object with new L4 protocol match condition and corresponding traffic rate limits.",
+        "x-f5xc-description-medium": "Replace a protocol_policer object with new L4 protocol match condition and corresponding traffic rate limits.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerReplaceSpecType",
           "required_fields": [
@@ -6735,6 +6918,7 @@
               "$ref": "#/components/schemas/schemaConditionType"
             },
             "x-displayname": "Conditions.",
+            "x-f5xc-description-short": "Conditions reported by various component of the system.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6761,6 +6945,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Most recently observed status of object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerStatusObject",
           "required_fields": [
@@ -6792,6 +6977,8 @@
         "default": "FIN",
         "x-displayname": "TCP Flags",
         "x-ves-proto-enum": "ves.io.schema.protocol_policer.TcpFlags",
+        "x-f5xc-description-short": "TCP flags indicate a particular connection state FIN flag which indicates that there is no more data from the sender, used in the last packet sent...",
+        "x-f5xc-description-medium": "TCP flags indicate a particular connection state FIN flag which indicates that there is no more data from the sender, used in the last packet sent from the sender SYN flag set in the first packet from sender and receiver while establishing three way handshake between two hosts RST flag that...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerTcpFlags",
           "required_fields": [],
@@ -6825,6 +7012,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Specification of TCP flag to be matched in a TCP packet.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protocol_policerTcpType",
           "required_fields": [
@@ -6859,6 +7047,7 @@
         "title": "Empty",
         "x-displayname": "Empty",
         "x-ves-proto-message": "ves.io.schema.Empty",
+        "x-f5xc-description-short": "Can be used for messages where no values are needed.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for ioschemaEmpty",
           "required_fields": [],
@@ -6948,6 +7137,8 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.repeated.max_items": "1"
             },
+            "x-f5xc-description-short": "List of RateLimitValues that specifies the total number of allowed requests for each specified period.",
+            "x-f5xc-description-medium": "List of RateLimitValues that specifies the total number of allowed requests for each specified period. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6969,6 +7160,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.repeated.max_items": "1"
             },
+            "x-f5xc-description-short": "Reference to user_identification object.",
+            "x-f5xc-description-medium": "Reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6978,6 +7171,7 @@
             "x-field-mutability": "read-only"
           }
         },
+        "x-f5xc-description-short": "Create rate_limiter creates a new object in the storage backend for metadata.namespace.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterCreateSpecType",
           "required_fields": [
@@ -7004,6 +7198,7 @@
             "title": "Fail_if_referred.",
             "format": "boolean",
             "x-displayname": "Fail-If-Referred.",
+            "x-f5xc-description-short": "Fail the DELETE operation if this object is being referred by other objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7028,7 +7223,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:03.920766+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:05.339298+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7037,6 +7232,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "Namespace in which the configuration object is present.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -7047,7 +7243,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:03.920771+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:05.339303+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -7082,6 +7278,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Deleted Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7097,6 +7294,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Disabled Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7115,6 +7313,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Referring Objects.",
+            "x-f5xc-description-short": "The set of objects that are referring to this object in their spec.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7136,6 +7335,8 @@
               "$ref": "#/components/schemas/rate_limiterStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-example": "active",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7145,7 +7346,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:03.920786+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:05.339318+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -7185,6 +7386,8 @@
           "GET_RSP_FORMAT_BROKEN_REFERENCES"
         ],
         "default": "GET_RSP_FORMAT_DEFAULT",
+        "x-f5xc-description-short": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT...",
+        "x-f5xc-description-medium": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\" Default format of returned resource - GET_RSP_FORMAT_FOR_CREATE: x-displayName: \"Create request Format\" Response should be...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterGetResponseFormatCode",
           "required_fields": [],
@@ -7219,6 +7422,8 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.repeated.max_items": "1"
             },
+            "x-f5xc-description-short": "List of RateLimitValues that specifies the total number of allowed requests for each specified period.",
+            "x-f5xc-description-medium": "List of RateLimitValues that specifies the total number of allowed requests for each specified period. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7240,6 +7445,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.repeated.max_items": "1"
             },
+            "x-f5xc-description-short": "Reference to user_identification object.",
+            "x-f5xc-description-medium": "Reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7249,6 +7456,7 @@
             "x-field-mutability": "read-only"
           }
         },
+        "x-f5xc-description-short": "GET rate_limiter reads a given object from storage backend for metadata.namespace.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterGetSpecType",
           "required_fields": [
@@ -7397,6 +7605,7 @@
         "title": "LeakyBucketRateLimiter.",
         "x-displayname": "Leaky Bucket Rate Limiter.",
         "x-ves-proto-message": "ves.io.schema.rate_limiter.LeakyBucketRateLimiter",
+        "x-f5xc-description-short": "Leaky-Bucket is the default rate limiter algorithm for F5.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterLeakyBucketRateLimiter",
           "required_fields": [],
@@ -7422,6 +7631,7 @@
               "$ref": "#/components/schemas/schemaErrorType"
             },
             "x-displayname": "Errors",
+            "x-f5xc-description-short": "Errors(if any) while listing items from collection.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7437,6 +7647,8 @@
               "$ref": "#/components/schemas/rate_limiterListResponseItem"
             },
             "x-displayname": "Items",
+            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
+            "x-f5xc-description-short": "Items represents the collection in response.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7470,6 +7682,8 @@
             "description": "The set of annotations present on this rate_limiter.",
             "title": "Annotations.",
             "x-displayname": "Annotations.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of annotations present on this rate_limiter.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7482,6 +7696,7 @@
             "description": "The description set for this rate_limiter.",
             "title": "Description.",
             "x-displayname": "Description.",
+            "x-f5xc-description-short": "The description set for this rate_limiter.",
             "minLength": 0,
             "maxLength": 0,
             "x-f5xc-required-for": {
@@ -7492,7 +7707,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:03.920807+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:05.339340+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -7500,6 +7715,8 @@
             "title": "Disabled",
             "format": "boolean",
             "x-displayname": "Disabled",
+            "x-f5xc-example": "True",
+            "x-f5xc-description-short": "Value of true indicates rate_limiter is administratively disabled.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7515,6 +7732,8 @@
             "description": "The set of labels present on this rate_limiter.",
             "title": "Labels",
             "x-displayname": "Labels",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of labels present on this rate_limiter.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7542,7 +7761,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:03.920818+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:05.339350+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7561,7 +7780,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:03.920822+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:05.339354+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -7574,6 +7793,7 @@
               "$ref": "#/components/schemas/rate_limiterStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7602,7 +7822,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:03.920830+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:05.339362+00:00"
           },
           "uid": {
             "type": "string",
@@ -7623,9 +7843,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:58:03.920836+00:00"
+            "x-reconciled-at": "2026-01-07T02:22:05.339368+00:00"
           }
         },
+        "x-f5xc-description-short": "By default a summary of rate_limiter is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
+        "x-f5xc-description-medium": "By default a summary of rate_limiter is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterListResponseItem",
           "required_fields": [
@@ -7668,6 +7890,7 @@
             "$ref": "#/components/schemas/rate_limiterInputSeconds"
           }
         },
+        "x-f5xc-description-short": "Action where a user is blocked from making further requests after exceeding rate limit threshold.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterRateLimitBlockAction",
           "required_fields": [
@@ -7694,6 +7917,8 @@
         "default": "SECOND",
         "x-displayname": "Rate Limit Period Unit.",
         "x-ves-proto-enum": "ves.io.schema.rate_limiter.RateLimitPeriodUnit",
+        "x-f5xc-description-short": "Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period...",
+        "x-f5xc-description-medium": "Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterRateLimitPeriodUnit",
           "required_fields": [],
@@ -7732,6 +7957,7 @@
               "ves.io.schema.rules.uint32.gt": "0",
               "ves.io.schema.rules.uint32.lte": "100"
             },
+            "x-f5xc-description-short": "The maximum burst of requests to accommodate, expressed as a multiple of the rate.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -7761,6 +7987,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.uint32.gte": "0"
             },
+            "x-f5xc-description-short": "Setting, combined with Per Period units, provides a duration.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -7792,6 +8019,7 @@
               "ves.io.schema.rules.uint32.gt": "0",
               "ves.io.schema.rules.uint32.lte": "8192"
             },
+            "x-f5xc-description-short": "The total number of allowed requests per rate-limiting period. Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -7805,6 +8033,8 @@
             "$ref": "#/components/schemas/rate_limiterRateLimitPeriodUnit"
           }
         },
+        "x-f5xc-description-short": "Tuple consisting of a rate limit period unit and the total number of allowed requests for that period.",
+        "x-f5xc-description-medium": "Tuple consisting of a rate limit period unit and the total number of allowed requests for that period.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterRateLimitValue",
           "required_fields": [
@@ -7888,6 +8118,8 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.repeated.max_items": "1"
             },
+            "x-f5xc-description-short": "List of RateLimitValues that specifies the total number of allowed requests for each specified period.",
+            "x-f5xc-description-medium": "List of RateLimitValues that specifies the total number of allowed requests for each specified period. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7909,6 +8141,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.repeated.max_items": "1"
             },
+            "x-f5xc-description-short": "Reference to user_identification object.",
+            "x-f5xc-description-medium": "Reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7918,6 +8152,7 @@
             "x-field-mutability": "read-only"
           }
         },
+        "x-f5xc-description-short": "Replace rate_limiter replaces an existing object in the storage backend for metadata.namespace.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterReplaceSpecType",
           "required_fields": [
@@ -7946,6 +8181,7 @@
               "$ref": "#/components/schemas/schemaConditionType"
             },
             "x-displayname": "Conditions.",
+            "x-f5xc-description-short": "Conditions reported by various component of the system.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7972,6 +8208,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Most recently observed status of object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterStatusObject",
           "required_fields": [
@@ -7992,6 +8229,7 @@
         "title": "TokenBucketRateLimiter.",
         "x-displayname": "Token Bucket Rate Limiter.",
         "x-ves-proto-message": "ves.io.schema.rate_limiter.TokenBucketRateLimiter",
+        "x-f5xc-description-short": "Token-Bucket is a rate limiter algorithm that is stricter with enforcing limits.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterTokenBucketRateLimiter",
           "required_fields": [],

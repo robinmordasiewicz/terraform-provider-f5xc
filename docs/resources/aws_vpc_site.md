@@ -218,7 +218,7 @@ An [`aws_cred`](#aws-cred) block supports the following:
 
 A [`blocked_services`](#blocked-services) block supports the following:
 
-<a id="blocked-services-blocked-sevice"></a>&#x2022; [`blocked_sevice`](#blocked-services-blocked-sevice) - Optional Block<br>Disable Node Local Services<br>See [Blocked Sevice](#blocked-services-blocked-sevice) below.
+<a id="blocked-services-blocked-sevice"></a>&#x2022; [`blocked_sevice`](#blocked-services-blocked-sevice) - Optional Block<br>Disable Node Local Services. Blocking or denial configuration<br>See [Blocked Sevice](#blocked-services-blocked-sevice) below.
 
 #### Blocked Services Blocked Sevice
 

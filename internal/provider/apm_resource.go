@@ -1651,7 +1651,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											MarkdownDescription: "Interface. BIG-IP interface details.",
 											Attributes: map[string]schema.Attribute{
 												"network_gateway": schema.StringAttribute{
-													MarkdownDescription: "Default Gateway.",
+													MarkdownDescription: "Default Gateway. Configuration parameter for network gateway",
 													Optional:            true,
 												},
 												"network_self_ip": schema.StringAttribute{
@@ -1687,7 +1687,7 @@ func (r *APMResource) Schema(ctx context.Context, req resource.SchemaRequest, re
 											MarkdownDescription: "Interface. BIG-IP interface details.",
 											Attributes: map[string]schema.Attribute{
 												"network_gateway": schema.StringAttribute{
-													MarkdownDescription: "Default Gateway.",
+													MarkdownDescription: "Default Gateway. Configuration parameter for network gateway",
 													Optional:            true,
 												},
 												"network_self_ip": schema.StringAttribute{

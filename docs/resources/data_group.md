@@ -36,7 +36,7 @@ resource "f5xc_data_group" "example" {
   address_records {
     # Configure address_records settings
   }
-  # Address records.
+  # Address records. Configuration parameter for records
   records {
     # Configure records settings
   }
@@ -85,19 +85,19 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`address_records`](#address-records) block supports the following:
 
-<a id="address-records-records"></a>&#x2022; [`records`](#address-records-records) - Optional Block<br>Address records
+<a id="address-records-records"></a>&#x2022; [`records`](#address-records-records) - Optional Block<br>Address records. Configuration parameter for records
 
 #### Integer Records
 
 An [`integer_records`](#integer-records) block supports the following:
 
-<a id="integer-records-records"></a>&#x2022; [`records`](#integer-records-records) - Optional Block<br>Integer records
+<a id="integer-records-records"></a>&#x2022; [`records`](#integer-records-records) - Optional Block<br>Integer records. Configuration parameter for records
 
 #### String Records
 
 A [`string_records`](#string-records) block supports the following:
 
-<a id="string-records-records"></a>&#x2022; [`records`](#string-records-records) - Optional Block<br>String records
+<a id="string-records-records"></a>&#x2022; [`records`](#string-records-records) - Optional Block<br>String records. Configuration parameter for records
 
 #### Timeouts
 

@@ -312,10 +312,11 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace where the Cloud Connect will be created.",
-				Required:            true,
+				MarkdownDescription: "Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted.",
+				Optional:            true,
+				Computed:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.RequiresReplace(),
+					stringplanmodifier.UseStateForUnknown(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -405,7 +406,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"vpc_list": schema.ListNestedBlock{
-								MarkdownDescription: "VPC List.",
+								MarkdownDescription: "VPC List. Collection of items or values",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"vpc_id": schema.StringAttribute{
@@ -498,7 +499,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"vnet_list": schema.ListNestedBlock{
-								MarkdownDescription: "VNet List.",
+								MarkdownDescription: "VNet List. Collection of items or values",
 								NestedObject: schema.NestedBlockObject{
 									Attributes: map[string]schema.Attribute{
 										"subscription_id": schema.StringAttribute{

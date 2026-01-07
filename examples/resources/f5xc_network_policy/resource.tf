@@ -1,5 +1,5 @@
 # Network Policy Resource Example
-# Manages a Network Policy resource in F5 Distributed Cloud for network policy view specification. configuration.
+# Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.
 
 # Basic Network Policy configuration
 resource "f5xc_network_policy" "example" {

@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-framework-timeouts/resource/timeouts"
+	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -45,16 +46,87 @@ type CertificateResource struct {
 	client *client.Client
 }
 
+// CertificateEmptyModel represents empty nested blocks
+type CertificateEmptyModel struct {
+}
+
+// CertificateCertificateChainModel represents certificate_chain block
+type CertificateCertificateChainModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// CertificateCertificateChainModelAttrTypes defines the attribute types for CertificateCertificateChainModel
+var CertificateCertificateChainModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
+// CertificateCustomHashAlgorithmsModel represents custom_hash_algorithms block
+type CertificateCustomHashAlgorithmsModel struct {
+	HashAlgorithms types.List `tfsdk:"hash_algorithms"`
+}
+
+// CertificateCustomHashAlgorithmsModelAttrTypes defines the attribute types for CertificateCustomHashAlgorithmsModel
+var CertificateCustomHashAlgorithmsModelAttrTypes = map[string]attr.Type{
+	"hash_algorithms": types.ListType{ElemType: types.StringType},
+}
+
+// CertificatePrivateKeyModel represents private_key block
+type CertificatePrivateKeyModel struct {
+	BlindfoldSecretInfo *CertificatePrivateKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
+	ClearSecretInfo     *CertificatePrivateKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
+}
+
+// CertificatePrivateKeyModelAttrTypes defines the attribute types for CertificatePrivateKeyModel
+var CertificatePrivateKeyModelAttrTypes = map[string]attr.Type{
+	"blindfold_secret_info": types.ObjectType{AttrTypes: CertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes},
+	"clear_secret_info":     types.ObjectType{AttrTypes: CertificatePrivateKeyClearSecretInfoModelAttrTypes},
+}
+
+// CertificatePrivateKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
+type CertificatePrivateKeyBlindfoldSecretInfoModel struct {
+	DecryptionProvider types.String `tfsdk:"decryption_provider"`
+	Location           types.String `tfsdk:"location"`
+	StoreProvider      types.String `tfsdk:"store_provider"`
+}
+
+// CertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for CertificatePrivateKeyBlindfoldSecretInfoModel
+var CertificatePrivateKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
+	"decryption_provider": types.StringType,
+	"location":            types.StringType,
+	"store_provider":      types.StringType,
+}
+
+// CertificatePrivateKeyClearSecretInfoModel represents clear_secret_info block
+type CertificatePrivateKeyClearSecretInfoModel struct {
+	Provider types.String `tfsdk:"provider_ref"`
+	URL      types.String `tfsdk:"url"`
+}
+
+// CertificatePrivateKeyClearSecretInfoModelAttrTypes defines the attribute types for CertificatePrivateKeyClearSecretInfoModel
+var CertificatePrivateKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
+	"provider_ref": types.StringType,
+	"url":          types.StringType,
+}
+
 type CertificateResourceModel struct {
-	Name           types.String   `tfsdk:"name"`
-	Namespace      types.String   `tfsdk:"namespace"`
-	Annotations    types.Map      `tfsdk:"annotations"`
-	Description    types.String   `tfsdk:"description"`
-	Disable        types.Bool     `tfsdk:"disable"`
-	Labels         types.Map      `tfsdk:"labels"`
-	ID             types.String   `tfsdk:"id"`
-	CertificateURL types.String   `tfsdk:"certificate_url"`
-	Timeouts       timeouts.Value `tfsdk:"timeouts"`
+	Name                 types.String                          `tfsdk:"name"`
+	Namespace            types.String                          `tfsdk:"namespace"`
+	Annotations          types.Map                             `tfsdk:"annotations"`
+	Description          types.String                          `tfsdk:"description"`
+	Disable              types.Bool                            `tfsdk:"disable"`
+	Labels               types.Map                             `tfsdk:"labels"`
+	ID                   types.String                          `tfsdk:"id"`
+	CertificateURL       types.String                          `tfsdk:"certificate_url"`
+	Timeouts             timeouts.Value                        `tfsdk:"timeouts"`
+	CertificateChain     *CertificateCertificateChainModel     `tfsdk:"certificate_chain"`
+	CustomHashAlgorithms *CertificateCustomHashAlgorithmsModel `tfsdk:"custom_hash_algorithms"`
+	DisableOCSPStapling  *CertificateEmptyModel                `tfsdk:"disable_ocsp_stapling"`
+	PrivateKey           *CertificatePrivateKeyModel           `tfsdk:"private_key"`
+	UseSystemDefaults    *CertificateEmptyModel                `tfsdk:"use_system_defaults"`
 }
 
 func (r *CertificateResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -64,7 +136,7 @@ func (r *CertificateResource) Metadata(ctx context.Context, req resource.Metadat
 func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             certificateSchemaVersion,
-		MarkdownDescription: "Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.",
+		MarkdownDescription: "Manages a Certificate resource in F5 Distributed Cloud for certificate. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Certificate. Must be unique within the namespace.",
@@ -112,7 +184,7 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"certificate_url": schema.StringAttribute{
-				MarkdownDescription: "Certificates. Certificate chain is the list of intermediate certificates in PEM format including the PEM headers.",
+				MarkdownDescription: "Certificate. Certificate. Certificate or certificate chain in PEM format including the PEM headers.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -127,6 +199,79 @@ func (r *CertificateResource) Schema(ctx context.Context, req resource.SchemaReq
 				Update: true,
 				Delete: true,
 			}),
+			"certificate_chain": schema.SingleNestedBlock{
+				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				Attributes: map[string]schema.Attribute{
+					"name": schema.StringAttribute{
+						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						Optional:            true,
+					},
+					"namespace": schema.StringAttribute{
+						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						Optional:            true,
+					},
+					"tenant": schema.StringAttribute{
+						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						Optional:            true,
+						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
+						},
+					},
+				},
+			},
+			"custom_hash_algorithms": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: custom_hash_algorithms, disable_ocsp_stapling, use_system_defaults; Default: use_system_defaults] Hash Algorithms. Specifies the hash algorithms to be used.",
+				Attributes: map[string]schema.Attribute{
+					"hash_algorithms": schema.ListAttribute{
+						MarkdownDescription: "[Enum: INVALID_HASH_ALGORITHM|SHA256|SHA1] Hash Algorithms. Ordered list of hash algorithms to be used. Possible values are `INVALID_HASH_ALGORITHM`, `SHA256`, `SHA1`. Defaults to `INVALID_HASH_ALGORITHM`.",
+						Optional:            true,
+						ElementType:         types.StringType,
+					},
+				},
+			},
+			"disable_ocsp_stapling": schema.SingleNestedBlock{
+				MarkdownDescription: "Enable this option",
+			},
+			"private_key": schema.SingleNestedBlock{
+				MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"blindfold_secret_info": schema.SingleNestedBlock{
+						MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
+						Attributes: map[string]schema.Attribute{
+							"decryption_provider": schema.StringAttribute{
+								MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+								Optional:            true,
+							},
+							"location": schema.StringAttribute{
+								MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
+								Optional:            true,
+							},
+							"store_provider": schema.StringAttribute{
+								MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+								Optional:            true,
+							},
+						},
+					},
+					"clear_secret_info": schema.SingleNestedBlock{
+						MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
+						Attributes: map[string]schema.Attribute{
+							"provider_ref": schema.StringAttribute{
+								MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
+								Optional:            true,
+							},
+							"url": schema.StringAttribute{
+								MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
+								Optional:            true,
+							},
+						},
+					},
+				},
+			},
+			"use_system_defaults": schema.SingleNestedBlock{
+				MarkdownDescription: "Enable this option",
+			},
 		},
 	}
 }
@@ -275,6 +420,65 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 	}
 
 	// Marshal spec fields from Terraform state to API struct
+	if data.CertificateChain != nil {
+		certificate_chainMap := make(map[string]interface{})
+		if !data.CertificateChain.Name.IsNull() && !data.CertificateChain.Name.IsUnknown() {
+			certificate_chainMap["name"] = data.CertificateChain.Name.ValueString()
+		}
+		if !data.CertificateChain.Namespace.IsNull() && !data.CertificateChain.Namespace.IsUnknown() {
+			certificate_chainMap["namespace"] = data.CertificateChain.Namespace.ValueString()
+		}
+		if !data.CertificateChain.Tenant.IsNull() && !data.CertificateChain.Tenant.IsUnknown() {
+			certificate_chainMap["tenant"] = data.CertificateChain.Tenant.ValueString()
+		}
+		createReq.Spec["certificate_chain"] = certificate_chainMap
+	}
+	if data.CustomHashAlgorithms != nil {
+		custom_hash_algorithmsMap := make(map[string]interface{})
+		if !data.CustomHashAlgorithms.HashAlgorithms.IsNull() && !data.CustomHashAlgorithms.HashAlgorithms.IsUnknown() {
+			var hash_algorithmsItems []string
+			diags := data.CustomHashAlgorithms.HashAlgorithms.ElementsAs(ctx, &hash_algorithmsItems, false)
+			if !diags.HasError() {
+				custom_hash_algorithmsMap["hash_algorithms"] = hash_algorithmsItems
+			}
+		}
+		createReq.Spec["custom_hash_algorithms"] = custom_hash_algorithmsMap
+	}
+	if data.DisableOCSPStapling != nil {
+		disable_ocsp_staplingMap := make(map[string]interface{})
+		createReq.Spec["disable_ocsp_stapling"] = disable_ocsp_staplingMap
+	}
+	if data.PrivateKey != nil {
+		private_keyMap := make(map[string]interface{})
+		if data.PrivateKey.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.PrivateKey.BlindfoldSecretInfo.Location.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.PrivateKey.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.PrivateKey.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.PrivateKey.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			private_keyMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.PrivateKey.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.PrivateKey.ClearSecretInfo.Provider.IsNull() && !data.PrivateKey.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.PrivateKey.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.PrivateKey.ClearSecretInfo.URL.IsNull() && !data.PrivateKey.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.PrivateKey.ClearSecretInfo.URL.ValueString()
+			}
+			private_keyMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		createReq.Spec["private_key"] = private_keyMap
+	}
+	if data.UseSystemDefaults != nil {
+		use_system_defaultsMap := make(map[string]interface{})
+		createReq.Spec["use_system_defaults"] = use_system_defaultsMap
+	}
 	if !data.CertificateURL.IsNull() && !data.CertificateURL.IsUnknown() {
 		createReq.Spec["certificate_url"] = data.CertificateURL.ValueString()
 	}
@@ -291,6 +495,60 @@ func (r *CertificateResource) Create(ctx context.Context, req resource.CreateReq
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
 	isImport := false // Create is never an import
 	_ = isImport      // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["certificate_chain"].(map[string]interface{}); ok && (isImport || data.CertificateChain != nil) {
+		data.CertificateChain = &CertificateCertificateChainModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_hash_algorithms"].(map[string]interface{}); ok && (isImport || data.CustomHashAlgorithms != nil) {
+		data.CustomHashAlgorithms = &CertificateCustomHashAlgorithmsModel{
+			HashAlgorithms: func() types.List {
+				if v, ok := blockData["hash_algorithms"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOCSPStapling == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableOCSPStapling = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_key"].(map[string]interface{}); ok && isImport && data.PrivateKey == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateKey = &CertificatePrivateKeyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_system_defaults"].(map[string]interface{}); ok && isImport && data.UseSystemDefaults == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseSystemDefaults = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["certificate_url"].(string); ok && v != "" {
 		data.CertificateURL = types.StringValue(v)
 	} else {
@@ -395,6 +653,60 @@ func (r *CertificateResource) Read(ctx context.Context, req resource.ReadRequest
 		"psd_is_nil": psd == nil,
 		"managed":    psd.Metadata.Custom["managed"],
 	})
+	if blockData, ok := apiResource.Spec["certificate_chain"].(map[string]interface{}); ok && (isImport || data.CertificateChain != nil) {
+		data.CertificateChain = &CertificateCertificateChainModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_hash_algorithms"].(map[string]interface{}); ok && (isImport || data.CustomHashAlgorithms != nil) {
+		data.CustomHashAlgorithms = &CertificateCustomHashAlgorithmsModel{
+			HashAlgorithms: func() types.List {
+				if v, ok := blockData["hash_algorithms"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOCSPStapling == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableOCSPStapling = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_key"].(map[string]interface{}); ok && isImport && data.PrivateKey == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateKey = &CertificatePrivateKeyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_system_defaults"].(map[string]interface{}); ok && isImport && data.UseSystemDefaults == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseSystemDefaults = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["certificate_url"].(string); ok && v != "" {
 		data.CertificateURL = types.StringValue(v)
 	} else {
@@ -460,6 +772,65 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 	}
 
 	// Marshal spec fields from Terraform state to API struct
+	if data.CertificateChain != nil {
+		certificate_chainMap := make(map[string]interface{})
+		if !data.CertificateChain.Name.IsNull() && !data.CertificateChain.Name.IsUnknown() {
+			certificate_chainMap["name"] = data.CertificateChain.Name.ValueString()
+		}
+		if !data.CertificateChain.Namespace.IsNull() && !data.CertificateChain.Namespace.IsUnknown() {
+			certificate_chainMap["namespace"] = data.CertificateChain.Namespace.ValueString()
+		}
+		if !data.CertificateChain.Tenant.IsNull() && !data.CertificateChain.Tenant.IsUnknown() {
+			certificate_chainMap["tenant"] = data.CertificateChain.Tenant.ValueString()
+		}
+		apiResource.Spec["certificate_chain"] = certificate_chainMap
+	}
+	if data.CustomHashAlgorithms != nil {
+		custom_hash_algorithmsMap := make(map[string]interface{})
+		if !data.CustomHashAlgorithms.HashAlgorithms.IsNull() && !data.CustomHashAlgorithms.HashAlgorithms.IsUnknown() {
+			var hash_algorithmsItems []string
+			diags := data.CustomHashAlgorithms.HashAlgorithms.ElementsAs(ctx, &hash_algorithmsItems, false)
+			if !diags.HasError() {
+				custom_hash_algorithmsMap["hash_algorithms"] = hash_algorithmsItems
+			}
+		}
+		apiResource.Spec["custom_hash_algorithms"] = custom_hash_algorithmsMap
+	}
+	if data.DisableOCSPStapling != nil {
+		disable_ocsp_staplingMap := make(map[string]interface{})
+		apiResource.Spec["disable_ocsp_stapling"] = disable_ocsp_staplingMap
+	}
+	if data.PrivateKey != nil {
+		private_keyMap := make(map[string]interface{})
+		if data.PrivateKey.BlindfoldSecretInfo != nil {
+			blindfold_secret_infoNestedMap := make(map[string]interface{})
+			if !data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["decryption_provider"] = data.PrivateKey.BlindfoldSecretInfo.DecryptionProvider.ValueString()
+			}
+			if !data.PrivateKey.BlindfoldSecretInfo.Location.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.Location.IsUnknown() {
+				blindfold_secret_infoNestedMap["location"] = data.PrivateKey.BlindfoldSecretInfo.Location.ValueString()
+			}
+			if !data.PrivateKey.BlindfoldSecretInfo.StoreProvider.IsNull() && !data.PrivateKey.BlindfoldSecretInfo.StoreProvider.IsUnknown() {
+				blindfold_secret_infoNestedMap["store_provider"] = data.PrivateKey.BlindfoldSecretInfo.StoreProvider.ValueString()
+			}
+			private_keyMap["blindfold_secret_info"] = blindfold_secret_infoNestedMap
+		}
+		if data.PrivateKey.ClearSecretInfo != nil {
+			clear_secret_infoNestedMap := make(map[string]interface{})
+			if !data.PrivateKey.ClearSecretInfo.Provider.IsNull() && !data.PrivateKey.ClearSecretInfo.Provider.IsUnknown() {
+				clear_secret_infoNestedMap["provider"] = data.PrivateKey.ClearSecretInfo.Provider.ValueString()
+			}
+			if !data.PrivateKey.ClearSecretInfo.URL.IsNull() && !data.PrivateKey.ClearSecretInfo.URL.IsUnknown() {
+				clear_secret_infoNestedMap["url"] = data.PrivateKey.ClearSecretInfo.URL.ValueString()
+			}
+			private_keyMap["clear_secret_info"] = clear_secret_infoNestedMap
+		}
+		apiResource.Spec["private_key"] = private_keyMap
+	}
+	if data.UseSystemDefaults != nil {
+		use_system_defaultsMap := make(map[string]interface{})
+		apiResource.Spec["use_system_defaults"] = use_system_defaultsMap
+	}
 	if !data.CertificateURL.IsNull() && !data.CertificateURL.IsUnknown() {
 		apiResource.Spec["certificate_url"] = data.CertificateURL.ValueString()
 	}
@@ -494,6 +865,60 @@ func (r *CertificateResource) Update(ctx context.Context, req resource.UpdateReq
 	apiResource = fetched // Use GET response which includes all computed fields
 	isImport := false     // Update is never an import
 	_ = isImport          // May be unused if resource has no blocks needing import detection
+	if blockData, ok := apiResource.Spec["certificate_chain"].(map[string]interface{}); ok && (isImport || data.CertificateChain != nil) {
+		data.CertificateChain = &CertificateCertificateChainModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
+	if blockData, ok := apiResource.Spec["custom_hash_algorithms"].(map[string]interface{}); ok && (isImport || data.CustomHashAlgorithms != nil) {
+		data.CustomHashAlgorithms = &CertificateCustomHashAlgorithmsModel{
+			HashAlgorithms: func() types.List {
+				if v, ok := blockData["hash_algorithms"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+		}
+	}
+	if _, ok := apiResource.Spec["disable_ocsp_stapling"].(map[string]interface{}); ok && isImport && data.DisableOCSPStapling == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.DisableOCSPStapling = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_key"].(map[string]interface{}); ok && isImport && data.PrivateKey == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateKey = &CertificatePrivateKeyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["use_system_defaults"].(map[string]interface{}); ok && isImport && data.UseSystemDefaults == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.UseSystemDefaults = &CertificateEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
 	if v, ok := apiResource.Spec["certificate_url"].(string); ok && v != "" {
 		data.CertificateURL = types.StringValue(v)
 	} else {

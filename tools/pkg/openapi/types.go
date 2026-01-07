@@ -146,24 +146,47 @@ type Index struct {
 }
 
 // DomainMetadata represents metadata about a domain specification file.
+// Field names map to the x-f5xc-* extensions in index.json.
 type DomainMetadata struct {
-	Name              string             `json:"name"`
-	File              string             `json:"file"`
-	Category          string             `json:"category"`
-	Description       string             `json:"description"`
-	DescriptionShort  string             `json:"description_short"`
-	DescriptionMedium string             `json:"description_medium"`
-	Icon              string             `json:"icon"`
-	RequiresTier      string             `json:"requires_tier"`
-	Complexity        string             `json:"complexity"`
-	IsPreview         bool               `json:"is_preview"`
-	CLIDomain         string             `json:"cli_domain"`
-	RelatedDomains    []string           `json:"related_domains"`
-	UseCases          []string           `json:"use_cases"`
-	PrimaryResources  []ResourceMetadata `json:"primary_resources"`
+	Name              string                      `json:"domain"` // Domain name from "domain" field
+	File              string                      `json:"file"`
+	Category          string                      `json:"x-f5xc-category"`
+	Description       string                      `json:"description"`
+	DescriptionShort  string                      `json:"x-f5xc-description-short"`
+	DescriptionMedium string                      `json:"x-f5xc-description-medium"`
+	Icon              string                      `json:"x-f5xc-icon"`
+	RequiresTier      string                      `json:"x-f5xc-requires-tier"`
+	Complexity        string                      `json:"x-f5xc-complexity"`
+	IsPreview         bool                        `json:"x-f5xc-is-preview"`
+	CLIDomain         string                      `json:"x-f5xc-cli-domain"`
+	RelatedDomains    []string                    `json:"x-f5xc-related-domains"`
+	UseCases          []string                    `json:"x-f5xc-use-cases"`
+	PrimaryResources  []PrimaryResourceMetadata   `json:"x-f5xc-primary-resources"`
+}
+
+// PrimaryResourceMetadata represents resource-level metadata from x-f5xc-primary-resources in index.json.
+// This is extracted from index.json and provides per-resource tier and dependency info.
+type PrimaryResourceMetadata struct {
+	Name             string               `json:"name"`
+	Description      string               `json:"description"`
+	DescriptionShort string               `json:"description_short"`
+	Tier             string               `json:"tier"`
+	Icon             string               `json:"icon"`
+	Category         string               `json:"category"`
+	SupportsLogs     bool                 `json:"supports_logs"`
+	SupportsMetrics  bool                 `json:"supports_metrics"`
+	Dependencies     ResourceDependencies `json:"dependencies"`
+	RelationshipHints []string            `json:"relationship_hints"`
+}
+
+// ResourceDependencies represents the dependencies of a resource.
+type ResourceDependencies struct {
+	Required []string `json:"required"`
+	Optional []string `json:"optional"`
 }
 
 // ResourceMetadata represents metadata about a resource within a domain.
+// Used by ExtractResourcesFromDomain for processing.
 type ResourceMetadata struct {
 	Name                 string   `json:"name"`
 	Description          string   `json:"description"`

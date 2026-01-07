@@ -178,6 +178,86 @@ func ParseIndexFromDir(specDir string) (*Index, error) {
 	return ParseIndex(indexPath)
 }
 
+// BuildResourceTierMap extracts tier information for all resources from index.json.
+// Returns a map of resourceName -> tier (e.g., "http_loadbalancer" -> "Standard").
+// Tier is first taken from resource-level, falling back to domain-level.
+func BuildResourceTierMap(index *Index) map[string]string {
+	result := make(map[string]string)
+	for _, domain := range index.Specifications {
+		for _, resource := range domain.PrimaryResources {
+			tier := resource.Tier
+			// Fallback to domain-level tier if resource-level not specified
+			if tier == "" {
+				tier = domain.RequiresTier
+			}
+			if tier != "" && resource.Name != "" {
+				result[resource.Name] = tier
+			}
+		}
+	}
+	return result
+}
+
+// BuildResourceDependencyMap extracts dependency information for all resources from index.json.
+// Returns a map of resourceName -> ResourceDependencies containing required and optional deps.
+func BuildResourceDependencyMap(index *Index) map[string]*ResourceDependencies {
+	result := make(map[string]*ResourceDependencies)
+	for _, domain := range index.Specifications {
+		for _, resource := range domain.PrimaryResources {
+			if resource.Name != "" {
+				deps := &ResourceDependencies{
+					Required: resource.Dependencies.Required,
+					Optional: resource.Dependencies.Optional,
+				}
+				// Only add if there are actual dependencies
+				if len(deps.Required) > 0 || len(deps.Optional) > 0 {
+					result[resource.Name] = deps
+				}
+			}
+		}
+	}
+	return result
+}
+
+// BuildResourceCategoryMap extracts category information for all resources from index.json.
+// Returns a map of resourceName -> category (e.g., "http_loadbalancer" -> "Security").
+func BuildResourceCategoryMap(index *Index) map[string]string {
+	result := make(map[string]string)
+	for _, domain := range index.Specifications {
+		for _, resource := range domain.PrimaryResources {
+			category := resource.Category
+			// Fallback to domain-level category if resource-level not specified
+			if category == "" {
+				category = domain.Category
+			}
+			if category != "" && resource.Name != "" {
+				result[resource.Name] = category
+			}
+		}
+	}
+	return result
+}
+
+// BuildReferencedByMap computes the reverse dependency map.
+// Returns a map of resourceName -> []resources that depend on it.
+func BuildReferencedByMap(depMap map[string]*ResourceDependencies) map[string][]string {
+	result := make(map[string][]string)
+	for resourceName, deps := range depMap {
+		if deps == nil {
+			continue
+		}
+		// Add to required dependencies' referenced_by lists
+		for _, depName := range deps.Required {
+			result[depName] = append(result[depName], resourceName)
+		}
+		// Add to optional dependencies' referenced_by lists
+		for _, depName := range deps.Optional {
+			result[depName] = append(result[depName], resourceName)
+		}
+	}
+	return result
+}
+
 // FindDomainSpecFiles finds all domain specification files in a v2 spec directory.
 // Returns paths to all .json files in the domains/ subdirectory.
 func FindDomainSpecFiles(specDir string) ([]string, error) {

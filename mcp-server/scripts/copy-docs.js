@@ -101,6 +101,22 @@ if (existsSync(SUBSCRIPTION_METADATA_SRC)) {
   console.log('  [SKIP] subscription-tiers.json: Source not found (optional)');
 }
 
+// Copy resource metadata files for deterministic AI configuration generation
+const METADATA_SRC = join(PROJECT_ROOT, 'tools', 'metadata');
+const METADATA_DEST = join(MCP_ROOT, 'dist', 'metadata');
+
+if (existsSync(METADATA_SRC)) {
+  try {
+    cpSync(METADATA_SRC, METADATA_DEST, { recursive: true });
+    const metadataCount = countFiles(METADATA_DEST);
+    console.log(`  [OK] metadata/: Copied ${metadataCount} metadata files`);
+  } catch (error) {
+    console.error(`  [ERROR] metadata/: ${error.message}`);
+  }
+} else {
+  console.log('  [SKIP] metadata/: Source not found (run generate-all-schemas.go to create)');
+}
+
 /**
  * Count files in a directory recursively
  */

@@ -252,6 +252,39 @@ export const AddonSchema = z.object({
   response_format: ResponseFormatSchema,
 }).strict();
 
+/**
+ * Consolidated metadata tool schema
+ * Provides access to resource metadata for deterministic AI configuration generation
+ */
+export const MetadataSchema = z.object({
+  operation: z.enum(['oneof', 'validation', 'defaults', 'enums', 'attribute', 'requires_replace', 'tier', 'dependencies', 'troubleshoot', 'summary'])
+    .describe(COMMON_PARAM_DESCRIPTIONS.operation),
+  resource: z.string()
+    .min(1)
+    .optional()
+    .describe('Resource name (e.g., "http_loadbalancer", "namespace")'),
+  attribute: z.string()
+    .min(1)
+    .optional()
+    .describe('Attribute name for attribute operation'),
+  pattern: z.string()
+    .min(1)
+    .optional()
+    .describe('Validation pattern name (e.g., "name", "domain", "port")'),
+  tier: SubscriptionTierEnum
+    .optional()
+    .describe('Filter resources by subscription tier'),
+  error_code: z.string()
+    .min(1)
+    .optional()
+    .describe('Error code for troubleshoot operation (e.g., "NOT_FOUND", "FORBIDDEN")'),
+  error_message: z.string()
+    .min(1)
+    .optional()
+    .describe('Error message pattern for troubleshoot operation'),
+  response_format: ResponseFormatSchema,
+}).strict();
+
 // =============================================================================
 // TYPE EXPORTS
 // =============================================================================
@@ -261,3 +294,4 @@ export type DocsInput = z.infer<typeof DocsSchema>;
 export type ApiInput = z.infer<typeof ApiSchema>;
 export type SubscriptionInput = z.infer<typeof SubscriptionSchema>;
 export type AddonInput = z.infer<typeof AddonSchema>;
+export type MetadataInput = z.infer<typeof MetadataSchema>;

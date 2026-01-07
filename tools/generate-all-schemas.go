@@ -29,6 +29,7 @@ import (
 	"sort"
 	"strings"
 	"text/template"
+	"time"
 
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/naming"
 	"github.com/f5xc/terraform-provider-f5xc/tools/pkg/namespace"
@@ -140,6 +141,70 @@ type GenerationResult struct {
 	BlockCount   int
 }
 
+// =============================================================================
+// METADATA COLLECTION TYPES (for MCP Server consumption)
+// =============================================================================
+
+// MetadataCollection holds all extracted metadata for JSON output
+type MetadataCollection struct {
+	GeneratedAt string                       `json:"generated_at"`
+	Version     string                       `json:"version"`
+	Resources   map[string]*ResourceMetadata `json:"resources"`
+}
+
+// ResourceMetadata contains complete metadata for a single resource
+type ResourceMetadata struct {
+	Description  string                        `json:"description"`
+	Category     string                        `json:"category,omitempty"`
+	Tier         string                        `json:"tier,omitempty"`
+	ImportFormat string                        `json:"import_format,omitempty"` // "namespace/name" or "name"
+	OneOfGroups  map[string]*OneOfGroupInfo    `json:"oneof_groups,omitempty"`
+	Attributes   map[string]*AttributeMetadata `json:"attributes"`
+	Dependencies *DependencyInfo               `json:"dependencies,omitempty"`
+}
+
+// OneOfGroupInfo represents a mutually exclusive field group
+type OneOfGroupInfo struct {
+	Fields      []string `json:"fields"`
+	Description string   `json:"description,omitempty"`
+	Default     string   `json:"default,omitempty"` // Recommended default field
+}
+
+// AttributeMetadata contains metadata for a single attribute
+type AttributeMetadata struct {
+	Type         string      `json:"type"`
+	Required     bool        `json:"required"`
+	Optional     bool        `json:"optional,omitempty"`
+	Computed     bool        `json:"computed,omitempty"`
+	Sensitive    bool        `json:"sensitive,omitempty"`
+	IsBlock      bool        `json:"is_block,omitempty"`
+	PlanModifier string      `json:"plan_modifier,omitempty"`
+	Validation   string      `json:"validation,omitempty"`
+	Enum         []string    `json:"enum,omitempty"`
+	Default      interface{} `json:"default,omitempty"`
+	OneOfGroup   string      `json:"oneof_group,omitempty"`
+	Description  string      `json:"description"`
+}
+
+// DependencyInfo holds resource relationship information
+type DependencyInfo struct {
+	References   []string `json:"references,omitempty"`   // Resources this resource references
+	ReferencedBy []string `json:"referenced_by,omitempty"` // Resources that reference this
+}
+
+// Global metadata collection (populated during generation)
+var metadataCollection = &MetadataCollection{
+	Resources: make(map[string]*ResourceMetadata),
+}
+
+// Global maps from index.json for resource metadata enrichment
+var (
+	resourceTierMap       = make(map[string]string)                       // resourceName -> tier
+	resourceDependencyMap = make(map[string]*openapi.ResourceDependencies) // resourceName -> dependencies
+	resourceReferencedByMap = make(map[string][]string)                   // resourceName -> resources that depend on it
+	resourceCategoryMap   = make(map[string]string)                       // resourceName -> category
+)
+
 var schemaCache = make(map[string]SchemaDefinition)
 var rawSpecCache = make(map[string]map[string]interface{}) // Store raw JSON for x-ves-oneof-field extraction
 
@@ -219,6 +284,13 @@ func main() {
 		generateProviderRegistration(results)
 	}
 
+	// Write metadata files for MCP server
+	if !dryRun {
+		if err := writeMetadataFiles(); err != nil {
+			fmt.Printf("⚠️  Warning: Failed to write metadata files: %v\n", err)
+		}
+	}
+
 	fmt.Println("\n🎉 Batch generation complete!")
 }
 
@@ -270,6 +342,16 @@ func processV2Specs(specDir string) ([]GenerationResult, int, int) {
 	fmt.Printf("📋 Spec version: %s\n", index.Version)
 	fmt.Printf("📋 Generated at: %s\n", index.GeneratedAt)
 	fmt.Printf("📄 Found %d domain specifications (v2 format)\n\n", len(index.Specifications))
+
+	// Build global maps from index.json for metadata enrichment
+	resourceTierMap = openapi.BuildResourceTierMap(index)
+	resourceDependencyMap = openapi.BuildResourceDependencyMap(index)
+	resourceReferencedByMap = openapi.BuildReferencedByMap(resourceDependencyMap)
+	resourceCategoryMap = openapi.BuildResourceCategoryMap(index)
+	if verbose {
+		fmt.Printf("📊 Loaded metadata: %d resources with tier, %d with dependencies\n",
+			len(resourceTierMap), len(resourceDependencyMap))
+	}
 
 	// Find all domain spec files
 	domainFiles, err := openapi.FindDomainSpecFiles(specDir)
@@ -531,6 +613,9 @@ func generateResourceFromSchema(resourceName string, schemaName string, schema *
 		if err := generateDataSource(resource); err != nil {
 			return GenerationResult{ResourceName: resourceName, Success: false, Error: err.Error()}
 		}
+
+		// Collect metadata for MCP server
+		collectResourceMetadata(resource, category, requiresTier)
 	}
 
 	fmt.Printf("✅ %s: %d attrs, %d blocks\n", resourceName, attrCount, blockCount)
@@ -926,7 +1011,7 @@ func extractResourceSchema(spec *OpenAPI3Spec, resourceName string) (*ResourceTe
 		HasNamespaceInPath:     hasNamespace,
 		Description:            description,
 		Attributes:             attributes,
-		OneOfGroups:            make(map[string][]string),
+		OneOfGroups:            oneOfGroups, // Now properly preserving extracted OneOf groups
 		ExampleUsage:           exampleUsage,
 		APIDocsURL:             apiDocsURL,
 		UsesBoolPlanModifier:   usesBool,
@@ -1908,6 +1993,229 @@ func extractOneOfGroups(spec *OpenAPI3Spec, schemaKey string) map[string][]strin
 	}
 
 	return oneOfGroups
+}
+
+// =============================================================================
+// METADATA COLLECTION FUNCTIONS (for MCP Server)
+// =============================================================================
+
+// collectResourceMetadata extracts and stores metadata for a resource
+func collectResourceMetadata(resource *ResourceTemplate, category string, requiresTier string) {
+	if resource == nil {
+		return
+	}
+
+	// Determine tier: prefer resource-level from index.json, fall back to domain-level
+	tier := requiresTier
+	if resourceTier, ok := resourceTierMap[resource.Name]; ok && resourceTier != "" {
+		tier = resourceTier
+	}
+
+	// Determine category: prefer resource-level from index.json, fall back to domain-level
+	cat := category
+	if resourceCat, ok := resourceCategoryMap[resource.Name]; ok && resourceCat != "" {
+		cat = resourceCat
+	}
+
+	// Determine import format based on HasNamespaceInPath
+	importFormat := "name"
+	if resource.HasNamespaceInPath {
+		importFormat = "namespace/name"
+	}
+
+	metadata := &ResourceMetadata{
+		Description:  resource.Description,
+		Category:     cat,
+		Tier:         tier,
+		ImportFormat: importFormat,
+		OneOfGroups:  make(map[string]*OneOfGroupInfo),
+		Attributes:   make(map[string]*AttributeMetadata),
+	}
+
+	// Convert OneOfGroups from ResourceTemplate format to metadata format
+	for groupName, fields := range resource.OneOfGroups {
+		defaultField := determineOneOfDefault(groupName, fields)
+		metadata.OneOfGroups[groupName] = &OneOfGroupInfo{
+			Fields:  fields,
+			Default: defaultField,
+		}
+	}
+
+	// Extract attribute metadata
+	extractAttributeMetadata(resource.Attributes, metadata.Attributes, resource.OneOfGroups)
+
+	// Add dependency information from index.json
+	if deps, ok := resourceDependencyMap[resource.Name]; ok && deps != nil {
+		metadata.Dependencies = &DependencyInfo{
+			References: append(deps.Required, deps.Optional...),
+		}
+	}
+	// Add referenced_by information (reverse dependencies)
+	if referencedBy, ok := resourceReferencedByMap[resource.Name]; ok && len(referencedBy) > 0 {
+		if metadata.Dependencies == nil {
+			metadata.Dependencies = &DependencyInfo{}
+		}
+		metadata.Dependencies.ReferencedBy = referencedBy
+	}
+
+	// Store in global collection
+	metadataCollection.Resources[resource.Name] = metadata
+}
+
+// extractAttributeMetadata recursively extracts metadata from attributes
+func extractAttributeMetadata(attrs []TerraformAttribute, output map[string]*AttributeMetadata, oneOfGroups map[string][]string) {
+	// Build reverse lookup: field -> group name
+	fieldToGroup := make(map[string]string)
+	for groupName, fields := range oneOfGroups {
+		for _, field := range fields {
+			fieldToGroup[field] = groupName
+		}
+	}
+
+	for _, attr := range attrs {
+		attrMeta := &AttributeMetadata{
+			Type:         attr.Type,
+			Required:     attr.Required,
+			Optional:     attr.Optional,
+			Computed:     attr.Computed,
+			Sensitive:    attr.Sensitive,
+			IsBlock:      attr.IsBlock,
+			PlanModifier: attr.PlanModifier,
+			Description:  attr.Description,
+		}
+
+		// Add OneOf group reference if applicable
+		if group, ok := fieldToGroup[attr.Name]; ok {
+			attrMeta.OneOfGroup = group
+		}
+
+		// Determine validation type based on field characteristics
+		attrMeta.Validation = inferValidationType(attr)
+
+		output[attr.Name] = attrMeta
+
+		// Note: We don't recursively extract nested attributes to keep the JSON manageable
+		// The descriptions contain constraint hints for nested fields
+	}
+}
+
+// inferValidationType determines the validation pattern name for an attribute
+func inferValidationType(attr TerraformAttribute) string {
+	switch attr.Name {
+	case "name":
+		if attr.UseDomainValidator {
+			return "domain"
+		}
+		return "name"
+	case "namespace":
+		return "name"
+	case "port", "listen_port":
+		return "port"
+	}
+
+	// Check type-based validations
+	if attr.Type == "int64" && strings.Contains(strings.ToLower(attr.Description), "port") {
+		return "port"
+	}
+
+	return ""
+}
+
+// writeMetadataFiles writes the collected metadata to JSON files for MCP server consumption
+func writeMetadataFiles() error {
+	// Create metadata directory
+	metadataDir := filepath.Join("tools", "metadata")
+	if err := os.MkdirAll(metadataDir, 0755); err != nil {
+		return fmt.Errorf("failed to create metadata directory: %w", err)
+	}
+
+	// Set generation metadata
+	metadataCollection.GeneratedAt = time.Now().UTC().Format(time.RFC3339)
+	metadataCollection.Version = "1.0.0"
+
+	// Write resource-metadata.json
+	resourceMetadataPath := filepath.Join(metadataDir, "resource-metadata.json")
+	resourceMetadataJSON, err := json.MarshalIndent(metadataCollection, "", "  ")
+	if err != nil {
+		return fmt.Errorf("failed to marshal resource metadata: %w", err)
+	}
+	if err := os.WriteFile(resourceMetadataPath, resourceMetadataJSON, 0644); err != nil {
+		return fmt.Errorf("failed to write resource metadata: %w", err)
+	}
+	fmt.Printf("📝 Wrote metadata for %d resources to %s\n", len(metadataCollection.Resources), resourceMetadataPath)
+
+	// Write validation-patterns.json
+	validationPatterns := getValidationPatterns()
+	validationPatternsPath := filepath.Join(metadataDir, "validation-patterns.json")
+	validationPatternsJSON, err := json.MarshalIndent(validationPatterns, "", "  ")
+	if err != nil {
+		return fmt.Errorf("failed to marshal validation patterns: %w", err)
+	}
+	if err := os.WriteFile(validationPatternsPath, validationPatternsJSON, 0644); err != nil {
+		return fmt.Errorf("failed to write validation patterns: %w", err)
+	}
+	fmt.Printf("📝 Wrote validation patterns to %s\n", validationPatternsPath)
+
+	return nil
+}
+
+// ValidationPatterns defines validation patterns for MCP server
+type ValidationPatterns struct {
+	Version  string                        `json:"version"`
+	Patterns map[string]*ValidationPattern `json:"patterns"`
+}
+
+// ValidationPattern describes a single validation rule
+type ValidationPattern struct {
+	Type        string   `json:"type"`                  // "regex" or "range"
+	Pattern     string   `json:"pattern,omitempty"`     // Regex pattern
+	Min         *int64   `json:"min,omitempty"`         // Minimum value for range
+	Max         *int64   `json:"max,omitempty"`         // Maximum value for range
+	Description string   `json:"description"`           // Human-readable description
+	Examples    []string `json:"examples,omitempty"`    // Valid example values
+	Invalid     []string `json:"invalid,omitempty"`     // Invalid example values
+}
+
+// getValidationPatterns returns the validation patterns used by the provider
+// These are extracted from internal/validators/validators.go
+func getValidationPatterns() *ValidationPatterns {
+	minPort := int64(1)
+	maxPort := int64(65535)
+
+	return &ValidationPatterns{
+		Version: "1.0.0",
+		Patterns: map[string]*ValidationPattern{
+			"name": {
+				Type:        "regex",
+				Pattern:     `^[a-z][a-z0-9-]{0,62}[a-z0-9]$|^[a-z]$`,
+				Description: "Resource name: lowercase alphanumeric with hyphens, 1-64 characters, must start with letter and end with letter or number",
+				Examples:    []string{"my-resource", "example-lb", "ns1", "a"},
+				Invalid:     []string{"My-Resource", "123-start", "-invalid", "too-long-name-that-exceeds-sixty-four-characters-limit-for-names"},
+			},
+			"domain": {
+				Type:        "regex",
+				Pattern:     `^(\*\.)?[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$`,
+				Description: "Valid DNS domain name with optional wildcard prefix",
+				Examples:    []string{"example.com", "*.example.com", "sub.domain.example.com"},
+				Invalid:     []string{"-invalid.com", "example..com", ""},
+			},
+			"port": {
+				Type:        "range",
+				Min:         &minPort,
+				Max:         &maxPort,
+				Description: "Valid TCP/UDP port number between 1 and 65535",
+				Examples:    []string{"80", "443", "8080", "65535"},
+				Invalid:     []string{"0", "65536", "-1"},
+			},
+			"namespace": {
+				Type:        "regex",
+				Pattern:     `^[a-z][a-z0-9-]{0,62}[a-z0-9]$|^[a-z]$`,
+				Description: "Namespace name: same rules as resource name",
+				Examples:    []string{"default", "production", "dev-env"},
+				Invalid:     []string{"Default", "123", "_invalid"},
+			},
+		},
+	}
 }
 
 // addOneOfConstraint adds a OneOf constraint hint to the description with recommended default

@@ -1,0 +1,192 @@
+{
+  "version": "1.0.0",
+  "description": "Common F5XC Terraform provider error patterns and remediation guidance",
+  "error_codes": {
+    "NOT_FOUND": {
+      "status": 404,
+      "causes": [
+        "Resource deleted outside Terraform",
+        "Typo in resource name or namespace",
+        "Wrong namespace specified",
+        "Resource never existed"
+      ],
+      "remediation": [
+        "Run 'terraform refresh' to sync state",
+        "Check resource exists in F5XC console",
+        "Verify namespace is correct",
+        "Remove resource from state: terraform state rm <resource>"
+      ],
+      "operations": ["Read", "Update", "Delete"]
+    },
+    "CONFLICT": {
+      "status": 409,
+      "causes": [
+        "Resource already exists with same name",
+        "Concurrent modification detected",
+        "State drift from external changes"
+      ],
+      "remediation": [
+        "Import existing resource: terraform import <resource> <id>",
+        "Use a different name",
+        "Refresh state and retry: terraform refresh"
+      ],
+      "operations": ["Create"]
+    },
+    "UNAUTHORIZED": {
+      "status": 401,
+      "causes": [
+        "API token expired",
+        "Invalid credentials",
+        "Certificate expired",
+        "Token revoked"
+      ],
+      "remediation": [
+        "Rotate API token in F5XC console",
+        "Check F5XC_API_TOKEN environment variable",
+        "Verify P12 certificate is valid and not expired",
+        "Regenerate credentials and update provider config"
+      ],
+      "operations": ["Create", "Read", "Update", "Delete"]
+    },
+    "FORBIDDEN": {
+      "status": 403,
+      "causes": [
+        "Insufficient permissions for operation",
+        "Namespace access denied",
+        "Feature requires higher subscription tier",
+        "Resource in protected namespace"
+      ],
+      "remediation": [
+        "Check user/service account permissions in F5XC",
+        "Verify namespace access rights",
+        "Check subscription tier: f5xc_terraform_subscription(operation: 'resource')",
+        "Request elevated permissions from admin"
+      ],
+      "operations": ["Create", "Read", "Update", "Delete"]
+    },
+    "RATE_LIMIT": {
+      "status": 429,
+      "causes": [
+        "Too many API requests",
+        "Batch operation too large",
+        "Concurrent apply operations"
+      ],
+      "remediation": [
+        "Wait 60 seconds and retry (automatic exponential backoff)",
+        "Reduce parallelism: terraform apply -parallelism=5",
+        "Split large operations into batches",
+        "Implement request throttling"
+      ],
+      "operations": ["Create", "Read", "Update", "Delete"]
+    },
+    "VALIDATION_ERROR": {
+      "status": 400,
+      "causes": [
+        "Invalid field value",
+        "Missing required field",
+        "Field value exceeds limits",
+        "Invalid field combination"
+      ],
+      "remediation": [
+        "Check validation patterns: f5xc_terraform_metadata(operation: 'validation')",
+        "Check required fields: f5xc_terraform_metadata(operation: 'requires_replace')",
+        "Check enum values: f5xc_terraform_metadata(operation: 'enums')",
+        "Check OneOf constraints: f5xc_terraform_metadata(operation: 'oneof')"
+      ],
+      "operations": ["Create", "Update"]
+    },
+    "INTERNAL_ERROR": {
+      "status": 500,
+      "causes": [
+        "F5XC API internal error",
+        "Temporary service unavailability",
+        "Backend processing failure"
+      ],
+      "remediation": [
+        "Retry the operation after a delay",
+        "Check F5XC status page for incidents",
+        "Contact F5 support if persistent"
+      ],
+      "operations": ["Create", "Read", "Update", "Delete"]
+    },
+    "SERVICE_UNAVAILABLE": {
+      "status": 503,
+      "causes": [
+        "F5XC API temporarily unavailable",
+        "Maintenance in progress",
+        "Capacity limits reached"
+      ],
+      "remediation": [
+        "Wait and retry with exponential backoff",
+        "Check F5XC status page",
+        "Try again during off-peak hours"
+      ],
+      "operations": ["Create", "Read", "Update", "Delete"]
+    },
+    "TIMEOUT": {
+      "status": 0,
+      "causes": [
+        "Network connectivity issues",
+        "API response too slow",
+        "Large resource operation",
+        "Firewall blocking requests"
+      ],
+      "remediation": [
+        "Check network connectivity to F5XC API",
+        "Increase timeout: provider { timeout = \"5m\" }",
+        "Verify firewall allows HTTPS to *.volterra.io",
+        "Check for VPN or proxy issues"
+      ],
+      "operations": ["Create", "Read", "Update", "Delete"]
+    }
+  },
+  "common_patterns": {
+    "drift_detected": {
+      "pattern": "Resource Drift Detected",
+      "cause": "Resource modified outside Terraform",
+      "remediation": "Run 'terraform refresh' then 'terraform plan' to review changes"
+    },
+    "validation_failed": {
+      "pattern": "Invalid value for",
+      "cause": "Field value doesn't match validation rules",
+      "remediation": "Check f5xc_terraform_metadata(operation: 'validation') for patterns"
+    },
+    "oneof_conflict": {
+      "pattern": "Conflicting attributes",
+      "cause": "Multiple mutually exclusive fields set",
+      "remediation": "Check f5xc_terraform_metadata(operation: 'oneof') for constraints"
+    },
+    "missing_dependency": {
+      "pattern": "depends on resource that doesn't exist",
+      "cause": "Dependency not created or in different namespace",
+      "remediation": "Check f5xc_terraform_metadata(operation: 'dependencies') for required resources"
+    },
+    "subscription_required": {
+      "pattern": "feature requires.*subscription",
+      "cause": "Current subscription tier doesn't include this feature",
+      "remediation": "Check f5xc_terraform_subscription(operation: 'resource') for tier requirements"
+    },
+    "import_format": {
+      "pattern": "cannot import",
+      "cause": "Wrong import ID format used",
+      "remediation": "Use f5xc_terraform_metadata(operation: 'attribute') to check import_format"
+    },
+    "namespace_not_found": {
+      "pattern": "namespace.*not found|namespace does not exist",
+      "cause": "Target namespace doesn't exist or inaccessible",
+      "remediation": "Create namespace first or check namespace name spelling"
+    },
+    "secret_encryption": {
+      "pattern": "blindfold|secret.*invalid|encryption.*failed",
+      "cause": "Secret encryption/decryption issue",
+      "remediation": "Check SecretPolicy exists and blindfold function parameters"
+    }
+  },
+  "diagnostic_tips": {
+    "enable_debug": "Set TF_LOG=DEBUG for detailed API request/response logs",
+    "check_state": "Run 'terraform state list' to see managed resources",
+    "validate_config": "Run 'terraform validate' before apply",
+    "plan_first": "Always run 'terraform plan' before 'terraform apply'",
+    "check_provider_version": "Ensure provider version is current: terraform providers"
+  }
+}

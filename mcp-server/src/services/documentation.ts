@@ -255,6 +255,7 @@ function getDocsPaths() {
     dataSources: join(docsRoot, 'data-sources'),
     functions: join(docsRoot, 'functions'),
     guides: join(docsRoot, 'guides'),
+    providerIndex: join(docsRoot, 'index.md'),
   };
 }
 
@@ -322,6 +323,15 @@ export function loadAllDocumentation(): ResourceDoc[] {
         type: 'guide',
       });
     }
+  }
+
+  // Load provider index (docs/index.md) - critical for provider configuration guidance
+  if (existsSync(DOCS_PATHS.providerIndex)) {
+    allDocs.push({
+      name: 'provider',
+      path: DOCS_PATHS.providerIndex,
+      type: 'provider',
+    });
   }
 
   return allDocs;

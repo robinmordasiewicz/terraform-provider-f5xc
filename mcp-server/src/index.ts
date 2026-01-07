@@ -242,6 +242,12 @@ server.registerTool(
     const apiSummary = getApiSpecsSummary();
 
     const output = {
+      provider: {
+        name: 'robinmordasiewicz/f5xc',
+        registry_url: 'https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest',
+        github_url: 'https://github.com/robinmordasiewicz/terraform-provider-f5xc',
+        npm_package: '@robinmordasiewicz/f5xc-terraform-mcp',
+      },
       documentation: {
         total: Object.values(docsSummary).reduce((a, b) => a + b, 0),
         by_type: docsSummary,
@@ -256,6 +262,47 @@ server.registerTool(
     if (params.response_format === ResponseFormat.MARKDOWN) {
       const lines = [
         '# F5 Distributed Cloud Terraform Provider',
+        '',
+        '## Provider Information',
+        '',
+        '| Property | Value |',
+        '|----------|-------|',
+        '| **Provider Name** | `robinmordasiewicz/f5xc` |',
+        '| **Registry URL** | https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest |',
+        '| **GitHub** | https://github.com/robinmordasiewicz/terraform-provider-f5xc |',
+        '| **npm Package** | `@robinmordasiewicz/f5xc-terraform-mcp` |',
+        '',
+        '## Quick Start',
+        '',
+        '### Terraform Configuration',
+        '',
+        '```hcl',
+        'terraform {',
+        '  required_providers {',
+        '    f5xc = {',
+        '      source = "robinmordasiewicz/f5xc"',
+        '    }',
+        '  }',
+        '}',
+        '',
+        'provider "f5xc" {',
+        '  # API Token authentication (recommended)',
+        '  api_url   = "https://your-tenant.console.ves.volterra.io"',
+        '  api_token = var.f5xc_api_token',
+        '}',
+        '```',
+        '',
+        '### Environment Variables',
+        '',
+        '| Variable | Description |',
+        '|----------|-------------|',
+        '| `F5XC_API_URL` | F5 Distributed Cloud API URL |',
+        '| `F5XC_API_TOKEN` | API Token for authentication |',
+        '| `F5XC_P12_FILE` | Path to P12 certificate file |',
+        '| `F5XC_P12_PASSWORD` | Password for P12 certificate |',
+        '| `F5XC_CERT` | Path to PEM certificate file |',
+        '| `F5XC_KEY` | Path to PEM private key file |',
+        '| `F5XC_CACERT` | Path to CA certificate file |',
         '',
         '## Documentation',
         '',
@@ -292,6 +339,8 @@ server.registerTool(
       lines.push('- `f5xc_terraform_get_summary` - This summary');
       lines.push('');
       lines.push('> **Token Optimization**: 14 tools consolidated to 6 tools (~77% reduction)');
+      lines.push('');
+      lines.push('> **Note**: Use `f5xc_terraform_docs` with `operation: "get", name: "provider"` for complete provider documentation.');
 
       textContent = lines.join('\n');
     } else {

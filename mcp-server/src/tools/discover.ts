@@ -88,6 +88,11 @@ function buildResponse(
 }
 
 interface DiscoverResponse {
+  provider: {
+    name: string;
+    registry_url: string;
+    github_url: string;
+  };
   tools: Array<{
     name: string;
     description: string;
@@ -101,6 +106,11 @@ interface DiscoverResponse {
 
 function buildJsonResponse(tools: ToolInfo[], verbose: boolean): DiscoverResponse {
   return {
+    provider: {
+      name: 'robinmordasiewicz/f5xc',
+      registry_url: 'https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest',
+      github_url: 'https://github.com/robinmordasiewicz/terraform-provider-f5xc',
+    },
     tools: tools.map((t) => {
       const tool: DiscoverResponse['tools'][0] = {
         name: t.name,
@@ -125,6 +135,9 @@ function buildJsonResponse(tools: ToolInfo[], verbose: boolean): DiscoverRespons
 function buildMarkdownResponse(tools: ToolInfo[], verbose: boolean): string {
   const lines: string[] = [
     '# F5XC Terraform MCP Tools',
+    '',
+    '**Provider**: `robinmordasiewicz/f5xc`',
+    '**Registry**: https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest',
     '',
     `**Available Tools**: ${tools.length}`,
     `**Token Estimate**: ${verbose ? '~2,000' : '~150'} tokens`,

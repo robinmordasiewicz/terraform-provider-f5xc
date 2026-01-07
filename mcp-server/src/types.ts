@@ -5,7 +5,7 @@
 export interface ResourceDoc {
   name: string;
   path: string;
-  type: 'resource' | 'data-source' | 'function' | 'guide';
+  type: 'resource' | 'data-source' | 'function' | 'guide' | 'provider';
   content?: string;
   // Subscription tier fields
   subscriptionTier?: SubscriptionTier;

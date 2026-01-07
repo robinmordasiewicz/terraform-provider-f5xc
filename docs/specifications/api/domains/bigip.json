@@ -3,7 +3,7 @@
   "info": {
     "title": "Bigip",
     "description": "On-premises appliance connector enabling iRule lifecycle operations and data group replication. APM policy coordination, virtual server configuration binding, and CNE linkage. Telemetry aggregation and health status monitoring across hybrid infrastructure deployments.",
-    "version": "2.0.15",
+    "version": "2.0.20",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -5861,6 +5861,8 @@
               "ves.io.schema.rules.map.max_pairs": "5",
               "ves.io.schema.rules.map.values.string.max_len": "255"
             },
+            "x-f5xc-description-short": "AWS Tags is a label consisting of a user-defined key and value.",
+            "x-f5xc-description-medium": "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5869,6 +5871,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Virtual F5 BIG-IP specification for AWS TGW Site.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmAPMBigIpAWSReplaceType",
           "required_fields": [
@@ -5909,6 +5912,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-description-short": "Admin Username for BIG-IP Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5944,6 +5948,7 @@
               "ves.io.schema.rules.repeated.max_items": "2",
               "ves.io.schema.rules.repeated.min_items": "1"
             },
+            "x-f5xc-description-short": "Specify how and where the service nodes are spawned Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5971,6 +5976,7 @@
               "ves.io.schema.rules.string.max_len": "8192",
               "ves.io.schema.rules.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Public SSH key for accessing the BIG-IP nodes. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5995,6 +6001,8 @@
               "ves.io.schema.rules.map.max_pairs": "5",
               "ves.io.schema.rules.map.values.string.max_len": "255"
             },
+            "x-f5xc-description-short": "AWS Tags is a label consisting of a user-defined key and value.",
+            "x-f5xc-description-medium": "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6003,6 +6011,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Virtual F5 BIG-IP configuration for AWS TGW Site using BIG-IP APM service.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmAPMBigIpAWSType",
           "required_fields": [
@@ -6036,6 +6045,7 @@
             "$ref": "#/components/schemas/ioschemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Select the flavor of BIG-IP AWS Marketplace to launch the instance on AWS TGW Site.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmAWSMarketPlaceImageTypeAPMaaS",
           "required_fields": [
@@ -6064,6 +6074,7 @@
             "$ref": "#/components/schemas/apmAWSMarketPlaceImageTypeAPMaaS"
           }
         },
+        "x-f5xc-description-short": "Virtual F5 BIG-IP APM service to be deployed as external service on AWS Transit Gateway Site.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmAWSSiteTypeChoice",
           "required_fields": [
@@ -6088,6 +6099,7 @@
             "$ref": "#/components/schemas/apmAPMBigIpAWSReplaceType"
           }
         },
+        "x-f5xc-description-short": "Virtual F5 BIG-IP service to be deployed on AWS Transit Gateway Site.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmAWSSiteTypeChoiceReplaceType",
           "required_fields": [
@@ -6168,6 +6180,7 @@
             "title": "Fail_if_referred.",
             "format": "boolean",
             "x-displayname": "Fail-If-Referred.",
+            "x-f5xc-description-short": "Fail the DELETE operation if this object is being referred by other objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6192,7 +6205,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856013+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602848+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6201,6 +6214,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "Namespace in which the configuration object is present.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -6211,7 +6225,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856020+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602855+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -6234,6 +6248,7 @@
         "title": "BIG-IP APM on App Stack Bare Metal Site.",
         "x-displayname": "BIG-IP APM on App Stack Bare Metal Site.",
         "x-ves-proto-message": "ves.io.schema.bigip.apm.F5BigIpAppStackBareMetalChoiceReplaceType",
+        "x-f5xc-description-short": "Virtual F5 BIG-IP APM service to be deployed on App Stack Bare Metal Site.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmF5BigIpAppStackBareMetalChoiceReplaceType",
           "required_fields": [],
@@ -6255,6 +6270,7 @@
             "$ref": "#/components/schemas/nfv_serviceF5BigIpAppStackBareMetalType"
           }
         },
+        "x-f5xc-description-short": "Virtual BIG-IP specification for App Stack Bare Metal Site.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmF5BigIpAppStackBareMetalTypeChoice",
           "required_fields": [
@@ -6285,6 +6301,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Deleted Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6300,6 +6317,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Disabled Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6318,6 +6336,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Referring Objects.",
+            "x-f5xc-description-short": "The set of objects that are referring to this object in their spec.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6339,6 +6358,8 @@
               "$ref": "#/components/schemas/apmStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-example": "active",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6348,7 +6369,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856038+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602873+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -6388,6 +6409,8 @@
           "GET_RSP_FORMAT_BROKEN_REFERENCES"
         ],
         "default": "GET_RSP_FORMAT_DEFAULT",
+        "x-f5xc-description-short": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT...",
+        "x-f5xc-description-medium": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\" Default format of returned resource - GET_RSP_FORMAT_FOR_CREATE: x-displayName: \"Create request Format\" Response should be...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmGetResponseFormatCode",
           "required_fields": [],
@@ -6413,6 +6436,7 @@
               "$ref": "#/components/schemas/schemaErrorType"
             },
             "x-displayname": "Errors",
+            "x-f5xc-description-short": "Errors(if any) while listing items from collection.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6428,6 +6452,8 @@
               "$ref": "#/components/schemas/apmListResponseItem"
             },
             "x-displayname": "Items",
+            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
+            "x-f5xc-description-short": "Items represents the collection in response.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6461,6 +6487,8 @@
             "description": "The set of annotations present on this apm.",
             "title": "Annotations.",
             "x-displayname": "Annotations.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of annotations present on this apm.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6483,7 +6511,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856051+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602886+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -6491,6 +6519,8 @@
             "title": "Disabled",
             "format": "boolean",
             "x-displayname": "Disabled",
+            "x-f5xc-example": "True",
+            "x-f5xc-description-short": "Value of true indicates apm is administratively disabled.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6506,6 +6536,7 @@
             "description": "The set of labels present on this apm.",
             "title": "Labels",
             "x-displayname": "Labels",
+            "x-f5xc-example": "{\"key\": \"value\"}",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6533,7 +6564,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856062+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602897+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6552,7 +6583,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856066+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602902+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -6565,6 +6596,7 @@
               "$ref": "#/components/schemas/apmStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6593,7 +6625,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856074+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602910+00:00"
           },
           "uid": {
             "type": "string",
@@ -6614,9 +6646,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856080+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602916+00:00"
           }
         },
+        "x-f5xc-description-short": "By default a summary of apm is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
+        "x-f5xc-description-medium": "By default a summary of apm is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmListResponseItem",
           "required_fields": [
@@ -6656,6 +6690,7 @@
               "$ref": "#/components/schemas/bigipapmMetricTypeData"
             },
             "x-displayname": "Data",
+            "x-f5xc-example": "{\"key\": \"value\"}",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6670,6 +6705,7 @@
             "$ref": "#/components/schemas/schemaUnitType"
           }
         },
+        "x-f5xc-description-short": "Metric data contains the metric type and the corresponding metric value.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmMetricData",
           "required_fields": [
@@ -6726,6 +6762,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "End time of metric collection from which data will be considered to build graph.",
+            "x-f5xc-description-medium": "End time of metric collection from which data will be considered to build graph. Format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be evaluated to start_time+10m If start_time is not specified, then the end_time will be evaluated to <current time>.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6758,6 +6796,8 @@
               "ves.io.schema.rules.repeated.min_items": "1",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Select fields to be returned in the response.",
+            "x-f5xc-description-medium": "Select fields to be returned in the response. One or more fields in {TX_THROUGHPUT_BYTES, CONNECTION_RATE, TX_THROUGHPUT_PACKETS, RX_THROUGHPUT_BYTES, RX_THROUGHPUT_PACKETS} can be specified. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6791,6 +6831,7 @@
               "$ref": "#/components/schemas/apmMetricLabel"
             },
             "x-displayname": "Group By",
+            "x-f5xc-description-short": "Aggregate data by zero or more labels {SITE, SERVICE, SERVICE_INSTANCE}.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6815,7 +6856,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856096+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602932+00:00"
           },
           "start_time": {
             "type": "string",
@@ -6830,6 +6871,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Start time of metric collection from which data will be considered to build graph.",
+            "x-f5xc-description-medium": "Start time of metric collection from which data will be considered to build graph. Format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be evaluated to end_time-10m If end_time is not specified, then the start_time will be evaluated to <current time>-10m.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6864,6 +6907,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Request to GET the metrics for BIG-IP APM services.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmMetricsRequest",
           "required_fields": [
@@ -6897,6 +6941,8 @@
               "$ref": "#/components/schemas/apmMetricData"
             },
             "x-displayname": "Data",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "Data contains time-series metric data for BIG-IP APM services.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6917,6 +6963,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.time_interval": "true"
             },
+            "x-f5xc-description-short": "Actual step size used in the response. It could be higher than the requested step due to metric rollups and the query duration.",
+            "x-f5xc-description-medium": "Actual step size used in the response. It could be higher than the requested step due to metric rollups and the query duration. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6995,6 +7043,7 @@
               "$ref": "#/components/schemas/schemaConditionType"
             },
             "x-displayname": "Conditions.",
+            "x-f5xc-description-short": "Conditions reported by various component of the system.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7016,6 +7065,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Config Object.",
+            "x-f5xc-description-short": "Reference to the object for current status.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7024,6 +7074,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Most recently observed status of object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for apmStatusObject",
           "required_fields": [
@@ -7058,6 +7109,7 @@
             "$ref": "#/components/schemas/nfv_serviceServiceHttpsManagementType"
           }
         },
+        "x-f5xc-description-short": "Creates a new APM as a service with configured parameters.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigipapmCreateSpecType",
           "required_fields": [
@@ -7113,6 +7165,8 @@
             "$ref": "#/components/schemas/ioschemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Endpoint Service is a type of NFV service where the packets are destined to NFV and service modifies the destination with a new destination address.",
+        "x-f5xc-description-medium": "Endpoint Service is a type of NFV service where the packets are destined to NFV and service modifies the destination with a new destination address.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigipapmEndpointServiceReplaceType",
           "required_fields": [
@@ -7169,6 +7223,7 @@
               "ves.io.schema.rules.string.ip": "true",
               "ves.io.schema.rules.string.not_in": "0.0.0.0"
             },
+            "x-f5xc-description-short": "Exclusive with [automatic_vip] Enter IP address for the default VIP.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -7203,6 +7258,8 @@
             "$ref": "#/components/schemas/ioschemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Endpoint Service is a type of service where the packets are destined to BIG-IP APM device and service modifies the destination with a new...",
+        "x-f5xc-description-medium": "Endpoint Service is a type of service where the packets are destined to BIG-IP APM device and service modifies the destination with a new destination address.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigipapmEndpointServiceType",
           "required_fields": [
@@ -7278,6 +7335,8 @@
         "default": "CPU_UTILIZATION",
         "x-displayname": "Metric Type.",
         "x-ves-proto-enum": "ves.io.schema.bigip.apm.MetricType",
+        "x-f5xc-description-short": "List of metric types x-unit: \"percent\" x-unit: \"count\" x-unit: \"count\" x-unit: \"count\" x-unit: \"Bps\" x-unit: \"Bps\" x-unit: \"per second\" x-unit...",
+        "x-f5xc-description-medium": "List of metric types x-unit: \"percent\" x-unit: \"count\" x-unit: \"count\" x-unit: \"count\" x-unit: \"Bps\" x-unit: \"Bps\" x-unit: \"per second\" x-unit: \"count\" x-unit: \"count\" x-unit: \"percentage\".",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigipapmMetricType",
           "required_fields": [],
@@ -7300,6 +7359,8 @@
             "description": "Key contains the name/value pair.\n\"name\" is the label name defined in \"MetricLabel\"",
             "title": "Key",
             "x-displayname": "Key",
+            "x-f5xc-example": "[REDACTED_PUBLIC_KEY]",
+            "x-f5xc-description-short": "Key contains the name/value pair. \"name\" is the label name defined in \"MetricLabel\".",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7309,7 +7370,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856149+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602984+00:00"
           },
           "value": {
             "type": "array",
@@ -7328,9 +7389,11 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856154+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602990+00:00"
           }
         },
+        "x-f5xc-description-short": "Metric Type Data contains key/value pair that uniquely identifies the group_by labels specified in the request.",
+        "x-f5xc-description-medium": "Metric Type Data contains key/value pair that uniquely identifies the group_by labels specified in the request.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigipapmMetricTypeData",
           "required_fields": [
@@ -7363,6 +7426,7 @@
             "$ref": "#/components/schemas/nfv_serviceServiceHttpsManagementType"
           }
         },
+        "x-f5xc-description-short": "Replaces configured APM Service with new set of parameters.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigipapmReplaceSpecType",
           "required_fields": [
@@ -7383,6 +7447,7 @@
         "title": "Empty",
         "x-displayname": "Empty",
         "x-ves-proto-message": "ves.io.schema.Empty",
+        "x-f5xc-description-short": "Can be used for messages where no values are needed.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for ioschemaEmpty",
           "required_fields": [],
@@ -7407,6 +7472,8 @@
             "x-displayname": "Kind",
             "x-ves-example": "Virtual_site.",
             "x-f5xc-example": "virtual_site",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. \"route\")",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. \"route\").",
             "minLength": 0,
             "maxLength": 14,
             "x-f5xc-required-for": {
@@ -7418,7 +7485,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856163+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.602999+00:00"
           },
           "name": {
             "type": "string",
@@ -7427,6 +7494,8 @@
             "x-displayname": "Name",
             "x-ves-example": "Contactus-route.",
             "x-f5xc-example": "contactus-route",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -7437,7 +7506,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856168+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603004+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7446,6 +7515,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -7456,7 +7527,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856172+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603008+00:00"
           },
           "tenant": {
             "type": "string",
@@ -7465,6 +7536,8 @@
             "x-displayname": "Tenant",
             "x-ves-example": "Example-corp.",
             "x-f5xc-example": "example-corp",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
             "minLength": 0,
             "maxLength": 18,
             "x-f5xc-required-for": {
@@ -7477,7 +7550,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856176+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603012+00:00"
           },
           "uid": {
             "type": "string",
@@ -7486,6 +7559,8 @@
             "x-displayname": "UID",
             "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
             "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
             "minLength": 0,
             "maxLength": 36,
             "x-f5xc-required-for": {
@@ -7499,9 +7574,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856182+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603018+00:00"
           }
         },
+        "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
+        "x-f5xc-description-medium": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name for public API and Uid for private API This type of reference is called direct because the relation is explicit and concrete (as opposed to selector...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for ioschemaObjectRefType",
           "required_fields": [
@@ -7530,6 +7607,8 @@
         "default": "BM_8_GB_MEMORY",
         "x-displayname": "Bare Metal ServiceNode Memory Size.",
         "x-ves-proto-enum": "ves.io.schema.nfv_service.BMNodeMemorySize",
+        "x-f5xc-description-short": "Enum to define amount of memory to be assigned to the node - BM_8_GB_MEMORY: 8 GB - BM_16_GB_MEMORY: 16 GB - BM_32_GB_MEMORY: 32 GB.",
+        "x-f5xc-description-medium": "Enum to define amount of memory to be assigned to the node - BM_8_GB_MEMORY: 8 GB - BM_16_GB_MEMORY: 16 GB - BM_32_GB_MEMORY: 32 GB.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for nfv_serviceBMNodeMemorySize",
           "required_fields": [],
@@ -7551,6 +7630,8 @@
         "default": "BM_4_VCPU",
         "x-displayname": "Bare Metal ServiceNode Virtual CPU Count.",
         "x-ves-proto-enum": "ves.io.schema.nfv_service.BMNodeVirtualCpuCount",
+        "x-f5xc-description-short": "Enum to define number of virtual CPU's to be assigned to the node - BM_4_VCPU: 4 virtual CPUs - BM_8_VCPU: 8 virtual CPUs.",
+        "x-f5xc-description-medium": "Enum to define number of virtual CPU's to be assigned to the node - BM_4_VCPU: 4 virtual CPUs - BM_8_VCPU: 8 virtual CPUs.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for nfv_serviceBMNodeVirtualCpuCount",
           "required_fields": [],
@@ -7589,6 +7670,7 @@
               "ves.io.schema.rules.string.max_len": "256",
               "ves.io.schema.rules.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Name of Utility Pool on BIG-IQ Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7614,6 +7696,8 @@
               "ves.io.schema.rules.string.ip": "true",
               "ves.io.schema.rules.string.not_in": "0.0.0.0"
             },
+            "x-f5xc-description-short": "IP Address from the TCP Load Balancer which is configured to communicate with License Server Required: YES.",
+            "x-f5xc-description-medium": "IP Address from the TCP Load Balancer which is configured to communicate with License Server Required: YES.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -7646,6 +7730,7 @@
               "ves.io.schema.rules.string.max_len": "256",
               "ves.io.schema.rules.string.min_len": "1"
             },
+            "x-f5xc-description-short": "License offering name aka SKU name Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7673,6 +7758,7 @@
               "ves.io.schema.rules.string.max_len": "256",
               "ves.io.schema.rules.string.min_len": "1"
             },
+            "x-f5xc-description-short": "User Name used to access BIG-IQ to activate the license Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7681,6 +7767,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Specification for BIG-IQ Instance, where and what.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for nfv_serviceBigIqInstanceType",
           "required_fields": [
@@ -7747,6 +7834,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-description-short": "Admin Username for BIG-IP Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -7782,6 +7870,7 @@
               "ves.io.schema.rules.repeated.max_items": "1",
               "ves.io.schema.rules.repeated.min_items": "1"
             },
+            "x-f5xc-description-short": "Specify how and where the service nodes are spawned Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7804,6 +7893,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.uri": "true"
             },
+            "x-f5xc-description-short": "Public URL where BIG-IP VE image (qcow2) is hosted Required: YES.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -7833,6 +7923,7 @@
               "ves.io.schema.rules.string.max_len": "8192",
               "ves.io.schema.rules.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Public SSH key for accessing the BIG-IP nodes. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7841,6 +7932,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Virtual BIG-IP specification for App Stack bare metal.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for nfv_serviceF5BigIpAppStackBareMetalType",
           "required_fields": [
@@ -7871,7 +7963,7 @@
           },
           "network_gateway": {
             "type": "string",
-            "description": "",
+            "description": "Configuration parameter for network gateway",
             "title": "BIG-IP Network Default Gateway.",
             "x-displayname": "Default Gateway.",
             "x-ves-example": "10.2.3.0",
@@ -7882,6 +7974,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.ipv4": "true"
             },
+            "x-f5xc-description-short": "Configuration parameter for network gateway.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -7979,6 +8072,8 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.hostname": "true"
             },
+            "x-f5xc-description-short": "Domain suffix will be used along with node name to form URL to access node management Required: YES.",
+            "x-f5xc-description-medium": "Domain suffix will be used along with node name to form URL to access node management Required: YES.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -8002,6 +8097,7 @@
               "ves.io.schema.rules.uint32.gte": "1",
               "ves.io.schema.rules.uint32.lte": "65535"
             },
+            "x-f5xc-description-short": "Exclusive with [default_https_port] Enter TCP port number.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -8060,6 +8156,8 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.pattern": "^([a-z]{2})-([a-z0-9]{4,20})-([a-z0-9]{2})$"
             },
+            "x-f5xc-description-short": "The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site Required: YES.",
+            "x-f5xc-description-medium": "The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site Required: YES.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -8094,6 +8192,7 @@
               "ves.io.schema.rules.string.max_len": "256",
               "ves.io.schema.rules.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Node Name will be used to assign as hostname to the service Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8117,6 +8216,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.ipv4_prefix": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [automatic_prefix] Enter IP prefix for the tunnel, it has to be /30.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -8127,6 +8227,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Specification for service nodes, how and where.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for nfv_serviceServiceNodesAWSType",
           "required_fields": [
@@ -8186,6 +8287,7 @@
               "ves.io.schema.rules.string.max_len": "256",
               "ves.io.schema.rules.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Node Name will be used to assign as hostname to the service Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8194,6 +8296,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Specification for service nodes, how and where.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for nfv_serviceServiceNodesBareMetalType",
           "required_fields": [
@@ -8242,9 +8345,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856237+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603075+00:00"
           }
         },
+        "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
+        "x-f5xc-description-medium": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message. Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type. Example 1: Pack and unpack a...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protobufAny",
           "required_fields": [
@@ -8273,6 +8378,8 @@
             "x-displayname": "Decryption Provider.",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
+            "x-f5xc-description-medium": "Name of the Secret Management Access object that contains information about the backend Secret Management service.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -8298,6 +8405,8 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.uri_ref": "true"
             },
+            "x-f5xc-description-short": "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location Required: YES.",
+            "x-f5xc-description-medium": "Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location Required: YES.",
             "minLength": 0,
             "maxLength": 4,
             "x-f5xc-required-for": {
@@ -8308,7 +8417,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856244+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603084+00:00"
           },
           "store_provider": {
             "type": "string",
@@ -8317,6 +8426,8 @@
             "x-displayname": "Store Provider.",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only...",
+            "x-f5xc-description-medium": "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -8327,6 +8438,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaBlindfoldSecretInfoType",
           "required_fields": [
@@ -8356,6 +8468,8 @@
             "x-displayname": "Provider",
             "x-ves-example": "Box-provider.",
             "x-f5xc-example": "box-provider",
+            "x-f5xc-description-short": "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only...",
+            "x-f5xc-description-medium": "Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
             "minLength": 0,
             "maxLength": 8,
             "x-f5xc-required-for": {
@@ -8366,7 +8480,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856250+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603093+00:00"
           },
           "url": {
             "type": "string",
@@ -8387,6 +8501,8 @@
               "ves.io.schema.rules.string.max_bytes": "131072",
               "ves.io.schema.rules.string.uri_ref": "true"
             },
+            "x-f5xc-description-short": "URL of the secret. Currently supported URL schemes is string:///.",
+            "x-f5xc-description-medium": "URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding. Required: YES.",
             "format": "uri",
             "minLength": 0,
             "x-f5xc-required-for": {
@@ -8397,6 +8513,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "ClearSecretInfoType specifies information about the Secret that is not encrypted.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaClearSecretInfoType",
           "required_fields": [
@@ -8422,6 +8539,8 @@
             "description": "Hostname of the instance of the site that sent the status.",
             "title": "Hostname",
             "x-displayname": "Hostname",
+            "x-f5xc-example": "example-resource",
+            "x-f5xc-description-short": "Hostname of the instance of the site that sent the status.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -8453,6 +8572,8 @@
             "x-displayname": "Reason",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "X-reason: \"Insufficient memory in data plane\" A human readable string explaining the reason for reaching this condition.",
+            "x-f5xc-description-medium": "X-reason: \"Insufficient memory in data plane\" A human readable string explaining the reason for reaching this condition.",
             "minLength": 0,
             "maxLength": 43,
             "x-f5xc-required-for": {
@@ -8463,13 +8584,15 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856259+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603103+00:00"
           },
           "service_name": {
             "type": "string",
             "description": "Name of the service that sent the status.",
             "title": "Service name.",
             "x-displayname": "Service Name.",
+            "x-f5xc-example": "example-resource",
+            "x-f5xc-description-short": "Name of the service that sent the status.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -8504,7 +8627,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856265+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603109+00:00"
           },
           "type": {
             "type": "string",
@@ -8519,6 +8642,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.in": "[\\\"Validation\\\",\\\"Operational\\\"]"
             },
+            "x-f5xc-description-short": "Type of the condition \"Validation\" represents validation user given configuration object \"Operational\" represents operational status of a given...",
+            "x-f5xc-description-medium": "Type of the condition \"Validation\" represents validation user given configuration object \"Operational\" represents operational status of a given configuration object.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -8529,6 +8654,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Conditions are used in the object status to describe the current state of the object, e.g.",
+        "x-f5xc-description-medium": "Conditions are used in the object status to describe the current state of the object, e.g. Ready, Succeeded, etc.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaConditionType",
           "required_fields": [
@@ -8564,6 +8691,8 @@
         "default": "EOK",
         "x-displayname": "Error Code.",
         "x-ves-proto-enum": "ves.io.schema.ErrorCode",
+        "x-f5xc-description-short": "Union of all possible error-codes from system - EOK: No error - EPERMS: Permissions error - EBADINPUT: Input is not correct - ENOTFOUND: Not found...",
+        "x-f5xc-description-medium": "Union of all possible error-codes from system - EOK: No error - EPERMS: Permissions error - EBADINPUT: Input is not correct - ENOTFOUND: Not found - EEXISTS: Already exists - EUNKNOWN: Unknown/catchall error - ESERIALIZE: Error in serializing/de-serializing - EINTERNAL: Server error - EPARTIAL...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaErrorCode",
           "required_fields": [],
@@ -8604,6 +8733,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Information about a error in API operation.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaErrorType",
           "required_fields": [
@@ -8630,6 +8760,8 @@
         "default": "INVALID_HASH_ALGORITHM",
         "x-displayname": "Hash Algorithm.",
         "x-ves-proto-enum": "ves.io.schema.HashAlgorithm",
+        "x-f5xc-description-short": "Specifies the Hash Algorithm to be used Invalid hash algorithm sha256 hash algorithm sha1 hash algorithm.",
+        "x-f5xc-description-medium": "Specifies the Hash Algorithm to be used Invalid hash algorithm sha256 hash algorithm sha1 hash algorithm.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaHashAlgorithm",
           "required_fields": [],
@@ -8670,6 +8802,7 @@
               "ves.io.schema.rules.repeated.min_items": "1",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Ordered list of hash algorithms to be used. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8678,6 +8811,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Specifies the hash algorithms to be used.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaHashAlgorithms",
           "required_fields": [
@@ -8703,6 +8837,7 @@
             "title": "Name",
             "x-displayname": "Name",
             "x-f5xc-example": "example-resource",
+            "x-f5xc-description-short": "Name of the service that is responsible for initializing this object.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -8713,9 +8848,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856279+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603122+00:00"
           }
         },
+        "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaInitializerType",
           "required_fields": [
@@ -8743,6 +8879,8 @@
               "$ref": "#/components/schemas/schemaInitializerType"
             },
             "x-displayname": "Pending",
+            "x-f5xc-description-short": "Pending is a list of initializers that must execute in order before this object is initialized.",
+            "x-f5xc-description-medium": "Pending is a list of initializers that must execute in order before this object is initialized. When the last pending initializer is removed, and no failing result is set, the initializers struct will be set to nil and the object is considered as initialized and visible to all clients.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8754,6 +8892,7 @@
             "$ref": "#/components/schemas/schemaStatusType"
           }
         },
+        "x-f5xc-description-short": "Initializers tracks the progress of initialization of a configuration object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaInitializersType",
           "required_fields": [
@@ -8794,7 +8933,7 @@
           },
           "value": {
             "type": "string",
-            "description": "",
+            "description": "Configuration parameter for value",
             "title": "Value",
             "x-displayname": "Value",
             "x-ves-example": "15",
@@ -8809,9 +8948,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856289+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603133+00:00"
           }
         },
+        "x-f5xc-description-short": "Metric data contains timestamp and the value.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaMetricValue",
           "required_fields": [
@@ -8851,6 +8991,8 @@
               "ves.io.schema.rules.map.values.string.max_len": "1024",
               "ves.io.schema.rules.map.values.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
+            "x-f5xc-description-medium": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8872,6 +9014,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_bytes": "1200"
             },
+            "x-f5xc-description-short": "Human readable description for the object.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -8881,7 +9024,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856296+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603139+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -8890,6 +9033,7 @@
             "format": "boolean",
             "x-displayname": "Disable",
             "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Value of true will administratively disable the object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8903,6 +9047,8 @@
             "title": "Labels",
             "x-displayname": "Labels",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user. Values specified here will be used by selector expression.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8924,6 +9070,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-description-short": "Name of configuration object. It has to be unique within the namespace.",
+            "x-f5xc-description-medium": "Name of configuration object. It has to be unique within the namespace. It can only be specified during create API and cannot be changed during replace API.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -8934,7 +9082,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856303+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603147+00:00"
           },
           "namespace": {
             "type": "string",
@@ -8943,6 +9091,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Staging",
             "x-f5xc-example": "staging",
+            "x-f5xc-description-short": "Defines the workspace within which each the configuration object is to be created.",
+            "x-f5xc-description-medium": "Defines the workspace within which each the configuration object is to be created. Must be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\".",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -8953,9 +9103,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856307+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603151+00:00"
           }
         },
+        "x-f5xc-description-short": "ObjectCreateMetaType is metadata that can be specified in Create request of an object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaObjectCreateMetaType",
           "required_fields": [
@@ -8999,6 +9150,8 @@
               "ves.io.schema.rules.map.values.string.max_len": "1024",
               "ves.io.schema.rules.map.values.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
+            "x-f5xc-description-medium": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9020,6 +9173,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_bytes": "1200"
             },
+            "x-f5xc-description-short": "Human readable description for the object.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -9029,7 +9183,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856313+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603157+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -9039,6 +9193,7 @@
             "x-displayname": "Disable",
             "x-ves-example": "True",
             "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Value of true will administratively disable the object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9053,6 +9208,8 @@
             "x-displayname": "Labels",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user. Values specified here will be used by selector expression.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9074,6 +9231,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-description-short": "Name of configuration object. It has to be unique within the namespace.",
+            "x-f5xc-description-medium": "Name of configuration object. It has to be unique within the namespace. It can only be specified during create API and cannot be changed during replace API.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -9084,7 +9243,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856320+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603165+00:00"
           },
           "namespace": {
             "type": "string",
@@ -9093,6 +9252,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Staging",
             "x-f5xc-example": "staging",
+            "x-f5xc-description-short": "Defines the workspace within which each the configuration object is to be created.",
+            "x-f5xc-description-medium": "Defines the workspace within which each the configuration object is to be created. Must be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\".",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -9103,9 +9264,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856324+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603169+00:00"
           }
         },
+        "x-f5xc-description-short": "ObjectGetMetaType is metadata that can be specified in GET/Create response of an object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaObjectGetMetaType",
           "required_fields": [
@@ -9149,6 +9311,8 @@
               "ves.io.schema.rules.map.values.string.max_len": "1024",
               "ves.io.schema.rules.map.values.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata.",
+            "x-f5xc-description-medium": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9170,6 +9334,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_bytes": "1200"
             },
+            "x-f5xc-description-short": "Human readable description for the object.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -9179,7 +9344,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856330+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603176+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -9188,6 +9353,7 @@
             "format": "boolean",
             "x-displayname": "Disable",
             "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Value of true will administratively disable the object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9202,6 +9368,8 @@
             "x-displayname": "Labels",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the user. Values specified here will be used by selector expression.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9222,6 +9390,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-description-short": "Name of configuration object. It has to be unique within the namespace.",
+            "x-f5xc-description-medium": "Name of configuration object. It has to be unique within the namespace. It can only be specified during create API and cannot be changed during replace API.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -9232,7 +9402,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856337+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603183+00:00"
           },
           "namespace": {
             "type": "string",
@@ -9241,6 +9411,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Staging",
             "x-f5xc-example": "staging",
+            "x-f5xc-description-short": "Defines the workspace within which each the configuration object is to be created.",
+            "x-f5xc-description-medium": "Defines the workspace within which each the configuration object is to be created. Must be a DNS_LABEL format. For a namespace object itself, namespace value will be \"\".",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -9251,9 +9423,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856341+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603187+00:00"
           }
         },
+        "x-f5xc-description-short": "ObjectReplaceMetaType is metadata that can be specified in Replace request of an object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaObjectReplaceMetaType",
           "required_fields": [
@@ -9300,6 +9473,8 @@
               "ves.io.schema.rules.repeated.items.string.port_range": "true",
               "ves.io.schema.rules.repeated.max_items": "128"
             },
+            "x-f5xc-description-short": "List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 Required: YES.",
+            "x-f5xc-description-medium": "List of port ranges. Each range is a single port or a pair of start and end ports e.g. 8080-8192 Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9329,6 +9504,8 @@
           "EncodingBase64"
         ],
         "default": "EncodingNone",
+        "x-f5xc-description-short": "X-displayName: \"Secret Encoding\" SecretEncodingType defines the encoding type of the secret before handled by the Secret Management Service. ...",
+        "x-f5xc-description-medium": "X-displayName: \"Secret Encoding\" SecretEncodingType defines the encoding type of the secret before handled by the Secret Management Service. - EncodingNone: x-displayName: \"None\" No Encoding - EncodingBase64: Base64 x-displayName: \"Base64\" Base64 encoding.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaSecretEncodingType",
           "required_fields": [],
@@ -9354,6 +9531,7 @@
             "$ref": "#/components/schemas/schemaClearSecretInfoType"
           }
         },
+        "x-f5xc-description-short": "SecretType is used in an object to indicate a sensitive/confidential field.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaSecretType",
           "required_fields": [
@@ -9380,6 +9558,8 @@
             "title": "Creation_timestamp.",
             "format": "date-time",
             "x-displayname": "Creation Timestamp.",
+            "x-f5xc-description-short": "Creation_timestamp is when the status object was created. It is used to find/tie-break for latest status object from same origin.",
+            "x-f5xc-description-medium": "Creation_timestamp is when the status object was created. It is used to find/tie-break for latest status object from same origin.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9397,6 +9577,8 @@
             "x-displayname": "Creator Class.",
             "x-ves-example": "ver.re1.int.ves.I/O.",
             "x-f5xc-example": "ver.re1.int.F5 XC",
+            "x-f5xc-description-short": "Class of creator which created this StatusObject. This will be service's DNS FQDN.",
+            "x-f5xc-description-medium": "Class of creator which created this StatusObject. This will be service's DNS FQDN. This will be set by the system based on client certificate information.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9414,6 +9596,8 @@
             "x-displayname": "Creator ID.",
             "x-ves-example": "Ver-instance-1.",
             "x-f5xc-example": "ver-instance-1",
+            "x-f5xc-description-short": "ID of creator which created this StatusObject. This will be a concrete identifier for service (e.g.",
+            "x-f5xc-description-medium": "ID of creator which created this StatusObject. This will be a concrete identifier for service (e.g. Identifying the environment also). This will be set by the system based on client certificate information.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9432,6 +9616,8 @@
             "description": "Status_id is a field used by the generator to distinguish (if necessary) between two status\nobjects for the same config object from the same site and same service and potentially same\ndaemon(creator-ID)",
             "title": "Status_id",
             "x-displayname": "Status ID",
+            "x-f5xc-description-short": "Status_id is a field used by the generator to distinguish (if necessary) between two status objects for the same config object from the same site...",
+            "x-f5xc-description-medium": "Status_id is a field used by the generator to distinguish (if necessary) between two status objects for the same config object from the same site and same service and potentially same daemon(creator-ID).",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9449,6 +9635,7 @@
             "x-displayname": "UID",
             "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
             "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "Uid is the unique in time and space value for a StatusObject.",
             "minLength": 0,
             "maxLength": 36,
             "x-f5xc-required-for": {
@@ -9461,13 +9648,14 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856358+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603205+00:00"
           },
           "vtrp_id": {
             "type": "string",
             "description": "Origin of this status exchanged by VTRP.",
             "title": "Vtrp_id",
             "x-displayname": "VTRP ID",
+            "x-f5xc-description-short": "Origin of this status exchanged by VTRP.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9484,6 +9672,7 @@
             "title": "Vtrp_stale.",
             "format": "boolean",
             "x-displayname": "VTRP Stale.",
+            "x-f5xc-description-short": "Indicate whether mars deems this object to be stale via graceful restart timer information.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9492,6 +9681,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "StatusMetaType is metadata that all status must have.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaStatusMetaType",
           "required_fields": [
@@ -9522,6 +9712,8 @@
         "default": "STATUS_DO_NOT_PUBLISH",
         "x-displayname": "Status Publish Type.",
         "x-ves-proto-enum": "ves.io.schema.StatusPublishType",
+        "x-f5xc-description-short": "StatusPublishType is all possible publish operations on a StatusObject - STATUS_DO_NOT_PUBLISH: Do Not Publish Do not propagate this status to user.",
+        "x-f5xc-description-medium": "StatusPublishType is all possible publish operations on a StatusObject - STATUS_DO_NOT_PUBLISH: Do Not Publish Do not propagate this status to user. This could be because status is only informational - STATUS_PUBLISH: Publish Propagate this status up to user as it might be actionable.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaStatusPublishType",
           "required_fields": [],
@@ -9547,6 +9739,7 @@
             "x-displayname": "Code",
             "x-ves-example": "0",
             "x-f5xc-example": "0",
+            "x-f5xc-description-short": "Suggested HTTP return code for this status, 0 if not set.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -9563,6 +9756,8 @@
             "x-displayname": "Reason",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Human-readable description of why this operation is in the \"Failure\" status. If this value is empty there is no information available.",
+            "x-f5xc-description-medium": "Human-readable description of why this operation is in the \"Failure\" status. If this value is empty there is no information available.",
             "minLength": 0,
             "maxLength": 43,
             "x-f5xc-required-for": {
@@ -9573,7 +9768,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856367+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603215+00:00"
           },
           "status": {
             "type": "string",
@@ -9582,6 +9777,7 @@
             "x-displayname": "Status",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Status of the operation. One of: \"Success\" or \"Failure\".",
             "minLength": 0,
             "maxLength": 17,
             "x-f5xc-required-for": {
@@ -9592,9 +9788,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856372+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603219+00:00"
           }
         },
+        "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaStatusType",
           "required_fields": [
@@ -9622,6 +9819,8 @@
             "title": "Creation_timestamp.",
             "format": "date-time",
             "x-displayname": "Creation Timestamp.",
+            "x-f5xc-description-short": "CreationTimestamp is a timestamp representing the server time when this object was created.",
+            "x-f5xc-description-medium": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9639,6 +9838,7 @@
             "x-displayname": "Creator Class.",
             "x-ves-example": "Prism",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Value identifying the class of the user or service which created this configuration object.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9656,6 +9856,7 @@
             "x-displayname": "Creator ID.",
             "x-ves-example": "Admin@example-corp.com.",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Value identifying the exact user or service that created this configuration object.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9693,6 +9894,8 @@
             "x-displayname": "Finalizers.",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "Must be empty before the object is deleted from the registry.",
+            "x-f5xc-description-medium": "Must be empty before the object is deleted from the registry. Each entry is an identifier for the responsible component that will remove the entry from the list. If the deletionTimestamp of the object is non-nil, entries in this list can only be removed.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9710,6 +9913,8 @@
             "x-displayname": "Labels",
             "x-ves-example": "'VES.I/O/soft-deleted': 'true'",
             "x-f5xc-example": "'F5 XC/soft-deleted''true'",
+            "x-f5xc-description-short": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the operator or software.",
+            "x-f5xc-description-medium": "Map of string keys and values that can be used to organize and categorize (scope and select) objects as chosen by the operator or software. Values here can be interpreted by software(backend or frontend) to enable certain behavior e.g. Things marked as soft-deleted(restorable).",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9723,6 +9928,8 @@
             "title": "Modification_timestamp.",
             "format": "date-time",
             "x-displayname": "Modification Timestamp.",
+            "x-f5xc-description-short": "ModificationTimestamp is a timestamp representing the server time when this object was last modified.",
+            "x-f5xc-description-medium": "ModificationTimestamp is a timestamp representing the server time when this object was last modified.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9741,6 +9948,8 @@
             "x-displayname": "Object Index.",
             "x-ves-example": "0",
             "x-f5xc-example": "0",
+            "x-f5xc-description-short": "Unique index for the object. Some objects need a unique integer index to be allocated for each object type.",
+            "x-f5xc-description-medium": "Unique index for the object. Some objects need a unique integer index to be allocated for each object type. This field will be populated for all objects that need it and will be zero otherwise.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -9761,6 +9970,8 @@
             "x-displayname": "Tenant",
             "x-ves-example": "Example-corp.",
             "x-f5xc-example": "example-corp",
+            "x-f5xc-description-short": "Tenant to which this configuration object belongs to. The value for this is found from presented credentials.",
+            "x-f5xc-description-medium": "Tenant to which this configuration object belongs to. The value for this is found from presented credentials.",
             "minLength": 0,
             "maxLength": 18,
             "x-f5xc-required-for": {
@@ -9772,7 +9983,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856390+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603239+00:00"
           },
           "uid": {
             "type": "string",
@@ -9781,6 +9992,8 @@
             "x-displayname": "UID",
             "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
             "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "Uid is the unique in time and space value for this object.",
+            "x-f5xc-description-medium": "Uid is the unique in time and space value for this object. It is generated by the server on successful creation of an object and is not allowed to change on Replace API. The value of is taken from uid field of ObjectMetaType, if provided.",
             "minLength": 0,
             "maxLength": 36,
             "x-f5xc-required-for": {
@@ -9793,9 +10006,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856395+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603244+00:00"
           }
         },
+        "x-f5xc-description-short": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
+        "x-f5xc-description-medium": "SystemObjectGetMetaType is metadata generated or populated by the system for all persisted objects and cannot be updated directly by users.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaSystemObjectGetMetaType",
           "required_fields": [
@@ -9849,6 +10064,8 @@
               "ves.io.schema.rules.string.max_bytes": "131072",
               "ves.io.schema.rules.string.min_bytes": "1"
             },
+            "x-f5xc-description-short": "TLS certificate. Certificate or certificate chain in PEM format including the PEM headers.",
+            "x-f5xc-description-medium": "TLS certificate. Certificate or certificate chain in PEM format including the PEM headers. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9876,7 +10093,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856402+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603252+00:00"
           },
           "disable_ocsp_stapling": {
             "$ref": "#/components/schemas/ioschemaEmpty"
@@ -9919,6 +10136,8 @@
         "default": "TLS_AUTO",
         "x-displayname": "TLS Protocol.",
         "x-ves-proto-enum": "ves.io.schema.TlsProtocol",
+        "x-f5xc-description-short": "TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version.",
+        "x-f5xc-description-medium": "TlsProtocol is enumeration of supported TLS versions F5 Distributed Cloud will choose the optimal TLS version.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaTlsProtocol",
           "required_fields": [],
@@ -9941,6 +10160,7 @@
         "default": "TREND_SENTIMENT_NONE",
         "x-displayname": "Trend Sentiment.",
         "x-ves-proto-enum": "ves.io.schema.TrendSentiment",
+        "x-f5xc-description-short": "Trend sentiment Indicates trend sentiment is positive Indicates trend sentiment is negative.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaTrendSentiment",
           "required_fields": [],
@@ -9965,6 +10185,7 @@
             "x-displayname": "Description.",
             "x-ves-example": "Trend was calculated by comparing the avg of window size intervals of end-start Time and last window time interval.",
             "x-f5xc-example": "Trend was calculated by comparing the avg of window size intervals of end-start Time and last window time interval",
+            "x-f5xc-description-short": "Description of the method used to calculate trend.",
             "minLength": 0,
             "maxLength": 0,
             "x-f5xc-required-for": {
@@ -9975,15 +10196,16 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856411+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603261+00:00"
           },
           "previous_value": {
             "type": "string",
-            "description": "",
+            "description": "Configuration parameter for previous value",
             "title": "Previous Value.",
             "x-displayname": "Previous Value.",
             "x-ves-example": "200.00",
             "x-f5xc-example": "200.00",
+            "x-f5xc-description-short": "Configuration parameter for previous value.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9998,7 +10220,7 @@
           },
           "value": {
             "type": "string",
-            "description": "",
+            "description": "Configuration parameter for value",
             "title": "Value",
             "x-displayname": "Value",
             "x-ves-example": "-15",
@@ -10013,9 +10235,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856417+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603267+00:00"
           }
         },
+        "x-f5xc-description-short": "Trend value contains trend value, trend sentiment and trend calculation description and window size.",
+        "x-f5xc-description-medium": "Trend value contains trend value, trend sentiment and trend calculation description and window size.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaTrendValue",
           "required_fields": [
@@ -10067,6 +10291,7 @@
         "default": "UNIT_MILLISECONDS",
         "x-displayname": "Unit",
         "x-ves-proto-enum": "ves.io.schema.UnitType",
+        "x-f5xc-description-short": "UnitType is enumeration of units for scalar fields.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaUnitType",
           "required_fields": [],
@@ -10087,6 +10312,8 @@
             "description": "X-displayName: \"Key\"\nKey of the individual secret. Vault Secrets are stored as key-value pair.\nIf user is only interested in one value from the map, this field should be set to the corresponding key.\nIf not provided entire secret will be returned.",
             "title": "Key",
             "x-f5xc-example": "key_pem",
+            "x-f5xc-description-short": "X-displayName: \"Key\" Key of the individual secret. Vault Secrets are stored as key-value pair.",
+            "x-f5xc-description-medium": "X-displayName: \"Key\" Key of the individual secret. Vault Secrets are stored as key-value pair. If user is only interested in one value from the map, this field should be set to the corresponding key.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -10097,13 +10324,14 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856436+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603273+00:00"
           },
           "location": {
             "type": "string",
             "description": "X-displayName: \"Location\"\nx-required\nPath to secret in Vault.",
             "title": "Location",
             "x-f5xc-example": "v1/data/vhost_key",
+            "x-f5xc-description-short": "X-displayName: \"Location\" x-required Path to secret in Vault.",
             "minLength": 0,
             "maxLength": 4,
             "x-f5xc-required-for": {
@@ -10114,13 +10342,15 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856441+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603278+00:00"
           },
           "provider": {
             "type": "string",
             "description": "X-displayName: \"Provider\"\nx-required\nName of the Secret Management Access object that contains information about the backend Vault.",
             "title": "Provider",
             "x-f5xc-example": "vault-vh-provider",
+            "x-f5xc-description-short": "X-displayName: \"Provider\" x-required Name of the Secret Management Access object that contains information about the backend Vault.",
+            "x-f5xc-description-medium": "X-displayName: \"Provider\" x-required Name of the Secret Management Access object that contains information about the backend Vault.",
             "minLength": 0,
             "maxLength": 8,
             "x-f5xc-required-for": {
@@ -10131,7 +10361,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856445+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603282+00:00"
           },
           "secret_encoding": {
             "$ref": "#/components/schemas/schemaSecretEncodingType"
@@ -10142,6 +10372,8 @@
             "title": "Version",
             "format": "int64",
             "x-f5xc-example": "1",
+            "x-f5xc-description-short": "X-displayName: \"Version\" Version of the secret to be fetched. As vault secrets are versioned, user can specify this field to fetch specific version.",
+            "x-f5xc-description-medium": "X-displayName: \"Version\" Version of the secret to be fetched. As vault secrets are versioned, user can specify this field to fetch specific version. If not provided latest version will be returned.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -10153,9 +10385,11 @@
             "maxLength": 1,
             "minLength": 1,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856452+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603288+00:00"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Vault Secret\" VaultSecretInfoType specifies information about the Secret managed by Hashicorp Vault.",
+        "x-f5xc-description-medium": "X-displayName: \"Vault Secret\" VaultSecretInfoType specifies information about the Secret managed by Hashicorp Vault.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaVaultSecretInfoType",
           "required_fields": [
@@ -10196,7 +10430,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856457+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603293+00:00"
           },
           "name": {
             "type": "string",
@@ -10205,6 +10439,8 @@
             "x-displayname": "Name",
             "x-ves-example": "Contactus-route.",
             "x-f5xc-example": "contactus-route",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -10215,7 +10451,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856461+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603298+00:00"
           },
           "namespace": {
             "type": "string",
@@ -10224,6 +10460,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -10234,7 +10472,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856465+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603302+00:00"
           },
           "uid": {
             "type": "string",
@@ -10255,9 +10493,10 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856470+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603307+00:00"
           }
         },
+        "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaViewRefType",
           "required_fields": [
@@ -10283,6 +10522,7 @@
             "description": "X-displayName: \"Name\"\nx-required\nName of the secret.",
             "title": "Name",
             "x-f5xc-example": "ChargeBack-API-Key",
+            "x-f5xc-description-short": "X-displayName: \"Name\" x-required Name of the secret.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -10293,9 +10533,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856475+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603312+00:00"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Wingman Secret\" WingmanSecretInfoType specifies the handle to the wingman secret.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaWingmanSecretInfoType",
           "required_fields": [
@@ -10323,6 +10564,8 @@
         "default": "XFCC_NONE",
         "x-displayname": "XFCC Elements.",
         "x-ves-proto-enum": "ves.io.schema.XfccElement",
+        "x-f5xc-description-short": "X-Forwarded-Client-Cert custom cookie elements The entire client certificate in URL encoded PEM format.",
+        "x-f5xc-description-medium": "X-Forwarded-Client-Cert custom cookie elements The entire client certificate in URL encoded PEM format. The entire client certificate chain (including the leaf certificate) in URL encoded PEM format. The Subject field of the current client certificate.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaXfccElement",
           "required_fields": [],
@@ -10360,6 +10603,8 @@
               "ves.io.schema.rules.string.max_bytes": "128",
               "ves.io.schema.rules.string.min_bytes": "1"
             },
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10368,7 +10613,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856480+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603317+00:00"
           },
           "namespace": {
             "type": "string",
@@ -10384,6 +10629,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_bytes": "64"
             },
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -10393,7 +10640,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856485+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603321+00:00"
           },
           "tenant": {
             "type": "string",
@@ -10409,6 +10656,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_bytes": "64"
             },
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -10420,9 +10669,11 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:04.856489+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:38.603326+00:00"
           }
         },
+        "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
+        "x-f5xc-description-medium": "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaviewsObjectRefType",
           "required_fields": [
@@ -10512,6 +10763,8 @@
             "title": "Modification_timestamp.",
             "format": "date-time",
             "x-displayname": "Modification Timestamp.",
+            "x-f5xc-description-short": "ModificationTimestamp is a timestamp representing the server time when this status was last modified.",
+            "x-f5xc-description-medium": "ModificationTimestamp is a timestamp representing the server time when this status was last modified.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -10545,6 +10798,7 @@
             "x-displayname": "Terraform Output.",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "The value of an \"output\" variable from the terraform state file.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -10662,6 +10916,8 @@
           "UPGRADE_NOT_REQUIRED"
         ],
         "default": "UPGRADE_SUCCESSFUL",
+        "x-f5xc-description-short": "X-displayName: \"Upgrade State\" Terraform State after version Upgrade - UPGRADE_SUCCESSFUL: x-displayName: \"Upgrade successful\" - UPGRADE_ERRORED...",
+        "x-f5xc-description-medium": "X-displayName: \"Upgrade State\" Terraform State after version Upgrade - UPGRADE_SUCCESSFUL: x-displayName: \"Upgrade successful\" - UPGRADE_ERRORED: x-displayName: \"Upgrade errored\" - UPGRADE_NOT_REQUIRED: x-displayName: \"Upgrade not required\".",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for terraform_parametersUpgradeState",
           "required_fields": [],
@@ -10683,6 +10939,8 @@
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
           }
         },
+        "x-f5xc-description-short": "Defines a way to advertise a load balancer on public.",
+        "x-f5xc-description-medium": "Defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for viewsAdvertisePublic",
           "required_fields": [
@@ -10721,6 +10979,7 @@
               "ves.io.schema.rules.string.ipv4_prefix": "true",
               "ves.io.schema.rules.string.max_ip_prefix_length": "28"
             },
+            "x-f5xc-description-short": "IPv4 subnet prefix for this subnet Required: YES.",
             "format": "ipv4",
             "minLength": 0,
             "maxLength": 1024,
@@ -10732,6 +10991,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Parameters for creating a new cloud subnet.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for viewsCloudSubnetParamType",
           "required_fields": [
@@ -10768,6 +11028,7 @@
               "ves.io.schema.rules.string.max_len": "64",
               "ves.io.schema.rules.string.pattern": "^(subnet-)([a-z0-9]{8}|[a-z0-9]{17})$"
             },
+            "x-f5xc-description-short": "Exclusive with [subnet_param] Information about existing subnet ID.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -10823,6 +11084,7 @@
               "ves.io.schema.rules.repeated.items.string.in": "[\\\"TLS_AES_128_GCM_SHA256\\\",\\\"TLS_AES_256_GCM_SHA384\\\",\\\"TLS_CHACHA20_POLY1305_SHA256\\\",\\\"TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256\\\",\\\"TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384\\\",\\\"TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256\\\",\\\"TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256\\\",\\\"TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384\\\",\\\"TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256\\\",\\\"TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA\\\",\\\"TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA\\\",\\\"TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA\\\",\\\"TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA\\\",\\\"TLS_RSA_WITH_AES_128_CBC_SHA\\\",\\\"TLS_RSA_WITH_AES_128_GCM_SHA256\\\",\\\"TLS_RSA_WITH_AES_256_CBC_SHA\\\",\\\"TLS_RSA_WITH_AES_256_GCM_SHA384\\\"]",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "The TLS listener will only support the specified cipher list. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10837,6 +11099,7 @@
             "$ref": "#/components/schemas/schemaTlsProtocol"
           }
         },
+        "x-f5xc-description-short": "Defines TLS protocol config including min/max versions and allowed ciphers.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for viewsCustomCiphers",
           "required_fields": [
@@ -10883,6 +11146,8 @@
               "ves.io.schema.rules.repeated.max_items": "16",
               "ves.io.schema.rules.repeated.min_items": "1"
             },
+            "x-f5xc-description-short": "Users can add one or more certificates that share the same set of domains.",
+            "x-f5xc-description-medium": "Users can add one or more certificates that share the same set of domains. For example, domain.com and *.domain.com - but use different signature algorithms Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10928,6 +11193,9 @@
             "title": "Client_certificate_optional.",
             "format": "boolean",
             "x-displayname": "Client Certificate Optional.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "Client certificate is optional. If the client has provided a certificate, the load balancer will verify it.",
+            "x-f5xc-description-medium": "Client certificate is optional. If the client has provided a certificate, the load balancer will verify it. If certification verification fails, the connection will be terminated.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10961,6 +11229,7 @@
               "ves.io.schema.rules.string.min_bytes": "1",
               "ves.io.schema.rules.string.truststore_url": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [trusted_ca] Upload a Root CA Certificate specifically for this Load Balancer.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10975,6 +11244,7 @@
             "$ref": "#/components/schemas/viewsXfccHeaderKeys"
           }
         },
+        "x-f5xc-description-short": "Validation context for downstream client TLS connections.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for viewsDownstreamTlsValidationContext",
           "required_fields": [
@@ -11015,6 +11285,7 @@
             "$ref": "#/components/schemas/ioschemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Defines various OPTIONS to configure TLS configuration parameters.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for viewsTlsConfig",
           "required_fields": [
@@ -11056,6 +11327,7 @@
               "ves.io.schema.rules.repeated.items.enum.defined_only": "true",
               "ves.io.schema.rules.repeated.items.enum.not_in": "[0]"
             },
+            "x-f5xc-description-short": "X-Forwarded-Client-Cert header elements to be added to requests Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11064,6 +11336,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-Forwarded-Client-Cert header elements to be added to requests.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for viewsXfccHeaderKeys",
           "required_fields": [
@@ -11152,6 +11425,7 @@
               "ves.io.schema.rules.string.max_bytes": "1048576",
               "ves.io.schema.rules.string.min_bytes": "1"
             },
+            "x-f5xc-description-short": "IRule code content, this content will be base64 encoded for preserving formating.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11170,6 +11444,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-example": "example-resource",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -11225,6 +11500,7 @@
             "title": "Fail_if_referred.",
             "format": "boolean",
             "x-displayname": "Fail-If-Referred.",
+            "x-f5xc-description-short": "Fail the DELETE operation if this object is being referred by other objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11249,7 +11525,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188260+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.022896+00:00"
           },
           "namespace": {
             "type": "string",
@@ -11258,6 +11534,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "Namespace in which the configuration object is present.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -11268,7 +11545,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188266+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.022903+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -11303,6 +11580,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Deleted Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11318,6 +11596,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Disabled Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11336,6 +11615,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Referring Objects.",
+            "x-f5xc-description-short": "The set of objects that are referring to this object in their spec.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11357,6 +11637,8 @@
               "$ref": "#/components/schemas/bigip_iruleStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-example": "active",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11366,7 +11648,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188281+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.022920+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -11406,6 +11688,8 @@
           "GET_RSP_FORMAT_BROKEN_REFERENCES"
         ],
         "default": "GET_RSP_FORMAT_DEFAULT",
+        "x-f5xc-description-short": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT...",
+        "x-f5xc-description-medium": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\" Default format of returned resource - GET_RSP_FORMAT_FOR_CREATE: x-displayName: \"Create request Format\" Response should be...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigip_iruleGetResponseFormatCode",
           "required_fields": [],
@@ -11437,6 +11721,7 @@
               "ves.io.schema.rules.string.max_bytes": "1048576",
               "ves.io.schema.rules.string.min_bytes": "1"
             },
+            "x-f5xc-description-short": "IRule code content, this content will be base64 encoded for preserving formating.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11455,6 +11740,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-example": "example-resource",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -11512,6 +11798,7 @@
               "$ref": "#/components/schemas/schemaErrorType"
             },
             "x-displayname": "Errors",
+            "x-f5xc-description-short": "Errors(if any) while listing items from collection.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11527,6 +11814,8 @@
               "$ref": "#/components/schemas/bigip_iruleListResponseItem"
             },
             "x-displayname": "Items",
+            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
+            "x-f5xc-description-short": "Items represents the collection in response.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11560,6 +11849,8 @@
             "description": "The set of annotations present on this bigip_irule.",
             "title": "Annotations.",
             "x-displayname": "Annotations.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of annotations present on this bigip_irule.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11572,6 +11863,7 @@
             "description": "The description set for this bigip_irule.",
             "title": "Description.",
             "x-displayname": "Description.",
+            "x-f5xc-description-short": "The description set for this bigip_irule.",
             "minLength": 0,
             "maxLength": 0,
             "x-f5xc-required-for": {
@@ -11582,7 +11874,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188298+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.022939+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -11590,6 +11882,8 @@
             "title": "Disabled",
             "format": "boolean",
             "x-displayname": "Disabled",
+            "x-f5xc-example": "True",
+            "x-f5xc-description-short": "Value of true indicates bigip_irule is administratively disabled.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11605,6 +11899,8 @@
             "description": "The set of labels present on this bigip_irule.",
             "title": "Labels",
             "x-displayname": "Labels",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of labels present on this bigip_irule.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11632,7 +11928,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188309+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.022950+00:00"
           },
           "namespace": {
             "type": "string",
@@ -11651,7 +11947,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188313+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.022955+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -11664,6 +11960,7 @@
               "$ref": "#/components/schemas/bigip_iruleStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11692,7 +11989,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188322+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.022963+00:00"
           },
           "uid": {
             "type": "string",
@@ -11713,9 +12010,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188327+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.022968+00:00"
           }
         },
+        "x-f5xc-description-short": "By default a summary of bigip_irule is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
+        "x-f5xc-description-medium": "By default a summary of bigip_irule is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigip_iruleListResponseItem",
           "required_fields": [
@@ -11801,6 +12100,7 @@
               "ves.io.schema.rules.string.max_bytes": "1048576",
               "ves.io.schema.rules.string.min_bytes": "1"
             },
+            "x-f5xc-description-short": "IRule code content, this content will be base64 encoded for preserving formating.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11819,6 +12119,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-example": "example-resource",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -11876,6 +12177,7 @@
               "$ref": "#/components/schemas/schemaConditionType"
             },
             "x-displayname": "Conditions.",
+            "x-f5xc-description-short": "Conditions reported by various component of the system.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11894,6 +12196,7 @@
               "$ref": "#/components/schemas/schemaObjectRefType"
             },
             "x-displayname": "Config Object.",
+            "x-f5xc-description-short": "Reference to the object for current status.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -11902,6 +12205,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Most recently observed status of object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigip_iruleStatusObject",
           "required_fields": [
@@ -11930,6 +12234,8 @@
             "x-displayname": "Kind",
             "x-ves-example": "Virtual_site.",
             "x-f5xc-example": "virtual_site",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. \"route\")",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. \"route\").",
             "minLength": 0,
             "maxLength": 14,
             "x-f5xc-required-for": {
@@ -11941,7 +12247,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188416+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.023059+00:00"
           },
           "name": {
             "type": "string",
@@ -11950,6 +12256,8 @@
             "x-displayname": "Name",
             "x-ves-example": "Contactus-route.",
             "x-f5xc-example": "contactus-route",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -11960,7 +12268,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188432+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.023063+00:00"
           },
           "namespace": {
             "type": "string",
@@ -11969,6 +12277,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -11979,7 +12289,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188436+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.023067+00:00"
           },
           "tenant": {
             "type": "string",
@@ -11988,6 +12298,8 @@
             "x-displayname": "Tenant",
             "x-ves-example": "Example-corp.",
             "x-f5xc-example": "example-corp",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
             "minLength": 0,
             "maxLength": 18,
             "x-f5xc-required-for": {
@@ -12000,7 +12312,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188441+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.023071+00:00"
           },
           "uid": {
             "type": "string",
@@ -12009,6 +12321,8 @@
             "x-displayname": "UID",
             "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
             "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
             "minLength": 0,
             "maxLength": 36,
             "x-f5xc-required-for": {
@@ -12022,9 +12336,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.188447+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.023076+00:00"
           }
         },
+        "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
+        "x-f5xc-description-medium": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name for public API and Uid for private API This type of reference is called direct because the relation is explicit and concrete (as opposed to selector...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaObjectRefType",
           "required_fields": [
@@ -12052,6 +12368,7 @@
             "title": "API endpoint path.",
             "x-f5xc-example": "/endpoint1",
             "x-required": true,
+            "x-f5xc-description-short": "X-displayName: \"API Endpoint\" The rule is applied only for the specified API endpoints.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -12069,6 +12386,7 @@
               "$ref": "#/components/schemas/schemaHttpMethod"
             },
             "x-f5xc-example": "['GET', 'POST', 'DELETE']",
+            "x-f5xc-description-short": "X-displayName: \"Methods\" List of methods values to match against. X-required.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12078,6 +12396,7 @@
           }
         },
         "x-required": true,
+        "x-f5xc-description-short": "X-displayName: \"API Endpoint\" The rule is applied only for the specified API endpoints.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_typeAPIEndpoint",
           "required_fields": [
@@ -12101,6 +12420,7 @@
             "description": "X-displayName: \"Name\"\nx-required\nBuilt-in rule for sensitive data detection.",
             "title": "Name",
             "x-f5xc-example": "[EMAIL, CC]",
+            "x-f5xc-description-short": "X-displayName: \"Name\" x-required Built-in rule for sensitive data detection.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -12111,10 +12431,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604552+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.539751+00:00"
           }
         },
         "x-f5xc-example": "[EMAIL, CC]",
+        "x-f5xc-description-short": "X-displayName: \"Built-In Sensitive Data Type\" Message wrapper for built-in sensitive data type.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_typeBuiltInSensitiveDataType",
           "required_fields": [
@@ -12171,6 +12492,8 @@
             "description": "X-displayName: \"Base Path\"\nThe rule is applied only for the requests matching the specified base path.",
             "title": "Base path",
             "x-f5xc-example": "/v1",
+            "x-f5xc-description-short": "X-displayName: \"Base Path\" The rule is applied only for the requests matching the specified base path.",
+            "x-f5xc-description-medium": "X-displayName: \"Base Path\" The rule is applied only for the requests matching the specified base path.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -12194,6 +12517,7 @@
             "description": "X-displayName: \"Specific Domain\"\nThe rule will apply for a specific domain.\nFor example: api.example.com.",
             "title": "Domain",
             "x-f5xc-example": "api.example.com",
+            "x-f5xc-description-short": "X-displayName: \"Specific Domain\" The rule will apply for a specific domain. For",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -12207,6 +12531,8 @@
             "$ref": "#/components/schemas/app_typeValuePattern"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Custom Data Detection Config\" The custom data detection config specifies targets, scopes & the pattern to be detected.",
+        "x-f5xc-description-medium": "X-displayName: \"Custom Data Detection Config\" The custom data detection config specifies targets, scopes & the pattern to be detected.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_typeCustomDataDetectionConfig",
           "required_fields": [
@@ -12243,6 +12569,7 @@
             "items": {
               "$ref": "#/components/schemas/schemaHttpSections"
             },
+            "x-f5xc-description-short": "X-displayName: \"Custom Sections\" x-required Request & Response Sections.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12251,6 +12578,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Custom Sections\" Request & Response Sections.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_typeCustomSections",
           "required_fields": [
@@ -12278,6 +12606,7 @@
             "$ref": "#/components/schemas/app_typeCustomSensitiveDataType"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Custom Sensitive Data Detection Rule\" Custom Sensitive Data Rule Definition.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_typeCustomSensitiveDataDetectionRule",
           "required_fields": [
@@ -12303,6 +12632,7 @@
             "title": "Sensitive data type.",
             "x-f5xc-example": "EMAIL",
             "x-required": true,
+            "x-f5xc-description-short": "X-displayName: \"Type\" The request is labeled as specified sensitive data type.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -12313,6 +12643,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Custom Sensitive Data Type\" The type/category of the sensitive data this rule detects.",
+        "x-f5xc-description-medium": "X-displayName: \"Custom Sensitive Data Type\" The type/category of the sensitive data this rule detects. E.g. Email, Credit Card etc.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_typeCustomSensitiveDataType",
           "required_fields": [
@@ -12348,6 +12680,7 @@
               "ves.io.schema.rules.uint32.gte": "1",
               "ves.io.schema.rules.uint32.lte": "7"
             },
+            "x-f5xc-description-short": "Inactive discovered API will be deleted after configured duration.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -12381,6 +12714,7 @@
             "description": "X-displayName: \"Exact Value\"\nSearch for values with exact match.",
             "title": "Exact value.",
             "x-f5xc-example": "x-volt-header",
+            "x-f5xc-description-short": "X-displayName: \"Exact Value\" Search for values with exact match.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -12395,6 +12729,7 @@
             "description": "X-displayName: \"Regex Value\"\nSearch for values matching this regular expression.",
             "title": "Regex value.",
             "x-f5xc-example": "'^new.*$', 'san f.*', '.* del .*'",
+            "x-f5xc-description-short": "X-displayName: \"Regex Value\" Search for values matching this regular expression.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -12405,6 +12740,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Key Pattern\" Pattern to detect. Could be exact match or regex match.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_typeKeyPattern",
           "required_fields": [
@@ -12430,6 +12766,8 @@
             "$ref": "#/components/schemas/app_typeValuePattern"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Key & Value Pattern\" Search for specific key & value patterns in the specified sections.",
+        "x-f5xc-description-medium": "X-displayName: \"Key & Value Pattern\" Search for specific key & value patterns in the specified sections.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_typeKeyValuePattern",
           "required_fields": [
@@ -12455,6 +12793,9 @@
             "items": {
               "$ref": "#/components/schemas/app_typeCustomSensitiveDataDetectionRule"
             },
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "X-displayName: \"Defined Custom Sensitive Data Types\" Rules to detect custom sensitive data in requests and/or responses sections.",
+            "x-f5xc-description-medium": "X-displayName: \"Defined Custom Sensitive Data Types\" Rules to detect custom sensitive data in requests and/or responses sections.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12470,6 +12811,8 @@
               "$ref": "#/components/schemas/app_typeBuiltInSensitiveDataType"
             },
             "x-f5xc-example": "[EMAIL, CC]",
+            "x-f5xc-description-short": "X-displayName: \"Disabled Built-In Sensitive Data Types\" List of disabled built-in sensitive data detection rules.",
+            "x-f5xc-description-medium": "X-displayName: \"Disabled Built-In Sensitive Data Types\" List of disabled built-in sensitive data detection rules.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12478,6 +12821,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Sensitive Data Detection Rules\" Rules to manage/configure sensitive data detection in requests and/or response sections.",
+        "x-f5xc-description-medium": "X-displayName: \"Sensitive Data Detection Rules\" Rules to manage/configure sensitive data detection in requests and/or response sections.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_typeSensitiveDataDetectionRules",
           "required_fields": [
@@ -12501,6 +12846,7 @@
             "description": "X-displayName: \"Exact Value\"\nPattern value to be detected.",
             "title": "Exact value.",
             "x-f5xc-example": "x-volt-header",
+            "x-f5xc-description-short": "X-displayName: \"Exact Value\" Pattern value to be detected.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -12515,6 +12861,7 @@
             "description": "X-displayName: \"Regex Value\"\nRegular expression for this pattern.",
             "title": "Regex value.",
             "x-f5xc-example": "'^new.*$', 'san f.*', '.* del .*'",
+            "x-f5xc-description-short": "X-displayName: \"Regex Value\" Regular expression for this pattern.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -12525,6 +12872,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Value Pattern\" Pattern to detect. Could be exact match or regex match.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_typeValuePattern",
           "required_fields": [
@@ -12602,6 +12950,8 @@
           "BLOCKING"
         ],
         "default": "NONE",
+        "x-f5xc-description-short": "BigIpVirtualServerAWAFEnforcementMode could be of type NONE, ALARM or BLOCKING.",
+        "x-f5xc-description-medium": "BigIpVirtualServerAWAFEnforcementMode could be of type NONE, ALARM or BLOCKING. X-displayName: \"BIG-IP AWAF Enforcement Mode\" Specifies the Virtual Server AWAF enforcement mode - NONE: x-displayName: \"None\" No AWAF Policy attached - MONITORING: x-displayName: \"Monitoring\" AWAF Enforcement...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigip_virtual_serverBigIpVirtualServerAWAFEnforcementMode",
           "required_fields": [],
@@ -12622,6 +12972,8 @@
         "default": "INVALID_VIRTUAL_SERVER",
         "x-displayname": "Virtual Server Type.",
         "x-ves-proto-enum": "ves.io.schema.views.bigip_virtual_server.BigIpVirtualServerType",
+        "x-f5xc-description-short": "VirtualServerType could be of type classic BIG-IP or BIG-IP-NEXT. BIG-IP-NEXT will be added later.",
+        "x-f5xc-description-medium": "VirtualServerType could be of type classic BIG-IP or BIG-IP-NEXT. BIG-IP-NEXT will be added later. Specifies the virtual server type Invalid Virtual Server Type Classic BIG-IP Virtual Server.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigip_virtual_serverBigIpVirtualServerType",
           "required_fields": [],
@@ -12647,6 +12999,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Deleted Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12662,6 +13015,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Disabled Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12680,6 +13034,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Referring Objects.",
+            "x-f5xc-description-short": "The set of objects that are referring to this object in their spec.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12701,6 +13056,8 @@
               "$ref": "#/components/schemas/bigip_virtual_serverStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-example": "active",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12710,7 +13067,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604608+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.539806+00:00"
           },
           "system_metadata": {
             "$ref": "#/components/schemas/schemaSystemObjectGetMetaType"
@@ -12748,6 +13105,8 @@
           "GET_RSP_FORMAT_BROKEN_REFERENCES"
         ],
         "default": "GET_RSP_FORMAT_DEFAULT",
+        "x-f5xc-description-short": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT...",
+        "x-f5xc-description-medium": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\" Default format of returned resource - GET_RSP_FORMAT_FOR_REPLACE: x-displayName: \"Replace request format\" Response should...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigip_virtual_serverGetResponseFormatCode",
           "required_fields": [],
@@ -12786,6 +13145,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-description-short": "Namespace of the BIG-IP Load Balancer for current request Required: YES.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -12796,9 +13156,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604618+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.539816+00:00"
           }
         },
+        "x-f5xc-description-short": "Request of GET Security Config Spec API.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigip_virtual_serverGetSecurityConfigReq",
           "required_fields": [
@@ -12828,6 +13189,7 @@
               "$ref": "#/components/schemas/schemaErrorType"
             },
             "x-displayname": "Errors",
+            "x-f5xc-description-short": "Errors(if any) while listing items from collection.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12843,6 +13205,8 @@
               "$ref": "#/components/schemas/bigip_virtual_serverListResponseItem"
             },
             "x-displayname": "Items",
+            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
+            "x-f5xc-description-short": "Items represents the collection in response.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12876,6 +13240,8 @@
             "description": "The set of annotations present on this bigip_virtual_server.",
             "title": "Annotations.",
             "x-displayname": "Annotations.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of annotations present on this bigip_virtual_server.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12888,6 +13254,7 @@
             "description": "The description set for this bigip_virtual_server.",
             "title": "Description.",
             "x-displayname": "Description.",
+            "x-f5xc-description-short": "The description set for this bigip_virtual_server.",
             "minLength": 0,
             "maxLength": 0,
             "x-f5xc-required-for": {
@@ -12898,7 +13265,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604628+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.539828+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -12906,6 +13273,8 @@
             "title": "Disabled",
             "format": "boolean",
             "x-displayname": "Disabled",
+            "x-f5xc-example": "True",
+            "x-f5xc-description-short": "Value of true indicates bigip_virtual_server is administratively disabled.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12921,6 +13290,8 @@
             "description": "The set of labels present on this bigip_virtual_server.",
             "title": "Labels",
             "x-displayname": "Labels",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of labels present on this bigip_virtual_server.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -12948,7 +13319,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604639+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.539838+00:00"
           },
           "namespace": {
             "type": "string",
@@ -12967,7 +13338,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604643+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.539842+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -12980,6 +13351,7 @@
               "$ref": "#/components/schemas/bigip_virtual_serverStatusObject"
             },
             "x-displayname": "Status",
+            "x-f5xc-description-short": "The status reported by different services for this configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13008,7 +13380,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604651+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.539851+00:00"
           },
           "uid": {
             "type": "string",
@@ -13017,6 +13389,7 @@
             "x-displayname": "UID",
             "x-ves-example": "D27938ba-967e-40a7-9709-57b8627f9f75.",
             "x-f5xc-example": "d27938ba-967e-40a7-9709-57b8627f9f75",
+            "x-f5xc-description-short": "The unique uid of this bigip_virtual_server.",
             "minLength": 0,
             "maxLength": 36,
             "x-f5xc-required-for": {
@@ -13029,9 +13402,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604657+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.539857+00:00"
           }
         },
+        "x-f5xc-description-short": "By default a summary of bigip_virtual_server is returned in 'List'.",
+        "x-f5xc-description-medium": "By default a summary of bigip_virtual_server is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigip_virtual_serverListResponseItem",
           "required_fields": [
@@ -13111,6 +13486,7 @@
               "$ref": "#/components/schemas/schemaConditionType"
             },
             "x-displayname": "Conditions.",
+            "x-f5xc-description-short": "Conditions represent the normalized status values for configuration object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13129,6 +13505,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Config Object.",
+            "x-f5xc-description-short": "BIG-IP virtual_server view object direct reference.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13137,6 +13514,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Most recently observed status of object.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigip_virtual_serverStatusObject",
           "required_fields": [
@@ -13164,6 +13542,7 @@
               "type": "string"
             },
             "x-displayname": "API Protection Configured.",
+            "description": "API version or group",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13178,6 +13557,8 @@
               "type": "string"
             },
             "x-displayname": "App Firewall Configured.",
+            "description": "Configuration parameter for app firewall",
+            "x-f5xc-description-short": "Configuration parameter for app firewall.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13192,6 +13573,8 @@
               "type": "string"
             },
             "x-displayname": "List of Load Balancers Where App Firewall is Configured Per Route.",
+            "description": "Configuration parameter for app firewall per route",
+            "x-f5xc-description-short": "Configuration parameter for app firewall per route.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13206,6 +13589,8 @@
               "type": "string"
             },
             "x-displayname": "Bot Defense Configured.",
+            "description": "Configuration parameter for bot defense",
+            "x-f5xc-description-short": "Configuration parameter for bot defense.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13220,6 +13605,8 @@
               "type": "string"
             },
             "x-displayname": "DDoS Detection Configured.",
+            "description": "Configuration parameter for ddos detection",
+            "x-f5xc-description-short": "Configuration parameter for ddos detection.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13234,6 +13621,8 @@
               "type": "string"
             },
             "x-displayname": "List of Load Balancers Secured.",
+            "description": "Protection or security configuration",
+            "x-f5xc-example": "{\"key\": \"value\"}",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13303,6 +13692,7 @@
             "$ref": "#/components/schemas/ioschemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Settings for API specification (API definition, OpenAPI validation, etc.).",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafAPISpecificationSettings",
           "required_fields": [
@@ -13343,6 +13733,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-description-short": "Code repository which contain API endpoints Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13351,6 +13742,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Select which API repositories represent the LB applications.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafApiCodeRepos",
           "required_fields": [
@@ -13415,6 +13807,8 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.repeated.max_items": "32"
             },
+            "x-f5xc-description-short": "Enter domains and their credentials to allow authenticated API crawling.",
+            "x-f5xc-description-medium": "Enter domains and their credentials to allow authenticated API crawling. You can only include domains you own that are associated with this Load Balancer. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13538,6 +13932,7 @@
             "$ref": "#/components/schemas/ioschemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Specifies the settings used for API discovery.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafApiDiscoverySetting",
           "required_fields": [
@@ -13690,6 +14085,7 @@
               "ves.io.schema.rules.repeated.max_items": "15",
               "ves.io.schema.rules.repeated.unique_metadata_name": "true"
             },
+            "x-f5xc-example": "{\"key\": \"value\"}",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -13734,6 +14130,8 @@
               "ves.io.schema.rules.string.max_len": "256",
               "ves.io.schema.rules.string.vh_domain": "true"
             },
+            "x-f5xc-example": "example.com",
+            "x-f5xc-description-short": "Select the domain to execute API Crawling with given credentials. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -13744,7 +14142,7 @@
             "x-original-maxLength": 256,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604711+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.539913+00:00"
           },
           "simple_login": {
             "$ref": "#/components/schemas/common_wafSimpleLogin"
@@ -13798,6 +14196,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Exclusive with [api_endpoint base_path] The API group which this validation applies to.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -13822,6 +14221,7 @@
               "ves.io.schema.rules.string.http_path": "true",
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Exclusive with [api_endpoint api_group] The base path which this validation applies to.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -13834,6 +14234,7 @@
             "$ref": "#/components/schemas/schemaMessageMetaType"
           }
         },
+        "x-f5xc-description-short": "Fall Through Rule for a specific endpoint, base-path, or API group.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafFallThroughRule",
           "required_fields": [
@@ -13868,6 +14269,8 @@
           }
         },
         "x-required": true,
+        "x-f5xc-description-short": "Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a.",
+        "x-f5xc-description-medium": "Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. Swagger) or doesn't have a specific rule in custom rules).",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafOpenApiFallThroughMode",
           "required_fields": [
@@ -13936,6 +14339,8 @@
             "$ref": "#/components/schemas/ioschemaEmpty"
           }
         },
+        "x-f5xc-description-short": "OpenAPI specification validation settings relevant for \"API Inventory\" enforcement and for \"Custom list\" enforcement.",
+        "x-f5xc-description-medium": "OpenAPI specification validation settings relevant for \"API Inventory\" enforcement and for \"Custom list\" enforcement.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafOpenApiValidationCommonSettings",
           "required_fields": [
@@ -13974,6 +14379,8 @@
           }
         },
         "x-required": true,
+        "x-f5xc-description-short": "Validation mode of OpenAPI specification.",
+        "x-f5xc-description-medium": "Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. Swagger).",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafOpenApiValidationMode",
           "required_fields": [
@@ -14027,6 +14434,8 @@
               "ves.io.schema.rules.repeated.min_items": "1",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of properties of the request to validate according to the OpenAPI specification file (a.k.a.",
+            "x-f5xc-description-medium": "List of properties of the request to validate according to the OpenAPI specification file (a.k.a. Swagger) Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -14087,6 +14496,8 @@
               "ves.io.schema.rules.repeated.min_items": "1",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of properties of the response to validate according to the OpenAPI specification file (a.k.a.",
+            "x-f5xc-description-medium": "List of properties of the response to validate according to the OpenAPI specification file (a.k.a. Swagger) Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -14138,6 +14549,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Exclusive with [api_endpoint base_path] The API group which this validation applies to.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -14162,6 +14574,7 @@
               "ves.io.schema.rules.string.http_path": "true",
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Exclusive with [api_endpoint api_group] The base path which this validation applies to.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -14187,6 +14600,7 @@
               "ves.io.schema.rules.string.max_len": "128",
               "ves.io.schema.rules.string.vh_domain": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [any_domain] The rule will apply for a specific domain.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -14199,6 +14613,7 @@
             "$ref": "#/components/schemas/common_wafOpenApiValidationMode"
           }
         },
+        "x-f5xc-description-short": "OpenAPI Validation Rule for a specific endpoint, base-path, or API group.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafOpenApiValidationRule",
           "required_fields": [
@@ -14238,6 +14653,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "64"
             },
+            "x-f5xc-description-short": "Enter the username to assign credentials for the selected domain to crawl.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -14291,6 +14707,7 @@
               "ves.io.schema.rules.repeated.max_items": "15",
               "ves.io.schema.rules.repeated.unique_metadata_name": "true"
             },
+            "x-f5xc-example": "{\"key\": \"value\"}",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -14302,6 +14719,8 @@
             "$ref": "#/components/schemas/common_wafOpenApiValidationCommonSettings"
           }
         },
+        "x-f5xc-description-short": "Define API groups, base paths, or API endpoints and their OpenAPI validation modes.",
+        "x-f5xc-description-medium": "Define API groups, base paths, or API endpoints and their OpenAPI validation modes. Any other API-endpoint not listed will act according to \"Fall Through Mode\".",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafValidateApiBySpecRule",
           "required_fields": [
@@ -14351,6 +14770,7 @@
             "$ref": "#/components/schemas/ioschemaEmpty"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Validation Settings For Headers\" Custom settings for headers validation.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafValidationSettingForHeaders",
           "required_fields": [
@@ -14379,6 +14799,7 @@
             "$ref": "#/components/schemas/ioschemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Custom settings for query parameters validation.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafValidationSettingForQueryParameters",
           "required_fields": [
@@ -14412,6 +14833,7 @@
         "default": "ANY",
         "x-displayname": "HTTP Method.",
         "x-ves-proto-enum": "ves.io.schema.HttpMethod",
+        "x-f5xc-description-short": "Specifies the HTTP method used to access a resource. Any HTTP Method.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaHttpMethod",
           "required_fields": [],
@@ -14435,6 +14857,8 @@
           "HTTP_SECTION_RSP_BODY"
         ],
         "default": "HTTP_SECTION_NONE",
+        "x-f5xc-description-short": "X-displayName: \"HTTP Sections\" Request & Response Sections. - HTTP_SECTION_NONE: None ALL_SECTIONS x-displayName: \"None\" ...",
+        "x-f5xc-description-medium": "X-displayName: \"HTTP Sections\" Request & Response Sections. - HTTP_SECTION_NONE: None ALL_SECTIONS x-displayName: \"None\" - HTTP_SECTION_QUERY_PARAMS: QUERY_PARAMS x-displayName: \"Request Query Params\" - HTTP_SECTION_REQ_HEADERS: REQ_HEADERS x-displayName: \"Request Headers\" ...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaHttpSections",
           "required_fields": [],
@@ -14475,7 +14899,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604843+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.540046+00:00"
           },
           "name": {
             "type": "string",
@@ -14496,6 +14920,7 @@
               "ves.io.schema.rules.string.min_len": "1",
               "ves.io.schema.rules.string.ves_object_name": "true"
             },
+            "x-f5xc-description-short": "Name of the message. The value of name has to follow DNS-1035 format.",
             "maxLength": 16,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -14505,9 +14930,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:05.604847+00:00"
+            "x-reconciled-at": "2026-01-07T15:52:39.540050+00:00"
           }
         },
+        "x-f5xc-description-short": "MessageMetaType is metadata (common attributes) of a message that only certain messages have.",
+        "x-f5xc-description-medium": "MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaMessageMetaType",
           "required_fields": [
@@ -14538,6 +14965,8 @@
         "default": "PROPERTY_QUERY_PARAMETERS",
         "x-displayname": "OpenAPI Validation Properties.",
         "x-ves-proto-enum": "ves.io.schema.OpenApiValidationProperties",
+        "x-f5xc-description-short": "List of required properties to validate against the OpenAPI spec Validate that all query parameters are according to the OpenAPI specification...",
+        "x-f5xc-description-medium": "List of required properties to validate against the OpenAPI spec Validate that all query parameters are according to the OpenAPI specification Validate that all path parameters are according to the OpenAPI specification Validate that the content type of the request is according to the OpenAPI...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaOpenApiValidationProperties",
           "required_fields": [],
@@ -14565,6 +14994,7 @@
             "type": "string",
             "description": "BIG-IP Hostname.",
             "x-displayname": "Hostname",
+            "x-f5xc-example": "example-resource",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -14588,6 +15018,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-description-short": "Version of the BIG-IP which hosts the virtual server Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -14635,6 +15066,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "1024"
             },
+            "x-f5xc-example": "example-resource",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -14650,6 +15082,7 @@
             "$ref": "#/components/schemas/bigip_virtual_serverBigIpVirtualServerType"
           }
         },
+        "x-f5xc-description-short": "Shape of the BIG-IP virtual server specification.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for viewsbigip_virtual_serverGetSpecType",
           "required_fields": [
@@ -14702,6 +15135,7 @@
             "$ref": "#/components/schemas/common_securitySensitiveDataPolicySettings"
           }
         },
+        "x-f5xc-description-short": "Shape of the BIG-IP virtual server specification.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for viewsbigip_virtual_serverReplaceSpecType",
           "required_fields": [
@@ -14795,6 +15229,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-description-short": "Specify Description for iRule Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -14804,7 +15239,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:26.979499+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:05.861571+00:00"
           },
           "irule": {
             "type": "string",
@@ -14822,6 +15257,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_len": "24576"
             },
+            "x-f5xc-description-short": "Www.internal.example.f5.com\")} DNS::drop} irule content Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -14831,6 +15267,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Create iRule in a given namespace. If one already exists it will give an error.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for iruleCreateSpecType",
           "required_fields": [
@@ -14857,6 +15294,7 @@
             "title": "Fail_if_referred.",
             "format": "boolean",
             "x-displayname": "Fail-If-Referred.",
+            "x-f5xc-description-short": "Fail the DELETE operation if this object is being referred by other objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -14881,7 +15319,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:26.979507+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:05.861581+00:00"
           },
           "namespace": {
             "type": "string",
@@ -14890,6 +15328,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "Namespace in which the configuration object is present.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -14900,7 +15339,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:26.979512+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:05.861586+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -14935,6 +15374,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Deleted Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -14950,6 +15390,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Disabled Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -14968,6 +15409,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Referring Objects.",
+            "x-f5xc-description-short": "The set of objects that are referring to this object in their spec.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15017,6 +15459,8 @@
           "GET_RSP_FORMAT_BROKEN_REFERENCES"
         ],
         "default": "GET_RSP_FORMAT_DEFAULT",
+        "x-f5xc-description-short": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT...",
+        "x-f5xc-description-medium": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\" Default format of returned resource - GET_RSP_FORMAT_FOR_CREATE: x-displayName: \"Create request Format\" Response should be...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for iruleGetResponseFormatCode",
           "required_fields": [],
@@ -15048,6 +15492,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-description-short": "Specify Description for iRule Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -15057,7 +15502,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:26.979527+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:05.861601+00:00"
           },
           "irule": {
             "type": "string",
@@ -15075,6 +15520,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_len": "24576"
             },
+            "x-f5xc-description-short": "Www.internal.example.f5.com\")} DNS::drop} irule content Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -15112,6 +15558,7 @@
               "$ref": "#/components/schemas/schemaErrorType"
             },
             "x-displayname": "Errors",
+            "x-f5xc-description-short": "Errors(if any) while listing items from collection.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15127,6 +15574,8 @@
               "$ref": "#/components/schemas/iruleListResponseItem"
             },
             "x-displayname": "Items",
+            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
+            "x-f5xc-description-short": "Items represents the collection in response.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15160,6 +15609,8 @@
             "description": "The set of annotations present on this irule.",
             "title": "Annotations.",
             "x-displayname": "Annotations.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of annotations present on this irule.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15182,7 +15633,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:26.979539+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:05.861614+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -15190,6 +15641,8 @@
             "title": "Disabled",
             "format": "boolean",
             "x-displayname": "Disabled",
+            "x-f5xc-example": "True",
+            "x-f5xc-description-short": "Value of true indicates irule is administratively disabled.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15205,6 +15658,8 @@
             "description": "The set of labels present on this irule.",
             "title": "Labels",
             "x-displayname": "Labels",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of labels present on this irule.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15232,7 +15687,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:26.979548+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:05.861623+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15251,7 +15706,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:26.979552+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:05.861627+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -15277,7 +15732,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:26.979558+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:05.861634+00:00"
           },
           "uid": {
             "type": "string",
@@ -15298,9 +15753,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:26.979563+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:05.861639+00:00"
           }
         },
+        "x-f5xc-description-short": "By default a summary of irule is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
+        "x-f5xc-description-medium": "By default a summary of irule is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for iruleListResponseItem",
           "required_fields": [
@@ -15385,6 +15842,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-description-short": "Specify Description for iRule Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -15394,7 +15852,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:26.979571+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:05.861648+00:00"
           },
           "irule": {
             "type": "string",
@@ -15412,6 +15870,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_len": "24576"
             },
+            "x-f5xc-description-short": "Www.internal.example.f5.com\")} DNS::drop} irule content Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -15452,6 +15911,7 @@
             "$ref": "#/components/schemas/data_groupStringRecords"
           }
         },
+        "x-f5xc-description-short": "Create data group in a given namespace. If one already exists it will give an error.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigcnedata_groupCreateSpecType",
           "required_fields": [
@@ -15516,6 +15976,7 @@
             "$ref": "#/components/schemas/data_groupStringRecords"
           }
         },
+        "x-f5xc-description-short": "Replace Data Group in a given namespace.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bigcnedata_groupReplaceSpecType",
           "required_fields": [
@@ -15539,7 +16000,7 @@
         "properties": {
           "records": {
             "type": "object",
-            "description": "",
+            "description": "Configuration parameter for records",
             "title": "Address records.",
             "x-displayname": "Address records.",
             "x-ves-validation-rules": {
@@ -15640,6 +16101,7 @@
             "title": "Fail_if_referred.",
             "format": "boolean",
             "x-displayname": "Fail-If-Referred.",
+            "x-f5xc-description-short": "Fail the DELETE operation if this object is being referred by other objects.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15664,7 +16126,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:32.375041+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:12.543463+00:00"
           },
           "namespace": {
             "type": "string",
@@ -15673,6 +16135,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "Namespace in which the configuration object is present.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -15683,7 +16146,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:32.375047+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:12.543471+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -15718,6 +16181,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Deleted Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15733,6 +16197,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Disabled Referred Objects.",
+            "x-f5xc-description-short": "The set of deleted objects that are referred by this object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15751,6 +16216,7 @@
               "$ref": "#/components/schemas/ioschemaObjectRefType"
             },
             "x-displayname": "Referring Objects.",
+            "x-f5xc-description-short": "The set of objects that are referring to this object in their spec.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15800,6 +16266,8 @@
           "GET_RSP_FORMAT_BROKEN_REFERENCES"
         ],
         "default": "GET_RSP_FORMAT_DEFAULT",
+        "x-f5xc-description-short": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT...",
+        "x-f5xc-description-medium": "X-displayName: \"GET Response Format\" This is the various forms that can be requested to be sent in the GetResponse - GET_RSP_FORMAT_DEFAULT: x-displayName: \"Default Format\" Default format of returned resource - GET_RSP_FORMAT_FOR_CREATE: x-displayName: \"Create request Format\" Response should be...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for data_groupGetResponseFormatCode",
           "required_fields": [],
@@ -15819,7 +16287,7 @@
         "properties": {
           "records": {
             "type": "object",
-            "description": "",
+            "description": "Configuration parameter for records",
             "title": "Integer records.",
             "x-displayname": "Integer records.",
             "x-ves-validation-rules": {
@@ -15865,6 +16333,7 @@
               "$ref": "#/components/schemas/schemaErrorType"
             },
             "x-displayname": "Errors",
+            "x-f5xc-description-short": "Errors(if any) while listing items from collection.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15880,6 +16349,8 @@
               "$ref": "#/components/schemas/data_groupListResponseItem"
             },
             "x-displayname": "Items",
+            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
+            "x-f5xc-description-short": "Items represents the collection in response.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15913,6 +16384,8 @@
             "description": "The set of annotations present on this data_group.",
             "title": "Annotations.",
             "x-displayname": "Annotations.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of annotations present on this data_group.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15925,6 +16398,7 @@
             "description": "The description set for this data_group.",
             "title": "Description.",
             "x-displayname": "Description.",
+            "x-f5xc-description-short": "The description set for this data_group.",
             "minLength": 0,
             "maxLength": 0,
             "x-f5xc-required-for": {
@@ -15935,7 +16409,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:32.375070+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:12.543495+00:00"
           },
           "disabled": {
             "type": "boolean",
@@ -15943,6 +16417,8 @@
             "title": "Disabled",
             "format": "boolean",
             "x-displayname": "Disabled",
+            "x-f5xc-example": "True",
+            "x-f5xc-description-short": "Value of true indicates data_group is administratively disabled.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15958,6 +16434,8 @@
             "description": "The set of labels present on this data_group.",
             "title": "Labels",
             "x-displayname": "Labels",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The set of labels present on this data_group.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -15985,7 +16463,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:32.375080+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:12.543505+00:00"
           },
           "namespace": {
             "type": "string",
@@ -16004,7 +16482,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:32.375084+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:12.543509+00:00"
           },
           "owner_view": {
             "$ref": "#/components/schemas/schemaViewRefType"
@@ -16030,7 +16508,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:32.375091+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:12.543516+00:00"
           },
           "uid": {
             "type": "string",
@@ -16051,9 +16529,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:32.375097+00:00"
+            "x-reconciled-at": "2026-01-07T15:53:12.543521+00:00"
           }
         },
+        "x-f5xc-description-short": "By default a summary of data_group is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
+        "x-f5xc-description-medium": "By default a summary of data_group is returned in 'List'. By setting 'report_fields' in the ListRequest more details of each item can be got.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for data_groupListResponseItem",
           "required_fields": [
@@ -16126,7 +16606,7 @@
         "properties": {
           "records": {
             "type": "object",
-            "description": "",
+            "description": "Configuration parameter for records",
             "title": "String records.",
             "x-displayname": "String records.",
             "x-ves-validation-rules": {

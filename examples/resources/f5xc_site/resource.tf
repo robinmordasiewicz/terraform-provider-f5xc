@@ -1,5 +1,5 @@
 # Site Resource Example
-# Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.
+# Manages a Site resource in F5 Distributed Cloud for azure vnet site specification. configuration.
 
 # Basic Site configuration
 resource "f5xc_site" "example" {
@@ -16,16 +16,16 @@ resource "f5xc_site" "example" {
   }
 
   # Resource-specific configuration
-  # [OneOf: blocked_services, default_blocked_services; Defau...
-  blocked_services {
-    # Configure blocked_services settings
+  # Secret. SecretType is used in an object to indicate a sen...
+  admin_password {
+    # Configure admin_password settings
   }
-  # Disable Node Local Services. Blocking or denial configura...
-  blocked_sevice {
-    # Configure blocked_sevice settings
+  # Blindfold Secret. BlindfoldSecretInfoType specifies infor...
+  blindfold_secret_info {
+    # Configure blindfold_secret_info settings
   }
-  # Enable this option
-  dns {
-    # Configure dns settings
+  # In-Clear Secret. ClearSecretInfoType specifies informatio...
+  clear_secret_info {
+    # Configure clear_secret_info settings
   }
 }

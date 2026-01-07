@@ -54,8 +54,6 @@ resource "f5xc_cloud_connect" "example" {
 
 <a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Cloud Connect. Must be unique within the namespace
 
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Cloud Connect will be created
-
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -63,6 +61,8 @@ resource "f5xc_cloud_connect" "example" {
 <a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
+
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 
@@ -116,7 +116,7 @@ A [`site`](#aws-tgw-site-site) block (within [`aws_tgw_site`](#aws-tgw-site)) su
 
 A [`vpc_attachments`](#aws-tgw-site-vpc-attachments) block (within [`aws_tgw_site`](#aws-tgw-site)) supports the following:
 
-<a id="aws-tgw-site-vpc-attachments-vpc-list"></a>&#x2022; [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) - Optional Block<br>VPC List<br>See [VPC List](#aws-tgw-site-vpc-attachments-vpc-list) below.
+<a id="aws-tgw-site-vpc-attachments-vpc-list"></a>&#x2022; [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) - Optional Block<br>VPC List. Collection of items or values<br>See [VPC List](#aws-tgw-site-vpc-attachments-vpc-list) below.
 
 #### AWS TGW Site VPC Attachments VPC List
 
@@ -170,7 +170,7 @@ A [`site`](#azure-vnet-site-site) block (within [`azure_vnet_site`](#azure-vnet-
 
 A [`vnet_attachments`](#azure-vnet-site-vnet-attachments) block (within [`azure_vnet_site`](#azure-vnet-site)) supports the following:
 
-<a id="list-5826e3"></a>&#x2022; [`vnet_list`](#list-5826e3) - Optional Block<br>VNET List<br>See [VNET List](#list-5826e3) below.
+<a id="list-5826e3"></a>&#x2022; [`vnet_list`](#list-5826e3) - Optional Block<br>VNET List. Collection of items or values<br>See [VNET List](#list-5826e3) below.
 
 #### Azure VNET Site VNET Attachments VNET List
 

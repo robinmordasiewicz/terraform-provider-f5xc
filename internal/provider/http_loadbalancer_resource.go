@@ -16333,7 +16333,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 						MarkdownDescription: "Mandatory Claims. Configurable Validation of mandatory Claims.",
 						Attributes: map[string]schema.Attribute{
 							"claim_names": schema.ListAttribute{
-								MarkdownDescription: "Claim Names.",
+								MarkdownDescription: "Claim Names. Human-readable name for the resource",
 								Optional:            true,
 								ElementType:         types.StringType,
 							},
@@ -17897,7 +17897,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										MarkdownDescription: "Hours. Input Duration Hours.",
 										Attributes: map[string]schema.Attribute{
 											"duration": schema.Int64Attribute{
-												MarkdownDescription: "Duration.",
+												MarkdownDescription: "Duration. Configuration parameter for duration",
 												Optional:            true,
 											},
 										},
@@ -17906,7 +17906,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										MarkdownDescription: "Minutes. Input Duration Minutes.",
 										Attributes: map[string]schema.Attribute{
 											"duration": schema.Int64Attribute{
-												MarkdownDescription: "Duration.",
+												MarkdownDescription: "Duration. Configuration parameter for duration",
 												Optional:            true,
 											},
 										},
@@ -17915,7 +17915,7 @@ func (r *HTTPLoadBalancerResource) Schema(ctx context.Context, req resource.Sche
 										MarkdownDescription: "Seconds. Input Duration Seconds.",
 										Attributes: map[string]schema.Attribute{
 											"duration": schema.Int64Attribute{
-												MarkdownDescription: "Duration.",
+												MarkdownDescription: "Duration. Configuration parameter for duration",
 												Optional:            true,
 											},
 										},

@@ -3,7 +3,7 @@
   "info": {
     "title": "Threat Campaign",
     "description": "F5 Distributed Cloud Threat Campaign API specifications",
-    "version": "2.0.15",
+    "version": "2.0.17",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -374,6 +374,8 @@
         "default": "VIOL_NONE",
         "x-displayname": "App Firewall Violation Type.",
         "x-ves-proto-enum": "ves.io.schema.app_firewall.AppFirewallViolationType",
+        "x-f5xc-description-short": "List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH...",
+        "x-f5xc-description-medium": "List of all supported Violation Types VIOL_NONE VIOL_FILETYPE VIOL_METHOD VIOL_MANDATORY_HEADER VIOL_HTTP_RESPONSE_STATUS VIOL_REQUEST_MAX_LENGTH VIOL_FILE_UPLOAD VIOL_FILE_UPLOAD_IN_BODY VIOL_XML_MALFORMED VIOL_JSON_MALFORMED VIOL_ASM_COOKIE_MODIFIED VIOL_HTTP_PROTOCOL_MULTIPLE_HOST_HEADERS...",
         "x-f5xc-minimum-configuration": {
           "description": "Web Application Firewall (WAF) policy for protecting HTTP applications",
           "required_fields": [
@@ -424,6 +426,8 @@
         "default": "ATTACK_TYPE_NONE",
         "x-displayname": "Attack Types.",
         "x-ves-proto-enum": "ves.io.schema.app_firewall.AttackType",
+        "x-f5xc-description-short": "List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE...",
+        "x-f5xc-description-medium": "List of all Attack Types ATTACK_TYPE_NONE ATTACK_TYPE_NON_BROWSER_CLIENT ATTACK_TYPE_OTHER_APPLICATION_ATTACKS ATTACK_TYPE_TROJAN_BACKDOOR_SPYWARE ATTACK_TYPE_DETECTION_EVASION ATTACK_TYPE_VULNERABILITY_SCAN ATTACK_TYPE_ABUSE_OF_FUNCTIONALITY ATTACK_TYPE_AUTHENTICATION_AUTHORIZATION_ATTACKS...",
         "x-f5xc-minimum-configuration": {
           "description": "Web Application Firewall (WAF) policy for protecting HTTP applications",
           "required_fields": [
@@ -459,6 +463,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-description-short": "Collapsed URL is the path with identified DYN components.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -483,6 +488,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "API Endpoint indentified by collapsed_url and method.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityApiEndpoint",
           "required_fields": [
@@ -513,6 +519,7 @@
             "x-displayname": "HTTP Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "HTTP load balancer for which this API endpoint protection rule applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -523,7 +530,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691137+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243624+00:00"
           },
           "namespace": {
             "type": "string",
@@ -532,6 +539,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Shared",
             "x-f5xc-example": "shared",
+            "x-f5xc-description-short": "Namespace of the App type for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -542,7 +550,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691144+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243630+00:00"
           },
           "path": {
             "type": "string",
@@ -563,6 +571,7 @@
               "ves.io.schema.rules.string.max_len": "1024",
               "ves.io.schema.rules.string.templated_http_path": "true"
             },
+            "x-f5xc-description-short": "Path to apply the API endpoint protection to Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -572,6 +581,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "GET suggested API endpoint protection rule for a given path.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedAPIEndpointProtectionRuleReq",
           "required_fields": [
@@ -601,6 +611,7 @@
             "$ref": "#/components/schemas/common_wafAPIEndpointProtectionRule"
           }
         },
+        "x-f5xc-description-short": "GET suggested API endpoint protection rule for a given path.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedAPIEndpointProtectionRuleRsp",
           "required_fields": [
@@ -662,6 +673,7 @@
               "ves.io.schema.rules.uint32.gte": "0",
               "ves.io.schema.rules.uint32.lte": "401308"
             },
+            "x-f5xc-description-short": "RFC 6793 defined 4-byte AS number Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -703,6 +715,7 @@
             "x-displayname": "HTTP Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "HTTP load balancer for which this WAF exclusion will be applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -713,7 +726,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691158+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243645+00:00"
           },
           "namespace": {
             "type": "string",
@@ -722,6 +735,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Shared",
             "x-f5xc-example": "shared",
+            "x-f5xc-description-short": "Namespace of the App type for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -732,7 +746,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691163+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243650+00:00"
           },
           "user_id": {
             "type": "string",
@@ -758,6 +772,7 @@
             "x-field-mutability": "read-only"
           }
         },
+        "x-f5xc-description-short": "GET suggested blocking SimpleClientSrcRule for a given IP/ASN.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedBlockClientRuleReq",
           "required_fields": [
@@ -792,6 +807,7 @@
             "x-displayname": "HTTP Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "HTTP load balancer for which this WAF exclusion will be applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -802,12 +818,13 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691170+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243658+00:00"
           },
           "rule": {
             "$ref": "#/components/schemas/common_wafSimpleClientSrcRule"
           }
         },
+        "x-f5xc-description-short": "GET suggested blocking SimpleClientSrcRule for a given IP/ASN.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedBlockClientRuleRsp",
           "required_fields": [
@@ -849,6 +866,7 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Sources that are located in one of the countries in the given list.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -869,6 +887,7 @@
             "x-displayname": "Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "Load balancer for which this WAF exclusion will be applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -879,7 +898,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691181+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243670+00:00"
           },
           "namespace": {
             "type": "string",
@@ -888,6 +907,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Shared",
             "x-f5xc-example": "shared",
+            "x-f5xc-description-short": "Namespace of the App type for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -898,12 +918,13 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691184+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243674+00:00"
           },
           "tls_fingerprint_matcher": {
             "$ref": "#/components/schemas/policyTlsFingerprintMatcherType"
           }
         },
+        "x-f5xc-description-short": "GET suggested blocking DDoSMitigtionRule for a given IP/ASN/Country/TLS.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedDDoSMitigtionRuleReq",
           "required_fields": [
@@ -942,6 +963,7 @@
             "x-displayname": "DDoS Mitigation Rule Name.",
             "x-ves-example": "VES-I/O-DDoS-mitigation-rule.",
             "x-f5xc-example": "ves-io-ddos-mitigation-rule",
+            "x-f5xc-description-short": "HTTP load balancer for which this DDoS Mitigation Rule will be applied.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -952,6 +974,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "GET suggested DDoS Mitigtion Rule for a given IP/ASN/Country/TLS.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedDDoSMitigtionRuleRsp",
           "required_fields": [
@@ -982,6 +1005,7 @@
             },
             "x-displayname": "API Groups membership.",
             "x-f5xc-example": "[\"group-1\", \"group-2\"]",
+            "x-f5xc-description-short": "List of API Groups the API Endpoint is a member of.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -999,6 +1023,7 @@
             "x-displayname": "HTTP Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "HTTP load balancer for which this Open API specification validation rule applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -1009,7 +1034,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691197+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243687+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1018,6 +1043,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Shared",
             "x-f5xc-example": "shared",
+            "x-f5xc-description-short": "Namespace of the App type for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -1028,7 +1054,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691201+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243691+00:00"
           },
           "path": {
             "type": "string",
@@ -1049,6 +1075,7 @@
               "ves.io.schema.rules.string.max_len": "1024",
               "ves.io.schema.rules.string.templated_http_path": "true"
             },
+            "x-f5xc-description-short": "Path to apply the Open API specification validation to Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -1058,6 +1085,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "GET suggested Open API specification validation for a given path.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedOasValidationRuleReq",
           "required_fields": [
@@ -1092,6 +1120,7 @@
             "$ref": "#/components/schemas/schemaEmpty"
           }
         },
+        "x-f5xc-description-short": "GET suggested Open API specification validation for a given path.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedOasValidationRuleRsp",
           "required_fields": [
@@ -1123,6 +1152,7 @@
             "x-displayname": "HTTP Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "HTTP load balancer for which this rate limit rule applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -1133,7 +1163,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691212+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243702+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1142,6 +1172,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Shared",
             "x-f5xc-example": "shared",
+            "x-f5xc-description-short": "Namespace of the App type for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -1152,7 +1183,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691216+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243707+00:00"
           },
           "path": {
             "type": "string",
@@ -1173,6 +1204,7 @@
               "ves.io.schema.rules.string.max_len": "1024",
               "ves.io.schema.rules.string.templated_http_path": "true"
             },
+            "x-f5xc-description-short": "Path to apply the rate limit to Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -1182,6 +1214,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "GET suggested rate limit rule for a given path.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedRateLimitRuleReq",
           "required_fields": [
@@ -1211,6 +1244,7 @@
             "$ref": "#/components/schemas/common_wafApiEndpointRule"
           }
         },
+        "x-f5xc-description-short": "GET suggested rate limit rule for a given path.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedRateLimitRuleRsp",
           "required_fields": [
@@ -1241,6 +1275,7 @@
             "x-displayname": "HTTP Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "HTTP load balancer for which this sensitive data rule applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -1251,7 +1286,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691225+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243717+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1260,6 +1295,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Shared",
             "x-f5xc-example": "shared",
+            "x-f5xc-description-short": "Namespace of the App type for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -1270,7 +1306,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691229+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243721+00:00"
           },
           "path": {
             "type": "string",
@@ -1291,6 +1327,7 @@
               "ves.io.schema.rules.string.max_len": "1024",
               "ves.io.schema.rules.string.templated_http_path": "true"
             },
+            "x-f5xc-description-short": "Path to apply the senstive data to Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -1300,6 +1337,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "GET suggested sensitive data rule for a given path.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedSensitiveDataRuleReq",
           "required_fields": [
@@ -1329,6 +1367,7 @@
             "$ref": "#/components/schemas/http_loadbalancerSensitiveDataTypes"
           }
         },
+        "x-f5xc-description-short": "GET suggested sensitive data rule for a given path.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedSensitiveDataRuleRsp",
           "required_fields": [
@@ -1390,6 +1429,7 @@
               "ves.io.schema.rules.uint32.gte": "0",
               "ves.io.schema.rules.uint32.lte": "401308"
             },
+            "x-f5xc-description-short": "RFC 6793 defined 4-byte AS number Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -1432,6 +1472,7 @@
             "x-displayname": "IP Reputation Security Event.",
             "x-ves-example": "True",
             "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Indicates whether the security event is IP reputation.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -1446,6 +1487,7 @@
             "x-displayname": "HTTP Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "HTTP load balancer for which this client blocking rule will be applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -1456,7 +1498,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691244+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243737+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1465,6 +1507,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Shared",
             "x-f5xc-example": "shared",
+            "x-f5xc-description-short": "Namespace of the App type for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -1475,7 +1518,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691248+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243741+00:00"
           },
           "sec_event_name": {
             "type": "string",
@@ -1512,6 +1555,7 @@
               "ves.io.schema.rules.repeated.max_items": "4",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of Security Event types that should stop being generated for this client.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -1527,6 +1571,7 @@
             "x-displayname": "Threat Mesh Security Event.",
             "x-ves-example": "True",
             "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Indicates whether the security event is threat mesh.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -1558,6 +1603,7 @@
             "x-field-mutability": "read-only"
           }
         },
+        "x-f5xc-description-short": "GET suggested blocking SimpleClientSrcRule for a given IP/ASN.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedTrustClientRuleReq",
           "required_fields": [
@@ -1596,6 +1642,7 @@
             "x-displayname": "HTTP Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "HTTP load balancer for which this client rule will be applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -1606,12 +1653,13 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691259+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243752+00:00"
           },
           "rule": {
             "$ref": "#/components/schemas/common_wafSimpleClientSrcRule"
           }
         },
+        "x-f5xc-description-short": "GET suggested SimpleClientSrcRule to trust a given IP/ASN.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedTrustClientRuleRsp",
           "required_fields": [
@@ -1662,7 +1710,7 @@
             "x-original-maxLength": 256,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691268+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243761+00:00"
           },
           "exclude_bot_names": {
             "type": "array",
@@ -1683,6 +1731,7 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Bot name contexts to be excluded for this request.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -1709,6 +1758,7 @@
               "ves.io.schema.rules.repeated.max_items": "1024",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "App Firewall signature contexts to be excluded for this request.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -1735,6 +1785,7 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "App Firewall violation contexts to be excluded for this request.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -1749,6 +1800,7 @@
             "x-displayname": "HTTP Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "HTTP load balancer for which this WAF exclusion will be applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -1759,7 +1811,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691278+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243771+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1768,6 +1820,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Shared",
             "x-f5xc-example": "shared",
+            "x-f5xc-description-short": "Namespace of the App type for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -1778,7 +1831,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691282+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243776+00:00"
           },
           "req_path": {
             "type": "string",
@@ -1815,6 +1868,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.pattern": "^$|^[a-fA-F0-9]{8}-([a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12}$"
             },
+            "x-f5xc-description-short": "Unique identifier for the request route.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -1825,6 +1879,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "GET suggested service policy rule to set up WAF rule exclusion for a given WAF security event.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedWAFExclusionRuleReq",
           "required_fields": [
@@ -1862,6 +1917,7 @@
             "x-displayname": "HTTP Load Balancer Name.",
             "x-ves-example": "VES-I/O-frontend.",
             "x-f5xc-example": "ves-io-frontend",
+            "x-f5xc-description-short": "HTTP load balancer for which this WAF exclusion will be applied.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -1872,7 +1928,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691291+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243785+00:00"
           },
           "waf_exclusion_policy": {
             "$ref": "#/components/schemas/schemaviewsObjectRefType"
@@ -1881,6 +1937,7 @@
             "$ref": "#/components/schemas/policySimpleWafExclusionRule"
           }
         },
+        "x-f5xc-description-short": "GET suggested service policy rule to set up WAF rule exclusion for a given WAF security event.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityGetSuggestedWAFExclusionRuleRsp",
           "required_fields": [
@@ -1920,7 +1977,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691298+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243793+00:00"
           },
           "namespace": {
             "type": "string",
@@ -1939,7 +1996,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691302+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243797+00:00"
           },
           "request_data": {
             "$ref": "#/components/schemas/app_securityRequestData"
@@ -1948,6 +2005,7 @@
             "$ref": "#/components/schemas/app_securitySecurityEventsData"
           }
         },
+        "x-f5xc-description-short": "List of virtual hosts in all the namespaces matching filter provided in the request.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityLoadbalancerData",
           "required_fields": [
@@ -1976,6 +2034,7 @@
             "format": "uint64",
             "x-displayname": "Count",
             "x-f5xc-example": "15",
+            "x-f5xc-description-short": "The number of requests matching the filter for virtual host in the given namespace.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -1993,6 +2052,7 @@
             "x-displayname": "Maximum time.",
             "x-ves-example": "01-01-1970T00:00:00Z.",
             "x-f5xc-example": "01-01-1970T00:00:00Z",
+            "x-f5xc-description-short": "Maximum time at which request ID was found.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2010,6 +2070,7 @@
             "x-displayname": "Minimum time.",
             "x-ves-example": "01-01-1970T00:00:00Z.",
             "x-f5xc-example": "01-01-1970T00:00:00Z",
+            "x-f5xc-description-short": "Minimum time at which the request ID was found.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2073,9 +2134,10 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691317+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243812+00:00"
           }
         },
+        "x-f5xc-description-short": "Metric label filter can be specified to query specific metrics based on label match.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySearchFilter",
           "required_fields": [
@@ -2101,6 +2163,7 @@
         "default": "REQUEST_ID",
         "x-displayname": "Search Label for VH List API.",
         "x-ves-proto-enum": "ves.io.schema.app_security.SearchLabel",
+        "x-f5xc-description-short": "List of Virtual Hosts will be returned matching the following labels.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySearchLabel",
           "required_fields": [],
@@ -2155,6 +2218,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.repeated.max_items": "5"
             },
+            "x-f5xc-description-short": "List of label filter expressions of the form \"label\" \"value\". Response will only contain data that matches all the conditions specified in the .",
+            "x-f5xc-description-medium": "List of label filter expressions of the form \"label\" \"value\". Response will only contain data that matches all the conditions specified in the . One or more of the following labels can be specified in the label_filter. , `.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -2169,6 +2234,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Shared",
             "x-f5xc-example": "shared",
+            "x-f5xc-description-short": "Namespace of the App type for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -2179,9 +2245,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691324+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243820+00:00"
           }
         },
+        "x-f5xc-description-short": "GET a list of virtual hosts in all the namespaces matching filter provided in the request.",
+        "x-f5xc-description-medium": "GET a list of virtual hosts in all the namespaces matching filter provided in the request. The filter can be a) Request ID b) Source IP.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySearchLoadBalancersRequest",
           "required_fields": [
@@ -2212,6 +2280,7 @@
             "x-displayname": "HTTP Load Balancer List.",
             "x-ves-example": "[VES-I/O-frontend\", \"ns1\" , \"1\", \"0\"]",
             "x-f5xc-example": "\"[ves-io-frontend\", \"ns1\" , \"1\", \"0\"]\"",
+            "x-f5xc-description-short": "HTTP load balancer list for which the SearchFilter is applied.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -2220,6 +2289,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "List of virtual hosts in all the namespaces matching filter provided in the request.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySearchLoadBalancersResponse",
           "required_fields": [
@@ -2251,6 +2321,7 @@
         "default": "WAF_SEC_EVENT",
         "x-displayname": "Security Event Type.",
         "x-ves-proto-enum": "ves.io.schema.app_security.SecEventType",
+        "x-f5xc-description-short": "Security event can be one of the following types.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecEventType",
           "required_fields": [],
@@ -2295,6 +2366,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch security events whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be evaluated...",
+            "x-f5xc-description-medium": "Fetch security events whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be evaluated to start_time+10m If start_time is not specified, then the end_time will be evaluated to <current time>.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2311,6 +2384,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Bloggin-app-namespace-1.",
             "x-f5xc-example": "bloggin-app-namespace-1",
+            "x-f5xc-description-short": "Fetch security events for a given namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -2321,7 +2395,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691334+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243830+00:00"
           },
           "query": {
             "type": "string",
@@ -2354,6 +2428,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch security events whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be...",
+            "x-f5xc-description-medium": "Fetch security events whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be evaluated to end_time-10m If end_time is not specified, then the start_time will be evaluated to <current time>-10m.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2364,6 +2440,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Request to GET only aggregation data for security events.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecurityEventsAggregationRequest",
           "required_fields": [
@@ -2409,6 +2486,7 @@
             "x-displayname": "Total Hits.",
             "x-ves-example": "0",
             "x-f5xc-example": "0",
+            "x-f5xc-description-short": "Total number of security events that matched the query.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2419,6 +2497,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Response message for SecurityEventsAggregationRequest.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecurityEventsAggregationResponse",
           "required_fields": [
@@ -2452,6 +2531,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "End time of metric collection from which data will be considered.",
+            "x-f5xc-description-medium": "End time of metric collection from which data will be considered. Format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be evaluated to start_time+10m If start_time is not specified, then the end_time will be evaluated to <current time>.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2469,6 +2550,8 @@
               "$ref": "#/components/schemas/metricsSecurityMetricLabel"
             },
             "x-displayname": "Group By",
+            "x-f5xc-description-short": "Aggregate data by one or more labels listed here. , , , , . Optional: If not specified, then the security events are aggregated/grouped by , .",
+            "x-f5xc-description-medium": "Aggregate data by one or more labels listed here. , , , , . Optional: If not specified, then the security events are aggregated/grouped by , .",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -2500,6 +2583,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Bloggin-app-namespace-1.",
             "x-f5xc-example": "bloggin-app-namespace-1",
+            "x-f5xc-description-short": "Namespace is used to scope the security events for the given namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -2510,7 +2594,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691350+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243846+00:00"
           },
           "start_time": {
             "type": "string",
@@ -2525,6 +2609,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Start time of metric collection from which data will be considered.",
+            "x-f5xc-description-medium": "Start time of metric collection from which data will be considered. Format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be evaluated to end_time-10m If end_time is not specified, then the start_time will be evaluated to <current time>-10m.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2559,6 +2645,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Request to GET number of security events for a given namespace.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecurityEventsCountRequest",
           "required_fields": [
@@ -2591,6 +2678,7 @@
               "$ref": "#/components/schemas/metricsSecurityEventsCounter"
             },
             "x-displayname": "Security events counter data.",
+            "x-f5xc-example": "{\"key\": \"value\"}",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -2611,6 +2699,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.time_interval": "true"
             },
+            "x-f5xc-description-short": "Actual step size used in the response. It could be higher than the requested step due to metric rollups and the query duration.",
+            "x-f5xc-description-medium": "Actual step size used in the response. It could be higher than the requested step due to metric rollups and the query duration. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2621,6 +2711,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Number of security events for each unique combination of group_by labels in the SecurityEventsCountRequest.",
+        "x-f5xc-description-medium": "Number of security events for each unique combination of group_by labels in the SecurityEventsCountRequest.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecurityEventsCountResponse",
           "required_fields": [
@@ -2647,6 +2739,7 @@
             "format": "uint64",
             "x-displayname": "Count",
             "x-f5xc-example": "15",
+            "x-f5xc-description-short": "The number of security events for virtual host in the given namespace.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2664,6 +2757,7 @@
             "x-displayname": "Maximum time.",
             "x-ves-example": "01-01-1970T00:00:00Z.",
             "x-f5xc-example": "01-01-1970T00:00:00Z",
+            "x-f5xc-description-short": "Maximum start time at which security event was found.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2681,6 +2775,7 @@
             "x-displayname": "Minimum time.",
             "x-ves-example": "01-01-1970T00:00:00Z.",
             "x-f5xc-example": "01-01-1970T00:00:00Z",
+            "x-f5xc-description-short": "Minimum time at which the secuirty event was found.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2739,6 +2834,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch security events whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be evaluated...",
+            "x-f5xc-description-medium": "Fetch security events whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be evaluated to start_time+10m If start_time is not specified, then the end_time will be evaluated to <current time>.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2756,6 +2853,8 @@
             "x-displayname": "Limit",
             "x-ves-example": "100",
             "x-f5xc-example": "100",
+            "x-f5xc-description-short": "Limits the number of security events returned in the response Optional: If not specified, first or last 500 security events that matches the query...",
+            "x-f5xc-description-medium": "Limits the number of security events returned in the response Optional: If not specified, first or last 500 security events that matches the query (depending on the sort order) will be returned in the response. The maximum value for limit is 500.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -2772,6 +2871,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Bloggin-app-namespace-1.",
             "x-f5xc-example": "bloggin-app-namespace-1",
+            "x-f5xc-description-short": "Fetch security events for a given namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -2782,7 +2882,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691369+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243867+00:00"
           },
           "query": {
             "type": "string",
@@ -2827,6 +2927,8 @@
             "description": "Optional: default is sort by last_event_time.",
             "title": "Sort by",
             "x-displayname": "Sort By",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "Optional: default is sort by last_event_time.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2849,6 +2951,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch security events whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be...",
+            "x-f5xc-description-medium": "Fetch security events whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be evaluated to end_time-10m If end_time is not specified, then the start_time will be evaluated to <current time>-10m.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2891,6 +2995,8 @@
             "description": "Aggregations provide summary/analytics data over the security events response. If the number of security events that matched the query\nis large and cannot be returned in a single response message, user can GET helpful insights/summary using aggregations.",
             "title": "Aggregations.",
             "x-displayname": "Aggregations.",
+            "x-f5xc-description-short": "Aggregations provide summary/analytics data over the security events response.",
+            "x-f5xc-description-medium": "Aggregations provide summary/analytics data over the security events response. If the number of security events that matched the query is large and cannot be returned in a single response message, user can GET helpful insights/summary using aggregations.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -2908,6 +3014,7 @@
             "x-displayname": "Events",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "List of security events that matched the query. Contains no more than 500 messages.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -2942,6 +3049,7 @@
             "x-displayname": "Total Hits.",
             "x-ves-example": "0",
             "x-f5xc-example": "0",
+            "x-f5xc-description-short": "Total number of security events that matched the query.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2952,6 +3060,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Response message for SecurityEventsRequest/SecurityEventsScrollRequest.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecurityEventsResponse",
           "required_fields": [
@@ -2981,6 +3090,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Bloggin-app-namespace-1.",
             "x-f5xc-example": "bloggin-app-namespace-1",
+            "x-f5xc-description-short": "Fetch the WAF security events scoped by namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -2991,7 +3101,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691387+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243885+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -3000,6 +3110,7 @@
             "x-displayname": "Scroll ID",
             "x-ves-example": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==.",
             "x-f5xc-example": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==",
+            "x-f5xc-description-short": "Long Base-64 encoded string which can be used to retrieve next batch of security events.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3011,6 +3122,8 @@
             "x-field-mutability": "read-only"
           }
         },
+        "x-f5xc-description-short": "Scroll request is used to fetch large number of security events in multiple batches with each SecurityEventsResponse containing no more than 500...",
+        "x-f5xc-description-medium": "Scroll request is used to fetch large number of security events in multiple batches with each SecurityEventsResponse containing no more than 500 messages. To scroll through more than 500 or all WAF security events, one can use the SecurityEventScrollRequest. Use the scroll_id returned in the...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecurityEventsScrollRequest",
           "required_fields": [
@@ -3058,6 +3171,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch security incidents whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be...",
+            "x-f5xc-description-medium": "Fetch security incidents whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be evaluated to start_time+10m If start_time is not specified, then the end_time will be evaluated to <current time>.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3074,6 +3189,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Bloggin-app-namespace-1.",
             "x-f5xc-example": "bloggin-app-namespace-1",
+            "x-f5xc-description-short": "Fetch security incidents for a given namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -3084,7 +3200,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691396+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243894+00:00"
           },
           "query": {
             "type": "string",
@@ -3117,6 +3233,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch security incidents whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be...",
+            "x-f5xc-description-medium": "Fetch security incidents whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be evaluated to end_time-10m If end_time is not specified, then the start_time will be evaluated to <current time>-10m.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3127,6 +3245,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Request to GET only aggregation data for security incidents.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecurityIncidentsAggregationRequest",
           "required_fields": [
@@ -3172,6 +3291,7 @@
             "x-displayname": "Total Hits.",
             "x-ves-example": "0",
             "x-f5xc-example": "0",
+            "x-f5xc-description-short": "Total number of security incidents that matched the query.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3182,6 +3302,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Response message for SecurityIncidentsAggregationRequest.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecurityIncidentsAggregationResponse",
           "required_fields": [
@@ -3229,6 +3350,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch security incidents whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be...",
+            "x-f5xc-description-medium": "Fetch security incidents whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be evaluated to start_time+10m If start_time is not specified, then the end_time will be evaluated to <current time>.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3246,6 +3369,8 @@
             "x-displayname": "Limit",
             "x-ves-example": "100",
             "x-f5xc-example": "100",
+            "x-f5xc-description-short": "Limits the number of security incidents returned in the response Optional: If not specified, first or last 500 security events that matches the...",
+            "x-f5xc-description-medium": "Limits the number of security incidents returned in the response Optional: If not specified, first or last 500 security events that matches the query (depending on the sort order) will be returned in the response. The maximum value for limit is 500.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -3262,6 +3387,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Bloggin-app-namespace-1.",
             "x-f5xc-example": "bloggin-app-namespace-1",
+            "x-f5xc-description-short": "Fetch security incidents for a given namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -3272,7 +3398,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691411+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243910+00:00"
           },
           "query": {
             "type": "string",
@@ -3317,6 +3443,8 @@
             "description": "Optional: default is sort by last_event_time.",
             "title": "Sort by",
             "x-displayname": "Sort By",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "Optional: default is sort by last_event_time.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3339,6 +3467,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch security incidents whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be...",
+            "x-f5xc-description-medium": "Fetch security incidents whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be evaluated to end_time-10m If end_time is not specified, then the start_time will be evaluated to <current time>-10m.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3381,6 +3511,8 @@
             "description": "Aggregations provide summary/analytics data over the security incidents response. If the number of security incidents\nthat matched the query is large and cannot be returned in a single response message, user can GET helpful\ninsights/summary using aggregations.",
             "title": "Aggregations.",
             "x-displayname": "Aggregations.",
+            "x-f5xc-description-short": "Aggregations provide summary/analytics data over the security incidents response.",
+            "x-f5xc-description-medium": "Aggregations provide summary/analytics data over the security incidents response. If the number of security incidents that matched the query is large and cannot be returned in a single response message, user can GET helpful insights/summary using aggregations.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3398,6 +3530,7 @@
             "x-displayname": "Incidents",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "List of security incidents that matched the query. Contains no more than 500 messages.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3432,6 +3565,7 @@
             "x-displayname": "Total Hits.",
             "x-ves-example": "0",
             "x-f5xc-example": "0",
+            "x-f5xc-description-short": "Total number of security events that matched the query.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3442,6 +3576,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Response message for SecurityIncidentsRequest/SecurityIncidentsScrollRequest.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecurityIncidentsResponse",
           "required_fields": [
@@ -3471,6 +3606,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Bloggin-app-namespace-1.",
             "x-f5xc-example": "bloggin-app-namespace-1",
+            "x-f5xc-description-short": "Fetch security incidents for a given namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -3481,7 +3617,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691451+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243940+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -3490,6 +3626,7 @@
             "x-displayname": "Scroll ID",
             "x-ves-example": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==.",
             "x-f5xc-example": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==",
+            "x-f5xc-description-short": "Long Base-64 encoded string which can be used to retrieve next batch of security events.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3501,6 +3638,8 @@
             "x-field-mutability": "read-only"
           }
         },
+        "x-f5xc-description-short": "Scroll request is used to fetch large number of security incidents in multiple batches with each SecurityIncidentsResponse containing no more than...",
+        "x-f5xc-description-medium": "Scroll request is used to fetch large number of security incidents in multiple batches with each SecurityIncidentsResponse containing no more than 500 messages. To scroll through more than 500 or all security incidents, one can use the SecurityIncidentsScrollRequest. Use the scroll_id returned...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySecurityIncidentsScrollRequest",
           "required_fields": [
@@ -3548,6 +3687,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch suspicious user logs whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be...",
+            "x-f5xc-description-medium": "Fetch suspicious user logs whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be evaluated to start_time+10m If start_time is not specified, then the end_time will be evaluated to <current time>.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3564,6 +3705,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Bloggin-app-namespace-1.",
             "x-f5xc-example": "bloggin-app-namespace-1",
+            "x-f5xc-description-short": "Fetch suspicious user logs for a given namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -3574,7 +3716,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691461+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243950+00:00"
           },
           "query": {
             "type": "string",
@@ -3607,6 +3749,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch suspicious user logs whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be...",
+            "x-f5xc-description-medium": "Fetch suspicious user logs whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be evaluated to end_time-10m If end_time is not specified, then the start_time will be evaluated to <current time>-10m.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3617,6 +3761,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Request to GET only aggregation data for suspicious user logs.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySuspiciousUserLogsAggregationRequest",
           "required_fields": [
@@ -3662,6 +3807,7 @@
             "x-displayname": "Total Hits.",
             "x-ves-example": "1400",
             "x-f5xc-example": "1400",
+            "x-f5xc-description-short": "Total number of suspicious user logs that matched the query.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3672,6 +3818,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Response message for SuspiciousUserLogsAggregationRequest.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySuspiciousUserLogsAggregationResponse",
           "required_fields": [
@@ -3719,6 +3866,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch suspicious user logs whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be...",
+            "x-f5xc-description-medium": "Fetch suspicious user logs whose timestamp <= end_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the end_time will be evaluated to start_time+10m If start_time is not specified, then the end_time will be evaluated to <current time>.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3736,6 +3885,8 @@
             "x-displayname": "Limit",
             "x-ves-example": "100",
             "x-f5xc-example": "100",
+            "x-f5xc-description-short": "Limits the number of logs returned in the response Optional: If not specified, first or last 500 logs that matches the query (depending on the...",
+            "x-f5xc-description-medium": "Limits the number of logs returned in the response Optional: If not specified, first or last 500 logs that matches the query (depending on the sort order) will be returned in the response. The maximum value for limit is 500.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -3752,6 +3903,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Bloggin-app-namespace-1.",
             "x-f5xc-example": "bloggin-app-namespace-1",
+            "x-f5xc-description-short": "Fetch suspicious user logs for a given namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -3762,7 +3914,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691477+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243966+00:00"
           },
           "query": {
             "type": "string",
@@ -3807,6 +3959,8 @@
             "description": "Optional: default is sort by last_event_time.",
             "title": "Sort by",
             "x-displayname": "Sort By",
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "Optional: default is sort by last_event_time.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3829,6 +3983,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.query_time": "true"
             },
+            "x-f5xc-description-short": "Fetch suspicious user logs whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be...",
+            "x-f5xc-description-medium": "Fetch suspicious user logs whose timestamp >= start_time format: unix_timestamp|RFC 3339 Optional: If not specified, then the start_time will be evaluated to end_time-10m If end_time is not specified, then the start_time will be evaluated to <current time>-10m.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3871,6 +4027,8 @@
             "description": "Aggregations provide summary/analytics data over the security events response. If the number of security events that matched the query\nis large and cannot be returned in a single response message, user can GET helpful insights/summary using aggregations.",
             "title": "Aggregations.",
             "x-displayname": "Aggregations.",
+            "x-f5xc-description-short": "Aggregations provide summary/analytics data over the security events response.",
+            "x-f5xc-description-medium": "Aggregations provide summary/analytics data over the security events response. If the number of security events that matched the query is large and cannot be returned in a single response message, user can GET helpful insights/summary using aggregations.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3888,6 +4046,7 @@
             "x-displayname": "Events",
             "x-ves-example": "Value",
             "x-f5xc-example": "value",
+            "x-f5xc-description-short": "List of log messages that matched the query. Contains no more than 500 messages.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3922,6 +4081,7 @@
             "x-displayname": "Total Hits.",
             "x-ves-example": "100",
             "x-f5xc-example": "100",
+            "x-f5xc-description-short": "Total number of logs that matched the query.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3932,6 +4092,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Response message for Suspicious User Logs Request.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySuspiciousUserLogsResponse",
           "required_fields": [
@@ -3961,6 +4122,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Bloggin-app-namespace-1.",
             "x-f5xc-example": "bloggin-app-namespace-1",
+            "x-f5xc-description-short": "Fetch the next batch of suspicious user logs scoped by namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -3971,7 +4133,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691495+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243984+00:00"
           },
           "scroll_id": {
             "type": "string",
@@ -3980,6 +4142,7 @@
             "x-displayname": "Scroll ID",
             "x-ves-example": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==.",
             "x-f5xc-example": "DXF1ZXJ5QW5kRmV0Y2gBAAAAAAAAAD4WYm9laVYtZndUQlNsdDcwakFMNjU1QQ==",
+            "x-f5xc-description-short": "Long Base-64 encoded string which can be used to retrieve next batch of security events.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3991,6 +4154,8 @@
             "x-field-mutability": "read-only"
           }
         },
+        "x-f5xc-description-short": "Scroll request is used to fetch large number of suspicious user logs in multiple batches with each SuspiciousUserLogsResponse containing no more...",
+        "x-f5xc-description-medium": "Scroll request is used to fetch large number of suspicious user logs in multiple batches with each SuspiciousUserLogsResponse containing no more than 500 messages. To scroll through more than 500 or all messages, one can use the SuspiciousUserLogsScrollRequest. Use the scroll_id returned in the...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitySuspiciousUserLogsScrollRequest",
           "required_fields": [
@@ -4044,7 +4209,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691502+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.243992+00:00"
           },
           "id": {
             "type": "string",
@@ -4101,6 +4266,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-description-short": "The Threat Campaign last update time Required: YES.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -4127,6 +4293,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-description-short": "The Threat Campaign Malwares Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4158,7 +4325,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691513+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244002+00:00"
           },
           "references": {
             "type": "array",
@@ -4217,6 +4384,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-description-short": "The Threat Campaign Systems Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4225,6 +4393,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Threat Campaign object representing the created threat campaign.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityThreatCampaign",
           "required_fields": [
@@ -4267,6 +4436,8 @@
             "$ref": "#/components/schemas/app_securityincidentsMultiFieldAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Aggregation Request\" Aggregation request to provide analytics data over the log response.",
+        "x-f5xc-description-medium": "X-displayName: \"Aggregation Request\" Aggregation request to provide analytics data over the log response.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsAggregationRequest",
           "required_fields": [
@@ -4292,6 +4463,8 @@
             "$ref": "#/components/schemas/app_securityincidentsKeyField"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Cardinality Aggregation\" GET approximate count of distinct values for the field in the incident.",
+        "x-f5xc-description-medium": "X-displayName: \"Cardinality Aggregation\" GET approximate count of distinct values for the field in the incident.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsCardinalityAggregation",
           "required_fields": [
@@ -4329,6 +4502,7 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nThis option provides sub-aggregation for each date bucket.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each date bucket.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4337,6 +4511,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Date Aggregation\" Aggregate incidents based on timestamp in the log.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsDateAggregation",
           "required_fields": [
@@ -4362,6 +4537,8 @@
             "$ref": "#/components/schemas/app_securityincidentsMultiFieldAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Date SubAggregation\" Aggregate security events based on one of the sub aggregation types.",
+        "x-f5xc-description-medium": "X-displayName: \"Date SubAggregation\" Aggregate security events based on one of the sub aggregation types.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsDateSubAggregation",
           "required_fields": [
@@ -4390,6 +4567,8 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nThis option provides sub-aggregation for each field aggregation bucket.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each field aggregation bucket.",
+            "x-f5xc-description-medium": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each field aggregation bucket.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4403,6 +4582,7 @@
             "title": "Topk",
             "format": "int64",
             "x-f5xc-example": "10",
+            "x-f5xc-description-short": "X-displayName: \"TopK\" Number of top field values to be returned in the response.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -4413,6 +4593,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field Aggregation\" Aggregate incidents based on the key fields in the security event.",
+        "x-f5xc-description-medium": "X-displayName: \"Field Aggregation\" Aggregate incidents based on the key fields in the security event.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsFieldAggregation",
           "required_fields": [
@@ -4437,6 +4619,8 @@
             "$ref": "#/components/schemas/app_securityincidentsCardinalityAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field SubAggregation\" Aggregate security events in each field bucket based on one of the sub aggregation types.",
+        "x-f5xc-description-medium": "X-displayName: \"Field SubAggregation\" Aggregate security events in each field bucket based on one of the sub aggregation types.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsFieldSubAggregation",
           "required_fields": [
@@ -4467,6 +4651,8 @@
           "INCIDENT_ID"
         ],
         "default": "CITY",
+        "x-f5xc-description-short": "X-displayName: \"Key Field\" Security events can be aggregated based on these fields. - CITY: x-displayName: \"City\" - COUNTRY: x-displayName...",
+        "x-f5xc-description-medium": "X-displayName: \"Key Field\" Security events can be aggregated based on these fields. - CITY: x-displayName: \"City\" - COUNTRY: x-displayName: \"Country\" - ASN: x-displayName: \"ASN\" - INCIDENT_TYPE: x-displayName: \"Incident Type\" - INTENT: x-displayName: \"Intent\" - VH_NAME: x-displayName: \"Virtual...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsKeyField",
           "required_fields": [],
@@ -4485,6 +4671,8 @@
           "EVENTS"
         ],
         "default": "EVENTS",
+        "x-f5xc-description-short": "X-displayName: \"Metric Field\" Metrics can be computed based on these fields. - EVENTS: x-displayName: \"Events\".",
+        "x-f5xc-description-medium": "X-displayName: \"Metric Field\" Metrics can be computed based on these fields. - EVENTS: x-displayName: \"Events\".",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsMetricField",
           "required_fields": [],
@@ -4504,6 +4692,8 @@
             "$ref": "#/components/schemas/app_securityincidentsPercentileAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Metrics Aggregation\" Computes metrics based on values for the field in the incident.",
+        "x-f5xc-description-medium": "X-displayName: \"Metrics Aggregation\" Computes metrics based on values for the field in the incident.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsMetricsAggregation",
           "required_fields": [
@@ -4531,6 +4721,8 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nThis option provides sub-aggregation for each field aggregation bucket.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each field aggregation bucket.",
+            "x-f5xc-description-medium": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each field aggregation bucket.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4544,6 +4736,7 @@
             "title": "Topk",
             "format": "int64",
             "x-f5xc-example": "10",
+            "x-f5xc-description-short": "X-displayName: \"TopK\" Number of top field values to be returned in the response.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -4554,6 +4747,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Multi-Field Aggregation\" Aggregate incidents based on the multiple fields in the incident.",
+        "x-f5xc-description-medium": "X-displayName: \"Multi-Field Aggregation\" Aggregate incidents based on the multiple fields in the incident.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsMultiFieldAggregation",
           "required_fields": [
@@ -4578,6 +4773,8 @@
             "$ref": "#/components/schemas/app_securityincidentsCardinalityAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Multi Field SubAggregation\" Aggregate security events in each MultiTerms bucket based on one of the sub aggregation types.",
+        "x-f5xc-description-medium": "X-displayName: \"Multi Field SubAggregation\" Aggregate security events in each MultiTerms bucket based on one of the sub aggregation types.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsMultiFieldSubAggregation",
           "required_fields": [
@@ -4598,6 +4795,8 @@
           "SRC_IP_TLS_FINGERPRINT"
         ],
         "default": "SRC_IP_TLS_FINGERPRINT",
+        "x-f5xc-description-short": "X-displayName: \"Multi-Key Field\" Security events can be aggregated based on these multiple key fields - SRC_IP_TLS_FINGERPRINT: x-displayName...",
+        "x-f5xc-description-medium": "X-displayName: \"Multi-Key Field\" Security events can be aggregated based on these multiple key fields - SRC_IP_TLS_FINGERPRINT: x-displayName: \"Source IP, JA3 TLS Fingerprint\" Aggregated by (keyfield.src_IP, keyfield.tls_FINGERPRINT).",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsMultiKeyField",
           "required_fields": [],
@@ -4622,6 +4821,7 @@
             "title": "Percent",
             "format": "double",
             "x-f5xc-example": "[99.0]",
+            "x-f5xc-description-short": "X-displayName: \"Percent\" x-required Percentile for which value is calculated.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4630,6 +4830,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Percentile Aggregation\" Calculates percentile over numeric values for a field.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securityincidentsPercentileAggregation",
           "required_fields": [
@@ -4670,6 +4871,8 @@
             "$ref": "#/components/schemas/suspicious_user_logMinAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Aggregation Request\" Aggregation request to provide analytics data over the log response.",
+        "x-f5xc-description-medium": "X-displayName: \"Aggregation Request\" Aggregation request to provide analytics data over the log response.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitysuspicious_user_logAggregationRequest",
           "required_fields": [
@@ -4697,6 +4900,8 @@
             "$ref": "#/components/schemas/app_securitysuspicious_user_logKeyField"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Cardinality Aggregation\" GET approximate count of distinct values for the field in the suspicious user log.",
+        "x-f5xc-description-medium": "X-displayName: \"Cardinality Aggregation\" GET approximate count of distinct values for the field in the suspicious user log.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitysuspicious_user_logCardinalityAggregation",
           "required_fields": [
@@ -4731,6 +4936,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Date Aggregation\" Aggregate suspicious user logs based on timestamp in the log.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitysuspicious_user_logDateAggregation",
           "required_fields": [
@@ -4758,6 +4964,8 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nThis option provides sub-aggregation for each field aggregation bucket.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each field aggregation bucket.",
+            "x-f5xc-description-medium": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each field aggregation bucket.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4771,6 +4979,7 @@
             "title": "Topk",
             "format": "int64",
             "x-f5xc-example": "10",
+            "x-f5xc-description-short": "X-displayName: \"TopK\" Number of top field values to be returned in the response.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -4781,6 +4990,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field Aggregation\" Aggregate incidents based on the key fields in the suspicious user log.",
+        "x-f5xc-description-medium": "X-displayName: \"Field Aggregation\" Aggregate incidents based on the key fields in the suspicious user log.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitysuspicious_user_logFieldAggregation",
           "required_fields": [
@@ -4805,6 +5016,8 @@
             "$ref": "#/components/schemas/app_securitysuspicious_user_logCardinalityAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field SubAggregation\" Aggregate security events in each field bucket based on one of the sub aggregation types.",
+        "x-f5xc-description-medium": "X-displayName: \"Field SubAggregation\" Aggregate security events in each field bucket based on one of the sub aggregation types.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitysuspicious_user_logFieldSubAggregation",
           "required_fields": [
@@ -4832,6 +5045,8 @@
           "SUSPICION_LOG_TYPE"
         ],
         "default": "CITY",
+        "x-f5xc-description-short": "X-displayName: \"Key Field\" Security events can be aggregated based on these fields. - CITY: x-displayName: \"City\" - COUNTRY: x-displayName...",
+        "x-f5xc-description-medium": "X-displayName: \"Key Field\" Security events can be aggregated based on these fields. - CITY: x-displayName: \"City\" - COUNTRY: x-displayName: \"Country\" - ASN: x-displayName: \"ASN\" - USER: x-displayName: \"User\" - THREAT_LEVEL: x-displayName: \"Threat Level\" - VH_NAME: x-displayName: \"Virtual Host...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitysuspicious_user_logKeyField",
           "required_fields": [],
@@ -4851,6 +5066,8 @@
             "$ref": "#/components/schemas/app_securitysuspicious_user_logPercentileAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Metrics Aggregation\" Computes metrics based on values for the field in the suspicious user log.",
+        "x-f5xc-description-medium": "X-displayName: \"Metrics Aggregation\" Computes metrics based on values for the field in the suspicious user log.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitysuspicious_user_logMetricsAggregation",
           "required_fields": [
@@ -4877,6 +5094,7 @@
             "title": "Percent",
             "format": "double",
             "x-f5xc-example": "[99.0]",
+            "x-f5xc-description-short": "X-displayName: \"Percent\" x-required Percentile for which value is calculated.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4885,6 +5103,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Percentile Aggregation\" Calculates percentile over numeric values for a field.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for app_securitysuspicious_user_logPercentileAggregation",
           "required_fields": [
@@ -4930,6 +5149,7 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Sources that are located in one of the countries in the given list.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4989,6 +5209,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.timestamp.within.seconds": "31536000"
             },
+            "x-f5xc-description-short": "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired.",
+            "x-f5xc-description-medium": "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5005,6 +5227,7 @@
             "$ref": "#/components/schemas/schemaMessageMetaType"
           }
         },
+        "x-f5xc-description-short": "DDoS Mitigation Rule specifies the sources to be blocked.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_securityDDoSMitigationRule",
           "required_fields": [
@@ -5057,6 +5280,7 @@
               "ves.io.schema.rules.string.max_len": "1024",
               "ves.io.schema.rules.string.templated_http_path": "true"
             },
+            "x-f5xc-description-short": "The endpoint (path) of the request. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5090,6 +5314,7 @@
               "ves.io.schema.rules.string.max_len": "128",
               "ves.io.schema.rules.string.vh_domain": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [any_domain] The rule will apply for a specific domain. For",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5099,6 +5324,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "API Protection Rule for a specific endpoint.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafAPIEndpointProtectionRule",
           "required_fields": [
@@ -5133,6 +5359,7 @@
             "$ref": "#/components/schemas/schemaEmpty"
           }
         },
+        "x-f5xc-description-short": "The action to take if the input request matches the rule.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafAPIProtectionRuleAction",
           "required_fields": [
@@ -5255,6 +5482,7 @@
               "ves.io.schema.rules.string.max_len": "1024",
               "ves.io.schema.rules.string.templated_http_path": "true"
             },
+            "x-f5xc-description-short": "The endpoint (path) of the request. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5289,6 +5517,7 @@
               "ves.io.schema.rules.string.max_len": "128",
               "ves.io.schema.rules.string.vh_domain": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [any_domain] The rule will apply for a specific domain.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5335,6 +5564,7 @@
         "default": "SKIP_PROCESSING_WAF",
         "x-displayname": "Action",
         "x-ves-proto-enum": "ves.io.schema.views.common_waf.ClientSrcRuleAction",
+        "x-f5xc-description-short": "Action that should be taken when client identifier matches the rule.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafClientSrcRuleAction",
           "required_fields": [],
@@ -5372,6 +5602,7 @@
               "ves.io.schema.rules.repeated.max_items": "15",
               "ves.io.schema.rules.repeated.unique_metadata_name": "true"
             },
+            "x-f5xc-example": "{\"key\": \"value\"}",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5427,6 +5658,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Exclusive with [api_endpoint base_path] The API group which this validation applies to.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5451,6 +5683,7 @@
               "ves.io.schema.rules.string.http_path": "true",
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Exclusive with [api_endpoint api_group] The base path which this validation applies to.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5463,6 +5696,7 @@
             "$ref": "#/components/schemas/schemaMessageMetaType"
           }
         },
+        "x-f5xc-description-short": "Fall Through Rule for a specific endpoint, base-path, or API group.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafFallThroughRule",
           "required_fields": [
@@ -5506,6 +5740,8 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.repeated.max_items": "16"
             },
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "List of HTTP header name and value pairs Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5555,6 +5791,8 @@
               "ves.io.schema.rules.uint32.gt": "0",
               "ves.io.schema.rules.uint32.lte": "8192"
             },
+            "x-f5xc-description-short": "The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period.",
+            "x-f5xc-description-medium": "The total number of allowed requests for 1 unit (e.g. SECOND/MINUTE/HOUR etc.) of the specified period. Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -5602,6 +5840,8 @@
           }
         },
         "x-required": true,
+        "x-f5xc-description-short": "Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a.",
+        "x-f5xc-description-medium": "Determine what to do with unprotected endpoints (not in the OpenAPI specification file (a.k.a. Swagger) or doesn't have a specific rule in custom rules).",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafOpenApiFallThroughMode",
           "required_fields": [
@@ -5670,6 +5910,8 @@
             "$ref": "#/components/schemas/schemaEmpty"
           }
         },
+        "x-f5xc-description-short": "OpenAPI specification validation settings relevant for \"API Inventory\" enforcement and for \"Custom list\" enforcement.",
+        "x-f5xc-description-medium": "OpenAPI specification validation settings relevant for \"API Inventory\" enforcement and for \"Custom list\" enforcement.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafOpenApiValidationCommonSettings",
           "required_fields": [
@@ -5708,6 +5950,8 @@
           }
         },
         "x-required": true,
+        "x-f5xc-description-short": "Validation mode of OpenAPI specification.",
+        "x-f5xc-description-medium": "Validation mode of OpenAPI specification. When a validation mismatch occurs on a request to one of the endpoints listed on the OpenAPI specification file (a.k.a. Swagger).",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafOpenApiValidationMode",
           "required_fields": [
@@ -5761,6 +6005,8 @@
               "ves.io.schema.rules.repeated.min_items": "1",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of properties of the request to validate according to the OpenAPI specification file (a.k.a.",
+            "x-f5xc-description-medium": "List of properties of the request to validate according to the OpenAPI specification file (a.k.a. Swagger) Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5821,6 +6067,8 @@
               "ves.io.schema.rules.repeated.min_items": "1",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of properties of the response to validate according to the OpenAPI specification file (a.k.a.",
+            "x-f5xc-description-medium": "List of properties of the response to validate according to the OpenAPI specification file (a.k.a. Swagger) Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5872,6 +6120,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Exclusive with [api_endpoint base_path] The API group which this validation applies to.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5896,6 +6145,7 @@
               "ves.io.schema.rules.string.http_path": "true",
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Exclusive with [api_endpoint api_group] The base path which this validation applies to.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5921,6 +6171,7 @@
               "ves.io.schema.rules.string.max_len": "128",
               "ves.io.schema.rules.string.vh_domain": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [any_domain] The rule will apply for a specific domain.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -5933,6 +6184,7 @@
             "$ref": "#/components/schemas/common_wafOpenApiValidationMode"
           }
         },
+        "x-f5xc-description-short": "OpenAPI Validation Rule for a specific endpoint, base-path, or API group.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafOpenApiValidationRule",
           "required_fields": [
@@ -5979,6 +6231,7 @@
               "ves.io.schema.rules.repeated.max_items": "10",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Actions that should be taken when client identifier matches the rule.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6002,6 +6255,8 @@
               "ves.io.schema.rules.uint32.gte": "1",
               "ves.io.schema.rules.uint32.lte": "401308"
             },
+            "x-f5xc-description-short": "Exclusive with [http_header ip_prefix ipv6_prefix user_identifier] RFC 6793 defined 4-byte AS number.",
+            "x-f5xc-description-medium": "Exclusive with [http_header ip_prefix ipv6_prefix user_identifier] RFC 6793 defined 4-byte AS number.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -6028,6 +6283,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.timestamp.within.seconds": "31536000"
             },
+            "x-f5xc-description-short": "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired.",
+            "x-f5xc-description-medium": "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6053,6 +6310,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.ipv4_prefix": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [as_number http_header ipv6_prefix user_identifier] IPv4 prefix string.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6075,6 +6333,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.ipv6_prefix": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [as_number http_header ip_prefix user_identifier] IPv6 prefix string.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6102,6 +6361,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-description-short": "Exclusive with [as_number http_header ip_prefix ipv6_prefix] Identify user based on user identifier.",
+            "x-f5xc-description-medium": "Exclusive with [as_number http_header ip_prefix ipv6_prefix] Identify user based on user identifier. User identifier value needs to be copied from security event.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -6115,6 +6376,7 @@
             "$ref": "#/components/schemas/schemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Simple client source rule specifies the sources to be blocked or trusted (skip WAF).",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafSimpleClientSrcRule",
           "required_fields": [
@@ -6172,6 +6434,7 @@
             "$ref": "#/components/schemas/schemaEmpty"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Validation Settings For Headers\" Custom settings for headers validation.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafValidationSettingForHeaders",
           "required_fields": [
@@ -6200,6 +6463,7 @@
             "$ref": "#/components/schemas/schemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Custom settings for query parameters validation.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for common_wafValidationSettingForQueryParameters",
           "required_fields": [
@@ -6255,6 +6519,8 @@
               "ves.io.schema.rules.repeated.min_items": "1",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of JSON Path field values. Use square brackets with an underscore [_] to indicate array elements (e.g., person.emails[_]).",
+            "x-f5xc-description-medium": "List of JSON Path field values. Use square brackets with an underscore [_] to indicate array elements (e.g., person.emails[_]). To reference JSON keys that contain spaces, enclose the entire path in double quotes.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6316,6 +6582,7 @@
             "$ref": "#/components/schemas/schemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Settings to mask sensitive data in request/response payload.",
         "x-f5xc-minimum-configuration": {
           "description": "HTTP/HTTPS load balancer for distributing traffic across origin pools",
           "required_fields": [
@@ -6371,6 +6638,7 @@
               "ves.io.schema.rules.string.max_bytes": "256",
               "ves.io.schema.rules.string.not_empty": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [presence regex] Header value to match exactly.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -6385,6 +6653,7 @@
             "title": "Invert_match.",
             "format": "boolean",
             "x-displayname": "NOT of match.",
+            "x-f5xc-description-short": "Invert the result of the match to detect missing header or non-matching value.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6422,7 +6691,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691697+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244188+00:00"
           },
           "presence": {
             "type": "boolean",
@@ -6430,6 +6699,7 @@
             "title": "Presence",
             "format": "boolean",
             "x-displayname": "Presence",
+            "x-f5xc-description-short": "Exclusive with [exact regex] If true, check for presence of header.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6453,6 +6723,7 @@
               "ves.io.schema.rules.string.not_empty": "true",
               "ves.io.schema.rules.string.regex": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [exact presence] Regex match of the header value in re2 format.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -6462,6 +6733,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Header match is done using the name of the header and its value.",
+        "x-f5xc-description-medium": "Header match is done using the name of the header and its value. The value match is done using one of the following regex match on value exact match of value presence of header Header Match can also be inverse of above, which be used to check missing header or non-matching value.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for ioschemaHeaderMatcherType",
           "required_fields": [
@@ -6492,6 +6765,8 @@
             "x-displayname": "Kind",
             "x-ves-example": "Virtual_site.",
             "x-f5xc-example": "virtual_site",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. \"route\")",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. \"route\").",
             "minLength": 0,
             "maxLength": 14,
             "x-f5xc-required-for": {
@@ -6503,7 +6778,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691705+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244196+00:00"
           },
           "name": {
             "type": "string",
@@ -6512,6 +6787,8 @@
             "x-displayname": "Name",
             "x-ves-example": "Contactus-route.",
             "x-f5xc-example": "contactus-route",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -6522,7 +6799,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691710+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244201+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6531,6 +6808,8 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Ns1",
             "x-f5xc-example": "ns1",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -6541,7 +6820,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691714+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244205+00:00"
           },
           "tenant": {
             "type": "string",
@@ -6550,6 +6829,8 @@
             "x-displayname": "Tenant",
             "x-ves-example": "Example-corp.",
             "x-f5xc-example": "example-corp",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
             "minLength": 0,
             "maxLength": 18,
             "x-f5xc-required-for": {
@@ -6562,7 +6843,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691718+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244209+00:00"
           },
           "uid": {
             "type": "string",
@@ -6571,6 +6852,8 @@
             "x-displayname": "UID",
             "x-ves-example": "D15f1fad-4d37-48c0-8706-df1824d76d31.",
             "x-f5xc-example": "d15f1fad-4d37-48c0-8706-df1824d76d31",
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
             "minLength": 0,
             "maxLength": 36,
             "x-f5xc-required-for": {
@@ -6584,9 +6867,11 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691724+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244215+00:00"
           }
         },
+        "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
+        "x-f5xc-description-medium": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name for public API and Uid for private API This type of reference is called direct because the relation is explicit and concrete (as opposed to selector...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for ioschemaObjectRefType",
           "required_fields": [
@@ -6622,9 +6907,10 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691729+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244221+00:00"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Avg Aggregation Data\" Average Aggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logAvgAggregationData",
           "required_fields": [
@@ -6647,6 +6933,7 @@
             "description": "X-displayName: \"Count\"\nx-example: 100\nCount of distinct values of a log field.",
             "title": "Count",
             "format": "uint64",
+            "x-f5xc-example": "42",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6660,6 +6947,8 @@
             "$ref": "#/components/schemas/schemaTrendValue"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Cardinality Aggregation Data\" Approximate count of distinct values of the log field specified in the request.",
+        "x-f5xc-description-medium": "X-displayName: \"Cardinality Aggregation Data\" Approximate count of distinct values of the log field specified in the request.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logCardinalityAggregationData",
           "required_fields": [
@@ -6683,6 +6972,7 @@
             "description": "X-displayName: \"Count\"\nx-example: 45\n\nnumber of logs in this bucket.",
             "title": "Count",
             "format": "uint64",
+            "x-f5xc-example": "42",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6696,6 +6986,7 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nSub aggregation data for the date bucket.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" Sub aggregation data for the date bucket.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6721,6 +7012,8 @@
             "$ref": "#/components/schemas/schemaTrendValue"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Date Aggregation Bucket\" Date histogram bucket containing the timestamp and the number of logs in that bucket.",
+        "x-f5xc-description-medium": "X-displayName: \"Date Aggregation Bucket\" Date histogram bucket containing the timestamp and the number of logs in that bucket.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logDateAggregationBucket",
           "required_fields": [
@@ -6748,6 +7041,7 @@
             "items": {
               "$ref": "#/components/schemas/logDateAggregationBucket"
             },
+            "x-f5xc-description-short": "X-displayName: \"Buckets\" Lists of buckets containing timestamp and the corresponding log count.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6760,6 +7054,8 @@
             "description": "X-displayName: \"Step\"\nActual step size in the response. It could be higher than the requested step depending on the query duration and/or the log rollups.\nFormat: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days.",
             "title": "Step",
             "x-f5xc-example": "30m",
+            "x-f5xc-description-short": "X-displayName: \"Step\" Actual step size in the response.",
+            "x-f5xc-description-medium": "X-displayName: \"Step\" Actual step size in the response. It could be higher than the requested step depending on the query duration and/or the log rollups. Format: [0-9][smhd], where s - seconds, m - minutes, h - hours, d - days.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6770,6 +7066,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Date Aggregation Data\" Date aggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logDateAggregationData",
           "required_fields": [
@@ -6795,6 +7092,7 @@
             "$ref": "#/components/schemas/logMultiFieldAggregationData"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Date SubAggregation\" Date subaggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logDateSubAggregationData",
           "required_fields": [
@@ -6818,6 +7116,7 @@
             "description": "X-displayName: \"Count\"\nx-example: 45\n\nnumber of logs in this bucket.",
             "title": "Count",
             "format": "uint64",
+            "x-f5xc-example": "42",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6842,7 +7141,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691751+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244243+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
@@ -6851,6 +7150,7 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nSub aggregation data for the field aggregation bucket.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" Sub aggregation data for the field aggregation bucket.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6862,6 +7162,8 @@
             "$ref": "#/components/schemas/schemaTrendValue"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field Aggregation Bucket\" Field aggregation bucket containing field value and the number of logs.",
+        "x-f5xc-description-medium": "X-displayName: \"Field Aggregation Bucket\" Field aggregation bucket containing field value and the number of logs.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logFieldAggregationBucket",
           "required_fields": [
@@ -6890,6 +7192,7 @@
             "items": {
               "$ref": "#/components/schemas/logFieldAggregationBucket"
             },
+            "x-f5xc-description-short": "X-displayName: \"Buckets\" Lists of buckets containing field value and the corresponding log count.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -6898,6 +7201,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field Aggregation Data\" Field Aggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logFieldAggregationData",
           "required_fields": [
@@ -6920,6 +7224,7 @@
             "description": "X-displayName: \"Count\"\nx-example: 45\n\nnumber of logs in this bucket.",
             "title": "Count",
             "format": "uint64",
+            "x-f5xc-example": "42",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -6934,6 +7239,7 @@
             "description": "X-displayName: \"Key\"\nKey contain the name/value pair that identifies the unique key fields.",
             "title": "Keys",
             "x-f5xc-example": "HIT, MISS, REVALIDATED",
+            "x-f5xc-description-short": "X-displayName: \"Key\" Key contain the name/value pair that identifies the unique key fields.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -6944,12 +7250,14 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691764+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244255+00:00"
           },
           "order_by": {
             "$ref": "#/components/schemas/logOrderByData"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field Sub Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
+        "x-f5xc-description-medium": "X-displayName: \"Field Sub Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logFieldSubAggregationBucket",
           "required_fields": [
@@ -6979,6 +7287,7 @@
             "items": {
               "$ref": "#/components/schemas/logFieldSubAggregationBucket"
             },
+            "x-f5xc-description-short": "X-displayName: \"Buckets\" Lists of buckets containing field values and the corresponding log count.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7002,6 +7311,7 @@
             "$ref": "#/components/schemas/logMultiFilterAggregationData"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field SubAggregation\" Field subaggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logFieldSubAggregationData",
           "required_fields": [
@@ -7030,6 +7340,7 @@
             "description": "X-displayName: \"Count\"\nx-example: 45\n\nnumber of logs in this bucket.",
             "title": "Count",
             "format": "uint64",
+            "x-f5xc-example": "42",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -7044,6 +7355,7 @@
             "description": "X-displayName: \"Key\"\nKey contain the name/value pair that identifies the unique key fields.",
             "title": "Keys",
             "x-f5xc-example": "HIT, MISS, REVALIDATED",
+            "x-f5xc-description-short": "X-displayName: \"Key\" Key contain the name/value pair that identifies the unique key fields.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -7054,9 +7366,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691779+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244271+00:00"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field Sub Field Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
+        "x-f5xc-description-medium": "X-displayName: \"Field Sub Field Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logFieldSubFieldAggregationBucket",
           "required_fields": [
@@ -7082,6 +7396,7 @@
             "items": {
               "$ref": "#/components/schemas/logFieldSubFieldAggregationBucket"
             },
+            "x-f5xc-description-short": "X-displayName: \"Buckets\" Lists of buckets containing field value and the corresponding log count.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7090,6 +7405,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field Sub Field Aggregation Data\" Field Aggregation data as Field Sub-aggregation.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logFieldSubFieldAggregationData",
           "required_fields": [
@@ -7112,6 +7428,7 @@
             "description": "X-displayName: \"Count\"\nx-example: 45\n\nnumber of logs in this bucket.",
             "title": "Count",
             "format": "uint64",
+            "x-f5xc-example": "42",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -7125,6 +7442,7 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nSub aggregation data for the filter aggregation.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" Sub aggregation data for the filter aggregation.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7133,6 +7451,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Filter Aggregation Data\" Filter Aggregation Data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logFilterAggregationData",
           "required_fields": [
@@ -7158,6 +7477,7 @@
             "items": {
               "$ref": "#/components/schemas/logFilterSubFieldAggregationBucket"
             },
+            "x-f5xc-description-short": "X-displayName: \"Buckets\" Lists of buckets containing field value and the corresponding log count.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7166,6 +7486,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"FilterSubAggregation\" Filter subaggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logFilterSubAggregationData",
           "required_fields": [
@@ -7188,6 +7509,7 @@
             "description": "X-displayName: \"Count\"\nx-example: 45\n\nnumber of logs in this bucket.",
             "title": "Count",
             "format": "uint64",
+            "x-f5xc-example": "42",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -7202,6 +7524,7 @@
             "description": "X-displayName: \"Key\"\nKey contain the name/value pair that identifies the unique key fields.",
             "title": "Keys",
             "x-f5xc-example": "HIT, MISS, REVALIDATED",
+            "x-f5xc-description-short": "X-displayName: \"Key\" Key contain the name/value pair that identifies the unique key fields.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -7212,12 +7535,13 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691792+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244284+00:00"
           },
           "sub_aggs": {
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nSub aggregation data for the filter aggregation.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" Sub aggregation data for the filter aggregation.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7226,6 +7550,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Filter Sub Field Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
+        "x-f5xc-description-medium": "X-displayName: \"Filter Sub Field Aggregation Bucket\" Field sub aggregation bucket containing field values and the number of logs.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logFilterSubFieldAggregationBucket",
           "required_fields": [
@@ -7276,6 +7602,7 @@
             "$ref": "#/components/schemas/logMultiFilterAggregationData"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Log Aggregation\" Log aggregation response data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logLogAggregationData",
           "required_fields": [
@@ -7316,9 +7643,10 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691811+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244302+00:00"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Max Aggregation Data\" Max Aggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logMaxAggregationData",
           "required_fields": [
@@ -7340,6 +7668,7 @@
             "$ref": "#/components/schemas/logPercentileAggregationData"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Metrics Aggregation\" Metrics aggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logMetricsAggregationData",
           "required_fields": [
@@ -7371,9 +7700,10 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691818+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244309+00:00"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Min Aggregation Data\" Min Aggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logMinAggregationData",
           "required_fields": [
@@ -7396,6 +7726,7 @@
             "description": "X-displayName: \"Count\"\nx-example: 45\n\nnumber of logs in this bucket.",
             "title": "Count",
             "format": "uint64",
+            "x-f5xc-example": "42",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -7410,6 +7741,8 @@
             "description": "X-displayName: \"Keys\"\nKeys contain the name/value pair that identifies the unique combination of multiple key fields\nSRC_IP\": \"10.10.10.1\", \"COUNTRY\": \"US\"}\"",
             "title": "Keys",
             "x-f5xc-example": "{",
+            "x-f5xc-description-short": "X-displayName: \"Keys\" Keys contain the name/value pair that identifies the unique combination of multiple key fields SRC_IP\": \"10.10.10.1\"...",
+            "x-f5xc-description-medium": "X-displayName: \"Keys\" Keys contain the name/value pair that identifies the unique combination of multiple key fields SRC_IP\": \"10.10.10.1\", \"COUNTRY\": \"US\"}\".",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7424,6 +7757,7 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nSub aggregation data for the multi field aggregation bucket.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" Sub aggregation data for the multi field aggregation bucket.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7432,6 +7766,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Multi-Field Aggregation Bucket\" Multi-Field aggregation bucket containing field values and the number of logs.",
+        "x-f5xc-description-medium": "X-displayName: \"Multi-Field Aggregation Bucket\" Multi-Field aggregation bucket containing field values and the number of logs.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logMultiFieldAggregationBucket",
           "required_fields": [
@@ -7459,6 +7795,7 @@
             "items": {
               "$ref": "#/components/schemas/logMultiFieldAggregationBucket"
             },
+            "x-f5xc-description-short": "X-displayName: \"Buckets\" Lists of buckets containing field values and the corresponding log count.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7467,6 +7804,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Multi-Field Aggregation Data\" Multi-Field Aggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logMultiFieldAggregationData",
           "required_fields": [
@@ -7500,6 +7838,7 @@
             "$ref": "#/components/schemas/logTopHitsAggregationData"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Multi Field SubAggregation\" Field subaggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logMultiFieldSubAggregationData",
           "required_fields": [
@@ -7526,6 +7865,7 @@
             "description": "X-displayName: \"Count\"\nx-example: 45\n\nnumber of logs in this bucket.",
             "title": "Count",
             "format": "uint64",
+            "x-f5xc-example": "42",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -7536,6 +7876,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Multi Filter Aggregation Data\" Multi Filter Aggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logMultiFilterAggregationData",
           "required_fields": [
@@ -7557,6 +7898,7 @@
             "$ref": "#/components/schemas/logMetricsAggregationData"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Order by Data\" Order by data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logOrderByData",
           "required_fields": [
@@ -7579,6 +7921,7 @@
             "description": "X-displayName: \"Key\"\nx-example: 99.0.",
             "title": "Key",
             "format": "double",
+            "x-f5xc-example": "[REDACTED_PUBLIC_KEY]",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7588,7 +7931,7 @@
             "maxLength": 16,
             "minLength": 7,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691839+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244332+00:00"
           },
           "value": {
             "type": "number",
@@ -7604,9 +7947,10 @@
             "maxLength": 15,
             "minLength": 3,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691844+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244337+00:00"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Percentile Aggregation Data\" Percentile Aggregation data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logPercentileAggregationData",
           "required_fields": [
@@ -7630,6 +7974,7 @@
             "description": "X-displayName: \"Count\"\nx-example: 100\nCount of top hit values.",
             "title": "Count",
             "format": "uint64",
+            "x-f5xc-example": "42",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -7646,6 +7991,7 @@
             "items": {
               "type": "string"
             },
+            "x-f5xc-description-short": "X-displayName: \"Documents\" document values.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -7654,6 +8000,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"TopHits Aggregation Data\" Top Hits Aggregation Data.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for logTopHitsAggregationData",
           "required_fields": [
@@ -7693,6 +8040,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "SecurityEventsCounter contains the timeseries data of security events counter.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for metricsSecurityEventsCounter",
           "required_fields": [
@@ -7720,6 +8068,7 @@
             "x-displayname": "Namespace",
             "x-ves-example": "Blogging-app-namespace-1.",
             "x-f5xc-example": "blogging-app-namespace-1",
+            "x-f5xc-description-short": "Namespace for which the security event was generated.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -7730,11 +8079,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691855+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244348+00:00"
           },
           "sec_event_type": {
             "type": "string",
-            "description": "",
+            "description": "Event or occurrence data",
             "title": "Security Event Type.",
             "x-displayname": "Security Event Type.",
             "x-ves-example": "WAF",
@@ -7750,7 +8099,7 @@
           },
           "src_instance": {
             "type": "string",
-            "description": "",
+            "description": "Instance or deployment identifier",
             "title": "Source Instance.",
             "x-displayname": "Source Instance.",
             "x-ves-example": "IN",
@@ -7766,7 +8115,7 @@
           },
           "src_site": {
             "type": "string",
-            "description": "",
+            "description": "Site or location identifier",
             "title": "Source Site.",
             "x-displayname": "Source Site.",
             "x-ves-example": "Greatblogs-CE.",
@@ -7782,7 +8131,7 @@
           },
           "vh_name": {
             "type": "string",
-            "description": "",
+            "description": "Human-readable name for the resource",
             "title": "Virtual Host.",
             "x-displayname": "Virtual Host.",
             "x-ves-example": "Greatblogs-vhost.",
@@ -7797,6 +8146,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "SecurityEventsId uniquely identifies an entry in the response for security events metrics query.",
+        "x-f5xc-description-medium": "SecurityEventsId uniquely identifies an entry in the response for security events metrics query. Security events counter is aggregated based on the MetricLabel specified in the group_by field in the request. Therefore, only the fields that corresponds to the MetricLabel in the group_by will have...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for metricsSecurityEventsId",
           "required_fields": [
@@ -7826,6 +8177,8 @@
         "default": "NAMESPACE",
         "x-displayname": "Security Events Metric Labels.",
         "x-ves-proto-enum": "ves.io.schema.app_security.metrics.SecurityMetricLabel",
+        "x-f5xc-description-short": "Labels in the security events metrics. Security events metric can be sliced and diced based on one or more labels listed below.",
+        "x-f5xc-description-medium": "Labels in the security events metrics. Security events metric can be sliced and diced based on one or more labels listed below.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for metricsSecurityMetricLabel",
           "required_fields": [],
@@ -7865,9 +8218,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691868+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244362+00:00"
           }
         },
+        "x-f5xc-description-short": "Label based filtering for Security Events metrics. Security Events metrics are tagged with labels mentioned in MetricLabel.",
+        "x-f5xc-description-medium": "Label based filtering for Security Events metrics. Security Events metrics are tagged with labels mentioned in MetricLabel. Metric label filter can be specified to query specific metrics based on label match.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for metricsSecurityMetricLabelFilter",
           "required_fields": [
@@ -7893,6 +8248,7 @@
         "default": "EQ",
         "x-displayname": "Security Events Metric Label Operator.",
         "x-ves-proto-enum": "ves.io.schema.app_security.metrics.SecurityMetricLabelOp",
+        "x-f5xc-description-short": "The operator to use when querying Security Events metrics with labels.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for metricsSecurityMetricLabelOp",
           "required_fields": [],
@@ -7927,7 +8283,7 @@
           },
           "value": {
             "type": "string",
-            "description": "Value",
+            "description": "Configuration parameter for value",
             "title": "Value",
             "x-displayname": "Value",
             "x-ves-example": "15",
@@ -7942,9 +8298,10 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691874+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244369+00:00"
           }
         },
+        "x-f5xc-description-short": "Value returned for a Security Events Metrics query.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for metricsSecurityMetricValue",
           "required_fields": [
@@ -7982,6 +8339,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check.",
+            "x-f5xc-description-medium": "Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -7994,6 +8353,7 @@
             "$ref": "#/components/schemas/app_firewallAttackType"
           }
         },
+        "x-f5xc-description-short": "App Firewall Attack Type context changes to be applied for this request.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyAppFirewallAttackTypeContext",
           "required_fields": [
@@ -8032,6 +8392,7 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Attack Types to be excluded for the defined match criteria.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8056,6 +8417,8 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-example": "example-resource",
+            "x-f5xc-description-short": "Bot Names to be excluded for the defined match criteria.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8080,6 +8443,7 @@
               "ves.io.schema.rules.repeated.max_items": "1024",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Signature IDs to be excluded for the defined match criteria.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8104,6 +8468,7 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Violations to be excluded for the defined match criteria.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8112,6 +8477,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria.",
+        "x-f5xc-description-medium": "Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyAppFirewallDetectionControl",
           "required_fields": [
@@ -8151,6 +8518,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check.",
+            "x-f5xc-description-medium": "Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -8178,6 +8547,8 @@
               "ves.io.schema.rules.uint32.gte": "0",
               "ves.io.schema.rules.uint32.lte": "299999999"
             },
+            "x-f5xc-description-short": "The allowed values for signature ID are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the...",
+            "x-f5xc-description-medium": "The allowed values for signature ID are 0 and in the range of 200000001-299999999. 0 implies that all signatures will be excluded for the specified context. Required: YES.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -8189,6 +8560,7 @@
             "x-field-mutability": "read-only"
           }
         },
+        "x-f5xc-description-short": "App Firewall signature context changes to be applied for this request.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyAppFirewallSignatureContext",
           "required_fields": [
@@ -8227,6 +8599,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "128"
             },
+            "x-f5xc-description-short": "Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check.",
+            "x-f5xc-description-medium": "Relevant only for contexts: Header, Cookie and Parameter. Name of the Context that the WAF Exclusion Rules will check. Wildcard matching can be used by prefixing or suffixing the context name with an wildcard asterisk (*).",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -8239,6 +8613,7 @@
             "$ref": "#/components/schemas/app_firewallAppFirewallViolationType"
           }
         },
+        "x-f5xc-description-short": "App Firewall violation context changes to be applied for this request.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyAppFirewallViolationContext",
           "required_fields": [
@@ -8286,6 +8661,8 @@
               "ves.io.schema.rules.repeated.min_items": "1",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy.",
+            "x-f5xc-description-medium": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8294,6 +8671,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy.",
+        "x-f5xc-description-medium": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyAsnMatchList",
           "required_fields": [
@@ -8331,6 +8710,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.repeated.max_items": "4"
             },
+            "x-f5xc-description-short": "List of references to bgp_asn_set objects. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8339,6 +8719,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Match any AS number contained in the list of bgp_asn_sets.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyAsnMatcherType",
           "required_fields": [
@@ -8382,6 +8763,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "Specifies bot to be excluded by its name.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyBotNameContext",
           "required_fields": [
@@ -8499,6 +8881,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_bytes": "256"
             },
+            "x-f5xc-description-short": "Case-sensitive cookie name. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -8508,9 +8891,11 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691920+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244414+00:00"
           }
         },
+        "x-f5xc-description-short": "Cookie matcher specifies the name of a single cookie and the criteria to match it.",
+        "x-f5xc-description-medium": "Cookie matcher specifies the name of a single cookie and the criteria to match it. The input has a list of values for each cookie in the request. A cookie matcher can check for one of the following: * Presence or absence of the cookie * At least one of the values for the cookie in the request...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyCookieMatcherType",
           "required_fields": [
@@ -8818,6 +9203,8 @@
         "default": "CONTEXT_ANY",
         "x-displayname": "WAF Exclusion Context OPTIONS.",
         "x-ves-proto-enum": "ves.io.schema.policy.DetectionContext",
+        "x-f5xc-description-short": "The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY...",
+        "x-f5xc-description-medium": "The available contexts for Exclusion rules. - CONTEXT_ANY: CONTEXT_ANY Detection will be excluded for all contexts. - CONTEXT_BODY: CONTEXT_BODY Detection will be excluded for the request body. - CONTEXT_REQUEST: CONTEXT_REQUEST Detection will be excluded for the request. - CONTEXT_RESPONSE...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyDetectionContext",
           "required_fields": [],
@@ -8869,6 +9256,7 @@
               "ves.io.schema.rules.repeated.max_items": "16",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of methods values to match against.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8877,6 +9265,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "HTTP method matcher specifies a list of methods to match an input HTTP method.",
+        "x-f5xc-description-medium": "HTTP method matcher specifies a list of methods to match an input HTTP method. The match is considered successful if the input method is a member of the list. The result of the match based on the method list is inverted if invert_matcher is true.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyHttpMethodMatcherType",
           "required_fields": [
@@ -8911,6 +9301,8 @@
         "default": "SPAM_SOURCES",
         "x-displayname": "IP Threat Category.",
         "x-ves-proto-enum": "ves.io.schema.policy.IPThreatCategory",
+        "x-f5xc-description-short": "The IP threat categories to use when a policy based IP threat category is configured. - SPAM_SOURCES: SPAM_SOURCES - WINDOWS_EXPLOITS...",
+        "x-f5xc-description-medium": "The IP threat categories to use when a policy based IP threat category is configured. - SPAM_SOURCES: SPAM_SOURCES - WINDOWS_EXPLOITS: WINDOWS_EXPLOITS - WEB_ATTACKS: WEB_ATTACKS - BOTNETS: BOTNETS - SCANNERS: SCANNERS - REPUTATION: REPUTATION - PHISHING: PHISHING - PROXY: PROXY ...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyIPThreatCategory",
           "required_fields": [],
@@ -8959,6 +9351,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.repeated.max_items": "4"
             },
+            "x-f5xc-description-short": "List of references to ip_prefix_set objects. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -8967,6 +9360,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
+        "x-f5xc-description-medium": "Match any IP prefix contained in the list of ip_prefix_sets. The result of the match is inverted if invert_matcher is true.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyIpMatcherType",
           "required_fields": [
@@ -9006,6 +9401,7 @@
               "ves.io.schema.rules.repeated.max_items": "16",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of exact JA4 TLS fingerprint to match the input JA4 TLS fingerprint against.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9014,6 +9410,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different...",
+        "x-f5xc-description-medium": "Extended version of JA3 that includes additional fields for more comprehensive fingerprinting of SSL/TLS clients and potentially has a different structure and length.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyJA4TlsFingerprintMatcherType",
           "required_fields": [
@@ -9083,9 +9481,11 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691938+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244433+00:00"
           }
         },
+        "x-f5xc-description-short": "JWT claim matcher specifies the name of a single JWT claim and the criteria for the input request to match it.",
+        "x-f5xc-description-medium": "JWT claim matcher specifies the name of a single JWT claim and the criteria for the input request to match it. The input has a list of actual values for each JWT claim name in the JWT payload. A JWT claim matcher can check for one of the following: * Presence or absence of the JWT Claim in the...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyJWTClaimMatcherType",
           "required_fields": [
@@ -9125,6 +9525,8 @@
         "default": "TLS_FINGERPRINT_NONE",
         "x-displayname": "TLS known fingerprint class.",
         "x-ves-proto-enum": "ves.io.schema.policy.KnownTlsFingerprintClass",
+        "x-f5xc-description-short": "Specifies known TLS fingerprint classes - TLS_FINGERPRINT_NONE: TLS_FINGERPRINT_NONE No TLS fingerprint - ANY_MALICIOUS_FINGERPRINT...",
+        "x-f5xc-description-medium": "Specifies known TLS fingerprint classes - TLS_FINGERPRINT_NONE: TLS_FINGERPRINT_NONE No TLS fingerprint - ANY_MALICIOUS_FINGERPRINT: ANY_MALICIOUS_FINGERPRINT TLS fingerprints known to be associated with malicious clients - ADWARE: ADWARE TLS fingerprints known to be associated with adware ...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyKnownTlsFingerprintClass",
           "required_fields": [],
@@ -9166,6 +9568,7 @@
               "ves.io.schema.rules.repeated.max_items": "64",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of exact values to match the input against.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9199,6 +9602,7 @@
               "ves.io.schema.rules.repeated.max_items": "16",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of regular expressions to match the input against.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9224,6 +9628,7 @@
               "ves.io.schema.rules.repeated.max_items": "9",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "Ordered list of transformers (starting from index 0) to be applied to the path before matching.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9232,6 +9637,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied.",
+        "x-f5xc-description-medium": "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyMatcherType",
           "required_fields": [
@@ -9297,6 +9704,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "List of IP Prefix strings to match against.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyPrefixMatchList",
           "required_fields": [
@@ -9356,6 +9764,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.repeated.max_items": "16"
             },
+            "x-f5xc-example": "{\"key\": \"value\"}",
             "x-f5xc-description-short": "List of predicates for various HTTP headers that need to match.",
             "x-f5xc-description-medium": "List of predicates for various HTTP headers that need to match. The criteria for matching each HTTP header are described in individual HeaderMatcherType instances. The actual HTTP header values are extracted from the request API as a list of strings for each HTTP header type.",
             "x-f5xc-required-for": {
@@ -9468,6 +9877,7 @@
               "ves.io.schema.rules.string.max_len": "256",
               "ves.io.schema.rules.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Exclusive with [any_domain suffix_value] Exact domain name.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9483,6 +9893,8 @@
             "x-displayname": "Expiration Timestamp.",
             "x-ves-example": "2019-12-31:44:34.171543432Z.",
             "x-f5xc-example": "2019-12-31:44:34.171543432Z",
+            "x-f5xc-description-short": "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired.",
+            "x-f5xc-description-medium": "Specifies expiration_timestamp the RFC 3339 format timestamp at which the containing rule is considered to be logically expired. The rule continues to exist in the configuration but is not applied anymore.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -9539,6 +9951,8 @@
               "ves.io.schema.rules.string.http_path": "true",
               "ves.io.schema.rules.string.max_len": "256"
             },
+            "x-f5xc-description-short": "Exclusive with [any_path path_regex] Path prefix to match (e.g. The value / will match on all paths)",
+            "x-f5xc-description-medium": "Exclusive with [any_path path_regex] Path prefix to match (e.g. The value / will match on all paths).",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -9563,6 +9977,8 @@
               "ves.io.schema.rules.string.max_bytes": "256",
               "ves.io.schema.rules.string.regex": "true"
             },
+            "x-f5xc-description-short": "Exclusive with [any_path path_prefix] Define the regex for the path. For example, the regex ^/.*$ will match on all paths.",
+            "x-f5xc-description-medium": "Exclusive with [any_path path_prefix] Define the regex for the path. For example, the regex ^/.*$ will match on all paths.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -9590,6 +10006,8 @@
               "ves.io.schema.rules.string.max_len": "256",
               "ves.io.schema.rules.string.min_len": "1"
             },
+            "x-f5xc-description-short": "Exclusive with [any_domain exact_value] Suffix of domain name e.g \"xyz.com\" will match \"*.xyz.com\" and \"xyz.com\".",
+            "x-f5xc-description-medium": "Exclusive with [any_domain exact_value] Suffix of domain name e.g \"xyz.com\" will match \"*.xyz.com\" and \"xyz.com\".",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9601,6 +10019,8 @@
             "$ref": "#/components/schemas/schemaEmpty"
           }
         },
+        "x-f5xc-description-short": "Simple WAF exclusion rule specifies a simple set of match conditions to be matched to skip a list of WAF detections.",
+        "x-f5xc-description-medium": "Simple WAF exclusion rule specifies a simple set of match conditions to be matched to skip a list of WAF detections.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policySimpleWafExclusionRule",
           "required_fields": [
@@ -9648,6 +10068,7 @@
               "ves.io.schema.rules.repeated.max_items": "16",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of known classes of TLS fingerprints to match the input TLS JA3 fingerprint against.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9676,6 +10097,7 @@
               "ves.io.schema.rules.repeated.max_items": "16",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of exact TLS JA3 fingerprints to match the input TLS JA3 fingerprint against.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9704,6 +10126,8 @@
               "ves.io.schema.rules.repeated.max_items": "32",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-description-short": "List of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint.",
+            "x-f5xc-description-medium": "List of TLS JA3 fingerprints to be excluded when matching the input TLS JA3 fingerprint. This can be used to skip known false positives when using one or more known TLS fingerprint classes in the enclosing matcher.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9712,6 +10136,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint.",
+        "x-f5xc-description-medium": "TLS fingerprint matcher specifies multiple criteria for matching a TLS fingerprint. The set of supported positve match criteria includes a list of known classes of TLS fingerprints and a list of exact values. The match is considered successful if either of these positive criteria are satisfied...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyTlsFingerprintMatcherType",
           "required_fields": [
@@ -9744,6 +10170,8 @@
         "default": "TRANSFORMER_NONE",
         "x-displayname": "Transformer.",
         "x-ves-proto-enum": "ves.io.schema.policy.Transformer",
+        "x-f5xc-description-short": "Transformers to be applied on the part of the request before matching. - TRANSFORMER_NONE: transformer none No transformers enabled - LOWER_CASE...",
+        "x-f5xc-description-medium": "Transformers to be applied on the part of the request before matching. - TRANSFORMER_NONE: transformer none No transformers enabled - LOWER_CASE: lower case Convert string to lower case - UPPER_CASE: upper case Convert string to upper case - BASE64_DECODE: base64 decode Decode string assuming...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyTransformer",
           "required_fields": [],
@@ -9766,6 +10194,8 @@
         "default": "SECOND",
         "x-displayname": "Rate Limit Period Unit.",
         "x-ves-proto-enum": "ves.io.schema.rate_limiter.RateLimitPeriodUnit",
+        "x-f5xc-description-short": "Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period...",
+        "x-f5xc-description-medium": "Unit for the period per which the rate limit is applied. - SECOND: Second Rate limit period unit is seconds - MINUTE: Minute Rate limit period unit is minutes - HOUR: Hour Rate limit period unit is hours - DAY: Day Rate limit period unit is days.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for rate_limiterRateLimitPeriodUnit",
           "required_fields": [],
@@ -9782,6 +10212,7 @@
         "title": "Empty",
         "x-displayname": "Empty",
         "x-ves-proto-message": "ves.io.schema.Empty",
+        "x-f5xc-description-short": "Can be used for messages where no values are needed.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaEmpty",
           "required_fields": [],
@@ -9812,6 +10243,7 @@
         "default": "ANY",
         "x-displayname": "HTTP Method.",
         "x-ves-proto-enum": "ves.io.schema.HttpMethod",
+        "x-f5xc-description-short": "Specifies the HTTP method used to access a resource. Any HTTP Method.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaHttpMethod",
           "required_fields": [],
@@ -9857,6 +10289,7 @@
               "ves.io.schema.rules.repeated.items.string.min_len": "1",
               "ves.io.schema.rules.repeated.max_items": "1"
             },
+            "x-f5xc-description-short": "Expressions contains the Kubernetes style label expression for selections. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -9865,6 +10298,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the...",
+        "x-f5xc-description-medium": "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaLabelSelectorType",
           "required_fields": [
@@ -9907,7 +10342,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691980+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244476+00:00"
           },
           "name": {
             "type": "string",
@@ -9928,6 +10363,7 @@
               "ves.io.schema.rules.string.min_len": "1",
               "ves.io.schema.rules.string.ves_object_name": "true"
             },
+            "x-f5xc-description-short": "Name of the message. The value of name has to follow DNS-1035 format.",
             "maxLength": 16,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -9937,9 +10373,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691984+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244480+00:00"
           }
         },
+        "x-f5xc-description-short": "MessageMetaType is metadata (common attributes) of a message that only certain messages have.",
+        "x-f5xc-description-medium": "MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaMessageMetaType",
           "required_fields": [
@@ -9970,6 +10408,8 @@
         "default": "PROPERTY_QUERY_PARAMETERS",
         "x-displayname": "OpenAPI Validation Properties.",
         "x-ves-proto-enum": "ves.io.schema.OpenApiValidationProperties",
+        "x-f5xc-description-short": "List of required properties to validate against the OpenAPI spec Validate that all query parameters are according to the OpenAPI specification...",
+        "x-f5xc-description-medium": "List of required properties to validate against the OpenAPI spec Validate that all query parameters are according to the OpenAPI specification Validate that all path parameters are according to the OpenAPI specification Validate that the content type of the request is according to the OpenAPI...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaOpenApiValidationProperties",
           "required_fields": [],
@@ -9991,6 +10431,7 @@
         "default": "DESCENDING",
         "x-displayname": "Sort Order.",
         "x-ves-proto-enum": "ves.io.schema.SortOrder",
+        "x-f5xc-description-short": "Sort algorithm Sort in descending order Sort in ascending order.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaSortOrder",
           "required_fields": [],
@@ -10011,6 +10452,8 @@
           "TREND_SENTIMENT_NEGATIVE"
         ],
         "default": "TREND_SENTIMENT_NONE",
+        "x-f5xc-description-short": "X-displayName: \"Trend Sentiment\" trend sentiment - TREND_SENTIMENT_NONE: x-displayName: \"None\" - TREND_SENTIMENT_POSITIVE: x-displayName...",
+        "x-f5xc-description-medium": "X-displayName: \"Trend Sentiment\" trend sentiment - TREND_SENTIMENT_NONE: x-displayName: \"None\" - TREND_SENTIMENT_POSITIVE: x-displayName: \"Positive\" Indicates trend sentiment is positive - TREND_SENTIMENT_NEGATIVE: x-displayName: \"Negative\" Indicates trend sentiment is negative.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaTrendSentiment",
           "required_fields": [],
@@ -10031,6 +10474,7 @@
             "description": "X-displayName: \"Description\"\ndescription of the method used to calculate trend.",
             "title": "Description.",
             "x-f5xc-example": "Trend was calculated by comparing the avg of window size intervals of end-start Time and last window time interval",
+            "x-f5xc-description-short": "X-displayName: \"Description\" description of the method used to calculate trend.",
             "minLength": 0,
             "maxLength": 0,
             "x-f5xc-required-for": {
@@ -10041,7 +10485,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691990+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244486+00:00"
           },
           "previous_value": {
             "type": "string",
@@ -10075,9 +10519,11 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.691996+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244493+00:00"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Trend Value\" Trend value contains trend value, trend sentiment and trend calculation description and window size.",
+        "x-f5xc-description-medium": "X-displayName: \"Trend Value\" Trend value contains trend value, trend sentiment and trend calculation description and window size.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaTrendValue",
           "required_fields": [
@@ -10112,6 +10558,8 @@
             "description": "Trend value computation requested for the field present in aggregation.\n\nX-displayName: \"Trend calculation requested by the user\"\nTrend value computation requested by the user\nOptional: default is false.",
             "format": "boolean",
             "x-f5xc-example": "true",
+            "x-f5xc-description-short": "Trend value computation requested for the field present in aggregation.",
+            "x-f5xc-description-medium": "Trend value computation requested for the field present in aggregation. X-displayName: \"Trend calculation requested by the user\" Trend value computation requested by the user Optional: default is false.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10126,6 +10574,8 @@
             "$ref": "#/components/schemas/schemaapp_securityMultiFieldAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Aggregation Request\" Aggregation request to provide analytics data over the security events.",
+        "x-f5xc-description-medium": "X-displayName: \"Aggregation Request\" Aggregation request to provide analytics data over the security events.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityAggregationRequest",
           "required_fields": [
@@ -10152,6 +10602,8 @@
             "$ref": "#/components/schemas/schemaapp_securityKeyField"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Cardinality Aggregation\" GET approximate count of distinct values for the field in the security event.",
+        "x-f5xc-description-medium": "X-displayName: \"Cardinality Aggregation\" GET approximate count of distinct values for the field in the security event.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityCardinalityAggregation",
           "required_fields": [
@@ -10189,6 +10641,7 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nThis option provides sub-aggregation for each date bucket.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each date bucket.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10197,6 +10650,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Date Aggregation\" Aggregate security events based on timestamp in the security event.",
+        "x-f5xc-description-medium": "X-displayName: \"Date Aggregation\" Aggregate security events based on timestamp in the security event.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityDateAggregation",
           "required_fields": [
@@ -10222,6 +10677,8 @@
             "$ref": "#/components/schemas/schemaapp_securityMultiFieldAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Date SubAggregation\" Aggregate security events based on one of the sub aggregation types.",
+        "x-f5xc-description-medium": "X-displayName: \"Date SubAggregation\" Aggregate security events based on one of the sub aggregation types.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityDateSubAggregation",
           "required_fields": [
@@ -10250,6 +10707,8 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nThis option provides sub-aggregation for each field aggregation bucket.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each field aggregation bucket.",
+            "x-f5xc-description-medium": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each field aggregation bucket.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10263,6 +10722,7 @@
             "title": "Topk",
             "format": "int64",
             "x-f5xc-example": "10",
+            "x-f5xc-description-short": "X-displayName: \"TopK\" Number of top field values to be returned in the response.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -10273,6 +10733,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field Aggregation\" Aggregate security events based on the key fields in the security event.",
+        "x-f5xc-description-medium": "X-displayName: \"Field Aggregation\" Aggregate security events based on the key fields in the security event.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityFieldAggregation",
           "required_fields": [
@@ -10297,6 +10759,8 @@
             "$ref": "#/components/schemas/schemaapp_securityCardinalityAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Field SubAggregation\" Aggregate security events in each field bucket based on one of the sub aggregation types.",
+        "x-f5xc-description-medium": "X-displayName: \"Field SubAggregation\" Aggregate security events in each field bucket based on one of the sub aggregation types.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityFieldSubAggregation",
           "required_fields": [
@@ -10377,6 +10841,8 @@
           "MALWARE_RECOMMENDED_ACTION"
         ],
         "default": "CITY",
+        "x-f5xc-description-short": "X-displayName: \"Key Field\" Security events can be aggregated based on these fields. - CITY: x-displayName: \"City\" - COUNTRY: x-displayName...",
+        "x-f5xc-description-medium": "X-displayName: \"Key Field\" Security events can be aggregated based on these fields. - CITY: x-displayName: \"City\" - COUNTRY: x-displayName: \"Country\" - SEC_EVENT_TYPE: x-displayName: \"Security Event Type\" - SRC_SITE: x-displayName: \"Source Site\" - VH_NAME: x-displayName: \"Virtual Host Name\" ...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityKeyField",
           "required_fields": [],
@@ -10395,6 +10861,8 @@
           "SUSPICION_SCORE"
         ],
         "default": "SUSPICION_SCORE",
+        "x-f5xc-description-short": "X-displayName: \"Metric Field\" Metrics can be computed based on these fields. - SUSPICION_SCORE: x-displayName: \"Suspicion Score\".",
+        "x-f5xc-description-medium": "X-displayName: \"Metric Field\" Metrics can be computed based on these fields. - SUSPICION_SCORE: x-displayName: \"Suspicion Score\".",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityMetricField",
           "required_fields": [],
@@ -10414,6 +10882,8 @@
             "$ref": "#/components/schemas/schemaapp_securityPercentileAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Metrics Aggregation\" Computes metrics based on values for the field in the security event.",
+        "x-f5xc-description-medium": "X-displayName: \"Metrics Aggregation\" Computes metrics based on values for the field in the security event.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityMetricsAggregation",
           "required_fields": [
@@ -10441,6 +10911,8 @@
             "type": "object",
             "description": "X-displayName: \"Sub Aggregation\"\nThis option provides sub-aggregation for each field aggregation bucket.",
             "title": "Sub aggregation.",
+            "x-f5xc-description-short": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each field aggregation bucket.",
+            "x-f5xc-description-medium": "X-displayName: \"Sub Aggregation\" This option provides sub-aggregation for each field aggregation bucket.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10454,6 +10926,7 @@
             "title": "Topk",
             "format": "int64",
             "x-f5xc-example": "10",
+            "x-f5xc-description-short": "X-displayName: \"TopK\" Number of top field values to be returned in the response.",
             "minimum": 0,
             "maximum": 2147483647,
             "x-f5xc-required-for": {
@@ -10464,6 +10937,8 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Multi-Field Aggregation\" Aggregate security events based on the multiple fields in the security event.",
+        "x-f5xc-description-medium": "X-displayName: \"Multi-Field Aggregation\" Aggregate security events based on the multiple fields in the security event.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityMultiFieldAggregation",
           "required_fields": [
@@ -10488,6 +10963,8 @@
             "$ref": "#/components/schemas/schemaapp_securityCardinalityAggregation"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Multi Field SubAggregation\" Aggregate security events in each MultiTerms bucket based on one of the sub aggregation types.",
+        "x-f5xc-description-medium": "X-displayName: \"Multi Field SubAggregation\" Aggregate security events in each MultiTerms bucket based on one of the sub aggregation types.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityMultiFieldSubAggregation",
           "required_fields": [
@@ -10521,6 +10998,8 @@
           "JA4_TLS_FINGERPRINT_COUNTRY"
         ],
         "default": "ASN_COUNTRY",
+        "x-f5xc-description-short": "X-displayName: \"Multi-Key Field\" Security events can be aggregated based on these multiple key fields - ASN_COUNTRY: x-displayName: \"ASN, Country\"...",
+        "x-f5xc-description-medium": "X-displayName: \"Multi-Key Field\" Security events can be aggregated based on these multiple key fields - ASN_COUNTRY: x-displayName: \"ASN, Country\" Aggregated by (keyfield.asn, keyfield.country) - DOMAIN_METHOD_API_EP: x-displayName: \"Domain, Method, API Endpoint\" Aggregated by (keyfield.domain...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityMultiKeyField",
           "required_fields": [],
@@ -10545,6 +11024,7 @@
             "title": "Percent",
             "format": "double",
             "x-f5xc-example": "[99.0]",
+            "x-f5xc-description-short": "X-displayName: \"Percent\" x-required Percentile for which value is calculated.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10553,6 +11033,7 @@
             }
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Percentile Aggregation\" Calculates percentile over numeric values for a field.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaapp_securityPercentileAggregation",
           "required_fields": [
@@ -10616,6 +11097,7 @@
               "ves.io.schema.rules.string.http_header_field": "true",
               "ves.io.schema.rules.string.max_bytes": "256"
             },
+            "x-f5xc-description-short": "Case-insensitive HTTP header name. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -10625,9 +11107,11 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.692040+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244538+00:00"
           }
         },
+        "x-f5xc-description-short": "Header matcher specifies the name of a single HTTP header and the criteria for the input request to match it.",
+        "x-f5xc-description-medium": "Header matcher specifies the name of a single HTTP header and the criteria for the input request to match it. The input has a list of actual values for each header name in the original HTTP request. A header matcher can check for one of the following: * Presence or absence of the header in the...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemapolicyHeaderMatcherType",
           "required_fields": [
@@ -10671,6 +11155,9 @@
               "ves.io.schema.rules.repeated.max_items": "32",
               "ves.io.schema.rules.repeated.unique": "true"
             },
+            "x-f5xc-example": "{\"key\": \"value\"}",
+            "x-f5xc-description-short": "The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions Required: YES.",
+            "x-f5xc-description-medium": "The IP threat categories is obtained from the list and is used to auto-generate equivalent label selection expressions Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10739,6 +11226,7 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.max_bytes": "256"
             },
+            "x-f5xc-description-short": "Case-sensitive HTTP query parameter name. Required: YES.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -10748,9 +11236,11 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.692052+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244550+00:00"
           }
         },
+        "x-f5xc-description-short": "Query parameter matcher specifies the name of a single query parameter and the criteria for the input request to match it.",
+        "x-f5xc-description-medium": "Query parameter matcher specifies the name of a single query parameter and the criteria for the input request to match it. The input has a list of actual values for each query parameter name in the original HTTP request. A query parameter matcher can check for one of the following: * Presence or...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemapolicyQueryParameterMatcherType",
           "required_fields": [
@@ -10794,6 +11284,8 @@
               "ves.io.schema.rules.string.max_bytes": "128",
               "ves.io.schema.rules.string.min_bytes": "1"
             },
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -10802,7 +11294,7 @@
             },
             "x-original-maxLength": 128,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.692056+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244554+00:00"
           },
           "namespace": {
             "type": "string",
@@ -10818,6 +11310,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_bytes": "64"
             },
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -10827,7 +11321,7 @@
             },
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.692060+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244559+00:00"
           },
           "tenant": {
             "type": "string",
@@ -10843,6 +11337,8 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_bytes": "64"
             },
+            "x-f5xc-description-short": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g.",
+            "x-f5xc-description-medium": "When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -10854,9 +11350,11 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 64,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-06T16:57:01.692064+00:00"
+            "x-reconciled-at": "2026-01-07T03:07:42.244563+00:00"
           }
         },
+        "x-f5xc-description-short": "Type establishes a direct reference from one object(the referrer) to another(the referred).",
+        "x-f5xc-description-medium": "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaviewsObjectRefType",
           "required_fields": [
@@ -10880,6 +11378,8 @@
             "$ref": "#/components/schemas/suspicious_user_logNumKeyField"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Avg aggregation\" GET the average value of the numeric values extracted from the field in the suspicious user log.",
+        "x-f5xc-description-medium": "X-displayName: \"Avg aggregation\" GET the average value of the numeric values extracted from the field in the suspicious user log.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for suspicious_user_logAvgAggregation",
           "required_fields": [
@@ -10901,6 +11401,8 @@
             "$ref": "#/components/schemas/suspicious_user_logNumKeyField"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Max aggregation\" GET the maximum value among the numeric values extracted from the field in the suspicious user log.",
+        "x-f5xc-description-medium": "X-displayName: \"Max aggregation\" GET the maximum value among the numeric values extracted from the field in the suspicious user log.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for suspicious_user_logMaxAggregation",
           "required_fields": [
@@ -10922,6 +11424,8 @@
             "$ref": "#/components/schemas/suspicious_user_logNumKeyField"
           }
         },
+        "x-f5xc-description-short": "X-displayName: \"Min aggregation\" GET the minimum value among the numeric values extracted from the field in the suspicious user log.",
+        "x-f5xc-description-medium": "X-displayName: \"Min aggregation\" GET the minimum value among the numeric values extracted from the field in the suspicious user log.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for suspicious_user_logMinAggregation",
           "required_fields": [
@@ -10956,6 +11460,8 @@
           "WAF_SUSPICION_SCORE"
         ],
         "default": "SUSPICION_SCORE",
+        "x-f5xc-description-short": "X-displayName: \"Num-Key Field\" suspicious user log can be aggregated based on these numeric fields. - SUSPICION_SCORE: x-displayName: \"SUSPICION...",
+        "x-f5xc-description-medium": "X-displayName: \"Num-Key Field\" suspicious user log can be aggregated based on these numeric fields. - SUSPICION_SCORE: x-displayName: \"SUSPICION SCORE\" - BEHAVIOR_ANOMALY_SCORE: x-displayName: \"BEHAVIOR ANOMALY SCORE\" - BOT_DEFENSE_SEC_EVENT_COUNT: x-displayName: \"BOT DEFENSE SEC EVENT COUNT\" ...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for suspicious_user_logNumKeyField",
           "required_fields": [],

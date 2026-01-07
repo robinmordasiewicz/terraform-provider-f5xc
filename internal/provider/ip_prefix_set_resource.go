@@ -141,7 +141,7 @@ func (r *IPPrefixSetResource) Schema(ctx context.Context, req resource.SchemaReq
 				NestedObject: schema.NestedBlockObject{
 					Attributes: map[string]schema.Attribute{
 						"description_spec": schema.StringAttribute{
-							MarkdownDescription: "Description.",
+							MarkdownDescription: "Description. Human-readable description text",
 							Optional:            true,
 						},
 						"ipv4_prefix": schema.StringAttribute{

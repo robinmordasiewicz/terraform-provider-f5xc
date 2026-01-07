@@ -3362,7 +3362,7 @@ A [`jwks_config`](#jwt-validation-jwks-config) block (within [`jwt_validation`](
 
 A [`mandatory_claims`](#jwt-validation-mandatory-claims) block (within [`jwt_validation`](#jwt-validation)) supports the following:
 
-<a id="names-2ccfbe"></a>&#x2022; [`claim_names`](#names-2ccfbe) - Optional List<br>Claim Names
+<a id="names-2ccfbe"></a>&#x2022; [`claim_names`](#names-2ccfbe) - Optional List<br>Claim Names. Human-readable name for the resource
 
 #### JWT Validation Reserved Claims
 
@@ -4106,19 +4106,19 @@ An [`action_block`](#rate-limit-rate-limiter-action-block) block (within [`rate_
 
 A [`hours`](#hours-fe2333) block (within [`rate_limit.rate_limiter.action_block`](#rate-limit-rate-limiter-action-block)) supports the following:
 
-<a id="duration-617314"></a>&#x2022; [`duration`](#duration-617314) - Optional Number<br>Duration
+<a id="duration-617314"></a>&#x2022; [`duration`](#duration-617314) - Optional Number<br>Duration. Configuration parameter for duration
 
 #### Rate Limit Rate Limiter Action Block Minutes
 
 A [`minutes`](#minutes-c83f64) block (within [`rate_limit.rate_limiter.action_block`](#rate-limit-rate-limiter-action-block)) supports the following:
 
-<a id="duration-534bd9"></a>&#x2022; [`duration`](#duration-534bd9) - Optional Number<br>Duration
+<a id="duration-534bd9"></a>&#x2022; [`duration`](#duration-534bd9) - Optional Number<br>Duration. Configuration parameter for duration
 
 #### Rate Limit Rate Limiter Action Block Seconds
 
 A [`seconds`](#seconds-8810ec) block (within [`rate_limit.rate_limiter.action_block`](#rate-limit-rate-limiter-action-block)) supports the following:
 
-<a id="duration-dfe2a4"></a>&#x2022; [`duration`](#duration-dfe2a4) - Optional Number<br>Duration
+<a id="duration-dfe2a4"></a>&#x2022; [`duration`](#duration-dfe2a4) - Optional Number<br>Duration. Configuration parameter for duration
 
 #### Ring Hash
 

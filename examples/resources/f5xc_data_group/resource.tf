@@ -20,7 +20,7 @@ resource "f5xc_data_group" "example" {
   address_records {
     # Configure address_records settings
   }
-  # Address records.
+  # Address records. Configuration parameter for records
   records {
     # Configure records settings
   }

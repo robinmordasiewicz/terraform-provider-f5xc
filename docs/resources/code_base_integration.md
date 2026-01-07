@@ -152,7 +152,7 @@ A [`bitbucket_server`](#code-base-integration-bitbucket-server) block (within [`
 
 <a id="username-9a8614"></a>&#x2022; [`username`](#username-9a8614) - Optional String<br>BitBucket Server Username
 
-<a id="ssl-af2ade"></a>&#x2022; [`verify_ssl`](#ssl-af2ade) - Optional Bool<br>Verify SSL
+<a id="ssl-af2ade"></a>&#x2022; [`verify_ssl`](#ssl-af2ade) - Optional Bool<br>Verify SSL. Configuration parameter for verify SSL
 
 #### Code Base Integration Bitbucket Server Passwd
 
@@ -178,7 +178,7 @@ A [`github`](#code-base-integration-github) block (within [`code_base_integratio
 
 <a id="code-base-integration-github-username"></a>&#x2022; [`username`](#code-base-integration-github-username) - Optional String<br>GitHub Username
 
-<a id="code-base-integration-github-verify-ssl"></a>&#x2022; [`verify_ssl`](#code-base-integration-github-verify-ssl) - Optional Bool<br>GitHub Verify SSL
+<a id="code-base-integration-github-verify-ssl"></a>&#x2022; [`verify_ssl`](#code-base-integration-github-verify-ssl) - Optional Bool<br>GitHub Verify SSL. Configuration parameter for verify SSL
 
 #### Code Base Integration Github Access Token
 

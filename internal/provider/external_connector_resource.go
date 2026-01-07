@@ -366,7 +366,7 @@ func (r *ExternalConnectorResource) Schema(ctx context.Context, req resource.Sch
 								MarkdownDescription: "Keepalive Timer.",
 								Attributes: map[string]schema.Attribute{
 									"timeout": schema.Int64Attribute{
-										MarkdownDescription: "Keepalive Timer.",
+										MarkdownDescription: "Keepalive Timer. Operation timeout duration",
 										Optional:            true,
 									},
 								},

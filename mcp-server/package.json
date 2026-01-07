@@ -1,6 +1,6 @@
 {
   "name": "@robinmordasiewicz/f5xc-terraform-mcp",
-  "version": "2.15.5",
+  "version": "3.4.0",
   "description": "MCP server for F5 Distributed Cloud Terraform provider - documentation, 270+ OpenAPI specs, subscription info, and addon activation workflows for AI assistants",
   "type": "module",
   "main": "dist/index.js",

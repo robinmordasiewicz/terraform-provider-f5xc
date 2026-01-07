@@ -105,19 +105,19 @@ An [`action_block`](#limits-action-block) block (within [`limits`](#limits)) sup
 
 A [`hours`](#limits-action-block-hours) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
-<a id="limits-action-block-hours-duration"></a>&#x2022; [`duration`](#limits-action-block-hours-duration) - Optional Number<br>Duration
+<a id="limits-action-block-hours-duration"></a>&#x2022; [`duration`](#limits-action-block-hours-duration) - Optional Number<br>Duration. Configuration parameter for duration
 
 #### Limits Action Block Minutes
 
 A [`minutes`](#limits-action-block-minutes) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
-<a id="limits-action-block-minutes-duration"></a>&#x2022; [`duration`](#limits-action-block-minutes-duration) - Optional Number<br>Duration
+<a id="limits-action-block-minutes-duration"></a>&#x2022; [`duration`](#limits-action-block-minutes-duration) - Optional Number<br>Duration. Configuration parameter for duration
 
 #### Limits Action Block Seconds
 
 A [`seconds`](#limits-action-block-seconds) block (within [`limits.action_block`](#limits-action-block)) supports the following:
 
-<a id="limits-action-block-seconds-duration"></a>&#x2022; [`duration`](#limits-action-block-seconds-duration) - Optional Number<br>Duration
+<a id="limits-action-block-seconds-duration"></a>&#x2022; [`duration`](#limits-action-block-seconds-duration) - Optional Number<br>Duration. Configuration parameter for duration
 
 #### Timeouts
 

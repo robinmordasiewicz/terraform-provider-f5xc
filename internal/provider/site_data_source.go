@@ -42,7 +42,7 @@ func (d *SiteDataSource) Metadata(ctx context.Context, req datasource.MetadataRe
 
 func (d *SiteDataSource) Schema(ctx context.Context, req datasource.SchemaRequest, resp *datasource.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		MarkdownDescription: "Manages virtual site object in given namespace. in F5 Distributed Cloud.",
+		MarkdownDescription: "Manages a Site resource in F5 Distributed Cloud for secure mesh site specification. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				MarkdownDescription: "Unique identifier for the resource.",

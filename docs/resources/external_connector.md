@@ -126,7 +126,7 @@ An [`ike_parameters`](#ipsec-ike-parameters) block (within [`ipsec`](#ipsec)) su
 
 A [`dpd_keep_alive_timer`](#timer-0d12ec) block (within [`ipsec.ike_parameters`](#ipsec-ike-parameters)) supports the following:
 
-<a id="timeout-a4e757"></a>&#x2022; [`timeout`](#timeout-a4e757) - Optional Number<br>Keepalive Timer
+<a id="timeout-a4e757"></a>&#x2022; [`timeout`](#timeout-a4e757) - Optional Number<br>Keepalive Timer. Operation timeout duration
 
 #### Ipsec IKE Parameters IKE Phase1 Profile
 

@@ -71,7 +71,7 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`ipv4_prefixes`](#ipv4-prefixes) block supports the following:
 
-<a id="ipv4-prefixes-description-spec"></a>&#x2022; [`description_spec`](#ipv4-prefixes-description-spec) - Optional String<br>Description
+<a id="ipv4-prefixes-description-spec"></a>&#x2022; [`description_spec`](#ipv4-prefixes-description-spec) - Optional String<br>Description. Human-readable description text
 
 <a id="ipv4-prefixes-ipv4-prefix"></a>&#x2022; [`ipv4_prefix`](#ipv4-prefixes-ipv4-prefix) - Optional String<br>IPv4 Prefix
 

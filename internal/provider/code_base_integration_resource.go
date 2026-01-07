@@ -605,7 +605,7 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 								Optional:            true,
 							},
 							"verify_ssl": schema.BoolAttribute{
-								MarkdownDescription: "Verify SSL. Configuration parameter for verify ssl",
+								MarkdownDescription: "Verify SSL.",
 								Optional:            true,
 							},
 						},
@@ -656,7 +656,7 @@ func (r *CodeBaseIntegrationResource) Schema(ctx context.Context, req resource.S
 								Optional:            true,
 							},
 							"verify_ssl": schema.BoolAttribute{
-								MarkdownDescription: "GitHub Verify SSL. Configuration parameter for verify ssl",
+								MarkdownDescription: "GitHub Verify SSL.",
 								Optional:            true,
 							},
 						},

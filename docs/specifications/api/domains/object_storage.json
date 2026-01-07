@@ -3,7 +3,7 @@
   "info": {
     "title": "Object Storage",
     "description": "Blob management for application component delivery across namespaces. Time-limited download links with cryptographic signing protect asset retrieval. Version-controlled packages organized by operating system type support artifact discovery. Query filtering by name, type, and release number enables programmatic access to integrator libraries and protection modules for mobile deployments.",
-    "version": "2.0.16",
+    "version": "2.0.15",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -2316,7 +2316,6 @@
         "title": "Empty",
         "x-displayname": "Empty",
         "x-ves-proto-message": "ves.io.schema.Empty",
-        "x-f5xc-description-short": "Can be used for messages where no values are needed.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaEmpty",
           "required_fields": [],
@@ -2347,7 +2346,6 @@
         "default": "ANY",
         "x-displayname": "HTTP Method.",
         "x-ves-proto-enum": "ves.io.schema.HttpMethod",
-        "x-f5xc-description-short": "Specifies the HTTP method used to access a resource. Any HTTP Method.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaHttpMethod",
           "required_fields": [],
@@ -2380,7 +2378,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.bytes.max_len": "5242880"
             },
-            "x-f5xc-description-short": "Exclusive with [string_value] Binary object contents. Should be encoded in base64 scheme.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2403,7 +2400,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.in": "[\\\"\\\", \\\"json\\\", \\\"yaml\\\", \\\"txt\\\", \\\"bin\\\"]"
             },
-            "x-f5xc-description-short": "The optional content format associated with object.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2427,7 +2423,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "512"
             },
-            "x-f5xc-description-short": "The optional description associated with object.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -2437,7 +2432,7 @@
             },
             "x-original-maxLength": 512,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659075+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271014+00:00"
           },
           "mobile_app_shield": {
             "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes"
@@ -2470,7 +2465,6 @@
               "ves.io.schema.rules.string.min_len": "1",
               "ves.io.schema.rules.string.ves_object_name": "true"
             },
-            "x-f5xc-description-short": "Name of the stored_object. Required: YES.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -2479,7 +2473,7 @@
             },
             "x-original-maxLength": 512,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659085+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271024+00:00"
           },
           "namespace": {
             "type": "string",
@@ -2495,7 +2489,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
-            "x-f5xc-description-short": "Namespace in which object is to be created Required: YES.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -2506,7 +2499,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659090+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271029+00:00"
           },
           "no_attributes": {
             "$ref": "#/components/schemas/schemaEmpty"
@@ -2527,7 +2520,6 @@
               "ves.io.schema.rules.message.required": "true",
               "ves.io.schema.rules.string.in": "[\\\"swagger\\\", \\\"generic\\\", \\\"big-object\\\", \\\"mobile-sdk\\\", \\\"mobile-integrator\\\", \\\"mobile-app-shield\\\"]"
             },
-            "x-f5xc-description-short": "Type of the stored_object Required: YES.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2549,7 +2541,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "5242880"
             },
-            "x-f5xc-description-short": "Exclusive with [bytes_value] String formatted contents.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -2676,8 +2667,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.bytes.max_len": "5242880"
             },
-            "x-f5xc-description-short": "Exclusive with [presigned_url string_value] Binary object contents. This will be a base64 encoded string.",
-            "x-f5xc-description-medium": "Exclusive with [presigned_url string_value] Binary object contents. This will be a base64 encoded string. The client should decode it to see the actual contents of the object.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2694,7 +2683,6 @@
             "x-displayname": "Content Format.",
             "x-ves-example": "JSON, YAML.",
             "x-f5xc-example": "json, yaml",
-            "x-f5xc-description-short": "The optional content format associated with object.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -2723,7 +2711,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "5242880"
             },
-            "x-f5xc-description-short": "Exclusive with [bytes_value presigned_url] String formatted contents.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -2782,7 +2769,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659117+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271056+00:00"
           },
           "no_attributes": {
             "$ref": "#/components/schemas/schemaEmpty"
@@ -2805,7 +2792,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659123+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271061+00:00"
           },
           "versions": {
             "type": "array",
@@ -2815,7 +2802,6 @@
               "$ref": "#/components/schemas/stored_objectVersionDescriptor"
             },
             "x-displayname": "Versions",
-            "x-f5xc-description-short": "Available versions for the stored object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -2857,8 +2843,6 @@
               "$ref": "#/components/schemas/stored_objectListItemDescriptor"
             },
             "x-displayname": "Stored Object Descriptors.",
-            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
-            "x-f5xc-description-short": "Stored object names and available versions for each object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -2914,7 +2898,6 @@
             }
           }
         },
-        "x-f5xc-description-short": "Describes attributes specific to object type - mobile-app-shield.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for stored_objectMobileAppShieldAttributes",
           "required_fields": [
@@ -2963,7 +2946,6 @@
             }
           }
         },
-        "x-f5xc-description-short": "Describes attributes specific to object type - mobile-integrator.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for stored_objectMobileIntegratorAttributes",
           "required_fields": [
@@ -3004,7 +2986,6 @@
             }
           }
         },
-        "x-f5xc-description-short": "Describes attributes specific to object type - mobile-SDK.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for stored_objectMobileSDKAttributes",
           "required_fields": [
@@ -3029,8 +3010,6 @@
         "default": "ANDROID",
         "x-displayname": "Operating System type.",
         "x-ves-proto-enum": "ves.io.schema.stored_object.OSType",
-        "x-f5xc-description-short": "Defines a selection for operating system type. Its either ANDROID or IOS - ANDROID: ANDROID - IOS: IOS.",
-        "x-f5xc-description-medium": "Defines a selection for operating system type. Its either ANDROID or IOS - ANDROID: ANDROID - IOS: IOS.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for stored_objectOSType",
           "required_fields": [],
@@ -3080,7 +3059,7 @@
             "description": "The URL to upload or download the resource.",
             "title": "URL",
             "x-displayname": "URL",
-            "x-f5xc-description-short": "The URL to upload or download the resource.",
+            "x-f5xc-example": "https://example.com",
             "format": "uri",
             "minLength": 0,
             "maxLength": 1024,
@@ -3114,8 +3093,6 @@
           "PREFIX_MATCH"
         ],
         "default": "EXACT_MATCH",
-        "x-f5xc-description-short": "X-displayName: \"Query Type\" The type of search query needs to be performed. Could be EXACT_MATCH or PREFIX_MATCH.",
-        "x-f5xc-description-medium": "X-displayName: \"Query Type\" The type of search query needs to be performed. Could be EXACT_MATCH or PREFIX_MATCH. EXACT_MATCH returns the objects with exact match on the name filed, while PREFIX_MATCH returns the list of object having the 'name' as prefix.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for stored_objectQueryType",
           "required_fields": [],
@@ -3147,7 +3124,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
-            "x-f5xc-description-short": "Creation date & time for the object Required: YES.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3170,7 +3146,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "512"
             },
-            "x-f5xc-description-short": "Optional field, the Description for the object.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -3180,7 +3155,7 @@
             },
             "x-original-maxLength": 512,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659147+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271086+00:00"
           },
           "mobile_app_shield": {
             "$ref": "#/components/schemas/stored_objectMobileAppShieldAttributes"
@@ -3204,7 +3179,6 @@
               "ves.io.schema.rules.message.required": "true"
             },
             "x-f5xc-example": "example-resource",
-            "x-f5xc-description-short": "Name of the stored object Required: YES.",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -3215,7 +3189,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659155+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271093+00:00"
           },
           "namespace": {
             "type": "string",
@@ -3229,8 +3203,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
-            "x-f5xc-example": "default",
-            "x-f5xc-description-short": "Namespace of the stored object Required: YES.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -3241,7 +3213,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659159+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271097+00:00"
           },
           "no_attributes": {
             "$ref": "#/components/schemas/schemaEmpty"
@@ -3258,6 +3230,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-example": "https://example.com",
             "format": "uri",
             "minLength": 0,
             "maxLength": 1024,
@@ -3280,8 +3253,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
-            "x-f5xc-example": "v1.2.3",
-            "x-f5xc-description-short": "Version of the stored object Required: YES.",
             "minLength": 0,
             "maxLength": 1,
             "x-f5xc-required-for": {
@@ -3292,7 +3263,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659165+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271104+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -3329,8 +3300,6 @@
         "default": "STORED_OBJECT_STATUS_NONE",
         "x-displayname": "",
         "x-ves-proto-enum": "ves.io.schema.stored_object.StoredObjectResponseStatus",
-        "x-f5xc-description-short": "The stored object status represents status of create object response if object got created, updated or already exists.",
-        "x-f5xc-description-medium": "The stored object status represents status of create object response if object got created, updated or already exists.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for stored_objectStoredObjectResponseStatus",
           "required_fields": [],
@@ -3361,7 +3330,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
-            "x-f5xc-description-short": "Creation date & time for the object Required: YES.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -3384,7 +3352,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.string.max_len": "512"
             },
-            "x-f5xc-description-short": "Optional field, the Description for the object.",
             "minLength": 0,
             "x-f5xc-required-for": {
               "minimum_config": false,
@@ -3394,7 +3361,7 @@
             },
             "x-original-maxLength": 512,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659172+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271111+00:00"
           },
           "latest_version": {
             "type": "boolean",
@@ -3402,7 +3369,6 @@
             "title": "Latest_version.",
             "format": "boolean",
             "x-displayname": "Latest Version.",
-            "x-f5xc-description-short": "Tag representing if this is the latest version for the object.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -3422,6 +3388,7 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
+            "x-f5xc-example": "https://example.com",
             "format": "uri",
             "minLength": 0,
             "maxLength": 1024,
@@ -3437,7 +3404,6 @@
             "description": "Version of the stored object.",
             "title": "Version",
             "x-displayname": "Version",
-            "x-f5xc-example": "v1.2.3",
             "minLength": 0,
             "maxLength": 1,
             "x-f5xc-required-for": {
@@ -3448,7 +3414,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:22:21.659179+00:00"
+            "x-reconciled-at": "2026-01-06T16:58:18.271118+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {

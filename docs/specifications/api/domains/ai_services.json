@@ -3,7 +3,7 @@
   "info": {
     "title": "Ai Services",
     "description": "Query handling through inference routing with production and test modes. Positive and negative quality markers with detailed categorization capture assistant performance. Streaming connections support authenticated access, subscription lifecycles, and feature flags. IP provisioning services allocate infrastructure resources for model workloads across distributed systems.",
-    "version": "2.0.16",
+    "version": "2.0.15",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -2458,7 +2458,6 @@
             "x-displayname": "Namespace",
             "x-ves-example": "System",
             "x-f5xc-example": "system",
-            "x-f5xc-description-short": "Namespace of the HTTP Load Balancer for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -2469,7 +2468,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423641+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590761+00:00"
           },
           "negative_feedback": {
             "$ref": "#/components/schemas/ai_assistantNegativeFeedbackDetails"
@@ -2564,7 +2563,6 @@
             "x-displayname": "Namespace",
             "x-ves-example": "System",
             "x-f5xc-example": "system",
-            "x-f5xc-description-short": "Namespace of the HTTP Load Balancer for current request.",
             "minLength": 0,
             "maxLength": 6,
             "x-f5xc-required-for": {
@@ -2575,7 +2573,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423661+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590781+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -2634,7 +2632,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.repeated.unique": "true"
             },
-            "x-f5xc-description-short": "Follow up Queries to be given as suggestion to users.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -2760,8 +2757,6 @@
         "default": "OTHER",
         "x-displayname": "",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.NegativeFeedbackType",
-        "x-f5xc-description-short": "X-displayName \"Negative Feedback Type\" Type of Negative Feedback - OTHER: x-displayName \"Other\" Other - INACCURATE_DATA: x-displayName \"Inaccurate...",
-        "x-f5xc-description-medium": "X-displayName \"Negative Feedback Type\" Type of Negative Feedback - OTHER: x-displayName \"Other\" Other - INACCURATE_DATA: x-displayName \"Inaccurate data\" Inaccurate data - IRRELEVANT_CONTENT: x-displayName \"Irrelevant content\" Irrelevant content - POOR_FORMAT: x-displayName \"Poor format\" Poor...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for ai_assistantNegativeFeedbackType",
           "required_fields": [],
@@ -2785,8 +2780,6 @@
         "default": "UNIT_TYPE_NONE",
         "x-displayname": "Unit Type",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.common.UnitType",
-        "x-f5xc-description-short": "Unit Type defines the unit for each fields. - UNIT_TYPE_NONE: None None type - GB: GB - PERCENT: Percent - BYTE: Byte.",
-        "x-f5xc-description-medium": "Unit Type defines the unit for each fields. - UNIT_TYPE_NONE: None None type - GB: GB - PERCENT: Percent - BYTE: Byte.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for ai_assistantcommonUnitType",
           "required_fields": [],
@@ -2810,8 +2803,6 @@
         "default": "ACTION_NONE",
         "x-displayname": "Action",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.explain_log_record.Action",
-        "x-f5xc-description-short": "Action taken for the request - ACTION_NONE: None No action - ALLOW: Allow The request was allowed to pass - BLOCK: Block The request was blocked ...",
-        "x-f5xc-description-medium": "Action taken for the request - ACTION_NONE: None No action - ALLOW: Allow The request was allowed to pass - BLOCK: Block The request was blocked - REDIRECT: Redirect The request was redirected.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for ai_assistantexplain_log_recordAction",
           "required_fields": [],
@@ -2858,8 +2849,6 @@
         "default": "COLOUR_TYPE_NONE",
         "x-displayname": "Colour Type.",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.common.ColourType",
-        "x-f5xc-description-short": "Colour Type defines the colour of fields to be displayed. - COLOUR_TYPE_NONE: None No colour - DANGER: danger colour type red - INFO: info colour...",
-        "x-f5xc-description-medium": "Colour Type defines the colour of fields to be displayed. - COLOUR_TYPE_NONE: None No colour - DANGER: danger colour type red - INFO: info colour type blue - WARNING: warning colour type orange - AMBER: amber colour type yellow - SUCCESS: success colour type green - MALIBU: malibu colour type blue.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonColourType",
           "required_fields": [],
@@ -2884,8 +2873,6 @@
         "default": "COLUMN_TYPE_NONE",
         "x-displayname": "Column Type.",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.common.ColumnType",
-        "x-f5xc-description-short": "Column Type defines the data type for each column. - COLUMN_TYPE_NONE: None - STRING: string - INT: integer - FLOAT: float - BOOL: boolean.",
-        "x-f5xc-description-medium": "Column Type defines the data type for each column. - COLUMN_TYPE_NONE: None - STRING: string - INT: integer - FLOAT: float - BOOL: boolean.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonColumnType",
           "required_fields": [],
@@ -2917,7 +2904,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
-            "x-f5xc-description-short": "Key will present a placeholder in a text field to insert the link. For",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -2928,7 +2914,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423687+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590806+00:00"
           },
           "log_filters": {
             "type": "array",
@@ -2962,7 +2948,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423693+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590813+00:00"
           },
           "object_name": {
             "type": "string",
@@ -3013,13 +2999,12 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423701+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590820+00:00"
           },
           "type": {
             "$ref": "#/components/schemas/commonDashboardLinkType"
           }
         },
-        "x-f5xc-description-short": "Dashboard link will present common fields like type, namespace, object, dateFilter, logFilter.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonDashboardLink",
           "required_fields": [
@@ -3061,8 +3046,6 @@
         "default": "SECURITY_ANALYTICS_EVENTS",
         "x-displayname": "Link Type",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.common.DashboardLinkType",
-        "x-f5xc-description-short": "Link Type to be presented - SECURITY_ANALYTICS_EVENTS: SECURITY_ANALYTICS_EVENTS Security analytics dashboard...",
-        "x-f5xc-description-medium": "Link Type to be presented - SECURITY_ANALYTICS_EVENTS: SECURITY_ANALYTICS_EVENTS Security analytics dashboard: /web/workspaces/web-app-and-API-protection/../dashboard/security-dashboard/../security_analytics/events - REQUESTS_EVENTS: REQUESTS_EVENTS Requests dashboard...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonDashboardLinkType",
           "required_fields": [],
@@ -3137,8 +3120,6 @@
         "default": "DISPLAY_TYPE_NONE",
         "x-displayname": "DisplayType Type.",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.common.DisplayType",
-        "x-f5xc-description-short": "Render Type defines the format to which data has to be rendered on UI. - DISPLAY_TYPE_NONE: None None type - ICON: icon Value to be displayed as...",
-        "x-f5xc-description-medium": "Render Type defines the format to which data has to be rendered on UI. - DISPLAY_TYPE_NONE: None None type - ICON: icon Value to be displayed as ICON - PROGRESS_BAR: progress bar - DATE: date - DURATION: duration - PROVIDER_ICON: provider icon.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonDisplayType",
           "required_fields": [],
@@ -3176,7 +3157,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423715+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590833+00:00"
           },
           "title": {
             "type": "string",
@@ -3195,7 +3176,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423719+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590837+00:00"
           },
           "tooltip": {
             "type": "string",
@@ -3243,8 +3224,6 @@
         "default": "IN",
         "x-displayname": "Filter Operator.",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.common.FilterOperator",
-        "x-f5xc-description-short": "Operator for query filter - IN: Filter Operator Specifies that query result includes filter values - NOT_IN: Filter Operator Specifies that query...",
-        "x-f5xc-description-medium": "Operator for query filter - IN: Filter Operator Specifies that query result includes filter values - NOT_IN: Filter Operator Specifies that query result excludes filter values.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonFilterOperator",
           "required_fields": [],
@@ -3269,8 +3248,6 @@
         "default": "FORMAT_TYPE_NONE",
         "x-displayname": "Format Type.",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.common.FormatType",
-        "x-f5xc-description-short": "Format Type defines the format type for each fields. - FORMAT_TYPE_NONE: None No format - INLINE: Inline Key value to be displayed in inline...",
-        "x-f5xc-description-medium": "Format Type defines the format type for each fields. - FORMAT_TYPE_NONE: None No format - INLINE: Inline Key value to be displayed in inline format - BOLD: Bold Value to be displayed in bold format - REVERSE_KEY_VALUE_ORDER: ReverseKeyValueOrder Key value to be displayed in Reverse Key Value...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonFormatType",
           "required_fields": [],
@@ -3302,7 +3279,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.message.required": "true"
             },
-            "x-f5xc-description-short": "Key will present a placeholder in a text field to insert the link. For",
             "minLength": 0,
             "maxLength": 16,
             "x-f5xc-required-for": {
@@ -3313,7 +3289,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423728+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590845+00:00"
           },
           "title": {
             "type": "string",
@@ -3332,7 +3308,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423732+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590849+00:00"
           },
           "url": {
             "type": "string",
@@ -3352,7 +3328,6 @@
             }
           }
         },
-        "x-f5xc-description-short": "Generic link can have external link with full URL.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonGenericLink",
           "required_fields": [
@@ -3475,7 +3450,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423746+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590863+00:00"
           },
           "op": {
             "$ref": "#/components/schemas/commonFilterOperator"
@@ -3545,7 +3520,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423754+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590872+00:00"
           },
           "type": {
             "$ref": "#/components/schemas/commonDashboardLinkType"
@@ -3669,7 +3644,6 @@
             }
           }
         },
-        "x-f5xc-description-short": "Overlay data for creating support ticket.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonOverlayData",
           "required_fields": [
@@ -3702,8 +3676,6 @@
         "default": "STATUS_STYLE_UNKNOWN",
         "x-displayname": "Status Style.",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.common.StatusStyle",
-        "x-f5xc-description-short": "Status Style defines the colour of status to be displayed. - STATUS_STYLE_UNKNOWN: Unknown No colour - STATUS_STYLE_SUCCESS: success colour type...",
-        "x-f5xc-description-medium": "Status Style defines the colour of status to be displayed. - STATUS_STYLE_UNKNOWN: Unknown No colour - STATUS_STYLE_SUCCESS: success colour type green - STATUS_STYLE_DANGER: danger colour type red - STATUS_STYLE_WARNING: warning colour type yellow - STATUS_STYLE_INACTIVE: inactive colour type...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonStatusStyle",
           "required_fields": [],
@@ -3730,8 +3702,6 @@
         "default": "WIDGET_TYPE_NONE",
         "x-displayname": "Widget Type.",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.common.WidgetType",
-        "x-f5xc-description-short": "Widget Type defines the data type for widget. - WIDGET_TYPE_NONE: None None type - TWO_VALUE: two_value Two Value type widget ...",
-        "x-f5xc-description-medium": "Widget Type defines the data type for widget. - WIDGET_TYPE_NONE: None None type - TWO_VALUE: two_value Two Value type widget - DISTRIBUTION_CHART: distribution_chart Distribution Chart type widget - TABLE: table Table type widget - LIST: list List type widget - GRID: grid Grid type widget ...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for commonWidgetType",
           "required_fields": [],
@@ -3755,8 +3725,6 @@
         "default": "ACCURACY_NONE",
         "x-displayname": "Accuracy",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.explain_log_record.Accuracy",
-        "x-f5xc-description-short": "Specifies accuracy of the signature - ACCURACY_NONE: None No accuracy - ACCURACY_LOW: Low Specifies low accuracy of the signature ...",
-        "x-f5xc-description-medium": "Specifies accuracy of the signature - ACCURACY_NONE: None No accuracy - ACCURACY_LOW: Low Specifies low accuracy of the signature - ACCURACY_MEDIUM: Medium Specifies medium accuracy of the signature - ACCURACY_HIGH: High Specifies high accuracy of the signature.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for explain_log_recordAccuracy",
           "required_fields": [],
@@ -3807,7 +3775,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423771+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590888+00:00"
           },
           "type": {
             "type": "string",
@@ -3943,8 +3911,6 @@
         "default": "ENFORCEMENT_NONE",
         "x-displayname": "Enforcement Mode.",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.explain_log_record.EnforcementMode",
-        "x-f5xc-description-short": "Enforcement mode of WAF - ENFORCEMENT_NONE: None No enforcement - MONITORING: Monitoring Monitoring mode of WAF - BLOCKING: Blocking Blocking mode...",
-        "x-f5xc-description-medium": "Enforcement mode of WAF - ENFORCEMENT_NONE: None No enforcement - MONITORING: Monitoring Monitoring mode of WAF - BLOCKING: Blocking Blocking mode of WAF.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for explain_log_recordEnforcementMode",
           "required_fields": [],
@@ -4054,8 +4020,6 @@
         "default": "IP_REPUTATION_NONE",
         "x-displayname": "IP Reputation.",
         "x-ves-proto-enum": "ves.io.schema.ai_assistant.explain_log_record.IPReputation",
-        "x-f5xc-description-short": "Specifies IP risk/trustworthiness - IP_REPUTATION_NONE: None No IP reputation - IP_REPUTATION_LOW: Low Specifies low IP risk/trustworthiness ...",
-        "x-f5xc-description-medium": "Specifies IP risk/trustworthiness - IP_REPUTATION_NONE: None No IP reputation - IP_REPUTATION_LOW: Low Specifies low IP risk/trustworthiness - IP_REPUTATION_HIGH: High Specifies high IP risk/trustworthiness.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for explain_log_recordIPReputation",
           "required_fields": [],
@@ -4091,7 +4055,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423795+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590912+00:00"
           },
           "rsp_code": {
             "type": "integer",
@@ -4251,7 +4215,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423811+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590928+00:00"
           },
           "state": {
             "type": "string",
@@ -4260,7 +4224,6 @@
             "x-displayname": "State",
             "x-ves-example": "Enabled",
             "x-f5xc-example": "Enabled",
-            "x-f5xc-description-short": "State of the signature, can be enabled, suppressed and etc.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -4447,7 +4410,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423829+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590946+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4536,7 +4499,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423838+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590955+00:00"
           },
           "state": {
             "type": "string",
@@ -4545,7 +4508,6 @@
             "x-displayname": "State",
             "x-ves-example": "Enabled",
             "x-f5xc-example": "Enabled",
-            "x-f5xc-description-short": "State of the violation, can be enabled, suppressed and etc.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -4612,7 +4574,6 @@
               "$ref": "#/components/schemas/explain_log_recordSignature"
             },
             "x-displayname": "Signatures.",
-            "x-f5xc-description-short": "The signatures that were detected in the request.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4628,7 +4589,6 @@
               "$ref": "#/components/schemas/explain_log_recordThreatCampaign"
             },
             "x-displayname": "Threat Campaign.",
-            "x-f5xc-description-short": "Threat campaigns that were detected in the request.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4644,7 +4604,6 @@
               "$ref": "#/components/schemas/explain_log_recordViolation"
             },
             "x-displayname": "Violations.",
-            "x-f5xc-description-short": "The violations that were detected in the request.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4702,7 +4661,6 @@
               "$ref": "#/components/schemas/commonLink"
             },
             "x-displayname": "Links",
-            "x-f5xc-description-short": "Links that will be presented to the user.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4784,7 +4742,7 @@
             "maxLength": 26,
             "minLength": 15,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423861+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590977+00:00"
           },
           "title": {
             "type": "string",
@@ -4803,7 +4761,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423866+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590982+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4842,7 +4800,6 @@
               "ves.io.schema.rules.repeated.unique": "true",
               "ves.io.schema.rules.string.max_len": "6"
             },
-            "x-f5xc-description-short": "External doc links, that will be presented to the user.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4858,7 +4815,6 @@
               "$ref": "#/components/schemas/listList"
             },
             "x-displayname": "List View",
-            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -4918,8 +4874,6 @@
         "default": "SPAM_SOURCES",
         "x-displayname": "IP Threat Category.",
         "x-ves-proto-enum": "ves.io.schema.policy.IPThreatCategory",
-        "x-f5xc-description-short": "The IP threat categories to use when a policy based IP threat category is configured. - SPAM_SOURCES: SPAM_SOURCES - WINDOWS_EXPLOITS...",
-        "x-f5xc-description-medium": "The IP threat categories to use when a policy based IP threat category is configured. - SPAM_SOURCES: SPAM_SOURCES - WINDOWS_EXPLOITS: WINDOWS_EXPLOITS - WEB_ATTACKS: WEB_ATTACKS - BOTNETS: BOTNETS - SCANNERS: SCANNERS - REPUTATION: REPUTATION - PHISHING: PHISHING - PROXY: PROXY ...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for policyIPThreatCategory",
           "required_fields": [],
@@ -4962,11 +4916,9 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423878+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.590993+00:00"
           }
         },
-        "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
-        "x-f5xc-description-medium": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message. Protobuf library provides support to pack/unpack Any values in the form of utility functions or additional generated methods of the Any type. Example 1: Pack and unpack a...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for protobufAny",
           "required_fields": [
@@ -4986,7 +4938,6 @@
         "title": "Empty",
         "x-displayname": "Empty",
         "x-ves-proto-message": "ves.io.schema.Empty",
-        "x-f5xc-description-short": "Can be used for messages where no values are needed.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaEmpty",
           "required_fields": [],
@@ -5015,8 +4966,6 @@
         "default": "EOK",
         "x-displayname": "Error Code.",
         "x-ves-proto-enum": "ves.io.schema.ErrorCode",
-        "x-f5xc-description-short": "Union of all possible error-codes from system - EOK: No error - EPERMS: Permissions error - EBADINPUT: Input is not correct - ENOTFOUND: Not found...",
-        "x-f5xc-description-medium": "Union of all possible error-codes from system - EOK: No error - EPERMS: Permissions error - EBADINPUT: Input is not correct - ENOTFOUND: Not found - EEXISTS: Already exists - EUNKNOWN: Unknown/catchall error - ESERIALIZE: Error in serializing/de-serializing - EINTERNAL: Server error - EPARTIAL...",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaErrorCode",
           "required_fields": [],
@@ -5057,7 +5006,6 @@
             }
           }
         },
-        "x-f5xc-description-short": "Information about a error in API operation.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaErrorType",
           "required_fields": [
@@ -5095,7 +5043,6 @@
               "ves.io.schema.rules.repeated.unique": "true",
               "ves.io.schema.rules.string.max_len": "6"
             },
-            "x-f5xc-description-short": "External doc links, that will be presented to the user.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5119,7 +5066,6 @@
               "ves.io.schema.rules.repeated.unique": "true",
               "ves.io.schema.rules.string.max_len": "6"
             },
-            "x-f5xc-description-short": "Internal Link like dashboard links, that will be presented to the user.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5193,7 +5139,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T02:20:40.423897+00:00"
+            "x-reconciled-at": "2026-01-06T16:56:53.591011+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5235,7 +5181,6 @@
             }
           }
         },
-        "x-f5xc-description-short": "Contains the value for each rows of table.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for widgetRow",
           "required_fields": [
@@ -5266,7 +5211,6 @@
             "x-validation-rules": {
               "ves.io.schema.rules.repeated.unique": "true"
             },
-            "x-f5xc-description-short": "Lists the name of the field & corresponding properties.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5324,7 +5268,6 @@
               "$ref": "#/components/schemas/commonLink"
             },
             "x-displayname": "Links",
-            "x-f5xc-description-short": "Links that will be presented to the user.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5340,8 +5283,6 @@
               "$ref": "#/components/schemas/widgetWidgetView"
             },
             "x-displayname": "Widget View.",
-            "x-f5xc-example": "[\"item1\", \"item2\", \"item3\"]",
-            "x-f5xc-description-short": "Response will have different types of widgets.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5406,7 +5347,6 @@
         "title": "EnableFeatureRequest.",
         "x-displayname": "EnableFeature Request.",
         "x-ves-proto-message": "ves.io.schema.ai_data.bfdp.EnableFeatureRequest",
-        "x-f5xc-description-short": "Any payload to be passed on the GET Provision API.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bfdpEnableFeatureRequest",
           "required_fields": [],
@@ -5423,7 +5363,6 @@
         "title": "EnableFeatureResponse.",
         "x-displayname": "EnableFeature Response.",
         "x-ves-proto-message": "ves.io.schema.ai_data.bfdp.EnableFeatureResponse",
-        "x-f5xc-description-short": "Any payload to be passed on the GET Provision API.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bfdpEnableFeatureResponse",
           "required_fields": [],
@@ -5448,7 +5387,6 @@
             "x-displayname": "Product_name.",
             "x-ves-example": "Product_name.",
             "x-f5xc-example": "product_name",
-            "x-f5xc-description-short": "Product_name is a pipeline name for which token to be generated.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5459,7 +5397,6 @@
             }
           }
         },
-        "x-f5xc-description-short": "API to refresh token for a given pipeline.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for bfdpRefreshTokenRequest",
           "required_fields": [
@@ -5486,7 +5423,6 @@
             "x-displayname": "Result",
             "x-ves-example": "Result",
             "x-f5xc-example": "result",
-            "x-f5xc-description-short": "Result will be in JSON format having token in it.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5559,7 +5495,6 @@
             "x-displayname": "Configured_tenant_id.",
             "x-ves-example": "Configured Tenant.",
             "x-f5xc-example": "Configured Tenant",
-            "x-f5xc-description-short": "F5 product's pipeline configured tenant .",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5577,7 +5512,6 @@
             "x-displayname": "Pipleine_id.",
             "x-ves-example": "Pipleine_id.",
             "x-f5xc-example": "pipleine_id",
-            "x-f5xc-description-short": "F5 product's pipeline ID for which this tenant is configured.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5595,7 +5529,6 @@
             "x-displayname": "Pipeline_name.",
             "x-ves-example": "Pipeline_name.",
             "x-f5xc-example": "pipeline_name",
-            "x-f5xc-description-short": "F5 product's pipeline name for which this tenant is configured.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5612,7 +5545,6 @@
             "x-displayname": "Token",
             "x-ves-example": "Token name.",
             "x-f5xc-example": "token name",
-            "x-f5xc-description-short": "F5 product's pipeline token to ingest data .",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5776,8 +5708,6 @@
             "x-displayname": "Context",
             "x-ves-example": "App-VIP-pool-1.",
             "x-f5xc-example": "app-vip-pool-1",
-            "x-f5xc-description-short": "Global IP allocator context from which IP allocation will happen Optional: If not specified, gia will try to allocate IP from default IP range.",
-            "x-f5xc-description-medium": "Global IP allocator context from which IP allocation will happen Optional: If not specified, gia will try to allocate IP from default IP range.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5794,7 +5724,6 @@
             "format": "boolean",
             "x-displayname": "Use IPv6 Range.",
             "x-f5xc-example": "false",
-            "x-f5xc-description-short": "Optional: If not specified, v4 range for this tenant will be used.",
             "x-f5xc-required-for": {
               "minimum_config": false,
               "create": false,
@@ -5883,8 +5812,6 @@
             "x-displayname": "Context",
             "x-ves-example": "App-VIP-pool-1.",
             "x-f5xc-example": "app-vip-pool-1",
-            "x-f5xc-description-short": "Global IP allocator context from which IP deallocation will happen Optional: If not specified, gia will try to deallocate given IP from default IP...",
-            "x-f5xc-description-medium": "Global IP allocator context from which IP deallocation will happen Optional: If not specified, gia will try to deallocate given IP from default IP range.",
             "minLength": 0,
             "maxLength": 1024,
             "x-f5xc-required-for": {
@@ -5917,7 +5844,6 @@
             }
           }
         },
-        "x-f5xc-description-short": "Input message of the 'DeAllocateIP' RPC.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for giaDeallocateIPRequest",
           "required_fields": [
@@ -5955,7 +5881,6 @@
             }
           }
         },
-        "x-f5xc-description-short": "Output message of the 'DeAllocateIP' RPC.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for giaDeallocateIPResponse",
           "required_fields": [

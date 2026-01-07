@@ -89,20 +89,6 @@ var SiteAdminPasswordClearSecretInfoModelAttrTypes = map[string]attr.Type{
 	"url":          types.StringType,
 }
 
-// SiteAzureCredModel represents azure_cred block
-type SiteAzureCredModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteAzureCredModelAttrTypes defines the attribute types for SiteAzureCredModel
-var SiteAzureCredModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
 // SiteBlockedServicesModel represents blocked_services block
 type SiteBlockedServicesModel struct {
 	BlockedSevice []SiteBlockedServicesBlockedSeviceModel `tfsdk:"blocked_sevice"`
@@ -127,6 +113,20 @@ var SiteBlockedServicesBlockedSeviceModelAttrTypes = map[string]attr.Type{
 	"dns":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"ssh":                types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"web_user_interface": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// SiteCloudCredentialsModel represents cloud_credentials block
+type SiteCloudCredentialsModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SiteCloudCredentialsModelAttrTypes defines the attribute types for SiteCloudCredentialsModel
+var SiteCloudCredentialsModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
 }
 
 // SiteCoordinatesModel represents coordinates block
@@ -155,26 +155,28 @@ var SiteCustomDNSModelAttrTypes = map[string]attr.Type{
 
 // SiteIngressEgressGwModel represents ingress_egress_gw block
 type SiteIngressEgressGwModel struct {
-	AzureCertifiedHw               types.String                                            `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking          *SiteIngressEgressGwAcceleratedNetworkingModel          `tfsdk:"accelerated_networking"`
+	GCPCertifiedHw                 types.String                                            `tfsdk:"gcp_certified_hw"`
+	GCPZoneNames                   types.List                                              `tfsdk:"gcp_zone_names"`
+	NodeNumber                     types.Int64                                             `tfsdk:"node_number"`
 	ActiveEnhancedFirewallPolicies *SiteIngressEgressGwActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
 	ActiveForwardProxyPolicies     *SiteIngressEgressGwActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
 	ActiveNetworkPolicies          *SiteIngressEgressGwActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
-	AzNodes                        []SiteIngressEgressGwAzNodesModel                       `tfsdk:"az_nodes"`
 	DcClusterGroupInsideVn         *SiteIngressEgressGwDcClusterGroupInsideVnModel         `tfsdk:"dc_cluster_group_inside_vn"`
 	DcClusterGroupOutsideVn        *SiteIngressEgressGwDcClusterGroupOutsideVnModel        `tfsdk:"dc_cluster_group_outside_vn"`
 	ForwardProxyAllowAll           *SiteEmptyModel                                         `tfsdk:"forward_proxy_allow_all"`
 	GlobalNetworkList              *SiteIngressEgressGwGlobalNetworkListModel              `tfsdk:"global_network_list"`
-	Hub                            *SiteIngressEgressGwHubModel                            `tfsdk:"hub"`
+	InsideNetwork                  *SiteIngressEgressGwInsideNetworkModel                  `tfsdk:"inside_network"`
 	InsideStaticRoutes             *SiteIngressEgressGwInsideStaticRoutesModel             `tfsdk:"inside_static_routes"`
+	InsideSubnet                   *SiteIngressEgressGwInsideSubnetModel                   `tfsdk:"inside_subnet"`
 	NoDcClusterGroup               *SiteEmptyModel                                         `tfsdk:"no_dc_cluster_group"`
 	NoForwardProxy                 *SiteEmptyModel                                         `tfsdk:"no_forward_proxy"`
 	NoGlobalNetwork                *SiteEmptyModel                                         `tfsdk:"no_global_network"`
 	NoInsideStaticRoutes           *SiteEmptyModel                                         `tfsdk:"no_inside_static_routes"`
 	NoNetworkPolicy                *SiteEmptyModel                                         `tfsdk:"no_network_policy"`
 	NoOutsideStaticRoutes          *SiteEmptyModel                                         `tfsdk:"no_outside_static_routes"`
-	NotHub                         *SiteEmptyModel                                         `tfsdk:"not_hub"`
+	OutsideNetwork                 *SiteIngressEgressGwOutsideNetworkModel                 `tfsdk:"outside_network"`
 	OutsideStaticRoutes            *SiteIngressEgressGwOutsideStaticRoutesModel            `tfsdk:"outside_static_routes"`
+	OutsideSubnet                  *SiteIngressEgressGwOutsideSubnetModel                  `tfsdk:"outside_subnet"`
 	PerformanceEnhancementMode     *SiteIngressEgressGwPerformanceEnhancementModeModel     `tfsdk:"performance_enhancement_mode"`
 	SmConnectionPublicIP           *SiteEmptyModel                                         `tfsdk:"sm_connection_public_ip"`
 	SmConnectionPvtIP              *SiteEmptyModel                                         `tfsdk:"sm_connection_pvt_ip"`
@@ -182,41 +184,31 @@ type SiteIngressEgressGwModel struct {
 
 // SiteIngressEgressGwModelAttrTypes defines the attribute types for SiteIngressEgressGwModel
 var SiteIngressEgressGwModelAttrTypes = map[string]attr.Type{
-	"azure_certified_hw":                types.StringType,
-	"accelerated_networking":            types.ObjectType{AttrTypes: SiteIngressEgressGwAcceleratedNetworkingModelAttrTypes},
+	"gcp_certified_hw":                  types.StringType,
+	"gcp_zone_names":                    types.ListType{ElemType: types.StringType},
+	"node_number":                       types.Int64Type,
 	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: SiteIngressEgressGwActiveEnhancedFirewallPoliciesModelAttrTypes},
 	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: SiteIngressEgressGwActiveForwardProxyPoliciesModelAttrTypes},
 	"active_network_policies":           types.ObjectType{AttrTypes: SiteIngressEgressGwActiveNetworkPoliciesModelAttrTypes},
-	"az_nodes":                          types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwAzNodesModelAttrTypes}},
 	"dc_cluster_group_inside_vn":        types.ObjectType{AttrTypes: SiteIngressEgressGwDcClusterGroupInsideVnModelAttrTypes},
 	"dc_cluster_group_outside_vn":       types.ObjectType{AttrTypes: SiteIngressEgressGwDcClusterGroupOutsideVnModelAttrTypes},
 	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"global_network_list":               types.ObjectType{AttrTypes: SiteIngressEgressGwGlobalNetworkListModelAttrTypes},
-	"hub":                               types.ObjectType{AttrTypes: SiteIngressEgressGwHubModelAttrTypes},
+	"inside_network":                    types.ObjectType{AttrTypes: SiteIngressEgressGwInsideNetworkModelAttrTypes},
 	"inside_static_routes":              types.ObjectType{AttrTypes: SiteIngressEgressGwInsideStaticRoutesModelAttrTypes},
+	"inside_subnet":                     types.ObjectType{AttrTypes: SiteIngressEgressGwInsideSubnetModelAttrTypes},
 	"no_dc_cluster_group":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_global_network":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_inside_static_routes":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_outside_static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"not_hub":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside_network":                   types.ObjectType{AttrTypes: SiteIngressEgressGwOutsideNetworkModelAttrTypes},
 	"outside_static_routes":             types.ObjectType{AttrTypes: SiteIngressEgressGwOutsideStaticRoutesModelAttrTypes},
+	"outside_subnet":                    types.ObjectType{AttrTypes: SiteIngressEgressGwOutsideSubnetModelAttrTypes},
 	"performance_enhancement_mode":      types.ObjectType{AttrTypes: SiteIngressEgressGwPerformanceEnhancementModeModelAttrTypes},
 	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwAcceleratedNetworkingModel represents accelerated_networking block
-type SiteIngressEgressGwAcceleratedNetworkingModel struct {
-	Disable *SiteEmptyModel `tfsdk:"disable"`
-	Enable  *SiteEmptyModel `tfsdk:"enable"`
-}
-
-// SiteIngressEgressGwAcceleratedNetworkingModelAttrTypes defines the attribute types for SiteIngressEgressGwAcceleratedNetworkingModel
-var SiteIngressEgressGwAcceleratedNetworkingModelAttrTypes = map[string]attr.Type{
-	"disable": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"enable":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SiteIngressEgressGwActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
@@ -289,92 +281,6 @@ var SiteIngressEgressGwActiveNetworkPoliciesNetworkPoliciesModelAttrTypes = map[
 	"name":      types.StringType,
 	"namespace": types.StringType,
 	"tenant":    types.StringType,
-}
-
-// SiteIngressEgressGwAzNodesModel represents az_nodes block
-type SiteIngressEgressGwAzNodesModel struct {
-	AzureAz       types.String                                  `tfsdk:"azure_az"`
-	InsideSubnet  *SiteIngressEgressGwAzNodesInsideSubnetModel  `tfsdk:"inside_subnet"`
-	OutsideSubnet *SiteIngressEgressGwAzNodesOutsideSubnetModel `tfsdk:"outside_subnet"`
-}
-
-// SiteIngressEgressGwAzNodesModelAttrTypes defines the attribute types for SiteIngressEgressGwAzNodesModel
-var SiteIngressEgressGwAzNodesModelAttrTypes = map[string]attr.Type{
-	"azure_az":       types.StringType,
-	"inside_subnet":  types.ObjectType{AttrTypes: SiteIngressEgressGwAzNodesInsideSubnetModelAttrTypes},
-	"outside_subnet": types.ObjectType{AttrTypes: SiteIngressEgressGwAzNodesOutsideSubnetModelAttrTypes},
-}
-
-// SiteIngressEgressGwAzNodesInsideSubnetModel represents inside_subnet block
-type SiteIngressEgressGwAzNodesInsideSubnetModel struct {
-	Subnet      *SiteIngressEgressGwAzNodesInsideSubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteIngressEgressGwAzNodesInsideSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwAzNodesInsideSubnetModel
-var SiteIngressEgressGwAzNodesInsideSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet":       types.ObjectType{AttrTypes: SiteIngressEgressGwAzNodesInsideSubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteIngressEgressGwAzNodesInsideSubnetSubnetParamModelAttrTypes},
-}
-
-// SiteIngressEgressGwAzNodesInsideSubnetSubnetModel represents subnet block
-type SiteIngressEgressGwAzNodesInsideSubnetSubnetModel struct {
-	SubnetName        types.String    `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteIngressEgressGwAzNodesInsideSubnetSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwAzNodesInsideSubnetSubnetModel
-var SiteIngressEgressGwAzNodesInsideSubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_name":         types.StringType,
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel represents subnet_param block
-type SiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteIngressEgressGwAzNodesInsideSubnetSubnetParamModelAttrTypes defines the attribute types for SiteIngressEgressGwAzNodesInsideSubnetSubnetParamModel
-var SiteIngressEgressGwAzNodesInsideSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
-}
-
-// SiteIngressEgressGwAzNodesOutsideSubnetModel represents outside_subnet block
-type SiteIngressEgressGwAzNodesOutsideSubnetModel struct {
-	Subnet      *SiteIngressEgressGwAzNodesOutsideSubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteIngressEgressGwAzNodesOutsideSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwAzNodesOutsideSubnetModel
-var SiteIngressEgressGwAzNodesOutsideSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet":       types.ObjectType{AttrTypes: SiteIngressEgressGwAzNodesOutsideSubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModelAttrTypes},
-}
-
-// SiteIngressEgressGwAzNodesOutsideSubnetSubnetModel represents subnet block
-type SiteIngressEgressGwAzNodesOutsideSubnetSubnetModel struct {
-	SubnetName        types.String    `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteIngressEgressGwAzNodesOutsideSubnetSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwAzNodesOutsideSubnetSubnetModel
-var SiteIngressEgressGwAzNodesOutsideSubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_name":         types.StringType,
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel represents subnet_param block
-type SiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModelAttrTypes defines the attribute types for SiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModel
-var SiteIngressEgressGwAzNodesOutsideSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
 }
 
 // SiteIngressEgressGwDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
@@ -475,244 +381,38 @@ var SiteIngressEgressGwGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlo
 	"tenant":    types.StringType,
 }
 
-// SiteIngressEgressGwHubModel represents hub block
-type SiteIngressEgressGwHubModel struct {
-	ExpressRouteDisabled *SiteEmptyModel                                 `tfsdk:"express_route_disabled"`
-	ExpressRouteEnabled  *SiteIngressEgressGwHubExpressRouteEnabledModel `tfsdk:"express_route_enabled"`
-	SpokeVnets           []SiteIngressEgressGwHubSpokeVnetsModel         `tfsdk:"spoke_vnets"`
+// SiteIngressEgressGwInsideNetworkModel represents inside_network block
+type SiteIngressEgressGwInsideNetworkModel struct {
+	ExistingNetwork        *SiteIngressEgressGwInsideNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork             *SiteIngressEgressGwInsideNetworkNewNetworkModel      `tfsdk:"new_network"`
+	NewNetworkAutogenerate *SiteEmptyModel                                       `tfsdk:"new_network_autogenerate"`
 }
 
-// SiteIngressEgressGwHubModelAttrTypes defines the attribute types for SiteIngressEgressGwHubModel
-var SiteIngressEgressGwHubModelAttrTypes = map[string]attr.Type{
-	"express_route_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"express_route_enabled":  types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledModelAttrTypes},
-	"spoke_vnets":            types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwHubSpokeVnetsModelAttrTypes}},
+// SiteIngressEgressGwInsideNetworkModelAttrTypes defines the attribute types for SiteIngressEgressGwInsideNetworkModel
+var SiteIngressEgressGwInsideNetworkModelAttrTypes = map[string]attr.Type{
+	"existing_network":         types.ObjectType{AttrTypes: SiteIngressEgressGwInsideNetworkExistingNetworkModelAttrTypes},
+	"new_network":              types.ObjectType{AttrTypes: SiteIngressEgressGwInsideNetworkNewNetworkModelAttrTypes},
+	"new_network_autogenerate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
-// SiteIngressEgressGwHubExpressRouteEnabledModel represents express_route_enabled block
-type SiteIngressEgressGwHubExpressRouteEnabledModel struct {
-	CustomAsn                        types.Int64                                                                     `tfsdk:"custom_asn"`
-	AdvertiseToRouteServer           *SiteEmptyModel                                                                 `tfsdk:"advertise_to_route_server"`
-	AutoAsn                          *SiteEmptyModel                                                                 `tfsdk:"auto_asn"`
-	Connections                      []SiteIngressEgressGwHubExpressRouteEnabledConnectionsModel                     `tfsdk:"connections"`
-	DoNotAdvertiseToRouteServer      *SiteEmptyModel                                                                 `tfsdk:"do_not_advertise_to_route_server"`
-	GatewaySubnet                    *SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel                    `tfsdk:"gateway_subnet"`
-	RouteServerSubnet                *SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel                `tfsdk:"route_server_subnet"`
-	SiteRegistrationOverExpressRoute *SiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel `tfsdk:"site_registration_over_express_route"`
-	SiteRegistrationOverInternet     *SiteEmptyModel                                                                 `tfsdk:"site_registration_over_internet"`
-	SkuErgw1az                       *SiteEmptyModel                                                                 `tfsdk:"sku_ergw1az"`
-	SkuErgw2az                       *SiteEmptyModel                                                                 `tfsdk:"sku_ergw2az"`
-	SkuHighPerf                      *SiteEmptyModel                                                                 `tfsdk:"sku_high_perf"`
-	SkuStandard                      *SiteEmptyModel                                                                 `tfsdk:"sku_standard"`
+// SiteIngressEgressGwInsideNetworkExistingNetworkModel represents existing_network block
+type SiteIngressEgressGwInsideNetworkExistingNetworkModel struct {
+	Name types.String `tfsdk:"name"`
 }
 
-// SiteIngressEgressGwHubExpressRouteEnabledModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledModel
-var SiteIngressEgressGwHubExpressRouteEnabledModelAttrTypes = map[string]attr.Type{
-	"custom_asn":                           types.Int64Type,
-	"advertise_to_route_server":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"auto_asn":                             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"connections":                          types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledConnectionsModelAttrTypes}},
-	"do_not_advertise_to_route_server":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"gateway_subnet":                       types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModelAttrTypes},
-	"route_server_subnet":                  types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModelAttrTypes},
-	"site_registration_over_express_route": types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModelAttrTypes},
-	"site_registration_over_internet":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sku_ergw1az":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sku_ergw2az":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sku_high_perf":                        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sku_standard":                         types.ObjectType{AttrTypes: map[string]attr.Type{}},
+// SiteIngressEgressGwInsideNetworkExistingNetworkModelAttrTypes defines the attribute types for SiteIngressEgressGwInsideNetworkExistingNetworkModel
+var SiteIngressEgressGwInsideNetworkExistingNetworkModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
 }
 
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsModel represents connections block
-type SiteIngressEgressGwHubExpressRouteEnabledConnectionsModel struct {
-	CircuitID         types.String                                                                `tfsdk:"circuit_id"`
-	Weight            types.Int64                                                                 `tfsdk:"weight"`
-	Metadata          *SiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel          `tfsdk:"metadata"`
-	OtherSubscription *SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel `tfsdk:"other_subscription"`
+// SiteIngressEgressGwInsideNetworkNewNetworkModel represents new_network block
+type SiteIngressEgressGwInsideNetworkNewNetworkModel struct {
+	Name types.String `tfsdk:"name"`
 }
 
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledConnectionsModel
-var SiteIngressEgressGwHubExpressRouteEnabledConnectionsModelAttrTypes = map[string]attr.Type{
-	"circuit_id":         types.StringType,
-	"weight":             types.Int64Type,
-	"metadata":           types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModelAttrTypes},
-	"other_subscription": types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModelAttrTypes},
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel represents metadata block
-type SiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name            types.String `tfsdk:"name"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModel
-var SiteIngressEgressGwHubExpressRouteEnabledConnectionsMetadataModelAttrTypes = map[string]attr.Type{
-	"description_spec": types.StringType,
-	"name":             types.StringType,
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel represents other_subscription block
-type SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel struct {
-	CircuitID     types.String                                                                             `tfsdk:"circuit_id"`
-	AuthorizedKey *SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel `tfsdk:"authorized_key"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModel
-var SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionModelAttrTypes = map[string]attr.Type{
-	"circuit_id":     types.StringType,
-	"authorized_key": types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModelAttrTypes},
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel represents authorized_key block
-type SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel struct {
-	BlindfoldSecretInfo *SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel
-var SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModelAttrTypes = map[string]attr.Type{
-	"blindfold_secret_info": types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModelAttrTypes},
-	"clear_secret_info":     types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModelAttrTypes},
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel struct {
-	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location           types.String `tfsdk:"location"`
-	StoreProvider      types.String `tfsdk:"store_provider"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel
-var SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
-	"decryption_provider": types.StringType,
-	"location":            types.StringType,
-	"store_provider":      types.StringType,
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel represents clear_secret_info block
-type SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel struct {
-	Provider types.String `tfsdk:"provider_ref"`
-	URL      types.String `tfsdk:"url"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel
-var SiteIngressEgressGwHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
-	"provider_ref": types.StringType,
-	"url":          types.StringType,
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel represents gateway_subnet block
-type SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel struct {
-	Auto        *SiteEmptyModel                                                         `tfsdk:"auto"`
-	Subnet      *SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModel
-var SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetModelAttrTypes = map[string]attr.Type{
-	"auto":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"subnet":       types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModelAttrTypes},
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel represents subnet block
-type SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel struct {
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModel
-var SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModel represents subnet_param block
-type SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModel
-var SiteIngressEgressGwHubExpressRouteEnabledGatewaySubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel represents route_server_subnet block
-type SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel struct {
-	Auto        *SiteEmptyModel                                                             `tfsdk:"auto"`
-	Subnet      *SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModel
-var SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetModelAttrTypes = map[string]attr.Type{
-	"auto":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"subnet":       types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModelAttrTypes},
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel represents subnet block
-type SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel struct {
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModel
-var SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModel represents subnet_param block
-type SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModel
-var SiteIngressEgressGwHubExpressRouteEnabledRouteServerSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel represents site_registration_over_express_route block
-type SiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel struct {
-	CloudlinkNetworkName types.String `tfsdk:"cloudlink_network_name"`
-}
-
-// SiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModelAttrTypes defines the attribute types for SiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel
-var SiteIngressEgressGwHubExpressRouteEnabledSiteRegistrationOverExpressRouteModelAttrTypes = map[string]attr.Type{
-	"cloudlink_network_name": types.StringType,
-}
-
-// SiteIngressEgressGwHubSpokeVnetsModel represents spoke_vnets block
-type SiteIngressEgressGwHubSpokeVnetsModel struct {
-	Auto   *SiteEmptyModel                            `tfsdk:"auto"`
-	Labels *SiteEmptyModel                            `tfsdk:"labels"`
-	Manual *SiteEmptyModel                            `tfsdk:"manual"`
-	VNET   *SiteIngressEgressGwHubSpokeVnetsVNETModel `tfsdk:"vnet"`
-}
-
-// SiteIngressEgressGwHubSpokeVnetsModelAttrTypes defines the attribute types for SiteIngressEgressGwHubSpokeVnetsModel
-var SiteIngressEgressGwHubSpokeVnetsModelAttrTypes = map[string]attr.Type{
-	"auto":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"labels": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"manual": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"vnet":   types.ObjectType{AttrTypes: SiteIngressEgressGwHubSpokeVnetsVNETModelAttrTypes},
-}
-
-// SiteIngressEgressGwHubSpokeVnetsVNETModel represents vnet block
-type SiteIngressEgressGwHubSpokeVnetsVNETModel struct {
-	ResourceGroup         types.String    `tfsdk:"resource_group"`
-	VNETName              types.String    `tfsdk:"vnet_name"`
-	F5OrchestratedRouting *SiteEmptyModel `tfsdk:"f5_orchestrated_routing"`
-	ManualRouting         *SiteEmptyModel `tfsdk:"manual_routing"`
-}
-
-// SiteIngressEgressGwHubSpokeVnetsVNETModelAttrTypes defines the attribute types for SiteIngressEgressGwHubSpokeVnetsVNETModel
-var SiteIngressEgressGwHubSpokeVnetsVNETModelAttrTypes = map[string]attr.Type{
-	"resource_group":          types.StringType,
-	"vnet_name":               types.StringType,
-	"f5_orchestrated_routing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"manual_routing":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
+// SiteIngressEgressGwInsideNetworkNewNetworkModelAttrTypes defines the attribute types for SiteIngressEgressGwInsideNetworkNewNetworkModel
+var SiteIngressEgressGwInsideNetworkNewNetworkModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
 }
 
 // SiteIngressEgressGwInsideStaticRoutesModel represents inside_static_routes block
@@ -853,6 +553,74 @@ var SiteIngressEgressGwInsideStaticRoutesStaticRouteListCustomStaticRouteSubnets
 	"prefix": types.StringType,
 }
 
+// SiteIngressEgressGwInsideSubnetModel represents inside_subnet block
+type SiteIngressEgressGwInsideSubnetModel struct {
+	ExistingSubnet *SiteIngressEgressGwInsideSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
+	NewSubnet      *SiteIngressEgressGwInsideSubnetNewSubnetModel      `tfsdk:"new_subnet"`
+}
+
+// SiteIngressEgressGwInsideSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwInsideSubnetModel
+var SiteIngressEgressGwInsideSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet": types.ObjectType{AttrTypes: SiteIngressEgressGwInsideSubnetExistingSubnetModelAttrTypes},
+	"new_subnet":      types.ObjectType{AttrTypes: SiteIngressEgressGwInsideSubnetNewSubnetModelAttrTypes},
+}
+
+// SiteIngressEgressGwInsideSubnetExistingSubnetModel represents existing_subnet block
+type SiteIngressEgressGwInsideSubnetExistingSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// SiteIngressEgressGwInsideSubnetExistingSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwInsideSubnetExistingSubnetModel
+var SiteIngressEgressGwInsideSubnetExistingSubnetModelAttrTypes = map[string]attr.Type{
+	"subnet_name": types.StringType,
+}
+
+// SiteIngressEgressGwInsideSubnetNewSubnetModel represents new_subnet block
+type SiteIngressEgressGwInsideSubnetNewSubnetModel struct {
+	PrimaryIpv4 types.String `tfsdk:"primary_ipv4"`
+	SubnetName  types.String `tfsdk:"subnet_name"`
+}
+
+// SiteIngressEgressGwInsideSubnetNewSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwInsideSubnetNewSubnetModel
+var SiteIngressEgressGwInsideSubnetNewSubnetModelAttrTypes = map[string]attr.Type{
+	"primary_ipv4": types.StringType,
+	"subnet_name":  types.StringType,
+}
+
+// SiteIngressEgressGwOutsideNetworkModel represents outside_network block
+type SiteIngressEgressGwOutsideNetworkModel struct {
+	ExistingNetwork        *SiteIngressEgressGwOutsideNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork             *SiteIngressEgressGwOutsideNetworkNewNetworkModel      `tfsdk:"new_network"`
+	NewNetworkAutogenerate *SiteEmptyModel                                        `tfsdk:"new_network_autogenerate"`
+}
+
+// SiteIngressEgressGwOutsideNetworkModelAttrTypes defines the attribute types for SiteIngressEgressGwOutsideNetworkModel
+var SiteIngressEgressGwOutsideNetworkModelAttrTypes = map[string]attr.Type{
+	"existing_network":         types.ObjectType{AttrTypes: SiteIngressEgressGwOutsideNetworkExistingNetworkModelAttrTypes},
+	"new_network":              types.ObjectType{AttrTypes: SiteIngressEgressGwOutsideNetworkNewNetworkModelAttrTypes},
+	"new_network_autogenerate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// SiteIngressEgressGwOutsideNetworkExistingNetworkModel represents existing_network block
+type SiteIngressEgressGwOutsideNetworkExistingNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// SiteIngressEgressGwOutsideNetworkExistingNetworkModelAttrTypes defines the attribute types for SiteIngressEgressGwOutsideNetworkExistingNetworkModel
+var SiteIngressEgressGwOutsideNetworkExistingNetworkModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+}
+
+// SiteIngressEgressGwOutsideNetworkNewNetworkModel represents new_network block
+type SiteIngressEgressGwOutsideNetworkNewNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// SiteIngressEgressGwOutsideNetworkNewNetworkModelAttrTypes defines the attribute types for SiteIngressEgressGwOutsideNetworkNewNetworkModel
+var SiteIngressEgressGwOutsideNetworkNewNetworkModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+}
+
 // SiteIngressEgressGwOutsideStaticRoutesModel represents outside_static_routes block
 type SiteIngressEgressGwOutsideStaticRoutesModel struct {
 	StaticRouteList []SiteIngressEgressGwOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
@@ -991,6 +759,40 @@ var SiteIngressEgressGwOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnet
 	"prefix": types.StringType,
 }
 
+// SiteIngressEgressGwOutsideSubnetModel represents outside_subnet block
+type SiteIngressEgressGwOutsideSubnetModel struct {
+	ExistingSubnet *SiteIngressEgressGwOutsideSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
+	NewSubnet      *SiteIngressEgressGwOutsideSubnetNewSubnetModel      `tfsdk:"new_subnet"`
+}
+
+// SiteIngressEgressGwOutsideSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwOutsideSubnetModel
+var SiteIngressEgressGwOutsideSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet": types.ObjectType{AttrTypes: SiteIngressEgressGwOutsideSubnetExistingSubnetModelAttrTypes},
+	"new_subnet":      types.ObjectType{AttrTypes: SiteIngressEgressGwOutsideSubnetNewSubnetModelAttrTypes},
+}
+
+// SiteIngressEgressGwOutsideSubnetExistingSubnetModel represents existing_subnet block
+type SiteIngressEgressGwOutsideSubnetExistingSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// SiteIngressEgressGwOutsideSubnetExistingSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwOutsideSubnetExistingSubnetModel
+var SiteIngressEgressGwOutsideSubnetExistingSubnetModelAttrTypes = map[string]attr.Type{
+	"subnet_name": types.StringType,
+}
+
+// SiteIngressEgressGwOutsideSubnetNewSubnetModel represents new_subnet block
+type SiteIngressEgressGwOutsideSubnetNewSubnetModel struct {
+	PrimaryIpv4 types.String `tfsdk:"primary_ipv4"`
+	SubnetName  types.String `tfsdk:"subnet_name"`
+}
+
+// SiteIngressEgressGwOutsideSubnetNewSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwOutsideSubnetNewSubnetModel
+var SiteIngressEgressGwOutsideSubnetNewSubnetModelAttrTypes = map[string]attr.Type{
+	"primary_ipv4": types.StringType,
+	"subnet_name":  types.StringType,
+}
+
 // SiteIngressEgressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
 type SiteIngressEgressGwPerformanceEnhancementModeModel struct {
 	PerfModeL3Enhanced *SiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
@@ -1015,946 +817,92 @@ var SiteIngressEgressGwPerformanceEnhancementModePerfModeL3EnhancedModelAttrType
 	"no_jumbo": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
-// SiteIngressEgressGwArModel represents ingress_egress_gw_ar block
-type SiteIngressEgressGwArModel struct {
-	AzureCertifiedHw               types.String                                              `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking          *SiteIngressEgressGwArAcceleratedNetworkingModel          `tfsdk:"accelerated_networking"`
-	ActiveEnhancedFirewallPolicies *SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies     *SiteIngressEgressGwArActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies          *SiteIngressEgressGwArActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
-	DcClusterGroupInsideVn         *SiteIngressEgressGwArDcClusterGroupInsideVnModel         `tfsdk:"dc_cluster_group_inside_vn"`
-	DcClusterGroupOutsideVn        *SiteIngressEgressGwArDcClusterGroupOutsideVnModel        `tfsdk:"dc_cluster_group_outside_vn"`
-	ForwardProxyAllowAll           *SiteEmptyModel                                           `tfsdk:"forward_proxy_allow_all"`
-	GlobalNetworkList              *SiteIngressEgressGwArGlobalNetworkListModel              `tfsdk:"global_network_list"`
-	Hub                            *SiteIngressEgressGwArHubModel                            `tfsdk:"hub"`
-	InsideStaticRoutes             *SiteIngressEgressGwArInsideStaticRoutesModel             `tfsdk:"inside_static_routes"`
-	NoDcClusterGroup               *SiteEmptyModel                                           `tfsdk:"no_dc_cluster_group"`
-	NoForwardProxy                 *SiteEmptyModel                                           `tfsdk:"no_forward_proxy"`
-	NoGlobalNetwork                *SiteEmptyModel                                           `tfsdk:"no_global_network"`
-	NoInsideStaticRoutes           *SiteEmptyModel                                           `tfsdk:"no_inside_static_routes"`
-	NoNetworkPolicy                *SiteEmptyModel                                           `tfsdk:"no_network_policy"`
-	NoOutsideStaticRoutes          *SiteEmptyModel                                           `tfsdk:"no_outside_static_routes"`
-	Node                           *SiteIngressEgressGwArNodeModel                           `tfsdk:"node"`
-	NotHub                         *SiteEmptyModel                                           `tfsdk:"not_hub"`
-	OutsideStaticRoutes            *SiteIngressEgressGwArOutsideStaticRoutesModel            `tfsdk:"outside_static_routes"`
-	PerformanceEnhancementMode     *SiteIngressEgressGwArPerformanceEnhancementModeModel     `tfsdk:"performance_enhancement_mode"`
-	SmConnectionPublicIP           *SiteEmptyModel                                           `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP              *SiteEmptyModel                                           `tfsdk:"sm_connection_pvt_ip"`
-}
-
-// SiteIngressEgressGwArModelAttrTypes defines the attribute types for SiteIngressEgressGwArModel
-var SiteIngressEgressGwArModelAttrTypes = map[string]attr.Type{
-	"azure_certified_hw":                types.StringType,
-	"accelerated_networking":            types.ObjectType{AttrTypes: SiteIngressEgressGwArAcceleratedNetworkingModelAttrTypes},
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModelAttrTypes},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: SiteIngressEgressGwArActiveForwardProxyPoliciesModelAttrTypes},
-	"active_network_policies":           types.ObjectType{AttrTypes: SiteIngressEgressGwArActiveNetworkPoliciesModelAttrTypes},
-	"dc_cluster_group_inside_vn":        types.ObjectType{AttrTypes: SiteIngressEgressGwArDcClusterGroupInsideVnModelAttrTypes},
-	"dc_cluster_group_outside_vn":       types.ObjectType{AttrTypes: SiteIngressEgressGwArDcClusterGroupOutsideVnModelAttrTypes},
-	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: SiteIngressEgressGwArGlobalNetworkListModelAttrTypes},
-	"hub":                               types.ObjectType{AttrTypes: SiteIngressEgressGwArHubModelAttrTypes},
-	"inside_static_routes":              types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesModelAttrTypes},
-	"no_dc_cluster_group":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_global_network":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_inside_static_routes":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_outside_static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node":                              types.ObjectType{AttrTypes: SiteIngressEgressGwArNodeModelAttrTypes},
-	"not_hub":                           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"outside_static_routes":             types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesModelAttrTypes},
-	"performance_enhancement_mode":      types.ObjectType{AttrTypes: SiteIngressEgressGwArPerformanceEnhancementModeModelAttrTypes},
-	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwArAcceleratedNetworkingModel represents accelerated_networking block
-type SiteIngressEgressGwArAcceleratedNetworkingModel struct {
-	Disable *SiteEmptyModel `tfsdk:"disable"`
-	Enable  *SiteEmptyModel `tfsdk:"enable"`
-}
-
-// SiteIngressEgressGwArAcceleratedNetworkingModelAttrTypes defines the attribute types for SiteIngressEgressGwArAcceleratedNetworkingModel
-var SiteIngressEgressGwArAcceleratedNetworkingModelAttrTypes = map[string]attr.Type{
-	"disable": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"enable":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
-type SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel struct {
-	EnhancedFirewallPolicies []SiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
-}
-
-// SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel
-var SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
-	"enhanced_firewall_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes}},
-}
-
-// SiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
-type SiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for SiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
-var SiteIngressEgressGwArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteIngressEgressGwArActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
-type SiteIngressEgressGwArActiveForwardProxyPoliciesModel struct {
-	ForwardProxyPolicies []SiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
-}
-
-// SiteIngressEgressGwArActiveForwardProxyPoliciesModelAttrTypes defines the attribute types for SiteIngressEgressGwArActiveForwardProxyPoliciesModel
-var SiteIngressEgressGwArActiveForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
-	"forward_proxy_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes}},
-}
-
-// SiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
-type SiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes defines the attribute types for SiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModel
-var SiteIngressEgressGwArActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteIngressEgressGwArActiveNetworkPoliciesModel represents active_network_policies block
-type SiteIngressEgressGwArActiveNetworkPoliciesModel struct {
-	NetworkPolicies []SiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
-}
-
-// SiteIngressEgressGwArActiveNetworkPoliciesModelAttrTypes defines the attribute types for SiteIngressEgressGwArActiveNetworkPoliciesModel
-var SiteIngressEgressGwArActiveNetworkPoliciesModelAttrTypes = map[string]attr.Type{
-	"network_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModelAttrTypes}},
-}
-
-// SiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
-type SiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModelAttrTypes defines the attribute types for SiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModel
-var SiteIngressEgressGwArActiveNetworkPoliciesNetworkPoliciesModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteIngressEgressGwArDcClusterGroupInsideVnModel represents dc_cluster_group_inside_vn block
-type SiteIngressEgressGwArDcClusterGroupInsideVnModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteIngressEgressGwArDcClusterGroupInsideVnModelAttrTypes defines the attribute types for SiteIngressEgressGwArDcClusterGroupInsideVnModel
-var SiteIngressEgressGwArDcClusterGroupInsideVnModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteIngressEgressGwArDcClusterGroupOutsideVnModel represents dc_cluster_group_outside_vn block
-type SiteIngressEgressGwArDcClusterGroupOutsideVnModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteIngressEgressGwArDcClusterGroupOutsideVnModelAttrTypes defines the attribute types for SiteIngressEgressGwArDcClusterGroupOutsideVnModel
-var SiteIngressEgressGwArDcClusterGroupOutsideVnModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteIngressEgressGwArGlobalNetworkListModel represents global_network_list block
-type SiteIngressEgressGwArGlobalNetworkListModel struct {
-	GlobalNetworkConnections []SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
-}
-
-// SiteIngressEgressGwArGlobalNetworkListModelAttrTypes defines the attribute types for SiteIngressEgressGwArGlobalNetworkListModel
-var SiteIngressEgressGwArGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
-}
-
-// SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
-type SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModel struct {
-	SLIToGlobalDR *SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel `tfsdk:"sli_to_global_dr"`
-	SloToGlobalDR *SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel `tfsdk:"slo_to_global_dr"`
-}
-
-// SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModel
-var SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
-}
-
-// SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
-type SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel struct {
-	GlobalVn *SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
-}
-
-// SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes defines the attribute types for SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel
-var SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes = map[string]attr.Type{
-	"global_vn": types.ObjectType{AttrTypes: SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes},
-}
-
-// SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel represents global_vn block
-type SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes defines the attribute types for SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel
-var SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel represents slo_to_global_dr block
-type SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel struct {
-	GlobalVn *SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
-}
-
-// SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes defines the attribute types for SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel
-var SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes = map[string]attr.Type{
-	"global_vn": types.ObjectType{AttrTypes: SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes},
-}
-
-// SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel represents global_vn block
-type SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes defines the attribute types for SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel
-var SiteIngressEgressGwArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteIngressEgressGwArHubModel represents hub block
-type SiteIngressEgressGwArHubModel struct {
-	ExpressRouteDisabled *SiteEmptyModel                                   `tfsdk:"express_route_disabled"`
-	ExpressRouteEnabled  *SiteIngressEgressGwArHubExpressRouteEnabledModel `tfsdk:"express_route_enabled"`
-	SpokeVnets           []SiteIngressEgressGwArHubSpokeVnetsModel         `tfsdk:"spoke_vnets"`
-}
-
-// SiteIngressEgressGwArHubModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubModel
-var SiteIngressEgressGwArHubModelAttrTypes = map[string]attr.Type{
-	"express_route_disabled": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"express_route_enabled":  types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledModelAttrTypes},
-	"spoke_vnets":            types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArHubSpokeVnetsModelAttrTypes}},
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledModel represents express_route_enabled block
-type SiteIngressEgressGwArHubExpressRouteEnabledModel struct {
-	CustomAsn                        types.Int64                                                                       `tfsdk:"custom_asn"`
-	AdvertiseToRouteServer           *SiteEmptyModel                                                                   `tfsdk:"advertise_to_route_server"`
-	AutoAsn                          *SiteEmptyModel                                                                   `tfsdk:"auto_asn"`
-	Connections                      []SiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel                     `tfsdk:"connections"`
-	DoNotAdvertiseToRouteServer      *SiteEmptyModel                                                                   `tfsdk:"do_not_advertise_to_route_server"`
-	GatewaySubnet                    *SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel                    `tfsdk:"gateway_subnet"`
-	RouteServerSubnet                *SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel                `tfsdk:"route_server_subnet"`
-	SiteRegistrationOverExpressRoute *SiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel `tfsdk:"site_registration_over_express_route"`
-	SiteRegistrationOverInternet     *SiteEmptyModel                                                                   `tfsdk:"site_registration_over_internet"`
-	SkuErgw1az                       *SiteEmptyModel                                                                   `tfsdk:"sku_ergw1az"`
-	SkuErgw2az                       *SiteEmptyModel                                                                   `tfsdk:"sku_ergw2az"`
-	SkuHighPerf                      *SiteEmptyModel                                                                   `tfsdk:"sku_high_perf"`
-	SkuStandard                      *SiteEmptyModel                                                                   `tfsdk:"sku_standard"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledModel
-var SiteIngressEgressGwArHubExpressRouteEnabledModelAttrTypes = map[string]attr.Type{
-	"custom_asn":                           types.Int64Type,
-	"advertise_to_route_server":            types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"auto_asn":                             types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"connections":                          types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledConnectionsModelAttrTypes}},
-	"do_not_advertise_to_route_server":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"gateway_subnet":                       types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModelAttrTypes},
-	"route_server_subnet":                  types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModelAttrTypes},
-	"site_registration_over_express_route": types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModelAttrTypes},
-	"site_registration_over_internet":      types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sku_ergw1az":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sku_ergw2az":                          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sku_high_perf":                        types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sku_standard":                         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel represents connections block
-type SiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel struct {
-	CircuitID         types.String                                                                  `tfsdk:"circuit_id"`
-	Weight            types.Int64                                                                   `tfsdk:"weight"`
-	Metadata          *SiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel          `tfsdk:"metadata"`
-	OtherSubscription *SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel `tfsdk:"other_subscription"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledConnectionsModel
-var SiteIngressEgressGwArHubExpressRouteEnabledConnectionsModelAttrTypes = map[string]attr.Type{
-	"circuit_id":         types.StringType,
-	"weight":             types.Int64Type,
-	"metadata":           types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModelAttrTypes},
-	"other_subscription": types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModelAttrTypes},
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel represents metadata block
-type SiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel struct {
-	DescriptionSpec types.String `tfsdk:"description_spec"`
-	Name            types.String `tfsdk:"name"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModel
-var SiteIngressEgressGwArHubExpressRouteEnabledConnectionsMetadataModelAttrTypes = map[string]attr.Type{
-	"description_spec": types.StringType,
-	"name":             types.StringType,
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel represents other_subscription block
-type SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel struct {
-	CircuitID     types.String                                                                               `tfsdk:"circuit_id"`
-	AuthorizedKey *SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel `tfsdk:"authorized_key"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModel
-var SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionModelAttrTypes = map[string]attr.Type{
-	"circuit_id":     types.StringType,
-	"authorized_key": types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModelAttrTypes},
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel represents authorized_key block
-type SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel struct {
-	BlindfoldSecretInfo *SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel `tfsdk:"blindfold_secret_info"`
-	ClearSecretInfo     *SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel     `tfsdk:"clear_secret_info"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModel
-var SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyModelAttrTypes = map[string]attr.Type{
-	"blindfold_secret_info": types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModelAttrTypes},
-	"clear_secret_info":     types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModelAttrTypes},
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel represents blindfold_secret_info block
-type SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel struct {
-	DecryptionProvider types.String `tfsdk:"decryption_provider"`
-	Location           types.String `tfsdk:"location"`
-	StoreProvider      types.String `tfsdk:"store_provider"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModel
-var SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyBlindfoldSecretInfoModelAttrTypes = map[string]attr.Type{
-	"decryption_provider": types.StringType,
-	"location":            types.StringType,
-	"store_provider":      types.StringType,
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel represents clear_secret_info block
-type SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel struct {
-	Provider types.String `tfsdk:"provider_ref"`
-	URL      types.String `tfsdk:"url"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModel
-var SiteIngressEgressGwArHubExpressRouteEnabledConnectionsOtherSubscriptionAuthorizedKeyClearSecretInfoModelAttrTypes = map[string]attr.Type{
-	"provider_ref": types.StringType,
-	"url":          types.StringType,
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel represents gateway_subnet block
-type SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel struct {
-	Auto        *SiteEmptyModel                                                           `tfsdk:"auto"`
-	Subnet      *SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModel
-var SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetModelAttrTypes = map[string]attr.Type{
-	"auto":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"subnet":       types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModelAttrTypes},
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel represents subnet block
-type SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel struct {
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModel
-var SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModel represents subnet_param block
-type SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModel
-var SiteIngressEgressGwArHubExpressRouteEnabledGatewaySubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel represents route_server_subnet block
-type SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel struct {
-	Auto        *SiteEmptyModel                                                               `tfsdk:"auto"`
-	Subnet      *SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModel
-var SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetModelAttrTypes = map[string]attr.Type{
-	"auto":         types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"subnet":       types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModelAttrTypes},
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel represents subnet block
-type SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel struct {
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModel
-var SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModel represents subnet_param block
-type SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModel
-var SiteIngressEgressGwArHubExpressRouteEnabledRouteServerSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel represents site_registration_over_express_route block
-type SiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel struct {
-	CloudlinkNetworkName types.String `tfsdk:"cloudlink_network_name"`
-}
-
-// SiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModel
-var SiteIngressEgressGwArHubExpressRouteEnabledSiteRegistrationOverExpressRouteModelAttrTypes = map[string]attr.Type{
-	"cloudlink_network_name": types.StringType,
-}
-
-// SiteIngressEgressGwArHubSpokeVnetsModel represents spoke_vnets block
-type SiteIngressEgressGwArHubSpokeVnetsModel struct {
-	Auto   *SiteEmptyModel                              `tfsdk:"auto"`
-	Labels *SiteEmptyModel                              `tfsdk:"labels"`
-	Manual *SiteEmptyModel                              `tfsdk:"manual"`
-	VNET   *SiteIngressEgressGwArHubSpokeVnetsVNETModel `tfsdk:"vnet"`
-}
-
-// SiteIngressEgressGwArHubSpokeVnetsModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubSpokeVnetsModel
-var SiteIngressEgressGwArHubSpokeVnetsModelAttrTypes = map[string]attr.Type{
-	"auto":   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"labels": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"manual": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"vnet":   types.ObjectType{AttrTypes: SiteIngressEgressGwArHubSpokeVnetsVNETModelAttrTypes},
-}
-
-// SiteIngressEgressGwArHubSpokeVnetsVNETModel represents vnet block
-type SiteIngressEgressGwArHubSpokeVnetsVNETModel struct {
-	ResourceGroup         types.String    `tfsdk:"resource_group"`
-	VNETName              types.String    `tfsdk:"vnet_name"`
-	F5OrchestratedRouting *SiteEmptyModel `tfsdk:"f5_orchestrated_routing"`
-	ManualRouting         *SiteEmptyModel `tfsdk:"manual_routing"`
-}
-
-// SiteIngressEgressGwArHubSpokeVnetsVNETModelAttrTypes defines the attribute types for SiteIngressEgressGwArHubSpokeVnetsVNETModel
-var SiteIngressEgressGwArHubSpokeVnetsVNETModelAttrTypes = map[string]attr.Type{
-	"resource_group":          types.StringType,
-	"vnet_name":               types.StringType,
-	"f5_orchestrated_routing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"manual_routing":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesModel represents inside_static_routes block
-type SiteIngressEgressGwArInsideStaticRoutesModel struct {
-	StaticRouteList []SiteIngressEgressGwArInsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesModel
-var SiteIngressEgressGwArInsideStaticRoutesModelAttrTypes = map[string]attr.Type{
-	"static_route_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesStaticRouteListModelAttrTypes}},
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListModel represents static_route_list block
-type SiteIngressEgressGwArInsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String                                                                  `tfsdk:"simple_static_route"`
-	CustomStaticRoute *SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesStaticRouteListModel
-var SiteIngressEgressGwArInsideStaticRoutesStaticRouteListModelAttrTypes = map[string]attr.Type{
-	"simple_static_route": types.StringType,
-	"custom_static_route": types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes},
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
-type SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs   types.List                                                                            `tfsdk:"attrs"`
-	Labels  *SiteEmptyModel                                                                       `tfsdk:"labels"`
-	Nexthop *SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
-	Subnets []SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModel
-var SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes = map[string]attr.Type{
-	"attrs":   types.ListType{ElemType: types.StringType},
-	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"nexthop": types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
-type SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type           types.String                                                                                       `tfsdk:"type"`
-	Interface      []SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
-	NexthopAddress *SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel
-var SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
-	"type":            types.StringType,
-	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
-type SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind      types.String `tfsdk:"kind"`
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-	Uid       types.String `tfsdk:"uid"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel
-var SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes = map[string]attr.Type{
-	"kind":      types.StringType,
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-	"uid":       types.StringType,
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
-type SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
-	Ipv4 *SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
-	Ipv6 *SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel
-var SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes},
-	"ipv6": types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes},
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
-type SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model struct {
-	Addr types.String `tfsdk:"addr"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model
-var SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes = map[string]attr.Type{
-	"addr": types.StringType,
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
-type SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
-	Addr types.String `tfsdk:"addr"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model
-var SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes = map[string]attr.Type{
-	"addr": types.StringType,
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
-type SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
-	Ipv4 *SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model `tfsdk:"ipv4"`
-	Ipv6 *SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel
-var SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes},
-	"ipv6": types.ObjectType{AttrTypes: SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes},
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
-type SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
-	Plen   types.Int64  `tfsdk:"plen"`
-	Prefix types.String `tfsdk:"prefix"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model
-var SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes = map[string]attr.Type{
-	"plen":   types.Int64Type,
-	"prefix": types.StringType,
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
-type SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model struct {
-	Plen   types.Int64  `tfsdk:"plen"`
-	Prefix types.String `tfsdk:"prefix"`
-}
-
-// SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes defines the attribute types for SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model
-var SiteIngressEgressGwArInsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes = map[string]attr.Type{
-	"plen":   types.Int64Type,
-	"prefix": types.StringType,
-}
-
-// SiteIngressEgressGwArNodeModel represents node block
-type SiteIngressEgressGwArNodeModel struct {
-	FaultDomain   types.Int64                                  `tfsdk:"fault_domain"`
-	NodeNumber    types.Int64                                  `tfsdk:"node_number"`
-	UpdateDomain  types.Int64                                  `tfsdk:"update_domain"`
-	InsideSubnet  *SiteIngressEgressGwArNodeInsideSubnetModel  `tfsdk:"inside_subnet"`
-	OutsideSubnet *SiteIngressEgressGwArNodeOutsideSubnetModel `tfsdk:"outside_subnet"`
-}
-
-// SiteIngressEgressGwArNodeModelAttrTypes defines the attribute types for SiteIngressEgressGwArNodeModel
-var SiteIngressEgressGwArNodeModelAttrTypes = map[string]attr.Type{
-	"fault_domain":   types.Int64Type,
-	"node_number":    types.Int64Type,
-	"update_domain":  types.Int64Type,
-	"inside_subnet":  types.ObjectType{AttrTypes: SiteIngressEgressGwArNodeInsideSubnetModelAttrTypes},
-	"outside_subnet": types.ObjectType{AttrTypes: SiteIngressEgressGwArNodeOutsideSubnetModelAttrTypes},
-}
-
-// SiteIngressEgressGwArNodeInsideSubnetModel represents inside_subnet block
-type SiteIngressEgressGwArNodeInsideSubnetModel struct {
-	Subnet      *SiteIngressEgressGwArNodeInsideSubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteIngressEgressGwArNodeInsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteIngressEgressGwArNodeInsideSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwArNodeInsideSubnetModel
-var SiteIngressEgressGwArNodeInsideSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet":       types.ObjectType{AttrTypes: SiteIngressEgressGwArNodeInsideSubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteIngressEgressGwArNodeInsideSubnetSubnetParamModelAttrTypes},
-}
-
-// SiteIngressEgressGwArNodeInsideSubnetSubnetModel represents subnet block
-type SiteIngressEgressGwArNodeInsideSubnetSubnetModel struct {
-	SubnetName        types.String    `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteIngressEgressGwArNodeInsideSubnetSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwArNodeInsideSubnetSubnetModel
-var SiteIngressEgressGwArNodeInsideSubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_name":         types.StringType,
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwArNodeInsideSubnetSubnetParamModel represents subnet_param block
-type SiteIngressEgressGwArNodeInsideSubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteIngressEgressGwArNodeInsideSubnetSubnetParamModelAttrTypes defines the attribute types for SiteIngressEgressGwArNodeInsideSubnetSubnetParamModel
-var SiteIngressEgressGwArNodeInsideSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
-}
-
-// SiteIngressEgressGwArNodeOutsideSubnetModel represents outside_subnet block
-type SiteIngressEgressGwArNodeOutsideSubnetModel struct {
-	Subnet      *SiteIngressEgressGwArNodeOutsideSubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteIngressEgressGwArNodeOutsideSubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteIngressEgressGwArNodeOutsideSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwArNodeOutsideSubnetModel
-var SiteIngressEgressGwArNodeOutsideSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet":       types.ObjectType{AttrTypes: SiteIngressEgressGwArNodeOutsideSubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteIngressEgressGwArNodeOutsideSubnetSubnetParamModelAttrTypes},
-}
-
-// SiteIngressEgressGwArNodeOutsideSubnetSubnetModel represents subnet block
-type SiteIngressEgressGwArNodeOutsideSubnetSubnetModel struct {
-	SubnetName        types.String    `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteIngressEgressGwArNodeOutsideSubnetSubnetModelAttrTypes defines the attribute types for SiteIngressEgressGwArNodeOutsideSubnetSubnetModel
-var SiteIngressEgressGwArNodeOutsideSubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_name":         types.StringType,
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwArNodeOutsideSubnetSubnetParamModel represents subnet_param block
-type SiteIngressEgressGwArNodeOutsideSubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteIngressEgressGwArNodeOutsideSubnetSubnetParamModelAttrTypes defines the attribute types for SiteIngressEgressGwArNodeOutsideSubnetSubnetParamModel
-var SiteIngressEgressGwArNodeOutsideSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesModel represents outside_static_routes block
-type SiteIngressEgressGwArOutsideStaticRoutesModel struct {
-	StaticRouteList []SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesModel
-var SiteIngressEgressGwArOutsideStaticRoutesModelAttrTypes = map[string]attr.Type{
-	"static_route_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModelAttrTypes}},
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModel represents static_route_list block
-type SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String                                                                   `tfsdk:"simple_static_route"`
-	CustomStaticRoute *SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModel
-var SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListModelAttrTypes = map[string]attr.Type{
-	"simple_static_route": types.StringType,
-	"custom_static_route": types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes},
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
-type SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs   types.List                                                                             `tfsdk:"attrs"`
-	Labels  *SiteEmptyModel                                                                        `tfsdk:"labels"`
-	Nexthop *SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
-	Subnets []SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel
-var SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes = map[string]attr.Type{
-	"attrs":   types.ListType{ElemType: types.StringType},
-	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"nexthop": types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
-type SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type           types.String                                                                                        `tfsdk:"type"`
-	Interface      []SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
-	NexthopAddress *SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel
-var SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
-	"type":            types.StringType,
-	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
-type SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind      types.String `tfsdk:"kind"`
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-	Uid       types.String `tfsdk:"uid"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel
-var SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes = map[string]attr.Type{
-	"kind":      types.StringType,
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-	"uid":       types.StringType,
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
-type SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
-	Ipv4 *SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
-	Ipv6 *SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel
-var SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes},
-	"ipv6": types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes},
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
-type SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model struct {
-	Addr types.String `tfsdk:"addr"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model
-var SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes = map[string]attr.Type{
-	"addr": types.StringType,
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
-type SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
-	Addr types.String `tfsdk:"addr"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model
-var SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes = map[string]attr.Type{
-	"addr": types.StringType,
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
-type SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
-	Ipv4 *SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model `tfsdk:"ipv4"`
-	Ipv6 *SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel
-var SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes},
-	"ipv6": types.ObjectType{AttrTypes: SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes},
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
-type SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
-	Plen   types.Int64  `tfsdk:"plen"`
-	Prefix types.String `tfsdk:"prefix"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model
-var SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes = map[string]attr.Type{
-	"plen":   types.Int64Type,
-	"prefix": types.StringType,
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
-type SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model struct {
-	Plen   types.Int64  `tfsdk:"plen"`
-	Prefix types.String `tfsdk:"prefix"`
-}
-
-// SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes defines the attribute types for SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model
-var SiteIngressEgressGwArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes = map[string]attr.Type{
-	"plen":   types.Int64Type,
-	"prefix": types.StringType,
-}
-
-// SiteIngressEgressGwArPerformanceEnhancementModeModel represents performance_enhancement_mode block
-type SiteIngressEgressGwArPerformanceEnhancementModeModel struct {
-	PerfModeL3Enhanced *SiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
-	PerfModeL7Enhanced *SiteEmptyModel                                                         `tfsdk:"perf_mode_l7_enhanced"`
-}
-
-// SiteIngressEgressGwArPerformanceEnhancementModeModelAttrTypes defines the attribute types for SiteIngressEgressGwArPerformanceEnhancementModeModel
-var SiteIngressEgressGwArPerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: SiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
-	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
-type SiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModel struct {
-	Jumbo   *SiteEmptyModel `tfsdk:"jumbo"`
-	NoJumbo *SiteEmptyModel `tfsdk:"no_jumbo"`
-}
-
-// SiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes defines the attribute types for SiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModel
-var SiteIngressEgressGwArPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes = map[string]attr.Type{
-	"jumbo":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_jumbo": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
 // SiteIngressGwModel represents ingress_gw block
 type SiteIngressGwModel struct {
-	AzureCertifiedHw           types.String                                  `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking      *SiteIngressGwAcceleratedNetworkingModel      `tfsdk:"accelerated_networking"`
-	AzNodes                    []SiteIngressGwAzNodesModel                   `tfsdk:"az_nodes"`
+	GCPCertifiedHw             types.String                                  `tfsdk:"gcp_certified_hw"`
+	GCPZoneNames               types.List                                    `tfsdk:"gcp_zone_names"`
+	NodeNumber                 types.Int64                                   `tfsdk:"node_number"`
+	LocalNetwork               *SiteIngressGwLocalNetworkModel               `tfsdk:"local_network"`
+	LocalSubnet                *SiteIngressGwLocalSubnetModel                `tfsdk:"local_subnet"`
 	PerformanceEnhancementMode *SiteIngressGwPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
 }
 
 // SiteIngressGwModelAttrTypes defines the attribute types for SiteIngressGwModel
 var SiteIngressGwModelAttrTypes = map[string]attr.Type{
-	"azure_certified_hw":           types.StringType,
-	"accelerated_networking":       types.ObjectType{AttrTypes: SiteIngressGwAcceleratedNetworkingModelAttrTypes},
-	"az_nodes":                     types.ListType{ElemType: types.ObjectType{AttrTypes: SiteIngressGwAzNodesModelAttrTypes}},
+	"gcp_certified_hw":             types.StringType,
+	"gcp_zone_names":               types.ListType{ElemType: types.StringType},
+	"node_number":                  types.Int64Type,
+	"local_network":                types.ObjectType{AttrTypes: SiteIngressGwLocalNetworkModelAttrTypes},
+	"local_subnet":                 types.ObjectType{AttrTypes: SiteIngressGwLocalSubnetModelAttrTypes},
 	"performance_enhancement_mode": types.ObjectType{AttrTypes: SiteIngressGwPerformanceEnhancementModeModelAttrTypes},
 }
 
-// SiteIngressGwAcceleratedNetworkingModel represents accelerated_networking block
-type SiteIngressGwAcceleratedNetworkingModel struct {
-	Disable *SiteEmptyModel `tfsdk:"disable"`
-	Enable  *SiteEmptyModel `tfsdk:"enable"`
+// SiteIngressGwLocalNetworkModel represents local_network block
+type SiteIngressGwLocalNetworkModel struct {
+	ExistingNetwork        *SiteIngressGwLocalNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork             *SiteIngressGwLocalNetworkNewNetworkModel      `tfsdk:"new_network"`
+	NewNetworkAutogenerate *SiteEmptyModel                                `tfsdk:"new_network_autogenerate"`
 }
 
-// SiteIngressGwAcceleratedNetworkingModelAttrTypes defines the attribute types for SiteIngressGwAcceleratedNetworkingModel
-var SiteIngressGwAcceleratedNetworkingModelAttrTypes = map[string]attr.Type{
-	"disable": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"enable":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
+// SiteIngressGwLocalNetworkModelAttrTypes defines the attribute types for SiteIngressGwLocalNetworkModel
+var SiteIngressGwLocalNetworkModelAttrTypes = map[string]attr.Type{
+	"existing_network":         types.ObjectType{AttrTypes: SiteIngressGwLocalNetworkExistingNetworkModelAttrTypes},
+	"new_network":              types.ObjectType{AttrTypes: SiteIngressGwLocalNetworkNewNetworkModelAttrTypes},
+	"new_network_autogenerate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
-// SiteIngressGwAzNodesModel represents az_nodes block
-type SiteIngressGwAzNodesModel struct {
-	AzureAz     types.String                          `tfsdk:"azure_az"`
-	LocalSubnet *SiteIngressGwAzNodesLocalSubnetModel `tfsdk:"local_subnet"`
+// SiteIngressGwLocalNetworkExistingNetworkModel represents existing_network block
+type SiteIngressGwLocalNetworkExistingNetworkModel struct {
+	Name types.String `tfsdk:"name"`
 }
 
-// SiteIngressGwAzNodesModelAttrTypes defines the attribute types for SiteIngressGwAzNodesModel
-var SiteIngressGwAzNodesModelAttrTypes = map[string]attr.Type{
-	"azure_az":     types.StringType,
-	"local_subnet": types.ObjectType{AttrTypes: SiteIngressGwAzNodesLocalSubnetModelAttrTypes},
+// SiteIngressGwLocalNetworkExistingNetworkModelAttrTypes defines the attribute types for SiteIngressGwLocalNetworkExistingNetworkModel
+var SiteIngressGwLocalNetworkExistingNetworkModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
 }
 
-// SiteIngressGwAzNodesLocalSubnetModel represents local_subnet block
-type SiteIngressGwAzNodesLocalSubnetModel struct {
-	Subnet      *SiteIngressGwAzNodesLocalSubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteIngressGwAzNodesLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
+// SiteIngressGwLocalNetworkNewNetworkModel represents new_network block
+type SiteIngressGwLocalNetworkNewNetworkModel struct {
+	Name types.String `tfsdk:"name"`
 }
 
-// SiteIngressGwAzNodesLocalSubnetModelAttrTypes defines the attribute types for SiteIngressGwAzNodesLocalSubnetModel
-var SiteIngressGwAzNodesLocalSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet":       types.ObjectType{AttrTypes: SiteIngressGwAzNodesLocalSubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteIngressGwAzNodesLocalSubnetSubnetParamModelAttrTypes},
+// SiteIngressGwLocalNetworkNewNetworkModelAttrTypes defines the attribute types for SiteIngressGwLocalNetworkNewNetworkModel
+var SiteIngressGwLocalNetworkNewNetworkModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
 }
 
-// SiteIngressGwAzNodesLocalSubnetSubnetModel represents subnet block
-type SiteIngressGwAzNodesLocalSubnetSubnetModel struct {
-	SubnetName        types.String    `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
+// SiteIngressGwLocalSubnetModel represents local_subnet block
+type SiteIngressGwLocalSubnetModel struct {
+	ExistingSubnet *SiteIngressGwLocalSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
+	NewSubnet      *SiteIngressGwLocalSubnetNewSubnetModel      `tfsdk:"new_subnet"`
 }
 
-// SiteIngressGwAzNodesLocalSubnetSubnetModelAttrTypes defines the attribute types for SiteIngressGwAzNodesLocalSubnetSubnetModel
-var SiteIngressGwAzNodesLocalSubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_name":         types.StringType,
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+// SiteIngressGwLocalSubnetModelAttrTypes defines the attribute types for SiteIngressGwLocalSubnetModel
+var SiteIngressGwLocalSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet": types.ObjectType{AttrTypes: SiteIngressGwLocalSubnetExistingSubnetModelAttrTypes},
+	"new_subnet":      types.ObjectType{AttrTypes: SiteIngressGwLocalSubnetNewSubnetModelAttrTypes},
 }
 
-// SiteIngressGwAzNodesLocalSubnetSubnetParamModel represents subnet_param block
-type SiteIngressGwAzNodesLocalSubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
+// SiteIngressGwLocalSubnetExistingSubnetModel represents existing_subnet block
+type SiteIngressGwLocalSubnetExistingSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
 }
 
-// SiteIngressGwAzNodesLocalSubnetSubnetParamModelAttrTypes defines the attribute types for SiteIngressGwAzNodesLocalSubnetSubnetParamModel
-var SiteIngressGwAzNodesLocalSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
+// SiteIngressGwLocalSubnetExistingSubnetModelAttrTypes defines the attribute types for SiteIngressGwLocalSubnetExistingSubnetModel
+var SiteIngressGwLocalSubnetExistingSubnetModelAttrTypes = map[string]attr.Type{
+	"subnet_name": types.StringType,
+}
+
+// SiteIngressGwLocalSubnetNewSubnetModel represents new_subnet block
+type SiteIngressGwLocalSubnetNewSubnetModel struct {
+	PrimaryIpv4 types.String `tfsdk:"primary_ipv4"`
+	SubnetName  types.String `tfsdk:"subnet_name"`
+}
+
+// SiteIngressGwLocalSubnetNewSubnetModelAttrTypes defines the attribute types for SiteIngressGwLocalSubnetNewSubnetModel
+var SiteIngressGwLocalSubnetNewSubnetModelAttrTypes = map[string]attr.Type{
+	"primary_ipv4": types.StringType,
+	"subnet_name":  types.StringType,
 }
 
 // SiteIngressGwPerformanceEnhancementModeModel represents performance_enhancement_mode block
@@ -1977,110 +925,6 @@ type SiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel struct {
 
 // SiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes defines the attribute types for SiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModel
 var SiteIngressGwPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes = map[string]attr.Type{
-	"jumbo":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_jumbo": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressGwArModel represents ingress_gw_ar block
-type SiteIngressGwArModel struct {
-	AzureCertifiedHw           types.String                                    `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking      *SiteIngressGwArAcceleratedNetworkingModel      `tfsdk:"accelerated_networking"`
-	Node                       *SiteIngressGwArNodeModel                       `tfsdk:"node"`
-	PerformanceEnhancementMode *SiteIngressGwArPerformanceEnhancementModeModel `tfsdk:"performance_enhancement_mode"`
-}
-
-// SiteIngressGwArModelAttrTypes defines the attribute types for SiteIngressGwArModel
-var SiteIngressGwArModelAttrTypes = map[string]attr.Type{
-	"azure_certified_hw":           types.StringType,
-	"accelerated_networking":       types.ObjectType{AttrTypes: SiteIngressGwArAcceleratedNetworkingModelAttrTypes},
-	"node":                         types.ObjectType{AttrTypes: SiteIngressGwArNodeModelAttrTypes},
-	"performance_enhancement_mode": types.ObjectType{AttrTypes: SiteIngressGwArPerformanceEnhancementModeModelAttrTypes},
-}
-
-// SiteIngressGwArAcceleratedNetworkingModel represents accelerated_networking block
-type SiteIngressGwArAcceleratedNetworkingModel struct {
-	Disable *SiteEmptyModel `tfsdk:"disable"`
-	Enable  *SiteEmptyModel `tfsdk:"enable"`
-}
-
-// SiteIngressGwArAcceleratedNetworkingModelAttrTypes defines the attribute types for SiteIngressGwArAcceleratedNetworkingModel
-var SiteIngressGwArAcceleratedNetworkingModelAttrTypes = map[string]attr.Type{
-	"disable": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"enable":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressGwArNodeModel represents node block
-type SiteIngressGwArNodeModel struct {
-	FaultDomain  types.Int64                          `tfsdk:"fault_domain"`
-	NodeNumber   types.Int64                          `tfsdk:"node_number"`
-	UpdateDomain types.Int64                          `tfsdk:"update_domain"`
-	LocalSubnet  *SiteIngressGwArNodeLocalSubnetModel `tfsdk:"local_subnet"`
-}
-
-// SiteIngressGwArNodeModelAttrTypes defines the attribute types for SiteIngressGwArNodeModel
-var SiteIngressGwArNodeModelAttrTypes = map[string]attr.Type{
-	"fault_domain":  types.Int64Type,
-	"node_number":   types.Int64Type,
-	"update_domain": types.Int64Type,
-	"local_subnet":  types.ObjectType{AttrTypes: SiteIngressGwArNodeLocalSubnetModelAttrTypes},
-}
-
-// SiteIngressGwArNodeLocalSubnetModel represents local_subnet block
-type SiteIngressGwArNodeLocalSubnetModel struct {
-	Subnet      *SiteIngressGwArNodeLocalSubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteIngressGwArNodeLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteIngressGwArNodeLocalSubnetModelAttrTypes defines the attribute types for SiteIngressGwArNodeLocalSubnetModel
-var SiteIngressGwArNodeLocalSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet":       types.ObjectType{AttrTypes: SiteIngressGwArNodeLocalSubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteIngressGwArNodeLocalSubnetSubnetParamModelAttrTypes},
-}
-
-// SiteIngressGwArNodeLocalSubnetSubnetModel represents subnet block
-type SiteIngressGwArNodeLocalSubnetSubnetModel struct {
-	SubnetName        types.String    `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteIngressGwArNodeLocalSubnetSubnetModelAttrTypes defines the attribute types for SiteIngressGwArNodeLocalSubnetSubnetModel
-var SiteIngressGwArNodeLocalSubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_name":         types.StringType,
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressGwArNodeLocalSubnetSubnetParamModel represents subnet_param block
-type SiteIngressGwArNodeLocalSubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteIngressGwArNodeLocalSubnetSubnetParamModelAttrTypes defines the attribute types for SiteIngressGwArNodeLocalSubnetSubnetParamModel
-var SiteIngressGwArNodeLocalSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
-}
-
-// SiteIngressGwArPerformanceEnhancementModeModel represents performance_enhancement_mode block
-type SiteIngressGwArPerformanceEnhancementModeModel struct {
-	PerfModeL3Enhanced *SiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModel `tfsdk:"perf_mode_l3_enhanced"`
-	PerfModeL7Enhanced *SiteEmptyModel                                                   `tfsdk:"perf_mode_l7_enhanced"`
-}
-
-// SiteIngressGwArPerformanceEnhancementModeModelAttrTypes defines the attribute types for SiteIngressGwArPerformanceEnhancementModeModel
-var SiteIngressGwArPerformanceEnhancementModeModelAttrTypes = map[string]attr.Type{
-	"perf_mode_l3_enhanced": types.ObjectType{AttrTypes: SiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes},
-	"perf_mode_l7_enhanced": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModel represents perf_mode_l3_enhanced block
-type SiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModel struct {
-	Jumbo   *SiteEmptyModel `tfsdk:"jumbo"`
-	NoJumbo *SiteEmptyModel `tfsdk:"no_jumbo"`
-}
-
-// SiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes defines the attribute types for SiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModel
-var SiteIngressGwArPerformanceEnhancementModePerfModeL3EnhancedModelAttrTypes = map[string]attr.Type{
 	"jumbo":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_jumbo": types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
@@ -2151,6 +995,34 @@ var SiteOSModelAttrTypes = map[string]attr.Type{
 	"default_os_version":       types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
+// SitePrivateConnectivityModel represents private_connectivity block
+type SitePrivateConnectivityModel struct {
+	CloudLink *SitePrivateConnectivityCloudLinkModel `tfsdk:"cloud_link"`
+	Inside    *SiteEmptyModel                        `tfsdk:"inside"`
+	Outside   *SiteEmptyModel                        `tfsdk:"outside"`
+}
+
+// SitePrivateConnectivityModelAttrTypes defines the attribute types for SitePrivateConnectivityModel
+var SitePrivateConnectivityModelAttrTypes = map[string]attr.Type{
+	"cloud_link": types.ObjectType{AttrTypes: SitePrivateConnectivityCloudLinkModelAttrTypes},
+	"inside":     types.ObjectType{AttrTypes: map[string]attr.Type{}},
+	"outside":    types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// SitePrivateConnectivityCloudLinkModel represents cloud_link block
+type SitePrivateConnectivityCloudLinkModel struct {
+	Name      types.String `tfsdk:"name"`
+	Namespace types.String `tfsdk:"namespace"`
+	Tenant    types.String `tfsdk:"tenant"`
+}
+
+// SitePrivateConnectivityCloudLinkModelAttrTypes defines the attribute types for SitePrivateConnectivityCloudLinkModel
+var SitePrivateConnectivityCloudLinkModelAttrTypes = map[string]attr.Type{
+	"name":      types.StringType,
+	"namespace": types.StringType,
+	"tenant":    types.StringType,
+}
+
 // SiteSwModel represents sw block
 type SiteSwModel struct {
 	VolterraSoftwareVersion types.String    `tfsdk:"volterra_software_version"`
@@ -2163,56 +1035,14 @@ var SiteSwModelAttrTypes = map[string]attr.Type{
 	"default_sw_version":        types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
-// SiteVNETModel represents vnet block
-type SiteVNETModel struct {
-	ExistingVNET *SiteVNETExistingVNETModel `tfsdk:"existing_vnet"`
-	NewVNET      *SiteVNETNewVNETModel      `tfsdk:"new_vnet"`
-}
-
-// SiteVNETModelAttrTypes defines the attribute types for SiteVNETModel
-var SiteVNETModelAttrTypes = map[string]attr.Type{
-	"existing_vnet": types.ObjectType{AttrTypes: SiteVNETExistingVNETModelAttrTypes},
-	"new_vnet":      types.ObjectType{AttrTypes: SiteVNETNewVNETModelAttrTypes},
-}
-
-// SiteVNETExistingVNETModel represents existing_vnet block
-type SiteVNETExistingVNETModel struct {
-	ResourceGroup         types.String    `tfsdk:"resource_group"`
-	VNETName              types.String    `tfsdk:"vnet_name"`
-	F5OrchestratedRouting *SiteEmptyModel `tfsdk:"f5_orchestrated_routing"`
-	ManualRouting         *SiteEmptyModel `tfsdk:"manual_routing"`
-}
-
-// SiteVNETExistingVNETModelAttrTypes defines the attribute types for SiteVNETExistingVNETModel
-var SiteVNETExistingVNETModelAttrTypes = map[string]attr.Type{
-	"resource_group":          types.StringType,
-	"vnet_name":               types.StringType,
-	"f5_orchestrated_routing": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"manual_routing":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteVNETNewVNETModel represents new_vnet block
-type SiteVNETNewVNETModel struct {
-	Name         types.String    `tfsdk:"name"`
-	PrimaryIpv4  types.String    `tfsdk:"primary_ipv4"`
-	Autogenerate *SiteEmptyModel `tfsdk:"autogenerate"`
-}
-
-// SiteVNETNewVNETModelAttrTypes defines the attribute types for SiteVNETNewVNETModel
-var SiteVNETNewVNETModelAttrTypes = map[string]attr.Type{
-	"name":         types.StringType,
-	"primary_ipv4": types.StringType,
-	"autogenerate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
 // SiteVoltstackClusterModel represents voltstack_cluster block
 type SiteVoltstackClusterModel struct {
-	AzureCertifiedHw               types.String                                             `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking          *SiteVoltstackClusterAcceleratedNetworkingModel          `tfsdk:"accelerated_networking"`
+	GCPCertifiedHw                 types.String                                             `tfsdk:"gcp_certified_hw"`
+	GCPZoneNames                   types.List                                               `tfsdk:"gcp_zone_names"`
+	NodeNumber                     types.Int64                                              `tfsdk:"node_number"`
 	ActiveEnhancedFirewallPolicies *SiteVoltstackClusterActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
 	ActiveForwardProxyPolicies     *SiteVoltstackClusterActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
 	ActiveNetworkPolicies          *SiteVoltstackClusterActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
-	AzNodes                        []SiteVoltstackClusterAzNodesModel                       `tfsdk:"az_nodes"`
 	DcClusterGroup                 *SiteVoltstackClusterDcClusterGroupModel                 `tfsdk:"dc_cluster_group"`
 	DefaultStorage                 *SiteEmptyModel                                          `tfsdk:"default_storage"`
 	ForwardProxyAllowAll           *SiteEmptyModel                                          `tfsdk:"forward_proxy_allow_all"`
@@ -2225,6 +1055,8 @@ type SiteVoltstackClusterModel struct {
 	NoNetworkPolicy                *SiteEmptyModel                                          `tfsdk:"no_network_policy"`
 	NoOutsideStaticRoutes          *SiteEmptyModel                                          `tfsdk:"no_outside_static_routes"`
 	OutsideStaticRoutes            *SiteVoltstackClusterOutsideStaticRoutesModel            `tfsdk:"outside_static_routes"`
+	SiteLocalNetwork               *SiteVoltstackClusterSiteLocalNetworkModel               `tfsdk:"site_local_network"`
+	SiteLocalSubnet                *SiteVoltstackClusterSiteLocalSubnetModel                `tfsdk:"site_local_subnet"`
 	SmConnectionPublicIP           *SiteEmptyModel                                          `tfsdk:"sm_connection_public_ip"`
 	SmConnectionPvtIP              *SiteEmptyModel                                          `tfsdk:"sm_connection_pvt_ip"`
 	StorageClassList               *SiteVoltstackClusterStorageClassListModel               `tfsdk:"storage_class_list"`
@@ -2232,12 +1064,12 @@ type SiteVoltstackClusterModel struct {
 
 // SiteVoltstackClusterModelAttrTypes defines the attribute types for SiteVoltstackClusterModel
 var SiteVoltstackClusterModelAttrTypes = map[string]attr.Type{
-	"azure_certified_hw":                types.StringType,
-	"accelerated_networking":            types.ObjectType{AttrTypes: SiteVoltstackClusterAcceleratedNetworkingModelAttrTypes},
+	"gcp_certified_hw":                  types.StringType,
+	"gcp_zone_names":                    types.ListType{ElemType: types.StringType},
+	"node_number":                       types.Int64Type,
 	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: SiteVoltstackClusterActiveEnhancedFirewallPoliciesModelAttrTypes},
 	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: SiteVoltstackClusterActiveForwardProxyPoliciesModelAttrTypes},
 	"active_network_policies":           types.ObjectType{AttrTypes: SiteVoltstackClusterActiveNetworkPoliciesModelAttrTypes},
-	"az_nodes":                          types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVoltstackClusterAzNodesModelAttrTypes}},
 	"dc_cluster_group":                  types.ObjectType{AttrTypes: SiteVoltstackClusterDcClusterGroupModelAttrTypes},
 	"default_storage":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
@@ -2250,21 +1082,11 @@ var SiteVoltstackClusterModelAttrTypes = map[string]attr.Type{
 	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"no_outside_static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"outside_static_routes":             types.ObjectType{AttrTypes: SiteVoltstackClusterOutsideStaticRoutesModelAttrTypes},
+	"site_local_network":                types.ObjectType{AttrTypes: SiteVoltstackClusterSiteLocalNetworkModelAttrTypes},
+	"site_local_subnet":                 types.ObjectType{AttrTypes: SiteVoltstackClusterSiteLocalSubnetModelAttrTypes},
 	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
 	"storage_class_list":                types.ObjectType{AttrTypes: SiteVoltstackClusterStorageClassListModelAttrTypes},
-}
-
-// SiteVoltstackClusterAcceleratedNetworkingModel represents accelerated_networking block
-type SiteVoltstackClusterAcceleratedNetworkingModel struct {
-	Disable *SiteEmptyModel `tfsdk:"disable"`
-	Enable  *SiteEmptyModel `tfsdk:"enable"`
-}
-
-// SiteVoltstackClusterAcceleratedNetworkingModelAttrTypes defines the attribute types for SiteVoltstackClusterAcceleratedNetworkingModel
-var SiteVoltstackClusterAcceleratedNetworkingModelAttrTypes = map[string]attr.Type{
-	"disable": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"enable":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
 }
 
 // SiteVoltstackClusterActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
@@ -2337,54 +1159,6 @@ var SiteVoltstackClusterActiveNetworkPoliciesNetworkPoliciesModelAttrTypes = map
 	"name":      types.StringType,
 	"namespace": types.StringType,
 	"tenant":    types.StringType,
-}
-
-// SiteVoltstackClusterAzNodesModel represents az_nodes block
-type SiteVoltstackClusterAzNodesModel struct {
-	AzureAz     types.String                                 `tfsdk:"azure_az"`
-	LocalSubnet *SiteVoltstackClusterAzNodesLocalSubnetModel `tfsdk:"local_subnet"`
-}
-
-// SiteVoltstackClusterAzNodesModelAttrTypes defines the attribute types for SiteVoltstackClusterAzNodesModel
-var SiteVoltstackClusterAzNodesModelAttrTypes = map[string]attr.Type{
-	"azure_az":     types.StringType,
-	"local_subnet": types.ObjectType{AttrTypes: SiteVoltstackClusterAzNodesLocalSubnetModelAttrTypes},
-}
-
-// SiteVoltstackClusterAzNodesLocalSubnetModel represents local_subnet block
-type SiteVoltstackClusterAzNodesLocalSubnetModel struct {
-	Subnet      *SiteVoltstackClusterAzNodesLocalSubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteVoltstackClusterAzNodesLocalSubnetModelAttrTypes defines the attribute types for SiteVoltstackClusterAzNodesLocalSubnetModel
-var SiteVoltstackClusterAzNodesLocalSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet":       types.ObjectType{AttrTypes: SiteVoltstackClusterAzNodesLocalSubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteVoltstackClusterAzNodesLocalSubnetSubnetParamModelAttrTypes},
-}
-
-// SiteVoltstackClusterAzNodesLocalSubnetSubnetModel represents subnet block
-type SiteVoltstackClusterAzNodesLocalSubnetSubnetModel struct {
-	SubnetName        types.String    `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteVoltstackClusterAzNodesLocalSubnetSubnetModelAttrTypes defines the attribute types for SiteVoltstackClusterAzNodesLocalSubnetSubnetModel
-var SiteVoltstackClusterAzNodesLocalSubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_name":         types.StringType,
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel represents subnet_param block
-type SiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteVoltstackClusterAzNodesLocalSubnetSubnetParamModelAttrTypes defines the attribute types for SiteVoltstackClusterAzNodesLocalSubnetSubnetParamModel
-var SiteVoltstackClusterAzNodesLocalSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
 }
 
 // SiteVoltstackClusterDcClusterGroupModel represents dc_cluster_group block
@@ -2623,6 +1397,74 @@ var SiteVoltstackClusterOutsideStaticRoutesStaticRouteListCustomStaticRouteSubne
 	"prefix": types.StringType,
 }
 
+// SiteVoltstackClusterSiteLocalNetworkModel represents site_local_network block
+type SiteVoltstackClusterSiteLocalNetworkModel struct {
+	ExistingNetwork        *SiteVoltstackClusterSiteLocalNetworkExistingNetworkModel `tfsdk:"existing_network"`
+	NewNetwork             *SiteVoltstackClusterSiteLocalNetworkNewNetworkModel      `tfsdk:"new_network"`
+	NewNetworkAutogenerate *SiteEmptyModel                                           `tfsdk:"new_network_autogenerate"`
+}
+
+// SiteVoltstackClusterSiteLocalNetworkModelAttrTypes defines the attribute types for SiteVoltstackClusterSiteLocalNetworkModel
+var SiteVoltstackClusterSiteLocalNetworkModelAttrTypes = map[string]attr.Type{
+	"existing_network":         types.ObjectType{AttrTypes: SiteVoltstackClusterSiteLocalNetworkExistingNetworkModelAttrTypes},
+	"new_network":              types.ObjectType{AttrTypes: SiteVoltstackClusterSiteLocalNetworkNewNetworkModelAttrTypes},
+	"new_network_autogenerate": types.ObjectType{AttrTypes: map[string]attr.Type{}},
+}
+
+// SiteVoltstackClusterSiteLocalNetworkExistingNetworkModel represents existing_network block
+type SiteVoltstackClusterSiteLocalNetworkExistingNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// SiteVoltstackClusterSiteLocalNetworkExistingNetworkModelAttrTypes defines the attribute types for SiteVoltstackClusterSiteLocalNetworkExistingNetworkModel
+var SiteVoltstackClusterSiteLocalNetworkExistingNetworkModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+}
+
+// SiteVoltstackClusterSiteLocalNetworkNewNetworkModel represents new_network block
+type SiteVoltstackClusterSiteLocalNetworkNewNetworkModel struct {
+	Name types.String `tfsdk:"name"`
+}
+
+// SiteVoltstackClusterSiteLocalNetworkNewNetworkModelAttrTypes defines the attribute types for SiteVoltstackClusterSiteLocalNetworkNewNetworkModel
+var SiteVoltstackClusterSiteLocalNetworkNewNetworkModelAttrTypes = map[string]attr.Type{
+	"name": types.StringType,
+}
+
+// SiteVoltstackClusterSiteLocalSubnetModel represents site_local_subnet block
+type SiteVoltstackClusterSiteLocalSubnetModel struct {
+	ExistingSubnet *SiteVoltstackClusterSiteLocalSubnetExistingSubnetModel `tfsdk:"existing_subnet"`
+	NewSubnet      *SiteVoltstackClusterSiteLocalSubnetNewSubnetModel      `tfsdk:"new_subnet"`
+}
+
+// SiteVoltstackClusterSiteLocalSubnetModelAttrTypes defines the attribute types for SiteVoltstackClusterSiteLocalSubnetModel
+var SiteVoltstackClusterSiteLocalSubnetModelAttrTypes = map[string]attr.Type{
+	"existing_subnet": types.ObjectType{AttrTypes: SiteVoltstackClusterSiteLocalSubnetExistingSubnetModelAttrTypes},
+	"new_subnet":      types.ObjectType{AttrTypes: SiteVoltstackClusterSiteLocalSubnetNewSubnetModelAttrTypes},
+}
+
+// SiteVoltstackClusterSiteLocalSubnetExistingSubnetModel represents existing_subnet block
+type SiteVoltstackClusterSiteLocalSubnetExistingSubnetModel struct {
+	SubnetName types.String `tfsdk:"subnet_name"`
+}
+
+// SiteVoltstackClusterSiteLocalSubnetExistingSubnetModelAttrTypes defines the attribute types for SiteVoltstackClusterSiteLocalSubnetExistingSubnetModel
+var SiteVoltstackClusterSiteLocalSubnetExistingSubnetModelAttrTypes = map[string]attr.Type{
+	"subnet_name": types.StringType,
+}
+
+// SiteVoltstackClusterSiteLocalSubnetNewSubnetModel represents new_subnet block
+type SiteVoltstackClusterSiteLocalSubnetNewSubnetModel struct {
+	PrimaryIpv4 types.String `tfsdk:"primary_ipv4"`
+	SubnetName  types.String `tfsdk:"subnet_name"`
+}
+
+// SiteVoltstackClusterSiteLocalSubnetNewSubnetModelAttrTypes defines the attribute types for SiteVoltstackClusterSiteLocalSubnetNewSubnetModel
+var SiteVoltstackClusterSiteLocalSubnetNewSubnetModelAttrTypes = map[string]attr.Type{
+	"primary_ipv4": types.StringType,
+	"subnet_name":  types.StringType,
+}
+
 // SiteVoltstackClusterStorageClassListModel represents storage_class_list block
 type SiteVoltstackClusterStorageClassListModel struct {
 	StorageClasses []SiteVoltstackClusterStorageClassListStorageClassesModel `tfsdk:"storage_classes"`
@@ -2645,450 +1487,6 @@ var SiteVoltstackClusterStorageClassListStorageClassesModelAttrTypes = map[strin
 	"storage_class_name":    types.StringType,
 }
 
-// SiteVoltstackClusterArModel represents voltstack_cluster_ar block
-type SiteVoltstackClusterArModel struct {
-	AzureCertifiedHw               types.String                                               `tfsdk:"azure_certified_hw"`
-	AcceleratedNetworking          *SiteVoltstackClusterArAcceleratedNetworkingModel          `tfsdk:"accelerated_networking"`
-	ActiveEnhancedFirewallPolicies *SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel `tfsdk:"active_enhanced_firewall_policies"`
-	ActiveForwardProxyPolicies     *SiteVoltstackClusterArActiveForwardProxyPoliciesModel     `tfsdk:"active_forward_proxy_policies"`
-	ActiveNetworkPolicies          *SiteVoltstackClusterArActiveNetworkPoliciesModel          `tfsdk:"active_network_policies"`
-	DcClusterGroup                 *SiteVoltstackClusterArDcClusterGroupModel                 `tfsdk:"dc_cluster_group"`
-	DefaultStorage                 *SiteEmptyModel                                            `tfsdk:"default_storage"`
-	ForwardProxyAllowAll           *SiteEmptyModel                                            `tfsdk:"forward_proxy_allow_all"`
-	GlobalNetworkList              *SiteVoltstackClusterArGlobalNetworkListModel              `tfsdk:"global_network_list"`
-	K8SCluster                     *SiteVoltstackClusterArK8SClusterModel                     `tfsdk:"k8s_cluster"`
-	NoDcClusterGroup               *SiteEmptyModel                                            `tfsdk:"no_dc_cluster_group"`
-	NoForwardProxy                 *SiteEmptyModel                                            `tfsdk:"no_forward_proxy"`
-	NoGlobalNetwork                *SiteEmptyModel                                            `tfsdk:"no_global_network"`
-	NoK8SCluster                   *SiteEmptyModel                                            `tfsdk:"no_k8s_cluster"`
-	NoNetworkPolicy                *SiteEmptyModel                                            `tfsdk:"no_network_policy"`
-	NoOutsideStaticRoutes          *SiteEmptyModel                                            `tfsdk:"no_outside_static_routes"`
-	Node                           *SiteVoltstackClusterArNodeModel                           `tfsdk:"node"`
-	OutsideStaticRoutes            *SiteVoltstackClusterArOutsideStaticRoutesModel            `tfsdk:"outside_static_routes"`
-	SmConnectionPublicIP           *SiteEmptyModel                                            `tfsdk:"sm_connection_public_ip"`
-	SmConnectionPvtIP              *SiteEmptyModel                                            `tfsdk:"sm_connection_pvt_ip"`
-	StorageClassList               *SiteVoltstackClusterArStorageClassListModel               `tfsdk:"storage_class_list"`
-}
-
-// SiteVoltstackClusterArModelAttrTypes defines the attribute types for SiteVoltstackClusterArModel
-var SiteVoltstackClusterArModelAttrTypes = map[string]attr.Type{
-	"azure_certified_hw":                types.StringType,
-	"accelerated_networking":            types.ObjectType{AttrTypes: SiteVoltstackClusterArAcceleratedNetworkingModelAttrTypes},
-	"active_enhanced_firewall_policies": types.ObjectType{AttrTypes: SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModelAttrTypes},
-	"active_forward_proxy_policies":     types.ObjectType{AttrTypes: SiteVoltstackClusterArActiveForwardProxyPoliciesModelAttrTypes},
-	"active_network_policies":           types.ObjectType{AttrTypes: SiteVoltstackClusterArActiveNetworkPoliciesModelAttrTypes},
-	"dc_cluster_group":                  types.ObjectType{AttrTypes: SiteVoltstackClusterArDcClusterGroupModelAttrTypes},
-	"default_storage":                   types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"forward_proxy_allow_all":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"global_network_list":               types.ObjectType{AttrTypes: SiteVoltstackClusterArGlobalNetworkListModelAttrTypes},
-	"k8s_cluster":                       types.ObjectType{AttrTypes: SiteVoltstackClusterArK8SClusterModelAttrTypes},
-	"no_dc_cluster_group":               types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_forward_proxy":                  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_global_network":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_k8s_cluster":                    types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_network_policy":                 types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"no_outside_static_routes":          types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"node":                              types.ObjectType{AttrTypes: SiteVoltstackClusterArNodeModelAttrTypes},
-	"outside_static_routes":             types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesModelAttrTypes},
-	"sm_connection_public_ip":           types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"sm_connection_pvt_ip":              types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"storage_class_list":                types.ObjectType{AttrTypes: SiteVoltstackClusterArStorageClassListModelAttrTypes},
-}
-
-// SiteVoltstackClusterArAcceleratedNetworkingModel represents accelerated_networking block
-type SiteVoltstackClusterArAcceleratedNetworkingModel struct {
-	Disable *SiteEmptyModel `tfsdk:"disable"`
-	Enable  *SiteEmptyModel `tfsdk:"enable"`
-}
-
-// SiteVoltstackClusterArAcceleratedNetworkingModelAttrTypes defines the attribute types for SiteVoltstackClusterArAcceleratedNetworkingModel
-var SiteVoltstackClusterArAcceleratedNetworkingModelAttrTypes = map[string]attr.Type{
-	"disable": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"enable":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel represents active_enhanced_firewall_policies block
-type SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel struct {
-	EnhancedFirewallPolicies []SiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel `tfsdk:"enhanced_firewall_policies"`
-}
-
-// SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel
-var SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
-	"enhanced_firewall_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes}},
-}
-
-// SiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel represents enhanced_firewall_policies block
-type SiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes defines the attribute types for SiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModel
-var SiteVoltstackClusterArActiveEnhancedFirewallPoliciesEnhancedFirewallPoliciesModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteVoltstackClusterArActiveForwardProxyPoliciesModel represents active_forward_proxy_policies block
-type SiteVoltstackClusterArActiveForwardProxyPoliciesModel struct {
-	ForwardProxyPolicies []SiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModel `tfsdk:"forward_proxy_policies"`
-}
-
-// SiteVoltstackClusterArActiveForwardProxyPoliciesModelAttrTypes defines the attribute types for SiteVoltstackClusterArActiveForwardProxyPoliciesModel
-var SiteVoltstackClusterArActiveForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
-	"forward_proxy_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes}},
-}
-
-// SiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModel represents forward_proxy_policies block
-type SiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes defines the attribute types for SiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModel
-var SiteVoltstackClusterArActiveForwardProxyPoliciesForwardProxyPoliciesModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteVoltstackClusterArActiveNetworkPoliciesModel represents active_network_policies block
-type SiteVoltstackClusterArActiveNetworkPoliciesModel struct {
-	NetworkPolicies []SiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModel `tfsdk:"network_policies"`
-}
-
-// SiteVoltstackClusterArActiveNetworkPoliciesModelAttrTypes defines the attribute types for SiteVoltstackClusterArActiveNetworkPoliciesModel
-var SiteVoltstackClusterArActiveNetworkPoliciesModelAttrTypes = map[string]attr.Type{
-	"network_policies": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModelAttrTypes}},
-}
-
-// SiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModel represents network_policies block
-type SiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModelAttrTypes defines the attribute types for SiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModel
-var SiteVoltstackClusterArActiveNetworkPoliciesNetworkPoliciesModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteVoltstackClusterArDcClusterGroupModel represents dc_cluster_group block
-type SiteVoltstackClusterArDcClusterGroupModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteVoltstackClusterArDcClusterGroupModelAttrTypes defines the attribute types for SiteVoltstackClusterArDcClusterGroupModel
-var SiteVoltstackClusterArDcClusterGroupModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteVoltstackClusterArGlobalNetworkListModel represents global_network_list block
-type SiteVoltstackClusterArGlobalNetworkListModel struct {
-	GlobalNetworkConnections []SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModel `tfsdk:"global_network_connections"`
-}
-
-// SiteVoltstackClusterArGlobalNetworkListModelAttrTypes defines the attribute types for SiteVoltstackClusterArGlobalNetworkListModel
-var SiteVoltstackClusterArGlobalNetworkListModelAttrTypes = map[string]attr.Type{
-	"global_network_connections": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes}},
-}
-
-// SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModel represents global_network_connections block
-type SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModel struct {
-	SLIToGlobalDR *SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel `tfsdk:"sli_to_global_dr"`
-	SloToGlobalDR *SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel `tfsdk:"slo_to_global_dr"`
-}
-
-// SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes defines the attribute types for SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModel
-var SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsModelAttrTypes = map[string]attr.Type{
-	"sli_to_global_dr": types.ObjectType{AttrTypes: SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes},
-	"slo_to_global_dr": types.ObjectType{AttrTypes: SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes},
-}
-
-// SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel represents sli_to_global_dr block
-type SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel struct {
-	GlobalVn *SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
-}
-
-// SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes defines the attribute types for SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModel
-var SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRModelAttrTypes = map[string]attr.Type{
-	"global_vn": types.ObjectType{AttrTypes: SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes},
-}
-
-// SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel represents global_vn block
-type SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes defines the attribute types for SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModel
-var SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSLIToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel represents slo_to_global_dr block
-type SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel struct {
-	GlobalVn *SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel `tfsdk:"global_vn"`
-}
-
-// SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes defines the attribute types for SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModel
-var SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRModelAttrTypes = map[string]attr.Type{
-	"global_vn": types.ObjectType{AttrTypes: SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes},
-}
-
-// SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel represents global_vn block
-type SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes defines the attribute types for SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModel
-var SiteVoltstackClusterArGlobalNetworkListGlobalNetworkConnectionsSloToGlobalDRGlobalVnModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteVoltstackClusterArK8SClusterModel represents k8s_cluster block
-type SiteVoltstackClusterArK8SClusterModel struct {
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-}
-
-// SiteVoltstackClusterArK8SClusterModelAttrTypes defines the attribute types for SiteVoltstackClusterArK8SClusterModel
-var SiteVoltstackClusterArK8SClusterModelAttrTypes = map[string]attr.Type{
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-}
-
-// SiteVoltstackClusterArNodeModel represents node block
-type SiteVoltstackClusterArNodeModel struct {
-	FaultDomain  types.Int64                                 `tfsdk:"fault_domain"`
-	NodeNumber   types.Int64                                 `tfsdk:"node_number"`
-	UpdateDomain types.Int64                                 `tfsdk:"update_domain"`
-	LocalSubnet  *SiteVoltstackClusterArNodeLocalSubnetModel `tfsdk:"local_subnet"`
-}
-
-// SiteVoltstackClusterArNodeModelAttrTypes defines the attribute types for SiteVoltstackClusterArNodeModel
-var SiteVoltstackClusterArNodeModelAttrTypes = map[string]attr.Type{
-	"fault_domain":  types.Int64Type,
-	"node_number":   types.Int64Type,
-	"update_domain": types.Int64Type,
-	"local_subnet":  types.ObjectType{AttrTypes: SiteVoltstackClusterArNodeLocalSubnetModelAttrTypes},
-}
-
-// SiteVoltstackClusterArNodeLocalSubnetModel represents local_subnet block
-type SiteVoltstackClusterArNodeLocalSubnetModel struct {
-	Subnet      *SiteVoltstackClusterArNodeLocalSubnetSubnetModel      `tfsdk:"subnet"`
-	SubnetParam *SiteVoltstackClusterArNodeLocalSubnetSubnetParamModel `tfsdk:"subnet_param"`
-}
-
-// SiteVoltstackClusterArNodeLocalSubnetModelAttrTypes defines the attribute types for SiteVoltstackClusterArNodeLocalSubnetModel
-var SiteVoltstackClusterArNodeLocalSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet":       types.ObjectType{AttrTypes: SiteVoltstackClusterArNodeLocalSubnetSubnetModelAttrTypes},
-	"subnet_param": types.ObjectType{AttrTypes: SiteVoltstackClusterArNodeLocalSubnetSubnetParamModelAttrTypes},
-}
-
-// SiteVoltstackClusterArNodeLocalSubnetSubnetModel represents subnet block
-type SiteVoltstackClusterArNodeLocalSubnetSubnetModel struct {
-	SubnetName        types.String    `tfsdk:"subnet_name"`
-	SubnetResourceGrp types.String    `tfsdk:"subnet_resource_grp"`
-	VNETResourceGroup *SiteEmptyModel `tfsdk:"vnet_resource_group"`
-}
-
-// SiteVoltstackClusterArNodeLocalSubnetSubnetModelAttrTypes defines the attribute types for SiteVoltstackClusterArNodeLocalSubnetSubnetModel
-var SiteVoltstackClusterArNodeLocalSubnetSubnetModelAttrTypes = map[string]attr.Type{
-	"subnet_name":         types.StringType,
-	"subnet_resource_grp": types.StringType,
-	"vnet_resource_group": types.ObjectType{AttrTypes: map[string]attr.Type{}},
-}
-
-// SiteVoltstackClusterArNodeLocalSubnetSubnetParamModel represents subnet_param block
-type SiteVoltstackClusterArNodeLocalSubnetSubnetParamModel struct {
-	Ipv4 types.String `tfsdk:"ipv4"`
-}
-
-// SiteVoltstackClusterArNodeLocalSubnetSubnetParamModelAttrTypes defines the attribute types for SiteVoltstackClusterArNodeLocalSubnetSubnetParamModel
-var SiteVoltstackClusterArNodeLocalSubnetSubnetParamModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.StringType,
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesModel represents outside_static_routes block
-type SiteVoltstackClusterArOutsideStaticRoutesModel struct {
-	StaticRouteList []SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModel `tfsdk:"static_route_list"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesModel
-var SiteVoltstackClusterArOutsideStaticRoutesModelAttrTypes = map[string]attr.Type{
-	"static_route_list": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModelAttrTypes}},
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModel represents static_route_list block
-type SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModel struct {
-	SimpleStaticRoute types.String                                                                    `tfsdk:"simple_static_route"`
-	CustomStaticRoute *SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel `tfsdk:"custom_static_route"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModel
-var SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListModelAttrTypes = map[string]attr.Type{
-	"simple_static_route": types.StringType,
-	"custom_static_route": types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes},
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel represents custom_static_route block
-type SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel struct {
-	Attrs   types.List                                                                              `tfsdk:"attrs"`
-	Labels  *SiteEmptyModel                                                                         `tfsdk:"labels"`
-	Nexthop *SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel  `tfsdk:"nexthop"`
-	Subnets []SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel `tfsdk:"subnets"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModel
-var SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteModelAttrTypes = map[string]attr.Type{
-	"attrs":   types.ListType{ElemType: types.StringType},
-	"labels":  types.ObjectType{AttrTypes: map[string]attr.Type{}},
-	"nexthop": types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes},
-	"subnets": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes}},
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel represents nexthop block
-type SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel struct {
-	Type           types.String                                                                                         `tfsdk:"type"`
-	Interface      []SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel     `tfsdk:"interface"`
-	NexthopAddress *SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel `tfsdk:"nexthop_address"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModel
-var SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopModelAttrTypes = map[string]attr.Type{
-	"type":            types.StringType,
-	"interface":       types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes}},
-	"nexthop_address": types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes},
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel represents interface block
-type SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel struct {
-	Kind      types.String `tfsdk:"kind"`
-	Name      types.String `tfsdk:"name"`
-	Namespace types.String `tfsdk:"namespace"`
-	Tenant    types.String `tfsdk:"tenant"`
-	Uid       types.String `tfsdk:"uid"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModel
-var SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopInterfaceModelAttrTypes = map[string]attr.Type{
-	"kind":      types.StringType,
-	"name":      types.StringType,
-	"namespace": types.StringType,
-	"tenant":    types.StringType,
-	"uid":       types.StringType,
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel represents nexthop_address block
-type SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel struct {
-	Ipv4 *SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model `tfsdk:"ipv4"`
-	Ipv6 *SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model `tfsdk:"ipv6"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModel
-var SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes},
-	"ipv6": types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes},
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model represents ipv4 block
-type SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model struct {
-	Addr types.String `tfsdk:"addr"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4Model
-var SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv4ModelAttrTypes = map[string]attr.Type{
-	"addr": types.StringType,
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model represents ipv6 block
-type SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model struct {
-	Addr types.String `tfsdk:"addr"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6Model
-var SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteNexthopNexthopAddressIpv6ModelAttrTypes = map[string]attr.Type{
-	"addr": types.StringType,
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel represents subnets block
-type SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel struct {
-	Ipv4 *SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model `tfsdk:"ipv4"`
-	Ipv6 *SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model `tfsdk:"ipv6"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModel
-var SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsModelAttrTypes = map[string]attr.Type{
-	"ipv4": types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes},
-	"ipv6": types.ObjectType{AttrTypes: SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes},
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model represents ipv4 block
-type SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model struct {
-	Plen   types.Int64  `tfsdk:"plen"`
-	Prefix types.String `tfsdk:"prefix"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4Model
-var SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv4ModelAttrTypes = map[string]attr.Type{
-	"plen":   types.Int64Type,
-	"prefix": types.StringType,
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model represents ipv6 block
-type SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model struct {
-	Plen   types.Int64  `tfsdk:"plen"`
-	Prefix types.String `tfsdk:"prefix"`
-}
-
-// SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes defines the attribute types for SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6Model
-var SiteVoltstackClusterArOutsideStaticRoutesStaticRouteListCustomStaticRouteSubnetsIpv6ModelAttrTypes = map[string]attr.Type{
-	"plen":   types.Int64Type,
-	"prefix": types.StringType,
-}
-
-// SiteVoltstackClusterArStorageClassListModel represents storage_class_list block
-type SiteVoltstackClusterArStorageClassListModel struct {
-	StorageClasses []SiteVoltstackClusterArStorageClassListStorageClassesModel `tfsdk:"storage_classes"`
-}
-
-// SiteVoltstackClusterArStorageClassListModelAttrTypes defines the attribute types for SiteVoltstackClusterArStorageClassListModel
-var SiteVoltstackClusterArStorageClassListModelAttrTypes = map[string]attr.Type{
-	"storage_classes": types.ListType{ElemType: types.ObjectType{AttrTypes: SiteVoltstackClusterArStorageClassListStorageClassesModelAttrTypes}},
-}
-
-// SiteVoltstackClusterArStorageClassListStorageClassesModel represents storage_classes block
-type SiteVoltstackClusterArStorageClassListStorageClassesModel struct {
-	DefaultStorageClass types.Bool   `tfsdk:"default_storage_class"`
-	StorageClassName    types.String `tfsdk:"storage_class_name"`
-}
-
-// SiteVoltstackClusterArStorageClassListStorageClassesModelAttrTypes defines the attribute types for SiteVoltstackClusterArStorageClassListStorageClassesModel
-var SiteVoltstackClusterArStorageClassListStorageClassesModelAttrTypes = map[string]attr.Type{
-	"default_storage_class": types.BoolType,
-	"storage_class_name":    types.StringType,
-}
-
 type SiteResourceModel struct {
 	Name                     types.String                       `tfsdk:"name"`
 	Namespace                types.String                       `tfsdk:"namespace"`
@@ -3098,37 +1496,30 @@ type SiteResourceModel struct {
 	Labels                   types.Map                          `tfsdk:"labels"`
 	ID                       types.String                       `tfsdk:"id"`
 	Address                  types.String                       `tfsdk:"address"`
-	AlternateRegion          types.String                       `tfsdk:"alternate_region"`
-	AzureRegion              types.String                       `tfsdk:"azure_region"`
 	DiskSize                 types.Int64                        `tfsdk:"disk_size"`
-	MachineType              types.String                       `tfsdk:"machine_type"`
-	NodesPerAz               types.Int64                        `tfsdk:"nodes_per_az"`
-	ResourceGroup            types.String                       `tfsdk:"resource_group"`
+	GCPRegion                types.String                       `tfsdk:"gcp_region"`
+	InstanceType             types.String                       `tfsdk:"instance_type"`
 	SSHKey                   types.String                       `tfsdk:"ssh_key"`
-	TotalNodes               types.Int64                        `tfsdk:"total_nodes"`
 	Timeouts                 timeouts.Value                     `tfsdk:"timeouts"`
 	AdminPassword            *SiteAdminPasswordModel            `tfsdk:"admin_password"`
-	AzureCred                *SiteAzureCredModel                `tfsdk:"azure_cred"`
 	BlockAllServices         *SiteEmptyModel                    `tfsdk:"block_all_services"`
 	BlockedServices          *SiteBlockedServicesModel          `tfsdk:"blocked_services"`
+	CloudCredentials         *SiteCloudCredentialsModel         `tfsdk:"cloud_credentials"`
 	Coordinates              *SiteCoordinatesModel              `tfsdk:"coordinates"`
 	CustomDNS                *SiteCustomDNSModel                `tfsdk:"custom_dns"`
 	DefaultBlockedServices   *SiteEmptyModel                    `tfsdk:"default_blocked_services"`
+	GCPLabels                *SiteEmptyModel                    `tfsdk:"gcp_labels"`
 	IngressEgressGw          *SiteIngressEgressGwModel          `tfsdk:"ingress_egress_gw"`
-	IngressEgressGwAr        *SiteIngressEgressGwArModel        `tfsdk:"ingress_egress_gw_ar"`
 	IngressGw                *SiteIngressGwModel                `tfsdk:"ingress_gw"`
-	IngressGwAr              *SiteIngressGwArModel              `tfsdk:"ingress_gw_ar"`
 	KubernetesUpgradeDrain   *SiteKubernetesUpgradeDrainModel   `tfsdk:"kubernetes_upgrade_drain"`
 	LogReceiver              *SiteLogReceiverModel              `tfsdk:"log_receiver"`
 	LogsStreamingDisabled    *SiteEmptyModel                    `tfsdk:"logs_streaming_disabled"`
-	NoWorkerNodes            *SiteEmptyModel                    `tfsdk:"no_worker_nodes"`
 	OfflineSurvivabilityMode *SiteOfflineSurvivabilityModeModel `tfsdk:"offline_survivability_mode"`
 	OS                       *SiteOSModel                       `tfsdk:"os"`
+	PrivateConnectDisabled   *SiteEmptyModel                    `tfsdk:"private_connect_disabled"`
+	PrivateConnectivity      *SitePrivateConnectivityModel      `tfsdk:"private_connectivity"`
 	Sw                       *SiteSwModel                       `tfsdk:"sw"`
-	Tags                     *SiteEmptyModel                    `tfsdk:"tags"`
-	VNET                     *SiteVNETModel                     `tfsdk:"vnet"`
 	VoltstackCluster         *SiteVoltstackClusterModel         `tfsdk:"voltstack_cluster"`
-	VoltstackClusterAr       *SiteVoltstackClusterArModel       `tfsdk:"voltstack_cluster_ar"`
 }
 
 func (r *SiteResource) Metadata(ctx context.Context, req resource.MetadataRequest, resp *resource.MetadataResponse) {
@@ -3138,7 +1529,7 @@ func (r *SiteResource) Metadata(ctx context.Context, req resource.MetadataReques
 func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, resp *resource.SchemaResponse) {
 	resp.Schema = schema.Schema{
 		Version:             siteSchemaVersion,
-		MarkdownDescription: "Manages a Site resource in F5 Distributed Cloud for azure vnet site specification. configuration.",
+		MarkdownDescription: "Manages a Site resource in F5 Distributed Cloud for gcp vpc site specification. configuration.",
 		Attributes: map[string]schema.Attribute{
 			"name": schema.StringAttribute{
 				MarkdownDescription: "Name of the Site. Must be unique within the namespace.",
@@ -3193,22 +1584,6 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"alternate_region": schema.StringAttribute{
-				MarkdownDescription: "[OneOf: alternate_region, azure_region] Alternate Azure Region Name. Name of the Azure region which does not support availability zones.",
-				Optional:            true,
-				Computed:            true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
-			},
-			"azure_region": schema.StringAttribute{
-				MarkdownDescription: "Recommended Azure Region Name. Name of the Azure region which supports availability zones.",
-				Optional:            true,
-				Computed:            true,
-				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
-				},
-			},
 			"disk_size": schema.Int64Attribute{
 				MarkdownDescription: "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB.",
 				Optional:            true,
@@ -3217,24 +1592,16 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					int64planmodifier.UseStateForUnknown(),
 				},
 			},
-			"machine_type": schema.StringAttribute{
-				MarkdownDescription: "Azure Machine Type for Node. Select Instance size based on performance needed. The default setting for Accelerated Networking is enabled, thus make sure you select a Virtual Machine that supports accelerated networking or disable the setting under, Select Ingress Gateway or Ingress/Egress Gateway > advanced OPTIONS.",
+			"gcp_region": schema.StringAttribute{
+				MarkdownDescription: "GCP Region. Name for GCP Region.",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
 				},
 			},
-			"nodes_per_az": schema.Int64Attribute{
-				MarkdownDescription: "Desired Worker Nodes Per AZ. Desired Worker Nodes Per AZ. Max limit is up to 21.",
-				Optional:            true,
-				Computed:            true,
-				PlanModifiers: []planmodifier.Int64{
-					int64planmodifier.UseStateForUnknown(),
-				},
-			},
-			"resource_group": schema.StringAttribute{
-				MarkdownDescription: "Resource Group. Azure resource group for resources that will be created .",
+			"instance_type": schema.StringAttribute{
+				MarkdownDescription: "GCP Instance Type for Node. Select Instance size based on performance needed .",
 				Optional:            true,
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
@@ -3247,14 +1614,6 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				Computed:            true,
 				PlanModifiers: []planmodifier.String{
 					stringplanmodifier.UseStateForUnknown(),
-				},
-			},
-			"total_nodes": schema.Int64Attribute{
-				MarkdownDescription: "Total Number of Worker Nodes for a Site. Total number of worker nodes to be deployed across all AZ's used in the Site.",
-				Optional:            true,
-				Computed:            true,
-				PlanModifiers: []planmodifier.Int64{
-					int64planmodifier.UseStateForUnknown(),
 				},
 			},
 		},
@@ -3301,27 +1660,6 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					},
 				},
 			},
-			"azure_cred": schema.SingleNestedBlock{
-				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-				Attributes: map[string]schema.Attribute{
-					"name": schema.StringAttribute{
-						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-						Optional:            true,
-					},
-					"namespace": schema.StringAttribute{
-						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-						Optional:            true,
-					},
-					"tenant": schema.StringAttribute{
-						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-						Optional:            true,
-						Computed:            true,
-						PlanModifiers: []planmodifier.String{
-							stringplanmodifier.UseStateForUnknown(),
-						},
-					},
-				},
-			},
 			"block_all_services": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option",
 			},
@@ -3349,6 +1687,27 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 									MarkdownDescription: "Enable this option",
 								},
 							},
+						},
+					},
+				},
+			},
+			"cloud_credentials": schema.SingleNestedBlock{
+				MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+				Attributes: map[string]schema.Attribute{
+					"name": schema.StringAttribute{
+						MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+						Optional:            true,
+					},
+					"namespace": schema.StringAttribute{
+						MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+						Optional:            true,
+					},
+					"tenant": schema.StringAttribute{
+						MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+						Optional:            true,
+						Computed:            true,
+						PlanModifiers: []planmodifier.String{
+							stringplanmodifier.UseStateForUnknown(),
 						},
 					},
 				},
@@ -3382,893 +1741,27 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 			"default_blocked_services": schema.SingleNestedBlock{
 				MarkdownDescription: "Enable this option",
 			},
-			"ingress_egress_gw": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: ingress_egress_gw, ingress_egress_gw_ar, ingress_gw, ingress_gw_ar, voltstack_cluster, voltstack_cluster_ar] Azure Ingress/Egress Gateway on Recommended Region. Two interface Azure ingress/egress site.",
-				Attributes: map[string]schema.Attribute{
-					"azure_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
-						Optional:            true,
-					},
-				},
-				Blocks: map[string]schema.Block{
-					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-						},
-					},
-					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-											Optional:            true,
-										},
-										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-											Optional:            true,
-										},
-										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"active_forward_proxy_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-											Optional:            true,
-										},
-										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-											Optional:            true,
-										},
-										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"active_network_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Firewall Policies Type. List of firewall policy views.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-											Optional:            true,
-										},
-										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-											Optional:            true,
-										},
-										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"az_nodes": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress/Egress Gateway (two Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently.",
-						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-								"azure_az": schema.StringAttribute{
-									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input .",
-									Optional:            true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"inside_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-									Attributes:          map[string]schema.Attribute{},
-									Blocks: map[string]schema.Block{
-										"subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-											Attributes: map[string]schema.Attribute{
-												"subnet_name": schema.StringAttribute{
-													MarkdownDescription: "Subnet Name. Name of existing subnet.",
-													Optional:            true,
-												},
-												"subnet_resource_grp": schema.StringAttribute{
-													MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-													Optional:            true,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"vnet_resource_group": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-											},
-										},
-										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-											Attributes: map[string]schema.Attribute{
-												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-													Optional:            true,
-												},
-											},
-										},
-									},
-								},
-								"outside_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-									Attributes:          map[string]schema.Attribute{},
-									Blocks: map[string]schema.Block{
-										"subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-											Attributes: map[string]schema.Attribute{
-												"subnet_name": schema.StringAttribute{
-													MarkdownDescription: "Subnet Name. Name of existing subnet.",
-													Optional:            true,
-												},
-												"subnet_resource_grp": schema.StringAttribute{
-													MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-													Optional:            true,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"vnet_resource_group": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-											},
-										},
-										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-											Attributes: map[string]schema.Attribute{
-												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-													Optional:            true,
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"dc_cluster_group_inside_vn": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-						Attributes: map[string]schema.Attribute{
-							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-								Optional:            true,
-							},
-							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-								Optional:            true,
-							},
-							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-								Optional:            true,
-								Computed:            true,
-								PlanModifiers: []planmodifier.String{
-									stringplanmodifier.UseStateForUnknown(),
-								},
-							},
-						},
-					},
-					"dc_cluster_group_outside_vn": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-						Attributes: map[string]schema.Attribute{
-							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-								Optional:            true,
-							},
-							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-								Optional:            true,
-							},
-							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-								Optional:            true,
-								Computed:            true,
-								PlanModifiers: []planmodifier.String{
-									stringplanmodifier.UseStateForUnknown(),
-								},
-							},
-						},
-					},
-					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"global_network_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Global Network Connection List. List of global network connections.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{},
-									Blocks: map[string]schema.Block{
-										"sli_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection.",
-											Attributes:          map[string]schema.Attribute{},
-											Blocks: map[string]schema.Block{
-												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-													Attributes: map[string]schema.Attribute{
-														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-															Optional:            true,
-														},
-														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-															Optional:            true,
-														},
-														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-															Optional:            true,
-															Computed:            true,
-															PlanModifiers: []planmodifier.String{
-																stringplanmodifier.UseStateForUnknown(),
-															},
-														},
-													},
-												},
-											},
-										},
-										"slo_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection.",
-											Attributes:          map[string]schema.Attribute{},
-											Blocks: map[string]schema.Block{
-												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-													Attributes: map[string]schema.Attribute{
-														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-															Optional:            true,
-														},
-														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-															Optional:            true,
-														},
-														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-															Optional:            true,
-															Computed:            true,
-															PlanModifiers: []planmodifier.String{
-																stringplanmodifier.UseStateForUnknown(),
-															},
-														},
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"hub": schema.SingleNestedBlock{
-						MarkdownDescription: "Hub VNet type. Hub VNet type.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"express_route_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"express_route_enabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Express Route Configuration. Express Route Configuration.",
-								Attributes: map[string]schema.Attribute{
-									"custom_asn": schema.Int64Attribute{
-										MarkdownDescription: "Custom ASN. Set custom ASN for F5XC Site.",
-										Optional:            true,
-									},
-								},
-								Blocks: map[string]schema.Block{
-									"advertise_to_route_server": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"auto_asn": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"connections": schema.ListNestedBlock{
-										MarkdownDescription: "Connections. Add the ExpressRoute Circuit Connections to this site .",
-										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-												"circuit_id": schema.StringAttribute{
-													MarkdownDescription: "Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site.",
-													Optional:            true,
-												},
-												"weight": schema.Int64Attribute{
-													MarkdownDescription: "Routing Weight. The weight (or priority) for the routes received from this connection. The. Defaults to `10`.",
-													Optional:            true,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"metadata": schema.SingleNestedBlock{
-													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
-													Attributes: map[string]schema.Attribute{
-														"description_spec": schema.StringAttribute{
-															MarkdownDescription: "Description. Human readable description.",
-															Optional:            true,
-														},
-														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-															Optional:            true,
-														},
-													},
-												},
-												"other_subscription": schema.SingleNestedBlock{
-													MarkdownDescription: "Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription.",
-													Attributes: map[string]schema.Attribute{
-														"circuit_id": schema.StringAttribute{
-															MarkdownDescription: "Circuit ID. Circuit ID.",
-															Optional:            true,
-														},
-													},
-													Blocks: map[string]schema.Block{
-														"authorized_key": schema.SingleNestedBlock{
-															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
-															Attributes:          map[string]schema.Attribute{},
-															Blocks: map[string]schema.Block{
-																"blindfold_secret_info": schema.SingleNestedBlock{
-																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
-																	Attributes: map[string]schema.Attribute{
-																		"decryption_provider": schema.StringAttribute{
-																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional:            true,
-																		},
-																		"location": schema.StringAttribute{
-																			MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
-																			Optional:            true,
-																		},
-																		"store_provider": schema.StringAttribute{
-																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
-																			Optional:            true,
-																		},
-																	},
-																},
-																"clear_secret_info": schema.SingleNestedBlock{
-																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
-																	Attributes: map[string]schema.Attribute{
-																		"provider_ref": schema.StringAttribute{
-																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
-																			Optional:            true,
-																		},
-																		"url": schema.StringAttribute{
-																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
-																			Optional:            true,
-																		},
-																	},
-																},
-															},
-														},
-													},
-												},
-											},
-										},
-									},
-									"do_not_advertise_to_route_server": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"gateway_subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-										Attributes:          map[string]schema.Attribute{},
-										Blocks: map[string]schema.Block{
-											"auto": schema.SingleNestedBlock{
-												MarkdownDescription: "Enable this option",
-											},
-											"subnet": schema.SingleNestedBlock{
-												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
-												Attributes: map[string]schema.Attribute{
-													"subnet_resource_grp": schema.StringAttribute{
-														MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-														Optional:            true,
-													},
-												},
-												Blocks: map[string]schema.Block{
-													"vnet_resource_group": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
-													},
-												},
-											},
-											"subnet_param": schema.SingleNestedBlock{
-												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-												Attributes: map[string]schema.Attribute{
-													"ipv4": schema.StringAttribute{
-														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-														Optional:            true,
-													},
-												},
-											},
-										},
-									},
-									"route_server_subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-										Attributes:          map[string]schema.Attribute{},
-										Blocks: map[string]schema.Block{
-											"auto": schema.SingleNestedBlock{
-												MarkdownDescription: "Enable this option",
-											},
-											"subnet": schema.SingleNestedBlock{
-												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
-												Attributes: map[string]schema.Attribute{
-													"subnet_resource_grp": schema.StringAttribute{
-														MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-														Optional:            true,
-													},
-												},
-												Blocks: map[string]schema.Block{
-													"vnet_resource_group": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
-													},
-												},
-											},
-											"subnet_param": schema.SingleNestedBlock{
-												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-												Attributes: map[string]schema.Attribute{
-													"ipv4": schema.StringAttribute{
-														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-														Optional:            true,
-													},
-												},
-											},
-										},
-									},
-									"site_registration_over_express_route": schema.SingleNestedBlock{
-										MarkdownDescription: "CloudLink ADN Network Config.",
-										Attributes: map[string]schema.Attribute{
-											"cloudlink_network_name": schema.StringAttribute{
-												MarkdownDescription: "Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support.",
-												Optional:            true,
-											},
-										},
-									},
-									"site_registration_over_internet": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"sku_ergw1az": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"sku_ergw2az": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"sku_high_perf": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"sku_standard": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-								},
-							},
-							"spoke_vnets": schema.ListNestedBlock{
-								MarkdownDescription: "Spoke VNet Peering (Legacy). Spoke VNet Peering.",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{},
-									Blocks: map[string]schema.Block{
-										"auto": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
-										},
-										"labels": schema.SingleNestedBlock{
-											MarkdownDescription: "Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace.",
-										},
-										"manual": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
-										},
-										"vnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Existing VNet Type. Resource group and name of existing Azure VNet.",
-											Attributes: map[string]schema.Attribute{
-												"resource_group": schema.StringAttribute{
-													MarkdownDescription: "Existing VNet Resource Group. Resource group of existing VNet .",
-													Optional:            true,
-												},
-												"vnet_name": schema.StringAttribute{
-													MarkdownDescription: "Existing VNet Name. Name of existing VNet .",
-													Optional:            true,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"f5_orchestrated_routing": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"manual_routing": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"inside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Static Route List Type. List of static routes.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
-											Optional:            true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
-											Attributes: map[string]schema.Attribute{
-												"attrs": schema.ListAttribute{
-													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional:            true,
-													ElementType:         types.StringType,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
-												},
-												"nexthop": schema.SingleNestedBlock{
-													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
-													Attributes: map[string]schema.Attribute{
-														"type": schema.StringAttribute{
-															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional:            true,
-														},
-													},
-													Blocks: map[string]schema.Block{
-														"interface": schema.ListNestedBlock{
-															MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
-															NestedObject: schema.NestedBlockObject{
-																Attributes: map[string]schema.Attribute{
-																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional:            true,
-																		Computed:            true,
-																		PlanModifiers: []planmodifier.String{
-																			stringplanmodifier.UseStateForUnknown(),
-																		},
-																	},
-																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-																		Optional:            true,
-																	},
-																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-																		Optional:            true,
-																	},
-																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-																		Optional:            true,
-																		Computed:            true,
-																		PlanModifiers: []planmodifier.String{
-																			stringplanmodifier.UseStateForUnknown(),
-																		},
-																	},
-																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-																		Optional:            true,
-																		Computed:            true,
-																		PlanModifiers: []planmodifier.String{
-																			stringplanmodifier.UseStateForUnknown(),
-																		},
-																	},
-																},
-															},
-														},
-														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
-															Attributes:          map[string]schema.Attribute{},
-															Blocks: map[string]schema.Block{
-																"ipv4": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
-																	Attributes: map[string]schema.Attribute{
-																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
-																			Optional:            true,
-																		},
-																	},
-																},
-																"ipv6": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
-																	Attributes: map[string]schema.Attribute{
-																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional:            true,
-																		},
-																	},
-																},
-															},
-														},
-													},
-												},
-												"subnets": schema.ListNestedBlock{
-													MarkdownDescription: "Subnets. List of route prefixes .",
-													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{},
-														Blocks: map[string]schema.Block{
-															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
-																Attributes: map[string]schema.Attribute{
-																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
-																		Optional:            true,
-																	},
-																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
-																		Optional:            true,
-																	},
-																},
-															},
-															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
-																Attributes: map[string]schema.Attribute{
-																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
-																		Optional:            true,
-																	},
-																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional:            true,
-																	},
-																},
-															},
-														},
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_inside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"not_hub": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Static Route List Type. List of static routes.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
-											Optional:            true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
-											Attributes: map[string]schema.Attribute{
-												"attrs": schema.ListAttribute{
-													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional:            true,
-													ElementType:         types.StringType,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
-												},
-												"nexthop": schema.SingleNestedBlock{
-													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
-													Attributes: map[string]schema.Attribute{
-														"type": schema.StringAttribute{
-															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional:            true,
-														},
-													},
-													Blocks: map[string]schema.Block{
-														"interface": schema.ListNestedBlock{
-															MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
-															NestedObject: schema.NestedBlockObject{
-																Attributes: map[string]schema.Attribute{
-																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional:            true,
-																		Computed:            true,
-																		PlanModifiers: []planmodifier.String{
-																			stringplanmodifier.UseStateForUnknown(),
-																		},
-																	},
-																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-																		Optional:            true,
-																	},
-																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-																		Optional:            true,
-																	},
-																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-																		Optional:            true,
-																		Computed:            true,
-																		PlanModifiers: []planmodifier.String{
-																			stringplanmodifier.UseStateForUnknown(),
-																		},
-																	},
-																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-																		Optional:            true,
-																		Computed:            true,
-																		PlanModifiers: []planmodifier.String{
-																			stringplanmodifier.UseStateForUnknown(),
-																		},
-																	},
-																},
-															},
-														},
-														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
-															Attributes:          map[string]schema.Attribute{},
-															Blocks: map[string]schema.Block{
-																"ipv4": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
-																	Attributes: map[string]schema.Attribute{
-																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
-																			Optional:            true,
-																		},
-																	},
-																},
-																"ipv6": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
-																	Attributes: map[string]schema.Attribute{
-																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional:            true,
-																		},
-																	},
-																},
-															},
-														},
-													},
-												},
-												"subnets": schema.ListNestedBlock{
-													MarkdownDescription: "Subnets. List of route prefixes .",
-													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{},
-														Blocks: map[string]schema.Block{
-															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
-																Attributes: map[string]schema.Attribute{
-																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
-																		Optional:            true,
-																	},
-																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
-																		Optional:            true,
-																	},
-																},
-															},
-															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
-																Attributes: map[string]schema.Attribute{
-																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
-																		Optional:            true,
-																	},
-																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional:            true,
-																	},
-																},
-															},
-														},
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS.",
-								Attributes:          map[string]schema.Attribute{},
-								Blocks: map[string]schema.Block{
-									"jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"no_jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-								},
-							},
-							"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-						},
-					},
-					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-				},
+			"gcp_labels": schema.SingleNestedBlock{
+				MarkdownDescription: "GCP Labels. GCP Label is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in GCP console.",
 			},
-			"ingress_egress_gw_ar": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Ingress/Egress Gateway on Alternate Region. Two interface Azure ingress/egress site on Alternate Region with no support for zones.",
+			"ingress_egress_gw": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: ingress_egress_gw, ingress_gw, voltstack_cluster] GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site.",
 				Attributes: map[string]schema.Attribute{
-					"azure_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
+					"gcp_certified_hw": schema.StringAttribute{
+						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware.",
+						Optional:            true,
+					},
+					"gcp_zone_names": schema.ListAttribute{
+						MarkdownDescription: "GCP zone names. X-required List of zones when instances will be created, needs to match with region selected.",
+						Optional:            true,
+						ElementType:         types.StringType,
+					},
+					"node_number": schema.Int64Attribute{
+						MarkdownDescription: "Number of main nodes. Number of main nodes to create, either 1 or 3.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
-					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-						},
-					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
 						Attributes:          map[string]schema.Attribute{},
@@ -4469,235 +1962,30 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 							},
 						},
 					},
-					"hub": schema.SingleNestedBlock{
-						MarkdownDescription: "Hub VNet type. Hub VNet type.",
+					"inside_network": schema.SingleNestedBlock{
+						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
-							"express_route_disabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"express_route_enabled": schema.SingleNestedBlock{
-								MarkdownDescription: "Express Route Configuration. Express Route Configuration.",
+							"existing_network": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network.",
 								Attributes: map[string]schema.Attribute{
-									"custom_asn": schema.Int64Attribute{
-										MarkdownDescription: "Custom ASN. Set custom ASN for F5XC Site.",
+									"name": schema.StringAttribute{
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network .",
 										Optional:            true,
 									},
 								},
-								Blocks: map[string]schema.Block{
-									"advertise_to_route_server": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"auto_asn": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"connections": schema.ListNestedBlock{
-										MarkdownDescription: "Connections. Add the ExpressRoute Circuit Connections to this site .",
-										NestedObject: schema.NestedBlockObject{
-											Attributes: map[string]schema.Attribute{
-												"circuit_id": schema.StringAttribute{
-													MarkdownDescription: "Circuit in same subscription. ExpressRoute Circuit is in same subscription as the site.",
-													Optional:            true,
-												},
-												"weight": schema.Int64Attribute{
-													MarkdownDescription: "Routing Weight. The weight (or priority) for the routes received from this connection. The. Defaults to `10`.",
-													Optional:            true,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"metadata": schema.SingleNestedBlock{
-													MarkdownDescription: "Message Metadata. MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create and replace APIs.",
-													Attributes: map[string]schema.Attribute{
-														"description_spec": schema.StringAttribute{
-															MarkdownDescription: "Description. Human readable description.",
-															Optional:            true,
-														},
-														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. This is the name of the message. The value of name has to follow DNS-1035 format.",
-															Optional:            true,
-														},
-													},
-												},
-												"other_subscription": schema.SingleNestedBlock{
-													MarkdownDescription: "Express Route Circuit Config From Other Subscription. Express Route Circuit Config From Other Subscription.",
-													Attributes: map[string]schema.Attribute{
-														"circuit_id": schema.StringAttribute{
-															MarkdownDescription: "Circuit ID. Circuit ID.",
-															Optional:            true,
-														},
-													},
-													Blocks: map[string]schema.Block{
-														"authorized_key": schema.SingleNestedBlock{
-															MarkdownDescription: "Secret. SecretType is used in an object to indicate a sensitive/confidential field.",
-															Attributes:          map[string]schema.Attribute{},
-															Blocks: map[string]schema.Block{
-																"blindfold_secret_info": schema.SingleNestedBlock{
-																	MarkdownDescription: "Blindfold Secret. BlindfoldSecretInfoType specifies information about the Secret managed by F5XC Secret Management.",
-																	Attributes: map[string]schema.Attribute{
-																		"decryption_provider": schema.StringAttribute{
-																			MarkdownDescription: "Decryption Provider. Name of the Secret Management Access object that contains information about the backend Secret Management service.",
-																			Optional:            true,
-																		},
-																		"location": schema.StringAttribute{
-																			MarkdownDescription: "Location. Location is the uri_ref. It could be in URL format for string:/// Or it could be a path if the store provider is an HTTP/HTTPS location .",
-																			Optional:            true,
-																		},
-																		"store_provider": schema.StringAttribute{
-																			MarkdownDescription: "Store Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
-																			Optional:            true,
-																		},
-																	},
-																},
-																"clear_secret_info": schema.SingleNestedBlock{
-																	MarkdownDescription: "In-Clear Secret. ClearSecretInfoType specifies information about the Secret that is not encrypted.",
-																	Attributes: map[string]schema.Attribute{
-																		"provider_ref": schema.StringAttribute{
-																			MarkdownDescription: "Provider. Name of the Secret Management Access object that contains information about the store to GET encrypted bytes This field needs to be provided only if the URL scheme is not string:///.",
-																			Optional:            true,
-																		},
-																		"url": schema.StringAttribute{
-																			MarkdownDescription: "URL. URL of the secret. Currently supported URL schemes is string:///. For string:/// scheme, Secret needs to be encoded Base64 format. When asked for this secret, caller will GET Secret bytes after Base64 decoding.",
-																			Optional:            true,
-																		},
-																	},
-																},
-															},
-														},
-													},
-												},
-											},
-										},
-									},
-									"do_not_advertise_to_route_server": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"gateway_subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-										Attributes:          map[string]schema.Attribute{},
-										Blocks: map[string]schema.Block{
-											"auto": schema.SingleNestedBlock{
-												MarkdownDescription: "Enable this option",
-											},
-											"subnet": schema.SingleNestedBlock{
-												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
-												Attributes: map[string]schema.Attribute{
-													"subnet_resource_grp": schema.StringAttribute{
-														MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-														Optional:            true,
-													},
-												},
-												Blocks: map[string]schema.Block{
-													"vnet_resource_group": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
-													},
-												},
-											},
-											"subnet_param": schema.SingleNestedBlock{
-												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-												Attributes: map[string]schema.Attribute{
-													"ipv4": schema.StringAttribute{
-														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-														Optional:            true,
-													},
-												},
-											},
-										},
-									},
-									"route_server_subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-										Attributes:          map[string]schema.Attribute{},
-										Blocks: map[string]schema.Block{
-											"auto": schema.SingleNestedBlock{
-												MarkdownDescription: "Enable this option",
-											},
-											"subnet": schema.SingleNestedBlock{
-												MarkdownDescription: "Azure Cloud Special Subnet. Parameters for Azure special subnet which name is reserved. (i.e GatewaySubnet or RouteServerSubnet)",
-												Attributes: map[string]schema.Attribute{
-													"subnet_resource_grp": schema.StringAttribute{
-														MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-														Optional:            true,
-													},
-												},
-												Blocks: map[string]schema.Block{
-													"vnet_resource_group": schema.SingleNestedBlock{
-														MarkdownDescription: "Enable this option",
-													},
-												},
-											},
-											"subnet_param": schema.SingleNestedBlock{
-												MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-												Attributes: map[string]schema.Attribute{
-													"ipv4": schema.StringAttribute{
-														MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-														Optional:            true,
-													},
-												},
-											},
-										},
-									},
-									"site_registration_over_express_route": schema.SingleNestedBlock{
-										MarkdownDescription: "CloudLink ADN Network Config.",
-										Attributes: map[string]schema.Attribute{
-											"cloudlink_network_name": schema.StringAttribute{
-												MarkdownDescription: "Private ADN Network. Establish private connectivity with the F5 Distributed Cloud Global Network using a Private ADN network. To provision a Private ADN network, please contact F5 Distributed Cloud support.",
-												Optional:            true,
-											},
-										},
-									},
-									"site_registration_over_internet": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"sku_ergw1az": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"sku_ergw2az": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"sku_high_perf": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"sku_standard": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+							},
+							"new_network": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network.",
+								Attributes: map[string]schema.Attribute{
+									"name": schema.StringAttribute{
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network .",
+										Optional:            true,
 									},
 								},
 							},
-							"spoke_vnets": schema.ListNestedBlock{
-								MarkdownDescription: "Spoke VNet Peering (Legacy). Spoke VNet Peering.",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{},
-									Blocks: map[string]schema.Block{
-										"auto": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
-										},
-										"labels": schema.SingleNestedBlock{
-											MarkdownDescription: "Labels For VNets Peering. Add Labels for each of the VNets peered with transit VNet, these labels can be used in firewall policy These labels used must be from known key and label defined in shared namespace.",
-										},
-										"manual": schema.SingleNestedBlock{
-											MarkdownDescription: "Enable this option",
-										},
-										"vnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Existing VNet Type. Resource group and name of existing Azure VNet.",
-											Attributes: map[string]schema.Attribute{
-												"resource_group": schema.StringAttribute{
-													MarkdownDescription: "Existing VNet Resource Group. Resource group of existing VNet .",
-													Optional:            true,
-												},
-												"vnet_name": schema.StringAttribute{
-													MarkdownDescription: "Existing VNet Name. Name of existing VNet .",
-													Optional:            true,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"f5_orchestrated_routing": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-												"manual_routing": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-											},
-										},
-									},
-								},
+							"new_network_autogenerate": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name.",
 							},
 						},
 					},
@@ -4843,6 +2131,34 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 							},
 						},
 					},
+					"inside_subnet": schema.SingleNestedBlock{
+						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"existing_subnet": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP existing subnet Type. Name of existing GCP subnet.",
+								Attributes: map[string]schema.Attribute{
+									"subnet_name": schema.StringAttribute{
+										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network .",
+										Optional:            true,
+									},
+								},
+							},
+							"new_subnet": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP subnet parameters Type. Parameters for GCP subnet.",
+								Attributes: map[string]schema.Attribute{
+									"primary_ipv4": schema.StringAttribute{
+										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
+										Optional:            true,
+									},
+									"subnet_name": schema.StringAttribute{
+										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty.",
+										Optional:            true,
+									},
+								},
+							},
+						},
+					},
 					"no_dc_cluster_group": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
 					},
@@ -4861,93 +2177,32 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					"no_outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Enable this option",
 					},
-					"node": schema.SingleNestedBlock{
-						MarkdownDescription: "Two Interface Node. Parameters for creating two interface Node in one AZ.",
-						Attributes: map[string]schema.Attribute{
-							"fault_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set.",
-								Optional:            true,
-							},
-							"node_number": schema.Int64Attribute{
-								MarkdownDescription: "Number of main nodes. Number of main nodes to create, either 1 or 3.",
-								Optional:            true,
-							},
-							"update_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set.",
-								Optional:            true,
-							},
-						},
+					"outside_network": schema.SingleNestedBlock{
+						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view.",
+						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
-							"inside_subnet": schema.SingleNestedBlock{
-								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-								Attributes:          map[string]schema.Attribute{},
-								Blocks: map[string]schema.Block{
-									"subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-										Attributes: map[string]schema.Attribute{
-											"subnet_name": schema.StringAttribute{
-												MarkdownDescription: "Subnet Name. Name of existing subnet.",
-												Optional:            true,
-											},
-											"subnet_resource_grp": schema.StringAttribute{
-												MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-												Optional:            true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"vnet_resource_group": schema.SingleNestedBlock{
-												MarkdownDescription: "Enable this option",
-											},
-										},
-									},
-									"subnet_param": schema.SingleNestedBlock{
-										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-										Attributes: map[string]schema.Attribute{
-											"ipv4": schema.StringAttribute{
-												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-												Optional:            true,
-											},
-										},
+							"existing_network": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network.",
+								Attributes: map[string]schema.Attribute{
+									"name": schema.StringAttribute{
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network .",
+										Optional:            true,
 									},
 								},
 							},
-							"outside_subnet": schema.SingleNestedBlock{
-								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-								Attributes:          map[string]schema.Attribute{},
-								Blocks: map[string]schema.Block{
-									"subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-										Attributes: map[string]schema.Attribute{
-											"subnet_name": schema.StringAttribute{
-												MarkdownDescription: "Subnet Name. Name of existing subnet.",
-												Optional:            true,
-											},
-											"subnet_resource_grp": schema.StringAttribute{
-												MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-												Optional:            true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"vnet_resource_group": schema.SingleNestedBlock{
-												MarkdownDescription: "Enable this option",
-											},
-										},
-									},
-									"subnet_param": schema.SingleNestedBlock{
-										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-										Attributes: map[string]schema.Attribute{
-											"ipv4": schema.StringAttribute{
-												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-												Optional:            true,
-											},
-										},
+							"new_network": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network.",
+								Attributes: map[string]schema.Attribute{
+									"name": schema.StringAttribute{
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network .",
+										Optional:            true,
 									},
 								},
+							},
+							"new_network_autogenerate": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name.",
 							},
 						},
-					},
-					"not_hub": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
 					},
 					"outside_static_routes": schema.SingleNestedBlock{
 						MarkdownDescription: "Static Route List Type. List of static routes.",
@@ -5086,6 +2341,34 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 												},
 											},
 										},
+									},
+								},
+							},
+						},
+					},
+					"outside_subnet": schema.SingleNestedBlock{
+						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view.",
+						Attributes:          map[string]schema.Attribute{},
+						Blocks: map[string]schema.Block{
+							"existing_subnet": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP existing subnet Type. Name of existing GCP subnet.",
+								Attributes: map[string]schema.Attribute{
+									"subnet_name": schema.StringAttribute{
+										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network .",
+										Optional:            true,
+									},
+								},
+							},
+							"new_subnet": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP subnet parameters Type. Parameters for GCP subnet.",
+								Attributes: map[string]schema.Attribute{
+									"primary_ipv4": schema.StringAttribute{
+										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
+										Optional:            true,
+									},
+									"subnet_name": schema.StringAttribute{
+										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty.",
+										Optional:            true,
 									},
 								},
 							},
@@ -5121,163 +2404,73 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 				},
 			},
 			"ingress_gw": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Ingress Gateway on Recommended Region. Single interface Azure ingress site on on Recommended Region.",
+				MarkdownDescription: "GCP Ingress Gateway. Single interface GCP ingress site.",
 				Attributes: map[string]schema.Attribute{
-					"azure_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
+					"gcp_certified_hw": schema.StringAttribute{
+						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware.",
+						Optional:            true,
+					},
+					"gcp_zone_names": schema.ListAttribute{
+						MarkdownDescription: "GCP zone names. X-required List of zones when instances will be created, needs to match with region selected.",
+						Optional:            true,
+						ElementType:         types.StringType,
+					},
+					"node_number": schema.Int64Attribute{
+						MarkdownDescription: "Number of main nodes. Number of main nodes to create, either 1 or 3.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
-					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
+					"local_network": schema.SingleNestedBlock{
+						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
-							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-						},
-					},
-					"az_nodes": schema.ListNestedBlock{
-						MarkdownDescription: "Ingress Gateway (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently.",
-						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-								"azure_az": schema.StringAttribute{
-									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input .",
-									Optional:            true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"local_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-									Attributes:          map[string]schema.Attribute{},
-									Blocks: map[string]schema.Block{
-										"subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-											Attributes: map[string]schema.Attribute{
-												"subnet_name": schema.StringAttribute{
-													MarkdownDescription: "Subnet Name. Name of existing subnet.",
-													Optional:            true,
-												},
-												"subnet_resource_grp": schema.StringAttribute{
-													MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-													Optional:            true,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"vnet_resource_group": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-											},
-										},
-										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-											Attributes: map[string]schema.Attribute{
-												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-													Optional:            true,
-												},
-											},
-										},
+							"existing_network": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network.",
+								Attributes: map[string]schema.Attribute{
+									"name": schema.StringAttribute{
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network .",
+										Optional:            true,
 									},
 								},
 							},
-						},
-					},
-					"performance_enhancement_mode": schema.SingleNestedBlock{
-						MarkdownDescription: "Performance Enhancement Mode. Optimize the site for L3 or L7 traffic processing. L7 optimized is the default.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"perf_mode_l3_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS.",
-								Attributes:          map[string]schema.Attribute{},
-								Blocks: map[string]schema.Block{
-									"jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
-									},
-									"no_jumbo": schema.SingleNestedBlock{
-										MarkdownDescription: "Enable this option",
+							"new_network": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network.",
+								Attributes: map[string]schema.Attribute{
+									"name": schema.StringAttribute{
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network .",
+										Optional:            true,
 									},
 								},
 							},
-							"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
+							"new_network_autogenerate": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name.",
 							},
 						},
 					},
-				},
-			},
-			"ingress_gw_ar": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Ingress Gateway on Alternate Region. Single interface Azure ingress site.",
-				Attributes: map[string]schema.Attribute{
-					"azure_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
-						Optional:            true,
-					},
-				},
-				Blocks: map[string]schema.Block{
-					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
+					"local_subnet": schema.SingleNestedBlock{
+						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
-							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-						},
-					},
-					"node": schema.SingleNestedBlock{
-						MarkdownDescription: "Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region.",
-						Attributes: map[string]schema.Attribute{
-							"fault_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set.",
-								Optional:            true,
-							},
-							"node_number": schema.Int64Attribute{
-								MarkdownDescription: "Number of main nodes. Number of main nodes to create, either 1 or 3.",
-								Optional:            true,
-							},
-							"update_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set.",
-								Optional:            true,
-							},
-						},
-						Blocks: map[string]schema.Block{
-							"local_subnet": schema.SingleNestedBlock{
-								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-								Attributes:          map[string]schema.Attribute{},
-								Blocks: map[string]schema.Block{
-									"subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-										Attributes: map[string]schema.Attribute{
-											"subnet_name": schema.StringAttribute{
-												MarkdownDescription: "Subnet Name. Name of existing subnet.",
-												Optional:            true,
-											},
-											"subnet_resource_grp": schema.StringAttribute{
-												MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-												Optional:            true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"vnet_resource_group": schema.SingleNestedBlock{
-												MarkdownDescription: "Enable this option",
-											},
-										},
+							"existing_subnet": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP existing subnet Type. Name of existing GCP subnet.",
+								Attributes: map[string]schema.Attribute{
+									"subnet_name": schema.StringAttribute{
+										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network .",
+										Optional:            true,
 									},
-									"subnet_param": schema.SingleNestedBlock{
-										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-										Attributes: map[string]schema.Attribute{
-											"ipv4": schema.StringAttribute{
-												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-												Optional:            true,
-											},
-										},
+								},
+							},
+							"new_subnet": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP subnet parameters Type. Parameters for GCP subnet.",
+								Attributes: map[string]schema.Attribute{
+									"primary_ipv4": schema.StringAttribute{
+										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
+										Optional:            true,
+									},
+									"subnet_name": schema.StringAttribute{
+										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty.",
+										Optional:            true,
 									},
 								},
 							},
@@ -5360,9 +2553,6 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 			"logs_streaming_disabled": schema.SingleNestedBlock{
 				MarkdownDescription: "Enable this option",
 			},
-			"no_worker_nodes": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Enable this option",
-			},
 			"offline_survivability_mode": schema.SingleNestedBlock{
 				MarkdownDescription: "Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen.",
 				Attributes:          map[string]schema.Attribute{},
@@ -5389,6 +2579,42 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					},
 				},
 			},
+			"private_connect_disabled": schema.SingleNestedBlock{
+				MarkdownDescription: "[OneOf: private_connect_disabled, private_connectivity] Enable this option",
+			},
+			"private_connectivity": schema.SingleNestedBlock{
+				MarkdownDescription: "Private Connect Configuration. Private Connect Configuration.",
+				Attributes:          map[string]schema.Attribute{},
+				Blocks: map[string]schema.Block{
+					"cloud_link": schema.SingleNestedBlock{
+						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
+						Attributes: map[string]schema.Attribute{
+							"name": schema.StringAttribute{
+								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
+								Optional:            true,
+							},
+							"namespace": schema.StringAttribute{
+								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
+								Optional:            true,
+							},
+							"tenant": schema.StringAttribute{
+								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
+								Optional:            true,
+								Computed:            true,
+								PlanModifiers: []planmodifier.String{
+									stringplanmodifier.UseStateForUnknown(),
+								},
+							},
+						},
+					},
+					"inside": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+					"outside": schema.SingleNestedBlock{
+						MarkdownDescription: "Enable this option",
+					},
+				},
+			},
 			"sw": schema.SingleNestedBlock{
 				MarkdownDescription: "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions.",
 				Attributes: map[string]schema.Attribute{
@@ -5403,75 +2629,24 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 					},
 				},
 			},
-			"tags": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure Tags. Azure Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in Azure console.",
-			},
-			"vnet": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure VNet choice. This defines choice about Azure VNet for a view.",
-				Attributes:          map[string]schema.Attribute{},
-				Blocks: map[string]schema.Block{
-					"existing_vnet": schema.SingleNestedBlock{
-						MarkdownDescription: "Azure Existing VNet Type. Resource group and name of existing Azure VNet.",
-						Attributes: map[string]schema.Attribute{
-							"resource_group": schema.StringAttribute{
-								MarkdownDescription: "Existing VNet Resource Group. Resource group of existing VNet .",
-								Optional:            true,
-							},
-							"vnet_name": schema.StringAttribute{
-								MarkdownDescription: "Existing VNet Name. Name of existing VNet .",
-								Optional:            true,
-							},
-						},
-						Blocks: map[string]schema.Block{
-							"f5_orchestrated_routing": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"manual_routing": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-						},
-					},
-					"new_vnet": schema.SingleNestedBlock{
-						MarkdownDescription: "Azure VNet Parameters. Parameters to create a new Azure VNet.",
-						Attributes: map[string]schema.Attribute{
-							"name": schema.StringAttribute{
-								MarkdownDescription: "Choose VNet Name. Specify the VNet Name.",
-								Optional:            true,
-							},
-							"primary_ipv4": schema.StringAttribute{
-								MarkdownDescription: "IPv4 CIDR block. IPv4 CIDR block for this VNet. It has to be private address space.",
-								Optional:            true,
-							},
-						},
-						Blocks: map[string]schema.Block{
-							"autogenerate": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-						},
-					},
-				},
-			},
 			"voltstack_cluster": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure App Stack Cluster on Recommended Region. App Stack Cluster of single interface Azure nodes.",
+				MarkdownDescription: "GCP App Stack Cluster. App Stack cluster of single interface GCP site.",
 				Attributes: map[string]schema.Attribute{
-					"azure_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
+					"gcp_certified_hw": schema.StringAttribute{
+						MarkdownDescription: "GCP Certified Hardware. Name for GCP certified hardware.",
+						Optional:            true,
+					},
+					"gcp_zone_names": schema.ListAttribute{
+						MarkdownDescription: "GCP zone names. X-required List of zones when instances will be created, needs to match with region selected.",
+						Optional:            true,
+						ElementType:         types.StringType,
+					},
+					"node_number": schema.Int64Attribute{
+						MarkdownDescription: "Number of main Nodes. Number of main nodes to create, either 1 or 3.",
 						Optional:            true,
 					},
 				},
 				Blocks: map[string]schema.Block{
-					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-						},
-					},
 					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
 						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
 						Attributes:          map[string]schema.Attribute{},
@@ -5552,52 +2727,6 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 											Computed:            true,
 											PlanModifiers: []planmodifier.String{
 												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"az_nodes": schema.ListNestedBlock{
-						MarkdownDescription: "App Stack Cluster (One Interface) Nodes in AZ. Only Single AZ or Three AZ(s) nodes are supported currently.",
-						NestedObject: schema.NestedBlockObject{
-							Attributes: map[string]schema.Attribute{
-								"azure_az": schema.StringAttribute{
-									MarkdownDescription: "Azure Availability Zone. A zone depicting a grouping of datacenters within an Azure region. Expecting numeric input .",
-									Optional:            true,
-								},
-							},
-							Blocks: map[string]schema.Block{
-								"local_subnet": schema.SingleNestedBlock{
-									MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-									Attributes:          map[string]schema.Attribute{},
-									Blocks: map[string]schema.Block{
-										"subnet": schema.SingleNestedBlock{
-											MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-											Attributes: map[string]schema.Attribute{
-												"subnet_name": schema.StringAttribute{
-													MarkdownDescription: "Subnet Name. Name of existing subnet.",
-													Optional:            true,
-												},
-												"subnet_resource_grp": schema.StringAttribute{
-													MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-													Optional:            true,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"vnet_resource_group": schema.SingleNestedBlock{
-													MarkdownDescription: "Enable this option",
-												},
-											},
-										},
-										"subnet_param": schema.SingleNestedBlock{
-											MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-											Attributes: map[string]schema.Attribute{
-												"ipv4": schema.StringAttribute{
-													MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-													Optional:            true,
-												},
 											},
 										},
 									},
@@ -5881,466 +3010,56 @@ func (r *SiteResource) Schema(ctx context.Context, req resource.SchemaRequest, r
 							},
 						},
 					},
-					"sm_connection_public_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"sm_connection_pvt_ip": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"storage_class_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Custom Storage Class List. Add additional custom storage classes in Kubernetes for this site.",
+					"site_local_network": schema.SingleNestedBlock{
+						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
-							"storage_classes": schema.ListNestedBlock{
-								MarkdownDescription: "List of Storage Classes. List of custom storage classes.",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"default_storage_class": schema.BoolAttribute{
-											MarkdownDescription: "Default Storage Class. Make this storage class default storage class for the K8s cluster.",
-											Optional:            true,
-										},
-										"storage_class_name": schema.StringAttribute{
-											MarkdownDescription: "Storage Class Name. Name of the storage class as it will appear in K8s.",
-											Optional:            true,
-										},
+							"existing_network": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP existing VPC network Type. Name of existing VPC network.",
+								Attributes: map[string]schema.Attribute{
+									"name": schema.StringAttribute{
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network .",
+										Optional:            true,
 									},
 								},
 							},
+							"new_network": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP VPC Network Manual Parameters. Parameters to create a new GCP VPC Network.",
+								Attributes: map[string]schema.Attribute{
+									"name": schema.StringAttribute{
+										MarkdownDescription: "GCP VPC Network Name. Name for your GCP VPC Network .",
+										Optional:            true,
+									},
+								},
+							},
+							"new_network_autogenerate": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP VPC Network Autogenerated Parameters. Create a new GCP VPC Network with autogenerated name.",
+							},
 						},
 					},
-				},
-			},
-			"voltstack_cluster_ar": schema.SingleNestedBlock{
-				MarkdownDescription: "Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes.",
-				Attributes: map[string]schema.Attribute{
-					"azure_certified_hw": schema.StringAttribute{
-						MarkdownDescription: "Azure Certified Hardware. Name for Azure certified hardware.",
-						Optional:            true,
-					},
-				},
-				Blocks: map[string]schema.Block{
-					"accelerated_networking": schema.SingleNestedBlock{
-						MarkdownDescription: "Accelerated Networking Type. Accelerated Networking to reduce Latency, When Mode is toggled, traffic disruption will be seen.",
+					"site_local_subnet": schema.SingleNestedBlock{
+						MarkdownDescription: "GCP VPC network choice. This defines choice about GCP VPC network for a view.",
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
-							"disable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-							"enable": schema.SingleNestedBlock{
-								MarkdownDescription: "Enable this option",
-							},
-						},
-					},
-					"active_enhanced_firewall_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Enhanced Network Policies Type. List of Enhanced Firewall Policies These policies use session-based rules and provide all OPTIONS available under firewall policies with an additional option for service insertion.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"enhanced_firewall_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Enhanced Firewall Policy. Ordered List of Enhanced Firewall Policies active .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-											Optional:            true,
-										},
-										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-											Optional:            true,
-										},
-										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
+							"existing_subnet": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP existing subnet Type. Name of existing GCP subnet.",
+								Attributes: map[string]schema.Attribute{
+									"subnet_name": schema.StringAttribute{
+										MarkdownDescription: "VPC Subnet Name. Name of your subnet in VPC network .",
+										Optional:            true,
 									},
 								},
 							},
-						},
-					},
-					"active_forward_proxy_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Forward Proxy Policies Type. Ordered List of Forward Proxy Policies active.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"forward_proxy_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Forward Proxy Policies. Ordered List of Forward Proxy Policies active .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-											Optional:            true,
-										},
-										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-											Optional:            true,
-										},
-										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
+							"new_subnet": schema.SingleNestedBlock{
+								MarkdownDescription: "GCP subnet parameters Type. Parameters for GCP subnet.",
+								Attributes: map[string]schema.Attribute{
+									"primary_ipv4": schema.StringAttribute{
+										MarkdownDescription: "IPv4 Subnet Prefix. IPv4 prefix for this Subnet. It has to be private address space.",
+										Optional:            true,
 									},
-								},
-							},
-						},
-					},
-					"active_network_policies": schema.SingleNestedBlock{
-						MarkdownDescription: "Active Firewall Policies Type. List of firewall policy views.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"network_policies": schema.ListNestedBlock{
-								MarkdownDescription: "Firewall Policy. Ordered List of Firewall Policies active for this network firewall .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"name": schema.StringAttribute{
-											MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-											Optional:            true,
-										},
-										"namespace": schema.StringAttribute{
-											MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-											Optional:            true,
-										},
-										"tenant": schema.StringAttribute{
-											MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-											Optional:            true,
-											Computed:            true,
-											PlanModifiers: []planmodifier.String{
-												stringplanmodifier.UseStateForUnknown(),
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-						Attributes: map[string]schema.Attribute{
-							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-								Optional:            true,
-							},
-							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-								Optional:            true,
-							},
-							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-								Optional:            true,
-								Computed:            true,
-								PlanModifiers: []planmodifier.String{
-									stringplanmodifier.UseStateForUnknown(),
-								},
-							},
-						},
-					},
-					"default_storage": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"forward_proxy_allow_all": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"global_network_list": schema.SingleNestedBlock{
-						MarkdownDescription: "Global Network Connection List. List of global network connections.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"global_network_connections": schema.ListNestedBlock{
-								MarkdownDescription: "Global Network Connections. Global network connections .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{},
-									Blocks: map[string]schema.Block{
-										"sli_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection.",
-											Attributes:          map[string]schema.Attribute{},
-											Blocks: map[string]schema.Block{
-												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-													Attributes: map[string]schema.Attribute{
-														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-															Optional:            true,
-														},
-														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-															Optional:            true,
-														},
-														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-															Optional:            true,
-															Computed:            true,
-															PlanModifiers: []planmodifier.String{
-																stringplanmodifier.UseStateForUnknown(),
-															},
-														},
-													},
-												},
-											},
-										},
-										"slo_to_global_dr": schema.SingleNestedBlock{
-											MarkdownDescription: "Global Network. Global network reference for direct connection.",
-											Attributes:          map[string]schema.Attribute{},
-											Blocks: map[string]schema.Block{
-												"global_vn": schema.SingleNestedBlock{
-													MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-													Attributes: map[string]schema.Attribute{
-														"name": schema.StringAttribute{
-															MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-															Optional:            true,
-														},
-														"namespace": schema.StringAttribute{
-															MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-															Optional:            true,
-														},
-														"tenant": schema.StringAttribute{
-															MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-															Optional:            true,
-															Computed:            true,
-															PlanModifiers: []planmodifier.String{
-																stringplanmodifier.UseStateForUnknown(),
-															},
-														},
-													},
-												},
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"k8s_cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",
-						Attributes: map[string]schema.Attribute{
-							"name": schema.StringAttribute{
-								MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-								Optional:            true,
-							},
-							"namespace": schema.StringAttribute{
-								MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-								Optional:            true,
-							},
-							"tenant": schema.StringAttribute{
-								MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-								Optional:            true,
-								Computed:            true,
-								PlanModifiers: []planmodifier.String{
-									stringplanmodifier.UseStateForUnknown(),
-								},
-							},
-						},
-					},
-					"no_dc_cluster_group": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_forward_proxy": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_global_network": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_k8s_cluster": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_network_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"no_outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Enable this option",
-					},
-					"node": schema.SingleNestedBlock{
-						MarkdownDescription: "Single Interface Node for Alternate Region. Parameters for creating Single interface Node for Alternate Region.",
-						Attributes: map[string]schema.Attribute{
-							"fault_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of fault domains. Namuber of fault domains to be used while creating the availability set.",
-								Optional:            true,
-							},
-							"node_number": schema.Int64Attribute{
-								MarkdownDescription: "Number of main nodes. Number of main nodes to create, either 1 or 3.",
-								Optional:            true,
-							},
-							"update_domain": schema.Int64Attribute{
-								MarkdownDescription: "Number of update domains. Namuber of update domains to be used while creating the availability set.",
-								Optional:            true,
-							},
-						},
-						Blocks: map[string]schema.Block{
-							"local_subnet": schema.SingleNestedBlock{
-								MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-								Attributes:          map[string]schema.Attribute{},
-								Blocks: map[string]schema.Block{
-									"subnet": schema.SingleNestedBlock{
-										MarkdownDescription: "Azure Subnet. Parameters for Azure subnet.",
-										Attributes: map[string]schema.Attribute{
-											"subnet_name": schema.StringAttribute{
-												MarkdownDescription: "Subnet Name. Name of existing subnet.",
-												Optional:            true,
-											},
-											"subnet_resource_grp": schema.StringAttribute{
-												MarkdownDescription: "Resource Group Name. Specify name of Resource Group.",
-												Optional:            true,
-											},
-										},
-										Blocks: map[string]schema.Block{
-											"vnet_resource_group": schema.SingleNestedBlock{
-												MarkdownDescription: "Enable this option",
-											},
-										},
-									},
-									"subnet_param": schema.SingleNestedBlock{
-										MarkdownDescription: "New Cloud Subnet Parameters. Parameters for creating a new cloud subnet.",
-										Attributes: map[string]schema.Attribute{
-											"ipv4": schema.StringAttribute{
-												MarkdownDescription: "IPv4 Subnet. IPv4 subnet prefix for this subnet .",
-												Optional:            true,
-											},
-										},
-									},
-								},
-							},
-						},
-					},
-					"outside_static_routes": schema.SingleNestedBlock{
-						MarkdownDescription: "Static Route List Type. List of static routes.",
-						Attributes:          map[string]schema.Attribute{},
-						Blocks: map[string]schema.Block{
-							"static_route_list": schema.ListNestedBlock{
-								MarkdownDescription: "List of Static Routes. List of Static routes .",
-								NestedObject: schema.NestedBlockObject{
-									Attributes: map[string]schema.Attribute{
-										"simple_static_route": schema.StringAttribute{
-											MarkdownDescription: "Simple Static Route. Use simple static route for prefix pointing to single interface in the network.",
-											Optional:            true,
-										},
-									},
-									Blocks: map[string]schema.Block{
-										"custom_static_route": schema.SingleNestedBlock{
-											MarkdownDescription: "Static Route. Defines a static route, configuring a list of prefixes and a next-hop to be used for them.",
-											Attributes: map[string]schema.Attribute{
-												"attrs": schema.ListAttribute{
-													MarkdownDescription: "[Enum: ROUTE_ATTR_NO_OP|ROUTE_ATTR_ADVERTISE|ROUTE_ATTR_INSTALL_HOST|ROUTE_ATTR_INSTALL_FORWARDING|ROUTE_ATTR_MERGE_ONLY] Attributes. List of route attributes associated with the static route. Possible values are `ROUTE_ATTR_NO_OP`, `ROUTE_ATTR_ADVERTISE`, `ROUTE_ATTR_INSTALL_HOST`, `ROUTE_ATTR_INSTALL_FORWARDING`, `ROUTE_ATTR_MERGE_ONLY`. Defaults to `ROUTE_ATTR_NO_OP`.",
-													Optional:            true,
-													ElementType:         types.StringType,
-												},
-											},
-											Blocks: map[string]schema.Block{
-												"labels": schema.SingleNestedBlock{
-													MarkdownDescription: "Static Route Labels. Add Labels for this Static Route, these labels can be used in network policy.",
-												},
-												"nexthop": schema.SingleNestedBlock{
-													MarkdownDescription: "Nexthop. Identifies the next-hop for a route.",
-													Attributes: map[string]schema.Attribute{
-														"type": schema.StringAttribute{
-															MarkdownDescription: "[Enum: NEXT_HOP_DEFAULT_GATEWAY|NEXT_HOP_USE_CONFIGURED|NEXT_HOP_NETWORK_INTERFACE] Nexthop Types. Defines types of next-hop Use default gateway on the local interface as gateway for route. Assumes there is only one local interface on the virtual network. Use the specified address as nexthop Use the network interface as nexthop Discard nexthop, used when attr type is Advertise Used in VoltADN private virtual network. Possible values are `NEXT_HOP_DEFAULT_GATEWAY`, `NEXT_HOP_USE_CONFIGURED`, `NEXT_HOP_NETWORK_INTERFACE`. Defaults to `NEXT_HOP_DEFAULT_GATEWAY`.",
-															Optional:            true,
-														},
-													},
-													Blocks: map[string]schema.Block{
-														"interface": schema.ListNestedBlock{
-															MarkdownDescription: "Network Interface. Nexthop is network interface when type is 'Network-Interface'",
-															NestedObject: schema.NestedBlockObject{
-																Attributes: map[string]schema.Attribute{
-																	"kind": schema.StringAttribute{
-																		MarkdownDescription: "Kind. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')",
-																		Optional:            true,
-																		Computed:            true,
-																		PlanModifiers: []planmodifier.String{
-																			stringplanmodifier.UseStateForUnknown(),
-																		},
-																	},
-																	"name": schema.StringAttribute{
-																		MarkdownDescription: "Name. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name.",
-																		Optional:            true,
-																	},
-																	"namespace": schema.StringAttribute{
-																		MarkdownDescription: "Namespace. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace.",
-																		Optional:            true,
-																	},
-																	"tenant": schema.StringAttribute{
-																		MarkdownDescription: "Tenant. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant.",
-																		Optional:            true,
-																		Computed:            true,
-																		PlanModifiers: []planmodifier.String{
-																			stringplanmodifier.UseStateForUnknown(),
-																		},
-																	},
-																	"uid": schema.StringAttribute{
-																		MarkdownDescription: "UID. When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid.",
-																		Optional:            true,
-																		Computed:            true,
-																		PlanModifiers: []planmodifier.String{
-																			stringplanmodifier.UseStateForUnknown(),
-																		},
-																	},
-																},
-															},
-														},
-														"nexthop_address": schema.SingleNestedBlock{
-															MarkdownDescription: "IP Address. IP Address used to specify an IPv4 or IPv6 address.",
-															Attributes:          map[string]schema.Attribute{},
-															Blocks: map[string]schema.Block{
-																"ipv4": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv4 Address. IPv4 Address in dot-decimal notation.",
-																	Attributes: map[string]schema.Attribute{
-																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv4 Address. IPv4 Address in string form with dot-decimal notation.",
-																			Optional:            true,
-																		},
-																	},
-																},
-																"ipv6": schema.SingleNestedBlock{
-																	MarkdownDescription: "IPv6 Address. IPv6 Address specified as hexadecimal numbers separated by ':'",
-																	Attributes: map[string]schema.Attribute{
-																		"addr": schema.StringAttribute{
-																			MarkdownDescription: "IPv6 Address. IPv6 Address in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' The address can be compacted by suppressing zeros e.g. '2001:db8:0:0:0:0:2:1' becomes '2001:db8::2:1' or '2001:db8:0:0:0:2:0:0' becomes '2001:db8::2::'",
-																			Optional:            true,
-																		},
-																	},
-																},
-															},
-														},
-													},
-												},
-												"subnets": schema.ListNestedBlock{
-													MarkdownDescription: "Subnets. List of route prefixes .",
-													NestedObject: schema.NestedBlockObject{
-														Attributes: map[string]schema.Attribute{},
-														Blocks: map[string]schema.Block{
-															"ipv4": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv4 Subnet. IPv4 subnets specified as prefix and prefix-length. Prefix length must be <= 32.",
-																Attributes: map[string]schema.Attribute{
-																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix-length of the IPv4 subnet. Must be <= 32.",
-																		Optional:            true,
-																	},
-																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv4 subnet in string form with dot-decimal notation.",
-																		Optional:            true,
-																	},
-																},
-															},
-															"ipv6": schema.SingleNestedBlock{
-																MarkdownDescription: "IPv6 Subnet. IPv6 subnets specified as prefix and prefix-length. Prefix-legnth must be <= 128.",
-																Attributes: map[string]schema.Attribute{
-																	"plen": schema.Int64Attribute{
-																		MarkdownDescription: "Prefix Length. Prefix length of the IPv6 subnet. Must be <= 128.",
-																		Optional:            true,
-																	},
-																	"prefix": schema.StringAttribute{
-																		MarkdownDescription: "Prefix. Prefix part of the IPv6 subnet given in form of string. IPv6 address must be specified as hexadecimal numbers separated by ':' e.g. '2001:db8:0:0:0:2:0:0' The address can be compacted by suppressing zeros e.g. '2001:db8::2::'",
-																		Optional:            true,
-																	},
-																},
-															},
-														},
-													},
-												},
-											},
-										},
+									"subnet_name": schema.StringAttribute{
+										MarkdownDescription: "VPC Subnet Name. Name of new VPC Subnet, will be autogenerated if empty.",
+										Optional:            true,
 									},
 								},
 							},
@@ -6550,19 +3269,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		createReq.Spec["admin_password"] = admin_passwordMap
 	}
-	if data.AzureCred != nil {
-		azure_credMap := make(map[string]interface{})
-		if !data.AzureCred.Name.IsNull() && !data.AzureCred.Name.IsUnknown() {
-			azure_credMap["name"] = data.AzureCred.Name.ValueString()
-		}
-		if !data.AzureCred.Namespace.IsNull() && !data.AzureCred.Namespace.IsUnknown() {
-			azure_credMap["namespace"] = data.AzureCred.Namespace.ValueString()
-		}
-		if !data.AzureCred.Tenant.IsNull() && !data.AzureCred.Tenant.IsUnknown() {
-			azure_credMap["tenant"] = data.AzureCred.Tenant.ValueString()
-		}
-		createReq.Spec["azure_cred"] = azure_credMap
-	}
 	if data.BlockAllServices != nil {
 		block_all_servicesMap := make(map[string]interface{})
 		createReq.Spec["block_all_services"] = block_all_servicesMap
@@ -6591,6 +3297,19 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		createReq.Spec["blocked_services"] = blocked_servicesMap
 	}
+	if data.CloudCredentials != nil {
+		cloud_credentialsMap := make(map[string]interface{})
+		if !data.CloudCredentials.Name.IsNull() && !data.CloudCredentials.Name.IsUnknown() {
+			cloud_credentialsMap["name"] = data.CloudCredentials.Name.ValueString()
+		}
+		if !data.CloudCredentials.Namespace.IsNull() && !data.CloudCredentials.Namespace.IsUnknown() {
+			cloud_credentialsMap["namespace"] = data.CloudCredentials.Namespace.ValueString()
+		}
+		if !data.CloudCredentials.Tenant.IsNull() && !data.CloudCredentials.Tenant.IsUnknown() {
+			cloud_credentialsMap["tenant"] = data.CloudCredentials.Tenant.ValueString()
+		}
+		createReq.Spec["cloud_credentials"] = cloud_credentialsMap
+	}
 	if data.Coordinates != nil {
 		coordinatesMap := make(map[string]interface{})
 		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
@@ -6615,12 +3334,12 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		default_blocked_servicesMap := make(map[string]interface{})
 		createReq.Spec["default_blocked_services"] = default_blocked_servicesMap
 	}
+	if data.GCPLabels != nil {
+		gcp_labelsMap := make(map[string]interface{})
+		createReq.Spec["gcp_labels"] = gcp_labelsMap
+	}
 	if data.IngressEgressGw != nil {
 		ingress_egress_gwMap := make(map[string]interface{})
-		if data.IngressEgressGw.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			ingress_egress_gwMap["accelerated_networking"] = accelerated_networkingNestedMap
-		}
 		if data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
 			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
@@ -6632,28 +3351,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		if data.IngressEgressGw.ActiveNetworkPolicies != nil {
 			active_network_policiesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["active_network_policies"] = active_network_policiesNestedMap
-		}
-		if len(data.IngressEgressGw.AzNodes) > 0 {
-			var az_nodesList []map[string]interface{}
-			for _, listItem := range data.IngressEgressGw.AzNodes {
-				listItemMap := make(map[string]interface{})
-				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
-					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
-				}
-				if listItem.InsideSubnet != nil {
-					inside_subnetDeepMap := make(map[string]interface{})
-					listItemMap["inside_subnet"] = inside_subnetDeepMap
-				}
-				if listItem.OutsideSubnet != nil {
-					outside_subnetDeepMap := make(map[string]interface{})
-					listItemMap["outside_subnet"] = outside_subnetDeepMap
-				}
-				az_nodesList = append(az_nodesList, listItemMap)
-			}
-			ingress_egress_gwMap["az_nodes"] = az_nodesList
-		}
-		if !data.IngressEgressGw.AzureCertifiedHw.IsNull() && !data.IngressEgressGw.AzureCertifiedHw.IsUnknown() {
-			ingress_egress_gwMap["azure_certified_hw"] = data.IngressEgressGw.AzureCertifiedHw.ValueString()
 		}
 		if data.IngressEgressGw.DcClusterGroupInsideVn != nil {
 			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
@@ -6684,17 +3381,31 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		if data.IngressEgressGw.ForwardProxyAllowAll != nil {
 			ingress_egress_gwMap["forward_proxy_allow_all"] = map[string]interface{}{}
 		}
+		if !data.IngressEgressGw.GCPCertifiedHw.IsNull() && !data.IngressEgressGw.GCPCertifiedHw.IsUnknown() {
+			ingress_egress_gwMap["gcp_certified_hw"] = data.IngressEgressGw.GCPCertifiedHw.ValueString()
+		}
+		if !data.IngressEgressGw.GCPZoneNames.IsNull() && !data.IngressEgressGw.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.IngressEgressGw.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				ingress_egress_gwMap["gcp_zone_names"] = gcp_zone_namesItems
+			}
+		}
 		if data.IngressEgressGw.GlobalNetworkList != nil {
 			global_network_listNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["global_network_list"] = global_network_listNestedMap
 		}
-		if data.IngressEgressGw.Hub != nil {
-			hubNestedMap := make(map[string]interface{})
-			ingress_egress_gwMap["hub"] = hubNestedMap
+		if data.IngressEgressGw.InsideNetwork != nil {
+			inside_networkNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_network"] = inside_networkNestedMap
 		}
 		if data.IngressEgressGw.InsideStaticRoutes != nil {
 			inside_static_routesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.InsideSubnet != nil {
+			inside_subnetNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_subnet"] = inside_subnetNestedMap
 		}
 		if data.IngressEgressGw.NoDcClusterGroup != nil {
 			ingress_egress_gwMap["no_dc_cluster_group"] = map[string]interface{}{}
@@ -6714,12 +3425,20 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		if data.IngressEgressGw.NoOutsideStaticRoutes != nil {
 			ingress_egress_gwMap["no_outside_static_routes"] = map[string]interface{}{}
 		}
-		if data.IngressEgressGw.NotHub != nil {
-			ingress_egress_gwMap["not_hub"] = map[string]interface{}{}
+		if !data.IngressEgressGw.NodeNumber.IsNull() && !data.IngressEgressGw.NodeNumber.IsUnknown() {
+			ingress_egress_gwMap["node_number"] = data.IngressEgressGw.NodeNumber.ValueInt64()
+		}
+		if data.IngressEgressGw.OutsideNetwork != nil {
+			outside_networkNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_network"] = outside_networkNestedMap
 		}
 		if data.IngressEgressGw.OutsideStaticRoutes != nil {
 			outside_static_routesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.OutsideSubnet != nil {
+			outside_subnetNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_subnet"] = outside_subnetNestedMap
 		}
 		if data.IngressEgressGw.PerformanceEnhancementMode != nil {
 			performance_enhancement_modeNestedMap := make(map[string]interface{})
@@ -6733,175 +3452,34 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		createReq.Spec["ingress_egress_gw"] = ingress_egress_gwMap
 	}
-	if data.IngressEgressGwAr != nil {
-		ingress_egress_gw_arMap := make(map[string]interface{})
-		if data.IngressEgressGwAr.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["accelerated_networking"] = accelerated_networkingNestedMap
-		}
-		if data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies != nil {
-			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
-		}
-		if data.IngressEgressGwAr.ActiveForwardProxyPolicies != nil {
-			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
-		}
-		if data.IngressEgressGwAr.ActiveNetworkPolicies != nil {
-			active_network_policiesNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["active_network_policies"] = active_network_policiesNestedMap
-		}
-		if !data.IngressEgressGwAr.AzureCertifiedHw.IsNull() && !data.IngressEgressGwAr.AzureCertifiedHw.IsUnknown() {
-			ingress_egress_gw_arMap["azure_certified_hw"] = data.IngressEgressGwAr.AzureCertifiedHw.ValueString()
-		}
-		if data.IngressEgressGwAr.DcClusterGroupInsideVn != nil {
-			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
-			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.IsUnknown() {
-				dc_cluster_group_inside_vnNestedMap["name"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.ValueString()
-			}
-			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.IsUnknown() {
-				dc_cluster_group_inside_vnNestedMap["namespace"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.ValueString()
-			}
-			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.IsUnknown() {
-				dc_cluster_group_inside_vnNestedMap["tenant"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.ValueString()
-			}
-			ingress_egress_gw_arMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
-		}
-		if data.IngressEgressGwAr.DcClusterGroupOutsideVn != nil {
-			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
-			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.IsUnknown() {
-				dc_cluster_group_outside_vnNestedMap["name"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.ValueString()
-			}
-			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
-				dc_cluster_group_outside_vnNestedMap["namespace"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.ValueString()
-			}
-			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
-				dc_cluster_group_outside_vnNestedMap["tenant"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.ValueString()
-			}
-			ingress_egress_gw_arMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
-		}
-		if data.IngressEgressGwAr.ForwardProxyAllowAll != nil {
-			ingress_egress_gw_arMap["forward_proxy_allow_all"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.GlobalNetworkList != nil {
-			global_network_listNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["global_network_list"] = global_network_listNestedMap
-		}
-		if data.IngressEgressGwAr.Hub != nil {
-			hubNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["hub"] = hubNestedMap
-		}
-		if data.IngressEgressGwAr.InsideStaticRoutes != nil {
-			inside_static_routesNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["inside_static_routes"] = inside_static_routesNestedMap
-		}
-		if data.IngressEgressGwAr.NoDcClusterGroup != nil {
-			ingress_egress_gw_arMap["no_dc_cluster_group"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.NoForwardProxy != nil {
-			ingress_egress_gw_arMap["no_forward_proxy"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.NoGlobalNetwork != nil {
-			ingress_egress_gw_arMap["no_global_network"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.NoInsideStaticRoutes != nil {
-			ingress_egress_gw_arMap["no_inside_static_routes"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.NoNetworkPolicy != nil {
-			ingress_egress_gw_arMap["no_network_policy"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.NoOutsideStaticRoutes != nil {
-			ingress_egress_gw_arMap["no_outside_static_routes"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.Node != nil {
-			nodeNestedMap := make(map[string]interface{})
-			if !data.IngressEgressGwAr.Node.FaultDomain.IsNull() && !data.IngressEgressGwAr.Node.FaultDomain.IsUnknown() {
-				nodeNestedMap["fault_domain"] = data.IngressEgressGwAr.Node.FaultDomain.ValueInt64()
-			}
-			if !data.IngressEgressGwAr.Node.NodeNumber.IsNull() && !data.IngressEgressGwAr.Node.NodeNumber.IsUnknown() {
-				nodeNestedMap["node_number"] = data.IngressEgressGwAr.Node.NodeNumber.ValueInt64()
-			}
-			if !data.IngressEgressGwAr.Node.UpdateDomain.IsNull() && !data.IngressEgressGwAr.Node.UpdateDomain.IsUnknown() {
-				nodeNestedMap["update_domain"] = data.IngressEgressGwAr.Node.UpdateDomain.ValueInt64()
-			}
-			ingress_egress_gw_arMap["node"] = nodeNestedMap
-		}
-		if data.IngressEgressGwAr.NotHub != nil {
-			ingress_egress_gw_arMap["not_hub"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.OutsideStaticRoutes != nil {
-			outside_static_routesNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["outside_static_routes"] = outside_static_routesNestedMap
-		}
-		if data.IngressEgressGwAr.PerformanceEnhancementMode != nil {
-			performance_enhancement_modeNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
-		}
-		if data.IngressEgressGwAr.SmConnectionPublicIP != nil {
-			ingress_egress_gw_arMap["sm_connection_public_ip"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.SmConnectionPvtIP != nil {
-			ingress_egress_gw_arMap["sm_connection_pvt_ip"] = map[string]interface{}{}
-		}
-		createReq.Spec["ingress_egress_gw_ar"] = ingress_egress_gw_arMap
-	}
 	if data.IngressGw != nil {
 		ingress_gwMap := make(map[string]interface{})
-		if data.IngressGw.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			ingress_gwMap["accelerated_networking"] = accelerated_networkingNestedMap
+		if !data.IngressGw.GCPCertifiedHw.IsNull() && !data.IngressGw.GCPCertifiedHw.IsUnknown() {
+			ingress_gwMap["gcp_certified_hw"] = data.IngressGw.GCPCertifiedHw.ValueString()
 		}
-		if len(data.IngressGw.AzNodes) > 0 {
-			var az_nodesList []map[string]interface{}
-			for _, listItem := range data.IngressGw.AzNodes {
-				listItemMap := make(map[string]interface{})
-				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
-					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
-				}
-				if listItem.LocalSubnet != nil {
-					local_subnetDeepMap := make(map[string]interface{})
-					listItemMap["local_subnet"] = local_subnetDeepMap
-				}
-				az_nodesList = append(az_nodesList, listItemMap)
+		if !data.IngressGw.GCPZoneNames.IsNull() && !data.IngressGw.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.IngressGw.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				ingress_gwMap["gcp_zone_names"] = gcp_zone_namesItems
 			}
-			ingress_gwMap["az_nodes"] = az_nodesList
 		}
-		if !data.IngressGw.AzureCertifiedHw.IsNull() && !data.IngressGw.AzureCertifiedHw.IsUnknown() {
-			ingress_gwMap["azure_certified_hw"] = data.IngressGw.AzureCertifiedHw.ValueString()
+		if data.IngressGw.LocalNetwork != nil {
+			local_networkNestedMap := make(map[string]interface{})
+			ingress_gwMap["local_network"] = local_networkNestedMap
+		}
+		if data.IngressGw.LocalSubnet != nil {
+			local_subnetNestedMap := make(map[string]interface{})
+			ingress_gwMap["local_subnet"] = local_subnetNestedMap
+		}
+		if !data.IngressGw.NodeNumber.IsNull() && !data.IngressGw.NodeNumber.IsUnknown() {
+			ingress_gwMap["node_number"] = data.IngressGw.NodeNumber.ValueInt64()
 		}
 		if data.IngressGw.PerformanceEnhancementMode != nil {
 			performance_enhancement_modeNestedMap := make(map[string]interface{})
 			ingress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
 		}
 		createReq.Spec["ingress_gw"] = ingress_gwMap
-	}
-	if data.IngressGwAr != nil {
-		ingress_gw_arMap := make(map[string]interface{})
-		if data.IngressGwAr.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			ingress_gw_arMap["accelerated_networking"] = accelerated_networkingNestedMap
-		}
-		if !data.IngressGwAr.AzureCertifiedHw.IsNull() && !data.IngressGwAr.AzureCertifiedHw.IsUnknown() {
-			ingress_gw_arMap["azure_certified_hw"] = data.IngressGwAr.AzureCertifiedHw.ValueString()
-		}
-		if data.IngressGwAr.Node != nil {
-			nodeNestedMap := make(map[string]interface{})
-			if !data.IngressGwAr.Node.FaultDomain.IsNull() && !data.IngressGwAr.Node.FaultDomain.IsUnknown() {
-				nodeNestedMap["fault_domain"] = data.IngressGwAr.Node.FaultDomain.ValueInt64()
-			}
-			if !data.IngressGwAr.Node.NodeNumber.IsNull() && !data.IngressGwAr.Node.NodeNumber.IsUnknown() {
-				nodeNestedMap["node_number"] = data.IngressGwAr.Node.NodeNumber.ValueInt64()
-			}
-			if !data.IngressGwAr.Node.UpdateDomain.IsNull() && !data.IngressGwAr.Node.UpdateDomain.IsUnknown() {
-				nodeNestedMap["update_domain"] = data.IngressGwAr.Node.UpdateDomain.ValueInt64()
-			}
-			ingress_gw_arMap["node"] = nodeNestedMap
-		}
-		if data.IngressGwAr.PerformanceEnhancementMode != nil {
-			performance_enhancement_modeNestedMap := make(map[string]interface{})
-			ingress_gw_arMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
-		}
-		createReq.Spec["ingress_gw_ar"] = ingress_gw_arMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
 		kubernetes_upgrade_drainMap := make(map[string]interface{})
@@ -6937,10 +3515,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		logs_streaming_disabledMap := make(map[string]interface{})
 		createReq.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
-	if data.NoWorkerNodes != nil {
-		no_worker_nodesMap := make(map[string]interface{})
-		createReq.Spec["no_worker_nodes"] = no_worker_nodesMap
-	}
 	if data.OfflineSurvivabilityMode != nil {
 		offline_survivability_modeMap := make(map[string]interface{})
 		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
@@ -6961,6 +3535,33 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		createReq.Spec["os"] = osMap
 	}
+	if data.PrivateConnectDisabled != nil {
+		private_connect_disabledMap := make(map[string]interface{})
+		createReq.Spec["private_connect_disabled"] = private_connect_disabledMap
+	}
+	if data.PrivateConnectivity != nil {
+		private_connectivityMap := make(map[string]interface{})
+		if data.PrivateConnectivity.CloudLink != nil {
+			cloud_linkNestedMap := make(map[string]interface{})
+			if !data.PrivateConnectivity.CloudLink.Name.IsNull() && !data.PrivateConnectivity.CloudLink.Name.IsUnknown() {
+				cloud_linkNestedMap["name"] = data.PrivateConnectivity.CloudLink.Name.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Namespace.IsNull() && !data.PrivateConnectivity.CloudLink.Namespace.IsUnknown() {
+				cloud_linkNestedMap["namespace"] = data.PrivateConnectivity.CloudLink.Namespace.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Tenant.IsNull() && !data.PrivateConnectivity.CloudLink.Tenant.IsUnknown() {
+				cloud_linkNestedMap["tenant"] = data.PrivateConnectivity.CloudLink.Tenant.ValueString()
+			}
+			private_connectivityMap["cloud_link"] = cloud_linkNestedMap
+		}
+		if data.PrivateConnectivity.Inside != nil {
+			private_connectivityMap["inside"] = map[string]interface{}{}
+		}
+		if data.PrivateConnectivity.Outside != nil {
+			private_connectivityMap["outside"] = map[string]interface{}{}
+		}
+		createReq.Spec["private_connectivity"] = private_connectivityMap
+	}
 	if data.Sw != nil {
 		swMap := make(map[string]interface{})
 		if data.Sw.DefaultSwVersion != nil {
@@ -6971,40 +3572,8 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		createReq.Spec["sw"] = swMap
 	}
-	if data.Tags != nil {
-		tagsMap := make(map[string]interface{})
-		createReq.Spec["tags"] = tagsMap
-	}
-	if data.VNET != nil {
-		vnetMap := make(map[string]interface{})
-		if data.VNET.ExistingVNET != nil {
-			existing_vnetNestedMap := make(map[string]interface{})
-			if !data.VNET.ExistingVNET.ResourceGroup.IsNull() && !data.VNET.ExistingVNET.ResourceGroup.IsUnknown() {
-				existing_vnetNestedMap["resource_group"] = data.VNET.ExistingVNET.ResourceGroup.ValueString()
-			}
-			if !data.VNET.ExistingVNET.VNETName.IsNull() && !data.VNET.ExistingVNET.VNETName.IsUnknown() {
-				existing_vnetNestedMap["vnet_name"] = data.VNET.ExistingVNET.VNETName.ValueString()
-			}
-			vnetMap["existing_vnet"] = existing_vnetNestedMap
-		}
-		if data.VNET.NewVNET != nil {
-			new_vnetNestedMap := make(map[string]interface{})
-			if !data.VNET.NewVNET.Name.IsNull() && !data.VNET.NewVNET.Name.IsUnknown() {
-				new_vnetNestedMap["name"] = data.VNET.NewVNET.Name.ValueString()
-			}
-			if !data.VNET.NewVNET.PrimaryIpv4.IsNull() && !data.VNET.NewVNET.PrimaryIpv4.IsUnknown() {
-				new_vnetNestedMap["primary_ipv4"] = data.VNET.NewVNET.PrimaryIpv4.ValueString()
-			}
-			vnetMap["new_vnet"] = new_vnetNestedMap
-		}
-		createReq.Spec["vnet"] = vnetMap
-	}
 	if data.VoltstackCluster != nil {
 		voltstack_clusterMap := make(map[string]interface{})
-		if data.VoltstackCluster.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			voltstack_clusterMap["accelerated_networking"] = accelerated_networkingNestedMap
-		}
 		if data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
 			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
@@ -7016,24 +3585,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		if data.VoltstackCluster.ActiveNetworkPolicies != nil {
 			active_network_policiesNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["active_network_policies"] = active_network_policiesNestedMap
-		}
-		if len(data.VoltstackCluster.AzNodes) > 0 {
-			var az_nodesList []map[string]interface{}
-			for _, listItem := range data.VoltstackCluster.AzNodes {
-				listItemMap := make(map[string]interface{})
-				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
-					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
-				}
-				if listItem.LocalSubnet != nil {
-					local_subnetDeepMap := make(map[string]interface{})
-					listItemMap["local_subnet"] = local_subnetDeepMap
-				}
-				az_nodesList = append(az_nodesList, listItemMap)
-			}
-			voltstack_clusterMap["az_nodes"] = az_nodesList
-		}
-		if !data.VoltstackCluster.AzureCertifiedHw.IsNull() && !data.VoltstackCluster.AzureCertifiedHw.IsUnknown() {
-			voltstack_clusterMap["azure_certified_hw"] = data.VoltstackCluster.AzureCertifiedHw.ValueString()
 		}
 		if data.VoltstackCluster.DcClusterGroup != nil {
 			dc_cluster_groupNestedMap := make(map[string]interface{})
@@ -7053,6 +3604,16 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		if data.VoltstackCluster.ForwardProxyAllowAll != nil {
 			voltstack_clusterMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if !data.VoltstackCluster.GCPCertifiedHw.IsNull() && !data.VoltstackCluster.GCPCertifiedHw.IsUnknown() {
+			voltstack_clusterMap["gcp_certified_hw"] = data.VoltstackCluster.GCPCertifiedHw.ValueString()
+		}
+		if !data.VoltstackCluster.GCPZoneNames.IsNull() && !data.VoltstackCluster.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.VoltstackCluster.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				voltstack_clusterMap["gcp_zone_names"] = gcp_zone_namesItems
+			}
 		}
 		if data.VoltstackCluster.GlobalNetworkList != nil {
 			global_network_listNestedMap := make(map[string]interface{})
@@ -7089,9 +3650,20 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		if data.VoltstackCluster.NoOutsideStaticRoutes != nil {
 			voltstack_clusterMap["no_outside_static_routes"] = map[string]interface{}{}
 		}
+		if !data.VoltstackCluster.NodeNumber.IsNull() && !data.VoltstackCluster.NodeNumber.IsUnknown() {
+			voltstack_clusterMap["node_number"] = data.VoltstackCluster.NodeNumber.ValueInt64()
+		}
 		if data.VoltstackCluster.OutsideStaticRoutes != nil {
 			outside_static_routesNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VoltstackCluster.SiteLocalNetwork != nil {
+			site_local_networkNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["site_local_network"] = site_local_networkNestedMap
+		}
+		if data.VoltstackCluster.SiteLocalSubnet != nil {
+			site_local_subnetNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["site_local_subnet"] = site_local_subnetNestedMap
 		}
 		if data.VoltstackCluster.SmConnectionPublicIP != nil {
 			voltstack_clusterMap["sm_connection_public_ip"] = map[string]interface{}{}
@@ -7105,136 +3677,20 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		}
 		createReq.Spec["voltstack_cluster"] = voltstack_clusterMap
 	}
-	if data.VoltstackClusterAr != nil {
-		voltstack_cluster_arMap := make(map[string]interface{})
-		if data.VoltstackClusterAr.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["accelerated_networking"] = accelerated_networkingNestedMap
-		}
-		if data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies != nil {
-			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
-		}
-		if data.VoltstackClusterAr.ActiveForwardProxyPolicies != nil {
-			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
-		}
-		if data.VoltstackClusterAr.ActiveNetworkPolicies != nil {
-			active_network_policiesNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["active_network_policies"] = active_network_policiesNestedMap
-		}
-		if !data.VoltstackClusterAr.AzureCertifiedHw.IsNull() && !data.VoltstackClusterAr.AzureCertifiedHw.IsUnknown() {
-			voltstack_cluster_arMap["azure_certified_hw"] = data.VoltstackClusterAr.AzureCertifiedHw.ValueString()
-		}
-		if data.VoltstackClusterAr.DcClusterGroup != nil {
-			dc_cluster_groupNestedMap := make(map[string]interface{})
-			if !data.VoltstackClusterAr.DcClusterGroup.Name.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Name.IsUnknown() {
-				dc_cluster_groupNestedMap["name"] = data.VoltstackClusterAr.DcClusterGroup.Name.ValueString()
-			}
-			if !data.VoltstackClusterAr.DcClusterGroup.Namespace.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Namespace.IsUnknown() {
-				dc_cluster_groupNestedMap["namespace"] = data.VoltstackClusterAr.DcClusterGroup.Namespace.ValueString()
-			}
-			if !data.VoltstackClusterAr.DcClusterGroup.Tenant.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Tenant.IsUnknown() {
-				dc_cluster_groupNestedMap["tenant"] = data.VoltstackClusterAr.DcClusterGroup.Tenant.ValueString()
-			}
-			voltstack_cluster_arMap["dc_cluster_group"] = dc_cluster_groupNestedMap
-		}
-		if data.VoltstackClusterAr.DefaultStorage != nil {
-			voltstack_cluster_arMap["default_storage"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.ForwardProxyAllowAll != nil {
-			voltstack_cluster_arMap["forward_proxy_allow_all"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.GlobalNetworkList != nil {
-			global_network_listNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["global_network_list"] = global_network_listNestedMap
-		}
-		if data.VoltstackClusterAr.K8SCluster != nil {
-			k8s_clusterNestedMap := make(map[string]interface{})
-			if !data.VoltstackClusterAr.K8SCluster.Name.IsNull() && !data.VoltstackClusterAr.K8SCluster.Name.IsUnknown() {
-				k8s_clusterNestedMap["name"] = data.VoltstackClusterAr.K8SCluster.Name.ValueString()
-			}
-			if !data.VoltstackClusterAr.K8SCluster.Namespace.IsNull() && !data.VoltstackClusterAr.K8SCluster.Namespace.IsUnknown() {
-				k8s_clusterNestedMap["namespace"] = data.VoltstackClusterAr.K8SCluster.Namespace.ValueString()
-			}
-			if !data.VoltstackClusterAr.K8SCluster.Tenant.IsNull() && !data.VoltstackClusterAr.K8SCluster.Tenant.IsUnknown() {
-				k8s_clusterNestedMap["tenant"] = data.VoltstackClusterAr.K8SCluster.Tenant.ValueString()
-			}
-			voltstack_cluster_arMap["k8s_cluster"] = k8s_clusterNestedMap
-		}
-		if data.VoltstackClusterAr.NoDcClusterGroup != nil {
-			voltstack_cluster_arMap["no_dc_cluster_group"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.NoForwardProxy != nil {
-			voltstack_cluster_arMap["no_forward_proxy"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.NoGlobalNetwork != nil {
-			voltstack_cluster_arMap["no_global_network"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.NoK8SCluster != nil {
-			voltstack_cluster_arMap["no_k8s_cluster"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.NoNetworkPolicy != nil {
-			voltstack_cluster_arMap["no_network_policy"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.NoOutsideStaticRoutes != nil {
-			voltstack_cluster_arMap["no_outside_static_routes"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.Node != nil {
-			nodeNestedMap := make(map[string]interface{})
-			if !data.VoltstackClusterAr.Node.FaultDomain.IsNull() && !data.VoltstackClusterAr.Node.FaultDomain.IsUnknown() {
-				nodeNestedMap["fault_domain"] = data.VoltstackClusterAr.Node.FaultDomain.ValueInt64()
-			}
-			if !data.VoltstackClusterAr.Node.NodeNumber.IsNull() && !data.VoltstackClusterAr.Node.NodeNumber.IsUnknown() {
-				nodeNestedMap["node_number"] = data.VoltstackClusterAr.Node.NodeNumber.ValueInt64()
-			}
-			if !data.VoltstackClusterAr.Node.UpdateDomain.IsNull() && !data.VoltstackClusterAr.Node.UpdateDomain.IsUnknown() {
-				nodeNestedMap["update_domain"] = data.VoltstackClusterAr.Node.UpdateDomain.ValueInt64()
-			}
-			voltstack_cluster_arMap["node"] = nodeNestedMap
-		}
-		if data.VoltstackClusterAr.OutsideStaticRoutes != nil {
-			outside_static_routesNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["outside_static_routes"] = outside_static_routesNestedMap
-		}
-		if data.VoltstackClusterAr.SmConnectionPublicIP != nil {
-			voltstack_cluster_arMap["sm_connection_public_ip"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.SmConnectionPvtIP != nil {
-			voltstack_cluster_arMap["sm_connection_pvt_ip"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.StorageClassList != nil {
-			storage_class_listNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["storage_class_list"] = storage_class_listNestedMap
-		}
-		createReq.Spec["voltstack_cluster_ar"] = voltstack_cluster_arMap
-	}
 	if !data.Address.IsNull() && !data.Address.IsUnknown() {
 		createReq.Spec["address"] = data.Address.ValueString()
-	}
-	if !data.AlternateRegion.IsNull() && !data.AlternateRegion.IsUnknown() {
-		createReq.Spec["alternate_region"] = data.AlternateRegion.ValueString()
-	}
-	if !data.AzureRegion.IsNull() && !data.AzureRegion.IsUnknown() {
-		createReq.Spec["azure_region"] = data.AzureRegion.ValueString()
 	}
 	if !data.DiskSize.IsNull() && !data.DiskSize.IsUnknown() {
 		createReq.Spec["disk_size"] = data.DiskSize.ValueInt64()
 	}
-	if !data.MachineType.IsNull() && !data.MachineType.IsUnknown() {
-		createReq.Spec["machine_type"] = data.MachineType.ValueString()
+	if !data.GCPRegion.IsNull() && !data.GCPRegion.IsUnknown() {
+		createReq.Spec["gcp_region"] = data.GCPRegion.ValueString()
 	}
-	if !data.NodesPerAz.IsNull() && !data.NodesPerAz.IsUnknown() {
-		createReq.Spec["nodes_per_az"] = data.NodesPerAz.ValueInt64()
-	}
-	if !data.ResourceGroup.IsNull() && !data.ResourceGroup.IsUnknown() {
-		createReq.Spec["resource_group"] = data.ResourceGroup.ValueString()
+	if !data.InstanceType.IsNull() && !data.InstanceType.IsUnknown() {
+		createReq.Spec["instance_type"] = data.InstanceType.ValueString()
 	}
 	if !data.SSHKey.IsNull() && !data.SSHKey.IsUnknown() {
 		createReq.Spec["ssh_key"] = data.SSHKey.ValueString()
-	}
-	if !data.TotalNodes.IsNull() && !data.TotalNodes.IsUnknown() {
-		createReq.Spec["total_nodes"] = data.TotalNodes.ValueInt64()
 	}
 
 	apiResource, err := r.client.CreateSite(ctx, createReq)
@@ -7254,28 +3710,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		data.AdminPassword = &SiteAdminPasswordModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["azure_cred"].(map[string]interface{}); ok && (isImport || data.AzureCred != nil) {
-		data.AzureCred = &SiteAzureCredModel{
-			Name: func() types.String {
-				if v, ok := blockData["name"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			Namespace: func() types.String {
-				if v, ok := blockData["namespace"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			Tenant: func() types.String {
-				if v, ok := blockData["tenant"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-		}
-	}
 	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.BlockAllServices = &SiteEmptyModel{}
@@ -7322,6 +3756,28 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["cloud_credentials"].(map[string]interface{}); ok && (isImport || data.CloudCredentials != nil) {
+		data.CloudCredentials = &SiteCloudCredentialsModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &SiteCoordinatesModel{
 			Latitude: func() types.Int64 {
@@ -7359,19 +3815,13 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		data.DefaultBlockedServices = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["gcp_labels"].(map[string]interface{}); ok && isImport && data.GCPLabels == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCPLabels = &SiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["ingress_egress_gw"].(map[string]interface{}); ok && (isImport || data.IngressEgressGw != nil) {
 		data.IngressEgressGw = &SiteIngressEgressGwModel{
-			AcceleratedNetworking: func() *SiteIngressEgressGwAcceleratedNetworkingModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
 			ActiveEnhancedFirewallPolicies: func() *SiteIngressEgressGwActiveEnhancedFirewallPoliciesModel {
 				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
 					// Normal Read: preserve existing state value
@@ -7404,43 +3854,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 					return &SiteIngressEgressGwActiveNetworkPoliciesModel{}
 				}
 				return nil
-			}(),
-			AzNodes: func() []SiteIngressEgressGwAzNodesModel {
-				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteIngressEgressGwAzNodesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteIngressEgressGwAzNodesModel{
-								AzureAz: func() types.String {
-									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								InsideSubnet: func() *SiteIngressEgressGwAzNodesInsideSubnetModel {
-									if _, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
-										return &SiteIngressEgressGwAzNodesInsideSubnetModel{}
-									}
-									return nil
-								}(),
-								OutsideSubnet: func() *SiteIngressEgressGwAzNodesOutsideSubnetModel {
-									if _, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
-										return &SiteIngressEgressGwAzNodesOutsideSubnetModel{}
-									}
-									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
 			}(),
 			DcClusterGroupInsideVn: func() *SiteIngressEgressGwDcClusterGroupInsideVnModel {
 				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.DcClusterGroupInsideVn != nil {
@@ -7514,6 +3927,25 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 				}
 				return nil
 			}(),
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			GlobalNetworkList: func() *SiteIngressEgressGwGlobalNetworkListModel {
 				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.GlobalNetworkList != nil {
 					// Normal Read: preserve existing state value
@@ -7525,14 +3957,14 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 				}
 				return nil
 			}(),
-			Hub: func() *SiteIngressEgressGwHubModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.Hub != nil {
+			InsideNetwork: func() *SiteIngressEgressGwInsideNetworkModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.InsideNetwork != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.Hub
+					return data.IngressEgressGw.InsideNetwork
 				}
 				// Import case: read from API
-				if _, ok := blockData["hub"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwHubModel{}
+				if _, ok := blockData["inside_network"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwInsideNetworkModel{}
 				}
 				return nil
 			}(),
@@ -7544,6 +3976,17 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 				// Import case: read from API
 				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
 					return &SiteIngressEgressGwInsideStaticRoutesModel{}
+				}
+				return nil
+			}(),
+			InsideSubnet: func() *SiteIngressEgressGwInsideSubnetModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.InsideSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.InsideSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_subnet"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwInsideSubnetModel{}
 				}
 				return nil
 			}(),
@@ -7619,15 +4062,20 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 				}
 				return nil
 			}(),
-			NotHub: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGw != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGw.NotHub
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			OutsideNetwork: func() *SiteIngressEgressGwOutsideNetworkModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.OutsideNetwork != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.OutsideNetwork
 				}
 				// Import case: read from API
-				if _, ok := blockData["not_hub"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
+				if _, ok := blockData["outside_network"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwOutsideNetworkModel{}
 				}
 				return nil
 			}(),
@@ -7639,6 +4087,17 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
 					return &SiteIngressEgressGwOutsideStaticRoutesModel{}
+				}
+				return nil
+			}(),
+			OutsideSubnet: func() *SiteIngressEgressGwOutsideSubnetModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.OutsideSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.OutsideSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_subnet"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwOutsideSubnetModel{}
 				}
 				return nil
 			}(),
@@ -7679,368 +4138,54 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["ingress_egress_gw_ar"].(map[string]interface{}); ok && (isImport || data.IngressEgressGwAr != nil) {
-		data.IngressEgressGwAr = &SiteIngressEgressGwArModel{
-			AcceleratedNetworking: func() *SiteIngressEgressGwArAcceleratedNetworkingModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			ActiveEnhancedFirewallPolicies: func() *SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveForwardProxyPolicies: func() *SiteIngressEgressGwArActiveForwardProxyPoliciesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveForwardProxyPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.ActiveForwardProxyPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArActiveForwardProxyPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveNetworkPolicies: func() *SiteIngressEgressGwArActiveNetworkPoliciesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveNetworkPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.ActiveNetworkPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArActiveNetworkPoliciesModel{}
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			DcClusterGroupInsideVn: func() *SiteIngressEgressGwArDcClusterGroupInsideVnModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.DcClusterGroupInsideVn != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.DcClusterGroupInsideVn
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["dc_cluster_group_inside_vn"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArDcClusterGroupInsideVnModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			DcClusterGroupOutsideVn: func() *SiteIngressEgressGwArDcClusterGroupOutsideVnModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.DcClusterGroupOutsideVn != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.DcClusterGroupOutsideVn
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["dc_cluster_group_outside_vn"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArDcClusterGroupOutsideVnModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			ForwardProxyAllowAll: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.ForwardProxyAllowAll
-				}
-				// Import case: read from API
-				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			GlobalNetworkList: func() *SiteIngressEgressGwArGlobalNetworkListModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.GlobalNetworkList != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.GlobalNetworkList
-				}
-				// Import case: read from API
-				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArGlobalNetworkListModel{}
-				}
-				return nil
-			}(),
-			Hub: func() *SiteIngressEgressGwArHubModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.Hub != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.Hub
-				}
-				// Import case: read from API
-				if _, ok := blockData["hub"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArHubModel{}
-				}
-				return nil
-			}(),
-			InsideStaticRoutes: func() *SiteIngressEgressGwArInsideStaticRoutesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.InsideStaticRoutes != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.InsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArInsideStaticRoutesModel{}
-				}
-				return nil
-			}(),
-			NoDcClusterGroup: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoDcClusterGroup
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoForwardProxy: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoForwardProxy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoGlobalNetwork: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoGlobalNetwork
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoInsideStaticRoutes: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoInsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_inside_static_routes"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoNetworkPolicy: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoNetworkPolicy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoOutsideStaticRoutes: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoOutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			Node: func() *SiteIngressEgressGwArNodeModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.Node != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.Node
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArNodeModel{
-						FaultDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						NodeNumber: func() types.Int64 {
-							if v, ok := nestedBlockData["node_number"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						UpdateDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["update_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			NotHub: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NotHub
-				}
-				// Import case: read from API
-				if _, ok := blockData["not_hub"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			OutsideStaticRoutes: func() *SiteIngressEgressGwArOutsideStaticRoutesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.OutsideStaticRoutes != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.OutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArOutsideStaticRoutesModel{}
-				}
-				return nil
-			}(),
-			PerformanceEnhancementMode: func() *SiteIngressEgressGwArPerformanceEnhancementModeModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.PerformanceEnhancementMode != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.PerformanceEnhancementMode
-				}
-				// Import case: read from API
-				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArPerformanceEnhancementModeModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPublicIP: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.SmConnectionPublicIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPvtIP: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.SmConnectionPvtIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-		}
-	}
 	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
 		data.IngressGw = &SiteIngressGwModel{
-			AcceleratedNetworking: func() *SiteIngressGwAcceleratedNetworkingModel {
-				if !isImport && data.IngressGw != nil && data.IngressGw.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGw.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressGwAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			AzNodes: func() []SiteIngressGwAzNodesModel {
-				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteIngressGwAzNodesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteIngressGwAzNodesModel{
-								AzureAz: func() types.String {
-									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								LocalSubnet: func() *SiteIngressGwAzNodesLocalSubnetModel {
-									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
-										return &SiteIngressGwAzNodesLocalSubnetModel{}
-									}
-									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			LocalNetwork: func() *SiteIngressGwLocalNetworkModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.LocalNetwork != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.LocalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["local_network"].(map[string]interface{}); ok {
+					return &SiteIngressGwLocalNetworkModel{}
+				}
+				return nil
+			}(),
+			LocalSubnet: func() *SiteIngressGwLocalSubnetModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.LocalSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.LocalSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["local_subnet"].(map[string]interface{}); ok {
+					return &SiteIngressGwLocalSubnetModel{}
+				}
+				return nil
+			}(),
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
 			}(),
 			PerformanceEnhancementMode: func() *SiteIngressGwPerformanceEnhancementModeModel {
 				if !isImport && data.IngressGw != nil && data.IngressGw.PerformanceEnhancementMode != nil {
@@ -8050,68 +4195,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
 					return &SiteIngressGwPerformanceEnhancementModeModel{}
-				}
-				return nil
-			}(),
-		}
-	}
-	if blockData, ok := apiResource.Spec["ingress_gw_ar"].(map[string]interface{}); ok && (isImport || data.IngressGwAr != nil) {
-		data.IngressGwAr = &SiteIngressGwArModel{
-			AcceleratedNetworking: func() *SiteIngressGwArAcceleratedNetworkingModel {
-				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGwAr.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressGwArAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			Node: func() *SiteIngressGwArNodeModel {
-				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.Node != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGwAr.Node
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
-					return &SiteIngressGwArNodeModel{
-						FaultDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						NodeNumber: func() types.Int64 {
-							if v, ok := nestedBlockData["node_number"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						UpdateDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["update_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			PerformanceEnhancementMode: func() *SiteIngressGwArPerformanceEnhancementModeModel {
-				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.PerformanceEnhancementMode != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGwAr.PerformanceEnhancementMode
-				}
-				// Import case: read from API
-				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &SiteIngressGwArPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -8149,11 +4232,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 		data.LogsStreamingDisabled = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["no_worker_nodes"].(map[string]interface{}); ok && isImport && data.NoWorkerNodes == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.NoWorkerNodes = &SiteEmptyModel{}
-	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.OfflineSurvivabilityMode = &SiteOfflineSurvivabilityModeModel{}
@@ -8181,6 +4259,16 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["private_connect_disabled"].(map[string]interface{}); ok && isImport && data.PrivateConnectDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectDisabled = &SiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_connectivity"].(map[string]interface{}); ok && isImport && data.PrivateConnectivity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectivity = &SitePrivateConnectivityModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
 		data.Sw = &SiteSwModel{
 			DefaultSwVersion: func() *SiteEmptyModel {
@@ -8203,29 +4291,8 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["tags"].(map[string]interface{}); ok && isImport && data.Tags == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.Tags = &SiteEmptyModel{}
-	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["vnet"].(map[string]interface{}); ok && isImport && data.VNET == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.VNET = &SiteVNETModel{}
-	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["voltstack_cluster"].(map[string]interface{}); ok && (isImport || data.VoltstackCluster != nil) {
 		data.VoltstackCluster = &SiteVoltstackClusterModel{
-			AcceleratedNetworking: func() *SiteVoltstackClusterAcceleratedNetworkingModel {
-				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackCluster.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
 			ActiveEnhancedFirewallPolicies: func() *SiteVoltstackClusterActiveEnhancedFirewallPoliciesModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
 					// Normal Read: preserve existing state value
@@ -8258,37 +4325,6 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 					return &SiteVoltstackClusterActiveNetworkPoliciesModel{}
 				}
 				return nil
-			}(),
-			AzNodes: func() []SiteVoltstackClusterAzNodesModel {
-				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteVoltstackClusterAzNodesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteVoltstackClusterAzNodesModel{
-								AzureAz: func() types.String {
-									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								LocalSubnet: func() *SiteVoltstackClusterAzNodesLocalSubnetModel {
-									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
-										return &SiteVoltstackClusterAzNodesLocalSubnetModel{}
-									}
-									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
 			}(),
 			DcClusterGroup: func() *SiteVoltstackClusterDcClusterGroupModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.DcClusterGroup != nil {
@@ -8343,6 +4379,25 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 					return &SiteEmptyModel{}
 				}
 				return nil
+			}(),
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 			GlobalNetworkList: func() *SiteVoltstackClusterGlobalNetworkListModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.GlobalNetworkList != nil {
@@ -8457,6 +4512,12 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 				}
 				return nil
 			}(),
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
 			OutsideStaticRoutes: func() *SiteVoltstackClusterOutsideStaticRoutesModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.OutsideStaticRoutes != nil {
 					// Normal Read: preserve existing state value
@@ -8465,6 +4526,28 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
 					return &SiteVoltstackClusterOutsideStaticRoutesModel{}
+				}
+				return nil
+			}(),
+			SiteLocalNetwork: func() *SiteVoltstackClusterSiteLocalNetworkModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.SiteLocalNetwork != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.SiteLocalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["site_local_network"].(map[string]interface{}); ok {
+					return &SiteVoltstackClusterSiteLocalNetworkModel{}
+				}
+				return nil
+			}(),
+			SiteLocalSubnet: func() *SiteVoltstackClusterSiteLocalSubnetModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.SiteLocalSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.SiteLocalSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["site_local_subnet"].(map[string]interface{}); ok {
+					return &SiteVoltstackClusterSiteLocalSubnetModel{}
 				}
 				return nil
 			}(),
@@ -8505,347 +4588,30 @@ func (r *SiteResource) Create(ctx context.Context, req resource.CreateRequest, r
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["voltstack_cluster_ar"].(map[string]interface{}); ok && (isImport || data.VoltstackClusterAr != nil) {
-		data.VoltstackClusterAr = &SiteVoltstackClusterArModel{
-			AcceleratedNetworking: func() *SiteVoltstackClusterArAcceleratedNetworkingModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			ActiveEnhancedFirewallPolicies: func() *SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveForwardProxyPolicies: func() *SiteVoltstackClusterArActiveForwardProxyPoliciesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveForwardProxyPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.ActiveForwardProxyPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArActiveForwardProxyPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveNetworkPolicies: func() *SiteVoltstackClusterArActiveNetworkPoliciesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveNetworkPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.ActiveNetworkPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArActiveNetworkPoliciesModel{}
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			DcClusterGroup: func() *SiteVoltstackClusterArDcClusterGroupModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.DcClusterGroup != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.DcClusterGroup
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["dc_cluster_group"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArDcClusterGroupModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			DefaultStorage: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.DefaultStorage
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_storage"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			ForwardProxyAllowAll: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.ForwardProxyAllowAll
-				}
-				// Import case: read from API
-				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			GlobalNetworkList: func() *SiteVoltstackClusterArGlobalNetworkListModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.GlobalNetworkList != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.GlobalNetworkList
-				}
-				// Import case: read from API
-				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArGlobalNetworkListModel{}
-				}
-				return nil
-			}(),
-			K8SCluster: func() *SiteVoltstackClusterArK8SClusterModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.K8SCluster != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.K8SCluster
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["k8s_cluster"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArK8SClusterModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			NoDcClusterGroup: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoDcClusterGroup
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoForwardProxy: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoForwardProxy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoGlobalNetwork: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoGlobalNetwork
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoK8SCluster: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoK8SCluster
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_k8s_cluster"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoNetworkPolicy: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoNetworkPolicy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoOutsideStaticRoutes: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoOutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			Node: func() *SiteVoltstackClusterArNodeModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.Node != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.Node
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArNodeModel{
-						FaultDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						NodeNumber: func() types.Int64 {
-							if v, ok := nestedBlockData["node_number"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						UpdateDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["update_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			OutsideStaticRoutes: func() *SiteVoltstackClusterArOutsideStaticRoutesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.OutsideStaticRoutes != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.OutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArOutsideStaticRoutesModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPublicIP: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.SmConnectionPublicIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPvtIP: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.SmConnectionPvtIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			StorageClassList: func() *SiteVoltstackClusterArStorageClassListModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.StorageClassList != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.StorageClassList
-				}
-				// Import case: read from API
-				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArStorageClassListModel{}
-				}
-				return nil
-			}(),
-		}
-	}
 	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
 	} else {
 		data.Address = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["alternate_region"].(string); ok && v != "" {
-		data.AlternateRegion = types.StringValue(v)
-	} else {
-		data.AlternateRegion = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["azure_region"].(string); ok && v != "" {
-		data.AzureRegion = types.StringValue(v)
-	} else {
-		data.AzureRegion = types.StringNull()
 	}
 	if v, ok := apiResource.Spec["disk_size"].(float64); ok {
 		data.DiskSize = types.Int64Value(int64(v))
 	} else {
 		data.DiskSize = types.Int64Null()
 	}
-	if v, ok := apiResource.Spec["machine_type"].(string); ok && v != "" {
-		data.MachineType = types.StringValue(v)
+	if v, ok := apiResource.Spec["gcp_region"].(string); ok && v != "" {
+		data.GCPRegion = types.StringValue(v)
 	} else {
-		data.MachineType = types.StringNull()
+		data.GCPRegion = types.StringNull()
 	}
-	if v, ok := apiResource.Spec["nodes_per_az"].(float64); ok {
-		data.NodesPerAz = types.Int64Value(int64(v))
+	if v, ok := apiResource.Spec["instance_type"].(string); ok && v != "" {
+		data.InstanceType = types.StringValue(v)
 	} else {
-		data.NodesPerAz = types.Int64Null()
-	}
-	if v, ok := apiResource.Spec["resource_group"].(string); ok && v != "" {
-		data.ResourceGroup = types.StringValue(v)
-	} else {
-		data.ResourceGroup = types.StringNull()
+		data.InstanceType = types.StringNull()
 	}
 	if v, ok := apiResource.Spec["ssh_key"].(string); ok && v != "" {
 		data.SSHKey = types.StringValue(v)
 	} else {
 		data.SSHKey = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["total_nodes"].(float64); ok {
-		data.TotalNodes = types.Int64Value(int64(v))
-	} else {
-		data.TotalNodes = types.Int64Null()
 	}
 
 	psd := privatestate.NewPrivateStateData()
@@ -8951,28 +4717,6 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		data.AdminPassword = &SiteAdminPasswordModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["azure_cred"].(map[string]interface{}); ok && (isImport || data.AzureCred != nil) {
-		data.AzureCred = &SiteAzureCredModel{
-			Name: func() types.String {
-				if v, ok := blockData["name"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			Namespace: func() types.String {
-				if v, ok := blockData["namespace"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			Tenant: func() types.String {
-				if v, ok := blockData["tenant"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-		}
-	}
 	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.BlockAllServices = &SiteEmptyModel{}
@@ -9019,6 +4763,28 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["cloud_credentials"].(map[string]interface{}); ok && (isImport || data.CloudCredentials != nil) {
+		data.CloudCredentials = &SiteCloudCredentialsModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &SiteCoordinatesModel{
 			Latitude: func() types.Int64 {
@@ -9056,19 +4822,13 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		data.DefaultBlockedServices = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["gcp_labels"].(map[string]interface{}); ok && isImport && data.GCPLabels == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCPLabels = &SiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["ingress_egress_gw"].(map[string]interface{}); ok && (isImport || data.IngressEgressGw != nil) {
 		data.IngressEgressGw = &SiteIngressEgressGwModel{
-			AcceleratedNetworking: func() *SiteIngressEgressGwAcceleratedNetworkingModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
 			ActiveEnhancedFirewallPolicies: func() *SiteIngressEgressGwActiveEnhancedFirewallPoliciesModel {
 				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
 					// Normal Read: preserve existing state value
@@ -9101,43 +4861,6 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 					return &SiteIngressEgressGwActiveNetworkPoliciesModel{}
 				}
 				return nil
-			}(),
-			AzNodes: func() []SiteIngressEgressGwAzNodesModel {
-				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteIngressEgressGwAzNodesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteIngressEgressGwAzNodesModel{
-								AzureAz: func() types.String {
-									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								InsideSubnet: func() *SiteIngressEgressGwAzNodesInsideSubnetModel {
-									if _, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
-										return &SiteIngressEgressGwAzNodesInsideSubnetModel{}
-									}
-									return nil
-								}(),
-								OutsideSubnet: func() *SiteIngressEgressGwAzNodesOutsideSubnetModel {
-									if _, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
-										return &SiteIngressEgressGwAzNodesOutsideSubnetModel{}
-									}
-									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
 			}(),
 			DcClusterGroupInsideVn: func() *SiteIngressEgressGwDcClusterGroupInsideVnModel {
 				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.DcClusterGroupInsideVn != nil {
@@ -9211,6 +4934,25 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 				}
 				return nil
 			}(),
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			GlobalNetworkList: func() *SiteIngressEgressGwGlobalNetworkListModel {
 				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.GlobalNetworkList != nil {
 					// Normal Read: preserve existing state value
@@ -9222,14 +4964,14 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 				}
 				return nil
 			}(),
-			Hub: func() *SiteIngressEgressGwHubModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.Hub != nil {
+			InsideNetwork: func() *SiteIngressEgressGwInsideNetworkModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.InsideNetwork != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.Hub
+					return data.IngressEgressGw.InsideNetwork
 				}
 				// Import case: read from API
-				if _, ok := blockData["hub"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwHubModel{}
+				if _, ok := blockData["inside_network"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwInsideNetworkModel{}
 				}
 				return nil
 			}(),
@@ -9241,6 +4983,17 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 				// Import case: read from API
 				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
 					return &SiteIngressEgressGwInsideStaticRoutesModel{}
+				}
+				return nil
+			}(),
+			InsideSubnet: func() *SiteIngressEgressGwInsideSubnetModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.InsideSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.InsideSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_subnet"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwInsideSubnetModel{}
 				}
 				return nil
 			}(),
@@ -9316,15 +5069,20 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 				}
 				return nil
 			}(),
-			NotHub: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGw != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGw.NotHub
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			OutsideNetwork: func() *SiteIngressEgressGwOutsideNetworkModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.OutsideNetwork != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.OutsideNetwork
 				}
 				// Import case: read from API
-				if _, ok := blockData["not_hub"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
+				if _, ok := blockData["outside_network"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwOutsideNetworkModel{}
 				}
 				return nil
 			}(),
@@ -9336,6 +5094,17 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
 					return &SiteIngressEgressGwOutsideStaticRoutesModel{}
+				}
+				return nil
+			}(),
+			OutsideSubnet: func() *SiteIngressEgressGwOutsideSubnetModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.OutsideSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.OutsideSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_subnet"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwOutsideSubnetModel{}
 				}
 				return nil
 			}(),
@@ -9376,368 +5145,54 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["ingress_egress_gw_ar"].(map[string]interface{}); ok && (isImport || data.IngressEgressGwAr != nil) {
-		data.IngressEgressGwAr = &SiteIngressEgressGwArModel{
-			AcceleratedNetworking: func() *SiteIngressEgressGwArAcceleratedNetworkingModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			ActiveEnhancedFirewallPolicies: func() *SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveForwardProxyPolicies: func() *SiteIngressEgressGwArActiveForwardProxyPoliciesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveForwardProxyPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.ActiveForwardProxyPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArActiveForwardProxyPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveNetworkPolicies: func() *SiteIngressEgressGwArActiveNetworkPoliciesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveNetworkPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.ActiveNetworkPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArActiveNetworkPoliciesModel{}
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			DcClusterGroupInsideVn: func() *SiteIngressEgressGwArDcClusterGroupInsideVnModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.DcClusterGroupInsideVn != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.DcClusterGroupInsideVn
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["dc_cluster_group_inside_vn"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArDcClusterGroupInsideVnModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			DcClusterGroupOutsideVn: func() *SiteIngressEgressGwArDcClusterGroupOutsideVnModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.DcClusterGroupOutsideVn != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.DcClusterGroupOutsideVn
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["dc_cluster_group_outside_vn"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArDcClusterGroupOutsideVnModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			ForwardProxyAllowAll: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.ForwardProxyAllowAll
-				}
-				// Import case: read from API
-				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			GlobalNetworkList: func() *SiteIngressEgressGwArGlobalNetworkListModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.GlobalNetworkList != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.GlobalNetworkList
-				}
-				// Import case: read from API
-				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArGlobalNetworkListModel{}
-				}
-				return nil
-			}(),
-			Hub: func() *SiteIngressEgressGwArHubModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.Hub != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.Hub
-				}
-				// Import case: read from API
-				if _, ok := blockData["hub"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArHubModel{}
-				}
-				return nil
-			}(),
-			InsideStaticRoutes: func() *SiteIngressEgressGwArInsideStaticRoutesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.InsideStaticRoutes != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.InsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArInsideStaticRoutesModel{}
-				}
-				return nil
-			}(),
-			NoDcClusterGroup: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoDcClusterGroup
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoForwardProxy: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoForwardProxy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoGlobalNetwork: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoGlobalNetwork
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoInsideStaticRoutes: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoInsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_inside_static_routes"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoNetworkPolicy: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoNetworkPolicy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoOutsideStaticRoutes: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoOutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			Node: func() *SiteIngressEgressGwArNodeModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.Node != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.Node
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArNodeModel{
-						FaultDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						NodeNumber: func() types.Int64 {
-							if v, ok := nestedBlockData["node_number"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						UpdateDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["update_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			NotHub: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NotHub
-				}
-				// Import case: read from API
-				if _, ok := blockData["not_hub"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			OutsideStaticRoutes: func() *SiteIngressEgressGwArOutsideStaticRoutesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.OutsideStaticRoutes != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.OutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArOutsideStaticRoutesModel{}
-				}
-				return nil
-			}(),
-			PerformanceEnhancementMode: func() *SiteIngressEgressGwArPerformanceEnhancementModeModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.PerformanceEnhancementMode != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.PerformanceEnhancementMode
-				}
-				// Import case: read from API
-				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArPerformanceEnhancementModeModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPublicIP: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.SmConnectionPublicIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPvtIP: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.SmConnectionPvtIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-		}
-	}
 	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
 		data.IngressGw = &SiteIngressGwModel{
-			AcceleratedNetworking: func() *SiteIngressGwAcceleratedNetworkingModel {
-				if !isImport && data.IngressGw != nil && data.IngressGw.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGw.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressGwAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			AzNodes: func() []SiteIngressGwAzNodesModel {
-				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteIngressGwAzNodesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteIngressGwAzNodesModel{
-								AzureAz: func() types.String {
-									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								LocalSubnet: func() *SiteIngressGwAzNodesLocalSubnetModel {
-									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
-										return &SiteIngressGwAzNodesLocalSubnetModel{}
-									}
-									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			LocalNetwork: func() *SiteIngressGwLocalNetworkModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.LocalNetwork != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.LocalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["local_network"].(map[string]interface{}); ok {
+					return &SiteIngressGwLocalNetworkModel{}
+				}
+				return nil
+			}(),
+			LocalSubnet: func() *SiteIngressGwLocalSubnetModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.LocalSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.LocalSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["local_subnet"].(map[string]interface{}); ok {
+					return &SiteIngressGwLocalSubnetModel{}
+				}
+				return nil
+			}(),
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
 			}(),
 			PerformanceEnhancementMode: func() *SiteIngressGwPerformanceEnhancementModeModel {
 				if !isImport && data.IngressGw != nil && data.IngressGw.PerformanceEnhancementMode != nil {
@@ -9747,68 +5202,6 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
 					return &SiteIngressGwPerformanceEnhancementModeModel{}
-				}
-				return nil
-			}(),
-		}
-	}
-	if blockData, ok := apiResource.Spec["ingress_gw_ar"].(map[string]interface{}); ok && (isImport || data.IngressGwAr != nil) {
-		data.IngressGwAr = &SiteIngressGwArModel{
-			AcceleratedNetworking: func() *SiteIngressGwArAcceleratedNetworkingModel {
-				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGwAr.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressGwArAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			Node: func() *SiteIngressGwArNodeModel {
-				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.Node != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGwAr.Node
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
-					return &SiteIngressGwArNodeModel{
-						FaultDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						NodeNumber: func() types.Int64 {
-							if v, ok := nestedBlockData["node_number"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						UpdateDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["update_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			PerformanceEnhancementMode: func() *SiteIngressGwArPerformanceEnhancementModeModel {
-				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.PerformanceEnhancementMode != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGwAr.PerformanceEnhancementMode
-				}
-				// Import case: read from API
-				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &SiteIngressGwArPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -9846,11 +5239,6 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 		data.LogsStreamingDisabled = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["no_worker_nodes"].(map[string]interface{}); ok && isImport && data.NoWorkerNodes == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.NoWorkerNodes = &SiteEmptyModel{}
-	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.OfflineSurvivabilityMode = &SiteOfflineSurvivabilityModeModel{}
@@ -9878,6 +5266,16 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["private_connect_disabled"].(map[string]interface{}); ok && isImport && data.PrivateConnectDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectDisabled = &SiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_connectivity"].(map[string]interface{}); ok && isImport && data.PrivateConnectivity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectivity = &SitePrivateConnectivityModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
 		data.Sw = &SiteSwModel{
 			DefaultSwVersion: func() *SiteEmptyModel {
@@ -9900,29 +5298,8 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["tags"].(map[string]interface{}); ok && isImport && data.Tags == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.Tags = &SiteEmptyModel{}
-	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["vnet"].(map[string]interface{}); ok && isImport && data.VNET == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.VNET = &SiteVNETModel{}
-	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["voltstack_cluster"].(map[string]interface{}); ok && (isImport || data.VoltstackCluster != nil) {
 		data.VoltstackCluster = &SiteVoltstackClusterModel{
-			AcceleratedNetworking: func() *SiteVoltstackClusterAcceleratedNetworkingModel {
-				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackCluster.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
 			ActiveEnhancedFirewallPolicies: func() *SiteVoltstackClusterActiveEnhancedFirewallPoliciesModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
 					// Normal Read: preserve existing state value
@@ -9955,37 +5332,6 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 					return &SiteVoltstackClusterActiveNetworkPoliciesModel{}
 				}
 				return nil
-			}(),
-			AzNodes: func() []SiteVoltstackClusterAzNodesModel {
-				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteVoltstackClusterAzNodesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteVoltstackClusterAzNodesModel{
-								AzureAz: func() types.String {
-									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								LocalSubnet: func() *SiteVoltstackClusterAzNodesLocalSubnetModel {
-									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
-										return &SiteVoltstackClusterAzNodesLocalSubnetModel{}
-									}
-									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
 			}(),
 			DcClusterGroup: func() *SiteVoltstackClusterDcClusterGroupModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.DcClusterGroup != nil {
@@ -10040,6 +5386,25 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 					return &SiteEmptyModel{}
 				}
 				return nil
+			}(),
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 			GlobalNetworkList: func() *SiteVoltstackClusterGlobalNetworkListModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.GlobalNetworkList != nil {
@@ -10154,6 +5519,12 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 				}
 				return nil
 			}(),
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
 			OutsideStaticRoutes: func() *SiteVoltstackClusterOutsideStaticRoutesModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.OutsideStaticRoutes != nil {
 					// Normal Read: preserve existing state value
@@ -10162,6 +5533,28 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
 					return &SiteVoltstackClusterOutsideStaticRoutesModel{}
+				}
+				return nil
+			}(),
+			SiteLocalNetwork: func() *SiteVoltstackClusterSiteLocalNetworkModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.SiteLocalNetwork != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.SiteLocalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["site_local_network"].(map[string]interface{}); ok {
+					return &SiteVoltstackClusterSiteLocalNetworkModel{}
+				}
+				return nil
+			}(),
+			SiteLocalSubnet: func() *SiteVoltstackClusterSiteLocalSubnetModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.SiteLocalSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.SiteLocalSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["site_local_subnet"].(map[string]interface{}); ok {
+					return &SiteVoltstackClusterSiteLocalSubnetModel{}
 				}
 				return nil
 			}(),
@@ -10202,347 +5595,30 @@ func (r *SiteResource) Read(ctx context.Context, req resource.ReadRequest, resp 
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["voltstack_cluster_ar"].(map[string]interface{}); ok && (isImport || data.VoltstackClusterAr != nil) {
-		data.VoltstackClusterAr = &SiteVoltstackClusterArModel{
-			AcceleratedNetworking: func() *SiteVoltstackClusterArAcceleratedNetworkingModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			ActiveEnhancedFirewallPolicies: func() *SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveForwardProxyPolicies: func() *SiteVoltstackClusterArActiveForwardProxyPoliciesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveForwardProxyPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.ActiveForwardProxyPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArActiveForwardProxyPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveNetworkPolicies: func() *SiteVoltstackClusterArActiveNetworkPoliciesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveNetworkPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.ActiveNetworkPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArActiveNetworkPoliciesModel{}
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			DcClusterGroup: func() *SiteVoltstackClusterArDcClusterGroupModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.DcClusterGroup != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.DcClusterGroup
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["dc_cluster_group"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArDcClusterGroupModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			DefaultStorage: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.DefaultStorage
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_storage"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			ForwardProxyAllowAll: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.ForwardProxyAllowAll
-				}
-				// Import case: read from API
-				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			GlobalNetworkList: func() *SiteVoltstackClusterArGlobalNetworkListModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.GlobalNetworkList != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.GlobalNetworkList
-				}
-				// Import case: read from API
-				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArGlobalNetworkListModel{}
-				}
-				return nil
-			}(),
-			K8SCluster: func() *SiteVoltstackClusterArK8SClusterModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.K8SCluster != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.K8SCluster
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["k8s_cluster"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArK8SClusterModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			NoDcClusterGroup: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoDcClusterGroup
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoForwardProxy: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoForwardProxy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoGlobalNetwork: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoGlobalNetwork
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoK8SCluster: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoK8SCluster
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_k8s_cluster"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoNetworkPolicy: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoNetworkPolicy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoOutsideStaticRoutes: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoOutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			Node: func() *SiteVoltstackClusterArNodeModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.Node != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.Node
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArNodeModel{
-						FaultDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						NodeNumber: func() types.Int64 {
-							if v, ok := nestedBlockData["node_number"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						UpdateDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["update_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			OutsideStaticRoutes: func() *SiteVoltstackClusterArOutsideStaticRoutesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.OutsideStaticRoutes != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.OutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArOutsideStaticRoutesModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPublicIP: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.SmConnectionPublicIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPvtIP: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.SmConnectionPvtIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			StorageClassList: func() *SiteVoltstackClusterArStorageClassListModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.StorageClassList != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.StorageClassList
-				}
-				// Import case: read from API
-				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArStorageClassListModel{}
-				}
-				return nil
-			}(),
-		}
-	}
 	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
 	} else {
 		data.Address = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["alternate_region"].(string); ok && v != "" {
-		data.AlternateRegion = types.StringValue(v)
-	} else {
-		data.AlternateRegion = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["azure_region"].(string); ok && v != "" {
-		data.AzureRegion = types.StringValue(v)
-	} else {
-		data.AzureRegion = types.StringNull()
 	}
 	if v, ok := apiResource.Spec["disk_size"].(float64); ok {
 		data.DiskSize = types.Int64Value(int64(v))
 	} else {
 		data.DiskSize = types.Int64Null()
 	}
-	if v, ok := apiResource.Spec["machine_type"].(string); ok && v != "" {
-		data.MachineType = types.StringValue(v)
+	if v, ok := apiResource.Spec["gcp_region"].(string); ok && v != "" {
+		data.GCPRegion = types.StringValue(v)
 	} else {
-		data.MachineType = types.StringNull()
+		data.GCPRegion = types.StringNull()
 	}
-	if v, ok := apiResource.Spec["nodes_per_az"].(float64); ok {
-		data.NodesPerAz = types.Int64Value(int64(v))
+	if v, ok := apiResource.Spec["instance_type"].(string); ok && v != "" {
+		data.InstanceType = types.StringValue(v)
 	} else {
-		data.NodesPerAz = types.Int64Null()
-	}
-	if v, ok := apiResource.Spec["resource_group"].(string); ok && v != "" {
-		data.ResourceGroup = types.StringValue(v)
-	} else {
-		data.ResourceGroup = types.StringNull()
+		data.InstanceType = types.StringNull()
 	}
 	if v, ok := apiResource.Spec["ssh_key"].(string); ok && v != "" {
 		data.SSHKey = types.StringValue(v)
 	} else {
 		data.SSHKey = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["total_nodes"].(float64); ok {
-		data.TotalNodes = types.Int64Value(int64(v))
-	} else {
-		data.TotalNodes = types.Int64Null()
 	}
 
 	// Preserve or set the managed marker for future Read operations
@@ -10631,19 +5707,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		apiResource.Spec["admin_password"] = admin_passwordMap
 	}
-	if data.AzureCred != nil {
-		azure_credMap := make(map[string]interface{})
-		if !data.AzureCred.Name.IsNull() && !data.AzureCred.Name.IsUnknown() {
-			azure_credMap["name"] = data.AzureCred.Name.ValueString()
-		}
-		if !data.AzureCred.Namespace.IsNull() && !data.AzureCred.Namespace.IsUnknown() {
-			azure_credMap["namespace"] = data.AzureCred.Namespace.ValueString()
-		}
-		if !data.AzureCred.Tenant.IsNull() && !data.AzureCred.Tenant.IsUnknown() {
-			azure_credMap["tenant"] = data.AzureCred.Tenant.ValueString()
-		}
-		apiResource.Spec["azure_cred"] = azure_credMap
-	}
 	if data.BlockAllServices != nil {
 		block_all_servicesMap := make(map[string]interface{})
 		apiResource.Spec["block_all_services"] = block_all_servicesMap
@@ -10672,6 +5735,19 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		apiResource.Spec["blocked_services"] = blocked_servicesMap
 	}
+	if data.CloudCredentials != nil {
+		cloud_credentialsMap := make(map[string]interface{})
+		if !data.CloudCredentials.Name.IsNull() && !data.CloudCredentials.Name.IsUnknown() {
+			cloud_credentialsMap["name"] = data.CloudCredentials.Name.ValueString()
+		}
+		if !data.CloudCredentials.Namespace.IsNull() && !data.CloudCredentials.Namespace.IsUnknown() {
+			cloud_credentialsMap["namespace"] = data.CloudCredentials.Namespace.ValueString()
+		}
+		if !data.CloudCredentials.Tenant.IsNull() && !data.CloudCredentials.Tenant.IsUnknown() {
+			cloud_credentialsMap["tenant"] = data.CloudCredentials.Tenant.ValueString()
+		}
+		apiResource.Spec["cloud_credentials"] = cloud_credentialsMap
+	}
 	if data.Coordinates != nil {
 		coordinatesMap := make(map[string]interface{})
 		if !data.Coordinates.Latitude.IsNull() && !data.Coordinates.Latitude.IsUnknown() {
@@ -10696,12 +5772,12 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		default_blocked_servicesMap := make(map[string]interface{})
 		apiResource.Spec["default_blocked_services"] = default_blocked_servicesMap
 	}
+	if data.GCPLabels != nil {
+		gcp_labelsMap := make(map[string]interface{})
+		apiResource.Spec["gcp_labels"] = gcp_labelsMap
+	}
 	if data.IngressEgressGw != nil {
 		ingress_egress_gwMap := make(map[string]interface{})
-		if data.IngressEgressGw.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			ingress_egress_gwMap["accelerated_networking"] = accelerated_networkingNestedMap
-		}
 		if data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
 			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
@@ -10713,28 +5789,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		if data.IngressEgressGw.ActiveNetworkPolicies != nil {
 			active_network_policiesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["active_network_policies"] = active_network_policiesNestedMap
-		}
-		if len(data.IngressEgressGw.AzNodes) > 0 {
-			var az_nodesList []map[string]interface{}
-			for _, listItem := range data.IngressEgressGw.AzNodes {
-				listItemMap := make(map[string]interface{})
-				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
-					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
-				}
-				if listItem.InsideSubnet != nil {
-					inside_subnetDeepMap := make(map[string]interface{})
-					listItemMap["inside_subnet"] = inside_subnetDeepMap
-				}
-				if listItem.OutsideSubnet != nil {
-					outside_subnetDeepMap := make(map[string]interface{})
-					listItemMap["outside_subnet"] = outside_subnetDeepMap
-				}
-				az_nodesList = append(az_nodesList, listItemMap)
-			}
-			ingress_egress_gwMap["az_nodes"] = az_nodesList
-		}
-		if !data.IngressEgressGw.AzureCertifiedHw.IsNull() && !data.IngressEgressGw.AzureCertifiedHw.IsUnknown() {
-			ingress_egress_gwMap["azure_certified_hw"] = data.IngressEgressGw.AzureCertifiedHw.ValueString()
 		}
 		if data.IngressEgressGw.DcClusterGroupInsideVn != nil {
 			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
@@ -10765,17 +5819,31 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		if data.IngressEgressGw.ForwardProxyAllowAll != nil {
 			ingress_egress_gwMap["forward_proxy_allow_all"] = map[string]interface{}{}
 		}
+		if !data.IngressEgressGw.GCPCertifiedHw.IsNull() && !data.IngressEgressGw.GCPCertifiedHw.IsUnknown() {
+			ingress_egress_gwMap["gcp_certified_hw"] = data.IngressEgressGw.GCPCertifiedHw.ValueString()
+		}
+		if !data.IngressEgressGw.GCPZoneNames.IsNull() && !data.IngressEgressGw.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.IngressEgressGw.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				ingress_egress_gwMap["gcp_zone_names"] = gcp_zone_namesItems
+			}
+		}
 		if data.IngressEgressGw.GlobalNetworkList != nil {
 			global_network_listNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["global_network_list"] = global_network_listNestedMap
 		}
-		if data.IngressEgressGw.Hub != nil {
-			hubNestedMap := make(map[string]interface{})
-			ingress_egress_gwMap["hub"] = hubNestedMap
+		if data.IngressEgressGw.InsideNetwork != nil {
+			inside_networkNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_network"] = inside_networkNestedMap
 		}
 		if data.IngressEgressGw.InsideStaticRoutes != nil {
 			inside_static_routesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["inside_static_routes"] = inside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.InsideSubnet != nil {
+			inside_subnetNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["inside_subnet"] = inside_subnetNestedMap
 		}
 		if data.IngressEgressGw.NoDcClusterGroup != nil {
 			ingress_egress_gwMap["no_dc_cluster_group"] = map[string]interface{}{}
@@ -10795,12 +5863,20 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		if data.IngressEgressGw.NoOutsideStaticRoutes != nil {
 			ingress_egress_gwMap["no_outside_static_routes"] = map[string]interface{}{}
 		}
-		if data.IngressEgressGw.NotHub != nil {
-			ingress_egress_gwMap["not_hub"] = map[string]interface{}{}
+		if !data.IngressEgressGw.NodeNumber.IsNull() && !data.IngressEgressGw.NodeNumber.IsUnknown() {
+			ingress_egress_gwMap["node_number"] = data.IngressEgressGw.NodeNumber.ValueInt64()
+		}
+		if data.IngressEgressGw.OutsideNetwork != nil {
+			outside_networkNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_network"] = outside_networkNestedMap
 		}
 		if data.IngressEgressGw.OutsideStaticRoutes != nil {
 			outside_static_routesNestedMap := make(map[string]interface{})
 			ingress_egress_gwMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.IngressEgressGw.OutsideSubnet != nil {
+			outside_subnetNestedMap := make(map[string]interface{})
+			ingress_egress_gwMap["outside_subnet"] = outside_subnetNestedMap
 		}
 		if data.IngressEgressGw.PerformanceEnhancementMode != nil {
 			performance_enhancement_modeNestedMap := make(map[string]interface{})
@@ -10814,175 +5890,34 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		apiResource.Spec["ingress_egress_gw"] = ingress_egress_gwMap
 	}
-	if data.IngressEgressGwAr != nil {
-		ingress_egress_gw_arMap := make(map[string]interface{})
-		if data.IngressEgressGwAr.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["accelerated_networking"] = accelerated_networkingNestedMap
-		}
-		if data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies != nil {
-			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
-		}
-		if data.IngressEgressGwAr.ActiveForwardProxyPolicies != nil {
-			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
-		}
-		if data.IngressEgressGwAr.ActiveNetworkPolicies != nil {
-			active_network_policiesNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["active_network_policies"] = active_network_policiesNestedMap
-		}
-		if !data.IngressEgressGwAr.AzureCertifiedHw.IsNull() && !data.IngressEgressGwAr.AzureCertifiedHw.IsUnknown() {
-			ingress_egress_gw_arMap["azure_certified_hw"] = data.IngressEgressGwAr.AzureCertifiedHw.ValueString()
-		}
-		if data.IngressEgressGwAr.DcClusterGroupInsideVn != nil {
-			dc_cluster_group_inside_vnNestedMap := make(map[string]interface{})
-			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.IsUnknown() {
-				dc_cluster_group_inside_vnNestedMap["name"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Name.ValueString()
-			}
-			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.IsUnknown() {
-				dc_cluster_group_inside_vnNestedMap["namespace"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Namespace.ValueString()
-			}
-			if !data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.IsNull() && !data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.IsUnknown() {
-				dc_cluster_group_inside_vnNestedMap["tenant"] = data.IngressEgressGwAr.DcClusterGroupInsideVn.Tenant.ValueString()
-			}
-			ingress_egress_gw_arMap["dc_cluster_group_inside_vn"] = dc_cluster_group_inside_vnNestedMap
-		}
-		if data.IngressEgressGwAr.DcClusterGroupOutsideVn != nil {
-			dc_cluster_group_outside_vnNestedMap := make(map[string]interface{})
-			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.IsUnknown() {
-				dc_cluster_group_outside_vnNestedMap["name"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Name.ValueString()
-			}
-			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.IsUnknown() {
-				dc_cluster_group_outside_vnNestedMap["namespace"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Namespace.ValueString()
-			}
-			if !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.IsNull() && !data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.IsUnknown() {
-				dc_cluster_group_outside_vnNestedMap["tenant"] = data.IngressEgressGwAr.DcClusterGroupOutsideVn.Tenant.ValueString()
-			}
-			ingress_egress_gw_arMap["dc_cluster_group_outside_vn"] = dc_cluster_group_outside_vnNestedMap
-		}
-		if data.IngressEgressGwAr.ForwardProxyAllowAll != nil {
-			ingress_egress_gw_arMap["forward_proxy_allow_all"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.GlobalNetworkList != nil {
-			global_network_listNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["global_network_list"] = global_network_listNestedMap
-		}
-		if data.IngressEgressGwAr.Hub != nil {
-			hubNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["hub"] = hubNestedMap
-		}
-		if data.IngressEgressGwAr.InsideStaticRoutes != nil {
-			inside_static_routesNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["inside_static_routes"] = inside_static_routesNestedMap
-		}
-		if data.IngressEgressGwAr.NoDcClusterGroup != nil {
-			ingress_egress_gw_arMap["no_dc_cluster_group"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.NoForwardProxy != nil {
-			ingress_egress_gw_arMap["no_forward_proxy"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.NoGlobalNetwork != nil {
-			ingress_egress_gw_arMap["no_global_network"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.NoInsideStaticRoutes != nil {
-			ingress_egress_gw_arMap["no_inside_static_routes"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.NoNetworkPolicy != nil {
-			ingress_egress_gw_arMap["no_network_policy"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.NoOutsideStaticRoutes != nil {
-			ingress_egress_gw_arMap["no_outside_static_routes"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.Node != nil {
-			nodeNestedMap := make(map[string]interface{})
-			if !data.IngressEgressGwAr.Node.FaultDomain.IsNull() && !data.IngressEgressGwAr.Node.FaultDomain.IsUnknown() {
-				nodeNestedMap["fault_domain"] = data.IngressEgressGwAr.Node.FaultDomain.ValueInt64()
-			}
-			if !data.IngressEgressGwAr.Node.NodeNumber.IsNull() && !data.IngressEgressGwAr.Node.NodeNumber.IsUnknown() {
-				nodeNestedMap["node_number"] = data.IngressEgressGwAr.Node.NodeNumber.ValueInt64()
-			}
-			if !data.IngressEgressGwAr.Node.UpdateDomain.IsNull() && !data.IngressEgressGwAr.Node.UpdateDomain.IsUnknown() {
-				nodeNestedMap["update_domain"] = data.IngressEgressGwAr.Node.UpdateDomain.ValueInt64()
-			}
-			ingress_egress_gw_arMap["node"] = nodeNestedMap
-		}
-		if data.IngressEgressGwAr.NotHub != nil {
-			ingress_egress_gw_arMap["not_hub"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.OutsideStaticRoutes != nil {
-			outside_static_routesNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["outside_static_routes"] = outside_static_routesNestedMap
-		}
-		if data.IngressEgressGwAr.PerformanceEnhancementMode != nil {
-			performance_enhancement_modeNestedMap := make(map[string]interface{})
-			ingress_egress_gw_arMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
-		}
-		if data.IngressEgressGwAr.SmConnectionPublicIP != nil {
-			ingress_egress_gw_arMap["sm_connection_public_ip"] = map[string]interface{}{}
-		}
-		if data.IngressEgressGwAr.SmConnectionPvtIP != nil {
-			ingress_egress_gw_arMap["sm_connection_pvt_ip"] = map[string]interface{}{}
-		}
-		apiResource.Spec["ingress_egress_gw_ar"] = ingress_egress_gw_arMap
-	}
 	if data.IngressGw != nil {
 		ingress_gwMap := make(map[string]interface{})
-		if data.IngressGw.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			ingress_gwMap["accelerated_networking"] = accelerated_networkingNestedMap
+		if !data.IngressGw.GCPCertifiedHw.IsNull() && !data.IngressGw.GCPCertifiedHw.IsUnknown() {
+			ingress_gwMap["gcp_certified_hw"] = data.IngressGw.GCPCertifiedHw.ValueString()
 		}
-		if len(data.IngressGw.AzNodes) > 0 {
-			var az_nodesList []map[string]interface{}
-			for _, listItem := range data.IngressGw.AzNodes {
-				listItemMap := make(map[string]interface{})
-				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
-					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
-				}
-				if listItem.LocalSubnet != nil {
-					local_subnetDeepMap := make(map[string]interface{})
-					listItemMap["local_subnet"] = local_subnetDeepMap
-				}
-				az_nodesList = append(az_nodesList, listItemMap)
+		if !data.IngressGw.GCPZoneNames.IsNull() && !data.IngressGw.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.IngressGw.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				ingress_gwMap["gcp_zone_names"] = gcp_zone_namesItems
 			}
-			ingress_gwMap["az_nodes"] = az_nodesList
 		}
-		if !data.IngressGw.AzureCertifiedHw.IsNull() && !data.IngressGw.AzureCertifiedHw.IsUnknown() {
-			ingress_gwMap["azure_certified_hw"] = data.IngressGw.AzureCertifiedHw.ValueString()
+		if data.IngressGw.LocalNetwork != nil {
+			local_networkNestedMap := make(map[string]interface{})
+			ingress_gwMap["local_network"] = local_networkNestedMap
+		}
+		if data.IngressGw.LocalSubnet != nil {
+			local_subnetNestedMap := make(map[string]interface{})
+			ingress_gwMap["local_subnet"] = local_subnetNestedMap
+		}
+		if !data.IngressGw.NodeNumber.IsNull() && !data.IngressGw.NodeNumber.IsUnknown() {
+			ingress_gwMap["node_number"] = data.IngressGw.NodeNumber.ValueInt64()
 		}
 		if data.IngressGw.PerformanceEnhancementMode != nil {
 			performance_enhancement_modeNestedMap := make(map[string]interface{})
 			ingress_gwMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
 		}
 		apiResource.Spec["ingress_gw"] = ingress_gwMap
-	}
-	if data.IngressGwAr != nil {
-		ingress_gw_arMap := make(map[string]interface{})
-		if data.IngressGwAr.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			ingress_gw_arMap["accelerated_networking"] = accelerated_networkingNestedMap
-		}
-		if !data.IngressGwAr.AzureCertifiedHw.IsNull() && !data.IngressGwAr.AzureCertifiedHw.IsUnknown() {
-			ingress_gw_arMap["azure_certified_hw"] = data.IngressGwAr.AzureCertifiedHw.ValueString()
-		}
-		if data.IngressGwAr.Node != nil {
-			nodeNestedMap := make(map[string]interface{})
-			if !data.IngressGwAr.Node.FaultDomain.IsNull() && !data.IngressGwAr.Node.FaultDomain.IsUnknown() {
-				nodeNestedMap["fault_domain"] = data.IngressGwAr.Node.FaultDomain.ValueInt64()
-			}
-			if !data.IngressGwAr.Node.NodeNumber.IsNull() && !data.IngressGwAr.Node.NodeNumber.IsUnknown() {
-				nodeNestedMap["node_number"] = data.IngressGwAr.Node.NodeNumber.ValueInt64()
-			}
-			if !data.IngressGwAr.Node.UpdateDomain.IsNull() && !data.IngressGwAr.Node.UpdateDomain.IsUnknown() {
-				nodeNestedMap["update_domain"] = data.IngressGwAr.Node.UpdateDomain.ValueInt64()
-			}
-			ingress_gw_arMap["node"] = nodeNestedMap
-		}
-		if data.IngressGwAr.PerformanceEnhancementMode != nil {
-			performance_enhancement_modeNestedMap := make(map[string]interface{})
-			ingress_gw_arMap["performance_enhancement_mode"] = performance_enhancement_modeNestedMap
-		}
-		apiResource.Spec["ingress_gw_ar"] = ingress_gw_arMap
 	}
 	if data.KubernetesUpgradeDrain != nil {
 		kubernetes_upgrade_drainMap := make(map[string]interface{})
@@ -11018,10 +5953,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		logs_streaming_disabledMap := make(map[string]interface{})
 		apiResource.Spec["logs_streaming_disabled"] = logs_streaming_disabledMap
 	}
-	if data.NoWorkerNodes != nil {
-		no_worker_nodesMap := make(map[string]interface{})
-		apiResource.Spec["no_worker_nodes"] = no_worker_nodesMap
-	}
 	if data.OfflineSurvivabilityMode != nil {
 		offline_survivability_modeMap := make(map[string]interface{})
 		if data.OfflineSurvivabilityMode.EnableOfflineSurvivabilityMode != nil {
@@ -11042,6 +5973,33 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		apiResource.Spec["os"] = osMap
 	}
+	if data.PrivateConnectDisabled != nil {
+		private_connect_disabledMap := make(map[string]interface{})
+		apiResource.Spec["private_connect_disabled"] = private_connect_disabledMap
+	}
+	if data.PrivateConnectivity != nil {
+		private_connectivityMap := make(map[string]interface{})
+		if data.PrivateConnectivity.CloudLink != nil {
+			cloud_linkNestedMap := make(map[string]interface{})
+			if !data.PrivateConnectivity.CloudLink.Name.IsNull() && !data.PrivateConnectivity.CloudLink.Name.IsUnknown() {
+				cloud_linkNestedMap["name"] = data.PrivateConnectivity.CloudLink.Name.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Namespace.IsNull() && !data.PrivateConnectivity.CloudLink.Namespace.IsUnknown() {
+				cloud_linkNestedMap["namespace"] = data.PrivateConnectivity.CloudLink.Namespace.ValueString()
+			}
+			if !data.PrivateConnectivity.CloudLink.Tenant.IsNull() && !data.PrivateConnectivity.CloudLink.Tenant.IsUnknown() {
+				cloud_linkNestedMap["tenant"] = data.PrivateConnectivity.CloudLink.Tenant.ValueString()
+			}
+			private_connectivityMap["cloud_link"] = cloud_linkNestedMap
+		}
+		if data.PrivateConnectivity.Inside != nil {
+			private_connectivityMap["inside"] = map[string]interface{}{}
+		}
+		if data.PrivateConnectivity.Outside != nil {
+			private_connectivityMap["outside"] = map[string]interface{}{}
+		}
+		apiResource.Spec["private_connectivity"] = private_connectivityMap
+	}
 	if data.Sw != nil {
 		swMap := make(map[string]interface{})
 		if data.Sw.DefaultSwVersion != nil {
@@ -11052,40 +6010,8 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		apiResource.Spec["sw"] = swMap
 	}
-	if data.Tags != nil {
-		tagsMap := make(map[string]interface{})
-		apiResource.Spec["tags"] = tagsMap
-	}
-	if data.VNET != nil {
-		vnetMap := make(map[string]interface{})
-		if data.VNET.ExistingVNET != nil {
-			existing_vnetNestedMap := make(map[string]interface{})
-			if !data.VNET.ExistingVNET.ResourceGroup.IsNull() && !data.VNET.ExistingVNET.ResourceGroup.IsUnknown() {
-				existing_vnetNestedMap["resource_group"] = data.VNET.ExistingVNET.ResourceGroup.ValueString()
-			}
-			if !data.VNET.ExistingVNET.VNETName.IsNull() && !data.VNET.ExistingVNET.VNETName.IsUnknown() {
-				existing_vnetNestedMap["vnet_name"] = data.VNET.ExistingVNET.VNETName.ValueString()
-			}
-			vnetMap["existing_vnet"] = existing_vnetNestedMap
-		}
-		if data.VNET.NewVNET != nil {
-			new_vnetNestedMap := make(map[string]interface{})
-			if !data.VNET.NewVNET.Name.IsNull() && !data.VNET.NewVNET.Name.IsUnknown() {
-				new_vnetNestedMap["name"] = data.VNET.NewVNET.Name.ValueString()
-			}
-			if !data.VNET.NewVNET.PrimaryIpv4.IsNull() && !data.VNET.NewVNET.PrimaryIpv4.IsUnknown() {
-				new_vnetNestedMap["primary_ipv4"] = data.VNET.NewVNET.PrimaryIpv4.ValueString()
-			}
-			vnetMap["new_vnet"] = new_vnetNestedMap
-		}
-		apiResource.Spec["vnet"] = vnetMap
-	}
 	if data.VoltstackCluster != nil {
 		voltstack_clusterMap := make(map[string]interface{})
-		if data.VoltstackCluster.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			voltstack_clusterMap["accelerated_networking"] = accelerated_networkingNestedMap
-		}
 		if data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
 			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
@@ -11097,24 +6023,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		if data.VoltstackCluster.ActiveNetworkPolicies != nil {
 			active_network_policiesNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["active_network_policies"] = active_network_policiesNestedMap
-		}
-		if len(data.VoltstackCluster.AzNodes) > 0 {
-			var az_nodesList []map[string]interface{}
-			for _, listItem := range data.VoltstackCluster.AzNodes {
-				listItemMap := make(map[string]interface{})
-				if !listItem.AzureAz.IsNull() && !listItem.AzureAz.IsUnknown() {
-					listItemMap["azure_az"] = listItem.AzureAz.ValueString()
-				}
-				if listItem.LocalSubnet != nil {
-					local_subnetDeepMap := make(map[string]interface{})
-					listItemMap["local_subnet"] = local_subnetDeepMap
-				}
-				az_nodesList = append(az_nodesList, listItemMap)
-			}
-			voltstack_clusterMap["az_nodes"] = az_nodesList
-		}
-		if !data.VoltstackCluster.AzureCertifiedHw.IsNull() && !data.VoltstackCluster.AzureCertifiedHw.IsUnknown() {
-			voltstack_clusterMap["azure_certified_hw"] = data.VoltstackCluster.AzureCertifiedHw.ValueString()
 		}
 		if data.VoltstackCluster.DcClusterGroup != nil {
 			dc_cluster_groupNestedMap := make(map[string]interface{})
@@ -11134,6 +6042,16 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		if data.VoltstackCluster.ForwardProxyAllowAll != nil {
 			voltstack_clusterMap["forward_proxy_allow_all"] = map[string]interface{}{}
+		}
+		if !data.VoltstackCluster.GCPCertifiedHw.IsNull() && !data.VoltstackCluster.GCPCertifiedHw.IsUnknown() {
+			voltstack_clusterMap["gcp_certified_hw"] = data.VoltstackCluster.GCPCertifiedHw.ValueString()
+		}
+		if !data.VoltstackCluster.GCPZoneNames.IsNull() && !data.VoltstackCluster.GCPZoneNames.IsUnknown() {
+			var gcp_zone_namesItems []string
+			diags := data.VoltstackCluster.GCPZoneNames.ElementsAs(ctx, &gcp_zone_namesItems, false)
+			if !diags.HasError() {
+				voltstack_clusterMap["gcp_zone_names"] = gcp_zone_namesItems
+			}
 		}
 		if data.VoltstackCluster.GlobalNetworkList != nil {
 			global_network_listNestedMap := make(map[string]interface{})
@@ -11170,9 +6088,20 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		if data.VoltstackCluster.NoOutsideStaticRoutes != nil {
 			voltstack_clusterMap["no_outside_static_routes"] = map[string]interface{}{}
 		}
+		if !data.VoltstackCluster.NodeNumber.IsNull() && !data.VoltstackCluster.NodeNumber.IsUnknown() {
+			voltstack_clusterMap["node_number"] = data.VoltstackCluster.NodeNumber.ValueInt64()
+		}
 		if data.VoltstackCluster.OutsideStaticRoutes != nil {
 			outside_static_routesNestedMap := make(map[string]interface{})
 			voltstack_clusterMap["outside_static_routes"] = outside_static_routesNestedMap
+		}
+		if data.VoltstackCluster.SiteLocalNetwork != nil {
+			site_local_networkNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["site_local_network"] = site_local_networkNestedMap
+		}
+		if data.VoltstackCluster.SiteLocalSubnet != nil {
+			site_local_subnetNestedMap := make(map[string]interface{})
+			voltstack_clusterMap["site_local_subnet"] = site_local_subnetNestedMap
 		}
 		if data.VoltstackCluster.SmConnectionPublicIP != nil {
 			voltstack_clusterMap["sm_connection_public_ip"] = map[string]interface{}{}
@@ -11186,136 +6115,20 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		}
 		apiResource.Spec["voltstack_cluster"] = voltstack_clusterMap
 	}
-	if data.VoltstackClusterAr != nil {
-		voltstack_cluster_arMap := make(map[string]interface{})
-		if data.VoltstackClusterAr.AcceleratedNetworking != nil {
-			accelerated_networkingNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["accelerated_networking"] = accelerated_networkingNestedMap
-		}
-		if data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies != nil {
-			active_enhanced_firewall_policiesNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["active_enhanced_firewall_policies"] = active_enhanced_firewall_policiesNestedMap
-		}
-		if data.VoltstackClusterAr.ActiveForwardProxyPolicies != nil {
-			active_forward_proxy_policiesNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["active_forward_proxy_policies"] = active_forward_proxy_policiesNestedMap
-		}
-		if data.VoltstackClusterAr.ActiveNetworkPolicies != nil {
-			active_network_policiesNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["active_network_policies"] = active_network_policiesNestedMap
-		}
-		if !data.VoltstackClusterAr.AzureCertifiedHw.IsNull() && !data.VoltstackClusterAr.AzureCertifiedHw.IsUnknown() {
-			voltstack_cluster_arMap["azure_certified_hw"] = data.VoltstackClusterAr.AzureCertifiedHw.ValueString()
-		}
-		if data.VoltstackClusterAr.DcClusterGroup != nil {
-			dc_cluster_groupNestedMap := make(map[string]interface{})
-			if !data.VoltstackClusterAr.DcClusterGroup.Name.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Name.IsUnknown() {
-				dc_cluster_groupNestedMap["name"] = data.VoltstackClusterAr.DcClusterGroup.Name.ValueString()
-			}
-			if !data.VoltstackClusterAr.DcClusterGroup.Namespace.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Namespace.IsUnknown() {
-				dc_cluster_groupNestedMap["namespace"] = data.VoltstackClusterAr.DcClusterGroup.Namespace.ValueString()
-			}
-			if !data.VoltstackClusterAr.DcClusterGroup.Tenant.IsNull() && !data.VoltstackClusterAr.DcClusterGroup.Tenant.IsUnknown() {
-				dc_cluster_groupNestedMap["tenant"] = data.VoltstackClusterAr.DcClusterGroup.Tenant.ValueString()
-			}
-			voltstack_cluster_arMap["dc_cluster_group"] = dc_cluster_groupNestedMap
-		}
-		if data.VoltstackClusterAr.DefaultStorage != nil {
-			voltstack_cluster_arMap["default_storage"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.ForwardProxyAllowAll != nil {
-			voltstack_cluster_arMap["forward_proxy_allow_all"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.GlobalNetworkList != nil {
-			global_network_listNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["global_network_list"] = global_network_listNestedMap
-		}
-		if data.VoltstackClusterAr.K8SCluster != nil {
-			k8s_clusterNestedMap := make(map[string]interface{})
-			if !data.VoltstackClusterAr.K8SCluster.Name.IsNull() && !data.VoltstackClusterAr.K8SCluster.Name.IsUnknown() {
-				k8s_clusterNestedMap["name"] = data.VoltstackClusterAr.K8SCluster.Name.ValueString()
-			}
-			if !data.VoltstackClusterAr.K8SCluster.Namespace.IsNull() && !data.VoltstackClusterAr.K8SCluster.Namespace.IsUnknown() {
-				k8s_clusterNestedMap["namespace"] = data.VoltstackClusterAr.K8SCluster.Namespace.ValueString()
-			}
-			if !data.VoltstackClusterAr.K8SCluster.Tenant.IsNull() && !data.VoltstackClusterAr.K8SCluster.Tenant.IsUnknown() {
-				k8s_clusterNestedMap["tenant"] = data.VoltstackClusterAr.K8SCluster.Tenant.ValueString()
-			}
-			voltstack_cluster_arMap["k8s_cluster"] = k8s_clusterNestedMap
-		}
-		if data.VoltstackClusterAr.NoDcClusterGroup != nil {
-			voltstack_cluster_arMap["no_dc_cluster_group"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.NoForwardProxy != nil {
-			voltstack_cluster_arMap["no_forward_proxy"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.NoGlobalNetwork != nil {
-			voltstack_cluster_arMap["no_global_network"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.NoK8SCluster != nil {
-			voltstack_cluster_arMap["no_k8s_cluster"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.NoNetworkPolicy != nil {
-			voltstack_cluster_arMap["no_network_policy"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.NoOutsideStaticRoutes != nil {
-			voltstack_cluster_arMap["no_outside_static_routes"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.Node != nil {
-			nodeNestedMap := make(map[string]interface{})
-			if !data.VoltstackClusterAr.Node.FaultDomain.IsNull() && !data.VoltstackClusterAr.Node.FaultDomain.IsUnknown() {
-				nodeNestedMap["fault_domain"] = data.VoltstackClusterAr.Node.FaultDomain.ValueInt64()
-			}
-			if !data.VoltstackClusterAr.Node.NodeNumber.IsNull() && !data.VoltstackClusterAr.Node.NodeNumber.IsUnknown() {
-				nodeNestedMap["node_number"] = data.VoltstackClusterAr.Node.NodeNumber.ValueInt64()
-			}
-			if !data.VoltstackClusterAr.Node.UpdateDomain.IsNull() && !data.VoltstackClusterAr.Node.UpdateDomain.IsUnknown() {
-				nodeNestedMap["update_domain"] = data.VoltstackClusterAr.Node.UpdateDomain.ValueInt64()
-			}
-			voltstack_cluster_arMap["node"] = nodeNestedMap
-		}
-		if data.VoltstackClusterAr.OutsideStaticRoutes != nil {
-			outside_static_routesNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["outside_static_routes"] = outside_static_routesNestedMap
-		}
-		if data.VoltstackClusterAr.SmConnectionPublicIP != nil {
-			voltstack_cluster_arMap["sm_connection_public_ip"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.SmConnectionPvtIP != nil {
-			voltstack_cluster_arMap["sm_connection_pvt_ip"] = map[string]interface{}{}
-		}
-		if data.VoltstackClusterAr.StorageClassList != nil {
-			storage_class_listNestedMap := make(map[string]interface{})
-			voltstack_cluster_arMap["storage_class_list"] = storage_class_listNestedMap
-		}
-		apiResource.Spec["voltstack_cluster_ar"] = voltstack_cluster_arMap
-	}
 	if !data.Address.IsNull() && !data.Address.IsUnknown() {
 		apiResource.Spec["address"] = data.Address.ValueString()
-	}
-	if !data.AlternateRegion.IsNull() && !data.AlternateRegion.IsUnknown() {
-		apiResource.Spec["alternate_region"] = data.AlternateRegion.ValueString()
-	}
-	if !data.AzureRegion.IsNull() && !data.AzureRegion.IsUnknown() {
-		apiResource.Spec["azure_region"] = data.AzureRegion.ValueString()
 	}
 	if !data.DiskSize.IsNull() && !data.DiskSize.IsUnknown() {
 		apiResource.Spec["disk_size"] = data.DiskSize.ValueInt64()
 	}
-	if !data.MachineType.IsNull() && !data.MachineType.IsUnknown() {
-		apiResource.Spec["machine_type"] = data.MachineType.ValueString()
+	if !data.GCPRegion.IsNull() && !data.GCPRegion.IsUnknown() {
+		apiResource.Spec["gcp_region"] = data.GCPRegion.ValueString()
 	}
-	if !data.NodesPerAz.IsNull() && !data.NodesPerAz.IsUnknown() {
-		apiResource.Spec["nodes_per_az"] = data.NodesPerAz.ValueInt64()
-	}
-	if !data.ResourceGroup.IsNull() && !data.ResourceGroup.IsUnknown() {
-		apiResource.Spec["resource_group"] = data.ResourceGroup.ValueString()
+	if !data.InstanceType.IsNull() && !data.InstanceType.IsUnknown() {
+		apiResource.Spec["instance_type"] = data.InstanceType.ValueString()
 	}
 	if !data.SSHKey.IsNull() && !data.SSHKey.IsUnknown() {
 		apiResource.Spec["ssh_key"] = data.SSHKey.ValueString()
-	}
-	if !data.TotalNodes.IsNull() && !data.TotalNodes.IsUnknown() {
-		apiResource.Spec["total_nodes"] = data.TotalNodes.ValueInt64()
 	}
 
 	_, err := r.client.UpdateSite(ctx, apiResource)
@@ -11343,20 +6156,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		data.Address = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["alternate_region"].(string); ok && v != "" {
-		data.AlternateRegion = types.StringValue(v)
-	} else if data.AlternateRegion.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.AlternateRegion = types.StringNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["azure_region"].(string); ok && v != "" {
-		data.AzureRegion = types.StringValue(v)
-	} else if data.AzureRegion.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.AzureRegion = types.StringNull()
-	}
-	// If plan had a value, preserve it
 	if v, ok := fetched.Spec["disk_size"].(float64); ok {
 		data.DiskSize = types.Int64Value(int64(v))
 	} else if data.DiskSize.IsUnknown() {
@@ -11364,25 +6163,18 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		data.DiskSize = types.Int64Null()
 	}
 	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["machine_type"].(string); ok && v != "" {
-		data.MachineType = types.StringValue(v)
-	} else if data.MachineType.IsUnknown() {
+	if v, ok := fetched.Spec["gcp_region"].(string); ok && v != "" {
+		data.GCPRegion = types.StringValue(v)
+	} else if data.GCPRegion.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
-		data.MachineType = types.StringNull()
+		data.GCPRegion = types.StringNull()
 	}
 	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["nodes_per_az"].(float64); ok {
-		data.NodesPerAz = types.Int64Value(int64(v))
-	} else if data.NodesPerAz.IsUnknown() {
+	if v, ok := fetched.Spec["instance_type"].(string); ok && v != "" {
+		data.InstanceType = types.StringValue(v)
+	} else if data.InstanceType.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
-		data.NodesPerAz = types.Int64Null()
-	}
-	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["resource_group"].(string); ok && v != "" {
-		data.ResourceGroup = types.StringValue(v)
-	} else if data.ResourceGroup.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.ResourceGroup = types.StringNull()
+		data.InstanceType = types.StringNull()
 	}
 	// If plan had a value, preserve it
 	if v, ok := fetched.Spec["ssh_key"].(string); ok && v != "" {
@@ -11390,13 +6182,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 	} else if data.SSHKey.IsUnknown() {
 		// API didn't return value and plan was unknown - set to null
 		data.SSHKey = types.StringNull()
-	}
-	// If plan had a value, preserve it
-	if v, ok := fetched.Spec["total_nodes"].(float64); ok {
-		data.TotalNodes = types.Int64Value(int64(v))
-	} else if data.TotalNodes.IsUnknown() {
-		// API didn't return value and plan was unknown - set to null
-		data.TotalNodes = types.Int64Null()
 	}
 	// If plan had a value, preserve it
 
@@ -11409,28 +6194,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		data.AdminPassword = &SiteAdminPasswordModel{}
 	}
 	// Normal Read: preserve existing state value
-	if blockData, ok := apiResource.Spec["azure_cred"].(map[string]interface{}); ok && (isImport || data.AzureCred != nil) {
-		data.AzureCred = &SiteAzureCredModel{
-			Name: func() types.String {
-				if v, ok := blockData["name"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			Namespace: func() types.String {
-				if v, ok := blockData["namespace"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			Tenant: func() types.String {
-				if v, ok := blockData["tenant"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-		}
-	}
 	if _, ok := apiResource.Spec["block_all_services"].(map[string]interface{}); ok && isImport && data.BlockAllServices == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.BlockAllServices = &SiteEmptyModel{}
@@ -11477,6 +6240,28 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 			}(),
 		}
 	}
+	if blockData, ok := apiResource.Spec["cloud_credentials"].(map[string]interface{}); ok && (isImport || data.CloudCredentials != nil) {
+		data.CloudCredentials = &SiteCloudCredentialsModel{
+			Name: func() types.String {
+				if v, ok := blockData["name"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Namespace: func() types.String {
+				if v, ok := blockData["namespace"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			Tenant: func() types.String {
+				if v, ok := blockData["tenant"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+		}
+	}
 	if blockData, ok := apiResource.Spec["coordinates"].(map[string]interface{}); ok && (isImport || data.Coordinates != nil) {
 		data.Coordinates = &SiteCoordinatesModel{
 			Latitude: func() types.Int64 {
@@ -11514,19 +6299,13 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		data.DefaultBlockedServices = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["gcp_labels"].(map[string]interface{}); ok && isImport && data.GCPLabels == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.GCPLabels = &SiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["ingress_egress_gw"].(map[string]interface{}); ok && (isImport || data.IngressEgressGw != nil) {
 		data.IngressEgressGw = &SiteIngressEgressGwModel{
-			AcceleratedNetworking: func() *SiteIngressEgressGwAcceleratedNetworkingModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
 			ActiveEnhancedFirewallPolicies: func() *SiteIngressEgressGwActiveEnhancedFirewallPoliciesModel {
 				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.ActiveEnhancedFirewallPolicies != nil {
 					// Normal Read: preserve existing state value
@@ -11559,43 +6338,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 					return &SiteIngressEgressGwActiveNetworkPoliciesModel{}
 				}
 				return nil
-			}(),
-			AzNodes: func() []SiteIngressEgressGwAzNodesModel {
-				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteIngressEgressGwAzNodesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteIngressEgressGwAzNodesModel{
-								AzureAz: func() types.String {
-									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								InsideSubnet: func() *SiteIngressEgressGwAzNodesInsideSubnetModel {
-									if _, ok := itemMap["inside_subnet"].(map[string]interface{}); ok {
-										return &SiteIngressEgressGwAzNodesInsideSubnetModel{}
-									}
-									return nil
-								}(),
-								OutsideSubnet: func() *SiteIngressEgressGwAzNodesOutsideSubnetModel {
-									if _, ok := itemMap["outside_subnet"].(map[string]interface{}); ok {
-										return &SiteIngressEgressGwAzNodesOutsideSubnetModel{}
-									}
-									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
 			}(),
 			DcClusterGroupInsideVn: func() *SiteIngressEgressGwDcClusterGroupInsideVnModel {
 				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.DcClusterGroupInsideVn != nil {
@@ -11669,6 +6411,25 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 				}
 				return nil
 			}(),
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
 			GlobalNetworkList: func() *SiteIngressEgressGwGlobalNetworkListModel {
 				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.GlobalNetworkList != nil {
 					// Normal Read: preserve existing state value
@@ -11680,14 +6441,14 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 				}
 				return nil
 			}(),
-			Hub: func() *SiteIngressEgressGwHubModel {
-				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.Hub != nil {
+			InsideNetwork: func() *SiteIngressEgressGwInsideNetworkModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.InsideNetwork != nil {
 					// Normal Read: preserve existing state value
-					return data.IngressEgressGw.Hub
+					return data.IngressEgressGw.InsideNetwork
 				}
 				// Import case: read from API
-				if _, ok := blockData["hub"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwHubModel{}
+				if _, ok := blockData["inside_network"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwInsideNetworkModel{}
 				}
 				return nil
 			}(),
@@ -11699,6 +6460,17 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 				// Import case: read from API
 				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
 					return &SiteIngressEgressGwInsideStaticRoutesModel{}
+				}
+				return nil
+			}(),
+			InsideSubnet: func() *SiteIngressEgressGwInsideSubnetModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.InsideSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.InsideSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["inside_subnet"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwInsideSubnetModel{}
 				}
 				return nil
 			}(),
@@ -11774,15 +6546,20 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 				}
 				return nil
 			}(),
-			NotHub: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGw != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGw.NotHub
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
+			OutsideNetwork: func() *SiteIngressEgressGwOutsideNetworkModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.OutsideNetwork != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.OutsideNetwork
 				}
 				// Import case: read from API
-				if _, ok := blockData["not_hub"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
+				if _, ok := blockData["outside_network"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwOutsideNetworkModel{}
 				}
 				return nil
 			}(),
@@ -11794,6 +6571,17 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
 					return &SiteIngressEgressGwOutsideStaticRoutesModel{}
+				}
+				return nil
+			}(),
+			OutsideSubnet: func() *SiteIngressEgressGwOutsideSubnetModel {
+				if !isImport && data.IngressEgressGw != nil && data.IngressEgressGw.OutsideSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressEgressGw.OutsideSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["outside_subnet"].(map[string]interface{}); ok {
+					return &SiteIngressEgressGwOutsideSubnetModel{}
 				}
 				return nil
 			}(),
@@ -11834,368 +6622,54 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["ingress_egress_gw_ar"].(map[string]interface{}); ok && (isImport || data.IngressEgressGwAr != nil) {
-		data.IngressEgressGwAr = &SiteIngressEgressGwArModel{
-			AcceleratedNetworking: func() *SiteIngressEgressGwArAcceleratedNetworkingModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			ActiveEnhancedFirewallPolicies: func() *SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.ActiveEnhancedFirewallPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArActiveEnhancedFirewallPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveForwardProxyPolicies: func() *SiteIngressEgressGwArActiveForwardProxyPoliciesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveForwardProxyPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.ActiveForwardProxyPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArActiveForwardProxyPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveNetworkPolicies: func() *SiteIngressEgressGwArActiveNetworkPoliciesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.ActiveNetworkPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.ActiveNetworkPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArActiveNetworkPoliciesModel{}
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			DcClusterGroupInsideVn: func() *SiteIngressEgressGwArDcClusterGroupInsideVnModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.DcClusterGroupInsideVn != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.DcClusterGroupInsideVn
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["dc_cluster_group_inside_vn"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArDcClusterGroupInsideVnModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			DcClusterGroupOutsideVn: func() *SiteIngressEgressGwArDcClusterGroupOutsideVnModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.DcClusterGroupOutsideVn != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.DcClusterGroupOutsideVn
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["dc_cluster_group_outside_vn"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArDcClusterGroupOutsideVnModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			ForwardProxyAllowAll: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.ForwardProxyAllowAll
-				}
-				// Import case: read from API
-				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			GlobalNetworkList: func() *SiteIngressEgressGwArGlobalNetworkListModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.GlobalNetworkList != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.GlobalNetworkList
-				}
-				// Import case: read from API
-				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArGlobalNetworkListModel{}
-				}
-				return nil
-			}(),
-			Hub: func() *SiteIngressEgressGwArHubModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.Hub != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.Hub
-				}
-				// Import case: read from API
-				if _, ok := blockData["hub"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArHubModel{}
-				}
-				return nil
-			}(),
-			InsideStaticRoutes: func() *SiteIngressEgressGwArInsideStaticRoutesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.InsideStaticRoutes != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.InsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["inside_static_routes"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArInsideStaticRoutesModel{}
-				}
-				return nil
-			}(),
-			NoDcClusterGroup: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoDcClusterGroup
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoForwardProxy: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoForwardProxy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoGlobalNetwork: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoGlobalNetwork
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoInsideStaticRoutes: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoInsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_inside_static_routes"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoNetworkPolicy: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoNetworkPolicy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoOutsideStaticRoutes: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NoOutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			Node: func() *SiteIngressEgressGwArNodeModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.Node != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.Node
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArNodeModel{
-						FaultDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						NodeNumber: func() types.Int64 {
-							if v, ok := nestedBlockData["node_number"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						UpdateDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["update_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			NotHub: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.NotHub
-				}
-				// Import case: read from API
-				if _, ok := blockData["not_hub"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			OutsideStaticRoutes: func() *SiteIngressEgressGwArOutsideStaticRoutesModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.OutsideStaticRoutes != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.OutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArOutsideStaticRoutesModel{}
-				}
-				return nil
-			}(),
-			PerformanceEnhancementMode: func() *SiteIngressEgressGwArPerformanceEnhancementModeModel {
-				if !isImport && data.IngressEgressGwAr != nil && data.IngressEgressGwAr.PerformanceEnhancementMode != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressEgressGwAr.PerformanceEnhancementMode
-				}
-				// Import case: read from API
-				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &SiteIngressEgressGwArPerformanceEnhancementModeModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPublicIP: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.SmConnectionPublicIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPvtIP: func() *SiteEmptyModel {
-				if !isImport && data.IngressEgressGwAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.IngressEgressGwAr.SmConnectionPvtIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-		}
-	}
 	if blockData, ok := apiResource.Spec["ingress_gw"].(map[string]interface{}); ok && (isImport || data.IngressGw != nil) {
 		data.IngressGw = &SiteIngressGwModel{
-			AcceleratedNetworking: func() *SiteIngressGwAcceleratedNetworkingModel {
-				if !isImport && data.IngressGw != nil && data.IngressGw.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGw.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressGwAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			AzNodes: func() []SiteIngressGwAzNodesModel {
-				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteIngressGwAzNodesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteIngressGwAzNodesModel{
-								AzureAz: func() types.String {
-									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								LocalSubnet: func() *SiteIngressGwAzNodesLocalSubnetModel {
-									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
-										return &SiteIngressGwAzNodesLocalSubnetModel{}
-									}
-									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
 					return types.StringValue(v)
 				}
 				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
+			}(),
+			LocalNetwork: func() *SiteIngressGwLocalNetworkModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.LocalNetwork != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.LocalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["local_network"].(map[string]interface{}); ok {
+					return &SiteIngressGwLocalNetworkModel{}
+				}
+				return nil
+			}(),
+			LocalSubnet: func() *SiteIngressGwLocalSubnetModel {
+				if !isImport && data.IngressGw != nil && data.IngressGw.LocalSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.IngressGw.LocalSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["local_subnet"].(map[string]interface{}); ok {
+					return &SiteIngressGwLocalSubnetModel{}
+				}
+				return nil
+			}(),
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
 			}(),
 			PerformanceEnhancementMode: func() *SiteIngressGwPerformanceEnhancementModeModel {
 				if !isImport && data.IngressGw != nil && data.IngressGw.PerformanceEnhancementMode != nil {
@@ -12205,68 +6679,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 				// Import case: read from API
 				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
 					return &SiteIngressGwPerformanceEnhancementModeModel{}
-				}
-				return nil
-			}(),
-		}
-	}
-	if blockData, ok := apiResource.Spec["ingress_gw_ar"].(map[string]interface{}); ok && (isImport || data.IngressGwAr != nil) {
-		data.IngressGwAr = &SiteIngressGwArModel{
-			AcceleratedNetworking: func() *SiteIngressGwArAcceleratedNetworkingModel {
-				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGwAr.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteIngressGwArAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			Node: func() *SiteIngressGwArNodeModel {
-				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.Node != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGwAr.Node
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
-					return &SiteIngressGwArNodeModel{
-						FaultDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						NodeNumber: func() types.Int64 {
-							if v, ok := nestedBlockData["node_number"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						UpdateDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["update_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			PerformanceEnhancementMode: func() *SiteIngressGwArPerformanceEnhancementModeModel {
-				if !isImport && data.IngressGwAr != nil && data.IngressGwAr.PerformanceEnhancementMode != nil {
-					// Normal Read: preserve existing state value
-					return data.IngressGwAr.PerformanceEnhancementMode
-				}
-				// Import case: read from API
-				if _, ok := blockData["performance_enhancement_mode"].(map[string]interface{}); ok {
-					return &SiteIngressGwArPerformanceEnhancementModeModel{}
 				}
 				return nil
 			}(),
@@ -12304,11 +6716,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 		data.LogsStreamingDisabled = &SiteEmptyModel{}
 	}
 	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["no_worker_nodes"].(map[string]interface{}); ok && isImport && data.NoWorkerNodes == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.NoWorkerNodes = &SiteEmptyModel{}
-	}
-	// Normal Read: preserve existing state value
 	if _, ok := apiResource.Spec["offline_survivability_mode"].(map[string]interface{}); ok && isImport && data.OfflineSurvivabilityMode == nil {
 		// Import case: populate from API since state is nil and psd is empty
 		data.OfflineSurvivabilityMode = &SiteOfflineSurvivabilityModeModel{}
@@ -12336,6 +6743,16 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 			}(),
 		}
 	}
+	if _, ok := apiResource.Spec["private_connect_disabled"].(map[string]interface{}); ok && isImport && data.PrivateConnectDisabled == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectDisabled = &SiteEmptyModel{}
+	}
+	// Normal Read: preserve existing state value
+	if _, ok := apiResource.Spec["private_connectivity"].(map[string]interface{}); ok && isImport && data.PrivateConnectivity == nil {
+		// Import case: populate from API since state is nil and psd is empty
+		data.PrivateConnectivity = &SitePrivateConnectivityModel{}
+	}
+	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["sw"].(map[string]interface{}); ok && (isImport || data.Sw != nil) {
 		data.Sw = &SiteSwModel{
 			DefaultSwVersion: func() *SiteEmptyModel {
@@ -12358,29 +6775,8 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 			}(),
 		}
 	}
-	if _, ok := apiResource.Spec["tags"].(map[string]interface{}); ok && isImport && data.Tags == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.Tags = &SiteEmptyModel{}
-	}
-	// Normal Read: preserve existing state value
-	if _, ok := apiResource.Spec["vnet"].(map[string]interface{}); ok && isImport && data.VNET == nil {
-		// Import case: populate from API since state is nil and psd is empty
-		data.VNET = &SiteVNETModel{}
-	}
-	// Normal Read: preserve existing state value
 	if blockData, ok := apiResource.Spec["voltstack_cluster"].(map[string]interface{}); ok && (isImport || data.VoltstackCluster != nil) {
 		data.VoltstackCluster = &SiteVoltstackClusterModel{
-			AcceleratedNetworking: func() *SiteVoltstackClusterAcceleratedNetworkingModel {
-				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackCluster.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
 			ActiveEnhancedFirewallPolicies: func() *SiteVoltstackClusterActiveEnhancedFirewallPoliciesModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.ActiveEnhancedFirewallPolicies != nil {
 					// Normal Read: preserve existing state value
@@ -12413,37 +6809,6 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 					return &SiteVoltstackClusterActiveNetworkPoliciesModel{}
 				}
 				return nil
-			}(),
-			AzNodes: func() []SiteVoltstackClusterAzNodesModel {
-				if listData, ok := blockData["az_nodes"].([]interface{}); ok && len(listData) > 0 {
-					var result []SiteVoltstackClusterAzNodesModel
-					for _, item := range listData {
-						if itemMap, ok := item.(map[string]interface{}); ok {
-							result = append(result, SiteVoltstackClusterAzNodesModel{
-								AzureAz: func() types.String {
-									if v, ok := itemMap["azure_az"].(string); ok && v != "" {
-										return types.StringValue(v)
-									}
-									return types.StringNull()
-								}(),
-								LocalSubnet: func() *SiteVoltstackClusterAzNodesLocalSubnetModel {
-									if _, ok := itemMap["local_subnet"].(map[string]interface{}); ok {
-										return &SiteVoltstackClusterAzNodesLocalSubnetModel{}
-									}
-									return nil
-								}(),
-							})
-						}
-					}
-					return result
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
 			}(),
 			DcClusterGroup: func() *SiteVoltstackClusterDcClusterGroupModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.DcClusterGroup != nil {
@@ -12498,6 +6863,25 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 					return &SiteEmptyModel{}
 				}
 				return nil
+			}(),
+			GCPCertifiedHw: func() types.String {
+				if v, ok := blockData["gcp_certified_hw"].(string); ok && v != "" {
+					return types.StringValue(v)
+				}
+				return types.StringNull()
+			}(),
+			GCPZoneNames: func() types.List {
+				if v, ok := blockData["gcp_zone_names"].([]interface{}); ok && len(v) > 0 {
+					var items []string
+					for _, item := range v {
+						if s, ok := item.(string); ok {
+							items = append(items, s)
+						}
+					}
+					listVal, _ := types.ListValueFrom(ctx, types.StringType, items)
+					return listVal
+				}
+				return types.ListNull(types.StringType)
 			}(),
 			GlobalNetworkList: func() *SiteVoltstackClusterGlobalNetworkListModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.GlobalNetworkList != nil {
@@ -12612,6 +6996,12 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 				}
 				return nil
 			}(),
+			NodeNumber: func() types.Int64 {
+				if v, ok := blockData["node_number"].(float64); ok {
+					return types.Int64Value(int64(v))
+				}
+				return types.Int64Null()
+			}(),
 			OutsideStaticRoutes: func() *SiteVoltstackClusterOutsideStaticRoutesModel {
 				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.OutsideStaticRoutes != nil {
 					// Normal Read: preserve existing state value
@@ -12620,6 +7010,28 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 				// Import case: read from API
 				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
 					return &SiteVoltstackClusterOutsideStaticRoutesModel{}
+				}
+				return nil
+			}(),
+			SiteLocalNetwork: func() *SiteVoltstackClusterSiteLocalNetworkModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.SiteLocalNetwork != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.SiteLocalNetwork
+				}
+				// Import case: read from API
+				if _, ok := blockData["site_local_network"].(map[string]interface{}); ok {
+					return &SiteVoltstackClusterSiteLocalNetworkModel{}
+				}
+				return nil
+			}(),
+			SiteLocalSubnet: func() *SiteVoltstackClusterSiteLocalSubnetModel {
+				if !isImport && data.VoltstackCluster != nil && data.VoltstackCluster.SiteLocalSubnet != nil {
+					// Normal Read: preserve existing state value
+					return data.VoltstackCluster.SiteLocalSubnet
+				}
+				// Import case: read from API
+				if _, ok := blockData["site_local_subnet"].(map[string]interface{}); ok {
+					return &SiteVoltstackClusterSiteLocalSubnetModel{}
 				}
 				return nil
 			}(),
@@ -12660,347 +7072,30 @@ func (r *SiteResource) Update(ctx context.Context, req resource.UpdateRequest, r
 			}(),
 		}
 	}
-	if blockData, ok := apiResource.Spec["voltstack_cluster_ar"].(map[string]interface{}); ok && (isImport || data.VoltstackClusterAr != nil) {
-		data.VoltstackClusterAr = &SiteVoltstackClusterArModel{
-			AcceleratedNetworking: func() *SiteVoltstackClusterArAcceleratedNetworkingModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.AcceleratedNetworking != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.AcceleratedNetworking
-				}
-				// Import case: read from API
-				if _, ok := blockData["accelerated_networking"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArAcceleratedNetworkingModel{}
-				}
-				return nil
-			}(),
-			ActiveEnhancedFirewallPolicies: func() *SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.ActiveEnhancedFirewallPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_enhanced_firewall_policies"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArActiveEnhancedFirewallPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveForwardProxyPolicies: func() *SiteVoltstackClusterArActiveForwardProxyPoliciesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveForwardProxyPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.ActiveForwardProxyPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_forward_proxy_policies"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArActiveForwardProxyPoliciesModel{}
-				}
-				return nil
-			}(),
-			ActiveNetworkPolicies: func() *SiteVoltstackClusterArActiveNetworkPoliciesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.ActiveNetworkPolicies != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.ActiveNetworkPolicies
-				}
-				// Import case: read from API
-				if _, ok := blockData["active_network_policies"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArActiveNetworkPoliciesModel{}
-				}
-				return nil
-			}(),
-			AzureCertifiedHw: func() types.String {
-				if v, ok := blockData["azure_certified_hw"].(string); ok && v != "" {
-					return types.StringValue(v)
-				}
-				return types.StringNull()
-			}(),
-			DcClusterGroup: func() *SiteVoltstackClusterArDcClusterGroupModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.DcClusterGroup != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.DcClusterGroup
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["dc_cluster_group"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArDcClusterGroupModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			DefaultStorage: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.DefaultStorage
-				}
-				// Import case: read from API
-				if _, ok := blockData["default_storage"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			ForwardProxyAllowAll: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.ForwardProxyAllowAll
-				}
-				// Import case: read from API
-				if _, ok := blockData["forward_proxy_allow_all"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			GlobalNetworkList: func() *SiteVoltstackClusterArGlobalNetworkListModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.GlobalNetworkList != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.GlobalNetworkList
-				}
-				// Import case: read from API
-				if _, ok := blockData["global_network_list"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArGlobalNetworkListModel{}
-				}
-				return nil
-			}(),
-			K8SCluster: func() *SiteVoltstackClusterArK8SClusterModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.K8SCluster != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.K8SCluster
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["k8s_cluster"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArK8SClusterModel{
-						Name: func() types.String {
-							if v, ok := nestedBlockData["name"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Namespace: func() types.String {
-							if v, ok := nestedBlockData["namespace"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-						Tenant: func() types.String {
-							if v, ok := nestedBlockData["tenant"].(string); ok && v != "" {
-								return types.StringValue(v)
-							}
-							return types.StringNull()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			NoDcClusterGroup: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoDcClusterGroup
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_dc_cluster_group"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoForwardProxy: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoForwardProxy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_forward_proxy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoGlobalNetwork: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoGlobalNetwork
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_global_network"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoK8SCluster: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoK8SCluster
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_k8s_cluster"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoNetworkPolicy: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoNetworkPolicy
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_network_policy"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			NoOutsideStaticRoutes: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.NoOutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["no_outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			Node: func() *SiteVoltstackClusterArNodeModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.Node != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.Node
-				}
-				// Import case: read from API
-				if nestedBlockData, ok := blockData["node"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArNodeModel{
-						FaultDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["fault_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						NodeNumber: func() types.Int64 {
-							if v, ok := nestedBlockData["node_number"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-						UpdateDomain: func() types.Int64 {
-							if v, ok := nestedBlockData["update_domain"].(float64); ok {
-								return types.Int64Value(int64(v))
-							}
-							return types.Int64Null()
-						}(),
-					}
-				}
-				return nil
-			}(),
-			OutsideStaticRoutes: func() *SiteVoltstackClusterArOutsideStaticRoutesModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.OutsideStaticRoutes != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.OutsideStaticRoutes
-				}
-				// Import case: read from API
-				if _, ok := blockData["outside_static_routes"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArOutsideStaticRoutesModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPublicIP: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.SmConnectionPublicIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_public_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			SmConnectionPvtIP: func() *SiteEmptyModel {
-				if !isImport && data.VoltstackClusterAr != nil {
-					// Normal Read: preserve existing state value (even if nil)
-					// This prevents API returning empty objects from overwriting user's 'not configured' intent
-					return data.VoltstackClusterAr.SmConnectionPvtIP
-				}
-				// Import case: read from API
-				if _, ok := blockData["sm_connection_pvt_ip"].(map[string]interface{}); ok {
-					return &SiteEmptyModel{}
-				}
-				return nil
-			}(),
-			StorageClassList: func() *SiteVoltstackClusterArStorageClassListModel {
-				if !isImport && data.VoltstackClusterAr != nil && data.VoltstackClusterAr.StorageClassList != nil {
-					// Normal Read: preserve existing state value
-					return data.VoltstackClusterAr.StorageClassList
-				}
-				// Import case: read from API
-				if _, ok := blockData["storage_class_list"].(map[string]interface{}); ok {
-					return &SiteVoltstackClusterArStorageClassListModel{}
-				}
-				return nil
-			}(),
-		}
-	}
 	if v, ok := apiResource.Spec["address"].(string); ok && v != "" {
 		data.Address = types.StringValue(v)
 	} else {
 		data.Address = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["alternate_region"].(string); ok && v != "" {
-		data.AlternateRegion = types.StringValue(v)
-	} else {
-		data.AlternateRegion = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["azure_region"].(string); ok && v != "" {
-		data.AzureRegion = types.StringValue(v)
-	} else {
-		data.AzureRegion = types.StringNull()
 	}
 	if v, ok := apiResource.Spec["disk_size"].(float64); ok {
 		data.DiskSize = types.Int64Value(int64(v))
 	} else {
 		data.DiskSize = types.Int64Null()
 	}
-	if v, ok := apiResource.Spec["machine_type"].(string); ok && v != "" {
-		data.MachineType = types.StringValue(v)
+	if v, ok := apiResource.Spec["gcp_region"].(string); ok && v != "" {
+		data.GCPRegion = types.StringValue(v)
 	} else {
-		data.MachineType = types.StringNull()
+		data.GCPRegion = types.StringNull()
 	}
-	if v, ok := apiResource.Spec["nodes_per_az"].(float64); ok {
-		data.NodesPerAz = types.Int64Value(int64(v))
+	if v, ok := apiResource.Spec["instance_type"].(string); ok && v != "" {
+		data.InstanceType = types.StringValue(v)
 	} else {
-		data.NodesPerAz = types.Int64Null()
-	}
-	if v, ok := apiResource.Spec["resource_group"].(string); ok && v != "" {
-		data.ResourceGroup = types.StringValue(v)
-	} else {
-		data.ResourceGroup = types.StringNull()
+		data.InstanceType = types.StringNull()
 	}
 	if v, ok := apiResource.Spec["ssh_key"].(string); ok && v != "" {
 		data.SSHKey = types.StringValue(v)
 	} else {
 		data.SSHKey = types.StringNull()
-	}
-	if v, ok := apiResource.Spec["total_nodes"].(float64); ok {
-		data.TotalNodes = types.Int64Value(int64(v))
-	} else {
-		data.TotalNodes = types.Int64Null()
 	}
 
 	psd := privatestate.NewPrivateStateData()

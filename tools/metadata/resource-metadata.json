@@ -1,9 +1,10 @@
 {
-  "generated_at": "2026-01-07T22:04:37Z",
+  "generated_at": "2026-01-07T23:28:07Z",
   "version": "1.0.0",
   "resources": {
     "address_allocator": {
       "description": "Manages Address Allocator will create an address allocator object in 'system' namespace of the user. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "address_allocation_scheme": {
           "type": "object",
@@ -75,6 +76,7 @@
     },
     "advertise_policy": {
       "description": "Manages a Advertise Policy resource in F5 Distributed Cloud for advertise_policy object controls how and where a service represented by a given virtual_host object is advertised to consumers. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "port_choice": {
           "fields": [
@@ -197,6 +199,9 @@
     },
     "alert_policy": {
       "description": "Manages new Alert Policy Object. in F5 Distributed Cloud.",
+      "category": "Monitoring",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -268,6 +273,7 @@
     },
     "alert_receiver": {
       "description": "Manages new Alert Receiver object. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "receiver": {
           "fields": [
@@ -378,6 +384,7 @@
     },
     "api_crawler": {
       "description": "Manages a API Crawler resource in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -435,6 +442,9 @@
     },
     "api_definition": {
       "description": "Manages API Definition. in F5 Distributed Cloud.",
+      "category": "API Management",
+      "tier": "Advanced",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "schema_updates_strategy": {
           "fields": [
@@ -532,10 +542,16 @@
           "optional": true,
           "description": "File Path. Define your application API by single or multiple OpenAPI files. 1. Upload your OpenAPI files via Web App \u0026 API Protection-\u003e Files-\u003e Swagger Files. 2. Select from the list of uploaded files. Notice file versions. If OpenAPI file is updated, need to select a new version here to redefine the API."
         }
+      },
+      "dependencies": {
+        "references": [
+          "api_endpoint"
+        ]
       }
     },
     "api_discovery": {
       "description": "Manages API discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -593,6 +609,7 @@
     },
     "api_testing": {
       "description": "Manages a API Testing resource in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "frequency_choice": {
           "fields": [
@@ -691,6 +708,7 @@
     },
     "apm": {
       "description": "Manages new APM as a service with configured parameters. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "http_management_choice": {
           "fields": [
@@ -778,6 +796,7 @@
     },
     "app_api_group": {
       "description": "Manages app_api_group creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "scope_choice": {
           "fields": [
@@ -868,6 +887,9 @@
     },
     "app_firewall": {
       "description": "Manages Application Firewall. in F5 Distributed Cloud.",
+      "category": "Security",
+      "tier": "Advanced",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "allowed_response_codes_choice": {
           "fields": [
@@ -1070,10 +1092,19 @@
           "oneof_group": "blocking_page_choice",
           "description": "Enable this option"
         }
+      },
+      "dependencies": {
+        "references": [
+          "service_policy"
+        ],
+        "referenced_by": [
+          "http_loadbalancer"
+        ]
       }
     },
     "app_setting": {
       "description": "Manages App setting configuration in namespace metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -1131,6 +1162,7 @@
     },
     "app_type": {
       "description": "Manages App type will create the configuration in namespace metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -1195,6 +1227,7 @@
     },
     "authentication": {
       "description": "Manages a Authentication resource in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "auth_type_choice": {
           "fields": [
@@ -1267,6 +1300,7 @@
     },
     "aws_tgw_site": {
       "description": "Manages a AWS TGW Site resource in F5 Distributed Cloud for deploying F5 sites connected via AWS Transit Gateway.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "blocked_services_choice": {
           "fields": [
@@ -1488,6 +1522,9 @@
     },
     "aws_vpc_site": {
       "description": "Manages a AWS VPC Site resource in F5 Distributed Cloud for deploying F5 sites within AWS VPC environments.",
+      "category": "Infrastructure",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "blocked_services_choice": {
           "fields": [
@@ -1901,10 +1938,18 @@
           "is_block": true,
           "description": "AWS VPC choice. This defines choice about AWS VPC for a view."
         }
+      },
+      "dependencies": {
+        "references": [
+          "cloud_credentials"
+        ]
       }
     },
     "azure_vnet_site": {
       "description": "Manages a Azure VNET Site resource in F5 Distributed Cloud for deploying F5 sites within Azure Virtual Network environments.",
+      "category": "Infrastructure",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "blocked_services_choice": {
           "fields": [
@@ -2239,10 +2284,16 @@
           "oneof_group": "site_type",
           "description": "Azure App Stack Cluster on Alternate Region. App Stack Cluster of single interface Azure nodes."
         }
+      },
+      "dependencies": {
+        "references": [
+          "cloud_credentials"
+        ]
       }
     },
     "bgp": {
-      "description": "Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "description": "Manages a BGP resource in F5 Distributed Cloud for bgp object is the configuration for peering with external bgp servers. it is created by users in system namespace. configuration.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -2250,11 +2301,12 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "as_numbers": {
-          "type": "list",
+        "bgp_parameters": {
+          "type": "object",
           "required": false,
           "optional": true,
-          "description": "AS Numbers. An unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy."
+          "is_block": true,
+          "description": "BGP Parameters. BGP parameters for the local site."
         },
         "description": {
           "type": "string",
@@ -2294,11 +2346,26 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the BGP will be created."
+        },
+        "peers": {
+          "type": "list",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Peers. List of peers ."
+        },
+        "where": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Site or Virtual Site Reference. VirtualSiteSiteRefSelector defines a union of reference to site or reference to virtual_site It used to refer site or a group of sites indicated by virtual site."
         }
       }
     },
     "bgp_asn_set": {
       "description": "Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -2355,6 +2422,7 @@
     },
     "bgp_routing_policy": {
       "description": "Manages a BGP Routing Policy resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers. configuration.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -2412,6 +2480,7 @@
     },
     "bot_defense_app_infrastructure": {
       "description": "Manages Bot Defense App Infrastructure in a given namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "infra_choice": {
           "fields": [
@@ -2502,6 +2571,7 @@
     },
     "cdn_cache_rule": {
       "description": "Manages a CDN Cache Rule resource in F5 Distributed Cloud for cdn loadbalancer specification. configuration.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -2559,6 +2629,9 @@
     },
     "cdn_loadbalancer": {
       "description": "Manages a CDN Load Balancer resource in F5 Distributed Cloud for content delivery and edge caching with load balancing.",
+      "category": "Load Balancing",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "api_definition_choice": {
           "fields": [
@@ -3131,10 +3204,18 @@
           "is_block": true,
           "description": "WAF Exclusion."
         }
+      },
+      "dependencies": {
+        "references": [
+          "cdn_origin_pool"
+        ]
       }
     },
     "certificate": {
       "description": "Manages a Certificate resource in F5 Distributed Cloud for TLS/SSL certificate management.",
+      "category": "Security",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -3189,10 +3270,18 @@
           "validation": "name",
           "description": "Namespace where the Certificate will be created."
         }
+      },
+      "dependencies": {
+        "referenced_by": [
+          "http_loadbalancer"
+        ]
       }
     },
     "certificate_chain": {
       "description": "Manages a Certificate Chain resource in F5 Distributed Cloud for certificate chain configuration for TLS.",
+      "category": "Security",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -3251,6 +3340,7 @@
     },
     "cloud_connect": {
       "description": "Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.",
+      "import_format": "name",
       "oneof_groups": {
         "cloud": {
           "fields": [
@@ -3332,6 +3422,9 @@
     },
     "cloud_credentials": {
       "description": "Manages a Cloud Credentials resource in F5 Distributed Cloud for api to create cloud_credentials object. configuration.",
+      "category": "Infrastructure",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "cloud": {
           "fields": [
@@ -3429,10 +3522,18 @@
           "validation": "name",
           "description": "Namespace where the Cloud Credentials will be created."
         }
+      },
+      "dependencies": {
+        "referenced_by": [
+          "gcp_vpc_site",
+          "azure_vnet_site",
+          "aws_vpc_site"
+        ]
       }
     },
     "cloud_elastic_ip": {
       "description": "Manages Cloud Elastic IP creates Cloud Elastic IP object Object is attached to a site. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -3498,6 +3599,7 @@
     },
     "cloud_link": {
       "description": "Manages new CloudLink with configured parameters. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "cloud_provider": {
           "fields": [
@@ -3594,6 +3696,7 @@
     },
     "cluster": {
       "description": "Manages cluster will create the object in the storage backend for namespace metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "http_protocol_type": {
           "fields": [
@@ -3829,6 +3932,7 @@
     },
     "cminstance": {
       "description": "Manages App type will create the configuration in namespace metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -3917,6 +4021,7 @@
     },
     "code_base_integration": {
       "description": "Manages integration details. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -3974,6 +4079,9 @@
     },
     "container_registry": {
       "description": "Manages a Container Registry resource in F5 Distributed Cloud for container image registry configuration.",
+      "category": "Container",
+      "tier": "Advanced",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -4055,6 +4163,7 @@
     },
     "crl": {
       "description": "Manages a CRL resource in F5 Distributed Cloud for api to create crl object. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "access_info_choice": {
           "fields": [
@@ -4153,6 +4262,7 @@
     },
     "data_group": {
       "description": "Manages data group in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "data_group_type": {
           "fields": [
@@ -4236,6 +4346,7 @@
     },
     "data_type": {
       "description": "Manages data_type creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -4315,6 +4426,7 @@
     },
     "dc_cluster_group": {
       "description": "Manages DC Cluster group in given namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -4372,6 +4484,7 @@
     },
     "discovery": {
       "description": "Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "cluster_identifier_choice": {
           "fields": [
@@ -4477,6 +4590,7 @@
     },
     "dns_compliance_checks": {
       "description": "Manages DNS Compliance Checks Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -4545,6 +4659,9 @@
     },
     "dns_domain": {
       "description": "Manages DNS Domain in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
+      "category": "DNS",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "domain_choice": {
           "fields": [
@@ -4618,6 +4735,9 @@
     },
     "endpoint": {
       "description": "Manages endpoint will create the object in the storage backend for namespace metadata.namespace. in F5 Distributed Cloud.",
+      "category": "Networking",
+      "tier": "Advanced",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "endpoint_address": {
           "fields": [
@@ -4752,6 +4872,7 @@
     },
     "enhanced_firewall_policy": {
       "description": "Manages a Enhanced Firewall Policy resource in F5 Distributed Cloud for enhanced firewall policy specification. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "rule_choice": {
           "fields": [
@@ -4871,6 +4992,7 @@
     },
     "external_connector": {
       "description": "Manages a External Connector resource in F5 Distributed Cloud for external_connector configuration specification. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "connection_type": {
           "fields": [
@@ -4943,6 +5065,7 @@
     },
     "fast_acl": {
       "description": "Manages `fast_acl` object, `fast_acl` object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to `fast_acl_rule` in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "site_choice": {
           "fields": [
@@ -5024,6 +5147,7 @@
     },
     "fast_acl_rule": {
       "description": "Manages new Fast ACL rule, `fast_acl_rule` has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "source": {
           "fields": [
@@ -5113,6 +5237,7 @@
     },
     "filter_set": {
       "description": "Manages specification. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -5178,6 +5303,7 @@
     },
     "fleet": {
       "description": "Manages fleet will create a fleet object in 'system' namespace of the user. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "bond_choice": {
           "fields": [
@@ -5621,6 +5747,9 @@
     },
     "forward_proxy_policy": {
       "description": "Manages a Forward Proxy Policy resource in F5 Distributed Cloud for forward proxy policy specification. configuration.",
+      "category": "Security",
+      "tier": "Advanced",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "proxy_choice": {
           "fields": [
@@ -5753,6 +5882,7 @@
     },
     "forwarding_class": {
       "description": "Manages a Forwarding Class resource in F5 Distributed Cloud for forwarding class is created by users in system namespace. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "marking_choice": {
           "fields": [
@@ -5892,6 +6022,9 @@
     },
     "gcp_vpc_site": {
       "description": "Manages a GCP VPC Site resource in F5 Distributed Cloud for deploying F5 sites within Google Cloud VPC environments.",
+      "category": "Infrastructure",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "blocked_services_choice": {
           "fields": [
@@ -6156,10 +6289,16 @@
           "oneof_group": "site_type",
           "description": "GCP App Stack Cluster. App Stack cluster of single interface GCP site."
         }
+      },
+      "dependencies": {
+        "references": [
+          "cloud_credentials"
+        ]
       }
     },
     "global_log_receiver": {
       "description": "Manages new Global Log Receiver object. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "filter_choice": {
           "fields": [
@@ -6395,6 +6534,9 @@
     },
     "healthcheck": {
       "description": "Manages a Healthcheck resource in F5 Distributed Cloud for healthcheck object defines method to determine if the given endpoint is healthy. single healthcheck object can be referred to by one or many cluster objects. configuration.",
+      "category": "Monitoring",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "health_check": {
           "fields": [
@@ -6514,10 +6656,20 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unhealthy Threshold. Number of failed responses before declaring unhealthy. In other words, this is the number of unhealthy health checks required before a host is marked unhealthy. Note that for HTTP health checking if a host responds with 503 this threshold is ignored and the host is considered unhealthy immediately."
         }
+      },
+      "dependencies": {
+        "referenced_by": [
+          "http_loadbalancer",
+          "tcp_loadbalancer",
+          "origin_pool"
+        ]
       }
     },
     "http_loadbalancer": {
       "description": "Manages a HTTP Load Balancer resource in F5 Distributed Cloud for load balancing HTTP/HTTPS traffic with advanced routing and security.",
+      "category": "Load Balancing",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "advertise_choice": {
           "fields": [
@@ -7375,10 +7527,22 @@
           "is_block": true,
           "description": "WAF Exclusion."
         }
+      },
+      "dependencies": {
+        "references": [
+          "origin_pool",
+          "healthcheck",
+          "app_firewall",
+          "certificate",
+          "rate_limiter",
+          "service_policy",
+          "bot_defense_policy"
+        ]
       }
     },
     "ip_prefix_set": {
       "description": "Manages ip_prefix_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -7435,7 +7599,8 @@
       }
     },
     "irule": {
-      "description": "Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
+      "description": "Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -7443,13 +7608,19 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "description": {
+        "code": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Description for iRule. Specify Description for iRule ."
+          "description": "IRule code. IRule code content, this content will be base64 encoded for preserving formating."
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "description": "Human readable description for the object."
         },
         "disable": {
           "type": "bool",
@@ -7464,13 +7635,13 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "irule": {
+        "irule_name": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Irule. www.internal.example.f5.com')} DNS::drop} irule content ."
+          "description": "IRule name. IRule name."
         },
         "labels": {
           "type": "map",
@@ -7491,11 +7662,22 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the Irule will be created."
+        },
+        "source": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "IRule source. IRule generation/updation source."
         }
       }
     },
     "log_receiver": {
       "description": "Manages new Log Receiver object. in F5 Distributed Cloud.",
+      "category": "Monitoring",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "log_receiver_choice": {
           "fields": [
@@ -7574,6 +7756,7 @@
     },
     "malicious_user_mitigation": {
       "description": "Manages malicious_user_mitigation creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -7631,6 +7814,7 @@
     },
     "nat_policy": {
       "description": "Manages a NAT Policy resource in F5 Distributed Cloud for nat policy create specification configures nat policy with multiple rules,. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "applies_to_choice": {
           "fields": [
@@ -7703,6 +7887,9 @@
     },
     "network_connector": {
       "description": "Manages a Network Connector resource in F5 Distributed Cloud for network connector is created by users in system namespace. configuration.",
+      "category": "Networking",
+      "tier": "Advanced",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "connector_choice": {
           "fields": [
@@ -7805,10 +7992,21 @@
           "oneof_group": "connector_choice",
           "description": "Global Network. Global network reference for direct connection."
         }
+      },
+      "dependencies": {
+        "references": [
+          "virtual_network"
+        ],
+        "referenced_by": [
+          "virtual_network"
+        ]
       }
     },
     "network_firewall": {
       "description": "Manages a Network Firewall resource in F5 Distributed Cloud for network firewall is created by users in system namespace. configuration.",
+      "category": "Security",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "fast_acl_choice": {
           "fields": [
@@ -7939,6 +8137,7 @@
     },
     "network_interface": {
       "description": "Manages a Network Interface resource in F5 Distributed Cloud for network interface represents configuration of a network device. it is created by users in system namespace. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "interface_choice": {
           "fields": [
@@ -8039,7 +8238,10 @@
       }
     },
     "network_policy": {
-      "description": "Manages a Network Policy resource in F5 Distributed Cloud for network policy view specification. configuration.",
+      "description": "Manages new network policy with configured parameters in specified namespace. in F5 Distributed Cloud.",
+      "category": "Security",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -8059,13 +8261,6 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
-        "egress_rules": {
-          "type": "list",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Egress Rules. Ordered list of rules applied to connections from policy endpoints."
-        },
         "endpoint": {
           "type": "object",
           "required": false,
@@ -8079,13 +8274,6 @@
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
-        },
-        "ingress_rules": {
-          "type": "list",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "Ingress Rules. Ordered list of rules applied to connections to policy endpoints."
         },
         "labels": {
           "type": "map",
@@ -8106,11 +8294,19 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the Network Policy will be created."
+        },
+        "rules": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Rule Choice. Shape of Rule Choice."
         }
       }
     },
     "network_policy_rule": {
       "description": "Manages network policy rule with configured parameters in specified namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "remote_endpoint": {
           "fields": [
@@ -8230,6 +8426,7 @@
     },
     "network_policy_view": {
       "description": "Manages a Network Policy View resource in F5 Distributed Cloud for network policy view specification. configuration.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -8301,6 +8498,7 @@
     },
     "nfv_service": {
       "description": "Manages new NFV service with configured parameters. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "http_management_choice": {
           "fields": [
@@ -8421,6 +8619,7 @@
     },
     "nginx_service_discovery": {
       "description": "Manages a Nginx Service Discovery resource in F5 Distributed Cloud for api to create nginx service discovery object for a site or virtual site in system namespace. configuration.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -8485,6 +8684,9 @@
     },
     "origin_pool": {
       "description": "Manages a Origin Pool resource in F5 Distributed Cloud for defining backend server pools for load balancer targets.",
+      "category": "Load Balancing",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "health_check_port_choice": {
           "fields": [
@@ -8657,16 +8859,42 @@
           "oneof_group": "tls_choice",
           "description": "TLS Parameters for Origin Servers. Upstream TLS Parameters."
         }
+      },
+      "dependencies": {
+        "references": [
+          "healthcheck"
+        ],
+        "referenced_by": [
+          "http_loadbalancer",
+          "tcp_loadbalancer"
+        ]
       }
     },
     "policer": {
-      "description": "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.",
+      "description": "Manages new policer with traffic rate limits. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
+        },
+        "burst_size": {
+          "type": "int64",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Burst Size(pps). The maximum size permitted for bursts of data. E.g. 10000 pps burst ."
+        },
+        "committed_information_rate": {
+          "type": "int64",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Committed Information Rate(pps). The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps ."
         },
         "description": {
           "type": "string",
@@ -8707,17 +8935,27 @@
           "validation": "name",
           "description": "Namespace where the Policer will be created."
         },
-        "protocol_policer": {
-          "type": "list",
+        "policer_mode": {
+          "type": "string",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "description": "Protocol Policer. List of L4 protocol match condition and associated traffic rate limits."
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] Policer Mode. - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`."
+        },
+        "policer_type": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Policer Type. Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`."
         }
       }
     },
     "policy_based_routing": {
       "description": "Manages a Policy Based Routing resource in F5 Distributed Cloud for network policy based routing create specification. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "policy_choice": {
           "fields": [
@@ -8799,6 +9037,7 @@
     },
     "protocol_inspection": {
       "description": "Manages Protocol Inspection Specification in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "action": {
           "type": "string",
@@ -8871,6 +9110,7 @@
     },
     "protocol_policer": {
       "description": "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -8928,6 +9168,7 @@
     },
     "proxy": {
       "description": "Manages a Proxy resource in F5 Distributed Cloud for tcp loadbalancer create specification. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "network_choice": {
           "fields": [
@@ -9100,6 +9341,9 @@
     },
     "rate_limiter": {
       "description": "Manages rate_limiter creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "category": "Security",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -9160,10 +9404,21 @@
           "is_block": true,
           "description": "User Identification Policy. A reference to user_identification object. The rules in the user_identification object are evaluated to determine the user identifier to be rate limited."
         }
+      },
+      "dependencies": {
+        "references": [
+          "rate_limiter_policy"
+        ],
+        "referenced_by": [
+          "http_loadbalancer"
+        ]
       }
     },
     "rate_limiter_policy": {
       "description": "Manages a Rate Limiter Policy resource in F5 Distributed Cloud for rate limiter policy create specification. configuration.",
+      "category": "Security",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "server_choice": {
           "fields": [
@@ -9260,10 +9515,16 @@
           "oneof_group": "server_choice",
           "description": "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string \u003cselector-syntax\u003e ::= \u003crequirement\u003e | \u003crequirement\u003e ',' \u003cselector-syntax\u003e \u003crequirement\u003e ::= [!] KEY [ \u003cset-based-restriction\u003e | \u003cexact-match-restriction\u003e ] \u003cset-based-restriction\u003e ::= '' | \u003cinclusion-exclusion\u003e \u003cvalue-set\u003e \u003cinclusion-exclusion\u003e ::= \u003cinclusion\u003e | \u003cexclusion\u003e \u003cexclusion\u003e ::= 'notin' \u003cinclusion\u003e ::= 'in' \u003cvalue-set\u003e ::= '(' \u003cvalues\u003e ')' \u003cvalues\u003e ::= VALUE | VALUE ',' \u003cvalues\u003e \u003cexact-match-restriction\u003e ::= ['='|'=='|'!='] VALUE."
         }
+      },
+      "dependencies": {
+        "referenced_by": [
+          "rate_limiter"
+        ]
       }
     },
     "route": {
       "description": "Manages route object in a given namespace. Route object is list of route rules. Each rule has match condition to match incoming requests and actions to take on matching requests. Virtual host object has reference to route object. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -9321,6 +9582,7 @@
     },
     "secret_management_access": {
       "description": "Manages secret_management_access creates a new object in storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "access_info": {
           "type": "object",
@@ -9393,6 +9655,7 @@
     },
     "securemesh_site": {
       "description": "Manages a Securemesh Site resource in F5 Distributed Cloud for deploying secure mesh edge sites with distributed security capabilities.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "blocked_services_choice": {
           "fields": [
@@ -9607,6 +9870,7 @@
     },
     "segment": {
       "description": "Manages a Segment resource in F5 Distributed Cloud for segment. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "internet_connection_choice": {
           "fields": [
@@ -9675,6 +9939,9 @@
     },
     "sensitive_data_policy": {
       "description": "Manages sensitive_data_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "category": "Security",
+      "tier": "Advanced",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -9744,6 +10011,9 @@
     },
     "service_policy": {
       "description": "Manages service_policy creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "category": "Security",
+      "tier": "Advanced",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "rule_choice": {
           "fields": [
@@ -9882,10 +10152,17 @@
           "oneof_group": "server_choice",
           "description": "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string \u003cselector-syntax\u003e ::= \u003crequirement\u003e | \u003crequirement\u003e ',' \u003cselector-syntax\u003e \u003crequirement\u003e ::= [!] KEY [ \u003cset-based-restriction\u003e | \u003cexact-match-restriction\u003e ] \u003cset-based-restriction\u003e ::= '' | \u003cinclusion-exclusion\u003e \u003cvalue-set\u003e \u003cinclusion-exclusion\u003e ::= \u003cinclusion\u003e | \u003cexclusion\u003e \u003cexclusion\u003e ::= 'notin' \u003cinclusion\u003e ::= 'in' \u003cvalue-set\u003e ::= '(' \u003cvalues\u003e ')' \u003cvalues\u003e ::= VALUE | VALUE ',' \u003cvalues\u003e \u003cexact-match-restriction\u003e ::= ['='|'=='|'!='] VALUE."
         }
+      },
+      "dependencies": {
+        "referenced_by": [
+          "http_loadbalancer",
+          "app_firewall"
+        ]
       }
     },
     "service_policy_rule": {
       "description": "Manages service_policy_rule creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "asn_choice": {
           "fields": [
@@ -10216,13 +10493,111 @@
       }
     },
     "site": {
-      "description": "Manages virtual site object in given namespace. in F5 Distributed Cloud.",
+      "description": "Manages a Site resource in F5 Distributed Cloud for gcp vpc site specification. configuration.",
+      "category": "Infrastructure",
+      "tier": "Standard",
+      "import_format": "namespace/name",
+      "oneof_groups": {
+        "blocked_services_choice": {
+          "fields": [
+            "block_all_services",
+            "blocked_services",
+            "default_blocked_services"
+          ],
+          "default": "default_blocked_services"
+        },
+        "deployment": {
+          "fields": [
+            "cloud_credentials"
+          ]
+        },
+        "logs_receiver_choice": {
+          "fields": [
+            "log_receiver",
+            "logs_streaming_disabled"
+          ]
+        },
+        "private_connectivity_choice": {
+          "fields": [
+            "private_connect_disabled",
+            "private_connectivity"
+          ]
+        },
+        "site_type": {
+          "fields": [
+            "ingress_egress_gw",
+            "ingress_gw",
+            "voltstack_cluster"
+          ]
+        }
+      },
       "attributes": {
+        "address": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Geographical Address. Site's geographical address that can be used to determine its latitude and longitude."
+        },
+        "admin_password": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Secret. SecretType is used in an object to indicate a sensitive/confidential field."
+        },
         "annotations": {
           "type": "map",
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
+        },
+        "block_all_services": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "blocked_services_choice",
+          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option"
+        },
+        "blocked_services": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "blocked_services_choice",
+          "description": "Disable Node Local Services. Disable node local services on this site. Note: The chosen services will GET disabled on all nodes in the site."
+        },
+        "cloud_credentials": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "deployment",
+          "description": "Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+        },
+        "coordinates": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Site Coordinates. Coordinates of the site which provides the site physical location."
+        },
+        "custom_dns": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Custom DNS. Custom DNS is the configured for specify CE site."
+        },
+        "default_blocked_services": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "blocked_services_choice",
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -10236,6 +10611,29 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
+        "disk_size": {
+          "type": "int64",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Cloud Disk Size. Disk size to be used for this instance in GiB. 80 is 80 GiB."
+        },
+        "gcp_labels": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "GCP Labels. GCP Label is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in GCP console."
+        },
+        "gcp_region": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "GCP Region. Name for GCP Region."
+        },
         "id": {
           "type": "string",
           "required": false,
@@ -10243,11 +10641,58 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
+        "ingress_egress_gw": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_type",
+          "description": "[OneOf: ingress_egress_gw, ingress_gw, voltstack_cluster] GCP Ingress/Egress Gateway. Two interface GCP ingress/egress site."
+        },
+        "ingress_gw": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_type",
+          "description": "GCP Ingress Gateway. Single interface GCP ingress site."
+        },
+        "instance_type": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "GCP Instance Type for Node. Select Instance size based on performance needed ."
+        },
+        "kubernetes_upgrade_drain": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Node by Node Upgrade. Specify how worker nodes within a site will be upgraded."
+        },
         "labels": {
           "type": "map",
           "required": false,
           "optional": true,
           "description": "Labels is a user defined key value map that can be attached to resources for organization and filtering."
+        },
+        "log_receiver": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "logs_receiver_choice",
+          "description": "[OneOf: log_receiver, logs_streaming_disabled] Object reference. This type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+        },
+        "logs_streaming_disabled": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "logs_receiver_choice",
+          "description": "Enable this option"
         },
         "name": {
           "type": "string",
@@ -10263,25 +10708,74 @@
           "validation": "name",
           "description": "Namespace where the Site will be created."
         },
-        "site_selector": {
+        "offline_survivability_mode": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Label Selector. This type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects. A null label selector matches no objects. Label selector is immutable. Expressions is a list of strings of label selection expression. Each string has ',' separated values which are 'AND' and all strings are logically 'OR'. BNF for expression string \u003cselector-syntax\u003e ::= \u003crequirement\u003e | \u003crequirement\u003e ',' \u003cselector-syntax\u003e \u003crequirement\u003e ::= [!] KEY [ \u003cset-based-restriction\u003e | \u003cexact-match-restriction\u003e ] \u003cset-based-restriction\u003e ::= '' | \u003cinclusion-exclusion\u003e \u003cvalue-set\u003e \u003cinclusion-exclusion\u003e ::= \u003cinclusion\u003e | \u003cexclusion\u003e \u003cexclusion\u003e ::= 'notin' \u003cinclusion\u003e ::= 'in' \u003cvalue-set\u003e ::= '(' \u003cvalues\u003e ')' \u003cvalues\u003e ::= VALUE | VALUE ',' \u003cvalues\u003e \u003cexact-match-restriction\u003e ::= ['='|'=='|'!='] VALUE."
+          "description": "Offline Survivability Mode. Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7 days, even when the site is offline. The certificates needed to keep the services running on this site are signed using a local CA. Secrets would also be cached locally to handle the connectivity loss. When the mode is toggled, services will restart and traffic disruption will be seen."
         },
-        "site_type": {
+        "os": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Operating System Version. Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions."
+        },
+        "private_connect_disabled": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "private_connectivity_choice",
+          "description": "[OneOf: private_connect_disabled, private_connectivity] Enable this option"
+        },
+        "private_connectivity": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "private_connectivity_choice",
+          "description": "Private Connect Configuration. Private Connect Configuration."
+        },
+        "ssh_key": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: INVALID|REGIONAL_EDGE|CUSTOMER_EDGE|NGINX_ONE] Site Type. Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site. Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`."
+          "description": "Public SSH key. Public SSH key for accessing the site."
+        },
+        "sw": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "F5XC Software Version. Select the F5XC Software Version for the site. By default, latest available F5XC Software Version will be used. Refer to release notes to find required released SW versions."
+        },
+        "voltstack_cluster": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_type",
+          "description": "GCP App Stack Cluster. App Stack cluster of single interface GCP site."
         }
+      },
+      "dependencies": {
+        "references": [
+          "virtual_site"
+        ],
+        "referenced_by": [
+          "site_mesh_group"
+        ]
       }
     },
     "site_mesh_group": {
       "description": "Manages Site Mesh Group in system namespace of user. in F5 Distributed Cloud.",
+      "category": "Infrastructure",
+      "tier": "Advanced",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "mesh_choice": {
           "fields": [
@@ -10391,10 +10885,16 @@
           "is_block": true,
           "description": "Virtual Site (Sites in this group). Set of sites for which this mesh group config is valid. If 'Type' is Spoke, then it gives set of spoke sites. If 'Type' is Hub, then it gives set of hub sites. If 'Type' is Full Mesh, then it gives set of sites that are connected in full mesh."
         }
+      },
+      "dependencies": {
+        "references": [
+          "site"
+        ]
       }
     },
     "subnet": {
       "description": "Manages a Subnet resource in F5 Distributed Cloud for subnet object contains configuration for an interface of a vm/pod. it is created in user or shared namespace. configuration.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "connection_choice": {
           "fields": [
@@ -10485,6 +10985,9 @@
     },
     "tcp_loadbalancer": {
       "description": "Manages a TCP Load Balancer resource in F5 Distributed Cloud for load balancing TCP traffic across origin pools.",
+      "category": "Load Balancing",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "advertise_choice": {
           "fields": [
@@ -10785,10 +11288,17 @@
           "oneof_group": "loadbalancer_type",
           "description": "TLS over TCP with Auto Certs Choice. Choice for selecting TLS over TCP proxy with automatic certificates."
         }
+      },
+      "dependencies": {
+        "references": [
+          "origin_pool",
+          "healthcheck"
+        ]
       }
     },
     "tenant_configuration": {
       "description": "Manages a Tenant Configuration resource in F5 Distributed Cloud for tenant configuration specification. configuration.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -10860,6 +11370,7 @@
     },
     "trusted_ca_list": {
       "description": "Manages a Trusted CA List resource in F5 Distributed Cloud for trusted certificate authority list management.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -10918,6 +11429,7 @@
     },
     "tunnel": {
       "description": "Manages tunnel in a given namespace. If one already exist it will give a error. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -10997,6 +11509,7 @@
     },
     "udp_loadbalancer": {
       "description": "Manages a UDP Load Balancer resource in F5 Distributed Cloud for load balancing UDP traffic across origin pools.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "advertise_choice": {
           "fields": [
@@ -11201,6 +11714,7 @@
     },
     "usb_policy": {
       "description": "Manages new USB policy object. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "allowed_devices": {
           "type": "list",
@@ -11258,6 +11772,7 @@
     },
     "user_identification": {
       "description": "Manages user_identification creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -11315,6 +11830,7 @@
     },
     "virtual_host": {
       "description": "Manages virtual host in a given namespace. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "authentication_choice": {
           "fields": [
@@ -11764,6 +12280,9 @@
     },
     "virtual_network": {
       "description": "Manages virtual network in given namespace. in F5 Distributed Cloud.",
+      "category": "Networking",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "network_choice": {
           "fields": [
@@ -11860,10 +12379,21 @@
           "is_block": true,
           "description": "Static Routes. List of static routes on the virtual network."
         }
+      },
+      "dependencies": {
+        "references": [
+          "network_connector"
+        ],
+        "referenced_by": [
+          "network_connector"
+        ]
       }
     },
     "virtual_site": {
       "description": "Manages virtual site object in given namespace. in F5 Distributed Cloud.",
+      "category": "Infrastructure",
+      "tier": "Standard",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -11925,10 +12455,16 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "[Enum: INVALID|REGIONAL_EDGE|CUSTOMER_EDGE|NGINX_ONE] Site Type. Site Type which can either RE or CE Invalid type of site Regional Edge site Customer Edge site. Possible values are `INVALID`, `REGIONAL_EDGE`, `CUSTOMER_EDGE`, `NGINX_ONE`."
         }
+      },
+      "dependencies": {
+        "referenced_by": [
+          "site"
+        ]
       }
     },
     "voltstack_site": {
       "description": "Manages a Voltstack Site resource in F5 Distributed Cloud for deploying Volterra stack sites for edge computing.",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "blocked_services_choice": {
           "fields": [
@@ -12321,6 +12857,7 @@
     },
     "waf_exclusion_policy": {
       "description": "Manages WAF exclusion policy. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",
@@ -12378,6 +12915,9 @@
     },
     "workload": {
       "description": "Manages a Workload resource in F5 Distributed Cloud for workload. configuration.",
+      "category": "Container",
+      "tier": "Advanced",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "workload_choice": {
           "fields": [
@@ -12466,10 +13006,19 @@
           "oneof_group": "workload_choice",
           "description": "StatefulServiceType. StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc."
         }
+      },
+      "dependencies": {
+        "references": [
+          "virtual_k8s"
+        ],
+        "referenced_by": [
+          "virtual_k8s"
+        ]
       }
     },
     "workload_flavor": {
       "description": "Manages workload_flavor. in F5 Distributed Cloud.",
+      "import_format": "namespace/name",
       "attributes": {
         "annotations": {
           "type": "map",

@@ -6,7 +6,7 @@ Enriched OpenAPI 3.0.3 specifications for F5 Distributed Cloud (XC) platform.
 
 | Field | Value |
 |-------|-------|
-| **Version** | unknown-2.0.17 |
+| **Version** | unknown-2.0.20 |
 | **Release Date** | 2026-01-07 |
 | **OpenAPI Version** | 3.0.3 |
 

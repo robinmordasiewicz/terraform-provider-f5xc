@@ -3,7 +3,7 @@
   "info": {
     "title": "Ai Services",
     "description": "Query handling through inference routing with production and test modes. Positive and negative quality markers with detailed categorization capture assistant performance. Streaming connections support authenticated access, subscription lifecycles, and feature flags. IP provisioning services allocate infrastructure resources for model workloads across distributed systems.",
-    "version": "2.0.20",
+    "version": "2.0.21",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -12,6 +12,7 @@
       "name": "Proprietary",
       "url": "https://www.f5.com/company/policies/eula"
     },
+    "x-f5xc-description-long": "Query handling through inference routing with production and test modes. Positive and negative quality markers with detailed categorization capture assistant performance. Streaming connections support authenticated access, subscription lifecycles, and feature flags. IP provisioning services allocate infrastructure resources for model workloads across distributed systems.",
     "summary": "Natural language processing with quality signals and anomaly monitoring. Token authentication for data stream subscriptions.",
     "x-f5xc-cli-domain": "ai_services",
     "x-f5xc-best-practices": {
@@ -2469,7 +2470,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.706916+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823103+00:00"
           },
           "negative_feedback": {
             "$ref": "#/components/schemas/ai_assistantNegativeFeedbackDetails"
@@ -2575,7 +2576,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.706936+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823121+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -2928,7 +2929,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.706962+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823144+00:00"
           },
           "log_filters": {
             "type": "array",
@@ -2962,7 +2963,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.706969+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823150+00:00"
           },
           "object_name": {
             "type": "string",
@@ -3013,7 +3014,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.706977+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823157+00:00"
           },
           "type": {
             "$ref": "#/components/schemas/commonDashboardLinkType"
@@ -3176,7 +3177,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.706992+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823169+00:00"
           },
           "title": {
             "type": "string",
@@ -3195,7 +3196,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.706996+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823173+00:00"
           },
           "tooltip": {
             "type": "string",
@@ -3313,7 +3314,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707005+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823180+00:00"
           },
           "title": {
             "type": "string",
@@ -3332,7 +3333,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707009+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823184+00:00"
           },
           "url": {
             "type": "string",
@@ -3475,7 +3476,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707024+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823197+00:00"
           },
           "op": {
             "$ref": "#/components/schemas/commonFilterOperator"
@@ -3545,7 +3546,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707033+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823204+00:00"
           },
           "type": {
             "$ref": "#/components/schemas/commonDashboardLinkType"
@@ -3807,7 +3808,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707050+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823219+00:00"
           },
           "type": {
             "type": "string",
@@ -4091,7 +4092,7 @@
             "x-original-maxLength": 1024,
             "format": "hostname",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707073+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823241+00:00"
           },
           "rsp_code": {
             "type": "integer",
@@ -4251,7 +4252,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707089+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823255+00:00"
           },
           "state": {
             "type": "string",
@@ -4447,7 +4448,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707107+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823271+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4536,7 +4537,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707115+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823279+00:00"
           },
           "state": {
             "type": "string",
@@ -4785,7 +4786,7 @@
             "maxLength": 26,
             "minLength": 15,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707137+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823299+00:00"
           },
           "title": {
             "type": "string",
@@ -4804,7 +4805,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707142+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823303+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -4963,7 +4964,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707153+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823313+00:00"
           }
         },
         "x-f5xc-description-short": "Contains an arbitrary serialized protocol buffer message along with a URL that describes the type of the serialized message.",
@@ -4987,7 +4988,6 @@
         "title": "Empty",
         "x-displayname": "Empty",
         "x-ves-proto-message": "ves.io.schema.Empty",
-        "x-f5xc-description-short": "Can be used for messages where no values are needed.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaEmpty",
           "required_fields": [],
@@ -5194,7 +5194,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:24.707171+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:29.823329+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {

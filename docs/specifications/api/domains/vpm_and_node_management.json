@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Vpm And Node Management",
-    "description": "F5 Distributed Cloud Vpm And Node Management API specifications",
-    "version": "2.0.20",
+    "description": "Vpm And Node Management management for F5 Distributed Cloud. Provides APIs for configuring vpm and node management, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
+    "version": "2.0.21",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -12,6 +12,8 @@
       "name": "Proprietary",
       "url": "https://www.f5.com/company/policies/eula"
     },
+    "x-f5xc-description-long": "Vpm And Node Management management for F5 Distributed Cloud. Provides APIs for configuring vpm and node management, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
+    "summary": "Configure and manage vpm and node management settings, policies, and resources across your F5 Distributed Cloud deployment.",
     "x-f5xc-cli-domain": "vpm_and_node_management",
     "x-f5xc-best-practices": {
       "common_errors": [
@@ -344,7 +346,6 @@
         "title": "Empty",
         "x-displayname": "Empty",
         "x-ves-proto-message": "ves.io.schema.Empty",
-        "x-f5xc-description-short": "Can be used for messages where no values are needed.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaEmpty",
           "required_fields": [],

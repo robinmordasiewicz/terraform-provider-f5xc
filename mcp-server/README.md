@@ -1,153 +1,332 @@
-# MCP Registry
+# F5 Distributed Cloud Terraform MCP Server
 
-The MCP registry provides MCP clients with a list of MCP servers, like an app store for MCP servers.
+[![npm version](https://img.shields.io/npm/v/@robinmordasiewicz/f5xc-terraform-mcp)](https://www.npmjs.com/package/@robinmordasiewicz/f5xc-terraform-mcp)
+[![MIT License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
-[**📤 Publish my MCP server**](docs/modelcontextprotocol-io/quickstart.mdx) | [**⚡️ Live API docs**](https://registry.modelcontextprotocol.io/docs) | [**👀 Ecosystem vision**](docs/design/ecosystem-vision.md) | 📖 **[Full documentation](./docs)**
+Token-optimized Model Context Protocol (MCP) server for F5 Distributed Cloud Terraform provider documentation, API specifications, and subscription management.
 
-## Development Status
+This MCP server exposes tools for AI assistants to interact with the [F5 Distributed Cloud Terraform Provider](https://github.com/robinmordasiewicz/terraform-provider-f5xc), enabling intelligent infrastructure-as-code assistance.
 
-**2025-10-24 update**: The Registry API has entered an **API freeze (v0.1)** 🎉. For the next month or more, the API will remain stable with no breaking changes, allowing integrators to confidently implement support. This freeze applies to v0.1 while development continues on v0. We'll use this period to validate the API in real-world integrations and gather feedback to shape v1 for general availability. Thank you to everyone for your contributions and patience—your involvement has been key to getting us here!
+## Features
 
-**2025-09-08 update**: The registry has launched in preview 🎉 ([announcement blog post](https://blog.modelcontextprotocol.io/posts/2025-09-08-mcp-registry-preview/)). While the system is now more stable, this is still a preview release and breaking changes or data resets may occur. A general availability (GA) release will follow later. We'd love your feedback in [GitHub discussions](https://github.com/modelcontextprotocol/registry/discussions/new?category=ideas) or in the [#registry-dev Discord](https://discord.com/channels/1358869848138059966/1369487942862504016) ([joining details here](https://modelcontextprotocol.io/community/communication)).
+- **270+ OpenAPI Specifications** - Complete F5XC API documentation for AI-assisted configuration
+- **250+ Terraform Resources** - Full documentation for all provider resources and data sources
+- **Token-Optimized Design** - 14 tools consolidated to 7 (~75% token reduction)
+- **Subscription Tier Management** - Check feature availability across STANDARD/ADVANCED/PREMIUM tiers
+- **Addon Service Workflows** - Manage F5XC service activations
+- **Resource Metadata** - Deterministic AI configuration generation with validation rules, defaults, and one-of schemas
 
-Current key maintainers:
-- **Adam Jones** (Anthropic) [@domdomegg](https://github.com/domdomegg)  
-- **Tadas Antanavicius** (PulseMCP) [@tadasant](https://github.com/tadasant)
-- **Toby Padilla** (GitHub) [@toby](https://github.com/toby)
-- **Radoslav (Rado) Dimitrov** (Stacklok) [@rdimitrov](https://github.com/rdimitrov)
+## Installation
 
-## Contributing
-
-We use multiple channels for collaboration - see [modelcontextprotocol.io/community/communication](https://modelcontextprotocol.io/community/communication).
-
-Often (but not always) ideas flow through this pipeline:
-
-- **[Discord](https://modelcontextprotocol.io/community/communication)** - Real-time community discussions
-- **[Discussions](https://github.com/modelcontextprotocol/registry/discussions)** - Propose and discuss product/technical requirements
-- **[Issues](https://github.com/modelcontextprotocol/registry/issues)** - Track well-scoped technical work  
-- **[Pull Requests](https://github.com/modelcontextprotocol/registry/pulls)** - Contribute work towards issues
-
-### Quick start:
-
-#### Pre-requisites
-
-- **Docker**
-- **Go 1.24.x**
-- **ko** - Container image builder for Go ([installation instructions](https://ko.build/install/))
-- **golangci-lint v2.4.0**
-
-#### Running the server
+### Global Installation
 
 ```bash
-# Start full development environment
-make dev-compose
+npm install -g @robinmordasiewicz/f5xc-terraform-mcp
 ```
 
-This starts the registry at [`localhost:8080`](http://localhost:8080) with PostgreSQL. The database uses ephemeral storage and is reset each time you restart the containers, ensuring a clean state for development and testing.
+### Usage with Claude Desktop
 
-**Note:** The registry uses [ko](https://ko.build) to build container images. The `make dev-compose` command automatically builds the registry image with ko and loads it into your local Docker daemon before starting the services.
+Add to your `claude_desktop_config.json`:
 
-By default, the registry seeds from the production API with a filtered subset of servers (to keep startup fast). This ensures your local environment mirrors production behavior and all seed data passes validation. For offline development you can seed from a file without validation with `MCP_REGISTRY_SEED_FROM=data/seed.json MCP_REGISTRY_ENABLE_REGISTRY_VALIDATION=false make dev-compose`.
+```json
+{
+  "mcpServers": {
+    "f5xc-terraform": {
+      "command": "npx",
+      "args": ["-y", "@robinmordasiewicz/f5xc-terraform-mcp"]
+    }
+  }
+}
+```
 
-The setup can be configured with environment variables in [docker-compose.yml](./docker-compose.yml) - see [.env.example](./.env.example) for a reference.
-
-<details>
-<summary>Alternative: Running a pre-built Docker image</summary>
-
-Pre-built Docker images are automatically published to GitHub Container Registry:
+### Manual CLI Usage
 
 ```bash
-# Run latest stable release
-docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:latest
+# Run the MCP server
+npx @robinmordasiewicz/f5xc-terraform-mcp
 
-# Run latest from main branch (continuous deployment)
-docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:main
-
-# Run specific release version
-docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:v1.0.0
-
-# Run development build from main branch
-docker run -p 8080:8080 ghcr.io/modelcontextprotocol/registry:main-20250906-abc123d
+# Or install globally and run directly
+f5xc-terraform-mcp
 ```
 
-**Available tags:**
-- **Releases**: `latest`, `v1.0.0`, `v1.1.0`, etc.
-- **Continuous**: `main` (latest main branch build)
-- **Development**: `main-<date>-<sha>` (specific commit builds)
+## Available Tools
 
-</details>
+| Tool | Description |
+|------|-------------|
+| `f5xc_terraform_discover` | Meta-tool for discovering available tools with optional schema details |
+| `f5xc_terraform_docs` | Search, get, or list documentation (resources, data-sources, functions, guides) |
+| `f5xc_terraform_api` | Query 270+ OpenAPI specs (search, get, find endpoints, schema definitions) |
+| `f5xc_terraform_subscription` | Check subscription tier requirements for resources and properties |
+| `f5xc_terraform_addon` | Manage addon services (list, check activation, workflow) |
+| `f5xc_terraform_metadata` | Resource metadata for deterministic AI config generation |
+| `f5xc_terraform_get_summary` | Get provider summary with documentation and API specs overview |
 
-#### Publishing a server
+## Tool Details
 
-To publish a server, we've built a simple CLI. You can use it with:
+### Documentation Tool (`f5xc_terraform_docs`)
+
+Search and retrieve Terraform provider documentation.
+
+```typescript
+// Search for resources
+await f5xc_terraform_docs({
+  operation: "search",
+  query: "http_loadbalancer",
+  type: "resource",
+  limit: 10
+});
+
+// Get specific resource documentation
+await f5xc_terraform_docs({
+  operation: "get",
+  name: "http_loadbalancer",
+  type: "resource"
+});
+
+// List all resources
+await f5xc_terraform_docs({
+  operation: "list",
+  type: "resource"
+});
+```
+
+### API Specification Tool (`f5xc_terraform_api`)
+
+Query OpenAPI specifications for API details.
+
+```typescript
+// Search API specs
+await f5xc_terraform_api({
+  operation: "search",
+  query: "http_loadbalancer",
+  limit: 10
+});
+
+// Get full spec with endpoints
+await f5xc_terraform_api({
+  operation: "get",
+  name: "http_loadbalancer",
+  include_paths: true,
+  include_definitions: false
+});
+
+// Find endpoints matching pattern
+await f5xc_terraform_api({
+  operation: "find_endpoints",
+  pattern: "/namespaces",
+  method: "GET"
+});
+
+// Get schema definition
+await f5xc_terraform_api({
+  operation: "get_definition",
+  spec_name: "http_loadbalancer",
+  definition_name: "HTTPLoadBalancerSpec"
+});
+```
+
+### Subscription Tool (`f5xc_terraform_subscription`)
+
+Check subscription tier requirements.
+
+```typescript
+// Get resource tier requirements
+await f5xc_terraform_subscription({
+  operation: "resource",
+  resource_name: "http_loadbalancer"
+});
+
+// Check if property requires Advanced tier
+await f5xc_terraform_subscription({
+  operation: "property",
+  resource_name: "http_loadbalancer",
+  property_path: "enable_malicious_user_detection"
+});
+```
+
+### Addon Service Tool (`f5xc_terraform_addon`)
+
+Manage F5XC addon services.
+
+```typescript
+// List available addon services
+await f5xc_terraform_addon({
+  operation: "list"
+});
+
+// Check service activation status
+await f5xc_terraform_addon({
+  operation: "check",
+  service_name: "wasm"
+});
+
+// Get activation workflow guidance
+await f5xc_terraform_addon({
+  operation: "workflow",
+  service_name: "security_app_protect"
+});
+```
+
+### Metadata Tool (`f5xc_terraform_metadata`)
+
+Get resource metadata for deterministic AI configuration.
+
+```typescript
+// Get one-of field options
+await f5xc_terraform_metadata({
+  operation: "oneof",
+  resource: "http_loadbalancer",
+  attribute: "http_type"
+});
+
+// Get validation patterns
+await f5xc_terraform_metadata({
+  operation: "validation",
+  pattern: "name"
+});
+
+// Get default values
+await f5xc_terraform_metadata({
+  operation: "defaults",
+  resource: "namespace"
+});
+
+// Get enums
+await f5xc_terraform_metadata({
+  operation: "enums",
+  resource: "http_loadbalancer"
+});
+
+// Check attribute properties
+await f5xc_terraform_metadata({
+  operation: "attribute",
+  resource: "http_loadbalancer",
+  attribute: "name"
+});
+
+// Check requires_replace
+await f5xc_terraform_metadata({
+  operation: "requires_replace",
+  resource: "http_loadbalancer",
+  attribute: "name"
+});
+
+// Get resource dependencies
+await f5xc_terraform_metadata({
+  operation: "dependencies",
+  resource: "http_loadbalancer"
+});
+
+// Get troubleshooting info
+await f5xc_terraform_metadata({
+  operation: "troubleshoot",
+  error_code: "NOT_FOUND"
+});
+
+// Get full resource summary
+await f5xc_terraform_metadata({
+  operation: "summary",
+  resource: "namespace"
+});
+```
+
+## Response Format
+
+All tools support both `markdown` (default) and `json` response formats:
+
+```typescript
+await f5xc_terraform_get_summary({
+  response_format: "json"
+});
+```
+
+## Token Optimization
+
+This MCP server uses a token-optimized design:
+
+- **14 original tools consolidated to 7** (~75% token reduction)
+- **Discovery meta-tool** enables lazy schema loading
+- **Shared parameter descriptions** reduce schema size
+- **Response truncation** for large payloads (50,000 character limit)
+
+## F5XC Provider Quick Start
+
+For Terraform configuration:
+
+```hcl
+terraform {
+  required_providers {
+    f5xc = {
+      source  = "robinmordasiewicz/f5xc"
+      version = ">= 2.0.0"
+    }
+  }
+}
+
+provider "f5xc" {
+  api_url   = "https://your-tenant.console.ves.volterra.io"
+  api_token = var.f5xc_api_token
+}
+
+# Create a namespace
+resource "f5xc_namespace" "example" {
+  name = "my-namespace"
+}
+```
+
+## Resources Supported
+
+- **250+ Terraform Resources** - Full CRUD for F5XC services
+- **40+ Data Sources** - Read-only access to F5XC configurations
+- **2 Provider Functions** - `blindfold` and `blindfold_file` for secret management
+- **Multiple Guides** - Step-by-step tutorials for common use cases
+
+## Subscription Tiers
+
+F5XC resources are organized by subscription tier:
+
+| Tier | Description |
+|------|-------------|
+| **STANDARD** | Core networking and security features |
+| **ADVANCED** | Enhanced WAF, bot defense, and advanced security |
+| **PREMIUM** | Enterprise features and dedicated support |
+
+Use the subscription tool to check which tier a resource or feature requires.
+
+## Documentation
+
+- [Terraform Provider Documentation](https://registry.terraform.io/providers/robinmordasiewicz/f5xc/latest/docs)
+- [F5 Distributed Cloud Docs](https://docs.cloud.f5.com/)
+- [MCP Protocol Documentation](https://modelcontextprotocol.io/)
+
+## Version Synchronization
+
+This npm package version is automatically synchronized with GitHub releases. Both the Terraform provider and MCP server share the same version number for consistency.
+
+## Development
 
 ```bash
-# Build the latest CLI
-make publisher
+# Clone the repository
+git clone https://github.com/robinmordasiewicz/terraform-provider-f5xc.git
 
-# Use it!
-./bin/mcp-publisher --help
+# Navigate to MCP server directory
+cd mcp-server
+
+# Install dependencies
+npm install
+
+# Build the server
+npm run build
+
+# Run in development mode with hot reload
+npm run dev
 ```
 
-See [the publisher guide](./docs/modelcontextprotocol-io/quickstart.mdx) for more details.
+## License
 
-#### Other commands
+This project is licensed under the [MIT License](LICENSE).
 
-```bash
-# Run lint, unit tests and integration tests
-make check
-```
+## Support
 
-There are also a few more helpful commands for development. Run `make help` to learn more, or look in [Makefile](./Makefile).
-
-<!--
-For Claude and other AI tools: Always prefer make targets over custom commands where possible.
--->
-
-## Architecture
-
-### Project Structure
-
-```
-├── cmd/                     # Application entry points
-│   └── publisher/           # Server publishing tool
-├── data/                    # Seed data
-├── deploy/                  # Deployment configuration (Pulumi)
-├── docs/                    # Documentation
-├── internal/                # Private application code
-│   ├── api/                 # HTTP handlers and routing
-│   ├── auth/                # Authentication (GitHub OAuth, JWT, namespace blocking)
-│   ├── config/              # Configuration management
-│   ├── database/            # Data persistence (PostgreSQL)
-│   ├── service/             # Business logic
-│   ├── telemetry/           # Metrics and monitoring
-│   └── validators/          # Input validation
-├── pkg/                     # Public packages
-│   ├── api/                 # API types and structures
-│   │   └── v0/              # Version 0 API types
-│   └── model/               # Data models for server.json
-├── scripts/                 # Development and testing scripts
-├── tests/                   # Integration tests
-└── tools/                   # CLI tools and utilities
-    └── validate-*.sh        # Schema validation tools
-```
-
-### Authentication
-
-Publishing supports multiple authentication methods:
-- **GitHub OAuth** - For publishing by logging into GitHub
-- **GitHub OIDC** - For publishing from GitHub Actions
-- **DNS verification** - For proving ownership of a domain and its subdomains
-- **HTTP verification** - For proving ownership of a domain
-
-The registry validates namespace ownership when publishing. E.g. to publish...:
-- `io.github.domdomegg/my-cool-mcp` you must login to GitHub as `domdomegg`, or be in a GitHub Action on domdomegg's repos
-- `me.adamjones/my-cool-mcp` you must prove ownership of `adamjones.me` via DNS or HTTP challenge
-
-## Community Projects
-
-Check out [community projects](docs/community-projects.md) to explore notable registry-related work created by the community.
-
-## More documentation
-
-See the [documentation](./docs) for more details if your question has not been answered here!
+- [GitHub Issues](https://github.com/robinmordasiewicz/terraform-provider-f5xc/issues)
+- [F5 Community](https://community.f5.com/)

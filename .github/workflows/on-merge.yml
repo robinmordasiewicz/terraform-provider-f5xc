@@ -63,6 +63,7 @@ jobs:
       mcp-changed: ${{ steps.changes.outputs.mcp }}
       docs-changed: ${{ steps.changes.outputs.docs }}
       has-any-changes: ${{ steps.changes.outputs.has_any_changes }}
+      only-mcp-config-files: ${{ steps.changes.outputs.only_mcp_config_files }}
       is-bot-commit: ${{ steps.check-author.outputs.is_bot }}
       should-process: ${{ steps.should-process.outputs.result }}
       needs-regeneration: ${{ steps.should-process.outputs.needs_regeneration }}
@@ -91,7 +92,8 @@ jobs:
           # Check for auto-generated commit messages
           if [[ "$MESSAGE" == "chore: auto-regenerate"* ]] || \
              [[ "$MESSAGE" == "docs: auto-generate"* ]] || \
-             [[ "$MESSAGE" == "chore: regenerate provider"* ]]; then
+             [[ "$MESSAGE" == "chore: regenerate provider"* ]] || \
+             [[ "$MESSAGE" == "chore(mcp): update server.json"* ]]; then
             IS_BOT="true"
             echo "Detected auto-generated commit message"
           fi
@@ -170,6 +172,17 @@ jobs:
             echo "has_any_changes=false" >> $GITHUB_OUTPUT
           fi
 
+          # Check if ONLY MCP config files changed (server.json/manifest.json)
+          # This happens when the mcp-unified job updates these files after publishing
+          # We should skip processing in this case to prevent infinite loops
+          ONLY_MCP_CONFIG_FILES=$(echo "$CHANGED" | grep -vE '^mcp-server/(server\.json|manifest\.json)' || true)
+          if [ -z "$ONLY_MCP_CONFIG_FILES" ] && [ -n "$CHANGED" ]; then
+            echo "only_mcp_config_files=true" >> $GITHUB_OUTPUT
+            echo "Only server.json/manifest.json changed (prevent loop)"
+          else
+            echo "only_mcp_config_files=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Determine if processing should proceed
         id: should-process
         run: |
@@ -180,6 +193,7 @@ jobs:
           FUNCTIONS="${{ steps.changes.outputs.functions }}"
           MCP="${{ steps.changes.outputs.mcp }}"
           HAS_ANY_CHANGES="${{ steps.changes.outputs.has_any_changes }}"
+          ONLY_MCP_CONFIG_FILES="${{ steps.changes.outputs.only_mcp_config_files }}"
 
           # Determine if regeneration would be needed
           NEEDS_REGEN="false"
@@ -194,8 +208,12 @@ jobs:
             NEEDS_MCP="true"
           fi
 
-          if [[ "$IS_BOT" == "true" ]]; then
-            # Bot commits (from regeneration PR merge) should proceed to tagging
+          # FIX: Skip if ONLY server.json/manifest.json changed (prevent infinite loop)
+          if [[ "$ONLY_MCP_CONFIG_FILES" == "true" ]]; then
+            echo "Skipping: Only server.json/manifest.json changed (prevent workflow loop)"
+            echo "result=false" >> $GITHUB_OUTPUT
+          elif [[ "$IS_BOT" == "true" ]]; then
+            # Bot commits (from regeneration PR merge or server.json update) should proceed to tagging
             echo "Processing: Bot commit - will proceed to tag/release"
             echo "result=true" >> $GITHUB_OUTPUT
           elif [[ "$NEEDS_REGEN" == "false" && "$NEEDS_MCP" == "false" ]]; then

@@ -31,6 +31,10 @@ import {
   getAllErrorCodes,
   getDiagnosticTips,
   getEnhancedMetadataSummary,
+  getAttributeSyntaxGuidance,
+  generateTerraformSyntaxGuide,
+  validateConfigurationSyntax,
+  getOneOfGroupsQuickReference,
 } from '../services/metadata.js';
 
 // =============================================================================
@@ -74,6 +78,8 @@ export async function handleMetadata(input: MetadataInput): Promise<string> {
       return handleTroubleshoot(input, response_format);
     case 'summary':
       return handleSummary(response_format);
+    case 'syntax':
+      return handleSyntax(input, response_format);
     default:
       throw new Error(`Unknown operation: ${operation}`);
   }
@@ -136,6 +142,19 @@ function handleOneOf(input: MetadataInput, format: ResponseFormat): string {
       lines.push(`**Description**: ${group.description}`);
     }
     lines.push('');
+    lines.push('**Syntax Examples**:');
+    lines.push('');
+    for (const field of group.fields) {
+      const guidance = getAttributeSyntaxGuidance(resource, field);
+      if (guidance) {
+        lines.push(`### \`${field}\``);
+        lines.push('');
+        lines.push('```hcl');
+        lines.push(guidance.example);
+        lines.push('```');
+        lines.push('');
+      }
+    }
   }
 
   return lines.join('\n');
@@ -405,6 +424,29 @@ function handleAttribute(input: MetadataInput, format: ResponseFormat): string {
   if (attrMeta.default !== undefined) {
     lines.push('');
     lines.push(`**Default**: ${JSON.stringify(attrMeta.default)}`);
+  }
+
+  // Add syntax guidance for this attribute
+  const syntaxGuidance = getAttributeSyntaxGuidance(resource, attribute);
+  if (syntaxGuidance) {
+    lines.push('');
+    lines.push('## Terraform Syntax');
+    lines.push('');
+    lines.push('**Correct Syntax**: `' + syntaxGuidance.correctSyntax + '`');
+    lines.push('');
+    lines.push('**Example**:');
+    lines.push('```hcl');
+    lines.push(syntaxGuidance.example);
+    lines.push('```');
+    lines.push('');
+
+    if (syntaxGuidance.isBlock) {
+      lines.push('**Important**: This is a **block-type** attribute. Use block syntax, not assignment.');
+      lines.push('');
+      lines.push('**Common Mistake**: `' + syntaxGuidance.incorrectSyntax.split('  #')[0].trim() + '`');
+      lines.push('');
+      lines.push(syntaxGuidance.incorrectSyntax);
+    }
   }
 
   return lines.join('\n');
@@ -849,9 +891,118 @@ function handleSummary(format: ResponseFormat): string {
   lines.push('| `tier` | Get subscription tier requirements for resources |');
   lines.push('| `dependencies` | Get resource dependencies and creation order |');
   lines.push('| `troubleshoot` | Get error codes, causes, and remediation steps |');
+  lines.push('| `syntax` | Get Terraform syntax guidance (block vs attribute) |');
   lines.push('| `summary` | This summary |');
 
   return lines.join('\n');
+}
+
+// =============================================================================
+// SYNTAX GUIDANCE HANDLER
+// =============================================================================
+
+function handleSyntax(input: MetadataInput, format: ResponseFormat): string {
+  const { resource, attribute } = input;
+
+  if (!resource) {
+    return formatError(
+      'Missing parameter',
+      'resource parameter is required for syntax operation',
+      format,
+    );
+  }
+
+  // If attribute specified, return guidance for that specific attribute
+  if (attribute) {
+    const guidance = getAttributeSyntaxGuidance(resource, attribute);
+
+    if (!guidance) {
+      return formatError(
+        'Attribute not found',
+        `Attribute '${attribute}' not found in resource '${resource}'`,
+        format,
+      );
+    }
+
+    if (format === ResponseFormat.JSON) {
+      return JSON.stringify(
+        {
+          operation: 'syntax',
+          resource,
+          attribute,
+          ...guidance,
+        },
+        null,
+        2,
+      );
+    }
+
+    // Markdown format for specific attribute
+    const lines: string[] = [
+      `# Syntax Guidance: ${resource}.${attribute}`,
+      '',
+      '## Correct Usage',
+      '',
+      `**Type**: ${guidance.terraformType}`,
+      '',
+      `**Correct Syntax**: \`${guidance.correctSyntax}\``,
+      '',
+      '**Example**:',
+      '```hcl',
+      guidance.example,
+      '```',
+      '',
+    ];
+
+    if (guidance.isOneOf) {
+      lines.push('## OneOf Group');
+      lines.push('');
+      lines.push(`This attribute is part of OneOf group: \`${guidance.oneOfGroup}\``);
+      lines.push('');
+      lines.push('**Mutually Exclusive**: Only one attribute from this group can be set.');
+      lines.push('');
+    }
+
+    lines.push('## Common Mistakes');
+    lines.push('');
+    lines.push(`**Incorrect**: \`${guidance.incorrectSyntax.split('  #')[0].trim()}\``);
+    lines.push('');
+    lines.push(guidance.incorrectSyntax);
+    lines.push('');
+
+    return lines.join('\n');
+  }
+
+  // Return full syntax guide for the resource
+  const guide = generateTerraformSyntaxGuide(resource);
+
+  if (!guide) {
+    return formatError(
+      'Resource not found',
+      `Resource '${resource}' not found in metadata`,
+      format,
+    );
+  }
+
+  if (format === ResponseFormat.JSON) {
+    return JSON.stringify(
+      {
+        operation: 'syntax',
+        resource,
+        totalBlocks: guide.totalBlocks,
+        totalAttributes: guide.totalAttributes,
+        totalOneOfGroups: guide.totalOneOfGroups,
+        blocks: guide.blocks,
+        attributes: guide.attributes,
+        oneOfGroups: guide.oneOfGroups,
+      },
+      null,
+      2,
+    );
+  }
+
+  // Return the generated markdown guide
+  return guide.syntaxGuide;
 }
 
 // =============================================================================
@@ -878,5 +1029,5 @@ function formatNoData(title: string, message: string, format: ResponseFormat): s
 
 export const METADATA_TOOL_DEFINITION = {
   name: 'f5xc_terraform_metadata',
-  description: 'Query resource metadata for deterministic Terraform configuration generation. Operations: oneof (mutually exclusive fields), validation (regex/range patterns), defaults, enums, attribute (full metadata), requires_replace, tier (subscription requirements), dependencies (creation order), troubleshoot (error remediation), summary.',
+  description: 'Query resource metadata for deterministic Terraform configuration generation. Operations: oneof (mutually exclusive fields), validation (regex/range patterns), defaults, enums, attribute (full metadata), requires_replace, tier (subscription requirements), dependencies (creation order), troubleshoot (error remediation), syntax (correct Terraform block vs attribute syntax), summary.',
 };

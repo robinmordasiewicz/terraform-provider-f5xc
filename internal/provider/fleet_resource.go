@@ -1650,7 +1650,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				Delete: true,
 			}),
 			"allow_all_usb": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Enable this option",
 			},
 			"blocked_services": schema.ListNestedBlock{
 				MarkdownDescription: "Disable node local services on this site.",
@@ -1663,13 +1663,13 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 					},
 					Blocks: map[string]schema.Block{
 						"dns": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"ssh": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"web_user_interface": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 					},
 				},
@@ -1702,7 +1702,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 							},
 							Blocks: map[string]schema.Block{
 								"active_backup": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"lacp": schema.SingleNestedBlock{
 									MarkdownDescription: "LACP parameters. LACP parameters for the bond device.",
@@ -1761,16 +1761,16 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"default_config": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_config, device_list, interface_list; Default: default_config] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: default_config, device_list, interface_list; Default: default_config] Enable this option",
 			},
 			"default_sriov_interface": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Enable this option",
 			},
 			"default_storage_class": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: default_storage_class, storage_class_list; Default: default_storage_class] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: default_storage_class, storage_class_list; Default: default_storage_class] Enable this option",
 			},
 			"deny_all_usb": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"device_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Add device for all interfaces belonging to this fleet.",
@@ -1846,13 +1846,13 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"disable_gpu": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Enable this option",
 			},
 			"disable_vm": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_vm, enable_vm; Default: disable_vm] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_vm, enable_vm; Default: disable_vm] Enable this option",
 			},
 			"enable_gpu": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"enable_vgpu": schema.SingleNestedBlock{
 				MarkdownDescription: "Licensing configuration for NVIDIA vGPU.",
@@ -1947,7 +1947,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable_upgrade_drain": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_upgrade_drain": schema.SingleNestedBlock{
 						MarkdownDescription: "Specify batch upgrade settings for worker nodes within a site.",
@@ -1963,10 +1963,10 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						},
 						Blocks: map[string]schema.Block{
 							"disable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_vega_upgrade_mode": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1994,7 +1994,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"logs_streaming_disabled": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"network_connectors": schema.ListNestedBlock{
 				MarkdownDescription: "Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet.",
@@ -2075,19 +2075,19 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 				},
 			},
 			"no_bond_devices": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_dc_cluster_group": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"no_storage_device": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_storage_device, storage_device_list; Default: no_storage_device] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: no_storage_device, storage_device_list; Default: no_storage_device] Enable this option",
 			},
 			"no_storage_interfaces": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_storage_interfaces, storage_interface_list; Default: no_storage_interfaces] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: no_storage_interfaces, storage_interface_list; Default: no_storage_interfaces] Enable this option",
 			},
 			"no_storage_static_routes": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: no_storage_static_routes, storage_static_routes; Default: no_storage_static_routes] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: no_storage_static_routes, storage_static_routes; Default: no_storage_static_routes] Enable this option",
 			},
 			"outside_virtual_network": schema.ListNestedBlock{
 				MarkdownDescription: "Default outside (site local) virtual network for the fleet.",
@@ -2137,15 +2137,15 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 						Attributes:          map[string]schema.Attribute{},
 						Blocks: map[string]schema.Block{
 							"jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"no_jumbo": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
 					"perf_mode_l7_enhanced": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -2343,7 +2343,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 									MarkdownDescription: "Advanced Parameters. Map of parameter name and string value.",
 								},
 								"custom_storage": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"hpe_storage": schema.SingleNestedBlock{
 									MarkdownDescription: "HPE Storage. Device configuration for HPE Storage.",
@@ -2669,7 +2669,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																},
 																Blocks: map[string]schema.Block{
 																	"no_qos": schema.SingleNestedBlock{
-																		MarkdownDescription: "Can be used for messages where no values are needed.",
+																		MarkdownDescription: "Enable this option",
 																	},
 																},
 															},
@@ -2730,7 +2730,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 													Blocks: map[string]schema.Block{
 														"no_qos": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},
@@ -2837,7 +2837,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													MarkdownDescription: "List of labels for Storage Device used in NetApp ONTAP. It is used for storage class selection.",
 												},
 												"no_chap": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"password": schema.SingleNestedBlock{
 													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -2942,7 +2942,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 																},
 																Blocks: map[string]schema.Block{
 																	"no_qos": schema.SingleNestedBlock{
-																		MarkdownDescription: "Can be used for messages where no values are needed.",
+																		MarkdownDescription: "Enable this option",
 																	},
 																},
 															},
@@ -3090,7 +3090,7 @@ func (r *FleetResource) Schema(ctx context.Context, req resource.SchemaRequest, 
 													},
 													Blocks: map[string]schema.Block{
 														"no_qos": schema.SingleNestedBlock{
-															MarkdownDescription: "Can be used for messages where no values are needed.",
+															MarkdownDescription: "Enable this option",
 														},
 													},
 												},

@@ -74,15 +74,15 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`rules`](#rules) block supports the following:
 
-<a id="rules-client-asn"></a>&#x2022; [`client_asn`](#rules-client-asn) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-client-asn"></a>&#x2022; [`client_asn`](#rules-client-asn) - Optional Block<br>Enable this option
 
-<a id="rules-client-city"></a>&#x2022; [`client_city`](#rules-client-city) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-client-city"></a>&#x2022; [`client_city`](#rules-client-city) - Optional Block<br>Enable this option
 
-<a id="rules-client-country"></a>&#x2022; [`client_country`](#rules-client-country) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-client-country"></a>&#x2022; [`client_country`](#rules-client-country) - Optional Block<br>Enable this option
 
-<a id="rules-client-ip"></a>&#x2022; [`client_ip`](#rules-client-ip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-client-ip"></a>&#x2022; [`client_ip`](#rules-client-ip) - Optional Block<br>Enable this option
 
-<a id="rules-client-region"></a>&#x2022; [`client_region`](#rules-client-region) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-client-region"></a>&#x2022; [`client_region`](#rules-client-region) - Optional Block<br>Enable this option
 
 <a id="rules-cookie-name"></a>&#x2022; [`cookie_name`](#rules-cookie-name) - Optional String<br>Use the HTTP cookie value for the given name as user
 
@@ -90,19 +90,19 @@ A [`rules`](#rules) block supports the following:
 
 <a id="rules-ip-and-http-header-name"></a>&#x2022; [`ip_and_http_header_name`](#rules-ip-and-http-header-name) - Optional String<br>Name of HTTP header from which the value should be extracted
 
-<a id="rules-ip-and-ja4-tls-fingerprint"></a>&#x2022; [`ip_and_ja4_tls_fingerprint`](#rules-ip-and-ja4-tls-fingerprint) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-ip-and-ja4-tls-fingerprint"></a>&#x2022; [`ip_and_ja4_tls_fingerprint`](#rules-ip-and-ja4-tls-fingerprint) - Optional Block<br>Enable this option
 
-<a id="rules-ip-and-tls-fingerprint"></a>&#x2022; [`ip_and_tls_fingerprint`](#rules-ip-and-tls-fingerprint) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-ip-and-tls-fingerprint"></a>&#x2022; [`ip_and_tls_fingerprint`](#rules-ip-and-tls-fingerprint) - Optional Block<br>Enable this option
 
-<a id="rules-ja4-tls-fingerprint"></a>&#x2022; [`ja4_tls_fingerprint`](#rules-ja4-tls-fingerprint) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-ja4-tls-fingerprint"></a>&#x2022; [`ja4_tls_fingerprint`](#rules-ja4-tls-fingerprint) - Optional Block<br>Enable this option
 
 <a id="rules-jwt-claim-name"></a>&#x2022; [`jwt_claim_name`](#rules-jwt-claim-name) - Optional String<br>Use the JWT claim value as user identifier
 
-<a id="rules-none"></a>&#x2022; [`none`](#rules-none) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-none"></a>&#x2022; [`none`](#rules-none) - Optional Block<br>Enable this option
 
 <a id="rules-query-param-key"></a>&#x2022; [`query_param_key`](#rules-query-param-key) - Optional String<br>Use the query parameter value for the given key as user
 
-<a id="rules-tls-fingerprint"></a>&#x2022; [`tls_fingerprint`](#rules-tls-fingerprint) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-tls-fingerprint"></a>&#x2022; [`tls_fingerprint`](#rules-tls-fingerprint) - Optional Block<br>Enable this option
 
 #### Timeouts
 

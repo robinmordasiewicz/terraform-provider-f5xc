@@ -312,11 +312,10 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 				},
 			},
 			"namespace": schema.StringAttribute{
-				MarkdownDescription: "Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted.",
-				Optional:            true,
-				Computed:            true,
+				MarkdownDescription: "Namespace where the Cloud Connect will be created.",
+				Required:            true,
 				PlanModifiers: []planmodifier.String{
-					stringplanmodifier.UseStateForUnknown(),
+					stringplanmodifier.RequiresReplace(),
 				},
 				Validators: []validator.String{
 					validators.NamespaceValidator(),
@@ -442,7 +441,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"all_route_tables": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"selective_route_tables": schema.SingleNestedBlock{
 													MarkdownDescription: "AWS Route Table. AWS Route Table.",
@@ -460,7 +459,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											MarkdownDescription: "Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall.",
 										},
 										"manual_routing": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -539,7 +538,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"all_route_tables": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"selective_route_tables": schema.SingleNestedBlock{
 													MarkdownDescription: "Azure Route Table. Azure Route Table.",
@@ -557,7 +556,7 @@ func (r *CloudConnectResource) Schema(ctx context.Context, req resource.SchemaRe
 											MarkdownDescription: "Add labels for the VNet attachments. These labels can then be used in policies such as enhanced firewall policies.",
 										},
 										"manual_routing": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 									},
 								},
@@ -811,8 +810,6 @@ func (r *CloudConnectResource) Create(ctx context.Context, req resource.CreateRe
 	}
 
 	data.ID = types.StringValue(apiResource.Metadata.Name)
-	// For resources without namespace in API path, namespace is computed from API response
-	data.Namespace = types.StringValue(apiResource.Metadata.Namespace)
 
 	// Unmarshal spec fields from API response to Terraform state
 	// This ensures computed nested fields (like tenant in Object Reference blocks) have known values
@@ -1216,17 +1213,19 @@ func (r *CloudConnectResource) Delete(ctx context.Context, req resource.DeleteRe
 }
 
 func (r *CloudConnectResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
-	// Import ID format: name (no namespace for this resource type)
-	name := req.ID
-	if name == "" {
+	// Import ID format: namespace/name
+	parts := strings.Split(req.ID, "/")
+	if len(parts) != 2 || parts[0] == "" || parts[1] == "" {
 		resp.Diagnostics.AddError(
 			"Invalid Import ID",
-			"Expected import ID to be the resource name, got empty string",
+			fmt.Sprintf("Expected import ID format: namespace/name, got: %s", req.ID),
 		)
 		return
 	}
+	namespace := parts[0]
+	name := parts[1]
 
-	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), "")...)
+	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("namespace"), namespace)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("name"), name)...)
 	resp.Diagnostics.Append(resp.State.SetAttribute(ctx, path.Root("id"), name)...)
 }

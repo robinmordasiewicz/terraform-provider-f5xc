@@ -88,9 +88,9 @@ An [`aws_assume_role`](#aws-assume-role) block supports the following:
 
 <a id="aws-assume-role-duration-seconds"></a>&#x2022; [`duration_seconds`](#aws-assume-role-duration-seconds) - Optional Number<br>The duration, in seconds of the role session
 
-<a id="aws-assume-role-external-id-is-optional"></a>&#x2022; [`external_id_is_optional`](#aws-assume-role-external-id-is-optional) - Optional Block<br>Can be used for messages where no values are needed
+<a id="aws-assume-role-external-id-is-optional"></a>&#x2022; [`external_id_is_optional`](#aws-assume-role-external-id-is-optional) - Optional Block<br>Enable this option
 
-<a id="tenant-id-b8874c"></a>&#x2022; [`external_id_is_tenant_id`](#tenant-id-b8874c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tenant-id-b8874c"></a>&#x2022; [`external_id_is_tenant_id`](#tenant-id-b8874c) - Optional Block<br>Enable this option
 
 <a id="aws-assume-role-role-arn"></a>&#x2022; [`role_arn`](#aws-assume-role-role-arn) - Optional String<br>IAM Role ARN to assume the role
 

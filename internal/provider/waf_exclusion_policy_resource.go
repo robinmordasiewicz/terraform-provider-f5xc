@@ -266,10 +266,10 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 					},
 					Blocks: map[string]schema.Block{
 						"any_domain": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"any_path": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"app_firewall_detection_control": schema.SingleNestedBlock{
 							MarkdownDescription: "Define the list of Signature IDs, Violations, Attack Types and Bot Names that should be excluded from triggering on the defined match criteria.",
@@ -359,7 +359,7 @@ func (r *WAFExclusionPolicyResource) Schema(ctx context.Context, req resource.Sc
 							},
 						},
 						"waf_skip_processing": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 					},
 				},

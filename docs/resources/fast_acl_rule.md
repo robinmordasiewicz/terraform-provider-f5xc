@@ -158,9 +158,9 @@ A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) s
 
 A [`port`](#port) block supports the following:
 
-<a id="port-all"></a>&#x2022; [`all`](#port-all) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-all"></a>&#x2022; [`all`](#port-all) - Optional Block<br>Enable this option
 
-<a id="port-dns"></a>&#x2022; [`dns`](#port-dns) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-dns"></a>&#x2022; [`dns`](#port-dns) - Optional Block<br>Enable this option
 
 <a id="port-user-defined"></a>&#x2022; [`user_defined`](#port-user-defined) - Optional Number<br>Matches the user defined port
 

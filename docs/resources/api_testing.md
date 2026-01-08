@@ -40,7 +40,7 @@ resource "f5xc_api_testing" "example" {
   credentials {
     # Configure credentials settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   admin {
     # Configure admin settings
   }
@@ -71,9 +71,9 @@ resource "f5xc_api_testing" "example" {
 <a id="domains"></a>&#x2022; [`domains`](#domains) - Optional Block<br>Add and configure testing domains and credentials<br>See [Domains](#domains) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="every-day"></a>[`every_day`](#every-day) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="every-month"></a>[`every_month`](#every-month) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="every-week"></a>[`every_week`](#every-week) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="every-day"></a>[`every_day`](#every-day) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="every-month"></a>[`every_month`](#every-month) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="every-week"></a>[`every_week`](#every-week) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -99,7 +99,7 @@ A [`domains`](#domains) block supports the following:
 
 A [`credentials`](#domains-credentials) block (within [`domains`](#domains)) supports the following:
 
-<a id="domains-credentials-admin"></a>&#x2022; [`admin`](#domains-credentials-admin) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domains-credentials-admin"></a>&#x2022; [`admin`](#domains-credentials-admin) - Optional Block<br>Enable this option
 
 <a id="domains-credentials-api-key"></a>&#x2022; [`api_key`](#domains-credentials-api-key) - Optional Block<br>API Key<br>See [API Key](#domains-credentials-api-key) below.
 
@@ -111,7 +111,7 @@ A [`credentials`](#domains-credentials) block (within [`domains`](#domains)) sup
 
 <a id="domains-credentials-login-endpoint"></a>&#x2022; [`login_endpoint`](#domains-credentials-login-endpoint) - Optional Block<br>Login Endpoint<br>See [Login Endpoint](#domains-credentials-login-endpoint) below.
 
-<a id="domains-credentials-standard"></a>&#x2022; [`standard`](#domains-credentials-standard) - Optional Block<br>Can be used for messages where no values are needed
+<a id="domains-credentials-standard"></a>&#x2022; [`standard`](#domains-credentials-standard) - Optional Block<br>Enable this option
 
 #### Domains Credentials API Key
 

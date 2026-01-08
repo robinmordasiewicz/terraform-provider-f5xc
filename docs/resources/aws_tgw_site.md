@@ -108,17 +108,17 @@ resource "f5xc_aws_tgw_site" "example" {
 <a id="aws-parameters"></a>&#x2022; [`aws_parameters`](#aws-parameters) - Optional Block<br>Setup AWS services VPC, transit gateway and site<br>See [AWS Parameters](#aws-parameters) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="block-all-services"></a>[`block_all_services`](#block-all-services) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="blocked-services"></a>[`blocked_services`](#blocked-services) - Optional Block<br>Disable node local services on this site<br>See [Blocked Services](#blocked-services) below for details.
 
 <a id="coordinates"></a>&#x2022; [`coordinates`](#coordinates) - Optional Block<br>Coordinates of the site which provides the site physical location<br>See [Coordinates](#coordinates) below for details.
 
 <a id="custom-dns"></a>&#x2022; [`custom_dns`](#custom-dns) - Optional Block<br>Custom DNS is the configured for specify CE site<br>See [Custom DNS](#custom-dns) below for details.
 
-<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Can be used for messages where no values are needed
+<a id="default-blocked-services"></a>&#x2022; [`default_blocked_services`](#default-blocked-services) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="direct-connect-disabled"></a>[`direct_connect_disabled`](#direct-connect-disabled) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="direct-connect-disabled"></a>[`direct_connect_disabled`](#direct-connect-disabled) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="direct-connect-enabled"></a>[`direct_connect_enabled`](#direct-connect-enabled) - Optional Block<br>Direct Connect Configuration. Direct Connect Configuration<br>See [Direct Connect Enabled](#direct-connect-enabled) below for details.
 <br><br>&#x2022; <a id="private-connectivity"></a>[`private_connectivity`](#private-connectivity) - Optional Block<br>Private Connect Configuration. Private Connect Configuration
 
@@ -126,7 +126,7 @@ resource "f5xc_aws_tgw_site" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Log Receiver](#log-receiver) below for details.
-<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
 
 <a id="offline-survivability-mode"></a>&#x2022; [`offline_survivability_mode`](#offline-survivability-mode) - Optional Block<br>Offline Survivability allows the Site to continue functioning normally without traffic loss during periods of connectivity loss to the Regional Edge (RE) or the Global Controller (GC). When this feature is enabled, a site can continue to function as is with existing configuration for upto 7<br>See [Offline Survivability Mode](#offline-survivability-mode) below for details.
 
@@ -168,15 +168,15 @@ An [`aws_parameters`](#aws-parameters) block supports the following:
 
 <a id="aws-parameters-custom-security-group"></a>&#x2022; [`custom_security_group`](#aws-parameters-custom-security-group) - Optional Block<br>Enter pre created security groups for slo(Site Local Outside) and SLI(Site Local Inside) interface. Supported only for sites deployed on existing VPC<br>See [Custom Security Group](#aws-parameters-custom-security-group) below.
 
-<a id="aws-parameters-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#aws-parameters-disable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="aws-parameters-disable-internet-vip"></a>&#x2022; [`disable_internet_vip`](#aws-parameters-disable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="aws-parameters-disk-size"></a>&#x2022; [`disk_size`](#aws-parameters-disk-size) - Optional Number<br>Node disk size for all node in the F5XC site. Unit is GiB
 
-<a id="aws-parameters-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#aws-parameters-enable-internet-vip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="aws-parameters-enable-internet-vip"></a>&#x2022; [`enable_internet_vip`](#aws-parameters-enable-internet-vip) - Optional Block<br>Enable this option
 
 <a id="aws-parameters-existing-tgw"></a>&#x2022; [`existing_tgw`](#aws-parameters-existing-tgw) - Optional Block<br>Existing TGW Type. Information needed for existing TGW<br>See [Existing TGW](#aws-parameters-existing-tgw) below.
 
-<a id="aws-parameters-f5xc-security-group"></a>&#x2022; [`f5xc_security_group`](#aws-parameters-f5xc-security-group) - Optional Block<br>Can be used for messages where no values are needed
+<a id="aws-parameters-f5xc-security-group"></a>&#x2022; [`f5xc_security_group`](#aws-parameters-f5xc-security-group) - Optional Block<br>Enable this option
 
 <a id="aws-parameters-instance-type"></a>&#x2022; [`instance_type`](#aws-parameters-instance-type) - Optional String<br>Instance size based on the performance
 
@@ -184,11 +184,11 @@ An [`aws_parameters`](#aws-parameters) block supports the following:
 
 <a id="aws-parameters-new-vpc"></a>&#x2022; [`new_vpc`](#aws-parameters-new-vpc) - Optional Block<br>AWS VPC Parameters. Parameters to create new AWS VPC<br>See [New VPC](#aws-parameters-new-vpc) below.
 
-<a id="aws-parameters-no-worker-nodes"></a>&#x2022; [`no_worker_nodes`](#aws-parameters-no-worker-nodes) - Optional Block<br>Can be used for messages where no values are needed
+<a id="aws-parameters-no-worker-nodes"></a>&#x2022; [`no_worker_nodes`](#aws-parameters-no-worker-nodes) - Optional Block<br>Enable this option
 
 <a id="aws-parameters-nodes-per-az"></a>&#x2022; [`nodes_per_az`](#aws-parameters-nodes-per-az) - Optional Number<br>Desired Worker Nodes Per AZ. Max limit is up to 21
 
-<a id="aws-parameters-reserved-tgw-cidr"></a>&#x2022; [`reserved_tgw_cidr`](#aws-parameters-reserved-tgw-cidr) - Optional Block<br>Can be used for messages where no values are needed
+<a id="aws-parameters-reserved-tgw-cidr"></a>&#x2022; [`reserved_tgw_cidr`](#aws-parameters-reserved-tgw-cidr) - Optional Block<br>Enable this option
 
 <a id="aws-parameters-ssh-key"></a>&#x2022; [`ssh_key`](#aws-parameters-ssh-key) - Optional String<br>Public SSH key for accessing nodes of the site
 
@@ -244,7 +244,7 @@ An [`az_nodes`](#aws-parameters-az-nodes) block (within [`aws_parameters`](#aws-
 
 <a id="aws-parameters-az-nodes-outside-subnet"></a>&#x2022; [`outside_subnet`](#aws-parameters-az-nodes-outside-subnet) - Optional Block<br>AWS Subnet. Parameters for AWS subnet<br>See [Outside Subnet](#aws-parameters-az-nodes-outside-subnet) below.
 
-<a id="subnet-54f20b"></a>&#x2022; [`reserved_inside_subnet`](#subnet-54f20b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="subnet-54f20b"></a>&#x2022; [`reserved_inside_subnet`](#subnet-54f20b) - Optional Block<br>Enable this option
 
 <a id="aws-parameters-az-nodes-workload-subnet"></a>&#x2022; [`workload_subnet`](#aws-parameters-az-nodes-workload-subnet) - Optional Block<br>AWS Subnet. Parameters for AWS subnet<br>See [Workload Subnet](#aws-parameters-az-nodes-workload-subnet) below.
 
@@ -306,7 +306,7 @@ An [`existing_tgw`](#aws-parameters-existing-tgw) block (within [`aws_parameters
 
 A [`new_tgw`](#aws-parameters-new-tgw) block (within [`aws_parameters`](#aws-parameters)) supports the following:
 
-<a id="aws-parameters-new-tgw-system-generated"></a>&#x2022; [`system_generated`](#aws-parameters-new-tgw-system-generated) - Optional Block<br>Can be used for messages where no values are needed
+<a id="aws-parameters-new-tgw-system-generated"></a>&#x2022; [`system_generated`](#aws-parameters-new-tgw-system-generated) - Optional Block<br>Enable this option
 
 <a id="aws-parameters-new-tgw-user-assigned"></a>&#x2022; [`user_assigned`](#aws-parameters-new-tgw-user-assigned) - Optional Block<br>Information needed when ASNs are assigned by the user<br>See [User Assigned](#aws-parameters-new-tgw-user-assigned) below.
 
@@ -322,7 +322,7 @@ An [`user_assigned`](#aws-parameters-new-tgw-user-assigned) block (within [`aws_
 
 A [`new_vpc`](#aws-parameters-new-vpc) block (within [`aws_parameters`](#aws-parameters)) supports the following:
 
-<a id="aws-parameters-new-vpc-autogenerate"></a>&#x2022; [`autogenerate`](#aws-parameters-new-vpc-autogenerate) - Optional Block<br>Can be used for messages where no values are needed
+<a id="aws-parameters-new-vpc-autogenerate"></a>&#x2022; [`autogenerate`](#aws-parameters-new-vpc-autogenerate) - Optional Block<br>Enable this option
 
 <a id="aws-parameters-new-vpc-name-tag"></a>&#x2022; [`name_tag`](#aws-parameters-new-vpc-name-tag) - Optional String<br>Specify the VPC Name
 
@@ -344,13 +344,13 @@ A [`blocked_services`](#blocked-services) block supports the following:
 
 A [`blocked_sevice`](#blocked-services-blocked-sevice) block (within [`blocked_services`](#blocked-services)) supports the following:
 
-<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-dns"></a>&#x2022; [`dns`](#blocked-services-blocked-sevice-dns) - Optional Block<br>Enable this option
 
 <a id="type-808ec9"></a>&#x2022; [`network_type`](#type-808ec9) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 
-<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-services-blocked-sevice-ssh"></a>&#x2022; [`ssh`](#blocked-services-blocked-sevice-ssh) - Optional Block<br>Enable this option
 
-<a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Can be used for messages where no values are needed
+<a id="interface-e57e21"></a>&#x2022; [`web_user_interface`](#interface-e57e21) - Optional Block<br>Enable this option
 
 #### Coordinates
 
@@ -372,13 +372,13 @@ A [`custom_dns`](#custom-dns) block supports the following:
 
 A [`direct_connect_enabled`](#direct-connect-enabled) block supports the following:
 
-<a id="direct-connect-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#direct-connect-enabled-auto-asn) - Optional Block<br>Can be used for messages where no values are needed
+<a id="direct-connect-enabled-auto-asn"></a>&#x2022; [`auto_asn`](#direct-connect-enabled-auto-asn) - Optional Block<br>Enable this option
 
 <a id="direct-connect-enabled-custom-asn"></a>&#x2022; [`custom_asn`](#direct-connect-enabled-custom-asn) - Optional Number<br>Custom Autonomous System Number
 
 <a id="direct-connect-enabled-hosted-vifs"></a>&#x2022; [`hosted_vifs`](#direct-connect-enabled-hosted-vifs) - Optional Block<br>AWS Direct Connect Hosted VIF Configuration<br>See [Hosted Vifs](#direct-connect-enabled-hosted-vifs) below.
 
-<a id="direct-connect-enabled-standard-vifs"></a>&#x2022; [`standard_vifs`](#direct-connect-enabled-standard-vifs) - Optional Block<br>Can be used for messages where no values are needed
+<a id="direct-connect-enabled-standard-vifs"></a>&#x2022; [`standard_vifs`](#direct-connect-enabled-standard-vifs) - Optional Block<br>Enable this option
 
 #### Direct Connect Enabled Hosted Vifs
 
@@ -386,7 +386,7 @@ A [`hosted_vifs`](#direct-connect-enabled-hosted-vifs) block (within [`direct_co
 
 <a id="connect-b8275e"></a>&#x2022; [`site_registration_over_direct_connect`](#connect-b8275e) - Optional Block<br>CloudLink ADN Network Config<br>See [Site Registration Over Direct Connect](#connect-b8275e) below.
 
-<a id="internet-6028e0"></a>&#x2022; [`site_registration_over_internet`](#internet-6028e0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="internet-6028e0"></a>&#x2022; [`site_registration_over_internet`](#internet-6028e0) - Optional Block<br>Enable this option
 
 <a id="list-d6c323"></a>&#x2022; [`vif_list`](#list-d6c323) - Optional Block<br>List of Hosted VIF Config. List of Hosted VIF Config<br>See [Vif List](#list-d6c323) below.
 
@@ -400,7 +400,7 @@ A [`vif_list`](#list-d6c323) block (within [`direct_connect_enabled.hosted_vifs`
 
 <a id="region-3f105f"></a>&#x2022; [`other_region`](#region-3f105f) - Optional String<br>Other Region
 
-<a id="region-3435ff"></a>&#x2022; [`same_as_site_region`](#region-3435ff) - Optional Block<br>Can be used for messages where no values are needed
+<a id="region-3435ff"></a>&#x2022; [`same_as_site_region`](#region-3435ff) - Optional Block<br>Enable this option
 
 <a id="vif-id-4f330c"></a>&#x2022; [`vif_id`](#vif-id-4f330c) - Optional String<br>AWS Direct Connect VIF ID that needs to be connected to the site
 
@@ -408,7 +408,7 @@ A [`vif_list`](#list-d6c323) block (within [`direct_connect_enabled.hosted_vifs`
 
 A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
 
-<a id="drain-0d0936"></a>&#x2022; [`disable_upgrade_drain`](#drain-0d0936) - Optional Block<br>Can be used for messages where no values are needed
+<a id="drain-0d0936"></a>&#x2022; [`disable_upgrade_drain`](#drain-0d0936) - Optional Block<br>Enable this option
 
 <a id="drain-7e30d4"></a>&#x2022; [`enable_upgrade_drain`](#drain-7e30d4) - Optional Block<br>Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#drain-7e30d4) below.
 
@@ -416,13 +416,13 @@ A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the fol
 
 An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
 
-<a id="mode-668699"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-668699) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-668699"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-668699) - Optional Block<br>Enable this option
 
 <a id="count-3aa796"></a>&#x2022; [`drain_max_unavailable_node_count`](#count-3aa796) - Optional Number<br>Node Batch Size Count
 
 <a id="timeout-ac4ee9"></a>&#x2022; [`drain_node_timeout`](#timeout-ac4ee9) - Optional Number<br>Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is
 
-<a id="mode-9c557b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9c557b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-9c557b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9c557b) - Optional Block<br>Enable this option
 
 #### Log Receiver
 
@@ -438,15 +438,15 @@ A [`log_receiver`](#log-receiver) block supports the following:
 
 An [`offline_survivability_mode`](#offline-survivability-mode) block supports the following:
 
-<a id="mode-565021"></a>&#x2022; [`enable_offline_survivability_mode`](#mode-565021) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-565021"></a>&#x2022; [`enable_offline_survivability_mode`](#mode-565021) - Optional Block<br>Enable this option
 
-<a id="mode-02f0c8"></a>&#x2022; [`no_offline_survivability_mode`](#mode-02f0c8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-02f0c8"></a>&#x2022; [`no_offline_survivability_mode`](#mode-02f0c8) - Optional Block<br>Enable this option
 
 #### OS
 
 An [`os`](#os) block supports the following:
 
-<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Can be used for messages where no values are needed
+<a id="os-default-os-version"></a>&#x2022; [`default_os_version`](#os-default-os-version) - Optional Block<br>Enable this option
 
 <a id="os-operating-system-version"></a>&#x2022; [`operating_system_version`](#os-operating-system-version) - Optional String<br>Specify a OS version to be used e.g. 9.2024.6
 
@@ -456,15 +456,15 @@ A [`performance_enhancement_mode`](#performance-enhancement-mode) block supports
 
 <a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
 
-<a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Enable this option
 
 #### Performance Enhancement Mode Perf Mode L3 Enhanced
 
 A [`perf_mode_l3_enhanced`](#enhanced-31b8ac) block (within [`performance_enhancement_mode`](#performance-enhancement-mode)) supports the following:
 
-<a id="jumbo-7ba5b8"></a>&#x2022; [`jumbo`](#jumbo-7ba5b8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jumbo-7ba5b8"></a>&#x2022; [`jumbo`](#jumbo-7ba5b8) - Optional Block<br>Enable this option
 
-<a id="jumbo-95338e"></a>&#x2022; [`no_jumbo`](#jumbo-95338e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jumbo-95338e"></a>&#x2022; [`no_jumbo`](#jumbo-95338e) - Optional Block<br>Enable this option
 
 #### Private Connectivity
 
@@ -472,9 +472,9 @@ A [`private_connectivity`](#private-connectivity) block supports the following:
 
 <a id="private-connectivity-cloud-link"></a>&#x2022; [`cloud_link`](#private-connectivity-cloud-link) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Cloud Link](#private-connectivity-cloud-link) below.
 
-<a id="private-connectivity-inside"></a>&#x2022; [`inside`](#private-connectivity-inside) - Optional Block<br>Can be used for messages where no values are needed
+<a id="private-connectivity-inside"></a>&#x2022; [`inside`](#private-connectivity-inside) - Optional Block<br>Enable this option
 
-<a id="private-connectivity-outside"></a>&#x2022; [`outside`](#private-connectivity-outside) - Optional Block<br>Can be used for messages where no values are needed
+<a id="private-connectivity-outside"></a>&#x2022; [`outside`](#private-connectivity-outside) - Optional Block<br>Enable this option
 
 #### Private Connectivity Cloud Link
 
@@ -490,7 +490,7 @@ A [`cloud_link`](#private-connectivity-cloud-link) block (within [`private_conne
 
 A [`sw`](#sw) block supports the following:
 
-<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Can be used for messages where no values are needed
+<a id="sw-default-sw-version"></a>&#x2022; [`default_sw_version`](#sw-default-sw-version) - Optional Block<br>Enable this option
 
 <a id="sw-volterra-software-version"></a>&#x2022; [`volterra_software_version`](#sw-volterra-software-version) - Optional String<br>Specify a F5XC Software Version to be used e.g. Crt-20210329-1002
 
@@ -506,15 +506,15 @@ A [`tgw_security`](#tgw-security) block supports the following:
 
 <a id="tgw-security-active-network-policies"></a>&#x2022; [`active_network_policies`](#tgw-security-active-network-policies) - Optional Block<br>Active Firewall Policies Type. List of firewall policy views<br>See [Active Network Policies](#tgw-security-active-network-policies) below.
 
-<a id="all-b3bd41"></a>&#x2022; [`east_west_service_policy_allow_all`](#all-b3bd41) - Optional Block<br>Can be used for messages where no values are needed
+<a id="all-b3bd41"></a>&#x2022; [`east_west_service_policy_allow_all`](#all-b3bd41) - Optional Block<br>Enable this option
 
-<a id="tgw-security-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#tgw-security-forward-proxy-allow-all) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tgw-security-forward-proxy-allow-all"></a>&#x2022; [`forward_proxy_allow_all`](#tgw-security-forward-proxy-allow-all) - Optional Block<br>Enable this option
 
-<a id="tgw-security-no-east-west-policy"></a>&#x2022; [`no_east_west_policy`](#tgw-security-no-east-west-policy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tgw-security-no-east-west-policy"></a>&#x2022; [`no_east_west_policy`](#tgw-security-no-east-west-policy) - Optional Block<br>Enable this option
 
-<a id="tgw-security-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#tgw-security-no-forward-proxy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tgw-security-no-forward-proxy"></a>&#x2022; [`no_forward_proxy`](#tgw-security-no-forward-proxy) - Optional Block<br>Enable this option
 
-<a id="tgw-security-no-network-policy"></a>&#x2022; [`no_network_policy`](#tgw-security-no-network-policy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tgw-security-no-network-policy"></a>&#x2022; [`no_network_policy`](#tgw-security-no-network-policy) - Optional Block<br>Enable this option
 
 #### TGW Security Active East West Service Policies
 
@@ -590,19 +590,19 @@ A [`vn_config`](#vn-config) block supports the following:
 
 <a id="vn-config-inside-static-routes"></a>&#x2022; [`inside_static_routes`](#vn-config-inside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Inside Static Routes](#vn-config-inside-static-routes) below.
 
-<a id="vn-config-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#vn-config-no-dc-cluster-group) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vn-config-no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#vn-config-no-dc-cluster-group) - Optional Block<br>Enable this option
 
-<a id="vn-config-no-global-network"></a>&#x2022; [`no_global_network`](#vn-config-no-global-network) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vn-config-no-global-network"></a>&#x2022; [`no_global_network`](#vn-config-no-global-network) - Optional Block<br>Enable this option
 
-<a id="vn-config-no-inside-static-routes"></a>&#x2022; [`no_inside_static_routes`](#vn-config-no-inside-static-routes) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vn-config-no-inside-static-routes"></a>&#x2022; [`no_inside_static_routes`](#vn-config-no-inside-static-routes) - Optional Block<br>Enable this option
 
-<a id="vn-config-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#vn-config-no-outside-static-routes) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vn-config-no-outside-static-routes"></a>&#x2022; [`no_outside_static_routes`](#vn-config-no-outside-static-routes) - Optional Block<br>Enable this option
 
 <a id="vn-config-outside-static-routes"></a>&#x2022; [`outside_static_routes`](#vn-config-outside-static-routes) - Optional Block<br>Static Route List Type. List of static routes<br>See [Outside Static Routes](#vn-config-outside-static-routes) below.
 
-<a id="vn-config-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#vn-config-sm-connection-public-ip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vn-config-sm-connection-public-ip"></a>&#x2022; [`sm_connection_public_ip`](#vn-config-sm-connection-public-ip) - Optional Block<br>Enable this option
 
-<a id="vn-config-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#vn-config-sm-connection-pvt-ip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vn-config-sm-connection-pvt-ip"></a>&#x2022; [`sm_connection_pvt_ip`](#vn-config-sm-connection-pvt-ip) - Optional Block<br>Enable this option
 
 #### Vn Config Allowed VIP Port
 
@@ -610,13 +610,13 @@ An [`allowed_vip_port`](#vn-config-allowed-vip-port) block (within [`vn_config`]
 
 <a id="vn-config-allowed-vip-port-custom-ports"></a>&#x2022; [`custom_ports`](#vn-config-allowed-vip-port-custom-ports) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#vn-config-allowed-vip-port-custom-ports) below.
 
-<a id="port-4fd6f6"></a>&#x2022; [`disable_allowed_vip_port`](#port-4fd6f6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-4fd6f6"></a>&#x2022; [`disable_allowed_vip_port`](#port-4fd6f6) - Optional Block<br>Enable this option
 
-<a id="port-24fa15"></a>&#x2022; [`use_http_https_port`](#port-24fa15) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-24fa15"></a>&#x2022; [`use_http_https_port`](#port-24fa15) - Optional Block<br>Enable this option
 
-<a id="port-f93401"></a>&#x2022; [`use_http_port`](#port-f93401) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-f93401"></a>&#x2022; [`use_http_port`](#port-f93401) - Optional Block<br>Enable this option
 
-<a id="port-b7f3d5"></a>&#x2022; [`use_https_port`](#port-b7f3d5) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-b7f3d5"></a>&#x2022; [`use_https_port`](#port-b7f3d5) - Optional Block<br>Enable this option
 
 #### Vn Config Allowed VIP Port Custom Ports
 
@@ -630,13 +630,13 @@ An [`allowed_vip_port_sli`](#vn-config-allowed-vip-port-sli) block (within [`vn_
 
 <a id="ports-0633b5"></a>&#x2022; [`custom_ports`](#ports-0633b5) - Optional Block<br>Custom Ports. List of Custom port<br>See [Custom Ports](#ports-0633b5) below.
 
-<a id="port-5a1653"></a>&#x2022; [`disable_allowed_vip_port`](#port-5a1653) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-5a1653"></a>&#x2022; [`disable_allowed_vip_port`](#port-5a1653) - Optional Block<br>Enable this option
 
-<a id="port-c09009"></a>&#x2022; [`use_http_https_port`](#port-c09009) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-c09009"></a>&#x2022; [`use_http_https_port`](#port-c09009) - Optional Block<br>Enable this option
 
-<a id="port-819a53"></a>&#x2022; [`use_http_port`](#port-819a53) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-819a53"></a>&#x2022; [`use_http_port`](#port-819a53) - Optional Block<br>Enable this option
 
-<a id="port-e5b518"></a>&#x2022; [`use_https_port`](#port-e5b518) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-e5b518"></a>&#x2022; [`use_https_port`](#port-e5b518) - Optional Block<br>Enable this option
 
 #### Vn Config Allowed VIP Port SLI Custom Ports
 

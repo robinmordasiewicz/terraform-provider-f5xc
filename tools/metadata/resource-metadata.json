@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-01-08T02:47:30Z",
+  "generated_at": "2026-01-08T17:40:15Z",
   "version": "1.0.0",
   "resources": {
     "address_allocator": {
@@ -505,7 +505,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "schema_updates_strategy",
-          "description": "[OneOf: mixed_schema_origin, strict_schema_origin] Can be used for messages where no values are needed."
+          "description": "[OneOf: mixed_schema_origin, strict_schema_origin] Enable this option"
         },
         "name": {
           "type": "string",
@@ -534,7 +534,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "schema_updates_strategy",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "swagger_specs": {
           "type": "list",
@@ -659,7 +659,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "frequency_choice",
-          "description": "[OneOf: every_day, every_month, every_week] Can be used for messages where no values are needed."
+          "description": "[OneOf: every_day, every_month, every_week] Enable this option"
         },
         "every_month": {
           "type": "object",
@@ -667,7 +667,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "frequency_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "every_week": {
           "type": "object",
@@ -675,7 +675,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "frequency_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "id": {
           "type": "string",
@@ -949,7 +949,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "allowed_response_codes_choice",
-          "description": "[OneOf: allow_all_response_codes, allowed_response_codes] Can be used for messages where no values are needed."
+          "description": "[OneOf: allow_all_response_codes, allowed_response_codes] Enable this option"
         },
         "allowed_response_codes": {
           "type": "object",
@@ -971,7 +971,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "enforcement_mode_choice",
-          "description": "[OneOf: blocking, monitoring] Can be used for messages where no values are needed."
+          "description": "[OneOf: blocking, monitoring] Enable this option"
         },
         "blocking_page": {
           "type": "object",
@@ -1003,7 +1003,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "anonymization_setting",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "default_bot_setting": {
           "type": "object",
@@ -1011,7 +1011,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "bot_protection_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "default_detection_settings": {
           "type": "object",
@@ -1019,7 +1019,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "detection_setting_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -1047,7 +1047,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "anonymization_setting",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "id": {
           "type": "string",
@@ -1068,7 +1068,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "enforcement_mode_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "name": {
           "type": "string",
@@ -1090,7 +1090,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocking_page_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         }
       },
       "dependencies": {
@@ -1344,7 +1344,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Can be used for messages where no values are needed."
+          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option"
         },
         "blocked_services": {
           "type": "object",
@@ -1374,7 +1374,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -1388,7 +1388,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "direct_connect_choice",
-          "description": "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Can be used for messages where no values are needed."
+          "description": "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Enable this option"
         },
         "direct_connect_enabled": {
           "type": "object",
@@ -1438,7 +1438,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "logs_receiver_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "name": {
           "type": "string",
@@ -1639,7 +1639,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Can be used for messages where no values are needed."
+          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option"
         },
         "blocked_services": {
           "type": "object",
@@ -1677,7 +1677,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -1691,7 +1691,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "direct_connect_choice",
-          "description": "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Can be used for messages where no values are needed."
+          "description": "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Enable this option"
         },
         "direct_connect_enabled": {
           "type": "object",
@@ -1713,7 +1713,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "internet_vip_choice",
-          "description": "[OneOf: disable_internet_vip, enable_internet_vip; Default: disable_internet_vip] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_internet_vip, enable_internet_vip; Default: disable_internet_vip] Enable this option"
         },
         "disk_size": {
           "type": "int64",
@@ -1729,7 +1729,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "egress_gateway_choice",
-          "description": "[OneOf: egress_gateway_default, egress_nat_gw, egress_virtual_private_gateway; Default: egress_gateway_default] Can be used for messages where no values are needed."
+          "description": "[OneOf: egress_gateway_default, egress_nat_gw, egress_virtual_private_gateway; Default: egress_gateway_default] Enable this option"
         },
         "egress_nat_gw": {
           "type": "object",
@@ -1753,7 +1753,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "internet_vip_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "f5_orchestrated_routing": {
           "type": "object",
@@ -1761,7 +1761,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "routing_type",
-          "description": "[OneOf: f5_orchestrated_routing, manual_routing] Can be used for messages where no values are needed."
+          "description": "[OneOf: f5_orchestrated_routing, manual_routing] Enable this option"
         },
         "f5xc_security_group": {
           "type": "object",
@@ -1769,7 +1769,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "security_group_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "id": {
           "type": "string",
@@ -1829,7 +1829,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "logs_receiver_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "manual_routing": {
           "type": "object",
@@ -1837,7 +1837,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "routing_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "name": {
           "type": "string",
@@ -1859,7 +1859,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "worker_nodes",
-          "description": "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Can be used for messages where no values are needed."
+          "description": "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Enable this option"
         },
         "nodes_per_az": {
           "type": "int64",
@@ -2049,7 +2049,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Can be used for messages where no values are needed."
+          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option"
         },
         "blocked_services": {
           "type": "object",
@@ -2079,7 +2079,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -2167,7 +2167,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "logs_receiver_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "machine_type": {
           "type": "string",
@@ -2197,7 +2197,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "worker_nodes",
-          "description": "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Can be used for messages where no values are needed."
+          "description": "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Enable this option"
         },
         "nodes_per_az": {
           "type": "int64",
@@ -2292,7 +2292,7 @@
       }
     },
     "bgp": {
-      "description": "Manages a BGP resource in F5 Distributed Cloud for bgp routing policy is a list of rules containing match criteria and action to be applied. these rules help contol routes which are imported or exported to bgp peers. configuration.",
+      "description": "Manages bgp_asn_set creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -2300,6 +2300,12 @@
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
+        },
+        "as_numbers": {
+          "type": "list",
+          "required": false,
+          "optional": true,
+          "description": "Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create whitelists or blacklists for use in network policy or service policy."
         },
         "description": {
           "type": "string",
@@ -2339,13 +2345,6 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the BGP will be created."
-        },
-        "rules": {
-          "type": "list",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "BGP Routing policy is composed of one or more rules. Note that the order of rules is critical as rules are applied top to bottom."
         }
       }
     },
@@ -2854,7 +2853,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "sensitive_data_policy_choice",
-          "description": "[OneOf: default_sensitive_data_policy, sensitive_data_policy; Default: default_sensitive_data_policy] Can be used for messages where no values are needed."
+          "description": "[OneOf: default_sensitive_data_policy, sensitive_data_policy; Default: default_sensitive_data_policy] Enable this option"
         },
         "description": {
           "type": "string",
@@ -2874,7 +2873,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "api_definition_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_api_discovery": {
           "type": "object",
@@ -2882,7 +2881,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "api_discovery_choice",
-          "description": "[OneOf: disable_api_discovery, enable_api_discovery; Default: disable_api_discovery] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_api_discovery, enable_api_discovery; Default: disable_api_discovery] Enable this option"
         },
         "disable_client_side_defense": {
           "type": "object",
@@ -2890,7 +2889,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "client_side_defense_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_ip_reputation": {
           "type": "object",
@@ -2898,7 +2897,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "ip_reputation_choice",
-          "description": "[OneOf: disable_ip_reputation, enable_ip_reputation; Default: disable_ip_reputation] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_ip_reputation, enable_ip_reputation; Default: disable_ip_reputation] Enable this option"
         },
         "disable_malicious_user_detection": {
           "type": "object",
@@ -2906,7 +2905,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "malicious_user_detection_choice",
-          "description": "[OneOf: disable_malicious_user_detection, enable_malicious_user_detection; Default: disable_malicious_user_detection] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_malicious_user_detection, enable_malicious_user_detection; Default: disable_malicious_user_detection] Enable this option"
         },
         "disable_rate_limit": {
           "type": "object",
@@ -2914,7 +2913,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "rate_limit_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_threat_mesh": {
           "type": "object",
@@ -2922,7 +2921,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "threat_mesh_choice",
-          "description": "[OneOf: disable_threat_mesh, enable_threat_mesh; Default: disable_threat_mesh] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_threat_mesh, enable_threat_mesh; Default: disable_threat_mesh] Enable this option"
         },
         "disable_waf": {
           "type": "object",
@@ -2930,7 +2929,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "waf_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "domains": {
           "type": "list",
@@ -2968,7 +2967,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "malicious_user_detection_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "enable_threat_mesh": {
           "type": "object",
@@ -2976,7 +2975,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "threat_mesh_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "graphql_rules": {
           "type": "list",
@@ -3037,7 +3036,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "l7_ddos_auto_mitigation_action",
-          "description": "[OneOf: l7_ddos_action_block, l7_ddos_action_default, l7_ddos_action_js_challenge; Default: l7_ddos_action_default] Can be used for messages where no values are needed."
+          "description": "[OneOf: l7_ddos_action_block, l7_ddos_action_default, l7_ddos_action_js_challenge; Default: l7_ddos_action_default] Enable this option"
         },
         "l7_ddos_action_default": {
           "type": "object",
@@ -3045,7 +3044,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "l7_ddos_auto_mitigation_action",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "l7_ddos_action_js_challenge": {
           "type": "object",
@@ -3081,7 +3080,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "challenge_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_service_policies": {
           "type": "object",
@@ -3089,7 +3088,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "service_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "origin_pool": {
           "type": "object",
@@ -3142,7 +3141,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "service_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "slow_ddos_mitigation": {
           "type": "object",
@@ -3158,7 +3157,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "slow_ddos_mitigation_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "trusted_clients": {
           "type": "list",
@@ -3173,7 +3172,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "user_id_choice",
-          "description": "[OneOf: user_id_client_ip, user_identification] Can be used for messages where no values are needed."
+          "description": "[OneOf: user_id_client_ip, user_identification] Enable this option"
         },
         "user_identification": {
           "type": "object",
@@ -3326,7 +3325,7 @@
     },
     "cloud_connect": {
       "description": "Manages a Cloud Connect resource in F5 Distributed Cloud for establishing connectivity to cloud provider networks.",
-      "import_format": "name",
+      "import_format": "namespace/name",
       "oneof_groups": {
         "cloud": {
           "fields": [
@@ -3392,12 +3391,10 @@
         },
         "namespace": {
           "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
+          "required": true,
+          "plan_modifier": "RequiresReplace",
           "validation": "name",
-          "description": "Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted."
+          "description": "Namespace where the Cloud Connect will be created."
         },
         "segment": {
           "type": "object",
@@ -3635,7 +3632,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "enable_connection_to_re_choice",
-          "description": "[OneOf: disabled, enabled] Can be used for messages where no values are needed."
+          "description": "[OneOf: disabled, enabled] Enable this option"
         },
         "enabled": {
           "type": "object",
@@ -3722,7 +3719,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "http_protocol_type",
-          "description": "[OneOf: auto_http_config, http1_config, http2_options] Can be used for messages where no values are needed."
+          "description": "[OneOf: auto_http_config, http1_config, http2_options] Enable this option"
         },
         "circuit_breaker": {
           "type": "object",
@@ -3764,7 +3761,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "proxy_protocol_type",
-          "description": "[OneOf: disable_proxy_protocol, proxy_protocol_v1, proxy_protocol_v2; Default: disable_proxy_protocol] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_proxy_protocol, proxy_protocol_v1, proxy_protocol_v2; Default: disable_proxy_protocol] Enable this option"
         },
         "endpoint_selection": {
           "type": "string",
@@ -3868,7 +3865,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "panic_threshold_type",
-          "description": "[OneOf: no_panic_threshold, panic_threshold; Default: no_panic_threshold] Can be used for messages where no values are needed."
+          "description": "[OneOf: no_panic_threshold, panic_threshold; Default: no_panic_threshold] Enable this option"
         },
         "outlier_detection": {
           "type": "object",
@@ -3892,7 +3889,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "proxy_protocol_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "proxy_protocol_v2": {
           "type": "object",
@@ -3900,7 +3897,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "proxy_protocol_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "tls_parameters": {
           "type": "object",
@@ -4471,8 +4468,23 @@
       }
     },
     "discovery": {
-      "description": "Manages API discovery creates a new object in the storage backend for metadata.namespace. in F5 Distributed Cloud.",
+      "description": "Manages a Discovery resource in F5 Distributed Cloud for api to create discovery object for a site or virtual site in system namespace. configuration.",
       "import_format": "namespace/name",
+      "oneof_groups": {
+        "cluster_identifier_choice": {
+          "fields": [
+            "cluster_id",
+            "no_cluster_id"
+          ],
+          "default": "no_cluster_id"
+        },
+        "discovery_choice": {
+          "fields": [
+            "discovery_consul",
+            "discovery_k8s"
+          ]
+        }
+      },
       "attributes": {
         "annotations": {
           "type": "map",
@@ -4480,12 +4492,14 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "custom_auth_types": {
-          "type": "list",
+        "cluster_id": {
+          "type": "string",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "description": "Select your custom authentication types to be detected in the API discovery."
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "oneof_group": "cluster_identifier_choice",
+          "description": "[OneOf: cluster_id, no_cluster_id; Default: no_cluster_id] Specify identifier for discovery cluster. This identifier can be specified in endpoint object to discover only from this discovery object."
         },
         "description": {
           "type": "string",
@@ -4498,6 +4512,22 @@
           "required": false,
           "optional": true,
           "description": "A value of true will administratively disable the object."
+        },
+        "discovery_consul": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "discovery_choice",
+          "description": "[OneOf: discovery_consul, discovery_k8s] Discovery configuration for Hashicorp Consul."
+        },
+        "discovery_k8s": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "discovery_choice",
+          "description": "K8s Discovery Configuration. Discovery configuration for K8s."
         },
         "id": {
           "type": "string",
@@ -4525,6 +4555,21 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the Discovery will be created."
+        },
+        "no_cluster_id": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "cluster_identifier_choice",
+          "description": "Enable this option"
+        },
+        "where": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "NetworkSiteRefSelector defines a union of reference to site or reference to virtual_network or reference to virtual_site It is used to determine virtual network using following rules * Direct reference to virtual_network object * Site local network when refering to site object * All site local.."
         }
       }
     },
@@ -4669,7 +4714,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "domain_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         }
       }
     },
@@ -4833,7 +4878,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "rule_choice",
-          "description": "[OneOf: allow_all, allowed_destinations, allowed_sources, denied_destinations, denied_sources, deny_all, rule_list] Can be used for messages where no values are needed."
+          "description": "[OneOf: allow_all, allowed_destinations, allowed_sources, denied_destinations, denied_sources, deny_all, rule_list] Enable this option"
         },
         "allowed_destinations": {
           "type": "object",
@@ -4879,7 +4924,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "rule_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -5004,24 +5049,17 @@
       }
     },
     "fast_acl": {
-      "description": "Manages new Fast ACL rule, has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.",
+      "description": "Manages object, object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "oneof_groups": {
-        "source": {
+        "site_choice": {
           "fields": [
-            "ip_prefix_set",
-            "prefix"
+            "re_acl",
+            "site_acl"
           ]
         }
       },
       "attributes": {
-        "action": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic."
-        },
         "annotations": {
           "type": "map",
           "required": false,
@@ -5047,14 +5085,6 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "ip_prefix_set": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "source",
-          "description": "[OneOf: ip_prefix_set, prefix] List of references to ip_prefix_set objects."
-        },
         "labels": {
           "type": "map",
           "required": false,
@@ -5075,21 +5105,28 @@
           "validation": "name",
           "description": "Namespace where the Fast ACL will be created."
         },
-        "port": {
-          "type": "list",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "validation": "port",
-          "description": "Source Ports. L4 port numbers to match ."
-        },
-        "prefix": {
+        "protocol_policer": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "source",
-          "description": "List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes."
+          "description": "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
+        },
+        "re_acl": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_choice",
+          "description": "[OneOf: re_acl, site_acl] Fast ACL for RE. Fast ACL definition for RE."
+        },
+        "site_acl": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "oneof_group": "site_choice",
+          "description": "Fast ACL for Site. Fast ACL definition for Site."
         }
       }
     },
@@ -5347,7 +5384,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "usb_policy_choice",
-          "description": "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Can be used for messages where no values are needed."
+          "description": "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Enable this option"
         },
         "annotations": {
           "type": "map",
@@ -5392,7 +5429,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "interface_choice",
-          "description": "[OneOf: default_config, device_list, interface_list; Default: default_config] Can be used for messages where no values are needed."
+          "description": "[OneOf: default_config, device_list, interface_list; Default: default_config] Enable this option"
         },
         "default_sriov_interface": {
           "type": "object",
@@ -5400,7 +5437,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "sriov_interface_choice",
-          "description": "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Can be used for messages where no values are needed."
+          "description": "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Enable this option"
         },
         "default_storage_class": {
           "type": "object",
@@ -5408,7 +5445,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "storage_class_choice",
-          "description": "[OneOf: default_storage_class, storage_class_list; Default: default_storage_class] Can be used for messages where no values are needed."
+          "description": "[OneOf: default_storage_class, storage_class_list; Default: default_storage_class] Enable this option"
         },
         "deny_all_usb": {
           "type": "object",
@@ -5416,7 +5453,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "usb_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -5444,7 +5481,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "gpu_choice",
-          "description": "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Enable this option"
         },
         "disable_vm": {
           "type": "object",
@@ -5452,7 +5489,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "vm_choice",
-          "description": "[OneOf: disable_vm, enable_vm; Default: disable_vm] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_vm, enable_vm; Default: disable_vm] Enable this option"
         },
         "enable_default_fleet_config_download": {
           "type": "bool",
@@ -5468,7 +5505,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "gpu_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "enable_vgpu": {
           "type": "object",
@@ -5543,7 +5580,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "logs_receiver_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "name": {
           "type": "string",
@@ -5579,7 +5616,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "bond_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_dc_cluster_group": {
           "type": "object",
@@ -5587,7 +5624,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "dc_cluster_group_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_storage_device": {
           "type": "object",
@@ -5595,7 +5632,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "storage_device_choice",
-          "description": "[OneOf: no_storage_device, storage_device_list; Default: no_storage_device] Can be used for messages where no values are needed."
+          "description": "[OneOf: no_storage_device, storage_device_list; Default: no_storage_device] Enable this option"
         },
         "no_storage_interfaces": {
           "type": "object",
@@ -5603,7 +5640,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "storage_interface_choice",
-          "description": "[OneOf: no_storage_interfaces, storage_interface_list; Default: no_storage_interfaces] Can be used for messages where no values are needed."
+          "description": "[OneOf: no_storage_interfaces, storage_interface_list; Default: no_storage_interfaces] Enable this option"
         },
         "no_storage_static_routes": {
           "type": "object",
@@ -5611,7 +5648,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "storage_static_routes_choice",
-          "description": "[OneOf: no_storage_static_routes, storage_static_routes; Default: no_storage_static_routes] Can be used for messages where no values are needed."
+          "description": "[OneOf: no_storage_static_routes, storage_static_routes; Default: no_storage_static_routes] Enable this option"
         },
         "operating_system_version": {
           "type": "string",
@@ -5723,7 +5760,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "rule_choice",
-          "description": "[OneOf: allow_all, allow_list, deny_list, rule_list] Can be used for messages where no values are needed."
+          "description": "[OneOf: allow_all, allow_list, deny_list, rule_list] Enable this option"
         },
         "allow_list": {
           "type": "object",
@@ -5745,7 +5782,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "proxy_choice",
-          "description": "[OneOf: any_proxy, drp_http_connect, network_connector, proxy_label_selector] Can be used for messages where no values are needed."
+          "description": "[OneOf: any_proxy, drp_http_connect, network_connector, proxy_label_selector] Enable this option"
         },
         "deny_list": {
           "type": "object",
@@ -5773,7 +5810,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "proxy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "id": {
           "type": "string",
@@ -5887,7 +5924,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "queueing_choice",
-          "description": "[OneOf: dscp_based_queue, queue_id_to_use] Can be used for messages where no values are needed."
+          "description": "[OneOf: dscp_based_queue, queue_id_to_use] Enable this option"
         },
         "id": {
           "type": "string",
@@ -5930,7 +5967,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "marking_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_policer": {
           "type": "object",
@@ -5938,7 +5975,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "policer_choice",
-          "description": "[OneOf: no_policer, policer; Default: no_policer] Can be used for messages where no values are needed."
+          "description": "[OneOf: no_policer, policer; Default: no_policer] Enable this option"
         },
         "policer": {
           "type": "object",
@@ -6035,7 +6072,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Can be used for messages where no values are needed."
+          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option"
         },
         "blocked_services": {
           "type": "object",
@@ -6073,7 +6110,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -6168,7 +6205,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "logs_receiver_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "name": {
           "type": "string",
@@ -6204,7 +6241,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "private_connectivity_choice",
-          "description": "[OneOf: private_connect_disabled, private_connectivity] Can be used for messages where no values are needed."
+          "description": "[OneOf: private_connect_disabled, private_connectivity] Enable this option"
         },
         "private_connectivity": {
           "type": "object",
@@ -6293,7 +6330,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "log_type",
-          "description": "[OneOf: audit_logs, dns_logs, request_logs, security_events] Can be used for messages where no values are needed."
+          "description": "[OneOf: audit_logs, dns_logs, request_logs, security_events] Enable this option"
         },
         "aws_cloud_watch_receiver": {
           "type": "object",
@@ -6345,7 +6382,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "log_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "gcp_bucket_receiver": {
           "type": "object",
@@ -6412,7 +6449,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "filter_choice",
-          "description": "[OneOf: ns_all, ns_current, ns_list] Can be used for messages where no values are needed."
+          "description": "[OneOf: ns_all, ns_current, ns_list] Enable this option"
         },
         "ns_current": {
           "type": "object",
@@ -6420,7 +6457,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "filter_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "ns_list": {
           "type": "object",
@@ -6444,7 +6481,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "log_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "s3_receiver": {
           "type": "object",
@@ -6460,7 +6497,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "log_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "splunk_receiver": {
           "type": "object",
@@ -6594,7 +6631,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "health_check",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "unhealthy_threshold": {
           "type": "int64",
@@ -6607,9 +6644,9 @@
       },
       "dependencies": {
         "referenced_by": [
-          "origin_pool",
           "http_loadbalancer",
-          "tcp_loadbalancer"
+          "tcp_loadbalancer",
+          "origin_pool"
         ]
       }
     },
@@ -6839,7 +6876,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "advertise_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "annotations": {
           "type": "map",
@@ -6998,7 +7035,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "sensitive_data_policy_choice",
-          "description": "[OneOf: default_sensitive_data_policy, sensitive_data_policy; Default: default_sensitive_data_policy] Can be used for messages where no values are needed."
+          "description": "[OneOf: default_sensitive_data_policy, sensitive_data_policy; Default: default_sensitive_data_policy] Enable this option"
         },
         "description": {
           "type": "string",
@@ -7018,7 +7055,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "api_definition_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_api_discovery": {
           "type": "object",
@@ -7026,7 +7063,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "api_discovery_choice",
-          "description": "[OneOf: disable_api_discovery, enable_api_discovery; Default: disable_api_discovery] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_api_discovery, enable_api_discovery; Default: disable_api_discovery] Enable this option"
         },
         "disable_api_testing": {
           "type": "object",
@@ -7034,7 +7071,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "api_testing_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_bot_defense": {
           "type": "object",
@@ -7042,7 +7079,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "bot_defense_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_caching": {
           "type": "object",
@@ -7050,7 +7087,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "cache_options",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_client_side_defense": {
           "type": "object",
@@ -7058,7 +7095,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "client_side_defense_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_ip_reputation": {
           "type": "object",
@@ -7066,7 +7103,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "ip_reputation_choice",
-          "description": "[OneOf: disable_ip_reputation, enable_ip_reputation; Default: disable_ip_reputation] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_ip_reputation, enable_ip_reputation; Default: disable_ip_reputation] Enable this option"
         },
         "disable_malicious_user_detection": {
           "type": "object",
@@ -7074,7 +7111,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "malicious_user_detection_choice",
-          "description": "[OneOf: disable_malicious_user_detection, enable_malicious_user_detection; Default: disable_malicious_user_detection] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_malicious_user_detection, enable_malicious_user_detection; Default: disable_malicious_user_detection] Enable this option"
         },
         "disable_malware_protection": {
           "type": "object",
@@ -7082,7 +7119,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "malware_protection",
-          "description": "[OneOf: disable_malware_protection, malware_protection_settings; Default: disable_malware_protection] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_malware_protection, malware_protection_settings; Default: disable_malware_protection] Enable this option"
         },
         "disable_rate_limit": {
           "type": "object",
@@ -7090,7 +7127,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "rate_limit_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_threat_mesh": {
           "type": "object",
@@ -7098,7 +7135,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "threat_mesh_choice",
-          "description": "[OneOf: disable_threat_mesh, enable_threat_mesh; Default: disable_threat_mesh] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_threat_mesh, enable_threat_mesh; Default: disable_threat_mesh] Enable this option"
         },
         "disable_trust_client_ip_headers": {
           "type": "object",
@@ -7106,7 +7143,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "trust_client_ip_headers_choice",
-          "description": "[OneOf: disable_trust_client_ip_headers, enable_trust_client_ip_headers; Default: disable_trust_client_ip_headers] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_trust_client_ip_headers, enable_trust_client_ip_headers; Default: disable_trust_client_ip_headers] Enable this option"
         },
         "disable_waf": {
           "type": "object",
@@ -7114,7 +7151,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "waf_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "do_not_advertise": {
           "type": "object",
@@ -7122,7 +7159,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "advertise_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "domains": {
           "type": "list",
@@ -7160,7 +7197,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "malicious_user_detection_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "enable_threat_mesh": {
           "type": "object",
@@ -7168,7 +7205,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "threat_mesh_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "enable_trust_client_ip_headers": {
           "type": "object",
@@ -7237,7 +7274,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "l7_ddos_auto_mitigation_action",
-          "description": "[OneOf: l7_ddos_action_block, l7_ddos_action_default, l7_ddos_action_js_challenge; Default: l7_ddos_action_default] Can be used for messages where no values are needed."
+          "description": "[OneOf: l7_ddos_action_block, l7_ddos_action_default, l7_ddos_action_js_challenge; Default: l7_ddos_action_default] Enable this option"
         },
         "l7_ddos_action_default": {
           "type": "object",
@@ -7245,7 +7282,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "l7_ddos_auto_mitigation_action",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "l7_ddos_action_js_challenge": {
           "type": "object",
@@ -7274,7 +7311,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "malware_protection_settings": {
           "type": "object",
@@ -7297,7 +7334,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "ml_config_choice",
-          "description": "[OneOf: multi_lb_app, single_lb_app] Can be used for messages where no values are needed."
+          "description": "[OneOf: multi_lb_app, single_lb_app] Enable this option"
         },
         "name": {
           "type": "string",
@@ -7319,7 +7356,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "challenge_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_service_policies": {
           "type": "object",
@@ -7327,7 +7364,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "service_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "origin_server_subset_rule_list": {
           "type": "object",
@@ -7357,7 +7394,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "rate_limit": {
           "type": "object",
@@ -7381,7 +7418,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "routes": {
           "type": "list",
@@ -7411,7 +7448,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "service_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "single_lb_app": {
           "type": "object",
@@ -7435,7 +7472,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "system_default_timeouts": {
           "type": "object",
@@ -7443,7 +7480,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "slow_ddos_mitigation_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "trusted_clients": {
           "type": "list",
@@ -7458,7 +7495,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "user_id_choice",
-          "description": "[OneOf: user_id_client_ip, user_identification] Can be used for messages where no values are needed."
+          "description": "[OneOf: user_id_client_ip, user_identification] Enable this option"
         },
         "user_identification": {
           "type": "object",
@@ -7547,7 +7584,7 @@
       }
     },
     "irule": {
-      "description": "Manages iRule in a given namespace. If one already exists it will give an error. in F5 Distributed Cloud.",
+      "description": "Manages a Irule resource in F5 Distributed Cloud for desired state for big-ip irule service. configuration.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -7556,13 +7593,19 @@
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "description": {
+        "code": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Specify Description for iRule ."
+          "description": "IRule code content, this content will be base64 encoded for preserving formating."
+        },
+        "description": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "description": "Human readable description for the object."
         },
         "disable": {
           "type": "bool",
@@ -7577,13 +7620,13 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "irule": {
+        "irule_name": {
           "type": "string",
           "required": false,
           "optional": true,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
-          "description": "Www.internal.example.f5.com')} DNS::drop} irule content ."
+          "description": "IRule name. IRule name."
         },
         "labels": {
           "type": "map",
@@ -7604,44 +7647,31 @@
           "plan_modifier": "RequiresReplace",
           "validation": "name",
           "description": "Namespace where the Irule will be created."
+        },
+        "source": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "IRule source. IRule generation/updation source."
         }
       }
     },
     "log_receiver": {
-      "description": "Manages new Global Log Receiver object. in F5 Distributed Cloud.",
+      "description": "Manages new Log Receiver object. in F5 Distributed Cloud.",
       "category": "Monitoring",
       "tier": "Standard",
       "import_format": "namespace/name",
       "oneof_groups": {
-        "filter_choice": {
+        "log_receiver_choice": {
           "fields": [
-            "ns_all",
-            "ns_current",
-            "ns_list"
+            "syslog"
           ]
         },
-        "log_type": {
+        "where_choice": {
           "fields": [
-            "audit_logs",
-            "dns_logs",
-            "request_logs",
-            "security_events"
-          ]
-        },
-        "receiver": {
-          "fields": [
-            "aws_cloud_watch_receiver",
-            "azure_event_hubs_receiver",
-            "azure_receiver",
-            "datadog_receiver",
-            "gcp_bucket_receiver",
-            "http_receiver",
-            "kafka_receiver",
-            "new_relic_receiver",
-            "qradar_receiver",
-            "s3_receiver",
-            "splunk_receiver",
-            "sumo_logic_receiver"
+            "site_local"
           ]
         }
       },
@@ -7651,46 +7681,6 @@
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
-        },
-        "audit_logs": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "log_type",
-          "description": "[OneOf: audit_logs, dns_logs, request_logs, security_events] Can be used for messages where no values are needed."
-        },
-        "aws_cloud_watch_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "[OneOf: aws_cloud_watch_receiver, azure_event_hubs_receiver, azure_receiver, datadog_receiver, gcp_bucket_receiver, http_receiver, kafka_receiver, new_relic_receiver, qradar_receiver, s3_receiver, splunk_receiver, sumo_logic_receiver] AWS Cloudwatch Logs Configuration for Global Log Receiver."
-        },
-        "azure_event_hubs_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "Azure Event Hubs Configuration for Global Log Receiver."
-        },
-        "azure_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "Azure Blob Configuration for Global Log Receiver."
-        },
-        "datadog_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "Datadog Configuration. Configuration for Datadog endpoint."
         },
         "description": {
           "type": "string",
@@ -7704,44 +7694,12 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
-        "dns_logs": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "log_type",
-          "description": "Can be used for messages where no values are needed."
-        },
-        "gcp_bucket_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "GCP Bucket Configuration for Global Log Receiver."
-        },
-        "http_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "HTTP Configuration. Configuration for HTTP endpoint."
-        },
         "id": {
           "type": "string",
           "required": false,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
-        },
-        "kafka_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "Kafka Configuration for Global Log Receiver."
         },
         "labels": {
           "type": "map",
@@ -7763,85 +7721,21 @@
           "validation": "name",
           "description": "Namespace where the Log Receiver will be created."
         },
-        "new_relic_receiver": {
+        "site_local": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "receiver",
-          "description": "NewRelic Configuration. Configuration for NewRelic endpoint."
+          "oneof_group": "where_choice",
+          "description": "Enable this option"
         },
-        "ns_all": {
+        "syslog": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "filter_choice",
-          "description": "[OneOf: ns_all, ns_current, ns_list] Can be used for messages where no values are needed."
-        },
-        "ns_current": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "filter_choice",
-          "description": "Can be used for messages where no values are needed."
-        },
-        "ns_list": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "filter_choice",
-          "description": "Namespace List. Namespace List."
-        },
-        "qradar_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "IBM QRadar Configuration. Configuration for IBM QRadar endpoint."
-        },
-        "request_logs": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "log_type",
-          "description": "Can be used for messages where no values are needed."
-        },
-        "s3_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "S3 Configuration for Global Log Receiver."
-        },
-        "security_events": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "log_type",
-          "description": "Can be used for messages where no values are needed."
-        },
-        "splunk_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "Configuration for Splunk HEC Logs endpoint."
-        },
-        "sumo_logic_receiver": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "receiver",
-          "description": "SumoLogic Configuration. Configuration for SumoLogic endpoint."
+          "oneof_group": "log_receiver_choice",
+          "description": "Syslog Server Configuration. Configuration for syslog server."
         }
       }
     },
@@ -8022,7 +7916,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "forward_proxy_choice",
-          "description": "[OneOf: disable_forward_proxy, enable_forward_proxy; Default: disable_forward_proxy] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_forward_proxy, enable_forward_proxy; Default: disable_forward_proxy] Enable this option"
         },
         "enable_forward_proxy": {
           "type": "object",
@@ -8179,7 +8073,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "fast_acl_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_forward_proxy_policy": {
           "type": "object",
@@ -8187,7 +8081,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "forward_proxy_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "disable_network_policy": {
           "type": "object",
@@ -8195,7 +8089,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "network_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "id": {
           "type": "string",
@@ -8692,7 +8586,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "http_management_choice",
-          "description": "[OneOf: disable_https_management, https_management; Default: disable_https_management] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_https_management, https_management; Default: disable_https_management] Enable this option"
         },
         "disable_ssh_access": {
           "type": "object",
@@ -8700,7 +8594,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "ssh_management_choice",
-          "description": "[OneOf: disable_ssh_access, enabled_ssh_access; Default: disable_ssh_access] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_ssh_access, enabled_ssh_access; Default: disable_ssh_access] Enable this option"
         },
         "enabled_ssh_access": {
           "type": "object",
@@ -8875,7 +8769,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "port_choice",
-          "description": "[OneOf: automatic_port, lb_port, port] Can be used for messages where no values are needed."
+          "description": "[OneOf: automatic_port, lb_port, port] Enable this option"
         },
         "description": {
           "type": "string",
@@ -8933,7 +8827,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "port_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "loadbalancer_algorithm": {
           "type": "string",
@@ -8963,7 +8857,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "tls_choice",
-          "description": "[OneOf: no_tls, use_tls; Default: no_tls] Can be used for messages where no values are needed."
+          "description": "[OneOf: no_tls, use_tls; Default: no_tls] Enable this option"
         },
         "origin_servers": {
           "type": "list",
@@ -8988,7 +8882,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "health_check_port_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "upstream_conn_pool_reuse_type": {
           "type": "object",
@@ -9017,7 +8911,7 @@
       }
     },
     "policer": {
-      "description": "Manages new policer with traffic rate limits. in F5 Distributed Cloud.",
+      "description": "Manages protocol_policer object, protocol_policer object contains list of L4 protocol match condition and corresponding traffic rate limits. in F5 Distributed Cloud.",
       "import_format": "namespace/name",
       "attributes": {
         "annotations": {
@@ -9025,22 +8919,6 @@
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
-        },
-        "burst_size": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "The maximum size permitted for bursts of data. E.g. 10000 pps burst ."
-        },
-        "committed_information_rate": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "The committed information rate is the guaranteed packets rate for traffic arriving or departing under normal conditions. E.g. 10000 pps ."
         },
         "description": {
           "type": "string",
@@ -9081,21 +8959,12 @@
           "validation": "name",
           "description": "Namespace where the Policer will be created."
         },
-        "policer_mode": {
-          "type": "string",
+        "protocol_policer": {
+          "type": "list",
           "required": false,
           "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: POLICER_MODE_NOT_SHARED|POLICER_MODE_SHARED] - POLICER_MODE_NOT_SHARED: Not Shared A separate policer instance is created for each reference to the policer - POLICER_MODE_SHARED: Shared A common policer instance is used for for all references to the policer. Possible values are `POLICER_MODE_NOT_SHARED`, `POLICER_MODE_SHARED`. Defaults to `POLICER_MODE_NOT_SHARED`."
-        },
-        "policer_type": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "[Enum: POLICER_SINGLE_RATE_TWO_COLOR] Specifies the type of Policer Basic Single-Rate Two-Color Policer. The only possible value is `POLICER_SINGLE_RATE_TWO_COLOR`. Defaults to `POLICER_SINGLE_RATE_TWO_COLOR`."
+          "is_block": true,
+          "description": "List of L4 protocol match condition and associated traffic rate limits."
         }
       }
     },
@@ -9390,7 +9259,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "site_choice",
-          "description": "[OneOf: do_not_advertise, site_virtual_sites] Can be used for messages where no values are needed."
+          "description": "[OneOf: do_not_advertise, site_virtual_sites] Enable this option"
         },
         "dynamic_proxy": {
           "type": "object",
@@ -9441,7 +9310,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "proxy_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_interception": {
           "type": "object",
@@ -9449,7 +9318,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "tls_interception_choice",
-          "description": "[OneOf: no_interception, tls_intercept; Default: no_interception] Can be used for messages where no values are needed."
+          "description": "[OneOf: no_interception, tls_intercept; Default: no_interception] Enable this option"
         },
         "site_local_inside_network": {
           "type": "object",
@@ -9457,7 +9326,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "network_choice",
-          "description": "[OneOf: site_local_inside_network, site_local_network] Can be used for messages where no values are needed."
+          "description": "[OneOf: site_local_inside_network, site_local_network] Enable this option"
         },
         "site_local_network": {
           "type": "object",
@@ -9465,7 +9334,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "network_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "site_virtual_sites": {
           "type": "object",
@@ -9588,7 +9457,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "server_choice",
-          "description": "[OneOf: any_server, server_name, server_name_matcher, server_selector] Can be used for messages where no values are needed."
+          "description": "[OneOf: any_server, server_name, server_name_matcher, server_selector] Enable this option"
         },
         "description": {
           "type": "string",
@@ -9946,7 +9815,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "[OneOf: block_all_services, blocked_services] Can be used for messages where no values are needed."
+          "description": "[OneOf: block_all_services, blocked_services] Enable this option"
         },
         "blocked_services": {
           "type": "object",
@@ -10006,7 +9875,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "node_ha_choice",
-          "description": "[OneOf: disable_ha, enable_ha; Default: disable_ha] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_ha, enable_ha; Default: disable_ha] Enable this option"
         },
         "disable_url_categorization": {
           "type": "object",
@@ -10014,7 +9883,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "url_categorization_choice",
-          "description": "[OneOf: disable_url_categorization, enable_url_categorization; Default: disable_url_categorization] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_url_categorization, enable_url_categorization; Default: disable_url_categorization] Enable this option"
         },
         "dns_ntp_config": {
           "type": "object",
@@ -10029,7 +9898,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "node_ha_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "enable_url_categorization": {
           "type": "object",
@@ -10037,7 +9906,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "url_categorization_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "equinix": {
           "type": "object",
@@ -10053,7 +9922,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "enterprise_proxy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "gcp": {
           "type": "object",
@@ -10112,7 +9981,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "logs_receiver_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "name": {
           "type": "string",
@@ -10134,7 +10003,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "forward_proxy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_network_policy": {
           "type": "object",
@@ -10142,7 +10011,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "network_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_proxy_bypass": {
           "type": "object",
@@ -10150,7 +10019,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "proxy_bypass_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_s2s_connectivity_sli": {
           "type": "object",
@@ -10158,7 +10027,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "s2s_connectivity_sli_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_s2s_connectivity_slo": {
           "type": "object",
@@ -10166,7 +10035,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "s2s_connectivity_slo_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "nutanix": {
           "type": "object",
@@ -10291,7 +10160,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "internet_connection_choice",
-          "description": "[OneOf: disable, enable] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable, enable] Enable this option"
         },
         "enable": {
           "type": "object",
@@ -10299,7 +10168,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "internet_connection_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "id": {
           "type": "string",
@@ -10433,7 +10302,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "rule_choice",
-          "description": "[OneOf: allow_all_requests, allow_list, deny_all_requests, deny_list, rule_list] Can be used for messages where no values are needed."
+          "description": "[OneOf: allow_all_requests, allow_list, deny_all_requests, deny_list, rule_list] Enable this option"
         },
         "allow_list": {
           "type": "object",
@@ -10455,7 +10324,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "server_choice",
-          "description": "[OneOf: any_server, server_name, server_name_matcher, server_selector] Can be used for messages where no values are needed."
+          "description": "[OneOf: any_server, server_name, server_name_matcher, server_selector] Enable this option"
         },
         "deny_all_requests": {
           "type": "object",
@@ -10463,7 +10332,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "rule_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "deny_list": {
           "type": "object",
@@ -10618,7 +10487,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "asn_choice",
-          "description": "[OneOf: any_asn, asn_list, asn_matcher] Can be used for messages where no values are needed."
+          "description": "[OneOf: any_asn, asn_list, asn_matcher] Enable this option"
         },
         "any_client": {
           "type": "object",
@@ -10626,7 +10495,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "client_choice",
-          "description": "[OneOf: any_client, client_name, client_name_matcher, client_selector, ip_threat_category_list] Can be used for messages where no values are needed."
+          "description": "[OneOf: any_client, client_name, client_name_matcher, client_selector, ip_threat_category_list] Enable this option"
         },
         "any_ip": {
           "type": "object",
@@ -10634,7 +10503,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "ip_choice",
-          "description": "[OneOf: any_ip, ip_matcher, ip_prefix_list] Can be used for messages where no values are needed."
+          "description": "[OneOf: any_ip, ip_matcher, ip_prefix_list] Enable this option"
         },
         "api_group_matcher": {
           "type": "object",
@@ -10886,7 +10755,7 @@
       }
     },
     "site": {
-      "description": "Manages a Site resource in F5 Distributed Cloud for aws vpc site specification. configuration.",
+      "description": "Manages a Site resource in F5 Distributed Cloud for aws tgw site specification. configuration.",
       "category": "Infrastructure",
       "tier": "Standard",
       "import_format": "namespace/name",
@@ -10899,11 +10768,6 @@
           ],
           "default": "default_blocked_services"
         },
-        "deployment": {
-          "fields": [
-            "aws_cred"
-          ]
-        },
         "direct_connect_choice": {
           "fields": [
             "direct_connect_disabled",
@@ -10911,92 +10775,26 @@
             "private_connectivity"
           ]
         },
-        "egress_gateway_choice": {
-          "fields": [
-            "egress_gateway_default",
-            "egress_nat_gw",
-            "egress_virtual_private_gateway"
-          ],
-          "default": "egress_gateway_default"
-        },
-        "internet_vip_choice": {
-          "fields": [
-            "disable_internet_vip",
-            "enable_internet_vip"
-          ],
-          "default": "disable_internet_vip"
-        },
         "logs_receiver_choice": {
           "fields": [
             "log_receiver",
             "logs_streaming_disabled"
           ]
-        },
-        "routing_type": {
-          "fields": [
-            "f5_orchestrated_routing",
-            "manual_routing"
-          ]
-        },
-        "security_group_choice": {
-          "fields": [
-            "custom_security_group",
-            "f5xc_security_group"
-          ]
-        },
-        "site_type": {
-          "fields": [
-            "ingress_egress_gw",
-            "ingress_gw",
-            "voltstack_cluster"
-          ]
-        },
-        "worker_nodes": {
-          "fields": [
-            "no_worker_nodes",
-            "nodes_per_az",
-            "total_nodes"
-          ],
-          "default": "no_worker_nodes"
         }
       },
       "attributes": {
-        "address": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "Site's geographical address that can be used to determine its latitude and longitude."
-        },
-        "admin_password": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "description": "SecretType is used in an object to indicate a sensitive/confidential field."
-        },
         "annotations": {
           "type": "map",
           "required": false,
           "optional": true,
           "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata."
         },
-        "aws_cred": {
+        "aws_parameters": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "deployment",
-          "description": "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name."
-        },
-        "aws_region": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "AWS Region. Name for AWS Region."
+          "description": "Setup AWS services VPC, transit gateway and site."
         },
         "block_all_services": {
           "type": "object",
@@ -11004,7 +10802,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Can be used for messages where no values are needed."
+          "description": "[OneOf: block_all_services, blocked_services, default_blocked_services; Default: default_blocked_services] Enable this option"
         },
         "blocked_services": {
           "type": "object",
@@ -11028,21 +10826,13 @@
           "is_block": true,
           "description": "Custom DNS is the configured for specify CE site."
         },
-        "custom_security_group": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "security_group_choice",
-          "description": "[OneOf: custom_security_group, f5xc_security_group] Enter pre created security groups for slo(Site Local Outside) and sli(Site Local Inside) interface. Supported only for sites deployed on existing VPC."
-        },
         "default_blocked_services": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -11056,7 +10846,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "direct_connect_choice",
-          "description": "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Can be used for messages where no values are needed."
+          "description": "[OneOf: direct_connect_disabled, direct_connect_enabled, private_connectivity] Enable this option"
         },
         "direct_connect_enabled": {
           "type": "object",
@@ -11072,100 +10862,12 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
-        "disable_internet_vip": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "internet_vip_choice",
-          "description": "[OneOf: disable_internet_vip, enable_internet_vip; Default: disable_internet_vip] Can be used for messages where no values are needed."
-        },
-        "disk_size": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "Disk size to be used for this instance in GiB. 80 is 80 GiB."
-        },
-        "egress_gateway_default": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "egress_gateway_choice",
-          "description": "[OneOf: egress_gateway_default, egress_nat_gw, egress_virtual_private_gateway; Default: egress_gateway_default] Can be used for messages where no values are needed."
-        },
-        "egress_nat_gw": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "egress_gateway_choice",
-          "description": "With this option, egress site traffic will be routed through an Network Address Translation(NAT) Gateway."
-        },
-        "egress_virtual_private_gateway": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "egress_gateway_choice",
-          "description": "With this option, egress site traffic will be routed through an Virtual Private Gateway."
-        },
-        "enable_internet_vip": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "internet_vip_choice",
-          "description": "Can be used for messages where no values are needed."
-        },
-        "f5_orchestrated_routing": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "routing_type",
-          "description": "[OneOf: f5_orchestrated_routing, manual_routing] Can be used for messages where no values are needed."
-        },
-        "f5xc_security_group": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "security_group_choice",
-          "description": "Can be used for messages where no values are needed."
-        },
         "id": {
           "type": "string",
           "required": false,
           "computed": true,
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
-        },
-        "ingress_egress_gw": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "site_type",
-          "description": "[OneOf: ingress_egress_gw, ingress_gw, voltstack_cluster] AWS Ingress/Egress Gateway. Two interface AWS ingress/egress site."
-        },
-        "ingress_gw": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "site_type",
-          "description": "AWS Ingress Gateway. Single interface AWS ingress site."
-        },
-        "instance_type": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "Select Instance size based on performance needed ."
         },
         "kubernetes_upgrade_drain": {
           "type": "object",
@@ -11194,15 +10896,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "logs_receiver_choice",
-          "description": "Can be used for messages where no values are needed."
-        },
-        "manual_routing": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "routing_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "name": {
           "type": "string",
@@ -11218,23 +10912,6 @@
           "validation": "name",
           "description": "Namespace where the Site will be created."
         },
-        "no_worker_nodes": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "worker_nodes",
-          "description": "[OneOf: no_worker_nodes, nodes_per_az, total_nodes; Default: no_worker_nodes] Can be used for messages where no values are needed."
-        },
-        "nodes_per_az": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "oneof_group": "worker_nodes",
-          "description": "Desired Worker Nodes Per AZ. Max limit is up to 21."
-        },
         "offline_survivability_mode": {
           "type": "object",
           "required": false,
@@ -11249,6 +10926,13 @@
           "is_block": true,
           "description": "Select the F5XC Operating System Version for the site. By default, latest available OS Version will be used. Refer to release notes to find required released OS versions."
         },
+        "performance_enhancement_mode": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Optimize the site for L3 or L7 traffic processing. L7 optimized is the default."
+        },
         "private_connectivity": {
           "type": "object",
           "required": false,
@@ -11256,14 +10940,6 @@
           "is_block": true,
           "oneof_group": "direct_connect_choice",
           "description": "Private Connect Configuration. Private Connect Configuration."
-        },
-        "ssh_key": {
-          "type": "string",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "description": "Public SSH key for accessing the site."
         },
         "sw": {
           "type": "object",
@@ -11279,29 +10955,26 @@
           "is_block": true,
           "description": "AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console."
         },
-        "total_nodes": {
-          "type": "int64",
-          "required": false,
-          "optional": true,
-          "computed": true,
-          "plan_modifier": "UseStateForUnknown",
-          "oneof_group": "worker_nodes",
-          "description": "Total number of worker nodes to be deployed across all AZ's used in the Site."
-        },
-        "voltstack_cluster": {
+        "tgw_security": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "oneof_group": "site_type",
-          "description": "App Stack cluster of single interface AWS nodes."
+          "description": "Security Configuration for transit gateway."
         },
-        "vpc": {
+        "vn_config": {
           "type": "object",
           "required": false,
           "optional": true,
           "is_block": true,
-          "description": "Defines choice about AWS VPC for a view."
+          "description": "Virtual Network Configuration. Virtual Network Configuration."
+        },
+        "vpc_attachments": {
+          "type": "object",
+          "required": false,
+          "optional": true,
+          "is_block": true,
+          "description": "Spoke VPCs to be attached to the AWS TGW Site."
         }
       },
       "dependencies": {
@@ -11359,7 +11032,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "re_fallback",
-          "description": "[OneOf: disable_re_fallback, enable_re_fallback; Default: disable_re_fallback] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_re_fallback, enable_re_fallback; Default: disable_re_fallback] Enable this option"
         },
         "enable_re_fallback": {
           "type": "object",
@@ -11367,7 +11040,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "re_fallback",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "full_mesh": {
           "type": "object",
@@ -11467,7 +11140,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "connection_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -11494,7 +11167,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "connection_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "labels": {
           "type": "map",
@@ -11615,7 +11288,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "advertise_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "annotations": {
           "type": "map",
@@ -11629,7 +11302,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "sni_default_lb_choice",
-          "description": "[OneOf: default_lb_with_sni, no_sni, sni; Default: default_lb_with_sni] Can be used for messages where no values are needed."
+          "description": "[OneOf: default_lb_with_sni, no_sni, sni; Default: default_lb_with_sni] Enable this option"
         },
         "description": {
           "type": "string",
@@ -11657,7 +11330,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "advertise_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "do_not_retract_cluster": {
           "type": "object",
@@ -11665,7 +11338,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "cluster_retract_choice",
-          "description": "[OneOf: do_not_retract_cluster, retract_cluster] Can be used for messages where no values are needed."
+          "description": "[OneOf: do_not_retract_cluster, retract_cluster] Enable this option"
         },
         "domains": {
           "type": "list",
@@ -11679,7 +11352,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "[OneOf: hash_policy_choice_least_active, hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness] Can be used for messages where no values are needed."
+          "description": "[OneOf: hash_policy_choice_least_active, hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness] Enable this option"
         },
         "hash_policy_choice_random": {
           "type": "object",
@@ -11687,7 +11360,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "hash_policy_choice_round_robin": {
           "type": "object",
@@ -11695,7 +11368,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "hash_policy_choice_source_ip_stickiness": {
           "type": "object",
@@ -11703,7 +11376,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "id": {
           "type": "string",
@@ -11756,7 +11429,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "service_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_sni": {
           "type": "object",
@@ -11764,7 +11437,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "sni_default_lb_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "origin_pools_weights": {
           "type": "list",
@@ -11788,7 +11461,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "cluster_retract_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "service_policies_from_namespace": {
           "type": "object",
@@ -11796,7 +11469,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "service_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "sni": {
           "type": "object",
@@ -11804,7 +11477,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "sni_default_lb_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "tcp": {
           "type": "object",
@@ -11812,7 +11485,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "loadbalancer_type",
-          "description": "[OneOf: tcp, tls_tcp, tls_tcp_auto_cert] Can be used for messages where no values are needed."
+          "description": "[OneOf: tcp, tls_tcp, tls_tcp_auto_cert] Enable this option"
         },
         "tls_tcp": {
           "type": "object",
@@ -12109,7 +11782,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "advertise_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "annotations": {
           "type": "map",
@@ -12143,7 +11816,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "advertise_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "domains": {
           "type": "list",
@@ -12165,7 +11838,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "[OneOf: hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness] Can be used for messages where no values are needed."
+          "description": "[OneOf: hash_policy_choice_random, hash_policy_choice_round_robin, hash_policy_choice_source_ip_stickiness] Enable this option"
         },
         "hash_policy_choice_round_robin": {
           "type": "object",
@@ -12173,7 +11846,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "hash_policy_choice_source_ip_stickiness": {
           "type": "object",
@@ -12181,7 +11854,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "hash_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "id": {
           "type": "string",
@@ -12250,7 +11923,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "loadbalancer_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         }
       }
     },
@@ -12527,7 +12200,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "server_header_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "default_loadbalancer": {
           "type": "object",
@@ -12535,7 +12208,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "default_lb_choice",
-          "description": "[OneOf: default_loadbalancer, non_default_loadbalancer; Default: default_loadbalancer] Can be used for messages where no values are needed."
+          "description": "[OneOf: default_loadbalancer, non_default_loadbalancer; Default: default_loadbalancer] Enable this option"
         },
         "description": {
           "type": "string",
@@ -12571,7 +12244,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "path_normalize_choice",
-          "description": "[OneOf: disable_path_normalize, enable_path_normalize; Default: disable_path_normalize] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_path_normalize, enable_path_normalize; Default: disable_path_normalize] Enable this option"
         },
         "domains": {
           "type": "list",
@@ -12592,7 +12265,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "path_normalize_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "http_protocol_options": {
           "type": "object",
@@ -12658,7 +12331,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "authentication_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_challenge": {
           "type": "object",
@@ -12666,7 +12339,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "challenge_type",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "non_default_loadbalancer": {
           "type": "object",
@@ -12674,7 +12347,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "default_lb_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "pass_through": {
           "type": "object",
@@ -12682,7 +12355,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "server_header_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "proxy": {
           "type": "string",
@@ -12860,7 +12533,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "network_choice",
-          "description": "[OneOf: global_network, legacy_type, site_local_inside_network, site_local_network] Can be used for messages where no values are needed."
+          "description": "[OneOf: global_network, legacy_type, site_local_inside_network, site_local_network] Enable this option"
         },
         "id": {
           "type": "string",
@@ -12904,7 +12577,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "network_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "site_local_network": {
           "type": "object",
@@ -12912,7 +12585,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "network_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "static_routes": {
           "type": "list",
@@ -13101,7 +12774,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "usb_policy_choice",
-          "description": "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Can be used for messages where no values are needed."
+          "description": "[OneOf: allow_all_usb, deny_all_usb, usb_policy] Enable this option"
         },
         "annotations": {
           "type": "map",
@@ -13161,7 +12834,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "blocked_services_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "default_network_config": {
           "type": "object",
@@ -13169,7 +12842,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "network_cfg_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "default_sriov_interface": {
           "type": "object",
@@ -13177,7 +12850,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "sriov_interface_choice",
-          "description": "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Can be used for messages where no values are needed."
+          "description": "[OneOf: default_sriov_interface, sriov_interfaces; Default: default_sriov_interface] Enable this option"
         },
         "default_storage_config": {
           "type": "object",
@@ -13185,7 +12858,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "storage_cfg_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "deny_all_usb": {
           "type": "object",
@@ -13193,7 +12866,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "usb_policy_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "description": {
           "type": "string",
@@ -13213,7 +12886,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "gpu_choice",
-          "description": "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_gpu, enable_gpu, enable_vgpu; Default: disable_gpu] Enable this option"
         },
         "disable_vm": {
           "type": "object",
@@ -13221,7 +12894,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "vm_choice",
-          "description": "[OneOf: disable_vm, enable_vm; Default: disable_vm] Can be used for messages where no values are needed."
+          "description": "[OneOf: disable_vm, enable_vm; Default: disable_vm] Enable this option"
         },
         "enable_gpu": {
           "type": "object",
@@ -13229,7 +12902,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "gpu_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "enable_vgpu": {
           "type": "object",
@@ -13297,7 +12970,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "logs_receiver_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "master_node_configuration": {
           "type": "list",
@@ -13326,7 +12999,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "bond_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_k8s_cluster": {
           "type": "object",
@@ -13334,7 +13007,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "k8s_cluster_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "no_local_control_plane": {
           "type": "object",
@@ -13342,7 +13015,7 @@
           "optional": true,
           "is_block": true,
           "oneof_group": "local_control_plane_choice",
-          "description": "Can be used for messages where no values are needed."
+          "description": "Enable this option"
         },
         "offline_survivability_mode": {
           "type": "object",
@@ -13456,20 +13129,10 @@
       }
     },
     "workload": {
-      "description": "Manages a Workload resource in F5 Distributed Cloud for workload. configuration.",
+      "description": "Manages workload_flavor. in F5 Distributed Cloud.",
       "category": "Container",
       "tier": "Advanced",
       "import_format": "namespace/name",
-      "oneof_groups": {
-        "workload_choice": {
-          "fields": [
-            "job",
-            "service",
-            "simple_service",
-            "stateful_service"
-          ]
-        }
-      },
       "attributes": {
         "annotations": {
           "type": "map",
@@ -13489,6 +13152,14 @@
           "optional": true,
           "description": "A value of true will administratively disable the object."
         },
+        "ephemeral_storage": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Ephemeral storage in MiB (mebibyte) allocated for the workload_flavor."
+        },
         "id": {
           "type": "string",
           "required": false,
@@ -13496,19 +13167,19 @@
           "plan_modifier": "UseStateForUnknown",
           "description": "Unique identifier for the resource."
         },
-        "job": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "workload_choice",
-          "description": "[OneOf: job, service, simple_service, stateful_service] Jobs are used for running batch processing tasks and run to completion. Jobs are generally used for tasks like report generation, billing, parallel data processing, ETL processing, etc."
-        },
         "labels": {
           "type": "map",
           "required": false,
           "optional": true,
           "description": "Labels is a user defined key value map that can be attached to resources for organization and filtering."
+        },
+        "memory": {
+          "type": "string",
+          "required": false,
+          "optional": true,
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Memory in MiB (mebibyte) allocated for the workload_flavor."
         },
         "name": {
           "type": "string",
@@ -13524,29 +13195,13 @@
           "validation": "name",
           "description": "Namespace where the Workload will be created."
         },
-        "service": {
-          "type": "object",
+        "vcpus": {
+          "type": "int64",
           "required": false,
           "optional": true,
-          "is_block": true,
-          "oneof_group": "workload_choice",
-          "description": "Service does not maintain per replica state, however it can be configured to use persistent storage that is shared amongst all the replicas. Replicas of a service are fungible and do not have a stable network identity or storage. Common examples of services are web servers, application servers.."
-        },
-        "simple_service": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "workload_choice",
-          "description": "SimpleService is a service having one container and one replica that is deployed on all Regional Edges and advertised on Internet via HTTP loadbalancer on default VIP."
-        },
-        "stateful_service": {
-          "type": "object",
-          "required": false,
-          "optional": true,
-          "is_block": true,
-          "oneof_group": "workload_choice",
-          "description": "StatefulService maintains per replica state and each replica has its own persistent storage. Each replica has a unique network identity and stable storage. Stateful service are used for distributed stateful applications like cassandra, mongodb, redis, etc."
+          "computed": true,
+          "plan_modifier": "UseStateForUnknown",
+          "description": "Number of vCPUs allocated for the workload_flavor. Each vCPU is a thread on a CPU core."
         }
       },
       "dependencies": {

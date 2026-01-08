@@ -61,21 +61,21 @@ resource "f5xc_proxy" "example" {
 <a id="connection-timeout"></a>&#x2022; [`connection_timeout`](#connection-timeout) - Optional Number  Defaults to `2000`  Specified in milliseconds<br>The timeout for new network connections to upstream server.  The (2 seconds)
 
 -> **One of the following:**
-&#x2022; <a id="do-not-advertise"></a>[`do_not_advertise`](#do-not-advertise) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="do-not-advertise"></a>[`do_not_advertise`](#do-not-advertise) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="site-virtual-sites"></a>[`site_virtual_sites`](#site-virtual-sites) - Optional Block<br>Defines a way to advertise a VIP on specific sites
 
 -> **One of the following:**
 &#x2022; <a id="dynamic-proxy"></a>[`dynamic_proxy`](#dynamic-proxy) - Optional Block<br>DynamicProxyType<br>See [Dynamic Proxy](#dynamic-proxy) below for details.
 <br><br>&#x2022; <a id="http-proxy"></a>[`http_proxy`](#http-proxy) - Optional Block<br>HTTP Connect Proxy. Parameters for HTTP Connect Proxy
 
-<a id="no-forward-proxy-policy"></a>&#x2022; [`no_forward_proxy_policy`](#no-forward-proxy-policy) - Optional Block<br>Can be used for messages where no values are needed
+<a id="no-forward-proxy-policy"></a>&#x2022; [`no_forward_proxy_policy`](#no-forward-proxy-policy) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="no-interception"></a>[`no_interception`](#no-interception) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="no-interception"></a>[`no_interception`](#no-interception) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="site-local-inside-network"></a>[`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="site-local-network"></a>[`site_local_network`](#site-local-network) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="site-local-inside-network"></a>[`site_local_inside_network`](#site-local-inside-network) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="site-local-network"></a>[`site_local_network`](#site-local-network) - Optional Block<br>Enable this option
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block
 
@@ -109,11 +109,11 @@ A [`forward_proxy_policies`](#policies-42e2f7) block (within [`active_forward_pr
 
 A [`dynamic_proxy`](#dynamic-proxy) block supports the following:
 
-<a id="dynamic-proxy-disable-dns-masquerade"></a>&#x2022; [`disable_dns_masquerade`](#dynamic-proxy-disable-dns-masquerade) - Optional Block<br>Can be used for messages where no values are needed
+<a id="dynamic-proxy-disable-dns-masquerade"></a>&#x2022; [`disable_dns_masquerade`](#dynamic-proxy-disable-dns-masquerade) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-domains"></a>&#x2022; [`domains`](#dynamic-proxy-domains) - Optional List<br>List of Domains to be proxied. Wildcard hosts are supported in the suffix or prefix form Supported Domains and search order: 1. Exact Domain names: `www.example.com.` 2
 
-<a id="dynamic-proxy-enable-dns-masquerade"></a>&#x2022; [`enable_dns_masquerade`](#dynamic-proxy-enable-dns-masquerade) - Optional Block<br>Can be used for messages where no values are needed
+<a id="dynamic-proxy-enable-dns-masquerade"></a>&#x2022; [`enable_dns_masquerade`](#dynamic-proxy-enable-dns-masquerade) - Optional Block<br>Enable this option
 
 <a id="dynamic-proxy-http-proxy"></a>&#x2022; [`http_proxy`](#dynamic-proxy-http-proxy) - Optional Block<br>Dynamic HTTP Proxy Type. Parameters for dynamic HTTP proxy<br>See [HTTP Proxy](#dynamic-proxy-http-proxy) below.
 
@@ -139,9 +139,9 @@ A [`more_option`](#dynamic-proxy-http-proxy-more-option) block (within [`dynamic
 
 <a id="pages-241bd8"></a>&#x2022; [`disable_default_error_pages`](#pages-241bd8) - Optional Bool<br>Disable the use of default F5XC error pages
 
-<a id="normalize-343080"></a>&#x2022; [`disable_path_normalize`](#normalize-343080) - Optional Block<br>Can be used for messages where no values are needed
+<a id="normalize-343080"></a>&#x2022; [`disable_path_normalize`](#normalize-343080) - Optional Block<br>Enable this option
 
-<a id="normalize-19a976"></a>&#x2022; [`enable_path_normalize`](#normalize-19a976) - Optional Block<br>Can be used for messages where no values are needed
+<a id="normalize-19a976"></a>&#x2022; [`enable_path_normalize`](#normalize-19a976) - Optional Block<br>Enable this option
 
 <a id="timeout-14c486"></a>&#x2022; [`idle_timeout`](#timeout-14c486) - Optional Number<br>The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset
 
@@ -255,9 +255,9 @@ A [`more_option`](#dynamic-proxy-https-proxy-more-option) block (within [`dynami
 
 <a id="pages-9edd65"></a>&#x2022; [`disable_default_error_pages`](#pages-9edd65) - Optional Bool<br>Disable the use of default F5XC error pages
 
-<a id="normalize-780e38"></a>&#x2022; [`disable_path_normalize`](#normalize-780e38) - Optional Block<br>Can be used for messages where no values are needed
+<a id="normalize-780e38"></a>&#x2022; [`disable_path_normalize`](#normalize-780e38) - Optional Block<br>Enable this option
 
-<a id="normalize-a240ab"></a>&#x2022; [`enable_path_normalize`](#normalize-a240ab) - Optional Block<br>Can be used for messages where no values are needed
+<a id="normalize-a240ab"></a>&#x2022; [`enable_path_normalize`](#normalize-a240ab) - Optional Block<br>Enable this option
 
 <a id="timeout-1062ad"></a>&#x2022; [`idle_timeout`](#timeout-1062ad) - Optional Number<br>The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset
 
@@ -355,7 +355,7 @@ A [`more_option`](#dynamic-proxy-https-proxy-more-option) block (within [`dynami
 
 A [`tls_params`](#dynamic-proxy-https-proxy-tls-params) block (within [`dynamic_proxy.https_proxy`](#dynamic-proxy-https-proxy)) supports the following:
 
-<a id="mtls-1872dc"></a>&#x2022; [`no_mtls`](#mtls-1872dc) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mtls-1872dc"></a>&#x2022; [`no_mtls`](#mtls-1872dc) - Optional Block<br>Enable this option
 
 <a id="certificates-6f0e81"></a>&#x2022; [`tls_certificates`](#certificates-6f0e81) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-6f0e81) below.
 
@@ -417,7 +417,7 @@ A [`sni_proxy`](#dynamic-proxy-sni-proxy) block (within [`dynamic_proxy`](#dynam
 
 A [`http_proxy`](#http-proxy) block supports the following:
 
-<a id="http-proxy-enable-http"></a>&#x2022; [`enable_http`](#http-proxy-enable-http) - Optional Block<br>Can be used for messages where no values are needed
+<a id="http-proxy-enable-http"></a>&#x2022; [`enable_http`](#http-proxy-enable-http) - Optional Block<br>Enable this option
 
 <a id="http-proxy-more-option"></a>&#x2022; [`more_option`](#http-proxy-more-option) - Optional Block<br>Defines various OPTIONS to define a route<br>See [More Option](#http-proxy-more-option) below.
 
@@ -433,9 +433,9 @@ A [`more_option`](#http-proxy-more-option) block (within [`http_proxy`](#http-pr
 
 <a id="pages-159caf"></a>&#x2022; [`disable_default_error_pages`](#pages-159caf) - Optional Bool<br>Disable the use of default F5XC error pages
 
-<a id="normalize-3090b6"></a>&#x2022; [`disable_path_normalize`](#normalize-3090b6) - Optional Block<br>Can be used for messages where no values are needed
+<a id="normalize-3090b6"></a>&#x2022; [`disable_path_normalize`](#normalize-3090b6) - Optional Block<br>Enable this option
 
-<a id="normalize-8562f8"></a>&#x2022; [`enable_path_normalize`](#normalize-8562f8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="normalize-8562f8"></a>&#x2022; [`enable_path_normalize`](#normalize-8562f8) - Optional Block<br>Enable this option
 
 <a id="http-proxy-more-option-idle-timeout"></a>&#x2022; [`idle_timeout`](#http-proxy-more-option-idle-timeout) - Optional Number<br>The amount of time that a stream can exist without upstream or downstream activity, in milliseconds. The stream is terminated with a HTTP 504 (Gateway Timeout) error code if no upstream response header has been received, otherwise the stream is reset
 
@@ -555,7 +555,7 @@ An [`advertise_where`](#site-virtual-sites-advertise-where) block (within [`site
 
 <a id="site-virtual-sites-advertise-where-site"></a>&#x2022; [`site`](#site-virtual-sites-advertise-where-site) - Optional Block<br>Defines a reference to a CE site along with network type and an optional IP address where a load balancer could be advertised<br>See [Site](#site-virtual-sites-advertise-where-site) below.
 
-<a id="port-7cb8fb"></a>&#x2022; [`use_default_port`](#port-7cb8fb) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-7cb8fb"></a>&#x2022; [`use_default_port`](#port-7cb8fb) - Optional Block<br>Enable this option
 
 <a id="site-7107b1"></a>&#x2022; [`virtual_site`](#site-7107b1) - Optional Block<br>Defines a reference to a customer site virtual site along with network type where a load balancer could be advertised<br>See [Virtual Site](#site-7107b1) below.
 
@@ -609,15 +609,15 @@ A [`tls_intercept`](#tls-intercept) block supports the following:
 
 <a id="tls-intercept-custom-certificate"></a>&#x2022; [`custom_certificate`](#tls-intercept-custom-certificate) - Optional Block<br>TLS Certificate. Handle to fetch certificate and key<br>See [Custom Certificate](#tls-intercept-custom-certificate) below.
 
-<a id="tls-intercept-enable-for-all-domains"></a>&#x2022; [`enable_for_all_domains`](#tls-intercept-enable-for-all-domains) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tls-intercept-enable-for-all-domains"></a>&#x2022; [`enable_for_all_domains`](#tls-intercept-enable-for-all-domains) - Optional Block<br>Enable this option
 
 <a id="tls-intercept-policy"></a>&#x2022; [`policy`](#tls-intercept-policy) - Optional Block<br>Policy to enable or disable TLS interception<br>See [Policy](#tls-intercept-policy) below.
 
 <a id="tls-intercept-trusted-ca-url"></a>&#x2022; [`trusted_ca_url`](#tls-intercept-trusted-ca-url) - Optional String<br>Custom Root CA Certificate for validating upstream server certificate
 
-<a id="tls-intercept-volterra-certificate"></a>&#x2022; [`volterra_certificate`](#tls-intercept-volterra-certificate) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tls-intercept-volterra-certificate"></a>&#x2022; [`volterra_certificate`](#tls-intercept-volterra-certificate) - Optional Block<br>Enable this option
 
-<a id="tls-intercept-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#tls-intercept-volterra-trusted-ca) - Optional Block<br>Can be used for messages where no values are needed
+<a id="tls-intercept-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#tls-intercept-volterra-trusted-ca) - Optional Block<br>Enable this option
 
 #### TLS Intercept Custom Certificate
 
@@ -629,11 +629,11 @@ A [`custom_certificate`](#tls-intercept-custom-certificate) block (within [`tls_
 
 <a id="spec-309e16"></a>&#x2022; [`description_spec`](#spec-309e16) - Optional String<br>Description. Description for the certificate
 
-<a id="stapling-e452bc"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-e452bc) - Optional Block<br>Can be used for messages where no values are needed
+<a id="stapling-e452bc"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-e452bc) - Optional Block<br>Enable this option
 
 <a id="key-64ce0d"></a>&#x2022; [`private_key`](#key-64ce0d) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-64ce0d) below.
 
-<a id="defaults-a85c93"></a>&#x2022; [`use_system_defaults`](#defaults-a85c93) - Optional Block<br>Can be used for messages where no values are needed
+<a id="defaults-a85c93"></a>&#x2022; [`use_system_defaults`](#defaults-a85c93) - Optional Block<br>Enable this option
 
 #### TLS Intercept Custom Certificate Custom Hash Algorithms
 
@@ -667,11 +667,11 @@ A [`policy`](#tls-intercept-policy) block (within [`tls_intercept`](#tls-interce
 
 An [`interception_rules`](#tls-intercept-policy-interception-rules) block (within [`tls_intercept.policy`](#tls-intercept-policy)) supports the following:
 
-<a id="interception-f6b646"></a>&#x2022; [`disable_interception`](#interception-f6b646) - Optional Block<br>Can be used for messages where no values are needed
+<a id="interception-f6b646"></a>&#x2022; [`disable_interception`](#interception-f6b646) - Optional Block<br>Enable this option
 
 <a id="match-42a3da"></a>&#x2022; [`domain_match`](#match-42a3da) - Optional Block<br>Domains. Domains names<br>See [Domain Match](#match-42a3da) below.
 
-<a id="interception-e82eca"></a>&#x2022; [`enable_interception`](#interception-e82eca) - Optional Block<br>Can be used for messages where no values are needed
+<a id="interception-e82eca"></a>&#x2022; [`enable_interception`](#interception-e82eca) - Optional Block<br>Enable this option
 
 #### TLS Intercept Policy Interception Rules Domain Match
 

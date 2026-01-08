@@ -124,22 +124,22 @@ resource "f5xc_origin_pool" "example" {
 <a id="advanced-options"></a>&#x2022; [`advanced_options`](#advanced-options) - Optional Block  Defaults to `null`<br>Configure Advanced OPTIONS for origin pool<br>See [Advanced Options](#advanced-options) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="automatic-port"></a>[`automatic_port`](#automatic-port) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="lb-port"></a>[`lb_port`](#lb-port) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="automatic-port"></a>[`automatic_port`](#automatic-port) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="lb-port"></a>[`lb_port`](#lb-port) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="port"></a>[`port`](#port) - Optional Number<br>Endpoint service is available on this port
 
 <a id="endpoint-selection"></a>&#x2022; [`endpoint_selection`](#endpoint-selection) - Optional String  Defaults to `DISTRIBUTED`<br>Possible values are `DISTRIBUTED`, `LOCAL_ONLY`, `LOCAL_PREFERRED`<br>[Enum: DISTRIBUTED|LOCAL_ONLY|LOCAL_PREFERRED] Policy for selection of endpoints from local site/remote site/both Consider both remote and local endpoints for load balancing LOCAL_ONLY: Consider only local endpoints for load balancing Enable this policy to load balance ONLY among locally discovered endpoints Prefer the local endpoints for
 
 -> **One of the following:**
 &#x2022; <a id="health-check-port"></a>[`health_check_port`](#health-check-port) - Optional Number<br>Port used for performing health check
-<br><br>&#x2022; <a id="same-as-endpoint-port"></a>[`same_as_endpoint_port`](#same-as-endpoint-port) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="same-as-endpoint-port"></a>[`same_as_endpoint_port`](#same-as-endpoint-port) - Optional Block<br>Enable this option
 
 <a id="healthcheck"></a>&#x2022; [`healthcheck`](#healthcheck) - Optional Block<br>Reference to healthcheck configuration objects<br>See [Healthcheck](#healthcheck) below for details.
 
 <a id="loadbalancer-algorithm"></a>&#x2022; [`loadbalancer_algorithm`](#loadbalancer-algorithm) - Optional String  Defaults to `ROUND_ROBIN`<br>Possible values are `ROUND_ROBIN`, `LEAST_REQUEST`, `RING_HASH`, `RANDOM`, `LB_OVERRIDE`<br>[Enum: ROUND_ROBIN|LEAST_REQUEST|RING_HASH|RANDOM|LB_OVERRIDE] Different load balancing algorithms supported When a connection to a endpoint in an upstream cluster is required, the load balancer uses loadbalancer_algorithm to determine which host is selected. - ROUND_ROBIN: ROUND_ROBIN Policy in which each healthy/available upstream endpoint is selected in
 
 -> **One of the following:**
-&#x2022; <a id="no-tls"></a>[`no_tls`](#no-tls) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="no-tls"></a>[`no_tls`](#no-tls) - Optional Block<br>Enable this option
 
 <a id="origin-servers"></a>&#x2022; [`origin_servers`](#origin-servers) - Optional Block<br>List of origin servers in this pool<br>See [Origin Servers](#origin-servers) below for details.
 
@@ -161,25 +161,25 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`advanced_options`](#advanced-options) block supports the following:
 
-<a id="advanced-options-auto-http-config"></a>&#x2022; [`auto_http_config`](#advanced-options-auto-http-config) - Optional Block<br>Can be used for messages where no values are needed
+<a id="advanced-options-auto-http-config"></a>&#x2022; [`auto_http_config`](#advanced-options-auto-http-config) - Optional Block<br>Enable this option
 
 <a id="advanced-options-circuit-breaker"></a>&#x2022; [`circuit_breaker`](#advanced-options-circuit-breaker) - Optional Block<br>CircuitBreaker provides a mechanism for watching failures in upstream connections or requests and if the failures reach a certain threshold, automatically fail subsequent requests which allows to apply back pressure on downstream quickly<br>See [Circuit Breaker](#advanced-options-circuit-breaker) below.
 
 <a id="advanced-options-connection-timeout"></a>&#x2022; [`connection_timeout`](#advanced-options-connection-timeout) - Optional Number  Defaults to `2`  Specified in milliseconds<br>The timeout for new network connections to endpoints in the cluster.  The seconds
 
-<a id="breaker-c470cf"></a>&#x2022; [`default_circuit_breaker`](#breaker-c470cf) - Optional Block<br>Can be used for messages where no values are needed
+<a id="breaker-c470cf"></a>&#x2022; [`default_circuit_breaker`](#breaker-c470cf) - Optional Block<br>Enable this option
 
-<a id="breaker-222fdc"></a>&#x2022; [`disable_circuit_breaker`](#breaker-222fdc) - Optional Block<br>Can be used for messages where no values are needed
+<a id="breaker-222fdc"></a>&#x2022; [`disable_circuit_breaker`](#breaker-222fdc) - Optional Block<br>Enable this option
 
-<a id="persistance-1139ff"></a>&#x2022; [`disable_lb_source_ip_persistance`](#persistance-1139ff) - Optional Block<br>Can be used for messages where no values are needed
+<a id="persistance-1139ff"></a>&#x2022; [`disable_lb_source_ip_persistance`](#persistance-1139ff) - Optional Block<br>Enable this option
 
-<a id="detection-c26369"></a>&#x2022; [`disable_outlier_detection`](#detection-c26369) - Optional Block<br>Can be used for messages where no values are needed
+<a id="detection-c26369"></a>&#x2022; [`disable_outlier_detection`](#detection-c26369) - Optional Block<br>Enable this option
 
-<a id="advanced-options-disable-proxy-protocol"></a>&#x2022; [`disable_proxy_protocol`](#advanced-options-disable-proxy-protocol) - Optional Block<br>Can be used for messages where no values are needed
+<a id="advanced-options-disable-proxy-protocol"></a>&#x2022; [`disable_proxy_protocol`](#advanced-options-disable-proxy-protocol) - Optional Block<br>Enable this option
 
-<a id="advanced-options-disable-subsets"></a>&#x2022; [`disable_subsets`](#advanced-options-disable-subsets) - Optional Block<br>Can be used for messages where no values are needed
+<a id="advanced-options-disable-subsets"></a>&#x2022; [`disable_subsets`](#advanced-options-disable-subsets) - Optional Block<br>Enable this option
 
-<a id="persistance-62e70d"></a>&#x2022; [`enable_lb_source_ip_persistance`](#persistance-62e70d) - Optional Block<br>Can be used for messages where no values are needed
+<a id="persistance-62e70d"></a>&#x2022; [`enable_lb_source_ip_persistance`](#persistance-62e70d) - Optional Block<br>Enable this option
 
 <a id="advanced-options-enable-subsets"></a>&#x2022; [`enable_subsets`](#advanced-options-enable-subsets) - Optional Block<br>Configure subset OPTIONS for origin pool<br>See [Enable Subsets](#advanced-options-enable-subsets) below.
 
@@ -189,15 +189,15 @@ An [`advanced_options`](#advanced-options) block supports the following:
 
 <a id="advanced-options-http-idle-timeout"></a>&#x2022; [`http_idle_timeout`](#advanced-options-http-idle-timeout) - Optional Number<br>The idle timeout for upstream connection pool connections. The idle timeout is defined as the period in which there are no active requests. When the idle timeout is reached the connection will be closed
 
-<a id="advanced-options-no-panic-threshold"></a>&#x2022; [`no_panic_threshold`](#advanced-options-no-panic-threshold) - Optional Block<br>Can be used for messages where no values are needed
+<a id="advanced-options-no-panic-threshold"></a>&#x2022; [`no_panic_threshold`](#advanced-options-no-panic-threshold) - Optional Block<br>Enable this option
 
 <a id="advanced-options-outlier-detection"></a>&#x2022; [`outlier_detection`](#advanced-options-outlier-detection) - Optional Block<br>Outlier detection and ejection is the process of dynamically determining whether some number of hosts in an upstream cluster are performing unlike the others and removing them from the healthy load balancing set. Outlier detection is a form of passive health checking. Algorithm 1<br>See [Outlier Detection](#advanced-options-outlier-detection) below.
 
 <a id="advanced-options-panic-threshold"></a>&#x2022; [`panic_threshold`](#advanced-options-panic-threshold) - Optional Number<br>Configure a threshold (percentage of unhealthy endpoints) below which all endpoints will be considered for load balancing ignoring its health status
 
-<a id="advanced-options-proxy-protocol-v1"></a>&#x2022; [`proxy_protocol_v1`](#advanced-options-proxy-protocol-v1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="advanced-options-proxy-protocol-v1"></a>&#x2022; [`proxy_protocol_v1`](#advanced-options-proxy-protocol-v1) - Optional Block<br>Enable this option
 
-<a id="advanced-options-proxy-protocol-v2"></a>&#x2022; [`proxy_protocol_v2`](#advanced-options-proxy-protocol-v2) - Optional Block<br>Can be used for messages where no values are needed
+<a id="advanced-options-proxy-protocol-v2"></a>&#x2022; [`proxy_protocol_v2`](#advanced-options-proxy-protocol-v2) - Optional Block<br>Enable this option
 
 #### Advanced Options Circuit Breaker
 
@@ -217,13 +217,13 @@ A [`circuit_breaker`](#advanced-options-circuit-breaker) block (within [`advance
 
 An [`enable_subsets`](#advanced-options-enable-subsets) block (within [`advanced_options`](#advanced-options)) supports the following:
 
-<a id="endpoint-0fc3f9"></a>&#x2022; [`any_endpoint`](#endpoint-0fc3f9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="endpoint-0fc3f9"></a>&#x2022; [`any_endpoint`](#endpoint-0fc3f9) - Optional Block<br>Enable this option
 
 <a id="subset-276c69"></a>&#x2022; [`default_subset`](#subset-276c69) - Optional Block<br>Origin Pool Default Subset. Default Subset definition<br>See [Default Subset](#subset-276c69) below.
 
 <a id="subsets-25c75e"></a>&#x2022; [`endpoint_subsets`](#subsets-25c75e) - Optional Block<br>List of subset class. Subsets class is defined using list of keys. Every unique combination of values of these keys form a subset withing the class<br>See [Endpoint Subsets](#subsets-25c75e) below.
 
-<a id="request-49c0b8"></a>&#x2022; [`fail_request`](#request-49c0b8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="request-49c0b8"></a>&#x2022; [`fail_request`](#request-49c0b8) - Optional Block<br>Enable this option
 
 #### Advanced Options Enable Subsets Default Subset
 
@@ -247,13 +247,13 @@ A [`http1_config`](#advanced-options-http1-config) block (within [`advanced_opti
 
 A [`header_transformation`](#transformation-1e4851) block (within [`advanced_options.http1_config`](#advanced-options-http1-config)) supports the following:
 
-<a id="transformation-6fa15c"></a>&#x2022; [`default_header_transformation`](#transformation-6fa15c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="transformation-6fa15c"></a>&#x2022; [`default_header_transformation`](#transformation-6fa15c) - Optional Block<br>Enable this option
 
-<a id="transformation-c4c936"></a>&#x2022; [`legacy_header_transformation`](#transformation-c4c936) - Optional Block<br>Can be used for messages where no values are needed
+<a id="transformation-c4c936"></a>&#x2022; [`legacy_header_transformation`](#transformation-c4c936) - Optional Block<br>Enable this option
 
-<a id="transformation-923ab8"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-923ab8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="transformation-923ab8"></a>&#x2022; [`preserve_case_header_transformation`](#transformation-923ab8) - Optional Block<br>Enable this option
 
-<a id="transformation-1ce9d5"></a>&#x2022; [`proper_case_header_transformation`](#transformation-1ce9d5) - Optional Block<br>Can be used for messages where no values are needed
+<a id="transformation-1ce9d5"></a>&#x2022; [`proper_case_header_transformation`](#transformation-1ce9d5) - Optional Block<br>Enable this option
 
 #### Advanced Options Http2 Options
 
@@ -321,9 +321,9 @@ A [`cbip_service`](#origin-servers-cbip-service) block (within [`origin_servers`
 
 A [`consul_service`](#origin-servers-consul-service) block (within [`origin_servers`](#origin-servers)) supports the following:
 
-<a id="network-5b2697"></a>&#x2022; [`inside_network`](#network-5b2697) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-5b2697"></a>&#x2022; [`inside_network`](#network-5b2697) - Optional Block<br>Enable this option
 
-<a id="network-844fc7"></a>&#x2022; [`outside_network`](#network-844fc7) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-844fc7"></a>&#x2022; [`outside_network`](#network-844fc7) - Optional Block<br>Enable this option
 
 <a id="name-e2ff9a"></a>&#x2022; [`service_name`](#name-e2ff9a) - Optional String<br>Consul service name of this origin server will be listed, including cluster-ID. The format is servicename:cluster-ID
 
@@ -357,7 +357,7 @@ A [`site`](#site-a096eb) block (within [`origin_servers.consul_service.site_loca
 
 A [`snat_pool`](#origin-servers-consul-service-snat-pool) block (within [`origin_servers.consul_service`](#origin-servers-consul-service)) supports the following:
 
-<a id="pool-8eb799"></a>&#x2022; [`no_snat_pool`](#pool-8eb799) - Optional Block<br>Can be used for messages where no values are needed
+<a id="pool-8eb799"></a>&#x2022; [`no_snat_pool`](#pool-8eb799) - Optional Block<br>Enable this option
 
 <a id="pool-fc27df"></a>&#x2022; [`snat_pool`](#pool-fc27df) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-fc27df) below.
 
@@ -385,9 +385,9 @@ An [`endpoint`](#endpoint-6a2e33) block (within [`origin_servers.custom_endpoint
 
 A [`k8s_service`](#origin-servers-k8s-service) block (within [`origin_servers`](#origin-servers)) supports the following:
 
-<a id="network-698e40"></a>&#x2022; [`inside_network`](#network-698e40) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-698e40"></a>&#x2022; [`inside_network`](#network-698e40) - Optional Block<br>Enable this option
 
-<a id="network-4852ec"></a>&#x2022; [`outside_network`](#network-4852ec) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-4852ec"></a>&#x2022; [`outside_network`](#network-4852ec) - Optional Block<br>Enable this option
 
 <a id="origin-servers-k8s-service-protocol"></a>&#x2022; [`protocol`](#origin-servers-k8s-service-protocol) - Optional String  Defaults to `PROTOCOL_TCP`<br>Possible values are `PROTOCOL_TCP`, `PROTOCOL_UDP`<br>[Enum: PROTOCOL_TCP|PROTOCOL_UDP] Type of protocol - PROTOCOL_TCP: TCP - PROTOCOL_UDP: UDP
 
@@ -397,7 +397,7 @@ A [`k8s_service`](#origin-servers-k8s-service) block (within [`origin_servers`](
 
 <a id="origin-servers-k8s-service-snat-pool"></a>&#x2022; [`snat_pool`](#origin-servers-k8s-service-snat-pool) - Optional Block<br>SNAT Pool. SNAT Pool configuration<br>See [Snat Pool](#origin-servers-k8s-service-snat-pool) below.
 
-<a id="networks-d41308"></a>&#x2022; [`vk8s_networks`](#networks-d41308) - Optional Block<br>Can be used for messages where no values are needed
+<a id="networks-d41308"></a>&#x2022; [`vk8s_networks`](#networks-d41308) - Optional Block<br>Enable this option
 
 #### Origin Servers K8S Service Site Locator
 
@@ -425,7 +425,7 @@ A [`site`](#site-e35217) block (within [`origin_servers.k8s_service.site_locator
 
 A [`snat_pool`](#origin-servers-k8s-service-snat-pool) block (within [`origin_servers.k8s_service`](#origin-servers-k8s-service)) supports the following:
 
-<a id="pool-57d5fe"></a>&#x2022; [`no_snat_pool`](#pool-57d5fe) - Optional Block<br>Can be used for messages where no values are needed
+<a id="pool-57d5fe"></a>&#x2022; [`no_snat_pool`](#pool-57d5fe) - Optional Block<br>Enable this option
 
 <a id="pool-8c0889"></a>&#x2022; [`snat_pool`](#pool-8c0889) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-8c0889) below.
 
@@ -437,11 +437,11 @@ A [`snat_pool`](#origin-servers-k8s-service-snat-pool) block (within [`origin_se
 
 A [`private_ip`](#origin-servers-private-ip) block (within [`origin_servers`](#origin-servers)) supports the following:
 
-<a id="network-340769"></a>&#x2022; [`inside_network`](#network-340769) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-340769"></a>&#x2022; [`inside_network`](#network-340769) - Optional Block<br>Enable this option
 
 <a id="origin-servers-private-ip-ip"></a>&#x2022; [`ip`](#origin-servers-private-ip-ip) - Optional String<br>IP. Private IPv4 address
 
-<a id="network-4b8cd1"></a>&#x2022; [`outside_network`](#network-4b8cd1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-4b8cd1"></a>&#x2022; [`outside_network`](#network-4b8cd1) - Optional Block<br>Enable this option
 
 <a id="origin-servers-private-ip-segment"></a>&#x2022; [`segment`](#origin-servers-private-ip-segment) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Segment](#origin-servers-private-ip-segment) below.
 
@@ -485,7 +485,7 @@ A [`site`](#site-9000e8) block (within [`origin_servers.private_ip.site_locator`
 
 A [`snat_pool`](#origin-servers-private-ip-snat-pool) block (within [`origin_servers.private_ip`](#origin-servers-private-ip)) supports the following:
 
-<a id="pool-c826de"></a>&#x2022; [`no_snat_pool`](#pool-c826de) - Optional Block<br>Can be used for messages where no values are needed
+<a id="pool-c826de"></a>&#x2022; [`no_snat_pool`](#pool-c826de) - Optional Block<br>Enable this option
 
 <a id="pool-cc6a33"></a>&#x2022; [`snat_pool`](#pool-cc6a33) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-cc6a33) below.
 
@@ -499,9 +499,9 @@ A [`private_name`](#origin-servers-private-name) block (within [`origin_servers`
 
 <a id="origin-servers-private-name-dns-name"></a>&#x2022; [`dns_name`](#origin-servers-private-name-dns-name) - Optional String<br>DNS Name. DNS Name
 
-<a id="network-1921f3"></a>&#x2022; [`inside_network`](#network-1921f3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-1921f3"></a>&#x2022; [`inside_network`](#network-1921f3) - Optional Block<br>Enable this option
 
-<a id="network-a1ed83"></a>&#x2022; [`outside_network`](#network-a1ed83) - Optional Block<br>Can be used for messages where no values are needed
+<a id="network-a1ed83"></a>&#x2022; [`outside_network`](#network-a1ed83) - Optional Block<br>Enable this option
 
 <a id="interval-4bd915"></a>&#x2022; [`refresh_interval`](#interval-4bd915) - Optional Number<br>Interval for DNS refresh in seconds. Max value is 7 days as per `HTTPS://datatracker.ietf.org/doc/HTML/rfc8767.`
 
@@ -547,7 +547,7 @@ A [`site`](#site-771c33) block (within [`origin_servers.private_name.site_locato
 
 A [`snat_pool`](#origin-servers-private-name-snat-pool) block (within [`origin_servers.private_name`](#origin-servers-private-name)) supports the following:
 
-<a id="pool-569cef"></a>&#x2022; [`no_snat_pool`](#pool-569cef) - Optional Block<br>Can be used for messages where no values are needed
+<a id="pool-569cef"></a>&#x2022; [`no_snat_pool`](#pool-569cef) - Optional Block<br>Enable this option
 
 <a id="pool-b6c3f7"></a>&#x2022; [`snat_pool`](#pool-b6c3f7) - Optional Block<br>List of IPv4 prefixes that represent an endpoint<br>See [Snat Pool](#pool-b6c3f7) below.
 
@@ -621,31 +621,31 @@ A [`timeouts`](#timeouts) block supports the following:
 
 An [`upstream_conn_pool_reuse_type`](#upstream-conn-pool-reuse-type) block supports the following:
 
-<a id="reuse-008a14"></a>&#x2022; [`disable_conn_pool_reuse`](#reuse-008a14) - Optional Block<br>Can be used for messages where no values are needed
+<a id="reuse-008a14"></a>&#x2022; [`disable_conn_pool_reuse`](#reuse-008a14) - Optional Block<br>Enable this option
 
-<a id="reuse-ad4462"></a>&#x2022; [`enable_conn_pool_reuse`](#reuse-ad4462) - Optional Block<br>Can be used for messages where no values are needed
+<a id="reuse-ad4462"></a>&#x2022; [`enable_conn_pool_reuse`](#reuse-ad4462) - Optional Block<br>Enable this option
 
 #### Use TLS
 
 An [`use_tls`](#use-tls) block supports the following:
 
-<a id="use-tls-default-session-key-caching"></a>&#x2022; [`default_session_key_caching`](#use-tls-default-session-key-caching) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-tls-default-session-key-caching"></a>&#x2022; [`default_session_key_caching`](#use-tls-default-session-key-caching) - Optional Block<br>Enable this option
 
-<a id="use-tls-disable-session-key-caching"></a>&#x2022; [`disable_session_key_caching`](#use-tls-disable-session-key-caching) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-tls-disable-session-key-caching"></a>&#x2022; [`disable_session_key_caching`](#use-tls-disable-session-key-caching) - Optional Block<br>Enable this option
 
-<a id="use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#use-tls-disable-sni) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-tls-disable-sni"></a>&#x2022; [`disable_sni`](#use-tls-disable-sni) - Optional Block<br>Enable this option
 
 <a id="use-tls-max-session-keys"></a>&#x2022; [`max_session_keys`](#use-tls-max-session-keys) - Optional Number<br>Number of session keys that are cached
 
-<a id="use-tls-no-mtls"></a>&#x2022; [`no_mtls`](#use-tls-no-mtls) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-tls-no-mtls"></a>&#x2022; [`no_mtls`](#use-tls-no-mtls) - Optional Block<br>Enable this option
 
-<a id="use-tls-skip-server-verification"></a>&#x2022; [`skip_server_verification`](#use-tls-skip-server-verification) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-tls-skip-server-verification"></a>&#x2022; [`skip_server_verification`](#use-tls-skip-server-verification) - Optional Block<br>Enable this option
 
 <a id="use-tls-sni"></a>&#x2022; [`sni`](#use-tls-sni) - Optional String<br>SNI value to be used
 
 <a id="use-tls-tls-config"></a>&#x2022; [`tls_config`](#use-tls-tls-config) - Optional Block<br>Defines various OPTIONS to configure TLS configuration parameters<br>See [TLS Config](#use-tls-tls-config) below.
 
-<a id="use-tls-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#use-tls-use-host-header-as-sni) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-tls-use-host-header-as-sni"></a>&#x2022; [`use_host_header_as_sni`](#use-tls-use-host-header-as-sni) - Optional Block<br>Enable this option
 
 <a id="use-tls-use-mtls"></a>&#x2022; [`use_mtls`](#use-tls-use-mtls) - Optional Block<br>mTLS Certificate. mTLS Client Certificate<br>See [Use mTLS](#use-tls-use-mtls) below.
 
@@ -653,7 +653,7 @@ An [`use_tls`](#use-tls) block supports the following:
 
 <a id="use-tls-use-server-verification"></a>&#x2022; [`use_server_verification`](#use-tls-use-server-verification) - Optional Block<br>TLS Validation Context for Origin Servers. Upstream TLS Validation Context<br>See [Use Server Verification](#use-tls-use-server-verification) below.
 
-<a id="use-tls-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#use-tls-volterra-trusted-ca) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-tls-volterra-trusted-ca"></a>&#x2022; [`volterra_trusted_ca`](#use-tls-volterra-trusted-ca) - Optional Block<br>Enable this option
 
 #### Use TLS TLS Config
 
@@ -661,11 +661,11 @@ A [`tls_config`](#use-tls-tls-config) block (within [`use_tls`](#use-tls)) suppo
 
 <a id="use-tls-tls-config-custom-security"></a>&#x2022; [`custom_security`](#use-tls-tls-config-custom-security) - Optional Block<br>Defines TLS protocol config including min/max versions and allowed ciphers<br>See [Custom Security](#use-tls-tls-config-custom-security) below.
 
-<a id="use-tls-tls-config-default-security"></a>&#x2022; [`default_security`](#use-tls-tls-config-default-security) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-tls-tls-config-default-security"></a>&#x2022; [`default_security`](#use-tls-tls-config-default-security) - Optional Block<br>Enable this option
 
-<a id="use-tls-tls-config-low-security"></a>&#x2022; [`low_security`](#use-tls-tls-config-low-security) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-tls-tls-config-low-security"></a>&#x2022; [`low_security`](#use-tls-tls-config-low-security) - Optional Block<br>Enable this option
 
-<a id="use-tls-tls-config-medium-security"></a>&#x2022; [`medium_security`](#use-tls-tls-config-medium-security) - Optional Block<br>Can be used for messages where no values are needed
+<a id="use-tls-tls-config-medium-security"></a>&#x2022; [`medium_security`](#use-tls-tls-config-medium-security) - Optional Block<br>Enable this option
 
 #### Use TLS TLS Config Custom Security
 
@@ -693,11 +693,11 @@ A [`tls_certificates`](#use-tls-use-mtls-tls-certificates) block (within [`use_t
 
 <a id="spec-ad9c6c"></a>&#x2022; [`description_spec`](#spec-ad9c6c) - Optional String<br>Description. Description for the certificate
 
-<a id="stapling-242d9f"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-242d9f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="stapling-242d9f"></a>&#x2022; [`disable_ocsp_stapling`](#stapling-242d9f) - Optional Block<br>Enable this option
 
 <a id="key-dc1b14"></a>&#x2022; [`private_key`](#key-dc1b14) - Optional Block<br>SecretType is used in an object to indicate a sensitive/confidential field<br>See [Private Key](#key-dc1b14) below.
 
-<a id="defaults-413d06"></a>&#x2022; [`use_system_defaults`](#defaults-413d06) - Optional Block<br>Can be used for messages where no values are needed
+<a id="defaults-413d06"></a>&#x2022; [`use_system_defaults`](#defaults-413d06) - Optional Block<br>Enable this option
 
 #### Use TLS Use mTLS TLS Certificates Custom Hash Algorithms
 

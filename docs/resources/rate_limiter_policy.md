@@ -63,7 +63,7 @@ resource "f5xc_rate_limiter_policy" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="any-server"></a>[`any_server`](#any-server) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="server-name"></a>[`server_name`](#server-name) - Optional String<br>The expected name of the server. The actual names for the server are extracted from the HTTP Host header and the name of the virtual_host for the request
 <br><br>&#x2022; <a id="server-name-matcher"></a>[`server_name_matcher`](#server-name-matcher) - Optional Block<br>Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions<br>See [Server Name Matcher](#server-name-matcher) below for details.
 <br><br>&#x2022; <a id="server-selector"></a>[`server_selector`](#server-selector) - Optional Block<br>Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects<br>See [Server Selector](#server-selector) below for details.
@@ -100,19 +100,19 @@ A [`metadata`](#rules-metadata) block (within [`rules`](#rules)) supports the fo
 
 A [`spec`](#rules-spec) block (within [`rules`](#rules)) supports the following:
 
-<a id="rules-spec-any-asn"></a>&#x2022; [`any_asn`](#rules-spec-any-asn) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-spec-any-asn"></a>&#x2022; [`any_asn`](#rules-spec-any-asn) - Optional Block<br>Enable this option
 
-<a id="rules-spec-any-country"></a>&#x2022; [`any_country`](#rules-spec-any-country) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-spec-any-country"></a>&#x2022; [`any_country`](#rules-spec-any-country) - Optional Block<br>Enable this option
 
-<a id="rules-spec-any-ip"></a>&#x2022; [`any_ip`](#rules-spec-any-ip) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-spec-any-ip"></a>&#x2022; [`any_ip`](#rules-spec-any-ip) - Optional Block<br>Enable this option
 
-<a id="rules-spec-apply-rate-limiter"></a>&#x2022; [`apply_rate_limiter`](#rules-spec-apply-rate-limiter) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-spec-apply-rate-limiter"></a>&#x2022; [`apply_rate_limiter`](#rules-spec-apply-rate-limiter) - Optional Block<br>Enable this option
 
 <a id="rules-spec-asn-list"></a>&#x2022; [`asn_list`](#rules-spec-asn-list) - Optional Block<br>Unordered set of RFC 6793 defined 4-byte AS numbers that can be used to create allow or deny lists for use in network policy or service policy. It can be used to create the allow list only for DNS Load Balancer<br>See [Asn List](#rules-spec-asn-list) below.
 
 <a id="rules-spec-asn-matcher"></a>&#x2022; [`asn_matcher`](#rules-spec-asn-matcher) - Optional Block<br>Match any AS number contained in the list of bgp_asn_sets<br>See [Asn Matcher](#rules-spec-asn-matcher) below.
 
-<a id="rules-spec-bypass-rate-limiter"></a>&#x2022; [`bypass_rate_limiter`](#rules-spec-bypass-rate-limiter) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-spec-bypass-rate-limiter"></a>&#x2022; [`bypass_rate_limiter`](#rules-spec-bypass-rate-limiter) - Optional Block<br>Enable this option
 
 <a id="rules-spec-country-list"></a>&#x2022; [`country_list`](#rules-spec-country-list) - Optional Block<br>Country Codes List. List of Country Codes to match against<br>See [Country List](#rules-spec-country-list) below.
 
@@ -186,9 +186,9 @@ A [`domain_matcher`](#rules-spec-domain-matcher) block (within [`rules.spec`](#r
 
 A [`headers`](#rules-spec-headers) block (within [`rules.spec`](#rules-spec)) supports the following:
 
-<a id="rules-spec-headers-check-not-present"></a>&#x2022; [`check_not_present`](#rules-spec-headers-check-not-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-spec-headers-check-not-present"></a>&#x2022; [`check_not_present`](#rules-spec-headers-check-not-present) - Optional Block<br>Enable this option
 
-<a id="rules-spec-headers-check-present"></a>&#x2022; [`check_present`](#rules-spec-headers-check-present) - Optional Block<br>Can be used for messages where no values are needed
+<a id="rules-spec-headers-check-present"></a>&#x2022; [`check_present`](#rules-spec-headers-check-present) - Optional Block<br>Enable this option
 
 <a id="rules-spec-headers-invert-matcher"></a>&#x2022; [`invert_matcher`](#rules-spec-headers-invert-matcher) - Optional Bool<br>Invert Header Matcher. Invert the match result
 

@@ -54,6 +54,8 @@ resource "f5xc_cloud_connect" "example" {
 
 <a id="name"></a>&#x2022; [`name`](#name) - Required String<br>Name of the Cloud Connect. Must be unique within the namespace
 
+<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Required String<br>Namespace where the Cloud Connect will be created
+
 <a id="annotations"></a>&#x2022; [`annotations`](#annotations) - Optional Map<br>Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata
 
 <a id="description"></a>&#x2022; [`description`](#description) - Optional String<br>Human readable description for the object
@@ -61,8 +63,6 @@ resource "f5xc_cloud_connect" "example" {
 <a id="disable"></a>&#x2022; [`disable`](#disable) - Optional Bool<br>A value of true will administratively disable the object
 
 <a id="labels"></a>&#x2022; [`labels`](#labels) - Optional Map<br>Labels is a user defined key value map that can be attached to resources for organization and filtering
-
-<a id="namespace"></a>&#x2022; [`namespace`](#namespace) - Optional String<br>Namespace for the Cloud Connect. For this resource type, namespace should be empty or omitted
 
 ### Spec Argument Reference
 
@@ -128,7 +128,7 @@ A [`vpc_list`](#aws-tgw-site-vpc-attachments-vpc-list) block (within [`aws_tgw_s
 
 <a id="labels-3555f3"></a>&#x2022; [`labels`](#labels-3555f3) - Optional Block<br>Add labels for the VPC attachment. These labels can then be used in policies such as enhanced firewall
 
-<a id="routing-97ae2a"></a>&#x2022; [`manual_routing`](#routing-97ae2a) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routing-97ae2a"></a>&#x2022; [`manual_routing`](#routing-97ae2a) - Optional Block<br>Enable this option
 
 <a id="vpc-id-318c59"></a>&#x2022; [`vpc_id`](#vpc-id-318c59) - Optional String<br>Enter the VPC ID of the VPC to be attached
 
@@ -182,7 +182,7 @@ A [`vnet_list`](#list-5826e3) block (within [`azure_vnet_site.vnet_attachments`]
 
 <a id="labels-e777f2"></a>&#x2022; [`labels`](#labels-e777f2) - Optional Block<br>Add labels for the VNET attachments. These labels can then be used in policies such as enhanced firewall policies
 
-<a id="routing-e423fa"></a>&#x2022; [`manual_routing`](#routing-e423fa) - Optional Block<br>Can be used for messages where no values are needed
+<a id="routing-e423fa"></a>&#x2022; [`manual_routing`](#routing-e423fa) - Optional Block<br>Enable this option
 
 <a id="subscription-id-9a0b4f"></a>&#x2022; [`subscription_id`](#subscription-id-9a0b4f) - Optional String<br>Enter the Subscription ID of the VNET to be attached
 

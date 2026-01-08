@@ -200,20 +200,20 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 				Delete: true,
 			}),
 			"disable_re_fallback": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: disable_re_fallback, enable_re_fallback; Default: disable_re_fallback] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: disable_re_fallback, enable_re_fallback; Default: disable_re_fallback] Enable this option",
 			},
 			"enable_re_fallback": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"full_mesh": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: full_mesh, hub_mesh, spoke_mesh] Full Mesh. Details of Full Mesh Group Type.",
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"data_plane_mesh": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -222,10 +222,10 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"data_plane_mesh": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},
@@ -234,10 +234,10 @@ func (r *SiteMeshGroupResource) Schema(ctx context.Context, req resource.SchemaR
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"control_and_data_plane_mesh": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"data_plane_mesh": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"hub_mesh_group": schema.SingleNestedBlock{
 						MarkdownDescription: "Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name.",

@@ -944,7 +944,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 													},
 												},
 												"disable_ocsp_stapling": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"private_key": schema.SingleNestedBlock{
 													MarkdownDescription: "SecretType is used in an object to indicate a sensitive/confidential field.",
@@ -983,7 +983,7 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 													},
 												},
 												"use_system_defaults": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -1056,16 +1056,16 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 								},
 							},
 							"default_session_key_caching": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_session_key_caching": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"disable_sni": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"use_host_header_as_sni": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -1174,10 +1174,10 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Reference. A site direct reference .",
@@ -1275,10 +1275,10 @@ func (r *SecretManagementAccessResource) Schema(ctx context.Context, req resourc
 						},
 						Blocks: map[string]schema.Block{
 							"disable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"enable_internet_vip": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"ref": schema.ListNestedBlock{
 								MarkdownDescription: "Virtual_site direct reference .",

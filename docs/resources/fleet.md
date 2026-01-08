@@ -70,8 +70,8 @@ resource "f5xc_fleet" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="allow-all-usb"></a>[`allow_all_usb`](#allow-all-usb) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="deny-all-usb"></a>[`deny_all_usb`](#deny-all-usb) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="allow-all-usb"></a>[`allow_all_usb`](#allow-all-usb) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="deny-all-usb"></a>[`deny_all_usb`](#deny-all-usb) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="usb-policy"></a>[`usb_policy`](#usb-policy) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name
 
 <a id="blocked-services"></a>&#x2022; [`blocked_services`](#blocked-services) - Optional Block<br>Disable node local services on this site<br>See [Blocked Services](#blocked-services) below for details.
@@ -84,21 +84,21 @@ resource "f5xc_fleet" "example" {
 <br><br>&#x2022; <a id="dc-cluster-group-inside"></a>[`dc_cluster_group_inside`](#dc-cluster-group-inside) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Dc Cluster Group Inside](#dc-cluster-group-inside) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="default-config"></a>[`default_config`](#default-config) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="default-config"></a>[`default_config`](#default-config) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="device-list"></a>[`device_list`](#device-list) - Optional Block<br>Add device for all interfaces belonging to this fleet<br>See [Device List](#device-list) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="default-sriov-interface"></a>[`default_sriov_interface`](#default-sriov-interface) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="default-sriov-interface"></a>[`default_sriov_interface`](#default-sriov-interface) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="default-storage-class"></a>[`default_storage_class`](#default-storage-class) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="default-storage-class"></a>[`default_storage_class`](#default-storage-class) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-gpu"></a>[`disable_gpu`](#disable-gpu) - Optional Block<br>Can be used for messages where no values are needed
-<br><br>&#x2022; <a id="enable-gpu"></a>[`enable_gpu`](#enable-gpu) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-gpu"></a>[`disable_gpu`](#disable-gpu) - Optional Block<br>Enable this option
+<br><br>&#x2022; <a id="enable-gpu"></a>[`enable_gpu`](#enable-gpu) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-vm"></a>[`disable_vm`](#disable-vm) - Optional Block<br>Enable this option
 
 <a id="enable-default-fleet-config-download"></a>&#x2022; [`enable_default_fleet_config_download`](#enable-default-fleet-config-download) - Optional Bool<br>Enable default fleet config, It must be set for storage config and GPU config
 
@@ -116,24 +116,24 @@ resource "f5xc_fleet" "example" {
 
 -> **One of the following:**
 &#x2022; <a id="log-receiver"></a>[`log_receiver`](#log-receiver) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Log Receiver](#log-receiver) below for details.
-<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Can be used for messages where no values are needed
+<br><br>&#x2022; <a id="logs-streaming-disabled"></a>[`logs_streaming_disabled`](#logs-streaming-disabled) - Optional Block<br>Enable this option
 
 <a id="network-connectors"></a>&#x2022; [`network_connectors`](#network-connectors) - Optional Block<br>Network Connector defines connection between two virtual networks in a given site. Fleet defines one or more such network connectors. The network connectors configuration is applied on all sites that are member of the fleet<br>See [Network Connectors](#network-connectors) below for details.
 
 <a id="network-firewall"></a>&#x2022; [`network_firewall`](#network-firewall) - Optional Block<br>Network Firewall defines firewall to be applied for the virtual networks in the fleet. The network firewall configuration is applied on all sites that are member of the fleet. Constraints The Network Firewall is applied on Virtual Networks of type site local network and site local inside network<br>See [Network Firewall](#network-firewall) below for details.
 
-<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Can be used for messages where no values are needed
+<a id="no-bond-devices"></a>&#x2022; [`no_bond_devices`](#no-bond-devices) - Optional Block<br>Enable this option
 
-<a id="no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#no-dc-cluster-group) - Optional Block<br>Can be used for messages where no values are needed
-
--> **One of the following:**
-&#x2022; <a id="no-storage-device"></a>[`no_storage_device`](#no-storage-device) - Optional Block<br>Can be used for messages where no values are needed
+<a id="no-dc-cluster-group"></a>&#x2022; [`no_dc_cluster_group`](#no-dc-cluster-group) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="no-storage-interfaces"></a>[`no_storage_interfaces`](#no-storage-interfaces) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="no-storage-device"></a>[`no_storage_device`](#no-storage-device) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="no-storage-static-routes"></a>[`no_storage_static_routes`](#no-storage-static-routes) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="no-storage-interfaces"></a>[`no_storage_interfaces`](#no-storage-interfaces) - Optional Block<br>Enable this option
+
+-> **One of the following:**
+&#x2022; <a id="no-storage-static-routes"></a>[`no_storage_static_routes`](#no-storage-static-routes) - Optional Block<br>Enable this option
 
 <a id="operating-system-version"></a>&#x2022; [`operating_system_version`](#operating-system-version) - Optional String<br>Desired Operating System version that is applied to all sites that are member of the fleet. Current Operating System version can be overridden via site config
 
@@ -167,13 +167,13 @@ In addition to all arguments above, the following attributes are exported:
 
 A [`blocked_services`](#blocked-services) block supports the following:
 
-<a id="blocked-services-dns"></a>&#x2022; [`dns`](#blocked-services-dns) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-services-dns"></a>&#x2022; [`dns`](#blocked-services-dns) - Optional Block<br>Enable this option
 
 <a id="blocked-services-network-type"></a>&#x2022; [`network_type`](#blocked-services-network-type) - Optional String  Defaults to `VIRTUAL_NETWORK_SITE_LOCAL`<br>Possible values are `VIRTUAL_NETWORK_SITE_LOCAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE`, `VIRTUAL_NETWORK_PER_SITE`, `VIRTUAL_NETWORK_PUBLIC`, `VIRTUAL_NETWORK_GLOBAL`, `VIRTUAL_NETWORK_SITE_SERVICE`, `VIRTUAL_NETWORK_VER_INTERNAL`, `VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE`, `VIRTUAL_NETWORK_IP_AUTO`, `VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK`, `VIRTUAL_NETWORK_SRV6_NETWORK`, `VIRTUAL_NETWORK_IP_FABRIC`, `VIRTUAL_NETWORK_SEGMENT`<br>[Enum: VIRTUAL_NETWORK_SITE_LOCAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE|VIRTUAL_NETWORK_PER_SITE|VIRTUAL_NETWORK_PUBLIC|VIRTUAL_NETWORK_GLOBAL|VIRTUAL_NETWORK_SITE_SERVICE|VIRTUAL_NETWORK_VER_INTERNAL|VIRTUAL_NETWORK_SITE_LOCAL_INSIDE_OUTSIDE|VIRTUAL_NETWORK_IP_AUTO|VIRTUAL_NETWORK_VOLTADN_PRIVATE_NETWORK|VIRTUAL_NETWORK_SRV6_NETWORK|VIRTUAL_NETWORK_IP_FABRIC|VIRTUAL_NETWORK_SEGMENT] Different types of virtual networks understood by the system Virtual-network of type VIRTUAL_NETWORK_SITE_LOCAL provides connectivity to public (outside) network. This is an insecure network and is connected to public internet via NAT Gateways/firwalls Virtual-network of this type is local to
 
-<a id="blocked-services-ssh"></a>&#x2022; [`ssh`](#blocked-services-ssh) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-services-ssh"></a>&#x2022; [`ssh`](#blocked-services-ssh) - Optional Block<br>Enable this option
 
-<a id="blocked-services-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-web-user-interface) - Optional Block<br>Can be used for messages where no values are needed
+<a id="blocked-services-web-user-interface"></a>&#x2022; [`web_user_interface`](#blocked-services-web-user-interface) - Optional Block<br>Enable this option
 
 #### Bond Device List
 
@@ -185,7 +185,7 @@ A [`bond_device_list`](#bond-device-list) block supports the following:
 
 A [`bond_devices`](#bond-device-list-bond-devices) block (within [`bond_device_list`](#bond-device-list)) supports the following:
 
-<a id="backup-c22794"></a>&#x2022; [`active_backup`](#backup-c22794) - Optional Block<br>Can be used for messages where no values are needed
+<a id="backup-c22794"></a>&#x2022; [`active_backup`](#backup-c22794) - Optional Block<br>Enable this option
 
 <a id="bond-device-list-bond-devices-devices"></a>&#x2022; [`devices`](#bond-device-list-bond-devices-devices) - Optional List<br>Ethernet devices that will make up this bond
 
@@ -305,7 +305,7 @@ An [`interfaces`](#interface-list-interfaces) block (within [`interface_list`](#
 
 A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the following:
 
-<a id="drain-0d0936"></a>&#x2022; [`disable_upgrade_drain`](#drain-0d0936) - Optional Block<br>Can be used for messages where no values are needed
+<a id="drain-0d0936"></a>&#x2022; [`disable_upgrade_drain`](#drain-0d0936) - Optional Block<br>Enable this option
 
 <a id="drain-7e30d4"></a>&#x2022; [`enable_upgrade_drain`](#drain-7e30d4) - Optional Block<br>Specify batch upgrade settings for worker nodes within a site<br>See [Enable Upgrade Drain](#drain-7e30d4) below.
 
@@ -313,13 +313,13 @@ A [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain) block supports the fol
 
 An [`enable_upgrade_drain`](#drain-7e30d4) block (within [`kubernetes_upgrade_drain`](#kubernetes-upgrade-drain)) supports the following:
 
-<a id="mode-668699"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-668699) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-668699"></a>&#x2022; [`disable_vega_upgrade_mode`](#mode-668699) - Optional Block<br>Enable this option
 
 <a id="count-3aa796"></a>&#x2022; [`drain_max_unavailable_node_count`](#count-3aa796) - Optional Number<br>Node Batch Size Count
 
 <a id="timeout-ac4ee9"></a>&#x2022; [`drain_node_timeout`](#timeout-ac4ee9) - Optional Number<br>Seconds to wait before initiating upgrade on the next set of nodes. Setting it to 0 will wait indefinitely for all services on nodes to be upgraded gracefully before proceeding to the next set of nodes. (Warning: It may block upgrade if services on a node cannot be gracefully upgraded. It is
 
-<a id="mode-9c557b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9c557b) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mode-9c557b"></a>&#x2022; [`enable_vega_upgrade_mode`](#mode-9c557b) - Optional Block<br>Enable this option
 
 #### Log Receiver
 
@@ -379,15 +379,15 @@ A [`performance_enhancement_mode`](#performance-enhancement-mode) block supports
 
 <a id="enhanced-31b8ac"></a>&#x2022; [`perf_mode_l3_enhanced`](#enhanced-31b8ac) - Optional Block<br>L3 Mode Enhanced Performance. L3 enhanced performance mode OPTIONS<br>See [Perf Mode L3 Enhanced](#enhanced-31b8ac) below.
 
-<a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enhanced-38f174"></a>&#x2022; [`perf_mode_l7_enhanced`](#enhanced-38f174) - Optional Block<br>Enable this option
 
 #### Performance Enhancement Mode Perf Mode L3 Enhanced
 
 A [`perf_mode_l3_enhanced`](#enhanced-31b8ac) block (within [`performance_enhancement_mode`](#performance-enhancement-mode)) supports the following:
 
-<a id="jumbo-7ba5b8"></a>&#x2022; [`jumbo`](#jumbo-7ba5b8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jumbo-7ba5b8"></a>&#x2022; [`jumbo`](#jumbo-7ba5b8) - Optional Block<br>Enable this option
 
-<a id="jumbo-95338e"></a>&#x2022; [`no_jumbo`](#jumbo-95338e) - Optional Block<br>Can be used for messages where no values are needed
+<a id="jumbo-95338e"></a>&#x2022; [`no_jumbo`](#jumbo-95338e) - Optional Block<br>Enable this option
 
 #### Sriov Interfaces
 
@@ -503,7 +503,7 @@ A [`storage_devices`](#storage-device-list-storage-devices) block (within [`stor
 
 <a id="parameters-88bc5e"></a>&#x2022; [`advanced_advanced_parameters`](#parameters-88bc5e) - Optional Block<br>Advanced Parameters. Map of parameter name and string value
 
-<a id="storage-06f9ba"></a>&#x2022; [`custom_storage`](#storage-06f9ba) - Optional Block<br>Can be used for messages where no values are needed
+<a id="storage-06f9ba"></a>&#x2022; [`custom_storage`](#storage-06f9ba) - Optional Block<br>Enable this option
 
 <a id="storage-af052c"></a>&#x2022; [`hpe_storage`](#storage-af052c) - Optional Block<br>HPE Storage. Device configuration for HPE Storage<br>See [Hpe Storage](#storage-af052c) below.
 

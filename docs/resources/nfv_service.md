@@ -67,10 +67,10 @@ resource "f5xc_nfv_service" "example" {
 ### Spec Argument Reference
 
 -> **One of the following:**
-&#x2022; <a id="disable-https-management"></a>[`disable_https_management`](#disable-https-management) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-https-management"></a>[`disable_https_management`](#disable-https-management) - Optional Block<br>Enable this option
 
 -> **One of the following:**
-&#x2022; <a id="disable-ssh-access"></a>[`disable_ssh_access`](#disable-ssh-access) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disable-ssh-access"></a>[`disable_ssh_access`](#disable-ssh-access) - Optional Block<br>Enable this option
 
 <a id="enabled-ssh-access"></a>&#x2022; [`enabled_ssh_access`](#enabled-ssh-access) - Optional Block<br>SSH based management. SSH based configuration<br>See [Enabled SSH Access](#enabled-ssh-access) below for details.
 
@@ -94,11 +94,11 @@ In addition to all arguments above, the following attributes are exported:
 
 An [`enabled_ssh_access`](#enabled-ssh-access) block supports the following:
 
-<a id="enabled-ssh-access-advertise-on-sli"></a>&#x2022; [`advertise_on_sli`](#enabled-ssh-access-advertise-on-sli) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-ssh-access-advertise-on-sli"></a>&#x2022; [`advertise_on_sli`](#enabled-ssh-access-advertise-on-sli) - Optional Block<br>Enable this option
 
-<a id="enabled-ssh-access-advertise-on-slo"></a>&#x2022; [`advertise_on_slo`](#enabled-ssh-access-advertise-on-slo) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-ssh-access-advertise-on-slo"></a>&#x2022; [`advertise_on_slo`](#enabled-ssh-access-advertise-on-slo) - Optional Block<br>Enable this option
 
-<a id="enabled-ssh-access-advertise-on-slo-sli"></a>&#x2022; [`advertise_on_slo_sli`](#enabled-ssh-access-advertise-on-slo-sli) - Optional Block<br>Can be used for messages where no values are needed
+<a id="enabled-ssh-access-advertise-on-slo-sli"></a>&#x2022; [`advertise_on_slo_sli`](#enabled-ssh-access-advertise-on-slo-sli) - Optional Block<br>Enable this option
 
 <a id="enabled-ssh-access-domain-suffix"></a>&#x2022; [`domain_suffix`](#enabled-ssh-access-domain-suffix) - Optional String<br>Domain suffix will be used along with node name to form the hostname for SSH node management
 
@@ -160,11 +160,11 @@ An [`admin_password`](#f5-big-ip-aws-service-admin-password) block (within [`f5_
 
 An [`endpoint_service`](#f5-big-ip-aws-service-endpoint-service) block (within [`f5_big_ip_aws_service`](#f5-big-ip-aws-service)) supports the following:
 
-<a id="slo-ip-6fccc9"></a>&#x2022; [`advertise_on_slo_ip`](#slo-ip-6fccc9) - Optional Block<br>Can be used for messages where no values are needed
+<a id="slo-ip-6fccc9"></a>&#x2022; [`advertise_on_slo_ip`](#slo-ip-6fccc9) - Optional Block<br>Enable this option
 
-<a id="external-c6878c"></a>&#x2022; [`advertise_on_slo_ip_external`](#external-c6878c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="external-c6878c"></a>&#x2022; [`advertise_on_slo_ip_external`](#external-c6878c) - Optional Block<br>Enable this option
 
-<a id="vip-bf0a34"></a>&#x2022; [`automatic_vip`](#vip-bf0a34) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vip-bf0a34"></a>&#x2022; [`automatic_vip`](#vip-bf0a34) - Optional Block<br>Enable this option
 
 <a id="vip-39201b"></a>&#x2022; [`configured_vip`](#vip-39201b) - Optional String<br>Enter IP address for the default VIP
 
@@ -172,17 +172,17 @@ An [`endpoint_service`](#f5-big-ip-aws-service-endpoint-service) block (within [
 
 <a id="ports-775f61"></a>&#x2022; [`custom_udp_ports`](#ports-775f61) - Optional Block<br>Port Range List. List of port ranges<br>See [Custom UDP Ports](#ports-775f61) below.
 
-<a id="ports-4442b0"></a>&#x2022; [`default_tcp_ports`](#ports-4442b0) - Optional Block<br>Can be used for messages where no values are needed
+<a id="ports-4442b0"></a>&#x2022; [`default_tcp_ports`](#ports-4442b0) - Optional Block<br>Enable this option
 
-<a id="slo-ip-47bf10"></a>&#x2022; [`disable_advertise_on_slo_ip`](#slo-ip-47bf10) - Optional Block<br>Can be used for messages where no values are needed
+<a id="slo-ip-47bf10"></a>&#x2022; [`disable_advertise_on_slo_ip`](#slo-ip-47bf10) - Optional Block<br>Enable this option
 
-<a id="port-926fe7"></a>&#x2022; [`http_port`](#port-926fe7) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-926fe7"></a>&#x2022; [`http_port`](#port-926fe7) - Optional Block<br>Enable this option
 
-<a id="port-440dce"></a>&#x2022; [`https_port`](#port-440dce) - Optional Block<br>Can be used for messages where no values are needed
+<a id="port-440dce"></a>&#x2022; [`https_port`](#port-440dce) - Optional Block<br>Enable this option
 
-<a id="ports-4d510f"></a>&#x2022; [`no_tcp_ports`](#ports-4d510f) - Optional Block<br>Can be used for messages where no values are needed
+<a id="ports-4d510f"></a>&#x2022; [`no_tcp_ports`](#ports-4d510f) - Optional Block<br>Enable this option
 
-<a id="ports-abc1e4"></a>&#x2022; [`no_udp_ports`](#ports-abc1e4) - Optional Block<br>Can be used for messages where no values are needed
+<a id="ports-abc1e4"></a>&#x2022; [`no_udp_ports`](#ports-abc1e4) - Optional Block<br>Enable this option
 
 #### F5 Big IP AWS Service Endpoint Service Custom TCP Ports
 
@@ -200,7 +200,7 @@ An [`endpoint_service`](#f5-big-ip-aws-service-endpoint-service) block (within [
 
 A [`nodes`](#f5-big-ip-aws-service-nodes) block (within [`f5_big_ip_aws_service`](#f5-big-ip-aws-service)) supports the following:
 
-<a id="prefix-e8faa8"></a>&#x2022; [`automatic_prefix`](#prefix-e8faa8) - Optional Block<br>Can be used for messages where no values are needed
+<a id="prefix-e8faa8"></a>&#x2022; [`automatic_prefix`](#prefix-e8faa8) - Optional Block<br>Enable this option
 
 <a id="f5-big-ip-aws-service-nodes-aws-az-name"></a>&#x2022; [`aws_az_name`](#f5-big-ip-aws-service-nodes-aws-az-name) - Optional String<br>The AWS Availability Zone must be consistent with the AWS Region chosen. Please select an AZ in the same Region as your TGW Site
 
@@ -208,7 +208,7 @@ A [`nodes`](#f5-big-ip-aws-service-nodes) block (within [`f5_big_ip_aws_service`
 
 <a id="f5-big-ip-aws-service-nodes-node-name"></a>&#x2022; [`node_name`](#f5-big-ip-aws-service-nodes-node-name) - Optional String<br>Node Name will be used to assign as hostname to the service
 
-<a id="subnet-2782dc"></a>&#x2022; [`reserved_mgmt_subnet`](#subnet-2782dc) - Optional Block<br>Can be used for messages where no values are needed
+<a id="subnet-2782dc"></a>&#x2022; [`reserved_mgmt_subnet`](#subnet-2782dc) - Optional Block<br>Enable this option
 
 <a id="prefix-53b238"></a>&#x2022; [`tunnel_prefix`](#prefix-53b238) - Optional String<br>Enter IP prefix for the tunnel, it has to be /30
 
@@ -226,7 +226,7 @@ A [`https_management`](#https-management) block supports the following:
 
 <a id="https-management-advertise-on-internet"></a>&#x2022; [`advertise_on_internet`](#https-management-advertise-on-internet) - Optional Block<br>Defines a way to advertise a load balancer on public. If optional public_ip is provided, it will only be advertised on RE sites where that public_ip is available<br>See [Advertise On Internet](#https-management-advertise-on-internet) below.
 
-<a id="vip-00de2c"></a>&#x2022; [`advertise_on_internet_default_vip`](#vip-00de2c) - Optional Block<br>Can be used for messages where no values are needed
+<a id="vip-00de2c"></a>&#x2022; [`advertise_on_internet_default_vip`](#vip-00de2c) - Optional Block<br>Enable this option
 
 <a id="https-management-advertise-on-sli-vip"></a>&#x2022; [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [Advertise On SLI VIP](#https-management-advertise-on-sli-vip) below.
 
@@ -236,7 +236,7 @@ A [`https_management`](#https-management) block supports the following:
 
 <a id="https-management-advertise-on-slo-vip"></a>&#x2022; [`advertise_on_slo_vip`](#https-management-advertise-on-slo-vip) - Optional Block<br>Inline TLS Parameters. Inline TLS parameters<br>See [Advertise On Slo VIP](#https-management-advertise-on-slo-vip) below.
 
-<a id="https-management-default-https-port"></a>&#x2022; [`default_https_port`](#https-management-default-https-port) - Optional Block<br>Can be used for messages where no values are needed
+<a id="https-management-default-https-port"></a>&#x2022; [`default_https_port`](#https-management-default-https-port) - Optional Block<br>Enable this option
 
 <a id="https-management-domain-suffix"></a>&#x2022; [`domain_suffix`](#https-management-domain-suffix) - Optional String<br>Domain suffix will be used along with node name to form URL to access node management
 
@@ -262,7 +262,7 @@ A [`public_ip`](#public-ip-e501cc) block (within [`https_management.advertise_on
 
 An [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-1bd8e3"></a>&#x2022; [`no_mtls`](#mtls-1bd8e3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mtls-1bd8e3"></a>&#x2022; [`no_mtls`](#mtls-1bd8e3) - Optional Block<br>Enable this option
 
 <a id="certificates-5355d7"></a>&#x2022; [`tls_certificates`](#certificates-5355d7) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-5355d7) below.
 
@@ -318,7 +318,7 @@ An [`advertise_on_sli_vip`](#https-management-advertise-on-sli-vip) block (withi
 
 An [`advertise_on_slo_internet_vip`](#vip-6dd6e5) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-65c4ed"></a>&#x2022; [`no_mtls`](#mtls-65c4ed) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mtls-65c4ed"></a>&#x2022; [`no_mtls`](#mtls-65c4ed) - Optional Block<br>Enable this option
 
 <a id="certificates-748bff"></a>&#x2022; [`tls_certificates`](#certificates-748bff) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-748bff) below.
 
@@ -374,7 +374,7 @@ An [`advertise_on_slo_internet_vip`](#vip-6dd6e5) block (within [`https_manageme
 
 An [`advertise_on_slo_sli`](#https-management-advertise-on-slo-sli) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-e2f684"></a>&#x2022; [`no_mtls`](#mtls-e2f684) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mtls-e2f684"></a>&#x2022; [`no_mtls`](#mtls-e2f684) - Optional Block<br>Enable this option
 
 <a id="certificates-b923c1"></a>&#x2022; [`tls_certificates`](#certificates-b923c1) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-b923c1) below.
 
@@ -430,7 +430,7 @@ An [`advertise_on_slo_sli`](#https-management-advertise-on-slo-sli) block (withi
 
 An [`advertise_on_slo_vip`](#https-management-advertise-on-slo-vip) block (within [`https_management`](#https-management)) supports the following:
 
-<a id="mtls-476751"></a>&#x2022; [`no_mtls`](#mtls-476751) - Optional Block<br>Can be used for messages where no values are needed
+<a id="mtls-476751"></a>&#x2022; [`no_mtls`](#mtls-476751) - Optional Block<br>Enable this option
 
 <a id="certificates-49cf23"></a>&#x2022; [`tls_certificates`](#certificates-49cf23) - Optional Block<br>Users can add one or more certificates that share the same set of domains. For example, domain.com and \*.domain.com - but use different signature algorithms<br>See [TLS Certificates](#certificates-49cf23) below.
 
@@ -490,13 +490,13 @@ A [`palo_alto_fw_service`](#palo-alto-fw-service) block supports the following:
 
 <a id="palo-alto-fw-service-aws-tgw-site"></a>&#x2022; [`aws_tgw_site`](#palo-alto-fw-service-aws-tgw-site) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [AWS TGW Site](#palo-alto-fw-service-aws-tgw-site) below.
 
-<a id="palo-alto-fw-service-disable-panaroma"></a>&#x2022; [`disable_panaroma`](#palo-alto-fw-service-disable-panaroma) - Optional Block<br>Can be used for messages where no values are needed
+<a id="palo-alto-fw-service-disable-panaroma"></a>&#x2022; [`disable_panaroma`](#palo-alto-fw-service-disable-panaroma) - Optional Block<br>Enable this option
 
 <a id="palo-alto-fw-service-instance-type"></a>&#x2022; [`instance_type`](#palo-alto-fw-service-instance-type) - Optional String  Defaults to `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`<br>Possible values are `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE`, `PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE`<br>[Enum: PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_12XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5N_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C4_8XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_9XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5_18XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_LARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_2XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_4XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_9XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_C5N_18XLARGE|PALO_ALTO_FW_AWS_INSTANCE_TYPE_R5_2XLARGE] - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_XLARGE: m4.xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_2XLARGE: m4.2xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M4_4XLARGE: m4.4xlarge - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_LARGE: m5.large - PALO_ALTO_FW_AWS_INSTANCE_TYPE_M5_XLARGE: m5.xlarge 
 
-<a id="palo-alto-fw-service-pan-ami-bundle1"></a>&#x2022; [`pan_ami_bundle1`](#palo-alto-fw-service-pan-ami-bundle1) - Optional Block<br>Can be used for messages where no values are needed
+<a id="palo-alto-fw-service-pan-ami-bundle1"></a>&#x2022; [`pan_ami_bundle1`](#palo-alto-fw-service-pan-ami-bundle1) - Optional Block<br>Enable this option
 
-<a id="palo-alto-fw-service-pan-ami-bundle2"></a>&#x2022; [`pan_ami_bundle2`](#palo-alto-fw-service-pan-ami-bundle2) - Optional Block<br>Can be used for messages where no values are needed
+<a id="palo-alto-fw-service-pan-ami-bundle2"></a>&#x2022; [`pan_ami_bundle2`](#palo-alto-fw-service-pan-ami-bundle2) - Optional Block<br>Enable this option
 
 <a id="palo-alto-fw-service-panorama-server"></a>&#x2022; [`panorama_server`](#palo-alto-fw-service-panorama-server) - Optional Block<br>Panorama Server Type. Panorama Server Type<br>See [Panorama Server](#palo-alto-fw-service-panorama-server) below.
 
@@ -596,7 +596,7 @@ A [`nodes`](#nodes-b8137e) block (within [`palo_alto_fw_service.service_nodes`](
 
 <a id="name-6e2eb6"></a>&#x2022; [`node_name`](#name-6e2eb6) - Optional String<br>Node Name will be used to assign as hostname to the service
 
-<a id="subnet-52b5ce"></a>&#x2022; [`reserved_mgmt_subnet`](#subnet-52b5ce) - Optional Block<br>Can be used for messages where no values are needed
+<a id="subnet-52b5ce"></a>&#x2022; [`reserved_mgmt_subnet`](#subnet-52b5ce) - Optional Block<br>Enable this option
 
 #### Palo Alto Fw Service Service Nodes Nodes Mgmt Subnet
 

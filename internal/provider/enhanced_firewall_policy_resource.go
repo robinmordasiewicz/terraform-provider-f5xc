@@ -437,7 +437,7 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 				Delete: true,
 			}),
 			"allow_all": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: allow_all, allowed_destinations, allowed_sources, denied_destinations, denied_sources, deny_all, rule_list] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: allow_all, allowed_destinations, allowed_sources, denied_destinations, denied_sources, deny_all, rule_list] Enable this option",
 			},
 			"allowed_destinations": schema.SingleNestedBlock{
 				MarkdownDescription: "List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes.",
@@ -480,7 +480,7 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 				},
 			},
 			"deny_all": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"rule_list": schema.SingleNestedBlock{
 				MarkdownDescription: "Custom Enhanced Firewall Policy Rules. Custom Enhanced Firewall Policy Rules.",
@@ -501,28 +501,28 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									},
 								},
 								"all_destinations": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_sli_vips": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_slo_vips": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_sources": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_tcp_traffic": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_traffic": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"all_udp_traffic": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"allow": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"applications": schema.SingleNestedBlock{
 									MarkdownDescription: "Applications. Application protocols like HTTP, SNMP.",
@@ -535,7 +535,7 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									},
 								},
 								"deny": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"destination_aws_vpc_ids": schema.SingleNestedBlock{
 									MarkdownDescription: "AWS VPC List. List of VPC Identifiers in AWS.",
@@ -640,10 +640,10 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									},
 								},
 								"inside_destinations": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"inside_sources": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"label_matcher": schema.SingleNestedBlock{
 									MarkdownDescription: "Label matcher specifies a list of label keys whose values need to match for source/client and destination/server. Note that the actual label values are not specified and do not matter. This allows an ability to scope grouping by the label key name.",
@@ -669,10 +669,10 @@ func (r *EnhancedFirewallPolicyResource) Schema(ctx context.Context, req resourc
 									},
 								},
 								"outside_destinations": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"outside_sources": schema.SingleNestedBlock{
-									MarkdownDescription: "Can be used for messages where no values are needed.",
+									MarkdownDescription: "Enable this option",
 								},
 								"protocol_port_range": schema.SingleNestedBlock{
 									MarkdownDescription: "Protocol and Port. Protocol and Port ranges.",

@@ -1059,7 +1059,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				Delete: true,
 			}),
 			"allow_all_requests": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: allow_all_requests, allow_list, deny_all_requests, deny_list, rule_list] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: allow_all_requests, allow_list, deny_all_requests, deny_list, rule_list] Enable this option",
 			},
 			"allow_list": schema.SingleNestedBlock{
 				MarkdownDescription: "List of sources. A request belongs to this list if it satisfies any of the match criteria.",
@@ -1115,13 +1115,13 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"default_action_allow": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_action_deny": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_action_next_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"ip_prefix_set": schema.ListNestedBlock{
 						MarkdownDescription: "Addresses that are covered by the prefixes in the given ip_prefix_set.",
@@ -1159,10 +1159,10 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 				},
 			},
 			"any_server": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: any_server, server_name, server_name_matcher, server_selector] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: any_server, server_name, server_name_matcher, server_selector] Enable this option",
 			},
 			"deny_all_requests": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"deny_list": schema.SingleNestedBlock{
 				MarkdownDescription: "List of sources. A request belongs to this list if it satisfies any of the match criteria.",
@@ -1218,13 +1218,13 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 						},
 					},
 					"default_action_allow": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_action_deny": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_action_next_policy": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"ip_prefix_set": schema.ListNestedBlock{
 						MarkdownDescription: "Addresses that are covered by the prefixes in the given ip_prefix_set.",
@@ -1301,13 +1301,13 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 									},
 									Blocks: map[string]schema.Block{
 										"any_asn": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"any_client": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"any_ip": schema.SingleNestedBlock{
-											MarkdownDescription: "Can be used for messages where no values are needed.",
+											MarkdownDescription: "Enable this option",
 										},
 										"api_group_matcher": schema.SingleNestedBlock{
 											MarkdownDescription: "Matcher specifies a list of values for matching an input string. The match is considered successful if the input value is present in the list. The result of the match is inverted if invert_matcher is true.",
@@ -1338,10 +1338,10 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -1446,10 +1446,10 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"bot_skip_processing": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -1498,10 +1498,10 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -1561,10 +1561,10 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -1702,10 +1702,10 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -1745,10 +1745,10 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"default": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"skip_processing": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -1815,10 +1815,10 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 												},
 												Blocks: map[string]schema.Block{
 													"check_not_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"check_present": schema.SingleNestedBlock{
-														MarkdownDescription: "Can be used for messages where no values are needed.",
+														MarkdownDescription: "Enable this option",
 													},
 													"item": schema.SingleNestedBlock{
 														MarkdownDescription: "Matcher specifies multiple criteria for matching an input string. The match is considered successful if any of the criteria are satisfied. The set of supported match criteria includes a list of exact values and a list of regular expressions.",
@@ -1901,43 +1901,43 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											},
 											Blocks: map[string]schema.Block{
 												"max_cookie_count_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_cookie_key_size_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_cookie_value_size_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_header_count_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_header_key_size_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_header_value_size_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_parameter_count_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_parameter_name_size_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_parameter_value_size_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_query_size_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_request_line_size_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_request_size_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"max_url_size_none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},
@@ -1946,7 +1946,7 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 											Attributes:          map[string]schema.Attribute{},
 											Blocks: map[string]schema.Block{
 												"dst_any": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"dst_segments": schema.SingleNestedBlock{
 													MarkdownDescription: "X-displayName: 'Segment List' List of references to Segments.",
@@ -1978,10 +1978,10 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"intra_segment": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"src_any": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"src_segments": schema.SingleNestedBlock{
 													MarkdownDescription: "X-displayName: 'Segment List' List of references to Segments.",
@@ -2128,10 +2128,10 @@ func (r *ServicePolicyResource) Schema(ctx context.Context, req resource.SchemaR
 													},
 												},
 												"none": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 												"waf_skip_processing": schema.SingleNestedBlock{
-													MarkdownDescription: "Can be used for messages where no values are needed.",
+													MarkdownDescription: "Enable this option",
 												},
 											},
 										},

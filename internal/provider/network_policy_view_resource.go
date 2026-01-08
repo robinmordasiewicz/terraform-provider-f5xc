@@ -464,16 +464,16 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 						},
 						"all_tcp_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"all_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"all_udp_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"any": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"applications": schema.SingleNestedBlock{
 							MarkdownDescription: "Applications. Application protocols like HTTP, SNMP.",
@@ -486,7 +486,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 						},
 						"inside_endpoints": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"ip_prefix_set": schema.SingleNestedBlock{
 							MarkdownDescription: "List of references to ip_prefix_set objects.",
@@ -567,7 +567,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 						},
 						"outside_endpoints": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"prefix_list": schema.SingleNestedBlock{
 							MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",
@@ -601,10 +601,10 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"any": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"inside_endpoints": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"label_selector": schema.SingleNestedBlock{
 						MarkdownDescription: "Type can be used to establish a 'selector reference' from one object(called selector) to a set of other objects(called selectees) based on the value of expresssions. A label selector is a label query over a set of resources. An empty label selector matches all objects.",
@@ -617,7 +617,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 						},
 					},
 					"outside_endpoints": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"prefix_list": schema.SingleNestedBlock{
 						MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",
@@ -651,16 +651,16 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 						},
 						"all_tcp_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"all_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"all_udp_traffic": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"any": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"applications": schema.SingleNestedBlock{
 							MarkdownDescription: "Applications. Application protocols like HTTP, SNMP.",
@@ -673,7 +673,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 						},
 						"inside_endpoints": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"ip_prefix_set": schema.SingleNestedBlock{
 							MarkdownDescription: "List of references to ip_prefix_set objects.",
@@ -754,7 +754,7 @@ func (r *NetworkPolicyViewResource) Schema(ctx context.Context, req resource.Sch
 							},
 						},
 						"outside_endpoints": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"prefix_list": schema.SingleNestedBlock{
 							MarkdownDescription: "List of IPv4 prefixes that represent an endpoint.",

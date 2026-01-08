@@ -24,7 +24,7 @@ resource "f5xc_advertise_policy" "example" {
   tls_parameters {
     # Configure tls_parameters settings
   }
-  # Can be used for messages where no values are needed.
+  # Enable this option
   client_certificate_optional {
     # Configure client_certificate_optional settings
   }

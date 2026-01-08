@@ -71,7 +71,7 @@ resource "f5xc_cloud_link" "example" {
 <br><br>&#x2022; <a id="gcp"></a>[`gcp`](#gcp) - Optional Block<br>Google Cloud Platform (GCP) CloudLink Provider. CloudLink for GCP Cloud Provider<br>See [GCP](#gcp) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="disabled"></a>[`disabled`](#disabled) - Optional Block<br>Can be used for messages where no values are needed
+&#x2022; <a id="disabled"></a>[`disabled`](#disabled) - Optional Block<br>Enable this option
 <br><br>&#x2022; <a id="enabled"></a>[`enabled`](#enabled) - Optional Block<br>CloudLink ADN Network Config<br>See [Enabled](#enabled) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
@@ -126,7 +126,7 @@ A [`connections`](#aws-byoc-connections) block (within [`aws.byoc`](#aws-byoc)) 
 
 <a id="aws-byoc-connections-region"></a>&#x2022; [`region`](#aws-byoc-connections-region) - Optional String<br>Region where the connection is setup
 
-<a id="name-ebc6a3"></a>&#x2022; [`system_generated_name`](#name-ebc6a3) - Optional Block<br>Can be used for messages where no values are needed
+<a id="name-ebc6a3"></a>&#x2022; [`system_generated_name`](#name-ebc6a3) - Optional Block<br>Enable this option
 
 <a id="aws-byoc-connections-tags"></a>&#x2022; [`tags`](#aws-byoc-connections-tags) - Optional Block<br>AWS Tags is a label consisting of a user-defined key and value. It helps to manage, identify, organize, search for, and filter resources in AWS console. Specified tags will be added to Virtual interface along with any F5XC specific tags
 
@@ -200,7 +200,7 @@ A [`connections`](#gcp-byoc-connections) block (within [`gcp.byoc`](#gcp-byoc)) 
 
 <a id="gcp-byoc-connections-region"></a>&#x2022; [`region`](#gcp-byoc-connections-region) - Optional String<br>GCP Region in which the GCP Cloud Interconnect attachment is configured
 
-<a id="gcp-byoc-connections-same-as-credential"></a>&#x2022; [`same_as_credential`](#gcp-byoc-connections-same-as-credential) - Optional Block<br>Can be used for messages where no values are needed
+<a id="gcp-byoc-connections-same-as-credential"></a>&#x2022; [`same_as_credential`](#gcp-byoc-connections-same-as-credential) - Optional Block<br>Enable this option
 
 #### GCP Byoc Connections Metadata
 

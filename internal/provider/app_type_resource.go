@@ -164,7 +164,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 				Attributes:          map[string]schema.Attribute{},
 				Blocks: map[string]schema.Block{
 					"disable": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"discovered_api_settings": schema.SingleNestedBlock{
 						MarkdownDescription: "Discovered API Settings. Configure Discovered API Settings.",
@@ -176,7 +176,7 @@ func (r *AppTypeResource) Schema(ctx context.Context, req resource.SchemaRequest
 						},
 					},
 					"enable": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 				},
 			},

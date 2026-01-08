@@ -363,7 +363,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"allow_all_response_codes": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: allow_all_response_codes, allowed_response_codes] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: allow_all_response_codes, allowed_response_codes] Enable this option",
 			},
 			"allowed_response_codes": schema.SingleNestedBlock{
 				MarkdownDescription: "List of HTTP response status codes that are allowed.",
@@ -376,7 +376,7 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"blocking": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: blocking, monitoring] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: blocking, monitoring] Enable this option",
 			},
 			"blocking_page": schema.SingleNestedBlock{
 				MarkdownDescription: "[OneOf: blocking_page, use_default_blocking_page; Default: use_default_blocking_page] Custom Blocking Response Page. Custom blocking response page body.",
@@ -450,13 +450,13 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"default_anonymization": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"default_bot_setting": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"default_detection_settings": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"detection_settings": schema.SingleNestedBlock{
 				MarkdownDescription: "Specifies detection settings to be used by WAF.",
@@ -480,25 +480,25 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 						},
 					},
 					"default_bot_setting": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"default_violation_settings": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_staging": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_suppression": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"disable_threat_campaigns": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_suppression": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"enable_threat_campaigns": schema.SingleNestedBlock{
-						MarkdownDescription: "Can be used for messages where no values are needed.",
+						MarkdownDescription: "Enable this option",
 					},
 					"signature_selection_setting": schema.SingleNestedBlock{
 						MarkdownDescription: "Attack Signatures are patterns that identify attacks on a web application and its components.",
@@ -515,16 +515,16 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 								},
 							},
 							"default_attack_type_settings": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"high_medium_accuracy_signatures": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"high_medium_low_accuracy_signatures": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 							"only_high_accuracy_signatures": schema.SingleNestedBlock{
-								MarkdownDescription: "Can be used for messages where no values are needed.",
+								MarkdownDescription: "Enable this option",
 							},
 						},
 					},
@@ -559,13 +559,13 @@ func (r *AppFirewallResource) Schema(ctx context.Context, req resource.SchemaReq
 				},
 			},
 			"disable_anonymization": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"monitoring": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"use_default_blocking_page": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 		},
 	}

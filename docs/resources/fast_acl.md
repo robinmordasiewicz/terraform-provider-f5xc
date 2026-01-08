@@ -2,12 +2,12 @@
 page_title: "f5xc_fast_acl Resource - terraform-provider-f5xc"
 subcategory: "Security"
 description: |-
-  Manages new Fast ACL rule, has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.
+  Manages object, object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to. in F5 Distributed Cloud.
 ---
 
 # f5xc_fast_acl (Resource)
 
-Manages new Fast ACL rule, has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.
+Manages object, object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to. in F5 Distributed Cloud.
 
 ~> **Note** For more information about this resource, please refer to the [F5 XC API Documentation](https://docs.cloud.f5.com/docs/api/).
 
@@ -15,7 +15,7 @@ Manages new Fast ACL rule, has specification to match source IP, source port and
 
 ```terraform
 # Fast ACL Resource Example
-# Manages new Fast ACL rule, has specification to match source IP, source port and action to apply. in F5 Distributed Cloud.
+# Manages object, object contains rules to protect site from denial of service It has destination{destination IP, destination port) and references to. in F5 Distributed Cloud.
 
 # Basic Fast ACL configuration
 resource "f5xc_fast_acl" "example" {
@@ -32,17 +32,17 @@ resource "f5xc_fast_acl" "example" {
   }
 
   # Resource-specific configuration
-  # FastAclRuleAction specifies possible action to be applied...
-  action {
-    # Configure action settings
+  # Type establishes a direct reference from one object(the r...
+  protocol_policer {
+    # Configure protocol_policer settings
   }
-  # Policer Reference. Reference to policer object.
-  policer_action {
-    # Configure policer_action settings
+  # [OneOf: re_acl, site_acl] Fast ACL for RE. Fast ACL defin...
+  re_acl {
+    # Configure re_acl settings
   }
-  # Reference. A policer direct reference.
-  ref {
-    # Configure ref settings
+  # Enable this option
+  all_public_vips {
+    # Configure all_public_vips settings
   }
 }
 ```
@@ -66,13 +66,11 @@ resource "f5xc_fast_acl" "example" {
 
 ### Spec Argument Reference
 
-<a id="action"></a>&#x2022; [`action`](#action) - Optional Block<br>FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic<br>See [Action](#action) below for details.
+<a id="protocol-policer"></a>&#x2022; [`protocol_policer`](#protocol-policer) - Optional Block<br>Type establishes a direct reference from one object(the referrer) to another(the referred). Such a reference is in form of tenant/namespace/name<br>See [Protocol Policer](#protocol-policer) below for details.
 
 -> **One of the following:**
-&#x2022; <a id="ip-prefix-set"></a>[`ip_prefix_set`](#ip-prefix-set) - Optional Block<br>List of references to ip_prefix_set objects<br>See [IP Prefix Set](#ip-prefix-set) below for details.
-<br><br>&#x2022; <a id="prefix"></a>[`prefix`](#prefix) - Optional Block<br>List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Prefix](#prefix) below for details.
-
-<a id="port"></a>&#x2022; [`port`](#port) - Optional Block<br>Source Ports. L4 port numbers to match<br>See [Port](#port) below for details.
+&#x2022; <a id="re-acl"></a>[`re_acl`](#re-acl) - Optional Block<br>Fast ACL for RE. Fast ACL definition for RE<br>See [RE ACL](#re-acl) below for details.
+<br><br>&#x2022; <a id="site-acl"></a>[`site_acl`](#site-acl) - Optional Block<br>Fast ACL for Site. Fast ACL definition for Site<br>See [Site ACL](#site-acl) below for details.
 
 <a id="timeouts"></a>&#x2022; [`timeouts`](#timeouts) - Optional Block<br>See [Timeouts](#timeouts) below for details.
 
@@ -84,91 +82,199 @@ In addition to all arguments above, the following attributes are exported:
 
 ---
 
-#### Action
+#### Protocol Policer
 
-An [`action`](#action) block supports the following:
+A [`protocol_policer`](#protocol-policer) block supports the following:
 
-<a id="action-policer-action"></a>&#x2022; [`policer_action`](#action-policer-action) - Optional Block<br>Policer Reference. Reference to policer object<br>See [Policer Action](#action-policer-action) below.
+<a id="protocol-policer-name"></a>&#x2022; [`name`](#protocol-policer-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
 
-<a id="action-protocol-policer-action"></a>&#x2022; [`protocol_policer_action`](#action-protocol-policer-action) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#action-protocol-policer-action) below.
+<a id="protocol-policer-namespace"></a>&#x2022; [`namespace`](#protocol-policer-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
 
-<a id="action-simple-action"></a>&#x2022; [`simple_action`](#action-simple-action) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
+<a id="protocol-policer-tenant"></a>&#x2022; [`tenant`](#protocol-policer-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
 
-#### Action Policer Action
+#### RE ACL
 
-A [`policer_action`](#action-policer-action) block (within [`action`](#action)) supports the following:
+A [`re_acl`](#re-acl) block supports the following:
 
-<a id="action-policer-action-ref"></a>&#x2022; [`ref`](#action-policer-action-ref) - Optional Block<br>Reference. A policer direct reference<br>See [Ref](#action-policer-action-ref) below.
+<a id="re-acl-all-public-vips"></a>&#x2022; [`all_public_vips`](#re-acl-all-public-vips) - Optional Block<br>Enable this option
 
-#### Action Policer Action Ref
+<a id="re-acl-default-tenant-vip"></a>&#x2022; [`default_tenant_vip`](#re-acl-default-tenant-vip) - Optional Block<br>Enable this option
 
-A [`ref`](#action-policer-action-ref) block (within [`action.policer_action`](#action-policer-action)) supports the following:
+<a id="re-acl-fast-acl-rules"></a>&#x2022; [`fast_acl_rules`](#re-acl-fast-acl-rules) - Optional Block<br>Rules. Fast ACL rules to match<br>See [Fast ACL Rules](#re-acl-fast-acl-rules) below.
 
-<a id="action-policer-action-ref-kind"></a>&#x2022; [`kind`](#action-policer-action-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="re-acl-selected-tenant-vip"></a>&#x2022; [`selected_tenant_vip`](#re-acl-selected-tenant-vip) - Optional Block<br>Specific Tenant VIP. Select various tenant public VIP(s)<br>See [Selected Tenant VIP](#re-acl-selected-tenant-vip) below.
 
-<a id="action-policer-action-ref-name"></a>&#x2022; [`name`](#action-policer-action-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+#### RE ACL Fast ACL Rules
 
-<a id="action-policer-action-ref-namespace"></a>&#x2022; [`namespace`](#action-policer-action-ref-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+A [`fast_acl_rules`](#re-acl-fast-acl-rules) block (within [`re_acl`](#re-acl)) supports the following:
 
-<a id="action-policer-action-ref-tenant"></a>&#x2022; [`tenant`](#action-policer-action-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+<a id="re-acl-fast-acl-rules-action"></a>&#x2022; [`action`](#re-acl-fast-acl-rules-action) - Optional Block<br>FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic<br>See [Action](#re-acl-fast-acl-rules-action) below.
 
-<a id="action-policer-action-ref-uid"></a>&#x2022; [`uid`](#action-policer-action-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="re-acl-fast-acl-rules-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#re-acl-fast-acl-rules-ip-prefix-set) - Optional Block<br>List of references to ip_prefix_set objects<br>See [IP Prefix Set](#re-acl-fast-acl-rules-ip-prefix-set) below.
 
-#### Action Protocol Policer Action
+<a id="re-acl-fast-acl-rules-metadata"></a>&#x2022; [`metadata`](#re-acl-fast-acl-rules-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#re-acl-fast-acl-rules-metadata) below.
 
-A [`protocol_policer_action`](#action-protocol-policer-action) block (within [`action`](#action)) supports the following:
+<a id="re-acl-fast-acl-rules-port"></a>&#x2022; [`port`](#re-acl-fast-acl-rules-port) - Optional Block<br>Source Ports. L4 port numbers to match<br>See [Port](#re-acl-fast-acl-rules-port) below.
 
-<a id="action-protocol-policer-action-ref"></a>&#x2022; [`ref`](#action-protocol-policer-action-ref) - Optional Block<br>Protocol policer Reference. Reference to protocol policer object<br>See [Ref](#action-protocol-policer-action-ref) below.
+<a id="re-acl-fast-acl-rules-prefix"></a>&#x2022; [`prefix`](#re-acl-fast-acl-rules-prefix) - Optional Block<br>List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Prefix](#re-acl-fast-acl-rules-prefix) below.
 
-#### Action Protocol Policer Action Ref
+#### RE ACL Fast ACL Rules Action
 
-A [`ref`](#action-protocol-policer-action-ref) block (within [`action.protocol_policer_action`](#action-protocol-policer-action)) supports the following:
+An [`action`](#re-acl-fast-acl-rules-action) block (within [`re_acl.fast_acl_rules`](#re-acl-fast-acl-rules)) supports the following:
 
-<a id="action-protocol-policer-action-ref-kind"></a>&#x2022; [`kind`](#action-protocol-policer-action-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="action-09a22d"></a>&#x2022; [`policer_action`](#action-09a22d) - Optional Block<br>Policer Reference. Reference to policer object<br>See [Policer Action](#action-09a22d) below.
 
-<a id="action-protocol-policer-action-ref-name"></a>&#x2022; [`name`](#action-protocol-policer-action-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+<a id="action-1f2796"></a>&#x2022; [`protocol_policer_action`](#action-1f2796) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#action-1f2796) below.
 
-<a id="namespace-b31006"></a>&#x2022; [`namespace`](#namespace-b31006) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="action-551f44"></a>&#x2022; [`simple_action`](#action-551f44) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
 
-<a id="tenant-2622a3"></a>&#x2022; [`tenant`](#tenant-2622a3) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+#### RE ACL Fast ACL Rules Action Policer Action
 
-<a id="action-protocol-policer-action-ref-uid"></a>&#x2022; [`uid`](#action-protocol-policer-action-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="deep-64211b"></a>Deeply nested **Action** block collapsed for readability.
 
-#### IP Prefix Set
+#### RE ACL Fast ACL Rules Action Policer Action Ref
 
-An [`ip_prefix_set`](#ip-prefix-set) block supports the following:
+<a id="deep-f6253f"></a>Deeply nested **Ref** block collapsed for readability.
 
-<a id="ip-prefix-set-ref"></a>&#x2022; [`ref`](#ip-prefix-set-ref) - Optional Block<br>List of references to ip_prefix_set objects<br>See [Ref](#ip-prefix-set-ref) below.
+#### RE ACL Fast ACL Rules Action Protocol Policer Action
 
-#### IP Prefix Set Ref
+<a id="deep-eb61a3"></a>Deeply nested **Action** block collapsed for readability.
 
-A [`ref`](#ip-prefix-set-ref) block (within [`ip_prefix_set`](#ip-prefix-set)) supports the following:
+#### RE ACL Fast ACL Rules Action Protocol Policer Action Ref
 
-<a id="ip-prefix-set-ref-kind"></a>&#x2022; [`kind`](#ip-prefix-set-ref-kind) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then kind will hold the referred object's kind (e.g. 'route')
+<a id="deep-8ac143"></a>Deeply nested **Ref** block collapsed for readability.
 
-<a id="ip-prefix-set-ref-name"></a>&#x2022; [`name`](#ip-prefix-set-ref-name) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then name will hold the referred object's(e.g. Route's) name
+#### RE ACL Fast ACL Rules IP Prefix Set
 
-<a id="ip-prefix-set-ref-namespace"></a>&#x2022; [`namespace`](#ip-prefix-set-ref-namespace) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then namespace will hold the referred object's(e.g. Route's) namespace
+<a id="deep-5eb942"></a>Deeply nested **Set** block collapsed for readability.
 
-<a id="ip-prefix-set-ref-tenant"></a>&#x2022; [`tenant`](#ip-prefix-set-ref-tenant) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then tenant will hold the referred object's(e.g. Route's) tenant
+#### RE ACL Fast ACL Rules IP Prefix Set Ref
 
-<a id="ip-prefix-set-ref-uid"></a>&#x2022; [`uid`](#ip-prefix-set-ref-uid) - Optional String<br>When a configuration object(e.g. Virtual_host) refers to another(e.g route) then uid will hold the referred object's(e.g. Route's) uid
+<a id="deep-8005c0"></a>Deeply nested **Ref** block collapsed for readability.
 
-#### Port
+#### RE ACL Fast ACL Rules Metadata
 
-A [`port`](#port) block supports the following:
+A [`metadata`](#re-acl-fast-acl-rules-metadata) block (within [`re_acl.fast_acl_rules`](#re-acl-fast-acl-rules)) supports the following:
 
-<a id="port-all"></a>&#x2022; [`all`](#port-all) - Optional Block<br>Can be used for messages where no values are needed
+<a id="spec-e77730"></a>&#x2022; [`description_spec`](#spec-e77730) - Optional String<br>Description. Human readable description
 
-<a id="port-dns"></a>&#x2022; [`dns`](#port-dns) - Optional Block<br>Can be used for messages where no values are needed
+<a id="re-acl-fast-acl-rules-metadata-name"></a>&#x2022; [`name`](#re-acl-fast-acl-rules-metadata-name) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
 
-<a id="port-user-defined"></a>&#x2022; [`user_defined`](#port-user-defined) - Optional Number<br>Matches the user defined port
+#### RE ACL Fast ACL Rules Port
 
-#### Prefix
+A [`port`](#re-acl-fast-acl-rules-port) block (within [`re_acl.fast_acl_rules`](#re-acl-fast-acl-rules)) supports the following:
 
-A [`prefix`](#prefix) block supports the following:
+<a id="re-acl-fast-acl-rules-port-all"></a>&#x2022; [`all`](#re-acl-fast-acl-rules-port-all) - Optional Block<br>Enable this option
 
-<a id="prefix-prefix"></a>&#x2022; [`prefix`](#prefix-prefix) - Optional List<br>IP Address prefix in string format. String must contain both prefix and prefix-length
+<a id="re-acl-fast-acl-rules-port-dns"></a>&#x2022; [`dns`](#re-acl-fast-acl-rules-port-dns) - Optional Block<br>Enable this option
+
+<a id="re-acl-fast-acl-rules-port-user-defined"></a>&#x2022; [`user_defined`](#re-acl-fast-acl-rules-port-user-defined) - Optional Number<br>Matches the user defined port
+
+#### RE ACL Fast ACL Rules Prefix
+
+A [`prefix`](#re-acl-fast-acl-rules-prefix) block (within [`re_acl.fast_acl_rules`](#re-acl-fast-acl-rules)) supports the following:
+
+<a id="re-acl-fast-acl-rules-prefix-prefix"></a>&#x2022; [`prefix`](#re-acl-fast-acl-rules-prefix-prefix) - Optional List<br>IP Address prefix in string format. String must contain both prefix and prefix-length
+
+#### RE ACL Selected Tenant VIP
+
+A [`selected_tenant_vip`](#re-acl-selected-tenant-vip) block (within [`re_acl`](#re-acl)) supports the following:
+
+<a id="vip-1d894b"></a>&#x2022; [`default_tenant_vip`](#vip-1d894b) - Optional Bool<br>Include tenant VIP in list of specific VIP(s)
+
+<a id="refs-523a60"></a>&#x2022; [`public_ip_refs`](#refs-523a60) - Optional Block<br>Select additional public VIP(s)<br>See [Public IP Refs](#refs-523a60) below.
+
+#### RE ACL Selected Tenant VIP Public IP Refs
+
+<a id="deep-2edc68"></a>Deeply nested **Refs** block collapsed for readability.
+
+#### Site ACL
+
+A [`site_acl`](#site-acl) block supports the following:
+
+<a id="site-acl-all-services"></a>&#x2022; [`all_services`](#site-acl-all-services) - Optional Block<br>Enable this option
+
+<a id="site-acl-fast-acl-rules"></a>&#x2022; [`fast_acl_rules`](#site-acl-fast-acl-rules) - Optional Block<br>Rules. Fast ACL rules to match<br>See [Fast ACL Rules](#site-acl-fast-acl-rules) below.
+
+<a id="site-acl-inside-network"></a>&#x2022; [`inside_network`](#site-acl-inside-network) - Optional Block<br>Enable this option
+
+<a id="site-acl-interface-services"></a>&#x2022; [`interface_services`](#site-acl-interface-services) - Optional Block<br>Enable this option
+
+<a id="site-acl-outside-network"></a>&#x2022; [`outside_network`](#site-acl-outside-network) - Optional Block<br>Enable this option
+
+<a id="site-acl-vip-services"></a>&#x2022; [`vip_services`](#site-acl-vip-services) - Optional Block<br>Enable this option
+
+#### Site ACL Fast ACL Rules
+
+A [`fast_acl_rules`](#site-acl-fast-acl-rules) block (within [`site_acl`](#site-acl)) supports the following:
+
+<a id="site-acl-fast-acl-rules-action"></a>&#x2022; [`action`](#site-acl-fast-acl-rules-action) - Optional Block<br>FastAclRuleAction specifies possible action to be applied on traffic, possible action include dropping, forwarding or ratelimiting the traffic<br>See [Action](#site-acl-fast-acl-rules-action) below.
+
+<a id="site-acl-fast-acl-rules-ip-prefix-set"></a>&#x2022; [`ip_prefix_set`](#site-acl-fast-acl-rules-ip-prefix-set) - Optional Block<br>List of references to ip_prefix_set objects<br>See [IP Prefix Set](#site-acl-fast-acl-rules-ip-prefix-set) below.
+
+<a id="site-acl-fast-acl-rules-metadata"></a>&#x2022; [`metadata`](#site-acl-fast-acl-rules-metadata) - Optional Block<br>MessageMetaType is metadata (common attributes) of a message that only certain messages have. This information is propagated to the metadata of a child object that gets created from the containing message during view processing. The information in this type can be specified by user during create<br>See [Metadata](#site-acl-fast-acl-rules-metadata) below.
+
+<a id="site-acl-fast-acl-rules-port"></a>&#x2022; [`port`](#site-acl-fast-acl-rules-port) - Optional Block<br>Source Ports. L4 port numbers to match<br>See [Port](#site-acl-fast-acl-rules-port) below.
+
+<a id="site-acl-fast-acl-rules-prefix"></a>&#x2022; [`prefix`](#site-acl-fast-acl-rules-prefix) - Optional Block<br>List of IP Address prefixes. Prefix must contain both prefix and prefix-length The list can contain mix of both IPv4 and IPv6 prefixes<br>See [Prefix](#site-acl-fast-acl-rules-prefix) below.
+
+#### Site ACL Fast ACL Rules Action
+
+An [`action`](#site-acl-fast-acl-rules-action) block (within [`site_acl.fast_acl_rules`](#site-acl-fast-acl-rules)) supports the following:
+
+<a id="action-2f2674"></a>&#x2022; [`policer_action`](#action-2f2674) - Optional Block<br>Policer Reference. Reference to policer object<br>See [Policer Action](#action-2f2674) below.
+
+<a id="action-31624c"></a>&#x2022; [`protocol_policer_action`](#action-31624c) - Optional Block<br>Protocol Policer Reference. Reference to policer object<br>See [Protocol Policer Action](#action-31624c) below.
+
+<a id="action-5a554b"></a>&#x2022; [`simple_action`](#action-5a554b) - Optional String  Defaults to `DENY`<br>Possible values are `DENY`, `ALLOW`<br>[Enum: DENY|ALLOW] FastAclRuleSimpleAction specifies simple action like PASS or DENY Drop the traffic Forward the traffic
+
+#### Site ACL Fast ACL Rules Action Policer Action
+
+<a id="deep-a4b94e"></a>Deeply nested **Action** block collapsed for readability.
+
+#### Site ACL Fast ACL Rules Action Policer Action Ref
+
+<a id="deep-e41b5f"></a>Deeply nested **Ref** block collapsed for readability.
+
+#### Site ACL Fast ACL Rules Action Protocol Policer Action
+
+<a id="deep-a68215"></a>Deeply nested **Action** block collapsed for readability.
+
+#### Site ACL Fast ACL Rules Action Protocol Policer Action Ref
+
+<a id="deep-9ef6c0"></a>Deeply nested **Ref** block collapsed for readability.
+
+#### Site ACL Fast ACL Rules IP Prefix Set
+
+<a id="deep-176f71"></a>Deeply nested **Set** block collapsed for readability.
+
+#### Site ACL Fast ACL Rules IP Prefix Set Ref
+
+<a id="deep-be6e78"></a>Deeply nested **Ref** block collapsed for readability.
+
+#### Site ACL Fast ACL Rules Metadata
+
+A [`metadata`](#site-acl-fast-acl-rules-metadata) block (within [`site_acl.fast_acl_rules`](#site-acl-fast-acl-rules)) supports the following:
+
+<a id="spec-0b0675"></a>&#x2022; [`description_spec`](#spec-0b0675) - Optional String<br>Description. Human readable description
+
+<a id="site-acl-fast-acl-rules-metadata-name"></a>&#x2022; [`name`](#site-acl-fast-acl-rules-metadata-name) - Optional String<br>Name of the message. The value of name has to follow DNS-1035 format
+
+#### Site ACL Fast ACL Rules Port
+
+A [`port`](#site-acl-fast-acl-rules-port) block (within [`site_acl.fast_acl_rules`](#site-acl-fast-acl-rules)) supports the following:
+
+<a id="site-acl-fast-acl-rules-port-all"></a>&#x2022; [`all`](#site-acl-fast-acl-rules-port-all) - Optional Block<br>Enable this option
+
+<a id="site-acl-fast-acl-rules-port-dns"></a>&#x2022; [`dns`](#site-acl-fast-acl-rules-port-dns) - Optional Block<br>Enable this option
+
+<a id="defined-3dc64a"></a>&#x2022; [`user_defined`](#defined-3dc64a) - Optional Number<br>Matches the user defined port
+
+#### Site ACL Fast ACL Rules Prefix
+
+A [`prefix`](#site-acl-fast-acl-rules-prefix) block (within [`site_acl.fast_acl_rules`](#site-acl-fast-acl-rules)) supports the following:
+
+<a id="site-acl-fast-acl-rules-prefix-prefix"></a>&#x2022; [`prefix`](#site-acl-fast-acl-rules-prefix-prefix) - Optional List<br>IP Address prefix in string format. String must contain both prefix and prefix-length
 
 #### Timeouts
 

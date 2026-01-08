@@ -406,10 +406,10 @@ func (r *FastACLRuleResource) Schema(ctx context.Context, req resource.SchemaReq
 					},
 					Blocks: map[string]schema.Block{
 						"all": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"dns": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 					},
 				},

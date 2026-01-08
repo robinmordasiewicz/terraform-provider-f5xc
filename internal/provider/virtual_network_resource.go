@@ -195,13 +195,13 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 				Delete: true,
 			}),
 			"global_network": schema.SingleNestedBlock{
-				MarkdownDescription: "[OneOf: global_network, legacy_type, site_local_inside_network, site_local_network] Can be used for messages where no values are needed.",
+				MarkdownDescription: "[OneOf: global_network, legacy_type, site_local_inside_network, site_local_network] Enable this option",
 			},
 			"site_local_inside_network": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"site_local_network": schema.SingleNestedBlock{
-				MarkdownDescription: "Can be used for messages where no values are needed.",
+				MarkdownDescription: "Enable this option",
 			},
 			"static_routes": schema.ListNestedBlock{
 				MarkdownDescription: "List of static routes on the virtual network.",
@@ -224,7 +224,7 @@ func (r *VirtualNetworkResource) Schema(ctx context.Context, req resource.Schema
 					},
 					Blocks: map[string]schema.Block{
 						"default_gateway": schema.SingleNestedBlock{
-							MarkdownDescription: "Can be used for messages where no values are needed.",
+							MarkdownDescription: "Enable this option",
 						},
 						"node_interface": schema.SingleNestedBlock{
 							MarkdownDescription: "X-displayName: 'NodeInterfaceType' On multinode site, this type holds the information about per node interfaces.",

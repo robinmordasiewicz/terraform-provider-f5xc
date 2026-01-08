@@ -3,12 +3,12 @@
   "name": "io.github.robinmordasiewicz/f5xc-terraform-mcp",
   "title": "F5 Distributed Cloud Terraform Provider",
   "description": "F5 Distributed Cloud Terraform provider docs, 270+ OpenAPI specs, and subscription info for AI.",
-  "version": "3.6.26",
+  "version": "3.6.27",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@robinmordasiewicz/f5xc-terraform-mcp",
-      "version": "3.6.26",
+      "version": "3.6.27",
       "transport": {
         "type": "stdio"
       },
@@ -16,12 +16,12 @@
     },
     {
       "registryType": "mcpb",
-      "identifier": "https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases/download/v3.6.26/f5xc-terraform-mcp-3.6.26.mcpb",
-      "version": "3.6.26",
+      "identifier": "https://github.com/robinmordasiewicz/terraform-provider-f5xc/releases/download/v3.6.27/f5xc-terraform-mcp-3.6.27.mcpb",
+      "version": "3.6.27",
       "transport": {
         "type": "stdio"
       },
-      "fileSha256": "8d4fc1b2e5094396616127099f74fb17026ee3ccddb359f6e1844bd06d89cfcd"
+      "fileSha256": "882b8fd5852b3ea280e5af92ddb3f4ef59b50b870d0f1ab7f4a75166b8e95934"
     }
   ],
   "repository": {

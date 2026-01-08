@@ -63,6 +63,7 @@ jobs:
       mcp-changed: ${{ steps.changes.outputs.mcp }}
       docs-changed: ${{ steps.changes.outputs.docs }}
       has-any-changes: ${{ steps.changes.outputs.has_any_changes }}
+      only-mcp-config: ${{ steps.changes.outputs.only_mcp_config }}
       is-bot-commit: ${{ steps.check-author.outputs.is_bot }}
       should-process: ${{ steps.should-process.outputs.result }}
       needs-regeneration: ${{ steps.should-process.outputs.needs_regeneration }}
@@ -91,7 +92,8 @@ jobs:
           # Check for auto-generated commit messages
           if [[ "$MESSAGE" == "chore: auto-regenerate"* ]] || \
              [[ "$MESSAGE" == "docs: auto-generate"* ]] || \
-             [[ "$MESSAGE" == "chore: regenerate provider"* ]]; then
+             [[ "$MESSAGE" == "chore: regenerate provider"* ]] || \
+             [[ "$MESSAGE" == "chore(mcp): update server.json"* ]]; then
             IS_BOT="true"
             echo "Detected auto-generated commit message"
           fi
@@ -170,6 +172,16 @@ jobs:
             echo "has_any_changes=false" >> $GITHUB_OUTPUT
           fi
 
+          # Safety net: Check if ONLY MCP config files changed (server.json/manifest.json)
+          # These files are updated by the mcp-unified job and should not trigger full rebuilds
+          ONLY_MCP_CONFIG_FILES=$(echo "$CHANGED" | grep -vE '^mcp-server/(server\.json|manifest\.json|package\.json|package-lock\.json)$' || true)
+          if [ -z "$ONLY_MCP_CONFIG_FILES" ]; then
+            echo "only_mcp_config=true" >> $GITHUB_OUTPUT
+            echo "Only MCP config files changed (server.json/manifest.json) - will skip full rebuild"
+          else
+            echo "only_mcp_config=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Determine if processing should proceed
         id: should-process
         run: |
@@ -180,6 +192,16 @@ jobs:
           FUNCTIONS="${{ steps.changes.outputs.functions }}"
           MCP="${{ steps.changes.outputs.mcp }}"
           HAS_ANY_CHANGES="${{ steps.changes.outputs.has_any_changes }}"
+          ONLY_MCP_CONFIG="${{ steps.changes.outputs.only_mcp_config }}"
+
+          # Safety net: Skip if ONLY MCP config files changed (already processed by mcp-unified job)
+          # This prevents infinite loops from server.json update PRs
+          if [[ "$ONLY_MCP_CONFIG" == "true" ]]; then
+            echo "Skipping: Only MCP config files changed (server.json/manifest.json)"
+            echo "needs_regeneration=false" >> $GITHUB_OUTPUT
+            echo "result=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
 
           # Determine if regeneration would be needed
           NEEDS_REGEN="false"
@@ -1056,6 +1078,7 @@ jobs:
           echo "| Functions Changed | ${{ needs.detect-changes.outputs.functions-changed }} |" >> $GITHUB_STEP_SUMMARY
           echo "| MCP Server Changed | ${{ needs.detect-changes.outputs.mcp-changed }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Docs Changed | ${{ needs.detect-changes.outputs.docs-changed }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Only MCP Config | ${{ needs.detect-changes.outputs.only-mcp-config }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Build/Test | ${{ needs.build-test.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Provider Regenerated | ${{ needs.regenerate-provider.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Docs Regenerated | ${{ needs.regenerate-docs.result }} |" >> $GITHUB_STEP_SUMMARY

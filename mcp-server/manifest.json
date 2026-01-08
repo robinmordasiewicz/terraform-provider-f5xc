@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "f5xc-terraform-mcp",
   "display_name": "F5 Distributed Cloud Terraform Provider",
-  "version": "3.6.5",
+  "version": "3.6.6",
   "description": "MCP server providing AI assistants with access to F5 Distributed Cloud Terraform provider documentation, 270+ OpenAPI specifications, subscription tier information, and addon service activation workflows.",
   "author": {
     "name": "Robin Mordasiewicz",

@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Authentication",
-    "description": "F5 Distributed Cloud Authentication API specifications",
-    "version": "2.0.20",
+    "description": "Authentication management for F5 Distributed Cloud. Provides APIs for configuring authentication, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
+    "version": "2.0.21",
     "contact": {
       "name": "F5 Distributed Cloud",
       "url": "https://docs.cloud.f5.com"
@@ -12,6 +12,8 @@
       "name": "Proprietary",
       "url": "https://www.f5.com/company/policies/eula"
     },
+    "x-f5xc-description-long": "Authentication management for F5 Distributed Cloud. Provides APIs for configuring authentication, managing associated resources, and integrating with other platform services. Supports lifecycle operations, policy enforcement, and observability.",
+    "summary": "Configure and manage authentication settings, policies, and resources across your F5 Distributed Cloud deployment.",
     "x-f5xc-cli-domain": "authentication",
     "x-f5xc-best-practices": {
       "common_errors": [
@@ -4102,7 +4104,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809649+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546664+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4121,7 +4123,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809656+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546670+00:00"
           },
           "spec": {
             "$ref": "#/components/schemas/api_credentialCustomCreateSpecType"
@@ -4209,7 +4211,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809670+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546680+00:00"
           }
         },
         "x-f5xc-description-short": "CreateResponse is the response format for the credential's create request.",
@@ -4278,7 +4280,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809680+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546688+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4297,7 +4299,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809685+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546692+00:00"
           },
           "namespace_roles": {
             "type": "array",
@@ -4575,7 +4577,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809709+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546714+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4602,7 +4604,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809714+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546718+00:00"
           }
         },
         "x-f5xc-description-short": "GET credential object with a given name.",
@@ -4713,7 +4715,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809726+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546728+00:00"
           },
           "namespace": {
             "type": "string",
@@ -4732,7 +4734,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809730+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546731+00:00"
           },
           "namespace_access": {
             "$ref": "#/components/schemas/schemaNamespaceAccessType"
@@ -4759,7 +4761,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809739+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546739+00:00"
           },
           "user_email": {
             "type": "string",
@@ -5108,7 +5110,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809767+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546764+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5127,7 +5129,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809771+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546768+00:00"
           },
           "type": {
             "$ref": "#/components/schemas/api_credentialAPICredentialType"
@@ -5151,7 +5153,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809777+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546774+00:00"
           },
           "user_email": {
             "type": "string",
@@ -5297,7 +5299,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809790+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546785+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5316,7 +5318,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809794+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546789+00:00"
           },
           "namespace_access": {
             "$ref": "#/components/schemas/schemaNamespaceAccessType"
@@ -5343,7 +5345,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809801+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546795+00:00"
           },
           "user_email": {
             "type": "string",
@@ -5538,7 +5540,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809816+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546808+00:00"
           }
         },
         "x-f5xc-description-short": "RecreateScimTokenRequest is the request format for generating SCIM API credential.",
@@ -5605,7 +5607,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809822+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546813+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5632,7 +5634,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809826+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546817+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -5681,7 +5683,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809831+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546821+00:00"
           },
           "namespace": {
             "type": "string",
@@ -5701,7 +5703,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809835+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546825+00:00"
           },
           "namespace_access": {
             "$ref": "#/components/schemas/schemaNamespaceAccessType"
@@ -5796,7 +5798,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809845+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546834+00:00"
           }
         },
         "x-f5xc-description-short": "Response format for the credential's replace request.",
@@ -5846,7 +5848,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809850+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546838+00:00"
           }
         },
         "x-f5xc-description-short": "ScimTokenRequest is used for fetching or revoking scim token.",
@@ -5958,7 +5960,7 @@
             "maxLength": 17,
             "minLength": 17,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809860+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546847+00:00"
           }
         },
         "x-f5xc-minimum-configuration": {
@@ -6045,7 +6047,6 @@
         "title": "Empty",
         "x-displayname": "Empty",
         "x-ves-proto-message": "ves.io.schema.Empty",
-        "x-f5xc-description-short": "Can be used for messages where no values are needed.",
         "x-f5xc-minimum-configuration": {
           "description": "Minimum configuration for schemaEmpty",
           "required_fields": [],
@@ -6080,7 +6081,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809869+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546855+00:00"
           }
         },
         "x-f5xc-description-short": "Initializer is information about an initializer that has not yet completed.",
@@ -6216,7 +6217,7 @@
             },
             "x-original-maxLength": 256,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809880+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546864+00:00"
           },
           "role": {
             "type": "string",
@@ -6319,7 +6320,7 @@
             },
             "x-original-maxLength": 1200,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809888+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546872+00:00"
           },
           "disable": {
             "type": "boolean",
@@ -6379,7 +6380,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809896+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546879+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6400,7 +6401,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809900+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546883+00:00"
           },
           "uid": {
             "type": "string",
@@ -6424,7 +6425,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809906+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546888+00:00"
           }
         },
         "x-f5xc-description-short": "ObjectMetaType is metadata(common attributes) of an object that all configuration objects will have.",
@@ -6474,7 +6475,7 @@
             "readOnly": true,
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809911+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546892+00:00"
           },
           "name": {
             "type": "string",
@@ -6495,7 +6496,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809915+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546896+00:00"
           },
           "namespace": {
             "type": "string",
@@ -6516,7 +6517,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809919+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546899+00:00"
           },
           "tenant": {
             "type": "string",
@@ -6539,7 +6540,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809923+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546903+00:00"
           },
           "uid": {
             "type": "string",
@@ -6563,7 +6564,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809928+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546908+00:00"
           }
         },
         "x-f5xc-description-short": "Type establishes a 'direct reference' from one object(the referrer) to another(the referred).",
@@ -6661,7 +6662,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809937+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546916+00:00"
           },
           "status": {
             "type": "string",
@@ -6681,7 +6682,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809941+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546920+00:00"
           }
         },
         "x-f5xc-description-short": "Status is a return value for calls that don't return other objects.",
@@ -6899,7 +6900,7 @@
             "maxLength": 6,
             "minLength": 6,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809960+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546939+00:00"
           },
           "object_index": {
             "type": "integer",
@@ -6980,7 +6981,7 @@
             "x-field-mutability": "read-only",
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809971+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546948+00:00"
           },
           "trace_info": {
             "type": "string",
@@ -7022,7 +7023,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809977+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546954+00:00"
           },
           "vtrp_id": {
             "type": "string",
@@ -7111,7 +7112,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809984+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546961+00:00"
           },
           "name": {
             "type": "string",
@@ -7132,7 +7133,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809989+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546965+00:00"
           },
           "namespace": {
             "type": "string",
@@ -7153,7 +7154,7 @@
             },
             "x-original-maxLength": 1024,
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809992+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546969+00:00"
           },
           "uid": {
             "type": "string",
@@ -7174,7 +7175,7 @@
             "x-original-maxLength": 1024,
             "format": "uuid",
             "x-reconciled-from-discovery": true,
-            "x-reconciled-at": "2026-01-07T15:52:27.809997+00:00"
+            "x-reconciled-at": "2026-01-08T05:41:32.546973+00:00"
           }
         },
         "x-f5xc-description-short": "ViewRefType represents a reference to a view.",
